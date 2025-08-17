@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const AboutMeSection () {
+export function AboutMeSection() {
   const philosophyCards = [
     {
       icon: "/symbol.png",
@@ -83,4 +83,4 @@ export const AboutMeSection () {
       </div>
     </section>
   );
-};
+}

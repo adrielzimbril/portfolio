@@ -1,9 +1,8 @@
 import { cn } from "@/lib/utils";
-
-export type IconProps = React.HTMLAttributes<SVGElement>;
+import { IconProps } from "./type";
 
 export const Icons = {
-  logo: ({ className }: { className?: string }) => (
+  logo: ({ className }: IconProps) => (
     <svg
       width="42"
       height="24"
@@ -29,7 +28,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  soc2: ({ className }: { className?: string }) => (
+  soc2: ({ className }: IconProps) => (
     <svg
       width="46"
       height="45"
@@ -224,7 +223,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  soc2Dark: ({ className }: { className?: string }) => (
+  soc2Dark: ({ className }: IconProps) => (
     <svg
       width="46"
       height="45"
@@ -419,7 +418,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  hipaa: ({ className }: { className?: string }) => (
+  hipaa: ({ className }: IconProps) => (
     <svg
       width="46"
       height="45"
@@ -559,7 +558,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  hipaaDark: ({ className }: { className?: string }) => (
+  hipaaDark: ({ className }: IconProps) => (
     <svg
       width="46"
       height="45"
@@ -699,7 +698,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  gdpr: ({ className }: { className?: string }) => (
+  gdpr: ({ className }: IconProps) => (
     <svg
       width="46"
       height="45"
@@ -1004,7 +1003,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  gdprDark: ({ className }: { className?: string }) => (
+  gdprDark: ({ className }: IconProps) => (
     <svg
       width="46"
       height="45"
@@ -1421,7 +1420,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  replit: () => (
+  replit: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"
@@ -1546,7 +1545,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  posthog: () => (
+  posthog: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"
@@ -1669,7 +1668,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  workos: () => (
+  workos: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"
@@ -1790,7 +1789,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  runwayml: () => (
+  runwayml: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"
@@ -1897,7 +1896,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  gemini: () => (
+  gemini: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"
@@ -2026,7 +2025,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  boat: () => (
+  boat: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"
@@ -2137,7 +2136,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  supabase: () => (
+  supabase: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"
@@ -2285,7 +2284,7 @@ export const Icons = {
       </defs>
     </svg>
   ),
-  figma: () => (
+  figma: ({ className }: IconProps) => (
     <svg
       width="52"
       height="60"

@@ -9,7 +9,7 @@ const navigationItems = [
   { label: "Blog", isActive: false },
 ];
 
-export const NavigationBarSection () {
+export function NavigationBarSection() {
   return (
     <nav className="w-full h-28 bg-greys-00">
       <div className="flex items-center justify-between px-[153px] pt-14">
@@ -44,4 +44,4 @@ export const NavigationBarSection () {
       </div>
     </nav>
   );
-};
+}

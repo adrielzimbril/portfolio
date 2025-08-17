@@ -1,10 +1,10 @@
 import React, { JSX } from "react";
-import { AboutMeSection } from "./sections/AboutMeSection/AboutMeSection";
-import { ContactSection } from "./sections/ContactSection/ContactSection";
-import { HeroSection } from "./sections/HeroSection/HeroSection";
-import { NavigationBarSection } from "./sections/NavigationBarSection/NavigationBarSection";
-import { ProjectsSection } from "./sections/ProjectsSection/ProjectsSection";
-import { ServicesSection } from "./sections/ServicesSection/ServicesSection";
+import { AboutMeSection } from "./sections/AboutMeSection";
+import { ContactSection } from "./sections/ContactSection";
+import { HeroSection } from "./sections/HeroSection";
+import { NavigationBarSection } from "./sections/NavigationBarSection";
+import { ProjectsSection } from "./sections/ProjectsSection";
+import { ServicesSection } from "./sections/ServicesSection";
 
 const socialMediaLinks = [
   {
@@ -37,7 +37,7 @@ const socialMediaLinks = [
   },
 ];
 
-export const About () {
+export default function About () {
   return (
     <div className="flex flex-col w-full max-w-[1440px] items-start relative bg-white mx-auto">
       <NavigationBarSection />

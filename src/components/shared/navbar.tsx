@@ -2,16 +2,21 @@
 
 import { Icons } from "@/components/shared/icons";
 import { NavMenu } from "@/components/shared/nav-menu";
+import { Header as NavMenuSec } from "@/components/shared/navbarsec";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useScroll } from "motion/react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { LogoName } from "./icons/logo-name";
+import Image from "next/image";
+import { routes } from "@/data/route";
+import { Link } from "@/components/ui/link";
+import { Button } from "../ui/button";
 
 const INITIAL_WIDTH = "70rem";
-const MAX_WIDTH = "800px";
+const MAX_WIDTH = "70rem";
 
 // Animation variants
 const overlayVariants = {
@@ -104,32 +109,49 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto max-w-7xl rounded-2xl transition-all duration-300  xl:px-0",
+            "mx-auto max-w-7xl rounded-2xl transition-all duration-300 xl:px-0",
             hasScrolled
-              ? "px-2 border border-border backdrop-blur-lg bg-background/75"
+              ? "px-2 shadow-lg backdrop-blur-lg bg-background/1"
               : "shadow-none px-7"
           )}
         >
           <div className="flex h-[56px] items-center justify-between p-4">
-            <Link href="/" className="flex items-center gap-3">
-              <Icons.logo className="size-7 md:size-10" />
-              <p className="text-lg font-semibold text-primary">SkyAgent</p>
+            <Link
+              href={routes.home.link}
+              variant="none"
+              size="none"
+              className="flex items-center gap-1"
+            >
+              <Image
+                width={56}
+                height={56}
+                className={cn("w-14! h-14!", hasScrolled && "w-10! h-10!")}
+                alt="Icon"
+                src="/icon.svg"
+              />
+              {/* <LogoIcon className="size-7 md:size-10" /> */}
+              <LogoName
+                className={cn(
+                  "h-5! w-48! flex-shrink-0",
+                  hasScrolled && "h-3.5! w-36!"
+                )}
+              />
             </Link>
 
-            <NavMenu />
+            {/* <NavMenu hasScrolled={hasScrolled} /> */}
+            <NavMenu hasScrolled={hasScrolled} />
+            {/* <NavMenuSec /> */}
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
               <div className="flex items-center space-x-6">
-                <Link
-                  className="bg-secondary h-8 hidden md:flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-secondary-foreground w-fit px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12]"
-                  href="#"
-                >
-                  Try for free
+                <Link href={routes.contact.link} asSquare whileTap>
+                  Parler de SaaS 👋
                 </Link>
               </div>
               <ThemeToggle />
-              <button
-                className="md:hidden border border-border size-8 rounded-md cursor-pointer flex items-center justify-center"
+              <Button
+                className="md:hidden"
+                variant="outline"
                 onClick={toggleDrawer}
               >
                 {isDrawerOpen ? (
@@ -137,7 +159,7 @@ export function Navbar() {
                 ) : (
                   <Menu className="size-5" />
                 )}
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -173,12 +195,12 @@ export function Navbar() {
                       SkyAgent
                     </p>
                   </Link>
-                  <button
+                  <Button
                     onClick={toggleDrawer}
                     className="border border-border rounded-md p-1 cursor-pointer"
                   >
                     <X className="size-5" />
-                  </button>
+                  </Button>
                 </div>
 
                 <motion.ul
@@ -186,24 +208,24 @@ export function Navbar() {
                   variants={drawerMenuContainerVariants}
                 >
                   <AnimatePresence>
-                    {siteConfig.nav.links.map((item) => (
+                    {Object.values(routes).map((item) => (
                       <motion.li
-                        key={item.id}
+                        key={item.name}
                         className="p-2.5 border-b border-border last:border-b-0"
                         variants={drawerMenuVariants}
                       >
                         <a
-                          href={item.href}
+                          href={item.link}
                           onClick={(e) => {
                             e.preventDefault();
                             const element = document.getElementById(
-                              item.href.substring(1)
+                              item.link.substring(1)
                             );
                             element?.scrollIntoView({ behavior: "smooth" });
                             setIsDrawerOpen(false);
                           }}
                           className={`underline-offset-4 hover:text-primary/80 transition-colors ${
-                            activeSection === item.href.substring(1)
+                            activeSection === item.link.substring(1)
                               ? "text-primary font-medium"
                               : "text-primary/60"
                           }`}
@@ -217,11 +239,8 @@ export function Navbar() {
 
                 {/* Action buttons */}
                 <div className="flex flex-col gap-2">
-                  <Link
-                    href="#"
-                    className="bg-secondary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-secondary-foreground w-full px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-secondary/80 transition-all ease-out active:scale-95"
-                  >
-                    Try for free
+                  <Link href={routes.contact.link} asSquare whileTap>
+                    Parler de SaaS 👋
                   </Link>
                 </div>
               </div>

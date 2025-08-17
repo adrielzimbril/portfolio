@@ -58,10 +58,7 @@ export function NavbarSection() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <Button
-          className="px-6 py-[13px] bg-greys-08 rounded-xl h-auto hover:bg-greys-06"
-          variant="secondary"
-        >
+        <Button>
           <span className="font-SF-pro-medium-17-m font-[number:var(--SF-pro-medium-17-m-font-weight)] text-text-iconsdark-high-emphasis text-[length:var(--SF-pro-medium-17-m-font-size)] tracking-[var(--SF-pro-medium-17-m-letter-spacing)] leading-[var(--SF-pro-medium-17-m-line-height)] whitespace-nowrap [font-style:var(--SF-pro-medium-17-m-font-style)]">
             Parler de SaaS 👋
           </span>

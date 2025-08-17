@@ -1,21 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { siteConfig } from "@/data/config";
 import { ThemeProvider } from "next-themes";
 import Dockbar from "@/components/shared/dockbar";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { Navbar } from "@/components/shared/navbar";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { SquircleProvider } from "@/components/shiro/providers/squircle-provider";
+import SplashCursor from "@/components/shiro/builder/splash-cursor";
+import { SmoothCursor } from "@/components/shiro/magicui/smooth-cursor";
+import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 
 export const viewport: Viewport = {
   themeColor: "black",
@@ -65,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased ${SFProDisplay.variable} ${SFProText.variable}`}
       >
         <ThemeProvider
           attribute="class"
@@ -74,16 +68,19 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <div className="max-w-7xl mx-auto border-x relative">
-              <div className="block w-px h-full border-l border-border absolute top-0 left-6 z-10"></div>
-              <div className="block w-px h-full border-r border-border absolute top-0 right-6 z-10"></div>
-              <Navbar />
-              <Dockbar />
-              {children}
-            </div>
+            <SquircleProvider>
+              <div className="max-w-7xl mx-auto relative">
+                <Navbar />
+                <Dockbar />
+                {/* <SplashCursor /> */}
+                {/* <SmoothCursor /> */}
+                {children}
+              </div>
+            </SquircleProvider>
           </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
   );
 }
+

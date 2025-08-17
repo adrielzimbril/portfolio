@@ -39,7 +39,7 @@ const socialMediaIcons = [
 export default function Home() {
   return (
     <div className="flex flex-col w-full max-w-[1440px] mx-auto items-start relative bg-white">
-      <NavbarSection />
+      {/* <NavbarSection /> */}
       <HeaderSection />
       <ProjectsSection />
       <ResourcesSection />

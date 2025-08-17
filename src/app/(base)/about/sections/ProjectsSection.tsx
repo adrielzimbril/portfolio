@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const ProjectsSection () {
+export function ProjectsSection() {
   const emojiItems = [
     {
       type: "emoji",
@@ -84,4 +84,4 @@ export const ProjectsSection () {
       </header>
     </section>
   );
-};
+}

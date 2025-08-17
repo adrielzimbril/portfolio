@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const ServicesSection () {
+export function ServicesSection() {
   const services = [
     {
       icon: "/playing-cards.svg",
@@ -91,4 +91,4 @@ export const ServicesSection () {
       </div>
     </section>
   );
-};
+}
