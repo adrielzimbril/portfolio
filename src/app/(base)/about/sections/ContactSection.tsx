@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const ContactSection () {
+export function ContactSection() {
   return (
     <section className="min-h-[720px] flex items-center justify-center w-full bg-greys-00 py-32">
       <Card className="w-full max-w-[1094px] mx-auto bg-[#f9f9f9] rounded-[64px] border-0">
@@ -40,4 +40,4 @@ export const ContactSection () {
       </Card>
     </section>
   );
-};
+}

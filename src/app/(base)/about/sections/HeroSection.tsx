@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const HeroSection () {
+export function HeroSection() {
   return (
     <section className="h-[689px] relative w-full bg-greys-00">
       <div className="flex justify-center pt-12">
@@ -37,4 +37,4 @@ export const HeroSection () {
       </div>
     </section>
   );
-};
+}

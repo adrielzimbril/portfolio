@@ -1,11 +1,12 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { routes } from "@/data/route";
+import { Link } from "@/components/ui/link";
 
 export function HeaderSection() {
   return (
-    <section className="h-[689px] relative w-full bg-greys-00 flex items-center justify-center">
-      <Card className="w-[1136px] bg-[#f9f9f9] rounded-[64px] border-none shadow-none">
+    <section className="relative w-full flex items-center justify-center mt-20">
+      <Card className="squircle squircle-stone-100 squircle-6xl squircle-smooth-xl bsg-stone-100 rosunded-[64px] border-none shadow-none">
         <CardContent className="px-12 py-16">
           <div className="flex flex-col items-start gap-6 max-w-full">
             <h1 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
@@ -19,16 +20,23 @@ export function HeaderSection() {
             </p>
 
             <div className="flex items-start gap-3">
-              <Button className="px-6 py-[13px] bg-greys-08 rounded-xl h-auto hover:bg-greys-08/90 text-text-iconsdark-high-emphasis [font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-[17px] tracking-[0.07px] leading-[22px]">
-                Discutons 👋
-              </Button>
-
-              <Button
-                variant="secondary"
-                className="px-4 py-[13px] bg-[#ffffff80] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)] rounded-xl h-auto hover:bg-[#ffffff90] text-[#000000de] [font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-[17px] tracking-[0.07px] leading-[22px]"
+              <Link
+                href={routes.contact.link}
+                variant="default"
+                asSquare
+                whileTap
               >
-                Voir mes projets client 􀄩
-              </Button>
+                <span>Discutons 👋</span>
+              </Link>
+
+              <Link
+                href={routes.projects.link}
+                variant="secondary"
+                asSquare
+                whileTap
+              >
+                <span>Voir mes projets client 💡</span>
+              </Link>
             </div>
           </div>
         </CardContent>
