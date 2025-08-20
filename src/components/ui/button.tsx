@@ -11,19 +11,22 @@ const buttonVariants = cva(
         default:
           "bg-inherit squircle-primary text-primary-foreground hover:squircle-primary/90",
         secondary:
-          "bg-white squircle-white text-black hover:bg-secondary/80 hover:squircle-primary/90 hover:text-white",
+          "bg-inherit squircle-white squircle-border-2 squircle-border-zinc-200 text-black hover:bg-secondary/80 hover:squircle-primary/90 hover:text-white",
         destructive:
           "squircle-destructive text-destructive-foreground hover:squircle-destructive/90",
         outline:
-          "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-secondary hover:text-accent-foreground",
+          "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-zinc-200",
         ghost: "hover:bg-accent hover:text-accent-foreground",
+        icon: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         none: "relative z-[1]",
       },
       size: {
         default: "px-6 py-3",
-        sm: "px-3 py-4 text-xs",
+        xs: "px-3 py-2",
+        sm: "px-3 py-4",
         lg: "px-8 py-4",
+        iconSmall: "px-1 py-1",
         icon: "h-9 w-9",
         nav: "px-4 py-2",
         none: "px-0 py-0",
@@ -40,14 +43,31 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  asFull?: boolean;
+  asIcon?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      asFull = false,
+      asIcon = false,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          asFull && "w-full flex text-center items-center justify-center",
+          asIcon && "[&_svg]:size-auto"
+        )}
         ref={ref}
         {...props}
       />

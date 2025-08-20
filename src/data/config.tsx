@@ -1,5 +1,9 @@
+import { Icons } from "@/components/shared/icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import * as LucideIcons from "lucide-react";
+import { routes } from "./route";
+import * as AuthleIcons from "@aurthle/icons";
 
 export const Highlight = ({
   children,
@@ -23,30 +27,112 @@ export const Highlight = ({
 export const BLUR_FADE_DELAY = 0.15;
 
 export const siteConfig = {
-  name: "Cal AI",
-  description: "Smart scheduling powered by AI.",
-  cta: "Get Started",
+  name: "Adriel Zimbril",
+  description: "Adriel Zimbril - Product designer",
+  cta: "Let's chat about your next project 👋",
   url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+  languages: [
+    {
+      code: "en",
+      name: "English",
+      href: "/",
+    },
+    {
+      code: "fr",
+      name: "Français",
+      href: "/fr",
+    },
+  ],
+  languagePrimary: "en_US",
+  languagesArray: ["en_US", "fr_FR"],
   keywords: [
-    "AI Calendar",
-    "Smart Scheduling",
-    "Productivity",
+    "Product designer",
+    "UI/UX",
+    "Freelancer",
+    "UI/UX",
+    "Developer",
+    "React Template",
+    "Next.js Template",
+    "Tailwind",
+    "Shadcn",
+    "Tailwind V4",
     "Time Management",
   ],
-  links: {
-    email: "support@calai.app",
-    twitter: "https://twitter.com/calaiapp",
-    discord: "https://discord.gg/calaiapp",
-    github: "https://github.com/calaiapp",
-    instagram: "https://instagram.com/calaiapp",
+  details: {
+    id: "adrielzimbril",
+    username: "@adrielzimbril",
+    name: "Adriel Zimbril",
+    nameShared: "Adriel Zimbril - Product designer",
   },
-  nav: {
-    links: [
-      { id: 1, name: "Home", href: "#hero" },
-      { id: 2, name: "How it Works", href: "#bento" },
-      { id: 3, name: "Features", href: "#features" },
-      { id: 4, name: "Pricing", href: "#pricing" },
+  links: {
+    twitter: "https://twitter.com/adrielzimbril",
+    discord: "https://discord.gg/adrielzimbril",
+    github: "https://github.com/adrielzimbril",
+    instagram: "https://instagram.com/adrielzimbril",
+    navbar: [
+      // {
+      //   href: routes.home.link,
+      //   icon: AuthleIcons.House,
+      //   label: routes.home.name,
+      // },
+      {
+        href: routes.contact.link,
+        icon: AuthleIcons.User,
+        label: routes.contact.name,
+      },
     ],
+    contact: {
+      email: "hello@adrielzimbril.com",
+      tel: "+123456789",
+      social: {
+        github: {
+          name: "GitHub",
+          url: "https://dub.sh/adrielzimbril-github",
+          icon: AuthleIcons.Github,
+
+          navbar: true,
+        },
+        linkedin: {
+          name: "LinkedIn",
+          url: "https://dub.sh/adrielzimbril-linkedin",
+          icon: AuthleIcons.Linkedin,
+
+          navbar: true,
+        },
+        x: {
+          name: "X",
+          url: "https://dub.sh/adrielzimbril-x",
+          icon: AuthleIcons.X,
+
+          navbar: true,
+        },
+        youtube: {
+          name: "Youtube",
+          url: "https://dub.sh/adrielzimbril-youtube",
+          icon: AuthleIcons.Youtube,
+          navbar: true,
+        },
+        producthunt: {
+          name: "Product Hunt",
+          url: "https://dub.sh/adrielzimbril-producthunt",
+          icon: AuthleIcons.Layersto,
+          navbar: true,
+        },
+        dribbble: {
+          name: "Dribbble",
+          url: "https://dub.sh/adrielzimbril-dribbble",
+          icon: AuthleIcons.Dribbble,
+          navbar: true,
+        },
+        email: {
+          name: "Send Email",
+          url: "#",
+          icon: AuthleIcons.Mail,
+
+          navbar: false,
+        },
+      },
+    },
   },
   hero: {
     badgeIcon: (

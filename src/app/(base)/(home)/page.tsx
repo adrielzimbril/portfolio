@@ -4,6 +4,7 @@ import { HeaderSection } from "./sections/HeaderSection";
 import { NavbarSection } from "./sections/NavbarSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
+import AboutSection from "./sections/AboutSection";
 
 const socialMediaIcons = [
   {
@@ -41,6 +42,7 @@ export default function Home() {
     <div className="flex flex-col w-full max-w-[1440px] mx-auto items-start relative bg-white">
       {/* <NavbarSection /> */}
       <HeaderSection />
+      <AboutSection />
       <ProjectsSection />
       <ResourcesSection />
       <ContactSection />

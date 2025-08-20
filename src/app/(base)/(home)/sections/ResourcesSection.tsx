@@ -55,9 +55,7 @@ export function ResourcesSection() {
     <section className="relative w-full bg-greys-00 py-[104px]">
       <div className="relative max-w-[1440px] mx-auto px-[152px]">
         <header className="flex flex-col items-center gap-4 mb-[272px]">
-          <Badge className="bg-[#f5f5f5cc] text-[#000000de] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)] rounded-lg px-3 py-1.5 text-xs [font-family:'SF_Pro_Text-Medium',Helvetica] font-medium tracking-[0] leading-4">
-            Tag
-          </Badge>
+          <Badge className="px-3 py-1.5">Tag</Badge>
 
           <h1 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] text-center tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
             Projets

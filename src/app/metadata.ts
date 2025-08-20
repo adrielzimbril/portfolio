@@ -1,43 +1,53 @@
 import { Metadata } from "next";
-import { siteConfig } from "@/lib/site";
+import { siteConfig } from "@/data/config";
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
   description: siteConfig.description,
-  keywords: [
-    "SkyAgent",
-    "AI",
-    "Agent",
-    "Magic UI",
-    "Freelancer",
-    "UI/UX",
-    "Developer",
-    "React Template",
-    "Next.js Template",
-    "Tailwind",
-    "Shadcn",
-    "Tailwind V4",
-  ],
+  keywords: siteConfig.keywords,
+  alternates: {
+    canonical: siteConfig.url,
+    languages: {
+      en: `/en`,
+      fr: `/fr`,
+    },
+  },
   authors: [
     {
-      name: "Dillion Verma",
-      url: "https://magicui.design",
+      name: siteConfig.details.name,
+      url: siteConfig.url,
     },
   ],
-  creator: "dillionverma",
+  creator: siteConfig.details.nameShared,
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+    url: true,
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: siteConfig.languagePrimary,
     url: siteConfig.url,
-    title: siteConfig.name,
+    title: {
+      default: siteConfig.name,
+      template: `%s - ${siteConfig.name}`,
+    },
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: {
+      default: siteConfig.name,
+      template: `%s - ${siteConfig.name}`,
+    },
     description: siteConfig.description,
-    creator: "@dillionverma",
+    creator: siteConfig.details.nameShared,
   },
   robots: {
     index: true,

@@ -61,7 +61,7 @@
   /* Typography - Font families */
   --font-sf-pro-display: var(--font-sf-pro-display);
   --font-sf-pro-text: var(--font-sf-pro-text);
-  --font-sans: var(--font-family-sf-pro-display);
+  --font-sans: var(--font-sf-pro-display);
 
   /* Typography - Font families */
   --font-family-large-24: var(--large-24-font-family);
@@ -259,8 +259,95 @@
   html {
     scroll-behavior: smooth;
   }
+ 
   body {
     @apply bg-background text-foreground font-sf-pro-text;
+  }
+
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    @apply font-sf-pro-display font-semibold;
+  }
+
+  /* Headings avec responsive design */
+  h1 {
+    /* @apply text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] 2xl:text-[5rem] leading-[100%] font-bold font-sf-pro-display; */
+    @apply text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] leading-[100%] font-bold;
+  }
+
+  h2 {
+    @apply text-[2rem] sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3rem] xl:text-[3.5rem] 2xl:text-[4rem] leading-[100%] font-semibold;
+  }
+
+  h3 {
+    @apply text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2rem] xl:text-[2.5rem] 2xl:text-[3rem] leading-[100%] font-semibold;
+  }
+
+  h4 {
+    @apply text-[1.5rem] leading-[100%] font-semibold;
+  }
+
+  h5 {
+    @apply text-[1.25rem] leading-[100%] font-medium;
+  }
+
+  h6 {
+    @apply text-[1rem] leading-[100%] font-medium;
+  }
+
+  /* Typography - Paragraphs et text */
+  p {
+    /* @apply text-[1rem] sm:text-[1.125rem] md:text-[1.125rem] lg:text-[1.125rem]; */
+    @apply text-[1rem] sm:text-[1.125rem] md:text-[1.125rem];
+    /* @apply mb-4; */
+  }
+
+  span {
+    @apply text-inherit;
+  }
+
+  mark {
+    @apply bg-yellow-200 px-1 py-0.5 rounded;
+  }
+
+  /* Typography - Code */
+  code {
+    @apply text-[0.875rem] font-mono bg-muted px-1.5 py-0.5 rounded;
+    @apply border border-border;
+  }
+
+  pre {
+    @apply bg-muted p-4 rounded-lg overflow-x-auto;
+    @apply border border-border mb-4;
+  }
+
+  pre code {
+    @apply bg-transparent border-none px-0 py-0;
+  }
+
+  /* Typography - Quotes */
+  blockquote {
+    @apply border-l-4 border-primary pl-6 py-2 italic;
+    @apply text-muted-foreground mb-4;
+  }
+
+  /* Typography - Forms */
+  label {
+    @apply text-[0.875rem] font-medium mb-2 block;
+  }
+
+  input, textarea, select {
+    @apply text-[1rem] font-sf-pro-text;
   }
 }
 
