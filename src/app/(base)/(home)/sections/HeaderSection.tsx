@@ -6,24 +6,23 @@ import { Link } from "@/components/ui/link";
 export function HeaderSection() {
   return (
     <section className="relative w-full flex items-center justify-center mt-20">
-      <Card className="squircle squircle-stone-100 squircle-6xl squircle-smooth-xl bsg-stone-100 rosunded-[64px] border-none shadow-none">
-        <CardContent className="px-12 py-16">
+      <Card className="squircle squircle-stone-100 squircle-6xl squircle-smooth-xl">
+        <CardContent className="px-12 py-16 md:py-24">
           <div className="flex flex-col items-start gap-6 max-w-full">
-            <h1 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
+            <h1 className="w-full relative">
               Transformez vos idées en produits que vos utilisateurs adorent
             </h1>
-
-            <p className="[font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#000000de] text-[28px] tracking-[0] leading-[33.6px]">
+            <p className="relative text-2xl">
               Product designer spécialisé dans la simplification des expériences
               SaaS + formateur pour les équipes qui veulent créer l&#39;évidence
               plutôt que la complexité
             </p>
-
-            <div className="flex items-start gap-3">
+            <div className="grid w-full md:flex md:w-auto items-start gap-3">
               <Link
                 href={routes.contact.link}
                 variant="default"
                 asSquare
+                asFull
                 whileTap
               >
                 <span>Discutons 👋</span>
@@ -33,6 +32,7 @@ export function HeaderSection() {
                 href={routes.projects.link}
                 variant="secondary"
                 asSquare
+                asFull
                 whileTap
               >
                 <span>Voir mes projets client 💡</span>

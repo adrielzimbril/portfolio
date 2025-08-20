@@ -13,7 +13,7 @@ import { LogoName } from "./icons/logo-name";
 import Image from "next/image";
 import { routes } from "@/data/route";
 import { Link } from "@/components/ui/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 const INITIAL_WIDTH = "70rem";
 const MAX_WIDTH = "70rem";
@@ -63,7 +63,7 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = siteConfig.nav.links.map((item) =>
+      const sections = siteConfig.links.navbar.map((item) =>
         item.href.substring(1)
       );
 
@@ -98,7 +98,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky z-50 mx-4 flex justify-center transition-all duration-300 md:mx-0",
+        "sticky z-50 flex justify-center transition-all duration-300 md:mx-0",
         hasScrolled ? "top-6" : "top-4 mx-0"
       )}
     >
@@ -106,12 +106,13 @@ export function Navbar() {
         initial={{ width: INITIAL_WIDTH }}
         animate={{ width: hasScrolled ? MAX_WIDTH : INITIAL_WIDTH }}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+        className="container p-0 w-full!"
       >
         <div
           className={cn(
-            "mx-auto max-w-7xl rounded-2xl transition-all duration-300 xl:px-0",
+            "mx-auto container rounded-2xl transition-all duration-300 xl:px-0",
             hasScrolled
-              ? "px-2 shadow-lg backdrop-blur-lg bg-background/1"
+              ? "px-2 shadow-lg backdrop-blur-lg bg-background/70"
               : "shadow-none px-7"
           )}
         >
@@ -120,20 +121,24 @@ export function Navbar() {
               href={routes.home.link}
               variant="none"
               size="none"
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 md:gap-1"
             >
               <Image
                 width={56}
                 height={56}
-                className={cn("w-14! h-14!", hasScrolled && "w-10! h-10!")}
+                className={cn(
+                  "w-10! md:w-12! h-10! md:h-12!"
+                  // hasScrolled && "w-10! h-10!"
+                )}
                 alt="Icon"
                 src="/icon.svg"
               />
               {/* <LogoIcon className="size-7 md:size-10" /> */}
               <LogoName
                 className={cn(
-                  "h-5! w-48! flex-shrink-0",
-                  hasScrolled && "h-3.5! w-36!"
+                  "hidden md:block",
+                  "h-5! md:h-6! w-48! md:w-60! flex-shrink-0"
+                  // hasScrolled && "h-3.5! w-36!"
                 )}
               />
             </Link>
@@ -143,7 +148,7 @@ export function Navbar() {
             {/* <NavMenuSec /> */}
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
-              <div className="flex items-center space-x-6">
+              <div className="hidden md:flex items-center space-x-6">
                 <Link href={routes.contact.link} asSquare whileTap>
                   Parler de SaaS 👋
                 </Link>
@@ -151,7 +156,8 @@ export function Navbar() {
               <ThemeToggle />
               <Button
                 className="md:hidden"
-                variant="outline"
+                size="icon"
+                //variant="secondary"
                 onClick={toggleDrawer}
               >
                 {isDrawerOpen ? (
@@ -180,66 +186,72 @@ export function Navbar() {
             />
 
             <motion.div
-              className="fixed inset-x-0 w-[95%] mx-auto bottom-3 bg-background border border-border p-4 rounded-xl shadow-lg"
+              className="fixed inset-x-0 w-[95%] h-[95%] mx-auto top-3 bg-background border border-border p-4 rounded-xl shadow-lg"
               initial="hidden"
               animate="visible"
               exit="exit"
               variants={drawerVariants}
             >
               {/* Mobile menu content */}
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <Link href="/" className="flex items-center gap-3">
-                    <Icons.logo className="size-7 md:size-10" />
-                    <p className="text-lg font-semibold text-primary">
-                      SkyAgent
-                    </p>
-                  </Link>
-                  <Button
-                    onClick={toggleDrawer}
-                    className="border border-border rounded-md p-1 cursor-pointer"
-                  >
-                    <X className="size-5" />
-                  </Button>
-                </div>
+              <div className="flex flex-col h-full justify-between gap-4">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center justify-between">
+                    <Link href="/" className="flex items-center gap-3">
+                      <Image
+                        width={56}
+                        height={56}
+                        className={cn("size-12")}
+                        alt="Icon"
+                        src="/icon.svg"
+                      />
+                      <LogoName className={cn("h-8! flex-shrink-0")} />
+                    </Link>
+                    <Button
+                      onClick={toggleDrawer}
+                      className="border border-border rounded-md p-1 cursor-pointer"
+                    >
+                      <X className="size-8!" />
+                    </Button>
+                  </div>
 
-                <motion.ul
-                  className="flex flex-col text-sm mb-4 border border-border rounded-md"
-                  variants={drawerMenuContainerVariants}
-                >
-                  <AnimatePresence>
-                    {Object.values(routes).map((item) => (
-                      <motion.li
-                        key={item.name}
-                        className="p-2.5 border-b border-border last:border-b-0"
-                        variants={drawerMenuVariants}
-                      >
-                        <a
-                          href={item.link}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            const element = document.getElementById(
-                              item.link.substring(1)
-                            );
-                            element?.scrollIntoView({ behavior: "smooth" });
-                            setIsDrawerOpen(false);
-                          }}
-                          className={`underline-offset-4 hover:text-primary/80 transition-colors ${
-                            activeSection === item.link.substring(1)
-                              ? "text-primary font-medium"
-                              : "text-primary/60"
-                          }`}
+                  <motion.ul
+                    className="flex flex-col text-sm mb-4 border border-border rounded-md"
+                    variants={drawerMenuContainerVariants}
+                  >
+                    <AnimatePresence>
+                      {Object.values(routes).map((item) => (
+                        <motion.li
+                          key={item.name}
+                          className="p-2.5 border-b border-border last:border-b-0"
+                          variants={drawerMenuVariants}
                         >
-                          {item.name}
-                        </a>
-                      </motion.li>
-                    ))}
-                  </AnimatePresence>
-                </motion.ul>
+                          <a
+                            href={item.link}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              const element = document.getElementById(
+                                item.link.substring(1)
+                              );
+                              element?.scrollIntoView({ behavior: "smooth" });
+                              setIsDrawerOpen(false);
+                            }}
+                            className={`underline-offset-4 hover:text-primary/80 transition-colors ${
+                              activeSection === item.link.substring(1)
+                                ? "text-primary font-medium"
+                                : "text-primary/60"
+                            }`}
+                          >
+                            {item.name}
+                          </a>
+                        </motion.li>
+                      ))}
+                    </AnimatePresence>
+                  </motion.ul>
+                </div>
 
                 {/* Action buttons */}
                 <div className="flex flex-col gap-2">
-                  <Link href={routes.contact.link} asSquare whileTap>
+                  <Link href={routes.contact.link} asSquare whileTap asFull>
                     Parler de SaaS 👋
                   </Link>
                 </div>

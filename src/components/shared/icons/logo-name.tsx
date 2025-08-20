@@ -8,7 +8,7 @@ export const LogoName = ({ className }: IconProps) => (
     viewBox="0 0 195 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={cn("size-4", className)}
+    className={cn("relative", className)}
   >
     <path
       d="M14.9914 19.9705L13.4761 15.9926H4.97911L3.46373 19.9705H0L7.36042 1.2988H11.1759L18.5364 19.9705H14.9914ZM6.11564 13.0159H12.3395L9.22759 4.81665L6.11564 13.0159Z"

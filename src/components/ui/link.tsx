@@ -12,6 +12,8 @@ export interface LinkProps
     VariantProps<typeof buttonVariants> {
   linkClassName?: string;
   asSquare?: boolean;
+  asFull?: boolean;
+  asIcon?: boolean;
   whileTap?: boolean;
 }
 
@@ -24,6 +26,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       href,
       linkClassName,
       asSquare,
+      asFull,
+      asIcon,
       whileTap,
       ...props
     },
@@ -33,6 +37,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       <Button
         variant={variant}
         size={size}
+        asFull={asFull}
+        asIcon={asIcon}
         className={cn(className, "cursor-pointer")}
         asChild={true}
       >
