@@ -3,22 +3,7 @@ import { LinkDiagonalOne } from "@aurthle/icons";
 import { routes } from "@/data/route";
 import { Stats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
-
-interface CardInfo {
-  id: string | number;
-  title: string;
-  description: string;
-  details: string;
-  primaryTag: string;
-  tags: string[];
-  avatars: Array<{ bg: string }>;
-  userCount: string;
-  buttonText: string;
-}
-
-interface CardInfoProps {
-  details: CardInfo;
-}
+import { CardInfoProps } from "@/components/shared/pages/resources/card";
 
 export function CardInfo({ details }: CardInfoProps) {
   return (

@@ -20,9 +20,9 @@ export const routes: Record<string, NavItem> = {
     name: "Projets",
     link: "/projects",
   },
-  blog: {
-    name: "Blog",
-    link: "/blog",
+  thoughts: {
+    name: "Réflexions",
+    link: "/thoughts",
   },
   contact: {
     name: "Contact",

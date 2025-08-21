@@ -13,7 +13,7 @@ export function ResourcesSection() {
       badge="Hub 🫶"
     >
       {resourcesData.map((resource) => (
-        <ResourceCard key={resource.id} resource={resource} />
+        <ResourceCard key={resource.id} details={resource} />
       ))}
     </SectionLayout>
   );

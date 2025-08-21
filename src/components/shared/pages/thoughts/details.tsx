@@ -1,27 +1,16 @@
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { routes } from "@/data/route";
-import {
-  ProjectCategories,
-  ProjectTags,
-} from "@/components/shared/pages/projects/tags";
-import { cn } from "@/lib/utils";
-import { CardInfoProps } from "@/components/shared/pages/projects/card";
+import { Tags } from "@/components/shared/pages/resources/tags";
+import { CardInfoProps } from "@/components/shared/pages/thoughts/card";
 
-export function CardInfo({ details, isWide }: CardInfoProps) {
+export function CardInfo({ details }: CardInfoProps) {
   return (
-    <div
-      className={cn(
-        "flex flex-col flex-1 items-start justify-between gap-4 w-full",
-        isWide && "justify-center"
-      )}
-    >
+    <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
-        <ProjectTags tags={details.tags} />
-
         <Header title={details.title} />
 
-        <ProjectCategories categories={details.categories} />
+        <Tags primaryTag={details.primaryTag} tags={details.tags} />
 
         <Description description={details.description} />
       </div>

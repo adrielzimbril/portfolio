@@ -2,6 +2,7 @@
   {
     "id": 1,
     "title": "Project title",
+    "type": "ebook",
     "icon": "/bold-duotone---school---book.png",
     "iconAlt": "Bold duotone school",
     "primaryTag": "E-book 📕",
@@ -32,6 +33,7 @@
   {
     "id": 2,
     "title": "Project title",
+    "type": "course",
     "icon": "/bold-duotone---video--audio--sound---video-library.svg",
     "iconAlt": "Bold duotone video",
     "primaryTag": "Formation 🎥",
@@ -62,6 +64,7 @@
   {
     "id": 3,
     "title": "Project title",
+    "type": "video",
     "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
     "iconAlt": "Bold duotone video",
     "primaryTag": "Masterclass 🎬",
