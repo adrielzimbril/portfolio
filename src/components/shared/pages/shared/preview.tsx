@@ -1,13 +1,20 @@
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface PreviewProps {
   icon?: string;
   iconAlt?: string;
+  isWide?: boolean;
 }
 
-export function Preview({ icon, iconAlt }: PreviewProps) {
+export function CardPreview({ icon, iconAlt, isWide }: PreviewProps) {
   return (
-    <div className="flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-3xl squircle-white overflow-hidden">
+    <div
+      className={cn(
+        "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-3xl squircle-white overflow-hidden",
+        isWide && "md:min-h-96"
+      )}
+    >
       <PreviewContent />
       {icon && <PreviewIcon icon={icon} iconAlt={iconAlt} />}
     </div>

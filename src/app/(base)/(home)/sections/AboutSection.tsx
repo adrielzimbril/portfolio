@@ -3,6 +3,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import svgPaths from "./imports/svg-443r28gzus";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const facts = [
   {
@@ -232,7 +234,7 @@ function DeviceIPhone12({
   );
 }
 
-function Component03Emoji({
+function EmojiComponent({
   isActive,
   onClick,
   isLeft,
@@ -251,22 +253,33 @@ function Component03Emoji({
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
     >
-      <div
-        className="absolute bg-center bg-cover bg-no-repeat inset-0 transition-opacity duration-300"
-        data-name="Emoji/False"
-        style={{
-          backgroundImage: `url('${imgEmojiFalse}')`,
-          opacity: isActive ? 0 : 1,
-        }}
-      />
-      <div
-        className="absolute bg-center bg-cover bg-no-repeat inset-0 transition-opacity duration-300"
-        data-name="Emoji/True"
-        style={{
-          backgroundImage: `url('${imgEmojiTrue}')`,
-          opacity: isActive ? 1 : 0,
-        }}
-      />
+      {isLeft ? (
+        <Image
+          src={imgEmojiFalse}
+          width={100}
+          height={100}
+          alt="Emoji False"
+          className={cn(
+            "w-full h-full object-cover transition-opacity duration-300",
+            {
+              "opacity-0": !isActive,
+            }
+          )}
+        />
+      ) : (
+        <Image
+          src={imgEmojiTrue}
+          width={100}
+          height={100}
+          alt="Emoji/True"
+          className={cn(
+            "w-full h-full object-cover transition-opacity duration-300",
+            {
+              "opacity-0": !isActive,
+            }
+          )}
+        />
+      )}
     </motion.div>
   );
 }
@@ -290,8 +303,8 @@ function GuessButton({
 
   const handleClick = () => {
     if (!hasGuessed) {
-      // Mode devinette
-      onGuess(!isLeft); // gauche = faux (false), droite = vrai (true)
+      // Devinette mode
+      onGuess(!isLeft); // Left = false, Right = true
     }
   };
 
@@ -308,7 +321,7 @@ function GuessButton({
         animate={{ x: 0, opacity: isActive ? 1 : 0.5 }}
         transition={{ duration: 0.5 }}
       >
-        <Component03Emoji
+        <EmojiComponent
           isActive={isActive}
           onClick={handleClick}
           isLeft={isLeft}
@@ -362,7 +375,7 @@ function NavigationButton({
         animate={{ x: 0, opacity: canNavigate ? 1 : 0.3 }}
         transition={{ duration: 0.5 }}
       >
-        <Component03Emoji
+        <EmojiComponent
           isActive={canNavigate}
           onClick={handleClick}
           isLeft={isLeft}
@@ -381,7 +394,7 @@ function NavigationButton({
   );
 }
 
-function Frame4538({
+function Content({
   currentFact,
   currentIndex,
   onNavigate,
@@ -655,7 +668,7 @@ function AllFactsModal({
   );
 }
 
-export default function App() {
+export function AboutSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAllFacts, setShowAllFacts] = useState(false);
   const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>(
@@ -686,6 +699,8 @@ export default function App() {
     const message = isCorrect
       ? currentFact.funnyTruthMessage
       : currentFact.funnyLieMessage;
+
+    handleNavigate(isCorrect ? "next" : "prev");
 
     // Show fun toast
     if (isCorrect) {
@@ -736,7 +751,7 @@ export default function App() {
     >
       <BackgroundFactsRotation facts={facts} currentIndex={currentIndex} />
 
-      <Frame4538
+      <Content
         currentFact={currentFact}
         currentIndex={currentIndex}
         onNavigate={handleNavigate}
@@ -763,7 +778,7 @@ export default function App() {
 
       {/* Indicateurs de progression responsives */}
       <motion.div
-        className="absolute bottom-[200px] sm:bottom-[120px] lg:bottom-[100px] left-1/2 translate-x-[-50%] flex gap-2 sm:gap-3 z-10"
+        className="flex gap-2 sm:gap-3 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
@@ -799,7 +814,7 @@ export default function App() {
 
       {/* Progress text responsive */}
       <motion.div
-        className="absolute bottom-[170px] sm:bottom-[80px] lg:bottom-[60px] left-1/2 translate-x-[-50%] text-center z-10"
+        className=" text-center z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
