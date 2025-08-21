@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpOne } from "@aurthle/icons";
 
-export default function ScrollToTop() {
+export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 

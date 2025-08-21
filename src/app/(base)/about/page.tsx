@@ -1,22 +1,19 @@
-import React, { JSX } from "react";
+import React from "react";
 import { AboutMeSection } from "./sections/AboutMeSection";
-import { ContactSection } from "./sections/ContactSection";
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeroSection } from "./sections/HeroSection";
-import { NavigationBarSection } from "./sections/NavigationBarSection";
-import { ProjectsSection } from "./sections/ProjectsSection";
 import { ServicesSection } from "./sections/ServicesSection";
+import { InteractiveFunFacts } from "./sections/InteractiveFunFactsSection";
 
 
 export default function About () {
   return (
-    <div className="flex flex-col w-full max-w-[1440px] items-start relative bg-white mx-auto">
-      <NavigationBarSection />
+    <>
       <HeroSection />
       <ServicesSection />
-      <ProjectsSection />
+      <InteractiveFunFacts />
       <AboutMeSection />
-      <ContactSection />
-     
-    </div>
+      <CallToAction />
+    </>
   );
 };

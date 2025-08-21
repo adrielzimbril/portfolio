@@ -149,7 +149,7 @@ export function Navbar() {
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
               <div className="hidden md:flex items-center space-x-6">
-                <Link href={routes.contact.link} asSquare whileTap>
+                <Link href={routes.contact.link} likeButton whileTap>
                   Parler de SaaS 👋
                 </Link>
               </div>
@@ -251,7 +251,7 @@ export function Navbar() {
 
                 {/* Action buttons */}
                 <div className="flex flex-col gap-2">
-                  <Link href={routes.contact.link} asSquare whileTap asFull>
+                  <Link href={routes.contact.link} likeButton whileTap asFull>
                     Parler de SaaS 👋
                   </Link>
                 </div>

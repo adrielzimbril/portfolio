@@ -2,15 +2,15 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { siteConfig } from "@/data/config";
 import { ThemeProvider } from "next-themes";
-import Dockbar from "@/components/shared/dockbar";
+import { Dockbar } from "@/components/shared/dockbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/shared/navbar";
 import { SquircleProvider } from "@/components/shiro/providers/squircle-provider";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { metadata as metadataBase } from "./metadata";
-import ScrollToTop from "@/components/shared/scroll-to-top";
+import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import { Footer } from "@/components/shared/footer";
-import SplashCursor from "@/components/shiro/builder/splash-cursor";
+import { Toaster } from "sonner";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -62,6 +62,7 @@ export default function RootLayout({
                   {/* <SmoothCursor /> */}
                   {children}
                   <ScrollToTop />
+                  <Toaster />
                   {/* <SplashCursor /> */}
                   <Footer />
                 </div>

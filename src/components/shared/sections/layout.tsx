@@ -5,38 +5,42 @@ export function SectionLayout({
   title,
   description,
   className,
+  contentClassName,
   link,
   badge,
   children,
   asFade,
   isFlex,
+  layoutStart,
 }: {
   title?: string;
   description?: string;
   className?: string;
+  contentClassName?: string;
   link?: string;
   badge?: string;
   children: React.ReactNode;
   asFade?: boolean;
   isFlex?: boolean;
+  layoutStart?: boolean;
 }) {
   return (
-    <section className={cn("relative w-full py-[104px]")}>
+    <section className={cn("relative w-full py-[104px]", className)}>
       {title && (
         <SectionHeader
           title={title}
           description={description!}
           link={link}
           badge={badge}
+          layoutStart={layoutStart}
         />
       )}
       <div
         className={cn(
-          "gap-6",
-          isFlex
-            ? "flex flex-col items-center"
-            : "grid grid-cols-1 md:grid-cols-2 place-items-center",
-          className
+          "flex flex-col items-center justify-center justify-items-center self-center place-self-center w-full gap-6",
+          !isFlex &&
+            "md:grid grid-cols-1 md:grid-cols-2 md:max-w-[90%] place-items-center",
+          contentClassName
         )}
       >
         {children}

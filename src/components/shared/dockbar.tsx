@@ -11,7 +11,7 @@ import { siteConfig } from "@/data/config";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 
-export default function Dockbar({ asFade }: { asFade?: boolean }) {
+export function Dockbar({ asFade }: { asFade?: boolean }) {
   return (
     <div
       className={cn(
@@ -32,7 +32,7 @@ export default function Dockbar({ asFade }: { asFade?: boolean }) {
               <TooltipTrigger>
                 <Link
                   href={item.href}
-                  asSquare
+                  likeButton
                   asIcon
                   variant="outline"
                   size="iconSmall"
@@ -55,7 +55,7 @@ export default function Dockbar({ asFade }: { asFade?: boolean }) {
                 <TooltipTrigger>
                   <Link
                     href={social.url}
-                    asSquare
+                    likeButton
                     asIcon
                     variant="outline"
                     size="iconSmall"

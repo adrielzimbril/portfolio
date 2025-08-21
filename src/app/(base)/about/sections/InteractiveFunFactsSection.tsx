@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import svgPaths from "./imports/svg-443r28gzus";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { toast } from "sonner";
@@ -390,7 +389,7 @@ function AllFactsModal({
         >
           <div className="relative flex flex-col gap-6">
             <div className="flex justify-between items-center">
-              <h4 className="text- ">Tous les faits 🦄</h4>
+              <h4 className="text- ">D 🦄</h4>
               <Button onClick={onClose} asPointer whileTap size="icon">
                 ✕
               </Button>
@@ -491,7 +490,7 @@ function AllFactsModal({
 }
 
 // Interactive Fun Facts Component
-export default function InteractiveFunFacts() {
+export function InteractiveFunFacts() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>(
     {}
@@ -564,15 +563,14 @@ export default function InteractiveFunFacts() {
   const canAnswer = gameStarted && !showAllFacts && !allQuestionsAnswered;
   const badge =
     gameStarted || showAllFacts
-      ? false === true
-        ? `Score: ${score}/${questions.length}`
-        : "Jouons"
+      ? `Score: ${score}/${questions.length}`
       : "Jouons";
 
   return (
     <SectionLayout
       isFlex
-      badge={`${badge} 🤭`}
+      badge="Jouons 🤭"
+      //badge={`${badge} 🤭`}
       title="Faits amusants sur moi"
       description="L'un d'eux est un mensonge que tu devras deviner, essaie de ne pas te tromper 🤭"
     >
@@ -637,12 +635,12 @@ export default function InteractiveFunFacts() {
                   "size-3 sm:size-4 rounded-full border-2 flex items-center justify-center",
                   !allQuestionsAnswered &&
                     "hover:scale-110 transition-transform duration-300 ease-in-out",
-                  index === currentQuestionIndex
-                    ? "bg-[#2a2a2a] border-[#2a2a2a]"
-                    : isGuessed
+                  isGuessed
                     ? isCorrect
                       ? "bg-green-500 border-green-500"
                       : "bg-red-500 border-red-500"
+                    : index === currentQuestionIndex
+                    ? "bg-[#2a2a2a] border-[#2a2a2a]"
                     : "bg-[rgba(0,0,0,0.2)] border-[rgba(0,0,0,0.2)]"
                 )}
               >

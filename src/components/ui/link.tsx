@@ -11,7 +11,7 @@ export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof buttonVariants> {
   linkClassName?: string;
-  asSquare?: boolean;
+  likeButton?: boolean;
   asFull?: boolean;
   asIcon?: boolean;
   whileTap?: boolean;
@@ -25,7 +25,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       size,
       href,
       linkClassName,
-      asSquare,
+      likeButton,
       asFull,
       asIcon,
       whileTap,
@@ -33,7 +33,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
     },
     ref
   ) => {
-    return asSquare ? (
+    return likeButton ? (
       <Button
         variant={variant}
         size={size}

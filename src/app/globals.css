@@ -280,28 +280,34 @@
   }
 
   /* Headings avec responsive design */
-  h1 {
+  h1,
+  .h1 {
     /* @apply text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] 2xl:text-[5rem] leading-[100%] font-bold font-sf-pro-display; */
     @apply text-[2.5rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] leading-[100%] font-bold;
   }
 
-  h2 {
+  h2,
+  .h2 {
     @apply text-[2rem] sm:text-[2.25rem] md:text-[2.75rem] lg:text-[3rem] xl:text-[3.5rem] 2xl:text-[4rem] leading-[100%] font-semibold;
   }
 
-  h3 {
+  h3,
+  .h3 {
     @apply text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2rem] xl:text-[2.5rem] 2xl:text-[3rem] leading-[100%] font-semibold;
   }
 
-  h4 {
+  h4,
+  .h4 {
     @apply text-[1.5rem] leading-[100%] font-semibold;
   }
 
-  h5 {
+  h5,
+  .h5 {
     @apply text-[1.25rem] leading-[100%] font-medium;
   }
 
-  h6 {
+  h6,
+  .h6 {
     @apply text-[1rem] leading-[100%] font-medium;
   }
 

@@ -62,7 +62,7 @@ function Description({ description }: { description: string }) {
 
 function Action({ buttonText }: { buttonText: string }) {
   return (
-    <Link href={routes.projects.link} asSquare whileTap size="xs" asIcon>
+    <Link href={routes.projects.link} likeButton whileTap size="xs" asIcon>
       <span className="flex items-center gap-1">
         {buttonText}
         <LinkDiagonalOne size={16} />
