@@ -2,7 +2,7 @@ import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { routes } from "@/data/route";
 
-export function HeroSection() {
+export function HeaderSection() {
   return (
     <PageHero
       title="Shop"

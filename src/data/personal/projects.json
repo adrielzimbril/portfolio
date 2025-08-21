@@ -1,0 +1,133 @@
+[
+  {
+    "id": 1,
+    "tags": [
+      "Stratégie de mise sur le marché",
+      "Planification de la feuille de route",
+      "Planification de la feuille de route"
+    ],
+    "title": "Project title",
+    "categories": [
+      {
+        "name": "SaaS 🦄",
+        "color": "bg-[#afffad]",
+        "colorCode": "#afffad",
+        "squircle": "squircle-[#afffad]"
+      },
+      {
+        "name": "Go To Market 🎯",
+        "color": "bg-[#ffe9ad]",
+        "colorCode": "#ffe9ad",
+        "squircle": "squircle-[#ffe9ad]"
+      },
+      {
+        "name": "Web Application 📝",
+        "color": "bg-[#ade9ff]",
+        "colorCode": "#ade9ff",
+        "squircle": "squircle-[#ade9ff]"
+      },
+      {
+        "name": "Design 🎨",
+        "color": "bg-[#f9f9f9]",
+        "colorCode": "#f9f9f9",
+        "squircle": "squircle-[#f9f9f9]"
+      },
+      {
+        "name": "Mobile App 📱",
+        "color": "bg-[#e2e4ff]",
+        "colorCode": "#e2e4ff",
+        "squircle": "squircle-[#e2e4ff]"
+      }
+    ],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "buttonText": "Plus d'infos"
+  },
+  {
+    "id": 2,
+    "tags": [
+      "Stratégie de mise sur le marché",
+      "Planification de la feuille de route",
+      "Planification de la feuille de route"
+    ],
+    "title": "Project title",
+    "categories": [
+      {
+        "name": "SaaS 🦄",
+        "color": "bg-[#afffad]",
+        "colorCode": "#afffad",
+        "squircle": "squircle-[#afffad]"
+      },
+      {
+        "name": "Go To Market 🎯",
+        "color": "bg-[#ffe9ad]",
+        "colorCode": "#ffe9ad",
+        "squircle": "squircle-[#ffe9ad]"
+      },
+      {
+        "name": "Web Application 📝",
+        "color": "bg-[#ade9ff]",
+        "colorCode": "#ade9ff",
+        "squircle": "squircle-[#ade9ff]"
+      },
+      {
+        "name": "Design 🎨",
+        "color": "bg-[#f9f9f9]",
+        "colorCode": "#f9f9f9",
+        "squircle": "squircle-[#f9f9f9]"
+      },
+      {
+        "name": "Mobile App 📱",
+        "color": "bg-[#e2e4ff]",
+        "colorCode": "#e2e4ff",
+        "squircle": "squircle-[#e2e4ff]"
+      }
+    ],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "buttonText": "Plus d'infos"
+  },
+  {
+    "id": 3,
+    "tags": [
+      "Innovation",
+      "Product Design",
+      "Web Application",
+      "Mobile App",
+      "Planification de la feuille de route"
+    ],
+    "title": "Vertical Project",
+    "categories": [
+      {
+        "name": "Startup 🚀",
+        "color": "bg-[#ffadad]",
+        "colorCode": "#ffadad",
+        "squircle": "squircle-[#ffadad]"
+      },
+      {
+        "name": "Go To Market 🎯",
+        "color": "bg-[#ffe9ad]",
+        "colorCode": "#ffe9ad",
+        "squircle": "squircle-[#ffe9ad]"
+      },
+      {
+        "name": "Innovation 💡",
+        "color": "bg-[#adffff]",
+        "colorCode": "#adffff",
+        "squircle": "squircle-[#adffff]"
+      },
+      {
+        "name": "Design 🎨",
+        "color": "bg-[#f9f9f9]",
+        "colorCode": "#f9f9f9",
+        "squircle": "squircle-[#f9f9f9]"
+      },
+      {
+        "name": "Mobile App 📱",
+        "color": "bg-[#e2e4ff]",
+        "colorCode": "#e2e4ff",
+        "squircle": "squircle-[#e2e4ff]"
+      }
+    ],
+    "description": "This project shows how vertical layout works on larger screens",
+    "buttonText": "Voir plus"
+  }
+]
