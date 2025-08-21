@@ -1,15 +1,5 @@
-import {
-  CalendarIcon,
-  ClockIcon,
-  DribbbleIcon,
-  EyeIcon,
-  FacebookIcon,
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  MailIcon,
-  TwitterIcon,
-} from "lucide-react";
+"use client";
+import { CalendarIcon, ClockIcon, EyeIcon } from "lucide-react";
 import React from "react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -19,30 +9,12 @@ import { Input } from "@/components/ui/input";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useNewsletterStats } from "@/hooks/useNewsletterStats";
 
-const navigationItems = [
-  { label: "Acceuil", active: true },
-  { label: "A propos", active: false },
-  { label: "Hub", active: false },
-  { label: "Projets", active: false },
-  { label: "Blog", active: false },
-];
-
 const metaInfo = [
   { icon: CalendarIcon, text: "18, Jul 2024" },
   { icon: ClockIcon, text: "08 min read" },
 ];
 
-const socialIcons = [
-  { icon: LinkedinIcon, alt: "Linkedin" },
-  { icon: InstagramIcon, alt: "Instagram" },
-  { icon: GithubIcon, alt: "Github" },
-  { icon: DribbbleIcon, alt: "Dribbble" },
-  { icon: FacebookIcon, alt: "Facebook" },
-  { icon: TwitterIcon, alt: "X twitter" },
-  { icon: MailIcon, alt: "Mail" },
-];
-
-export const Newsletter = () => {
+export default function Newsletter() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { readerCount, isLoading } = useNewsletterStats();
 

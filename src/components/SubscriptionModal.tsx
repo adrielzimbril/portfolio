@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from './ui/dialog'
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -17,10 +17,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form'
-import { Input } from './ui/input'
-import { Button } from './ui/button'
-import { supabase } from '../lib/supabase'
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
 
 const formSchema = z.object({
   nom: z.string().min(2, {

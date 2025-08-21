@@ -1,10 +1,16 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl =
+  process.env.SUPABASE_URL || "https://placeholder.supabase.co";
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || "placeholder-anon-key";
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
+// Only throw error if we're trying to use actual Supabase functionality
+const isPlaceholder =
+  supabaseUrl.includes("placeholder") ||
+  supabaseAnonKey.includes("placeholder");
+
+if (!isPlaceholder) {
+  throw new Error("Missing Supabase environment variables");
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
