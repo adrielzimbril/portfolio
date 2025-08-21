@@ -10,7 +10,7 @@ import { Toaster } from "sonner";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full max-w-[1440px] mx-auto items-start relative bg-white">
+    <>
       {/* <NavbarSection /> */}
       <HeaderSection />
       {/* <AboutSection /> */}
@@ -20,6 +20,6 @@ export default function Home() {
       <ProjectsSection />
       <ContactSection />
       <Toaster />
-    </div>
+    </>
   );
 }

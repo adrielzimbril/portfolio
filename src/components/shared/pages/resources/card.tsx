@@ -22,7 +22,7 @@ interface ResourceCardProps {
 
 export function ResourceCard({ resource }: ResourceCardProps) {
   return (
-    <Card className="squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl rounded-4sxl border-0 overflow-hidden">
+    <Card className="squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
       <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
         <CardPreview icon={resource.icon} iconAlt={resource.iconAlt} />
         <CardInfo details={resource} />
