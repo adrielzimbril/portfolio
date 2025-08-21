@@ -1,14 +1,5 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "@/components/ui/link";
 import { routes } from "@/data/route";
-import { ArrowRightOne, LinkDiagonalOne, LinkOne } from "@aurthle/icons";
-import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 

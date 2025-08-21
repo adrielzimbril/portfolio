@@ -23,7 +23,7 @@ const data = [
   },
 ];
 
-export function ServicesSection() {
+export function CraftSection() {
   return (
     <SectionLayout
       badge="Votre partenaire 🫶"

@@ -1,8 +1,8 @@
 import React from "react";
-import { AboutMeSection } from "./sections/AboutMeSection";
+import { PhilosophySection } from "./sections/PhilosophySection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeroSection } from "./sections/HeroSection";
-import { ServicesSection } from "./sections/ServicesSection";
+import { CraftSection } from "./sections/CraftSection";
 import { InteractiveFunFacts } from "./sections/InteractiveFunFactsSection";
 
 
@@ -10,9 +10,9 @@ export default function About () {
   return (
     <>
       <HeroSection />
-      <ServicesSection />
+      <CraftSection />
       <InteractiveFunFacts />
-      <AboutMeSection />
+      <PhilosophySection />
       <CallToAction />
     </>
   );

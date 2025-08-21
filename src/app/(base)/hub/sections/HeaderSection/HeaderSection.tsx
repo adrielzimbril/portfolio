@@ -10,6 +10,7 @@ export function HeroSection() {
       buttonLink={routes.hub.link}
       buttonText="Voir mes ressources"
       imagePath="/image-657.png"
+      actionButton
     />
   );
 }

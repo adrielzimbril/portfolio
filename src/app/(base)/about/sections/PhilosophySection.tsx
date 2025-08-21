@@ -33,13 +33,9 @@ const data = [
   },
 ];
 
-export function AboutMeSection() {
+export function PhilosophySection() {
   return (
-    <SectionLayout
-      badge="Votre partenaire 🫶"
-      title="Ce que je peux faire pour vous."
-      layoutStart
-    >
+    <SectionLayout badge="Unicorn 🦄" title="Ma philosophie." layoutStart>
       {data.map((item, index) => (
         <DetailsCard
           key={index}

@@ -4,7 +4,6 @@ import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import NextLink from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export interface LinkProps
@@ -39,17 +38,19 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         size={size}
         asFull={asFull}
         asIcon={asIcon}
-        className={cn(className, "cursor-pointer")}
+        className={cn(className)}
         asChild={true}
+        whileTap={whileTap}
+        asPointer
       >
-        <motion.span whileTap={whileTap ? { scale: 1.05 } : undefined}>
+        <span className="relative">
           <NextLink
             className={cn("relative size-full", linkClassName)}
             href={href!}
             ref={ref}
             {...props}
           />
-        </motion.span>
+        </span>
       </Button>
     ) : (
       <NextLink

@@ -5,13 +5,32 @@ import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeho
 import { ArrowRightOne, ArrowDownOne } from "@aurthle/icons";
 import { Button } from "@/components/ui/button";
 
+function ButtonContent({
+  variant,
+  buttonText,
+}: {
+  variant: "default" | "secondary";
+  buttonText: string;
+}) {
+  return (
+    <span className="flex items-center gap-1">
+      {buttonText}
+      {variant === "default" ? (
+        <ArrowDownOne size={18} />
+      ) : (
+        <ArrowRightOne size={18} />
+      )}
+    </span>
+  );
+}
+
 function ContentSection({
   title,
   description,
   buttonLink,
   buttonText,
   buttonVariant,
-  linkIsButton,
+  actionButton,
   onClick,
 }: {
   title: string;
@@ -19,14 +38,14 @@ function ContentSection({
   buttonLink: string;
   buttonText: string;
   buttonVariant: "default" | "secondary";
-  linkIsButton: boolean;
+  actionButton: boolean;
   onClick: () => void;
 }) {
   return (
     <div className="flex flex-col gap-8 items-start justify-start relative md:max-w-[50%]">
       <h1 className="relative whitespace-pre-line">{title}</h1>
       <p className="relative text-2xl whitespace-pre-line">{description}</p>
-      {linkIsButton ? (
+      {actionButton ? (
         <Button
           onClick={onClick}
           variant={buttonVariant}
@@ -35,12 +54,7 @@ function ContentSection({
           whileTap
           asPointer
         >
-          <span>{buttonText}</span>
-          {buttonVariant === "default" ? (
-            <ArrowRightOne size={18} />
-          ) : (
-            <ArrowDownOne size={16} />
-          )}
+          <ButtonContent variant={buttonVariant} buttonText={buttonText} />
         </Button>
       ) : (
         <Link
@@ -52,12 +66,7 @@ function ContentSection({
           whileTap
           likeButton
         >
-          <span>{buttonText}</span>
-          {buttonVariant === "default" ? (
-            <ArrowRightOne size={18} />
-          ) : (
-            <ArrowDownOne size={16} />
-          )}
+          <ButtonContent variant={buttonVariant} buttonText={buttonText} />
         </Link>
       )}
     </div>
@@ -73,7 +82,7 @@ export function PageHero({
   imagePath,
   isMobileHidden = true,
   imageContent,
-  linkIsButton = false,
+  actionButton = false,
   onClick = () => {},
 }: {
   title: string;
@@ -84,8 +93,8 @@ export function PageHero({
   imagePath?: string;
   isMobileHidden?: boolean;
   imageContent?: React.ReactNode;
-  linkIsButton?: boolean;
-  onClick: () => void;
+  actionButton?: boolean;
+  onClick?: () => void;
 }) {
   return (
     <SectionBase>
@@ -99,7 +108,7 @@ export function PageHero({
         buttonLink={buttonLink}
         buttonText={buttonText}
         buttonVariant={buttonVariant}
-        linkIsButton={linkIsButton}
+        actionButton={actionButton}
         onClick={onClick}
       />
     </SectionBase>
