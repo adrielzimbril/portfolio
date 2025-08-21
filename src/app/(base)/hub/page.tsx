@@ -1,6 +1,6 @@
 import React from "react";
-import { HeaderSection } from "./sections/HeaderSection/HeaderSection";
-import { ProjectSection } from "./sections/ProjectSection/ProjectSection";
+import { HeaderSection } from "./sections/HeaderSection";
+import { ProjectSection } from "./sections/MyHubSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 
 export default function MyHub() {
