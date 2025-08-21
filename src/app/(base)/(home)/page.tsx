@@ -3,19 +3,14 @@ import { ContactSection } from "./sections/ContactSection";
 import { HeaderSection } from "./sections/HeaderSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
-import { AboutSection } from "./sections/AboutSection";
-import InteractiveFunFacts from "./sections/AboutSectionSecond";
-import InteractiveFunFactsTerio from "./sections/AboutSectionTerio";
+import InteractiveFunFacts from "./sections/InteractiveFunFactsSection";
 import { Toaster } from "sonner";
 
 export default function Home() {
   return (
     <>
-      {/* <NavbarSection /> */}
       <HeaderSection />
-      {/* <AboutSection /> */}
       <InteractiveFunFacts />
-      {/* <InteractiveFunFactsTerio /> */}
       <ResourcesSection />
       <ProjectsSection />
       <ContactSection />

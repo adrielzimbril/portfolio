@@ -10,6 +10,7 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 // Interface pour les questions
 interface Question {
@@ -307,47 +308,46 @@ function CustomAlert({
         onClick={onClose}
       >
         <motion.div
-          className={`bg-white rounded-3xl p-8 max-w-md mx-4 text-center ${
-            isCorrect ? "border-4 border-green-500" : "border-4 border-red-500"
-          }`}
+          className="relative squircle squircle-white squircle-5xl squircle-smooth-xl flex flex-col gap-6 p-8 max-w-md mx-4 text-center"
           initial={{ scale: 0.5, y: 50 }}
           animate={{ scale: 1, y: 0 }}
           exit={{ scale: 0.5, y: 50 }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="text-6xl mb-4">{isCorrect ? "🎉" : "😅"}</div>
+          <div className="relative flex flex-col gap-2 items-center justify-center">
+            <h3 className="mb-2">{isCorrect ? "🎉" : "😅"}</h3>
 
-          <h3
-            className={`text-2xl font-bold mb-3 ${
-              isCorrect ? "text-green-600" : "text-red-600"
-            }`}
-          >
-            {isCorrect ? "Bravo !" : "Pas tout à fait !"}
-          </h3>
+            <h4
+              className={cn("font-bold", {
+                "text-green-600": isCorrect,
+                "text-red-600": !isCorrect,
+              })}
+            >
+              {isCorrect ? "Bravo !" : "Pas tout à fait !"}
+            </h4>
 
-          <p className="text-gray-700 mb-4">
-            {isCorrect
-              ? "Tu as trouvé la bonne réponse ! 🎯"
-              : "Ce n'était pas la bonne réponse... 🤔"}
-          </p>
+            <p className="text-gray-700">
+              {isCorrect
+                ? "Tu as trouvé la bonne réponse ! 😆"
+                : "Ce n'était pas la bonne réponse... 😖"}
+            </p>
+          </div>
 
           {question.funFact && (
-            <div className="bg-blue-50 p-4 rounded-xl">
-              <p className="text-sm text-blue-800 font-medium mb-2">
-                Fun Fact :
-              </p>
-              <p className="text-blue-700">{question.funFact}</p>
+            <div className="relative squircle squircle-stone-100 squircle-3xl squircle-smooth-xl flex flex-col p-4 gap-2 items-center justify-center">
+              <Badge
+                className="inline-flex w-fit squircle-white"
+                variant="colored"
+              >
+                Réponse 🥸
+              </Badge>
+              <p className="text-zinc-800">{question.funFact}</p>
             </div>
           )}
 
-          <motion.button
-            className="mt-6 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-medium transition-colors"
-            onClick={onClose}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <Button onClick={onClose} asFull asPointer whileTap>
             {isCorrect ? "Continuer 😍" : "Réessayer 😩"}
-          </motion.button>
+          </Button>
         </motion.div>
       </motion.div>
     </AnimatePresence>
@@ -367,117 +367,126 @@ function AllFactsModal({
   if (!isOpen) return null;
 
   const totalGuessed = Object.keys(guessedFacts).length;
+  const totalQuestions = questions.length;
   const correctGuesses = questions.filter(
-    (fact) =>
-      guessedFacts[fact.id] !== undefined &&
-      guessedFacts[fact.id] === fact.isTrue
+    (fact) => guessedFacts[fact.id] !== undefined && guessedFacts[fact.id]
   ).length;
 
   return (
-    <motion.div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onClose}
-    >
+    <AnimatePresence>
       <motion.div
-        className="bg-white rounded-[16px] sm:rounded-[24px] p-4 sm:p-8 max-w-[95%] sm:max-w-2xl w-full max-h-[90vh] sm:max-h-[80vh] overflow-y-auto"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        onClick={(e) => e.stopPropagation()}
+        className="fixed inset-0 bg-black/10 bg-opacity-50 flex items-center justify-center z-50 p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
       >
-        <div className="flex justify-between items-center mb-4 sm:mb-6">
-          <h2 className="text-[24px] sm:text-[32px] font-semibold text-[rgba(0,0,0,0.87)]">
-            Tous les faits 🦄
-          </h2>
-          <button
-            onClick={onClose}
-            className="text-[rgba(0,0,0,0.6)] hover:text-[rgba(0,0,0,0.87)] text-[20px] sm:text-[24px]"
-          >
-            ✕
-          </button>
-        </div>
-
-        {totalGuessed > 0 && (
-          <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-blue-50 rounded-[12px] sm:rounded-[16px] border-2 border-blue-200">
-            <h3 className="text-[16px] sm:text-[20px] font-semibold text-blue-800 mb-1 sm:mb-2">
-              🎯 Ton score : {correctGuesses}/{totalGuessed}
-            </h3>
-            <p className="text-[14px] sm:text-base text-blue-700">
-              {correctGuesses === totalGuessed
-                ? "Parfait ! Tu as tout bon ! 🏆"
-                : correctGuesses > totalGuessed / 2
-                ? "Pas mal du tout ! 👏"
-                : "Tu peux mieux faire ! 😅"}
-            </p>
+        <motion.div
+          className="relative squircle squircle-white squircle-5xl squircle-smooth-xl flex flex-col gap-6 p-6 sm:p-8 max-w-[95%] sm:max-w-2xl w-full max-h-[90vh]"
+          initial={{ scale: 0.5, y: 50 }}
+          animate={{ scale: 1, y: 0 }}
+          exit={{ scale: 0.5, y: 50 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="relative flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+              <h4 className="text- ">Tous les faits 🦄</h4>
+              <Button onClick={onClose} asPointer whileTap size="icon">
+                ✕
+              </Button>
+            </div>
           </div>
-        )}
+          <Separator />
 
-        <div className="grid gap-3 sm:gap-4">
-          {questions.map((question, index) => {
-            const userGuessed = guessedFacts[question.id] !== undefined;
-            const userGuessCorrect =
-              userGuessed && guessedFacts[question.id] === question.isTrue;
-
-            return (
+          {/* Facts Grid */}
+          <div className="flex flex-col gap-4 overflow-y-auto">
+            {/* Score Section */}
+            {totalGuessed > 0 && (
               <motion.div
-                key={question.id}
-                className={`p-3 sm:p-4 rounded-[12px] sm:rounded-[16px] border-2 ${
-                  userGuessed
-                    ? userGuessCorrect
-                      ? "border-green-200 bg-green-50"
-                      : "border-red-200 bg-red-50"
-                    : question.isTrue
-                    ? "border-green-200 bg-green-50"
-                    : "border-red-200 bg-red-50"
-                }`}
+                className="squircle squircle-stone-50 squircle-3xl squircle-smooth-xl p-4 sm:p-6 squircle-border-2 squircle-border-stone-200 flex flex-col gap-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: 0.1 }}
               >
-                <div className="flex items-start gap-2 sm:gap-3">
-                  <span className="text-[24px] sm:text-[32px]">
-                    {question.emoji}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-[16px] sm:text-[20px] font-semibold text-[rgba(0,0,0,0.87)] mb-1">
-                      {question.title}
-                    </h3>
-                    <p className="text-[14px] sm:text-[16px] text-[rgba(0,0,0,0.6)] mb-2">
-                      {question.subtitle}
-                    </p>
-                    <div className="flex gap-2 flex-wrap">
-                      <span
-                        className={`inline-block px-2 sm:px-3 py-1 rounded-full text-[12px] sm:text-[14px] font-medium ${
-                          question.isTrue
-                            ? "bg-green-200 text-green-800"
-                            : "bg-red-200 text-red-800"
-                        }`}
-                      >
-                        {question.isTrue ? "✅ Vrai" : "❌ Mensonge"}
-                      </span>
-                      {userGuessed && (
-                        <span
-                          className={`inline-block px-2 sm:px-3 py-1 rounded-full text-[12px] sm:text-[14px] font-medium ${
-                            userGuessCorrect
-                              ? "bg-blue-200 text-blue-800"
-                              : "bg-orange-200 text-orange-800"
-                          }`}
+                <h5 className="font-bold">
+                  🎯 Ton score : {correctGuesses}/{totalQuestions}
+                </h5>
+                <p className="text-gray-700">
+                  {correctGuesses === totalGuessed
+                    ? "Tu as tout bon, Oula tu me connais un peu trop 😄🏆"
+                    : correctGuesses > totalGuessed / 2
+                    ? "Pas mal du tout ! 👏"
+                    : "Tu peux mieux faire ! 😅"}
+                </p>
+              </motion.div>
+            )}
+            {questions.map((question, index) => {
+              const userGuessed = guessedFacts[question.id] !== undefined;
+              const userGuessedCorrect =
+                userGuessed && guessedFacts[question.id];
+
+              return (
+                <motion.div
+                  key={question.id}
+                  className={cn(
+                    "squircle squircle-zinc-50",
+                    "squircle-3xl squircle-smooth-xl p-4 sm:p-6 border-2"
+                  )}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.2 }}
+                >
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <h4 className="bg-white center leading-[140%] rounded-full p-2 aspect-square shrink-0">
+                      {question.emoji}
+                    </h4>
+
+                    <div className="flex-1 min-w-0">
+                      <h5 className="font-bold mb-1">{question.title}</h5>
+                      <p className="text-base text-gray-700">
+                        {question.description}
+                      </p>
+
+                      {/* Badges */}
+                      <div className="flex gap-2 flex-wrap">
+                        <Badge
+                          variant="colored"
+                          className={cn(
+                            "squircle-white squircle-border-2 squircle-border-stone-200 ",
+                            question.isTrue ? "text-green-800" : "text-red-800"
+                          )}
                         >
-                          {userGuessCorrect ? "🎯 Correct!" : "❌ Raté!"}
-                        </span>
-                      )}
+                          {question.isTrue ? "✅ Vérité" : "❌ Mensonge"}
+                        </Badge>
+
+                        {userGuessed && (
+                          <Badge
+                            className={cn(
+                              userGuessedCorrect
+                                ? "squircle-blue-100 text-blue-900"
+                                : "squircle-orange-100 text-orange-900"
+                            )}
+                            variant="colored"
+                          >
+                            {userGuessedCorrect ? "🎯 Correct!" : "❌ Raté!"}
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <Separator />
+          {/* Close Button */}
+          <Button onClick={onClose} size="lg" whileTap asPointer asFull>
+            Fermer 😊
+          </Button>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </AnimatePresence>
   );
 }
 
@@ -502,16 +511,9 @@ export default function InteractiveFunFacts() {
   // Derive calculations based on guessedFacts
   const answeredQuestionsCount = Object.keys(guessedFacts).length;
   const allQuestionsAnswered = answeredQuestionsCount === questions.length;
+
   // Verify if there is a false in the guessed answers
   const hasGuessedFalse = Object.values(guessedFacts).includes(false);
-
-  // Or to be more specific, verify if he correctly guessed a lie
-  const hasCorrectlyGuessedLie = Object.entries(guessedFacts).some(
-    ([questionId, guess]) => {
-      const question = questions.find((q) => q.id === parseInt(questionId));
-      return question && !question.isTrue && !guess; // question fausse ET il a répondu faux
-    }
-  );
 
   const handleEmojiClick = (isTrue: boolean) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -562,7 +564,9 @@ export default function InteractiveFunFacts() {
   const canAnswer = gameStarted && !showAllFacts && !allQuestionsAnswered;
   const badge =
     gameStarted || showAllFacts
-      ? `Score: ${score}/${questions.length}`
+      ? false === true
+        ? `Score: ${score}/${questions.length}`
+        : "Jouons"
       : "Jouons";
 
   return (
