@@ -1,7 +1,7 @@
 "use server";
 
 import { setLocaleCookie } from "@i18n/lib/locale-cookie";
-import type { Locale } from "@repo/i18n";
+import type { Locale } from "@i18n/types";
 import { revalidatePath } from "next/cache";
 
 export async function updateLocale(locale: Locale) {

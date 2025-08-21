@@ -46,6 +46,7 @@ export interface ButtonProps
   asFull?: boolean;
   asIcon?: boolean;
   asPointer?: boolean;
+  whileTap?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -58,6 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asFull = false,
       asIcon = false,
       asPointer = false,
+      whileTap = false,
       ...props
     },
     ref
@@ -69,7 +71,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           buttonVariants({ variant, size, className }),
           asFull && "w-full flex text-center items-center justify-center",
           asIcon && "[&_svg]:size-auto",
-          asPointer && "cursor-pointer"
+          asPointer && "cursor-pointer",
+          whileTap && "hover:scale-105"
         )}
         ref={ref}
         {...props}

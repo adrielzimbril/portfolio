@@ -133,16 +133,6 @@ function ScreenIPhone12({
               <div className="font-['SF_Pro_Display:Medium',_sans-serif] relative shrink-0 text-[16px] sm:text-[24px] text-[rgba(0,0,0,0.38)] tracking-[0.0168px] w-full">
                 <p className="block leading-[1.2]">{fact.subtitle}</p>
               </div>
-              {!hasGuessed && (
-                <motion.div
-                  className="font-['SF_Pro_Display:Medium',_sans-serif] text-[14px] sm:text-[18px] text-[rgba(0,0,0,0.6)] mt-1 sm:mt-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <p className="block leading-[1.2]">👈 Faux ou Vrai 👉</p>
-                </motion.div>
-              )}
             </motion.div>
           </AnimatePresence>
           <Frame4496 />
@@ -162,7 +152,7 @@ function BackgroundFactsRotation({
   const otherFacts = facts.filter((_, index) => index !== currentIndex);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10 sm:opacity-20">
+    <div className="overflow-hidden pointer-events-none opacity-10 sm:opacity-20">
       {otherFacts.map((fact, index) => (
         <motion.div
           key={fact.id}
@@ -260,10 +250,7 @@ function EmojiComponent({
           height={100}
           alt="Emoji False"
           className={cn(
-            "w-full h-full object-cover transition-opacity duration-300",
-            {
-              "opacity-0": !isActive,
-            }
+            "w-full h-full object-cover transition-opacity duration-300"
           )}
         />
       ) : (
@@ -273,10 +260,7 @@ function EmojiComponent({
           height={100}
           alt="Emoji/True"
           className={cn(
-            "w-full h-full object-cover transition-opacity duration-300",
-            {
-              "opacity-0": !isActive,
-            }
+            "w-full h-full object-cover transition-opacity duration-300"
           )}
         />
       )}
@@ -328,7 +312,7 @@ function GuessButton({
         />
       </motion.div>
 
-      {hasGuessed && (
+      {/* {hasGuessed && (
         <motion.div
           className="font-['SF_Pro_Display:Medium',_sans-serif] text-[12px] sm:text-[14px] text-[rgba(0,0,0,0.6)] text-center"
           initial={{ opacity: 0, y: 10 }}
@@ -337,7 +321,7 @@ function GuessButton({
         >
           {isLeft ? "← Précédent" : "Suivant →"}
         </motion.div>
-      )}
+      )} */}
     </div>
   );
 }
@@ -408,40 +392,22 @@ function Content({
   hasGuessed: boolean;
 }) {
   return (
-    <div className="absolute box-border content-center flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center sm:justify-between left-1/2 p-4 sm:p-0 top-[180px] sm:top-[240px] lg:top-[298px] translate-x-[-50%] w-full max-w-[340px] sm:max-w-[600px] lg:max-w-[1136px] z-10">
+    <div className="box-border content-center flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center sm:justify-between p-4 sm:p-0 w-full max-w-[340px] sm:max-w-[600px] lg:max-w-[1136px] z-10">
       <div className="flex flex-row sm:flex-col gap-6 sm:gap-0 justify-between w-full sm:w-auto order-2 sm:order-1">
-        {!hasGuessed ? (
+        <GuessButton
+          isLeft={true}
+          onGuess={onGuess}
+          hasGuessed={hasGuessed}
+          currentIndex={currentIndex}
+        />
+
+        <div className="block sm:hidden">
           <GuessButton
-            isLeft={true}
+            isLeft={false}
             onGuess={onGuess}
             hasGuessed={hasGuessed}
             currentIndex={currentIndex}
           />
-        ) : (
-          <NavigationButton
-            isLeft={true}
-            currentIndex={currentIndex}
-            onNavigate={onNavigate}
-            disabled={false}
-          />
-        )}
-
-        <div className="block sm:hidden">
-          {!hasGuessed ? (
-            <GuessButton
-              isLeft={false}
-              onGuess={onGuess}
-              hasGuessed={hasGuessed}
-              currentIndex={currentIndex}
-            />
-          ) : (
-            <NavigationButton
-              isLeft={false}
-              currentIndex={currentIndex}
-              onNavigate={onNavigate}
-              disabled={false}
-            />
-          )}
         </div>
       </div>
 
@@ -450,21 +416,12 @@ function Content({
       </div>
 
       <div className="hidden sm:block order-3">
-        {!hasGuessed ? (
-          <GuessButton
-            isLeft={false}
-            onGuess={onGuess}
-            hasGuessed={hasGuessed}
-            currentIndex={currentIndex}
-          />
-        ) : (
-          <NavigationButton
-            isLeft={false}
-            currentIndex={currentIndex}
-            onNavigate={onNavigate}
-            disabled={false}
-          />
-        )}
+        <GuessButton
+          isLeft={false}
+          onGuess={onGuess}
+          hasGuessed={hasGuessed}
+          currentIndex={currentIndex}
+        />
       </div>
     </div>
   );
@@ -478,7 +435,7 @@ function Component02ControlsButtons({
   onReset: () => void;
 }) {
   return (
-    <div className="absolute flex flex-col sm:flex-row gap-3 sm:gap-4 bottom-[120px] sm:bottom-auto sm:top-[580px] lg:top-[630px] left-1/2 translate-x-[-50%] z-10 px-4">
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 z-10 px-4">
       <motion.div
         className="bg-[#2a2a2a] box-border content-stretch flex flex-row items-center justify-center sm:justify-start overflow-clip px-4 sm:px-6 py-[10px] sm:py-[13px] rounded-lg sm:rounded-xl cursor-pointer text-center"
         data-name="02 Controls / Buttons"
@@ -515,10 +472,10 @@ function Component02ControlsButtons({
   );
 }
 
-function Frame4430({ encouragement }: { encouragement: string }) {
+function HeaderEncouragement({ encouragement }: { encouragement: string }) {
   return (
     <motion.div
-      className="absolute box-border content-stretch flex flex-col gap-2 sm:gap-4 items-center justify-start leading-[0] left-1/2 not-italic p-4 sm:p-0 text-center top-[20px] sm:top-[60px] lg:top-[104px] translate-x-[-50%] z-10 w-full max-w-[90%] sm:max-w-none"
+      className="box-border content-stretch flex flex-col gap-2 sm:gap-4 items-center justify-start leading-[0] p-4 sm:p-0 text-center z-10 w-full max-w-[90%] sm:max-w-none"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -679,19 +636,17 @@ export function AboutSection() {
   const currentFact = facts[currentIndex];
   const hasGuessedCurrent = guessedFacts[currentFact.id] !== undefined;
 
-  const handleNavigate = (direction: "prev" | "next") => {
-    if (direction === "prev" && currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    } else if (direction === "next" && currentIndex < facts.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
+  const handleNavigate = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === facts.length - 1 ? 0 : prevIndex + 1
+    );
 
     // Change encouragement
     setEncouragementIndex((prev) => (prev + 1) % encouragements.length);
   };
 
   const handleGuess = (guess: boolean) => {
-    if (hasGuessedCurrent) return;
+    // if (hasGuessedCurrent) return;
 
     setGuessedFacts((prev) => ({ ...prev, [currentFact.id]: guess }));
 
@@ -700,7 +655,7 @@ export function AboutSection() {
       ? currentFact.funnyTruthMessage
       : currentFact.funnyLieMessage;
 
-    handleNavigate(isCorrect ? "next" : "prev");
+    handleNavigate();
 
     // Show fun toast
     if (isCorrect) {
@@ -745,12 +700,10 @@ export function AboutSection() {
   };
 
   return (
-    <div
-      className="bg-[#ffffff] relative w-full min-h-screen overflow-hidden"
-      data-name="01 Home + Work / Project Hero / Center"
-    >
+    <div className="relative w-full overflow-hidden">
       <BackgroundFactsRotation facts={facts} currentIndex={currentIndex} />
 
+      <HeaderEncouragement encouragement={encouragements[encouragementIndex]} />
       <Content
         currentFact={currentFact}
         currentIndex={currentIndex}
@@ -764,8 +717,6 @@ export function AboutSection() {
         onReset={handleReset}
       />
 
-      <Frame4430 encouragement={encouragements[encouragementIndex]} />
-
       <AnimatePresence>
         {showAllFacts && (
           <AllFactsModal
@@ -776,53 +727,46 @@ export function AboutSection() {
         )}
       </AnimatePresence>
 
-      {/* Indicateurs de progression responsives */}
-      <motion.div
-        className="flex gap-2 sm:gap-3 z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-      >
-        {facts.map((fact, index) => {
-          const isGuessed = guessedFacts[fact.id] !== undefined;
-          const isCorrect = isGuessed && guessedFacts[fact.id] === fact.isTrue;
+      <div className="relative">
+        {/* Indicateurs de progression responsives */}
+        <div className="flex gap-2 sm:gap-3 z-10">
+          {facts.map((fact, index) => {
+            const isGuessed = guessedFacts[fact.id] !== undefined;
+            const isCorrect =
+              isGuessed && guessedFacts[fact.id] === fact.isTrue;
 
-          return (
-            <motion.div
-              key={index}
-              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full cursor-pointer border-2 flex items-center justify-center ${
-                index === currentIndex
-                  ? "bg-[#2a2a2a] border-[#2a2a2a]"
-                  : isGuessed
-                  ? isCorrect
-                    ? "bg-green-500 border-green-500"
-                    : "bg-red-500 border-red-500"
-                  : "bg-[rgba(0,0,0,0.2)] border-[rgba(0,0,0,0.2)]"
-              }`}
-              whileHover={{ scale: 1.3 }}
-              onClick={() => setCurrentIndex(index)}
-            >
-              {isGuessed && (
-                <span className="text-white text-[6px] sm:text-[8px]">
-                  {isCorrect ? "✓" : "✗"}
-                </span>
-              )}
-            </motion.div>
-          );
-        })}
-      </motion.div>
+            return (
+              <motion.div
+                key={index}
+                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full cursor-pointer border-2 flex items-center justify-center ${
+                  index === currentIndex
+                    ? "bg-[#2a2a2a] border-[#2a2a2a]"
+                    : isGuessed
+                    ? isCorrect
+                      ? "bg-green-500 border-green-500"
+                      : "bg-red-500 border-red-500"
+                    : "bg-[rgba(0,0,0,0.2)] border-[rgba(0,0,0,0.2)]"
+                }`}
+                whileHover={{ scale: 1.3 }}
+                onClick={() => setCurrentIndex(index)}
+              >
+                {isGuessed && (
+                  <span className="text-white text-[6px] sm:text-[8px]">
+                    {isCorrect ? "✓" : "✗"}
+                  </span>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
 
-      {/* Progress text responsive */}
-      <motion.div
-        className=" text-center z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-      >
-        <p className="text-[rgba(0,0,0,0.6)] text-[14px] sm:text-[16px]">
-          {Object.keys(guessedFacts).length}/{facts.length} faits devinés
-        </p>
-      </motion.div>
+        {/* Progress text responsive */}
+        <div className=" text-center z-10">
+          <p className="text-[rgba(0,0,0,0.6)] text-[14px] sm:text-[16px]">
+            {Object.keys(guessedFacts).length}/{facts.length} faits devinés
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
