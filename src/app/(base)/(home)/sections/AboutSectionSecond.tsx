@@ -22,7 +22,7 @@ interface Question {
   funnyLieMessage?: string;
 }
 
-// Questions du quiz
+// Quiz Questions
 const questions: Question[] = [
   {
     id: 1,
@@ -112,60 +112,54 @@ const questions: Question[] = [
   },
 ];
 
-// Composant pour l'emoji personnalisé
-function CustomEmoji({
-  isTrue,
+// Custom Emoji Component
+function GuessButton({
+  isFalse,
   onClick,
   canAnswer,
-  hasActiveQuestion,
 }: {
-  isTrue: boolean;
+  isFalse?: boolean;
   onClick: () => void;
   canAnswer: boolean;
-  hasActiveQuestion: boolean;
 }) {
-  const isAnswerButton = hasActiveQuestion && canAnswer;
   const imgEmojiFalse = "/emoji-false.png";
   const imgEmojiTrue = "/emoji-true.png";
 
   return (
     <motion.div
-      className={`bg-[#f9f9f9] box-border content-stretch flex items-center justify-start overflow-clip p-[24px] relative rounded-[120px] shrink-0 cursor-pointer transition-all duration-300 ${
-        isAnswerButton
-          ? "hover:bg-green-50 hover:ring-2 hover:ring-green-300"
-          : "hover:bg-gray-100"
-      }`}
+      className={cn(
+        "relative bg-stone-100 border-2 border-zinc-200 content-stretch flex items-center justify-start p-4 md:p-6 rounded-full shrink-0 cursor-pointer transition-all duration-300",
+        canAnswer
+          ? isFalse
+            ? "hover:bg-red-100 hover:border-red-500"
+            : "hover:bg-green-100 hover:border-green-500"
+          : "pointer-events-none cursor-default"
+      )}
       onClick={onClick}
-      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="relative shrink-0 size-[88px]">
-        {/* <div
-          className="absolute bg-center bg-cover bg-no-repeat inset-0"
-          style={{
-            backgroundImage: `url('${isTrue ? imgEmojiTrue : imgEmojiFalse}')`,
-          }}
-        /> */}
+      <div className="relative shrink-0 size-11 md:size-20">
         <Image
-          src={isTrue ? imgEmojiTrue : imgEmojiFalse}
+          src={isFalse ? imgEmojiFalse : imgEmojiTrue}
           width={100}
           height={100}
-          alt="Emoji/True"
+          alt={isFalse ? "Emoji/True" : "Emoji/False"}
           className={cn(
-            "w-full h-full object-cover transition-opacity duration-300 pointer-events-none"
+            "w-full h-full object-cover transition-opacity duration-300 pointer-events-none",
+            !canAnswer && "opacity-50"
           )}
         />
-        {isAnswerButton && (
-          <motion.div
+        {canAnswer && (
+          <motion.span
             className={`absolute -top-2 -right-2 text-xs font-bold px-2 py-1 rounded-full text-white ${
-              isTrue ? "bg-green-500" : "bg-red-500"
+              isFalse ? "bg-red-500" : "bg-green-500"
             }`}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2 }}
           >
-            {isTrue ? "VRAI" : "FAUX"}
-          </motion.div>
+            {isFalse ? "FAUX" : "VRAI"}
+          </motion.span>
         )}
       </div>
     </motion.div>
@@ -287,7 +281,7 @@ function QuestionCard({
   );
 }
 
-// Composant pour l'alerte personnalisée
+// Custom Alert Component
 function CustomAlert({
   isVisible,
   isCorrect,
@@ -359,7 +353,7 @@ function CustomAlert({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {isCorrect ? "Continuer" : "Essayer encore"}
+            {isCorrect ? "Continuer 😍" : "Réessayer 😩"}
           </motion.button>
         </motion.div>
       </motion.div>
@@ -367,6 +361,7 @@ function CustomAlert({
   );
 }
 
+// All Facts Modal Component
 function AllFactsModal({
   isOpen,
   onClose,
@@ -493,11 +488,9 @@ function AllFactsModal({
   );
 }
 
+// Interactive Fun Facts Component
 export default function InteractiveFunFacts() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answeredQuestions, setAnsweredQuestions] = useState<Set<number>>(
-    new Set()
-  );
   const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>(
     {}
   );
@@ -514,6 +507,20 @@ export default function InteractiveFunFacts() {
   const [showAllQuestions, setShowAllQuestions] = useState(false);
   const [showAllFacts, setShowAllFacts] = useState(false);
 
+  // Derive calculations based on guessedFacts
+  const answeredQuestionsCount = Object.keys(guessedFacts).length;
+  const allQuestionsAnswered = answeredQuestionsCount === questions.length;
+  // Verify if there is a false in the guessed answers
+  const hasGuessedFalse = Object.values(guessedFacts).includes(false);
+
+  // Or to be more specific, verify if he correctly guessed a lie
+  const hasCorrectlyGuessedLie = Object.entries(guessedFacts).some(
+    ([questionId, guess]) => {
+      const question = questions.find((q) => q.id === parseInt(questionId));
+      return question && !question.isTrue && !guess; // question fausse ET il a répondu faux
+    }
+  );
+
   const handleEmojiClick = (isTrue: boolean) => {
     if (showAllQuestions) {
       setShowAllQuestions(false);
@@ -521,7 +528,7 @@ export default function InteractiveFunFacts() {
     }
 
     const currentQuestion = questions[currentQuestionIndex];
-    if (!currentQuestion || answeredQuestions.has(currentQuestion.id)) {
+    if (!currentQuestion || guessedFacts[currentQuestion.id] !== undefined) {
       return;
     }
 
@@ -531,8 +538,7 @@ export default function InteractiveFunFacts() {
       setScore((prev) => prev + 1);
     }
 
-    setAnsweredQuestions((prev) => new Set([...prev, currentQuestion.id]));
-    setGuessedFacts((prev) => ({ ...prev, [currentQuestion.id]: isTrue }));
+    setGuessedFacts((prev) => ({ ...prev, [currentQuestion.id]: isCorrect }));
     setAlertData({ isCorrect, question: currentQuestion });
     setShowAlert(true);
   };
@@ -541,7 +547,7 @@ export default function InteractiveFunFacts() {
     setShowAlert(false);
     setAlertData({ isCorrect: false, question: null });
 
-    // Passer à la question suivante après fermeture de l'alerte
+    // Pass to the next question after closing the alert
     if (currentQuestionIndex < questions.length - 1) {
       setTimeout(() => {
         setCurrentQuestionIndex((prev) => prev + 1);
@@ -551,10 +557,9 @@ export default function InteractiveFunFacts() {
 
   const resetGame = () => {
     setCurrentQuestionIndex(0);
-    setAnsweredQuestions(new Set());
     setGuessedFacts({});
-    setScore(0);
     setGameStarted(true);
+    setScore(0);
     setShowAllQuestions(false);
     toast.success("C'est reparti pour un tour! 🚀", {
       duration: 2000,
@@ -568,14 +573,7 @@ export default function InteractiveFunFacts() {
     });
   };
 
-  const allQuestionsAnswered = answeredQuestions.size === questions.length;
   const canAnswer = gameStarted && !showAllQuestions && !allQuestionsAnswered;
-  const badgeOld = gameStarted
-    ? `Score: ${score}/${questions.length} | Question ${Math.min(
-        currentQuestionIndex + 1,
-        questions.length
-      )}/${questions.length}`
-    : "Jouons";
   const badge =
     gameStarted || showAllQuestions
       ? `Score: ${score}/${questions.length}`
@@ -583,37 +581,29 @@ export default function InteractiveFunFacts() {
 
   return (
     <SectionLayout
-      className={cn("relative w-full py-[104px]")}
       isFlex
       badge={`${badge} 🤭`}
       title="Faits amusants sur moi"
       description="L'un d'eux est un mensonge que tu devras deviner, essaie de ne pas te tromper 🤭"
     >
-      {/* Titre */}
-      {/* <div className="content-stretch flex flex-col gap-4 items-center justify-start leading-[0] left-1/2 not-italic text-center top-[104px] translate-x-[-50%]">
-          {gameStarted && (
-            <motion.div
-              className="mt-4 text-xl font-medium text-blue-600"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              {badge}
-            </motion.div>
-          )}
-        </div> */}
-
       {/* Zone de jeu principale */}
-      <div className="content-center flex flex-wrap gap-6 items-center justify-between w-[1136px]">
-        {/* Bouton Faux (gauche) */}
-        <CustomEmoji
-          isTrue={false}
-          onClick={() => handleEmojiClick(false)}
-          canAnswer={canAnswer}
-          hasActiveQuestion={canAnswer}
-        />
+      <div className="content-center flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-between w-full">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 justify-between w-full sm:w-auto order-2 sm:order-1">
+          <GuessButton
+            isFalse
+            onClick={() => handleEmojiClick(false)}
+            canAnswer={canAnswer}
+          />
+          <div className="block sm:hidden">
+            <GuessButton
+              onClick={() => handleEmojiClick(true)}
+              canAnswer={canAnswer}
+            />
+          </div>
+        </div>
 
         {/* Zone des cartes */}
-        <div className="relative flex h-[427.27px] items-center justify-center w-[592.28px] overflow-hiddens">
+        <div className="relative order-1 sm:order-2 w-full overflow-hidden">
           {questions.map((question, index) => (
             <QuestionCard
               key={question.id}
@@ -626,13 +616,12 @@ export default function InteractiveFunFacts() {
           ))}
         </div>
 
-        {/* Bouton Vrai (droite) */}
-        <CustomEmoji
-          isTrue={true}
-          onClick={() => handleEmojiClick(true)}
-          canAnswer={canAnswer}
-          hasActiveQuestion={canAnswer}
-        />
+        <div className="hidden sm:block order-3">
+          <GuessButton
+            onClick={() => handleEmojiClick(true)}
+            canAnswer={canAnswer}
+          />
+        </div>
       </div>
 
       <AnimatePresence>
@@ -645,33 +634,20 @@ export default function InteractiveFunFacts() {
         )}
       </AnimatePresence>
 
-      {allQuestionsAnswered && (
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div className="text-3xl font-bold text-green-600 mb-4">
-            Félicitations ! 🎊
-          </div>
-          <div className="text-xl text-gray-700 mb-6">
-            Score final: {score}/{questions.length}
-          </div>
-        </motion.div>
-      )}
-
       <div className="relative">
-        {/* Indicateurs de progression responsives */}
+        {/* Responsive progression indicators */}
         <div className="flex gap-2 sm:gap-3 z-10">
           {questions.map((question, index) => {
             const isGuessed = guessedFacts[question.id] !== undefined;
-            const isCorrect =
-              isGuessed && guessedFacts[question.id] === question.isTrue;
+            const isCorrect = isGuessed && guessedFacts[question.id];
 
             return (
               <motion.div
                 key={index}
-                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full cursor-pointer border-2 flex items-center justify-center ${
+                className={cn(
+                  "size-3 sm:size-4 rounded-full border-2 flex items-center justify-center",
+                  !allQuestionsAnswered &&
+                    "hover:scale-110 transition-transform duration-300 ease-in-out",
                   index === currentQuestionIndex
                     ? "bg-[#2a2a2a] border-[#2a2a2a]"
                     : isGuessed
@@ -679,9 +655,7 @@ export default function InteractiveFunFacts() {
                       ? "bg-green-500 border-green-500"
                       : "bg-red-500 border-red-500"
                     : "bg-[rgba(0,0,0,0.2)] border-[rgba(0,0,0,0.2)]"
-                }`}
-                whileHover={{ scale: 1.3 }}
-                onClick={() => setCurrentQuestionIndex(index)}
+                )}
               >
                 {isGuessed && (
                   <span className="text-white text-[6px] sm:text-[8px]">
@@ -694,19 +668,22 @@ export default function InteractiveFunFacts() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 z-10 px-4">
-        {/* Bouton "Montrez-moi tout" */}
+      <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+        {/* Show all facts button */}
         <Button
           onClick={() => setShowAllFacts(true)}
           asPointer
           whileTap
           size="lg"
+          asFull
         >
           {allQuestionsAnswered
-            ? "Montrez-moi tout 🦄"
+            ? hasGuessedFalse
+              ? "Je veux les réponses 😣"
+              : "Je veux les réponses 😄"
             : showAllQuestions
-            ? "Reprendre le quiz 🔄"
-            : "Montrez-moi tout 🦄"}
+            ? "Recommencer le quiz 🔄"
+            : "Je veux les réponses 😄"}
         </Button>
 
         {allQuestionsAnswered && (
@@ -721,45 +698,15 @@ export default function InteractiveFunFacts() {
               variant="secondary"
               whileTap
               size="lg"
+              asFull
             >
               Rejouer 🔄
             </Button>
           </motion.div>
         )}
       </div>
-      {/* Instructions ou résultat final */}
-      {!gameStarted && (
-        <motion.div
-          className="text-center text-gray-600"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          Clique sur les emojis pour commencer !
-        </motion.div>
-      )}
 
-      {gameStarted && !allQuestionsAnswered && !showAllQuestions && (
-        <motion.div
-          className="text-center text-blue-600 font-medium"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          Clique sur l'emoji VRAI ou FAUX pour répondre ! 👆
-        </motion.div>
-      )}
-
-      {showAllQuestions && (
-        <motion.div
-          className="text-center text-purple-600 font-medium"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          Voici toutes les questions ! Clique sur "Reprendre le quiz" pour
-          continuer 🎯
-        </motion.div>
-      )}
-
-      {/* Alerte personnalisée */}
+      {/* Personalized alert */}
       <CustomAlert
         isVisible={showAlert}
         isCorrect={alertData.isCorrect}
