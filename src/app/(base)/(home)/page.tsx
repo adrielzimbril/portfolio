@@ -2,6 +2,7 @@ import React from "react";
 import { ContactSection } from "./sections/ContactSection";
 import { HeaderSection } from "./sections/HeaderSection";
 import { NavbarSection } from "./sections/NavbarSection";
+import { ProjectsSectionOld } from "./sections/ProjectsSectionOld";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
 import AboutSection from "./sections/AboutSection";
@@ -43,8 +44,9 @@ export default function Home() {
       {/* <NavbarSection /> */}
       <HeaderSection />
       <AboutSection />
-      <ProjectsSection />
       <ResourcesSection />
+      <ProjectsSection wideCardsCount={1} />
+      <ProjectsSectionOld />
       <ContactSection />
       <footer className="flex items-center justify-center gap-2.5 relative w-full bg-white">
         <div className="flex items-center justify-center gap-2.5 px-[152px] py-[45px] relative flex-1 bg-[#f9f9f9] rounded-[32px_32px_0px_0px] overflow-hidden">
