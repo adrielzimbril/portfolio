@@ -131,7 +131,7 @@ function ImagePlaceholder() {
 
 export function ContactSection() {
   return (
-    <SectionLayout className={cn("relative w-full py-[104px]")} isFlex>
+    <SectionLayout isFlex>
       <Card className="squircle squircle-stone-100 squircle-7xl squircle-smooth-xl">
         <CardContent className="md:px-12 py-16 md:py-20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-full">

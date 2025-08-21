@@ -8,6 +8,8 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 // Interface pour les questions
 interface Question {
@@ -172,13 +174,11 @@ function QuestionCard({
   index,
   currentQuestionIndex,
   totalQuestions,
-  showAllQuestions,
 }: {
   question: Question;
   index: number;
   currentQuestionIndex: number;
   totalQuestions: number;
-  showAllQuestions: boolean;
 }) {
   const isActive = index === currentQuestionIndex;
   const isPast = index < currentQuestionIndex;
@@ -188,17 +188,6 @@ function QuestionCard({
     const rotation = index * (index % 2 === 0 ? 4 : -4);
     const x = Math.sin(((rotation * Math.PI) / 180) * 40);
     const y = Math.cos(((rotation * Math.PI) / 180) * 20);
-
-    if (showAllQuestions) {
-      // Show all questions mode - all cards visible with rotations
-      return {
-        rotate: rotation || 0,
-        scale: index === 0 ? 1.1 : 1,
-        x,
-        y,
-        zIndex: totalQuestions - index,
-      };
-    }
 
     if (isActive) {
       // Active card - right and front
@@ -226,7 +215,7 @@ function QuestionCard({
     const distanceFromCurrent = index - currentQuestionIndex;
     return {
       rotate: rotation || (distanceFromCurrent % 2 === 0 ? 8 : -8),
-      scale: 1 - distanceFromCurrent * 0.05,
+      scale: 1 - distanceFromCurrent * 0.02,
       x,
       y,
       zIndex: totalQuestions - distanceFromCurrent,
@@ -237,7 +226,7 @@ function QuestionCard({
 
   return (
     <motion.div
-      className="absolute bg-[#ffffff] h-[339px] rounded-[48px] w-[542px]"
+      className={cn("relative max-w-xl", index !== 0 && "absolute")}
       style={{
         zIndex: transform.zIndex,
         transformOrigin: "center center",
@@ -247,7 +236,7 @@ function QuestionCard({
         scale: transform.scale,
         x: transform.x,
         y: transform.y,
-        opacity: isPast && !showAllQuestions ? 0.3 : 1,
+        opacity: isPast ? 0.3 : 1,
       }}
       transition={{
         type: "spring",
@@ -256,27 +245,31 @@ function QuestionCard({
         duration: 0.8,
       }}
     >
-      <div className="box-border content-stretch flex flex-col h-[339px] items-center justify-center overflow-clip px-4 py-[91px] relative w-[542px]">
-        <div className="bg-[#ffffff] h-60 relative shrink-0 w-full">
-          <div className="flex flex-col items-center justify-center overflow-clip relative size-full">
-            <div className="box-border content-stretch flex flex-col gap-2.5 h-60 items-center justify-center px-[34px] py-0 relative w-full">
-              <div className="content-stretch flex flex-col gap-[6.976px] items-start justify-start leading-[0] not-italic relative shrink-0 w-full">
-                <div className="font-['SF_Pro_Display:Semibold',_sans-serif] leading-[1.2] relative shrink-0 text-[29.649px] text-[rgba(0,0,0,0.87)] tracking-[0.1216px] w-full text-center">
-                  <h2 className="mb-4">{question.emoji}</h2>
-                  <h4>{question.title}</h4>
-                </div>
-                <div className="font-['SF_Pro_Display:Medium',_sans-serif] relative shrink-0 text-[18px] text-[rgba(0,0,0,0.38)] tracking-[0.0168px] w-full text-center">
-                  <p className="leading-[1.2]">{question.description}</p>
-                </div>
-              </div>
+      <Card className="squircle squircle-stone-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
+        <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4">
+          <div
+            className={cn(
+              "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-3xl squircle-white overflow-hidden"
+            )}
+          >
+            <div className="flex flex-col items-start gap-4 w-full max-w-[90%] py-12 mx-auto">
+              <Badge className="aspect-square p-4 rounded-full">
+                <span className=" text-4xl">{question.emoji}</span>
+              </Badge>
+              <h3 className="text-3xl tracking-wide leading-[120%]">
+                {question.title}
+              </h3>
+
+              <p className="text-zinc-500 text-xl leading-[140%]">
+                {question.description}
+              </p>
+              <p className="text-zinc-400 text-lg leading-[120%]">
+                {question.subtitle}
+              </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div
-        aria-hidden="true"
-        className="absolute border-[#f9f9f9] border-[16px] border-solid inset-0 pointer-events-none rounded-[48px]"
-      />
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }
@@ -503,8 +496,7 @@ export default function InteractiveFunFacts() {
     question: null,
   });
   const [score, setScore] = useState(0);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [showAllQuestions, setShowAllQuestions] = useState(false);
+  const [gameStarted, setGameStarted] = useState(true);
   const [showAllFacts, setShowAllFacts] = useState(false);
 
   // Derive calculations based on guessedFacts
@@ -522,11 +514,6 @@ export default function InteractiveFunFacts() {
   );
 
   const handleEmojiClick = (isTrue: boolean) => {
-    if (showAllQuestions) {
-      setShowAllQuestions(false);
-      return;
-    }
-
     const currentQuestion = questions[currentQuestionIndex];
     if (!currentQuestion || guessedFacts[currentQuestion.id] !== undefined) {
       return;
@@ -560,7 +547,6 @@ export default function InteractiveFunFacts() {
     setGuessedFacts({});
     setGameStarted(true);
     setScore(0);
-    setShowAllQuestions(false);
     toast.success("C'est reparti pour un tour! 🚀", {
       duration: 2000,
       style: {
@@ -573,9 +559,9 @@ export default function InteractiveFunFacts() {
     });
   };
 
-  const canAnswer = gameStarted && !showAllQuestions && !allQuestionsAnswered;
+  const canAnswer = gameStarted && !showAllFacts && !allQuestionsAnswered;
   const badge =
-    gameStarted || showAllQuestions
+    gameStarted || showAllFacts
       ? `Score: ${score}/${questions.length}`
       : "Jouons";
 
@@ -588,7 +574,7 @@ export default function InteractiveFunFacts() {
     >
       {/* Zone de jeu principale */}
       <div className="content-center flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-between w-full">
-        <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 justify-between w-full sm:w-auto order-2 sm:order-1">
+        <div className="flex flex-row gap-6 sm:gap-0 justify-center w-full sm:w-auto order-2 sm:order-1">
           <GuessButton
             isFalse
             onClick={() => handleEmojiClick(false)}
@@ -603,7 +589,7 @@ export default function InteractiveFunFacts() {
         </div>
 
         {/* Zone des cartes */}
-        <div className="relative order-1 sm:order-2 w-full overflow-hidden">
+        <div className="relative flex items-center justify-center order-1 sm:order-2 size-full py-8 md:py-14">
           {questions.map((question, index) => (
             <QuestionCard
               key={question.id}
@@ -611,7 +597,6 @@ export default function InteractiveFunFacts() {
               index={index}
               currentQuestionIndex={currentQuestionIndex}
               totalQuestions={questions.length}
-              showAllQuestions={showAllQuestions}
             />
           ))}
         </div>
@@ -681,7 +666,7 @@ export default function InteractiveFunFacts() {
             ? hasGuessedFalse
               ? "Je veux les réponses 😣"
               : "Je veux les réponses 😄"
-            : showAllQuestions
+            : showAllFacts
             ? "Recommencer le quiz 🔄"
             : "Je veux les réponses 😄"}
         </Button>
