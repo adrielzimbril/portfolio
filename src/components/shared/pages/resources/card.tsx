@@ -5,6 +5,7 @@ import { CardInfo } from "@/components/shared/pages/resources/details";
 interface Resource {
   id: string | number;
   title: string;
+  type?: "ebook" | "course" | "video";
   description: string;
   details: string;
   icon: string;
@@ -24,7 +25,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   return (
     <Card className="squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
       <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
-        <CardPreview icon={resource.icon} iconAlt={resource.iconAlt} />
+        <CardPreview iconType={resource.type} iconAlt={resource.title} />
         <CardInfo details={resource} />
       </CardContent>
     </Card>

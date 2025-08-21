@@ -2,12 +2,18 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface PreviewProps {
+  iconType?: "ebook" | "course" | "video";
   icon?: string;
   iconAlt?: string;
   isWide?: boolean;
 }
 
-export function CardPreview({ icon, iconAlt, isWide }: PreviewProps) {
+export function CardPreview({
+  iconType,
+  icon = "bold-duotone---school---book.svg",
+  iconAlt,
+  isWide,
+}: PreviewProps) {
   return (
     <div
       className={cn(
@@ -16,7 +22,7 @@ export function CardPreview({ icon, iconAlt, isWide }: PreviewProps) {
       )}
     >
       <PreviewContent />
-      {icon && <PreviewIcon icon={icon} iconAlt={iconAlt} />}
+      {iconType && <PreviewIcon icon={icon} iconAlt={iconAlt} />}
     </div>
   );
 }
