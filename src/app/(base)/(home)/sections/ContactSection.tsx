@@ -1,55 +1,126 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
+"use client";
+import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "@/components/ui/link";
+import { routes } from "@/data/route";
+import { cn } from "@/lib/utils";
+import { useId, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { useIsMobile } from "@/hooks/useIsMobile";
+
+function EmailInputComponent() {
+  const [email, setEmail] = useState("");
+
+  return (
+    <div
+      className="bg-[#ffffff] relative rounded-xl shrink-0"
+      data-name="02 Controls / EmailInput"
+    >
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="😏 vous voulez recevoir des cadeaux ?"
+        className="box-border w-full bg-transparent flex gap-2.5 items-center justify-start overflow-clip px-4 py-[13px] relative text-[17px] tracking-[0.0731px] border-none outline-none "
+      />
+      <div
+        aria-hidden="true"
+        className="absolute border-2 border-[#f9f9f9] border-solid inset-[-1px] pointer-events-none rounded-[13px]"
+      />
+    </div>
+  );
+}
+
+function EmailForm() {
+  const handleSubmit = () => {
+    alert("Merci pour votre inscription ! 🎁");
+  };
+  const id = useId();
+  const isMobile = useIsMobile();
+
+  return (
+    <div className="relative grid grid-cols-1 w-full gap-4 items-start justify-start">
+      <Input
+        variant="secondary"
+        id={id}
+        placeholder="😏 Voulez-vous recevoir des cadeaux ?"
+        type="email"
+      />
+      {/* <EmailInputComponent /> */}
+      <Button onClick={handleSubmit} size="lg" asPointer>
+        Recevoir <span className="relative">{isMobile ? "📥" : "!"}</span>
+      </Button>
+    </div>
+  );
+}
+
+function ContentSection() {
+  const handleLinkClick = (linkType: "blog" | "linkedin") => {
+    if (linkType === "blog") {
+      alert("Redirection vers le Blog...");
+    } else {
+      alert("Redirection vers LinkedIn...");
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-8 items-start justify-start relative">
+      <h2 className="relative">Discutons de votre prochain projet !</h2>
+      <p className="relative">
+        <span>{`Je partage régulièrement mes réflexions, retours d'expérience et conseils sur mon `}</span>
+        <Link
+          href="https://blog.adrielzimbril.com"
+          variant="ghost"
+          onClick={() => handleLinkClick("blog")}
+          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline"
+        >
+          Blog
+        </Link>
+        <span>{` et sur `}</span>
+        <Link
+          href="https://linkedin.com/in/adriel-zimbril"
+          variant="ghost"
+          onClick={() => handleLinkClick("linkedin")}
+          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline"
+        >
+          Linkedin
+        </Link>
+        <span>
+          .<br aria-hidden="true" />
+          Que ce soit pour discuter design, produit ou innovation,
+          n&apos;hésitez pas à me contacter.
+        </span>
+      </p>
+      <EmailForm />
+    </div>
+  );
+}
+
+function ImagePlaceholder() {
+  const imgImage1001 = "/image-1001.png";
+  return (
+    <div className="relative hidden bg-white md:order-2 md:flex items-center justify-center overflow-clip size-full md:size-[80%] aspect-square rounded-full">
+      <div className="relative shrink-0 size-[88px]" data-name="03 Emoji">
+        <div
+          className="absolute bg-center bg-cover bg-no-repeat inset-0"
+          data-name="image 1001"
+          style={{ backgroundImage: `url('${imgImage1001}')` }}
+        />
+      </div>
+    </div>
+  );
+}
 
 export function ContactSection() {
   return (
-    <section className="h-[720px] relative w-full bg-greys-00">
-      <Card className="w-[1094px] relative top-32 left-[173px] bg-[#f9f9f9] rounded-[64px] border-none">
-        <CardContent className="flex items-center justify-between p-12">
-          <div className="inline-flex flex-col items-start gap-8 relative flex-[0_0_auto]">
-            <h2 className="relative w-[557px] mt-[-1.00px] font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
-              Discutons de votre prochain projet !
-            </h2>
-
-            <p className="relative w-[508px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#000000de] text-2xl tracking-[0.02px] leading-[28.8px]">
-              <span className="tracking-[0]">
-                Je partage régulièrement mes réflexions, retours
-                d&apos;expérience et conseils sur mon{" "}
-              </span>
-
-              <span className="tracking-[0] underline">Blog</span>
-
-              <span className="tracking-[0]"> et sur </span>
-
-              <span className="tracking-[0] underline">Linkedin</span>
-
-              <span className="tracking-[0]">
-                . Que ce soit pour discuter design, produit ou innovation,
-                n&apos;hésitez pas à me contacter.
-              </span>
-            </p>
-
-            <div className="inline-flex items-start gap-4 relative flex-[0_0_auto]">
-              <Button
-                variant="outline"
-                className="h-auto inline-flex items-start gap-2.5 px-4 py-[13px] relative flex-[0_0_auto] mt-[-1.00px] mb-[-1.00px] ml-[-1.00px] bg-white rounded-xl overflow-hidden border-2 border-solid border-[#f9f9f9]"
-              >
-                <span className="relative w-fit mt-[-1.00px] [font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-text-iconslight-disabled text-[17px] tracking-[0.07px] leading-[22px] whitespace-nowrap">
-                  😏 vous voulez recevoir des cadeaux ?
-                </span>
-              </Button>
-
-              <Button className="h-auto px-4 py-[13px] bg-greys-08 inline-flex items-center relative flex-[0_0_auto] rounded-xl overflow-hidden">
-                <span className="relative w-fit mt-[-1.00px] [font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-text-iconsdark-high-emphasis text-[17px] tracking-[0.07px] leading-[22px] whitespace-nowrap">
-                  Recevoir !
-                </span>
-              </Button>
-            </div>
-          </div>
-
-          <div className="inline-flex items-center gap-2.5 p-40 relative flex-[0_0_auto] bg-white rounded-[1000px] overflow-hidden backdrop-blur-[75px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(75px)_brightness(100%)]">
-            <div className="relative w-[88px] h-[88px] bg-[url(/image-1001.png)] bg-cover bg-[50%_50%]" />
+    <section className={cn("relative w-full py-[104px]")}>
+      <Card className="squircle squircle-stone-100 squircle-7xl squircle-smooth-xl">
+        <CardContent className="md:px-12 py-16 md:py-20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-full">
+            <ImagePlaceholder />
+            <ContentSection />
           </div>
         </CardContent>
       </Card>

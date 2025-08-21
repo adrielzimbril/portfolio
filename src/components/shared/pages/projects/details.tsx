@@ -1,39 +1,44 @@
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { routes } from "@/data/route";
-import { Stats } from "@/components/shared/pages/resources/avatar-stats";
-import { Tags } from "@/components/shared/pages/resources/tags";
+import { ProjectCategories, ProjectTags } from "./tags";
+import { cn } from "@/lib/utils";
 
 interface CardInfo {
   id: string | number;
   title: string;
   description: string;
-  details: string;
-  primaryTag: string;
   tags: string[];
-  avatars: Array<{ bg: string }>;
-  userCount: string;
+  categories: {
+    name: string;
+    squircle: string;
+    color?: string;
+    colorCode?: string;
+  }[];
   buttonText: string;
 }
 
 interface CardInfoProps {
   details: CardInfo;
+  isWide: boolean;
 }
 
-export function CardInfo({ details }: CardInfoProps) {
+export function CardInfo({ details, isWide }: CardInfoProps) {
   return (
-    <div className="flex flex-col items-start justify-between gap-4 w-full">
+    <div
+      className={cn(
+        "flex flex-col flex-1 items-start justify-between gap-4 w-full",
+        isWide && "justify-center"
+      )}
+    >
       <div className="flex flex-col items-start justify-center gap-4 w-full">
+        <ProjectTags tags={details.tags} />
+
         <Header title={details.title} />
 
-        <Tags primaryTag={details.primaryTag} tags={details.tags} />
+        <ProjectCategories categories={details.categories} />
 
-        <Description
-          description={details.description}
-          details={details.details}
-        />
-
-        <Stats avatars={details.avatars} userCount={details.userCount} />
+        <Description description={details.description} />
       </div>
 
       <Action buttonText={details.buttonText} />
@@ -45,21 +50,11 @@ function Header({ title }: { title: string }) {
   return <h3 className="relative capitalize">{title}</h3>;
 }
 
-function Description({
-  description,
-  details,
-}: {
-  description: string;
-  details: string;
-}) {
+function Description({ description }: { description: string }) {
   return (
     <>
       <p className="w-full relative text-[1.5rem] leading-[120%] font-medium text-zinc-600">
         {description}
-      </p>
-
-      <p className="w-full relative text-base text-zinc-500 leading-6 whitespace-pre-line">
-        {details}
       </p>
     </>
   );

@@ -25,7 +25,7 @@ const buttonVariants = cva(
         default: "px-6 py-3",
         xs: "px-3 py-2",
         sm: "px-3 py-4",
-        lg: "px-8 py-4",
+        lg: "px-6 py-3 text-lg",
         iconSmall: "px-1 py-1",
         icon: "h-9 w-9",
         nav: "px-4 py-2",
@@ -45,6 +45,7 @@ export interface ButtonProps
   asChild?: boolean;
   asFull?: boolean;
   asIcon?: boolean;
+  asPointer?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -56,6 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asChild = false,
       asFull = false,
       asIcon = false,
+      asPointer = false,
       ...props
     },
     ref
@@ -66,7 +68,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           buttonVariants({ variant, size, className }),
           asFull && "w-full flex text-center items-center justify-center",
-          asIcon && "[&_svg]:size-auto"
+          asIcon && "[&_svg]:size-auto",
+          asPointer && "cursor-pointer"
         )}
         ref={ref}
         {...props}

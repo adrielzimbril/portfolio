@@ -6,11 +6,11 @@ import Dockbar from "@/components/shared/dockbar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/shared/navbar";
 import { SquircleProvider } from "@/components/shiro/providers/squircle-provider";
-import SplashCursor from "@/components/shiro/builder/splash-cursor";
-import { SmoothCursor } from "@/components/shiro/magicui/smooth-cursor";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { metadata as metadataBase } from "./metadata";
 import ScrollToTop from "@/components/shared/scroll-to-top";
+import { Footer } from "@/components/shared/footer";
+import SplashCursor from "@/components/shiro/builder/splash-cursor";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -55,14 +55,17 @@ export default function RootLayout({
         >
           <TooltipProvider openDelay={0} closeDelay={0}>
             <SquircleProvider>
-              <div className="max-w-7xls container mx-auto relative">
-                <Navbar />
-                <Dockbar />
-                <ScrollToTop />
-                {/* <SplashCursor /> */}
-                {/* <SmoothCursor /> */}
-                {children}
-              </div>
+              <main>
+                <div className="max-w-7xls container mx-auto relative">
+                  <Navbar />
+                  <Dockbar asFade={false} />
+                  {/* <SmoothCursor /> */}
+                  {children}
+                  <ScrollToTop />
+                  {/* <SplashCursor /> */}
+                  <Footer />
+                </div>
+              </main>
             </SquircleProvider>
           </TooltipProvider>
         </ThemeProvider>

@@ -7,7 +7,7 @@ export function HeaderSection() {
   return (
     <section className="relative w-full flex items-center justify-center mt-20">
       <Card className="squircle squircle-stone-100 squircle-6xl squircle-smooth-xl">
-        <CardContent className="px-12 py-16 md:py-24">
+        <CardContent className="md:px-12 py-16 md:py-24">
           <div className="flex flex-col items-start gap-6 max-w-full">
             <h1 className="w-full relative">
               Transformez vos idées en produits que vos utilisateurs adorent
