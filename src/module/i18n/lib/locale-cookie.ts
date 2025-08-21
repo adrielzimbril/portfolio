@@ -1,14 +1,14 @@
 import "server-only";
 
-import { config } from "@repo/config";
-import type { Locale } from "@repo/i18n";
+import { appConfig } from "@data/config";
 import { cookies } from "next/headers";
+import type { Locale } from "@i18n/types";
 
 export async function getUserLocale() {
-	const cookie = (await cookies()).get(config.i18n.localeCookieName);
-	return cookie?.value ?? config.i18n.defaultLocale;
+  const cookie = (await cookies()).get(appConfig.i18n.localeCookieName);
+  return cookie?.value ?? appConfig.i18n.defaultLocale;
 }
 
 export async function setLocaleCookie(locale: Locale) {
-	(await cookies()).set(config.i18n.localeCookieName, locale);
+  (await cookies()).set(appConfig.i18n.localeCookieName, locale);
 }

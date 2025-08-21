@@ -35,16 +35,29 @@ function EmailInputComponent() {
 
 function EmailForm() {
   const handleSubmit = () => {
+    console.log(email);
+    // Check if email syntax is correct
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Veuillez entrer une adresse email valide.");
+      return;
+    }
+
     alert("Merci pour votre inscription ! 🎁");
+
+    // TODO: Send email to server
   };
   const id = useId();
   const isMobile = useIsMobile();
+  const [email, setEmail] = useState("");
 
   return (
     <div className="relative grid grid-cols-1 w-full gap-4 items-start justify-start">
       <Input
         variant="secondary"
         id={id}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="😏 Voulez-vous recevoir des cadeaux ?"
         type="email"
       />
@@ -69,21 +82,24 @@ function ContentSection() {
     <div className="flex flex-col gap-8 items-start justify-start relative">
       <h2 className="relative">Discutons de votre prochain projet !</h2>
       <p className="relative">
-        <span>{`Je partage régulièrement mes réflexions, retours d'expérience et conseils sur mon `}</span>
+        <span>
+          Je partage régulièrement mes réflexions, retours d'expérience et
+          conseils sur mon
+        </span>
         <Link
           href="https://blog.adrielzimbril.com"
           variant="ghost"
           onClick={() => handleLinkClick("blog")}
-          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline"
+          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline px-1"
         >
           Blog
         </Link>
-        <span>{` et sur `}</span>
+        <span>et sur</span>
         <Link
           href="https://linkedin.com/in/adriel-zimbril"
           variant="ghost"
           onClick={() => handleLinkClick("linkedin")}
-          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline"
+          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-1"
         >
           Linkedin
         </Link>
@@ -115,7 +131,7 @@ function ImagePlaceholder() {
 
 export function ContactSection() {
   return (
-    <section className={cn("relative w-full py-[104px]")}>
+    <SectionLayout className={cn("relative w-full py-[104px]")} isFlex>
       <Card className="squircle squircle-stone-100 squircle-7xl squircle-smooth-xl">
         <CardContent className="md:px-12 py-16 md:py-20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-full">
@@ -124,6 +140,6 @@ export function ContactSection() {
           </div>
         </CardContent>
       </Card>
-    </section>
+    </SectionLayout>
   );
 }

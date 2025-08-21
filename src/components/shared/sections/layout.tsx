@@ -9,6 +9,7 @@ export function SectionLayout({
   badge,
   children,
   asFade,
+  isFlex,
 }: {
   title?: string;
   description?: string;
@@ -17,6 +18,7 @@ export function SectionLayout({
   badge?: string;
   children: React.ReactNode;
   asFade?: boolean;
+  isFlex?: boolean;
 }) {
   return (
     <section className={cn("relative w-full py-[104px]")}>
@@ -24,13 +26,16 @@ export function SectionLayout({
         <SectionHeader
           title={title}
           description={description!}
-          link={link!}
-          badge={badge!}
+          link={link}
+          badge={badge}
         />
       )}
       <div
         className={cn(
-          "grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center",
+          "gap-6",
+          isFlex
+            ? "flex flex-col items-center"
+            : "grid grid-cols-1 md:grid-cols-2 place-items-center",
           className
         )}
       >
