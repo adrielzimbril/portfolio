@@ -2,144 +2,126 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "@/components/ui/link";
+import { routes } from "@/data/route";
+import { ArrowRightOne, LinkDiagonalOne, LinkOne } from "@aurthle/icons";
+import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { SectionLayout } from "@/components/shared/sections/layout";
+import { ResourceCard } from "@/components/shared/pages/resources/card";
 
-const projectData = [
+const resourcesData = [
   {
     id: 1,
-    emoji: "😎",
-    message: "I made you looked.",
-    subtitle: "You can have the rest of the empty space here.",
-    tags: [
-      "Stratégie de mise sur le marché",
-      "Planification de la feuille de route",
-      "Planification de la feuille de route",
-    ],
     title: "Project title",
-    categories: [
-      { name: "SaaS 🦄", color: "bg-[#afffad]" },
-      { name: "Go To Market 🎯", color: "bg-[#ffe9ad]" },
-      { name: "Web Application 📝", color: "bg-[#ade9ff]" },
-      { name: "Design 🎨", color: "bg-[#f9f9f9]" },
-      { name: "Mobile App 📱", color: "bg-[#e2e4ff]" },
-    ],
+    icon: "/bold-duotone---school---book.png",
+    iconAlt: "Bold duotone school",
+    primaryTag: "E-book 📕",
+    tags: ["Saas", "Design", "Conseils"],
     description:
       "You can add what outcomes has this project brought after your design! For example",
-    buttonText: "Plus d'infos 􀄫",
+    details:
+      "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    avatars: [
+      {
+        src: ".//content.png",
+        bg: "bg-avatar-user-squareamlie-laurent-color-background",
+      },
+      {
+        src: ".//content-1.png",
+        bg: "bg-avatar-user-squaresienna-hewitt-neutral-background",
+      },
+      {
+        src: ".//content-2.png",
+        bg: "bg-avatar-user-squareammar-foley-color-background",
+      },
+      {
+        src: ".//content-3.png",
+        bg: "bg-avatar-user-squarejulius-vaughan-color-background",
+      },
+    ],
+    userCount: "+256 lecteurs",
+    buttonText: "Lire",
   },
   {
     id: 2,
-    emoji: "😎",
-    message: "I made you looked.",
-    subtitle: "You can have the rest of the empty space here.",
-    tags: [
-      "Stratégie de mise sur le marché",
-      "Planification de la feuille de route",
-      "Planification de la feuille de route",
-    ],
     title: "Project title",
-    categories: [
-      { name: "SaaS 🦄", color: "bg-[#afffad]" },
-      { name: "Go To Market 🎯", color: "bg-[#ffe9ad]" },
-      { name: "Web Application 📝", color: "bg-[#ade9ff]" },
-      { name: "Design 🎨", color: "bg-[#f9f9f9]" },
-      { name: "Mobile App 📱", color: "bg-[#e2e4ff]" },
-    ],
+    icon: "/bold-duotone---video--audio--sound---video-library.svg",
+    iconAlt: "Bold duotone video",
+    primaryTag: "Formation 🎥",
+    tags: ["SaaS", "Design", "Conseils"],
     description:
       "You can add what outcomes has this project brought after your design! For example",
-    buttonText: "Plus d'infos 􀄫",
+    details:
+      "🕓 Time: 1-4 Days\n⚡ Level: from 0 to PRO\n🎁 400+ Figma Templates",
+    avatars: [
+      {
+        src: ".//content-4.png",
+        bg: "bg-avatar-user-squareali-mahdi-color-background",
+      },
+      {
+        src: ".//content-5.png",
+        bg: "bg-avatar-user-squarezahra-christensen-neutral-background",
+      },
+      {
+        src: ".//content-6.png",
+        bg: "bg-avatar-user-squareriley-omoore-color-background",
+      },
+      {
+        src: ".//content-7.png",
+        bg: "bg-avatar-user-squareyoussef-roberson-color-background",
+      },
+    ],
+    userCount: "+2468 étudiants",
+    buttonText: "Rejoindre",
+  },
+  {
+    id: 3,
+    title: "Project title",
+    icon: "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    iconAlt: "Bold duotone video",
+    primaryTag: "Masterclass 🎬",
+    tags: ["SaaS", "Design", "Conseils"],
+    description:
+      "You can add what outcomes has this project brought after your design! For example",
+    details:
+      "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    avatars: [
+      {
+        src: ".//content-8.png",
+        bg: "bg-avatar-user-squarecohen-lozano-color-background",
+      },
+      {
+        src: ".//content-9.png",
+        bg: "bg-avatar-user-squareashton-blackwell-color-background",
+      },
+      {
+        src: ".//content-10.png",
+        bg: "bg-avatar-user-squareowen-garcia-color-background",
+      },
+      {
+        src: ".//content-11.png",
+        bg: "bg-avatar-user-squareisla-allison-color-background",
+      },
+    ],
+    userCount: "+2468 étudiants",
+    buttonText: "Regarder",
   },
 ];
 
 export function ResourcesSection() {
   return (
-    <section className="relative w-full bg-greys-00 py-[104px]">
-      <div className="relative max-w-[1440px] mx-auto px-[152px]">
-        <header className="flex flex-col items-center gap-4 mb-[272px]">
-          <Badge className="px-3 py-1.5">Tag</Badge>
-
-          <h1 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] text-center tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
-            Projets
-          </h1>
-
-          <p className="w-[654px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-text-iconslight-medium-emphasis text-2xl text-center tracking-[0.02px] leading-[28.8px]">
-            Chaque projet est une opportunité de transformer une idée en
-            expérience réelle, avec un design qui séduit et une stratégie qui
-            fonctionne.
-          </p>
-
-          <Button className="h-auto px-4 py-[13px] bg-[#ffffff80] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)] rounded-xl text-[#000000de] [font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-[17px] tracking-[0.07px] leading-[22px] hover:bg-[#ffffff90]">
-            Voir plus 􀄫
-          </Button>
-        </header>
-
-        <div className="flex flex-col gap-6 max-w-[1136px] mx-auto">
-          {projectData.map((project) => (
-            <Card
-              key={project.id}
-              className="flex items-center justify-center gap-4 pt-0 pb-4 px-0 bg-[#f9f9f9] rounded-[32px] overflow-hidden border-0"
-            >
-              <CardContent className="flex p-0 w-full">
-                <div className="flex flex-col items-center justify-end p-4 flex-1 bg-greys-01 rounded-[48px] overflow-hidden border-[16px] border-solid border-[#f9f9f9]">
-                  <div className="flex flex-col items-center justify-center gap-2.5 px-[34px] py-0 flex-1 w-full bg-greys-00 rounded-[22px] overflow-hidden">
-                    <div className="flex flex-col items-start gap-[6.98px] w-full">
-                      <div className="mt-[-0.87px] [font-family:'SF_Pro_Display-Semibold',Helvetica] font-normal text-[#000000de] text-[29.6px] tracking-[0.12px] leading-[35.6px]">
-                        {project.emoji}
-                        <br />
-                        {project.message}
-                      </div>
-                      <div className="[font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-text-iconslight-disabled text-2xl tracking-[0.02px] leading-[28.8px]">
-                        {project.subtitle}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start gap-6 px-[46px] py-8 flex-1">
-                  <div className="flex flex-col items-start gap-4 w-full">
-                    <div className="flex flex-wrap items-start gap-[8px_8px] w-full">
-                      {project.tags.map((tag, index) => (
-                        <Badge
-                          key={index}
-                          className="bg-white rounded-[10px] px-3 py-1.5 backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)] text-[#000000de] [font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-xs tracking-[0] leading-4"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    <h2 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
-                      {project.title}
-                    </h2>
-
-                    <div className="flex flex-wrap items-start gap-[6px_6px] px-2 py-1 w-full bg-white rounded-lg overflow-hidden">
-                      {project.categories.map((category, index) => (
-                        <Badge
-                          key={index}
-                          className={`${category.color} rounded-[10px] px-3 py-1.5 backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)] text-[#000000de] [font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-xs tracking-[0] leading-4`}
-                        >
-                          {category.name}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center">
-                      <p className="w-[344px] mt-[-1.00px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-text-iconslight-medium-emphasis text-2xl tracking-[0.02px] leading-[28.8px]">
-                        {project.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <Button className="h-auto px-4 py-2 bg-white backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)] rounded-xl overflow-hidden text-[#000000de] [font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-[17px] tracking-[0.07px] leading-[22px] hover:bg-gray-50">
-                    {project.buttonText}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="absolute w-full h-[249px] bottom-0 left-0 bg-[linear-gradient(0deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)]" />
-      </div>
-    </section>
+    <SectionLayout
+      title="Ressources"
+      description="Des guides, modèles et conseils pour maîtriser l'UI/UX, les design systems et Figma, et créer des produits qui donnent envie d'être utilisés."
+      link={routes.projects.link}
+      badge="Hub 🫶"
+    >
+      {resourcesData.map((resource) => (
+        <ResourceCard key={resource.id} resource={resource} />
+      ))}
+    </SectionLayout>
   );
 }

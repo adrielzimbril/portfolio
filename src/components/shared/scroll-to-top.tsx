@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ArrowUpOne } from "@aurthle/icons";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,7 +33,7 @@ export default function ScrollToTop() {
 
   // Correct calculation for the SVG
   const size = 48;
-  const strokeWidth = 3;
+  const strokeWidth = 4;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset =
@@ -45,6 +46,7 @@ export default function ScrollToTop() {
           <Button
             onClick={scrollToTop}
             className="relative rounded-full p-3 transition-all duration-200 group active:scale-95"
+            variant="outline"
             asIcon
             style={{
               width: size + "px",
@@ -65,7 +67,7 @@ export default function ScrollToTop() {
                 r={radius}
                 strokeWidth={strokeWidth}
                 fill="none"
-                className="stroke-zinc-900"
+                className="stroke-zinc-200"
               />
               {/* Progress Circle */}
               <circle
@@ -83,7 +85,7 @@ export default function ScrollToTop() {
 
             {/* Arrow Icon with subtle animation */}
             <div className="flex items-center justify-center relative z-10">
-              <ChevronUp className="size-6" />
+              <ArrowUpOne />
             </div>
           </Button>
         </div>
