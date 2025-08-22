@@ -12,6 +12,7 @@ export function SectionLayout({
   asFade,
   isFlex,
   layoutStart,
+  isPage,
 }: {
   title?: string;
   description?: string;
@@ -23,6 +24,7 @@ export function SectionLayout({
   asFade?: boolean;
   isFlex?: boolean;
   layoutStart?: boolean;
+  isPage?: boolean;
 }) {
   return (
     <section className={cn("relative w-full py-[104px]", className)}>
@@ -33,6 +35,7 @@ export function SectionLayout({
           link={link}
           badge={badge}
           layoutStart={layoutStart}
+          isPage={isPage}
         />
       )}
       <div

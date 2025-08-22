@@ -7,6 +7,8 @@ export function SectionBase({
   isCallToAction,
   isWide,
   className,
+  cardClassName,
+  cardContentClassName,
   sectionClassName,
   sectionContentClassName,
 }: {
@@ -14,6 +16,8 @@ export function SectionBase({
   isCallToAction?: boolean;
   isWide?: boolean;
   className?: string;
+  cardClassName?: string;
+  cardContentClassName?: string;
   sectionClassName?: string;
   sectionContentClassName?: string;
 }) {
@@ -27,15 +31,18 @@ export function SectionBase({
         className={cn(
           "squircle squircle-stone-100  squircle-smooth-xl",
           isCallToAction ? "squircle-7xl" : "squircle-6xl",
-          className
+          cardClassName
         )}
       >
-        <CardContent className={cn("md:px-12 py-16 md:py-20")}>
+        <CardContent
+          className={cn("md:px-12 py-16 md:py-20", cardContentClassName)}
+        >
           <div
             className={cn(
               "flex flex-col items-center justify-between gap-6 max-w-full",
               isWide ? "items-start justify-center" : "md:flex-row",
-              !isCallToAction && !isWide && "md:gap-16"
+              !isCallToAction && !isWide && "md:gap-16",
+              className
             )}
           >
             {children}

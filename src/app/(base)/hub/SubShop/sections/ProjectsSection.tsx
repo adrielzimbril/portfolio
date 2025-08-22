@@ -2,7 +2,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const ProjectsSection () {
+export function ProjectsSection() {
   return (
     <section className="w-full relative bg-greys-00">
       <div className="flex w-full max-w-[1136px] mx-auto items-start justify-center px-12 py-16 relative">
@@ -73,4 +73,4 @@ export const ProjectsSection () {
       </div>
     </section>
   );
-};
+}

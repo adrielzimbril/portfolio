@@ -9,12 +9,14 @@ export function SectionHeader({
   link,
   badge,
   layoutStart,
+  isPage,
 }: {
   title: string;
   description: string;
   link?: string;
   badge?: string;
   layoutStart?: boolean;
+  isPage?: boolean;
 }) {
   return (
     <div
@@ -25,7 +27,12 @@ export function SectionHeader({
     >
       {badge && <Badge>{badge}</Badge>}
 
-      <h2 className={cn(layoutStart ? "h2 md:h3 font-normals" : "capitalize")}>
+      <h2
+        className={cn(
+          layoutStart ? "h2 md:h3 font-normals" : "capitalize",
+          isPage && "font-normal"
+        )}
+      >
         {title}
       </h2>
 

@@ -26,7 +26,7 @@ const tags = [
   },
 ];
 
-export const HeaderSection () {
+export function HeaderSection() {
   return (
     <section className="relative w-full bg-greys-00 py-10">
       <div className="flex flex-col max-w-[1136px] mx-auto items-start justify-center gap-4 p-8 bg-[#f9f9f9] rounded-[64px] overflow-hidden">
@@ -73,4 +73,4 @@ export const HeaderSection () {
       </div>
     </section>
   );
-};
+}

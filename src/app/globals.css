@@ -249,13 +249,14 @@
 	--ring: hsl(216 34% 17%);
 	}
 
-	*,
-	::after,
-	::before,
-	::backdrop,
-	::file-selector-button {
-		@apply border-none outline-none;
-	}
+  *:not(input):not(textarea):not(select):not(button),
+  *:not(input):not(textarea):not(select):not(button)::after,
+  *:not(input):not(textarea):not(select):not(button)::before,
+  *:not(input):not(textarea):not(select):not(button)::backdrop,
+  *:not(input):not(textarea):not(select):not(button)::file-selector-button {
+    @apply border-none outline-none;
+  }
+
   html {
     scroll-behavior: smooth;
   }

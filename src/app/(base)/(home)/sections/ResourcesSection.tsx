@@ -1,8 +1,13 @@
 import React from "react";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { ResourceCard } from "@/components/shared/pages/resources/card";
+import {
+  Resource,
+  ResourceCard,
+} from "@/components/shared/pages/resources/card";
 import resourcesData from "@/data/personal/resources.json";
+
+const data = resourcesData as Resource[];
 
 export function ResourcesSection() {
   return (
@@ -12,7 +17,7 @@ export function ResourcesSection() {
       link={routes.projects.link}
       badge="Hub 🫶"
     >
-      {resourcesData.map((resource) => (
+      {data.map((resource) => (
         <ResourceCard key={resource.id} details={resource} />
       ))}
     </SectionLayout>

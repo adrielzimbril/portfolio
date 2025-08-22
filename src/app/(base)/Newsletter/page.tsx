@@ -8,11 +8,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useNewsletterStats } from "@/hooks/useNewsletterStats";
+import { cn } from "@/lib/utils";
+import { Tags } from "@/components/shared/pages/resources/tags";
+import { SectionLayout } from "@/components/shared/sections/layout";
+import { SectionBase } from "@/components/shared/pages/shared/section-base";
 
 const metaInfo = [
   { icon: CalendarIcon, text: "18, Jul 2024" },
   { icon: ClockIcon, text: "08 min read" },
 ];
+
+const date = "18, Jul 2024";
+const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
 
 export default function Newsletter() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,71 +36,64 @@ export default function Newsletter() {
 
   return (
     <>
-      <main className="relative self-stretch w-full h-[827px] bg-greys-00">
-        <div className="flex flex-col w-[1136px] items-start justify-center gap-4 p-8 absolute top-[83px] left-[152px] bg-[#f9f9f9] rounded-[64px] overflow-hidden">
-          <Card className="flex flex-col items-center justify-end p-4 self-stretch w-full bg-[#f9f9f9] rounded-[48px] overflow-hidden border-[16px] border-solid border-white">
-            <CardContent className="flex flex-col justify-center gap-2.5 px-[34px] py-16 self-stretch w-full bg-white items-center">
-              <div className="flex flex-col items-center gap-6 px-8 py-0 self-stretch w-full">
-                <div className="absolute w-[339px] h-[69px] top-[62px] left-[558px] bg-white rounded-lg" />
+      <SectionBase
+        sectionClassName="w-full"
+        sectionContentClassName="w-full"
+        cardClassName="w-full"
+        cardContentClassName="w-full p-6 md:p-8"
+        //cardContentClassName="squircle squircle-white squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60"
+        className="squircle squircle-white squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      >
+        <div
+          className={cn(
+            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto"
+            // isWide && "md:min-h-96"
+          )}
+        >
+          <div
+            className={
+              "flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4"
+            }
+          >
+            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
+              Pour les développeurs freelances qui galèrent à trouver des
+              clients.
+            </Badge>
+            <h2 className="self-stretch">
+              Trouve des clients en continu grâce à la méthode Tsunami 🌊
+            </h2>
+            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600">
+              Je te montre comment utiliser l&#39;IA et l&#39;AUTOMATISATION
+              pour trouver des missions en boucle.
+            </p>
+          </div>
+          <Tags primaryTag={date} tags={tags} isCentered />
+          {/* <Badge className="justify-center gap-1 px-3 py-1.5 bg-[#e2e4ff] rounded-[10px] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)]">
+            <EyeIcon className="w-4 h-4" />
+            <span className="[font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-[#000000de] text-xs tracking-[0] leading-4 whitespace-nowrap">
+              {isLoading ? "..." : formatReaderCount(readerCount)}
+            </span>
+          </Badge> */}
 
-                <h1 className="self-stretch mt-[-1.00px] font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] text-center tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
-                  Trouve des clients en continu grâce à la méthode Tsunami 🌊
-                </h1>
+          <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
+            <Input
+              placeholder="😏 vous voulez recevoir des cadeaux ?"
+              type="email"
+            />
 
-                <p className="self-stretch [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-text-iconslight-disabled text-[34px] text-center tracking-[0.02px] leading-[40.8px]">
-                  Je te montre comment utiliser l&#39;IA et l&#39;AUTOMATISATION
-                  pour trouver des missions en boucle.
-                </p>
-
-                <div className="flex flex-wrap items-start justify-center gap-[6px_6px] p-4 bg-white rounded-2xl">
-                  {metaInfo.map((item, index) => (
-                    <Badge
-                      key={index}
-                      className="justify-center gap-1 px-3 py-1.5 bg-[#e2e4ff] rounded-[10px] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)]"
-                    >
-                      <item.icon className="w-4 h-4" />
-                      <span className="[font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-[#000000de] text-xs tracking-[0] leading-4 whitespace-nowrap">
-                        {item.text}
-                      </span>
-                    </Badge>
-                  ))}
-                  <Badge className="justify-center gap-1 px-3 py-1.5 bg-[#e2e4ff] rounded-[10px] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)]">
-                    <EyeIcon className="w-4 h-4" />
-                    <span className="[font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-[#000000de] text-xs tracking-[0] leading-4 whitespace-nowrap">
-                      {isLoading ? "..." : formatReaderCount(readerCount)}
-                    </span>
-                  </Badge>
-                </div>
-
-                <div className="flex flex-col items-start gap-4">
-                  <Input
-                    className="w-[660px] px-4 py-[13px] mt-[-2.00px] ml-[-2.00px] mr-[-2.00px] bg-[#f9f9f9] rounded-xl border-4 border-solid border-[#f5f5f599]"
-                    defaultValue="😏 vous voulez recevoir des cadeaux ?"
-                    style={{
-                      fontSize: "24px",
-                      fontFamily: "SF_Pro_Text-Regular, Helvetica",
-                      fontWeight: "normal",
-                      color: "var(--text-iconslight-disabled)",
-                      textAlign: "center",
-                      letterSpacing: "0.10px",
-                      lineHeight: "22px",
-                    }}
-                  />
-
-                  <Button
-                    onClick={() => setIsModalOpen(true)}
-                    className="flex items-center justify-center px-4 py-[13px] self-stretch w-full bg-greys-08 rounded-xl h-auto hover:bg-gray-700 transition-colors"
-                  >
-                    <span className="[font-family:'SF_Pro_Text-Bold',Helvetica] font-bold text-text-iconsdark-high-emphasis text-[17px] tracking-[0.07px] leading-[22px] whitespace-nowrap">
-                      Recevoir !
-                    </span>
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              asFull
+              whileTap
+              asPointer
+            >
+              <span className="[font-family:'SF_Pro_Text-Bold',Helvetica] font-bold text-text-iconsdark-high-emphasis text-[17px] tracking-[0.07px] leading-[22px] whitespace-nowrap">
+                Recevoir !
+              </span>
+            </Button>
+          </div>
         </div>
-      </main>
+      </SectionBase>
 
       <SubscriptionModal
         isOpen={isModalOpen}

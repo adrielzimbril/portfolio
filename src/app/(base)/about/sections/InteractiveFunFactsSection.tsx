@@ -389,7 +389,9 @@ function AllFactsModal({
         >
           <div className="relative flex flex-col gap-6">
             <div className="flex justify-between items-center">
-              <h4 className="text- ">D 🦄</h4>
+              <h4 className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
+                Créateur et Amoureux de SaaS 🦄❣️
+              </h4>
               <Button onClick={onClose} asPointer whileTap size="icon">
                 ✕
               </Button>

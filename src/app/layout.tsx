@@ -56,7 +56,7 @@ export default function RootLayout({
           <TooltipProvider openDelay={0} closeDelay={0}>
             <SquircleProvider>
               <main>
-                <div className="max-w-7xls container mx-auto relative">
+                <div className="container mx-auto relative">
                   <Navbar />
                   <Dockbar asFade={false} />
                   {/* <SmoothCursor /> */}
