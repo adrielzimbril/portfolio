@@ -8,9 +8,9 @@ export function ProjectsSection() {
       <div className="flex w-full max-w-[1136px] mx-auto items-start justify-center px-12 py-16 relative">
         <div className="flex w-full max-w-[961px] items-start justify-center relative">
           <div className="flex flex-col w-full max-w-[606px] items-start gap-8 relative">
-            <h1 className="relative self-stretch mt-[-1.00px] font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
+            <h2 className="relative self-stretch h3 font-normal">
               Présentation
-            </h1>
+            </h2>
 
             <p className="relative self-stretch [font-family:'SF_Pro_Display-Regular',Helvetica] font-normal text-[#00000099] text-[17px] tracking-[0.01px] leading-[20.4px]">
               You can add what outcomes has this project brought after your

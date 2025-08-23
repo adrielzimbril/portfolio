@@ -1,6 +1,6 @@
+@import "@squircle/tailwindcss";
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@squircle/tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -249,11 +249,22 @@
 	--ring: hsl(216 34% 17%);
 	}
 
-  *:not(input):not(textarea):not(select):not(button),
-  *:not(input):not(textarea):not(select):not(button)::after,
-  *:not(input):not(textarea):not(select):not(button)::before,
-  *:not(input):not(textarea):not(select):not(button)::backdrop,
-  *:not(input):not(textarea):not(select):not(button)::file-selector-button {
+  *:not(input):not(textarea):not(select):not(button):not([class*="border"]),
+  *:not(input):not(textarea):not(select):not(button):not([class*="border"])::after,
+  *:not(input):not(textarea):not(select):not(button):not([class*="border"])::before,
+  *:not(input):not(textarea):not(select):not(button):not([class*="border"])::backdrop,
+  *:not(input):not(textarea):not(select):not(button):not([class*="border"])::file-selector-button,
+  /* Réinclude border-none et border-0 */
+  .border-none:not(input):not(textarea):not(select):not(button),
+  .border-none:not(input):not(textarea):not(select):not(button)::after,
+  .border-none:not(input):not(textarea):not(select):not(button)::before,
+  .border-none:not(input):not(textarea):not(select):not(button)::backdrop,
+  .border-none:not(input):not(textarea):not(select):not(button)::file-selector-button,
+  .border-0:not(input):not(textarea):not(select):not(button),
+  .border-0:not(input):not(textarea):not(select):not(button)::after,
+  .border-0:not(input):not(textarea):not(select):not(button)::before,
+  .border-0:not(input):not(textarea):not(select):not(button)::backdrop,
+  .border-0:not(input):not(textarea):not(select):not(button)::file-selector-button {
     @apply border-none outline-none;
   }
 

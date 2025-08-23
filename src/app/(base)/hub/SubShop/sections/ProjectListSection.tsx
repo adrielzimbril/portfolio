@@ -31,9 +31,7 @@ export function ProjectListSection() {
         contentClassName="md:grid-cols-3"
       >
         {statsData.map((stat, index) => (
-          <>
-            <ResourceCard key={index} details={stat} />
-          </>
+          <ResourceCard key={index} details={stat} />
         ))}
       </SectionLayout>
     </>
