@@ -130,6 +130,19 @@ function LoadingDots() {
   );
 }
 
+function LoadingProgressBar() {
+  const progress = useRealisticLoading();
+
+  return (
+    <div className="w-80 bg-[#f9f9f9] h-1 relative rounded-full overflow-hidden">
+      <div
+        className="bg-[#2a2a2a] h-full rounded-full transition-all duration-300 ease-out"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+}
+
 function FloatingCard({
   delay,
   children,
@@ -212,18 +225,6 @@ function useRealisticLoading() {
   return progress;
 }
 
-function LoadingProgressBar() {
-  const progress = useRealisticLoading();
-
-  return (
-    <div className="w-80 bg-[#f9f9f9] h-1 relative rounded-full overflow-hidden">
-      <div
-        className="bg-[#2a2a2a] h-full rounded-full transition-all duration-300 ease-out"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  );
-}
 export function GenericLoadingPage() {
   return (
     <div className="bg-[#ffffff] content-stretch flex flex-col items-center justify-center relative size-full min-h-screen overflow-hidden">
