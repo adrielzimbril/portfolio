@@ -117,6 +117,16 @@
   --radius: var(--radius);
 }
 
+@theme {
+  --animate-loading-progress: loading-progress 2s ease-in-out 0s infinite normal none running;
+ 
+
+@keyframes loading-progress {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+}
 @layer base {
 	:root {
 	/* Avatar colors */
