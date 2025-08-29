@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const IntroductionSection () {
+export function IntroductionSection() {
   const points = [
     {
       title: "Point 1",
@@ -55,4 +55,4 @@ export const IntroductionSection () {
       </div>
     </section>
   );
-};
+}

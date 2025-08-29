@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 
-export const NavigationBarSection () {
+export function NavigationBarSection() {
   const navigationItems = [
     { label: "Acceuil", isActive: true },
     { label: "A propos", isActive: false },
@@ -61,4 +61,4 @@ export const NavigationBarSection () {
       </div>
     </nav>
   );
-};
+}

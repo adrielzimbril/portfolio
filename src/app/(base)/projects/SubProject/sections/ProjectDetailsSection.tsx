@@ -14,7 +14,7 @@ const projectDetails = {
   ],
 };
 
-export const ProjectDetailsSection () {
+export function ProjectDetailsSection() {
   return (
     <section className="w-full bg-greys-00">
       <div className="flex items-center justify-center gap-[92px] px-12 py-16 rounded-[64px]">
@@ -89,4 +89,4 @@ export const ProjectDetailsSection () {
       </div>
     </section>
   );
-};
+}

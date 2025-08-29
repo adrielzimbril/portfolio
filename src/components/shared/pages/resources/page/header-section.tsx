@@ -6,12 +6,11 @@ import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-// Types pour les props
-interface Tag {
-  text: string;
-  bgColor: string;
-}
+import { ResourceHeaderTag } from "@/types/componentType";
 
+/**
+ * Preview Content Types
+ */
 type PreviewContentType = "text" | "image" | "video" | "custom";
 
 interface BasePreviewContent {
@@ -62,7 +61,7 @@ interface HeaderSectionProps {
   mainTitle?: string;
 
   // Tags
-  tags?: Tag[];
+  tags?: ResourceHeaderTag[];
 
   // CTA Button
   ctaButton?: {
@@ -75,30 +74,6 @@ interface HeaderSectionProps {
   sectionClassName?: string;
   cardClassName?: string;
 }
-
-// Default Tags
-const defaultTags: Tag[] = [
-  {
-    text: "SaaS 🦄",
-    bgColor: "squircle-[#afffad]",
-  },
-  {
-    text: "Go To Market 🎯",
-    bgColor: "squircle-[#ffe9ad]",
-  },
-  {
-    text: "Web Application 📝",
-    bgColor: "squircle-[#ade9ff]",
-  },
-  {
-    text: "Design 🎨",
-    bgColor: "squircle-[#f9f9f9]",
-  },
-  {
-    text: "Mobile App 📱",
-    bgColor: "squircle-[#e2e4ff]",
-  },
-];
 
 // Function to render preview content
 const renderPreviewContent = (content: PreviewContent) => {
@@ -172,7 +147,7 @@ export function HeaderSection({
     subtitle: "You can have the rest of the empty space here.",
   } as TextPreviewContent,
   mainTitle = "Design System × Product Thinking",
-  tags = defaultTags,
+  tags,
   ctaButton = {
     text: "Obtenir 🚀",
     href: "#contact",
@@ -199,10 +174,8 @@ export function HeaderSection({
         </CardContent>
       </Card>
 
-      {/* Header Title */}
       <h1 className="h2 w-full font-normal relative">{mainTitle}</h1>
 
-      {/* Header Tags */}
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-7xl squircle-white overflow-hidden">
           {tags.map((tag, index) => (
@@ -218,7 +191,6 @@ export function HeaderSection({
         </div>
       )}
 
-      {/* Header CTA Button */}
       {ctaButton && (
         <div className="relative w-full">
           <Link

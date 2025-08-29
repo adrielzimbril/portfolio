@@ -27,7 +27,7 @@ const metricsData = [
   },
 ];
 
-export const ProjectOverviewSection () {
+export function ProjectOverviewSection() {
   return (
     <section className="min-h-[832px] relative w-full bg-greys-00 flex flex-col items-center justify-center py-20">
       <div className="flex flex-col items-center gap-4 mb-16">
@@ -104,4 +104,4 @@ export const ProjectOverviewSection () {
       </div>
     </section>
   );
-};
+}

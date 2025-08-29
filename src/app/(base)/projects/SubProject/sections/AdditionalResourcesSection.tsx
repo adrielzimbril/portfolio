@@ -69,7 +69,7 @@ const projectsData = [
   },
 ];
 
-export const AdditionalResourcesSection () {
+export function AdditionalResourcesSection() {
   return (
     <section className="w-full bg-greys-00 py-[99px]">
       <div className="max-w-[1136px] mx-auto px-4">
@@ -153,4 +153,4 @@ export const AdditionalResourcesSection () {
       </div>
     </section>
   );
-};
+}

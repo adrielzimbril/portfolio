@@ -2,7 +2,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { CardInfoProps } from "@/components/shared/pages/shared/page/preview-value-card";
 import { Badge } from "@/components/ui/badge";
-import icon from "@/app/icon";
 
 function PreviewContent({
   title,
@@ -13,9 +12,7 @@ function PreviewContent({
 }) {
   return (
     <div className="flex flex-col items-start gap-4 md:gap-6 w-full">
-      <h4 className="text-3xl leading-[120%] font-normal tracking-wide">
-        {title}
-      </h4>
+      <h4 className="text-3xl leading-[120%]">{title}</h4>
 
       <p className="text-zinc-500 leading-[120%]">{description}</p>
     </div>

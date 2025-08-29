@@ -32,7 +32,7 @@ const cardData = [
   },
 ];
 
-export const ProjectGallerySection () {
+export function ProjectGallerySection() {
   return (
     <section className="w-full bg-greys-00 py-24">
       <div className="max-w-7xl mx-auto px-6">
@@ -42,8 +42,8 @@ export const ProjectGallerySection () {
           </h1>
           <p className="w-full max-w-[654px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#00000099] text-2xl text-center tracking-[0.02px] leading-[28.8px]">
             Toute bonne histoire commence par un POURQUOI ? La même chose
-            s'applique à votre projet ! Clarifier d'abord le problème est un
-            excellent moyen de briser la glace pour vos lecteurs
+            s'applique à votre projet ! Clarifier d&apos;abord le problème est
+            un excellent moyen de briser la glace pour vos lecteurs
           </p>
         </header>
 
@@ -83,4 +83,4 @@ export const ProjectGallerySection () {
       </div>
     </section>
   );
-};
+}

@@ -27,7 +27,8 @@
       "@shared/*": ["./src/components/shared/*"],
       "@ui/*": ["./src/components/ui/*"],
       "@shiro/*": ["./src/components/shiro/*"],
-      "@i18n/*": ["./src/module/i18n/*"]
+      "@i18n/*": ["./src/module/i18n/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

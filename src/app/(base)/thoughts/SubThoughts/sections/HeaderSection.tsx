@@ -26,7 +26,7 @@ const topicTags = [
   "Mobile App 📱",
 ];
 
-export const HeaderSection () {
+export function HeaderSection() {
   return (
     <section className="min-h-[797px] w-full bg-greys-00 flex items-center justify-center p-8">
       <div className="w-full max-w-[1136px] flex flex-col justify-center gap-4 p-8 bg-[#f9f9f9] rounded-[64px] overflow-hidden">
@@ -85,4 +85,4 @@ export const HeaderSection () {
       </div>
     </section>
   );
-};
+}

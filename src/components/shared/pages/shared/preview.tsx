@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { ResourceType } from "@/types/enum";
 
 interface PreviewProps {
-  iconType?: "ebook" | "course" | "video";
+  iconType?: ResourceType;
   icon?: string;
   iconAlt?: string;
   isWide?: boolean;

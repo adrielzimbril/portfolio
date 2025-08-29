@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const ProblemStatementSection () {
+export function ProblemStatementSection() {
   const researchData = [
     {
       icon: "/image-989-1.png",
@@ -65,4 +65,4 @@ export const ProblemStatementSection () {
       </div>
     </section>
   );
-};
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-export const HeaderSection () {
+export function HeaderSection() {
   const badges = [
     {
       text: "SaaS 🦄",
@@ -70,9 +70,9 @@ export const HeaderSection () {
 
             {/* Description */}
             <p className="relative w-full [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-text-iconslight-disabled text-2xl tracking-[0.02px] leading-[28.8px] mb-4">
-              Donnez à votre entreprise les moyens d'une conception centrée sur
-              l'utilisateur et de l'IA pour offrir des expériences client
-              fluides et accélérer la croissance.
+              Donnez à votre entreprise les moyens d&apos;une conception centrée
+              sur l&apos;utilisateur et de l&apos;IA pour offrir des expériences
+              client fluides et accélérer la croissance.
             </p>
 
             {/* Boutons d'action */}
@@ -142,4 +142,4 @@ export const HeaderSection () {
       </div>
     </section>
   );
-};
+}

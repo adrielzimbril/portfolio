@@ -20,7 +20,7 @@ const finalParagraphs = [
   "You can add what outcomes has this project brought after your design! For example, can show some real data.You can add what outcomes has this project brought after your design! For example, can show some real data.You can add what outcomes has this project brought after your design! For example, can show some real data.",
 ];
 
-export const ProjectsSection () {
+export function ProjectsSection() {
   return (
     <section className="w-full bg-greys-00">
       <div className="flex justify-center px-12 py-16">

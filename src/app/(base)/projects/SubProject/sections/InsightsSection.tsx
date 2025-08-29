@@ -1,6 +1,6 @@
 import React from "react";
 
-export const InsightsSection () {
+export function InsightsSection() {
   const phoneData = [
     {
       hardwareButtons: "/hardware-buttons-1.png",
@@ -47,7 +47,9 @@ export const InsightsSection () {
                   />
 
                   <img
-                    className={`absolute ${index === 3 ? "w-[9px]" : "w-[368px]"} h-[180px] top-[118px] left-0`}
+                    className={`absolute ${
+                      index === 3 ? "w-[9px]" : "w-[368px]"
+                    } h-[180px] top-[118px] left-0`}
                     alt="Hardware buttons"
                     src={phone.hardwareButtons}
                   />
@@ -55,7 +57,8 @@ export const InsightsSection () {
                   <div className="absolute w-[327px] h-[708px] top-[17px] left-[21px] bg-greys-00 rounded-[20.93px] overflow-hidden">
                     <div className="flex flex-col w-[271px] items-start gap-[6.98px] relative top-[290px] left-7">
                       <div className="relative self-stretch mt-[-0.87px] font-SF-pro-title-02-34 font-[number:var(--SF-pro-title-02-34-font-weight)] text-[#000000de] text-[length:var(--SF-pro-title-02-34-font-size)] tracking-[var(--SF-pro-title-02-34-letter-spacing)] leading-[var(--SF-pro-title-02-34-line-height)] [font-style:var(--SF-pro-title-02-34-font-style)]">
-                        😎<br />I made you looked.
+                        😎
+                        <br />I made you looked.
                       </div>
 
                       <div className="relative self-stretch [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-text-iconslight-disabled text-2xl tracking-[0.02px] leading-[28.8px]">
@@ -86,4 +89,4 @@ export const InsightsSection () {
       </div>
     </section>
   );
-};
+}

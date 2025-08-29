@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const UserResearchSection () {
+export function UserResearchSection() {
   return (
     <section className="h-[720px] relative w-full bg-greys-00 flex items-center justify-center">
       <Card className="w-[1094px] bg-white rounded-[64px] border-[16px] border-solid border-[#f5f5f599] p-0">
@@ -46,4 +46,4 @@ export const UserResearchSection () {
       </Card>
     </section>
   );
-};
+}

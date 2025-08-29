@@ -1,11 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/resources/details";
+import { ResourceType } from "@/types/enum";
 
 export interface Resource {
   id: string | number;
   title: string;
-  type: "ebook" | "course" | "video";
+  type: ResourceType;
   description: string;
   details: string;
   icon: string;
