@@ -6,7 +6,6 @@ import {
   ExampleWithImage,
   ExampleWithVideo,
   ExampleWithCustomContent,
-  ExampleCustomText,
   ExampleImageWithTags,
 } from "./sections/HeaderSection";
 import { MoreInfoSection } from "./sections/MoreInfoSection";
@@ -20,7 +19,6 @@ export default function SubShop() {
       <ExampleWithImage />
       <ExampleWithVideo />
       <ExampleWithCustomContent />
-      <ExampleCustomText />
       <ExampleImageWithTags />
       {/* Projects Section */}
       <ProjectsSection />

@@ -168,35 +168,6 @@ function ExampleWithCustomContent() {
   );
 }
 
-// Exemple 5: Texte personnalisé
-function ExampleCustomText() {
-  return (
-    <HeaderSection
-      previewContent={{
-        type: "text",
-        emoji: "🎯",
-        title: "Atteignez vos objectifs",
-        subtitle: "Avec notre solution complète",
-      }}
-      mainTitle="Performance × Résultats"
-      tags={[
-        {
-          text: "Analytics 📊",
-          bgColor: "squircle-[#ff9f43]",
-        },
-        {
-          text: "Automation 🤖",
-          bgColor: "squircle-[#48dbfb]",
-        },
-      ]}
-      ctaButton={{
-        text: "Commencer gratuitement 🎁",
-        href: "/free-trial",
-      }}
-    />
-  );
-}
-
 // Exemple 6: Image avec tags personnalisés
 function ExampleImageWithTags() {
   const designTags = [
@@ -238,6 +209,5 @@ export {
   ExampleWithImage,
   ExampleWithVideo,
   ExampleWithCustomContent,
-  ExampleCustomText,
   ExampleImageWithTags,
 };

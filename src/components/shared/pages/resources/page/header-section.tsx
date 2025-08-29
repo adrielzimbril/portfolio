@@ -55,41 +55,28 @@ type PreviewContent =
   | CustomPreviewContent;
 
 interface HeaderSectionProps {
-  // Contenu de la carte de prévisualisation
+  // Preview Content
   previewContent?: PreviewContent;
 
-  // Titre principal
+  // Main Title
   mainTitle?: string;
 
   // Tags
   tags?: Tag[];
 
-  // Bouton CTA
+  // CTA Button
   ctaButton?: {
     text: string;
     href: string;
-    variant?:
-      | "default"
-      | "destructive"
-      | "outline"
-      | "secondary"
-      | "ghost"
-      | "link";
-    size?: "sm" | "lg" | "default";
   };
 
-  // Classes CSS optionnelles
+  // Optional CSS Classes
   className?: string;
   sectionClassName?: string;
   cardClassName?: string;
-
-  // Configuration de la section
-  isWide?: boolean;
-  marginTop?: string;
-  marginBottom?: string;
 }
 
-// Tags par défaut
+// Default Tags
 const defaultTags: Tag[] = [
   {
     text: "SaaS 🦄",
@@ -113,7 +100,7 @@ const defaultTags: Tag[] = [
   },
 ];
 
-// Fonction pour rendre le contenu de prévisualisation
+// Function to render preview content
 const renderPreviewContent = (content: PreviewContent) => {
   switch (content.type) {
     case "text":
@@ -158,7 +145,7 @@ const renderPreviewContent = (content: PreviewContent) => {
             autoPlay={content.autoplay}
             loop={content.loop}
             muted={content.muted}
-            controls={content.controls !== false} // Par défaut true
+            controls={content.controls !== false}
             className="max-w-full max-h-full rounded-lg"
           />
           {content.caption && (
@@ -189,33 +176,23 @@ export function HeaderSection({
   ctaButton = {
     text: "Obtenir 🚀",
     href: "#contact",
-    variant: "default",
-    size: "lg",
   },
-  className,
-  sectionClassName,
-  cardClassName,
-  isWide = true,
-  marginTop = "mt-20",
-  marginBottom = "mb-10 md:mb-20",
 }: HeaderSectionProps) {
   return (
     <SectionBase
-      sectionClassName={cn("p-0", marginTop, marginBottom, sectionClassName)}
-      isWide={isWide}
-      cardClassName={cn("w-full", cardClassName)}
+      sectionClassName="p-0 mt-20 mb-10 md:mb-20"
+      isWide
+      cardClassName="w-full"
       cardContentClassName="md:px-12 py-6 md:py-12"
     >
       {/* Header Preview Card */}
-      <Card
-        className={cn(
-          "w-full squircle squircle-white squircle-smooth-xl squircle-6xl overflow-hidden p-5",
-          className
-        )}
-      >
+      <Card className="w-full squircle squircle-white squircle-smooth-xl squircle-6xl overflow-hidden p-5">
         <CardContent
           className={cn(
-            "w-full squircle squircle-stone-100 squircle-smooth-xl squircle-5xl overflow-hidden md:px-12 py-16 md:py-20 min-h-[300px] flex flex-col justify-center"
+            "w-full squircle squircle-stone-100 squircle-smooth-xl squircle-5xl overflow-hidden flex flex-col justify-center",
+            previewContent.type === "text" || previewContent.type === "custom"
+              ? "md:px-12 py-16 md:py-20 min-h-[300px]"
+              : "p-0"
           )}
         >
           {renderPreviewContent(previewContent)}
@@ -247,8 +224,7 @@ export function HeaderSection({
           <Link
             href={ctaButton.href}
             className="w-full font-bold text-2xl py-5"
-            variant={ctaButton.variant || "default"}
-            size={ctaButton.size || "lg"}
+            size="lg"
             likeButton
             asFull
           >
