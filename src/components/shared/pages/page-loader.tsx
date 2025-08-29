@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import svgPaths from "../loading-1/svg-bgtumon3tx";
-import imgIcon from "../loading-1/576887334bdcab59385ed7ed507c00d867dd7f03.png";
-import { Loader2 } from "lucide-react";
+import React from "react";
+import svgPaths from "./svg-bgtumon3tx";
+import imgIcon from "./576887334bdcab59385ed7ed507c00d867dd7f03.png";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -198,22 +197,31 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
   return (
     <div className="flex flex-col mx-auto items-center justify-center relative bg-white size-full min-h-dvh">
       {/* Floating background elements */}
-      <FloatingCard delay={0} position="top-left" title="SaaS 🦄" />
+      {floatingSkills.map((skill, index) => (
+        <FloatingCard
+          key={skill}
+          delay={index * 0.5}
+          position={
+            index % 4 === 0
+              ? "top-left"
+              : index % 4 === 1
+              ? "top-right"
+              : index % 4 === 2
+              ? "bottom-left"
+              : "bottom-right"
+          }
+          title={skill}
+        />
+      ))}
 
-      <FloatingCard delay={1} position="top-right" title="Design 🎨" />
-
-      <FloatingCard delay={2} position="bottom-left" title="Innovation 💡" />
-
-      <FloatingCard delay={1.5} position="bottom-right" title="Web App 📱" />
-
-      {/* Contenu principal de chargement avec animations séquentielles */}
+      {/* Principal content with sequential animations */}
       <motion.div
         className="flex flex-col items-center justify-center self-center gap-8 px-4 md:px-8 max-w-xl"
-        // initial={{ opacity: 0, y: 30 }}
-        // animate={{ opacity: 1, y: 0 }}
-        // transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        //initial={{ opacity: 0, y: 30 }}
+        //animate={{ opacity: 1, y: 0 }}
+        //transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        {/* Header avec animation */}
+        {/* Header with animation */}
         <motion.header
           className="absolute top-0 left-0 right-0 h-28 bg-greys-00"
           initial={{ opacity: 0, y: -20 }}
@@ -263,7 +271,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </div>
         </motion.div> */}
 
-        {/* Animation de chargement principale */}
+        {/* Main loading animation */}
         <motion.div
           className="relative"
           initial={{ scale: 0.8 }}
@@ -323,7 +331,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </motion.div>
         </motion.div>
 
-        {/* Texte de chargement avec animations */}
+        {/* Loading text with animations */}
         <motion.div
           className="size-full flex flex-col items-center gap-4 text-center"
           initial={{ opacity: 0 }}
@@ -349,7 +357,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </motion.p>
         </motion.div>
 
-        {/* Indicateurs de progression avec animations */}
+        {/* Progress indicators with animations */}
         <motion.div
           className="flex flex-col items-center gap-4 w-full max-w-md"
           initial={{ opacity: 0, y: 20 }}
@@ -359,7 +367,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           <LoadingProgressBar isPage={isPage} />
         </motion.div>
 
-        {/* Points de chargement animés */}
+        {/* Animated loading points */}
         {/* <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-greys-08 rounded-full animate-bounce animate-infinite delay-0"></div>
           <div className="w-3 h-3 bg-greys-08 rounded-full animate-bounce animate-infinite delay-150"></div>
@@ -375,17 +383,16 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         </div>
       </motion.div>
 
-      {/* Stats preview avec animation */}
+      {/* Stats preview with animation */}
       <motion.div
         className="content-stretch flex gap-8 items-center justify-center mt-12"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 0.6 }}
+        //initial={{ opacity: 0 }}
+        //animate={{ opacity: 1 }}
+        //transition={{ delay: 2, duration: 0.6 }}
       >
         {statsData.map((stat, index) => (
-          <>
+          <React.Fragment key={stat.label}>
             <motion.div
-              key={stat.label}
               className="content-stretch flex flex-col gap-1 items-center justify-center"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -411,7 +418,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
                 transition={{ delay: 2.3, duration: 0.3 }}
               />
             )}
-          </>
+          </React.Fragment>
         ))}
       </motion.div>
     </div>

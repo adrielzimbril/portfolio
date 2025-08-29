@@ -11,6 +11,7 @@ import { metadata as metadataBase } from "./metadata";
 import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import { Footer } from "@/components/shared/footer";
 import { Toaster } from "sonner";
+import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -53,22 +54,24 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TooltipProvider openDelay={0} closeDelay={0}>
-            <SquircleProvider>
-              <main>
-                <div className="container mx-auto relative">
-                  <Navbar />
-                  <Dockbar asFade={false} />
-                  {/* <SmoothCursor /> */}
-                  {children}
-                  <ScrollToTop />
-                  <Toaster />
-                  {/* <SplashCursor /> */}
-                  <Footer />
-                </div>
-              </main>
-            </SquircleProvider>
-          </TooltipProvider>
+          <LayoutProvider>
+            <TooltipProvider openDelay={0} closeDelay={0}>
+              <SquircleProvider>
+                <main>
+                  <div className="container mx-auto relative">
+                    <Navbar />
+                    <Dockbar asFade={false} />
+                    {/* <SmoothCursor /> */}
+                    {children}
+                    <ScrollToTop />
+                    <Toaster />
+                    {/* <SplashCursor /> */}
+                    <Footer />
+                  </div>
+                </main>
+              </SquircleProvider>
+            </TooltipProvider>
+          </LayoutProvider>
         </ThemeProvider>
       </body>
     </html>

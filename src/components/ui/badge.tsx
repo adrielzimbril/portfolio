@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "squircle squircle-7xl squircle-smooth-xl inline-flex items-center border px-3 py-1.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "squircle squircle-7xl squircle-smooth-xl inline-flex items-center border px-3 py-1.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
       variant: {
@@ -16,9 +16,17 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
       },
+      size: {
+        default: "text-xs",
+        sm: "text-sm",
+        md: "text-base",
+        lg: "text-lg",
+        xl: "text-xl",
+      },
     },
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   }
 );
@@ -29,10 +37,16 @@ export interface BadgeProps
   contentClassName?: string;
 }
 
-function Badge({ className, variant, contentClassName, ...props }: BadgeProps) {
+function Badge({
+  className,
+  variant,
+  size,
+  contentClassName,
+  ...props
+}: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props}>
-      <span className={cn("text-sm font-medium", contentClassName)}>
+    <div className={cn(badgeVariants({ variant, size }), className)} {...props}>
+      <span className={cn("font-medium", contentClassName)}>
         {props.children}
       </span>
     </div>

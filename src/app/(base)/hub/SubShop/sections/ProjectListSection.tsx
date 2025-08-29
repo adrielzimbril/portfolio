@@ -1,5 +1,4 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { ResourceCard } from "@/components/shared/pages/resources/page/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 

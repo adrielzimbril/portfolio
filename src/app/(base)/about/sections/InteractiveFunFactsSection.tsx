@@ -28,89 +28,183 @@ interface Question {
 const questions: Question[] = [
   {
     id: 1,
-    emoji: "🎸",
-    title: "J'ai joué dans un groupe de rock",
-    description:
-      "Pendant mes études, j'étais le guitariste principal d'un groupe qui a joué dans plusieurs bars locaux.",
-    subtitle: "C'était une expérience incroyable mais très difficile.",
-    isTrue: false,
-    funFact: "En réalité, je ne sais jouer que 3 accords de guitare ! 🎵",
+    emoji: "💣",
+    title: "J'ai détruit un SaaS rentable",
+    description: "J’ai fermé un projet qui faisait de l’argent.",
+    subtitle: "Un choix volontaire, pas une erreur.",
+    isTrue: true,
+    funFact:
+      "C'était un projet qui rapportait, mais qui ne me ressemblait pas.",
     funnyTruthMessage:
-      "Bien vu! 🎯 C'était effectivement un mensonge - je n'ai jamais mis les pieds sur l'Everest!",
-    funnyLieMessage:
-      "Haha, tu m'as cru! 😅 Non non, je n'ai jamais escaladé l'Everest - j'ai le vertige rien qu'en voyant une échelle!",
+      "Exact! 🎯 Parfois il faut détruire pour mieux reconstruire.",
+    funnyLieMessage: "Ahah non, là c'est bien réel… 💥",
   },
   {
     id: 2,
-    emoji: "🌍",
-    title: "J'ai visité 25 pays",
-    description:
-      "Mon passeport est rempli de tampons de tous les continents, sauf l'Antarctique.",
-    subtitle: "C'était une expérience incroyable mais très difficile.",
-    isTrue: true,
+    emoji: "🍕",
+    title: "Mon premier client m’a payé en pizzas",
+    description: "Au lieu de me donner de l’argent, il m’a offert des pizzas.",
+    subtitle: "Pepperoni > facture ?",
+    isTrue: false,
     funFact:
-      "Mon pays préféré était le Japon - la culture et la nourriture étaient incroyables ! 🍜",
-    funnyTruthMessage:
-      "Bien vu! 🎯 C'était effectivement un mensonge - je n'ai jamais mis les pieds sur l'Everest!",
+      "J'ai eu des petits budgets… mais toujours en cash, jamais en mozzarella.",
+    funnyTruthMessage: "Bien vu! 🎯 C'était faux, jamais payé en pizza.",
     funnyLieMessage:
-      "Haha, tu m'as cru! 😅 Non non, je n'ai jamais escaladé l'Everest - j'ai le vertige rien qu'en voyant une échelle!",
+      "Haha, tu m'as cru! 😅 Mais non, je préfère l'argent aux parts de pizza.",
   },
   {
     id: 3,
-    emoji: "🥘",
-    title: "Je peux cuisiner 50 plats différents",
+    emoji: "🚀",
+    title: "4 SaaS présentés, 4 sélectionnés",
     description:
-      "De la cuisine française aux spécialités asiatiques, ma collection de recettes est impressionnante.",
-    subtitle: "C'était une expérience incroyable mais très difficile.",
+      "Mes 4 projets ont passé les premières phases d’un incubateur.",
+    subtitle: "Mission validée!",
     isTrue: true,
-    funFact:
-      "J'ai appris en regardant des vidéos YouTube pendant le confinement ! 👨‍🍳",
-    funnyTruthMessage:
-      "Bien vu! 🎯 C'était effectivement un mensonge - je n'ai jamais mis les pieds sur l'Everest!",
-    funnyLieMessage:
-      "Haha, tu m'as cru! 😅 Non non, je n'ai jamais escaladé l'Everest - j'ai le vertige rien qu'en voyant une échelle!",
+    funFact: "C'était avec le programme Y’ELLO Startup.",
+    funnyTruthMessage: "Exact! 🎯 Une de mes plus belles validations.",
+    funnyLieMessage: "Ah non, celui-là est vrai 😉",
   },
   {
     id: 4,
-    emoji: "🦈",
-    title: "J'ai nagé avec des requins",
-    description:
-      "En Afrique du Sud, j'ai fait de la plongée en cage avec des grands blancs.",
-    subtitle: "C'était une expérience incroyable mais très difficile.",
-    isTrue: false,
-    funFact: "J'ai une peur bleue des requins - même dans un aquarium ! 🫣",
-    funnyTruthMessage:
-      "Bien vu! 🎯 C'était effectivement un mensonge - je n'ai jamais mis les pieds sur l'Everest!",
-    funnyLieMessage:
-      "Haha, tu m'as cru! 😅 Non non, je n'ai jamais escaladé l'Everest - j'ai le vertige rien qu'en voyant une échelle!",
+    emoji: "🚫",
+    title: "Je déteste les beaux designs inutiles",
+    description: "Un mockup magnifique mais jamais codé, ça ne sert à rien.",
+    subtitle: "Forme ≠ fond.",
+    isTrue: true,
+    funFact:
+      "Un design non UX-ready ou inaccessible est une cata pour l’utilisateur, même s’il est joli.",
+    funnyTruthMessage: "Exact! 🎯 L’esthétique seule ne me séduit pas.",
+    funnyLieMessage: "Ah non, c’est vrai… j’ai horreur de ça.",
   },
   {
     id: 5,
-    emoji: "🦈",
-    title: "J'ai nagé avec des requins",
-    description:
-      "En Afrique du Sud, j'ai fait de la plongée en cage avec des grands blancs.",
-    subtitle: "C'était une expérience incroyable mais très difficile.",
-    isTrue: false,
-    funFact: "J'ai une peur bleue des requins - même dans un aquarium ! 🫣",
-    funnyTruthMessage:
-      "Bien vu! 🎯 C'était effectivement un mensonge - je n'ai jamais mis les pieds sur l'Everest!",
-    funnyLieMessage:
-      "Haha, tu m'as cru! 😅 Non non, je n'ai jamais escaladé l'Everest - j'ai le vertige rien qu'en voyant une échelle!",
+    emoji: "🧀",
+    title: "J'adore le fromage, j'en mange tous les jours",
+    description: "Gourmand en mozzarella, je ne peux pas m'en passer.",
+    subtitle: "Fromage addict.",
+    isTrue: true,
+    funFact: "Je peux en manger à chaque repas, sans jamais me lasser.",
+    funnyTruthMessage: "Exact! 🎯 Le fromage, c’est ma faiblesse.",
+    funnyLieMessage: "Ah non, c’est vrai… 🧀 forever.",
+  },
+  {
+    id: 6,
+    emoji: "😮‍💨",
+    title: "J’ai failli arrêter le code à 18 ans",
+    description: "Burnout, plus envie de toucher un clavier.",
+    subtitle: "Presque la fin, mais pas tout à fait.",
+    isTrue: true,
+    funFact: "Ce break m’a recentré sur le produit et le design.",
+    funnyTruthMessage: "Exact! 🎯 Ça m'a permis de revenir plus fort.",
+    funnyLieMessage: "Ah non, c'est vrai… et dur à vivre.",
+  },
+  {
+    id: 7,
+    emoji: "🎨",
+    title: "Le design m’a appris la discipline",
+    description: "Reproduire, ajuster, recommencer encore et encore.",
+    subtitle: "Design = rigueur.",
+    isTrue: true,
+    funFact:
+      "Le design m’a appris la patience et la précision plus que le code.",
+    funnyTruthMessage: "Exact! 🎯 C’est mon école invisible.",
+    funnyLieMessage: "Non non, celui-là est vrai.",
   },
   {
     id: 8,
-    emoji: "🦈",
-    title: "J'ai nagé avec des requins",
-    description:
-      "En Afrique du Sud, j'ai fait de la plongée en cage avec des grands blancs.",
-    subtitle: "C'était une expérience incroyable mais très difficile.",
+    emoji: "🎤",
+    title: "J’ai appris le design en clonant des sites de rappeurs",
+    description: "Je m’entraînais en refaisant leurs pages pour le fun.",
+    subtitle: "Training mode.",
     isTrue: false,
-    funFact: "J'ai une peur bleue des requins - même dans un aquarium ! 🫣",
-    funnyTruthMessage:
-      "Bien vu! 🎯 C'était effectivement un mensonge - je n'ai jamais mis les pieds sur l'Everest!",
+    funFact:
+      "J’ai appris le design autrement, mais pas avec des sites de rappeurs.",
+    funnyTruthMessage: "Bien vu! 🎯 Ce n’était qu’un mensonge.",
+    funnyLieMessage: "Haha tu m'as cru! 😅 Mais non, pas de sites de rappeurs.",
+  },
+  {
+    id: 9,
+    emoji: "🖼️",
+    title: "J’ai recopié 50 designs sur Dribbble",
+    description:
+      "J’ai progressé en design en reproduisant les sites de mes designers préférés.",
+    subtitle: "50 clones plus tard…",
+    isTrue: true,
+    funFact: "C’était ma meilleure école: observer et reproduire.",
+    funnyTruthMessage: "Exact! 🎯 C’était mon entraînement intensif.",
+    funnyLieMessage: "Non non, c'est bien vrai 😉",
+  },
+  {
+    id: 10,
+    emoji: "🏦",
+    title: "Je veux créer une néobanque un jour",
+    description: "Pas juste une app, une vraie banque digitale.",
+    subtitle: "Projet long terme.",
+    isTrue: false,
+    funFact:
+      "Je garde ça privé pour l’instant, mais disons que ce n’est pas mon projet actuel.",
+    funnyTruthMessage: "Bien vu! 🎯 Ce n’est pas mon projet officiel.",
+    funnyLieMessage: "Haha, tu m'as cru? 😅 Mais non, pas encore de néobanque.",
+  },
+  {
+    id: 11,
+    emoji: "🔤",
+    title: "Toutes mes marques commencent par A",
+    description: "Je ne lance que des noms en A.",
+    subtitle: "Alphabet power.",
+    isTrue: false,
+    funFact:
+      "J’adore les noms en A (flow, mémorisation), mais ce n’est pas une règle stricte.",
+    funnyTruthMessage: "Bien vu! 🎯 J’aime les 'A' mais je ne suis pas rigide.",
     funnyLieMessage:
-      "Haha, tu m'as cru! 😅 Non non, je n'ai jamais escaladé l'Everest - j'ai le vertige rien qu'en voyant une échelle!",
+      "Haha tu m'as cru? 😅 Pas toutes mes marques commencent par A.",
+  },
+  {
+    id: 12,
+    emoji: "😭",
+    title: "J’ai pleuré devant une erreur 500",
+    description: "Après deux jours de blocage, c’était juste un ';' oublié.",
+    subtitle: "Le drame du dev.",
+    isTrue: true,
+    funFact: "Une ligne, deux jours de ma vie perdus. Lesson learned.",
+    funnyTruthMessage: "Exact! 🎯 C’était douloureux mais formateur.",
+    funnyLieMessage: "Ah non, c'est bien vrai 😅",
+  },
+  {
+    id: 13,
+    emoji: "🎰",
+    title: "Mon domaine est devenu un site de casino",
+    description:
+      "J’ai oublié de renouveler un domaine, il a fini en machines à sous.",
+    subtitle: "Jackpot?",
+    isTrue: true,
+    funFact: "C’était un ancien domaine d’un projet perso. Gros fail.",
+    funnyTruthMessage: "Exact! 🎯 Ça pique quand ça arrive.",
+    funnyLieMessage: "Non non, c’est vrai… et douloureux.",
+  },
+  {
+    id: 14,
+    emoji: "🧑‍💻",
+    title: "Je rêve de créer un langage qui porte mon prénom",
+    description: "Imagine 'AdrielLang', ça sonne bien non?",
+    subtitle: "Geek dream.",
+    isTrue: false,
+    funFact:
+      "J’aimerais, mais ce n’est pas dans mes plans concrets (pour l’instant).",
+    funnyTruthMessage: "Bien vu! 🎯 Pas encore de 'AdrielLang'.",
+    funnyLieMessage: "Haha tu m'as cru! 😅 Non non, pas de langage maison.",
+  },
+  {
+    id: 15,
+    emoji: "🐢",
+    title: "Mon premier PC mettait 10 minutes à démarrer",
+    description: "Je devais attendre une éternité avant de coder.",
+    subtitle: "Patience mode.",
+    isTrue: true,
+    funFact:
+      "Celeron 1.10ghz, impossible de lancer un serveur Next.js. Une vraie tortue.",
+    funnyTruthMessage: "Exact! 🎯 Ça forge la patience du dev.",
+    funnyLieMessage: "Ah non, c'est bien vrai 😉",
   },
 ];
 
@@ -193,7 +287,7 @@ function QuestionCard({
       // Active card - right and front
       return {
         rotate: 0,
-        scale: 1.05,
+        scale: 1,
         x,
         y,
         zIndex: 20,
@@ -204,7 +298,7 @@ function QuestionCard({
       // Past cards - shifted to the left
       return {
         rotate: rotation || 0,
-        scale: 1,
+        scale: 0.9,
         x,
         y,
         zIndex: totalQuestions - index,
@@ -214,8 +308,8 @@ function QuestionCard({
     // Future cards - stacked behind with rotation
     const distanceFromCurrent = index - currentQuestionIndex;
     return {
-      rotate: rotation || (distanceFromCurrent % 2 === 0 ? 8 : -8),
-      scale: 1 - distanceFromCurrent * 0.02,
+      rotate: rotation || (distanceFromCurrent % 2 === 0 ? 2 : -2),
+      scale: 1 - distanceFromCurrent * 0.05,
       x,
       y,
       zIndex: totalQuestions - distanceFromCurrent,
@@ -413,9 +507,9 @@ function AllFactsModal({
                   🎯 Ton score : {correctGuesses}/{totalQuestions}
                 </h5>
                 <p className="text-gray-700">
-                  {correctGuesses === totalGuessed
+                  {correctGuesses === totalQuestions
                     ? "Tu as tout bon, Oula tu me connais un peu trop 😄🏆"
-                    : correctGuesses > totalGuessed / 2
+                    : correctGuesses > totalQuestions / 2
                     ? "Pas mal du tout ! 👏"
                     : "Tu peux mieux faire ! 😅"}
                 </p>
@@ -431,7 +525,7 @@ function AllFactsModal({
                   key={question.id}
                   className={cn(
                     "squircle squircle-zinc-50",
-                    "squircle-3xl squircle-smooth-xl p-4 sm:p-6 border-2"
+                    "squircle-3xl squircle-smooth-xl p-4 sm:p-6 squircle-border-2 squircle-border-zinc-100"
                   )}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -643,7 +737,7 @@ export function InteractiveFunFacts() {
                       : "bg-red-500 border-red-500"
                     : index === currentQuestionIndex
                     ? "bg-[#2a2a2a] border-[#2a2a2a]"
-                    : "bg-[rgba(0,0,0,0.2)] border-[rgba(0,0,0,0.2)]"
+                    : "bg-zinc-100 border-zinc-200"
                 )}
               >
                 {isGuessed && (
