@@ -55,7 +55,7 @@ const SmoothScroll = ({
 
   useEffect(() => {
     scrollPerc.set(percentage);
-  }, [percentage]);
+  }, [percentage, scrollPerc]);
 
   const transform = useTransform(
     scrollPerc,
@@ -75,7 +75,7 @@ const SmoothScroll = ({
           style={{ x: spring }}
           className="thumbnails-container relative max-w-max flex items-center overflow-hidden h-dvh"
         >
-          <div className="thumbnails">
+          <div className="thumbnails relative flex gap-4">
             {phoneData.map((phone, index) => (
               <Card
                 key={index}
@@ -93,7 +93,7 @@ const SmoothScroll = ({
 };
 
 const Card: React.FC<{
-  src: string;
+  src?: string;
   index: number;
   hardwareButtons: string;
   showInnerFrame: boolean;

@@ -1,6 +1,7 @@
 import React from "react";
 import { HorizontalScrollCarousel } from "./horizontal-scroll-carousel";
 import SmoothScroll from "./horizontal-scroll-carousel copy";
+import { SectionLayout } from "@/components/shared/sections/layout";
 
 export function InsightsSection() {
   const phoneData = [
@@ -23,18 +24,15 @@ export function InsightsSection() {
   ];
 
   return (
-    <section className="relative w-full bg-greys-00 overflow-hidden py-20">
-      <div className="flex flex-col items-start justify-center gap-4 px-64 mb-16">
-        <h1 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
-          Idéation
-        </h1>
-        <p className="[font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#00000099] text-2xl tracking-[0.02px] leading-[28.8px]">
-          Vous pouvez poser quelques concepts initiaux
-        </p>
-      </div>
-
-      <div className="relative">
-        {/* <div className="flex items-center gap-6 px-64">
+    <>
+      <SectionLayout
+        title="Idéation"
+        description="Vous pouvez poser quelques concepts initiaux."
+        //className="p-0"
+        contentClassName="lg:max-w-[80%] items-start"
+        isFlex
+      >
+        <div className="flex flex-col md:flex-row flex-wrap items-center justify-center gap-6 md:gap-8 mx-auto">
           {phoneData.map((phone, index) => (
             <div key={index} className="relative w-[368px] h-[742.98px]">
               <div className="h-[743px]">
@@ -82,27 +80,9 @@ export function InsightsSection() {
               </div>
             </div>
           ))}
-        </div> */}
-        <HorizontalScrollCarousel
-          images={[
-            "/hardware-buttons-1.png",
-            "/hardware-buttons-2.png",
-            "/hardware-buttons-3.png",
-            "/hardware-buttons-4.png",
-          ]}
-          data={phoneData}
-        />
-        <SmoothScroll
-          phoneData={phoneData}
-          images={[
-            "/hardware-buttons-1.png",
-            "/hardware-buttons-2.png",
-            "/hardware-buttons-3.png",
-            "/hardware-buttons-4.png",
-          ]}
-        />
-        <div className="absolute w-full h-[226px] bottom-0 left-0 bg-[linear-gradient(0deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)]" />
-      </div>
-    </section>
+        </div>
+        <div className="absolute w-full pointer-events-none h-[249px] bottom-0 left-0 bg-[linear-gradient(0deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)]" />
+      </SectionLayout>
+    </>
   );
 }

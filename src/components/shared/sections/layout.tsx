@@ -42,7 +42,7 @@ export function SectionLayout({
         className={cn(
           "flex flex-col items-center justify-center justify-items-center self-center place-self-center w-full gap-6",
           !isFlex &&
-            "md:grid grid-cols-1 md:grid-cols-2 md:max-w-[90%] place-items-center",
+            "md:grid grid-cols-1 md:grid-cols-2 md:max-w-[90%] place-items-center place-self-center",
           contentClassName
         )}
       >

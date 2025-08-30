@@ -1,8 +1,9 @@
 import React from "react";
-import { CallToAction } from "../../../components/shared/pages/shared/call-to-action";
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeaderSection } from "./sections/HeaderSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
+import { QuoteSection } from "./sections/QuoteSection";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <HeaderSection />
       <ResourcesSection />
       <ProjectsSection />
+      <QuoteSection />
       <CallToAction />
     </>
   );

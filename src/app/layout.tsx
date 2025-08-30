@@ -12,6 +12,7 @@ import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import { Footer } from "@/components/shared/footer";
 import { Toaster } from "sonner";
 import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
+import { ReactLenis } from "lenis/react";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -57,18 +58,20 @@ export default function RootLayout({
           <LayoutProvider>
             <TooltipProvider openDelay={0} closeDelay={0}>
               <SquircleProvider>
-                <main>
-                  <div className="container mx-auto relative">
-                    <Navbar />
-                    <Dockbar asFade={false} />
-                    {/* <SmoothCursor /> */}
-                    {children}
-                    <ScrollToTop />
-                    <Toaster />
-                    {/* <SplashCursor /> */}
-                    <Footer />
-                  </div>
-                </main>
+                <ReactLenis root>
+                  <main>
+                    <div className="container mx-auto relative">
+                      <Navbar />
+                      <Dockbar asFade={false} />
+                      {/* <SmoothCursor /> */}
+                      {children}
+                      <ScrollToTop />
+                      <Toaster />
+                      {/* <SplashCursor /> */}
+                      <Footer />
+                    </div>
+                  </main>
+                </ReactLenis>
               </SquircleProvider>
             </TooltipProvider>
           </LayoutProvider>
