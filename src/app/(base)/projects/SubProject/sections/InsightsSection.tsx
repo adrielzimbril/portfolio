@@ -1,4 +1,6 @@
 import React from "react";
+import { HorizontalScrollCarousel } from "./horizontal-scroll-carousel";
+import SmoothScroll from "./horizontal-scroll-carousel copy";
 
 export function InsightsSection() {
   const phoneData = [
@@ -32,7 +34,7 @@ export function InsightsSection() {
       </div>
 
       <div className="relative">
-        <div className="flex items-center gap-6 px-64">
+        {/* <div className="flex items-center gap-6 px-64">
           {phoneData.map((phone, index) => (
             <div key={index} className="relative w-[368px] h-[742.98px]">
               <div className="h-[743px]">
@@ -80,8 +82,25 @@ export function InsightsSection() {
               </div>
             </div>
           ))}
-        </div>
-
+        </div> */}
+        <HorizontalScrollCarousel
+          images={[
+            "/hardware-buttons-1.png",
+            "/hardware-buttons-2.png",
+            "/hardware-buttons-3.png",
+            "/hardware-buttons-4.png",
+          ]}
+          data={phoneData}
+        />
+        <SmoothScroll
+          phoneData={phoneData}
+          images={[
+            "/hardware-buttons-1.png",
+            "/hardware-buttons-2.png",
+            "/hardware-buttons-3.png",
+            "/hardware-buttons-4.png",
+          ]}
+        />
         <div className="absolute w-full h-[226px] bottom-0 left-0 bg-[linear-gradient(0deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)]" />
       </div>
     </section>

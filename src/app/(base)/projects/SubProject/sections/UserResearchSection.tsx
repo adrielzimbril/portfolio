@@ -42,8 +42,7 @@ export function UserResearchSection() {
         <EmojiPlaceholder
           src="/image-1310-2.png"
           //isMobileHidden
-          className="size-fit md:size-fit aspect-square p-16 border-8 md:border-12 border-zinc-100"
-          imgContainerClassName="size-11 md:size-20"
+          variant="bordered"
         />
         <ContentSection />
       </SectionBase>
