@@ -42,8 +42,8 @@ export function ProjectGallerySection() {
           </h1>
           <p className="w-full max-w-[654px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#00000099] text-2xl text-center tracking-[0.02px] leading-[28.8px]">
             Toute bonne histoire commence par un POURQUOI ? La même chose
-            s'applique à votre projet ! Clarifier d&apos;abord le problème est
-            un excellent moyen de briser la glace pour vos lecteurs
+            s&apos;applique à votre projet ! Clarifier d&apos;abord le problème
+            est un excellent moyen de briser la glace pour vos lecteurs
           </p>
         </header>
 

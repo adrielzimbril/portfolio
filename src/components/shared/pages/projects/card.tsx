@@ -19,7 +19,7 @@ export interface Project {
 
 export interface CardInfoProps {
   details: Project;
-  isWide: boolean;
+  isWide?: boolean;
 }
 
 export function ProjectCard({ details, isWide }: CardInfoProps) {

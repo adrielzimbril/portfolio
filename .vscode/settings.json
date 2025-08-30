@@ -1,5 +1,4 @@
 {
-    "i18n-ally.localesPaths": [
-        "src/module/i18n"
-    ]
+  "i18n-ally.localesPaths": ["src/module/i18n"],
+  "cSpell.words": ["l'utilisateur"]
 }

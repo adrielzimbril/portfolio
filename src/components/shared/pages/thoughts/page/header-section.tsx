@@ -2,11 +2,9 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-
-import { ResourceHeaderTag } from "@/types/componentType";
+import { Calendar, Eye, HourglassFill } from "@aurthle/icons";
 
 /**
  * Preview Content Types
@@ -60,16 +58,14 @@ interface HeaderSectionProps {
   // Main Title
   mainTitle?: string;
 
-  // Description
-  description?: string;
-
   // Tags
-  tags?: ResourceHeaderTag[];
+  tags?: string[];
 
-  // CTA Button
-  ctaButton?: {
-    text: string;
-    href: string;
+  // Article details : Date  + Min read + Views
+  articleDetails?: {
+    date?: string;
+    minRead?: string;
+    views?: string;
   };
 
   // Optional CSS Classes
@@ -150,17 +146,12 @@ export function HeaderSection({
     subtitle: "You can have the rest of the empty space here.",
   } as TextPreviewContent,
   mainTitle,
-  description,
   tags,
-  ctaButton = {
-    text: "Obtenir 🚀",
-    href: "#contact",
-  },
-  sectionClassName,
+  articleDetails,
 }: HeaderSectionProps) {
   return (
     <SectionBase
-      sectionClassName={cn("p-0 mt-20 mb-10 md:mb-20", sectionClassName)}
+      sectionClassName="p-0 mt-20 mb-10 md:mb-20"
       isWide
       cardClassName="w-full"
       cardContentClassName="md:px-12 py-6 md:py-12"
@@ -179,38 +170,59 @@ export function HeaderSection({
         </CardContent>
       </Card>
 
-      <h1 className={cn("h2 w-full relative", !description && "font-normal")}>
-        {mainTitle}
-      </h1>
+      <h1 className="h2 w-full font-normal relative">{mainTitle}</h1>
 
-      {description && <p className="text-zinc-00">{description}</p>}
+      {articleDetails && Object.keys(articleDetails).length > 0 && (
+        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
+          {articleDetails.date && (
+            <Badge
+              className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+              variant="colored"
+              size="md"
+            >
+              <span className="flex items-center gap-2">
+                <Calendar className="size-4 text-indigo-500" variant="bulk" />
+                {articleDetails.date}
+              </span>
+            </Badge>
+          )}
+          {articleDetails.minRead && (
+            <Badge
+              className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+              variant="colored"
+              size="md"
+            >
+              <span className="flex items-center gap-2">
+                <HourglassFill
+                  className="size-4 text-indigo-500"
+                  variant="bulk"
+                />
+                {articleDetails.minRead} min read
+              </span>
+            </Badge>
+          )}
+          {articleDetails.views && (
+            <Badge
+              className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+              variant="colored"
+              size="md"
+            >
+              <span className="flex items-center gap-2">
+                <Eye className="size-4 text-indigo-500" variant="bulk" />
+                {articleDetails.views} views
+              </span>
+            </Badge>
+          )}
+        </div>
+      )}
 
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-7xl squircle-white overflow-hidden">
           {tags.map((tag, index) => (
-            <Badge
-              key={index}
-              className={tag.bgColor}
-              variant="colored"
-              size="sm"
-            >
-              {tag.text}
+            <Badge key={index} size="sm">
+              {tag}
             </Badge>
           ))}
-        </div>
-      )}
-
-      {ctaButton && (
-        <div className="relative w-full">
-          <Link
-            href={ctaButton.href}
-            className="w-full font-bold text-2xl py-5"
-            size="lg"
-            likeButton
-            asFull
-          >
-            <span>{ctaButton.text}</span>
-          </Link>
         </div>
       )}
     </SectionBase>

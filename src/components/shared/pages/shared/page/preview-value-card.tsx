@@ -15,7 +15,7 @@ export function PreviewValueCard({
   description,
 }: CardInfoProps) {
   return (
-    <Card className="squircle size-full max-w-[75%] md:max-w-[95%] squircle-stone-100 squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto">
+    <Card className="squircle size-full max-w-[95%] squircle-stone-100 squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto">
       <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
         <PreviewValueCardDetails
           icon={icon}

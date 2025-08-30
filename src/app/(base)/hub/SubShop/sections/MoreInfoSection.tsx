@@ -1,7 +1,4 @@
 import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import projectData from "@/data/personal/projects.json";

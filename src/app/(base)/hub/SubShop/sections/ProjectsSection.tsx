@@ -3,10 +3,9 @@ import { PageDetails } from "@/components/shared/pages/resources/page/page-detai
 
 export function ProjectsSection() {
   return (
-    <>
-      <PageDetails
-        useMarkdown
-        descriptionTop={`
+    <PageDetails
+      useMarkdown
+      descriptionTop={`
     Vous pouvez ajouter **des résultats concrets** que ce projet a apportés après votre design ! Vous pouvez ajouter **des résultats concrets** que ce projet a apportés après votre design !
 
     Par exemple, montrer des *données réelles*.
@@ -16,13 +15,13 @@ export function ProjectsSection() {
     
     Voici un [lien utile](https://example.com) pour plus d'informations.
   `}
-        previewValueCard={{
-          icon: "/emoji-true.png",
-          badge: "Pourquoi",
-          title: "Pourquoi ce problème est-il important ?",
-          description: "Carte des propositions de valeur",
-        }}
-        descriptionBottom={`
+      previewValueCard={{
+        icon: "/emoji-true.png",
+        badge: "Pourquoi",
+        title: "Pourquoi ce problème est-il important ?",
+        description: "Carte des propositions de valeur",
+      }}
+      descriptionBottom={`
     Tu vas enfin comprendre quoi dire à **ChatGPT** pour obtenir des réponses précises.
 
     Voici comment faire :
@@ -32,7 +31,6 @@ export function ProjectsSection() {
     ✅ Valide le paiement
     ✅ Reviens sur la page pour télécharger tes ressources
   `}
-      />
-    </>
+    />
   );
 }
