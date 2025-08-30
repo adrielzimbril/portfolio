@@ -46,7 +46,9 @@ export function PreviewValueCardDetails({
       )}
     >
       <div className="flex flex-row items-center justify-between w-full mx-auto">
-        <Badge size="md">{badge}</Badge>
+        <Badge className="capitalize" size="md">
+          {badge}
+        </Badge>
         <PreviewIcon icon={icon} />
       </div>
       <PreviewContent title={title} description={description} />

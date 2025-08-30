@@ -1,9 +1,6 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { Link } from "@/components/ui/link";
-import { routes } from "@/data/route";
 import { cn } from "@/lib/utils";
 
 function ContentSection() {
@@ -52,4 +49,4 @@ export function ElementHomeWorkContactSubsection() {
       </SectionBase>
     </>
   );
-};
+}

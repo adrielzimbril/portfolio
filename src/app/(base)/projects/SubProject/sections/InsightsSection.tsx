@@ -34,10 +34,7 @@ export function InsightsSection() {
       <div className="relative">
         <div className="flex items-center gap-6 px-64">
           {phoneData.map((phone, index) => (
-            <div
-              key={index}
-              className="relative w-[368px] h-[742.98px] shadow-[0px_4.54px_2.65px_#12192202,0px_10.32px_6.03px_#12192203,0px_17.96px_10.49px_#12192203,0px_28.54px_16.66px_#12192204,0px_44.03px_25.71px_#12192204,0px_68.7px_40.12px_#12192205,0px_114.06px_66.61px_#12192206,0px_227.89px_133.09px_#12192208]"
-            >
+            <div key={index} className="relative w-[368px] h-[742.98px]">
               <div className="h-[743px]">
                 <div className="relative w-[368px] h-[743px]">
                   <img

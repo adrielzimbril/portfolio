@@ -10,33 +10,23 @@
     "categories": [
       {
         "name": "SaaS 🦄",
-        "color": "bg-[#afffad]",
-        "colorCode": "#afffad",
-        "squircle": "squircle-[#afffad]"
+        "color": 1
       },
       {
         "name": "Go To Market 🎯",
-        "color": "bg-[#ffe9ad]",
-        "colorCode": "#ffe9ad",
-        "squircle": "squircle-[#ffe9ad]"
+        "color": 4
       },
       {
         "name": "Web Application 📝",
-        "color": "bg-[#ade9ff]",
-        "colorCode": "#ade9ff",
-        "squircle": "squircle-[#ade9ff]"
+        "color": 0
       },
       {
         "name": "Design 🎨",
-        "color": "bg-[#f9f9f9]",
-        "colorCode": "#f9f9f9",
-        "squircle": "squircle-[#f9f9f9]"
+        "color": 2
       },
       {
         "name": "Mobile App 📱",
-        "color": "bg-[#e2e4ff]",
-        "colorCode": "#e2e4ff",
-        "squircle": "squircle-[#e2e4ff]"
+        "color": 3
       }
     ],
     "description": "You can add what outcomes has this project brought after your design! For example",
@@ -53,33 +43,23 @@
     "categories": [
       {
         "name": "SaaS 🦄",
-        "color": "bg-[#afffad]",
-        "colorCode": "#afffad",
-        "squircle": "squircle-[#afffad]"
+        "color": 1
       },
       {
         "name": "Go To Market 🎯",
-        "color": "bg-[#ffe9ad]",
-        "colorCode": "#ffe9ad",
-        "squircle": "squircle-[#ffe9ad]"
+        "color": 3
       },
       {
         "name": "Web Application 📝",
-        "color": "bg-[#ade9ff]",
-        "colorCode": "#ade9ff",
-        "squircle": "squircle-[#ade9ff]"
+        "color": 0
       },
       {
         "name": "Design 🎨",
-        "color": "bg-[#f9f9f9]",
-        "colorCode": "#f9f9f9",
-        "squircle": "squircle-[#f9f9f9]"
+        "color": 2
       },
       {
         "name": "Mobile App 📱",
-        "color": "bg-[#e2e4ff]",
-        "colorCode": "#e2e4ff",
-        "squircle": "squircle-[#e2e4ff]"
+        "color": 6
       }
     ],
     "description": "You can add what outcomes has this project brought after your design! For example",
@@ -98,33 +78,23 @@
     "categories": [
       {
         "name": "Startup 🚀",
-        "color": "bg-[#ffadad]",
-        "colorCode": "#ffadad",
-        "squircle": "squircle-[#ffadad]"
+        "color": 8
       },
       {
         "name": "Go To Market 🎯",
-        "color": "bg-[#ffe9ad]",
-        "colorCode": "#ffe9ad",
-        "squircle": "squircle-[#ffe9ad]"
+        "color": 4
       },
       {
         "name": "Innovation 💡",
-        "color": "bg-[#adffff]",
-        "colorCode": "#adffff",
-        "squircle": "squircle-[#adffff]"
+        "color": 7
       },
       {
         "name": "Design 🎨",
-        "color": "bg-[#f9f9f9]",
-        "colorCode": "#f9f9f9",
-        "squircle": "squircle-[#f9f9f9]"
+        "color": 6
       },
       {
         "name": "Mobile App 📱",
-        "color": "bg-[#e2e4ff]",
-        "colorCode": "#e2e4ff",
-        "squircle": "squircle-[#e2e4ff]"
+        "color": 5
       }
     ],
     "description": "This project shows how vertical layout works on larger screens",

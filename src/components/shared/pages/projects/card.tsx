@@ -10,9 +10,7 @@ export interface Project {
   tags: string[];
   categories: {
     name: string;
-    squircle: string;
-    color?: string;
-    colorCode?: string;
+    color: number;
   }[];
   buttonText: string;
 }

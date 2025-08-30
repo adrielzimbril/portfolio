@@ -181,7 +181,7 @@ export function HeaderSection({
               size="md"
             >
               <span className="flex items-center gap-2">
-                <Calendar className="size-4 text-indigo-500" variant="bulk" />
+                <Calendar className="size-4 text-indigo-400" variant="bulk" />
                 {articleDetails.date}
               </span>
             </Badge>
@@ -194,7 +194,7 @@ export function HeaderSection({
             >
               <span className="flex items-center gap-2">
                 <HourglassFill
-                  className="size-4 text-indigo-500"
+                  className="size-4 text-indigo-400"
                   variant="bulk"
                 />
                 {articleDetails.minRead} min read
@@ -208,7 +208,7 @@ export function HeaderSection({
               size="md"
             >
               <span className="flex items-center gap-2">
-                <Eye className="size-4 text-indigo-500" variant="bulk" />
+                <Eye className="size-4 text-indigo-400" variant="bulk" />
                 {articleDetails.views} views
               </span>
             </Badge>

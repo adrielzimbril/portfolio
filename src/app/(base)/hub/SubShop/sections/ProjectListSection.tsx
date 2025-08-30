@@ -5,12 +5,12 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 export function ProjectListSection() {
   const statsData = [
     {
-      icon: "/image-989.png",
+      icon: "/image-989-1.png",
       number: "30",
       description: "Interviews téléphonique",
     },
     {
-      icon: "/image-1001-1.png",
+      icon: "/image-1001.png",
       number: "30",
       description: "Interviews téléphonique",
     },

@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { pickRandomColor } from "@/lib/pickRandomColor";
 
 interface TagsProps {
   primaryTag?: string;
@@ -18,7 +19,7 @@ export function Tags({ primaryTag, tags, isCentered, className }: TagsProps) {
       )}
     >
       {primaryTag && (
-        <Badge className="squircle-[#e2e4ff]" variant="colored">
+        <Badge className={cn(pickRandomColor("PURPLE"))} variant="colored">
           {primaryTag}
         </Badge>
       )}

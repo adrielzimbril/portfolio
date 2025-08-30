@@ -1,6 +1,9 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { SectionLayout } from "@/components/shared/sections/layout";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const metricsData = [
   {
@@ -27,81 +30,141 @@ const metricsData = [
   },
 ];
 
+function MetricParagraph({
+  subtitle,
+  secondarySubtitle,
+}: {
+  subtitle?: string;
+  secondarySubtitle?: string;
+}) {
+  return (
+    <div className="flex flex-col items-start gap-2 w-full">
+      {subtitle && <h4 className="h2 tracking-wide">{subtitle}</h4>}
+      {secondarySubtitle && (
+        <p className="text-xl text-zinc-600 font-bosld leading-[120%]">
+          {secondarySubtitle}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function ProjectOverviewSection() {
   return (
-    <section className="min-h-[832px] relative w-full bg-greys-00 flex flex-col items-center justify-center py-20">
-      <div className="flex flex-col items-center gap-4 mb-16">
-        <h2 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] text-center tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
-          Résultats
-        </h2>
-
-        <p className="w-[654px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#00000099] text-2xl text-center tracking-[0.02px] leading-[28.8px]">
-          Vous pouvez indiquer n&#39;importe quel indicateur de réussite de
-          votre projet, par exemple le taux d&#39;adoption et de rétention,
-          ainsi que le retour sur investissement du produit.
-        </p>
-      </div>
-
-      <div className="flex items-start justify-center gap-4">
+    <>
+      <SectionLayout
+        title="Résultats"
+        description="Vous pouvez indiquer n'importe quel indicateur de réussite de votre projet, par exemple le taux d'adoption et de rétention, ainsi que le retour sur investissement du produit."
+        className="p-0"
+        contentClassName="md:grid-cols-3"
+      >
         {metricsData.map((metric, index) => (
           <Card
             key={index}
-            className="flex flex-col items-start justify-between p-10 bg-white rounded-[48px] overflow-hidden border-[16px] border-solid border-[#f5f5f599] min-h-[400px]"
+            className="squircle size-full max-w-[75%] md:max-w-full squircle-stone-100 squircle-6xl squircle-smooth-md border-0 overflow-hidden"
           >
-            <CardContent className="p-0 w-full">
-              <Badge
-                variant="secondary"
-                className="inline-flex items-center px-2 py-1 bg-[#f9f9f9] rounded-lg overflow-hidden mb-12"
+            <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
+              <div
+                className={cn(
+                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-white overflow-hidden"
+                )}
               >
-                <span className="font-tiny-12 font-[number:var(--tiny-12-font-weight)] text-text-iconslight-medium-emphasis text-[length:var(--tiny-12-font-size)] tracking-[var(--tiny-12-letter-spacing)] leading-[var(--tiny-12-line-height)] [font-style:var(--tiny-12-font-style)]">
-                  {metric.category}
-                </span>
-              </Badge>
-
-              <div className="flex flex-col items-start gap-2 w-full">
-                <div className="inline-flex items-center p-4 bg-[#f5f5f599] rounded-[75px] overflow-hidden">
-                  <div
-                    className="w-[32px] h-[32px] bg-cover bg-center"
-                    style={{ backgroundImage: `url(${metric.icon})` }}
+                <Badge>{metric.category}</Badge>
+                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+                  <Image
+                    width={100}
+                    height={100}
+                    className="size-8 object-cover pointer-events-none"
+                    alt={metric.icon}
+                    src={metric.icon!}
                   />
                 </div>
 
-                {metric.category === "Rétention" ? (
-                  <div className="flex flex-col items-start gap-4 w-[266px]">
-                    <div className="flex flex-col items-start gap-2 w-full">
-                      <div className="font-title-01-64 font-[number:var(--title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--title-01-64-font-size)] tracking-[var(--title-01-64-letter-spacing)] leading-[var(--title-01-64-line-height)] [font-style:var(--title-01-64-font-style)]">
-                        {metric.value}
-                      </div>
-                      <div className="font-large-24 font-[number:var(--large-24-font-weight)] text-text-iconslight-medium-emphasis text-[length:var(--large-24-font-size)] tracking-[var(--large-24-letter-spacing)] leading-[var(--large-24-line-height)] [font-style:var(--large-24-font-style)]">
-                        {metric.subtitle}
-                      </div>
-                    </div>
+                <div className="flex flex-col items-start gap-2 w-full">
+                  {metric.category === "Rétention" ? (
+                    <>
+                      <MetricParagraph
+                        subtitle={metric.value}
+                        secondarySubtitle={metric.subtitle}
+                      />
 
-                    <div className="flex flex-col items-start gap-2 w-full">
-                      <div className="font-title-01-64 font-[number:var(--title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--title-01-64-font-size)] tracking-[var(--title-01-64-letter-spacing)] leading-[var(--title-01-64-line-height)] [font-style:var(--title-01-64-font-style)]">
-                        {metric.secondaryValue}
-                      </div>
-                      <div className="font-large-24 font-[number:var(--large-24-font-weight)] text-text-iconslight-medium-emphasis text-[length:var(--large-24-font-size)] tracking-[var(--large-24-letter-spacing)] leading-[var(--large-24-line-height)] [font-style:var(--large-24-font-style)] whitespace-nowrap">
-                        {metric.secondarySubtitle}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <div className="font-title-01-64 font-[number:var(--title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--title-01-64-font-size)] tracking-[var(--title-01-64-letter-spacing)] leading-[var(--title-01-64-line-height)] [font-style:var(--title-01-64-font-style)] w-full">
-                      {metric.value}
-                    </div>
-
-                    <div className="w-[286px] font-large-24 font-[number:var(--large-24-font-weight)] text-text-iconslight-medium-emphasis text-[length:var(--large-24-font-size)] tracking-[var(--large-24-letter-spacing)] leading-[var(--large-24-line-height)] [font-style:var(--large-24-font-style)]">
-                      {metric.description}
-                    </div>
-                  </>
-                )}
+                      <MetricParagraph
+                        subtitle={metric.secondaryValue}
+                        secondarySubtitle={metric.secondarySubtitle}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <MetricParagraph
+                        subtitle={metric.value}
+                        secondarySubtitle={metric.description}
+                      />
+                    </>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>
         ))}
-      </div>
-    </section>
+      </SectionLayout>
+      <section className="min-h-[832px] relative w-full bg-greys-00 flex flex-col items-center justify-center py-20 hidden">
+        <div className="flex flex-col items-center gap-4 mb-16">
+          <h2 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] text-center tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
+            Résultats
+          </h2>
+
+          <p className="w-[654px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#00000099] text-2xl text-center tracking-[0.02px] leading-[28.8px]">
+            Vous pouvez indiquer n&#39;importe quel indicateur de réussite de
+            votre projet, par exemple le taux d&#39;adoption et de rétention,
+            ainsi que le retour sur investissement du produit.
+          </p>
+        </div>
+
+        <div className="flex items-start justify-center gap-4">
+          {metricsData.map((metric, index) => (
+            <Card
+              key={index}
+              className="squircle size-full max-w-[75%] md:max-w-[95%] squircle-stone-100 squircle-7xl squircle-smooth-lg border-0 overflow-hidden"
+            >
+              <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
+                <Badge>{metric.category}</Badge>
+                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+                  <Image
+                    width={100}
+                    height={100}
+                    className="size-8 object-cover pointer-events-none"
+                    alt={metric.icon}
+                    src={metric.icon!}
+                  />
+                </div>
+
+                <div className="flex flex-col items-start gap-2 w-full">
+                  {metric.category === "Rétention" ? (
+                    <>
+                      <MetricParagraph
+                        subtitle={metric.value}
+                        secondarySubtitle={metric.subtitle}
+                      />
+
+                      <MetricParagraph
+                        subtitle={metric.secondaryValue}
+                        secondarySubtitle={metric.secondarySubtitle}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <MetricParagraph
+                        subtitle={metric.value}
+                        secondarySubtitle={metric.description}
+                      />
+                    </>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

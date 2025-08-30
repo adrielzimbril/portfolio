@@ -1,15 +1,16 @@
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { ResourceCard } from "@/components/shared/pages/resources/page/card";
+import { SectionLayout } from "@/components/shared/sections/layout";
 
 export function ProblemStatementSection() {
-  const researchData = [
+  const statsData = [
     {
       icon: "/image-989-1.png",
       number: "30",
       description: "Interviews téléphonique",
     },
     {
-      icon: "/image-1001-2.png",
+      icon: "/image-1001.png",
       number: "30",
       description: "Interviews téléphonique",
     },
@@ -21,48 +22,17 @@ export function ProblemStatementSection() {
   ];
 
   return (
-    <section className="relative w-full bg-greys-00 py-24">
-      <div className="flex flex-col items-center gap-16 max-w-6xl mx-auto px-4">
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="font-SF-pro-title-01-64 font-[number:var(--SF-pro-title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--SF-pro-title-01-64-font-size)] text-center tracking-[var(--SF-pro-title-01-64-letter-spacing)] leading-[var(--SF-pro-title-01-64-line-height)] [font-style:var(--SF-pro-title-01-64-font-style)]">
-            Recherche utilisateur
-          </h2>
-
-          <p className="max-w-[654px] [font-family:'SF_Pro_Display-Medium',Helvetica] font-medium text-[#00000099] text-2xl text-center tracking-[0.02px] leading-[28.8px]">
-            C&#39;est désormais un sujet vaste et cela varie selon les projets.
-            Il peut s&#39;agir d&#39;un entretien avec un utilisateur,
-            d&#39;enquêtes ou même d&#39;une réunion avec les parties prenantes
-          </p>
-        </div>
-
-        <div className="flex items-start justify-center gap-6 w-full max-w-4xl">
-          {researchData.map((item, index) => (
-            <Card
-              key={index}
-              className="flex-1 bg-white rounded-[48px] border-[16px] border-solid border-[#f5f5f599] overflow-hidden"
-            >
-              <CardContent className="flex flex-col items-start justify-center gap-12 p-12">
-                <div className="inline-flex items-center p-4 bg-[#f5f5f599] rounded-[75px] overflow-hidden">
-                  <div
-                    className="w-8 h-8 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${item.icon})` }}
-                  />
-                </div>
-
-                <div className="flex flex-col items-start gap-2 w-full">
-                  <div className="font-title-01-64 font-[number:var(--title-01-64-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--title-01-64-font-size)] tracking-[var(--title-01-64-letter-spacing)] leading-[var(--title-01-64-line-height)] [font-style:var(--title-01-64-font-style)]">
-                    {item.number}
-                  </div>
-
-                  <div className="font-medium-17 font-[number:var(--medium-17-font-weight)] text-text-iconslight-medium-emphasis text-[length:var(--medium-17-font-size)] tracking-[var(--medium-17-letter-spacing)] leading-[var(--medium-17-line-height)] whitespace-nowrap [font-style:var(--medium-17-font-style)]">
-                    {item.description}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
+    <>
+      <SectionLayout
+        title="Recherche utilisateur"
+        description="C'est désormais un sujet vaste et cela varie selon les projets. Il peut s'agir d'un entretien avec un utilisateur, d'enquêtes ou même d'une réunion avec les parties prenantes"
+        className="p-0"
+        contentClassName="md:grid-cols-3"
+      >
+        {statsData.map((stat, index) => (
+          <ResourceCard key={index} details={stat} />
+        ))}
+      </SectionLayout>
+    </>
   );
 }
