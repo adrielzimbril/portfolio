@@ -2,54 +2,14 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { Calendar, Eye, HourglassFill } from "@aurthle/icons";
-
-/**
- * Preview Content Types
- */
-type PreviewContentType = "text" | "image" | "video" | "custom";
-
-interface BasePreviewContent {
-  type: PreviewContentType;
-}
-
-interface TextPreviewContent extends BasePreviewContent {
-  type: "text";
-  emoji?: string;
-  title?: string;
-  subtitle?: string;
-}
-
-interface ImagePreviewContent extends BasePreviewContent {
-  type: "image";
-  src: string;
-  alt: string;
-  caption?: string;
-}
-
-interface VideoPreviewContent extends BasePreviewContent {
-  type: "video";
-  src: string;
-  poster?: string;
-  caption?: string;
-  autoplay?: boolean;
-  loop?: boolean;
-  muted?: boolean;
-  controls?: boolean;
-}
-
-interface CustomPreviewContent extends BasePreviewContent {
-  type: "custom";
-  content: React.ReactNode;
-}
-
-type PreviewContent =
-  | TextPreviewContent
-  | ImagePreviewContent
-  | VideoPreviewContent
-  | CustomPreviewContent;
+import { cn } from "@/lib/utils";
+import { PreviewContentType } from "@/types";
+import {
+  HeaderPreviewCard,
+  PreviewContent,
+  TextPreviewContent,
+} from "@/components/shared/pages/shared/page/header-preview-card";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -74,73 +34,9 @@ interface HeaderSectionProps {
   cardClassName?: string;
 }
 
-// Function to render preview content
-const renderPreviewContent = (content: PreviewContent) => {
-  switch (content.type) {
-    case "text":
-      return (
-        <>
-          <h3 className="h2 w-full relative mb-4">
-            {content.emoji && (
-              <>
-                {content.emoji}
-                <br />
-              </>
-            )}
-            {content.title}
-          </h3>
-          {content.subtitle && (
-            <p className="relative text-4xl text-zinc-400">
-              {content.subtitle}
-            </p>
-          )}
-        </>
-      );
-
-    case "image":
-      return (
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <Image
-            src={content.src}
-            alt={content.alt}
-            width={600}
-            height={400}
-            className="w-full h-full object-contain rounded-lg"
-          />
-        </div>
-      );
-
-    case "video":
-      return (
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <video
-            src={content.src}
-            poster={content.poster}
-            autoPlay={content.autoplay}
-            loop={content.loop}
-            muted={content.muted}
-            controls={content.controls !== false}
-            className="max-w-full max-h-full rounded-lg"
-          />
-          {content.caption && (
-            <p className="text-zinc-400 text-center mt-4 text-lg">
-              {content.caption}
-            </p>
-          )}
-        </div>
-      );
-
-    case "custom":
-      return content.content;
-
-    default:
-      return null;
-  }
-};
-
 export function HeaderSection({
   previewContent = {
-    type: "text",
+    type: PreviewContentType.TEXT,
     emoji: "😎",
     title: "I made you looked.",
     subtitle: "You can have the rest of the empty space here.",
@@ -161,12 +57,13 @@ export function HeaderSection({
         <CardContent
           className={cn(
             "w-full squircle squircle-stone-100 squircle-smooth-xl squircle-5xl overflow-hidden flex flex-col justify-center",
-            previewContent.type === "text" || previewContent.type === "custom"
+            previewContent.type === PreviewContentType.TEXT ||
+              previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
               : "p-0"
           )}
         >
-          {renderPreviewContent(previewContent)}
+          <HeaderPreviewCard content={previewContent} />
         </CardContent>
       </Card>
 

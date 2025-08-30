@@ -6,9 +6,9 @@ import {
   ProjectTags,
 } from "@/components/shared/pages/projects/tags";
 import { cn } from "@/lib/utils";
-import { CardInfoProps } from "@/components/shared/pages/projects/card";
+import { ProjectPreviewCardInfoProps } from "@/types/type";
 
-export function CardInfo({ details, isWide }: CardInfoProps) {
+export function CardInfo({ details, isWide }: ProjectPreviewCardInfoProps) {
   return (
     <div
       className={cn(

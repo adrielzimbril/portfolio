@@ -8,6 +8,14 @@ export enum ResourceType {
   VIDEO = "video",
 }
 
+
+export enum PreviewContentType {
+  TEXT = "text",
+  IMAGE = "image",
+  VIDEO = "video",
+  CUSTOM = "custom",
+}
+
 export enum PortfolioProjectType {
   WORK = "work",
   PERSONAL = "personal",

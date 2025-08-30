@@ -3,9 +3,9 @@ import { LinkDiagonalOne } from "@aurthle/icons";
 import { routes } from "@/data/route";
 import { Stats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { CardInfoProps } from "@/components/shared/pages/resources/card";
+import { ResourcePreviewCardInfoProps } from "@/types/type";
 
-export function CardInfo({ details }: CardInfoProps) {
+export function CardInfo({ details }: ResourcePreviewCardInfoProps) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">

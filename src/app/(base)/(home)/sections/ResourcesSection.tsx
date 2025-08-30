@@ -1,15 +1,22 @@
 import React from "react";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import {
-  Resource,
-  ResourceCard,
-} from "@/components/shared/pages/resources/card";
-import resourcesData from "@/data/personal/resources.json";
+import { ResourceCard } from "@/components/shared/pages/resources/card";
+import { ResourcePreview } from "@/types/type";
+import { getJsonDataCached } from "@/lib/get-json-data";
+import { ResourcesPreviewSectionProps } from "@/types/type";
 
-const data = resourcesData as Resource[];
+const config: ResourcesPreviewSectionProps = {
+  limit: 4,
+};
 
 export function ResourcesSection() {
+  const { limit } = config;
+  const resourceData = getJsonDataCached(
+    "resources",
+    "personal"
+  ) as ResourcePreview[];
+
   return (
     <SectionLayout
       title="Ressources"
@@ -17,9 +24,10 @@ export function ResourcesSection() {
       link={routes.projects.link}
       badge="Hub 🫶"
     >
-      {data.map((resource) => (
-        <ResourceCard key={resource.id} details={resource} />
-      ))}
+      {resourceData.map((resource, index) => {
+        if (limit !== undefined && index >= limit) return null;
+        return <ResourceCard key={resource.id} details={resource} />;
+      })}
     </SectionLayout>
   );
 }

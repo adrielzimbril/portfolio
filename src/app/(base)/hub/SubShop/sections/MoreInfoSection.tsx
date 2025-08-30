@@ -1,30 +1,10 @@
 import React from "react";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import projectData from "@/data/personal/projects.json";
+import { ProjectPreview, ProjectsPreviewSectionProps } from "@/types/type";
+import { getJsonDataCached } from "@/lib/get-json-data";
 
-interface ProjectsSectionProps {
-  /**
-   * Number of cards to display in wide format on desktop
-   * The others will be in vertical format (preview on top, info on bottom)
-   * @default 0 - All cards in vertical format
-   */
-  wideCardsCount: number;
-
-  /**
-   * Force all cards to be wide on desktop
-   * @default false
-   */
-  allWide?: boolean;
-
-  /**
-   * Number of cards to display
-   * @default 0 - All cards
-   */
-  limit?: number;
-}
-
-const config: ProjectsSectionProps = {
+const config: ProjectsPreviewSectionProps = {
   allWide: false,
   wideCardsCount: 0,
   limit: 2,
@@ -32,11 +12,16 @@ const config: ProjectsSectionProps = {
 
 export function MoreInfoSection() {
   const { allWide, wideCardsCount, limit } = config;
+  const projectData = getJsonDataCached(
+    "projects",
+    "personal"
+  ) as ProjectPreview[];
   return (
     <SectionLayout title="Autres ressources." layoutStart>
       {projectData.map((project, index) => {
-        if (limit && index >= limit) return null;
-        const isWide = allWide || index < wideCardsCount;
+        if (limit && index >= limit!) return null;
+        const isWide =
+          allWide || (wideCardsCount !== undefined && index < wideCardsCount!);
 
         return (
           <ProjectCard key={project.id} details={project} isWide={isWide} />

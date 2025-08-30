@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { CardInfoProps } from "@/components/shared/pages/resources/page/card";
+import { ResourceInnerStatementPreviewCardInfoProps } from "@/types/type";
 
-export function CardPreview({ details }: CardInfoProps) {
+export function CardPreview({
+  details,
+}: ResourceInnerStatementPreviewCardInfoProps) {
   return (
     <div
       className={cn(

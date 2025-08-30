@@ -91,5 +91,284 @@
     ],
     "userCount": "+2468 étudiants",
     "buttonText": "Regarder"
+  },
+  {
+    "id": 4,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 5,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 6,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 7,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 8,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 9,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 10,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 11,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
+  },
+  {
+    "id": 12,
+    "title": "Project title",
+    "type": "video",
+    "icon": "/bold-duotone---video--audio--sound---clapperboard-play.png",
+    "iconAlt": "Bold duotone video",
+    "primaryTag": "Masterclass 🎬",
+    "tags": ["SaaS", "Design", "Conseils"],
+    "description": "You can add what outcomes has this project brought after your design! For example",
+    "details": "🕓 Time: 7-30 Days\n⚡ Level: from 0 to PRO\n🎁 Figma files, extra lessons, certificate, community…",
+    "avatars": [
+      {
+        "src": ".//content-8.png",
+        "bg": "bg-avatar-user-squarecohen-lozano-color-background"
+      },
+      {
+        "src": ".//content-9.png",
+        "bg": "bg-avatar-user-squareashton-blackwell-color-background"
+      },
+      {
+        "src": ".//content-10.png",
+        "bg": "bg-avatar-user-squareowen-garcia-color-background"
+      },
+      {
+        "src": ".//content-11.png",
+        "bg": "bg-avatar-user-squareisla-allison-color-background"
+      }
+    ],
+    "userCount": "+2468 étudiants",
+    "buttonText": "Regarder"
   }
 ]

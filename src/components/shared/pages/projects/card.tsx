@@ -2,25 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
 import { cn } from "@/lib/utils";
+import { ProjectPreviewCardInfoProps } from "@/types/type";
 
-export interface Project {
-  id: string | number;
-  title: string;
-  description: string;
-  tags: string[];
-  categories: {
-    name: string;
-    color: number;
-  }[];
-  buttonText: string;
-}
-
-export interface CardInfoProps {
-  details: Project;
-  isWide?: boolean;
-}
-
-export function ProjectCard({ details, isWide }: CardInfoProps) {
+export function ProjectCard({ details, isWide }: ProjectPreviewCardInfoProps) {
   return (
     <Card
       className={cn(

@@ -4,10 +4,7 @@ export function QuoteSection() {
   const { quoteSection } = siteConfig;
 
   return (
-    <section
-      id="quote"
-      className="flex flex-col items-center justify-center gap-8 w-full p-14 bg-accent z-20"
-    >
+    <section className="flex flex-col items-center justify-center border-y- dborder-border border-dashed py-10 w-full p-14 z-20">
       <blockquote className="max-w-3xl text-left px-4">
         <p className="text-xl md:text-2xl text-primary leading-relaxed tracking-tighter font-medium mb-6">
           {quoteSection.quote}

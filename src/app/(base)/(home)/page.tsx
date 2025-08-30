@@ -5,6 +5,7 @@ import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
 import { QuoteSection } from "./sections/QuoteSection";
 
+
 export default function Home() {
   return (
     <>
