@@ -2,9 +2,9 @@ import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { routes } from "@/data/route";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { CardInfoProps } from "@/components/shared/pages/thoughts/card";
+import { ThoughtPreviewCardInfoProps } from "@/types";
 
-export function CardInfo({ details }: CardInfoProps) {
+export function CardInfo({ details }: ThoughtPreviewCardInfoProps) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">

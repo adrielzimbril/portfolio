@@ -68,6 +68,10 @@ const serverJsonCache = new Map<string, JsonData<unknown>>();
  * @param subfolder - Optional: The subfolder where the file is located
  *
  * @template T - The type of the data
+ *
+ * @example
+ * const data = getJsonDataCached("projects", "personal");
+ * // returns the cached data if available, otherwise loads from disk
  */
 export function getJsonDataCached<T>(
   fileName: string,
@@ -91,6 +95,10 @@ export function getJsonDataCached<T>(
  *
  * @param subfolder - Optional: The subfolder to scan
  * @returns Array of available JSON file names (without .json extension)
+ *
+ * @example
+ * const files = getAvailableJsonFiles("personal");
+ * // returns ["projects", "skills"]
  */
 export function getAvailableJsonFiles(subfolder?: string): string[] {
   try {
@@ -117,6 +125,10 @@ export function getAvailableJsonFiles(subfolder?: string): string[] {
  * SERVER-ONLY: Preload multiple JSON files into cache
  *
  * @param files - Array of objects with fileName and optional subfolder
+ *
+ * @example
+ * preloadJsonFiles([{ fileName: "projects", subfolder: "personal" }]);
+ * // preloads the projects.json file from the personal subfolder
  */
 export function preloadJsonFiles(
   files: Array<{ fileName: string; subfolder?: string }>
@@ -132,15 +144,13 @@ export function preloadJsonFiles(
 }
 
 /**
- * SERVER-ONLY: Clear the cache
- */
-export function clearServerJsonCache(): void {
-  serverJsonCache.clear();
-  console.log("Server JSON cache cleared");
-}
-
-/**
  * SERVER-ONLY: Get cache statistics
+ *
+ * @returns Object containing the size of the cache and an array of cache keys
+ *
+ * @example
+ * const stats = getCacheStats();
+ * // returns { size: 10, keys: ["projects", "skills"] }
  */
 export function getCacheStats(): {
   size: number;
@@ -150,4 +160,16 @@ export function getCacheStats(): {
     size: serverJsonCache.size,
     keys: Array.from(serverJsonCache.keys()),
   };
+}
+
+/**
+ * SERVER-ONLY: Clear the cache
+ *
+ * @example
+ * clearServerJsonCache();
+ * // clears the server JSON cache
+ */
+export function clearServerJsonCache(): void {
+  serverJsonCache.clear();
+  console.log("Server JSON cache cleared");
 }

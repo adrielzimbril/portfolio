@@ -79,6 +79,20 @@ export interface ProjectsPreviewSectionProps {
   limit?: number;
 }
 
+export interface ThoughtPreview {
+  id: string | number;
+  date: string;
+  primaryTag: string;
+  tags: string[];
+  title: string;
+  description: string;
+  buttonText: string;
+}
+
+export interface ThoughtPreviewCardInfoProps {
+  details: ThoughtPreview;
+}
+
 export interface ResourcesPreviewSectionProps {
   /**
    * Number of cards to display

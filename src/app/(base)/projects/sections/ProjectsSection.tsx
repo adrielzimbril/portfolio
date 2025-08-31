@@ -6,32 +6,25 @@ import { getJsonDataCached } from "@/utils/get-json-data";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { LoadMore } from "@/components/shared/pages/shared/load-more";
 
 const config: ProjectsPreviewSectionProps = {
   allWide: false,
   wideCardsCount: 1,
-  limit: 4,
 };
 
 export function ProjectsSection() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [dataSource, setDataSource] = useState<ProjectPreview[]>([]);
 
   useEffect(() => {
     const loadInitialData = async () => {
-      try {
-        const data = (await getJsonDataCached("projects", "personal", {
-          mode: "client",
-        })) as ProjectPreview[];
-        setDataSource(data);
-        setError(null);
-      } catch (err) {
-        console.error("Error loading initial data:", err);
-        setError("Failed to load projects");
-      } finally {
-        setIsInitialLoading(false);
-      }
+      const data = (await getJsonDataCached(
+        "projects",
+        "personal"
+      )) as ProjectPreview[];
+      setDataSource(data);
+      setIsInitialLoading(false);
     };
 
     loadInitialData();
@@ -43,26 +36,21 @@ export function ProjectsSection() {
   const { allWide, wideCardsCount, limit } = config;
 
   return (
-    <SectionLayout className="p-0">
+    <LoadMore
+      hasMore={hasMore}
+      loading={loading}
+      onLoadMore={loadMore}
+      loadedItems={loadedItems}
+      totalItems={totalItems}
+    >
       {data.map((project, index) => {
         if (limit && index >= limit) return null;
         const isWide =
           allWide || (wideCardsCount !== undefined && index < wideCardsCount!);
-
         return (
           <ProjectCard key={project.id} details={project} isWide={isWide} />
         );
       })}
-
-      {hasMore && (
-        <Button onClick={loadMore} disabled={loading}>
-          {loading ? "Loading..." : "Load More"}
-        </Button>
-      )}
-
-      <p>
-        Showing {loadedItems} of {totalItems} projects
-      </p>
-    </SectionLayout>
+    </LoadMore>
   );
 }
