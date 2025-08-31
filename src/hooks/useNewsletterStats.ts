@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from "@/lib/supabase";
-
+import logger from "@/utils/logger";
 export const useNewsletterStats = () => {
   const [readerCount, setReaderCount] = useState(90000) // Valeur par défaut
   const [isLoading, setIsLoading] = useState(true)
@@ -15,7 +15,7 @@ export const useNewsletterStats = () => {
           .single()
 
         if (error && error.code !== 'PGRST116') {
-          console.error('Erreur lors de la récupération des stats:', error)
+          logger.error("Erreur lors de la récupération des stats:", error);
           return
         }
 
@@ -23,7 +23,7 @@ export const useNewsletterStats = () => {
           setReaderCount(data.total_readers)
         }
       } catch (error) {
-        console.error('Erreur lors de la récupération des stats:', error)
+        logger.error("Erreur lors de la récupération des stats:", error);
       } finally {
         setIsLoading(false)
       }

@@ -7,10 +7,11 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { routes } from "@/data/route";
+import logger from "@/utils/logger";
 
 function EmailForm() {
   const handleSubmit = () => {
-    console.log(email);
+    logger.info(email);
     // Check if email syntax is correct
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {

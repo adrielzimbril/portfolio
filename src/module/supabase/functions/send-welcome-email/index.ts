@@ -1,15 +1,16 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import logger from "@/utils/logger";
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
-}
+};
 
 interface EmailRequest {
-  nom: string
-  numero: string
-  email?: string
+  nom: string;
+  numero: string;
+  email?: string;
 }
 
 serve(async (req: Request) => {
@@ -18,14 +19,14 @@ serve(async (req: Request) => {
     return new Response(null, {
       status: 200,
       headers: corsHeaders,
-    })
+    });
   }
 
   try {
-    const { nom, numero, email }: EmailRequest = await req.json()
+    const { nom, numero, email }: EmailRequest = await req.json();
 
     // Simuler l'envoi d'email (remplacez par votre service d'email préféré)
-    console.log("Envoi d'email de bienvenue à:", { nom, numero, email })
+    logger.info("Envoi d'email de bienvenue à:", { nom, numero, email });
 
     // Ici vous pouvez intégrer avec:
     // - SendGrid
@@ -64,18 +65,18 @@ serve(async (req: Request) => {
             L'équipe Adriel ZIMBRIL
           </p>
         </div>
-      `
-    }
+      `,
+    };
 
     // Log pour le développement
-    console.log("Email préparé:", emailData)
+    logger.info("Email préparé:", emailData);
 
     // Retourner une réponse de succès
     return new Response(
-      JSON.stringify({ 
-        success: true, 
+      JSON.stringify({
+        success: true,
         message: "Email envoyé avec succès",
-        recipient: nom 
+        recipient: nom,
       }),
       {
         status: 200,
@@ -84,15 +85,14 @@ serve(async (req: Request) => {
           "Content-Type": "application/json",
         },
       }
-    )
-
+    );
   } catch (error) {
-    console.error("Erreur lors de l'envoi de l'email:", error)
-    
+    logger.error("Erreur lors de l'envoi de l'email:", error);
+
     return new Response(
-      JSON.stringify({ 
-        success: false, 
-        error: "Erreur lors de l'envoi de l'email" 
+      JSON.stringify({
+        success: false,
+        error: "Erreur lors de l'envoi de l'email",
       }),
       {
         status: 500,
@@ -101,6 +101,6 @@ serve(async (req: Request) => {
           "Content-Type": "application/json",
         },
       }
-    )
+    );
   }
-})
+});

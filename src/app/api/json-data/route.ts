@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { catchError, createError, getJsonDataCached } from "@/utils";
 import { getJsonDataCached as getJsonDataServer } from "@/utils/get-json-data/server";
+import logger from "@/utils/logger";
 
 export async function GET(request: NextRequest) {
   try {
@@ -35,7 +36,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error reading JSON file:", error);
+    logger.error("Error reading JSON file:", error);
 
     const errorResponse = createError("INTERNAL_SERVER_ERROR", {
       statusCode: 500,

@@ -1,9 +1,9 @@
 "use client";
+import { useCallback, useEffect, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { useEventCallback } from "@/hooks/useEventCallback";
 import { useEventListener } from "@/hooks/useEventListener";
-import { useCallback, useEffect, useState } from "react";
-
-import type { Dispatch, SetStateAction } from "react";
+import logger from "@/utils/logger";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -68,7 +68,7 @@ export function useSessionStorage<T>(
       try {
         parsed = JSON.parse(value);
       } catch (error) {
-        console.error("Error parsing JSON:", error);
+        logger.error("Error parsing JSON:", error);
         return defaultValue; // Return initialValue if parsing fails
       }
 
@@ -92,7 +92,7 @@ export function useSessionStorage<T>(
       const raw = window.sessionStorage.getItem(key);
       return raw ? deserializer(raw) : initialValueToUse;
     } catch (error) {
-      console.warn(`Error reading sessionStorage key “${key}”:`, error);
+      logger.warn(`Error reading sessionStorage key “${key}”:`, error);
       return initialValueToUse;
     }
   }, [initialValue, key, deserializer]);
@@ -110,7 +110,7 @@ export function useSessionStorage<T>(
   const setValue: Dispatch<SetStateAction<T>> = useEventCallback((value) => {
     // Prevent build error "window is undefined" but keeps working
     if (IS_SERVER) {
-      console.warn(
+      logger.warn(
         `Tried setting sessionStorage key “${key}” even though environment is not a client`
       );
     }
@@ -128,14 +128,14 @@ export function useSessionStorage<T>(
       // We dispatch a custom event so every similar useSessionStorage hook is notified
       window.dispatchEvent(new StorageEvent("session-storage", { key }));
     } catch (error) {
-      console.warn(`Error setting sessionStorage key “${key}”:`, error);
+      logger.warn(`Error setting sessionStorage key “${key}”:`, error);
     }
   });
 
   const removeValue = useEventCallback(() => {
     // Prevent build error "window is undefined" but keeps working
     if (IS_SERVER) {
-      console.warn(
+      logger.warn(
         `Tried removing sessionStorage key “${key}” even though environment is not a client`
       );
     }

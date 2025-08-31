@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/data/config";
+import logger from "@/utils/logger";
 
 // Configuration exports
 export const runtime = "edge";
@@ -42,10 +43,10 @@ export default async function Image() {
           />
         </div>
       ),
-      { ...size },
+      { ...size }
     );
   } catch (error) {
-    console.error("Error generating OpenGraph image:", error);
+    logger.error("Error generating OpenGraph image:", error);
     return new Response(`Failed to generate image`, { status: 500 });
   }
 }

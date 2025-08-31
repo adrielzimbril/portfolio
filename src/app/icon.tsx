@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { headers } from "next/headers";
 import { siteConfig } from "@/data/config";
+import logger from "@/utils/logger";
 
 // Configuration exports
 export const alt = siteConfig.details.nameShared;
@@ -52,7 +53,7 @@ export default async function Icon() {
       }
     );
   } catch (error) {
-    console.error("Error generating OpenGraph image:", error);
+    logger.error("Error generating OpenGraph image:", error);
     return new Response(`Failed to generate image`, { status: 500 });
   }
 }

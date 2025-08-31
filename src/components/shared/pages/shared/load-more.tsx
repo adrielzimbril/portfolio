@@ -1,7 +1,10 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
+import { useLoadMore } from "@/hooks/useLoadMore";
+import { getJsonDataCached } from "@/utils";
+import { ThoughtPreview, ResourcePreview, ProjectPreview } from "@/types";
 
 interface LoadMoreProps {
   children: ReactNode;
@@ -10,13 +13,21 @@ interface LoadMoreProps {
   onLoadMore: () => void;
   loadedItems: number;
   totalItems: number;
-
-  // Optional Props for customization
-  containerClassName?: string;
+  incrementCount?: number;
   showCounter?: boolean;
 }
 
-export function LoadingSpinner() {
+type PreviewItem = ThoughtPreview | ResourcePreview | ProjectPreview;
+interface LoadMoreListProps {
+  dataPath: string;
+  subPath: string;
+  renderItem: (item: PreviewItem, index: number) => ReactNode;
+  initialCount?: number;
+  incrementCount?: number;
+  showCounter?: boolean;
+}
+
+function LoadingSpinner() {
   return (
     <div className="relative w-5 h-5">
       <div className="absolute inset-0 rounded-full border-2 border-zinc-200" />
@@ -25,7 +36,42 @@ export function LoadingSpinner() {
   );
 }
 
-export function LoadMore({
+function useLoadMoreData<T>({
+  dataPath,
+  subPath,
+  initialCount = 3,
+  incrementCount = 3,
+}: {
+  dataPath: string;
+  subPath: string;
+  initialCount?: number;
+  incrementCount?: number;
+}) {
+  const [dataSource, setDataSource] = useState<T[]>([]);
+
+  useEffect(() => {
+    const loadInitialData = async () => {
+      const data = (await getJsonDataCached(dataPath, subPath)) as T[];
+      setDataSource(data);
+    };
+
+    loadInitialData();
+  }, [dataPath, subPath]);
+
+  const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
+    useLoadMore({ dataSource, initialCount, incrementCount });
+
+  return {
+    data,
+    loadMore,
+    loading,
+    hasMore,
+    loadedItems,
+    totalItems,
+  };
+}
+
+function LoadMoreContainer({
   children,
   hasMore,
   loading,
@@ -75,5 +121,35 @@ export function LoadMore({
         )}
       </div>
     </SectionLayout>
+  );
+}
+
+export function LoadMore({
+  dataPath,
+  subPath,
+  renderItem,
+  initialCount = 4,
+  incrementCount = 4,
+  ...loadMoreProps
+}: LoadMoreListProps) {
+  const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
+    useLoadMoreData<PreviewItem>({
+      dataPath,
+      subPath,
+      initialCount,
+      incrementCount,
+    });
+
+  return (
+    <LoadMoreContainer
+      hasMore={hasMore}
+      loading={loading}
+      onLoadMore={loadMore}
+      loadedItems={loadedItems}
+      totalItems={totalItems}
+      {...loadMoreProps}
+    >
+      {data.map(renderItem)}
+    </LoadMoreContainer>
   );
 }

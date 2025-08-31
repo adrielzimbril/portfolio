@@ -10,19 +10,19 @@ import {
  *
  * @example
  * const color = pickRandomColor();
- * console.log(color); // Output: random color
+ * logger.info(color); // Output: random color
  *
  * @example
  * const color = pickRandomColor("BLUE");
- * console.log(color); // Output: squircle-[#ade9ff]
+ * logger.info(color); // Output: squircle-[#ade9ff]
  *
  * @example
  * const color = pickRandomColor(0);
- * console.log(color); // Output: squircle-[#ade9ff]
+ * logger.info(color); // Output: squircle-[#ade9ff]
  *
  * @example
  * const color = pickRandomColor("WHITE_GOLD");
- * console.log(color); // Output: squircle-[#f9f9f9]
+ * logger.info(color); // Output: squircle-[#f9f9f9]
  */
 function pickRandomColor(
   id?: DEFAULT_CATEGORY_COLOR_NAME | number
@@ -56,7 +56,7 @@ function pickRandomColor(
  *
  * @example
  * const colorName = pickRandomColorName();
- * console.log(colorName); // Output: random color name (e.g. BLUE)
+ * logger.info(colorName); // Output: random color name (e.g. BLUE)
  */
 function pickRandomColorName(): DEFAULT_CATEGORY_COLOR_NAME {
   const colors = Object.keys(DEFAULT_TAG_COLOR);
@@ -72,7 +72,7 @@ function pickRandomColorName(): DEFAULT_CATEGORY_COLOR_NAME {
  *
  * @example
  * const colorIndex = getColorIndex("BLUE");
- * console.log(colorIndex); // Output: 0
+ * logger.info(colorIndex); // Output: 0
  */
 function getColorIndex(colorName: DEFAULT_CATEGORY_COLOR_NAME): number {
   return Object.keys(DEFAULT_TAG_COLOR).indexOf(colorName);
@@ -86,19 +86,19 @@ function getColorIndex(colorName: DEFAULT_CATEGORY_COLOR_NAME): number {
  *
  * @example
  * const isValid = isValidColorName("BLUE");
- * console.log(isValid); // Output: true
+ * logger.info(isValid); // Output: true
  *
  * @example
  * const isValid = isValidColorName("INVALID");
- * console.log(isValid); // Output: false
+ * logger.info(isValid); // Output: false
  *
  * @example
  * const isValid = isValidColorName(0);
- * console.log(isValid); // Output: true
+ * logger.info(isValid); // Output: true
  *
  * @example
  * const isValid = isValidColorName(100);
- * console.log(isValid); // Output: false
+ * logger.info(isValid); // Output: false
  */
 function isValidColorName(id: DEFAULT_CATEGORY_COLOR_NAME | number): boolean {
   return (
@@ -116,7 +116,7 @@ function isValidColorName(id: DEFAULT_CATEGORY_COLOR_NAME | number): boolean {
  *
  * @example
  * const colorCount = getColorCount();
- * console.log(colorCount); // Output: number of available colors
+ * logger.info(colorCount); // Output: number of available colors
  */
 function getColorCount(): number {
   return Object.values(DEFAULT_TAG_COLOR).length;

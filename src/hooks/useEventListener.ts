@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
 import type { RefObject } from "react";
-
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayout";
 
 /**
@@ -15,7 +14,7 @@ import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayout";
  * @returns {void}
  *
  * @example
- * useEventListener("resize", () => { console.log("resize"); });
+ * useEventListener("resize", () => { logger.info("resize"); });
  * // Listen to window resize event
  */
 function useEventListener<K extends keyof MediaQueryListEventMap>(

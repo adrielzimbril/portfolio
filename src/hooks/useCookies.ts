@@ -122,7 +122,7 @@ function deleteCookie(name: string, options: CookieOptions = {}): void {
  *   });
  *
  * // Get the cookie
- * console.log(consentCookieValue);
+ * logger.info(consentCookieValue);
  *
  * // Update the cookie
  * setConsentCookieValue({ accepted: true });

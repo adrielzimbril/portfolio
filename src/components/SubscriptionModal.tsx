@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
+import logger from "@/utils/logger";
 
 const formSchema = z.object({
   nom: z.string().min(2, {
@@ -113,7 +114,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       })
 
       if (emailError) {
-        console.warn('Erreur lors de l\'envoi de l\'email:', emailError)
+        logger.warn("Erreur lors de l'envoi de l'email:", emailError);
         // Ne pas bloquer le processus si l'email échoue
       }
 
@@ -127,7 +128,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       }, 2000)
 
     } catch (error) {
-      console.error('Erreur lors de l\'inscription:', error)
+      logger.error("Erreur lors de l'inscription:", error);
       alert('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.')
     } finally {
       setIsSubmitting(false)

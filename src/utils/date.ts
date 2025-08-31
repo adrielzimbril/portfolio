@@ -6,7 +6,7 @@
  *
  * @example
  * const date = formatDate("2023-01-01");
- * console.log(date); // Output: Today
+ * logger.info(date); // Output: Today
  */
 export function formatDate(date: string): string {
   const currentDate = new Date().getTime();

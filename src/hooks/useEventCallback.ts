@@ -24,7 +24,7 @@ export function useEventCallback<Args extends unknown[], R>(
  *
  * @example
  * const handleClick = useEventCallback((event) => {
- *   console.log(event);
+ *   logger.info(event);
  * });
  */
 export function useEventCallback<Args extends unknown[], R>(

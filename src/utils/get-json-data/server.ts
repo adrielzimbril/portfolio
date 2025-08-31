@@ -1,6 +1,7 @@
 import { readFileSync, existsSync, readdirSync } from "fs";
 import { join } from "path";
 import { JsonData } from "@/types/type";
+import logger from "@/utils/logger";
 
 /**
  * SERVER-ONLY: Reads a JSON file from the filesystem
@@ -26,7 +27,7 @@ export function getJsonData<T>(
     // Complete file path
     const filePath = join(process.cwd(), basePath, `${fileName}.json`);
 
-    console.log(
+    logger.debug(
       "Looking for file:",
       `${fileName}.json`,
       "in folder:",
@@ -80,11 +81,11 @@ export function getJsonDataCached<T>(
   const cacheKey = subfolder ? `${subfolder}/${fileName}` : fileName;
 
   if (serverJsonCache.has(cacheKey)) {
-    console.log(`Cache hit for: ${cacheKey}`);
+    logger.debug(`Cache hit for: ${cacheKey}`);
     return serverJsonCache.get(cacheKey) as JsonData<T>;
   }
 
-  console.log(`Cache miss for: ${cacheKey}, loading from disk`);
+  logger.debug(`Cache miss for: ${cacheKey}, loading from disk`);
   const data = getJsonData<T>(fileName, subfolder);
   serverJsonCache.set(cacheKey, data);
   return data;
@@ -107,6 +108,7 @@ export function getAvailableJsonFiles(subfolder?: string): string[] {
     const fullPath = join(process.cwd(), basePath);
 
     if (!existsSync(fullPath)) {
+      logger.error(`Directory ${fullPath} does not exist`);
       return [];
     }
 
@@ -116,7 +118,7 @@ export function getAvailableJsonFiles(subfolder?: string): string[] {
       .filter((file: string) => file.endsWith(".json"))
       .map((file: string) => file.replace(".json", ""));
   } catch (error) {
-    console.error("Error reading directory:", error);
+    logger.error("Error reading directory:", error);
     return [];
   }
 }
@@ -136,9 +138,9 @@ export function preloadJsonFiles(
   files.forEach(({ fileName, subfolder }) => {
     try {
       getJsonDataCached(fileName, subfolder);
-      console.log(`Preloaded: ${subfolder ? `${subfolder}/` : ""}${fileName}`);
+      logger.debug(`Preloaded: ${subfolder ? `${subfolder}/` : ""}${fileName}`);
     } catch (error) {
-      console.error(`Failed to preload ${fileName}:`, error);
+      logger.error(`Failed to preload ${fileName}:`, error);
     }
   });
 }
@@ -171,5 +173,5 @@ export function getCacheStats(): {
  */
 export function clearServerJsonCache(): void {
   serverJsonCache.clear();
-  console.log("Server JSON cache cleared");
+  logger.debug("Server JSON cache cleared");
 }
