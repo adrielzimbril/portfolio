@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 const metricsData = [
   {

@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useNewsletterStats } from "@/hooks/useNewsletterStats";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";

@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Calendar, Eye, HourglassFill } from "@aurthle/icons";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { PreviewContentType } from "@/types";
 import {
   HeaderPreviewCard,

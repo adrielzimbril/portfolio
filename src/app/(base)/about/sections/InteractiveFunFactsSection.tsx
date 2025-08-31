@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import Image from "next/image";
 import { toast } from "sonner";
 import { SectionLayout } from "@/components/shared/sections/layout";

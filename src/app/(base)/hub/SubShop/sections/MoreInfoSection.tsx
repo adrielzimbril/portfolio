@@ -1,8 +1,7 @@
-import React from "react";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectPreview, ProjectsPreviewSectionProps } from "@/types/type";
-import { getJsonDataCached } from "@/lib/get-json-data";
+import { getJsonDataCached } from "@/utils/get-json-data";
 
 const config: ProjectsPreviewSectionProps = {
   allWide: false,
@@ -10,12 +9,13 @@ const config: ProjectsPreviewSectionProps = {
   limit: 2,
 };
 
-export function MoreInfoSection() {
+export async function MoreInfoSection() {
   const { allWide, wideCardsCount, limit } = config;
-  const projectData = getJsonDataCached(
+  const projectData = (await getJsonDataCached(
     "projects",
     "personal"
-  ) as ProjectPreview[];
+  )) as ProjectPreview[];
+
   return (
     <SectionLayout title="Autres ressources." layoutStart>
       {projectData.map((project, index) => {

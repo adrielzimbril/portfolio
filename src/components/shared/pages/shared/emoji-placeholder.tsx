@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
 

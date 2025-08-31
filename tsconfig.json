@@ -28,7 +28,8 @@
       "@ui/*": ["./src/components/ui/*"],
       "@shiro/*": ["./src/components/shiro/*"],
       "@i18n/*": ["./src/module/i18n/*"],
-      "@types/*": ["./src/types/*"]
+      "@types/*": ["./src/types/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

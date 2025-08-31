@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { ProjectPreviewCardInfoProps } from "@/types/type";
 
 export function ProjectCard({ details, isWide }: ProjectPreviewCardInfoProps) {

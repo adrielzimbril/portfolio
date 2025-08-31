@@ -1,21 +1,20 @@
-import React from "react";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { ResourcePreview } from "@/types/type";
-import { getJsonDataCached } from "@/lib/get-json-data";
+import { getJsonDataCached } from "@/utils/get-json-data";
 import { ResourcesPreviewSectionProps } from "@/types/type";
 
 const config: ResourcesPreviewSectionProps = {
   limit: 4,
 };
 
-export function ResourcesSection() {
+export async function ResourcesSection() {
   const { limit } = config;
-  const resourceData = getJsonDataCached(
+  const resourceData = (await getJsonDataCached(
     "resources",
     "personal"
-  ) as ResourcePreview[];
+  )) as ResourcePreview[];
 
   return (
     <SectionLayout

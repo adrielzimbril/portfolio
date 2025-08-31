@@ -9,7 +9,7 @@ import {
   type Transition,
 } from "motion/react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 type Side = "top" | "bottom" | "left" | "right";
 

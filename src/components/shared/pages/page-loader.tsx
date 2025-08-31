@@ -2,7 +2,7 @@
 import React from "react";
 import svgPaths from "./svg-bgtumon3tx";
 import imgIcon from "./576887334bdcab59385ed7ed507c00d867dd7f03.png";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";

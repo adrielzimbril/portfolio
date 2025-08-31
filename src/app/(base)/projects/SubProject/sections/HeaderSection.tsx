@@ -2,36 +2,37 @@ import React from "react";
 import { routes } from "@/data/route";
 import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section";
 import { DEFAULT_TAG_COLOR } from "@/types/default";
+import { PreviewContentType } from "@/types/enum";
 
 const tags = [
   {
     text: "SaaS 🦄",
-      bgColor: DEFAULT_TAG_COLOR.GREEN,
-    },
-    {
-      text: "Go To Market 🎯",
-      bgColor: DEFAULT_TAG_COLOR.YELLOW,
-    },
-    {
-      text: "Web Application 📝",
-      bgColor: DEFAULT_TAG_COLOR.BLUE,
-    },
-    {
-      text: "Design 🎨",
-      bgColor: DEFAULT_TAG_COLOR.WHITE_GOLD,
-    },
-    {
-      text: "Mobile App 📱",
-      bgColor: DEFAULT_TAG_COLOR.PURPLE,
-    },
-  ];
+    bgColor: DEFAULT_TAG_COLOR.GREEN,
+  },
+  {
+    text: "Go To Market 🎯",
+    bgColor: DEFAULT_TAG_COLOR.YELLOW,
+  },
+  {
+    text: "Web Application 📝",
+    bgColor: DEFAULT_TAG_COLOR.BLUE,
+  },
+  {
+    text: "Design 🎨",
+    bgColor: DEFAULT_TAG_COLOR.WHITE_GOLD,
+  },
+  {
+    text: "Mobile App 📱",
+    bgColor: DEFAULT_TAG_COLOR.PURPLE,
+  },
+];
 
 export function HeaderSection() {
   return (
     <ResourceHeaderSection
       sectionClassName="md:w-[90%] mx-auto"
       previewContent={{
-        type: "text",
+        type: PreviewContentType.TEXT,
         emoji: "🛍️🛒",
         title: "E-commerce",
         subtitle:

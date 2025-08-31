@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { pickRandomColor } from "@/lib/pick-random-color";
-import { cn } from "@/lib/utils";
+import { pickRandomColor } from "@/utils/pick-random-color";
+import { cn } from "@/utils/utils";
 
 function ProjectTags({ tags }: { tags: string[] }) {
   return (

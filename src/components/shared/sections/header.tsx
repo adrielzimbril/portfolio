@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/components/ui/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { ArrowRightOne } from "@aurthle/icons";
 
 export function SectionHeader({

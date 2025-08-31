@@ -1,7 +1,7 @@
 import React from "react";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 function ContentSection() {
   return (

@@ -1,4 +1,14 @@
-export function formatDate(date: string) {
+/**
+ * Formats a date string to a relative time
+ *
+ * @param date - The date string to format
+ * @returns A relative time string
+ *
+ * @example
+ * const date = formatDate("2023-01-01");
+ * console.log(date); // Output: Today
+ */
+export function formatDate(date: string): string {
   const currentDate = new Date().getTime();
   if (!date.includes("T")) {
     date = `${date}T00:00:00`;

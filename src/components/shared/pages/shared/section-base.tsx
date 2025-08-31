@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 export function SectionBase({
   children,

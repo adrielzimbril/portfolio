@@ -5,7 +5,7 @@ import {
   ProjectCategories,
   ProjectTags,
 } from "@/components/shared/pages/projects/tags";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { ProjectPreviewCardInfoProps } from "@/types/type";
 
 export function CardInfo({ details, isWide }: ProjectPreviewCardInfoProps) {

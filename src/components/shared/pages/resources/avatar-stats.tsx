@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 interface StatsProps {
   avatars: Array<{ bg: string }>;

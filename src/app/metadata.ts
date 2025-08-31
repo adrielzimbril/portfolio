@@ -1,6 +1,15 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/data/config";
 
+export interface innerPageSeo {
+  title: string;
+  description: string;
+  keywords: string[];
+  alternates: {
+    canonical: string;
+  };
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {

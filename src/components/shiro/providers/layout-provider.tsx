@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
+import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayout";
+import { sleep } from "@/utils";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -11,6 +13,10 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
       setIsLoaded(true);
     }, 5000);
   }, [isLoaded]);
+
+  // useEffect(() => {
+  //   sleep(5000).then(() => setIsLoaded(true));
+  // }, []);
 
   return (
     <>

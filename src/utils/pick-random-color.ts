@@ -52,6 +52,8 @@ function pickRandomColor(
 /**
  * Returns a random color name
  *
+ * @returns A random color name from the enum DEFAULT_TAG_COLOR
+ *
  * @example
  * const colorName = pickRandomColorName();
  * console.log(colorName); // Output: random color name (e.g. BLUE)
@@ -65,6 +67,9 @@ function pickRandomColorName(): DEFAULT_CATEGORY_COLOR_NAME {
 /**
  * Returns the index of a color name
  *
+ * @param colorName - The color name to get the index of
+ * @returns The index of the color name
+ *
  * @example
  * const colorIndex = getColorIndex("BLUE");
  * console.log(colorIndex); // Output: 0
@@ -75,6 +80,9 @@ function getColorIndex(colorName: DEFAULT_CATEGORY_COLOR_NAME): number {
 
 /**
  * Checks if a color name or numeric index is valid
+ *
+ * @param id - The color name or numeric index to check
+ * @returns Whether the color name or numeric index is valid
  *
  * @example
  * const isValid = isValidColorName("BLUE");
@@ -103,6 +111,8 @@ function isValidColorName(id: DEFAULT_CATEGORY_COLOR_NAME | number): boolean {
 
 /**
  * Returns the number of available colors
+ *
+ * @returns The number of available colors
  *
  * @example
  * const colorCount = getColorCount();

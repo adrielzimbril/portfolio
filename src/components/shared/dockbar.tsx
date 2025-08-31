@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/tooltip";
 import { siteConfig } from "@/data/config";
 import { Link } from "@/components/ui/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 export function Dockbar({ asFade }: { asFade?: boolean }) {
   return (

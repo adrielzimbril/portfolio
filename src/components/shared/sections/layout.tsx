@@ -1,5 +1,5 @@
 import { SectionHeader } from "@/components/shared/sections/header";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 export function SectionLayout({
   title,

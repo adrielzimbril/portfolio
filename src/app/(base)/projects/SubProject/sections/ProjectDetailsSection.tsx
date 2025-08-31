@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { pickRandomColor } from "@/lib/pick-random-color";
+import { pickRandomColor } from "@/utils/pick-random-color";
 import { FormattedText } from "@/components/shared/formatted-text";
 import { Card, CardContent } from "@/components/ui/card";
 

@@ -5,7 +5,7 @@ import { NavMenu } from "@/components/shared/nav-menu";
 import { Header as NavMenuSec } from "@/components/shared/navbarsec";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { siteConfig } from "@/data/config";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useScroll } from "motion/react";
 import { useEffect, useState } from "react";

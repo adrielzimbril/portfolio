@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 

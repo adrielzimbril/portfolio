@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import svgPaths from "../loading-1/svg-bgtumon3tx";
 import imgIcon from "../loading-1/576887334bdcab59385ed7ed507c00d867dd7f03.png";
 import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";

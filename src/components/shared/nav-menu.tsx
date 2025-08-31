@@ -1,7 +1,7 @@
 "use client";
 
 import { routes } from "@/data/route";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";

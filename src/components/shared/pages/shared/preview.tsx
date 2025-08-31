@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types/enum";
 
 interface PreviewProps {

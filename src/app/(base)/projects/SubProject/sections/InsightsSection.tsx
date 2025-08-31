@@ -1,6 +1,4 @@
 import React from "react";
-import { HorizontalScrollCarousel } from "./horizontal-scroll-carousel";
-import SmoothScroll from "./horizontal-scroll-carousel copy";
 import { SectionLayout } from "@/components/shared/sections/layout";
 
 export function InsightsSection() {

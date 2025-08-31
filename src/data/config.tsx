@@ -1,5 +1,5 @@
 import { Icons } from "@/components/shared/icons";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import * as LucideIcons from "lucide-react";
 import { routes } from "./route";

@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { AdditionalResourcesSection } from "./sections/AdditionalResourcesSection";
 import { HeaderSection } from "./sections/HeaderSection";

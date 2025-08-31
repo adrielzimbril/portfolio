@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { IconProps } from "./type";
 
 export const LogoIcon = ({ className }: IconProps) => (

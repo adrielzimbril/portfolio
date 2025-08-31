@@ -86,3 +86,16 @@ export interface ResourcesPreviewSectionProps {
    */
   limit?: number;
 }
+
+
+/**
+ * Types for better security
+ *
+ * @template T - The type of the data
+ */
+export type JsonData<T = unknown> = Record<string, unknown> | unknown[] | T;
+
+
+export type GetServerMode = {
+  mode?: "server" | "client" | "auto";
+};

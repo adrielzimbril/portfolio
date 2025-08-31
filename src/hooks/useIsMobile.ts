@@ -1,6 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 
+/**
+ * Returns a boolean indicating whether the current window width is less than the specified breakpoint.
+ * 
+ * @param breakpoint - The breakpoint to use for determining if the current window width is mobile.
+ * 
+ * @returns A boolean indicating whether the current window width is less than the specified breakpoint.
+ * 
+ * @example
+ * const isMobile = useIsMobile();
+ */
 export const useIsMobile = (breakpoint = 768) => {
   const [isMobile, setIsMobile] = useState(false);
 

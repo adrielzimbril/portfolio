@@ -1,8 +1,7 @@
-import React from "react";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { getJsonDataCached } from "@/lib/get-json-data";
+import { getJsonDataCached } from "@/utils/get-json-data";
 import { ProjectPreview } from "@/types";
 import { ProjectsPreviewSectionProps } from "@/types/type";
 
@@ -12,12 +11,12 @@ const config: ProjectsPreviewSectionProps = {
   limit: 3,
 };
 
-export function ProjectsSection() {
+export async function ProjectsSection() {
   const { allWide, wideCardsCount, limit } = config;
-  const projectData = getJsonDataCached(
+  const projectData = (await getJsonDataCached(
     "projects",
     "personal"
-  ) as ProjectPreview[];
+  )) as ProjectPreview[];
 
   return (
     <SectionLayout
