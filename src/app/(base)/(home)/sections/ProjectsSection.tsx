@@ -3,9 +3,9 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { getJsonDataCached } from "@/utils/get-json-data";
 import { ProjectPreview } from "@/types";
-import { ProjectsPreviewSectionProps } from "@/types/type";
+import { ProjectPreviewCardContainerSectionProps } from "@/types/type";
 
-const config: ProjectsPreviewSectionProps = {
+const config: ProjectPreviewCardContainerSectionProps = {
   allWide: false,
   wideCardsCount: 1,
   limit: 3,

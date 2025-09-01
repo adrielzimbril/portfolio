@@ -3,9 +3,9 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { ResourcePreview } from "@/types/type";
 import { getJsonDataCached } from "@/utils/get-json-data";
-import { ResourcesPreviewSectionProps } from "@/types/type";
+import { PreviewCardContainerSectionProps } from "@/types/type";
 
-const config: ResourcesPreviewSectionProps = {
+const config: PreviewCardContainerSectionProps = {
   limit: 4,
 };
 

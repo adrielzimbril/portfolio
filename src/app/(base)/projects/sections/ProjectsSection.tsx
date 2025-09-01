@@ -1,3 +1,4 @@
+"use client";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { LoadMore } from "@/components/shared/pages/shared/load-more";
 import { ProjectPreview } from "@/types";
@@ -18,6 +19,6 @@ export function ProjectsSection() {
           />
         );
       }}
-    ></LoadMore>
+    />
   );
 }

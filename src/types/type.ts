@@ -57,7 +57,16 @@ export interface ProjectPreviewCardInfoProps {
   isWide?: boolean;
 }
 
-export interface ProjectsPreviewSectionProps {
+export interface PreviewCardContainerSectionProps {
+  /**
+   * Number of cards to display
+   * @default 0 - All cards
+   */
+  limit?: number;
+}
+
+export interface ProjectPreviewCardContainerSectionProps
+  extends PreviewCardContainerSectionProps {
   /**
    * Force all cards to be wide on desktop
    * @default false
@@ -71,12 +80,6 @@ export interface ProjectsPreviewSectionProps {
    * @minimum 0
    */
   wideCardsCount?: number;
-
-  /**
-   * Number of cards to display
-   * @default 0 - All cards
-   */
-  limit?: number;
 }
 
 export interface ThoughtPreview {
@@ -92,15 +95,6 @@ export interface ThoughtPreview {
 export interface ThoughtPreviewCardInfoProps {
   details: ThoughtPreview;
 }
-
-export interface ResourcesPreviewSectionProps {
-  /**
-   * Number of cards to display
-   * @default 0 - All cards
-   */
-  limit?: number;
-}
-
 
 /**
  * Types for better security
