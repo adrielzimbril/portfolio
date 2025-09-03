@@ -23,16 +23,6 @@ const nextConfig: NextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["@vercel/og"],
   },
-  webpack: (config, { webpack }) => {
-    config.plugins.push(
-      new webpack.IgnorePlugin({
-        resourceRegExp: /^pg-native$|^cloudflare:sockets$/,
-      })
-    );
-
-    return config;
-  },
 };
 
-//export default withContentCollections(withNextIntl(nextConfig));
-export default withContentCollections(nextConfig);
+export default withContentCollections(withNextIntl(nextConfig));

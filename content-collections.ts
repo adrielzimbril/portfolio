@@ -41,7 +41,7 @@ const posts = defineCollection({
         [
           rehypeShiki,
           {
-            theme: "nord",
+            theme: "github-dark",
           },
         ],
       ],
@@ -52,6 +52,7 @@ const posts = defineCollection({
       body,
       locale: getLocaleFromFilePath(document._meta.filePath),
       path: sanitizePath(document._meta.path),
+      slug: document._meta.path,
     };
   },
 });
@@ -95,12 +96,14 @@ const projects = defineCollection({
         ],
       ],
     });
+    const slug = document._meta.path;
 
     return {
       ...document,
       body,
       locale: getLocaleFromFilePath(document._meta.filePath),
       path: sanitizePath(document._meta.path),
+      slug,
     };
   },
 });
