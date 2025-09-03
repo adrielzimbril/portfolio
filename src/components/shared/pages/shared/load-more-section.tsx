@@ -1,10 +1,11 @@
+"use client";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { getJsonDataCached } from "@/utils";
-import { ThoughtPreview, ResourcePreview, ProjectPreview } from "@/types";
+import { PreviewItem } from "@/types";
 
 interface LoadMoreProps {
   children: ReactNode;
@@ -17,7 +18,6 @@ interface LoadMoreProps {
   showCounter?: boolean;
 }
 
-type PreviewItem = ThoughtPreview | ResourcePreview | ProjectPreview;
 interface LoadMoreListProps {
   dataPath: string;
   subPath: string;
@@ -124,7 +124,7 @@ function LoadMoreContainer({
   );
 }
 
-export function LoadMore({
+export function LoadMoreSection({
   dataPath,
   subPath,
   renderItem,

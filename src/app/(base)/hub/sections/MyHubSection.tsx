@@ -1,15 +1,16 @@
+"use client";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
-import { LoadMore } from "@/components/shared/pages/shared/load-more";
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { ResourcePreview } from "@/types";
 
-export function ProjectSection() {
+export function MyHubSection() {
   return (
-    <LoadMore
+    <LoadMoreSection
       dataPath="resources"
       subPath="personal"
       renderItem={(item) => (
         <ResourceCard key={item.id} details={item as ResourcePreview} />
       )}
-    ></LoadMore>
+    />
   );
 }

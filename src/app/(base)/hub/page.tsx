@@ -1,13 +1,13 @@
 import React from "react";
 import { HeaderSection } from "./sections/HeaderSection";
-import { ProjectSection } from "./sections/MyHubSection";
+import { MyHubSection } from "./sections/MyHubSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 
 export default function MyHub() {
   return (
     <>
       <HeaderSection />
-      <ProjectSection />
+      <MyHubSection />
       <CallToAction isPage />
     </>
   );

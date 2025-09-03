@@ -1,11 +1,11 @@
 "use client";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { LoadMore } from "@/components/shared/pages/shared/load-more";
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { ProjectPreview } from "@/types";
 
-export function ProjectsSection() {
+export function MyProjectsSection() {
   return (
-    <LoadMore
+    <LoadMoreSection
       dataPath="projects"
       subPath="personal"
       initialCount={3}

@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectsSection } from "./sections/ProjectsSection";
+import { MyProjectsSection } from "./sections/MyProjectsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeaderSection } from "./sections/HeaderSection";
 
@@ -7,7 +7,7 @@ export default function MyProject() {
   return (
     <>
       <HeaderSection />
-      <ProjectsSection />
+      <MyProjectsSection />
       <CallToAction isPage />
     </>
   );

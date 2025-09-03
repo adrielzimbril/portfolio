@@ -1,29 +1,37 @@
-import { ProjectCard } from "@/components/shared/pages/projects/card";
+"use client";
+import React, { useEffect, useState } from "react";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import {
   ResourcePreview,
-  ProjectPreviewCardContainerSectionProps,
+  PreviewCardContainerSectionProps,
 } from "@/types/type";
 import { getJsonDataCached } from "@/utils/get-json-data";
 
-const config: ProjectPreviewCardContainerSectionProps = {
+const config: PreviewCardContainerSectionProps = {
   limit: 2,
 };
 
-export async function MoreInfoSection() {
+export function MoreInfoSection() {
+  const [dataSource, setDataSource] = useState<ResourcePreview[]>([]);
+
+  useEffect(() => {
+    const loadInitialData = async () => {
+      const data = (await getJsonDataCached(
+        "resources",
+        "personal"
+      )) as ResourcePreview[];
+      setDataSource(data);
+    };
+    loadInitialData();
+  }, []);
+
   const { limit } = config;
-  const resourceData = (await getJsonDataCached(
-    "resources",
-    "personal"
-  )) as ResourcePreview[];
 
   return (
     <SectionLayout title="Autres ressources." layoutStart>
-      {resourceData.map((resource, index) => {
-        if (limit && index >= limit!) return null;
-
-        return <ResourceCard key={resource.id} details={resource} />;
+      {dataSource.slice(0, limit!).map((resource, index) => {
+        return <ResourceCard key={index} details={resource} />;
       })}
     </SectionLayout>
   );

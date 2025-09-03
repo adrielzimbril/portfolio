@@ -97,6 +97,11 @@ export interface ThoughtPreviewCardInfoProps {
 }
 
 /**
+ * Union type of all preview items
+ */
+export type PreviewItem = ThoughtPreview | ResourcePreview | ProjectPreview;
+
+/**
  * Types for better security
  *
  * @template T - The type of the data
