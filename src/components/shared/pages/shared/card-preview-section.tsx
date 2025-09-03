@@ -9,6 +9,7 @@ interface CardPreviewSectionProps {
   dataPath: string;
   subPath: string;
   limit?: number;
+  pageId?: number;
   renderItem: (item: PreviewItem, index: number) => React.ReactNode;
 }
 
@@ -17,6 +18,7 @@ export function CardPreviewSection({
   dataPath,
   subPath,
   limit = 2,
+  pageId,
   renderItem,
 }: CardPreviewSectionProps) {
   const [dataSource, setDataSource] = useState<PreviewItem[]>([]);
@@ -32,9 +34,16 @@ export function CardPreviewSection({
     loadInitialData();
   }, [dataPath, subPath]);
 
+  // if pageId is provided, filter out the current page data
+  const filteredData = pageId
+    ? dataSource.filter((item) => item.id !== pageId)
+    : dataSource;
+
+  const limitedData = filteredData.slice(0, limit);
+
   return (
     <SectionLayout title={title} layoutStart>
-      {dataSource.slice(0, limit).map(renderItem)}
+      {limitedData.map(renderItem)}
     </SectionLayout>
   );
 }

@@ -38,3 +38,33 @@ export function formatDate(date: string): string {
     return `${fullDate} (${yearsAgo}y ago)`;
   }
 }
+
+/**
+ * Returns the current date
+ *
+ * @param date - The date string or Date object to format (default: today)
+ * @param lang - The language to use for formatting (default: "en-US")
+ * @param iso - If true, returns the ISO date string (default: false)
+ *
+ * @returns The formatted date string
+ *
+ * @example
+ * const date = getDate("2023-01-01", "en-US");
+ * console.log(date); // Output: Jan 1, 2023
+ * 
+ * @example
+ * const date = getDate("2023-01-01", "en-US", true);
+ * console.log(date); // Output: 2023-01-01
+ * 
+ * @example
+ * const date = getDate("2023-01-01", "en-US", false);
+ * console.log(date); // Output: Jan 1, 2023
+ */
+export function getDate(
+  date: string | Date = new Date(),
+  lang: Intl.LocalesArgument = "en-US",
+  iso: boolean = true
+): string {
+  const d = new Date(date);
+  return iso ? d.toISOString().split("T")[0] : d.toLocaleDateString(lang);
+}

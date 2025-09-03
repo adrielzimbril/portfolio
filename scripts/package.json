@@ -1,0 +1,26 @@
+{
+  "name": "@aurthle/scripts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "_moduleAliases": {
+    "@": "./migrate/*",
+    "@migrate": "./migrate/*"
+  },
+  "scripts": {
+    "migrate": "node migrate/index.js"
+  },
+  "dependencies": {
+    "@content-collections/core": "^0.6.0",
+    "@content-collections/mdx": "^0.1.0",
+    "@content-collections/next": "^0.2.0",
+    "module-alias": "^2.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "mysql2": "^3.6.0",
+    "postcss": "^8",
+    "turndown": "^7.1.2",
+    "typescript": "^5"
+  }
+}

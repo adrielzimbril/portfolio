@@ -1,5 +1,5 @@
 import type { appConfig } from "@data/config";
-import type messages from "./translations/en.json";
+import type messages from "@i18n/translations/en.json";
 
 export type Messages = typeof messages;
 

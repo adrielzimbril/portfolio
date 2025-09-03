@@ -1,5 +1,4 @@
 import logger from "@/utils/logger";
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -13,7 +12,7 @@ interface EmailRequest {
   email?: string;
 }
 
-serve(async (req: Request) => {
+export async function POST(req: Request) {
   // Gérer les requêtes OPTIONS pour CORS
   if (req.method === "OPTIONS") {
     return new Response(null, {
@@ -103,4 +102,4 @@ serve(async (req: Request) => {
       }
     );
   }
-});
+}

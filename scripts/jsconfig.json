@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/jsconfig",
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "Preserve",
+    "target": "ES2021",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "paths": {
+      "@/*": ["./migrate/*"],
+      "@/migrate/*": ["./migrate/*"]
+    }
+  },
+  "include": ["**/*.js"],
+  "exclude": ["dist", "build", "node_modules"]
+}

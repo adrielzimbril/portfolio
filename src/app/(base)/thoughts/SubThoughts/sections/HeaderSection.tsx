@@ -1,4 +1,5 @@
 import { HeaderSection as ThoughtHeaderSection } from "@/components/shared/pages/thoughts/page/header-section";
+import { PreviewContentType } from "@/types";
 
 const metadataItems = { date: "18, Jul 2024", readTime: "08", views: "90k" };
 const tags = [
@@ -13,7 +14,7 @@ export function HeaderSection() {
   return (
     <ThoughtHeaderSection
       previewContent={{
-        type: "text",
+        type: PreviewContentType.TEXT,
         emoji: "😎",
         title: "I made you looked.",
         subtitle: "You can have the rest of the empty space here.",
