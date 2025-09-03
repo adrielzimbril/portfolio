@@ -1,6 +1,6 @@
 import "server-only";
 
-import { appConfig } from "@data/config";
+import { appConfig } from "@data/app-config";
 import { cookies } from "next/headers";
 import type { Locale } from "@i18n/types";
 

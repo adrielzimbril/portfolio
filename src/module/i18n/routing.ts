@@ -1,4 +1,4 @@
-import { appConfig } from "@data/config";
+import { appConfig } from "@data/app-config";
 import { createNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
 

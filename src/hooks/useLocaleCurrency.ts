@@ -1,5 +1,5 @@
 import { useLocale } from "next-intl";
-import { appConfig } from "@/data/config";
+import { appConfig } from "@data/app-config";
 
 export function useLocaleCurrency() {
 	const locale = useLocale();

@@ -1,6 +1,6 @@
 import { getUserLocale } from "@i18n/lib/locale-cookie";
 import { routing } from "@i18n/routing";
-import { appConfig } from "@data/config";
+import { appConfig } from "@data/app-config";
 import { getMessagesForLocale } from "@i18n/hooks/get-message-from-local";
 import { getRequestConfig } from "next-intl/server";
 

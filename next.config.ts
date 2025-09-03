@@ -2,12 +2,21 @@ import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
 import nextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = nextIntlPlugin("./modules/i18n/request.ts");
+const withNextIntl = nextIntlPlugin("./src/module/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   /* config options here */
+  domains: ["localhost", "adrielzimbril.com", "www.adrielzimbril.com"],
   images: {
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "designmodo.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.adrielzimbril.com",
+      },
       {
         // google profile images
         protocol: "https",
@@ -21,6 +30,7 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
+    mdxRs: true,
     serverComponentsExternalPackages: ["@vercel/og"],
   },
 };

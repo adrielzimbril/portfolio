@@ -1,5 +1,5 @@
 import { routing } from "@i18n/routing";
-import { appConfig } from "@/data/config";
+import { appConfig } from "@data/app-config";
 
 import createMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";

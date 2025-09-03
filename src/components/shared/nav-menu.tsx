@@ -9,13 +9,13 @@ import { usePathname } from "next/navigation";
 
 export function NavMenu({ hasScrolled }: { hasScrolled: boolean }) {
   const router = usePathname();
+  const menuRoutes = Object.values(routes).filter((item) => item.inHeader);
   const [activeTab, setActiveTab] = useState<string>(
-    Object.values(routes).find((item) => item.link === router)?.name ||
-      routes.home.name
+    menuRoutes.find((item) => item.link === router)?.name || routes.home.name
   );
 
   useEffect(() => {
-    const current = Object.values(routes).find((r) => r.link === router);
+    const current = menuRoutes.find((r) => r.link === router);
     if (current) setActiveTab(current.name);
   }, [router]);
 
@@ -29,7 +29,7 @@ export function NavMenu({ hasScrolled }: { hasScrolled: boolean }) {
             "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-secondary"
           )}
         >
-          {Object.values(routes).map((item) => (
+          {menuRoutes.map((item) => (
             <Link
               key={item.name}
               href={item.link}

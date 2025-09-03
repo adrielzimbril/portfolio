@@ -2,7 +2,7 @@ import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import rehypeShiki from "@shikijs/rehype";
 import { z } from "zod";
-import { appConfig } from "@/data/config";
+import { appConfig } from "@data/app-config";
 
 function sanitizePath(path: string) {
   return path
@@ -31,8 +31,8 @@ const posts = defineCollection({
     category_id: z.number(),
     meta_title: z.string().optional(),
     meta_description: z.string().optional(),
-    created_at: z.date(),
-    updated_at: z.date(),
+    created_at: z.string(),
+    updated_at: z.string(),
     published: z.boolean(),
   }),
   transform: async (document, context) => {
@@ -74,15 +74,15 @@ const projects = defineCollection({
     image_big: z.string(),
     image_thumbnail: z.string(),
     gallery: z.array(z.string()).optional(),
-    date_project_start: z.date().optional(),
-    date_project_end: z.date().optional(),
+    date_project_start: z.string().optional().nullable(),
+    date_project_end: z.string().optional().nullable(),
     client: z.string(),
     button_text: z.string().optional(),
     button_link: z.string().optional(),
     meta_title: z.string(),
     meta_description: z.string(),
-    created_at: z.date(),
-    updated_at: z.date(),
+    created_at: z.string(),
+    updated_at: z.string(),
     published: z.boolean(),
   }),
   transform: async (document, context) => {

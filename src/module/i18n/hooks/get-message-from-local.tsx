@@ -1,4 +1,4 @@
-import { appConfig } from "@data/config";
+import { appConfig } from "@data/app-config";
 import deepmerge from "deepmerge";
 import type { Messages } from "@i18n/types";
 
