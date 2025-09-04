@@ -4,6 +4,8 @@ import rehypeShiki from "@shikijs/rehype";
 import { z } from "zod";
 import { appConfig } from "@data/app-config";
 
+const BASE_COLLECTION_PATH = "src/content";
+
 function sanitizePath(path: string) {
   return path
     .replace(/(\.[a-zA-Z-]{2,5})$/, "")
@@ -19,21 +21,25 @@ function getLocaleFromFilePath(path: string) {
   );
 }
 
-const posts = defineCollection({
-  name: "posts",
-  directory: "content/posts",
-  include: "**/*.{mdx,md}",
+// Collection of authors (dans posts/authors/)
+const authors = defineCollection({
+  name: "authors",
+  directory: `${BASE_COLLECTION_PATH}/posts/authors`,
+  include: "**/*.{md,mdx}",
   schema: z.object({
-    title: z.string(),
-    slug: z.string(),
-    photo: z.string().optional(),
-    category: z.string(),
-    category_id: z.number(),
-    meta_title: z.string().optional(),
-    meta_description: z.string().optional(),
-    created_at: z.string(),
-    updated_at: z.string(),
-    published: z.boolean(),
+    ref: z.string(),
+    displayName: z.string(),
+    email: z.string().email(),
+    bio: z.string().optional(),
+    avatar: z.string().optional(),
+    social: z
+      .object({
+        twitter: z.string().optional(),
+        github: z.string().optional(),
+        linkedin: z.string().optional(),
+        website: z.string().optional(),
+      })
+      .optional(),
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
@@ -52,38 +58,218 @@ const posts = defineCollection({
       body,
       locale: getLocaleFromFilePath(document._meta.filePath),
       path: sanitizePath(document._meta.path),
-      slug: document._meta.path,
     };
   },
 });
 
-const projects = defineCollection({
-  name: "projects",
-  directory: "content/projects",
-  include: "**/*.{mdx,md}",
+// Collection of categories for posts (in posts/categories/)
+const postCategories = defineCollection({
+  name: "postCategories",
+  directory: `${BASE_COLLECTION_PATH}/posts/categories`,
+  include: "**/*.{md,mdx}",
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+    description: z.string().optional(),
+    color: z.string(), // Squircle color (ex: "BLUE")
+    slug: z.string(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document, {
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+      ],
+    });
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+
+// Collection of tags for posts (in posts/tags/)
+const postTags = defineCollection({
+  name: "postTags",
+  directory: `${BASE_COLLECTION_PATH}/posts/tags`,
+  include: "**/*.{md,mdx}",
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+    description: z.string().optional(),
+    color: z.string(), // Squircle color
+    slug: z.string(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document, {
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+      ],
+    });
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+
+// Collection of categories for projects (in projects/categories/)
+const projectCategories = defineCollection({
+  name: "projectCategories",
+  directory: `${BASE_COLLECTION_PATH}/projects/categories`,
+  include: "**/*.{md,mdx}",
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+    description: z.string().optional(),
+    color: z.string(), // Squircle color
+    slug: z.string(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document, {
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+      ],
+    });
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+
+// Collection of tags for projects (in projects/tags/) - If you want separate tags
+const projectTags = defineCollection({
+  name: "projectTags",
+  directory: `${BASE_COLLECTION_PATH}/projects/tags`,
+  include: "**/*.{md,mdx}",
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+    description: z.string().optional(),
+    color: z.string(), // Squircle color
+    slug: z.string(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document, {
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+      ],
+    });
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+
+// Collection of posts with relations
+const posts = defineCollection({
+  name: "posts",
+  directory: `${BASE_COLLECTION_PATH}/posts`,
+  include: "*.{mdx,md}", // Only files at the root of posts/
   schema: z.object({
     title: z.string(),
     slug: z.string(),
-    project_type: z.string(),
-    project_type_id: z.number(),
-    project_type_label: z.string(),
+    excerpt: z.string().optional(),
+    photo: z.string().optional(),
+    categories_id: z.array(z.number()), // ID of the category
+    tags_id: z.array(z.number()), // Array of tag IDs
+    created_at: z.string(),
+    updated_at: z.string().optional(),
+    published: z.boolean(),
+    featured: z.boolean().optional().default(false),
+  }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document, {
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+      ],
+    });
+
+    // Resolve relations
+    const categories = context
+      .documents(postCategories)
+      .filter((c) => document.categories_id.includes(c.id));
+
+    const tags = context
+      .documents(postTags)
+      .filter((t) => document.tags_id.includes(t.id));
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+      slug: document._meta.path,
+      // Relations resolved
+      categories: categories || [],
+      tags: tags || [],
+    };
+  },
+});
+
+// Collection of projects with relations
+const projects = defineCollection({
+  name: "projects",
+  directory: `${BASE_COLLECTION_PATH}/projects`,
+  include: "*.{mdx,md}", // Only files at the root of projects/
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    excerpt: z.string().optional(),
+    project_type: z.string().optional(),
     project_link: z.string().optional(),
     project_keywords: z.string().optional(),
-    category: z.string(),
-    category_id: z.number(),
-    image_big: z.string(),
-    image_thumbnail: z.string(),
+    categories_id: z.array(z.number()), // ID of the project category
+    tags_id: z.array(z.number()), // Array of tag IDs
+    image_big: z.string().optional(),
+    image_thumbnail: z.string().optional(),
     gallery: z.array(z.string()).optional(),
-    date_project_start: z.string().optional().nullable(),
-    date_project_end: z.string().optional().nullable(),
-    client: z.string(),
+    date_project: z.array(z.string().nullable().optional()),
+    client: z.string().optional(),
     button_text: z.string().optional(),
     button_link: z.string().optional(),
-    meta_title: z.string(),
-    meta_description: z.string(),
     created_at: z.string(),
-    updated_at: z.string(),
+    updated_at: z.string().optional(),
     published: z.boolean(),
+    featured: z.boolean().optional().default(false),
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
@@ -96,6 +282,17 @@ const projects = defineCollection({
         ],
       ],
     });
+
+    // Resolve relations
+    const categories = context
+      .documents(projectCategories)
+      .filter((c) => document.categories_id.includes(c.id));
+
+    // Use projectTags or postTags according to your preference
+    const tags = context
+      .documents(projectTags)
+      .filter((t) => document.tags_id.includes(t.id));
+
     const slug = document._meta.path;
 
     return {
@@ -104,10 +301,23 @@ const projects = defineCollection({
       locale: getLocaleFromFilePath(document._meta.filePath),
       path: sanitizePath(document._meta.path),
       slug,
+      // Resolved relations
+      categories: categories || [],
+      tags: tags || [],
     };
   },
 });
 
 export default defineConfig({
-  collections: [posts, projects],
+  collections: [
+    // Metadata collections
+    authors,
+    postCategories,
+    postTags,
+    projectCategories,
+    projectTags,
+    // Main collections with relations
+    posts,
+    projects,
+  ],
 });

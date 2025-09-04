@@ -4,18 +4,21 @@ import { allPosts } from "content-collections";
 type GetAllPostsOptions = {
   published?: boolean;
   locale?: string;
+  pageSlug?: string;
   sort?: "asc" | "desc";
   limit?: number;
 };
+
 export async function getAllPosts(
   options: GetAllPostsOptions = {
     published: true,
     locale: undefined,
+    pageSlug: undefined,
     sort: "asc",
     limit: undefined,
   }
 ): Promise<Post[]> {
-  const { published, locale, sort, limit } = options;
+  const { published, locale, pageSlug, sort, limit } = options;
   return Promise.resolve(
     allPosts
       .filter(
@@ -27,6 +30,7 @@ export async function getAllPosts(
           ? a.path.localeCompare(b.path)
           : b.path.localeCompare(a.path)
       )
+      .filter((post) => post.slug !== pageSlug)
       .slice(0, limit)
   );
 }
@@ -109,12 +113,15 @@ export async function getFilteredPosts(
   return Promise.resolve(
     posts.filter((post) => {
       // Filter by category
-      if (options.category && post.category !== options.category) {
+      if (
+        options.category &&
+        post.categories.find((cat) => cat.slug === options.category)
+      ) {
         return false;
       }
 
       // Filter by tag
-      if (options.tag && !post.tags.includes(options.tag)) {
+      if (options.tag && !post.tags.find((tag) => tag.slug === options.tag)) {
         return false;
       }
 
@@ -123,7 +130,7 @@ export async function getFilteredPosts(
         const searchLower = options.search.toLowerCase();
         const titleMatch = post.title.toLowerCase().includes(searchLower);
         const contentMatch =
-          post.meta_description?.toLowerCase().includes(searchLower) || false;
+          post.excerpt?.toLowerCase().includes(searchLower) || false;
 
         if (!titleMatch && !contentMatch) {
           return false;
@@ -146,8 +153,10 @@ export async function getFilteredPosts(
  * ```
  */
 export async function getAllCategories(): Promise<string[]> {
-  const categories = allPosts.map((post) => post.category);
-  return Promise.resolve([...new Set(categories)]);
+  const categories = allPosts.map((post) =>
+    post.categories.map((cat) => cat.slug)
+  );
+  return Promise.resolve([...new Set(categories.flat())]);
 }
 
 /**
@@ -162,6 +171,6 @@ export async function getAllCategories(): Promise<string[]> {
  * // Returns all unique tags from all posts
  */
 export async function getAllTags(): Promise<string[]> {
-  const allTags = allPosts.flatMap((post) => post.tags);
+  const allTags = allPosts.flatMap((post) => post.tags.map((tag) => tag.slug));
   return Promise.resolve([...new Set(allTags)]);
 }

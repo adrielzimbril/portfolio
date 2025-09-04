@@ -80,8 +80,13 @@ function createSlug(name) {
     .replace(/^-|-$/g, "");
 }
 
+// Créer un ref à partir d'un nom
+function createRef(name) {
+  return createSlug(name);
+}
+
 async function createAuthors() {
-  const authorsDir = path.join(process.cwd(), "content", "authors");
+  const authorsDir = path.join(process.cwd(), "content", "posts", "authors");
   await fs.mkdir(authorsDir, { recursive: true });
 
   // Créer un auteur par défaut
@@ -103,12 +108,18 @@ social:
 
 async function createCategoriesAndTags(connection) {
   // Créer les dossiers
-  const categoriesDir = path.join(process.cwd(), "content", "categories");
-  const tagsDir = path.join(process.cwd(), "content", "tags");
+  const categoriesDir = path.join(
+    process.cwd(),
+    "content",
+    "posts",
+    "categories"
+  );
+  const tagsDir = path.join(process.cwd(), "content", "posts", "tags");
   const projectCategoriesDir = path.join(
     process.cwd(),
     "content",
-    "project-categories"
+    "projects",
+    "categories"
   );
 
   await fs.mkdir(categoriesDir, { recursive: true });
@@ -124,10 +135,12 @@ async function createCategoriesAndTags(connection) {
     for (let i = 0; i < postCategories.length; i++) {
       const category = postCategories[i];
       const slug = createSlug(category.name);
+      const ref = createRef(category.name);
       const color = squircleColors[i % squircleColors.length];
 
       const categoryContent = `---
 id: ${category.id}
+ref: "${ref}"
 name: "${category.name}"
 description: "Articles dans la catégorie ${category.name}"
 color: "${color}"
@@ -135,10 +148,10 @@ slug: "${slug}"
 ---`;
 
       await fs.writeFile(
-        path.join(categoriesDir, `${category.id}.md`),
+        path.join(categoriesDir, `${ref}.md`),
         categoryContent
       );
-      console.log(`✅ Catégorie créée: ${category.id}.md (${category.name})`);
+      console.log(`✅ Catégorie créée: ${ref}.md (${category.name})`);
     }
   } catch (error) {
     console.log(
@@ -168,9 +181,11 @@ slug: "${slug}"
       const category = defaultCategories[i];
       const slug = createSlug(category.name);
       const color = squircleColors[i];
+      const ref = createRef(category.name);
 
       const categoryContent = `---
 id: ${category.id}
+ref: "${ref}"
 name: "${category.name}"
 description: "${category.description}"
 color: "${color}"
@@ -178,11 +193,11 @@ slug: "${slug}"
 ---`;
 
       await fs.writeFile(
-        path.join(categoriesDir, `${category.id}.md`),
+        path.join(categoriesDir, `${ref}.md`),
         categoryContent
       );
       console.log(
-        `✅ Catégorie par défaut créée: ${category.id}.md (${category.name})`
+        `✅ Catégorie par défaut créée: ${ref}.md (${category.name})`
       );
     }
   }
@@ -197,9 +212,11 @@ slug: "${slug}"
       const category = projCategories[i];
       const slug = createSlug(category.name);
       const color = squircleColors[(i + 3) % squircleColors.length]; // Offset pour varier les couleurs
+      const ref = createRef(category.name);
 
       const categoryContent = `---
 id: ${category.id}
+ref: "${ref}"
 name: "${category.name}"
 description: "Projets dans la catégorie ${category.name}"
 color: "${color}"
@@ -207,12 +224,10 @@ slug: "${slug}"
 ---`;
 
       await fs.writeFile(
-        path.join(projectCategoriesDir, `${category.id}.md`),
+        path.join(projectCategoriesDir, `${ref}.md`),
         categoryContent
       );
-      console.log(
-        `✅ Catégorie de projet créée: ${category.id}.md (${category.name})`
-      );
+      console.log(`✅ Catégorie de projet créée: ${ref}.md (${category.name})`);
     }
   } catch (error) {
     console.log(
@@ -237,9 +252,11 @@ slug: "${slug}"
       const category = defaultProjectCategories[i];
       const slug = createSlug(category.name);
       const color = squircleColors[(i + 3) % squircleColors.length];
+      const ref = createRef(category.name);
 
       const categoryContent = `---
 id: ${category.id}
+ref: "${ref}"
 name: "${category.name}"
 description: "${category.description}"
 color: "${color}"
@@ -247,11 +264,11 @@ slug: "${slug}"
 ---`;
 
       await fs.writeFile(
-        path.join(projectCategoriesDir, `${category.id}.md`),
+        path.join(projectCategoriesDir, `${ref}.md`),
         categoryContent
       );
       console.log(
-        `✅ Catégorie de projet par défaut créée: ${category.id}.md (${category.name})`
+        `✅ Catégorie de projet par défaut créée: ${ref}.md (${category.name})`
       );
     }
   }
@@ -286,18 +303,20 @@ slug: "${slug}"
   for (let i = 0; i < defaultTags.length; i++) {
     const tag = defaultTags[i];
     const slug = createSlug(tag.name);
+    const ref = createRef(tag.name);
     const color = squircleColors[(i + 6) % squircleColors.length]; // Offset pour varier les couleurs
 
     const tagContent = `---
 id: ${tag.id}
+ref: "${ref}"
 name: "${tag.name}"
 description: "${tag.description}"
 color: "${color}"
 slug: "${slug}"
 ---`;
 
-    await fs.writeFile(path.join(tagsDir, `${tag.id}.md`), tagContent);
-    console.log(`✅ Tag créé: ${tag.id}.md (${tag.name})`);
+    await fs.writeFile(path.join(tagsDir, `${ref}.md`), tagContent);
+    console.log(`✅ Tag créé: ${ref}.md (${tag.name})`);
   }
 }
 
@@ -357,8 +376,8 @@ title: "${(post.title || "").replace(/"/g, '\\"')}"
 slug: "${sanitizeFileName(post.slug || post.title)}"
 excerpt: "${(post.meta_description || "").replace(/"/g, '\\"')}"
 photo: "${post.photo || ""}"
-category_id: [${post.category_id || categoryId}]
-tag_ids: [${tagIds.join(", ")}]
+categories_id: [${post.category_id || categoryId}]
+tags_id: [${tagIds.join(", ")}]
 created_at: "${new Date(post.created_at).toISOString()}"
 updated_at: "${new Date(post.updated_at || "").toISOString()}"
 published: true
@@ -404,10 +423,10 @@ excerpt: "${(project.meta_description || "").replace(/"/g, '\\"')}"
 project_type: "${project.project_type || "web"}"
 project_type_id: ${getProjectTypeId(project.project_type)}
 project_type_label: "${getProjectTypeLabel(project.project_type)}"
-project_link: "${project.project_link || ""}"
+project_link: "${project.button_link || ""}"
 project_keywords: "${project.project_keywords || ""}"
-category_id: [${project.category_id || categoryId}]
-tag_ids: [${tagIds.join(", ")}]
+categories_id: [${project.category_id || categoryId}]
+tags_id: [${tagIds.join(", ")}]
 image_big: "${project.image_big || ""}"
 image_thumbnail: "${project.image_thumbnail || ""}"
 gallery: [${[
@@ -422,7 +441,11 @@ gallery: [${[
 date_project:  [${getDateProject(project.date).date_start}, ${
     getDateProject(project.date).date_end
   }]
-client: "${project.client || ""}"
+client: "${
+    project.client
+      ? project.client.replace("Client: ", "").replace("Client : ", "")
+      : ""
+  }"
 button_text: "${project.button_text || ""}"
 button_link: "${project.button_link || ""}"
 created_at: "${new Date(project.created_at).toISOString()}"
@@ -491,14 +514,14 @@ async function migrateAll() {
 
         // Section informations du projet
         if (project.client || project.date || project.project_link) {
-          additionalContent += "\n## Informations du projet\n\n";
+          additionalContent += "\n\n## Informations du projet\n\n";
 
-          if (project.client) {
-            additionalContent += `**Client:** ${project.client.replace(
-              "Client: ",
-              ""
-            )}\n\n`;
-          }
+          // if (project.client) {
+          //   additionalContent += `**Client:** ${project.client.replace(
+          //     "Client: ",
+          //     ""
+          //   )}\n\n`;
+          // }
 
           if (project.date) {
             additionalContent += `**Période:** ${project.date}\n\n`;

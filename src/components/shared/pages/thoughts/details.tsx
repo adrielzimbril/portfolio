@@ -10,7 +10,7 @@ export function CardInfo({ details }: ThoughtPreviewCardInfoProps) {
       <div className="flex flex-col items-start justify-center gap-4 w-full">
         <Header title={details.title} />
 
-        <Tags primaryTag={details.primaryTag} tags={details.tags} />
+        <Tags primaryTag={details.tags[0]} tags={details.tags.slice(1)} />
 
         <Description description={details.description} />
       </div>
