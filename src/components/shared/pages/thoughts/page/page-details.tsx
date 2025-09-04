@@ -1,5 +1,5 @@
 import React from "react";
-import { ResourcePageMarkdownContent } from "@/module/content/components/blog/Content";
+import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 
 // Interface for page details props
 interface PageDetailsProps {
@@ -15,7 +15,7 @@ export function PageDetails({ content }: PageDetailsProps) {
           <h2 className="relative self-stretch h3 font-normal">Présentation</h2>
 
           <div className="flex flex-col gap-8 md:gap-12 text-zinc-500 font-normal text-base w-full">
-            <ResourcePageMarkdownContent content={content} />
+            <MarkdownContentRender content={content} />
           </div>
         </div>
       </div>

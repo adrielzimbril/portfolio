@@ -3,7 +3,7 @@
 import { MDXContent } from "@content-collections/mdx/react";
 import { mdxComponents } from "@/module/content/utils/mdx-components";
 
-export function ResourcePageMarkdownContent({ content }: { content: string }) {
+export function MarkdownContentRender({ content }: { content: string }) {
   return (
     <div className="prose dark:prose-invert mx-auto mt-6 w-full">
       <MDXContent
