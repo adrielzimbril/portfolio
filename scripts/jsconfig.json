@@ -15,6 +15,6 @@
       "@/migrate/*": ["./migrate/*"]
     }
   },
-  "include": ["**/*.js"],
+  "include": ["**/*.js", "migrate/migrate-enhanced.mjs"],
   "exclude": ["dist", "build", "node_modules"]
 }
