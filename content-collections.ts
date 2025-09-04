@@ -203,7 +203,7 @@ const posts = defineCollection({
     title: z.string(),
     slug: z.string(),
     excerpt: z.string().optional(),
-    photo: z.string().optional(),
+    cover: z.string().optional(),
     categories_id: z.array(z.number()), // ID of the category
     tags_id: z.array(z.number()), // Array of tag IDs
     created_at: z.string(),

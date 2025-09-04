@@ -1,8 +1,12 @@
 import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types/enum";
+import { getImageUrl } from "@/utils/base-url";
 
 interface PreviewProps {
+  title?: string;
+  cover?: string;
+  coverText?: { emoji: string; title: string; description: string };
   iconType?: ResourceType;
   icon?: string;
   iconAlt?: string;
@@ -10,6 +14,9 @@ interface PreviewProps {
 }
 
 export function CardPreview({
+  title,
+  cover,
+  coverText,
   iconType,
   icon = "bold-duotone---school---book.svg",
   iconAlt,
@@ -18,44 +25,71 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-3xl squircle-white overflow-hidden",
-        isWide && "md:min-h-96"
+        "flex relative flex-col min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-3xl squircle-white overflow-hidden",
+        isWide && "md:min-h-96",
+        cover ? "p-2 h-48 md:h-72" : "p-4"
       )}
     >
-      <PreviewContent />
-      {iconType && <PreviewIcon icon={icon} iconAlt={iconAlt} />}
+      {cover ? (
+        <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-3xl rounded-2xl">
+          <Image
+            width={1200}
+            height={630}
+            className="size-full h-48 md:h-72 object-cover transition-all duration-400 ease-in-out hover:scale-105"
+            alt={iconAlt ?? ""}
+            src={getImageUrl(cover!)}
+          />
+        </div>
+      ) : (
+        <PreviewContent
+          emoji={coverText?.emoji ?? "😎"}
+          title={coverText?.title ?? "I made you looked."}
+          description={
+            coverText?.description ??
+            "You can have the rest of the empty space here."
+          }
+        />
+      )}
+      {iconType && <PreviewIcon icon={icon} iconAlt={iconAlt} title={title} />}
     </div>
   );
 }
 
-function PreviewContent({ children }: { children?: React.ReactNode }) {
+function PreviewContent({
+  emoji,
+  title,
+  description,
+}: {
+  emoji: string;
+  title: string;
+  description: string;
+}) {
   return (
     <div className="flex flex-col items-start gap-3 w-full max-w-[90%] mx-auto">
-      {children ?? (
-        <>
-          <h4 className="text-3xl tracking-wide leading-[120%]">
-            😎
-            <br />I made you looked.
-          </h4>
+      <>
+        <h4 className="text-3xl tracking-wide leading-[120%]">
+          {emoji}
+          <br />
+          {title}
+        </h4>
 
-          <p className="font-medium text-zinc-500 text-2xl leading-[120%]">
-            You can have the rest of the empty space here.
-          </p>
-        </>
-      )}
+        <p className="font-medium text-zinc-500 text-2xl leading-[120%]">
+          {description}
+        </p>
+      </>
     </div>
   );
 }
 
-function PreviewIcon({ icon, iconAlt }: PreviewProps) {
+function PreviewIcon({ icon, iconAlt, title }: PreviewProps) {
   return (
     <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-zinc-100 rounded-full overflow-hidden">
       <Image
         width={24}
         height={24}
         className="w-6 h-6"
-        alt={iconAlt ?? ""}
-        src={icon!}
+        alt={iconAlt ?? title ?? ""}
+        src={getImageUrl(icon!)}
       />
     </div>
   );

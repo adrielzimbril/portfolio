@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
         hostname: "www.adrielzimbril.com",
       },
       {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
         // google profile images
         protocol: "https",
         hostname: "lh3.googleusercontent.com",

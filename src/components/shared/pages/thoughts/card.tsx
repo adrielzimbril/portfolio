@@ -1,14 +1,34 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/thoughts/details";
-import { ThoughtPreviewCardInfoProps } from "@/types";
+import { Post } from "@/module/content/types";
 
-export function ThoughtCard({ details }: ThoughtPreviewCardInfoProps) {
+export function ThoughtCard({
+  title,
+  cover,
+  slug,
+  excerpt,
+  tags,
+  created_at,
+}: {
+  title: string;
+  cover?: string;
+  slug: string;
+  excerpt: string;
+  tags: { name: string }[];
+  created_at: string;
+}) {
   return (
-    <Card className="squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
-      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
-        <CardPreview />
-        <CardInfo details={details} />
+    <Card className="squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl h-full border-0 overflow-hidden">
+      <CardContent className="h-full grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
+        <CardPreview title={title} cover={cover} />
+        <CardInfo
+          title={title}
+          excerpt={excerpt}
+          tags={tags}
+          created_at={created_at}
+          slug={slug}
+        />
       </CardContent>
     </Card>
   );

@@ -7,3 +7,22 @@ export function getBaseUrl() {
 	}
 	return `http://localhost:${process.env.PORT ?? 3000}`;
 }
+
+
+export function getResourcesUrl(
+  resource: "hub" | "project" | "thought",
+  slug?: string | undefined
+) {
+  return `${getBaseUrl()}/${resource}${slug ? `/${slug}` : ""}`;
+}
+
+export function getImageUrl(slug: string) {
+  if (slug.startsWith("http://") || slug.startsWith("https://")) {
+    return slug;
+  }
+
+  const base = getBaseUrl().replace(/\/+$/, "");
+  const path = slug.replace(/^\/+/, "");
+
+  return `${base}/${path}`;
+}

@@ -14,7 +14,7 @@ export async function getAllPosts(
     published: true,
     locale: undefined,
     pageSlug: undefined,
-    sort: "asc",
+    sort: "desc",
     limit: undefined,
   }
 ): Promise<Post[]> {
@@ -27,8 +27,8 @@ export async function getAllPosts(
       )
       .sort((a, b) =>
         sort === "asc"
-          ? a.path.localeCompare(b.path)
-          : b.path.localeCompare(a.path)
+          ? a.created_at.localeCompare(b.created_at)
+          : b.created_at.localeCompare(a.created_at)
       )
       .filter((post) => post.slug !== pageSlug)
       .slice(0, limit)
@@ -61,7 +61,7 @@ export async function getAllPostSlugs(
   options: GetAllPostSlugsOptions = {
     published: true,
     locale: undefined,
-    sort: "asc",
+    sort: "desc",
     limit: undefined,
   }
 ): Promise<string[]> {
@@ -74,8 +74,8 @@ export async function getAllPostSlugs(
       )
       .sort((a, b) =>
         sort === "asc"
-          ? a.path.localeCompare(b.path)
-          : b.path.localeCompare(a.path)
+          ? a.created_at.localeCompare(b.created_at)
+          : b.created_at.localeCompare(a.created_at)
       )
       .map((post) => post.path)
       .slice(0, limit)
