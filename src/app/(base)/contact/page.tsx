@@ -24,8 +24,8 @@ export default function Newsletter() {
         sectionContentClassName="w-full"
         cardClassName="w-full"
         cardContentClassName="w-full p-6 md:p-8"
-        //cardContentClassName="squircle squircle-white squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60"
-        className="squircle squircle-white squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+        //cardContentClassName="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60"
+        className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
       >
         <div
           className={cn(
@@ -54,7 +54,7 @@ export default function Newsletter() {
             namespace="shiro-decouverte"
             calLink="shirospace-saas-agency/shiro-decouverte"
             style={{ width: "100%", height: "100%", overflow: "scroll" }}
-            className="squircle squircle-white squircle-3xl squircle-smooth-xl border-0 overflow-hidden size-full"
+            className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden size-full"
             config={{ layout: "month_view" }}
           />
 

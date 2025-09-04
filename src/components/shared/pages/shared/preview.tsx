@@ -25,17 +25,17 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex relative flex-col min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-3xl squircle-white overflow-hidden",
+        "flex relative flex-col min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-white overflow-hidden",
         isWide && "md:min-h-96",
         cover ? "p-2 h-48 md:h-72" : "p-4"
       )}
     >
       {cover ? (
-        <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-3xl rounded-2xl">
+        <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
           <Image
             width={1200}
             height={630}
-            className="size-full h-48 md:h-72 object-cover transition-all duration-400 ease-in-out hover:scale-105"
+            className="size-full h-48 md:h-72 object-cover pointer-events-none transition-all duration-800 ease hover:scale-105"
             alt={iconAlt ?? ""}
             src={getImageUrl(cover!)}
           />

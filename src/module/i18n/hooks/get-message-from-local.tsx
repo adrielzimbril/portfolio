@@ -3,8 +3,7 @@ import deepmerge from "deepmerge";
 import type { Messages } from "@i18n/types";
 
 export const importLocale = async (locale: string): Promise<Messages> => {
-  return (await import(`@i18n/translations/${locale}.json`))
-    .default as Messages;
+  return (await import(`../translations/${locale}.json`)).default as Messages;
 };
 
 export const getMessagesForLocale = async (

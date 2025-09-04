@@ -1,10 +1,4 @@
-interface NavItem {
-  name: string;
-  link: string;
-  inHeader?: boolean;
-}
-
-export const routes: Record<string, NavItem> = {
+export const routes = {
   home: {
     name: "Acceuil",
     link: "/",

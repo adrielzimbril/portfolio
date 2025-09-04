@@ -5,7 +5,7 @@ export function ProjectsSection() {
   return (
     <PageDetails
       useMarkdown
-      descriptionTop={`
+      content={`
         Vous pouvez ajouter **des résultats concrets** que ce projet a apportés après votre design ! Vous pouvez ajouter **des résultats concrets** que ce projet a apportés après votre design !
     
         Par exemple, montrer des *données réelles*.

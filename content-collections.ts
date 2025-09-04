@@ -4,6 +4,12 @@ import rehypeShiki from "@shikijs/rehype";
 import { z } from "zod";
 import { appConfig } from "@data/app-config";
 
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeStringify from "rehype-stringify";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+
 const BASE_COLLECTION_PATH = "src/content";
 
 function sanitizePath(path: string) {
@@ -213,13 +219,16 @@ const posts = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
+      remarkPlugins: [remarkGfm, remarkParse, remarkRehype],
       rehypePlugins: [
         [
           rehypeShiki,
           {
-            theme: "github-dark",
+            theme: "nord",
           },
         ],
+        [rehypePrettyCode],
+        [rehypeStringify],
       ],
     });
 
@@ -273,6 +282,7 @@ const projects = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
+      remarkPlugins: [remarkGfm, remarkParse, remarkRehype],
       rehypePlugins: [
         [
           rehypeShiki,
@@ -280,6 +290,8 @@ const projects = defineCollection({
             theme: "nord",
           },
         ],
+        [rehypePrettyCode],
+        [rehypeStringify],
       ],
     });
 

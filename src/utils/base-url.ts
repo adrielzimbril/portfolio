@@ -10,7 +10,7 @@ export function getBaseUrl() {
 
 
 export function getResourcesUrl(
-  resource: "hub" | "project" | "thought",
+  resource: "hub" | "projects" | "thoughts",
   slug?: string | undefined
 ) {
   return `${getBaseUrl()}/${resource}${slug ? `/${slug}` : ""}`;

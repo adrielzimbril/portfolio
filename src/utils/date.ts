@@ -60,11 +60,17 @@ export function formatDate(date: string): string {
  * const date = getDate("2023-01-01", "en-US", false);
  * console.log(date); // Output: Jan 1, 2023
  */
-export function getDate(
-  date: string | Date = new Date(),
-  lang: Intl.LocalesArgument = "en-US",
-  iso: boolean = true
-): string {
+export function getDate({
+  date,
+  lang = "en-US",
+  iso = true,
+}: {
+  date: string | Date;
+  lang?: Intl.LocalesArgument;
+  iso?: boolean;
+}): string {
   const d = new Date(date);
-  return iso ? d.toISOString().split("T")[0] : d.toLocaleDateString(lang);
+  return iso
+    ? d.toISOString().split("T")[0]
+    : Intl.DateTimeFormat(lang, { dateStyle: "medium" }).format(d);
 }

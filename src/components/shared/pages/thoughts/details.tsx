@@ -58,7 +58,7 @@ function Description({ description }: { description: string }) {
 function Action({ slug }: { slug: string }) {
   return (
     <Link
-      href={`${getResourcesUrl("thought", slug)}`}
+      href={`${getResourcesUrl("thoughts", slug)}`}
       likeButton
       whileTap
       size="xs"

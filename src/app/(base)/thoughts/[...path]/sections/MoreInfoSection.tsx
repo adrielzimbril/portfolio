@@ -6,21 +6,23 @@ import { getAllPosts } from "@/module/content/utils/lib";
 import { Post } from "@/module/content/types";
 import logger from "@/utils/logger";
 
-export function MoreInfoSection() {
+export function MoreInfoSection({ pageSlug }: { pageSlug: string }) {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     async function loadPosts() {
       try {
-        const data = await getAllPosts({ limit: 2 });
+        const data = await getAllPosts({ pageSlug: pageSlug, limit: 2 });
         setPosts(data);
+        logger.info("MoreInfoSection loaded posts : ", data);
+        logger.info("MoreInfoSection pageSlug : ", pageSlug);
       } catch (err) {
         logger.error(err);
       }
     }
 
     loadPosts();
-  }, []);
+  }, [pageSlug]);
 
   return (
     <CardPreviewSection title="Autres articles.">

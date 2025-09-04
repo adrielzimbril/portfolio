@@ -13,6 +13,12 @@ import { Footer } from "@/components/shared/footer";
 import { Toaster } from "sonner";
 import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
 import { ReactLenis } from "lenis/react";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import type { PropsWithChildren } from "react";
+import { appConfig } from "@/data/app-config";
+import logger from "@/utils/logger";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -39,11 +45,26 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const locales = Object.keys(appConfig.i18n.locales);
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params,
+}: PropsWithChildren<{ params: Promise<{ locale: string }> }>) {
+  const { locale } = await params;
+
+  setRequestLocale(locale);
+
+  if (!locales.includes(locale as any)) {
+    //notFound();
+    logger.error("Locale not found", locale);
+  }
+
+  const messages = await getMessages();
   return (
     <html lang={siteConfig.languagePrimary} suppressHydrationWarning>
       <body
@@ -55,26 +76,28 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <LayoutProvider>
-            <TooltipProvider openDelay={0} closeDelay={0}>
-              <SquircleProvider>
-                <ReactLenis root>
-                  <main>
-                    <div className="container mx-auto relative">
-                      <Navbar />
-                      <Dockbar asFade={false} />
-                      {/* <SmoothCursor /> */}
-                      {children}
-                      <ScrollToTop />
-                      <Toaster />
-                      {/* <SplashCursor /> */}
-                      <Footer />
-                    </div>
-                  </main>
-                </ReactLenis>
-              </SquircleProvider>
-            </TooltipProvider>
-          </LayoutProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <LayoutProvider>
+              <TooltipProvider openDelay={0} closeDelay={0}>
+                <SquircleProvider>
+                  <ReactLenis root>
+                    <main>
+                      <div className="container mx-auto relative">
+                        <Navbar />
+                        <Dockbar asFade={false} />
+                        {/* <SmoothCursor /> */}
+                        {children}
+                        <ScrollToTop />
+                        <Toaster />
+                        {/* <SplashCursor /> */}
+                        <Footer />
+                      </div>
+                    </main>
+                  </ReactLenis>
+                </SquircleProvider>
+              </TooltipProvider>
+            </LayoutProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

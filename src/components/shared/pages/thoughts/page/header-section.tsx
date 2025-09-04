@@ -10,6 +10,7 @@ import {
   PreviewContent,
   TextPreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
+import { getDate } from "@/utils";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -19,7 +20,7 @@ interface HeaderSectionProps {
   mainTitle?: string;
 
   // Tags
-  tags?: string[];
+  tags?: { name: string }[];
 
   // Article details : Date  + Min read + Views
   articleDetails?: {
@@ -50,13 +51,13 @@ export function HeaderSection({
       sectionClassName="p-0 mt-20 mb-10 md:mb-20"
       isWide
       cardClassName="w-full"
-      cardContentClassName="md:px-12 py-6 md:py-12"
+      cardContentClassName="px-4 md:px-12 py-6 md:py-12"
     >
       {/* Header Preview Card */}
-      <Card className="w-full squircle squircle-white squircle-smooth-xl squircle-6xl overflow-hidden p-5">
+      <Card className="w-full squircle squircle-white squircle-smooth-xl squircle-2xl md:squircle-4xl overflow-hidden p-3 md:p-5">
         <CardContent
           className={cn(
-            "w-full squircle squircle-stone-100 squircle-smooth-xl squircle-5xl overflow-hidden flex flex-col justify-center",
+            "w-full squircle squircle-stone-100 squircle-smooth-xl squircle-xl md:squircle-3xl overflow-hidden flex flex-col justify-center",
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
@@ -67,7 +68,7 @@ export function HeaderSection({
         </CardContent>
       </Card>
 
-      <h1 className="h2 w-full font-normal relative">{mainTitle}</h1>
+      <h1 className="h3 w-full font-normals relative">{mainTitle}</h1>
 
       {articleDetails && Object.keys(articleDetails).length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
@@ -79,7 +80,7 @@ export function HeaderSection({
             >
               <span className="flex items-center gap-2">
                 <Calendar className="size-4 text-indigo-400" variant="bulk" />
-                {articleDetails.date}
+                {getDate({ date: articleDetails.date, iso: false })}
               </span>
             </Badge>
           )}
@@ -114,10 +115,10 @@ export function HeaderSection({
       )}
 
       {tags && tags.length > 0 && (
-        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-7xl squircle-white overflow-hidden">
+        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-white overflow-hidden">
           {tags.map((tag, index) => (
             <Badge key={index} size="sm">
-              {tag}
+              {tag.name || (tag as unknown as string)}
             </Badge>
           ))}
         </div>

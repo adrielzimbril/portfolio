@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PreviewContentType } from "@/types";
+import { getImageUrl } from "@/utils/base-url";
 
 interface BasePreviewContent {
   type: PreviewContentType;
@@ -68,13 +69,13 @@ export function HeaderPreviewCard({ content }: { content: PreviewContent }) {
 
     case PreviewContentType.IMAGE:
       return (
-        <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className="w-full h-full max-h-[500px] md:max-h-[500px] flex flex-col items-center justify-center overflow-hidden rounded-2xl md:rounded-[2rem]">
           <Image
-            src={content.src}
+            src={getImageUrl(content.src)}
             alt={content.alt}
-            width={600}
-            height={400}
-            className="w-full h-full object-contain rounded-lg"
+            width={1200}
+            height={630}
+            className="size-auto object-cover pointer-events-none hover:scale-105 transition-all duration-800 rounded-2xl md:rounded-[2rem]"
           />
         </div>
       );
