@@ -47,11 +47,9 @@ function Header({ title }: { title: string }) {
 
 function Description({ description }: { description: string }) {
   return (
-    <>
-      <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-zinc-600">
-        {description}
-      </p>
-    </>
+    <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-zinc-600">
+      {description}
+    </p>
   );
 }
 

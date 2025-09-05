@@ -1,7 +1,7 @@
-import type { Post } from "@/module/content/types/types";
-import { allPosts } from "content-collections";
+import type { Project } from "@/module/content/types/types";
+import { allProjects } from "content-collections";
 
-type GetAllPostsOptions = {
+type GetAllProjectsOptions = {
   published?: boolean;
   locale?: string;
   pageSlug?: string;
@@ -9,102 +9,103 @@ type GetAllPostsOptions = {
   limit?: number;
 };
 
-export async function getAllPosts(
-  options: GetAllPostsOptions = {
+export async function getAllProjects(
+  options: GetAllProjectsOptions = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
     sort: "desc",
     limit: undefined,
   }
-): Promise<Post[]> {
+): Promise<Project[]> {
   const { published, locale, pageSlug, sort, limit } = options;
   return Promise.resolve(
-    allPosts
+    allProjects
       .filter(
-        (post) =>
-          post.published === published && (!locale || post.locale === locale)
+        (project) =>
+          project.published === published &&
+          (!locale || project.locale === locale)
       )
       .sort((a, b) =>
         sort === "asc"
           ? a.created_at.localeCompare(b.created_at)
           : b.created_at.localeCompare(a.created_at)
       )
-      .filter((post) => post.slug !== pageSlug)
+      .filter((project) => project.slug !== pageSlug)
       .slice(0, limit)
   );
 }
 
-export async function getPostBySlug(
+export async function getProjectBySlug(
   slug: string,
   options?: {
     locale?: string;
   }
-): Promise<Post | null> {
+): Promise<Project | null> {
   const { locale } = options ?? {};
 
   return Promise.resolve(
-    allPosts.find(
-      (post: Post) => post.path === slug && (!locale || post.locale === locale)
+    allProjects.find(
+      (project: Project) =>
+        project.path === slug && (!locale || project.locale === locale)
     ) ?? null
   );
 }
 
-
-interface PostsResult {
-  currentPost: Post;
-  adjacentPosts: Post[];
+interface ProjectsResult {
+  currentProject: Project;
+  adjacentProjects: Project[];
   totalFound: number;
 }
 
 /**
- * Retrieves a post and its adjacent posts (always 2 max)
+ * Retrieves a project and its adjacent projects (always 2 max)
  * Automatically adapts : if not enough before, takes more after and vice versa
  *
- * @param slug - The slug of the post
- * @param options - Options for the post retrieval
+ * @param slug - The slug of the project
+ * @param options - Options for the project retrieval
  *
- * @returns Promise<PostsResult | null>
+ * @returns Promise<ProjectsResult | null>
  *
  * @example
  * ```typescript
- * const posts = await getPostWithAdjacent("my-post-slug", { locale: "en" });
+ * const projects = await getProjectWithAdjacent("my-project-slug", { locale: "en" });
  * ```
- * // Returns the post with slug "my-post-slug" and its adjacent posts
+ * // Returns the project with slug "my-project-slug" and its adjacent projects
  */
-export async function getPostWithAdjacent(
+export async function getProjectWithAdjacent(
   slug: string,
   options?: {
     locale?: string;
   }
-): Promise<PostsResult | null> {
+): Promise<ProjectsResult | null> {
   const { locale } = options ?? {};
   // Filter by locale if specified
-  const filteredPosts = allPosts.filter(
-    (post: Post) => !locale || post.locale === locale
+  const filteredProjects = allProjects.filter(
+    (project: Project) => !locale || project.locale === locale
   );
 
   // Sort by date (most recent first)
-  const sortedPosts = filteredPosts.sort(
+  const sortedProjects = filteredProjects.sort(
     (a, b) =>
       new Date(b.created_at || "").getTime() -
       new Date(a.created_at || "").getTime()
   );
 
-  // Find the current post
-  const currentIndex = sortedPosts.findIndex(
-    (post: Post) => post.path === slug
+  // Find the current project
+  const currentIndex = sortedProjects.findIndex(
+    (project: Project) => project.path === slug
   );
 
   if (currentIndex === -1) {
     return null;
   }
 
-  const currentPost = sortedPosts[currentIndex];
+  const currentProject = sortedProjects[currentIndex];
 
-  // Intelligent logic to always have 2 posts
+  // Intelligent logic to always have 2 projects
   const availableBefore = currentIndex;
-  const availableAfter = sortedPosts.length - currentIndex - 1;
+  const availableAfter = sortedProjects.length - currentIndex - 1;
   const totalWanted = 2;
 
   let beforeCount = 1; // Preference: 1 before, 1 after
@@ -112,11 +113,11 @@ export async function getPostWithAdjacent(
 
   // Automatic adaptation
   if (availableBefore === 0) {
-    // First post -> take 2 after
+    // First project -> take 2 after
     beforeCount = 0;
     afterCount = Math.min(2, availableAfter);
   } else if (availableAfter === 0) {
-    // Last post -> take 2 before
+    // Last project -> take 2 before
     beforeCount = Math.min(2, availableBefore);
     afterCount = 0;
   } else if (availableBefore < 1) {
@@ -129,36 +130,36 @@ export async function getPostWithAdjacent(
     beforeCount = Math.min(totalWanted - afterCount, availableBefore);
   }
 
-  // Retrieve the posts
-  const beforePosts =
+  // Retrieve the projects
+  const beforeProjects =
     beforeCount > 0
-      ? sortedPosts.slice(currentIndex - beforeCount, currentIndex)
+      ? sortedProjects.slice(currentIndex - beforeCount, currentIndex)
       : [];
 
-  const afterPosts =
+  const afterProjects =
     afterCount > 0
-      ? sortedPosts.slice(currentIndex + 1, currentIndex + 1 + afterCount)
+      ? sortedProjects.slice(currentIndex + 1, currentIndex + 1 + afterCount)
       : [];
 
   // Combine in chronological order
-  const adjacentPosts = [...beforePosts, ...afterPosts];
+  const adjacentProjects = [...beforeProjects, ...afterProjects];
 
   return {
-    currentPost,
-    adjacentPosts,
-    totalFound: adjacentPosts.length,
+    currentProject,
+    adjacentProjects,
+    totalFound: adjacentProjects.length,
   };
 }
 
-type GetAllPostSlugsOptions = {
+type GetAllProjectSlugsOptions = {
   published?: boolean;
   locale?: string;
   sort?: "asc" | "desc";
   limit?: number;
 };
 
-export async function getAllPostSlugs(
-  options: GetAllPostSlugsOptions = {
+export async function getAllProjectSlugs(
+  options: GetAllProjectSlugsOptions = {
     published: true,
     locale: undefined,
     sort: "desc",
@@ -167,17 +168,18 @@ export async function getAllPostSlugs(
 ): Promise<string[]> {
   const { published, locale, sort, limit } = options;
   return Promise.resolve(
-    allPosts
+    allProjects
       .filter(
-        (post) =>
-          post.published === published && (!locale || post.locale === locale)
+        (project) =>
+          project.published === published &&
+          (!locale || project.locale === locale)
       )
       .sort((a, b) =>
         sort === "asc"
           ? a.created_at.localeCompare(b.created_at)
           : b.created_at.localeCompare(a.created_at)
       )
-      .map((post) => post.path)
+      .map((project) => project.path)
       .slice(0, limit)
   );
 }
@@ -191,46 +193,49 @@ type FilterOptions = {
 };
 
 /**
- * Get filtered posts
+ * Get filtered projects
  *
  * @param options - Filter options
  *
- * @returns Promise<Post[]>
+ * @returns Promise<Project[]>
  *
  * @example
  * ```typescript
- * const posts = await getFilteredPosts({ category: "technology" });
+ * const projects = await getFilteredProjects({ category: "technology" });
  * ```
- * // Returns all posts filtered by category "technology"
+ * // Returns all projects filtered by category "technology"
  */
-export async function getFilteredPosts(
+export async function getFilteredProjects(
   options: FilterOptions = { published: undefined, locale: undefined }
-): Promise<Post[]> {
-  const posts = await getAllPosts({
+): Promise<Project[]> {
+  const projects = await getAllProjects({
     published: options.published,
     locale: options.locale,
   });
   return Promise.resolve(
-    posts.filter((post) => {
+    projects.filter((project) => {
       // Filter by category
       if (
         options.category &&
-        post.categories.find((cat) => cat.slug === options.category)
+        project.categories.find((cat) => cat.slug === options.category)
       ) {
         return false;
       }
 
       // Filter by tag
-      if (options.tag && !post.tags.find((tag) => tag.slug === options.tag)) {
+      if (
+        options.tag &&
+        !project.tags.find((tag) => tag.slug === options.tag)
+      ) {
         return false;
       }
 
       // Filter by search
       if (options.search) {
         const searchLower = options.search.toLowerCase();
-        const titleMatch = post.title.toLowerCase().includes(searchLower);
+        const titleMatch = project.title.toLowerCase().includes(searchLower);
         const contentMatch =
-          post.excerpt?.toLowerCase().includes(searchLower) || false;
+          project.excerpt?.toLowerCase().includes(searchLower) || false;
 
         if (!titleMatch && !contentMatch) {
           return false;
@@ -249,12 +254,12 @@ export async function getFilteredPosts(
  *
  * @example
  * ```typescript
- * const categories = await getAllPostCategories();
+ * const categories = await getAllProjectCategories();
  * ```
  */
-export async function getAllPostCategories(): Promise<string[]> {
-  const categories = allPosts.map((post) =>
-    post.categories.map((cat) => cat.slug)
+export async function getAllProjectCategories(): Promise<string[]> {
+  const categories = allProjects.map((project) =>
+    project.categories.map((cat) => cat.slug)
   );
   return Promise.resolve([...new Set(categories.flat())]);
 }
@@ -266,11 +271,13 @@ export async function getAllPostCategories(): Promise<string[]> {
  *
  * @example
  * ```typescript
- * const tags = await getAllPostTags();
+ * const tags = await getAllProjectTags();
  * ```
- * // Returns all unique tags from all posts
+ * // Returns all unique tags from all projects
  */
-export async function getAllPostTags(): Promise<string[]> {
-  const allTags = allPosts.flatMap((post) => post.tags.map((tag) => tag.slug));
+export async function getAllProjectTags(): Promise<string[]> {
+  const allTags = allProjects.flatMap((project) =>
+    project.tags.map((tag) => tag.slug)
+  );
   return Promise.resolve([...new Set(allTags)]);
 }

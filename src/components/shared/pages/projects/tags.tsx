@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { cn } from "@/utils/utils";
+import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
 
 function ProjectTags({ tags }: { tags: string[] }) {
   return (
@@ -19,7 +20,7 @@ function ProjectCategories({
 }: {
   categories: {
     name: string;
-    color: number;
+    color: DEFAULT_CATEGORY_COLOR_NAME;
   }[];
 }) {
   return (

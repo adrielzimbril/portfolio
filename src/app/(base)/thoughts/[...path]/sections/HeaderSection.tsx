@@ -13,8 +13,8 @@ export function HeaderSection({
   tags: { name: string }[];
   cover: string;
   title: string;
-  readingTime: string | number;
-  views: string | number;
+  readingTime: string;
+  views: number;
 }) {
   return (
     <ThoughtHeaderSection

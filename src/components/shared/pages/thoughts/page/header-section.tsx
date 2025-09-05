@@ -25,8 +25,8 @@ interface HeaderSectionProps {
   // Article details : Date  + Min read + Views
   articleDetails?: {
     date?: string;
-    readingTime?: string | number;
-    views?: string | number;
+    readingTime?: string;
+    views?: number;
   };
 
   // Optional CSS Classes
@@ -84,33 +84,31 @@ export function HeaderSection({
               </span>
             </Badge>
           )}
-          {articleDetails.readingTime && (
-            <Badge
-              className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
-              variant="colored"
-              size="md"
-            >
-              <span className="flex items-center gap-2">
-                <HourglassFill
-                  className="size-4 text-indigo-400"
-                  variant="bulk"
-                />
-                {articleDetails.readingTime} read
-              </span>
-            </Badge>
-          )}
-          {articleDetails.views && (
-            <Badge
-              className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
-              variant="colored"
-              size="md"
-            >
-              <span className="flex items-center gap-2">
-                <Eye className="size-4 text-indigo-400" variant="bulk" />
-                {articleDetails.views} views
-              </span>
-            </Badge>
-          )}
+
+          <Badge
+            className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+            variant="colored"
+            size="md"
+          >
+            <span className="flex items-center gap-2">
+              <HourglassFill
+                className="size-4 text-indigo-400"
+                variant="bulk"
+              />
+              {articleDetails.readingTime} read
+            </span>
+          </Badge>
+
+          <Badge
+            className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+            variant="colored"
+            size="md"
+          >
+            <span className="flex items-center gap-2">
+              <Eye className="size-4 text-indigo-400" variant="bulk" />
+              {articleDetails.views} views
+            </span>
+          </Badge>
         </div>
       )}
 

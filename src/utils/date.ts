@@ -63,14 +63,16 @@ export function formatDate(date: string): string {
 export function getDate({
   date,
   lang = "en-US",
+  dateStyle = "medium",
   iso = true,
 }: {
   date: string | Date;
   lang?: Intl.LocalesArgument;
+  dateStyle?: Intl.DateTimeFormatOptions["dateStyle"];
   iso?: boolean;
 }): string {
   const d = new Date(date);
   return iso
     ? d.toISOString().split("T")[0]
-    : Intl.DateTimeFormat(lang, { dateStyle: "medium" }).format(d);
+    : Intl.DateTimeFormat(lang, { dateStyle }).format(d);
 }

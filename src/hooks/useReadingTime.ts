@@ -299,9 +299,9 @@ export function formatTime(
       return `${totalSeconds} sec`;
     case "detailed":
       return minutes > 0 && seconds > 0
-        ? `${minutes} minV ${seconds} sec`
+        ? `${minutes} min ${seconds} sec`
         : minutes > 0
-        ? `${minutes} minV`
+        ? `${minutes} min`
         : `${seconds} sec`;
     case "short":
       return minutes > 0 ? `${minutes}m` : `${seconds}s`;

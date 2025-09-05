@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MyThoughtsSection } from "./sections/MyThoughtsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";

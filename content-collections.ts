@@ -200,6 +200,17 @@ const projectTags = defineCollection({
   },
 });
 
+// Collection of project types (in projects/types/)
+const projectTypes = defineCollection({
+  name: "projectTypes",
+  directory: `${BASE_COLLECTION_PATH}/projects/types`,
+  include: "**/*.{md,mdx}",
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+  }),
+});
+
 // Collection of posts with relations
 const posts = defineCollection({
   name: "posts",
@@ -224,7 +235,7 @@ const posts = defineCollection({
         [
           rehypeShiki,
           {
-            theme: "nord",
+            theme: "github-dark",
           },
         ],
         [rehypePrettyCode],
@@ -264,6 +275,8 @@ const projects = defineCollection({
     slug: z.string(),
     excerpt: z.string().optional(),
     project_type: z.string().optional(),
+    project_type_id: z.number().optional(), // ID of the project type
+    project_type_label: z.string().optional(),
     project_link: z.string().optional(),
     project_keywords: z.string().optional(),
     categories_id: z.array(z.number()), // ID of the project category
@@ -305,6 +318,10 @@ const projects = defineCollection({
       .documents(projectTags)
       .filter((t) => document.tags_id.includes(t.id));
 
+    const project_type = context
+      .documents(projectTypes)
+      .filter((t) => document.project_type_id === t.id);
+
     const slug = document._meta.path;
 
     return {
@@ -316,6 +333,7 @@ const projects = defineCollection({
       // Resolved relations
       categories: categories || [],
       tags: tags || [],
+      project_type: project_type || [],
     };
   },
 });
@@ -328,6 +346,7 @@ export default defineConfig({
     postTags,
     projectCategories,
     projectTags,
+    projectTypes,
     // Main collections with relations
     posts,
     projects,

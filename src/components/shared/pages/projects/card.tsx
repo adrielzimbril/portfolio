@@ -4,11 +4,27 @@ import { CardInfo } from "@/components/shared/pages/projects/details";
 import { cn } from "@/utils/utils";
 import { ProjectPreviewCardInfoProps } from "@/types/type";
 
-export function ProjectCard({ details, isWide }: ProjectPreviewCardInfoProps) {
+export function ProjectCard({
+  title,
+  cover,
+  description,
+  slug,
+  tags,
+  categories,
+  isWide,
+}: {
+  title: string;
+  cover?: string;
+  description: string;
+  slug: string;
+  tags: { name: string }[];
+  categories: { name: string; color: string }[];
+  isWide: boolean;
+}) {
   return (
     <Card
       className={cn(
-        "flex flex-col items-center justify-center squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full",
+        "flex flex-col items-center justify-center squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden size-full",
         isWide && "md:flex-row md:col-span-2"
       )}
     >
@@ -18,8 +34,16 @@ export function ProjectCard({ details, isWide }: ProjectPreviewCardInfoProps) {
           isWide && "md:flex-row"
         )}
       >
-        <CardPreview isWide={isWide} />
-        <CardInfo details={details} isWide={isWide} />
+        <CardPreview title={title} cover={cover} isWide={isWide} />
+        <CardInfo
+          title={title}
+          cover={cover}
+          description={description}
+          slug={slug}
+          tags={tags}
+          categories={categories}
+          isWide={isWide}
+        />
       </CardContent>
     </Card>
   );
