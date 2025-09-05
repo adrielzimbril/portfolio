@@ -31,7 +31,7 @@ export function ProjectDetailsSection({
   return (
     <section className="relative w-full">
       <div className="relative flex flex-col md:flex-row w-full max-w-5xl mx-auto place-content-center justify-center gap-6 md:gap-20">
-        <div className="flex flex-col w-full md:max-w-[60%] items-start gap-8">
+        <div className="flex flex-col w-full md:max-w-[60%] items-start gap-4 md:gap-8">
           <h2 className="relative self-stretch h3">Présentation</h2>
 
           <div className="flex flex-col gap-8 md:gap-12 text-zinc-500 font-normal text-base w-full">

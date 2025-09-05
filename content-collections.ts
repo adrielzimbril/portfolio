@@ -14,7 +14,7 @@ import rehypeImgSize from "rehype-img-size";
 import rehypeVideo from "rehype-video";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import { PortfolioProjectScope } from "@/types";
+import { PortfolioProjectResearchScope } from "@/types";
 // import { mdxAnnotations } from "mdx-annotations";
 // import { rehypeExtendedTable } from "rehype-extended-table";
 
@@ -304,7 +304,7 @@ const projects = defineCollection({
     cards: z
       .array(
         z.object({
-          title: z.enum(Object.values(PortfolioProjectScope)),
+          title: z.enum(Object.values(PortfolioProjectResearchScope)),
           emoji: z.string(),
           description: z.string(),
           methodology: z.string(),
@@ -313,6 +313,31 @@ const projects = defineCollection({
       .optional(),
     goalSectionDescription: z.string().optional(),
     goalSectionSubDescription: z.string().optional(),
+    pointSectionDescription: z.string().optional(),
+    points: z
+      .array(z.object({ title: z.string(), description: z.string() }))
+      .optional(),
+    statementSectionDescription: z.string().optional(),
+    statements: z
+      .array(
+        z.object({
+          icon: z.string(),
+          number: z.string(),
+          description: z.string(),
+        })
+      )
+      .optional(),
+    previewSectionDescription: z.string().optional(),
+    resultSectionDescription: z.string().optional(),
+    results: z
+      .array(
+        z.object({
+          badge: z.string(),
+          icon: z.string(),
+          content: z.string(),
+        })
+      )
+      .optional(),
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {

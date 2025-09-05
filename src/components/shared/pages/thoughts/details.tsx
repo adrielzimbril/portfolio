@@ -7,12 +7,14 @@ import { getResourcesUrl } from "@/utils/base-url";
 export function CardInfo({
   title,
   excerpt,
+  primaryTag,
   tags,
   slug,
   created_at,
 }: {
   title: string;
   excerpt: string;
+  primaryTag?: string;
   tags: { name: string }[];
   slug: string;
   created_at: string;
@@ -24,8 +26,10 @@ export function CardInfo({
 
         {tags && (
           <Tags
-            primaryTag={tags[0].name}
-            tags={tags.slice(1, 5).map((tag) => tag.name)}
+            primaryTag={primaryTag ?? tags[0].name}
+            tags={tags
+              .slice(primaryTag ? 0 : 1, primaryTag ? 4 : 5)
+              .map((tag) => tag.name)}
           />
         )}
 

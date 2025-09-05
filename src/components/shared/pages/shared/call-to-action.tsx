@@ -8,6 +8,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { routes } from "@/data/route";
 import logger from "@/utils/logger";
+import { getImageUrl } from "@/utils/base-url";
 
 function EmailForm() {
   const handleSubmit = () => {
@@ -132,7 +133,7 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
 export function CallToAction({ isPage }: { isPage?: boolean }) {
   return (
     <SectionBase isCallToAction>
-      <EmojiPlaceholder src="/image-1001.png" isMobileHidden />
+      <EmojiPlaceholder src={getImageUrl("/image-1001.png")} isMobileHidden />
       <ContentSection isPage={isPage} />
     </SectionBase>
   );

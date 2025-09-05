@@ -2,6 +2,7 @@ import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { CardInfoProps } from "@/components/shared/pages/shared/page/preview-value-card";
 import { Badge } from "@/components/ui/badge";
+import { getImageUrl } from "@/utils/base-url";
 
 function PreviewContent({
   title,
@@ -27,7 +28,7 @@ function PreviewIcon({ icon }: { icon: string }) {
         height={100}
         className="size-10 object-cover pointer-events-none"
         alt={icon}
-        src={icon!}
+        src={getImageUrl(icon)}
       />
     </div>
   );

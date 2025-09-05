@@ -8,7 +8,6 @@ export enum ResourceType {
   VIDEO = "video",
 }
 
-
 export enum PreviewContentType {
   TEXT = "text",
   IMAGE = "image",
@@ -27,7 +26,7 @@ export enum PortfolioProjectCategory {
   OTHER = "other",
 }
 
-export enum PortfolioProjectScope {
+export enum PortfolioProjectResearchScope {
   WHO = "who",
   WHEN = "when",
   WHERE = "where",

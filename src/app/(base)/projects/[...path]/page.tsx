@@ -1,16 +1,16 @@
 import React from "react";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { HeaderSection } from "./sections/HeaderSection";
-import { InsightsSection } from "./sections/InsightsSection";
-import { IntroductionSection } from "./sections/IntroductionSection";
-import { ProblemStatementSection } from "./sections/ProblemStatementSection";
+import { ProjectPreviewSection } from "./sections/ProjectPreviewSection";
+import { ProjectPointsResearchSection } from "./sections/ProjectPointsResearchSection";
+import { ProjectStatementSection } from "./sections/ProjectStatementSection";
 import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
 import {
   CardData,
-  ProjectGallerySection,
-} from "./sections/ProjectGallerySection";
-import { ProjectOverviewSection } from "./sections/ProjectOverviewSection";
-import { UserResearchSection } from "./sections/UserResearchSection";
+  ProjectResearchSection,
+} from "./sections/ProjectResearchSection";
+import { ProjectResultSection } from "./sections/ProjectResultSection";
+import { GoalResearchSection } from "./sections/GoalResearchSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { localeRedirect } from "@/module/i18n/routing";
 import { getProjectWithAdjacent } from "@/module/content/utils/lib/projects";
@@ -44,10 +44,18 @@ export default async function SubProject(props: {
     project_link,
     date_project,
     categories,
+    gallery,
     cardSectionDescription,
     cards,
     goalSectionDescription,
     goalSectionSubDescription,
+    pointSectionDescription,
+    points,
+    statementSectionDescription,
+    statements,
+    previewSectionDescription,
+    resultSectionDescription,
+    results,
   } = post!.currentProject;
   return (
     <>
@@ -56,7 +64,7 @@ export default async function SubProject(props: {
         cover={image_big || ""}
         description={excerpt || ""}
         tags={categories}
-        projectLink={project_link || ""}
+        projectLink={project_link}
       />
       <ProjectDetailsSection
         content={body || ""}
@@ -64,21 +72,42 @@ export default async function SubProject(props: {
         tags={tags}
       />
       {cardSectionDescription && cards && (
-        <ProjectGallerySection
+        <ProjectResearchSection
           cards={cards as CardData[]}
           cardSectionDescription={cardSectionDescription}
         />
       )}
       {goalSectionDescription && (
-        <UserResearchSection
+        <GoalResearchSection
           description={goalSectionDescription}
           subDescription={goalSectionSubDescription}
         />
       )}
-      <ProblemStatementSection />
-      <IntroductionSection />
-      <InsightsSection />
-      <ProjectOverviewSection />
+      {statementSectionDescription && statements && (
+        <ProjectStatementSection
+          description={statementSectionDescription}
+          statements={statements}
+        />
+      )}
+      {pointSectionDescription && points && (
+        <ProjectPointsResearchSection
+          pointSectionDescription={pointSectionDescription}
+          points={points}
+        />
+      )}
+      {gallery && (
+        <ProjectPreviewSection
+          title={title}
+          description={previewSectionDescription}
+          gallery={gallery}
+        />
+      )}
+      {resultSectionDescription && results && (
+        <ProjectResultSection
+          description={resultSectionDescription}
+          results={results}
+        />
+      )}
       <MorePreviewSection data={post!.adjacentProjects} />
       <CallToAction isPage />
     </>

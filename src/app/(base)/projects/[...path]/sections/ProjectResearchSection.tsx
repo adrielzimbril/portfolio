@@ -2,16 +2,16 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { PortfolioProjectScope } from "@/types/enum";
+import { PortfolioProjectResearchScope } from "@/types/enum";
 
 export interface CardData {
-  title: PortfolioProjectScope;
+  title: PortfolioProjectResearchScope;
   emoji: string;
   description: string;
   methodology?: string;
 }
 
-export function ProjectGallerySection({
+export function ProjectResearchSection({
   cards,
   cardSectionDescription,
 }: {

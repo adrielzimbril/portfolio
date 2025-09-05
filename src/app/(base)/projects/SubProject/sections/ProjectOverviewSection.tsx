@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
+import { getImageUrl } from "@/utils/base-url";
 
 const metricsData = [
   {
@@ -76,7 +77,7 @@ export function ProjectOverviewSection() {
                     height={100}
                     className="size-8 object-cover pointer-events-none"
                     alt={metric.icon}
-                    src={metric.icon!}
+                    src={getImageUrl(metric.icon!)}
                   />
                 </div>
 
@@ -134,7 +135,7 @@ export function ProjectOverviewSection() {
                     height={100}
                     className="size-8 object-cover pointer-events-none"
                     alt={metric.icon}
-                    src={metric.icon!}
+                    src={getImageUrl(metric.icon!)}
                   />
                 </div>
 

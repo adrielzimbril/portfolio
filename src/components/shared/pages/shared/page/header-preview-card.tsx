@@ -84,7 +84,7 @@ export function HeaderPreviewCard({ content }: { content: PreviewContent }) {
       return (
         <div className="w-full h-full flex flex-col items-center justify-center">
           <video
-            src={content.src}
+            src={getImageUrl(content.src)}
             poster={content.poster}
             autoPlay={content.autoplay}
             loop={content.loop}

@@ -14,6 +14,7 @@ import Image from "next/image";
 import { routes } from "@/data/route";
 import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
+import { getImageUrl } from "@/utils/base-url";
 
 const INITIAL_WIDTH = "70rem";
 const MAX_WIDTH = "70rem";
@@ -131,7 +132,7 @@ export function Navbar() {
                   // hasScrolled && "w-10! h-10!"
                 )}
                 alt="Icon"
-                src="/icon.svg"
+                src={getImageUrl("/icon.svg")}
               />
               {/* <LogoIcon className="size-7 md:size-10" /> */}
               <LogoName
@@ -202,7 +203,7 @@ export function Navbar() {
                         height={56}
                         className={cn("size-12")}
                         alt="Icon"
-                        src="/icon.svg"
+                        src={getImageUrl("/icon.svg")}
                       />
                       <LogoName className={cn("h-8! flex-shrink-0")} />
                     </Link>
@@ -219,32 +220,34 @@ export function Navbar() {
                     variants={drawerMenuContainerVariants}
                   >
                     <AnimatePresence>
-                      {Object.values(routes).map((item) => (
-                        <motion.li
-                          key={item.name}
-                          className="p-2.5 border-b border-border last:border-b-0"
-                          variants={drawerMenuVariants}
-                        >
-                          <a
-                            href={item.link}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              const element = document.getElementById(
-                                item.link.substring(1)
-                              );
-                              element?.scrollIntoView({ behavior: "smooth" });
-                              setIsDrawerOpen(false);
-                            }}
-                            className={`underline-offset-4 hover:text-primary/80 transition-colors ${
-                              activeSection === item.link.substring(1)
-                                ? "text-primary font-medium"
-                                : "text-primary/60"
-                            }`}
+                      {Object.values(routes)
+                        .filter((item) => item.inHeader)
+                        .map((item) => (
+                          <motion.li
+                            key={item.name}
+                            className="p-2.5 border-b border-border last:border-b-0"
+                            variants={drawerMenuVariants}
                           >
-                            {item.name}
-                          </a>
-                        </motion.li>
-                      ))}
+                            <a
+                              href={item.link}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.getElementById(
+                                  item.link.substring(1)
+                                );
+                                element?.scrollIntoView({ behavior: "smooth" });
+                                setIsDrawerOpen(false);
+                              }}
+                              className={`underline-offset-4 hover:text-primary/80 transition-colors ${
+                                activeSection === item.link.substring(1)
+                                  ? "text-primary font-medium"
+                                  : "text-primary/60"
+                              }`}
+                            >
+                              {item.name}
+                            </a>
+                          </motion.li>
+                        ))}
                     </AnimatePresence>
                   </motion.ul>
                 </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
+import { getImageUrl } from "@/utils/base-url";
 
 export function InsightsSection() {
   const phoneData = [
@@ -38,7 +39,7 @@ export function InsightsSection() {
                   <img
                     className="absolute w-[362px] h-[743px] top-0 left-[3px]"
                     alt="Iphone shape"
-                    src="/iphone-shape.svg"
+                    src={getImageUrl("/iphone-shape.svg")}
                   />
 
                   <img
@@ -46,7 +47,7 @@ export function InsightsSection() {
                       index === 3 ? "w-[9px]" : "w-[368px]"
                     } h-[180px] top-[118px] left-0`}
                     alt="Hardware buttons"
-                    src={phone.hardwareButtons}
+                    src={getImageUrl(phone.hardwareButtons)}
                   />
 
                   <div className="absolute w-[327px] h-[708px] top-[17px] left-[21px] bg-greys-00 rounded-[20.93px] overflow-hidden">
@@ -66,7 +67,7 @@ export function InsightsSection() {
                     <img
                       className="absolute w-[350px] h-[731px] top-1.5 left-[9px]"
                       alt="Inner screen frame w"
-                      src="/inner-screen-frame-w--notch.svg"
+                      src={getImageUrl("/inner-screen-frame-w--notch.svg")}
                     />
                   )}
 

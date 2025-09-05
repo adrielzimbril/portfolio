@@ -5,7 +5,7 @@ import type { ImageProps } from "next/image";
 import Image from "next/image";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { PortfolioProjectScope } from "@/types";
+import { PortfolioProjectResearchScope } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
 
 export const mdxComponents = {

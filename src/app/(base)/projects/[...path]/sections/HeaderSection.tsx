@@ -15,7 +15,7 @@ export function HeaderSection({
   cover: string;
   description: string;
   tags: { name: string; color: string }[];
-  projectLink: string;
+  projectLink?: string;
 }) {
   return (
     <ResourceHeaderSection
@@ -32,7 +32,7 @@ export function HeaderSection({
       mainTitle={title}
       description={description}
       tags={tags}
-      ctaButton={{ text: "Voir le projet 🦄", href: projectLink }}
+      ctaButton={projectLink ?? undefined}
     />
   );
 }

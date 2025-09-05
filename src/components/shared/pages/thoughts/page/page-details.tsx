@@ -11,7 +11,7 @@ export function PageDetails({ content }: PageDetailsProps) {
   return (
     <section className="relative w-full">
       <div className="relative w-full max-w-3xl mx-auto">
-        <div className="flex flex-col w-full max-w-[90%] mx-auto items-start justify-center gap-4 relative">
+        <div className="flex flex-col w-full max-w-[90%] mx-auto items-start justify-center gap-4 md:gap-8 relative">
           <h2 className="relative self-stretch h3 font-normal">Présentation</h2>
 
           <div className="flex flex-col gap-8 md:gap-12 text-zinc-500 font-normal text-base w-full">

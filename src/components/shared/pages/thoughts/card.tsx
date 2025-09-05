@@ -8,6 +8,7 @@ export function ThoughtCard({
   cover,
   slug,
   excerpt,
+  primaryTag,
   tags,
   created_at,
 }: {
@@ -15,6 +16,7 @@ export function ThoughtCard({
   cover?: string;
   slug: string;
   excerpt: string;
+  primaryTag?: string;
   tags: { name: string }[];
   created_at: string;
 }) {
@@ -25,6 +27,7 @@ export function ThoughtCard({
         <CardInfo
           title={title}
           excerpt={excerpt}
+          primaryTag={primaryTag}
           tags={tags}
           created_at={created_at}
           slug={slug}

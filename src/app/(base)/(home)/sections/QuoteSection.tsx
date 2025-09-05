@@ -1,4 +1,5 @@
 import { siteConfig } from "@/data/config";
+import { getImageUrl } from "@/utils/base-url";
 
 export function QuoteSection() {
   const { quoteSection } = siteConfig;
@@ -13,7 +14,7 @@ export function QuoteSection() {
         <div className="flex gap-4">
           <div className="size-10 rounded-full bg-primary border border-border">
             <img
-              src={quoteSection.author.image}
+              src={getImageUrl(quoteSection.author.image)}
               alt={quoteSection.author.name}
               className="size-full rounded-full object-contain"
             />

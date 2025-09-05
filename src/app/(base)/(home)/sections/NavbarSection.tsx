@@ -7,6 +7,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { getImageUrl } from "@/utils/base-url";
 
 export function NavbarSection() {
   const [activeTab, setActiveTab] = useState("Acceuil");
@@ -23,11 +24,15 @@ export function NavbarSection() {
     <nav className="w-full h-28 bg-greys-00">
       <div className="flex items-center justify-between px-[153px] pt-14">
         <div className="flex items-center gap-2.5">
-          <img className="w-14 h-14" alt="Icon" src="/icon.svg" />
+          <img
+            className="w-14 h-14"
+            alt="Icon"
+            src={getImageUrl("/icon.svg")}
+          />
           <img
             className="flex-shrink-0"
             alt="Adriel zimbril"
-            src="/adriel-zimbril.svg"
+            src={getImageUrl("/adriel-zimbril.svg")}
           />
         </div>
 

@@ -6,6 +6,7 @@ import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";
+import { getImageUrl } from "@/utils/base-url";
 
 interface GenericLoadingPageProps {
   title?: string;
@@ -242,14 +243,14 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
               <Image
                 className="relative flex-shrink-0 size-14"
                 alt="Icon"
-                src="/icon.svg"
+                src={getImageUrl("/icon.svg")}
                 width="56"
                 height="56"
               />
               <Image
                 className="relative flex-shrink-0 h-5"
                 alt="Adriel zimbril"
-                src="/adriel-zimbril.svg"
+                src={getImageUrl("/adriel-zimbril.svg")}
                 width="195"
                 height="20"
               />

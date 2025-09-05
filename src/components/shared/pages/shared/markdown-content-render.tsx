@@ -6,7 +6,7 @@ import { mdxCustomComponents } from "@/module/content/utils/mdx-components";
 
 export function MarkdownContentRender({ content }: { content: string }) {
   return (
-    <div className="prose dark:prose-invert mx-auto mt-6 w-full">
+    <div className="prose dark:prose-invert mx-auto w-full">
       <MDXContent
         code={content}
         components={{

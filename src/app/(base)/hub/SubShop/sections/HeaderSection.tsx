@@ -2,6 +2,7 @@ import React from "react";
 import { routes } from "@/data/route";
 import { HeaderSection } from "@/components/shared/pages/resources/page/header-section";
 import { ResourceHeaderTag } from "@/types/componentType";
+import { PreviewContentType } from "@/types";
 
 const tags: ResourceHeaderTag[] = [
   {
@@ -30,14 +31,14 @@ function ExampleBasic() {
   return (
     <HeaderSection
       previewContent={{
-        type: "text",
+        type: PreviewContentType.TEXT,
         emoji: "😎",
         title: "I made you looked.",
         subtitle: "You can have the rest of the empty space here.",
       }}
       mainTitle="Design System × Product Thinking"
-      tags={tags}
-      ctaButton={{ text: "Obtenir 🚀", href: routes.contact.link }}
+      tags={tags.map((tag) => ({ name: tag.text, color: tag.bgColor }))}
+      ctaButton={routes.contact.link}
     />
   );
 }

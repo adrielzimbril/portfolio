@@ -7,6 +7,7 @@ import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";
+import { getImageUrl } from "@/utils/base-url";
 
 interface GenericLoadingPageProps {
   title?: string;
@@ -206,14 +207,14 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
 
       <FloatingCard delay={1.5} position="bottom-right" title="Web App 📱" />
 
-      {/* Contenu principal de chargement avec animations séquentielles */}
+      {/* Main Content with sequential animations */}
       <motion.div
         className="flex flex-col items-center justify-center self-center gap-8 px-4 md:px-8 max-w-xl"
         // initial={{ opacity: 0, y: 30 }}
         // animate={{ opacity: 1, y: 0 }}
         // transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        {/* Header avec animation */}
+        {/* Header with animation */}
         <motion.header
           className="absolute top-0 left-0 right-0 h-28 bg-greys-00"
           initial={{ opacity: 0, y: -20 }}
@@ -234,14 +235,14 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
               <Image
                 className="relative flex-shrink-0 size-14"
                 alt="Icon"
-                src="/icon.svg"
+                src={getImageUrl("/icon.svg")}
                 width="56"
                 height="56"
               />
               <Image
                 className="relative flex-shrink-0 h-5"
                 alt="Adriel zimbril"
-                src="/adriel-zimbril.svg"
+                src={getImageUrl("/adriel-zimbril.svg")}
                 width="195"
                 height="20"
               />
@@ -263,7 +264,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </div>
         </motion.div> */}
 
-        {/* Animation de chargement principale */}
+        {/* Main loading animation */}
         <motion.div
           className="relative"
           initial={{ scale: 0.8 }}
@@ -323,7 +324,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </motion.div>
         </motion.div>
 
-        {/* Texte de chargement avec animations */}
+        {/* Loading text with animations */}
         <motion.div
           className="size-full flex flex-col items-center gap-4 text-center"
           initial={{ opacity: 0 }}
@@ -349,7 +350,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </motion.p>
         </motion.div>
 
-        {/* Indicateurs de progression avec animations */}
+        {/* Progress indicators with animations */}
         <motion.div
           className="flex flex-col items-center gap-4 w-full max-w-md"
           initial={{ opacity: 0, y: 20 }}
@@ -359,7 +360,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           <LoadingProgressBar isPage={isPage} />
         </motion.div>
 
-        {/* Points de chargement animés */}
+        {/* Animated loading points */}
         {/* <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-greys-08 rounded-full animate-bounce animate-infinite delay-0"></div>
           <div className="w-3 h-3 bg-greys-08 rounded-full animate-bounce animate-infinite delay-150"></div>
@@ -375,7 +376,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         </div>
       </motion.div>
 
-      {/* Stats preview avec animation */}
+      {/* Stats preview with animation */}
       <motion.div
         className="content-stretch flex gap-8 items-center justify-center mt-12"
         initial={{ opacity: 0, y: 20 }}

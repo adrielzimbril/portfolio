@@ -2,13 +2,15 @@ import React from "react";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { cn } from "@/utils/utils";
+import { FormattedText } from "@/components/shared/formatted-text";
+import { getImageUrl } from "@/utils/base-url";
 
 function ContentSection({
   description,
   subDescription,
 }: {
   description: string;
-  subDescription: string;
+  subDescription?: string;
 }) {
   return (
     <div className="flex flex-col gap-4 items-start justify-start relative md:max-w-[55%]">
@@ -16,17 +18,21 @@ function ContentSection({
       <p className="relative text-lg md:text-2xl leading-[120%] md:mb-4">
         {description}
       </p>
-      <p className="relative text-base text-zinc-500">{subDescription}</p>
+      {subDescription && (
+        <FormattedText className="relative text-base text-zinc-500">
+          {subDescription}
+        </FormattedText>
+      )}
     </div>
   );
 }
 
-export function UserResearchSection({
+export function GoalResearchSection({
   description,
   subDescription,
 }: {
   description: string;
-  subDescription: string;
+  subDescription?: string;
 }) {
   return (
     <>
@@ -39,7 +45,7 @@ export function UserResearchSection({
         )}
       >
         <EmojiPlaceholder
-          src="/image-1310-2.png"
+          src={getImageUrl("/image-1310-2.png")}
           //isMobileHidden
           variant="bordered"
         />
@@ -50,4 +56,4 @@ export function UserResearchSection({
       </SectionBase>
     </>
   );
-};
+}

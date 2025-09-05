@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,6 +15,8 @@ import {
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { pickRandomColor } from "@/utils";
 import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
+import { Button } from "@/components/ui/button";
+import { useScrollTo } from "@/hooks/useScrollTo";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -32,10 +35,7 @@ interface HeaderSectionProps {
   }[];
 
   // CTA Button
-  ctaButton?: {
-    text: string;
-    href: string;
-  };
+  ctaButton?: string;
 
   // Optional CSS Classes
   className?: string;
@@ -53,12 +53,10 @@ export function HeaderSection({
   mainTitle,
   description,
   tags,
-  ctaButton = {
-    text: "Obtenir 🚀",
-    href: "#contact",
-  },
+  ctaButton,
   sectionClassName,
 }: HeaderSectionProps) {
+  const scrollTo = useScrollTo();
   return (
     <SectionBase
       sectionClassName={cn("p-0 mt-20 mb-10 md:mb-20", sectionClassName)}
@@ -104,17 +102,31 @@ export function HeaderSection({
         </div>
       )}
 
-      {ctaButton && (
+      {ctaButton && ctaButton.startsWith("http") ? (
         <div className="relative w-full">
           <Link
-            href={ctaButton.href}
+            href={ctaButton}
             className="w-full font-bold text-2xl py-5"
             size="lg"
             likeButton
             asFull
+            data-project-url={ctaButton}
           >
-            <span>{ctaButton.text}</span>
+            <span>Voir le projet 🦄</span>
           </Link>
+        </div>
+      ) : (
+        <div className="relative w-full">
+          <Button
+            onClick={() => scrollTo("gallery-section")}
+            className="w-full font-bold text-2xl py-5"
+            size="lg"
+            asFull
+            asPointer
+            data-scroll-to="gallery-section"
+          >
+            <span>Voir le projet 🦄</span>
+          </Button>
         </div>
       )}
     </SectionBase>

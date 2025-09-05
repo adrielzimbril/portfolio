@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { ResourceInnerStatementPreviewCardInfoProps } from "@/types/type";
+import { getImageUrl } from "@/utils/base-url";
 
 export function CardPreview({
   details,
@@ -46,7 +47,7 @@ function PreviewIcon({ icon }: { icon: string }) {
         height={100}
         className="size-10 object-cover pointer-events-none"
         alt={icon}
-        src={icon!}
+        src={getImageUrl(icon)}
       />
     </div>
   );

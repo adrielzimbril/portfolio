@@ -2,6 +2,7 @@
 import { cn } from "@/utils/utils";
 import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { getImageUrl } from "@/utils/base-url";
 
 export function EmojiPlaceholder({
   src,
@@ -32,7 +33,7 @@ export function EmojiPlaceholder({
         variant === "bordered" &&
           "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-zinc-100",
         variant === "squircle" &&
-          "bg-white squircle squircle-white squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-zinc-100 aspect-square size-full md:size-96 p-12 overflow-hidden",
+          "squircle squircle-white squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-zinc-100 aspect-square size-full md:size-96 p-12 overflow-hidden",
         isMobileHidden && isMobile && "hidden",
         className
       )}
@@ -49,10 +50,10 @@ export function EmojiPlaceholder({
         {/* <div
           className="absolute bg-center bg-cover bg-no-repeat inset-0"
           data-name="image 1001"
-          style={{ backgroundImage: `url('${src}')` }}
+          style={{ backgroundImage: `url('${getImageUrl(src)}')` }}
         /> */}
         <Image
-          src={src}
+          src={getImageUrl(src)}
           className={cn(
             "size-full object-cover pointer-events-none",
             imgClassName

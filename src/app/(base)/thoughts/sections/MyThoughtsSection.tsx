@@ -6,6 +6,7 @@ import { Post } from "@/module/content/types";
 import { useState, useEffect } from "react";
 import { getAllPosts } from "@/module/content/utils/lib";
 import logger from "@/utils/logger";
+import { getDate } from "@/utils";
 
 export function MyThoughtsSection() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -46,6 +47,7 @@ export function MyThoughtsSection() {
           cover={post.cover}
           slug={post.slug}
           excerpt={post.excerpt || ""}
+          primaryTag={getDate({ date: post.created_at, iso: false })}
           tags={post.tags}
           created_at={post.created_at}
         />

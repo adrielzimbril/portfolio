@@ -2,6 +2,7 @@ import { SectionHeader } from "@/components/shared/sections/header";
 import { cn } from "@/utils/utils";
 
 export function SectionLayout({
+  id,
   title,
   description,
   className,
@@ -14,6 +15,7 @@ export function SectionLayout({
   layoutStart,
   isPage,
 }: {
+  id?: string;
   title?: string;
   description?: string;
   className?: string;
@@ -27,7 +29,7 @@ export function SectionLayout({
   isPage?: boolean;
 }) {
   return (
-    <section className={cn("relative w-full py-[104px]", className)}>
+    <section className={cn("relative w-full py-[104px]", className)} id={id}>
       {title && (
         <SectionHeader
           title={title}

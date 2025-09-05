@@ -201,17 +201,22 @@ export function getDateDifference(
     default:
       // Automatic format - the most appropriate
       if (years >= 1) {
-        formatted = years === 1 ? "1 année" : `${years} années`;
+        formatted =
+          years === 1
+            ? months >= 1
+              ? `${years + 1} années`
+              : "1 année"
+            : `${years} années`;
       } else if (months >= 1) {
-        formatted = months === 1 ? "1 mois" : `${months} mois`;
+        formatted = months === 1 ? weeks >= 1 ? `${months + 1} mois` : "1 mois" : `${months} mois`;
       } else if (weeks >= 1) {
-        formatted = weeks === 1 ? "1 semaine" : `${weeks} semaines`;
+        formatted = weeks === 1 ? days >= 1 ? `${weeks + 1} semaines` : "1 semaine" : `${weeks} semaines`;
       } else if (days >= 1) {
-        formatted = days === 1 ? "1 jour" : `${days} jours`;
+        formatted = days === 1 ? hours >= 1 ? `${days + 1} jours` : "1 jour" : `${days} jours`;
       } else if (hours >= 1) {
-        formatted = hours === 1 ? "1 heure" : `${hours} heures`;
+        formatted = hours === 1 ? minutes >= 1 ? `${hours + 1} heures` : "1 heure" : `${hours} heures`;
       } else if (minutes >= 1) {
-        formatted = minutes === 1 ? "1 minute" : `${minutes} minutes`;
+        formatted = minutes === 1 ? seconds >= 1 ? `${minutes + 1} minutes` : "1 minute" : `${minutes} minutes`;
       } else {
         formatted = seconds === 1 ? "1 seconde" : `${seconds} secondes`;
       }

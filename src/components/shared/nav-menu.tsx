@@ -9,15 +9,26 @@ import { usePathname } from "next/navigation";
 
 export function NavMenu({ hasScrolled }: { hasScrolled: boolean }) {
   const router = usePathname();
-  const menuRoutes = Object.values(routes).filter((item) => item.inHeader);
-  const [activeTab, setActiveTab] = useState<string>(
-    menuRoutes.find((item) => item.link === router)?.name || routes.home.name
-  );
+const menuRoutes = Object.values(routes).filter((item) => item.inHeader);
 
-  useEffect(() => {
-    const current = menuRoutes.find((r) => r.link === router);
-    if (current) setActiveTab(current.name);
-  }, [router]);
+// Create a copy of the sorted array (does not modify menuRoutes)
+const menuRoutesSorted = [...menuRoutes].sort((a, b) =>
+  b.name.localeCompare(a.name)
+);
+
+const [activeTab, setActiveTab] = useState<string>(
+  menuRoutesSorted.find((item) => router.startsWith(item.link))?.name ||
+    menuRoutesSorted.find((item) => item.link === router)?.name ||
+    routes.home.name
+);
+
+useEffect(() => {
+  const current =
+    menuRoutesSorted.find((item) => router.startsWith(item.link)) ||
+    menuRoutesSorted.find((item) => item.link === router);
+  if (current) setActiveTab(current.name);
+}, [router, menuRoutesSorted]);
+
 
   return (
     <div className="w-fit hidden md:block">
