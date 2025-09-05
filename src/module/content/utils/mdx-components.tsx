@@ -3,6 +3,10 @@ import { slugifyHeadline } from "@/utils/content";
 import type { MDXComponents } from "mdx/types";
 import type { ImageProps } from "next/image";
 import Image from "next/image";
+import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
+import { SectionLayout } from "@/components/shared/sections/layout";
+import { PortfolioProjectScope } from "@/types";
+import { getImageUrl } from "@/utils/base-url";
 
 export const mdxComponents = {
   a: (props) => {
@@ -30,9 +34,10 @@ export const mdxComponents = {
     props.src ? (
       <Image
         {...(props as ImageProps)}
-        sizes="100vw"
-        style={{ width: "100%", height: "auto" }}
-        className="rounded-lg shadow"
+        src={getImageUrl(props.src as string)}
+        width={2000}
+        height={2000}
+        className="w-full h-auto rounded-lg pointer-events-none mb-6 md:mb-12"
         loading="lazy"
       />
     ) : null,
@@ -165,3 +170,49 @@ export const mdxComponents = {
     </td>
   ),
 } satisfies MDXComponents;
+
+export const mdxCustomComponents = {
+  SectionLayout,
+  PreviewValueCard,
+  SmartSection,
+  ConditionalSection,
+} satisfies MDXComponents;
+
+{
+  /* Composant qui se cache si title est vide */
+}
+export function SmartSection({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) {
+  // Ne pas afficher si title est vide ou undefined
+  if (!title?.trim()) return null;
+
+  return (
+    <SectionLayout title={title} description={description}>
+      {children}
+    </SectionLayout>
+  );
+}
+
+interface ConditionalSectionProps {
+  condition: boolean;
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+}
+export function ConditionalSection({
+  condition,
+  children,
+  fallback = null,
+}: ConditionalSectionProps) {
+  if (!condition) {
+    return <>{fallback}</>;
+  }
+
+  return <>{children}</>;
+}

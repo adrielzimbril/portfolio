@@ -9,6 +9,14 @@ import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import rehypeUnwrapImages from "rehype-unwrap-images";
+import rehypeImgSize from "rehype-img-size";
+import rehypeVideo from "rehype-video";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import { PortfolioProjectScope } from "@/types";
+// import { mdxAnnotations } from "mdx-annotations";
+// import { rehypeExtendedTable } from "rehype-extended-table";
 
 const BASE_COLLECTION_PATH = "src/content";
 
@@ -292,10 +300,30 @@ const projects = defineCollection({
     updated_at: z.string().optional(),
     published: z.boolean(),
     featured: z.boolean().optional().default(false),
+    cardSectionDescription: z.string().optional(),
+    cards: z
+      .array(
+        z.object({
+          title: z.enum(Object.values(PortfolioProjectScope)),
+          emoji: z.string(),
+          description: z.string(),
+          methodology: z.string(),
+        })
+      )
+      .optional(),
+    goalSectionDescription: z.string().optional(),
+    goalSectionSubDescription: z.string().optional(),
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
-      remarkPlugins: [remarkGfm, remarkParse, remarkRehype],
+      remarkPlugins: [
+        remarkGfm,
+        remarkParse,
+        remarkRehype,
+        remarkFrontmatter,
+        remarkMdxFrontmatter,
+        // mdxAnnotations.remark,
+      ],
       rehypePlugins: [
         [
           rehypeShiki,
@@ -303,8 +331,13 @@ const projects = defineCollection({
             theme: "nord",
           },
         ],
-        [rehypePrettyCode],
+        // [rehypeImgSize],
+        [rehypeVideo, { allowDangerousHtml: true, details: false }],
         [rehypeStringify],
+        [rehypePrettyCode],
+        // [mdxAnnotations.rehype],
+        // [rehypeExtendedTable],
+        [rehypeUnwrapImages],
       ],
     });
 

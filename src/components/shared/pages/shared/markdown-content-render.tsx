@@ -2,6 +2,7 @@
 
 import { MDXContent } from "@content-collections/mdx/react";
 import { mdxComponents } from "@/module/content/utils/mdx-components";
+import { mdxCustomComponents } from "@/module/content/utils/mdx-components";
 
 export function MarkdownContentRender({ content }: { content: string }) {
   return (
@@ -29,6 +30,7 @@ export function MarkdownContentRender({ content }: { content: string }) {
           p: mdxComponents.p,
           a: mdxComponents.a,
           img: mdxComponents.img,
+          ...mdxCustomComponents,
         }}
       />
     </div>

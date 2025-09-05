@@ -8,7 +8,7 @@
  * const date = formatDate("2023-01-01");
  * logger.info(date); // Output: Today
  */
-export function formatDate(date: string): string {
+export function formatDateDiff(date: string): string {
   const currentDate = new Date().getTime();
   if (!date.includes("T")) {
     date = `${date}T00:00:00`;
@@ -51,11 +51,11 @@ export function formatDate(date: string): string {
  * @example
  * const date = getDate("2023-01-01", "en-US");
  * console.log(date); // Output: Jan 1, 2023
- * 
+ *
  * @example
  * const date = getDate("2023-01-01", "en-US", true);
  * console.log(date); // Output: 2023-01-01
- * 
+ *
  * @example
  * const date = getDate("2023-01-01", "en-US", false);
  * console.log(date); // Output: Jan 1, 2023
@@ -75,4 +75,157 @@ export function getDate({
   return iso
     ? d.toISOString().split("T")[0]
     : Intl.DateTimeFormat(lang, { dateStyle }).format(d);
+}
+
+/**
+ * Calculate the difference between two dates with different output formats
+ *
+ * @param dateArray - An array of two date strings
+ * @param options - Optional parameters to customize the output format
+ *
+ * @returns A string or an object containing the formatted difference and breakdown
+ *
+ * @example
+ * const dateArray = ["2023-01-01", "2023-06-17"];
+ * const difference = getDateDifference(dateArray);
+ * console.log(difference); // Output: "5 months"
+ *
+ * @example
+ * const difference = getDateDifference(dateArray, { format: 'detailed' });
+ * console.log(difference); // Output: { formatted: "5 months", totalDays: 158, breakdown: { years: 0, months: 5, weeks: 0, days: 158, hours: 0, minutes: 0, seconds: 0 } }
+ *
+ * @example
+ * const difference = getDateDifference(dateArray, { format: 'detailed', returnObject: true });
+ * console.log(difference); // Output: { formatted: "5 months", totalDays: 158, breakdown: { years: 0, months: 5, weeks: 0, days: 158, hours: 0, minutes: 0, seconds: 0 } }
+ *
+ * @example
+ * const difference = getDateDifference(dateArray, { format: 'precise' });
+ * console.log(difference); // Output: "5 months 0 weeks 0 days 0 hours 0 minutes 0 seconds"
+ */
+export function getDateDifference(
+  dateArray: string[],
+  options?: {
+    format?: "auto" | "short" | "precise" | "detailed";
+    returnObject?: boolean;
+  }
+):
+  | string
+  | {
+      formatted: string;
+      totalDays: number;
+      breakdown: {
+        years: number;
+        months: number;
+        weeks: number;
+        days: number;
+        hours: number;
+        minutes: number;
+        seconds: number;
+      };
+    } {
+  const { format = "auto", returnObject = false } = options || {};
+
+  if (dateArray.length < 2) {
+    return returnObject
+      ? {
+          formatted: "Not enough dates",
+          totalDays: 0,
+          breakdown: {
+            years: 0,
+            months: 0,
+            weeks: 0,
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
+        }
+      : "Not enough dates";
+  }
+
+  const date1 = new Date(dateArray[0]);
+  const date2 = new Date(dateArray[1]);
+
+  // Ensure that date2 > date1
+  const startDate = date1 < date2 ? date1 : date2;
+  const endDate = date1 < date2 ? date2 : date1;
+
+  // Difference in milliseconds
+  const diffMs = endDate.getTime() - startDate.getTime();
+
+  // Conversions
+  const seconds = Math.floor(diffMs / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
+  const months = Math.floor(days / 30.44); // Average
+  const years = Math.floor(days / 365.25); // With leap years
+
+  // Detailed object for returnObject
+  const breakdown = { years, months, weeks, days, hours, minutes, seconds };
+
+  // Formatting according to the requested type
+  let formatted: string;
+
+  switch (format) {
+    case "short":
+      if (years >= 1) formatted = `${years}a`;
+      else if (months >= 1) formatted = `${months}m`;
+      else if (weeks >= 1) formatted = `${weeks}sem`;
+      else if (days >= 1) formatted = `${days}j`;
+      else if (hours >= 1) formatted = `${hours}h`;
+      else if (minutes >= 1) formatted = `${minutes}min`;
+      else formatted = `${seconds}s`;
+      break;
+
+    case "precise":
+      const preciseYears = Math.floor(days / 365);
+      const preciseMonths = Math.floor((days % 365) / 30);
+      const preciseWeeks = Math.floor(((days % 365) % 30) / 7);
+      const preciseDays = ((days % 365) % 30) % 7;
+
+      const parts = [];
+      if (preciseYears > 0)
+        parts.push(`${preciseYears} année${preciseYears > 1 ? "s" : ""}`);
+      if (preciseMonths > 0) parts.push(`${preciseMonths} mois`);
+      if (preciseWeeks > 0)
+        parts.push(`${preciseWeeks} semaine${preciseWeeks > 1 ? "s" : ""}`);
+      if (preciseDays > 0)
+        parts.push(`${preciseDays} jour${preciseDays > 1 ? "s" : ""}`);
+
+      formatted = parts.length > 0 ? parts.join(", ") : "0 jour";
+      break;
+
+    case "auto":
+    default:
+      // Automatic format - the most appropriate
+      if (years >= 1) {
+        formatted = years === 1 ? "1 année" : `${years} années`;
+      } else if (months >= 1) {
+        formatted = months === 1 ? "1 mois" : `${months} mois`;
+      } else if (weeks >= 1) {
+        formatted = weeks === 1 ? "1 semaine" : `${weeks} semaines`;
+      } else if (days >= 1) {
+        formatted = days === 1 ? "1 jour" : `${days} jours`;
+      } else if (hours >= 1) {
+        formatted = hours === 1 ? "1 heure" : `${hours} heures`;
+      } else if (minutes >= 1) {
+        formatted = minutes === 1 ? "1 minute" : `${minutes} minutes`;
+      } else {
+        formatted = seconds === 1 ? "1 seconde" : `${seconds} secondes`;
+      }
+      break;
+  }
+
+  // Return according to the requested type
+  if (returnObject || format === "detailed") {
+    return {
+      formatted,
+      totalDays: days,
+      breakdown,
+    };
+  }
+
+  return formatted;
 }

@@ -4,52 +4,28 @@ import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { PortfolioProjectScope } from "@/types/enum";
 
-interface CardData {
+export interface CardData {
   title: PortfolioProjectScope;
   emoji: string;
   description: string;
   methodology?: string;
 }
-const cardData: CardData[] = [
-  {
-    title: PortfolioProjectScope.WHO,
-    emoji: "/emoji-true-2.png",
-    description:
-      "Qui rencontre le problème ? Vous pouvez ajouter des cadres plus spécifiques pour les développer.",
-    methodology: "Persona",
-  },
-  {
-    title: PortfolioProjectScope.WHEN,
-    emoji: "/image-1310-2.png",
-    description:
-      "Quand le problème apparaît-il réellement dans le processus? Cela peut être à un moment précis.",
-    methodology: "Carte d'empathie",
-  },
-  {
-    title: PortfolioProjectScope.WHERE,
-    emoji: "/emoji-true-2.png",
-    description:
-      "Dans quel contexte l'utilisateur rencontre-t-il le problème, espace physique ou numérique ?",
-    methodology: "Carte du parcours",
-  },
-  {
-    title: PortfolioProjectScope.WHY,
-    emoji: "/emoji-true-2.png",
-    description:
-      "Pourquoi ce problème est-il important pour les utilisateurs, les avantages de la résolution de ce problème ?",
-    methodology: "Carte des propositions de valeur",
-  },
-];
 
-export function ProjectGallerySection() {
+export function ProjectGallerySection({
+  cards,
+  cardSectionDescription,
+}: {
+  cards: CardData[];
+  cardSectionDescription: string;
+}) {
   return (
     <>
       <SectionLayout
         title="Cadrage du problème"
-        description="Toute bonne histoire commence par un POURQUOI ? La même chose s'applique à votre projet ! Clarifier d'abord le problème est un excellent moyen de briser la glace pour vos lecteurs"
+        description={cardSectionDescription}
         //className="p-0"
       >
-        {cardData.map((card, index) => {
+        {cards.map((card, index) => {
           return (
             card.methodology && (
               <PreviewValueCard

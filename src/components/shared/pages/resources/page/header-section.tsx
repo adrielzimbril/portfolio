@@ -12,6 +12,8 @@ import {
   TextPreviewContent,
   PreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
+import { pickRandomColor } from "@/utils";
+import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -24,7 +26,10 @@ interface HeaderSectionProps {
   description?: string;
 
   // Tags
-  tags?: ResourceHeaderTag[];
+  tags?: {
+    name: string;
+    color: string;
+  }[];
 
   // CTA Button
   ctaButton?: {
@@ -87,11 +92,13 @@ export function HeaderSection({
           {tags.map((tag, index) => (
             <Badge
               key={index}
-              className={tag.bgColor}
+              className={pickRandomColor(
+                tag.color as DEFAULT_CATEGORY_COLOR_NAME
+              )}
               variant="colored"
               size="sm"
             >
-              {tag.text}
+              {tag.name}
             </Badge>
           ))}
         </div>
