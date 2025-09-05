@@ -1,5 +1,5 @@
 import React from "react";
-import { AdditionalResourcesSection } from "./sections/AdditionalResourcesSection";
+import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { HeaderSection } from "./sections/HeaderSection";
 import { InsightsSection } from "./sections/InsightsSection";
 import { IntroductionSection } from "./sections/IntroductionSection";
@@ -9,8 +9,27 @@ import { ProjectGallerySection } from "./sections/ProjectGallerySection";
 import { ProjectOverviewSection } from "./sections/ProjectOverviewSection";
 import { UserResearchSection } from "./sections/UserResearchSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { localeRedirect } from "@/module/i18n/routing";
+import { getProjectWithAdjacent } from "@/module/content/utils/lib/projects";
+import { getActivePathFromUrlParam } from "@/utils/content";
+import { setRequestLocale } from "next-intl/server";
+import { routes } from "@/data/route";
+import { PageParams } from "@/types";
 
-export default function SubProject() {
+export default async function SubProject(props: {
+  params: Promise<PageParams>;
+}) {
+  const { path, locale } = await props.params;
+  setRequestLocale(locale);
+
+  const slug = getActivePathFromUrlParam(path);
+  const post = await getProjectWithAdjacent(slug, { locale });
+
+  if (!post) {
+    return localeRedirect({ href: routes.projects.link, locale });
+  }
+
+  const { title, created_at, tags, image_big, body } = post.currentProject;
   return (
     <>
       <HeaderSection />
@@ -21,7 +40,7 @@ export default function SubProject() {
       <IntroductionSection />
       <InsightsSection />
       <ProjectOverviewSection />
-      <AdditionalResourcesSection />
+      <MorePreviewSection data={post.adjacentProjects} />
       <CallToAction isPage />
     </>
   );

@@ -13,13 +13,9 @@ import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { routes } from "@/data/route";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
+import { PageParams } from "@/types";
 
-type Params = {
-  path: string;
-  locale: string;
-};
-
-export async function generateMetadata(props: { params: Promise<Params> }) {
+export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
 
   const { path } = params;
@@ -41,7 +37,9 @@ export async function generateMetadata(props: { params: Promise<Params> }) {
   };
 }
 
-export default async function BlogPostPage(props: { params: Promise<Params> }) {
+export default async function BlogPostPage(props: {
+  params: Promise<PageParams>;
+}) {
   const { path, locale } = await props.params;
   setRequestLocale(locale);
 
