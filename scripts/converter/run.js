@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { convertDataToFiles } from "./sc";
+import { convertDataToFiles } from "./sc.js";
 import fs from "fs";
 
 // Utilisation du script de conversion
@@ -64,7 +64,7 @@ Exemple de data.json:
   }
 ]
   `);
-  return;
+  //return;
 }
 
 main();

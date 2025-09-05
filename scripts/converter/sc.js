@@ -33,6 +33,10 @@ function createSlug(title) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 }
+// Créer un ref à partir d'un nom
+function createRef(name) {
+  return createSlug(name);
+}
 
 // Fonction pour obtenir une couleur aléatoire
 function getRandomColor() {
@@ -79,14 +83,14 @@ id: ${item.id}
 title: "${item.title}"
 slug: "${createSlug(item.title)}"
 description: "${item.description}"
-features:
-${features.map((feature) => `  - "${feature.trim()}"`).join("\n")}
+features: [${features.map((feature) => `"${feature.trim()}"`).join(", ")}]
 cover: "${item.icon}"
 type: "${item.type}"
-tags_ids: [${tagIds.join(", ")}]
+tags_id: [${tagIds.join(", ")}]
 studentsNumber: ${extractStudentNumber(item.userCount)}
-studentsProfilImage:
-${item.avatars.map((avatar) => `  - "${avatar.src}"`).join("\n")}
+studentsProfilImage: [${item.avatars
+    .map((avatar) => `"${avatar.src}"`)
+    .join(", ")}]
 ---
 
 # ${item.title}
@@ -109,15 +113,12 @@ Ce projet compte ${extractStudentNumber(item.userCount)} participants actifs.
 function createTagMD(tag) {
   return `---
 id: ${tag.id}
+ref: "${createRef(tag.name)}"
 name: "${tag.name}"
+description: "Ressources liées au tag ${tag.name}"
 color: "${tag.color}"
+slug: "${createSlug(tag.name)}"
 ---
-
-# Tag: ${tag.name}
-
-Description du tag ${tag.name}.
-
-*[Contenu à développer pour ce tag]*
 `;
 }
 
@@ -125,7 +126,7 @@ Description du tag ${tag.name}.
 export async function convertDataToFiles(inputData) {
   const outputDir = "./content";
   const hubDir = path.join(outputDir, "hub");
-  const tagsDir = path.join(outputDir, "tags");
+  const tagsDir = path.join(outputDir, "hub", "tags");
 
   // Créer les dossiers
   [outputDir, hubDir, tagsDir].forEach((dir) => {

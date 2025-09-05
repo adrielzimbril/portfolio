@@ -56,16 +56,7 @@ const authors = defineCollection({
       .optional(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-      ],
-    });
+    const body = await compileMDX(context, document);
 
     return {
       ...document,
@@ -89,16 +80,7 @@ const postCategories = defineCollection({
     slug: z.string(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-      ],
-    });
+    const body = await compileMDX(context, document);
 
     return {
       ...document,
@@ -122,16 +104,7 @@ const postTags = defineCollection({
     slug: z.string(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-      ],
-    });
+    const body = await compileMDX(context, document);
 
     return {
       ...document,
@@ -155,16 +128,7 @@ const projectCategories = defineCollection({
     slug: z.string(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-      ],
-    });
+    const body = await compileMDX(context, document);
 
     return {
       ...document,
@@ -188,16 +152,7 @@ const projectTags = defineCollection({
     slug: z.string(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-      ],
-    });
+    const body = await compileMDX(context, document);
 
     return {
       ...document,
@@ -217,7 +172,66 @@ const projectTypes = defineCollection({
     id: z.number(),
     name: z.string(),
   }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document);
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+    };
+  },
 });
+
+// Collection of tags for projects (in projects/tags/) - If you want separate tags
+const resourcesTags = defineCollection({
+  name: "resourcesTags",
+  directory: `${BASE_COLLECTION_PATH}/resources/tags`,
+  include: "**/*.{md,mdx}",
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+    description: z.string().optional(),
+    color: z.string(), // Squircle color
+    slug: z.string(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document);
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+const renderPlugins = {
+  remarkPlugins: [
+    remarkGfm,
+    remarkParse,
+    remarkRehype,
+    remarkFrontmatter,
+    remarkMdxFrontmatter,
+    // mdxAnnotations.remark,
+  ],
+  rehypePlugins: [
+    [
+      rehypeShiki,
+      {
+        theme: "github-dark",
+      },
+    ],
+    // [rehypeImgSize],
+    [rehypeVideo, { allowDangerousHtml: true, details: false }],
+    [rehypeStringify],
+    [rehypePrettyCode],
+    // [mdxAnnotations.rehype],
+    // [rehypeExtendedTable],
+    [rehypeUnwrapImages],
+  ],
+};
 
 // Collection of posts with relations
 const posts = defineCollection({
@@ -237,19 +251,7 @@ const posts = defineCollection({
     featured: z.boolean().optional().default(false),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      remarkPlugins: [remarkGfm, remarkParse, remarkRehype],
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-        [rehypePrettyCode],
-        [rehypeStringify],
-      ],
-    });
+    const body = await compileMDX(context, document, renderPlugins);
 
     // Resolve relations
     const categories = context
@@ -340,31 +342,7 @@ const projects = defineCollection({
       .optional(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      remarkPlugins: [
-        remarkGfm,
-        remarkParse,
-        remarkRehype,
-        remarkFrontmatter,
-        remarkMdxFrontmatter,
-        // mdxAnnotations.remark,
-      ],
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "nord",
-          },
-        ],
-        // [rehypeImgSize],
-        [rehypeVideo, { allowDangerousHtml: true, details: false }],
-        [rehypeStringify],
-        [rehypePrettyCode],
-        // [mdxAnnotations.rehype],
-        // [rehypeExtendedTable],
-        [rehypeUnwrapImages],
-      ],
-    });
+    const body = await compileMDX(context, document, renderPlugins);
 
     // Resolve relations
     const categories = context
@@ -395,6 +373,8 @@ const projects = defineCollection({
     };
   },
 });
+
+
 
 export default defineConfig({
   collections: [

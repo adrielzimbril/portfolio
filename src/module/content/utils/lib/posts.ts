@@ -45,11 +45,10 @@ export async function getPostBySlug(
 
   return Promise.resolve(
     allPosts.find(
-      (post: Post) => post.path === slug && (!locale || post.locale === locale)
+      (post: Post) => post.slug === slug && (!locale || post.locale === locale)
     ) ?? null
   );
 }
-
 
 interface PostsResult {
   currentPost: Post;
@@ -93,7 +92,7 @@ export async function getPostWithAdjacent(
 
   // Find the current post
   const currentIndex = sortedPosts.findIndex(
-    (post: Post) => post.path === slug
+    (post: Post) => post.slug === slug
   );
 
   if (currentIndex === -1) {
@@ -177,7 +176,7 @@ export async function getAllPostSlugs(
           ? a.created_at.localeCompare(b.created_at)
           : b.created_at.localeCompare(a.created_at)
       )
-      .map((post) => post.path)
+      .map((post) => post.slug)
       .slice(0, limit)
   );
 }

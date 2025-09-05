@@ -1,4 +1,4 @@
-import type { Project } from "@/module/content/types/types";
+import type { Resource } from "@/module/content/types/types";
 import { allProjects } from "content-collections";
 
 type GetAllProjectsOptions = {
@@ -17,21 +17,21 @@ export async function getAllProjects(
     sort: "desc",
     limit: undefined,
   }
-): Promise<Project[]> {
+): Promise<Resource[]> {
   const { published, locale, pageSlug, sort, limit } = options;
   return Promise.resolve(
     allProjects
       .filter(
-        (project) =>
-          project.published === published &&
-          (!locale || project.locale === locale)
+        (resource) =>
+          resource.published === published &&
+          (!locale || resource.locale === locale)
       )
       .sort((a, b) =>
         sort === "asc"
           ? a.created_at.localeCompare(b.created_at)
           : b.created_at.localeCompare(a.created_at)
       )
-      .filter((project) => project.slug !== pageSlug)
+      .filter((resource) => resource.slug !== pageSlug)
       .slice(0, limit)
   );
 }
@@ -41,37 +41,37 @@ export async function getProjectBySlug(
   options?: {
     locale?: string;
   }
-): Promise<Project | null> {
+): Promise<Resource | null> {
   const { locale } = options ?? {};
 
   return Promise.resolve(
     allProjects.find(
-      (project: Project) =>
-        project.slug === slug && (!locale || project.locale === locale)
+      (resource: Resource) =>
+        resource.slug === slug && (!locale || resource.locale === locale)
     ) ?? null
   );
 }
 
 interface ProjectsResult {
-  currentProject: Project;
-  adjacentProjects: Project[];
+  currentProject: Resource;
+  adjacentProjects: Resource[];
   totalFound: number;
 }
 
 /**
- * Retrieves a project and its adjacent projects (always 2 max)
+ * Retrieves a resource and its adjacent projects (always 2 max)
  * Automatically adapts : if not enough before, takes more after and vice versa
  *
- * @param slug - The slug of the project
- * @param options - Options for the project retrieval
+ * @param slug - The slug of the resource
+ * @param options - Options for the resource retrieval
  *
  * @returns Promise<ProjectsResult | null>
  *
  * @example
  * ```typescript
- * const projects = await getProjectWithAdjacent("my-project-slug", { locale: "en" });
+ * const projects = await getProjectWithAdjacent("my-resource-slug", { locale: "en" });
  * ```
- * // Returns the project with slug "my-project-slug" and its adjacent projects
+ * // Returns the resource with slug "my-resource-slug" and its adjacent projects
  */
 export async function getProjectWithAdjacent(
   slug: string,
@@ -82,7 +82,7 @@ export async function getProjectWithAdjacent(
   const { locale } = options ?? {};
   // Filter by locale if specified
   const filteredProjects = allProjects.filter(
-    (project: Project) => !locale || project.locale === locale
+    (resource: Resource) => !locale || resource.locale === locale
   );
 
   // Sort by date (most recent first)
@@ -92,9 +92,9 @@ export async function getProjectWithAdjacent(
       new Date(a.created_at || "").getTime()
   );
 
-  // Find the current project
+  // Find the current resource
   const currentIndex = sortedProjects.findIndex(
-    (project: Project) => project.slug === slug
+    (resource: Resource) => resource.slug === slug
   );
 
   if (currentIndex === -1) {
@@ -113,11 +113,11 @@ export async function getProjectWithAdjacent(
 
   // Automatic adaptation
   if (availableBefore === 0) {
-    // First project -> take 2 after
+    // First resource -> take 2 after
     beforeCount = 0;
     afterCount = Math.min(2, availableAfter);
   } else if (availableAfter === 0) {
-    // Last project -> take 2 before
+    // Last resource -> take 2 before
     beforeCount = Math.min(2, availableBefore);
     afterCount = 0;
   } else if (availableBefore < 1) {
@@ -170,16 +170,16 @@ export async function getAllProjectSlugs(
   return Promise.resolve(
     allProjects
       .filter(
-        (project) =>
-          project.published === published &&
-          (!locale || project.locale === locale)
+        (resource) =>
+          resource.published === published &&
+          (!locale || resource.locale === locale)
       )
       .sort((a, b) =>
         sort === "asc"
           ? a.created_at.localeCompare(b.created_at)
           : b.created_at.localeCompare(a.created_at)
       )
-      .map((project) => project.slug)
+      .map((resource) => resource.slug)
       .slice(0, limit)
   );
 }
@@ -197,7 +197,7 @@ type FilterOptions = {
  *
  * @param options - Filter options
  *
- * @returns Promise<Project[]>
+ * @returns Promise<Resource[]>
  *
  * @example
  * ```typescript
@@ -207,17 +207,17 @@ type FilterOptions = {
  */
 export async function getFilteredProjects(
   options: FilterOptions = { published: undefined, locale: undefined }
-): Promise<Project[]> {
+): Promise<Resource[]> {
   const projects = await getAllProjects({
     published: options.published,
     locale: options.locale,
   });
   return Promise.resolve(
-    projects.filter((project) => {
+    projects.filter((resource) => {
       // Filter by category
       if (
         options.category &&
-        project.categories.find((cat) => cat.slug === options.category)
+        resource.categories.find((cat) => cat.slug === options.category)
       ) {
         return false;
       }
@@ -225,7 +225,7 @@ export async function getFilteredProjects(
       // Filter by tag
       if (
         options.tag &&
-        !project.tags.find((tag) => tag.slug === options.tag)
+        !resource.tags.find((tag) => tag.slug === options.tag)
       ) {
         return false;
       }
@@ -233,9 +233,9 @@ export async function getFilteredProjects(
       // Filter by search
       if (options.search) {
         const searchLower = options.search.toLowerCase();
-        const titleMatch = project.title.toLowerCase().includes(searchLower);
+        const titleMatch = resource.title.toLowerCase().includes(searchLower);
         const contentMatch =
-          project.excerpt?.toLowerCase().includes(searchLower) || false;
+          resource.excerpt?.toLowerCase().includes(searchLower) || false;
 
         if (!titleMatch && !contentMatch) {
           return false;
@@ -258,8 +258,8 @@ export async function getFilteredProjects(
  * ```
  */
 export async function getAllProjectCategories(): Promise<string[]> {
-  const categories = allProjects.map((project) =>
-    project.categories.map((cat) => cat.slug)
+  const categories = allProjects.map((resource) =>
+    resource.categories.map((cat) => cat.slug)
   );
   return Promise.resolve([...new Set(categories.flat())]);
 }
@@ -276,8 +276,8 @@ export async function getAllProjectCategories(): Promise<string[]> {
  * // Returns all unique tags from all projects
  */
 export async function getAllProjectTags(): Promise<string[]> {
-  const allTags = allProjects.flatMap((project) =>
-    project.tags.map((tag) => tag.slug)
+  const allTags = allProjects.flatMap((resource) =>
+    resource.tags.map((tag) => tag.slug)
   );
   return Promise.resolve([...new Set(allTags)]);
 }
