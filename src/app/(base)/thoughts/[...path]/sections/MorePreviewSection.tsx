@@ -6,7 +6,7 @@ import { getAllPosts } from "@/module/content/utils/lib";
 import { Post } from "@/module/content/types";
 import logger from "@/utils/logger";
 
-export function MoreInfoSection({ pageSlug }: { pageSlug: string }) {
+export function MorePreviewSection({ pageSlug }: { pageSlug: string }) {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {

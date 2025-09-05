@@ -4,10 +4,11 @@ import { getPostBySlug } from "@/module/content/utils/lib/posts";
 import { getActivePathFromUrlParam } from "@/utils/content";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import { HeaderSection } from "./sections/HeaderSection";
-import { MoreInfoSection } from "./sections/MoreInfoSection";
-import { ProjectsSection } from "./sections/ProjectsSection";
+import { MorePreviewSection } from "./sections/MorePreviewSection";
+import { ContentsSection } from "./sections/ContentSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { routes } from "@/data/route";
+import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 
 type Params = {
   path: string;
@@ -54,17 +55,30 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
   }
 
   const { title, created_at, tags, cover, body } = post;
+  const { minutes, seconds, totalSeconds } = calculateReadingTime({
+    content: body,
+  }) || {
+    minutes: 0,
+    seconds: 0,
+    totalSeconds: 0,
+  };
+  const formattedReadingTime = formatTime(
+    { minutes, seconds, totalSeconds },
+    "minutes"
+  );
 
   return (
     <>
       <HeaderSection
-        date={created_at}
-        tags={tags}
-        cover={cover || ""}
         title={title}
+        cover={cover || ""}
+        tags={tags}
+        date={created_at}
+        readingTime={formattedReadingTime}
+        views={0}
       />
-      <ProjectsSection content={body} />
-      <MoreInfoSection pageSlug={slug} />
+      <ContentsSection content={body} />
+      <MorePreviewSection pageSlug={slug} />
       <CallToAction isPage />
     </>
   );

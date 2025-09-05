@@ -1,18 +1,20 @@
 import { HeaderSection as ThoughtHeaderSection } from "@/components/shared/pages/thoughts/page/header-section";
 import { PreviewContentType } from "@/types";
 
-const metadataItems = { readTime: "08", views: "90k" };
-
 export function HeaderSection({
-  date,
-  tags,
-  cover,
   title,
+  cover,
+  tags,
+  date,
+  readingTime,
+  views,
 }: {
   date: string;
   tags: { name: string }[];
   cover: string;
   title: string;
+  readingTime: string | number;
+  views: string | number;
 }) {
   return (
     <ThoughtHeaderSection
@@ -29,8 +31,8 @@ export function HeaderSection({
       tags={tags}
       articleDetails={{
         date,
-        minRead: metadataItems.readTime,
-        views: metadataItems.views,
+        readingTime,
+        views,
       }}
     />
   );

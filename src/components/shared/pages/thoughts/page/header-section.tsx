@@ -25,8 +25,8 @@ interface HeaderSectionProps {
   // Article details : Date  + Min read + Views
   articleDetails?: {
     date?: string;
-    minRead?: string;
-    views?: string;
+    readingTime?: string | number;
+    views?: string | number;
   };
 
   // Optional CSS Classes
@@ -84,7 +84,7 @@ export function HeaderSection({
               </span>
             </Badge>
           )}
-          {articleDetails.minRead && (
+          {articleDetails.readingTime && (
             <Badge
               className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
               variant="colored"
@@ -95,7 +95,7 @@ export function HeaderSection({
                   className="size-4 text-indigo-400"
                   variant="bulk"
                 />
-                {articleDetails.minRead} min read
+                {articleDetails.readingTime} read
               </span>
             </Badge>
           )}
