@@ -24,8 +24,35 @@ enum DEFAULT_TAG_COLOR {
   PINKISH_BLUE = "squircle-[#b3cde0]",
 }
 
+enum DEFAULT_COLOR_CODE {
+  BLUE = "#ade9ff",
+  GREEN = "#adffad",
+  WHITE_GOLD = "#f9f9f9",
+  PURPLE = "#e2e4ff",
+  INDIGO = "#b3baf5",
+  YELLOW = "#ffe9ad",
+  RED = "#ffadad",
+  SKY = "#adffff",
+  PINK = "#ffadff",
+  ORANGE = "#ffd3ad",
+  VIOLET = "#8e8eff",
+  GREENISH_YELLOW = "#ffeccc",
+  TURQUOISE = "#adfbff",
+  GOLD = "#ffd700",
+  AMBER = "#ffc107",
+  TEAL = "#00bfa5",
+  CYAN = "#00e5ff",
+  LIME = "#c8e6c9",
+  PINKISH_PURPLE = "#d8b6ff",
+  PINKISH_ORANGE = "#ffab91",
+  PINKISH_PINK = "#ff83b0",
+  PINKISH_GREEN = "#c5e1a5",
+  PINKISH_BLUE = "#b3cde0",
+}
+
 type DEFAULT_CATEGORY_COLOR_NAME = keyof typeof DEFAULT_TAG_COLOR;
+type DEFAULT_COLOR_CODE_NAME = keyof typeof DEFAULT_COLOR_CODE;
 
-export { DEFAULT_TAG_COLOR };
+export { DEFAULT_TAG_COLOR, DEFAULT_COLOR_CODE };
 
-export { type DEFAULT_CATEGORY_COLOR_NAME };
+export { type DEFAULT_CATEGORY_COLOR_NAME, type DEFAULT_COLOR_CODE_NAME };

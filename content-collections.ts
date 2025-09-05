@@ -14,7 +14,7 @@ import rehypeImgSize from "rehype-img-size";
 import rehypeVideo from "rehype-video";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import { PortfolioProjectResearchScope } from "@/types";
+import { PortfolioProjectResearchScope, ResourceType } from "@/types";
 // import { mdxAnnotations } from "mdx-annotations";
 // import { rehypeExtendedTable } from "rehype-extended-table";
 
@@ -184,16 +184,16 @@ const projectTypes = defineCollection({
   },
 });
 
-// Collection of tags for projects (in projects/tags/) - If you want separate tags
-const resourcesTags = defineCollection({
-  name: "resourcesTags",
+// Collection of tags for resources (in resources/tags/) - If you want separate tags
+const resourceTags = defineCollection({
+  name: "resourceTags",
   directory: `${BASE_COLLECTION_PATH}/resources/tags`,
   include: "**/*.{md,mdx}",
   schema: z.object({
     id: z.number(),
     name: z.string(),
     description: z.string().optional(),
-    color: z.string(), // Squircle color
+    color: z.string(),
     slug: z.string(),
   }),
   transform: async (document, context) => {
@@ -207,31 +207,6 @@ const resourcesTags = defineCollection({
     };
   },
 });
-const renderPlugins = {
-  remarkPlugins: [
-    remarkGfm,
-    remarkParse,
-    remarkRehype,
-    remarkFrontmatter,
-    remarkMdxFrontmatter,
-    // mdxAnnotations.remark,
-  ],
-  rehypePlugins: [
-    [
-      rehypeShiki,
-      {
-        theme: "github-dark",
-      },
-    ],
-    // [rehypeImgSize],
-    [rehypeVideo, { allowDangerousHtml: true, details: false }],
-    [rehypeStringify],
-    [rehypePrettyCode],
-    // [mdxAnnotations.rehype],
-    // [rehypeExtendedTable],
-    [rehypeUnwrapImages],
-  ],
-};
 
 // Collection of posts with relations
 const posts = defineCollection({
@@ -251,7 +226,31 @@ const posts = defineCollection({
     featured: z.boolean().optional().default(false),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, renderPlugins);
+    const body = await compileMDX(context, document, {
+      remarkPlugins: [
+        remarkGfm,
+        remarkParse,
+        remarkRehype,
+        remarkFrontmatter,
+        remarkMdxFrontmatter,
+        // mdxAnnotations.remark,
+      ],
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+        // [rehypeImgSize],
+        [rehypeVideo, { allowDangerousHtml: true, details: false }],
+        [rehypeStringify],
+        [rehypePrettyCode],
+        // [mdxAnnotations.rehype],
+        // [rehypeExtendedTable],
+        [rehypeUnwrapImages],
+      ],
+    });
 
     // Resolve relations
     const categories = context
@@ -267,7 +266,7 @@ const posts = defineCollection({
       body,
       locale: getLocaleFromFilePath(document._meta.filePath),
       path: sanitizePath(document._meta.path),
-      slug: document._meta.path,
+      //slug: document._meta.path,
       // Relations resolved
       categories: categories || [],
       tags: tags || [],
@@ -342,7 +341,31 @@ const projects = defineCollection({
       .optional(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, renderPlugins);
+    const body = await compileMDX(context, document, {
+      remarkPlugins: [
+        remarkGfm,
+        remarkParse,
+        remarkRehype,
+        remarkFrontmatter,
+        remarkMdxFrontmatter,
+        // mdxAnnotations.remark,
+      ],
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+        // [rehypeImgSize],
+        [rehypeVideo, { allowDangerousHtml: true, details: false }],
+        [rehypeStringify],
+        [rehypePrettyCode],
+        // [mdxAnnotations.rehype],
+        // [rehypeExtendedTable],
+        [rehypeUnwrapImages],
+      ],
+    });
 
     // Resolve relations
     const categories = context
@@ -358,14 +381,12 @@ const projects = defineCollection({
       .documents(projectTypes)
       .filter((t) => document.project_type_id === t.id);
 
-    const slug = document._meta.path;
-
     return {
       ...document,
       body,
       locale: getLocaleFromFilePath(document._meta.filePath),
       path: sanitizePath(document._meta.path),
-      slug,
+      //slug: document._meta.path,
       // Resolved relations
       categories: categories || [],
       tags: tags || [],
@@ -374,7 +395,68 @@ const projects = defineCollection({
   },
 });
 
+const resources = defineCollection({
+  name: "resources",
+  directory: `${BASE_COLLECTION_PATH}/resources`,
+  include: "*.{mdx,md}", // Only files at the root of projects/
+  schema: z.object({
+    id: z.number(),
+    title: z.string(),
+    slug: z.string(),
+    excerpt: z.string(),
+    features: z.array(z.string()).optional(),
+    cover: z.string().optional(),
+    type: z.enum(Object.values(ResourceType)),
+    tags_id: z.array(z.number()),
+    studentsNumber: z.number(),
+    studentsProfilImage: z.array(z.string()),
+    created_at: z.string(),
+    updated_at: z.string().optional(),
+    published: z.boolean(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileMDX(context, document, {
+      remarkPlugins: [
+        remarkGfm,
+        remarkParse,
+        remarkRehype,
+        remarkFrontmatter,
+        remarkMdxFrontmatter,
+        // mdxAnnotations.remark,
+      ],
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            theme: "github-dark",
+          },
+        ],
+        // [rehypeImgSize],
+        [rehypeVideo, { allowDangerousHtml: true, details: false }],
+        [rehypeStringify],
+        [rehypePrettyCode],
+        // [mdxAnnotations.rehype],
+        // [rehypeExtendedTable],
+        [rehypeUnwrapImages],
+      ],
+    });
 
+    // Use resourcesTags or postTags according to your preference
+    const tags = context
+      .documents(resourceTags)
+      .filter((t) => document.tags_id.includes(t.id));
+
+    return {
+      ...document,
+      body,
+      locale: getLocaleFromFilePath(document._meta.filePath),
+      path: sanitizePath(document._meta.path),
+      //slug: document._meta.path,
+      // Resolved relations
+      tags: tags || [],
+    };
+  },
+});
 
 export default defineConfig({
   collections: [
@@ -385,8 +467,10 @@ export default defineConfig({
     projectCategories,
     projectTags,
     projectTypes,
+    resourceTags,
     // Main collections with relations
     posts,
     projects,
+    resources,
   ],
 });

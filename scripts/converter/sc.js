@@ -82,7 +82,7 @@ function createResourceMDX(item, tagIds) {
 id: ${item.id}
 title: "${item.title}"
 slug: "${createSlug(item.title)}"
-description: "${item.description}"
+excerpt: "${item.description}"
 features: [${features.map((feature) => `"${feature.trim()}"`).join(", ")}]
 cover: "${item.icon}"
 type: "${item.type}"
@@ -91,6 +91,9 @@ studentsNumber: ${extractStudentNumber(item.userCount)}
 studentsProfilImage: [${item.avatars
     .map((avatar) => `"${avatar.src}"`)
     .join(", ")}]
+created_at: ${new Date().toISOString()}
+updated_at: ${new Date().toISOString()}
+published: true
 ---
 
 # ${item.title}

@@ -1,7 +1,55 @@
 import {
   DEFAULT_TAG_COLOR,
   DEFAULT_CATEGORY_COLOR_NAME,
+  DEFAULT_COLOR_CODE,
+  DEFAULT_COLOR_CODE_NAME,
 } from "@/types/default";
+
+/**
+ *  Returns a color from the enum DEFAULT_TAG_COLOR
+ * @param id - Optional: valid color name or numeric index (0-${Object.values(DEFAULT_TAG_COLOR).length - 1})
+ * @returns A color from the enum DEFAULT_TAG_COLOR
+ *
+ * @example
+ * const color = pickRandomColor();
+ * logger.info(color); // Output: random color
+ *
+ * @example
+ * const color = pickRandomColor("BLUE");
+ * logger.info(color); // Output: squircle-[#ade9ff]
+ *
+ * @example
+ * const color = pickRandomColor(0);
+ * logger.info(color); // Output: squircle-[#ade9ff]
+ *
+ * @example
+ * const color = pickRandomColor("WHITE_GOLD");
+ * logger.info(color); // Output: squircle-[#f9f9f9]
+ */
+function pickRandomColorCode(
+  id?: DEFAULT_COLOR_CODE_NAME | number
+): DEFAULT_COLOR_CODE {
+  const colors = Object.values(DEFAULT_COLOR_CODE);
+
+  if (id !== undefined) {
+    // If it's a number
+    if (typeof id === "number" && !isNaN(id)) {
+      const num = Number(id);
+      if (num >= 0 && num < colors.length) {
+        return colors[num];
+      }
+    }
+
+    // If it's a valid color name
+    if (typeof id === "string" && id in DEFAULT_COLOR_CODE) {
+      return DEFAULT_COLOR_CODE[id];
+    }
+  }
+
+  // Completely random by default
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+}
 
 /**
  *  Returns a color from the enum DEFAULT_TAG_COLOR
@@ -125,6 +173,7 @@ function getColorCount(): number {
 export {
   pickRandomColor,
   pickRandomColorName,
+  pickRandomColorCode,
   getColorIndex,
   isValidColorName,
   getColorCount,

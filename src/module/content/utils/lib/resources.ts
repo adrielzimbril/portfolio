@@ -1,7 +1,7 @@
 import type { Resource } from "@/module/content/types/types";
-import { allProjects } from "content-collections";
+import { allResources } from "content-collections";
 
-type GetAllProjectsOptions = {
+type GetAllResourcesOptions = {
   published?: boolean;
   locale?: string;
   pageSlug?: string;
@@ -9,8 +9,8 @@ type GetAllProjectsOptions = {
   limit?: number;
 };
 
-export async function getAllProjects(
-  options: GetAllProjectsOptions = {
+export async function getAllResources(
+  options: GetAllResourcesOptions = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
@@ -20,23 +20,19 @@ export async function getAllProjects(
 ): Promise<Resource[]> {
   const { published, locale, pageSlug, sort, limit } = options;
   return Promise.resolve(
-    allProjects
+    allResources
       .filter(
         (resource) =>
           resource.published === published &&
           (!locale || resource.locale === locale)
       )
-      .sort((a, b) =>
-        sort === "asc"
-          ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at)
-      )
+      .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
       .filter((resource) => resource.slug !== pageSlug)
       .slice(0, limit)
   );
 }
 
-export async function getProjectBySlug(
+export async function getResourceBySlug(
   slug: string,
   options?: {
     locale?: string;
@@ -45,55 +41,51 @@ export async function getProjectBySlug(
   const { locale } = options ?? {};
 
   return Promise.resolve(
-    allProjects.find(
+    allResources.find(
       (resource: Resource) =>
         resource.slug === slug && (!locale || resource.locale === locale)
     ) ?? null
   );
 }
 
-interface ProjectsResult {
-  currentProject: Resource;
-  adjacentProjects: Resource[];
+interface ResourcesResult {
+  currentResource: Resource;
+  adjacentResources: Resource[];
   totalFound: number;
 }
 
 /**
- * Retrieves a resource and its adjacent projects (always 2 max)
+ * Retrieves a resource and its adjacent resources (always 2 max)
  * Automatically adapts : if not enough before, takes more after and vice versa
  *
  * @param slug - The slug of the resource
  * @param options - Options for the resource retrieval
  *
- * @returns Promise<ProjectsResult | null>
+ * @returns Promise<ResourcesResult | null>
  *
  * @example
  * ```typescript
- * const projects = await getProjectWithAdjacent("my-resource-slug", { locale: "en" });
+ * const resources = await getResourceWithAdjacent("my-resource-slug", { locale: "en" });
  * ```
- * // Returns the resource with slug "my-resource-slug" and its adjacent projects
+ * // Returns the resource with slug "my-resource-slug" and its adjacent resources
  */
-export async function getProjectWithAdjacent(
+export async function getResourceWithAdjacent(
   slug: string,
   options?: {
     locale?: string;
   }
-): Promise<ProjectsResult | null> {
+): Promise<ResourcesResult | null> {
   const { locale } = options ?? {};
   // Filter by locale if specified
-  const filteredProjects = allProjects.filter(
+  const filteredResources = allResources.filter(
     (resource: Resource) => !locale || resource.locale === locale
   );
 
   // Sort by date (most recent first)
-  const sortedProjects = filteredProjects.sort(
-    (a, b) =>
-      new Date(b.created_at || "").getTime() -
-      new Date(a.created_at || "").getTime()
-  );
+  const sortedResources = filteredResources.sort((a, b) => b.id - a.id);
 
   // Find the current resource
-  const currentIndex = sortedProjects.findIndex(
+  const currentIndex = sortedResources.findIndex(
     (resource: Resource) => resource.slug === slug
   );
 
@@ -101,11 +93,11 @@ export async function getProjectWithAdjacent(
     return null;
   }
 
-  const currentProject = sortedProjects[currentIndex];
+  const currentResource = sortedResources[currentIndex];
 
-  // Intelligent logic to always have 2 projects
+  // Intelligent logic to always have 2 resources
   const availableBefore = currentIndex;
-  const availableAfter = sortedProjects.length - currentIndex - 1;
+  const availableAfter = sortedResources.length - currentIndex - 1;
   const totalWanted = 2;
 
   let beforeCount = 1; // Preference: 1 before, 1 after
@@ -130,36 +122,36 @@ export async function getProjectWithAdjacent(
     beforeCount = Math.min(totalWanted - afterCount, availableBefore);
   }
 
-  // Retrieve the projects
-  const beforeProjects =
+  // Retrieve the resources
+  const beforeResources =
     beforeCount > 0
-      ? sortedProjects.slice(currentIndex - beforeCount, currentIndex)
+      ? sortedResources.slice(currentIndex - beforeCount, currentIndex)
       : [];
 
-  const afterProjects =
+  const afterResources =
     afterCount > 0
-      ? sortedProjects.slice(currentIndex + 1, currentIndex + 1 + afterCount)
+      ? sortedResources.slice(currentIndex + 1, currentIndex + 1 + afterCount)
       : [];
 
   // Combine in chronological order
-  const adjacentProjects = [...beforeProjects, ...afterProjects];
+  const adjacentResources = [...beforeResources, ...afterResources];
 
   return {
-    currentProject,
-    adjacentProjects,
-    totalFound: adjacentProjects.length,
+    currentResource,
+    adjacentResources,
+    totalFound: adjacentResources.length,
   };
 }
 
-type GetAllProjectSlugsOptions = {
+type GetAllResourceSlugsOptions = {
   published?: boolean;
   locale?: string;
   sort?: "asc" | "desc";
   limit?: number;
 };
 
-export async function getAllProjectSlugs(
-  options: GetAllProjectSlugsOptions = {
+export async function getAllResourceSlugs(
+  options: GetAllResourceSlugsOptions = {
     published: true,
     locale: undefined,
     sort: "desc",
@@ -168,17 +160,13 @@ export async function getAllProjectSlugs(
 ): Promise<string[]> {
   const { published, locale, sort, limit } = options;
   return Promise.resolve(
-    allProjects
+    allResources
       .filter(
         (resource) =>
           resource.published === published &&
           (!locale || resource.locale === locale)
       )
-      .sort((a, b) =>
-        sort === "asc"
-          ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at)
-      )
+      .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
       .map((resource) => resource.slug)
       .slice(0, limit)
   );
@@ -193,7 +181,7 @@ type FilterOptions = {
 };
 
 /**
- * Get filtered projects
+ * Get filtered resources
  *
  * @param options - Filter options
  *
@@ -201,27 +189,19 @@ type FilterOptions = {
  *
  * @example
  * ```typescript
- * const projects = await getFilteredProjects({ category: "technology" });
+ * const resources = await getFilteredResources({ category: "technology" });
  * ```
- * // Returns all projects filtered by category "technology"
+ * // Returns all resources filtered by category "technology"
  */
-export async function getFilteredProjects(
+export async function getFilteredResources(
   options: FilterOptions = { published: undefined, locale: undefined }
 ): Promise<Resource[]> {
-  const projects = await getAllProjects({
+  const resources = await getAllResources({
     published: options.published,
     locale: options.locale,
   });
   return Promise.resolve(
-    projects.filter((resource) => {
-      // Filter by category
-      if (
-        options.category &&
-        resource.categories.find((cat) => cat.slug === options.category)
-      ) {
-        return false;
-      }
-
+    resources.filter((resource) => {
       // Filter by tag
       if (
         options.tag &&
@@ -248,35 +228,18 @@ export async function getFilteredProjects(
 }
 
 /**
- * Get all categories
- *
- * @returns Promise<string[]>
- *
- * @example
- * ```typescript
- * const categories = await getAllProjectCategories();
- * ```
- */
-export async function getAllProjectCategories(): Promise<string[]> {
-  const categories = allProjects.map((resource) =>
-    resource.categories.map((cat) => cat.slug)
-  );
-  return Promise.resolve([...new Set(categories.flat())]);
-}
-
-/**
  * Get all tags
  *
  * @returns Promise<string[]>
  *
  * @example
  * ```typescript
- * const tags = await getAllProjectTags();
+ * const tags = await getAllResourceTags();
  * ```
- * // Returns all unique tags from all projects
+ * // Returns all unique tags from all resources
  */
-export async function getAllProjectTags(): Promise<string[]> {
-  const allTags = allProjects.flatMap((resource) =>
+export async function getAllResourceTags(): Promise<string[]> {
+  const allTags = allResources.flatMap((resource) =>
     resource.tags.map((tag) => tag.slug)
   );
   return Promise.resolve([...new Set(allTags)]);

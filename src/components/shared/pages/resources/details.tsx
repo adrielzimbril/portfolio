@@ -3,58 +3,96 @@ import { LinkDiagonalOne } from "@aurthle/icons";
 import { routes } from "@/data/route";
 import { Stats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { ResourcePreviewCardInfoProps } from "@/types/type";
+import { ResourcePreviewCardInfoProps, ResourceType } from "@/types";
 
-export function CardInfo({ details }: ResourcePreviewCardInfoProps) {
+export function CardInfo({
+  title,
+  resourceType,
+  tags,
+  description,
+  features,
+  avatars,
+  userCount,
+}: {
+  title: string;
+  resourceType: ResourceType;
+  tags: { name: string }[];
+  description: string;
+  features: string[];
+  avatars: string[];
+  userCount: number;
+}) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
-        <Header title={details.title} />
+        <Header title={title} />
 
-        <Tags primaryTag={details.primaryTag} tags={details.tags} />
-
-        <Description
-          description={details.description}
-          details={details.details}
+        <Tags
+          primaryTag={
+            resourceType === ResourceType.COURSE
+              ? "Formation 🎥"
+              : resourceType === ResourceType.EBOOK
+              ? "E-book 📕"
+              : "Masterclass 🎬"
+          }
+          tags={tags.map((tag) => tag.name)}
         />
 
-        <Stats avatars={details.avatars} userCount={details.userCount} />
+        <Description description={description} features={features} />
+
+        <Stats
+          avatars={avatars}
+          userCount={userCount}
+          resourceType={resourceType}
+        />
       </div>
 
-      <Action buttonText={details.buttonText} />
+      <Action resourceType={resourceType} />
     </div>
   );
 }
 
 function Header({ title }: { title: string }) {
-  return <h3 className="relative capitalize">{title}</h3>;
+  return (
+    <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
+      {title}
+    </h3>
+  );
 }
 
 function Description({
   description,
-  details,
+  features,
 }: {
   description: string;
-  details: string;
+  features: string[];
 }) {
   return (
     <>
-      <p className="w-full relative text-[1.5rem] leading-[120%] font-medium text-zinc-600">
+      <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-zinc-600">
         {description}
       </p>
 
       <p className="w-full relative text-base text-zinc-500 leading-6 whitespace-pre-line">
-        {details}
+        {features.slice(0, 4).map((feature) => (
+          <span key={feature} className="ml-2 md:ml-4 block">
+            - {feature}
+          </span>
+        ))}
       </p>
     </>
   );
 }
 
-function Action({ buttonText }: { buttonText: string }) {
+function Action({ resourceType }: { resourceType: ResourceType }) {
   return (
     <Link href={routes.projects.link} likeButton whileTap size="xs" asIcon>
       <span className="flex items-center gap-1">
-        {buttonText}
+        {resourceType === ResourceType.COURSE
+          ? "Enroll Now"
+          : resourceType === ResourceType.EBOOK
+          ? "Read Now"
+          : "Watch Now"}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>

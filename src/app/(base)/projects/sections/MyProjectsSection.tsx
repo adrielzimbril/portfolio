@@ -14,7 +14,6 @@ export function MyProjectsSection() {
     async function loadProjects() {
       try {
         const data = await getAllProjects();
-        logger.info("Projects loaded : ", data);
         setProjects(data);
       } catch (err) {
         logger.error(err);

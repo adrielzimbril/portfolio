@@ -2,6 +2,12 @@ import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types/enum";
 import { getImageUrl } from "@/utils/base-url";
+import {
+  BookOne,
+  ClapperboardPlay,
+  MoonZoomView,
+  VideoLibrary,
+} from "@aurthle/icons";
 
 interface PreviewProps {
   title?: string;
@@ -11,6 +17,7 @@ interface PreviewProps {
   icon?: string;
   iconAlt?: string;
   isWide?: boolean;
+  resourceType?: ResourceType;
 }
 
 export function CardPreview({
@@ -21,6 +28,7 @@ export function CardPreview({
   icon = "bold-duotone---school---book.svg",
   iconAlt,
   isWide,
+  resourceType,
 }: PreviewProps) {
   return (
     <div
@@ -50,7 +58,14 @@ export function CardPreview({
           }
         />
       )}
-      {iconType && <PreviewIcon icon={icon} iconAlt={iconAlt} title={title} />}
+      {resourceType && (
+        <PreviewIcon
+          icon={icon}
+          iconAlt={iconAlt}
+          title={title}
+          resourceType={resourceType}
+        />
+      )}
     </div>
   );
 }
@@ -81,16 +96,16 @@ function PreviewContent({
   );
 }
 
-function PreviewIcon({ icon, iconAlt, title }: PreviewProps) {
+function PreviewIcon({ icon, iconAlt, title, resourceType }: PreviewProps) {
   return (
     <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-zinc-100 rounded-full overflow-hidden">
-      <Image
-        width={24}
-        height={24}
-        className="w-6 h-6"
-        alt={iconAlt ?? title ?? ""}
-        src={getImageUrl(icon!)}
-      />
+      {resourceType === ResourceType.COURSE ? (
+        <BookOne size={24} variant="bulk" />
+      ) : resourceType === ResourceType.EBOOK ? (
+        <ClapperboardPlay size={24} variant="bulk" />
+      ) : (
+        <VideoLibrary size={24} variant="bulk" />
+      )}
     </div>
   );
 }
