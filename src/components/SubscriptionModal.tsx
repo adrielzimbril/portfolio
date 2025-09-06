@@ -20,128 +20,103 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/module/supabase/supabase";
 import logger from "@/utils/logger";
 
-const formSchema = z.object({
-  nom: z.string().min(2, {
-    message: "Le nom doit contenir au moins 2 caractères.",
-  }),
-  numero: z.string().min(10, {
-    message: "Le numéro doit contenir au moins 10 caractères.",
-  }),
-  email: z.string().email({
-    message: "Veuillez entrer une adresse email valide.",
-  }).optional().or(z.literal('')),
-})
+const emailSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "Veuillez entrer une adresse email valide." }),
+});
 
-type FormData = z.infer<typeof formSchema>
+const optionalInfoSchema = z.object({
+  nom: z
+    .string()
+    .min(2, { message: "Le nom doit contenir au moins 2 caractères." })
+    .optional()
+    .or(z.literal("")),
+  numero: z
+    .string()
+    .min(10, { message: "Le numéro doit contenir au moins 10 caractères." })
+    .optional()
+    .or(z.literal("")),
+});
+
+type EmailForm = z.infer<typeof emailSchema>;
+type OptionalInfoForm = z.infer<typeof optionalInfoSchema>;
 
 interface SubscriptionModalProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1);
+  const [email, setEmail] = useState<string>("");
 
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      nom: '',
-      numero: '',
-      email: '',
-    },
-  })
+  const emailForm = useForm<EmailForm>({
+    resolver: zodResolver(emailSchema),
+    defaultValues: { email: "" },
+  });
 
-  const onSubmit = async (values: FormData) => {
-    setIsSubmitting(true)
-    
+  const optionalForm = useForm<OptionalInfoForm>({
+    resolver: zodResolver(optionalInfoSchema),
+    defaultValues: { nom: "", numero: "" },
+  });
+
+  const onSubmit = async (values: OptionalInfoForm) => {
+    setIsSubmitting(true);
+
     try {
-      // 1. Insérer le nouvel abonné
-      const { error: insertError } = await supabase
-        .from('newsletter_subscribers')
-        .insert([
-          {
-            nom: values.nom,
-            numero: values.numero,
-            email: values.email || null,
-          }
-        ])
+      // Appel unique à notre API - n'écrase pas les infos si l'email existe déjà
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name: values.nom || undefined,
+          phone: values.numero || undefined,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok)
+        throw new Error(json?.error || "Erreur lors de l'inscription");
 
-      if (insertError) {
-        throw insertError
-      }
+      setIsSuccess(true);
 
-      // 2. Incrémenter le nombre de lecteurs
-      const { data: currentStats, error: fetchError } = await supabase
-        .from('newsletter_stats')
-        .select('total_readers')
-        .eq('id', 'main')
-        .single()
-
-      if (fetchError && fetchError.code !== 'PGRST116') {
-        throw fetchError
-      }
-
-      const newReaderCount = (currentStats?.total_readers || 90000) + 1
-
-      const { error: updateError } = await supabase
-        .from('newsletter_stats')
-        .upsert([
-          {
-            id: 'main',
-            total_readers: newReaderCount,
-            updated_at: new Date().toISOString(),
-          }
-        ])
-
-      if (updateError) {
-        throw updateError
-      }
-
-      // 3. Envoyer l'email via Edge Function
-      const { error: emailError } = await supabase.functions.invoke('send-welcome-email', {
-        body: {
-          nom: values.nom,
-          numero: values.numero,
-          email: values.email,
-        }
-      })
-
-      if (emailError) {
-        logger.warn("Erreur lors de l'envoi de l'email:", emailError);
-        // Ne pas bloquer le processus si l'email échoue
-      }
-
-      setIsSuccess(true)
-      
       // Fermer la modal après 2 secondes
       setTimeout(() => {
-        onClose()
-        setIsSuccess(false)
-        form.reset()
-      }, 2000)
-
+        onClose();
+        setIsSuccess(false);
+        emailForm.reset();
+        optionalForm.reset();
+        setStep(1);
+        setEmail("");
+      }, 2000);
     } catch (error) {
       logger.error("Erreur lors de l'inscription:", error);
-      alert('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.')
+      alert(
+        "Une erreur est survenue lors de l'inscription. Veuillez réessayer."
+      );
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const handleClose = () => {
     if (!isSubmitting) {
-      onClose()
-      setIsSuccess(false)
-      form.reset()
+      onClose();
+      setIsSuccess(false);
+      emailForm.reset();
+      optionalForm.reset();
+      setStep(1);
+      setEmail("");
     }
-  }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -151,7 +126,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             🎁 Recevoir les cadeaux
           </DialogTitle>
           <DialogDescription className="text-center text-gray-600">
-            Remplissez vos informations pour recevoir la méthode Tsunami et nos cadeaux exclusifs !
+            Remplissez vos informations pour recevoir la méthode Tsunami et nos
+            cadeaux exclusifs !
           </DialogDescription>
         </DialogHeader>
 
@@ -162,60 +138,25 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               Inscription réussie !
             </h3>
             <p className="text-center text-gray-600">
-              Vous allez recevoir un email avec tous les détails. Merci de votre confiance ! 🎉
+              Vous allez recevoir un email avec tous les détails. Merci de votre
+              confiance ! 🎉
             </p>
           </div>
-        ) : (
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        ) : step === 1 ? (
+          <Form {...emailForm}>
+            <form
+              onSubmit={emailForm.handleSubmit(async (values) => {
+                setEmail(values.email);
+                setStep(2);
+              })}
+              className="space-y-6"
+            >
               <FormField
-                control={form.control}
-                name="nom"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium">
-                      Nom complet *
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Votre nom et prénom"
-                        className="h-12 border-2 border-gray-200 focus:border-blue-500"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="numero"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium">
-                      Numéro de téléphone *
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="+33 6 12 34 56 78"
-                        className="h-12 border-2 border-gray-200 focus:border-blue-500"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
+                control={emailForm.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">
-                      Email (optionnel)
-                    </FormLabel>
+                    <FormLabel className="text-sm font-medium">Email</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
@@ -231,8 +172,66 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
               <Button
                 type="submit"
-                disabled={isSubmitting}
                 className="w-full h-12 bg-black hover:bg-gray-800 text-white font-semibold text-lg"
+              >
+                Continuer
+              </Button>
+
+              <p className="text-xs text-gray-500 text-center">
+                Nous n'utiliserons jamais votre email à des fins publicitaires.
+              </p>
+            </form>
+          </Form>
+        ) : (
+          <Form {...optionalForm}>
+            <form
+              onSubmit={optionalForm.handleSubmit(onSubmit)}
+              className="space-y-6"
+            >
+              <FormField
+                control={optionalForm.control}
+                name="nom"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm font-medium">Nom</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Votre nom et prénom"
+                        className="h-12 border-2 border-gray-200 focus:border-blue-500"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={optionalForm.control}
+                name="numero"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm font-medium">
+                      Numéro de téléphone
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="+33 6 12 34 56 78"
+                        className="h-12 border-2 border-gray-200 focus:border-blue-500"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+                asPointer
+                asFull
               >
                 {isSubmitting ? (
                   <>
@@ -240,18 +239,18 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     Inscription en cours...
                   </>
                 ) : (
-                  'Recevoir mes cadeaux ! 🎁'
+                  "Recevoir mes cadeaux ! 🎁"
                 )}
               </Button>
 
               <p className="text-xs text-gray-500 text-center">
-                En vous inscrivant, vous acceptez de recevoir nos communications.
-                Vous pouvez vous désabonner à tout moment.
+                Vous pouvez passer cette étape, vos informations personnelles
+                sont facultatives.
               </p>
             </form>
           </Form>
         )}
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
