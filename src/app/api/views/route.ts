@@ -3,10 +3,6 @@ import { supabase } from "@/module/supabase/client";
 import { useGetIpInfo } from "@/hooks/useIpInfo";
 import logger from "@/utils/logger";
 
-// Structure des tables:
-// 1. page_counters: { id, path, type, slug, total_views, created_at, updated_at }
-// 2. unique_views: { id, user_ip, path, type, slug, first_view_at, last_view_at, view_count, details }
-
 // API: GET ?path=/some/path -> returns { totalViews, uniqueUsers }
 //      POST { path } -> increments and returns { totalViews, uniqueUsers }
 
@@ -18,25 +14,39 @@ export async function GET(req: NextRequest) {
 
   try {
     // Récupérer le compteur total de vues
-    const { data: counterData, error: counterError } = await supabase
+    const counterQuery = supabase
       .from("page_counters")
       .select("total_views")
       .eq("path", path)
-      .eq("type", type)
-      .eq("slug", slug)
-      .maybeSingle();
+      .eq("type", type);
+
+    if (slug) {
+      counterQuery.eq("slug", slug);
+    } else {
+      counterQuery.is("slug", null);
+    }
+
+    const { data: counterData, error: counterError } =
+      await counterQuery.maybeSingle();
 
     if (counterError && counterError.code !== "PGRST116") {
       throw counterError;
     }
 
     // Compter le nombre d'utilisateurs uniques
-    const { count: uniqueUsersCount, error: uniqueError } = await supabase
+    const uniqueQuery = supabase
       .from("unique_views")
       .select("user_ip", { count: "exact", head: true })
       .eq("path", path)
-      .eq("type", type)
-      .eq("slug", slug);
+      .eq("type", type);
+
+    if (slug) {
+      uniqueQuery.eq("slug", slug);
+    } else {
+      uniqueQuery.is("slug", null);
+    }
+
+    const { count: uniqueUsersCount, error: uniqueError } = await uniqueQuery;
 
     if (uniqueError) {
       throw uniqueError;
@@ -67,7 +77,6 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const now = new Date().toISOString();
   const ip =
     req.headers.get("x-forwarded-for") ||
     req.headers.get("x-real-ip") ||
@@ -80,97 +89,39 @@ export async function POST(req: NextRequest) {
     const blockedIp: string[] = ["::1", "127.0.0.1"];
     const ipInfo = useGetIpInfo(blockedIp.includes(ip) ? "" : ip);
 
-    let isNewUniqueUser = false;
+    // Utiliser la fonction RPC PostgreSQL pour tout gérer atomiquement
+    const { data: analyticsData, error: rpcError } = await supabase.rpc(
+      "increment_page_analytics",
+      {
+        p_path: path,
+        p_type: type,
+        p_slug: slug,
+        p_user_ip: ip,
+        p_details: { ...details, userInfo: ipInfo },
+      }
+    );
 
-    // 1. Incrémenter le compteur total de vues
-    const { data: existingCounter } = await supabase
-      .from("page_counters")
-      .select("total_views")
-      .eq("path", path)
-      .eq("type", type)
-      .eq("slug", slug)
-      .maybeSingle();
-
-    const newTotalViews = (existingCounter?.total_views ?? 0) + 1;
-
-    const { error: counterError } = await supabase
-      .from("page_counters")
-      .upsert({
-        path,
-        type,
-        slug,
-        total_views: newTotalViews,
-        updated_at: now,
-      });
-
-    if (counterError) {
-      throw counterError;
+    if (rpcError) {
+      throw rpcError;
     }
 
-    // 2. Gérer la vue unique par utilisateur
-    const { data: existingUserView } = await supabase
-      .from("unique_views")
-      .select("view_count")
-      .eq("user_ip", ip)
-      .eq("path", path)
-      .eq("type", type)
-      .eq("slug", slug)
-      .maybeSingle();
-
-    if (existingUserView) {
-      // Utilisateur existant - mettre à jour sa dernière vue
-      const { error: updateError } = await supabase
-        .from("unique_views")
-        .update({
-          last_view_at: now,
-          view_count: existingUserView.view_count + 1,
-          details: { ...details, userInfo: ipInfo },
-        })
-        .eq("user_ip", ip)
-        .eq("path", path)
-        .eq("type", type)
-        .eq("slug", slug);
-
-      if (updateError) {
-        throw updateError;
-      }
-    } else {
-      // Nouvel utilisateur unique
-      isNewUniqueUser = true;
-      const { error: insertError } = await supabase
-        .from("unique_views")
-        .insert({
-          user_ip: ip,
-          path,
-          type,
-          slug,
-          first_view_at: now,
-          last_view_at: now,
-          view_count: 1,
-          details: { ...details, userInfo: ipInfo },
-        });
-
-      if (insertError) {
-        throw insertError;
-      }
-    }
-
-    // 3. Récupérer le nombre total d'utilisateurs uniques
-    const { count: uniqueUsersCount } = await supabase
-      .from("unique_views")
-      .select("user_ip", { count: "exact", head: true })
-      .eq("path", path)
-      .eq("type", type)
-      .eq("slug", slug);
+    // La fonction RPC retourne un array, prendre le premier élément
+    const result = analyticsData?.[0] || {
+      total_views: 1,
+      unique_users: 1,
+      user_view_count: 1,
+      is_new_unique_user: true,
+    };
 
     return new Response(
       JSON.stringify({
-        totalViews: newTotalViews,
-        uniqueUsers: uniqueUsersCount ?? 1,
+        totalViews: result.total_views,
+        uniqueUsers: result.unique_users,
+        userViewCount: result.user_view_count,
+        isNewUniqueUser: result.is_new_unique_user,
         path,
         type,
         slug,
-        isNewUniqueUser,
       }),
       {
         status: 200,
