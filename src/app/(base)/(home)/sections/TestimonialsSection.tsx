@@ -11,7 +11,6 @@ interface Testimonial {
   id: number;
   name: string;
   position: string;
-  company: string;
   testimonial: string;
   linkedinUrl?: string;
   websiteUrl?: string;
@@ -21,31 +20,30 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Sophie Martin",
-    position: "CEO",
-    company: "TechStart",
+    name: "Christian Junior Braffo",
+    position:
+      "↳Développeur Web & Certifié Cloud Practitioner | J'apporte de la visibilité à votre business grâce à un portfolio , des sites et applications web performants  sur mesure",
     testimonial:
-      "Adriel a transformé notre vision en une solution concrète qui génère des résultats exceptionnels. Son expertise en IA et sa compréhension des enjeux business sont remarquables.",
-    linkedinUrl: "https://linkedin.com/in/sophiemartin",
-    avatar: "SM",
+      "Adriel Zimbril n’est pas un simple développeur, c’est un développeur qui repousse ses limites à chaque fois , il est capable d’implémenter n’importe quelle maquette que vous lui proposer , Il est très ouvert et est toujours prêt à aider, c’est probablement le meilleur Dev que je connaisse",
+    linkedinUrl: "https://www.linkedin.com/in/christian-junior-braffo-",
+    avatar: "CJB",
   },
   {
     id: 2,
-    name: "Marc Dubois",
-    position: "Directeur Marketing",
-    company: "InnovateCorp",
+    name: "Youssouf Aboubacar Yvan Gamby",
+    position:
+      "Chargé d’affaires chez Witti Finances Côte d'Ivoire | Master 2 en Sciences de Gestion",
     testimonial:
-      "L'automatisation mise en place par Adriel nous a fait gagner 40% de temps sur nos processus d'acquisition client. Un travail de qualité professionnelle.",
-    linkedinUrl: "https://linkedin.com/in/marcdubois",
-    avatar: "MD",
+      "J’avais besoin d’un développeur pour m’aider à lancer mon SaaS pour étudiants, mais au final, Adriel a été bien plus que ça. Il m’a accompagné comme un vrai conseiller. Il m’a aidé à clarifier mon idée, à structurer mon produit, et à mieux comprendre ce que je voulais vraiment proposer.\n Grâce à lui, j’ai pu poser des bases solides, éviter pas mal d’erreurs et avancer beaucoup plus vite. Si vous avez un projet en tête mais que c’est encore flou, Adriel est clairement la bonne personne pour vous aider à le rendre concret.",
+    linkedinUrl: "https://www.linkedin.com/in/youssoufgamby",
+    avatar: "YAG",
   },
   {
     id: 3,
-    name: "Claire Rousseau",
-    position: "Fondatrice",
-    company: "GrowthLab",
+    name: "Angaman Brou Cedrick Delmas",
+    position: "Developer Backend Java/Python",
     testimonial:
-      "Collaborer avec Adriel, c'est avoir accès à une expertise rare. Il comprend parfaitement les défis des entrepreneurs et propose des solutions innovantes.",
+      "J’ai eu la chance de travailler avec Adriel Zimbril sur mon tout premier projet professionnel en intelligence artificielle. Il était Lead Project et en même temps mon mentor tout au long de l’aventure. Adriel m’a énormément appris, aussi bien sur la gestion de projet que sur les aspects techniques. Il m’a guidé avec patience, m’a challengé quand il fallait, et m’a surtout aidé à monter en compétence rapidement. \n J’ai pu prendre confiance, mieux structurer mon travail et comprendre les vrais enjeux d’un projet tech. Travailler avec lui a été une vraie opportunité, et je le recommande sincèrement à toute personne ou entreprise qui cherche un leader passionné, pédagogue et efficace.",
     websiteUrl: "https://growthlab.com",
     avatar: "CR",
   },
@@ -135,8 +133,7 @@ export function TestimonialsSection() {
                         {currentTestimonial.name}
                       </cite>
                       <p className="text-sm text-primary">
-                        {currentTestimonial.position} chez{" "}
-                        {currentTestimonial.company}
+                        {currentTestimonial.position}
                       </p>
                     </div>
                   </div>
