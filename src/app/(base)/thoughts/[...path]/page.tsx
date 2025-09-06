@@ -14,6 +14,7 @@ import { routes } from "@/data/route";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
 import { PageParams } from "@/types";
+import { ViewsBadge } from "@/components/ViewsBadge";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
@@ -59,6 +60,7 @@ export default async function BlogPostPage(props: {
     totalSeconds: 0,
   };
   const formattedReadingTime = formatTime({ minutes, seconds, totalSeconds });
+  const viewPath = `/${locale}/thoughts/${slug}`;
 
   return (
     <>
@@ -96,6 +98,7 @@ export default async function BlogPostPage(props: {
         date={created_at}
         readingTime={formattedReadingTime}
         views={0}
+        viewsNode={<ViewsBadge path={viewPath} />}
       />
       <ContentsSection content={body} />
       <MorePreviewSection data={post.adjacentPosts} />

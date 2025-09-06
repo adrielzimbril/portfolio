@@ -9,6 +9,7 @@ import { PageParams } from "@/types";
 import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/route";
+import { ViewsIncrementor } from "@/components/ViewsIncrementor";
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
   const { path, locale } = await props.params;
@@ -22,9 +23,11 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
   }
 
   const { title, cover, tags, body, excerpt, type } = resource!.currentResource;
+  const viewPath = `/${locale}/hub/${slug}`;
 
   return (
     <>
+      <ViewsIncrementor path={viewPath} />
       <HeaderSection
         title={title}
         cover={cover ?? ""}

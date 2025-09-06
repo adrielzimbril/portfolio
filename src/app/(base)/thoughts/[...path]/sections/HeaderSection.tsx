@@ -8,6 +8,7 @@ export function HeaderSection({
   date,
   readingTime,
   views,
+  viewsNode,
 }: {
   date: string;
   tags: { name: string }[];
@@ -15,6 +16,7 @@ export function HeaderSection({
   title: string;
   readingTime: string;
   views: number;
+  viewsNode?: React.ReactNode;
 }) {
   return (
     <ThoughtHeaderSection
@@ -34,6 +36,7 @@ export function HeaderSection({
         readingTime,
         views,
       }}
+      viewsNode={viewsNode}
     />
   );
 }

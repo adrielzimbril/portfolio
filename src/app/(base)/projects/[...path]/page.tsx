@@ -19,6 +19,7 @@ import { setRequestLocale } from "next-intl/server";
 import { routes } from "@/data/route";
 import { PageParams } from "@/types";
 import logger from "@/utils/logger";
+import { ViewsIncrementor } from "@/components/ViewsIncrementor";
 
 export default async function SubProject(props: {
   params: Promise<PageParams>;
@@ -56,8 +57,10 @@ export default async function SubProject(props: {
     resultSectionDescription,
     results,
   } = post!.currentProject;
+  const viewPath = `/${locale}/projects/${slug}`;
   return (
     <>
+      <ViewsIncrementor path={viewPath} />
       <HeaderSection
         title={title}
         cover={image_big || ""}

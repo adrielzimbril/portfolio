@@ -29,6 +29,9 @@ interface HeaderSectionProps {
     views?: number;
   };
 
+  // Optional custom node to display views (e.g., dynamic client badge)
+  viewsNode?: React.ReactNode;
+
   // Optional CSS Classes
   className?: string;
   sectionClassName?: string;
@@ -45,6 +48,7 @@ export function HeaderSection({
   mainTitle,
   tags,
   articleDetails,
+  viewsNode,
 }: HeaderSectionProps) {
   return (
     <SectionBase
@@ -99,16 +103,20 @@ export function HeaderSection({
             </span>
           </Badge>
 
-          <Badge
-            className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
-            variant="colored"
-            size="md"
-          >
-            <span className="flex items-center gap-2">
-              <Eye className="size-4 text-indigo-400" variant="bulk" />
-              {articleDetails.views} views
-            </span>
-          </Badge>
+          {viewsNode ? (
+            <>{viewsNode}</>
+          ) : (
+            <Badge
+              className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+              variant="colored"
+              size="md"
+            >
+              <span className="flex items-center gap-2">
+                <Eye className="size-4 text-indigo-400" variant="bulk" />
+                {articleDetails.views} views
+              </span>
+            </Badge>
+          )}
         </div>
       )}
 
