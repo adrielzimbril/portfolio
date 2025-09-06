@@ -4,12 +4,12 @@ const supabaseUrl =
   process.env.SUPABASE_URL || "https://placeholder.supabase.co";
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || "placeholder-anon-key";
 
-// Only throw error if we're trying to use actual Supabase functionality
+// Only throw error if we are missing real env vars in production/runtime
 const isPlaceholder =
   supabaseUrl.includes("placeholder") ||
   supabaseAnonKey.includes("placeholder");
 
-if (!isPlaceholder) {
+if (process.env.NODE_ENV !== 'development' && isPlaceholder) {
   throw new Error("Missing Supabase environment variables");
 }
 
@@ -55,6 +55,23 @@ export type Database = {
         Update: {
           id?: string
           total_readers?: number
+          updated_at?: string
+        }
+      }
+      page_views: {
+        Row: {
+          path: string
+          count: number
+          updated_at: string
+        }
+        Insert: {
+          path: string
+          count?: number
+          updated_at?: string
+        }
+        Update: {
+          path?: string
+          count?: number
           updated_at?: string
         }
       }
