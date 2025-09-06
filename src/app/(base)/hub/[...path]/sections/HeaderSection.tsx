@@ -16,6 +16,7 @@ export function HeaderSection({
 }) {
   return (
     <ResourceHeaderSection
+      sectionClassName="md:w-[90%] mx-auto"
       previewContent={
         cover
           ? {
@@ -26,6 +27,7 @@ export function HeaderSection({
           : undefined
       }
       mainTitle={title}
+      description={description}
       tags={tags}
       ctaButton={routes.contact.link}
     />

@@ -35,11 +35,10 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         description={excerpt}
         tags={tags}
       />
-      {/* Projects Section */}
-      <ProjectsSection />
+      <ProjectsSection content={body || ""} />
       <ElementHomeWorkContactSubsection />
       <ProjectListSection />
-      <MoreInfoSection />
+      <MoreInfoSection data={resource!.adjacentResources} />
       <CallToAction isPage />
     </>
   );

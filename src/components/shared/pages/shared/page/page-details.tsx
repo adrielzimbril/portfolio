@@ -14,7 +14,7 @@ export function PageDetails({ content }: PageDetailsProps) {
         <div className="flex flex-col w-full max-w-[90%] mx-auto items-start justify-center gap-4 md:gap-8 relative">
           <h2 className="relative self-stretch h3 font-normal">Présentation</h2>
 
-          <div className="flex flex-col gap-8 md:gap-12 text-zinc-500 font-normal text-base w-full">
+          <div className="flex flex-col gap-8 md:gap-12 font-normal text-base w-full">
             <MarkdownContentRender content={content} />
           </div>
         </div>

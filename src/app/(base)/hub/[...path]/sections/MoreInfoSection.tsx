@@ -1,30 +1,12 @@
 "use client";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section-new";
-import logger from "@/utils/logger";
 import { Resource } from "@/module/content/types";
-import { useState, useEffect } from "react";
-import { getAllResources } from "@/module/content/utils/lib/resources";
 
-export function MoreInfoSection() {
-  const [resources, setResources] = useState<Resource[]>([]);
-
-  useEffect(() => {
-    async function loadResources() {
-      try {
-        const data = await getAllResources({ limit: 2 });
-        setResources(data);
-      } catch (err) {
-        logger.error(err);
-      }
-    }
-
-    loadResources();
-  }, []);
-
+export function MoreInfoSection({ data }: { data: Resource[] }) {
   return (
     <CardPreviewSection title="Autres ressources.">
-      {resources.map((resource, index) => (
+      {data.map((resource, index) => (
         <ResourceCard
           key={index}
           title={resource.title}

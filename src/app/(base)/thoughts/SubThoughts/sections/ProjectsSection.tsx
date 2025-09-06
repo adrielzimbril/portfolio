@@ -1,5 +1,5 @@
 import React from "react";
-import { PageDetails } from "@/components/shared/pages/thoughts/page/page-details";
+import { PageDetails } from "@/components/shared/pages/shared/page/page-details";
 
 export function ProjectsSection() {
   return (
