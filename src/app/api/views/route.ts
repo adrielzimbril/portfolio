@@ -6,6 +6,9 @@ import { supabase } from "@/module/supabase/client";
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const path = searchParams.get('path') || '/'
+  const details = searchParams.get("details")
+    ? JSON.parse(searchParams.get("details"))
+    : ""; 
 
   const { data, error } = await supabase
     .from('page_views')

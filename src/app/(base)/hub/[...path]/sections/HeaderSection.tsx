@@ -34,6 +34,7 @@ export function HeaderSection({
       mainTitle={title}
       description={description}
       tags={tags}
+      type={type}
       extraNode={requestsNode}
       ctaButton={routes.contact.link}
       ctaButtonText="Obtenir 🦄"

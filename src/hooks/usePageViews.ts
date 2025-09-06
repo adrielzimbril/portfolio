@@ -1,7 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
+import { PageType } from "@/types";
 
-export function usePageViews(path: string) {
+export function usePageViews(
+  path: string,
+  slug: string,
+  type: PageType,
+  details?: Object
+) {
   const [count, setCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,15 +21,22 @@ export function usePageViews(path: string) {
         const incRes = await fetch(`/api/views`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ path }),
+          body: JSON.stringify({ path, slug, type, details }),
         });
         const incJson = await incRes.json();
-        if (!incRes.ok) throw new Error(incJson?.error || "Failed to increment");
+        if (!incRes.ok)
+          throw new Error(incJson?.error || "Failed to increment");
         if (!cancelled) setCount(incJson.count);
       } catch (e: any) {
         try {
           // Fallback: just read
-          const res = await fetch(`/api/views?path=${encodeURIComponent(path)}`);
+          const res = await fetch(
+            `/api/views?path=${encodeURIComponent(
+              path
+            )}&slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
+              type
+            )}&details=${encodeURIComponent(JSON.stringify(details))}`
+          );
           const json = await res.json();
           if (!res.ok) throw new Error(json?.error || "Failed to fetch");
           if (!cancelled) setCount(json.count ?? 0);
@@ -39,7 +52,7 @@ export function usePageViews(path: string) {
     return () => {
       cancelled = true;
     };
-  }, [path]);
+  }, [path, details]);
 
   return { count, loading, error } as const;
 }

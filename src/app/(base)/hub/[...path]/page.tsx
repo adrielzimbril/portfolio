@@ -5,14 +5,19 @@ import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
 import { getActivePathFromUrlParam } from "@/utils/content";
 import { setRequestLocale } from "next-intl/server";
-import { PageParams } from "@/types";
+import { PageParams, PageType } from "@/types";
 import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/route";
-import { ViewsIncrementor } from "@/components/ViewsIncrementor";
-import { ProductTypeSubscribersBadge, ProductTitleRequestsBadge } from "@/components/SubscriberBadges";
+import {
+  ProductTypeSubscribersBadge,
+  ProductTitleRequestsBadge,
+} from "@/components/SubscriberBadges";
+import { usePageViews } from "@/hooks/usePageViews";
+import { useRouter } from "next/navigation";
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
+  const router = useRouter();
   const { path, locale } = await props.params;
   setRequestLocale(locale);
 
@@ -23,12 +28,12 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
     return localeRedirect({ href: routes.projects.link, locale });
   }
 
+  usePageViews(path, slug, PageType.HUB, { locale: locale, router });
+
   const { title, cover, tags, body, excerpt, type } = resource!.currentResource;
-  const viewPath = `/${locale}/hub/${slug}`;
 
   return (
     <>
-      <ViewsIncrementor path={viewPath} />
       <HeaderSection
         title={title}
         cover={cover ?? ""}

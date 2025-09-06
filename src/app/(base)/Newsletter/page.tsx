@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
-import { useNewsletterStats } from "@/hooks/useNewsletterStats";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionLayout } from "@/components/shared/sections/layout";
@@ -25,7 +24,6 @@ const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
 export default function Newsletter() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const { readerCount, isLoading } = useNewsletterStats();
 
   const formatReaderCount = (count: number) => {
     if (count >= 1000000) {

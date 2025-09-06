@@ -17,6 +17,7 @@ import { pickRandomColor } from "@/utils";
 import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
 import { Button } from "@/components/ui/button";
 import { useScrollTo } from "@/hooks/useScrollTo";
+import { ResourceType } from "@/types/enum";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -27,6 +28,9 @@ interface HeaderSectionProps {
 
   // Description
   description?: string;
+
+  // Resource Type
+  type?: ResourceType;
 
   // Tags
   tags?: {

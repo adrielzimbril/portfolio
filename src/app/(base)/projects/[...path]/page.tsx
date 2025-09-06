@@ -17,13 +17,14 @@ import { getProjectWithAdjacent } from "@/module/content/utils/lib/projects";
 import { getActivePathFromUrlParam } from "@/utils/content";
 import { setRequestLocale } from "next-intl/server";
 import { routes } from "@/data/route";
-import { PageParams } from "@/types";
-import logger from "@/utils/logger";
-import { ViewsIncrementor } from "@/components/ViewsIncrementor";
+import { PageParams, PageType } from "@/types";
+import { useRouter } from "next/router";
+import { usePageViews } from "@/hooks/usePageViews";
 
 export default async function SubProject(props: {
   params: Promise<PageParams>;
 }) {
+  const router = useRouter();
   const { path, locale } = await props.params;
   setRequestLocale(locale);
 
@@ -33,6 +34,8 @@ export default async function SubProject(props: {
   if (!post) {
     return localeRedirect({ href: routes.projects.link, locale });
   }
+
+  usePageViews(path, slug, PageType.PROJECT, { locale: locale, router });
 
   const {
     title,
@@ -57,10 +60,8 @@ export default async function SubProject(props: {
     resultSectionDescription,
     results,
   } = post!.currentProject;
-  const viewPath = `/${locale}/projects/${slug}`;
   return (
     <>
-      <ViewsIncrementor path={viewPath} />
       <HeaderSection
         title={title}
         cover={image_big || ""}

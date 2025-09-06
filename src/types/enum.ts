@@ -8,6 +8,12 @@ export enum ResourceType {
   VIDEO = "video",
 }
 
+export enum PageType {
+  PROJECT = "project",
+  HUB = "hub",
+  THOUGHT = "thought",
+}
+
 export enum PreviewContentType {
   TEXT = "text",
   IMAGE = "image",

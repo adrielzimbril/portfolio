@@ -13,8 +13,10 @@ import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { routes } from "@/data/route";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
-import { PageParams } from "@/types";
+import { PageParams, PageType } from "@/types";
 import { ViewsBadge } from "@/components/ViewsBadge";
+import { useRouter } from "next/router";
+import { usePageViews } from "@/hooks/usePageViews";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
@@ -41,6 +43,7 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
 export default async function BlogPostPage(props: {
   params: Promise<PageParams>;
 }) {
+  const router = useRouter();
   const { path, locale } = await props.params;
   setRequestLocale(locale);
 
@@ -50,6 +53,11 @@ export default async function BlogPostPage(props: {
   if (!post) {
     return localeRedirect({ href: routes.thoughts.link, locale });
   }
+
+  const { count, loading } = usePageViews(path, slug, PageType.THOUGHT, {
+    locale: locale,
+    router,
+  });
 
   const { title, created_at, tags, cover, body } = post.currentPost;
   const { minutes, seconds, totalSeconds } = calculateReadingTime({
@@ -97,8 +105,8 @@ export default async function BlogPostPage(props: {
         tags={tags}
         date={created_at}
         readingTime={formattedReadingTime}
-        views={0}
-        viewsNode={<ViewsBadge path={viewPath} />}
+        views={count ?? 0}
+        viewsNode={<ViewsBadge path={viewPath} type={PageType.THOUGHT} />}
       />
       <ContentsSection content={body} />
       <MorePreviewSection data={post.adjacentPosts} />

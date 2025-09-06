@@ -2,9 +2,10 @@
 import { EyeIcon } from "lucide-react";
 import { usePageViews } from "@/hooks/usePageViews";
 import { Badge } from "@/components/ui/badge";
+import { PageType } from "@/types";
 
-export function ViewsBadge({ path }: { path: string }) {
-  const { count, loading } = usePageViews(path);
+export function ViewsBadge({ path, type }: { path: string; type: PageType }) {
+  const { count, loading } = usePageViews(path, "", type);
   const text = loading ? "..." : formatCount(count ?? 0);
 
   return (
