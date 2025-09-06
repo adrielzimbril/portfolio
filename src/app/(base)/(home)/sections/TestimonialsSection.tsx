@@ -55,7 +55,7 @@ export function TestimonialsSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 8000); // Time interval to change testimonial cards is 8 seconds
+    }, 10000); // Time interval to change testimonial cards is 10 seconds
 
     return () => clearInterval(interval);
   }, []);
