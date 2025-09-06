@@ -18,6 +18,11 @@ import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
 import { Button } from "@/components/ui/button";
 import { useScrollTo } from "@/hooks/useScrollTo";
 import { ResourceType } from "@/types/enum";
+import {
+  ProductTypeSubscribersBadge,
+  ProductTitleRequestsBadge,
+} from "@/components/SubscriberBadges";
+import { PreviewIcon } from "@/components/shared/pages/shared/preview";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -46,9 +51,6 @@ interface HeaderSectionProps {
   className?: string;
   sectionClassName?: string;
   cardClassName?: string;
-
-  // Optional extra content slot (e.g., counters/badges)
-  extraNode?: React.ReactNode;
 }
 
 export function HeaderSection({
@@ -61,10 +63,10 @@ export function HeaderSection({
   mainTitle,
   description,
   tags,
+  type,
   ctaButton,
   ctaButtonText,
   sectionClassName,
-  extraNode,
 }: HeaderSectionProps) {
   const scrollTo = useScrollTo();
   return (
@@ -85,7 +87,7 @@ export function HeaderSection({
               : "p-0"
           )}
         >
-          <HeaderPreviewCard content={previewContent} />
+          <HeaderPreviewCard content={previewContent} type={type} />
         </CardContent>
       </Card>
 
@@ -112,9 +114,10 @@ export function HeaderSection({
         </div>
       )}
 
-      {extraNode ? (
-        <div className="mt-2">{extraNode}</div>
-      ) : null}
+      <div className="mt-2 flex gap-2 flex-wrap">
+        {type && <ProductTypeSubscribersBadge type={type as any} />}
+        {mainTitle && <ProductTitleRequestsBadge title={mainTitle} />}
+      </div>
 
       {ctaButton && ctaButton.startsWith("http") ? (
         <div className="relative w-full">

@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { PreviewContentType } from "@/types";
+import { PreviewContentType, ResourceType } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
+import { PreviewIcon } from "@/components/shared/pages/shared/preview";
 
 interface BasePreviewContent {
   type: PreviewContentType;
@@ -45,7 +46,13 @@ type PreviewContent =
 /**
  * Function to render preview content
  */
-export function HeaderPreviewCard({ content }: { content: PreviewContent }) {
+export function HeaderPreviewCard({
+  content,
+  type,
+}: {
+  content: PreviewContent;
+  type?: ResourceType;
+}) {
   switch (content.type) {
     case PreviewContentType.TEXT:
       return (
@@ -77,6 +84,7 @@ export function HeaderPreviewCard({ content }: { content: PreviewContent }) {
             height={630}
             className="size-auto object-cover hover:scale-105 transition-all duration-800 rounded-2xl md:rounded-[2rem]"
           />
+          {type && <PreviewIcon resourceType={type} />}
         </div>
       );
 
@@ -92,6 +100,7 @@ export function HeaderPreviewCard({ content }: { content: PreviewContent }) {
             controls={content.controls !== false}
             className="max-w-full max-h-full rounded-lg"
           />
+          {type && <PreviewIcon resourceType={type} />}
           {content.caption && (
             <p className="text-zinc-400 text-center mt-4 text-lg">
               {content.caption}
@@ -101,7 +110,12 @@ export function HeaderPreviewCard({ content }: { content: PreviewContent }) {
       );
 
     case PreviewContentType.CUSTOM:
-      return content.content;
+      return (
+        <>
+          {content.content}
+          {type && <PreviewIcon resourceType={type} />}
+        </>
+      );
 
     default:
       return null;

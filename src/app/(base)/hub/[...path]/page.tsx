@@ -35,12 +35,6 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         description={excerpt}
         type={type}
         tags={tags}
-        requestsNode={
-          <div className="flex gap-2 flex-wrap">
-            {type ? <ProductTypeSubscribersBadge type={type as any} /> : null}
-            {title ? <ProductTitleRequestsBadge title={title} /> : null}
-          </div>
-        }
         pageViewsData={{ slug, locale }}
       />
       <ProjectDetailsSection content={body || ""} />

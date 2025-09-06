@@ -78,7 +78,7 @@ function PreviewContent({
   );
 }
 
-function PreviewIcon({ resourceType }: PreviewProps) {
+export function PreviewIcon({ resourceType }: PreviewProps) {
   return (
     <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-zinc-100 rounded-full pointer-events-none overflow-hidden">
       {resourceType === ResourceType.COURSE ? (

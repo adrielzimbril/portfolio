@@ -14,7 +14,6 @@ export function HeaderSection({
   description,
   tags,
   type,
-  requestsNode,
   pageViewsData,
 }: {
   title: string;
@@ -22,7 +21,6 @@ export function HeaderSection({
   description: string;
   tags: { name: string; color: string }[];
   type?: ResourceType;
-  requestsNode?: React.ReactNode;
   pageViewsData: { slug: string; locale: string };
 }) {
   usePageViews(
@@ -51,7 +49,6 @@ export function HeaderSection({
       description={description}
       tags={tags}
       type={type}
-      extraNode={requestsNode}
       ctaButton={routes.contact.link}
       ctaButtonText="Obtenir 🦄"
     />

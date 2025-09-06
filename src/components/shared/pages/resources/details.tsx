@@ -1,9 +1,8 @@
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
-import { routes } from "@/data/route";
 import { Stats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { ResourcePreviewCardInfoProps, ResourceType } from "@/types";
+import { ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 
 export function CardInfo({
