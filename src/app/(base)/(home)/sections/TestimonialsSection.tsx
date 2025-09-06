@@ -69,7 +69,7 @@ export function TestimonialsSection() {
       badge="On a construit ensemble 🫱🏾‍🫲🏻"
       isFlex
     >
-      <div className="flex flex-col gap-4 md:gap-8 items-center justify-center px-6 max-w-3xl mx-auto">
+      <div className="flex flex-col gap-4 md:gap-8 items-center justify-center px-6 max-w-5xl mx-auto">
         <Card className="squircle squircle-stone-100 squircle-3xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
           <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
             <div
@@ -108,13 +108,13 @@ export function TestimonialsSection() {
                     </>
                   )}
                 </Badge>
-                <blockquote className="text-xl md:text-2xl tracking-tighter font-medium text-zinc-700 leading-[150%] p-0">
+                <blockquote className="text-xl md:text-2xl tracking-tighter font-medium whitespace-pre-line text-zinc-700 leading-[150%] p-0">
                   "{currentTestimonial.testimonial}"
                 </blockquote>
 
                 {/* Author Info */}
                 <div className="flex flex-col gap-2">
-                  <div className="flex gap-4 max-w-sm">
+                  <div className="flex gap-4 max-w-lg md:max-w-2xl">
                     <div className="size-10 md:size-12 rounded-full flex items-center justify-center">
                       <BoringAvatar
                         name={currentTestimonial.avatar ?? ""}
