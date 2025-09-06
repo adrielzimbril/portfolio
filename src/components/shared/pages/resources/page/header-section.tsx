@@ -42,6 +42,9 @@ interface HeaderSectionProps {
   className?: string;
   sectionClassName?: string;
   cardClassName?: string;
+
+  // Optional extra content slot (e.g., counters/badges)
+  extraNode?: React.ReactNode;
 }
 
 export function HeaderSection({
@@ -57,6 +60,7 @@ export function HeaderSection({
   ctaButton,
   ctaButtonText,
   sectionClassName,
+  extraNode,
 }: HeaderSectionProps) {
   const scrollTo = useScrollTo();
   return (
@@ -103,6 +107,10 @@ export function HeaderSection({
           ))}
         </div>
       )}
+
+      {extraNode ? (
+        <div className="mt-2">{extraNode}</div>
+      ) : null}
 
       {ctaButton && ctaButton.startsWith("http") ? (
         <div className="relative w-full">

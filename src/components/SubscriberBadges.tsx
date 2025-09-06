@@ -1,0 +1,67 @@
+"use client";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import {
+  useNewsletterSubscribersCount,
+  useProductTypeSubscribersCount,
+  useProductTitleRequestsCount,
+} from "@/hooks/useSubscriberStats";
+import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
+
+function formatCount(n: number) {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `${Math.floor(n / 1_000)}K`;
+  return `${n}`;
+}
+
+export function NewsletterSubscribersBadge() {
+  const { count, loading } = useNewsletterSubscribersCount();
+  return (
+    <Badge
+      className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+      variant="colored"
+      size="md"
+    >
+      <span className="flex items-center gap-2">
+        <UsersGroup size={16} className="text-indigo-400" variant="bulk" />
+        {loading ? "..." : `${formatCount(count ?? 0)} abonnés`}
+      </span>
+    </Badge>
+  );
+}
+
+export function ProductTypeSubscribersBadge({
+  type,
+}: {
+  type: "course" | "ebook" | "video";
+}) {
+  const { count, loading } = useProductTypeSubscribersCount(type);
+  return (
+    <Badge
+      className="squircle squircle-emerald-100 squircle-smooth-xl squircle-5xl"
+      variant="colored"
+      size="md"
+    >
+      <span className="flex items-center gap-2">
+        <Box size={16} className="text-emerald-500" variant="bulk" />
+        {loading ? "..." : `${formatCount(count ?? 0)} demandes ${type}`}
+      </span>
+    </Badge>
+  );
+}
+
+export function ProductTitleRequestsBadge({ title }: { title: string }) {
+  const { count, loading } = useProductTitleRequestsCount(title);
+  return (
+    <Badge
+      className="squircle squircle-amber-100 squircle-smooth-xl squircle-5xl"
+      variant="colored"
+      size="md"
+    >
+      <span className="flex items-center gap-2">
+        <GiftBoxOne size={16} className="text-amber-500" variant="bulk" />
+        {loading ? "..." : `${formatCount(count ?? 0)} demandes`}
+      </span>
+    </Badge>
+  );
+}

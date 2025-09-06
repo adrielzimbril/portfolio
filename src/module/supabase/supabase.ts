@@ -1,19 +1,16 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl =
-  process.env.SUPABASE_URL || "https://placeholder.supabase.co";
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || "placeholder-anon-key";
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-// Only throw error if we are missing real env vars in production/runtime
-const isPlaceholder =
-  supabaseUrl.includes("placeholder") ||
-  supabaseAnonKey.includes("placeholder");
-
-if (process.env.NODE_ENV !== 'development' && isPlaceholder) {
+if (
+  (process.env.NODE_ENV !== "development" && !supabaseUrl) ||
+  !supabaseAnonKey
+) {
   throw new Error("Missing Supabase environment variables");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl!, supabaseAnonKey!);
 
 export type Database = {
   public: {

@@ -10,12 +10,14 @@ export function HeaderSection({
   description,
   tags,
   type,
+  requestsNode,
 }: {
   title: string;
   cover: string;
   description: string;
   tags: { name: string; color: string }[];
   type?: ResourceType;
+  requestsNode?: React.ReactNode;
 }) {
   return (
     <ResourceHeaderSection
@@ -32,6 +34,7 @@ export function HeaderSection({
       mainTitle={title}
       description={description}
       tags={tags}
+      extraNode={requestsNode}
       ctaButton={routes.contact.link}
       ctaButtonText="Obtenir 🦄"
     />

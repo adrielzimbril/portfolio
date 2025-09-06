@@ -12,6 +12,7 @@ import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
+import { NewsletterSubscribersBadge } from "@/components/SubscriberBadges";
 
 const metaInfo = [
   { icon: CalendarIcon, text: "18, Jul 2024" },
@@ -69,6 +70,7 @@ export default function Newsletter() {
             </p>
           </div>
           <Tags primaryTag={date} tags={tags} isCentered />
+          <div className="mt-2"><NewsletterSubscribersBadge /></div>
           {/* <Badge className="justify-center gap-1 px-3 py-1.5 bg-[#e2e4ff] rounded-[10px] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)]">
             <EyeIcon className="w-4 h-4" />
             <span className="[font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-[#000000de] text-xs tracking-[0] leading-4 whitespace-nowrap">
