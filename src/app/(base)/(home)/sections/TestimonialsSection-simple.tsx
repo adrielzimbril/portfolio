@@ -1,5 +1,5 @@
 "use client";
-import { Link, Linkedin } from "@aurthle/icons";
+import { Link, Linkedin, LinkOne } from "@aurthle/icons";
 import { useState, useEffect } from "react";
 import BoringAvatar from "boring-avatars";
 import { cn, pickRandomColorCode } from "@/utils";
@@ -81,8 +81,12 @@ export function TestimonialsSection() {
             >
               <div className="flex flex-col items-start gap-4 md:gap-6 w-full max-w-[90%] py-6 md:py-8 mx-auto">
                 <Badge
-                  className="squircle-blue-100"
-                  contentClassName="flex items-center gap-1"
+                  className={cn(
+                    currentTestimonial.linkedinUrl
+                      ? "squircle-blue-100"
+                      : "squircle-orange-200"
+                  )}
+                  contentClassName="flex items-center gap-1 font-bold"
                   variant="colored"
                 >
                   {(currentTestimonial.linkedinUrl ||
@@ -90,13 +94,17 @@ export function TestimonialsSection() {
                     <>
                       {currentTestimonial.linkedinUrl ? (
                         <>
-                          <Linkedin size={16} variant="bulk" />
-                          <span>LinkedIn</span>
+                          <Linkedin size={18} variant="bulk" />
+                          <span className="hidden md:block leading-0">
+                            LinkedIn
+                          </span>
                         </>
                       ) : (
                         <>
-                          <Link size={16} variant="bulk" />
-                          <span>Website</span>
+                          <LinkOne size={18} variant="bulk" />
+                          <span className="hidden md:block leading-0">
+                            Website
+                          </span>
                         </>
                       )}
                     </>
@@ -109,7 +117,7 @@ export function TestimonialsSection() {
                 {/* Author Info */}
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-4 max-w-sm">
-                    <div className="size-6 md:size-12 bg-muted rounded-full flex items-center justify-center">
+                    <div className="size-10 md:size-12 rounded-full flex items-center justify-center">
                       <BoringAvatar
                         name={currentTestimonial.avatar ?? ""}
                         colors={[
@@ -119,6 +127,7 @@ export function TestimonialsSection() {
                           pickRandomColorCode(),
                         ]}
                         variant="beam"
+                        className="size-10 md:size-12"
                       />
                     </div>
                     <div className="text-start">
