@@ -12,7 +12,6 @@ export default function Home() {
       <HeaderSection />
       <ResourcesSection />
       <ProjectsSection />
-      <QuoteSection />
       <TestimonialsSection />
       <CallToAction />
     </>
