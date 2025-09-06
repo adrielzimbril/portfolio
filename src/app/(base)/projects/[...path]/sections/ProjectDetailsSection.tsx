@@ -34,9 +34,7 @@ export function ProjectDetailsSection({
         <div className="flex flex-col w-full md:max-w-[60%] items-start gap-4 md:gap-8">
           <h2 className="relative self-stretch h3">Présentation</h2>
 
-          <div className="flex flex-col gap-8 md:gap-12 text-zinc-500 font-normal text-base w-full">
-            <MarkdownContentRender content={content} />
-          </div>
+          <MarkdownContentRender content={content} />
         </div>
 
         <Card className="squircle size-full md:max-w-[30%] squircle-stone-100 squircle-6xl squircle-smooth-md border-0 overflow-hidden mx-auto">

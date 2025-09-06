@@ -4,7 +4,7 @@ import { ElementHomeWorkContactSubsection } from "./sections/ElementHomeWorkCont
 import { HeaderSection } from "./sections/HeaderSection";
 import { MoreInfoSection } from "./sections/MoreInfoSection";
 import { ProjectListSection } from "./sections/ProjectListSection";
-import { ProjectsSection } from "./sections/ProjectsSection";
+import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
 import { getProjectWithAdjacent } from "@/module/content/utils/lib";
 import { getActivePathFromUrlParam } from "@/utils/content";
 import logger from "@/utils/logger";
@@ -35,7 +35,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         description={excerpt}
         tags={tags}
       />
-      <ProjectsSection content={body || ""} />
+      <ProjectDetailsSection content={body || ""} />
       <ElementHomeWorkContactSubsection />
       <ProjectListSection />
       <MoreInfoSection data={resource!.adjacentResources} />

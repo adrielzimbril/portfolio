@@ -175,7 +175,6 @@ export const mdxCustomComponents = {
   SectionLayout,
   PreviewValueCard,
   SmartSection,
-  ConditionalSection,
 } satisfies MDXComponents;
 
 {
@@ -198,21 +197,4 @@ export function SmartSection({
       {children}
     </SectionLayout>
   );
-}
-
-interface ConditionalSectionProps {
-  condition: boolean;
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
-}
-export function ConditionalSection({
-  condition,
-  children,
-  fallback = null,
-}: ConditionalSectionProps) {
-  if (!condition) {
-    return <>{fallback}</>;
-  }
-
-  return <>{children}</>;
 }
