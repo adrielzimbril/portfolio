@@ -103,7 +103,7 @@ export function HeaderSection({
             </span>
           </Badge>
 
-          {viewsNode && <>{viewsNode}</>}
+          <>{viewsNode}</>
           <Badge
             className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
             variant="colored"

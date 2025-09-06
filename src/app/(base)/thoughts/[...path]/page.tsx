@@ -15,8 +15,6 @@ import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
 import { PageParams, PageType } from "@/types";
 import { ViewsBadge } from "@/components/ViewsBadge";
-import { useRouter } from "next/router";
-import { usePageViews } from "@/hooks/usePageViews";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
@@ -40,7 +38,9 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
   };
 }
 
-export default async function BlogPostPage(props: { params: Promise<PageParams> }) {
+export default async function BlogPostPage(props: {
+  params: Promise<PageParams>;
+}) {
   const { path, locale } = await props.params;
   setRequestLocale(locale);
 
@@ -98,7 +98,7 @@ export default async function BlogPostPage(props: { params: Promise<PageParams> 
         date={created_at}
         readingTime={formattedReadingTime}
         viewsNode={<ViewsBadge path={viewPath} type={PageType.THOUGHT} />}
-        pageViewsData={{ path, slug, locale }}
+        pageViewsData={{ slug, locale }}
       />
       <ContentsSection content={body} />
       <MorePreviewSection data={post.adjacentPosts} />

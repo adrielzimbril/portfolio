@@ -9,9 +9,9 @@ export enum ResourceType {
 }
 
 export enum PageType {
-  PROJECT = "project",
+  PROJECT = "projects",
   HUB = "hub",
-  THOUGHT = "thought",
+  THOUGHT = "thoughts",
 }
 
 export enum PreviewContentType {

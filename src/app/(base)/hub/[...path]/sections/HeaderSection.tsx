@@ -7,7 +7,8 @@ import { PreviewContentType } from "@/types";
 import { ResourceType } from "@/types/enum";
 import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
+import { getResourcesUrl } from "@/utils/base-url";
 
 export function HeaderSection({
   title,
@@ -24,14 +25,19 @@ export function HeaderSection({
   tags: { name: string; color: string }[];
   type?: ResourceType;
   requestsNode?: React.ReactNode;
-  pageViewsData: { path: string; slug: string; locale: string };
+  pageViewsData: { slug: string; locale: string };
 }) {
   const router = useRouter();
 
-  usePageViews(pageViewsData.path, pageViewsData.slug, PageType.HUB, {
-    locale: pageViewsData.locale,
-    router: router,
-  });
+  usePageViews(
+    getResourcesUrl(PageType.HUB, pageViewsData.slug),
+    pageViewsData.slug,
+    PageType.HUB,
+    {
+      locale: pageViewsData.locale,
+      router: router,
+    }
+  );
 
   return (
     <ResourceHeaderSection

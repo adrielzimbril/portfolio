@@ -41,7 +41,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
             {title ? <ProductTitleRequestsBadge title={title} /> : null}
           </div>
         }
-        pageViewsData={{ path, slug, locale }}
+        pageViewsData={{ slug, locale }}
       />
       <ProjectDetailsSection content={body || ""} />
       <MorePreviewSection data={resource!.adjacentResources} />

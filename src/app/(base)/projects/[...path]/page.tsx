@@ -63,7 +63,7 @@ export default async function SubProject(props: {
         description={excerpt || ""}
         tags={categories}
         projectLink={project_link}
-        pageViewsData={{ path, slug, locale }}
+        pageViewsData={{ slug, locale }}
       />
       <ProjectDetailsSection
         content={body || ""}
