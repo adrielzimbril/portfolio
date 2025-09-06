@@ -1,16 +1,22 @@
 import { createBrowserClient } from "@supabase/ssr";
 import logger from "@/utils/logger";
+import { Database } from "@/module/supabase/types";
 
-const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-const supabaseAnonKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
+export const supabaseKey = {
+  url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+  anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
+};
 
 logger.info("Supabase environment variables:", {
-  supabaseUrl,
-  supabaseAnonKey,
+  supabaseUrl: supabaseKey.url,
+  supabaseAnonKey: supabaseKey.anonKey,
 });
 
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!supabaseKey.url || !supabaseKey.anonKey) {
   throw new Error("Missing Supabase environment variables");
 }
 
-export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createBrowserClient<Database>(
+  supabaseKey.url,
+  supabaseKey.anonKey
+);

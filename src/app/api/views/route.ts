@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
       {
         p_path: path,
         p_type: type,
-        p_slug: slug,
+        p_slug: slug ?? undefined,
       }
     );
 
