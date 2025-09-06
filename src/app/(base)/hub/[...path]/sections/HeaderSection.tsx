@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { routes } from "@/data/route";
 import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section";
@@ -7,7 +6,6 @@ import { PreviewContentType } from "@/types";
 import { ResourceType } from "@/types/enum";
 import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
-import { useRouter } from "next/router";
 import { getResourcesUrl } from "@/utils/base-url";
 
 export function HeaderSection({
@@ -27,15 +25,12 @@ export function HeaderSection({
   requestsNode?: React.ReactNode;
   pageViewsData: { slug: string; locale: string };
 }) {
-  const router = useRouter();
-
   usePageViews(
     getResourcesUrl(PageType.HUB, pageViewsData.slug),
     pageViewsData.slug,
     PageType.HUB,
     {
       locale: pageViewsData.locale,
-      router: router,
     }
   );
 

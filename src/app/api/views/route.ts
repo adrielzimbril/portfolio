@@ -34,12 +34,15 @@ export async function GET(req: NextRequest) {
     };
 
     return new Response(
+      // JSON.stringify({
+      //   totalViews: result.total_views,
+      //   uniqueUsers: result.unique_users,
+      //   path,
+      //   type,
+      //   slug,
+      // }),
       JSON.stringify({
-        totalViews: result.total_views,
-        uniqueUsers: result.unique_users,
-        path,
-        type,
-        slug,
+        count: result.total_views,
       }),
       {
         status: 200,
@@ -92,14 +95,17 @@ export async function POST(req: NextRequest) {
     };
 
     return new Response(
+      // JSON.stringify({
+      //   totalViews: result.total_views,
+      //   uniqueUsers: result.unique_users,
+      //   userViewCount: result.user_view_count,
+      //   isNewUniqueUser: result.is_new_unique_user,
+      //   path,
+      //   type,
+      //   slug,
+      // }),
       JSON.stringify({
-        totalViews: result.total_views,
-        uniqueUsers: result.unique_users,
-        userViewCount: result.user_view_count,
-        isNewUniqueUser: result.is_new_unique_user,
-        path,
-        type,
-        slug,
+        count: result.total_views,
       }),
       {
         status: 200,

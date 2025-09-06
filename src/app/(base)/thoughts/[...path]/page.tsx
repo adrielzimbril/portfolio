@@ -59,7 +59,6 @@ export default async function BlogPostPage(props: {
     totalSeconds: 0,
   };
   const formattedReadingTime = formatTime({ minutes, seconds, totalSeconds });
-  const viewPath = `/${locale}/thoughts/${slug}`;
 
   return (
     <>

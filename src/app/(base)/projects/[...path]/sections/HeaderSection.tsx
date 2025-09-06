@@ -2,7 +2,6 @@
 import React from "react";
 import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section";
 import { PreviewContentType } from "@/types/enum";
-import { useRouter } from "next/router";
 import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
@@ -22,15 +21,12 @@ export function HeaderSection({
   projectLink?: string;
   pageViewsData: { slug: string; locale: string };
 }) {
-  const router = useRouter();
-
   usePageViews(
     getResourcesUrl(PageType.PROJECT, pageViewsData.slug),
     pageViewsData.slug,
     PageType.PROJECT,
     {
       locale: pageViewsData.locale,
-      router: router,
     }
   );
 
