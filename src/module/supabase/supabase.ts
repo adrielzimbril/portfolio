@@ -24,6 +24,7 @@ export type Database = {
           nom: string
           numero: string
           email?: string
+          subscribed_from_page?: string
           created_at: string
         }
         Insert: {
@@ -31,6 +32,7 @@ export type Database = {
           nom: string
           numero: string
           email?: string
+          subscribed_from_page?: string
           created_at?: string
         }
         Update: {
@@ -38,6 +40,7 @@ export type Database = {
           nom?: string
           numero?: string
           email?: string
+          subscribed_from_page?: string
           created_at?: string
         }
       }
@@ -73,6 +76,50 @@ export type Database = {
           path?: string
           count?: number
           updated_at?: string
+        }
+      }
+      hub_product_requests: {
+        Row: {
+          id: string
+          email: string
+          name?: string
+          phone?: string
+          product_title: string
+          product_type?: string
+          features?: string[] | null
+          cover_image?: string | null
+          product_url?: string | null
+          custom_text?: string | null
+          subscribed_from_page?: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          email: string
+          name?: string
+          phone?: string
+          product_title: string
+          product_type?: string
+          features?: string[] | null
+          cover_image?: string | null
+          product_url?: string | null
+          custom_text?: string | null
+          subscribed_from_page?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          email?: string
+          name?: string
+          phone?: string
+          product_title?: string
+          product_type?: string
+          features?: string[] | null
+          cover_image?: string | null
+          product_url?: string | null
+          custom_text?: string | null
+          subscribed_from_page?: string | null
+          created_at?: string
         }
       }
     }

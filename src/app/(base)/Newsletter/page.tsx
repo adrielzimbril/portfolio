@@ -23,6 +23,7 @@ const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
 
 export default function Newsletter() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
   const { readerCount, isLoading } = useNewsletterStats();
 
   const formatReaderCount = (count: number) => {
@@ -79,6 +80,8 @@ export default function Newsletter() {
             <Input
               placeholder="😏 vous voulez recevoir des cadeaux ?"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <Button
@@ -97,6 +100,7 @@ export default function Newsletter() {
 
       <SubscriptionModal
         isOpen={isModalOpen}
+        email={email || undefined}
         onClose={() => setIsModalOpen(false)}
       />
     </>

@@ -1,6 +1,9 @@
 import { NextRequest } from 'next/server'
 import { supabase } from '@/module/supabase/supabase'
 import { brevoAddContact } from '@/lib/brevo'
+import { brevoSendEmail } from '@/lib/brevo'
+import { renderEmail } from '@/lib/email'
+import { WelcomeEmail } from '@/emails/WelcomeEmail'
 
 function getListIdByProduct(product?: string) {
   const map: Record<string, number | undefined> = {
@@ -13,7 +16,7 @@ function getListIdByProduct(product?: string) {
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
-  const { email, name, phone, productType }: { email: string; name?: string; phone?: string; productType?: 'course'|'ebook'|'video' } = body;
+  const { email, name, phone, productType, subscribedFromPage }: { email: string; name?: string; phone?: string; productType?: 'course'|'ebook'|'video'; subscribedFromPage?: string } = body;
 
   if (!email) {
     return new Response(JSON.stringify({ error: 'Email is required' }), { status: 400 })
@@ -35,10 +38,17 @@ export async function POST(req: NextRequest) {
   if (!existing) {
     const { error: insertError } = await supabase
       .from("newsletter_subscribers")
-      .insert([{ nom: name || null, numero: phone || null, email }]);
+      .insert([{ nom: name || null, numero: phone || null, email, subscribed_from_page: subscribedFromPage || null }]);
 
     if (insertError) {
       return new Response(JSON.stringify({ error: insertError.message }), { status: 500 })
+    }
+    // Try sending welcome email (best effort)
+    try {
+      const html = renderEmail(WelcomeEmail({ name: name || undefined }));
+      await brevoSendEmail({ toEmail: email, toName: name, subject: 'Bienvenue 🎁', html });
+    } catch (e) {
+      console.warn('Welcome email send failed:', e);
     }
   } else {
     // Update name and phone if provided

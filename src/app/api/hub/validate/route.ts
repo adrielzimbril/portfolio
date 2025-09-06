@@ -1,5 +1,8 @@
 import { NextRequest } from 'next/server'
 import { brevoSendEmail } from '@/lib/brevo'
+import { supabase } from '@/module/supabase/supabase'
+import { renderEmail } from '@/lib/email'
+import { ProductDeliveryEmail } from '@/emails/ProductDeliveryEmail'
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}))
@@ -23,33 +26,47 @@ export async function POST(req: NextRequest) {
     coverImage?: string
     productUrl?: string
     customText?: string
+    subscribedFromPage?: string
   } = body
 
   if (!email || !productTitle) {
     return new Response(JSON.stringify({ error: 'Missing required fields: email, productTitle' }), { status: 400 })
   }
 
-  const html = `
-    <div style="font-family:Inter,Arial,sans-serif;max-width:640px;margin:0 auto;color:#111">
-      <h1 style="font-size:24px;margin:0 0 12px">${productTitle}</h1>
-      ${coverImage ? `<img src="${coverImage}" alt="${productTitle}" style="width:100%;max-height:360px;object-fit:cover;border-radius:12px;margin:12px 0"/>` : ''}
-      ${customText ? `<p style="line-height:1.6">${customText}</p>` : ''}
-      ${features?.length ? `
-        <ul style="line-height:1.8;padding-left:20px">
-          ${features.map((f: string) => `<li>${f}</li>`).join('')}
-        </ul>
-      ` : ''}
-      ${productUrl ? `
-        <div style="text-align:center;margin:24px 0">
-          <a href="${productUrl}" style="display:inline-block;background:#111;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none">Voir le produit</a>
-        </div>
-      ` : ''}
-      <hr style="border:none;border-top:1px solid #eee;margin:24px 0"/>
-      <p style="font-size:12px;color:#666">${name ? `Pour ${name}. ` : ''}${phone ? `Tel: ${phone}` : ''}</p>
-    </div>
-  `
+  const html = renderEmail(
+    ProductDeliveryEmail({
+      name,
+      productTitle,
+      features,
+      coverImage,
+      productUrl,
+      customText,
+    })
+  )
 
   try {
+    // Store request in Supabase
+    const { error: insertError } = await supabase
+      .from('hub_product_requests')
+      .insert([
+        {
+          email,
+          name,
+          phone,
+          product_title: productTitle,
+          product_type: productType,
+          features: features ?? null,
+          cover_image: coverImage ?? null,
+          product_url: productUrl ?? null,
+          custom_text: customText ?? null,
+          subscribed_from_page: body.subscribedFromPage ?? null,
+        },
+      ])
+
+    if (insertError) {
+      console.warn('Failed to store hub_product_request:', insertError)
+    }
+
     await brevoSendEmail({ toEmail: email, toName: name, subject: `Votre accès: ${productTitle}`, html })
     return new Response(JSON.stringify({ success: true }), { status: 200, headers: { 'Content-Type': 'application/json' } })
   } catch (e: any) {

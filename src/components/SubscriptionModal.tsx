@@ -57,13 +57,16 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
+    if (!email) return;
     // Unique call to our API - does not overwrite info if the email already exists
     async function subscribe() {
+      const subscribedFromPage = typeof window !== 'undefined' ? window.location.pathname : undefined;
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
+          subscribedFromPage,
         }),
       });
       const json = await res.json();
@@ -90,6 +93,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           email,
           name: values.nom || undefined,
           phone: values.numero || undefined,
+          subscribedFromPage: typeof window !== 'undefined' ? window.location.pathname : undefined,
         }),
       });
       const json = await res.json();
