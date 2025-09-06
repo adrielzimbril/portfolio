@@ -31,6 +31,7 @@ export function HeaderSection({
       description={description}
       tags={tags}
       ctaButton={projectLink ?? undefined}
+      ctaButtonText="Voir le projet 🦄"
     />
   );
 }

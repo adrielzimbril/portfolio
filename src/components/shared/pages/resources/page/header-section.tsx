@@ -36,6 +36,7 @@ interface HeaderSectionProps {
 
   // CTA Button
   ctaButton?: string;
+  ctaButtonText: string;
 
   // Optional CSS Classes
   className?: string;
@@ -54,6 +55,7 @@ export function HeaderSection({
   description,
   tags,
   ctaButton,
+  ctaButtonText,
   sectionClassName,
 }: HeaderSectionProps) {
   const scrollTo = useScrollTo();
@@ -112,7 +114,7 @@ export function HeaderSection({
             asFull
             data-project-url={ctaButton}
           >
-            <span>Voir le projet 🦄</span>
+            <span>{ctaButtonText}</span>
           </Link>
         </div>
       ) : (
@@ -125,7 +127,7 @@ export function HeaderSection({
             asPointer
             data-scroll-to="gallery-section"
           >
-            <span>Voir le projet 🦄</span>
+            <span>{ctaButtonText}</span>
           </Button>
         </div>
       )}

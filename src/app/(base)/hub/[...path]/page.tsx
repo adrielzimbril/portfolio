@@ -1,16 +1,15 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { ElementHomeWorkContactSubsection } from "./sections/ElementHomeWorkContactSubsection";
 import { HeaderSection } from "./sections/HeaderSection";
-import { MoreInfoSection } from "./sections/MoreInfoSection";
-import { ProjectListSection } from "./sections/ProjectListSection";
+import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
-import { getProjectWithAdjacent } from "@/module/content/utils/lib";
 import { getActivePathFromUrlParam } from "@/utils/content";
-import logger from "@/utils/logger";
 import { setRequestLocale } from "next-intl/server";
 import { PageParams } from "@/types";
 import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
+import { localeRedirect } from "@/module/i18n/routing";
+import { routes } from "@/data/route";
+import { ResourceType } from "@/types/enum";
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
   const { path, locale } = await props.params;
@@ -20,12 +19,10 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
   const resource = await getResourceWithAdjacent(slug, { locale });
 
   if (!resource) {
-    //return localeRedirect({ href: routes.projects.link, locale });
-    logger.error(`Resource not found for slug: ${slug}`);
+    return localeRedirect({ href: routes.projects.link, locale });
   }
 
-  const { title, cover, created_at, tags, body, excerpt } =
-    resource!.currentResource;
+  const { title, cover, tags, body, excerpt, type } = resource!.currentResource;
 
   return (
     <>
@@ -33,12 +30,11 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         title={title}
         cover={cover ?? ""}
         description={excerpt}
+        type={type}
         tags={tags}
       />
       <ProjectDetailsSection content={body || ""} />
-      <ElementHomeWorkContactSubsection />
-      <ProjectListSection />
-      <MoreInfoSection data={resource!.adjacentResources} />
+      <MorePreviewSection data={resource!.adjacentResources} />
       <CallToAction isPage />
     </>
   );

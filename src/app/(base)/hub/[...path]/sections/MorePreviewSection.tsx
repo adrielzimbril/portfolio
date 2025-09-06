@@ -3,7 +3,7 @@ import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section-new";
 import { Resource } from "@/module/content/types";
 
-export function MoreInfoSection({ data }: { data: Resource[] }) {
+export function MorePreviewSection({ data }: { data: Resource[] }) {
   return (
     <CardPreviewSection title="Autres ressources.">
       {data.map((resource, index) => (
