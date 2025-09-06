@@ -13,52 +13,30 @@ export async function GET(req: NextRequest) {
   const slug = searchParams.get("slug");
 
   try {
-    // Récupérer le compteur total de vues
-    const counterQuery = supabase
-      .from("page_counters")
-      .select("total_views")
-      .eq("path", path)
-      .eq("type", type);
+    // Utiliser la fonction RPC pour récupérer les analytics
+    const { data: analyticsData, error: rpcError } = await supabase.rpc(
+      "get_page_analytics",
+      {
+        p_path: path,
+        p_type: type,
+        p_slug: slug,
+      }
+    );
 
-    if (slug) {
-      counterQuery.eq("slug", slug);
-    } else {
-      counterQuery.is("slug", null);
+    if (rpcError) {
+      throw rpcError;
     }
 
-    const { data: counterData, error: counterError } =
-      await counterQuery.maybeSingle();
-
-    if (counterError && counterError.code !== "PGRST116") {
-      throw counterError;
-    }
-
-    // Compter le nombre d'utilisateurs uniques
-    const uniqueQuery = supabase
-      .from("unique_views")
-      .select("user_ip", { count: "exact", head: true })
-      .eq("path", path)
-      .eq("type", type);
-
-    if (slug) {
-      uniqueQuery.eq("slug", slug);
-    } else {
-      uniqueQuery.is("slug", null);
-    }
-
-    const { count: uniqueUsersCount, error: uniqueError } = await uniqueQuery;
-
-    if (uniqueError) {
-      throw uniqueError;
-    }
-
-    const totalViews = counterData?.total_views ?? 0;
-    const uniqueUsers = uniqueUsersCount ?? 0;
+    // La fonction RPC retourne un array, prendre le premier élément
+    const result = analyticsData?.[0] || {
+      total_views: 0,
+      unique_users: 0,
+    };
 
     return new Response(
       JSON.stringify({
-        totalViews,
-        uniqueUsers,
+        totalViews: result.total_views,
+        uniqueUsers: result.unique_users,
         path,
         type,
         slug,
