@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { supabase } from '@/module/supabase/supabase'
+import { supabase } from "@/module/supabase/client";
 
 // API: GET ?path=/some/path -> returns { count }
 //      POST { path } -> increments and returns { count }

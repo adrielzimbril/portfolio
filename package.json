@@ -27,6 +27,7 @@
     "@squircle/core": "^1.0.6",
     "@squircle/paint-polyfill": "^1.0.6",
     "@squircle/tailwindcss": "^1.0.6",
+    "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.57.0",
     "boring-avatars": "^2.0.1",
     "canvas-confetti": "^1.9.3",
@@ -84,6 +85,7 @@
     "eslint-config-next": "15.4.6",
     "markdown-toc": "^1.2.0",
     "mdx": "^0.3.1",
+    "supabase": "^2.39.2",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2",
     "zod": "^4.1.5"

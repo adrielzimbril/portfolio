@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { supabase } from '@/module/supabase/supabase'
+import { supabase } from "@/module/supabase/client";
 import { brevoAddContact } from '@/lib/brevo'
 import { brevoSendEmail } from '@/lib/brevo'
 import { renderEmail } from '@/lib/email'

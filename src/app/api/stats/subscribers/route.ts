@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { supabase } from '@/module/supabase/supabase'
+import { supabase } from "@/module/supabase/client";
 
 // Supported:
 // GET /api/stats/subscribers?scope=newsletter -> { count }
