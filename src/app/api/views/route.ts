@@ -1,21 +1,24 @@
 import { NextRequest } from 'next/server'
 import { supabase } from "@/module/supabase/client";
 import { useGetIpInfo } from "@/hooks/useIpInfo";
+import logger from "@/utils/logger";
 
 // API: GET ?path=/some/path -> returns { count }
 //      POST { path } -> increments and returns { count }
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
+  const ip =
+    req.headers.get("x-forwarded-for") ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
   const path = searchParams.get("path") || "/";
   const type = searchParams.get("type");
   const slug = searchParams.get("slug");
-  const details = searchParams.get("details")
-    ? JSON.parse(searchParams.get("details") || "")
-    : null;
 
   const { data, error } = await supabase
     .from("page_views")
     .select("count")
+    .eq("ip", ip)
     .eq("path", path)
     .eq("type", type)
     .eq("slug", slug)
@@ -35,9 +38,13 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const { path, type, slug, details } = await req
-    .json()
-    .catch(() => ({ path: "/", type: "page", slug: null, details: null }));
+  const rq = req.json();
+  const { path, type, slug, details } = await rq.catch(() => ({
+    path: "/",
+    type: "page",
+    slug: null,
+    details: null,
+  }));
   const now = new Date().toISOString();
   const ip =
     req.headers.get("x-forwarded-for") ||
@@ -49,22 +56,29 @@ export async function POST(req: NextRequest) {
   const { data: existing, error: readError } = await supabase
     .from("page_views")
     .select("count")
+    .eq("ip", ip)
     .eq("path", path)
     .eq("type", type)
     .eq("slug", slug)
     .maybeSingle();
 
   if (readError && readError.code !== "PGRST116") {
-    return new Response(JSON.stringify({ error: readError.message }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ from: "readError", error: readError.message }),
+      {
+        status: 500,
+      }
+    );
   }
 
   const nextCount = (existing?.count ?? 0) + 1;
 
-  const ipInfo = useGetIpInfo(ip);
+  const blockedIp: string[] = ["::1", "127.0.0.1"];
+
+  const ipInfo = useGetIpInfo(blockedIp.includes(ip) ? "" : ip);
 
   const { error: upsertError } = await supabase.from("page_views").upsert({
+    ip,
     path,
     type,
     slug,
@@ -74,9 +88,12 @@ export async function POST(req: NextRequest) {
   });
 
   if (upsertError) {
-    return new Response(JSON.stringify({ error: upsertError.message }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ from: "upsertError", error: upsertError.message }),
+      {
+        status: 500,
+      }
+    );
   }
 
   return new Response(JSON.stringify({ count: nextCount }), {

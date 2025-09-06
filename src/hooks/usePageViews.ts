@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PageType } from "@/types";
 
 export function usePageViews(
@@ -11,6 +11,7 @@ export function usePageViews(
   const [count, setCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const memoizedDetails = useMemo(() => details, [JSON.stringify(details)]);
 
   useEffect(() => {
     let cancelled = false;
@@ -52,7 +53,7 @@ export function usePageViews(
     return () => {
       cancelled = true;
     };
-  }, [path, details]);
+  }, [path, slug, type, memoizedDetails]);
 
   return { count, loading, error } as const;
 }

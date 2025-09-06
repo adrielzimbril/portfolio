@@ -1,4 +1,5 @@
 import { z } from "zod";
+import logger from "@/utils/logger";
 
 // 🎯 Schémas Zod pour validation et typage automatique
 const TimezoneSchema = z.object({
@@ -194,7 +195,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
  * // Usage basique
  * const result = await getIpInfo('8.8.8.8');
  * if (result.data) {
- *   console.log(result.data.country_name);
+ *   logger.info(result.data.country_name);
  * }
  *
  * // Usage avec options
@@ -281,15 +282,15 @@ export async function useIpInfo<T = IpInfoResponse>(
             if (strictValidation) {
               return {
                 data: null,
-                error: `Données invalides: ${(validationError as any).errors
-                  .map((e: any) => e.message)
-                  .join(", ")}`,
+                error: `Données invalides: ${JSON.stringify(
+                  (validationError as any).errors
+                )}`,
                 isValid: false,
                 validationErrors: validationError,
               };
             } else {
               // Mode permissif : retourner les données brutes
-              console.warn(
+              logger.warn(
                 "Validation échouée, utilisation des données brutes:",
                 (validationError as any).errors
               );
@@ -331,7 +332,7 @@ export async function useIpInfo<T = IpInfoResponse>(
         ? error.message
         : "Une erreur inconnue est survenue";
 
-    console.error("Erreur lors de la récupération des infos IP:", error);
+    logger.error("Erreur lors de la récupération des infos IP:", error);
 
     return {
       data: null,

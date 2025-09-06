@@ -14,7 +14,6 @@ import { routes } from "@/data/route";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
 import { PageParams, PageType } from "@/types";
-import { ViewsBadge } from "@/components/ViewsBadge";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
@@ -97,7 +96,6 @@ export default async function BlogPostPage(props: {
         tags={tags}
         date={created_at}
         readingTime={formattedReadingTime}
-        viewsNode={<ViewsBadge path={viewPath} type={PageType.THOUGHT} />}
         pageViewsData={{ slug, locale }}
       />
       <ContentsSection content={body} />

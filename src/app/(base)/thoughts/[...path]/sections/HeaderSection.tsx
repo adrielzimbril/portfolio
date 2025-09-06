@@ -11,7 +11,6 @@ export function HeaderSection({
   tags,
   date,
   readingTime,
-  viewsNode,
   pageViewsData,
 }: {
   date: string;
@@ -19,7 +18,6 @@ export function HeaderSection({
   cover: string;
   title: string;
   readingTime: string;
-  viewsNode?: React.ReactNode;
   pageViewsData: { slug: string; locale: string };
 }) {
   const { count, loading } = usePageViews(
@@ -49,7 +47,6 @@ export function HeaderSection({
         readingTime,
         views: count ?? 0,
       }}
-      viewsNode={viewsNode}
     />
   );
 }
