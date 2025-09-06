@@ -4,6 +4,8 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { Badge } from "@/components/ui/badge";
 import { PageType } from "@/types";
 
+import { formatCount } from "@/utils/date";
+
 export function ViewsBadge({ path, type }: { path: string; type: PageType }) {
   const { count, loading } = usePageViews(path, "", type);
   const text = loading ? "..." : formatCount(count ?? 0);
@@ -16,10 +18,4 @@ export function ViewsBadge({ path, type }: { path: string; type: PageType }) {
       </span>
     </Badge>
   );
-}
-
-function formatCount(n: number) {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M reads`;
-  if (n >= 1_000) return `${Math.floor(n / 1_000)}K reads`;
-  return `${n} reads`;
 }

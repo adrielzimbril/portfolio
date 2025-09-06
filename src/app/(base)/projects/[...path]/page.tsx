@@ -18,13 +18,10 @@ import { getActivePathFromUrlParam } from "@/utils/content";
 import { setRequestLocale } from "next-intl/server";
 import { routes } from "@/data/route";
 import { PageParams, PageType } from "@/types";
-import { useRouter } from "next/router";
-import { usePageViews } from "@/hooks/usePageViews";
 
 export default async function SubProject(props: {
   params: Promise<PageParams>;
 }) {
-  const router = useRouter();
   const { path, locale } = await props.params;
   setRequestLocale(locale);
 
@@ -34,8 +31,6 @@ export default async function SubProject(props: {
   if (!post) {
     return localeRedirect({ href: routes.projects.link, locale });
   }
-
-  usePageViews(path, slug, PageType.PROJECT, { locale: locale, router });
 
   const {
     title,
@@ -68,6 +63,7 @@ export default async function SubProject(props: {
         description={excerpt || ""}
         tags={categories}
         projectLink={project_link}
+        pageViewsData={{ path, slug, locale }}
       />
       <ProjectDetailsSection
         content={body || ""}

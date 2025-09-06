@@ -1,5 +1,9 @@
+"use client";
 import { HeaderSection as ThoughtHeaderSection } from "@/components/shared/pages/thoughts/page/header-section";
 import { PreviewContentType } from "@/types";
+import { useRouter } from "next/navigation";
+import { usePageViews } from "@/hooks/usePageViews";
+import { PageType } from "@/types";
 
 export function HeaderSection({
   title,
@@ -7,17 +11,28 @@ export function HeaderSection({
   tags,
   date,
   readingTime,
-  views,
   viewsNode,
+  pageViewsData,
 }: {
   date: string;
   tags: { name: string }[];
   cover: string;
   title: string;
   readingTime: string;
-  views: number;
   viewsNode?: React.ReactNode;
+  pageViewsData: { path: string; slug: string; locale: string };
 }) {
+  const router = useRouter();
+  const { count, loading } = usePageViews(
+    pageViewsData.path,
+    pageViewsData.slug,
+    PageType.THOUGHT,
+    {
+      locale: pageViewsData.locale,
+      router,
+    }
+  );
+
   return (
     <ThoughtHeaderSection
       previewContent={
@@ -34,7 +49,7 @@ export function HeaderSection({
       articleDetails={{
         date,
         readingTime,
-        views,
+        views: count ?? 0,
       }}
       viewsNode={viewsNode}
     />

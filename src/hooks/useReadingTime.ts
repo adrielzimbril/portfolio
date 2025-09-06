@@ -309,3 +309,4 @@ export function formatTime(
       return minutes > 0 ? `${minutes} min` : `${seconds} sec`;
   }
 }
+

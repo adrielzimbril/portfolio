@@ -10,7 +10,7 @@ import {
   PreviewContent,
   TextPreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
-import { getDate } from "@/utils";
+import { formatCount, getDate } from "@/utils";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -103,20 +103,17 @@ export function HeaderSection({
             </span>
           </Badge>
 
-          {viewsNode ? (
-            <>{viewsNode}</>
-          ) : (
-            <Badge
-              className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
-              variant="colored"
-              size="md"
-            >
-              <span className="flex items-center gap-2">
-                <Eye className="size-4 text-indigo-400" variant="bulk" />
-                {articleDetails.views} views
-              </span>
-            </Badge>
-          )}
+          {viewsNode && <>{viewsNode}</>}
+          <Badge
+            className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
+            variant="colored"
+            size="md"
+          >
+            <span className="flex items-center gap-2">
+              <Eye className="size-4 text-indigo-400" variant="bulk" />
+              {formatCount(articleDetails.views ?? 0)} views
+            </span>
+          </Badge>
         </div>
       )}
 

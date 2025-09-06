@@ -13,11 +13,8 @@ import {
   ProductTypeSubscribersBadge,
   ProductTitleRequestsBadge,
 } from "@/components/SubscriberBadges";
-import { usePageViews } from "@/hooks/usePageViews";
-import { useRouter } from "next/navigation";
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
-  const router = useRouter();
   const { path, locale } = await props.params;
   setRequestLocale(locale);
 
@@ -27,8 +24,6 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
   if (!resource) {
     return localeRedirect({ href: routes.projects.link, locale });
   }
-
-  usePageViews(path, slug, PageType.HUB, { locale: locale, router });
 
   const { title, cover, tags, body, excerpt, type } = resource!.currentResource;
 
@@ -46,6 +41,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
             {title ? <ProductTitleRequestsBadge title={title} /> : null}
           </div>
         }
+        pageViewsData={{ path, slug, locale }}
       />
       <ProjectDetailsSection content={body || ""} />
       <MorePreviewSection data={resource!.adjacentResources} />
