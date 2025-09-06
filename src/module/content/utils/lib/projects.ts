@@ -10,15 +10,17 @@ type GetAllProjectsOptions = {
 };
 
 export async function getAllProjects(
-  options: GetAllProjectsOptions = {
+  options: Partial<GetAllProjectsOptions> = {}
+): Promise<Project[]> {
+  const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
     sort: "desc",
     limit: Number.MAX_SAFE_INTEGER,
-  }
-): Promise<Project[]> {
-  const { published, locale, pageSlug, sort, limit } = options;
+    ...options,
+  };
+
   return Promise.resolve(
     allProjects
       .filter(
@@ -159,14 +161,15 @@ type GetAllProjectSlugsOptions = {
 };
 
 export async function getAllProjectSlugs(
-  options: GetAllProjectSlugsOptions = {
+  options: Partial<GetAllProjectSlugsOptions> = {}
+): Promise<string[]> {
+  const { published, locale, sort, limit } = {
     published: true,
     locale: undefined,
     sort: "desc",
     limit: Number.MAX_SAFE_INTEGER,
-  }
-): Promise<string[]> {
-  const { published, locale, sort, limit } = options;
+    ...options,
+  };
   return Promise.resolve(
     allProjects
       .filter(

@@ -1,9 +1,12 @@
+"use client";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { getJsonDataCached } from "@/utils/get-json-data";
-import { ProjectPreview } from "@/types";
 import { ProjectPreviewCardContainerSectionProps } from "@/types/type";
+import { useState, useEffect } from "react";
+import { getAllProjects } from "@/module/content/utils/lib";
+import logger from "@/utils/logger";
+import { Project } from "@/module/content/types";
 
 const config: ProjectPreviewCardContainerSectionProps = {
   allWide: false,
@@ -11,28 +14,47 @@ const config: ProjectPreviewCardContainerSectionProps = {
   limit: 3,
 };
 
-export async function ProjectsSection() {
+export function ProjectsSection() {
   const { allWide, wideCardsCount, limit } = config;
-  const projectData = (await getJsonDataCached(
-    "projects",
-    "personal"
-  )) as ProjectPreview[];
+  const [projects, setProjects] = useState<Project[]>([]);
 
+  useEffect(() => {
+    async function loadProjects() {
+      try {
+        const data = await getAllProjects({ limit: limit });
+        logger.info("Projects loaded", data);
+        setProjects(data);
+      } catch (err) {
+        logger.error(err);
+      }
+    }
+
+    loadProjects();
+  }, []);
   return (
     <SectionLayout
       title="Projets"
       description="Chaque projet est une opportunité de transformer une idée en expérience réelle, avec un design qui séduit et une stratégie qui fonctionne."
       link={routes.projects.link}
-      badge="Hub 🫶"
+      badge="Problem Solver 🦄"
       asFade
     >
-      {projectData.map((project, index) => {
+      {projects.map((project, index) => {
         if (limit && index >= limit) return null;
         const isWide =
           allWide || (wideCardsCount !== undefined && index < wideCardsCount!);
 
         return (
-          <ProjectCard key={project.id} details={project} isWide={isWide} />
+          <ProjectCard
+            key={index}
+            title={project.title}
+            cover={project.image_thumbnail}
+            description={project.excerpt || ""}
+            slug={project.slug}
+            tags={project.tags}
+            categories={project.categories}
+            isWide={isWide}
+          />
         );
       })}
     </SectionLayout>

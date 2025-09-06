@@ -10,15 +10,16 @@ type GetAllPostsOptions = {
 };
 
 export async function getAllPosts(
-  options: GetAllPostsOptions = {
+  options: Partial<GetAllPostsOptions> = {}
+): Promise<Post[]> {
+  const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
     sort: "desc",
     limit: Number.MAX_SAFE_INTEGER,
-  }
-): Promise<Post[]> {
-  const { published, locale, pageSlug, sort, limit } = options;
+    ...options,
+  };
   return Promise.resolve(
     allPosts
       .filter(
@@ -157,14 +158,16 @@ type GetAllPostSlugsOptions = {
 };
 
 export async function getAllPostSlugs(
-  options: GetAllPostSlugsOptions = {
+  options: Partial<GetAllPostSlugsOptions> = {}
+): Promise<string[]> {
+  const { published, locale, sort, limit } = {
     published: true,
     locale: undefined,
     sort: "desc",
     limit: Number.MAX_SAFE_INTEGER,
-  }
-): Promise<string[]> {
-  const { published, locale, sort, limit } = options;
+    ...options,
+  };
+
   return Promise.resolve(
     allPosts
       .filter(

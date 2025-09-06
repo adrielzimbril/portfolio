@@ -10,15 +10,17 @@ type GetAllResourcesOptions = {
 };
 
 export async function getAllResources(
-  options: GetAllResourcesOptions = {
+  options: Partial<GetAllResourcesOptions> = {}
+): Promise<Resource[]> {
+  const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
     sort: "desc",
     limit: Number.MAX_SAFE_INTEGER,
-  }
-): Promise<Resource[]> {
-  const { published, locale, pageSlug, sort, limit } = options;
+    ...options,
+  };
+
   return Promise.resolve(
     allResources
       .filter(
@@ -151,14 +153,15 @@ type GetAllResourceSlugsOptions = {
 };
 
 export async function getAllResourceSlugs(
-  options: GetAllResourceSlugsOptions = {
+  options: Partial<GetAllResourceSlugsOptions> = {}
+): Promise<string[]> {
+  const { published, locale, sort, limit } = {
     published: true,
     locale: undefined,
     sort: "desc",
     limit: Number.MAX_SAFE_INTEGER,
-  }
-): Promise<string[]> {
-  const { published, locale, sort, limit } = options;
+    ...options,
+  };
   return Promise.resolve(
     allResources
       .filter(

@@ -4,7 +4,8 @@ import { HeaderSection } from "./sections/HeaderSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
 import { QuoteSection } from "./sections/QuoteSection";
-
+import { TestimonialsSectionSimple } from "./sections/TestimonialsSection-simple";
+import { TestimonialsSection } from "./sections/TestimonialsSection";
 
 export default function Home() {
   return (
@@ -13,6 +14,8 @@ export default function Home() {
       <ResourcesSection />
       <ProjectsSection />
       <QuoteSection />
+      <TestimonialsSection />
+      <TestimonialsSectionSimple />
       <CallToAction />
     </>
   );
