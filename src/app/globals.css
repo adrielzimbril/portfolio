@@ -365,8 +365,7 @@
 
   /* Typography - Quotes */
   blockquote {
-    @apply border-l-4 border-primary pl-6 py-2 italic;
-    @apply text-muted-foreground mb-4;
+    @apply border-l-4 border-primary pl-6 py-2;
   }
 
   /* Typography - Forms */
