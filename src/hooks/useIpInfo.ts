@@ -1,6 +1,3 @@
-"use client";
-import logger from "@/utils/logger";
-import { useState, useEffect, useCallback } from "react";
 import { z } from "zod";
 
 // 🎯 Schémas Zod pour validation et typage automatique
@@ -53,21 +50,21 @@ const CountrySchema = z.object({
   flag_emoji: z.string(),
   flag_emoji_unicode: z.string(),
   language: LanguageSchema,
-  languages: z.record(z.string(), z.any()).optional(),
+  languages: z.record(z.string(), z.string()).optional(),
   alt_spellings: z.array(z.string()).optional(),
-  translations: z.record(z.string(), z.any()).optional(),
+  translations: z.record(z.string(), z.string()).optional(),
   timezones: z.array(TimezoneSchema).optional(),
-  extras: z.record(z.any(), z.any()).optional(),
+  extras: z.record(z.string(), z.any()).optional(),
 });
 
 const ContinentSchema = z.object({
   name: z.string(),
-  translations: z.record(z.string(), z.any()).optional(),
+  translations: z.record(z.string(), z.string()).optional(),
 });
 
 const SubRegionSchema = z.object({
   name: z.string(),
-  translations: z.record(z.string(), z.any()).optional(),
+  translations: z.record(z.string(), z.string()).optional(),
 });
 
 const SimpleTimezoneSchema = z.object({
@@ -139,38 +136,20 @@ export interface IpInfoSummary {
   };
 }
 
-interface UseIpInfoOptions {
-  autoFetch?: boolean;
-  enableCache?: boolean;
+interface GetIpInfoOptions {
   timeout?: number;
   retryCount?: number;
   retryDelay?: number;
-  // 🆕 Validation stricte avec Zod
   strictValidation?: boolean;
-  // 🆕 Transformation en format simplifié
   simplified?: boolean;
 }
 
-interface UseIpInfoReturn<T = IpInfoResponse> {
+interface IpInfoResult<T = IpInfoResponse> {
   data: T | null;
-  loading: boolean;
   error: string | null;
-  fetchIpInfo: (ip?: string) => Promise<void>;
-  refetch: () => Promise<void>;
-  reset: () => void;
-  lastSearchedIp: string | null;
-  // 🆕 Données validées et sûres
-  isValidData: boolean;
-  // 🆕 Erreurs de validation
-  validationErrors: z.ZodError | null;
+  isValid: boolean;
+  validationErrors?: z.ZodError;
 }
-
-// 💾 Cache avec TTL
-const ipInfoCache = new Map<
-  string,
-  { data: any; timestamp: number; validated: boolean }
->();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 // 🔧 Fonction pour transformer en format simplifié
 function transformToSummary(data: IpInfoResponse): IpInfoSummary {
@@ -200,32 +179,49 @@ function transformToSummary(data: IpInfoResponse): IpInfoSummary {
   };
 }
 
+// 🕐 Helper pour délais
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 /**
- * Hook avancé pour récupérer les informations d'une adresse IP avec validation Zod
+ * Fonction SERVER-SIDE pour récupérer les informations d'une adresse IP
  *
- * @param initialIp - L'adresse IP à rechercher
+ * @param ip - L'adresse IP à rechercher (optionnel, utilise l'IP publique si non fournie)
  * @param options - Options de configuration
  *
- * @example
- * // Usage basique avec validation
- * const { data, loading, error, isValidData } = useIpInfo('8.8.8.8', {
- *   autoFetch: true,
- *   strictValidation: true
- * });
+ * @returns Promesse avec les données, erreur et statut de validation
  *
- * // Format simplifié
- * const { data } = useIpInfo<IpInfoSummary>('8.8.8.8', {
- *   autoFetch: true,
+ * @example
+ * // Usage basique
+ * const result = await getIpInfo('8.8.8.8');
+ * if (result.data) {
+ *   console.log(result.data.country_name);
+ * }
+ *
+ * // Usage avec options
+ * const result = await getIpInfo('8.8.8.8', {
+ *   timeout: 15000,
+ *   retryCount: 3,
  *   simplified: true
  * });
+ *
+ * // Dans un Server Component
+ * export default async function Page() {
+ *   const ipResult = await getIpInfo();
+ *   return <div>{ipResult.data?.country_name}</div>;
+ * }
+ *
+ * // Dans une Server Action
+ * 'use server';
+ * export async function getLocationAction(ip: string) {
+ *   const result = await getIpInfo(ip, { simplified: true });
+ *   return result.data?.location;
+ * }
  */
-export function useIpInfo<T = IpInfoResponse>(
-  initialIp: string | null = null,
-  options: UseIpInfoOptions = {}
-): UseIpInfoReturn<T> {
+export async function useIpInfo<T = IpInfoResponse>(
+  ip?: string,
+  options: GetIpInfoOptions = {}
+): Promise<IpInfoResult<T>> {
   const {
-    autoFetch = false,
-    enableCache = true,
     timeout = 10000,
     retryCount = 2,
     retryDelay = 1000,
@@ -233,228 +229,135 @@ export function useIpInfo<T = IpInfoResponse>(
     simplified = false,
   } = options;
 
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [lastSearchedIp, setLastSearchedIp] = useState<string | null>(
-    initialIp
-  );
-  const [isValidData, setIsValidData] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<z.ZodError | null>(
-    null
-  );
+  try {
+    // 🌐 Construire l'URL
+    const baseUrl = "https://api.oricodes.com/ip";
+    const url = ip ? `${baseUrl}/${ip}` : baseUrl;
 
-  const sleep = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
-  const validateAndTransformData = useCallback(
-    (rawData: any): T | null => {
+    // 🔄 Logique de retry
+    let lastError: Error;
+    for (let attempt = 0; attempt <= retryCount; attempt++) {
       try {
+        // ⏰ Controller pour timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+        const response = await fetch(url, {
+          signal: controller.signal,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          // 🔧 Configuration pour Next.js
+          next: { revalidate: 300 }, // Cache 5min
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(
+            `HTTP Error: ${response.status} ${response.statusText}`
+          );
+        }
+
+        const rawResult = await response.json();
+
         // 🔍 Validation avec Zod
-        const validatedData = IpInfoResponseSchema.parse(rawData);
-        setIsValidData(true);
-        setValidationErrors(null);
+        try {
+          const validatedData = IpInfoResponseSchema.parse(rawResult);
 
-        // 🎯 Transformation si demandée
-        if (simplified) {
-          return transformToSummary(validatedData) as T;
-        }
+          // 🎯 Transformation si demandée
+          const finalData = simplified
+            ? (transformToSummary(validatedData) as T)
+            : (validatedData as T);
 
-        return validatedData as T;
-      } catch (err: any) {
-        if (err instanceof z.ZodError) {
-          setValidationErrors(err);
-          setIsValidData(false);
-
-          if (strictValidation) {
-            logger.error("Erreurs de validation:", (err as any).errors);
-            throw new Error(
-              `Données invalides: ${(err as any).errors
-                .map((e: any) => e.message)
-                .join(", ")}`
-            );
-          } else {
-            // Mode permissif : retourner les données brutes
-            logger.warn(
-              "Validation échouée, utilisation des données brutes:",
-              (err as any).errors
-            );
-            return rawData as T;
-          }
-        }
-        throw err;
-      }
-    },
-    [strictValidation, simplified]
-  );
-
-  const fetchIpInfo = useCallback(
-    async (ip?: string): Promise<void> => {
-      const targetIp = ip || initialIp;
-      const cacheKey = targetIp || "current-ip";
-
-      try {
-        setLoading(true);
-        setError(null);
-        setValidationErrors(null);
-        setLastSearchedIp(targetIp);
-
-        // 💾 Vérifier le cache
-        if (enableCache && ipInfoCache.has(cacheKey)) {
-          const cached = ipInfoCache.get(cacheKey)!;
-          const isExpired = Date.now() - cached.timestamp > CACHE_DURATION;
-
-          if (!isExpired) {
-            const processedData = validateAndTransformData(cached.data);
-            if (processedData) {
-              setData(processedData);
-              setLoading(false);
-              return;
-            }
-          } else {
-            ipInfoCache.delete(cacheKey);
-          }
-        }
-
-        // 🌐 Requête API
-        const baseUrl = "https://api.oricodes.com/ip";
-        const url = targetIp ? `${baseUrl}/${targetIp}` : baseUrl;
-
-        let lastError: Error;
-        for (let attempt = 0; attempt <= retryCount; attempt++) {
-          try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), timeout);
-
-            const response = await fetch(url, {
-              signal: controller.signal,
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-            });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-              throw new Error(
-                `HTTP Error: ${response.status} ${response.statusText}`
+          return {
+            data: finalData,
+            error: null,
+            isValid: true,
+          };
+        } catch (validationError) {
+          if (validationError instanceof z.ZodError) {
+            if (strictValidation) {
+              return {
+                data: null,
+                error: `Données invalides: ${(validationError as any).errors
+                  .map((e: any) => e.message)
+                  .join(", ")}`,
+                isValid: false,
+                validationErrors: validationError,
+              };
+            } else {
+              // Mode permissif : retourner les données brutes
+              console.warn(
+                "Validation échouée, utilisation des données brutes:",
+                (validationError as any).errors
               );
-            }
+              const finalData =
+                simplified && rawResult
+                  ? (transformToSummary(rawResult) as T)
+                  : (rawResult as T);
 
-            const rawResult = await response.json();
-
-            // 🔍 Validation et transformation
-            const processedData = validateAndTransformData(rawResult);
-
-            if (processedData) {
-              // 💾 Mise en cache
-              if (enableCache) {
-                ipInfoCache.set(cacheKey, {
-                  data: rawResult,
-                  timestamp: Date.now(),
-                  validated: isValidData,
-                });
-              }
-
-              setData(processedData);
-              setLoading(false);
-              return;
-            }
-          } catch (err) {
-            lastError = err as Error;
-
-            if (err instanceof Error && err.name === "AbortError") {
-              throw new Error(
-                `Timeout: La requête a pris plus de ${timeout}ms`
-              );
-            }
-
-            if (attempt < retryCount) {
-              await sleep(retryDelay);
+              return {
+                data: finalData,
+                error: null,
+                isValid: false,
+                validationErrors: validationError,
+              };
             }
           }
+          throw validationError;
         }
-
-        throw lastError!;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error
-            ? err.message
-            : "Une erreur inconnue est survenue";
+        lastError = err as Error;
 
-        logger.error("Erreur lors de la récupération des infos IP:", err);
-        setError(errorMessage);
-        setData(null);
-        setIsValidData(false);
-      } finally {
-        setLoading(false);
+        // 🚫 Pas de retry pour les erreurs d'abort (timeout)
+        if (err instanceof Error && err.name === "AbortError") {
+          throw new Error(`Timeout: La requête a pris plus de ${timeout}ms`);
+        }
+
+        // ⏳ Attendre avant le prochain essai (sauf pour le dernier)
+        if (attempt < retryCount) {
+          await sleep(retryDelay);
+        }
       }
-    },
-    [
-      initialIp,
-      enableCache,
-      timeout,
-      retryCount,
-      retryDelay,
-      validateAndTransformData,
-      isValidData,
-    ]
-  );
-
-  const refetch = useCallback(async (): Promise<void> => {
-    await fetchIpInfo(lastSearchedIp || undefined);
-  }, [fetchIpInfo, lastSearchedIp]);
-
-  const reset = useCallback(() => {
-    setData(null);
-    setError(null);
-    setValidationErrors(null);
-    setLoading(false);
-    setLastSearchedIp(initialIp);
-    setIsValidData(false);
-  }, [initialIp]);
-
-  useEffect(() => {
-    if (autoFetch) {
-      fetchIpInfo();
     }
-  }, [autoFetch, fetchIpInfo]);
 
-  return {
-    data,
-    loading,
-    error,
-    fetchIpInfo,
-    refetch,
-    reset,
-    lastSearchedIp,
-    isValidData,
-    validationErrors,
-  };
+    // 💥 Si tous les essais ont échoué
+    throw lastError!;
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Une erreur inconnue est survenue";
+
+    console.error("Erreur lors de la récupération des infos IP:", error);
+
+    return {
+      data: null,
+      error: errorMessage,
+      isValid: false,
+    };
+  }
 }
 
-// 🎁 Hooks spécialisés avec types automatiques
-export function useGetIpInfo(ip?: string, simplified: boolean = false) {
+// 🎁 Fonctions utilitaires spécialisées
+
+/**
+ * Récupère les infos d'une IP (côté serveur)
+ */
+export async function useGetIpInfo(ip?: string, simplified: boolean = false) {
   return simplified
-    ? useIpInfo<IpInfoSummary>(ip, {
-        autoFetch: true,
-        enableCache: true,
-        simplified: true,
-      })
-    : useIpInfo(ip, { autoFetch: true, enableCache: true });
+    ? await useIpInfo<IpInfoSummary>(ip, { simplified: true })
+    : await useIpInfo(ip);
 }
 
-// 🧹 Utilitaires
-export function clearIpInfoCache(): void {
-  ipInfoCache.clear();
-}
-
-export function getIpInfoCacheStats() {
-  return {
-    size: ipInfoCache.size,
-    keys: Array.from(ipInfoCache.keys()),
-    validated: Array.from(ipInfoCache.values()).filter((v) => v.validated)
-      .length,
-  };
+/**
+ * Valide une adresse IP (format basique)
+ */
+export function isValidIpAddress(ip: string): boolean {
+  const ipv4Regex =
+    /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  const ipv6Regex = /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::1$|^::$/;
+  return ipv4Regex.test(ip) || ipv6Regex.test(ip);
 }
