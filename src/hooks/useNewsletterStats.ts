@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/module/supabase/supabase";
 import logger from "@/utils/logger";
 export const useNewsletterStats = () => {
   const [readerCount, setReaderCount] = useState(90000) // Valeur par défaut
