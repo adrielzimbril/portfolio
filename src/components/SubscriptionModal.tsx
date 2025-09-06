@@ -23,9 +23,7 @@ import { Button } from "@/components/ui/button";
 import logger from "@/utils/logger";
 
 const emailSchema = z.object({
-  email: z
-    .string()
-    .email({ message: "Veuillez entrer une adresse email valide." }),
+  email: z.email({ message: "Veuillez entrer une adresse email valide." }),
 });
 
 const optionalInfoSchema = z.object({
@@ -46,22 +44,34 @@ type OptionalInfoForm = z.infer<typeof optionalInfoSchema>;
 
 interface SubscriptionModalProps {
   isOpen: boolean;
+  email?: string;
   onClose: () => void;
 }
 
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
+  email,
   onClose,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [step, setStep] = useState<1 | 2>(1);
-  const [email, setEmail] = useState<string>("");
 
-  const emailForm = useForm<EmailForm>({
-    resolver: zodResolver(emailSchema),
-    defaultValues: { email: "" },
-  });
+  useEffect(() => {
+    // Unique call to our API - does not overwrite info if the email already exists
+    async function subscribe() {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok)
+        throw new Error(json?.error || "Erreur lors de l'inscription");
+    }
+    subscribe();
+  }, [email]);
 
   const optionalForm = useForm<OptionalInfoForm>({
     resolver: zodResolver(optionalInfoSchema),
@@ -88,14 +98,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
       setIsSuccess(true);
 
-      // Fermer la modal après 2 secondes
+      // Close the modal after 2 seconds
       setTimeout(() => {
         onClose();
         setIsSuccess(false);
-        emailForm.reset();
         optionalForm.reset();
-        setStep(1);
-        setEmail("");
       }, 2000);
     } catch (error) {
       logger.error("Erreur lors de l'inscription:", error);
@@ -111,10 +118,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     if (!isSubmitting) {
       onClose();
       setIsSuccess(false);
-      emailForm.reset();
       optionalForm.reset();
-      setStep(1);
-      setEmail("");
     }
   };
 
@@ -142,46 +146,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               confiance ! 🎉
             </p>
           </div>
-        ) : step === 1 ? (
-          <Form {...emailForm}>
-            <form
-              onSubmit={emailForm.handleSubmit(async (values) => {
-                setEmail(values.email);
-                setStep(2);
-              })}
-              className="space-y-6"
-            >
-              <FormField
-                control={emailForm.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="votre@email.com"
-                        className="h-12 border-2 border-gray-200 focus:border-blue-500"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                type="submit"
-                className="w-full h-12 bg-black hover:bg-gray-800 text-white font-semibold text-lg"
-              >
-                Continuer
-              </Button>
-
-              <p className="text-xs text-gray-500 text-center">
-                Nous n'utiliserons jamais votre email à des fins publicitaires.
-              </p>
-            </form>
-          </Form>
         ) : (
           <Form {...optionalForm}>
             <form
