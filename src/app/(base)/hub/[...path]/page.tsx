@@ -9,7 +9,6 @@ import { PageParams } from "@/types";
 import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/route";
-import { ResourceType } from "@/types/enum";
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
   const { path, locale } = await props.params;
