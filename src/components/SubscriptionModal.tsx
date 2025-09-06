@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Loader2, CheckCircle } from 'lucide-react'
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Loader2, CheckCircle } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -82,7 +82,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Appel unique à notre API - n'écrase pas les infos si l'email existe déjà
+      // Unique call to our API - does not overwrite info if the email already exists
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
