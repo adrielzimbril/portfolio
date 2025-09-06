@@ -21,18 +21,16 @@ const testimonials: Testimonial[] = [
   {
     id: 1,
     name: "Christian Junior Braffo",
-    position:
-      "↳Développeur Web & Certifié Cloud Practitioner | J'apporte de la visibilité à votre business grâce à un portfolio , des sites et applications web performants  sur mesure",
+    position: "Développeur Web & Certifié Cloud Practitioner",
     testimonial:
-      "Adriel Zimbril n’est pas un simple développeur, c’est un développeur qui repousse ses limites à chaque fois , il est capable d’implémenter n’importe quelle maquette que vous lui proposer , Il est très ouvert et est toujours prêt à aider, c’est probablement le meilleur Dev que je connaisse",
+      "Adriel Zimbril n’est pas un simple développeur, c’est un développeur qui repousse ses limites à chaque fois, il est capable d’implémenter n’importe quelle maquette que vous lui proposer , Il est très ouvert et est toujours prêt à aider, c’est probablement le meilleur Dev que je connaisse",
     linkedinUrl: "https://www.linkedin.com/in/christian-junior-braffo-",
     avatar: "CJB",
   },
   {
     id: 2,
     name: "Youssouf Aboubacar Yvan Gamby",
-    position:
-      "Chargé d’affaires chez Witti Finances Côte d'Ivoire | Master 2 en Sciences de Gestion",
+    position: "Chargé d’affaires chez Witti Finances Côte d'Ivoire",
     testimonial:
       "J’avais besoin d’un développeur pour m’aider à lancer mon SaaS pour étudiants, mais au final, Adriel a été bien plus que ça. Il m’a accompagné comme un vrai conseiller. Il m’a aidé à clarifier mon idée, à structurer mon produit, et à mieux comprendre ce que je voulais vraiment proposer.\n Grâce à lui, j’ai pu poser des bases solides, éviter pas mal d’erreurs et avancer beaucoup plus vite. Si vous avez un projet en tête mais que c’est encore flou, Adriel est clairement la bonne personne pour vous aider à le rendre concret.",
     linkedinUrl: "https://www.linkedin.com/in/youssoufgamby",

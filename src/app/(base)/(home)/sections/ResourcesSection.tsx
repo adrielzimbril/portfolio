@@ -37,7 +37,6 @@ export function ResourcesSection() {
       badge="Hub 🫶"
     >
       {resources.map((resource, index) => {
-        if (limit !== undefined && index >= limit) return null;
         return (
           <ResourceCard
             key={index}

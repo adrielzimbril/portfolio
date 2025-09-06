@@ -31,6 +31,7 @@ export function ProjectsSection() {
 
     loadProjects();
   }, []);
+
   return (
     <SectionLayout
       title="Projets"
@@ -40,7 +41,6 @@ export function ProjectsSection() {
       asFade
     >
       {projects.map((project, index) => {
-        if (limit && index >= limit) return null;
         const isWide =
           allWide || (wideCardsCount !== undefined && index < wideCardsCount!);
 

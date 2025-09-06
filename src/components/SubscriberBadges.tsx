@@ -20,7 +20,6 @@ export function NewsletterSubscribersBadge() {
     <Badge
       className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
       variant="colored"
-      size="md"
     >
       <span className="flex items-center gap-2">
         <UsersGroup size={16} className="text-indigo-400" variant="bulk" />

@@ -25,15 +25,6 @@ export default function Newsletter() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
 
-  const formatReaderCount = (count: number) => {
-    if (count >= 1000000) {
-      return `${(count / 1000000).toFixed(1)}M reads`;
-    } else if (count >= 1000) {
-      return `${Math.floor(count / 1000)}K reads`;
-    }
-    return `${count} reads`;
-  };
-
   return (
     <>
       <SectionBase

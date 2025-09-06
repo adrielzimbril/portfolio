@@ -38,7 +38,6 @@ export function ThoughtsSection() {
       badge="Ma vision 🤯"
     >
       {posts.map((post, index) => {
-        if (limit !== undefined && index >= limit) return null;
         return (
           <ThoughtCard
             key={index}
