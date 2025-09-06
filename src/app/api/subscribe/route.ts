@@ -34,11 +34,23 @@ export async function POST(req: NextRequest) {
 
   if (!existing) {
     const { error: insertError } = await supabase
-      .from('newsletter_subscribers')
-      .insert([{ nom: name || '', numero: phone || '', email }])
+      .from("newsletter_subscribers")
+      .insert([{ nom: name || null, numero: phone || null, email }]);
 
     if (insertError) {
       return new Response(JSON.stringify({ error: insertError.message }), { status: 500 })
+    }
+  } else {
+    // Update name and phone if provided
+    if (name || phone) {
+      const { error: updateError } = await supabase
+        .from('newsletter_subscribers')
+        .update({ nom: name || null, numero: phone || null })
+        .eq('email', email)
+
+      if (updateError) {
+        return new Response(JSON.stringify({ error: updateError.message }), { status: 500 })
+      }
     }
   }
 
