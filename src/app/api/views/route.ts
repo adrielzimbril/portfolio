@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 import { supabase } from "@/module/supabase/client";
+import { useGetIpInfo } from "@/hooks/useIpInfo";
 
 // API: GET ?path=/some/path -> returns { count }
 //      POST { path } -> increments and returns { count }
@@ -38,6 +39,10 @@ export async function POST(req: NextRequest) {
     .json()
     .catch(() => ({ path: "/", type: "page", slug: null, details: null }));
   const now = new Date().toISOString();
+  const ip =
+    req.headers.get("x-forwarded-for") ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
 
   // Upsert and increment count atomically using RPC via PostgREST
   // Fallback: get current and update
@@ -57,9 +62,16 @@ export async function POST(req: NextRequest) {
 
   const nextCount = (existing?.count ?? 0) + 1;
 
-  const { error: upsertError } = await supabase
-    .from("page_views")
-    .upsert({ path, type, slug, count: nextCount, updated_at: now, details });
+  const ipInfo = useGetIpInfo(ip);
+
+  const { error: upsertError } = await supabase.from("page_views").upsert({
+    path,
+    type,
+    slug,
+    count: nextCount,
+    updated_at: now,
+    details: { ...details, userInfo: ipInfo },
+  });
 
   if (upsertError) {
     return new Response(JSON.stringify({ error: upsertError.message }), {
