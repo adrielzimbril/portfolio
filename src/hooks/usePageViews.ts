@@ -6,7 +6,8 @@ export function usePageViews(
   path: string,
   slug: string,
   type: PageType,
-  details?: Object
+  details?: Object,
+  wantResponse?: boolean
 ) {
   const [count, setCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,7 @@ export function usePageViews(
         const incRes = await fetch(`/api/views`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ path, slug, type, details }),
+          body: JSON.stringify({ path, slug, type, details, wantResponse }),
         });
         const incJson = await incRes.json();
         if (!incRes.ok)
@@ -36,7 +37,9 @@ export function usePageViews(
               path
             )}&slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
               type
-            )}&details=${encodeURIComponent(JSON.stringify(details))}`
+            )}&details=${encodeURIComponent(
+              JSON.stringify(details)
+            )}&wantResponse=${wantResponse}`
           );
           const json = await res.json();
           if (!res.ok) throw new Error(json?.error || "Failed to fetch");

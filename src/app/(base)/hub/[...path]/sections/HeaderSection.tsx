@@ -31,7 +31,8 @@ export function HeaderSection({
     PageType.HUB,
     {
       locale: pageViewsData.locale,
-    }
+    },
+    false
   );
 
   return (

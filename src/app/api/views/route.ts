@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
   const path = searchParams.get("path") || "/";
   const type = searchParams.get("type") || "page";
   const slug = searchParams.get("slug");
+  const wantResponse = searchParams.get("wantResponse") === "true";
 
   try {
     // Utiliser la fonction RPC pour récupérer les analytics
@@ -42,7 +43,7 @@ export async function GET(req: NextRequest) {
       //   slug,
       // }),
       JSON.stringify({
-        count: result.total_views,
+        ...(wantResponse ? { count: result.total_views } : {}),
       }),
       {
         status: 200,
@@ -65,7 +66,13 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json().catch(() => ({}));
-    const { path = "/", type = "page", slug = null, details = null } = body;
+    const {
+      path = "/",
+      type = "page",
+      slug = null,
+      details = null,
+      wantResponse = true,
+    } = body;
 
     const blockedIp: string[] = ["::1", "127.0.0.1"];
     const ipInfo = useGetIpInfo(blockedIp.includes(ip) ? "" : ip);
@@ -105,7 +112,7 @@ export async function POST(req: NextRequest) {
       //   slug,
       // }),
       JSON.stringify({
-        count: result.total_views,
+        ...(wantResponse ? { count: result.total_views } : {}),
       }),
       {
         status: 200,

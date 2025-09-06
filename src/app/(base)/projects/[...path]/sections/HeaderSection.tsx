@@ -27,7 +27,8 @@ export function HeaderSection({
     PageType.PROJECT,
     {
       locale: pageViewsData.locale,
-    }
+    },
+    false
   );
 
   return (
