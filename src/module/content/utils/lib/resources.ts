@@ -15,7 +15,7 @@ export async function getAllResources(
     locale: undefined,
     pageSlug: undefined,
     sort: "desc",
-    limit: undefined,
+    limit: Number.MAX_SAFE_INTEGER,
   }
 ): Promise<Resource[]> {
   const { published, locale, pageSlug, sort, limit } = options;
@@ -155,7 +155,7 @@ export async function getAllResourceSlugs(
     published: true,
     locale: undefined,
     sort: "desc",
-    limit: undefined,
+    limit: Number.MAX_SAFE_INTEGER,
   }
 ): Promise<string[]> {
   const { published, locale, sort, limit } = options;

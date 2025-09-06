@@ -15,7 +15,7 @@ export async function getAllProjects(
     locale: undefined,
     pageSlug: undefined,
     sort: "desc",
-    limit: undefined,
+    limit: Number.MAX_SAFE_INTEGER,
   }
 ): Promise<Project[]> {
   const { published, locale, pageSlug, sort, limit } = options;
@@ -163,7 +163,7 @@ export async function getAllProjectSlugs(
     published: true,
     locale: undefined,
     sort: "desc",
-    limit: undefined,
+    limit: Number.MAX_SAFE_INTEGER,
   }
 ): Promise<string[]> {
   const { published, locale, sort, limit } = options;

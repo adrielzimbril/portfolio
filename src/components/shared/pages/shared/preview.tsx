@@ -2,20 +2,12 @@ import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types/enum";
 import { getImageUrl } from "@/utils/base-url";
-import {
-  BookOne,
-  ClapperboardPlay,
-  MoonZoomView,
-  VideoLibrary,
-} from "@aurthle/icons";
+import { BookOne, ClapperboardPlay, VideoLibrary } from "@aurthle/icons";
 
 interface PreviewProps {
   title?: string;
   cover?: string;
   coverText?: { emoji: string; title: string; description: string };
-  iconType?: ResourceType;
-  icon?: string;
-  iconAlt?: string;
   isWide?: boolean;
   resourceType?: ResourceType;
 }
@@ -24,9 +16,6 @@ export function CardPreview({
   title,
   cover,
   coverText,
-  iconType,
-  icon = "bold-duotone---school---book.svg",
-  iconAlt,
   isWide,
   resourceType,
 }: PreviewProps) {
@@ -44,7 +33,7 @@ export function CardPreview({
             width={1200}
             height={630}
             className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
-            alt={iconAlt ?? ""}
+            alt={title ?? ""}
             src={getImageUrl(cover!)}
           />
         </div>
@@ -58,14 +47,7 @@ export function CardPreview({
           }
         />
       )}
-      {resourceType && (
-        <PreviewIcon
-          icon={icon}
-          iconAlt={iconAlt}
-          title={title}
-          resourceType={resourceType}
-        />
-      )}
+      {resourceType && <PreviewIcon resourceType={resourceType} />}
     </div>
   );
 }
@@ -96,9 +78,9 @@ function PreviewContent({
   );
 }
 
-function PreviewIcon({ icon, iconAlt, title, resourceType }: PreviewProps) {
+function PreviewIcon({ resourceType }: PreviewProps) {
   return (
-    <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-zinc-100 rounded-full overflow-hidden">
+    <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-zinc-100 rounded-full pointer-events-none overflow-hidden">
       {resourceType === ResourceType.COURSE ? (
         <BookOne size={24} variant="bulk" />
       ) : resourceType === ResourceType.EBOOK ? (

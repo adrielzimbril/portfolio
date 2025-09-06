@@ -27,7 +27,7 @@ function UserAvatars({ avatars }: { avatars: string[] }) {
         {avatars.map((avatar, index) => (
           <Avatar key={index} className="w-6 h-6">
             <AvatarImage src={avatar} />
-            <AvatarFallback className={cn("relative")}>
+            <AvatarFallback className={cn("relative pointer-events-none")}>
               {/* <span className="text-[.5rem] font-bold text-zinc-500 text-wrap">
                 A Z
               </span> */}

@@ -1,23 +1,21 @@
 import React from "react";
+import { routes } from "@/data/route";
 import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section";
-import { PreviewContentType } from "@/types/enum";
+import { PreviewContentType } from "@/types";
 
 export function HeaderSection({
   title,
   cover,
   description,
   tags,
-  projectLink,
 }: {
   title: string;
   cover: string;
   description: string;
   tags: { name: string; color: string }[];
-  projectLink?: string;
 }) {
   return (
     <ResourceHeaderSection
-      sectionClassName="md:w-[90%] mx-auto"
       previewContent={
         cover
           ? {
@@ -28,9 +26,8 @@ export function HeaderSection({
           : undefined
       }
       mainTitle={title}
-      description={description}
       tags={tags}
-      ctaButton={projectLink ?? undefined}
+      ctaButton={routes.contact.link}
     />
   );
 }

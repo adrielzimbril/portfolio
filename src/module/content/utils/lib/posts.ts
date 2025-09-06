@@ -15,7 +15,7 @@ export async function getAllPosts(
     locale: undefined,
     pageSlug: undefined,
     sort: "desc",
-    limit: undefined,
+    limit: Number.MAX_SAFE_INTEGER,
   }
 ): Promise<Post[]> {
   const { published, locale, pageSlug, sort, limit } = options;
@@ -161,7 +161,7 @@ export async function getAllPostSlugs(
     published: true,
     locale: undefined,
     sort: "desc",
-    limit: undefined,
+    limit: Number.MAX_SAFE_INTEGER,
   }
 ): Promise<string[]> {
   const { published, locale, sort, limit } = options;

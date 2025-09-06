@@ -43,6 +43,7 @@ export function MyHubSection() {
         <ResourceCard
           key={index}
           title={item.title}
+          slug={item.slug}
           cover={item.cover}
           type={item.type}
           tags={item.tags}

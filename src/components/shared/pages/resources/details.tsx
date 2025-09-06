@@ -4,9 +4,11 @@ import { routes } from "@/data/route";
 import { Stats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { ResourcePreviewCardInfoProps, ResourceType } from "@/types";
+import { getResourcesUrl } from "@/utils/base-url";
 
 export function CardInfo({
   title,
+  slug,
   resourceType,
   tags,
   description,
@@ -15,6 +17,7 @@ export function CardInfo({
   userCount,
 }: {
   title: string;
+  slug: string;
   resourceType: ResourceType;
   tags: { name: string }[];
   description: string;
@@ -41,13 +44,13 @@ export function CardInfo({
         <Description description={description} features={features} />
 
         <Stats
-          avatars={avatars}
+          avatars={avatars || ["image1", "image2", "image3", "image4"]}
           userCount={userCount}
           resourceType={resourceType}
         />
       </div>
 
-      <Action resourceType={resourceType} />
+      <Action slug={slug} resourceType={resourceType} />
     </div>
   );
 }
@@ -84,9 +87,21 @@ function Description({
   );
 }
 
-function Action({ resourceType }: { resourceType: ResourceType }) {
+function Action({
+  slug,
+  resourceType,
+}: {
+  slug: string;
+  resourceType: ResourceType;
+}) {
   return (
-    <Link href={routes.projects.link} likeButton whileTap size="xs" asIcon>
+    <Link
+      href={getResourcesUrl("hub", slug)}
+      likeButton
+      whileTap
+      size="xs"
+      asIcon
+    >
       <span className="flex items-center gap-1">
         {resourceType === ResourceType.COURSE
           ? "Enroll Now"

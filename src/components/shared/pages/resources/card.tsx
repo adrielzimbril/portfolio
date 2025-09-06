@@ -7,6 +7,7 @@ import { features } from "process";
 export function ResourceCard({
   title,
   cover,
+  slug,
   type,
   tags,
   description,
@@ -16,6 +17,7 @@ export function ResourceCard({
 }: {
   title: string;
   cover?: string;
+  slug: string;
   type: ResourceType;
   tags: { name: string }[];
   description: string;
@@ -29,6 +31,7 @@ export function ResourceCard({
         <CardPreview title={title} cover={cover} resourceType={type} />
         <CardInfo
           title={title}
+          slug={slug}
           resourceType={type}
           tags={tags}
           description={description}

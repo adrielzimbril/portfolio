@@ -30,8 +30,7 @@ export default async function SubProject(props: {
   const post = await getProjectWithAdjacent(slug, { locale });
 
   if (!post) {
-    //return localeRedirect({ href: routes.projects.link, locale });
-    logger.error(`Project not found for slug: ${slug}`);
+    return localeRedirect({ href: routes.projects.link, locale });
   }
 
   const {
