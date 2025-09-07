@@ -10,7 +10,6 @@ import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { metadata as metadataBase } from "./metadata";
 import { ScrollToTop } from "@/components/shared/scroll-to-top";
 import { Footer } from "@/components/shared/footer";
-import { Toaster } from "sonner";
 import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
 import { ReactLenis } from "lenis/react";
 import { NextIntlClientProvider } from "next-intl";
@@ -19,6 +18,7 @@ import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
+import { Toaster } from "@/components/shiro/providers/toast-provider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -88,7 +88,7 @@ export default async function RootLayout({
                         {/* <SmoothCursor /> */}
                         {children}
                         <ScrollToTop />
-                        <Toaster />
+                        <Toaster position="bottom-right" />
                         {/* <SplashCursor /> */}
                         <Footer />
                       </div>

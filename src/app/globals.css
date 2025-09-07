@@ -1,6 +1,7 @@
 @import "@squircle/tailwindcss";
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "style/tailwind-animate.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

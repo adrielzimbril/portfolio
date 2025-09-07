@@ -1,0 +1,163 @@
+# windsurrfrules.yaml
+project:
+  name: shirofolio
+  packageManager: pnpm
+  runtime:
+    node: ">=18"
+  frameworks:
+    - nextjs
+  monorepo: false
+
+conventions:
+  codeStyle:
+    typescript: true
+    eslint: true
+    tailwindcss: true
+    formatting: biome # biome.json présent
+  git:
+    commitMessage: conventional
+    protectedBranches:
+      - main
+  i18n:
+    library: use-intl
+    localesFromConfig: true
+
+directories:
+  app: src/app/
+  components: src/components/
+  hooks: src/hooks/
+  utils: src/utils/
+  supabase:
+    client: src/module/supabase/client.ts
+    server: src/module/supabase/server.ts
+    types: src/module/supabase/types.ts
+    migrations: supabase/migrations/
+  mail:
+    root: src/module/mail/
+    providers: src/module/mail/provider/
+    templates: src/module/mail/emails/
+    sendUtil: src/module/mail/util/send.ts
+  content:
+    root: src/module/content/
+  pages:
+    thoughts: src/app/(base)/thoughts/
+    projects: src/app/(base)/projects/
+    hub: src/app/(base)/hub/
+
+scripts:
+  dev:
+    - pnpm run dev # concurrently: next + trigger.dev
+  build:
+    - pnpm run build
+  start:
+    - pnpm run start
+  lint:
+    - pnpm run lint
+  trigger:
+    dev: pnpm run dev:trigger
+    deploy: pnpm run trigger:deploy
+  mail:
+    preview: pnpm run mail:preview
+    export: pnpm run mail:export
+
+safety:
+  autoRun:
+    allowed:
+      - pnpm run lint
+      - pnpm run mail:preview
+      - pnpm run mail:export
+    askConfirmation:
+      - pnpm run dev
+      - pnpm run build
+      - pnpm run trigger:deploy
+    forbidden:
+      - supabase db reset
+      - destructive SQL
+  secrets:
+    neverCommit:
+      - .env
+      - .env.local
+    requiredEnv:
+      - NEXT_PUBLIC_SUPABASE_URL
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY
+      - RESEND_API_KEY
+      - BREVO_GENERAL_LIST_ID
+  filesProtection:
+    writeProtected:
+      - src/module/supabase/types.ts # généré par DB; éditer avec prudence
+    reviewOnChange:
+      - supabase/migrations/**
+      - src/app/api/**
+
+supabase:
+  migrations:
+    path: supabase/migrations/
+    rules:
+      - prefer RPC functions for business logic (no direct table writes in API)
+      - use partial unique indexes for nullable columns (e.g. lower(email) where email is not null)
+  rpc:
+    established:
+      - upsert_user
+      - merge_users
+      - add_newsletter_subscriber
+      - add_hub_product_request
+      - get_page_analytics
+      - increment_page_analytics
+      - upsert_page_counter
+      - upsert_unique_view
+    guidance:
+      - When user_id is known, do not pass email/name/phone; DB fills via trigger.
+      - Prefer RPC over direct insert/upsert from API routes.
+
+analytics:
+  pageViews:
+    clientHook: src/hooks/usePageViews.ts
+    apiRoute: src/app/api/views/route.ts
+    rules:
+      - GET/POST must call RPC (get_page_analytics / increment_page_analytics)
+      - Respect wantResponse flag for lightweight responses
+
+mail:
+  provider:
+    default: resend
+    files:
+      - src/module/mail/provider/resend.ts
+      - src/module/mail/provider/console.ts
+  templates:
+    index: src/module/mail/emails/index.ts
+    rules:
+      - use sendEmail util (src/module/mail/util/send.ts)
+      - prefer templateId unless ad-hoc mail is required
+
+routing:
+  sitemap:
+    file: src/app/sitemap.ts
+    priority:
+      home: 1.0
+      marketing: 0.8
+      resources: 0.6
+    changeFrequency:
+      marketing: monthly
+      resources: weekly
+
+clientServerBoundaries:
+  next:
+    useClientOnlyWhereNeeded: true
+    server:
+      - API routes must not access browser-only APIs
+    client:
+      - hooks use client
+
+logging:
+  logger: src/utils/logger.ts
+  rules:
+    - log errors in API routes (do not swallow)
+    - no env dumping in production
+
+reviewChecklist:
+  - Does the change use RPC instead of direct table writes where applicable?
+  - If user_id is available, are email/name/phone omitted and filled by DB?
+  - Are migrations idempotent and using partial unique indexes for nullable unique columns?
+  - Are secrets untouched and .env.local excluded?
+  - For emails, is sendEmail used with templateId or proper subject/html?
+  - For analytics, is wantResponse respected and payload minimal?
