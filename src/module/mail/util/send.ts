@@ -21,14 +21,16 @@ export async function sendEmail<T extends TemplateId>(
         subject: string;
         text?: string;
         html?: string;
+        react?: string;
       }
   )
 ) {
   const { to, locale = appConfig.i18n.defaultLocale } = params;
 
-  let html: string;
+  let html: string = "";
   let text: string;
   let subject: string;
+  let react: string;
 
   if ("templateId" in params) {
     const { templateId, context } = params;
@@ -39,11 +41,12 @@ export async function sendEmail<T extends TemplateId>(
     });
     subject = template.subject;
     text = template.text;
-    html = template.html;
+    react = template.react ?? "";
   } else {
     subject = params.subject;
     text = params.text ?? "";
     html = params.html ?? "";
+    react = params.react ?? "";
   }
 
   try {
@@ -51,7 +54,7 @@ export async function sendEmail<T extends TemplateId>(
       to,
       subject,
       text,
-      html,
+      body: { html, react },
     });
     return true;
   } catch (e) {

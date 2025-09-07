@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server'
 import { brevoSendEmail } from '@/lib/brevo'
 import { supabase } from "@/module/supabase/client";
-import { renderEmail } from "@/module/mail/email";
 import { ProductDeliveryEmail } from "@/module/mail/emails/ProductDeliveryEmail";
 import logger from "@/utils/logger";
+import { getTemplate } from "@/module/mail/util/templates";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -57,16 +57,18 @@ export async function POST(req: NextRequest) {
     logger.warn("upsert_user RPC threw in hub/validate", e);
   }
 
-  const html = renderEmail(
-    ProductDeliveryEmail({
+  const { react } = await getTemplate({
+    templateId: "productDelivery",
+    context: {
       name,
       productTitle,
       features,
       coverImage,
       productUrl,
       customText,
-    })
-  );
+    },
+    locale: "en",
+  });
 
   try {
     // Centralized DB logic: add request via RPC (handles user linkage and field filling)
@@ -75,9 +77,9 @@ export async function POST(req: NextRequest) {
       {
         p_user_id: userId,
         // Only pass contact when no user_id (optional; server will fill from user when provided)
-        p_email: userId ? null : email ?? null,
-        p_name: userId ? null : name ?? null,
-        p_phone: userId ? null : phone ?? null,
+        p_email: userId ? null : (email ?? null),
+        p_name: userId ? null : (name ?? null),
+        p_phone: userId ? null : (phone ?? null),
         p_product_title: productTitle,
         p_product_type: productType ?? null,
         p_features: (features as any) ?? null,
@@ -99,7 +101,7 @@ export async function POST(req: NextRequest) {
       toEmail: email,
       toName: name,
       subject: `Votre accès: ${productTitle}`,
-      html,
+      html: react,
     });
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

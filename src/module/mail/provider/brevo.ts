@@ -17,7 +17,7 @@ export const send: SendEmailHandler = async ({ to, subject, body }) => {
   });
 
   if (!response.data) {
-    logger.error("Error sending email", response.error);
+    logger.error(await response.error);
     throw new Error("Could not send email");
   }
 };

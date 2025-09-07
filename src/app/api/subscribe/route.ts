@@ -1,10 +1,10 @@
 import { NextRequest } from 'next/server'
 import { supabase } from "@/module/supabase/client";
 import { brevoAddContact } from '@/lib/brevo'
-import { brevoSendEmail } from '@/lib/brevo'
-import { renderEmail } from "@/module/mail/email";
+import { brevoSendEmail } from "@/lib/brevo";
 import { WelcomeEmail } from "@/module/mail/emails/WelcomeEmail";
 import logger from "@/utils/logger";
+import { getTemplate } from "@/module/mail/util/templates";
 
 function getListIdByProduct(product?: string) {
   const map: Record<string, number | undefined> = {
@@ -115,12 +115,16 @@ export async function POST(req: NextRequest) {
   // Send welcome email only for first-time subscribers
   if (!alreadyExists) {
     try {
-      const html = renderEmail(WelcomeEmail({ name }));
+      const { react } = await getTemplate({
+        templateId: "welcome",
+        context: { name },
+        locale: "en",
+      });
       await brevoSendEmail({
         toEmail: email,
         toName: name,
         subject: "Bienvenue 🎁",
-        html,
+        html: react,
       });
     } catch (e) {
       logger.warn("Welcome email send failed:", e);

@@ -1,10 +1,13 @@
 import { Locale } from "@/module/i18n";
 
 export interface SendEmailParams {
-  to: string;
+  to: string | string[];
   subject: string;
   text: string;
-  html?: string;
+  body?: {
+    html?: string;
+    react?: string;
+  };
 }
 
 export type SendEmailHandler = (params: SendEmailParams) => Promise<void>;
