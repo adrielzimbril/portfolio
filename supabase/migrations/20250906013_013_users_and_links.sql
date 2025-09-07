@@ -41,7 +41,7 @@ alter table if exists public.hub_product_requests
 
 -- 3) Backfill user_id by matching on email or phone
 -- Create helper function to get or create a user and return id (same logic as RPC below)
-create or replace function public._get_or_create_user(p_name text, p_email text, p_phone text)
+create or replace function public.get_or_create_user(p_name text, p_email text, p_phone text)
 returns uuid
 language plpgsql
 as $$
@@ -53,11 +53,6 @@ begin
   -- Try find by email first
   if v_email is not null then
     select u.id into v_user_id from public.users u where lower(u.email) = lower(v_email) limit 1;
-  end if;
-
-  -- If not found, try by phone
-  if v_user_id is null and v_phone is not null then
-    select u.id into v_user_id from public.users u where u.phone = v_phone limit 1;
   end if;
 
   -- Create if still not found
@@ -84,7 +79,7 @@ $$;
 -- Expecting columns: email, name (or nom), phone (or numero)
 -- Use COALESCE for compatibility
 update public.newsletter_subscribers ns
-set user_id = public._get_or_create_user(
+set user_id = public.get_or_create_user(
   '',
   ns.email,
   ''
@@ -94,7 +89,7 @@ where ns.user_id is null
 
 -- Backfill hub_product_requests similarly
 update public.hub_product_requests hpr
-set user_id = public._get_or_create_user(
+set user_id = public.get_or_create_user(
   hpr.name,
   hpr.email,
   hpr.phone
@@ -128,7 +123,7 @@ declare
   v_phone text := nullif(trim(p_phone), '');
   v_id uuid;
 begin
-  v_id := public._get_or_create_user(p_name, v_email, v_phone);
+  v_id := public.get_or_create_user(p_name, v_email, v_phone);
 
   update public.users
   set

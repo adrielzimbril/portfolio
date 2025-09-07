@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logger from "@/utils/logger";
+import { toast } from "sonner";
 
 const emailSchema = z.object({
   email: z.email({ message: "Veuillez entrer une adresse email valide." }),
@@ -113,7 +114,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       }, 2000);
     } catch (error) {
       logger.error("Erreur lors de l'inscription:", error);
-      alert(
+      toast.error(
         "Une erreur est survenue lors de l'inscription. Veuillez réessayer."
       );
     } finally {

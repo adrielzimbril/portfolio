@@ -1,4 +1,5 @@
 "use client";
+import logger from "@/utils/logger";
 import { useEffect, useState } from "react";
 
 async function fetchJSON(url: string) {
@@ -18,6 +19,7 @@ export function useNewsletterSubscribersCount() {
     (async () => {
       try {
         const json = await fetchJSON(`/api/stats/subscribers?scope=newsletter`);
+        logger.info("newsletter subscribers count", json);
         if (!cancelled) setCount(json.count ?? 0);
       } catch (e: any) {
         if (!cancelled) setError(e?.message || "Unknown error");
@@ -25,13 +27,17 @@ export function useNewsletterSubscribersCount() {
         if (!cancelled) setLoading(false);
       }
     })();
-    return () => { cancelled = true };
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return { count, loading, error } as const;
 }
 
-export function useProductTypeSubscribersCount(type: "course" | "ebook" | "video") {
+export function useProductTypeSubscribersCount(
+  type: "course" | "ebook" | "video"
+) {
   const [count, setCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +47,10 @@ export function useProductTypeSubscribersCount(type: "course" | "ebook" | "video
     let cancelled = false;
     (async () => {
       try {
-        const json = await fetchJSON(`/api/stats/subscribers?scope=productType&type=${encodeURIComponent(type)}`);
+        const json = await fetchJSON(
+          `/api/stats/subscribers?scope=productType&type=${encodeURIComponent(type)}`
+        );
+        logger.info("product type subscribers count", json);
         if (!cancelled) setCount(json.count ?? 0);
       } catch (e: any) {
         if (!cancelled) setError(e?.message || "Unknown error");
@@ -49,7 +58,9 @@ export function useProductTypeSubscribersCount(type: "course" | "ebook" | "video
         if (!cancelled) setLoading(false);
       }
     })();
-    return () => { cancelled = true };
+    return () => {
+      cancelled = true;
+    };
   }, [type]);
 
   return { count, loading, error } as const;
@@ -65,7 +76,10 @@ export function useProductTitleRequestsCount(title: string) {
     let cancelled = false;
     (async () => {
       try {
-        const json = await fetchJSON(`/api/stats/subscribers?scope=productTitle&title=${encodeURIComponent(title)}`);
+        const json = await fetchJSON(
+          `/api/stats/subscribers?scope=productTitle&title=${encodeURIComponent(title)}`
+        );
+        logger.info("product title subscribers count", json);
         if (!cancelled) setCount(json.count ?? 0);
       } catch (e: any) {
         if (!cancelled) setError(e?.message || "Unknown error");
@@ -73,7 +87,9 @@ export function useProductTitleRequestsCount(title: string) {
         if (!cancelled) setLoading(false);
       }
     })();
-    return () => { cancelled = true };
+    return () => {
+      cancelled = true;
+    };
   }, [title]);
 
   return { count, loading, error } as const;

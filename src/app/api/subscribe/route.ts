@@ -63,22 +63,30 @@ export async function POST(req: NextRequest) {
   }
 
   if (!userId) {
-    return new Response(JSON.stringify({ error: "User creation failed" }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({
+        error: "User creation failed",
+        statusText: "Step before 1 failed",
+      }),
+      {
+        status: 500,
+      }
+    );
   }
 
   // 1) Check if subscriber already exists
-  const { data: existing, error: findError } = await supabase
-    .from("newsletter_subscribers")
-    .select("id, user_id")
-    .eq("user_id", userId)
-    .maybeSingle();
+  const { data: existing, error: findError } = await supabase.rpc(
+    "get_or_create_user",
+    {
+      p_email: email,
+      p_name: name ?? "",
+      p_phone: phone ?? "",
+    }
+  );
 
   if (findError) {
     return new Response(JSON.stringify({ error: findError.message }), {
       status: 500,
-      statusText: "Step 1 failed",
     });
   }
 
@@ -88,16 +96,19 @@ export async function POST(req: NextRequest) {
   const { error: addErr } = await supabase.rpc(
     "create_newsletter_subscription",
     {
-      p_email: userId ? "" : (email ?? ""),
-      p_name: userId ? "" : (name ?? ""),
-      p_subscribed_from_page: subscribedFromPage ?? undefined,
+      p_email: email,
+      p_name: name,
+      p_subscribed_from_page: JSON.stringify({
+        origin: req.headers.get("origin"),
+        referer: req.headers.get("referer"),
+        url: req.url,
+      }),
     }
   );
 
   if (addErr) {
     return new Response(JSON.stringify({ error: addErr.message }), {
       status: 500,
-      statusText: "Step 2 failed",
     });
   }
 
@@ -132,7 +143,7 @@ export async function POST(req: NextRequest) {
     logger.warn("Brevo add contact error:", e?.message || e);
   }
 
-  return new Response(JSON.stringify({ success: true, alreadyExists }), {
+  return new Response(JSON.stringify({ success: true }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
   });

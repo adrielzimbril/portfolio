@@ -52,7 +52,7 @@ declare
 begin
   if v_user_id is null then
     -- Create/find user if we have contact info
-    v_user_id := public._get_or_create_user(p_name, p_email, p_phone);
+    v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
   end if;
 
   -- Upsert by email if provided, else insert by user_id
@@ -98,7 +98,7 @@ declare
   v_row public.hub_product_requests;
 begin
   if v_user_id is null then
-    v_user_id := public._get_or_create_user(p_name, p_email, p_phone);
+    v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
   end if;
 
   insert into public.hub_product_requests(
