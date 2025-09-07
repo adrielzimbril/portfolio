@@ -35,43 +35,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       locales.map((locale) => ({
         url: new URL(`/${locale}${page}`, baseUrl).href,
         lastModified: new Date(),
-        alternates: {
-          languages: locales.map((l) => ({
-            href: new URL(`/${l}${page}`, baseUrl).href,
-            hreflang: l,
-          })),
-        },
       }))
     ),
     ...posts.map((post: Post) => ({
       url: new URL(`/${post.locale}/thoughts/${post.path}`, baseUrl).href,
       lastModified: new Date(),
-      alternates: {
-        languages: locales.map((l) => ({
-          href: new URL(`/${l}/thoughts/${post.path}`, baseUrl).href,
-          hreflang: l,
-        })),
-      },
     })),
     ...resources.map((resource: Resource) => ({
       url: new URL(`/${resource.locale}/hub/${resource.path}`, baseUrl).href,
       lastModified: new Date(),
-      alternates: {
-        languages: locales.map((l) => ({
-          href: new URL(`/${l}/hub/${resource.path}`, baseUrl).href,
-          hreflang: l,
-        })),
-      },
     })),
     ...projects.map((project: Project) => ({
       url: new URL(`/${project.locale}/projects/${project.path}`, baseUrl).href,
       lastModified: new Date(),
-      alternates: {
-        languages: locales.map((l) => ({
-          href: new URL(`/${l}/projects/${project.path}`, baseUrl).href,
-          hreflang: l,
-        })),
-      },
     })),
   ];
 }
