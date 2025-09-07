@@ -2,6 +2,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./style/tailwind-animate.css";
+@source '../node_modules/@aurthle/*';
+@source '../node_modules/@aurthle/react-phone';
+@source '../node_modules/@aurthle/emoji-hub';
+@source '../node_modules/@aurthle/react-layout-kit';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

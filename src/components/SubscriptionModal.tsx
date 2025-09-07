@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logger from "@/utils/logger";
 import { toast } from "sonner";
+import { PhoneInput } from "@aurthle/react-phone";
 
 const emailSchema = z.object({
   email: z.email({ message: "Veuillez entrer une adresse email valide." }),
@@ -192,6 +193,21 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         className="h-12 border-2 border-gray-200 focus:border-blue-500"
                         {...field}
                       />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={optionalForm.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm font-medium">
+                      Numéro de téléphone
+                    </FormLabel>
+                    <FormControl>
+                      <PhoneInput defaultCountry="CI" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
