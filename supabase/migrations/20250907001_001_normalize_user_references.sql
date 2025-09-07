@@ -10,11 +10,6 @@ SELECT * FROM hub_product_requests;
 CREATE TABLE temp_newsletter_subscribers AS 
 SELECT * FROM newsletter_subscribers;
 
--- ÉTAPE 2: Modifier la structure de hub_product_requests
--- Ajouter la colonne user_id avant de supprimer les autres
-ALTER TABLE hub_product_requests 
-ADD COLUMN user_id UUID REFERENCES users(id) ON DELETE CASCADE;
-
 -- Créer un index pour les performances
 CREATE INDEX idx_hub_product_requests_user_id ON hub_product_requests(user_id);
 
@@ -36,8 +31,7 @@ SELECT
     NOW()
 FROM temp_hub_product_requests hpr
 LEFT JOIN users u ON hpr.email = u.email
-WHERE u.id IS NULL AND hpr.email IS NOT NULL
-ON CONFLICT (email) DO NOTHING;
+WHERE u.id IS NULL AND hpr.email IS NOT NULL;
 
 -- Mettre à jour les user_id pour les nouveaux utilisateurs créés
 UPDATE hub_product_requests 
@@ -50,11 +44,6 @@ AND hub_product_requests.user_id IS NULL;
 ALTER TABLE hub_product_requests DROP COLUMN IF EXISTS email;
 ALTER TABLE hub_product_requests DROP COLUMN IF EXISTS name;
 ALTER TABLE hub_product_requests DROP COLUMN IF EXISTS phone;
-
--- ÉTAPE 5: Modifier la structure de newsletter_subscribers
--- Ajouter la colonne user_id
-ALTER TABLE newsletter_subscribers 
-ADD COLUMN user_id UUID REFERENCES users(id) ON DELETE CASCADE;
 
 -- Créer un index pour les performances
 CREATE INDEX idx_newsletter_subscribers_user_id ON newsletter_subscribers(user_id);
@@ -71,14 +60,13 @@ INSERT INTO users (id, email, name, phone, created_at, updated_at)
 SELECT 
     gen_random_uuid(),
     ns.email,
-    COALESCE(ns.name, 'Newsletter Subscriber'),
+    '',
     NULL,
     NOW(),
     NOW()
 FROM temp_newsletter_subscribers ns
 LEFT JOIN users u ON ns.email = u.email
-WHERE u.id IS NULL AND ns.email IS NOT NULL
-ON CONFLICT (email) DO NOTHING;
+WHERE u.id IS NULL AND ns.email IS NOT NULL;
 
 -- Mettre à jour les user_id pour les nouveaux utilisateurs créés
 UPDATE newsletter_subscribers 
@@ -155,8 +143,8 @@ CREATE OR REPLACE FUNCTION create_product_request(
     p_email TEXT,
     p_name TEXT DEFAULT NULL,
     p_phone TEXT DEFAULT NULL,
-    p_product_title TEXT,
-    p_product_type TEXT,
+    p_product_title TEXT DEFAULT NULL,
+    p_product_type TEXT DEFAULT NULL,
     p_features TEXT DEFAULT NULL,
     p_cover_image TEXT DEFAULT NULL,
     p_product_url TEXT DEFAULT NULL,
