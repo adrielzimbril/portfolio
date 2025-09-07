@@ -14,6 +14,7 @@ import { Resource } from "@/module/content/types";
 import { DEFAULT_CATEGORY_COLOR_NAME, ResourceType } from "@/types";
 import Image from "next/image";
 import { ProjectCategories } from "@/components/shared/pages/projects/tags";
+import { PhoneInput } from "@aurthle/react-phone";
 
 export function GetResource({
   title,
@@ -102,6 +103,7 @@ export function GetResource({
               {isLoading ? "..." : formatReaderCount(readerCount)}
             </span>
           </Badge> */}
+          <PhoneInput defaultCountry="CI" />
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <Input

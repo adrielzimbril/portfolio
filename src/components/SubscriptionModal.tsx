@@ -170,7 +170,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     <FormControl>
                       <Input
                         placeholder="Votre nom et prénom"
-                        className="h-12 border-2 border-gray-200 focus:border-blue-500"
+                        className="h-12 border-2 border-input focus:border-blue-500"
                         {...field}
                       />
                     </FormControl>
