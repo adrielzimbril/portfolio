@@ -5,27 +5,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 
-@source '../node_modules/@aurthle/*';
-@source '../node_modules/@aurthle/**/*.{ts,tsx,js,mjs,jsx,mdx}';
+@source '../../node_modules/@aurthle/*';
 @source '@aurthle/react-phone';
 @source '@aurthle/emoji-hub';
 @source '@aurthle/react-layout-kit';
 
 @theme inline {
-  /* Avatar colors */
-  --color-avatar-user-squareali-mahdi-color-background: var(--avatar-user-squareali-mahdi-color-background);
-  --color-avatar-user-squareamlie-laurent-color-background: var(--avatar-user-squareamlie-laurent-color-background);
-  --color-avatar-user-squareammar-foley-color-background: var(--avatar-user-squareammar-foley-color-background);
-  --color-avatar-user-squareashton-blackwell-color-background: var(--avatar-user-squareashton-blackwell-color-background);
-  --color-avatar-user-squarecohen-lozano-color-background: var(--avatar-user-squarecohen-lozano-color-background);
-  --color-avatar-user-squareisla-allison-color-background: var(--avatar-user-squareisla-allison-color-background);
-  --color-avatar-user-squarejulius-vaughan-color-background: var(--avatar-user-squarejulius-vaughan-color-background);
-  --color-avatar-user-squareowen-garcia-color-background: var(--avatar-user-squareowen-garcia-color-background);
-  --color-avatar-user-squareriley-omoore-color-background: var(--avatar-user-squareriley-omoore-color-background);
-  --color-avatar-user-squaresienna-hewitt-neutral-background: var(--avatar-user-squaresienna-hewitt-neutral-background);
-  --color-avatar-user-squareyoussef-roberson-color-background: var(--avatar-user-squareyoussef-roberson-color-background);
-  --color-avatar-user-squarezahra-christensen-neutral-background: var(--avatar-user-squarezahra-christensen-neutral-background);
-
   /* Base colors */
   --color-base-white: var(--base-white);
   --color-gray-900: var(--gray-900);
@@ -184,20 +169,6 @@
 
 @layer base {
 	:root {
-	/* Avatar colors */
-	--avatar-user-squareali-mahdi-color-background: rgba(207, 212, 198, 1);
-	--avatar-user-squareamlie-laurent-color-background: rgba(221, 192, 206, 1);
-	--avatar-user-squareammar-foley-color-background: rgba(199, 209, 176, 1);
-	--avatar-user-squareashton-blackwell-color-background: rgba(211, 214, 233, 1);
-	--avatar-user-squarecohen-lozano-color-background: rgba(198, 208, 203, 1);
-	--avatar-user-squareisla-allison-color-background: rgba(233, 220, 187, 1);
-	--avatar-user-squarejulius-vaughan-color-background: rgba(233, 220, 187, 1);
-	--avatar-user-squareowen-garcia-color-background: rgba(233, 220, 187, 1);
-	--avatar-user-squareriley-omoore-color-background: rgba(233, 220, 187, 1);
-	--avatar-user-squaresienna-hewitt-neutral-background: rgba(224, 224, 224, 1);
-	--avatar-user-squareyoussef-roberson-color-background: rgba(216, 224, 207, 1);
-	--avatar-user-squarezahra-christensen-neutral-background: rgba(224, 224, 224, 1);
-
 	/* Base colors */
 	--base-white: rgba(255, 255, 255, 1);
 	--gray-900: rgba(24, 29, 39, 1);
