@@ -27,19 +27,18 @@ const emailSchema = z.object({
 });
 
 const optionalInfoSchema = z.object({
-  nom: z
+  name: z
     .string()
     .min(2, { message: "Le nom doit contenir au moins 2 caractères." })
     .optional()
     .or(z.literal("")),
-  numero: z
+  phone: z
     .string()
     .min(10, { message: "Le numéro doit contenir au moins 10 caractères." })
     .optional()
     .or(z.literal("")),
 });
 
-type EmailForm = z.infer<typeof emailSchema>;
 type OptionalInfoForm = z.infer<typeof optionalInfoSchema>;
 
 interface SubscriptionModalProps {
@@ -60,7 +59,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     if (!email) return;
     // Unique call to our API - does not overwrite info if the email already exists
     async function subscribe() {
-      const subscribedFromPage = typeof window !== 'undefined' ? window.location.pathname : undefined;
+      const subscribedFromPage =
+        typeof window !== "undefined" ? window.location.pathname : undefined;
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,7 +78,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   const optionalForm = useForm<OptionalInfoForm>({
     resolver: zodResolver(optionalInfoSchema),
-    defaultValues: { nom: "", numero: "" },
+    defaultValues: { name: "", phone: "" },
   });
 
   const onSubmit = async (values: OptionalInfoForm) => {
@@ -91,9 +91,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
-          name: values.nom || undefined,
-          phone: values.numero || undefined,
-          subscribedFromPage: typeof window !== 'undefined' ? window.location.pathname : undefined,
+          name: values.name || undefined,
+          phone: values.phone || undefined,
+          subscribedFromPage:
+            typeof window !== "undefined"
+              ? window.location.pathname
+              : undefined,
         }),
       });
       const json = await res.json();
@@ -158,7 +161,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             >
               <FormField
                 control={optionalForm.control}
-                name="nom"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium">Nom</FormLabel>
@@ -176,7 +179,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
               <FormField
                 control={optionalForm.control}
-                name="numero"
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-medium">

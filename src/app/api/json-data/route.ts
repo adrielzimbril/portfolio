@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { catchError, createError, getJsonDataCached } from "@/utils";
+import { catchError, createError } from "@/utils";
 import { getJsonDataCached as getJsonDataServer } from "@/utils/get-json-data/server";
 import logger from "@/utils/logger";
 
