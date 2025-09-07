@@ -1,8 +1,8 @@
 import { NextRequest } from 'next/server'
 import { brevoSendEmail } from '@/lib/brevo'
 import { supabase } from "@/module/supabase/client";
-import { renderEmail } from '@/lib/email'
-import { ProductDeliveryEmail } from '@/emails/ProductDeliveryEmail'
+import { renderEmail } from "@/module/mail/email";
+import { ProductDeliveryEmail } from "@/module/mail/emails/ProductDeliveryEmail";
 import logger from "@/utils/logger";
 
 export async function POST(req: NextRequest) {

@@ -2,8 +2,8 @@ import { NextRequest } from 'next/server'
 import { supabase } from "@/module/supabase/client";
 import { brevoAddContact } from '@/lib/brevo'
 import { brevoSendEmail } from '@/lib/brevo'
-import { renderEmail } from '@/lib/email'
-import { WelcomeEmail } from '@/emails/WelcomeEmail'
+import { renderEmail } from "@/module/mail/email";
+import { WelcomeEmail } from "@/module/mail/emails/WelcomeEmail";
 import logger from "@/utils/logger";
 
 function getListIdByProduct(product?: string) {
