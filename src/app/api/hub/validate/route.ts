@@ -37,6 +37,26 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Best-effort: ensure we have a user and capture its id
+  let userId: string | null = null;
+  try {
+    const { data: userData, error: userErr } = await (supabase as any).rpc(
+      "upsert_user",
+      {
+        p_name: name ?? null,
+        p_email: email ?? null,
+        p_phone: phone ?? null,
+      }
+    );
+    if (userErr) {
+      logger.warn("upsert_user RPC failed in hub/validate", userErr);
+    } else {
+      userId = (userData as any)?.id ?? null;
+    }
+  } catch (e) {
+    logger.warn("upsert_user RPC threw in hub/validate", e);
+  }
+
   const html = renderEmail(
     ProductDeliveryEmail({
       name,
@@ -55,17 +75,18 @@ export async function POST(req: NextRequest) {
       .insert([
         {
           email,
-          name,
-          phone,
+          name: name ?? null,
+          phone: phone ?? null,
           product_title: productTitle,
-          product_type: productType,
+          product_type: productType ?? null,
           features: features ?? null,
           cover_image: coverImage ?? null,
           product_url: productUrl ?? null,
           custom_text: customText ?? null,
           subscribed_from_page: body.subscribedFromPage ?? null,
+          user_id: userId,
         },
-      ]);
+      ] as any);
 
     if (insertError) {
       logger.error("Failed to store hub_product_request:", insertError);

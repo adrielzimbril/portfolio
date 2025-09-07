@@ -37,6 +37,27 @@ export async function POST(req: NextRequest) {
     });
   }
 
+  // Link or create the user record first (users table)
+  let userId: string | null = null;
+  try {
+    const { data: userData, error: userErr } = await (supabase as any).rpc(
+      "upsert_user",
+      {
+        p_name: name ?? null,
+        p_email: email ?? null,
+        p_phone: phone ?? null,
+      }
+    );
+    if (userErr) {
+      logger.warn("upsert_user RPC failed, continuing without user link", userErr);
+    } else {
+      // Supabase returns a single row for this RPC
+      userId = (userData as any)?.id ?? null;
+    }
+  } catch (e) {
+    logger.warn("upsert_user RPC threw, continuing without user link", e);
+  }
+
   // 1) Check if subscriber already exists
   const { data: existing, error: findError } = await supabase
     .from("newsletter_subscribers")
@@ -61,6 +82,7 @@ export async function POST(req: NextRequest) {
           phone: phone || null,
           email,
           subscribed_from_page: subscribedFromPage || null,
+          user_id: userId,
         },
       ]);
 
@@ -71,11 +93,11 @@ export async function POST(req: NextRequest) {
     }
     // Try sending welcome email (best effort)
     try {
-      const html = renderEmail(WelcomeEmail({ name: name || undefined }));
+      const html = renderEmail(WelcomeEmail({ name }));
       await brevoSendEmail({
         toEmail: email,
         toName: name,
-        subject: "Bienvenue 🎁",
+        subject: "Bienvenue ",
         html,
       });
     } catch (e) {
@@ -86,7 +108,7 @@ export async function POST(req: NextRequest) {
     if (name || phone) {
       const { error: updateError } = await supabase
         .from("newsletter_subscribers")
-        .upsert({ name: name || null, phone: phone || null })
+        .upsert({ name: name || null, phone: phone || null, user_id: userId ?? undefined })
         .eq("email", email);
 
       if (updateError) {
