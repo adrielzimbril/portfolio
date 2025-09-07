@@ -5,9 +5,9 @@ export const firstScheduledTask = schedules.task({
   id: "first-scheduled-task",
   //description for the schedule
   description: "This is a scheduled task",
-  //every 30 seconds (UTC timezone)
+  //every 3 months (UTC timezone)
   cron: {
-    pattern: "*/30 * * * *",
+    pattern: "0 0 0 */3 *",
     timezone: "UTC",
   },
   //queue the task to run every 30 seconds

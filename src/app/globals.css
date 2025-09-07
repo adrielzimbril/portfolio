@@ -2,13 +2,11 @@
 @import "@squircle/tailwindcss";
 @import "tw-animate-css";
 @import "./style/tailwind-animate.css";
-@custom-variant dark (&:where(.dark, .dark *));
-
 
 @source '../../node_modules/@aurthle/*';
 @source '@aurthle/react-phone';
-@source '@aurthle/emoji-hub';
-@source '@aurthle/react-layout-kit';
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   /* Base colors */

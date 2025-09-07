@@ -18,7 +18,7 @@
     "@aurthle/icons": "^1.0.10",
     "@aurthle/react-hooks": "^1.0.4",
     "@aurthle/react-layout-kit": "^1.0.1",
-    "@aurthle/react-phone": "^1.0.1",
+    "@aurthle/react-phone": "^1.0.4",
     "@aurthle/tsconfig": "^0.0.0",
     "@calcom/embed-react": "^1.5.3",
     "@hookform/resolvers": "^5.2.1",
