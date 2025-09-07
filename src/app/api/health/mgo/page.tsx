@@ -1,10 +1,20 @@
-// app/api/supabase-health-check/route.ts (ou pages/api/supabase-health-check.ts)
 import { createClient } from "@supabase/supabase-js";
 import { supabaseKey } from "@/module/supabase/client";
+import { generateToken, getApiBaseUrl, validateToken } from "@/utils";
 import { NextResponse } from "next/server";
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
+    const { token } = await request.json();
+
+    // Validation du token
+    if (!token || !validateToken(token)) {
+      return NextResponse.json(
+        { success: false, error: "Invalid or expired token" },
+        { status: 401 }
+      );
+    }
+
     const supabase = createClient(supabaseKey.url, supabaseKey.anonKey);
 
     const { data, error } = await supabase.functions.invoke(
@@ -35,7 +45,7 @@ export async function POST() {
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: "Request processing failed",
         timestamp: new Date().toISOString(),
       },
       { status: 500 }
@@ -43,7 +53,21 @@ export async function POST() {
   }
 }
 
-// Optionnel : GET pour tester manuellement
 export async function GET() {
-  return POST();
+  const token = generateToken();
+
+  const response = await fetch(`${getApiBaseUrl()}/api/health/mgo`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token: token }),
+  });
+
+  if (!response.ok) {
+    return NextResponse.json(
+      { success: false, error: "Request processing failed" },
+      { status: response.status }
+    );
+  }
+
+  return NextResponse.json({ success: true });
 }

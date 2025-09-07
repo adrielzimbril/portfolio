@@ -7,10 +7,10 @@ export const firstScheduledTask = schedules.task({
   description: "This is a scheduled task",
   //every 3 months (UTC timezone)
   cron: {
-    pattern: "0 0 0 */3 *",
+    pattern: "0 0 1 */3 *",
     timezone: "UTC",
   },
-  //queue the task to run every 30 seconds
+  //queue the task to run with a max concurrency limit of 1
   queue: {
     name: "first-scheduled-task-queue",
     concurrencyLimit: 1,
