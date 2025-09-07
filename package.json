@@ -26,6 +26,7 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@react-email/render": "^1.2.2",
     "@sindresorhus/slugify": "^2.2.1",
     "@squircle/core": "^1.0.6",
     "@squircle/paint-polyfill": "^1.0.6",

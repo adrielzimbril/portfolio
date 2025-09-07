@@ -69,27 +69,30 @@ export async function POST(req: NextRequest) {
   );
 
   try {
-    // Store request in Supabase
-    const { error: insertError } = await supabase
-      .from("hub_product_requests")
-      .insert([
-        {
-          email,
-          name: name ?? null,
-          phone: phone ?? null,
-          product_title: productTitle,
-          product_type: productType ?? null,
-          features: features ?? null,
-          cover_image: coverImage ?? null,
-          product_url: productUrl ?? null,
-          custom_text: customText ?? null,
-          subscribed_from_page: body.subscribedFromPage ?? null,
-          user_id: userId,
-        },
-      ] as any);
+    // Centralized DB logic: add request via RPC (handles user linkage and field filling)
+    const { error: rpcErr } = await (supabase as any).rpc(
+      "add_hub_product_request",
+      {
+        p_user_id: userId,
+        // Only pass contact when no user_id (optional; server will fill from user when provided)
+        p_email: userId ? null : email ?? null,
+        p_name: userId ? null : name ?? null,
+        p_phone: userId ? null : phone ?? null,
+        p_product_title: productTitle,
+        p_product_type: productType ?? null,
+        p_features: (features as any) ?? null,
+        p_cover_image: coverImage ?? null,
+        p_product_url: productUrl ?? null,
+        p_custom_text: customText ?? null,
+        p_subscribed_from_page: body.subscribedFromPage ?? null,
+      }
+    );
 
-    if (insertError) {
-      logger.error("Failed to store hub_product_request:", insertError);
+    if (rpcErr) {
+      logger.error("Failed to store hub_product_request via RPC:", rpcErr);
+      return new Response(JSON.stringify({ error: rpcErr.message }), {
+        status: 500,
+      });
     }
 
     await brevoSendEmail({

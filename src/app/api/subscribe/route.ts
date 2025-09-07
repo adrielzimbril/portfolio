@@ -71,51 +71,39 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  let alreadyExists = !!existing;
+  const alreadyExists = !!existing;
 
-  if (!existing) {
-    const { error: insertError } = await supabase
-      .from("newsletter_subscribers")
-      .insert([
-        {
-          name: name || null,
-          phone: phone || null,
-          email,
-          subscribed_from_page: subscribedFromPage || null,
-          user_id: userId,
-        },
-      ]);
-
-    if (insertError) {
-      return new Response(JSON.stringify({ error: insertError.message }), {
-        status: 500,
-      });
+  // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
+  const { error: addErr } = await (supabase as any).rpc(
+    "add_newsletter_subscriber",
+    {
+      p_user_id: userId,
+      // If a user_id is present, we don't need to pass contact info; DB will fill from users
+      p_email: userId ? null : email ?? null,
+      p_name: userId ? null : name ?? null,
+      p_phone: userId ? null : phone ?? null,
+      p_subscribed_from_page: subscribedFromPage ?? null,
     }
-    // Try sending welcome email (best effort)
+  );
+
+  if (addErr) {
+    return new Response(JSON.stringify({ error: addErr.message }), {
+      status: 500,
+    });
+  }
+
+  // Send welcome email only for first-time subscribers
+  if (!alreadyExists) {
     try {
       const html = renderEmail(WelcomeEmail({ name }));
       await brevoSendEmail({
         toEmail: email,
         toName: name,
-        subject: "Bienvenue ",
+        subject: "Bienvenue 🎁",
         html,
       });
     } catch (e) {
       logger.warn("Welcome email send failed:", e);
-    }
-  } else {
-    // Update name and phone if provided
-    if (name || phone) {
-      const { error: updateError } = await supabase
-        .from("newsletter_subscribers")
-        .upsert({ name: name || null, phone: phone || null, user_id: userId ?? undefined })
-        .eq("email", email);
-
-      if (updateError) {
-        return new Response(JSON.stringify({ error: updateError.message }), {
-          status: 500,
-        });
-      }
     }
   }
 
