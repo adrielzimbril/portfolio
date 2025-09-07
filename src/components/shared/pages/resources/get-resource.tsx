@@ -103,13 +103,13 @@ export function GetResource({
               {isLoading ? "..." : formatReaderCount(readerCount)}
             </span>
           </Badge> */}
-          <PhoneInput defaultCountry="CI" />
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
+            <PhoneInput defaultCountry="CI" className="w-full h-12" />
             <Input
               placeholder="😏 vous voulez recevoir des cadeaux ?"
               type="email"
-              className="ml-auto rounded-s-md w-fit ps-16 w-9"
+              className="ml-auto rounded-s-md"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
