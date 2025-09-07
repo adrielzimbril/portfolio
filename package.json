@@ -95,6 +95,7 @@
     "eslint-config-next": "15.4.6",
     "markdown-toc": "^1.2.0",
     "mdx": "^0.3.1",
+    "prettier": "^3.6.2",
     "supabase": "^2.39.2",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2",

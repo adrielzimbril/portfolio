@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Link or create the user record first (users table)
-  let userId: string | null = null;
+  let userId: string | undefined;
   try {
     const { data: userData, error: userErr } = await supabase.rpc(
       "upsert_user",
@@ -49,43 +49,55 @@ export async function POST(req: NextRequest) {
       }
     );
     if (userErr) {
-      logger.warn("upsert_user RPC failed, continuing without user link", userErr);
+      logger.warn(
+        "upsert_user RPC failed, continuing without user link",
+        userErr
+      );
     } else {
       // Supabase returns a single row for this RPC
-      userId = (userData as any)?.id ?? null;
+      userId = (userData as any)?.id;
     }
   } catch (e) {
+    userId = undefined;
     logger.warn("upsert_user RPC threw, continuing without user link", e);
+  }
+
+  if (!userId) {
+    return new Response(JSON.stringify({ error: "User creation failed" }), {
+      status: 500,
+    });
   }
 
   // 1) Check if subscriber already exists
   const { data: existing, error: findError } = await supabase
     .from("newsletter_subscribers")
-    .select("id, email")
-    .eq("email", email)
+    .select("id, user_id")
+    .eq("user_id", userId)
     .maybeSingle();
 
   if (findError) {
     return new Response(JSON.stringify({ error: findError.message }), {
       status: 500,
+      statusText: "Step 1 failed",
     });
   }
 
   const alreadyExists = !!existing;
 
   // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
-  const { error: addErr } = await supabase.rpc("add_newsletter_subscriber", {
-    p_user_id: userId ?? undefined,
-    // If a user_id is present, we don't need to pass contact info; DB will fill from users
-    p_email: userId ? undefined : email ?? undefined,
-    p_name: userId ? undefined : name ?? undefined,
-    p_phone: userId ? undefined : phone ?? undefined,
-    p_subscribed_from_page: subscribedFromPage ?? undefined,
-  });
+  const { error: addErr } = await supabase.rpc(
+    "create_newsletter_subscription",
+    {
+      p_email: userId ? "" : (email ?? ""),
+      p_name: userId ? "" : (name ?? ""),
+      p_subscribed_from_page: subscribedFromPage ?? undefined,
+    }
+  );
 
   if (addErr) {
     return new Response(JSON.stringify({ error: addErr.message }), {
       status: 500,
+      statusText: "Step 2 failed",
     });
   }
 
