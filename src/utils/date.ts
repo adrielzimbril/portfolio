@@ -64,7 +64,7 @@ export function getDate({
   date,
   lang = "en-US",
   dateStyle = "medium",
-  iso = true,
+  iso = false,
 }: {
   date: string | Date;
   lang?: Intl.LocalesArgument;

@@ -41,6 +41,7 @@ export default function Newsletter() {
             </h2>
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600"></p>
           </div>
+
           <Cal
             namespace="shiro-decouverte"
             calLink="shirospace-saas-agency/shiro-decouverte"
@@ -62,7 +63,7 @@ export default function Newsletter() {
               data-cal-namespace="shiro-decouverte"
               data-cal-link="shirospace-saas-agency/shiro-decouverte"
               data-cal-config='{"layout":"month_view"}'
-              className={cn("hidden", "")}
+              className={cn("hidden")}
             >
               <span className="font-bold text-base">Recevoir !🦄</span>
             </Button>

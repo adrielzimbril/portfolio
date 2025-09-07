@@ -83,7 +83,7 @@ export function HeaderSection({
             >
               <span className="flex items-center gap-2">
                 <Calendar className="size-4 text-indigo-400" variant="bulk" />
-                {getDate({ date: articleDetails.date, iso: false })}
+                {getDate({ date: articleDetails.date })}
               </span>
             </Badge>
           )}

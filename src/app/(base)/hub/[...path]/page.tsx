@@ -5,14 +5,10 @@ import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
 import { getActivePathFromUrlParam } from "@/utils/content";
 import { setRequestLocale } from "next-intl/server";
-import { PageParams, PageType } from "@/types";
+import { PageParams } from "@/types";
 import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/route";
-import {
-  ProductTypeSubscribersBadge,
-  ProductTitleRequestsBadge,
-} from "@/components/SubscriberBadges";
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
   const { path, locale } = await props.params;
