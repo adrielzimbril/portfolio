@@ -2,6 +2,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./style/tailwind-animate.css";
+@import "./style/test.css"
+
 @source '../node_modules/@aurthle/*';
 @source '../node_modules/@aurthle/react-phone';
 @source '../node_modules/@aurthle/emoji-hub';
