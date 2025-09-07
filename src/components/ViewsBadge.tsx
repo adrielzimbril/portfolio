@@ -4,7 +4,7 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { Badge } from "@/components/ui/badge";
 import { PageType } from "@/types";
 
-import { formatCount } from "@/utils/date";
+import { formatCount } from "@/utils/format-date";
 
 export function ViewsBadge({ path, type }: { path: string; type: PageType }) {
   const { count, loading } = usePageViews(path, "", type);

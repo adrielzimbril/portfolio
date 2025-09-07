@@ -8,6 +8,9 @@ export function getBaseUrl() {
 	return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
+export function getApiBaseUrl() {
+  return `${getBaseUrl()}/api`;
+}
 
 export function getResourcesUrl(
   resource: "hub" | "projects" | "thoughts",

@@ -1,32 +1,57 @@
+// tasks/supabase-live-check.ts
 import { logger, task } from "@trigger.dev/sdk";
-import { createClient } from "@supabase/supabase-js";
-import { supabaseKey } from "@/module/supabase/client";
+import { getApiBaseUrl } from "@/utils";
+
+const API_BASE_URL = getApiBaseUrl();
 
 export const supabaseLiveCheckTask = task({
-  //unique id for the task
   id: "supabase-live-check",
-  //description for the task
   description:
     "This is a scheduled task for checking supabase project database status",
-  //queue the task to limit concurrency to 1 max
   queue: {
     name: "supabase-live-check-queue",
     concurrencyLimit: 1,
   },
   run: async (payload) => {
-    const supabase = createClient(supabaseKey.url, supabaseKey.anonKey);
-    const { data, error } = await supabase.functions.invoke(
-      "check_tables_rls",
-      {
-        body: { name: "Functions" },
+    try {
+      logger.info(
+        `Starting Supabase health check via API... with payload : ${payload}`,
+        { status: "starting", data: payload }
+      );
+
+      const response = await fetch(`${API_BASE_URL}/supabase-health-check`, {
+        method: "POST",
+      });
+
+      if (!response.ok) {
+        logger.error(`API responded with status: ${response.status}`, {
+          status: "error",
+          data: { status: response.status },
+        });
+        throw new Error(`API responded with status: ${response.status}`);
       }
-    );
 
-    // Log the received data
-    logger.info(data); //is an array of Date objects
+      const result = await response.json();
 
-    if (error) {
-      logger.error(error);
+      if (!result.success) {
+        logger.error(`Health check failed: ${result.error}`, {
+          status: "error",
+          data: result,
+        });
+        throw new Error(`Health check failed: ${result.error}`);
+      }
+
+      logger.info(`Health check successful: ${result}`, {
+        status: "success",
+        data: result,
+      });
+      return result;
+    } catch (error) {
+      logger.error(`Supabase health check failed: ${error}`, {
+        status: "error",
+        data: { error },
+      });
+      throw error;
     }
   },
 });

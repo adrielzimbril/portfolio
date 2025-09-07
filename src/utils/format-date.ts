@@ -72,8 +72,9 @@ export function getDate({
   iso?: boolean;
 }): string {
   const d = new Date(date);
+  if (!d) return "Invalid date";
   return iso
-    ? d.toISOString().split("T")[0]
+    ? d.toISOString().split("T")[0] || "Invalid date"
     : Intl.DateTimeFormat(lang, { dateStyle }).format(d);
 }
 
@@ -143,6 +144,24 @@ export function getDateDifference(
       : "Not enough dates";
   }
 
+  if (!dateArray[0] || !dateArray[1]) {
+    return returnObject
+      ? {
+          formatted: "Invalid dates",
+          totalDays: 0,
+          breakdown: {
+            years: 0,
+            months: 0,
+            weeks: 0,
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          },
+        }
+      : "Invalid dates";
+  }
+
   const date1 = new Date(dateArray[0]);
   const date2 = new Date(dateArray[1]);
 
@@ -208,15 +227,40 @@ export function getDateDifference(
               : "1 année"
             : `${years} années`;
       } else if (months >= 1) {
-        formatted = months === 1 ? weeks >= 1 ? `${months + 1} mois` : "1 mois" : `${months} mois`;
+        formatted =
+          months === 1
+            ? weeks >= 1
+              ? `${months + 1} mois`
+              : "1 mois"
+            : `${months} mois`;
       } else if (weeks >= 1) {
-        formatted = weeks === 1 ? days >= 1 ? `${weeks + 1} semaines` : "1 semaine" : `${weeks} semaines`;
+        formatted =
+          weeks === 1
+            ? days >= 1
+              ? `${weeks + 1} semaines`
+              : "1 semaine"
+            : `${weeks} semaines`;
       } else if (days >= 1) {
-        formatted = days === 1 ? hours >= 1 ? `${days + 1} jours` : "1 jour" : `${days} jours`;
+        formatted =
+          days === 1
+            ? hours >= 1
+              ? `${days + 1} jours`
+              : "1 jour"
+            : `${days} jours`;
       } else if (hours >= 1) {
-        formatted = hours === 1 ? minutes >= 1 ? `${hours + 1} heures` : "1 heure" : `${hours} heures`;
+        formatted =
+          hours === 1
+            ? minutes >= 1
+              ? `${hours + 1} heures`
+              : "1 heure"
+            : `${hours} heures`;
       } else if (minutes >= 1) {
-        formatted = minutes === 1 ? seconds >= 1 ? `${minutes + 1} minutes` : "1 minute" : `${minutes} minutes`;
+        formatted =
+          minutes === 1
+            ? seconds >= 1
+              ? `${minutes + 1} minutes`
+              : "1 minute"
+            : `${minutes} minutes`;
       } else {
         formatted = seconds === 1 ? "1 seconde" : `${seconds} secondes`;
       }
@@ -234,7 +278,6 @@ export function getDateDifference(
 
   return formatted;
 }
-
 
 export function formatCount(n: number) {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;

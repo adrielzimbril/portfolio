@@ -1,5 +1,5 @@
 import { LocaleLink } from "@i18n/routing";
-import { slugifyHeadline } from "@/utils/content";
+import { slugifyHeadline } from "@/utils/format-content";
 import type { MDXComponents } from "mdx/types";
 import type { ImageProps } from "next/image";
 import Image from "next/image";

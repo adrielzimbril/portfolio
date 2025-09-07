@@ -1,5 +1,5 @@
 import React from "react";
-import { getActivePathFromUrlParam } from "@/utils/content";
+import { getActivePathFromUrlParam } from "@/utils/format-content";
 import { setRequestLocale } from "next-intl/server";
 import { PageParams } from "@/types";
 import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";

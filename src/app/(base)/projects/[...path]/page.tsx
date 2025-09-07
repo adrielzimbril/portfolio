@@ -14,7 +14,7 @@ import { GoalResearchSection } from "./sections/GoalResearchSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { localeRedirect } from "@/module/i18n/routing";
 import { getProjectWithAdjacent } from "@/module/content/utils/lib/projects";
-import { getActivePathFromUrlParam } from "@/utils/content";
+import { getActivePathFromUrlParam } from "@/utils/format-content";
 import { setRequestLocale } from "next-intl/server";
 import { routes } from "@/data/route";
 import { PageParams, PageType } from "@/types";
