@@ -25,6 +25,29 @@ const baseRoutes = Object.values(routes)
 
 const staticMarketingPages = [...new Set([...baseRoutes, "/contact"])];
 
+/**
+ * Get the priority of a route
+ * @param route The route to get the priority of
+ * @returns The priority of the route
+ * 
+ * Priority levels:
+ *  - Landing Page	1 (Highest Priority)
+ *  - Supporting Pages	0.8 (High Priority)
+ *  - Docs	0.8 (High Priority)
+ *  - Resources pages	: 0.6 (Medium Priority)
+ *      - Thoughts
+ *      - Projects
+ *      - Resources
+ */
+const getPriority = (type: "home" | "marketing" | "resources"): number => {
+  const typePriority = {
+    home: 1,
+    marketing: 0.8,
+    resources: 0.6,
+  }
+  return typePriority[type];
+};
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
   const resources = await getAllResources();
@@ -35,19 +58,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       locales.map((locale) => ({
         url: new URL(`/${locale}${page}`, baseUrl).href,
         lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: getPriority(page === "/" ? "home" : "marketing"),
       }))
     ),
     ...posts.map((post: Post) => ({
       url: new URL(`/${post.locale}/thoughts/${post.path}`, baseUrl).href,
       lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: getPriority("resources"),
     })),
     ...resources.map((resource: Resource) => ({
       url: new URL(`/${resource.locale}/hub/${resource.path}`, baseUrl).href,
       lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: getPriority("resources"),
     })),
     ...projects.map((project: Project) => ({
       url: new URL(`/${project.locale}/projects/${project.path}`, baseUrl).href,
       lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: getPriority("resources"),
     })),
   ];
 }
