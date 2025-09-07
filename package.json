@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev:next": "next dev --turbopack",
+    "dev:trigger": "pnpm dlx trigger.dev@latest dev ",
+    "dev": "npx concurrently --kill-others --names \"next,trigger\" --prefix-colors \"yellow,blue\" \"pnpm run dev:next\" \"pnpm run dev:trigger\"",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "trigger:deploy": "pnpm dlx trigger.dev@latest deploy"
   },
   "dependencies": {
     "@aurthle/emoji-hub": "^1.0.2",
@@ -29,6 +32,7 @@
     "@squircle/tailwindcss": "^1.0.6",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.57.0",
+    "@trigger.dev/sdk": "^4.0.2",
     "boring-avatars": "^2.0.1",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
@@ -75,6 +79,7 @@
     "@mdx-js/mdx": "^3.1.1",
     "@shikijs/rehype": "^3.12.2",
     "@tailwindcss/postcss": "^4.1.12",
+    "@trigger.dev/build": "^4.0.2",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.19.11",
     "@types/nprogress": "^0.2.3",
