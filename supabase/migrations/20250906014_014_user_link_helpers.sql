@@ -82,7 +82,7 @@ create or replace function public.add_hub_product_request(
   p_email text default null,
   p_name text default null,
   p_phone text default null,
-  p_product_title text,
+  p_product_title text default null,
   p_product_type text default null,
   p_features text[] default null,
   p_cover_image text default null,

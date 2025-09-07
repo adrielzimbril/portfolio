@@ -85,22 +85,22 @@ $$;
 -- Use COALESCE for compatibility
 update public.newsletter_subscribers ns
 set user_id = public._get_or_create_user(
-  coalesce(ns.name, ns.nom),
+  '',
   ns.email,
-  coalesce(ns.phone, ns.numero)
+  ''
 )
 where ns.user_id is null
-  and (ns.email is not null or coalesce(ns.phone, ns.numero) is not null);
+  and (ns.email is not null);
 
 -- Backfill hub_product_requests similarly
 update public.hub_product_requests hpr
 set user_id = public._get_or_create_user(
-  coalesce(hpr.name, hpr.nom),
+  hpr.name,
   hpr.email,
-  coalesce(hpr.phone, hpr.numero)
+  hpr.phone
 )
 where hpr.user_id is null
-  and (hpr.email is not null or coalesce(hpr.phone, hpr.numero) is not null);
+  and (hpr.email is not null);
 
 -- 4) Add foreign keys
 alter table if exists public.newsletter_subscribers
@@ -176,29 +176,39 @@ end;
 $$;
 
 -- 7) Convenience RPCs to link rows after-the-fact
-create or replace function public.link_newsletter_to_user(p_newsletter_id bigint, p_user_id uuid)
+create or replace function public.link_newsletter_to_user(p_newsletter_id uuid, p_user_id uuid)
 returns void language sql as $$
   update public.newsletter_subscribers set user_id = p_user_id where id = p_newsletter_id;
 $$;
 
-create or replace function public.link_hub_request_to_user(p_request_id bigint, p_user_id uuid)
+create or replace function public.link_hub_request_to_user(p_request_id uuid, p_user_id uuid)
 returns void language sql as $$
   update public.hub_product_requests set user_id = p_user_id where id = p_request_id;
 $$;
 
 -- 8) RLS policies (simple open policies, adjust for your needs)
 alter table public.users enable row level security;
-create policy if not exists users_select_all on public.users for select using (true);
-create policy if not exists users_insert_all on public.users for insert with check (true);
-create policy if not exists users_update_all on public.users for update using (true) with check (true);
+DROP POLICY IF EXISTS users_select_all ON public.users;
+CREATE POLICY users_select_all ON public.users FOR SELECT USING (true);
+DROP POLICY IF EXISTS users_insert_all ON public.users;
+CREATE POLICY users_insert_all ON public.users FOR INSERT WITH CHECK (true);
+DROP POLICY IF EXISTS users_update_all ON public.users;
+CREATE POLICY users_update_all ON public.users FOR UPDATE USING (true) WITH CHECK (true);
 
 -- Optional RLS on child tables if not already present
 alter table if exists public.newsletter_subscribers enable row level security;
-create policy if not exists newsletter_select_all on public.newsletter_subscribers for select using (true);
-create policy if not exists newsletter_insert_all on public.newsletter_subscribers for insert with check (true);
-create policy if not exists newsletter_update_all on public.newsletter_subscribers for update using (true) with check (true);
+
+DROP POLICY IF EXISTS newsletter_select_all ON public.newsletter_subscribers;
+CREATE POLICY newsletter_select_all ON public.newsletter_subscribers FOR SELECT USING (true);
+DROP POLICY IF EXISTS newsletter_insert_all ON public.newsletter_subscribers;
+CREATE POLICY newsletter_insert_all ON public.newsletter_subscribers FOR INSERT WITH CHECK (true);
+DROP POLICY IF EXISTS newsletter_update_all ON public.newsletter_subscribers;
+CREATE POLICY newsletter_update_all ON public.newsletter_subscribers FOR UPDATE USING (true) WITH CHECK (true);
 
 alter table if exists public.hub_product_requests enable row level security;
-create policy if not exists hubreq_select_all on public.hub_product_requests for select using (true);
-create policy if not exists hubreq_insert_all on public.hub_product_requests for insert with check (true);
-create policy if not exists hubreq_update_all on public.hub_product_requests for update using (true) with check (true);
+DROP POLICY IF EXISTS hubreq_select_all ON public.hub_product_requests;
+CREATE POLICY hubreq_select_all ON public.hub_product_requests FOR SELECT USING (true);
+DROP POLICY IF EXISTS hubreq_insert_all ON public.hub_product_requests;
+CREATE POLICY hubreq_insert_all ON public.hub_product_requests FOR INSERT WITH CHECK (true);
+DROP POLICY IF EXISTS hubreq_update_all ON public.hub_product_requests;
+CREATE POLICY hubreq_update_all ON public.hub_product_requests FOR UPDATE USING (true) WITH CHECK (true);
