@@ -1,4 +1,5 @@
 {
+  "extends": "@aurthle/tsconfig/bundler.json",
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],

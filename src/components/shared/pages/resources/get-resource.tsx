@@ -109,6 +109,7 @@ export function GetResource({
             <Input
               placeholder="😏 vous voulez recevoir des cadeaux ?"
               type="email"
+              className="ml-auto rounded-s-md w-fit ps-16 w-9"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
