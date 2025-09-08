@@ -108,28 +108,7 @@ export function GetResource({
           <div className="mt-2">
             <NewsletterSubscribersBadge />
           </div>
-          {/* <Badge className="justify-center gap-1 px-3 py-1.5 bg-[#e2e4ff] rounded-[10px] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)]">
-            <EyeIcon className="w-4 h-4" />
-            <span className="[font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-[#000000de] text-xs tracking-[0] leading-4 whitespace-nowrap">
-              {isLoading ? "..." : formatReaderCount(readerCount)}
-            </span>
-          </Badge> */}
-
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
-            <PhoneInput
-              defaultCountry={userCountry as unknown as any}
-              wrapperClassName="rounded-xl w-full h-12"
-              className="rounded-xl w-full h-12"
-              inputComponent={Input}
-              inputClassName={cn(
-                "-ms-px shadow-none",
-                "peer ps-16",
-                "h-auto",
-                "rounded-xl"
-              )}
-              triggerClassName="bg-zinc-50 hover:bg-zinc-100 h-auto rounded-s-xl peer z-10"
-              contentClassName="data-[selected=true]:bg-zinc-100 data-[selected=true]:text-inherit"
-            />
             <Input
               placeholder="😏 vous voulez recevoir des cadeaux ?"
               type="email"

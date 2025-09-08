@@ -7,6 +7,14 @@ export const ContactSchema = z.object({
   phone: z.string().optional(),
 });
 
+export enum ContactProvider {
+  BREVO = "brevo",
+  RESEND = "resend",
+  CUSTOM = "custom",
+}
+
+export type ContactProviderType = ContactProvider;
+
 export type ContactInput = z.infer<typeof ContactSchema> & {
   // Optional list identifiers for providers that support lists (e.g., Brevo)
   listIds?: string[] | number[];

@@ -3,6 +3,7 @@ import { supabase } from "@/module/supabase/client";
 import logger from "@/utils/logger";
 import { sendEmail } from "@/module/mail";
 import { addContact } from "@/module/contact";
+import { ContactProvider } from "@/module/contact/types/types";
 
 function getListIdByProduct(product?: string) {
   const map: Record<string, number | undefined> = {
@@ -139,6 +140,7 @@ export async function POST(req: NextRequest) {
         firstName: name ?? undefined,
         phone: phone ?? undefined,
         listIds,
+        provider: ContactProvider.BREVO,
       });
     }
   } catch (e: any) {

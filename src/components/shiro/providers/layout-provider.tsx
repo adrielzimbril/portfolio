@@ -5,7 +5,7 @@ import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const asLoader = false;
+  const asLoader = true;
 
   useEffect(() => {
     setTimeout(() => {

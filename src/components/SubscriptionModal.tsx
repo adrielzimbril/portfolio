@@ -188,6 +188,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         onClose();
         setIsSuccess(false);
         optionalForm.reset();
+        animateConfetti();
       }, 2000);
     } catch (error) {
       logger.error("Erreur lors de la mise à jour:", error);
@@ -226,7 +227,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         </DialogHeader>
 
         {isSuccess ? (
-          <div className="flex flex-col items-center justify-center py-8 space-y-4 mt-4 md:mt-6">
+          <div className="flex flex-col items-center justify-center py-8 space-y-4">
             <CheckCircle className="w-16 h-16 text-green-500" />
             <h3 className="text-xl font-semibold text-green-600">
               Informations mises à jour !
@@ -315,11 +316,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   )}
                 </Button>
               </div>
-
-              <p className="text-xs text-gray-500 text-center">
-                Ces informations sont facultatives. Votre inscription est déjà
-                confirmée !
-              </p>
             </form>
           </Form>
         )}
