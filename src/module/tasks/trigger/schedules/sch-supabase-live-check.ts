@@ -27,7 +27,7 @@ export const supabaseLiveCheckTask = schedules.task({
       // Validation token generation
       const token = generateToken();
 
-      const response = await fetch(`${API_BASE_URL}/supabase-health-check`, {
+      const response = await fetch(`${API_BASE_URL}/health/check-rmd`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

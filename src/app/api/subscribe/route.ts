@@ -1,10 +1,8 @@
 import { NextRequest } from 'next/server'
 import { supabase } from "@/module/supabase/client";
-import { brevoAddContact } from '@/lib/brevo'
-import { brevoSendEmail } from "@/lib/brevo";
-import { WelcomeEmail } from "@/module/mail/emails/WelcomeEmail";
 import logger from "@/utils/logger";
-import { getTemplate } from "@/module/mail/util/templates";
+import { sendEmail } from "@/module/mail";
+import { addContact } from "@/module/contact";
 
 function getListIdByProduct(product?: string) {
   const map: Record<string, number | undefined> = {
@@ -48,6 +46,7 @@ export async function POST(req: NextRequest) {
         p_phone: phone ?? "",
       }
     );
+
     if (userErr) {
       logger.warn(
         "upsert_user RPC failed, continuing without user link",
@@ -115,16 +114,11 @@ export async function POST(req: NextRequest) {
   // Send welcome email only for first-time subscribers
   if (!alreadyExists) {
     try {
-      const { react } = await getTemplate({
-        templateId: "welcome",
+      await sendEmail({
+        to: [{ email, name }],
         context: { name },
+        templateId: "welcome",
         locale: "en",
-      });
-      await brevoSendEmail({
-        toEmail: email,
-        toName: name,
-        subject: "Bienvenue 🎁",
-        html: react,
       });
     } catch (e) {
       logger.warn("Welcome email send failed:", e);
@@ -140,7 +134,12 @@ export async function POST(req: NextRequest) {
 
   try {
     if (listIds.length > 0) {
-      await brevoAddContact({ email, firstName: name, phone, listIds });
+      await addContact({
+        email,
+        firstName: name ?? undefined,
+        phone: phone ?? undefined,
+        listIds,
+      });
     }
   } catch (e: any) {
     // Do not fail the flow if Brevo fails

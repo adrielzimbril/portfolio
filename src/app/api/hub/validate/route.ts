@@ -1,9 +1,8 @@
-import { NextRequest } from 'next/server'
-import { brevoSendEmail } from '@/lib/brevo'
+import { NextRequest } from "next/server";
 import { supabase } from "@/module/supabase/client";
-import { ProductDeliveryEmail } from "@/module/mail/emails/ProductDeliveryEmail";
 import logger from "@/utils/logger";
-import { getTemplate } from "@/module/mail/util/templates";
+import { sendEmail } from "@/module/mail";
+import { ResourceType } from "@/types";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -12,7 +11,7 @@ export async function POST(req: NextRequest) {
     name,
     phone,
     productTitle,
-    productType, // 'course' | 'ebook' | 'video'
+    productType,
     features,
     coverImage,
     productUrl,
@@ -22,7 +21,7 @@ export async function POST(req: NextRequest) {
     name?: string;
     phone?: string;
     productTitle: string;
-    productType?: "course" | "ebook" | "video";
+    productType?: ResourceType;
     features?: string[];
     coverImage?: string;
     productUrl?: string;
@@ -57,19 +56,6 @@ export async function POST(req: NextRequest) {
     logger.warn("upsert_user RPC threw in hub/validate", e);
   }
 
-  const { react } = await getTemplate({
-    templateId: "productDelivery",
-    context: {
-      name,
-      productTitle,
-      features,
-      coverImage,
-      productUrl,
-      customText,
-    },
-    locale: "en",
-  });
-
   try {
     // Centralized DB logic: add request via RPC (handles user linkage and field filling)
     const { error: rpcErr } = await (supabase as any).rpc(
@@ -97,12 +83,20 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    await brevoSendEmail({
-      toEmail: email,
-      toName: name,
-      subject: `Votre accès: ${productTitle}`,
-      html: react,
+    await sendEmail({
+      to: [{ email, name }],
+      context: {
+        name,
+        productTitle,
+        features,
+        coverImage,
+        productUrl,
+        customText,
+      },
+      templateId: "productDelivery",
+      locale: "en",
     });
+
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
