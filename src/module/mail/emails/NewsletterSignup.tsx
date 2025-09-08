@@ -4,7 +4,7 @@ import Wrapper from "@/module/mail/components/Wrapper";
 import { Heading, Text } from "@react-email/components";
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
-import type { BaseMailProps } from "@/module/mail/types";
+import type { BaseMailProps } from "@/module/mail/types/types";
 
 export function NewsletterSignup({
   locale,

@@ -1,6 +1,6 @@
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
-import type { SendEmailHandler } from "@/module/mail/types";
+import type { SendEmailHandler } from "@/module/mail/types/types";
 import { TransactionalEmailsApi, SendSmtpEmail } from "@getbrevo/brevo";
 
 const { from, replyTo } = appConfig.mails;

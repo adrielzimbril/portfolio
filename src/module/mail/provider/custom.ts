@@ -1,5 +1,5 @@
 import { appConfig } from "@/data/app-config";
-import type { SendEmailHandler } from "@/module/mail/types";
+import type { SendEmailHandler } from "@/module/mail/types/types";
 
 const { from } = appConfig.mails;
 
