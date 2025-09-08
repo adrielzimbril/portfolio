@@ -48,7 +48,8 @@
     "**/*.cjs",
     "**/*.mjs",
     "**/*.mdx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "node_modules/@aurthle/**/*"
   ],
-  "exclude": ["node_modules", "!node_modules/@aurthle"]
+  "exclude": ["node_modules"]
 }
