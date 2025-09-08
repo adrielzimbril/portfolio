@@ -20,6 +20,8 @@
     "@aurthle/react-layout-kit": "^1.0.1",
     "@aurthle/react-phone": "^1.0.4",
     "@aurthle/tsconfig": "^0.0.0",
+    "@aws-sdk/client-s3": "^3.883.0",
+    "@aws-sdk/s3-request-presigner": "^3.883.0",
     "@calcom/embed-react": "^1.5.3",
     "@getbrevo/brevo": "^3.0.1",
     "@hookform/resolvers": "^5.2.1",

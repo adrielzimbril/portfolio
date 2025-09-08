@@ -1,6 +1,6 @@
-import { config } from "@repo/config";
+import { appConfig } from "@/data/app-config";
 
-const { defaultLocale } = config.i18n;
+const { defaultLocale } = appConfig.i18n;
 
-export { default as defaultTranslations } from "@repo/i18n/translations/en.json";
+export { default as defaultTranslations } from "@module/i18n/translations/en.json";
 export { defaultLocale };
