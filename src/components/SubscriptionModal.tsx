@@ -24,6 +24,8 @@ import logger from "@/utils/logger";
 import { toast } from "sonner";
 import { PhoneInput } from "@aurthle/react-phone";
 import confetti from "canvas-confetti";
+import { useGetIpInfo } from "@/hooks/useIpInfo";
+import { cn } from "@/utils";
 
 const emailSchema = z.object({
   email: z.email({ message: "Veuillez entrer une adresse email valide." }),
@@ -58,8 +60,20 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const [userCountry, setUserCountry] = useState("CI");
+
   useEffect(() => {
-    if (!email) return;
+    if (!isOpen) return;
+    const getCountry = async () => {
+      const country = await useGetIpInfo(undefined, true);
+      setUserCountry(country.data?.country?.code ?? "CI");
+    };
+    getCountry();
+    logger.info("useGetIpInfo received data", userCountry);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen && !email) return;
     // Unique call to our API - does not overwrite info if the email already exists
     async function subscribe() {
       const subscribedFromPage =
@@ -77,7 +91,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         throw new Error(json?.error || "Erreur lors de l'inscription");
     }
     subscribe();
-  }, [email]);
+  }, [isOpen, email]);
 
   const optionalForm = useForm<OptionalInfoForm>({
     resolver: zodResolver(optionalInfoSchema),
@@ -136,6 +150,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         throw new Error(json?.error || "Erreur lors de l'inscription");
 
       setIsSuccess(true);
+      animateConfetti();
 
       // Close the modal after 2 seconds
       setTimeout(() => {
@@ -237,7 +252,25 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                       Numéro de téléphone
                     </FormLabel>
                     <FormControl>
-                      <PhoneInput defaultCountry="CI" {...field} />
+                      <PhoneInput
+                        defaultCountry={userCountry as unknown as any}
+                        wrapperClassName="rounded-xl w-full h-12"
+                        className="rounded-xl w-full h-12"
+                        inputComponent={Input}
+                        inputClassName={cn(
+                          "-ms-px shadow-none",
+                          "peer ps-16",
+                          "h-auto",
+                          "rounded-xl",
+                          "focus:border-blue-500"
+                        )}
+                        triggerClassName={cn(
+                          "bg-zinc-50 hover:bg-zinc-100 h-auto rounded-s-xl peer z-10",
+                          "h-auto border-2"
+                        )}
+                        contentClassName="data-[selected=true]:bg-zinc-100 data-[selected=true]:text-inherit"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

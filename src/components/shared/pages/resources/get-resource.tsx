@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CalendarIcon, ClockIcon, EyeIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,8 @@ import { Resource } from "@/module/content/types";
 import { DEFAULT_CATEGORY_COLOR_NAME, ResourceType } from "@/types";
 import { ProjectCategories } from "@/components/shared/pages/projects/tags";
 import { PhoneInput } from "@aurthle/react-phone";
+import { useGetIpInfo } from "@/hooks/useIpInfo";
+import logger from "@/utils/logger";
 
 export function GetResource({
   title,
@@ -40,6 +42,16 @@ export function GetResource({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [userCountry, setUserCountry] = useState("CI");
+
+  useEffect(() => {
+    const getCountry = async () => {
+      const country = await useGetIpInfo(undefined, true);
+      logger.info("useGetIpInfo received data", country);
+      setUserCountry(country.data?.country?.code ?? "CI");
+    };
+    getCountry();
+  }, []);
 
   return (
     <>
@@ -105,16 +117,23 @@ export function GetResource({
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <PhoneInput
-              defaultCountry="CI"
-              className="w-full h-12"
+              defaultCountry={userCountry as unknown as any}
+              wrapperClassName="rounded-xl w-full h-12"
+              className="rounded-xl w-full h-12"
               inputComponent={Input}
-              inputClassName={cn("-ms-px shadow-none", "peer ps-16", "h-auto")}
-              countrySelectProps={{ triggerClassName: "w-full" }}
+              inputClassName={cn(
+                "-ms-px shadow-none",
+                "peer ps-16",
+                "h-auto",
+                "rounded-xl"
+              )}
+              triggerClassName="bg-zinc-50 hover:bg-zinc-100 h-auto rounded-s-xl peer z-10"
+              contentClassName="data-[selected=true]:bg-zinc-100 data-[selected=true]:text-inherit"
             />
             <Input
               placeholder="😏 vous voulez recevoir des cadeaux ?"
               type="email"
-              className="ml-auto rounded-s-md"
+              //className="ml-auto rounded-s-md"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
