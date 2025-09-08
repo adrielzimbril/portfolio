@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -26,10 +26,6 @@ import { PhoneInput } from "@aurthle/react-phone";
 import confetti from "canvas-confetti";
 import { useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
-
-const emailSchema = z.object({
-  email: z.email({ message: "Veuillez entrer une adresse email valide." }),
-});
 
 const optionalInfoSchema = z.object({
   name: z
@@ -59,23 +55,79 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [userCountry, setUserCountry] = useState("CI");
+  const [userCountry, setUserCountry] = useState("FR");
+  const [hasInitialSubscription, setHasInitialSubscription] = useState(false);
 
+  // Utilisation de useRef pour s'assurer qu'on ne récupère l'IP qu'une seule fois
+  const ipInfoFetched = useRef(false);
+  const countryFetched = useRef(false);
+
+  // Récupération du pays une seule fois à l'ouverture
   useEffect(() => {
-    if (!isOpen) return;
-    const getCountry = async () => {
-      const country = await useGetIpInfo(undefined, true);
-      setUserCountry(country.data?.country?.code ?? "CI");
-    };
-    getCountry();
-    logger.info("useGetIpInfo received data", userCountry);
-  }, [isOpen]); // Retiré userCountry des dépendances pour éviter les boucles
+    if (!isOpen || countryFetched.current) return;
 
-  // SUPPRIMÉ : Le useEffect qui faisait l'inscription automatique
-  // useEffect(() => {
-  //   if (!isOpen && !email) return;
-  //   // ... code d'inscription automatique
-  // }, [isOpen, email]);
+    const getCountry = async () => {
+      try {
+        const country = await useGetIpInfo(undefined, true);
+        setUserCountry(country.data?.country?.code ?? "FR");
+        logger.info("Country fetched:", country.data?.country?.code);
+      } catch (error) {
+        logger.error("Erreur lors de la récupération du pays:", error);
+      }
+    };
+
+    getCountry();
+    countryFetched.current = true;
+  }, [isOpen]);
+
+  const apiSubscribe = (data: {
+    email: string;
+    name?: string;
+    phone?: string;
+    subscribedFromPage?: string;
+    updateExisting: boolean;
+  }) => {
+    return fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  };
+
+  // Inscription automatique avec email à l'ouverture
+  useEffect(() => {
+    //if (!isOpen || !email || hasInitialSubscription || ipInfoFetched.current)
+    if (!isOpen || !email) return;
+
+    const subscribeWithEmail = async () => {
+      try {
+        logger.info("Inscription automatique avec email:", email);
+
+        const subscribedFromPage =
+          typeof window !== "undefined" ? window.location.pathname : undefined;
+
+        const res = await apiSubscribe({
+          email,
+          subscribedFromPage,
+          updateExisting: false, // Première inscription
+        });
+
+        const json = await res.json();
+        if (!res.ok) {
+          throw new Error(json?.error || "Erreur lors de l'inscription");
+        }
+
+        setHasInitialSubscription(true);
+        logger.info("Inscription automatique réussie");
+      } catch (error) {
+        logger.error("Erreur lors de l'inscription automatique:", error);
+        toast.error("Erreur lors de l'inscription. Veuillez réessayer.");
+      }
+    };
+
+    subscribeWithEmail();
+    ipInfoFetched.current = true;
+  }, [isOpen, email, hasInitialSubscription]);
 
   const optionalForm = useForm<OptionalInfoForm>({
     resolver: zodResolver(optionalInfoSchema),
@@ -112,40 +164,35 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   };
 
   const onSubmit = async (values: OptionalInfoForm) => {
+    if (!email) {
+      toast.error("Email requis pour la mise à jour");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const subscribedFromPage =
-        typeof window !== "undefined" ? window.location.pathname : undefined;
-
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          name: values.name || undefined,
-          phone: values.phone || undefined,
-          subscribedFromPage,
-        }),
+      await apiSubscribe({
+        email,
+        name: values.name || undefined,
+        phone: values.phone || undefined,
+        subscribedFromPage:
+          typeof window !== "undefined" ? window.location.pathname : undefined,
+        updateExisting: true,
       });
-
-      const json = await res.json();
-      if (!res.ok)
-        throw new Error(json?.error || "Erreur lors de l'inscription");
 
       setIsSuccess(true);
       animateConfetti();
 
-      // Close the modal after 2 seconds
       setTimeout(() => {
         onClose();
         setIsSuccess(false);
         optionalForm.reset();
       }, 2000);
     } catch (error) {
-      logger.error("Erreur lors de l'inscription:", error);
+      logger.error("Erreur lors de la mise à jour:", error);
       toast.error(
-        "Une erreur est survenue lors de l'inscription. Veuillez réessayer."
+        "Une erreur est survenue lors de la mise à jour. Veuillez réessayer."
       );
     } finally {
       setIsSubmitting(false);
@@ -160,28 +207,32 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     }
   };
 
+  const handleSkip = () => {
+    handleClose();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[425px] bg-white">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
             🎁 Recevoir les cadeaux
           </DialogTitle>
           <DialogDescription className="text-center text-gray-600">
-            Remplissez vos informations pour recevoir la méthode Tsunami et nos
-            cadeaux exclusifs !
+            {hasInitialSubscription
+              ? "Votre inscription est confirmée ! Vous pouvez ajouter vos informations pour personnaliser votre expérience."
+              : "Inscription en cours... Vous pouvez ajouter vos informations personnelles."}
           </DialogDescription>
         </DialogHeader>
 
         {isSuccess ? (
-          <div className="flex flex-col items-center justify-center py-8 space-y-4">
+          <div className="flex flex-col items-center justify-center py-8 space-y-4 mt-4 md:mt-6">
             <CheckCircle className="w-16 h-16 text-green-500" />
             <h3 className="text-xl font-semibold text-green-600">
-              Inscription réussie !
+              Informations mises à jour !
             </h3>
             <p className="text-center text-gray-600">
-              Vous allez recevoir un email avec tous les détails. Merci de votre
-              confiance ! 🎉
+              Vos informations ont été mises à jour avec succès. Merci ! 🎉
             </p>
           </div>
         ) : (
@@ -195,11 +246,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">Nom</FormLabel>
+                    <FormLabel className="text-sm font-medium">
+                      Nom (optionnel)
+                    </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Votre nom et prénom"
-                        className="h-12 border-2 border-input focus:border-blue-500"
+                        className="h-12 border-2 border-input"
                         {...field}
                       />
                     </FormControl>
@@ -208,15 +261,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 )}
               />
 
-              {/* SUPPRIMÉ : Le premier champ téléphone en double */}
-
               <FormField
                 control={optionalForm.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">
-                      Numéro de téléphone
+                    <FormLabel className="tesxt-sm font-medium">
+                      Numéro de téléphone (optionnel)
                     </FormLabel>
                     <FormControl>
                       <PhoneInput
@@ -226,10 +277,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         inputComponent={Input}
                         inputClassName={cn(
                           "-ms-px shadow-none",
-                          "peer ps-16",
+                          "peer ps-18",
                           "h-auto",
                           "rounded-xl",
-                          "focus:border-blue-500"
+                          "text-base"
                         )}
                         triggerClassName={cn(
                           "bg-zinc-50 hover:bg-zinc-100 h-auto rounded-s-xl peer z-10",
@@ -244,26 +295,30 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 )}
               />
 
-              <Button
-                type="submit"
-                size="lg"
-                disabled={isSubmitting}
-                asPointer
-                asFull
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Inscription en cours...
-                  </>
-                ) : (
-                  "Recevoir mes cadeaux ! 🎁"
-                )}
-              </Button>
+              <div className="flex gap-3">
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={isSubmitting}
+                  className="flex-1"
+                  asFull
+                  asPointer
+                  whileTap
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Mise à jour...
+                    </>
+                  ) : (
+                    "Recevoir 🦄"
+                  )}
+                </Button>
+              </div>
 
               <p className="text-xs text-gray-500 text-center">
-                Vous pouvez passer cette étape, vos informations personnelles
-                sont facultatives.
+                Ces informations sont facultatives. Votre inscription est déjà
+                confirmée !
               </p>
             </form>
           </Form>

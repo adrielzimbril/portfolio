@@ -421,7 +421,7 @@
   }
 
   input, textarea, select {
-    @apply text-[1rem] font-sf-pro-text;
+    @apply text-sm;
   }
 }
 

@@ -10,6 +10,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogHeader,
+  DialogCard,
+  DialogBadge,
+  DialogFooter,
+  DialogSeparator,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // Interface pour les questions
 interface Question {
@@ -368,7 +380,7 @@ function QuestionCard({
   );
 }
 
-// Custom Alert Component
+// Custom Alert Component with Dialog
 function CustomAlert({
   isVisible,
   isCorrect,
@@ -389,65 +401,50 @@ function CustomAlert({
     }
   }, [isVisible, onClose]);
 
-  if (!isVisible || !question) return null;
-
   return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 bg-black/10 bg-opacity-50 flex items-center justify-center z-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
-      >
-        <motion.div
-          className="relative squircle squircle-white squircle-5xl squircle-smooth-xl flex flex-col gap-6 p-8 max-w-md mx-4 text-center"
-          initial={{ scale: 0.5, y: 50 }}
-          animate={{ scale: 1, y: 0 }}
-          exit={{ scale: 0.5, y: 50 }}
-          onClick={(e) => e.stopPropagation()}
-        >
+    <Dialog open={isVisible} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent size="sm" variant="modern" className="text-center">
+        <DialogHeader>
           <div className="relative flex flex-col gap-2 items-center justify-center">
-            <h3 className="mb-2">{isCorrect ? "🎉" : "😅"}</h3>
+            <h3 className="mb-2 text-4xl">{isCorrect ? "🎉" : "😅"}</h3>
 
-            <h4
+            <DialogTitle
               className={cn("font-bold", {
                 "text-green-600": isCorrect,
                 "text-red-600": !isCorrect,
               })}
             >
               {isCorrect ? "Bravo !" : "Pas tout à fait !"}
-            </h4>
+            </DialogTitle>
 
-            <p className="text-gray-700">
+            <DialogDescription>
               {isCorrect
                 ? "Tu as trouvé la bonne réponse ! 😆"
                 : "Ce n'était pas la bonne réponse... 😖"}
-            </p>
+            </DialogDescription>
           </div>
+        </DialogHeader>
 
-          {question.funFact && (
-            <div className="relative squircle squircle-stone-100 squircle-xl md:squircle-3xl squircle-smooth-xl flex flex-col p-4 gap-2 items-center justify-center">
-              <Badge
-                className="inline-flex w-fit squircle-white"
-                variant="colored"
-              >
-                Réponse 🥸
-              </Badge>
-              <p className="text-zinc-800">{question.funFact}</p>
-            </div>
-          )}
+        {question?.funFact && (
+          <DialogCard variant="default" className="text-center">
+            <DialogBadge variant="colored" className="mb-2">
+              Réponse 🥸
+            </DialogBadge>
+            <p className="text-zinc-800">{question.funFact}</p>
+          </DialogCard>
+        )}
 
+        <DialogFooter>
           <Button onClick={onClose} asFull asPointer whileTap>
             {isCorrect ? "Continuer 😍" : "Réessayer 😩"}
           </Button>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 
-// All Facts Modal Component
+// All Facts Modal Component with Dialog
 function AllFactsModal({
   isOpen,
   onClose,
@@ -457,8 +454,6 @@ function AllFactsModal({
   onClose: () => void;
   guessedFacts: { [key: number]: boolean };
 }) {
-  if (!isOpen) return null;
-
   const totalGuessed = Object.keys(guessedFacts).length;
   const totalQuestions = questions.length;
   const correctGuesses = questions.filter(
@@ -466,71 +461,56 @@ function AllFactsModal({
   ).length;
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 bg-black/10 bg-opacity-50 flex items-center justify-center z-50 p-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent
+        size="xl"
+        variant="modern"
+        className="flex flex-col gap-4 md:gap-6 p-4 sm:max-h-[min(640px,80vh)]"
       >
-        <motion.div
-          className="relative squircle squircle-white squircle-5xl squircle-smooth-xl flex flex-col gap-6 p-6 sm:p-8 max-w-[95%] sm:max-w-2xl w-full max-h-[90vh]"
-          initial={{ scale: 0.5, y: 50 }}
-          animate={{ scale: 1, y: 0 }}
-          exit={{ scale: 0.5, y: 50 }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="relative flex flex-col gap-6">
-            <div className="flex justify-between items-center">
-              <h4 className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
-                Créateur et Amoureux de SaaS 🦄❣️
-              </h4>
-              <Button onClick={onClose} asPointer whileTap size="icon">
-                ✕
-              </Button>
-            </div>
-          </div>
-          <Separator />
+        <DialogHeader>
+          <DialogTitle className="text-base font-normal md:font-medium md:text-xl text-zinc-600">
+            Créateur et Amoureux de SaaS 🦄❣️
+          </DialogTitle>
+        </DialogHeader>
 
-          {/* Facts Grid */}
-          <div className="flex flex-col gap-4 overflow-y-auto">
-            {/* Score Section */}
-            {totalGuessed > 0 && (
-              <motion.div
-                className="squircle squircle-stone-50 squircle-xl md:squircle-3xl squircle-smooth-xl p-4 sm:p-6 squircle-border-2 squircle-border-stone-200 flex flex-col gap-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                <h5 className="font-bold">
+        <DialogSeparator />
+
+        <div className="flex flex-col gap-4 px-2 overflow-y-auto  max-h-[calc(100vh-200px)] scroll-smooth">
+          {/* Score Section */}
+          {totalGuessed > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <DialogCard variant="default">
+                <h5 className="font-bold mb-2">
                   🎯 Ton score : {correctGuesses}/{totalQuestions}
                 </h5>
                 <p className="text-gray-700">
                   {correctGuesses === totalQuestions
                     ? "Tu as tout bon, Oula tu me connais un peu trop 😄🏆"
                     : correctGuesses > totalQuestions / 2
-                    ? "Pas mal du tout ! 👏"
-                    : "Tu peux mieux faire ! 😅"}
+                      ? "Pas mal du tout ! 👏"
+                      : "Tu peux mieux faire ! 😅"}
                 </p>
-              </motion.div>
-            )}
-            {questions.map((question, index) => {
-              const userGuessed = guessedFacts[question.id] !== undefined;
-              const userGuessedCorrect =
-                userGuessed && guessedFacts[question.id];
+              </DialogCard>
+            </motion.div>
+          )}
 
-              return (
-                <motion.div
-                  key={question.id}
-                  className={cn(
-                    "squircle squircle-zinc-50",
-                    "squircle-3xl squircle-smooth-xl p-4 sm:p-6 squircle-border-2 squircle-border-zinc-100"
-                  )}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.2 }}
-                >
+          {/* Facts Grid */}
+          {questions.map((question, index) => {
+            const userGuessed = guessedFacts[question.id] !== undefined;
+            const userGuessedCorrect = userGuessed && guessedFacts[question.id];
+
+            return (
+              <motion.div
+                key={question.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.2 }}
+              >
+                <DialogCard variant="default">
                   <div className="flex items-start gap-3 sm:gap-4">
                     <h4 className="bg-white center leading-[140%] rounded-full p-2 aspect-square shrink-0">
                       {question.emoji}
@@ -538,24 +518,23 @@ function AllFactsModal({
 
                     <div className="flex-1 min-w-0">
                       <h5 className="font-bold mb-1">{question.title}</h5>
-                      <p className="text-base text-gray-700">
+                      <p className="text-base text-gray-700 mb-3">
                         {question.description}
                       </p>
 
                       {/* Badges */}
                       <div className="flex gap-2 flex-wrap">
-                        <Badge
+                        <DialogBadge
                           variant="colored"
                           className={cn(
-                            "squircle-white squircle-border-2 squircle-border-stone-200 ",
                             question.isTrue ? "text-green-800" : "text-red-800"
                           )}
                         >
                           {question.isTrue ? "✅ Vérité" : "❌ Mensonge"}
-                        </Badge>
+                        </DialogBadge>
 
                         {userGuessed && (
-                          <Badge
+                          <DialogBadge
                             className={cn(
                               userGuessedCorrect
                                 ? "squircle-blue-100 text-blue-900"
@@ -564,24 +543,26 @@ function AllFactsModal({
                             variant="colored"
                           >
                             {userGuessedCorrect ? "🎯 Correct!" : "❌ Raté!"}
-                          </Badge>
+                          </DialogBadge>
                         )}
                       </div>
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                </DialogCard>
+              </motion.div>
+            );
+          })}
+        </div>
 
-          <Separator />
-          {/* Close Button */}
+        <DialogSeparator />
+
+        <DialogFooter>
           <Button onClick={onClose} size="lg" whileTap asPointer asFull>
             Fermer 😊
           </Button>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 
