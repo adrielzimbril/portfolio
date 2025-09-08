@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
-import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayout";
-import { sleep } from "@/utils";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const asLoader = false;
 
   useEffect(() => {
     setTimeout(() => {
@@ -20,14 +19,14 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {isLoaded ? (
-        children
-      ) : (
+      {asLoader && !isLoaded ? (
         <GenericLoadingPage
           title="Your ideas into products that your users adore"
           emoji="🦄"
           subtitle="Problem Solver & Your SaaS Product designer ❣️"
         />
+      ) : (
+        children
       )}
     </>
   );

@@ -34,8 +34,8 @@ export const add: AddContactHandler = async ({
         : undefined;
     // Brevo attributes are case-sensitive
     contact.attributes = {
-      FIRST_NAME: firstName || undefined,
-      LAST_NAME: lastName || undefined,
+      FIRSTNAME: firstName || undefined,
+      LASTNAME: lastName || undefined,
       SMS: phone || undefined,
       TAGS: tags || undefined,
     } as any;
