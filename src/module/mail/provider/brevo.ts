@@ -1,16 +1,15 @@
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import type { SendEmailHandler } from "@/module/mail/types/types";
-import { TransactionalEmailsApi, SendSmtpEmail } from "@getbrevo/brevo";
+import {
+  TransactionalEmailsApi,
+  TransactionalEmailsApiApiKeys,
+  SendSmtpEmail,
+} from "@getbrevo/brevo";
 
 const { from, replyTo } = appConfig.mails;
 
 const MAIL_PROVIDER_API_KEY = process.env.BREVO_API_KEY || "";
-
-export declare enum TransactionalEmailsApiApiKeys {
-  apiKey = 0,
-  partnerKey = 1,
-}
 
 const provider = new TransactionalEmailsApi();
 provider.setApiKey(TransactionalEmailsApiApiKeys.apiKey, MAIL_PROVIDER_API_KEY);

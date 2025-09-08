@@ -1,12 +1,10 @@
 import logger from "@/utils/logger";
 import type { AddContactHandler } from "@/module/contact/types/types";
-import { ContactsApi, CreateContact } from "@getbrevo/brevo";
-
-// The SDK exports ApiKeys enums per API. We declare it here to avoid deep type import
-export declare enum ContactsApiApiKeys {
-  apiKey = 0,
-  partnerKey = 1,
-}
+import {
+  ContactsApi,
+  ContactsApiApiKeys,
+  CreateContact,
+} from "@getbrevo/brevo";
 
 const CONTACT_PROVIDER_API_KEY = process.env.BREVO_API_KEY || "";
 

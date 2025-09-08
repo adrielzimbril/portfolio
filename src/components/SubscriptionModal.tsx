@@ -59,7 +59,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
   const [userCountry, setUserCountry] = useState("CI");
 
   useEffect(() => {
@@ -70,28 +69,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     };
     getCountry();
     logger.info("useGetIpInfo received data", userCountry);
-  }, []);
+  }, [isOpen]); // Retiré userCountry des dépendances pour éviter les boucles
 
-  useEffect(() => {
-    if (!isOpen && !email) return;
-    // Unique call to our API - does not overwrite info if the email already exists
-    async function subscribe() {
-      const subscribedFromPage =
-        typeof window !== "undefined" ? window.location.pathname : undefined;
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          subscribedFromPage,
-        }),
-      });
-      const json = await res.json();
-      if (!res.ok)
-        throw new Error(json?.error || "Erreur lors de l'inscription");
-    }
-    subscribe();
-  }, [isOpen, email]);
+  // SUPPRIMÉ : Le useEffect qui faisait l'inscription automatique
+  // useEffect(() => {
+  //   if (!isOpen && !email) return;
+  //   // ... code d'inscription automatique
+  // }, [isOpen, email]);
 
   const optionalForm = useForm<OptionalInfoForm>({
     resolver: zodResolver(optionalInfoSchema),
@@ -131,7 +115,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Unique call to our API - does not overwrite info if the email already exists
+      const subscribedFromPage =
+        typeof window !== "undefined" ? window.location.pathname : undefined;
+
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -139,12 +125,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           email,
           name: values.name || undefined,
           phone: values.phone || undefined,
-          subscribedFromPage:
-            typeof window !== "undefined"
-              ? window.location.pathname
-              : undefined,
+          subscribedFromPage,
         }),
       });
+
       const json = await res.json();
       if (!res.ok)
         throw new Error(json?.error || "Erreur lors de l'inscription");
@@ -224,25 +208,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 )}
               />
 
-              <FormField
-                control={optionalForm.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium">
-                      Numéro de téléphone
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="+33 6 12 34 56 78"
-                        className="h-12 border-2 border-gray-200 focus:border-blue-500"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {/* SUPPRIMÉ : Le premier champ téléphone en double */}
+
               <FormField
                 control={optionalForm.control}
                 name="phone"
