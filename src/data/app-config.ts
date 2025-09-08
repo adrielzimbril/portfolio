@@ -56,6 +56,7 @@ export const appConfig = {
   mails: {
     // the from address for mails
     from: "noreply@supastarter.dev",
+    replyTo: "hello@supastarter.dev",
   },
   // Storage
   storage: {

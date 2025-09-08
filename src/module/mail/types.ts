@@ -1,7 +1,10 @@
 import { Locale } from "@/module/i18n";
 
 export interface SendEmailParams {
-  to: string | string[];
+  to: {
+    email: string;
+    name?: string;
+  }[];
   subject: string;
   text: string;
   body?: {

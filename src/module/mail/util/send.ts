@@ -7,7 +7,7 @@ import { getTemplate } from "@/module/mail/util/templates";
 
 export async function sendEmail<T extends TemplateId>(
   params: {
-    to: string;
+    to: { email: string; name?: string }[];
     locale?: keyof typeof appConfig.i18n.locales;
   } & (
     | {

@@ -23,6 +23,7 @@ export type Config = {
   };
   mails: {
     from: string;
+    replyTo: string;
   };
   storage: {
     bucketNames: {
