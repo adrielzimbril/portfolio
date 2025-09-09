@@ -8,6 +8,8 @@ export enum ResourceType {
   VIDEO = "video",
 }
 
+export type ResourceTypeKey = (typeof ResourceType)[keyof typeof ResourceType];
+
 export enum PageType {
   PROJECT = "projects",
   HUB = "hub",

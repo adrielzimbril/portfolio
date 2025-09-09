@@ -128,8 +128,10 @@ export async function POST(req: NextRequest) {
         locale: "en",
       });
       logger.info("Welcome email sent successfully", sendEmailResult);
+      console.log("Welcome email sent successfully", sendEmailResult);
     } catch (e) {
       logger.warn("Welcome email send failed:", e);
+      console.error("Welcome email send failed:", e);
     }
   }
 
@@ -142,17 +144,20 @@ export async function POST(req: NextRequest) {
 
   try {
     if (listIds.length > 0) {
-      await addContact({
+      const addContactResult = await addContact({
         email,
         firstName: name ?? undefined,
         phone: phone ?? undefined,
         listIds,
         provider: ContactProvider.BREVO,
       });
+      logger.info("Brevo contact added successfully server", addContactResult);
+      console.log("Brevo contact added successfully server", addContactResult);
     }
   } catch (e: any) {
     // Do not fail the flow if Brevo fails
-    logger.warn("Brevo add contact error:", e?.message || e);
+    logger.warn("Brevo add contact error server:", e?.message || e);
+    console.error("Brevo add contact error server:", e?.message || e);
   }
 
   return new Response(JSON.stringify({ success: true }), {

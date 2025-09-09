@@ -117,6 +117,7 @@ export function GetResource({
       <SubscriptionModal
         isOpen={isModalOpen}
         email={email || undefined}
+        productType={type}
         onClose={() => setIsModalOpen(false)}
       />
     </>

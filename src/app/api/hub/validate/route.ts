@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    await sendEmail({
+    const sendMailResult = await sendEmail({
       to: [{ email, name }],
       context: {
         name,
@@ -96,6 +96,9 @@ export async function POST(req: NextRequest) {
       templateId: "productDelivery",
       locale: "en",
     });
+
+    logger.info("Email sent successfully", sendMailResult);
+    console.log("Email sent successfully", sendMailResult);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

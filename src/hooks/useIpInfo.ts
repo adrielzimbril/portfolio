@@ -265,8 +265,6 @@ export async function useIpInfo<T = IpInfoResponse>(
         }
         const rawResult = await response.json();
 
-        logger.info("Response ok", rawResult);
-
         // 🔍 Validation avec Zod
         try {
           const validatedData = IpInfoResponseSchema.parse(rawResult);

@@ -23,38 +23,91 @@ export const add: AddContactHandler = async ({
     throw new Error("Missing BREVO_API_KEY env var");
   }
 
-  try {
-    const contact = new CreateContact();
-    contact.email = email;
-    contact.listIds =
-      listIds && listIds.length > 0
-        ? listIds.map((id) => Number(id))
-        : undefined;
-    // Brevo attributes are case-sensitive
-    contact.attributes = {
-      FIRSTNAME: firstName || undefined,
-      LASTNAME: lastName || undefined,
-      SMS: phone || undefined,
-      TAGS: tags || undefined,
-    } as any;
-    // Update when exists for idempotency
-    contact.updateEnabled = true;
+  const contact = new CreateContact();
+  contact.email = email;
+  contact.listIds =
+    listIds && listIds.length > 0 ? listIds.map((id) => Number(id)) : undefined;
+  const nameContact = contact;
+  const phoneContact = contact;
+  // Update when exists for idempotency
+  contact.updateEnabled = true;
+  // Brevo attributes are case-sensitive
+  nameContact.attributes = {
+    FIRSTNAME: firstName || undefined,
+    LASTNAME: lastName || undefined,
+    SMS: undefined,
+    TAGS: tags || undefined,
+  } as any;
+  phoneContact.attributes = {
+    SMS: phone || undefined,
+  } as any;
 
-    const res = await provider.createContact(contact);
-    logger.info("Brevo contact add response", res);
-    return { ok: true };
+  try {
+    const res = await provider.createContact(nameContact);
+    logger.info("Brevo contact add name response", {
+      email,
+      status: res.response.statusCode,
+      alreadyExists: false,
+      step: "passed",
+    });
+    logger.info(
+      "Brevo contact added successfully | data details :",
+      nameContact
+    );
+    const phoneRes = await provider.createContact(phoneContact);
+    logger.info("Brevo contact phone add response", {
+      email,
+      status: phoneRes.response.statusCode,
+      alreadyExists: false,
+      step: "passed",
+    });
+    logger.info(
+      "Brevo contact added successfully | data details :",
+      phoneContact
+    );
+    return { ok: true, alreadyExists: false } as const;
   } catch (err: any) {
+    if (err.status === 400 || err.message.includes("400")) {
+      try {
+        const updateRes = await provider.updateContact(email, nameContact);
+        logger.info("Brevo contact name update response", {
+          email,
+          status: updateRes.response.statusCode,
+          alreadyExists: true,
+          step: "passed",
+        });
+        logger.info(
+          "Brevo contact updated successfully | data details :",
+          nameContact
+        );
+        const updatePhoneRes = await provider.updateContact(
+          email,
+          phoneContact
+        );
+        logger.info("Brevo contact phone update response", {
+          email,
+          status: updatePhoneRes.response.statusCode,
+          alreadyExists: true,
+          step: "passed",
+        });
+        logger.info(
+          "Brevo contact updated successfully | data details :",
+          phoneContact
+        );
+        return { ok: true, alreadyExists: true } as const;
+      } catch (updateErr: any) {
+        const message =
+          (updateErr?.body?.message as string) ||
+          updateErr?.message ||
+          "Unknown Brevo error";
+        logger.error("Brevo update contact failed", JSON.stringify(updateErr));
+        throw new Error(message);
+      }
+    }
     const message =
       (err?.body?.message as string) || err?.message || "Unknown Brevo error";
-    // Treat "exists" as success for idempotency
-    if (
-      typeof message === "string" &&
-      message.toLowerCase().includes("exists")
-    ) {
-      logger.info("Brevo contact already exists", { email });
-      return { ok: true, alreadyExists: true } as const;
-    }
-    logger.error("Brevo add contact failed", err);
+
+    logger.error("Brevo add contact failed", JSON.stringify(err));
     throw new Error(message);
   }
 };

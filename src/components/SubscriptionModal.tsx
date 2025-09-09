@@ -27,6 +27,7 @@ import confetti from "canvas-confetti";
 import { useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
 import posthog from 'posthog-js';
+import { ResourceTypeKey } from "@/types";
 
 const optionalInfoSchema = z.object({
   name: z
@@ -42,12 +43,14 @@ type OptionalInfoForm = z.infer<typeof optionalInfoSchema>;
 interface SubscriptionModalProps {
   isOpen: boolean;
   email?: string;
+  productType?: ResourceTypeKey;
   onClose: () => void;
 }
 
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
   email,
+  productType,
   onClose,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -82,6 +85,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     phone?: string;
     subscribedFromPage?: string;
     updateExisting: boolean;
+    productType?: ResourceTypeKey;
   }) => {
     return fetch("/api/subscribe", {
       method: "POST",
@@ -104,6 +108,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           email,
           subscribedFromPage,
           updateExisting: false, // Première inscription
+          productType,
         });
 
         const json = await res.json();
@@ -164,7 +169,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      posthog.capture('subscription_modal_optional_info_submitted', {
+      posthog.capture("subscription_modal_optional_info_submitted", {
         email: email,
         has_name: !!values.name,
         has_phone: !!values.phone,
@@ -173,6 +178,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         email,
         name: values.name || undefined,
         phone: values.phone || undefined,
+        productType,
         subscribedFromPage:
           typeof window !== "undefined" ? window.location.pathname : undefined,
         updateExisting: true,
@@ -199,7 +205,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   const handleClose = () => {
     if (!isSubmitting) {
-      posthog.capture('subscription_modal_skipped', {
+      posthog.capture("subscription_modal_skipped", {
         email: email,
       });
       onClose();
