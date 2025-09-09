@@ -1,4 +1,5 @@
 "use client";
+import posthog from 'posthog-js';
 import { CalendarIcon, ClockIcon, EyeIcon } from "lucide-react";
 import React from "react";
 import { useState } from "react";
@@ -62,7 +63,10 @@ export default function Newsletter() {
             />
 
             <Button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                posthog.capture('newsletter_subscribe_clicked', { has_email_entered: !!email });
+                setIsModalOpen(true);
+              }}
               asFull
               whileTap
               asPointer

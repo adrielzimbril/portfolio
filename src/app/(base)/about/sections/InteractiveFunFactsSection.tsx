@@ -22,6 +22,7 @@ import {
   DialogSeparator,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import posthog from 'posthog-js';
 
 // Interface pour les questions
 interface Question {
@@ -569,17 +570,14 @@ function AllFactsModal({
 // Interactive Fun Facts Component
 export function InteractiveFunFacts() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>(
-    {}
-  );
+  const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>({
+
+  });
   const [showAlert, setShowAlert] = useState(false);
   const [alertData, setAlertData] = useState<{
     isCorrect: boolean;
     question: Question | null;
-  }>({
-    isCorrect: false,
-    question: null,
-  });
+  }>({ isCorrect: false, question: null });
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(true);
   const [showAllFacts, setShowAllFacts] = useState(false);
@@ -598,6 +596,13 @@ export function InteractiveFunFacts() {
     }
 
     const isCorrect = currentQuestion.isTrue === isTrue;
+
+    posthog.capture('fun-fact-guess-submitted', {
+      question_id: currentQuestion.id,
+      question_title: currentQuestion.title,
+      user_guess: isTrue ? 'true' : 'false',
+      is_correct: isCorrect,
+    });
 
     if (isCorrect) {
       setScore((prev) => prev + 1);
@@ -621,6 +626,10 @@ export function InteractiveFunFacts() {
   };
 
   const resetGame = () => {
+    posthog.capture('fun-facts-game-reset', {
+      final_score: score,
+      total_questions: questions.length,
+    });
     setCurrentQuestionIndex(0);
     setGuessedFacts({});
     setGameStarted(true);
@@ -735,7 +744,14 @@ export function InteractiveFunFacts() {
       <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
         {/* Show all facts button */}
         <Button
-          onClick={() => setShowAllFacts(true)}
+          onClick={() => {
+            setShowAllFacts(true);
+            posthog.capture('fun-facts-answers-viewed', {
+              score: score,
+              total_questions: questions.length,
+              answered_questions_count: answeredQuestionsCount,
+            });
+          }}
           asPointer
           whileTap
           size="lg"

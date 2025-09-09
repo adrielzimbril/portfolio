@@ -5,6 +5,7 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import { flushSync } from "react-dom";
 import { useRef } from "react";
+import posthog from 'posthog-js';
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
@@ -12,9 +13,15 @@ export function ModeToggle() {
   const changeTheme = async () => {
     if (!buttonRef.current) return;
 
+    const newTheme = theme === "light" ? "dark" : "light";
+    posthog.capture('theme_changed', {
+        from_theme: theme,
+        to_theme: newTheme
+    });
+
     await document.startViewTransition(() => {
       flushSync(() => {
-        setTheme(theme === "light" ? "dark" : "light");
+        setTheme(newTheme);
       });
     }).ready;
 

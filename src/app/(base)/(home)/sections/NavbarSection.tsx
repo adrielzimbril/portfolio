@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import posthog from 'posthog-js';
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -44,7 +45,10 @@ export function NavbarSection() {
                   className={`flex flex-col items-center gap-[3px] ${
                     activeTab === item.value ? "bg-[#f5f5f599] rounded-2xl" : ""
                   }`}
-                  onClick={() => setActiveTab(item.value)}
+                  onClick={() => {
+                    setActiveTab(item.value);
+                    posthog.capture('navbar_tab_clicked', { tab_name: item.value });
+                  }}
                 >
                   <div className="flex items-center px-5 py-2.5 rounded-xl overflow-hidden cursor-pointer">
                     <span
@@ -63,7 +67,7 @@ export function NavbarSection() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <Button>
+        <Button onClick={() => posthog.capture('contact_button_clicked', { button_text: 'Parler de SaaS 👋' })}>
           <span className="font-SF-pro-medium-17-m font-[number:var(--SF-pro-medium-17-m-font-weight)] text-text-iconsdark-high-emphasis text-[length:var(--SF-pro-medium-17-m-font-size)] tracking-[var(--SF-pro-medium-17-m-letter-spacing)] leading-[var(--SF-pro-medium-17-m-line-height)] whitespace-nowrap [font-style:var(--SF-pro-medium-17-m-font-style)]">
             Parler de SaaS 👋
           </span>

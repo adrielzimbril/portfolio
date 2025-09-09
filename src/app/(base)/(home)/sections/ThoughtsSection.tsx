@@ -1,4 +1,5 @@
 "use client";
+import posthog from "posthog-js";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
@@ -39,15 +40,24 @@ export function ThoughtsSection() {
     >
       {posts.map((post, index) => {
         return (
-          <ThoughtCard
+          <div
             key={index}
-            title={post.title}
-            cover={post.cover}
-            slug={post.slug}
-            excerpt={post.excerpt || ""}
-            tags={post.tags}
-            created_at={post.created_at}
-          />
+            onClick={() =>
+              posthog.capture("thought_card_clicked", {
+                post_slug: post.slug,
+                post_title: post.title,
+              })
+            }
+          >
+            <ThoughtCard
+              title={post.title}
+              cover={post.cover}
+              slug={post.slug}
+              excerpt={post.excerpt || ""}
+              tags={post.tags}
+              created_at={post.created_at}
+            />
+          </div>
         );
       })}
     </SectionLayout>

@@ -1,4 +1,5 @@
 "use client";
+import posthog from "posthog-js";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
@@ -45,16 +46,25 @@ export function ProjectsSection() {
           allWide || (wideCardsCount !== undefined && index < wideCardsCount!);
 
         return (
-          <ProjectCard
+          <div
             key={index}
-            title={project.title}
-            cover={project.image_thumbnail}
-            description={project.excerpt || ""}
-            slug={project.slug}
-            tags={project.tags}
-            categories={project.categories}
-            isWide={isWide}
-          />
+            onClick={() =>
+              posthog.capture("project-card-clicked", {
+                project_slug: project.slug,
+                project_title: project.title,
+              })
+            }
+          >
+            <ProjectCard
+              title={project.title}
+              cover={project.image_thumbnail}
+              description={project.excerpt || ""}
+              slug={project.slug}
+              tags={project.tags}
+              categories={project.categories}
+              isWide={isWide}
+            />
+          </div>
         );
       })}
     </SectionLayout>
