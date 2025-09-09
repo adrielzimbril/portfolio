@@ -1,6 +1,5 @@
 "use client";
 
-// @ts-expect-error package is not installed per default
 import posthog from "posthog-js";
 import { useEffect } from "react";
 
@@ -13,10 +12,10 @@ export function AnalyticsScript() {
 		}
 
 		posthog.init(posthogKey, {
-			// use eu.i.posthog.com for european users
-			api_host: "https://i.posthog.com",
-			person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
-		});
+      // use eu.i.posthog.com for european users
+      api_host: "https://us.posthog.com",
+      person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
+    });
 	}, []);
 }
 

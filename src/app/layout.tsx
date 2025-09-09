@@ -100,7 +100,7 @@ export default async function RootLayout({
             </LayoutProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
-        <AnalyticsScript />
+        {/* <AnalyticsScript /> */}
       </body>
     </html>
   );
