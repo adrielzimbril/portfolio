@@ -4,21 +4,13 @@ import React from "react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { SectionLayout } from "@/components/shared/sections/layout";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { NewsletterSubscribersBadge } from "@/components/SubscriberBadges";
 
-const metaInfo = [
-  { icon: CalendarIcon, text: "18, Jul 2024" },
-  { icon: ClockIcon, text: "08 min read" },
-];
-
-const date = "18, Jul 2024";
 const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
 
 export default function Newsletter() {
@@ -58,14 +50,8 @@ export default function Newsletter() {
               pour trouver des missions en boucle.
             </p>
           </div>
-          <Tags primaryTag={date} tags={tags} isCentered />
-          <div className="mt-2"><NewsletterSubscribersBadge /></div>
-          {/* <Badge className="justify-center gap-1 px-3 py-1.5 bg-[#e2e4ff] rounded-[10px] backdrop-blur-[50px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(50px)_brightness(100%)]">
-            <EyeIcon className="w-4 h-4" />
-            <span className="[font-family:'SF_Pro_Text-Medium',Helvetica] font-medium text-[#000000de] text-xs tracking-[0] leading-4 whitespace-nowrap">
-              {isLoading ? "..." : formatReaderCount(readerCount)}
-            </span>
-          </Badge> */}
+          <Tags tags={tags} isCentered />
+          {/* <div className="mt-2"><NewsletterSubscribersBadge /></div> */}
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <Input
@@ -81,9 +67,7 @@ export default function Newsletter() {
               whileTap
               asPointer
             >
-              <span className="[font-family:'SF_Pro_Text-Bold',Helvetica] font-bold text-text-iconsdark-high-emphasis text-[17px] tracking-[0.07px] leading-[22px] whitespace-nowrap">
-                Recevoir !
-              </span>
+              <span className="font-bold text-base">Recevoir !🦄</span>
             </Button>
           </div>
         </div>

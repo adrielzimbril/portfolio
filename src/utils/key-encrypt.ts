@@ -1,8 +1,9 @@
-import crypto from "crypto";
+import crypto from "node:crypto";
 
 const SECRET_KEY =
-  process.env.HEALTH_CHECK_SECRET_KEY || process.env.API_SECRET_KEY || "your-secret-key";
-
+  process.env.HEALTH_CHECK_SECRET_KEY ||
+  process.env.API_SECRET_KEY ||
+  "your-secret-key";
 
 // ==========================================
 // SOLUTION 1: Simple token with timestamp
@@ -108,7 +109,11 @@ export function validateSimpleJWT(token: string): {
     const parts = token.split(".");
     if (parts.length !== 3) return { valid: false };
 
-    const [encodedHeader, encodedPayload, receivedSignature] = parts as [string, string, string];
+    const [encodedHeader, encodedPayload, receivedSignature] = parts as [
+      string,
+      string,
+      string,
+    ];
 
     // Validate signature
     const expectedSignature = crypto

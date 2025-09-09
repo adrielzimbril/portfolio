@@ -40,11 +40,14 @@ const CountrySchema = z.object({
   phone_codes: z.string(),
   phone_extra: z
     .object({
-      calling_code: z.array(z.string()),
-      national_prefix: z.string(),
-      international_prefix: z.string(),
-      national_number_lengths: z.array(z.number()),
-      national_destination_code_lengths: z.array(z.number()),
+      calling_code: z.array(z.string()).nullable().optional(),
+      national_prefix: z.string().nullable().optional(),
+      international_prefix: z.string().nullable().optional(),
+      national_number_lengths: z.array(z.number()).nullable().optional(),
+      national_destination_code_lengths: z
+        .array(z.number())
+        .nullable()
+        .optional(),
     })
     .optional(),
   flag: z.string(),
@@ -260,8 +263,9 @@ export async function useIpInfo<T = IpInfoResponse>(
             `HTTP Error: ${response.status} ${response.statusText}`
           );
         }
-
         const rawResult = await response.json();
+
+        logger.info("Response ok", rawResult);
 
         // 🔍 Validation avec Zod
         try {

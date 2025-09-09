@@ -10,12 +10,7 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { NewsletterSubscribersBadge } from "@/components/SubscriberBadges";
 import { getDate } from "@/utils";
-import { Resource } from "@/module/content/types";
-import { DEFAULT_CATEGORY_COLOR_NAME, ResourceType } from "@/types";
-import { ProjectCategories } from "@/components/shared/pages/projects/tags";
-import { PhoneInput } from "@aurthle/react-phone";
-import { useGetIpInfo } from "@/hooks/useIpInfo";
-import logger from "@/utils/logger";
+import { ResourceType } from "@/types";
 
 export function GetResource({
   title,
@@ -25,9 +20,9 @@ export function GetResource({
   excerpt,
   type,
   created_at,
+  slug,
   path,
   locale,
-  slug,
 }: {
   title: string;
   cover?: string;
@@ -42,16 +37,6 @@ export function GetResource({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [userCountry, setUserCountry] = useState("CI");
-
-  useEffect(() => {
-    const getCountry = async () => {
-      const country = await useGetIpInfo(undefined, true);
-      logger.info("useGetIpInfo received data", country);
-      setUserCountry(country.data?.country?.code ?? "CI");
-    };
-    getCountry();
-  }, []);
 
   return (
     <>

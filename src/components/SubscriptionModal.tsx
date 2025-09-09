@@ -33,11 +33,7 @@ const optionalInfoSchema = z.object({
     .min(2, { message: "Le nom doit contenir au moins 2 caractères." })
     .optional()
     .or(z.literal("")),
-  phone: z
-    .string()
-    .min(10, { message: "Le numéro doit contenir au moins 10 caractères." })
-    .optional()
-    .or(z.literal("")),
+  phone: z.string().optional().or(z.literal("")),
 });
 
 type OptionalInfoForm = z.infer<typeof optionalInfoSchema>;
@@ -58,11 +54,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   const [userCountry, setUserCountry] = useState("FR");
   const [hasInitialSubscription, setHasInitialSubscription] = useState(false);
 
-  // Utilisation de useRef pour s'assurer qu'on ne récupère l'IP qu'une seule fois
+  // Use of useRef to ensure we only fetch the IP once
   const ipInfoFetched = useRef(false);
   const countryFetched = useRef(false);
 
-  // Récupération du pays une seule fois à l'ouverture
+  // Fetch the country once at open
   useEffect(() => {
     if (!isOpen || countryFetched.current) return;
 
@@ -70,7 +66,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       try {
         const country = await useGetIpInfo(undefined, true);
         setUserCountry(country.data?.country?.code ?? "FR");
-        logger.info("Country fetched:", country.data?.country?.code);
       } catch (error) {
         logger.error("Erreur lors de la récupération du pays:", error);
       }
@@ -94,15 +89,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     });
   };
 
-  // Inscription automatique avec email à l'ouverture
+  // Automatic subscription with email at open
   useEffect(() => {
     //if (!isOpen || !email || hasInitialSubscription || ipInfoFetched.current)
     if (!isOpen || !email) return;
 
     const subscribeWithEmail = async () => {
       try {
-        logger.info("Inscription automatique avec email:", email);
-
         const subscribedFromPage =
           typeof window !== "undefined" ? window.location.pathname : undefined;
 
@@ -118,9 +111,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         }
 
         setHasInitialSubscription(true);
-        logger.info("Inscription automatique réussie");
       } catch (error) {
-        logger.error("Erreur lors de l'inscription automatique:", error);
         toast.error("Erreur lors de l'inscription. Veuillez réessayer.");
       }
     };
@@ -135,7 +126,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   });
 
   const animateConfetti = () => {
-    const duration = 5 * 1000;
+    const duration = 8 * 1000;
     const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
