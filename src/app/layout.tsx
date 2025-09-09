@@ -19,6 +19,7 @@ import type { PropsWithChildren } from "react";
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { Toaster } from "@/components/shiro/providers/toast-provider";
+import { AnalyticsScript } from "@/module/analytics";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -99,6 +100,7 @@ export default async function RootLayout({
             </LayoutProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+        <AnalyticsScript />
       </body>
     </html>
   );

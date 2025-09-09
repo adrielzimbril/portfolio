@@ -111,16 +111,23 @@ export async function POST(req: NextRequest) {
       status: 500,
     });
   }
+  logger.info("Newsletter subscription added successfully", {
+    email,
+    name,
+    phone,
+  });
 
   // Send welcome email only for first-time subscribers
   if (!alreadyExists) {
+    logger.info("Sending welcome email", { email, name });
     try {
-      await sendEmail({
+      const sendEmailResult = await sendEmail({
         to: [{ email, name }],
         context: { name },
         templateId: "welcome",
         locale: "en",
       });
+      logger.info("Welcome email sent successfully", sendEmailResult);
     } catch (e) {
       logger.warn("Welcome email send failed:", e);
     }
