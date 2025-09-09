@@ -55,8 +55,8 @@ export const appConfig = {
   // Mails
   mails: {
     // the from address for mails
-    from: "noreply@supastarter.dev",
-    replyTo: "hello@supastarter.dev",
+    from: "hello@adrielzimbril.com",
+    replyTo: "hello@adrielzimbril.com",
   },
   // Storage
   storage: {
@@ -69,7 +69,7 @@ export const appConfig = {
     // whether the contact form should be enabled
     enabled: true,
     // the email to which the contact form messages should be sent
-    to: "hello@your-domain.com",
+    to: "hello@adrielzimbril.com",
     // the subject of the email
     subject: "Contact form message",
   },

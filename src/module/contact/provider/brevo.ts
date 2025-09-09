@@ -23,14 +23,17 @@ export const add: AddContactHandler = async ({
     throw new Error("Missing BREVO_API_KEY env var");
   }
 
-  const contact = new CreateContact();
-  contact.email = email;
-  contact.listIds =
+  const nameContact = new CreateContact();
+  nameContact.email = email;
+  nameContact.listIds =
     listIds && listIds.length > 0 ? listIds.map((id) => Number(id)) : undefined;
-  const nameContact = contact;
-  const phoneContact = contact;
   // Update when exists for idempotency
-  contact.updateEnabled = true;
+  nameContact.updateEnabled = true;
+  const phoneContact = new CreateContact();
+  phoneContact.email = email;
+  phoneContact.listIds =
+    listIds && listIds.length > 0 ? listIds.map((id) => Number(id)) : undefined;
+  phoneContact.updateEnabled = true;
   // Brevo attributes are case-sensitive
   nameContact.attributes = {
     FIRSTNAME: firstName || undefined,
@@ -44,70 +47,64 @@ export const add: AddContactHandler = async ({
 
   try {
     const res = await provider.createContact(nameContact);
-    logger.info("Brevo contact add name response", {
-      email,
-      status: res.response.statusCode,
-      alreadyExists: false,
-      step: "passed",
-    });
-    logger.info(
-      "Brevo contact added successfully | data details :",
-      nameContact
-    );
+    // logger.info("Brevo contact add name response", {
+    //   email,
+    //   type: "name",
+    //   status: res.response.statusCode,
+    //   alreadyExists: false,
+    //   step: "passed",
+    // });
     const phoneRes = await provider.createContact(phoneContact);
-    logger.info("Brevo contact phone add response", {
-      email,
-      status: phoneRes.response.statusCode,
-      alreadyExists: false,
-      step: "passed",
-    });
-    logger.info(
-      "Brevo contact added successfully | data details :",
-      phoneContact
-    );
-    return { ok: true, alreadyExists: false } as const;
+    // logger.info("Brevo contact phone add response", {
+    //   email,
+    //   type: "phone",
+    //   status: phoneRes.response.statusCode,
+    //   alreadyExists: false,
+    //   step: "passed",
+    // });
+    const alreadyExists: boolean = Boolean(res) || Boolean(phoneRes);
+    return { ok: true, alreadyExists } as const;
   } catch (err: any) {
     if (err.status === 400 || err.message.includes("400")) {
       try {
         const updateRes = await provider.updateContact(email, nameContact);
-        logger.info("Brevo contact name update response", {
-          email,
-          status: updateRes.response.statusCode,
-          alreadyExists: true,
-          step: "passed",
-        });
-        logger.info(
-          "Brevo contact updated successfully | data details :",
-          nameContact
-        );
+        // logger.info("Brevo contact name update response", {
+        //   email,
+        //   type: "name",
+        //   status: updateRes.response.statusCode,
+        //   alreadyExists: true,
+        //   step: "passed",
+        // });
         const updatePhoneRes = await provider.updateContact(
           email,
           phoneContact
         );
-        logger.info("Brevo contact phone update response", {
-          email,
-          status: updatePhoneRes.response.statusCode,
-          alreadyExists: true,
-          step: "passed",
-        });
-        logger.info(
-          "Brevo contact updated successfully | data details :",
-          phoneContact
-        );
-        return { ok: true, alreadyExists: true } as const;
+        // logger.info("Brevo contact phone update response", {
+        //   email,
+        //   type: "phone",
+        //   status: updatePhoneRes.response.statusCode,
+        //   alreadyExists: true,
+        //   step: "passed",
+        // });
+        const alreadyExists: boolean =
+          Boolean(updateRes) || Boolean(updatePhoneRes);
+        return {
+          ok: true,
+          alreadyExists,
+        } as const;
       } catch (updateErr: any) {
         const message =
           (updateErr?.body?.message as string) ||
           updateErr?.message ||
           "Unknown Brevo error";
-        logger.error("Brevo update contact failed", JSON.stringify(updateErr));
+        // logger.error("Brevo update contact failed", JSON.stringify(updateErr));
         throw new Error(message);
       }
     }
     const message =
       (err?.body?.message as string) || err?.message || "Unknown Brevo error";
 
-    logger.error("Brevo add contact failed", JSON.stringify(err));
+    // logger.error("Brevo add contact failed", JSON.stringify(err));
     throw new Error(message);
   }
 };

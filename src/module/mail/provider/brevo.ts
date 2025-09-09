@@ -6,8 +6,10 @@ import {
   TransactionalEmailsApiApiKeys,
   SendSmtpEmail,
 } from "@getbrevo/brevo";
+import { siteConfig } from "@/data/config";
 
 const { from, replyTo } = appConfig.mails;
+const { details } = siteConfig;
 
 const MAIL_PROVIDER_API_KEY = process.env.BREVO_API_KEY || "";
 
@@ -21,23 +23,21 @@ export const send: SendEmailHandler = async ({ to, subject, body }) => {
 
   try {
     const message = new SendSmtpEmail();
-    message.subject = subject;
+    message.subject = subject || details.hook;
     message.htmlContent = body?.react ?? body?.html;
-    message.sender = { name: from, email: from };
+    message.sender = { email: from, name: details.nameShared };
     message.to = to.map((t) => ({ email: t.email, name: t.name }));
-    message.replyTo = { email: replyTo, name: from };
+    message.replyTo = { email: replyTo, name: details.nameShared };
 
     await provider
       .sendTransacEmail(message)
       .then((res) => {
-        logger.info("Email sent successfully", res);
-        console.log("Email sent successfully", res);
+        // logger.info("Email sent successfully", JSON.stringify(res));
         return res;
       })
       .catch((err) => {
-        logger.error("Error sending email", err);
-        console.error("Error sending email:", err.body);
-        throw new Error("Could not send email");
+        logger.error("Error sending email", JSON.stringify(err));
+        // throw new Error("Could not send email", { cause: err });
       });
   } catch (err: any) {
     const message =
@@ -48,11 +48,8 @@ export const send: SendEmailHandler = async ({ to, subject, body }) => {
       message.toLowerCase().includes("exists")
     ) {
       logger.info("Brevo sent message already exists", { email: from });
-      console.log("Brevo sent message already exists", { email: from });
-      return { ok: true, alreadyExists: true } as const;
     }
     logger.error("Brevo send message failed", err);
-    console.error("Brevo send message failed", err);
-    throw new Error(message);
+    // throw new Error(message, { cause: err });
   }
 };

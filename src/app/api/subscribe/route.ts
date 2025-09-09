@@ -38,62 +38,58 @@ export async function POST(req: NextRequest) {
 
   // Link or create the user record first (users table)
   let userId: string | undefined;
-  try {
-    const { data: userData, error: userErr } = await supabase.rpc(
-      "upsert_user",
-      {
-        p_name: name ?? "",
-        p_email: email ?? undefined,
-        p_phone: phone ?? "",
-      }
-    );
+  // search user by email
+  const { data: existingUser, error: findError } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", email);
+  const alreadyExists = Boolean(existingUser?.length > 0);
+  logger.info("User find result", {
+    email,
+    alreadyExists,
+    findError,
+    existingUser,
+  });
 
-    if (userErr) {
-      logger.warn(
-        "upsert_user RPC failed, continuing without user link",
-        userErr
+  if (!alreadyExists) {
+    try {
+      const { data: userData, error: userErr } = await supabase.rpc(
+        "upsert_user",
+        {
+          p_name: name ?? "",
+          p_email: email ?? undefined,
+          p_phone: phone ?? "",
+        }
       );
-    } else {
-      // Supabase returns a single row for this RPC
-      userId = (userData as any)?.id;
-    }
-  } catch (e) {
-    userId = undefined;
-    logger.warn("upsert_user RPC threw, continuing without user link", e);
-  }
 
-  if (!userId) {
-    return new Response(
-      JSON.stringify({
-        error: "User creation failed",
-        statusText: "Step before 1 failed",
-      }),
-      {
-        status: 500,
+      if (userErr) {
+        logger.warn(
+          "upsert_user RPC failed, continuing without user link",
+          userErr
+        );
+      } else {
+        // Supabase returns a single row for this RPC
+        userId = (userData as any)?.id;
       }
-    );
-  }
-
-  // 1) Check if subscriber already exists
-  const { data: existing, error: findError } = await supabase.rpc(
-    "get_or_create_user",
-    {
-      p_email: email,
-      p_name: name ?? "",
-      p_phone: phone ?? "",
+    } catch (e) {
+      userId = undefined;
+      logger.warn("upsert_user RPC threw, continuing without user link", e);
     }
-  );
 
-  if (findError) {
-    return new Response(JSON.stringify({ error: findError.message }), {
-      status: 500,
-    });
+    if (!userId) {
+      return new Response(
+        JSON.stringify({
+          error: "User creation failed",
+          statusText: "Step before 1 failed",
+        }),
+        {
+          status: 500,
+        }
+      );
+    }
   }
-
-  const alreadyExists = !!existing;
-
   // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
-  const { error: addErr } = await supabase.rpc(
+  const { data: subscriptionData, error: addErr } = await supabase.rpc(
     "create_newsletter_subscription",
     {
       p_email: email,
@@ -111,27 +107,19 @@ export async function POST(req: NextRequest) {
       status: 500,
     });
   }
-  logger.info("Newsletter subscription added successfully", {
-    email,
-    name,
-    phone,
-  });
 
   // Send welcome email only for first-time subscribers
   if (!alreadyExists) {
     logger.info("Sending welcome email", { email, name });
     try {
-      const sendEmailResult = await sendEmail({
+      await sendEmail({
         to: [{ email, name }],
         context: { name },
         templateId: "welcome",
         locale: "en",
       });
-      logger.info("Welcome email sent successfully", sendEmailResult);
-      console.log("Welcome email sent successfully", sendEmailResult);
     } catch (e) {
       logger.warn("Welcome email send failed:", e);
-      console.error("Welcome email send failed:", e);
     }
   }
 
@@ -144,20 +132,17 @@ export async function POST(req: NextRequest) {
 
   try {
     if (listIds.length > 0) {
-      const addContactResult = await addContact({
+      await addContact({
         email,
         firstName: name ?? undefined,
         phone: phone ?? undefined,
         listIds,
         provider: ContactProvider.BREVO,
       });
-      logger.info("Brevo contact added successfully server", addContactResult);
-      console.log("Brevo contact added successfully server", addContactResult);
     }
   } catch (e: any) {
     // Do not fail the flow if Brevo fails
     logger.warn("Brevo add contact error server:", e?.message || e);
-    console.error("Brevo add contact error server:", e?.message || e);
   }
 
   return new Response(JSON.stringify({ success: true }), {

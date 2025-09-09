@@ -1,9 +1,6 @@
-import { Icons } from "@/components/shared/icons";
 import { cn } from "@/utils/utils";
-import { motion } from "motion/react";
-import * as LucideIcons from "lucide-react";
 import { routes } from "./route";
-import * as AuthleIcons from "@aurthle/icons";
+import * as AurthleIcons from "@aurthle/icons";
 
 import type { Config } from "./app-config-types";
 
@@ -30,7 +27,7 @@ export const BLUR_FADE_DELAY = 0.15;
 
 export const siteConfig = {
   name: "Adriel Zimbril",
-  description: "Adriel Zimbril - Product designer",
+  description: "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
   cta: "Let's chat about your next project 👋",
   url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   languages: [
@@ -64,7 +61,9 @@ export const siteConfig = {
     id: "adrielzimbril",
     username: "@adrielzimbril",
     name: "Adriel Zimbril",
-    nameShared: "Adriel Zimbril - Product designer",
+    nameShared:
+      "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
+    hook: "Let's chat about your next project 👋",
   },
   links: {
     twitter: "https://twitter.com/adrielzimbril",
@@ -79,7 +78,7 @@ export const siteConfig = {
       // },
       {
         href: routes.contact.link,
-        icon: AuthleIcons.User,
+        icon: AurthleIcons.User,
         label: routes.contact.name,
       },
     ],
@@ -90,46 +89,46 @@ export const siteConfig = {
         github: {
           name: "GitHub",
           url: "https://dub.sh/adrielzimbril-github",
-          icon: AuthleIcons.Github,
+          icon: AurthleIcons.Github,
 
           navbar: true,
         },
         linkedin: {
           name: "LinkedIn",
           url: "https://dub.sh/adrielzimbril-linkedin",
-          icon: AuthleIcons.Linkedin,
+          icon: AurthleIcons.Linkedin,
 
           navbar: true,
         },
         x: {
           name: "X",
           url: "https://dub.sh/adrielzimbril-x",
-          icon: AuthleIcons.X,
+          icon: AurthleIcons.X,
 
           navbar: true,
         },
         youtube: {
           name: "Youtube",
           url: "https://dub.sh/adrielzimbril-youtube",
-          icon: AuthleIcons.Youtube,
+          icon: AurthleIcons.Youtube,
           navbar: true,
         },
         producthunt: {
           name: "Product Hunt",
           url: "https://dub.sh/adrielzimbril-producthunt",
-          icon: AuthleIcons.Layersto,
+          icon: AurthleIcons.Layersto,
           navbar: true,
         },
         dribbble: {
           name: "Dribbble",
           url: "https://dub.sh/adrielzimbril-dribbble",
-          icon: AuthleIcons.Dribbble,
+          icon: AurthleIcons.Dribbble,
           navbar: true,
         },
         email: {
           name: "Send Email",
           url: "#",
-          icon: AuthleIcons.Mail,
+          icon: AurthleIcons.Mail,
 
           navbar: false,
         },

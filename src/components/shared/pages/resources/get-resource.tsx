@@ -8,7 +8,11 @@ import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { NewsletterSubscribersBadge } from "@/components/SubscriberBadges";
+import {
+  NewsletterSubscribersBadge,
+  ProductTitleRequestsBadge,
+  ProductTypeSubscribersBadge,
+} from "@/components/SubscriberBadges";
 import { getDate } from "@/utils";
 import { ResourceType } from "@/types";
 
@@ -92,6 +96,8 @@ export function GetResource({
           />
           <div className="mt-2">
             <NewsletterSubscribersBadge />
+            <ProductTypeSubscribersBadge type={type} />
+            <ProductTitleRequestsBadge title={title} />
           </div>
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <Input
