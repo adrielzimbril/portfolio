@@ -15,7 +15,7 @@ const buttonVariants = cva(
         destructive:
           "squircle-destructive text-destructive-foreground hover:squircle-destructive/90",
         outline:
-          "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-zinc-600",
+          "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-zinc-200",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         icon: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
