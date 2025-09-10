@@ -28,7 +28,7 @@ import { useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
 import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
-
+import { motion } from "motion/react";
 
 // Form Info Schema for ensuring name and phone
 const FormInfoSchema = z.object({
@@ -203,7 +203,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         setIsSuccess(false);
         formSchemaValidate.reset();
         animateConfetti();
-      }, 2000);
+      }, 200000);
     } catch (error) {
       logger.error("Erreur lors de la mise à jour:", error);
       toast.error(
@@ -319,11 +319,100 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Mise à jour...
+                      <motion.div
+                        className="flex gap-2 items-center justify-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5 }}
+                      >
+                        {[0, 1, 2].map((i) => (
+                          <motion.div
+                            key={i}
+                            className="w-3 h-3 bg-[#2a2a2a] rounded-full"
+                            animate={{
+                              scale: [1, 1.3, 1],
+                              opacity: [0.4, 1, 0.4],
+                            }}
+                            transition={{
+                              duration: 1.2,
+                              repeat: Infinity,
+                              delay: i * 0.2 + 1.5,
+                            }}
+                          />
+                        ))}
+                      </motion.div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-bounce animate-infinite delay-0"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-bounce animate-infinite delay-150"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-bounce animate-infinite delay-300"></div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-pulse animate-infinite delay-0"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-pulse animate-infinite delay-300"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-pulse animate-infinite delay-600"></div>
+                      </div>
+                      <motion.div
+                        className="size-4 mr-2 bg-white rounded-full"
+                        animate={{
+                          scale: [1, 1.3, 1],
+                          opacity: [0.6, 1, 0.4],
+                        }}
+                        transition={{
+                          duration: 2,
+                          ease: "easeInOut",
+                          repeat: Infinity,
+                        }}
+                      />
+                      <span>Un instant...</span>
                     </>
                   ) : (
-                    "Recevoir 🦄"
+                    <>
+                      <motion.div
+                        className="flex gap-2 items-center justify-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.5 }}
+                      >
+                        {[0, 1, 2].map((i) => (
+                          <motion.div
+                            key={i}
+                            className="w-3 h-3 bg-zinc-100 rounded-full"
+                            animate={{
+                              scale: [1, 1.3, 1],
+                              opacity: [0.4, 1, 0.6],
+                            }}
+                            transition={{
+                              duration: 1.6,
+                              repeat: Infinity,
+                              delay: i * 0.2 + 1.5,
+                            }}
+                          />
+                        ))}
+                      </motion.div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-bounce animate-infinite delay-0"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-bounce animate-infinite delay-150"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-bounce animate-infinite delay-300"></div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-pulse animate-infinite delay-0"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-pulse animate-infinite delay-300"></div>
+                        <div className="w-3 h-3 bg-zinc-100 rounded-full animate-pulse animate-infinite delay-600"></div>
+                      </div>
+                      <motion.div
+                        className="size-4 mr-2 bg-white rounded-full"
+                        animate={{
+                          scale: [1, 1.3, 1],
+                          opacity: [0.6, 1, 0.4],
+                        }}
+                        transition={{
+                          duration: 2,
+                          ease: "easeInOut",
+                          repeat: Infinity,
+                        }}
+                      />
+                      <span>Recevoir 🦄</span>
+                    </>
                   )}
                 </Button>
               </div>

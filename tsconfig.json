@@ -28,6 +28,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@config/*": ["./src/config/*"],
       "@module/*": ["./src/module/*"],
       "@lib/*": ["./src/lib/*"],
       "@data/*": ["./src/data/*"],

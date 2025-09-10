@@ -279,8 +279,46 @@ export function getDateDifference(
   return formatted;
 }
 
+
+/**
+ * Formats a number with K or M
+ * 
+ * @param n - The number to format
+ * 
+ * @returns A string representing the formatted number
+ * 
+ * @example
+ * formatCount(1000) // returns "1K"
+ */
 export function formatCount(n: number) {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
   if (n >= 1_000) return `${Math.floor(n / 1_000)}K`;
   return `${n}`;
+}
+
+
+/**
+ * Formats a date string to a human-readable date
+ * 
+ * @param dateString - The date string to format
+ * 
+ * @returns A string representing the formatted date
+ * 
+ * @example
+ * getHumanDate("2023-01-01") // returns "1 January 2023"
+ */
+export function getHumanDate(dateString: string): string {
+  const date = new Date(dateString);
+
+  const formatted = date.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  return formatted.replace(
+    /(\d{1,2}) (\w)(\w+)( \d{4})/,
+    (_, d, firstLetter, rest, year) =>
+      `${d} ${firstLetter.toUpperCase()}${rest}${year}`
+  );
 }

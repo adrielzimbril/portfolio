@@ -10,6 +10,7 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import {
   NewsletterSubscribersBadge,
+  ProductAvatarsStats,
   ProductTitleRequestsBadge,
   ProductTypeSubscribersBadge,
 } from "@/components/SubscriberBadges";
@@ -23,6 +24,7 @@ import { ResourceType } from "@/types";
 import logger from "@/utils/logger";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
+import { AvatarsStats } from "./avatar-stats";
 
 export function GetResource({
   id,
@@ -112,13 +114,15 @@ export function GetResource({
             isCentered
           />
           <div className="mt-2 flex items-center gap-2">
-            <NewsletterSubscribersBadge />
-            <ProductTypeSubscribersBadge type={type} />
-            <ProductTitleRequestsBadge title={title} />
+            {/* <NewsletterSubscribersBadge />
+            <ProductTypeSubscribersBadge type={type} /> */}
+            {/* <ProductTitleRequestsBadge title={title} type={type} /> */}
+
+            <ProductAvatarsStats title={title} type={type} />
           </div>
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <Input
-              placeholder="😏 vous voulez recevoir des cadeaux ?"
+              placeholder="😏 Prêt à recevoir quelque chose d'interessant ?"
               type="email"
               //className="ml-auto rounded-s-md"
               value={email}

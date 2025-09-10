@@ -1,5 +1,5 @@
 import React from "react";
-import { getActivePathFromUrlParam } from "@/utils/format-content";
+import { getActivePathFromUrlParam } from "@/utils/route-utils";
 import { setRequestLocale } from "next-intl/server";
 import { PageParams } from "@/types";
 import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
@@ -39,7 +39,6 @@ export default async function SubShopGet(props: {
     <>
       <GetResource
         id={id}
-        content={content}
         title={title}
         cover={cover}
         tags={tags}

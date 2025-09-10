@@ -1,96 +1,70 @@
 "use client";
+
+import useSWR from "swr";
 import logger from "@/utils/logger";
-import { useEffect, useState } from "react";
 
 async function fetchJSON(url: string) {
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: "no-store" }); // 👈 no-store = fresh data
   const json = await res.json();
   if (!res.ok) throw new Error(json?.error || "Request failed");
   return json;
 }
 
 export function useNewsletterSubscribersCount() {
-  const [count, setCount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading, mutate } = useSWR(
+    "/api/stats/subscribers?scope=newsletter",
+    fetchJSON,
+    {
+      revalidateOnFocus: true, // 👈 re-fetch when we come back to the page
+    }
+  );
 
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const json = await fetchJSON(`/api/stats/subscribers?scope=newsletter`);
-        logger.info("newsletter subscribers count", json);
-        if (!cancelled) setCount(json.count ?? 0);
-      } catch (e: any) {
-        if (!cancelled) setError(e?.message || "Unknown error");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  logger.info("newsletter subscribers count", data);
 
-  return { count, loading, error } as const;
+  return {
+    count: data?.count ?? 0,
+    loading: isLoading,
+    error: error?.message ?? null,
+    refresh: mutate, // 👈 button or manual action
+  } as const;
 }
 
 export function useProductTypeSubscribersCount(
   type: "course" | "ebook" | "video"
 ) {
-  const [count, setCount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading, mutate } = useSWR(
+    type
+      ? `/api/stats/subscribers?scope=productType&type=${encodeURIComponent(type)}`
+      : null, // null = skip fetch if no type
+    fetchJSON
+  );
 
-  useEffect(() => {
-    if (!type) return;
-    let cancelled = false;
-    (async () => {
-      try {
-        const json = await fetchJSON(
-          `/api/stats/subscribers?scope=productType&type=${encodeURIComponent(type)}`
-        );
-        logger.info("product type subscribers count", json);
-        if (!cancelled) setCount(json.count ?? 0);
-      } catch (e: any) {
-        if (!cancelled) setError(e?.message || "Unknown error");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [type]);
+  logger.info("product type subscribers count", data);
 
-  return { count, loading, error } as const;
+  return {
+    count: data?.count ?? 0,
+    loading: isLoading,
+    error: error?.message ?? null,
+    refresh: mutate,
+  } as const;
 }
 
 export function useProductTitleRequestsCount(title: string) {
-  const [count, setCount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading, mutate } = useSWR(
+    title
+      ? `/api/stats/subscribers?scope=productTitle&title=${encodeURIComponent(
+          title
+        )}`
+      : null, // null = skip fetch if no title
+    fetchJSON
+  );
 
-  useEffect(() => {
-    if (!title) return;
-    let cancelled = false;
-    (async () => {
-      try {
-        const json = await fetchJSON(
-          `/api/stats/subscribers?scope=productTitle&title=${encodeURIComponent(title)}`
-        );
-        logger.info("product title subscribers count", json);
-        if (!cancelled) setCount(json.count ?? 0);
-      } catch (e: any) {
-        if (!cancelled) setError(e?.message || "Unknown error");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, [title]);
+  logger.info("product title subscribers count", data);
 
-  return { count, loading, error } as const;
+  return {
+    count: data?.count ?? 0,
+    loading: isLoading,
+    error: error?.message ?? null,
+    refresh: mutate,
+  } as const;
 }

@@ -138,36 +138,29 @@ export async function POST(req: NextRequest) {
       const customText = undefined;
 
       if (userId) {
-        const { data: productRequests } = await supabase
-          .from("hub_product_requests")
-          .select("*")
-          .eq("product_id", productId)
-          .eq("user_id", userId);
-
-        if (productRequests?.length === 0) {
-          try {
-            await supabase.from("hub_product_requests").insert({
-              user_id: userId,
-              product_id: productId,
-              product_title: title,
-              product_type: type,
-              features: features,
-              cover: getImageUrl(cover || ""),
-              product_url: productUrl,
-              custom_text: customText,
-              subscribed_from_page: JSON.stringify({
-                path: subscribedFromPage,
-                origin: req.headers.get("origin"),
-                referer: req.headers.get("referer"),
-                url: req.url,
-              }),
-            });
-          } catch (e: any) {
-            logger.error(
-              `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
-              e
-            );
-          }
+        try {
+          await supabase.from("hub_product_requests").insert({
+            user_id: userId,
+            product_id: productId,
+            product_title: title,
+            product_type: type,
+            requested_at: new Date().toISOString(),
+            features: features,
+            cover: getImageUrl(cover || ""),
+            product_url: productUrl,
+            custom_text: customText,
+            subscribed_from_page: JSON.stringify({
+              path: subscribedFromPage,
+              origin: req.headers.get("origin"),
+              referer: req.headers.get("referer"),
+              url: req.url,
+            }),
+          });
+        } catch (e: any) {
+          logger.error(
+            `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
+            e
+          );
         }
       }
 

@@ -6,45 +6,68 @@ import BoringAvatar from "boring-avatars";
 import { pickRandomColor, pickRandomColorCode } from "@/utils";
 
 interface StatsProps {
-  avatars: string[];
+  avatars?: string[];
   userCount: number;
   resourceType: ResourceType;
+  colorName?: string;
+  className?: string;
 }
 
-export function Stats({ avatars, userCount, resourceType }: StatsProps) {
+export function AvatarsStats({
+  avatars,
+  userCount,
+  resourceType,
+  colorName,
+  className,
+}: StatsProps) {
   return (
-    <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl squircle-white">
-      <UserAvatars avatars={avatars} />
+    <div
+      className={cn(
+        "inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl",
+        colorName ?? "squircle-white",
+        className
+      )}
+    >
+      <UserAvatars avatars={avatars} userCount={userCount} />
       <UserCount count={userCount} resourceType={resourceType} />
     </div>
   );
 }
 
-function UserAvatars({ avatars }: { avatars: string[] }) {
+function UserAvatars({
+  avatars,
+  userCount,
+}: {
+  avatars?: string[];
+  userCount?: number;
+}) {
+  const numPeople = avatars?.length ?? userCount ?? 0;
   return (
     <div className="inline-flex items-start">
-      <AvatarGroup numPeople={99}>
-        {avatars.map((avatar, index) => (
-          <Avatar key={index} className="w-6 h-6">
-            <AvatarImage src={avatar} />
-            <AvatarFallback className={cn("relative pointer-events-none")}>
-              {/* <span className="text-[.5rem] font-bold text-zinc-500 text-wrap">
-                A Z
-              </span> */}
-              <BoringAvatar
-                name={avatar.slice(8).replace(".png", "")}
-                colors={[
-                  pickRandomColorCode(),
-                  pickRandomColorCode(),
-                  pickRandomColorCode(),
-                  pickRandomColorCode(),
-                  pickRandomColorCode(),
-                ]}
-                variant="beam"
-              />
-            </AvatarFallback>
-          </Avatar>
-        ))}
+      <AvatarGroup numPeople={numPeople}>
+        {Array.from({ length: numPeople })
+          .slice(0, 5)
+          .map((_, index) => (
+            <Avatar key={index} className="w-6 h-6">
+              <AvatarImage src={avatars?.[index]} />
+              <AvatarFallback className={cn("relative pointer-events-none")}>
+                <BoringAvatar
+                  name={
+                    avatars?.[index]?.slice(8)?.replace(".png", "") ??
+                    (index + 1).toString()
+                  }
+                  colors={[
+                    pickRandomColorCode(),
+                    pickRandomColorCode(),
+                    pickRandomColorCode(),
+                    pickRandomColorCode(),
+                    pickRandomColorCode(),
+                  ]}
+                  variant="beam"
+                />
+              </AvatarFallback>
+            </Avatar>
+          ))}
       </AvatarGroup>
     </div>
   );
@@ -58,13 +81,13 @@ function UserCount({
   resourceType: ResourceType;
 }) {
   return (
-    <span className="relative text-sm text-zinc-600">
-      {count}{" "}
+    <span className="relative flex items-center gap-1 font-bold text-sm text-zinc-600">
+      {count > 2 ? `+${count}` : count}{" "}
       {resourceType === ResourceType.COURSE
-        ? "students"
+        ? "Étudiants 🧑‍🎓"
         : resourceType === ResourceType.EBOOK
-        ? "viewers"
-        : "watchers"}
+          ? "Lecteurs 📖"
+          : "Vues 🍿"}
     </span>
   );
 }

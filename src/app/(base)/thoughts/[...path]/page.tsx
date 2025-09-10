@@ -4,7 +4,7 @@ import {
   getPostBySlug,
   getPostWithAdjacent,
 } from "@/module/content/utils/lib/posts";
-import { getActivePathFromUrlParam } from "@/utils/format-content";
+import { getActivePathFromUrlParam } from "@/utils/route-utils";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";

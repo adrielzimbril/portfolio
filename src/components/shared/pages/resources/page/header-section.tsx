@@ -116,7 +116,9 @@ export function HeaderSection({
 
       <div className="mt-2 flex gap-2 flex-wrap">
         {type && <ProductTypeSubscribersBadge type={type as any} />}
-        {mainTitle && <ProductTitleRequestsBadge title={mainTitle} />}
+        {mainTitle && (
+          <ProductTitleRequestsBadge title={mainTitle} type={type} />
+        )}
       </div>
 
       {ctaButton && ctaButton.startsWith("http") ? (

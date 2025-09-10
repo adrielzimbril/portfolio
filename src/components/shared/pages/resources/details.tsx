@@ -1,6 +1,6 @@
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
-import { Stats } from "@/components/shared/pages/resources/avatar-stats";
+import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
@@ -34,16 +34,27 @@ export function CardInfo({
             resourceType === ResourceType.COURSE
               ? "Formation 🎥"
               : resourceType === ResourceType.EBOOK
-              ? "E-book 📕"
-              : "Masterclass 🎬"
+                ? "E-book 📕"
+                : "Masterclass 🎬"
           }
           tags={tags.map((tag) => tag.name)}
         />
 
         <Description description={description} features={features} />
 
-        <Stats
-          avatars={avatars || ["image1", "image2", "image3", "image4"]}
+        <AvatarsStats
+          avatars={
+            avatars || [
+              "image1",
+              "image2",
+              "image3",
+              "image4",
+              "image5",
+              "image6",
+              "image7",
+              "image8",
+            ]
+          }
           userCount={userCount}
           resourceType={resourceType}
         />

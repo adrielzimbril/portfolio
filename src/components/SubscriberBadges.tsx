@@ -7,6 +7,8 @@ import {
   useProductTitleRequestsCount,
 } from "@/hooks/useSubscriberStats";
 import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
+import { ResourceType } from "@/types";
+import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
 
 function formatCount(n: number) {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
@@ -26,11 +28,7 @@ export function NewsletterSubscribersBadge() {
   );
 }
 
-export function ProductTypeSubscribersBadge({
-  type,
-}: {
-  type: "course" | "ebook" | "video";
-}) {
+export function ProductTypeSubscribersBadge({ type }: { type: ResourceType }) {
   const { count, loading } = useProductTypeSubscribersCount(type);
   return (
     <Badge className="squircle squircle-emerald-100" variant="colored">
@@ -42,14 +40,50 @@ export function ProductTypeSubscribersBadge({
   );
 }
 
-export function ProductTitleRequestsBadge({ title }: { title: string }) {
+export function ProductTitleRequestsBadge({
+  title,
+  type,
+}: {
+  title: string;
+  type: ResourceType;
+}) {
   const { count, loading } = useProductTitleRequestsCount(title);
+  const productType =
+    type === ResourceType.COURSE
+      ? "Étudiants 🧑‍🎓"
+      : type === ResourceType.EBOOK
+        ? "Lecteurs 📖"
+        : "Vues 🍿";
   return (
     <Badge className="squircle squircle-amber-100" variant="colored">
-      <span className="flex items-center gap-2">
-        <GiftBoxOne size={16} className="text-amber-500" variant="bulk" />
-        {loading ? "..." : `${formatCount(count ?? 0)} demandes`}
+      <span className="flex items-center gap-1">
+        <GiftBoxOne size={16} className="text-amber-600" variant="bulk" />
+        {loading ? (
+          <span className="animate-pulse transition-all ease-in-out duration-200">
+            🤯
+          </span>
+        ) : (
+          `${formatCount(count ?? 0)} ${productType}`
+        )}
       </span>
     </Badge>
   );
 }
+
+export function ProductAvatarsStats({
+  title,
+  type,
+}: {
+  title: string;
+  type: ResourceType;
+}) {
+  const { count, loading } = useProductTitleRequestsCount(title);
+  return (
+    <AvatarsStats
+      userCount={count ?? 0}
+      resourceType={type}
+      colorName="squircle-zinc-100"
+    />
+  );
+}
+
