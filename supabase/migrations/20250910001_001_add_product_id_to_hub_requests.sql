@@ -12,67 +12,40 @@ drop function if exists public.create_product_request();
 
 -- Create or replace the function to include the new fields
 create or replace function public.add_hub_product_request(
-  p_user_id uuid,
-  p_product_id text,
-  p_product_title text,
-  p_product_type text,
-  p_features text[],
-  p_cover_image text,
-  p_product_url text,
-  p_custom_text text,
-  p_subscribed_from_page text
+  p_user_id uuid default null,
+  p_email text default null,
+  p_name text default null,
+  p_phone text default null,
+  p_product_id text default null,
+  p_product_title text default null,
+  p_product_type text default null,
+  p_features text[] default null,
+  p_cover_image text default null,
+  p_product_url text default null,
+  p_custom_text text default null,
+  p_subscribed_from_page text default null
 )
-returns uuid
+returns table (id bigint, user_id uuid)
 language plpgsql
 as $$
 declare
-  v_request_id uuid;
-  v_user_email text;
-  v_user_name text;
-  v_user_phone text;
-  v_user_id uuid;
+  v_user_id uuid := p_user_id;
+  v_row public.hub_product_requests;
 begin
-  -- Get or create user if user_id is provided
-  if p_user_id is not null then
-    select email, name, phone into v_user_email, v_user_name, v_user_phone
-    from public.users
-    where id = p_user_id;
-    
-    v_user_id := p_user_id;
+  if v_user_id is null then
+    v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
   end if;
 
-  -- Insert the product request with the new fields
-  insert into public.hub_product_requests (
-    user_id,
-    email,
-    name,
-    phone,
-    product_id,
-    product_title,
-    product_type,
-    features,
-    cover_image,
-    product_url,
-    custom_text,
-    subscribed_from_page,
-    requested_at
+  insert into public.hub_product_requests(
+    email, name, phone,
+    product_title, product_type, features, cover_image, product_url, custom_text,
+    subscribed_from_page, user_id, product_id
   ) values (
-    v_user_id,
-    v_user_email,
-    v_user_name,
-    v_user_phone,
-    p_product_id,
-    p_product_title,
-    p_product_type,
-    p_features,
-    p_cover_image,
-    p_product_url,
-    p_custom_text,
-    p_subscribed_from_page,
-    now()
-  )
-  returning id into v_request_id;
+    p_email, p_name, p_phone,
+    p_product_title, p_product_type, p_features, p_cover_image, p_product_url, p_custom_text,
+    p_subscribed_from_page, v_user_id, p_product_id
+  ) returning * into v_row;
 
-  return v_request_id;
+  return query select v_row.id, v_row.user_id;
 end;
 $$;
