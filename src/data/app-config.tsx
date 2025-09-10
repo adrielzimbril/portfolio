@@ -1,4 +1,8 @@
 import type { Config } from "@/data/app-config-types";
+import { USFlagRound } from "@/components/icons/flags/USFlagRound";
+import { FRFlagRound } from "@/components/icons/flags/FRFlagRound";
+import { USFlag } from "@/components/icons/flags/USFlag";
+import { FRFlag } from "@/components/icons/flags/FRFlag";
 
 export const appConfig = {
   // Internationalization
@@ -11,10 +15,14 @@ export const appConfig = {
       en: {
         currency: "USD",
         label: "English",
+        icon: <USFlag width="20px" height="15px" />,
+        iconMobile: <USFlagRound />,
       },
       fr: {
         currency: "EUR",
         label: "Français",
+        icon: <FRFlag width="20px" height="15px" />,
+        iconMobile: <FRFlagRound />,
       },
     },
     // The default locale is used if no locale is provided

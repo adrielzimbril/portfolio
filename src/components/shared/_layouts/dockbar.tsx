@@ -1,6 +1,6 @@
 "use client";
 import { Dock, DockIcon } from "@/components/shiro/magicui/dock";
-import { ModeToggle } from "@/components/shared/mode-toggle";
+import { ModeToggle } from "@/components/shared/_layouts/mode-toggle";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,

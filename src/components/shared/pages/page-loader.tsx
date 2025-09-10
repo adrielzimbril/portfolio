@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";
 import { getImageUrl } from "@/utils/base-url";
-import { Loader } from "../loader";
+import { Loader } from "../_layouts/loader";
 
 interface GenericLoadingPageProps {
   title?: string;

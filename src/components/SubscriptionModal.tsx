@@ -28,7 +28,7 @@ import { useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
 import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
-import { Loader } from "@/components/shared/loader";
+import { Loader } from "@/components/shared/_layouts/loader";
 
 // Form Info Schema for ensuring name and phone
 const FormInfoSchema = z.object({

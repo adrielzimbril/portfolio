@@ -1,7 +1,14 @@
 export type Config = {
   i18n: {
     enabled: boolean;
-    locales: { [locale: string]: { currency: string; label: string } };
+    locales: {
+      [locale: string]: {
+        currency: string;
+        label: string;
+        icon: React.ReactNode;
+        iconMobile: React.ReactNode;
+      };
+    };
     defaultLocale: string;
     defaultCurrency: string;
     localeCookieName: string;

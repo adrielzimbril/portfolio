@@ -2,9 +2,9 @@
 
 import { setLocaleCookie } from "@i18n/lib/locale-cookie";
 import type { Locale } from "@i18n/types";
-import { revalidatePath } from "next/cache";
+import { clearCache } from "@/utils/cache";
 
 export async function updateLocale(locale: Locale) {
-	await setLocaleCookie(locale);
-	revalidatePath("/");
+  await setLocaleCookie(locale);
+  clearCache();
 }

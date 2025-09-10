@@ -5,7 +5,7 @@ import { PreviewItem } from "@/types";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
-import { Loader } from "@/components/shared/loader";
+import { Loader } from "@/components/shared/_layouts/loader";
 import { Link } from "@/components/ui/link";
 import { routes } from "@/data/route";
 

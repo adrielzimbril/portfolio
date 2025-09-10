@@ -1,15 +1,15 @@
 "use client";
 
 import { Icons } from "@/components/shared/icons";
-import { NavMenu } from "@/components/shared/nav-menu";
-import { Header as NavMenuSec } from "@/components/shared/navbarsec";
-import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { NavMenu } from "@/components/shared/_layouts/nav-menu";
+import { Header as NavMenuSec } from "@/components/shared/_layouts/navbarsec";
+import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/utils/utils";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useScroll } from "motion/react";
 import { useEffect, useState } from "react";
-import { LogoName } from "./icons/logo-name";
+import { LogoName } from "../icons/logo-name";
 import Image from "next/image";
 import { routes } from "@/data/route";
 import { Link } from "@/components/ui/link";
