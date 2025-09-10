@@ -20,6 +20,7 @@ export function getResourcesUrl(
 }
 
 export function getImageUrl(slug: string) {
+  if (!slug) return "";
   if (slug.startsWith("http://") || slug.startsWith("https://")) {
     return slug;
   }

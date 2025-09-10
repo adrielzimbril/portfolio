@@ -1,4 +1,5 @@
-import { NextRequest } from 'next/server'
+import { getImageUrl } from "@/utils/base-url";
+import { NextRequest } from "next/server";
 import { supabase } from "@/module/supabase/client";
 import logger from "@/utils/logger";
 import { sendEmail } from "@/module/mail";
@@ -32,6 +33,7 @@ export async function POST(req: NextRequest) {
     productType,
     subscribedFromPage,
     updateExisting,
+    updateLayer,
   }: {
     email: string;
     name?: string;
@@ -40,6 +42,7 @@ export async function POST(req: NextRequest) {
     productType?: "course" | "ebook" | "video";
     subscribedFromPage?: string;
     updateExisting?: boolean;
+    updateLayer?: boolean;
   } = body;
 
   if (!email) {
@@ -53,75 +56,62 @@ export async function POST(req: NextRequest) {
   // search user by email
   const { data: existingUser, error: findError } = await supabase
     .from("users")
-    .select("*")
-    .eq("email", email);
-  const alreadyExists = Boolean(existingUser?.length > 0);
-
+    .select("id")
+    .eq("email", email)
+    .limit(1);
+  const alreadyExists = Boolean(existingUser!.length > 0);
   if (!alreadyExists) {
     try {
-      const { data: userData, error: userErr } = await supabase.rpc(
-        "upsert_user",
-        {
-          p_name: name ?? "",
-          p_email: email ?? undefined,
-          p_phone: phone ?? "",
-        }
-      );
-
-      if (userErr) {
-        logger.warn(
-          "upsert_user RPC failed, continuing without user link",
-          userErr
-        );
-      } else {
-        // Supabase returns a single row for this RPC
-        userId = (userData as any)?.id;
-      }
+      const { data: userData } = await supabase.rpc("upsert_user", {
+        p_name: name ?? "",
+        p_email: email ?? undefined,
+        p_phone: phone ?? "",
+      });
+      // Supabase returns a single row for this RPC
+      userId = userData!.id;
     } catch (e) {
-      userId = undefined;
       logger.warn("upsert_user RPC threw, continuing without user link", e);
     }
-
-    if (!userId) {
-      return new Response(
-        JSON.stringify({
-          error: "User creation failed",
-          statusText: "Step before 1 failed",
-        }),
-        {
-          status: 500,
-        }
-      );
-    }
+  } else if (existingUser && existingUser.length > 0) {
+    userId = existingUser[0].id;
   }
   // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
   // logger.info("Adding newsletter subscriber", { email, name, phone });
-  try {
-    const { data: subscriptionData, error: addErr } = await supabase.rpc(
-      "add_newsletter_subscriber",
-      {
-        p_user_id: userId,
-        p_email: email,
-        p_name: name,
-        p_phone: phone,
-        p_subscribed_from_page: JSON.stringify({
+
+  if (!alreadyExists && userId) {
+    try {
+      await supabase.from("newsletter_subscribers").insert({
+        created_at: new Date().toISOString(),
+        user_id: userId,
+        subscribed_from_page: JSON.stringify({
+          path: subscribedFromPage,
           origin: req.headers.get("origin"),
           referer: req.headers.get("referer"),
           url: req.url,
         }),
-      }
-    );
-    logger.info("Newsletter subscriber added", {
-      data: subscriptionData,
-      error: addErr,
-    });
-  } catch (e) {
-    logger.error("Failed to add newsletter subscriber", { error: e });
+        updateexisting: alreadyExists,
+      });
+    } catch (e) {
+      logger.error(
+        `Failed to add newsletter subscriber for user ${userId} - ${email}`,
+        { error: e }
+      );
+    }
+  } else {
+    try {
+      await supabase.from("newsletter_subscribers").update({
+        updateexisting: alreadyExists,
+      });
+    } catch (e) {
+      logger.error(
+        `Failed to add newsletter subscriber for user ${userId} - ${email}`,
+        { error: e }
+      );
+    }
   }
 
   // Send welcome email only for first-time subscribers
-  if (!alreadyExists) {
-    logger.info("Sending welcome email", { email, name });
+  if (!alreadyExists && !updateExisting) {
     try {
       await sendEmail({
         to: [{ email, name }],
@@ -130,7 +120,10 @@ export async function POST(req: NextRequest) {
         locale: "en",
       });
     } catch (e) {
-      logger.warn("Welcome email send failed:", e);
+      logger.warn(
+        `Welcome email send failed for user ${userId} - ${email}:`,
+        e
+      );
     }
   }
 
@@ -142,58 +135,53 @@ export async function POST(req: NextRequest) {
       const productUrl = getResourcesUrl(PageType.HUB, slug);
       const customText = undefined;
 
-      logger.info("Adding hub product request", {
-        productId,
-        title,
-        type,
-      });
-      try {
-        const { data, error: rpcErr } = await supabase.rpc(
-          "add_hub_product_request",
-          {
-            p_user_id: userId,
-            p_email: email,
-            p_name: name,
-            p_phone: phone,
-            p_product_id: productId,
-            p_product_title: title,
-            p_product_type: type,
-            p_features: features,
-            p_cover: cover,
-            p_product_url: productUrl,
-            p_custom_text: customText,
-            p_subscribed_from_page: body.subscribedFromPage,
-          }
-        );
-
-        rpcErr &&
-          logger.error("Failed to store hub_product_request via RPC:", {
-            data,
-            error: rpcErr,
+      if (!alreadyExists && userId) {
+        try {
+          await supabase.from("hub_product_requests").insert({
+            user_id: userId,
+            product_id: productId,
+            product_title: title,
+            product_type: type,
+            features: features,
+            cover: getImageUrl(cover || ""),
+            product_url: productUrl,
+            custom_text: customText,
+            subscribed_from_page: JSON.stringify({
+              path: subscribedFromPage,
+              origin: req.headers.get("origin"),
+              referer: req.headers.get("referer"),
+              url: req.url,
+            }),
           });
-      } catch (e: any) {
-        logger.error(
-          "Failed: error caught to store hub_product_request via RPC:",
-          e
-        );
+        } catch (e: any) {
+          logger.error(
+            `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
+            e
+          );
+        }
       }
 
-      try {
-        await sendEmail({
-          to: [{ email, name }],
-          context: {
-            name,
-            productTitle: title,
-            features,
-            coverImage: cover,
-            productUrl,
-            customText,
-          },
-          templateId: "productDelivery",
-          locale: "en",
-        });
-      } catch (e) {
-        logger.warn("Product delivery email send failed:", e);
+      if (updateExisting) {
+        try {
+          await sendEmail({
+            to: [{ email, name }],
+            context: {
+              name,
+              productTitle: title,
+              features,
+              coverImage: cover,
+              productUrl,
+              customText,
+            },
+            templateId: "productDelivery",
+            locale: "en",
+          });
+        } catch (e) {
+          logger.warn(
+            `Product delivery email send failed for user ${userId} - ${email}:`,
+            e
+          );
+        }
       }
     }
   }
@@ -218,7 +206,10 @@ export async function POST(req: NextRequest) {
     }
   } catch (e: any) {
     // Do not fail the flow if Brevo fails
-    logger.warn("Brevo add contact error server:", e?.message || e);
+    logger.warn(
+      `Brevo add contact error for user ${userId} - ${email}:`,
+      e?.message || e
+    );
   }
 
   return new Response(JSON.stringify({ success: true }), {

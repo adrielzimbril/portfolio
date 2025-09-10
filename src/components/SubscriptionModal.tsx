@@ -93,6 +93,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     updateExisting: boolean;
     productId?: string;
     productType?: ResourceTypeKey;
+    updateLayer?: boolean;
   }) => {
     return fetch("/api/subscribe", {
       method: "POST",
@@ -117,6 +118,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           updateExisting: false, // Première inscription
           productId,
           productType,
+          updateLayer: false,
         });
 
         const json = await res.json();
@@ -190,6 +192,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         subscribedFromPage:
           typeof window !== "undefined" ? window.location.pathname : undefined,
         updateExisting: true,
+        updateLayer: true,
       });
 
       setIsSuccess(true);
