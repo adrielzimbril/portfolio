@@ -1,7 +1,7 @@
 import { z } from "zod";
 import logger from "@/utils/logger";
 
-// 🎯 Schémas Zod pour validation et typage automatique
+// 🎯 Zod schemas for validation and automatic typing
 const TimezoneSchema = z.object({
   zoneName: z.string(),
   gmtOffset: z.number(),
@@ -96,7 +96,7 @@ const SimpleCurrencySchema = z.object({
   name_plural: z.string().optional(),
 });
 
-// 🌍 Schema principal pour la réponse complète
+// 🌍 Main schema for the complete response
 const IpInfoResponseSchema = z.object({
   ip: z.string(),
   type: z.string(),
@@ -116,10 +116,10 @@ const IpInfoResponseSchema = z.object({
   connection: ConnectionSchema,
 });
 
-// 🎯 Type TypeScript inféré automatiquement
+// 🎯 Type TypeScript inferred automatically
 export type IpInfoResponse = z.infer<typeof IpInfoResponseSchema>;
 
-// 📊 Types simplifiés pour usage facile
+// 📊 Simplified types for easy usage
 export interface IpInfoSummary {
   ip: string;
   location: string; // "City, Country"
@@ -155,7 +155,7 @@ interface IpInfoResult<T = IpInfoResponse> {
   validationErrors?: z.ZodError;
 }
 
-// 🔧 Fonction pour transformer en format simplifié
+// 🔧 Function to transform to simplified format
 function transformToSummary(data: IpInfoResponse): IpInfoSummary {
   const location = [data.city, data.country_name].filter(Boolean).join(", ");
 
@@ -183,38 +183,38 @@ function transformToSummary(data: IpInfoResponse): IpInfoSummary {
   };
 }
 
-// 🕐 Helper pour délais
+// 🕐 Helper for delays
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
- * Fonction SERVER-SIDE pour récupérer les informations d'une adresse IP
+ * SERVER-SIDE function to retrieve information about an IP address
  *
- * @param ip - L'adresse IP à rechercher (optionnel, utilise l'IP publique si non fournie)
- * @param options - Options de configuration
+ * @param ip - The IP address to search for (optional, uses public IP if not provided)
+ * @param options - Configuration options
  *
- * @returns Promesse avec les données, erreur et statut de validation
+ * @returns Promise with data, error and validation status
  *
  * @example
- * // Usage basique
+ * // Basic usage
  * const result = await getIpInfo('8.8.8.8');
  * if (result.data) {
  *   logger.info(result.data.country_name);
  * }
  *
- * // Usage avec options
+ * // Usage with options
  * const result = await getIpInfo('8.8.8.8', {
  *   timeout: 15000,
  *   retryCount: 3,
  *   simplified: true
  * });
  *
- * // Dans un Server Component
+ * // In a Server Component
  * export default async function Page() {
  *   const ipResult = await getIpInfo();
  *   return <div>{ipResult.data?.country_name}</div>;
  * }
  *
- * // Dans une Server Action
+ * // In a Server Action
  * 'use server';
  * export async function getLocationAction(ip: string) {
  *   const result = await getIpInfo(ip, { simplified: true });
@@ -234,15 +234,15 @@ export async function useIpInfo<T = IpInfoResponse>(
   } = options;
 
   try {
-    // 🌐 Construire l'URL
+    // Build the URL
     const baseUrl = "https://api.oricodes.com/ip";
     const url = ip ? `${baseUrl}/${ip}` : baseUrl;
 
-    // 🔄 Logique de retry
+    // Retry logic
     let lastError: Error;
     for (let attempt = 0; attempt <= retryCount; attempt++) {
       try {
-        // ⏰ Controller pour timeout
+        // Timeout controller
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -252,7 +252,7 @@ export async function useIpInfo<T = IpInfoResponse>(
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          // 🔧 Configuration pour Next.js
+          // Configuration for Next.js
           next: { revalidate: 300 }, // Cache 5min
         });
 
@@ -265,11 +265,11 @@ export async function useIpInfo<T = IpInfoResponse>(
         }
         const rawResult = await response.json();
 
-        // 🔍 Validation avec Zod
+        // 🔍 Validation with Zod
         try {
           const validatedData = IpInfoResponseSchema.parse(rawResult);
 
-          // 🎯 Transformation si demandée
+          // 🎯 Transformation if requested
           const finalData = simplified
             ? (transformToSummary(validatedData) as T)
             : (validatedData as T);
@@ -291,7 +291,7 @@ export async function useIpInfo<T = IpInfoResponse>(
                 validationErrors: validationError,
               };
             } else {
-              // Mode permissif : retourner les données brutes
+              // Permissive mode : use raw data
               logger.warn(
                 "Validation échouée, utilisation des données brutes:",
                 (validationError as any).errors
@@ -314,19 +314,19 @@ export async function useIpInfo<T = IpInfoResponse>(
       } catch (err) {
         lastError = err as Error;
 
-        // 🚫 Pas de retry pour les erreurs d'abort (timeout)
+        // 🚫 No retry for abort errors (timeout)
         if (err instanceof Error && err.name === "AbortError") {
           throw new Error(`Timeout: La requête a pris plus de ${timeout}ms`);
         }
 
-        // ⏳ Attendre avant le prochain essai (sauf pour le dernier)
+        // ⏳ Wait before next attempt (except last one)
         if (attempt < retryCount) {
           await sleep(retryDelay);
         }
       }
     }
 
-    // 💥 Si tous les essais ont échoué
+    // 💥 If all attempts failed
     throw lastError!;
   } catch (error) {
     const errorMessage =
@@ -344,10 +344,10 @@ export async function useIpInfo<T = IpInfoResponse>(
   }
 }
 
-// 🎁 Fonctions utilitaires spécialisées
+// 🎁 Specialized utility functions
 
 /**
- * Récupère les infos d'une IP (côté serveur)
+ * Retrieves IP information (server-side)
  */
 export async function useGetIpInfo(ip?: string, simplified: boolean = false) {
   return simplified
@@ -356,7 +356,7 @@ export async function useGetIpInfo(ip?: string, simplified: boolean = false) {
 }
 
 /**
- * Valide une adresse IP (format basique)
+ * Validates an IP address (basic format)
  */
 export function isValidIpAddress(ip: string): boolean {
   const ipv4Regex =

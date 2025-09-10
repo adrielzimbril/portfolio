@@ -111,7 +111,7 @@ export function GetResource({
             tags={tags.map((tag) => tag.name)}
             isCentered
           />
-          <div className="mt-2">
+          <div className="mt-2 flex items-center gap-2">
             <NewsletterSubscribersBadge />
             <ProductTypeSubscribersBadge type={type} />
             <ProductTitleRequestsBadge title={title} />

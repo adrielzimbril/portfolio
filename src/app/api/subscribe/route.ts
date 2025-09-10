@@ -56,10 +56,12 @@ export async function POST(req: NextRequest) {
   // search user by email
   const { data: existingUser, error: findError } = await supabase
     .from("users")
-    .select("id")
+    .select("*")
     .eq("email", email)
     .limit(1);
-  const alreadyExists = Boolean(existingUser!.length > 0);
+  const existingUserData = existingUser?.[0];
+  const alreadyExists = Boolean(existingUserData);
+
   if (!alreadyExists) {
     try {
       const { data: userData } = await supabase.rpc("upsert_user", {
@@ -72,8 +74,8 @@ export async function POST(req: NextRequest) {
     } catch (e) {
       logger.warn("upsert_user RPC threw, continuing without user link", e);
     }
-  } else if (existingUser && existingUser.length > 0) {
-    userId = existingUser[0].id;
+  } else if (existingUserData) {
+    userId = existingUserData.id;
   }
   // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
   // logger.info("Adding newsletter subscriber", { email, name, phone });
@@ -135,29 +137,37 @@ export async function POST(req: NextRequest) {
       const productUrl = getResourcesUrl(PageType.HUB, slug);
       const customText = undefined;
 
-      if (!alreadyExists && userId) {
-        try {
-          await supabase.from("hub_product_requests").insert({
-            user_id: userId,
-            product_id: productId,
-            product_title: title,
-            product_type: type,
-            features: features,
-            cover: getImageUrl(cover || ""),
-            product_url: productUrl,
-            custom_text: customText,
-            subscribed_from_page: JSON.stringify({
-              path: subscribedFromPage,
-              origin: req.headers.get("origin"),
-              referer: req.headers.get("referer"),
-              url: req.url,
-            }),
-          });
-        } catch (e: any) {
-          logger.error(
-            `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
-            e
-          );
+      if (userId) {
+        const { data: productRequests } = await supabase
+          .from("hub_product_requests")
+          .select("*")
+          .eq("product_id", productId)
+          .eq("user_id", userId);
+
+        if (productRequests?.length === 0) {
+          try {
+            await supabase.from("hub_product_requests").insert({
+              user_id: userId,
+              product_id: productId,
+              product_title: title,
+              product_type: type,
+              features: features,
+              cover: getImageUrl(cover || ""),
+              product_url: productUrl,
+              custom_text: customText,
+              subscribed_from_page: JSON.stringify({
+                path: subscribedFromPage,
+                origin: req.headers.get("origin"),
+                referer: req.headers.get("referer"),
+                url: req.url,
+              }),
+            });
+          } catch (e: any) {
+            logger.error(
+              `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
+              e
+            );
+          }
         }
       }
 

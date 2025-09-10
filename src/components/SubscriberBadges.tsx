@@ -17,10 +17,7 @@ function formatCount(n: number) {
 export function NewsletterSubscribersBadge() {
   const { count, loading } = useNewsletterSubscribersCount();
   return (
-    <Badge
-      className="squircle squircle-violet-100 squircle-smooth-xl squircle-5xl"
-      variant="colored"
-    >
+    <Badge className="squircle squircle-violet-100" variant="colored">
       <span className="flex items-center gap-2">
         <UsersGroup size={16} className="text-indigo-400" variant="bulk" />
         {loading ? "..." : `${formatCount(count ?? 0)} abonnés`}
@@ -36,11 +33,7 @@ export function ProductTypeSubscribersBadge({
 }) {
   const { count, loading } = useProductTypeSubscribersCount(type);
   return (
-    <Badge
-      className="squircle squircle-emerald-100 squircle-smooth-xl squircle-5xl"
-      variant="colored"
-      size="md"
-    >
+    <Badge className="squircle squircle-emerald-100" variant="colored">
       <span className="flex items-center gap-2">
         <Box size={16} className="text-emerald-500" variant="bulk" />
         {loading ? "..." : `${formatCount(count ?? 0)} demandes ${type}`}
@@ -52,11 +45,7 @@ export function ProductTypeSubscribersBadge({
 export function ProductTitleRequestsBadge({ title }: { title: string }) {
   const { count, loading } = useProductTitleRequestsCount(title);
   return (
-    <Badge
-      className="squircle squircle-amber-100 squircle-smooth-xl squircle-5xl"
-      variant="colored"
-      size="md"
-    >
+    <Badge className="squircle squircle-amber-100" variant="colored">
       <span className="flex items-center gap-2">
         <GiftBoxOne size={16} className="text-amber-500" variant="bulk" />
         {loading ? "..." : `${formatCount(count ?? 0)} demandes`}
