@@ -133,9 +133,30 @@ export async function POST(req: NextRequest) {
     const productId = validateSimpleClientToken(productIdToken);
     const productData = await getResourceById(productId.payload?.id);
     if (productData) {
-      const { title, features, cover, slug } = productData;
+      const { title, features, cover, slug, type } = productData;
       const productUrl = getResourcesUrl(PageType.HUB, slug);
       const customText = undefined;
+
+      try {
+        const { error: rpcErr } = await supabase.rpc(
+          "add_hub_product_request",
+          {
+            p_user_id: userId,
+            p_product_title: title,
+            p_product_type: type,
+            p_features: features,
+            p_cover_image: cover,
+            p_product_url: productUrl,
+            p_custom_text: customText,
+            p_subscribed_from_page: body.subscribedFromPage,
+          }
+        );
+
+        rpcErr &&
+          logger.error("Failed to store hub_product_request via RPC:", rpcErr);
+      } catch (e: any) {
+        logger.error("Failed to store hub_product_request via RPC:", e);
+      }
 
       try {
         await sendEmail({
