@@ -96,9 +96,8 @@ BEGIN
     v_user_id,
     p_product_id
   )
-  ON CONFLICT (user_id) DO UPDATE
-    SET product_id         = EXCLUDED.product_id,
-        product_title      = EXCLUDED.product_title,
+  ON CONFLICT (user_id, product_id) DO UPDATE
+    SET product_title      = EXCLUDED.product_title,
         product_type       = EXCLUDED.product_type,
         features           = EXCLUDED.features,
         cover              = EXCLUDED.cover,

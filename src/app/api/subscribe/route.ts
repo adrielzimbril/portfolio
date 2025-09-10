@@ -95,25 +95,28 @@ export async function POST(req: NextRequest) {
     }
   }
   // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
-  const { data: subscriptionData, error: addErr } = await supabase.rpc(
-    "add_newsletter_subscriber",
-    {
-      p_user_id: userId,
-      p_email: email,
-      p_name: name,
-      p_phone: phone,
-      p_subscribed_from_page: JSON.stringify({
-        origin: req.headers.get("origin"),
-        referer: req.headers.get("referer"),
-        url: req.url,
-      }),
-    }
-  );
-
-  if (addErr) {
-    return new Response(JSON.stringify({ error: addErr.message }), {
-      status: 500,
+  // logger.info("Adding newsletter subscriber", { email, name, phone });
+  try {
+    const { data: subscriptionData, error: addErr } = await supabase.rpc(
+      "add_newsletter_subscriber",
+      {
+        p_user_id: userId,
+        p_email: email,
+        p_name: name,
+        p_phone: phone,
+        p_subscribed_from_page: JSON.stringify({
+          origin: req.headers.get("origin"),
+          referer: req.headers.get("referer"),
+          url: req.url,
+        }),
+      }
+    );
+    logger.info("Newsletter subscriber added", {
+      data: subscriptionData,
+      error: addErr,
     });
+  } catch (e) {
+    logger.error("Failed to add newsletter subscriber", { error: e });
   }
 
   // Send welcome email only for first-time subscribers
@@ -139,8 +142,13 @@ export async function POST(req: NextRequest) {
       const productUrl = getResourcesUrl(PageType.HUB, slug);
       const customText = undefined;
 
+      logger.info("Adding hub product request", {
+        productId,
+        title,
+        type,
+      });
       try {
-        const { error: rpcErr } = await supabase.rpc(
+        const { data, error: rpcErr } = await supabase.rpc(
           "add_hub_product_request",
           {
             p_user_id: userId,
@@ -159,9 +167,15 @@ export async function POST(req: NextRequest) {
         );
 
         rpcErr &&
-          logger.error("Failed to store hub_product_request via RPC:", rpcErr);
+          logger.error("Failed to store hub_product_request via RPC:", {
+            data,
+            error: rpcErr,
+          });
       } catch (e: any) {
-        logger.error("Failed to store hub_product_request via RPC:", e);
+        logger.error(
+          "Failed: error caught to store hub_product_request via RPC:",
+          e
+        );
       }
 
       try {
