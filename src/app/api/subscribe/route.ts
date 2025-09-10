@@ -96,10 +96,12 @@ export async function POST(req: NextRequest) {
   }
   // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
   const { data: subscriptionData, error: addErr } = await supabase.rpc(
-    "create_newsletter_subscription",
+    "add_newsletter_subscriber",
     {
+      p_user_id: userId,
       p_email: email,
       p_name: name,
+      p_phone: phone,
       p_subscribed_from_page: JSON.stringify({
         origin: req.headers.get("origin"),
         referer: req.headers.get("referer"),
@@ -138,16 +140,22 @@ export async function POST(req: NextRequest) {
       const customText = undefined;
 
       try {
-        const { error: rpcErr } = await supabase.rpc("create_product_request", {
-          p_user_id: userId,
-          p_product_title: title,
-          p_product_type: type,
-          p_features: features?.join(","),
-          p_cover_image: cover,
-          p_product_url: productUrl,
-          p_custom_text: customText,
-          p_subscribed_from_page: body.subscribedFromPage,
-        });
+        const { error: rpcErr } = await supabase.rpc(
+          "add_hub_product_request",
+          {
+            p_user_id: userId,
+            p_email: email,
+            p_name: name,
+            p_phone: phone,
+            p_product_title: title,
+            p_product_type: type,
+            p_features: features,
+            p_cover_image: cover,
+            p_product_url: productUrl,
+            p_custom_text: customText,
+            p_subscribed_from_page: body.subscribedFromPage,
+          }
+        );
 
         rpcErr &&
           logger.error("Failed to store hub_product_request via RPC:", rpcErr);

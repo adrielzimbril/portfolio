@@ -6,6 +6,10 @@ alter table public.hub_product_requests
   add column if not exists product_id text,
   add column if not exists requested_at timestamptz not null default now();
 
+-- Drop the old functions
+drop function if exists public.create_newsletter_subscription();
+drop function if exists public.create_product_request();
+
 -- Create or replace the function to include the new fields
 create or replace function public.add_hub_product_request(
   p_user_id uuid,
