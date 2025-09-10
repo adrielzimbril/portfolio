@@ -49,7 +49,7 @@ export function HeaderSection({
       description={description}
       tags={tags}
       type={type}
-      ctaButton={routes.contact.link}
+      ctaButton={pageViewsData.slug}
       ctaButtonText="Obtenir 🦄"
     />
   );

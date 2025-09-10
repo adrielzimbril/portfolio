@@ -3,7 +3,7 @@ import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
 import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types";
 import BoringAvatar from "boring-avatars";
-import { pickRandomColor, pickRandomColorCode } from "@/utils";
+import { getImageUrl, pickRandomColor, pickRandomColorCode } from "@/utils";
 
 interface StatsProps {
   avatars?: string[];
@@ -49,20 +49,16 @@ function UserAvatars({
           .slice(0, 5)
           .map((_, index) => (
             <Avatar key={index} className="w-6 h-6">
-              <AvatarImage src={avatars?.[index]} />
+              <AvatarImage src={getImageUrl(avatars?.[index] ?? "")} />
               <AvatarFallback className={cn("relative pointer-events-none")}>
                 <BoringAvatar
                   name={
                     avatars?.[index]?.slice(8)?.replace(".png", "") ??
                     (index + 1).toString()
                   }
-                  colors={[
-                    pickRandomColorCode(),
-                    pickRandomColorCode(),
-                    pickRandomColorCode(),
-                    pickRandomColorCode(),
-                    pickRandomColorCode(),
-                  ]}
+                  colors={Array.from({ length: 8 }).map(
+                    () => pickRandomColorCode() ?? "#ffffff"
+                  )}
                   variant="beam"
                 />
               </AvatarFallback>
@@ -87,7 +83,7 @@ function UserCount({
         ? "Étudiants 🧑‍🎓"
         : resourceType === ResourceType.EBOOK
           ? "Lecteurs 📖"
-          : "Vues 🍿"}
+          : "Participants 🍿"}
     </span>
   );
 }

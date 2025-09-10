@@ -13,7 +13,7 @@ import {
   TextPreviewContent,
   PreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
-import { pickRandomColor } from "@/utils";
+import { getResourceAskUrl, pickRandomColor } from "@/utils";
 import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
 import { Button } from "@/components/ui/button";
 import { useScrollTo } from "@/hooks/useScrollTo";
@@ -21,6 +21,7 @@ import { ResourceType } from "@/types/enum";
 import {
   ProductTypeSubscribersBadge,
   ProductTitleRequestsBadge,
+  ProductAvatarsStats,
 } from "@/components/SubscriberBadges";
 import { PreviewIcon } from "@/components/shared/pages/shared/preview";
 
@@ -99,6 +100,13 @@ export function HeaderSection({
 
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-white overflow-hidden">
+          {mainTitle && type && (
+            <ProductAvatarsStats
+              colorName="squircle-indigo-100"
+              title={mainTitle}
+              type={type}
+            />
+          )}
           {tags.map((tag, index) => (
             <Badge
               key={index}
@@ -113,23 +121,15 @@ export function HeaderSection({
           ))}
         </div>
       )}
-
-      <div className="mt-2 flex gap-2 flex-wrap">
-        {type && <ProductTypeSubscribersBadge type={type as any} />}
-        {mainTitle && (
-          <ProductTitleRequestsBadge title={mainTitle} type={type} />
-        )}
-      </div>
-
-      {ctaButton && ctaButton.startsWith("http") ? (
+      {ctaButton && (!type ? ctaButton.startsWith("http") : true) ? (
         <div className="relative w-full">
           <Link
-            href={ctaButton}
+            href={type ? getResourceAskUrl(ctaButton) : ctaButton}
             className="w-full font-bold text-2xl py-5"
             size="lg"
             likeButton
             asFull
-            data-project-url={ctaButton}
+            data-project-url={type ? getResourceAskUrl(ctaButton) : ctaButton}
           >
             <span>{ctaButtonText}</span>
           </Link>

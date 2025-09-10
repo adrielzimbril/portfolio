@@ -9,6 +9,7 @@ import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeho
 import { routes } from "@/data/route";
 import logger from "@/utils/logger";
 import { getImageUrl } from "@/utils/base-url";
+import { siteConfig } from "@/data/config";
 
 function EmailForm() {
   const handleSubmit = () => {
@@ -66,7 +67,7 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
               et conseils sur mon
             </span>
             <Link
-              href="https://blog.adrielzimbril.com"
+              href={routes.thoughts.link}
               variant="ghost"
               onClick={() => handleLinkClick("blog")}
               className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline px-1"
@@ -75,7 +76,7 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
             </Link>
             <span>et sur</span>
             <Link
-              href="https://linkedin.com/in/adriel-zimbril"
+              href={siteConfig.links.contact.social.linkedin.url}
               variant="ghost"
               onClick={() => handleLinkClick("linkedin")}
               className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-1"

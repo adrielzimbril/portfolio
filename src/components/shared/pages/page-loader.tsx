@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";
 import { getImageUrl } from "@/utils/base-url";
+import { Loader } from "../loader";
 
 interface GenericLoadingPageProps {
   title?: string;
@@ -154,33 +155,6 @@ function FloatingCard({
   );
 }
 
-function LoadingDots() {
-  return (
-    <motion.div
-      className="flex gap-2 items-center justify-center"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.5 }}
-    >
-      {[0, 1, 2].map((i) => (
-        <motion.div
-          key={i}
-          className="w-3 h-3 bg-[#2a2a2a] rounded-full"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.4, 1, 0.4],
-          }}
-          transition={{
-            duration: 1.2,
-            repeat: Infinity,
-            delay: i * 0.2 + 1.5,
-          }}
-        />
-      ))}
-    </motion.div>
-  );
-}
-
 const statsData = [
   { number: "12+", label: "Projects" },
   { number: "3+", label: "Years" },
@@ -206,10 +180,10 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
             index % 4 === 0
               ? "top-left"
               : index % 4 === 1
-              ? "top-right"
-              : index % 4 === 2
-              ? "bottom-left"
-              : "bottom-right"
+                ? "top-right"
+                : index % 4 === 2
+                  ? "bottom-left"
+                  : "bottom-right"
           }
           title={skill}
         />
@@ -368,19 +342,8 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           <LoadingProgressBar isPage={isPage} />
         </motion.div>
 
-        {/* Animated loading points */}
-        {/* <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-greys-08 rounded-full animate-bounce animate-infinite delay-0"></div>
-          <div className="w-3 h-3 bg-greys-08 rounded-full animate-bounce animate-infinite delay-150"></div>
-          <div className="w-3 h-3 bg-greys-08 rounded-full animate-bounce animate-infinite delay-300"></div>
-        </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-greys-08 rounded-full animate-pulse animate-infinite delay-0"></div>
-          <div className="w-3 h-3 bg-greys-08 rounded-full animate-pulse animate-infinite delay-300"></div>
-          <div className="w-3 h-3 bg-greys-08 rounded-full animate-pulse animate-infinite delay-600"></div>
-        </div> */}
-        <div className="flex items-center gap-2">
-          <LoadingDots />
+          <Loader color="bg-zinc-900" />
         </div>
       </motion.div>
 

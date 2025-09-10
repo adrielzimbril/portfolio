@@ -28,7 +28,7 @@ import {
  */
 function pickRandomColorCode(
   id?: DEFAULT_COLOR_CODE_NAME | number
-): DEFAULT_COLOR_CODE {
+): DEFAULT_COLOR_CODE | undefined {
   const colors = Object.values(DEFAULT_COLOR_CODE);
 
   if (id !== undefined) {
@@ -74,7 +74,7 @@ function pickRandomColorCode(
  */
 function pickRandomColor(
   id?: DEFAULT_CATEGORY_COLOR_NAME | number
-): DEFAULT_TAG_COLOR {
+): DEFAULT_TAG_COLOR | undefined {
   const colors = Object.values(DEFAULT_TAG_COLOR);
 
   if (id !== undefined) {

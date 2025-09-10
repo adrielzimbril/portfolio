@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import logger from "@/utils/logger";
 
 async function fetchJSON(url: string) {
   const res = await fetch(url, { cache: "no-store" }); // 👈 no-store = fresh data
@@ -18,8 +17,6 @@ export function useNewsletterSubscribersCount() {
       revalidateOnFocus: true, // 👈 re-fetch when we come back to the page
     }
   );
-
-  logger.info("newsletter subscribers count", data);
 
   return {
     count: data?.count ?? 0,
@@ -39,8 +36,6 @@ export function useProductTypeSubscribersCount(
     fetchJSON
   );
 
-  logger.info("product type subscribers count", data);
-
   return {
     count: data?.count ?? 0,
     loading: isLoading,
@@ -58,8 +53,6 @@ export function useProductTitleRequestsCount(title: string) {
       : null, // null = skip fetch if no title
     fetchJSON
   );
-
-  logger.info("product title subscribers count", data);
 
   return {
     count: data?.count ?? 0,

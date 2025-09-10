@@ -9,6 +9,7 @@ import {
 import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
 import { ResourceType } from "@/types";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
+import { cn } from "@/utils";
 
 function formatCount(n: number) {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
@@ -45,15 +46,16 @@ export function ProductTitleRequestsBadge({
   type,
 }: {
   title: string;
-  type: ResourceType;
-}) {
+  type?: ResourceType;
+}): JSX.Element | null {
+  if (!type) return null;
   const { count, loading } = useProductTitleRequestsCount(title);
   const productType =
     type === ResourceType.COURSE
       ? "Étudiants 🧑‍🎓"
       : type === ResourceType.EBOOK
         ? "Lecteurs 📖"
-        : "Vues 🍿";
+        : "Participants 🍿";
   return (
     <Badge className="squircle squircle-amber-100" variant="colored">
       <span className="flex items-center gap-1">
@@ -73,16 +75,18 @@ export function ProductTitleRequestsBadge({
 export function ProductAvatarsStats({
   title,
   type,
+  colorName,
 }: {
   title: string;
   type: ResourceType;
+  colorName?: string;
 }) {
   const { count, loading } = useProductTitleRequestsCount(title);
   return (
     <AvatarsStats
       userCount={count ?? 0}
       resourceType={type}
-      colorName="squircle-zinc-100"
+      colorName={cn(colorName ?? "squircle-zinc-100")}
     />
   );
 }

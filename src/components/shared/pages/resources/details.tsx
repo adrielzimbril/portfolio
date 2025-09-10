@@ -4,6 +4,7 @@ import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
+import { useProductTitleRequestsCount } from "@/hooks/useSubscriberStats";
 
 export function CardInfo({
   title,
@@ -24,6 +25,8 @@ export function CardInfo({
   avatars: string[];
   userCount: number;
 }) {
+  const { count: avatarCount, loading: avatarCountLoading } =
+    useProductTitleRequestsCount(title);
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
@@ -44,18 +47,20 @@ export function CardInfo({
 
         <AvatarsStats
           avatars={
-            avatars || [
-              "image1",
-              "image2",
-              "image3",
-              "image4",
-              "image5",
-              "image6",
-              "image7",
-              "image8",
-            ]
+            avatarCount < 1
+              ? ["image1"]
+              : (avatars ?? [
+                  "image1",
+                  "image2",
+                  "image3",
+                  "image4",
+                  "image5",
+                  "image6",
+                  "image7",
+                  "image8",
+                ])
           }
-          userCount={userCount}
+          userCount={avatarCount ?? userCount}
           resourceType={resourceType}
         />
       </div>
