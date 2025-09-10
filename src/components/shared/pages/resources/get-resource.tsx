@@ -13,10 +13,19 @@ import {
   ProductTitleRequestsBadge,
   ProductTypeSubscribersBadge,
 } from "@/components/SubscriberBadges";
-import { getDate } from "@/utils";
+import {
+  generateJwtToken,
+  generateSimpleClientToken,
+  generateToken,
+  getDate,
+} from "@/utils";
 import { ResourceType } from "@/types";
+import logger from "@/utils/logger";
+import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
+import { toast } from "sonner";
 
 export function GetResource({
+  id,
   title,
   cover,
   tags,
@@ -28,6 +37,7 @@ export function GetResource({
   path,
   locale,
 }: {
+  id?: string | number;
   title: string;
   cover?: string;
   tags: { name: string; color: string }[];
@@ -41,6 +51,13 @@ export function GetResource({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const emailValidator = useEmailValidator({ label: "Email", required: true });
+  const isEmailValid = !Boolean(emailValidator(email));
+
+  const productId = generateSimpleClientToken({
+    action: "validate-product-id",
+    id: id ?? "",
+  });
 
   return (
     <>
@@ -109,7 +126,15 @@ export function GetResource({
             />
 
             <Button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                if (isEmailValid) {
+                  setIsModalOpen(true);
+                } else {
+                  toast.error(
+                    "Oups ! Veuillez entrer une adresse email valide, s'il vous plaît 🦄"
+                  );
+                }
+              }}
               asFull
               whileTap
               asPointer
@@ -123,6 +148,7 @@ export function GetResource({
       <SubscriptionModal
         isOpen={isModalOpen}
         email={email || undefined}
+        productId={productId}
         productType={type}
         onClose={() => setIsModalOpen(false)}
       />

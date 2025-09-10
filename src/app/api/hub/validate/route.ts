@@ -3,6 +3,7 @@ import { supabase } from "@/module/supabase/client";
 import logger from "@/utils/logger";
 import { sendEmail } from "@/module/mail";
 import { ResourceType } from "@/types";
+import { validateJwtToken, validateJwtToken, validateToken } from "@/utils";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -10,6 +11,7 @@ export async function POST(req: NextRequest) {
     email,
     name,
     phone,
+    productId: encryptedProductId,
     productTitle,
     productType,
     features,
@@ -20,6 +22,7 @@ export async function POST(req: NextRequest) {
     email: string;
     name?: string;
     phone?: string;
+    productId?: string;
     productTitle: string;
     productType?: ResourceType;
     features?: string[];
@@ -29,15 +32,18 @@ export async function POST(req: NextRequest) {
     subscribedFromPage?: string;
   } = body;
 
-  if (!email || !productTitle) {
+  if (!email || !productTitle || !encryptedProductId) {
     return new Response(
-      JSON.stringify({ error: "Missing required fields: email, productTitle" }),
+      JSON.stringify({
+        error: "Missing required fields: email, productTitle, productId",
+      }),
       { status: 400 }
     );
   }
 
   // Best-effort: ensure we have a user and capture its id
   let userId: string | null = null;
+  const productId = validateJwtToken(encryptedProductId);
   try {
     const { data: userData, error: userErr } = await (supabase as any).rpc(
       "upsert_user",

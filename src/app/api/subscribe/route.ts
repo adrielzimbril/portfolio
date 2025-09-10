@@ -4,6 +4,14 @@ import logger from "@/utils/logger";
 import { sendEmail } from "@/module/mail";
 import { addContact } from "@/module/contact";
 import { ContactProvider } from "@/module/contact/types/types";
+import {
+  getResourcesUrl,
+  validateJwtToken,
+  validateSimpleClientToken,
+  validateToken,
+} from "@/utils";
+import { getAllResources, getResourceById } from "@/module/content/utils/lib";
+import { PageType, ResourceType } from "@/types";
 
 function getListIdByProduct(product?: string) {
   const map: Record<string, number | undefined> = {
@@ -20,14 +28,18 @@ export async function POST(req: NextRequest) {
     email,
     name,
     phone,
+    productId: productIdToken,
     productType,
     subscribedFromPage,
+    updateExisting,
   }: {
     email: string;
     name?: string;
     phone?: string;
+    productId?: string;
     productType?: "course" | "ebook" | "video";
     subscribedFromPage?: string;
+    updateExisting?: boolean;
   } = body;
 
   if (!email) {
@@ -44,12 +56,6 @@ export async function POST(req: NextRequest) {
     .select("*")
     .eq("email", email);
   const alreadyExists = Boolean(existingUser?.length > 0);
-  logger.info("User find result", {
-    email,
-    alreadyExists,
-    findError,
-    existingUser,
-  });
 
   if (!alreadyExists) {
     try {
@@ -123,10 +129,39 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  if (productIdToken) {
+    const productId = validateSimpleClientToken(productIdToken);
+    const productData = await getResourceById(productId.payload?.id);
+    if (productData) {
+      const { title, features, cover, slug } = productData;
+      const productUrl = getResourcesUrl(PageType.HUB, slug);
+      const customText = undefined;
+
+      try {
+        await sendEmail({
+          to: [{ email, name }],
+          context: {
+            name,
+            productTitle: title,
+            features,
+            coverImage: cover,
+            productUrl,
+            customText,
+          },
+          templateId: "productDelivery",
+          locale: "en",
+        });
+      } catch (e) {
+        logger.warn("Product delivery email send failed:", e);
+      }
+    }
+  }
+
   // 2) Add to Brevo lists (general + product-specific)
   const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
-  const productId = getListIdByProduct(productType);
-  const listIds = [generalId, productId].filter(
+  const productTypeId = Number(process.env.BREVO_PRODUCT_LIST_ID);
+
+  const listIds = [generalId, productTypeId].filter(
     (n): n is number => !!n && !Number.isNaN(n)
   );
 

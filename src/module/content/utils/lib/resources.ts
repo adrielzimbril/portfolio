@@ -50,6 +50,19 @@ export async function getResourceBySlug(
   );
 }
 
+export async function getResourceById(
+  id: number,
+  options?: { locale?: string }
+): Promise<Resource | null> {
+  const { locale } = options ?? {};
+  return Promise.resolve(
+    allResources.find(
+      (resource: Resource) =>
+        resource.id === id && (!locale || resource.locale === locale)
+    ) ?? null
+  );
+}
+
 interface ResourcesResult {
   currentResource: Resource;
   adjacentResources: Resource[];

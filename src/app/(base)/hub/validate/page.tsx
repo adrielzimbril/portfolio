@@ -4,13 +4,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
+import { generateJwtToken, generateToken } from "@/utils/key-encrypt";
 
 export default function HubProductValidationPage() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [productTitle, setProductTitle] = useState("");
-  const [productType, setProductType] = useState<"course" | "ebook" | "video" | "">("");
+  const [productType, setProductType] = useState<
+    "course" | "ebook" | "video" | ""
+  >("");
   const [features, setFeatures] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [productUrl, setProductUrl] = useState("");
@@ -18,6 +21,7 @@ export default function HubProductValidationPage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const productId = generateJwtToken({ action: "validate-product-id", id: 1 });
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -26,7 +30,8 @@ export default function HubProductValidationPage() {
     setError(null);
 
     try {
-      const subscribedFromPage = typeof window !== "undefined" ? window.location.pathname : undefined;
+      const subscribedFromPage =
+        typeof window !== "undefined" ? window.location.pathname : undefined;
       const res = await fetch("/api/hub/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -36,11 +41,17 @@ export default function HubProductValidationPage() {
           phone: phone || undefined,
           productTitle,
           productType: productType || undefined,
-          features: features ? features.split(",").map((s) => s.trim()).filter(Boolean) : undefined,
+          features: features
+            ? features
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean)
+            : undefined,
           coverImage: coverImage || undefined,
           productUrl: productUrl || undefined,
           customText: customText || undefined,
           subscribedFromPage,
+          productId: productId,
         }),
       });
       const json = await res.json();
@@ -65,25 +76,46 @@ export default function HubProductValidationPage() {
         <CardContent className="p-6 md:p-8 space-y-6">
           <div>
             <h1 className="h3">Valider un produit du Hub</h1>
-            <p className="text-zinc-600">Renseignez les informations ci-dessous pour recevoir le produit par email.</p>
+            <p className="text-zinc-600">
+              Renseignez les informations ci-dessous pour recevoir le produit
+              par email.
+            </p>
           </div>
 
-          <form onSubmit={onSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form
+            onSubmit={onSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
             <div className="space-y-2">
               <label className="text-sm font-medium">Email</label>
-              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Nom (optionnel)</label>
               <Input value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">Téléphone (optionnel)</label>
-              <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+33 6 12 34 56 78" />
+              <label className="text-sm font-medium">
+                Téléphone (optionnel)
+              </label>
+              <Input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+33 6 12 34 56 78"
+              />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Titre du produit</label>
-              <Input value={productTitle} onChange={(e) => setProductTitle(e.target.value)} required />
+              <Input
+                value={productTitle}
+                onChange={(e) => setProductTitle(e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium">Type de produit</label>
@@ -99,20 +131,42 @@ export default function HubProductValidationPage() {
               </select>
             </div>
             <div className="space-y-2 md:col-span-2">
-              <label className="text-sm font-medium">Fonctionnalités (séparées par des virgules)</label>
-              <Input value={features} onChange={(e) => setFeatures(e.target.value)} placeholder="Ex: Guide PDF, Accès privé, 3 vidéos" />
+              <label className="text-sm font-medium">
+                Fonctionnalités (séparées par des virgules)
+              </label>
+              <Input
+                value={features}
+                onChange={(e) => setFeatures(e.target.value)}
+                placeholder="Ex: Guide PDF, Accès privé, 3 vidéos"
+              />
             </div>
             <div className="space-y-2 md:col-span-2">
-              <label className="text-sm font-medium">Image de couverture (URL)</label>
-              <Input value={coverImage} onChange={(e) => setCoverImage(e.target.value)} placeholder="https://..." />
+              <label className="text-sm font-medium">
+                Image de couverture (URL)
+              </label>
+              <Input
+                value={coverImage}
+                onChange={(e) => setCoverImage(e.target.value)}
+                placeholder="https://..."
+              />
             </div>
             <div className="space-y-2 md:col-span-2">
-              <label className="text-sm font-medium">Lien du produit (URL)</label>
-              <Input value={productUrl} onChange={(e) => setProductUrl(e.target.value)} placeholder="https://..." />
+              <label className="text-sm font-medium">
+                Lien du produit (URL)
+              </label>
+              <Input
+                value={productUrl}
+                onChange={(e) => setProductUrl(e.target.value)}
+                placeholder="https://..."
+              />
             </div>
             <div className="space-y-2 md:col-span-2">
               <label className="text-sm font-medium">Texte personnalisé</label>
-              <Input value={customText} onChange={(e) => setCustomText(e.target.value)} placeholder="Un message pour l'acheteur..." />
+              <Input
+                value={customText}
+                onChange={(e) => setCustomText(e.target.value)}
+                placeholder="Un message pour l'acheteur..."
+              />
             </div>
 
             <div className="md:col-span-2">

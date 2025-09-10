@@ -1,38 +1,122 @@
-import crypto from "node:crypto";
+import logger from "@/utils/logger";
 
-const SECRET_KEY =
-  process.env.HEALTH_CHECK_SECRET_KEY ||
-  process.env.API_SECRET_KEY ||
-  "your-secret-key";
+const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
+
+// Check if we are on the server or client
+const isServer = typeof window === "undefined";
+
+// Import dynamic crypto for server only
+let serverCrypto: any = null;
+if (isServer) {
+  try {
+    serverCrypto = require("node:crypto");
+  } catch (e) {
+    logger.warn("Failed to load node:crypto:", e);
+  }
+}
+
+// Convert to Base64URL
+function toBase64Url(input: Buffer | string | object) {
+  const inputFormatted =
+    typeof input === "object" ? JSON.stringify(input) : input;
+
+  if (isServer && Buffer) {
+    return Buffer.from(inputFormatted)
+      .toString("base64")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+  } else {
+    // Version browser using btoa
+    return btoa(inputFormatted as string)
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+  }
+}
+
+// Decode Base64URL back
+function fromBase64Url(input: string) {
+  input = input.replace(/-/g, "+").replace(/_/g, "/");
+  while (input.length % 4) input += "=";
+
+  if (isServer && Buffer) {
+    const buffer = Buffer.from(input, "base64");
+    return buffer.toString();
+  } else {
+    // Version browser using atob
+    const decoded = atob(input);
+    return decoded;
+  }
+}
+
+// Function HMAC compatible client/server
+async function createHmac(
+  algorithm: string,
+  key: string,
+  data: string
+): Promise<string> {
+  if (isServer && serverCrypto) {
+    // Version server with node:crypto
+    return serverCrypto.createHmac(algorithm, key).update(data).digest("hex");
+  } else if (
+    typeof window !== "undefined" &&
+    window.crypto &&
+    window.crypto.subtle
+  ) {
+    // Version browser with Web Crypto API
+    const encoder = new TextEncoder();
+    const keyData = encoder.encode(key);
+    const dataBuffer = encoder.encode(data);
+
+    const cryptoKey = await window.crypto.subtle.importKey(
+      "raw",
+      keyData,
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+
+    const signature = await window.crypto.subtle.sign(
+      "HMAC",
+      cryptoKey,
+      dataBuffer
+    );
+    return Array.from(new Uint8Array(signature))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  } else {
+    throw new Error("No crypto implementation available");
+  }
+}
 
 // ==========================================
-// SOLUTION 1: Simple token with timestamp
+// SOLUTION 1: Simple token with timestamp (ASYNC)
 // ==========================================
 
 /**
  * Generate a simple token with timestamp
  */
-export function generateToken(): string {
+export async function generateToken(input?: string | object): Promise<string> {
   const timestamp = Date.now();
-  const data = `health-check:${timestamp}`;
-  const hash = crypto
-    .createHmac("sha256", SECRET_KEY)
-    .update(data)
-    .digest("hex");
+  const inputStr = toBase64Url(input ?? "");
+  const data = `health-check:${timestamp}:${inputStr}`;
 
-  // Format: timestamp:hash
-  return `${timestamp}:${hash}`;
+  const hash = await createHmac("sha256", SECRET_KEY, data);
+
+  // Format: timestamp:hash:input
+  return input ? `${timestamp}:${hash}:${inputStr}` : `${timestamp}:${hash}`;
 }
 
 /**
  * Validate a simple token
  */
-export function validateToken(
+export async function validateToken(
   token: string,
   maxAgeMinutes: number = 5
-): boolean {
+): Promise<boolean> {
   try {
-    const [timestampStr, receivedHash] = token.split(":");
+    const [timestampStr, receivedHash, input] = token.split(":");
     if (!timestampStr || !receivedHash) return false;
 
     const timestamp = parseInt(timestampStr);
@@ -43,100 +127,232 @@ export function validateToken(
     if (now - timestamp > maxAge) return false;
 
     // Recalculate hash
-    const data = `health-check:${timestamp}`;
-    const expectedHash = crypto
-      .createHmac("sha256", SECRET_KEY)
-      .update(data)
-      .digest("hex");
+    const data = input
+      ? `health-check:${timestamp}:${fromBase64Url(input)}`
+      : `health-check:${timestamp}`;
 
-    // Secure comparison
-    return crypto.timingSafeEqual(
-      Buffer.from(receivedHash),
-      Buffer.from(expectedHash)
-    );
+    const expectedHash = await createHmac("sha256", SECRET_KEY, data);
+
+    // Secure comparison (simple version for compatibility)
+    return receivedHash === expectedHash;
   } catch {
     return false;
   }
 }
 
 // ==========================================
-// SOLUTION 2: JWT ultra-simple (without library)
+// SOLUTION 2: JWT ultra-simple (ASYNC)
 // ==========================================
 
 /**
  * Create a simple JWT without library
  */
-export function createSimpleJWT(
+export async function generateJwtToken(
   payload: any,
   expiresInMinutes: number = 5
-): string {
+): Promise<{ token: string; expiresAt: string; debug: any }> {
   const header = {
     alg: "HS256",
     typ: "JWT",
   };
 
   const now = Math.floor(Date.now() / 1000);
+  const exp = now + expiresInMinutes * 60;
+
   const jwtPayload = {
     ...payload,
-    iat: now, // issued at
-    exp: now + expiresInMinutes * 60, // expires
-    iss: "trigger-task", // issuer
+    iat: now,
+    exp: exp,
+    iss: "trigger-task",
   };
 
-  const encodedHeader = Buffer.from(JSON.stringify(header)).toString(
-    "base64url"
-  );
-  const encodedPayload = Buffer.from(JSON.stringify(jwtPayload)).toString(
-    "base64url"
-  );
+  const encodedHeader = toBase64Url(JSON.stringify(header));
+  const encodedPayload = toBase64Url(JSON.stringify(jwtPayload));
 
-  const signature = crypto
-    .createHmac("sha256", SECRET_KEY)
-    .update(`${encodedHeader}.${encodedPayload}`)
-    .digest("base64url");
+  // Create the signature with our HMAC compatible function
+  const signatureData = `${encodedHeader}.${encodedPayload}`;
+  const signatureHex = await createHmac("sha256", SECRET_KEY, signatureData);
 
-  return `${encodedHeader}.${encodedPayload}.${signature}`;
+  // Convert hex to base64url
+  const signatureBuffer =
+    isServer && Buffer
+      ? Buffer.from(signatureHex, "hex")
+      : new Uint8Array(
+          signatureHex.match(/.{2}/g)!.map((byte) => parseInt(byte, 16))
+        );
+
+  const signature =
+    isServer && Buffer
+      ? signatureBuffer
+          .toString("base64")
+          .replace(/\+/g, "-")
+          .replace(/\//g, "_")
+          .replace(/=+$/, "")
+      : btoa(String.fromCharCode(...Array.from(signatureBuffer as Uint8Array)))
+          .replace(/\+/g, "-")
+          .replace(/\//g, "_")
+          .replace(/=+$/, "");
+
+  const token = `${encodedHeader}.${encodedPayload}.${signature}`;
+
+  return {
+    token,
+    expiresAt: new Date(exp * 1000).toISOString(),
+    debug: {
+      issuedAt: new Date(now * 1000).toISOString(),
+      lifetimeMinutes: expiresInMinutes,
+      payload: jwtPayload,
+    },
+  };
 }
 
 /**
  * Validate a simple JWT
  */
-export function validateSimpleJWT(token: string): {
+export async function validateJwtToken(token: string): Promise<{
+  valid: boolean;
+  payload?: any;
+  debug: {
+    reason?: string;
+    tokenExpiry?: string;
+    currentTime?: string;
+    timeUntilExpiry?: number;
+    signatureValid?: boolean;
+  };
+}> {
+  const debug: any = {};
+
+  try {
+    // Check basic format
+    const parts = token.split(".");
+    if (parts.length !== 3) {
+      return {
+        valid: false,
+        debug: {
+          reason: "Invalid JWT format - expected 3 parts separated by dots",
+        },
+      };
+    }
+
+    const [encodedHeader, encodedPayload, receivedSignature] = parts;
+
+    if (!encodedHeader || !encodedPayload) {
+      return { valid: false, debug: { reason: "Invalid JWT format" } };
+    }
+
+    // Verify signature first
+    const signatureData = `${encodedHeader}.${encodedPayload}`;
+    const signatureHex = await createHmac("sha256", SECRET_KEY, signatureData);
+
+    // Convert hex to base64url like in generateJwtToken
+    const signatureBuffer =
+      isServer && Buffer
+        ? Buffer.from(signatureHex, "hex")
+        : new Uint8Array(
+            signatureHex.match(/.{2}/g)!.map((byte) => parseInt(byte, 16))
+          );
+
+    const expectedSignature =
+      isServer && Buffer
+        ? signatureBuffer
+            .toString("base64")
+            .replace(/\+/g, "-")
+            .replace(/\//g, "_")
+            .replace(/=+$/, "")
+        : btoa(
+            String.fromCharCode(...Array.from(signatureBuffer as Uint8Array))
+          )
+            .replace(/\+/g, "-")
+            .replace(/\//g, "_")
+            .replace(/=+$/, "");
+
+    debug.signatureValid = receivedSignature === expectedSignature;
+
+    if (!debug.signatureValid) {
+      return {
+        valid: false,
+        debug: {
+          ...debug,
+          reason: "Signature verification failed - check SECRET_KEY",
+          expectedSignature: expectedSignature.slice(-10) + "...",
+          receivedSignature: receivedSignature?.slice(-10) + "...",
+        },
+      };
+    }
+
+    // Decode payload
+    const payloadStr = fromBase64Url(encodedPayload);
+    const payload = JSON.parse(payloadStr);
+
+    // Check expiration with detailed info
+    const now = Math.floor(Date.now() / 1000);
+    debug.currentTime = new Date(now * 1000).toISOString();
+    debug.tokenExpiry = new Date(payload.exp * 1000).toISOString();
+    debug.timeUntilExpiry = payload.exp - now;
+
+    if (payload.exp && now > payload.exp) {
+      return {
+        valid: false,
+        payload,
+        debug: {
+          ...debug,
+          reason: `Token expired ${Math.abs(debug.timeUntilExpiry)} seconds ago`,
+        },
+      };
+    }
+
+    // All checks passed
+    return {
+      valid: true,
+      payload,
+      debug: {
+        ...debug,
+        reason: "Token is valid",
+        timeUntilExpiry: debug.timeUntilExpiry,
+      },
+    };
+  } catch (e: any) {
+    return {
+      valid: false,
+      debug: {
+        reason: `Exception during validation: ${e.message}`,
+      },
+    };
+  }
+}
+
+// ==========================================
+// SOLUTION 3: Version synchrone for the client only
+// ==========================================
+
+/**
+ * Generates a simple token without cryptography (for the client only)
+ * ATTENTION: Do not use in production for real security
+ */
+export function generateSimpleClientToken(payload: any): string {
+  const timestamp = Date.now();
+  const data = {
+    ...payload,
+    timestamp,
+    exp: timestamp + 5 * 60 * 1000, // 5 minutes
+  };
+
+  return toBase64Url(JSON.stringify(data));
+}
+
+/**
+ * Validates a simple token without cryptography (for the client only)
+ * ATTENTION: Do not use in production for real security
+ */
+export function validateSimpleClientToken(token: string): {
   valid: boolean;
   payload?: any;
 } {
   try {
-    const parts = token.split(".");
-    if (parts.length !== 3) return { valid: false };
+    const decoded = fromBase64Url(token);
+    const payload = JSON.parse(decoded);
 
-    const [encodedHeader, encodedPayload, receivedSignature] = parts as [
-      string,
-      string,
-      string,
-    ];
-
-    // Validate signature
-    const expectedSignature = crypto
-      .createHmac("sha256", SECRET_KEY)
-      .update(`${encodedHeader}.${encodedPayload}`)
-      .digest("base64url");
-
-    if (
-      !crypto.timingSafeEqual(
-        Buffer.from(receivedSignature),
-        Buffer.from(expectedSignature)
-      )
-    ) {
-      return { valid: false };
-    }
-
-    // Decode payload
-    const payload = JSON.parse(
-      Buffer.from(encodedPayload, "base64url").toString()
-    );
-
-    // Verify expiration
-    const now = Math.floor(Date.now() / 1000);
+    const now = Date.now();
     if (payload.exp && now > payload.exp) {
       return { valid: false };
     }
@@ -148,60 +364,7 @@ export function validateSimpleJWT(token: string): {
 }
 
 // ==========================================
-// SOLUTION 3: Hash simple with nonce
-// ==========================================
-
-/**
- * Generate a hash with nonce
- */
-export function generateHashToken(): string {
-  const nonce = crypto.randomBytes(16).toString("hex");
-  const timestamp = Date.now();
-  const data = `${nonce}:${timestamp}:health-check`;
-  const hash = crypto
-    .createHash("sha256")
-    .update(data + SECRET_KEY)
-    .digest("hex");
-
-  return `${nonce}:${timestamp}:${hash}`;
-}
-
-/**
- * Validate a hash with nonce
- */
-export function validateHashToken(
-  token: string,
-  maxAgeMinutes: number = 5
-): boolean {
-  try {
-    const [nonce, timestampStr, receivedHash] = token.split(":");
-    if (!nonce || !timestampStr || !receivedHash) return false;
-
-    const timestamp = parseInt(timestampStr);
-    const now = Date.now();
-    const maxAge = maxAgeMinutes * 60 * 1000;
-
-    // Check token age
-    if (now - timestamp > maxAge) return false;
-
-    // Recalculate hash
-    const data = `${nonce}:${timestamp}:health-check`;
-    const expectedHash = crypto
-      .createHash("sha256")
-      .update(data + SECRET_KEY)
-      .digest("hex");
-
-    return crypto.timingSafeEqual(
-      Buffer.from(receivedHash),
-      Buffer.from(expectedHash)
-    );
-  } catch {
-    return false;
-  }
-}
-
-// ==========================================
-// SOLUTION 4: Static API key (the simplest)
+// SOLUTION 4: Static API key (unchanged)
 // ==========================================
 
 const API_KEYS = new Set([
@@ -215,8 +378,22 @@ const API_KEYS = new Set([
  */
 export function generateApiKey(): string {
   const prefix = "api_";
-  const randomPart = crypto.randomBytes(16).toString("hex");
-  return `${prefix}${randomPart}`;
+
+  if (isServer && serverCrypto) {
+    const randomPart = serverCrypto.randomBytes(16).toString("hex");
+    return `${prefix}${randomPart}`;
+  } else if (typeof window !== "undefined" && window.crypto) {
+    const array = new Uint8Array(16);
+    window.crypto.getRandomValues(array);
+    const randomPart = Array.from(array, (byte) =>
+      byte.toString(16).padStart(2, "0")
+    ).join("");
+    return `${prefix}${randomPart}`;
+  } else {
+    // Basic fallback
+    const randomPart = Math.random().toString(36).substring(2, 18);
+    return `${prefix}${randomPart}`;
+  }
 }
 
 /**
@@ -225,43 +402,3 @@ export function generateApiKey(): string {
 export function validateApiKey(apiKey: string): boolean {
   return API_KEYS.has(apiKey);
 }
-
-// ==========================================
-// EXAMPLES OF USAGE
-// ==========================================
-
-export function demonstrateUsage() {
-  console.log("=== Solutions simples de validation ===\n");
-
-  // Solution 1: Token with timestamp
-  console.log("1. Token simple:");
-  const simpleToken = generateToken();
-  console.log("Token generated:", simpleToken);
-  console.log("Valid:", validateToken(simpleToken));
-  console.log();
-
-  // Solution 2: JWT simple
-  console.log("2. JWT simple:");
-  const jwt = createSimpleJWT({ action: "health-check" });
-  console.log("JWT generated:", jwt.substring(0, 50) + "...");
-  const jwtResult = validateSimpleJWT(jwt);
-  console.log("Valid:", jwtResult.valid);
-  console.log("Payload:", jwtResult.payload);
-  console.log();
-
-  // Solution 3: Hash with nonce
-  console.log("3. Hash with nonce:");
-  const hashToken = generateHashToken();
-  console.log("Token generated:", hashToken);
-  console.log("Valid:", validateHashToken(hashToken));
-  console.log();
-
-  // Solution 4: Static API key
-  console.log("4. Static API key:");
-  const apiKey = "api_key_trigger_task_2024";
-  console.log("Key:", apiKey);
-  console.log("Valid:", validateApiKey(apiKey));
-}
-
-// Uncomment to test
-// demonstrateUsage();

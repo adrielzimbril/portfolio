@@ -26,23 +26,29 @@ import { PhoneInput } from "@aurthle/react-phone";
 import confetti from "canvas-confetti";
 import { useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
-import posthog from 'posthog-js';
+import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
 
-const optionalInfoSchema = z.object({
+// CORRECTION: Schema de validation corrigé
+const FormInfoSchema = z.object({
   name: z
     .string()
-    .min(2, { message: "Le nom doit contenir au moins 2 caractères." })
-    .optional()
-    .or(z.literal("")),
-  phone: z.string().optional().or(z.literal("")),
+    .min(1, { message: "Oups, le nom est requis 😅" })
+    .min(4, { message: "Le nom doit contenir au moins 4 caractères 😅" }),
+  phone: z
+    .string()
+    .min(1, { message: "Oups, le numéro de téléphone est requis 😅" })
+    .min(8, {
+      message: "Le numéro de téléphone doit contenir au moins 8 caractères 😅",
+    }),
 });
 
-type OptionalInfoForm = z.infer<typeof optionalInfoSchema>;
+type FormInfoForm = z.infer<typeof FormInfoSchema>;
 
 interface SubscriptionModalProps {
   isOpen: boolean;
   email?: string;
+  productId?: string;
   productType?: ResourceTypeKey;
   onClose: () => void;
 }
@@ -50,6 +56,7 @@ interface SubscriptionModalProps {
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
   email,
+  productId,
   productType,
   onClose,
 }) => {
@@ -61,6 +68,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   // Use of useRef to ensure we only fetch the IP once
   const ipInfoFetched = useRef(false);
   const countryFetched = useRef(false);
+
+  const formSchemaValidate = useForm<FormInfoForm>({
+    resolver: zodResolver(FormInfoSchema),
+    defaultValues: { name: "", phone: "" },
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
 
   // Fetch the country once at open
   useEffect(() => {
@@ -85,6 +99,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     phone?: string;
     subscribedFromPage?: string;
     updateExisting: boolean;
+    productId?: string;
     productType?: ResourceTypeKey;
   }) => {
     return fetch("/api/subscribe", {
@@ -96,7 +111,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   // Automatic subscription with email at open
   useEffect(() => {
-    //if (!isOpen || !email || hasInitialSubscription || ipInfoFetched.current)
     if (!isOpen || !email) return;
 
     const subscribeWithEmail = async () => {
@@ -107,7 +121,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         const res = await apiSubscribe({
           email,
           subscribedFromPage,
-          updateExisting: false, // Première inscription
+          updateExisting: false,
+          productId,
           productType,
         });
 
@@ -125,11 +140,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     subscribeWithEmail();
     ipInfoFetched.current = true;
   }, [isOpen, email, hasInitialSubscription]);
-
-  const optionalForm = useForm<OptionalInfoForm>({
-    resolver: zodResolver(optionalInfoSchema),
-    defaultValues: { name: "", phone: "" },
-  });
 
   const animateConfetti = () => {
     const duration = 8 * 1000;
@@ -160,11 +170,15 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     }, 250);
   };
 
-  const onSubmit = async (values: OptionalInfoForm) => {
+  const onSubmit = async (values: FormInfoForm) => {
     if (!email) {
-      toast.error("Email requis pour la mise à jour");
+      toast.error("Oups, l'email est requis pour la mise à jour 😅");
       return;
     }
+
+    // AJOUT: Log des valeurs pour debug
+    console.log("Form values:", values);
+    console.log("Form errors:", formSchemaValidate.formState.errors);
 
     setIsSubmitting(true);
 
@@ -174,10 +188,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         has_name: !!values.name,
         has_phone: !!values.phone,
       });
+
       await apiSubscribe({
         email,
         name: values.name || undefined,
         phone: values.phone || undefined,
+        productId,
         productType,
         subscribedFromPage:
           typeof window !== "undefined" ? window.location.pathname : undefined,
@@ -190,8 +206,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       setTimeout(() => {
         onClose();
         setIsSuccess(false);
-        optionalForm.reset();
-        animateConfetti();
+        formSchemaValidate.reset();
       }, 2000);
     } catch (error) {
       logger.error("Erreur lors de la mise à jour:", error);
@@ -210,12 +225,16 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       });
       onClose();
       setIsSuccess(false);
-      optionalForm.reset();
+      formSchemaValidate.reset();
     }
   };
 
-  const handleSkip = () => {
-    handleClose();
+  // AJOUT: Function pour tester la validation manuellement
+  const handleTestValidation = () => {
+    console.log("Current form state:", formSchemaValidate.getValues());
+    console.log("Form errors:", formSchemaValidate.formState.errors);
+    console.log("Is form valid:", formSchemaValidate.formState.isValid);
+    formSchemaValidate.trigger(); // Force la validation
   };
 
   return (
@@ -243,19 +262,17 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </p>
           </div>
         ) : (
-          <Form {...optionalForm}>
+          <Form {...formSchemaValidate}>
             <form
-              onSubmit={optionalForm.handleSubmit(onSubmit)}
+              onSubmit={formSchemaValidate.handleSubmit(onSubmit)}
               className="space-y-6"
             >
               <FormField
-                control={optionalForm.control}
+                control={formSchemaValidate.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">
-                      Nom (optionnel)
-                    </FormLabel>
+                    <FormLabel className="text-sm font-medium">Nom</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Votre nom et prénom"
@@ -269,12 +286,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               />
 
               <FormField
-                control={optionalForm.control}
+                control={formSchemaValidate.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="tesxt-sm font-medium">
-                      Numéro de téléphone (optionnel)
+                    <FormLabel className="text-sm font-medium">
+                      Numéro de téléphone
                     </FormLabel>
                     <FormControl>
                       <PhoneInput
@@ -322,6 +339,18 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   )}
                 </Button>
               </div>
+
+              {/* AJOUT: Bouton de debug (à supprimer en production) */}
+              {process.env.NODE_ENV === "development" && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleTestValidation}
+                  className="w-full"
+                >
+                  Test Validation (Debug)
+                </Button>
+              )}
             </form>
           </Form>
         )}
