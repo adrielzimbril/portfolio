@@ -23,7 +23,6 @@ export function ProjectsSection() {
     async function loadProjects() {
       try {
         const data = await getAllProjects({ limit: limit });
-        logger.info("Projects loaded", data);
         setProjects(data);
       } catch (err) {
         logger.error(err);

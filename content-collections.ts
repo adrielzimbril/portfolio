@@ -10,14 +10,11 @@ import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeUnwrapImages from "rehype-unwrap-images";
-import rehypeImgSize from "rehype-img-size";
 import rehypeVideo from "rehype-video";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { PortfolioProjectResearchScope, ResourceType } from "@/types";
-import { transformerCopyButton } from "@rehype-pretty/transformers";
-// import { mdxAnnotations } from "mdx-annotations";
-// import { rehypeExtendedTable } from "rehype-extended-table";
+import { mdxAnnotations } from "mdx-annotations";
 
 const BASE_COLLECTION_PATH = "src/content";
 
@@ -209,11 +206,18 @@ const resourceTags = defineCollection({
   },
 });
 
+const remarkPluginsList: any = [
+  remarkGfm,
+  remarkParse,
+  remarkRehype,
+  remarkFrontmatter,
+  remarkMdxFrontmatter,
+  mdxAnnotations.remark,
+];
+
 const rehypePluginsList: any = [
-  // [rehypeImgSize],
   [rehypeVideo, { allowDangerousHtml: true, details: false }],
-  // [mdxAnnotations.rehype],
-  // [rehypeExtendedTable],
+  [mdxAnnotations.rehype],
   [rehypeUnwrapImages],
   [
     rehypeShiki,
@@ -224,17 +228,7 @@ const rehypePluginsList: any = [
       },
     },
   ],
-  [
-    rehypePrettyCode,
-    {
-      transformers: [
-        transformerCopyButton({
-          visibility: "always",
-          feedbackDuration: 3_000,
-        }),
-      ],
-    },
-  ],
+  [rehypePrettyCode],
   [rehypeStringify],
 ];
 
@@ -257,14 +251,7 @@ const posts = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
-      remarkPlugins: [
-        remarkGfm,
-        remarkParse,
-        remarkRehype,
-        remarkFrontmatter,
-        remarkMdxFrontmatter,
-        // mdxAnnotations.remark,
-      ],
+      remarkPlugins: remarkPluginsList,
       rehypePlugins: rehypePluginsList,
     });
 
@@ -358,14 +345,7 @@ const projects = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
-      remarkPlugins: [
-        remarkGfm,
-        remarkParse,
-        remarkRehype,
-        remarkFrontmatter,
-        remarkMdxFrontmatter,
-        // mdxAnnotations.remark,
-      ],
+      remarkPlugins: remarkPluginsList,
       rehypePlugins: rehypePluginsList,
     });
 
@@ -418,14 +398,7 @@ const resources = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileMDX(context, document, {
-      remarkPlugins: [
-        remarkGfm,
-        remarkParse,
-        remarkRehype,
-        remarkFrontmatter,
-        remarkMdxFrontmatter,
-        // mdxAnnotations.remark,
-      ],
+      remarkPlugins: remarkPluginsList,
       rehypePlugins: rehypePluginsList,
     });
 

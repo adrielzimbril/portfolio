@@ -8,8 +8,9 @@ export const routing = defineRouting({
   localeCookie: {
     name: appConfig.i18n.localeCookieName,
   },
-  localePrefix: appConfig.i18n.enabled ? "always" : "never",
+  localePrefix: "never",
   localeDetection: appConfig.i18n.enabled,
+  alternateLinks: appConfig.i18n.enabled,
 });
 
 export const {

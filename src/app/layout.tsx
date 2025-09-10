@@ -20,6 +20,8 @@ import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { Toaster } from "@/components/shiro/providers/toast-provider";
 import { AnalyticsScript } from "@/module/analytics";
+import getRequestConfig from "@/module/i18n/request";
+import { getUserLocale } from "@/module/i18n/lib/locale-cookie";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -56,18 +58,18 @@ export default async function RootLayout({
   children,
   params,
 }: PropsWithChildren<{ params: Promise<{ locale: string }> }>) {
-  const { locale } = await params;
+  const locale = await getUserLocale();
 
   setRequestLocale(locale);
 
   if (!locales.includes(locale as any)) {
     //notFound();
-    logger.error("Locale not found", locale);
+    logger.error("Layout : Locale not found", locale);
   }
 
   const messages = await getMessages();
   return (
-    <html lang={siteConfig.languagePrimary} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`antialiased ${SFProDisplay.variable} ${SFProText.variable}`}
       >
