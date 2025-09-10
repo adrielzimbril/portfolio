@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
             p_product_title: title,
             p_product_type: type,
             p_features: features,
-            p_cover_image: cover,
+            p_cover: cover,
             p_product_url: productUrl,
             p_custom_text: customText,
             p_subscribed_from_page: body.subscribedFromPage,
