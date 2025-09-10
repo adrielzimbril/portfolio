@@ -132,8 +132,8 @@ export async function POST(req: NextRequest) {
   }
 
   if (productIdToken) {
-    const productId = validateSimpleClientToken(productIdToken);
-    const productData = await getResourceById(productId.payload?.id);
+    const productId = validateSimpleClientToken(productIdToken).payload?.id;
+    const productData = await getResourceById(productId);
     if (productData) {
       const { title, features, cover, slug, type } = productData;
       const productUrl = getResourcesUrl(PageType.HUB, slug);
@@ -147,6 +147,7 @@ export async function POST(req: NextRequest) {
             p_email: email,
             p_name: name,
             p_phone: phone,
+            p_product_id: productId,
             p_product_title: title,
             p_product_type: type,
             p_features: features,
