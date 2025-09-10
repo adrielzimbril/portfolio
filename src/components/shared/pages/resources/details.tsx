@@ -2,7 +2,7 @@ import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { ResourceType } from "@/types";
+import { PageType, ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useProductTitleRequestsCount } from "@/hooks/useSubscriberStats";
 
@@ -30,7 +30,7 @@ export function CardInfo({
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
-        <Header title={title} />
+        <Header title={title} slug={slug} />
 
         <Tags
           primaryTag={
@@ -70,11 +70,13 @@ export function CardInfo({
   );
 }
 
-function Header({ title }: { title: string }) {
+function Header({ title, slug }: { title: string; slug: string }) {
   return (
-    <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
-      {title}
-    </h3>
+    <Link href={getResourcesUrl(PageType.HUB, slug)}>
+      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
+        {title}
+      </h3>
+    </Link>
   );
 }
 
@@ -111,7 +113,7 @@ function Action({
 }) {
   return (
     <Link
-      href={getResourcesUrl("hub", slug)}
+      href={getResourcesUrl(PageType.HUB, slug)}
       likeButton
       whileTap
       size="xs"
@@ -121,8 +123,8 @@ function Action({
         {resourceType === ResourceType.COURSE
           ? "Enroll Now"
           : resourceType === ResourceType.EBOOK
-          ? "Read Now"
-          : "Watch Now"}
+            ? "Read Now"
+            : "Watch Now"}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>

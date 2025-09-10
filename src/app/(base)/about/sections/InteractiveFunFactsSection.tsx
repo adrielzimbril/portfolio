@@ -404,7 +404,12 @@ function CustomAlert({
 
   return (
     <Dialog open={isVisible} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent size="sm" variant="modern" className="text-center">
+      <DialogContent
+        size="sm"
+        variant="modern"
+        className="text-center"
+        closeButton={false}
+      >
         <DialogHeader>
           <div className="relative flex flex-col gap-2 items-center justify-center">
             <h3 className="mb-2 text-4xl">{isCorrect ? "🎉" : "😅"}</h3>
@@ -559,7 +564,7 @@ function AllFactsModal({
 
         <DialogFooter>
           <Button onClick={onClose} size="lg" whileTap asPointer asFull>
-            Fermer 😊
+            Compris 😊
           </Button>
         </DialogFooter>
       </DialogContent>

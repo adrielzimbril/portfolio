@@ -15,6 +15,7 @@ import rehypeVideo from "rehype-video";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { PortfolioProjectResearchScope, ResourceType } from "@/types";
+import { transformerCopyButton } from "@rehype-pretty/transformers";
 // import { mdxAnnotations } from "mdx-annotations";
 // import { rehypeExtendedTable } from "rehype-extended-table";
 
@@ -208,6 +209,35 @@ const resourceTags = defineCollection({
   },
 });
 
+const rehypePluginsList: any = [
+  // [rehypeImgSize],
+  [rehypeVideo, { allowDangerousHtml: true, details: false }],
+  // [mdxAnnotations.rehype],
+  // [rehypeExtendedTable],
+  [rehypeUnwrapImages],
+  [
+    rehypeShiki,
+    {
+      themes: {
+        light: "one-dark-pro",
+        dark: "github-dark",
+      },
+    },
+  ],
+  [
+    rehypePrettyCode,
+    {
+      transformers: [
+        transformerCopyButton({
+          visibility: "always",
+          feedbackDuration: 3_000,
+        }),
+      ],
+    },
+  ],
+  [rehypeStringify],
+];
+
 // Collection of posts with relations
 const posts = defineCollection({
   name: "posts",
@@ -235,21 +265,7 @@ const posts = defineCollection({
         remarkMdxFrontmatter,
         // mdxAnnotations.remark,
       ],
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-        // [rehypeImgSize],
-        [rehypeVideo, { allowDangerousHtml: true, details: false }],
-        [rehypeStringify],
-        [rehypePrettyCode],
-        // [mdxAnnotations.rehype],
-        // [rehypeExtendedTable],
-        [rehypeUnwrapImages],
-      ],
+      rehypePlugins: rehypePluginsList,
     });
 
     // Resolve relations
@@ -350,21 +366,7 @@ const projects = defineCollection({
         remarkMdxFrontmatter,
         // mdxAnnotations.remark,
       ],
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-        // [rehypeImgSize],
-        [rehypeVideo, { allowDangerousHtml: true, details: false }],
-        [rehypeStringify],
-        [rehypePrettyCode],
-        // [mdxAnnotations.rehype],
-        // [rehypeExtendedTable],
-        [rehypeUnwrapImages],
-      ],
+      rehypePlugins: rehypePluginsList,
     });
 
     // Resolve relations
@@ -424,21 +426,7 @@ const resources = defineCollection({
         remarkMdxFrontmatter,
         // mdxAnnotations.remark,
       ],
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            theme: "github-dark",
-          },
-        ],
-        // [rehypeImgSize],
-        [rehypeVideo, { allowDangerousHtml: true, details: false }],
-        [rehypeStringify],
-        [rehypePrettyCode],
-        // [mdxAnnotations.rehype],
-        // [rehypeExtendedTable],
-        [rehypeUnwrapImages],
-      ],
+      rehypePlugins: rehypePluginsList,
     });
 
     // Use resourcesTags or postTags according to your preference

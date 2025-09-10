@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { cn } from "@/utils/utils";
-import { ResourceType } from "@/types/enum";
-import { getImageUrl } from "@/utils/base-url";
+import { PageType, ResourceType } from "@/types/enum";
+import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import { BookOne, ClapperboardPlay, VideoLibrary } from "@aurthle/icons";
+import { Link } from "@/components/ui/link";
 
 interface PreviewProps {
   title?: string;
   cover?: string;
+  type: PageType;
+  slug?: string;
   coverText?: { emoji: string; title: string; description: string };
   isWide?: boolean;
   resourceType?: ResourceType;
@@ -15,6 +18,8 @@ interface PreviewProps {
 export function CardPreview({
   title,
   cover,
+  type,
+  slug,
   coverText,
   isWide,
   resourceType,
@@ -27,27 +32,29 @@ export function CardPreview({
         cover ? "p-2 h-48 md:h-80" : "p-4"
       )}
     >
-      {cover ? (
-        <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
-          <Image
-            width={1200}
-            height={630}
-            className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
-            alt={title ?? ""}
-            src={getImageUrl(cover!)}
+      <Link href={getResourcesUrl(type, slug!)} className="flex w-full">
+        {cover ? (
+          <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
+            <Image
+              width={1200}
+              height={630}
+              className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
+              alt={title ?? ""}
+              src={getImageUrl(cover!)}
+            />
+          </div>
+        ) : (
+          <PreviewContent
+            emoji={coverText?.emoji ?? "😎"}
+            title={coverText?.title ?? "I made you looked."}
+            description={
+              coverText?.description ??
+              "You can have the rest of the empty space here."
+            }
           />
-        </div>
-      ) : (
-        <PreviewContent
-          emoji={coverText?.emoji ?? "😎"}
-          title={coverText?.title ?? "I made you looked."}
-          description={
-            coverText?.description ??
-            "You can have the rest of the empty space here."
-          }
-        />
-      )}
-      {resourceType && <PreviewIcon resourceType={resourceType} />}
+        )}
+        {resourceType && <PreviewIcon resourceType={resourceType} />}
+      </Link>
     </div>
   );
 }
@@ -78,7 +85,7 @@ function PreviewContent({
   );
 }
 
-export function PreviewIcon({ resourceType }: PreviewProps) {
+export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
   return (
     <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-zinc-100 rounded-full pointer-events-none overflow-hidden">
       {resourceType === ResourceType.COURSE ? (

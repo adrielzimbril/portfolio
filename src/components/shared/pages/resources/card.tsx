@@ -1,8 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/resources/details";
-import { ResourcePreviewCardInfoProps, ResourceType } from "@/types";
-import { features } from "process";
+import { PageType, ResourcePreviewCardInfoProps, ResourceType } from "@/types";
 
 export function ResourceCard({
   title,
@@ -28,7 +27,13 @@ export function ResourceCard({
   return (
     <Card className="squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
       <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
-        <CardPreview title={title} cover={cover} resourceType={type} />
+        <CardPreview
+          title={title}
+          type={PageType.HUB}
+          slug={slug}
+          cover={cover}
+          resourceType={type}
+        />
         <CardInfo
           title={title}
           slug={slug}

@@ -37,6 +37,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@react-email/components": "^0.5.2",
     "@react-email/render": "^1.2.2",
+    "@rehype-pretty/transformers": "^0.13.2",
     "@sindresorhus/slugify": "^2.2.1",
     "@squircle/core": "^1.0.6",
     "@squircle/paint-polyfill": "^1.0.6",

@@ -9,6 +9,7 @@ import { cn } from "@/utils/utils";
 import { ProjectPreviewCardInfoProps } from "@/types/type";
 import { getResourcesUrl } from "@/utils/base-url";
 import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types";
+import { PageType } from "@/types";
 
 export function CardInfo({
   title,
@@ -37,7 +38,7 @@ export function CardInfo({
       <div className="flex flex-col items-start justify-center gap-4 w-full">
         <ProjectTags tags={tags.map((tag) => tag.name)} />
 
-        <Header title={title} />
+        <Header title={title} slug={slug} />
 
         <ProjectCategories
           categories={categories.map((category) => ({
@@ -54,11 +55,13 @@ export function CardInfo({
   );
 }
 
-function Header({ title }: { title: string }) {
+function Header({ title, slug }: { title: string; slug: string }) {
   return (
-    <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
-      {title}
-    </h3>
+    <Link href={getResourcesUrl(PageType.PROJECT, slug)}>
+      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
+        {title}
+      </h3>
+    </Link>
   );
 }
 
@@ -73,7 +76,7 @@ function Description({ description }: { description: string }) {
 function Action({ slug }: { slug: string }) {
   return (
     <Link
-      href={getResourcesUrl("projects", slug)}
+      href={getResourcesUrl(PageType.PROJECT, slug)}
       likeButton
       whileTap
       size="xs"

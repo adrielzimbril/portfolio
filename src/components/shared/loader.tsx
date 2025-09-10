@@ -4,17 +4,17 @@ import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 
 type LoaderProps = {
-  style?: "dots" | "bounce" | "pulse" | "single";
+  variant?: "dots" | "bounce" | "pulse" | "single";
   color?: string;
   className?: string;
 };
 
 export function Loader({
-  style = "dots",
+  variant = "dots",
   color = "bg-zinc-100",
   className,
 }: LoaderProps) {
-  switch (style) {
+  switch (variant) {
     case "dots":
       return (
         <motion.div

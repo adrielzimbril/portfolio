@@ -4,6 +4,7 @@ import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types";
 import BoringAvatar from "boring-avatars";
 import { getImageUrl, pickRandomColor, pickRandomColorCode } from "@/utils";
+import { useMemo } from "react";
 
 interface StatsProps {
   avatars?: string[];
@@ -42,28 +43,35 @@ function UserAvatars({
   userCount?: number;
 }) {
   const numPeople = avatars?.length ?? userCount ?? 0;
+
+  // ✅ Génère toutes les couleurs une seule fois, hors du .map()
+  const colorSets: string[][] = useMemo(() => {
+    return Array.from({ length: numPeople }).map(() =>
+      Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
+    );
+  }, [numPeople]);
   return (
     <div className="inline-flex items-start">
       <AvatarGroup numPeople={numPeople}>
         {Array.from({ length: numPeople })
           .slice(0, 5)
-          .map((_, index) => (
-            <Avatar key={index} className="w-6 h-6">
-              <AvatarImage src={getImageUrl(avatars?.[index] ?? "")} />
-              <AvatarFallback className={cn("relative pointer-events-none")}>
-                <BoringAvatar
-                  name={
-                    avatars?.[index]?.slice(8)?.replace(".png", "") ??
-                    (index + 1).toString()
-                  }
-                  colors={Array.from({ length: 8 }).map(
-                    () => pickRandomColorCode() ?? "#ffffff"
-                  )}
-                  variant="beam"
-                />
-              </AvatarFallback>
-            </Avatar>
-          ))}
+          .map((_, index) => {
+            return (
+              <Avatar key={index} className="w-6 h-6">
+                <AvatarImage src={getImageUrl(avatars?.[index] ?? "")} />
+                <AvatarFallback className={cn("relative pointer-events-none")}>
+                  <BoringAvatar
+                    name={
+                      avatars?.[index]?.slice(8)?.replace(".png", "") ??
+                      (index + 1).toString()
+                    }
+                    colors={colorSets[index] ?? []}
+                    variant="beam"
+                  />
+                </AvatarFallback>
+              </Avatar>
+            );
+          })}
       </AvatarGroup>
     </div>
   );

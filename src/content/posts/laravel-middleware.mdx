@@ -30,7 +30,7 @@ Les middlewares ont plusieurs fonctions, notamment :
 
 Laravel facilite la création de middlewares. Vous pouvez utiliser la commande artisan pour générer un middleware et définir les actions à effectuer. Par exemple, vous pourriez créer un middleware pour vérifier si un utilisateur est administrateur avant d'accéder à certaines parties de l'administration.
 
-```
+```php
 php artisan make:middleware AdminMiddleware
 ```
 
@@ -42,7 +42,7 @@ Imaginons que vous ayez une application où seuls les utilisateurs connectés pe
 
 Pour utiliser un middleware, vous pouvez le spécifier dans le constructeur de votre contrôleur ou dans le fichier de définition de vos routes. Par exemple :
 
-```
+```php
 // Dans le constructeur du contrôleur
 $this->middleware('auth');
 

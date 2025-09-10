@@ -55,11 +55,13 @@ function DialogContent({
   size = "md",
   variant = "modern",
   scrollArea = false,
+  closeButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   size?: "sm" | "md" | "lg" | "xl" | "full";
   variant?: "default" | "modern" | "glass";
   scrollArea?: boolean;
+  closeButton?: boolean;
 }) {
   const sizeClasses = {
     sm: "sm:max-w-sm",
@@ -101,21 +103,23 @@ function DialogContent({
         ) : (
           children
         )}
-        <DialogPrimitive.Close
-          className={cn(
-            "group absolute top-6 right-6 flex size-8 items-center justify-center disabled:pointer-events-none",
-            "p-0"
-          )}
-          asChild
-        >
-          <Button asPointer whileTap size="icon">
-            <XIcon
-              size={16}
-              className="opacity-70 transition-opacity group-hover:opacity-100"
-            />
-            <span className="sr-only">Close</span>
-          </Button>
-        </DialogPrimitive.Close>
+        {closeButton && (
+          <DialogPrimitive.Close
+            className={cn(
+              "group absolute top-6 right-6 flex size-8 items-center justify-center disabled:pointer-events-none",
+              "p-0"
+            )}
+            asChild
+          >
+            <Button asPointer whileTap size="icon">
+              <XIcon
+                size={16}
+                className="opacity-70 transition-opacity group-hover:opacity-100"
+              />
+              <span className="sr-only">Close</span>
+            </Button>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Content>
     </DialogPortal>
   );

@@ -3,6 +3,7 @@ import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
 import { cn } from "@/utils/utils";
 import { ProjectPreviewCardInfoProps } from "@/types/type";
+import { PageType } from "@/types";
 
 export function ProjectCard({
   title,
@@ -34,7 +35,13 @@ export function ProjectCard({
           isWide && "md:flex-row"
         )}
       >
-        <CardPreview title={title} cover={cover} isWide={isWide} />
+        <CardPreview
+          title={title}
+          slug={slug}
+          cover={cover}
+          isWide={isWide}
+          type={PageType.PROJECT}
+        />
         <CardInfo
           title={title}
           cover={cover}

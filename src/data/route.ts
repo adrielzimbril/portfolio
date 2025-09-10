@@ -44,4 +44,9 @@ export const routes = {
     link: "/contact",
     inHeader: false,
   },
+  newsletter: {
+    name: "Newsletter",
+    link: "/newsletter",
+    inHeader: false,
+  },
 };
