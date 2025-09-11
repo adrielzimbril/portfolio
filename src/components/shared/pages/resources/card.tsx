@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/resources/details";
-import { PageType, ResourcePreviewCardInfoProps, ResourceType } from "@/types";
+import { PageType, ResourceType } from "@/types";
 
 export function ResourceCard({
   title,

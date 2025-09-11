@@ -1,6 +1,5 @@
 import React from "react";
-import { getActivePathFromUrlParam } from "@/utils/route-utils";
-import { getLocale, setRequestLocale } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { PageParams } from "@/types";
 import {
   getResourceWithAdjacent,
@@ -16,13 +15,12 @@ import { getImageUrl, getResourcesUrl } from "@/utils";
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
 
-  const { path } = params;
+  const { slug } = params;
 
   const locale = await getLocale();
-  const slug = getActivePathFromUrlParam(path);
   const resource = await getResourceBySlug(slug, { locale });
 
-  return {
+  const metadata: Metadata = {
     title: resource?.title,
     description: resource?.excerpt,
     openGraph: {
@@ -37,16 +35,17 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       ],
     },
   };
+
+  return metadata;
 }
 
 export default async function SubShopGet(props: {
   params: Promise<PageParams>;
 }) {
-  const { path } = await props.params;
+  const { slug } = await props.params;
 
   const locale = await getLocale();
 
-  const slug = getActivePathFromUrlParam(path);
   const resource = await getResourceWithAdjacent(slug, { locale });
 
   if (!resource) {
@@ -79,7 +78,6 @@ export default async function SubShopGet(props: {
         excerpt={excerpt}
         type={type}
         created_at={created_at}
-        path={path}
         locale={locale}
         slug={slug}
       />

@@ -8,23 +8,11 @@ import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import {
-  NewsletterSubscribersBadge,
-  ProductAvatarsStats,
-  ProductTitleRequestsBadge,
-  ProductTypeSubscribersBadge,
-} from "@/components/SubscriberBadges";
-import {
-  generateJwtToken,
-  generateSimpleClientToken,
-  generateToken,
-  getDate,
-} from "@/utils";
+import { ProductAvatarsStats } from "@/components/SubscriberBadges";
+import { generateSimpleClientToken, getDate } from "@/utils";
 import { ResourceType } from "@/types";
-import logger from "@/utils/logger";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
-import { AvatarsStats } from "./avatar-stats";
 import { useTranslations } from "use-intl";
 
 export function GetResource({
@@ -37,7 +25,6 @@ export function GetResource({
   type,
   created_at,
   slug,
-  path,
   locale,
 }: {
   id?: string | number;
@@ -48,7 +35,6 @@ export function GetResource({
   excerpt: string;
   type: ResourceType;
   created_at: string;
-  path?: string;
   locale?: string;
   slug?: string;
 }) {
@@ -94,10 +80,14 @@ export function GetResource({
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4">
             <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
               {type === ResourceType.COURSE
-                ? "Formation 🎥"
+                ? t("common.page-sections.hub.base.resources-type.course.title")
                 : type === ResourceType.EBOOK
-                  ? "E-book 📕"
-                  : "Masterclass 🎬"}
+                  ? t(
+                      "common.page-sections.hub.base.resources-type.ebook.title"
+                    )
+                  : t(
+                      "common.page-sections.hub.base.resources-type.masterclass.title"
+                    )}
             </Badge>
             <h2 className="self-stretch">{title}</h2>
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-500">
@@ -124,7 +114,9 @@ export function GetResource({
           </div>
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <Input
-              placeholder="😏 Prêt à recevoir quelque chose d'interessant ?"
+              placeholder={t(
+                "common.page-sections.newsletter.form.fields.email-page.placeholder"
+              )}
               type="email"
               //className="ml-auto rounded-s-md"
               value={email}

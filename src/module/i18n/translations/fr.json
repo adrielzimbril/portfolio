@@ -90,6 +90,16 @@
       }
     }
   },
+  "hub": {
+    "title": "Hub",
+    "description": "Welcome to our hub page",
+    "page": {
+      "header-section": {
+        "title": "Hub",
+        "description": "Welcome to our hub page"
+      }
+    }
+  },
   "thoughts": {
     "description": "Read the latest news from our company",
     "title": "My awesome blog",
@@ -236,6 +246,10 @@
             "email": {
               "label": "Email",
               "placeholder": "Votre email"
+            },
+            "email-page": {
+              "label": "Email",
+              "placeholder": "😏 Prêt à recevoir quelque chose d'interessant ?"
             },
             "name": {
               "label": "Nom",

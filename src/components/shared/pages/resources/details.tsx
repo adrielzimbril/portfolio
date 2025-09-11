@@ -31,6 +31,7 @@ export function CardInfo({
   const t = useTranslations();
   const { count: avatarCount, loading: avatarCountLoading } =
     useProductTitleRequestsCount(title);
+
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
