@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { getImageUrl } from "@/utils/base-url";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export function ProjectPreviewSection({
   title,
@@ -12,13 +14,16 @@ export function ProjectPreviewSection({
   description?: string;
   gallery: string[];
 }) {
+  const t = useTranslations();
+
   return (
     <>
       <SectionLayout
         id="gallery-section"
-        title="Idéation"
+        title={t("projects.inner-page.project-preview-section.title")}
         description={
-          description || "Vous pouvez poser quelques concepts initiaux."
+          description ||
+          t("projects.inner-page.project-preview-section.description")
         }
         //className="p-0"
         contentClassName="lg:max-w-[80%] items-start"

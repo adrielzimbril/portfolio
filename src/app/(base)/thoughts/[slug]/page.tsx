@@ -15,7 +15,7 @@ import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
 import { PageParams, PageType } from "@/types";
 import { Metadata } from "next";
-import logger from "@/utils/logger";
+
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;

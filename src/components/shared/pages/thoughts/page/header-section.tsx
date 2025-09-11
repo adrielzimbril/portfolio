@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,6 +12,7 @@ import {
   TextPreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { formatCount, getDate } from "@/utils";
+import { useTranslations } from "next-intl";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -39,16 +41,22 @@ interface HeaderSectionProps {
 }
 
 export function HeaderSection({
-  previewContent = {
-    type: PreviewContentType.TEXT,
-    emoji: "😎",
-    title: "I made you looked.",
-    subtitle: "You can have the rest of the empty space here.",
-  } as TextPreviewContent,
+  previewContent: initPreviewContent,
   mainTitle,
   tags,
   articleDetails,
 }: HeaderSectionProps) {
+  const t = useTranslations();
+
+  const basePreviewContent = {
+    type: PreviewContentType.TEXT,
+    emoji: t("common.page-sections.preview.emoji"),
+    title: t("common.page-sections.preview.title"),
+    subtitle: t("common.page-sections.preview.description"),
+  } as TextPreviewContent;
+
+  const previewContent = initPreviewContent || basePreviewContent;
+
   return (
     <SectionBase
       sectionClassName="p-0 mt-20 mb-10 md:mb-20"

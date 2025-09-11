@@ -52,7 +52,7 @@ export function HeaderSection({
       tags={tags}
       type={type}
       ctaButton={pageViewsData.slug}
-      ctaButtonText={`${t("common.page-sections.cta.variant-one.button")} 🦄`}
+      ctaButtonText={`${t("common.button.obtain")} 🦄`}
     />
   );
 }

@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { ResourceCard } from "@/components/shared/pages/resources/page/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
+import { useTranslations } from "next-intl";
 
 export function ProjectStatementSection({
   description,
@@ -9,11 +11,16 @@ export function ProjectStatementSection({
   description: string;
   statements: { icon: string; number: string; description: string }[];
 }) {
+  const t = useTranslations();
+
   return (
     <>
       <SectionLayout
-        title="Recherche utilisateur"
-        description={description}
+        title={t("projects.inner-page.project-statement-section.title")}
+        description={
+          description ||
+          t("projects.inner-page.project-statement-section.description")
+        }
         className="p-0"
         contentClassName="md:grid-cols-3"
       >

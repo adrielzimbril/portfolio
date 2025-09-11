@@ -99,6 +99,11 @@
         "description": "Donnez à votre entreprise les moyens d'une conception centrée sur l'utilisateur et de l'IA pour offrir des expériences client fluides et accélérer la croissance.",
         "cta": "Voir mes ressources"
       }
+    },
+    "inner-page": {
+      "more-preview-section": {
+        "title": "Autres ressources."
+      }
     }
   },
   "projects": {
@@ -110,6 +115,37 @@
         "description": "Donnez à votre entreprise les moyens d'une conception centrée sur l'utilisateur et de l'IA pour offrir des expériences client fluides et accélérer la croissance.",
         "cta": "Voir mes projets"
       }
+    },
+    "inner-page": {
+      "header-section": {
+        "cta": "Voir mes projets"
+      },
+      "project-research-section": {
+        "title": "Cadrage du problème",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "goal-research-section": {
+        "title": "Objectif ?"
+      },
+      "project-statement-section": {
+        "title": "Recherche utilisateur",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "project-points-research-section": {
+        "title": "Points clés",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "project-preview-section": {
+        "title": "Idéation",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "project-result-section": {
+        "title": "Résultats",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "more-preview-section": {
+        "title": "Autres projets."
+      }
     }
   },
   "thoughts": {
@@ -120,6 +156,11 @@
         "title": "Réflexions",
         "description": "Voici un espace où vous pouvez publier des articles sur vraiment tout, par exemple des conseils sur le design, des engrenages qui boostent votre productivité",
         "cta": "Voir mes réflexions"
+      }
+    },
+    "inner-page": {
+      "more-preview-section": {
+        "title": "Autres réflexions."
       }
     }
   },
@@ -188,6 +229,14 @@
       "loaded": "Chargé",
       "sending": "Envoi...",
       "sent": "Envoyé"
+    },
+    "shared": {
+      "text": {
+        "presentation": "Présentation",
+        "results": "Résultats",
+        "role": "Role",
+        "duration": "Durée"
+      }
     },
     "base": {
       "website": "Site web",
@@ -285,11 +334,6 @@
             }
           }
         }
-      }
-    },
-    "shared": {
-      "text": {
-        "presentation": "Présentation"
       }
     },
     "actions": {

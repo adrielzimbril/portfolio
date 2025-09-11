@@ -5,6 +5,7 @@ import { PreviewContentType } from "@/types/enum";
 import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
+import { useTranslations } from "next-intl";
 
 export function HeaderSection({
   title,
@@ -21,6 +22,8 @@ export function HeaderSection({
   projectLink?: string;
   pageViewsData: { slug: string; locale: string };
 }) {
+  const t = useTranslations();
+
   usePageViews(
     getResourcesUrl(PageType.PROJECT, pageViewsData.slug),
     pageViewsData.slug,
@@ -47,7 +50,7 @@ export function HeaderSection({
       description={description}
       tags={tags}
       ctaButton={projectLink ?? undefined}
-      ctaButtonText="Voir le projet 🦄"
+      ctaButtonText={`${t("projects.inner-page.header-section.cta")} 🦄`}
     />
   );
 }

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,6 +7,7 @@ import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { getImageUrl } from "@/utils/base-url";
 import { FormattedText } from "@/components/shared/formatted-text";
+import { useTranslations } from "next-intl";
 
 export function ProjectResultSection({
   description,
@@ -14,11 +16,16 @@ export function ProjectResultSection({
   description: string;
   results: { badge: string; icon: string; content: string }[];
 }) {
+  const t = useTranslations();
+
   return (
     <>
       <SectionLayout
-        title="Résultats"
-        description={description}
+        title={t("projects.inner-page.project-result-section.title")}
+        description={
+          description ||
+          t("projects.inner-page.project-result-section.description")
+        }
         className="p-0"
         contentClassName="md:grid-cols-3"
       >

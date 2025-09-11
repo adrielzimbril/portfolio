@@ -3,10 +3,15 @@ import React from "react";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section-new";
 import { Project } from "@/module/content/types";
+import { useTranslations } from "next-intl";
 
 export function MorePreviewSection({ data }: { data: Project[] }) {
+  const t = useTranslations();
+
   return (
-    <CardPreviewSection title="Autres projets.">
+    <CardPreviewSection
+      title={t("projects.inner-page.more-preview-section.title")}
+    >
       {data.map((project, index) => (
         <ProjectCard
           key={index}

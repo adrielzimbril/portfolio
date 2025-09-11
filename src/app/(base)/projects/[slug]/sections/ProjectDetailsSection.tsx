@@ -1,10 +1,11 @@
+"use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
-import { FormattedText } from "@/components/shared/formatted-text";
 import { Card, CardContent } from "@/components/ui/card";
 import { getDateDifference } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
+import { useTranslations } from "next-intl";
 
 const projectDetails = {
   role: ["Product designer", "product designer"],
@@ -28,11 +29,15 @@ export function ProjectDetailsSection({
   duration: Array<string>;
   tags: { name: string }[];
 }) {
+  const t = useTranslations();
+
   return (
     <section className="relative w-full">
       <div className="relative flex flex-col md:flex-row w-full max-w-5xl mx-auto place-content-center justify-center gap-6 md:gap-20">
         <div className="flex flex-col w-full md:max-w-[60%] items-start gap-4 md:gap-8">
-          <h2 className="relative self-stretch h3">Présentation</h2>
+          <h2 className="relative self-stretch h3">
+            {t("common.shared.text.presentation")}
+          </h2>
 
           <MarkdownContentRender content={content} />
         </div>
@@ -41,7 +46,9 @@ export function ProjectDetailsSection({
           <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
             <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-white overflow-hidden">
               <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Role</span>
+                <span className="font-normal text-zinc-700">
+                  {t("common.shared.text.role")}
+                </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   {projectDetails.role.map((role, index) => (
@@ -64,7 +71,9 @@ export function ProjectDetailsSection({
                 duration.length >= 1 &&
                 duration.every((d) => typeof d === "string") && (
                   <div className="flex w-full flex-col gap-2">
-                    <span className="font-normal text-zinc-700">Durée</span>
+                    <span className="font-normal text-zinc-700">
+                      {t("common.shared.text.duration")}
+                    </span>
 
                     <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                       <Badge
@@ -78,7 +87,9 @@ export function ProjectDetailsSection({
                 )}
 
               <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Résultats</span>
+                <span className="font-normal text-zinc-700">
+                  {t("common.shared.text.results")}
+                </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   {tags.map((tag, index) => (

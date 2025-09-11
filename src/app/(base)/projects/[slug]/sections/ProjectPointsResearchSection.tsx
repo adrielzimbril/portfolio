@@ -1,8 +1,9 @@
+"use client";
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { getImageUrl } from "@/utils/base-url";
+import { useTranslations } from "next-intl";
 
 function PointCard({
   title,
@@ -26,11 +27,16 @@ export function ProjectPointsResearchSection({
   pointSectionDescription: string;
   points: { title: string; description: string }[];
 }) {
+  const t = useTranslations();
+
   return (
     <>
       <SectionLayout
-        title="Aperçus"
-        description={pointSectionDescription}
+        title={t("projects.inner-page.project-points-research-section.title")}
+        description={
+          pointSectionDescription ||
+          t("projects.inner-page.project-points-research-section.description")
+        }
         //className="p-0"
         contentClassName="lg:max-w-[80%] items-start"
       >
