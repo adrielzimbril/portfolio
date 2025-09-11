@@ -54,4 +54,4 @@ package-lock.json
 .env.local
 
 # Ignore all lang d.ts files
-src/module/i18n/translations/*.d.json
+/src/module/i18n/translations/*.d.json.ts
