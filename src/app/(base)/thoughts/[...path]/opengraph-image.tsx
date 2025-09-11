@@ -1,0 +1,66 @@
+import { getBaseUrl } from "@/utils/base-url";
+import { ImageResponse } from "next/og";
+import { siteConfig } from "@/data/config";
+import logger from "@/utils/logger";
+import { PageParams } from "@/types";
+import { getPostBySlug } from "@/module/content/utils/lib/posts";
+import { getLocale } from "next-intl/server";
+import { getActivePathFromUrlParam } from "@/utils/route-utils";
+import { routes } from "@/data/route";
+import { localeRedirect } from "@i18n/routing";
+
+// Configuration exports
+export const runtime = "edge";
+export const alt = siteConfig.details.nameShared;
+export const size = {
+  width: 1200,
+  height: 630,
+};
+export const contentType = "image/png";
+
+export default async function Image(props: { params: Promise<PageParams> }) {
+  const params = await props.params;
+
+  const { path } = params;
+
+  const locale = await getLocale();
+  const slug = getActivePathFromUrlParam(path);
+  const post = await getPostBySlug(slug, { locale });
+
+  if (!post) {
+    return localeRedirect({ href: routes.thoughts.link, locale });
+  }
+
+  try {
+    const baseUrl = getBaseUrl();
+
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "black",
+          }}
+        >
+          <img
+            src={`${baseUrl}/agent-template-og.png`}
+            alt={alt}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }}
+          />
+        </div>
+      ),
+      { ...size }
+    );
+  } catch (error) {
+    logger.error("Error generating OpenGraph image:", error);
+    return new Response(`Failed to generate image`, { status: 500 });
+  }
+}

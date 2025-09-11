@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MyThoughtsSection } from "./sections/MyThoughtsSection";
