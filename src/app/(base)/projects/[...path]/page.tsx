@@ -13,22 +13,50 @@ import { ProjectResultSection } from "./sections/ProjectResultSection";
 import { GoalResearchSection } from "./sections/GoalResearchSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { localeRedirect } from "@/module/i18n/routing";
-import { getProjectWithAdjacent } from "@/module/content/utils/lib/projects";
+import {
+  getProjectWithAdjacent,
+  getProjectBySlug,
+} from "@/module/content/utils/lib/projects";
 import { getActivePathFromUrlParam } from "@/utils/route-utils";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { routes } from "@/data/route";
 import { PageParams, PageType } from "@/types";
+import { getBaseUrl, getImageUrl } from "@/utils";
+
+export async function generateMetadata(props: { params: Promise<PageParams> }) {
+  const params = await props.params;
+
+  const { path } = params;
+
+  const locale = await getLocale();
+  const slug = getActivePathFromUrlParam(path);
+  const project = await getProjectBySlug(slug, { locale });
+
+  return {
+    title: project?.title,
+    description: project?.excerpt,
+    openGraph: {
+      title: project?.title,
+      description: project?.excerpt,
+      images: [
+        getImageUrl(project?.image_big ?? ""),
+        getImageUrl(`og?title=${slug}`),
+      ],
+    },
+  };
+}
 
 export default async function SubProject(props: {
   params: Promise<PageParams>;
 }) {
-  const { path, locale } = await props.params;
+  const { path } = await props.params;
+  const locale = await getLocale();
   setRequestLocale(locale);
 
   const slug = getActivePathFromUrlParam(path);
-  const post = await getProjectWithAdjacent(slug, { locale });
+  const project = await getProjectWithAdjacent(slug, { locale });
 
-  if (!post) {
+  if (!project) {
     return localeRedirect({ href: routes.projects.link, locale });
   }
 
@@ -54,7 +82,7 @@ export default async function SubProject(props: {
     previewSectionDescription,
     resultSectionDescription,
     results,
-  } = post!.currentProject;
+  } = project!.currentProject;
   return (
     <>
       <HeaderSection
@@ -107,8 +135,9 @@ export default async function SubProject(props: {
           results={results}
         />
       )}
-      <MorePreviewSection data={post!.adjacentProjects} />
+      <MorePreviewSection data={project!.adjacentProjects} />
       <CallToAction isPage />
     </>
   );
-}
+} 
+

@@ -11,7 +11,7 @@ export function DefaultSeo() {
       title={siteConfig.details.nameShared}
       titleTemplate={`%s | ${siteConfig.details.nameShared}`}
       defaultTitle={siteConfig.details.nameShared}
-      description={"Shissro - " + siteConfig.description}
+      description={siteConfig.description}
       canonical={siteUrl}
       norobots={!siteConfig.seo.robots.index}
       dangerouslySetAllPagesToNoIndex={!siteConfig.seo.robots.index}
@@ -34,7 +34,7 @@ export function DefaultSeo() {
             url: siteConfig.seo?.ogImage?.original,
             width: 800,
             height: 600,
-            alt: "Shirssso - " + siteConfig.details.nameShared,
+            alt: siteConfig.details.nameShared,
           },
         ],
       }}

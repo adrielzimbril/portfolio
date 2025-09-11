@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { getAllProjects } from "@/module/content/utils/lib";
 import logger from "@/utils/logger";
 import { Project } from "@/module/content/types";
+import { cn } from "@/utils";
 
 const config: ProjectPreviewCardContainerSectionProps = {
   allWide: false,
@@ -53,6 +54,7 @@ export function ProjectsSection() {
                 project_title: project.title,
               })
             }
+            className={cn(isWide && "md:flex-row md:col-span-2")}
           >
             <ProjectCard
               title={project.title}

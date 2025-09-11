@@ -4,15 +4,42 @@ import { HeaderSection } from "./sections/HeaderSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
 import { getActivePathFromUrlParam } from "@/utils/route-utils";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { PageParams } from "@/types";
-import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
+import {
+  getResourceWithAdjacent,
+  getResourceBySlug,
+} from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/route";
+import { getImageUrl, getBaseUrl } from "@/utils";
+
+export async function generateMetadata(props: { params: Promise<PageParams> }) {
+  const params = await props.params;
+
+  const { path } = params;
+
+  const locale = await getLocale();
+  const slug = getActivePathFromUrlParam(path);
+  const resource = await getResourceBySlug(slug, { locale });
+
+  return {
+    title: resource?.title,
+    description: resource?.excerpt,
+    openGraph: {
+      title: resource?.title,
+      description: resource?.excerpt,
+      images: [
+        getImageUrl(resource?.cover ?? ""),
+        getImageUrl(`og?title=${slug}`),
+      ],
+    },
+  };
+}
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
-  const { path, locale } = await props.params;
-  setRequestLocale(locale);
+  const { path } = await props.params;
+  const locale = await getLocale();
 
   const slug = getActivePathFromUrlParam(path);
   const resource = await getResourceWithAdjacent(slug, { locale });

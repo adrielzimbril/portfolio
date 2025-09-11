@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     default: siteConfig.details.nameShared,
     template: `%s | ${siteConfig.details.nameShared}`,
   },
-  description: "Shiro - " + siteConfig.description,
+  description: siteConfig.description,
   keywords: siteConfig.keywords,
   alternates: {
     canonical: siteConfig.url,
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
       default: siteConfig.details.nameShared,
       template: `%s | ${siteConfig.details.nameShared}`,
     },
-    description: "Shirdvdvdvdvdveeo - " + siteConfig.description,
-    siteName: "Shirocddv - " + siteConfig.details.nameShared,
+    description: siteConfig.description,
+    siteName: siteConfig.details.nameShared,
   },
   twitter: {
     card: "summary_large_image",

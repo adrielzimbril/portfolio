@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { getBaseUrl } from "@/utils/base-url";
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/data/config";
 import logger from "@/utils/logger";
@@ -15,10 +15,7 @@ export const contentType = "image/png";
 export default async function Image() {
   try {
     // Get the host from headers
-    const headersList = await headers();
-    const host = headersList.get("host") || "";
-    const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-    const baseUrl = `${protocol}://${host}`;
+    const baseUrl = getBaseUrl();
 
     return new ImageResponse(
       (

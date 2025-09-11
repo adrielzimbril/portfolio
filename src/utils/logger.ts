@@ -27,6 +27,10 @@ const logger = {
   debug: (...args: unknown[]) =>
     process.env.NODE_ENV === "development" &&
     console.debug("🐛 [DEBUG]", ...args),
+
+  trace: (...args: unknown[]) =>
+    process.env.NODE_ENV === "development" &&
+    console.trace("[🗺️ TRACE]", ...args),
 };
 
 export default logger;

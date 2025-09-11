@@ -14,6 +14,7 @@ import { routes } from "@/data/route";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
 import { PageParams, PageType } from "@/types";
+import { Metadata } from "next";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
@@ -24,24 +25,30 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const slug = getActivePathFromUrlParam(path);
   const post = await getPostBySlug(slug, { locale });
 
-  return {
+  const metadata: Metadata = {
     title: post?.title,
     description: post?.excerpt,
     openGraph: {
       title: post?.title,
       description: post?.excerpt,
-      images: post?.cover
-        ? [getImageUrl(post.cover)]
-        : [`${getBaseUrl()}/og?title=${encodeURIComponent(post?.title ?? "")}`],
+      images: [
+        getImageUrl(post?.cover ?? ""),
+        getResourcesUrl(
+          PageType.THOUGHT,
+          `${slug}/opengraph-image?${new Date().getTime()}`
+        ),
+      ],
     },
   };
+
+  return metadata;
 }
 
 export default async function BlogPostPage(props: {
   params: Promise<PageParams>;
 }) {
-  const { path, locale } = await props.params;
-  setRequestLocale(locale);
+  const { path } = await props.params;
+  const locale = await getLocale();
 
   const slug = getActivePathFromUrlParam(path);
   const post = await getPostWithAdjacent(slug, { locale });
@@ -79,7 +86,7 @@ export default async function BlogPostPage(props: {
               : `${getBaseUrl()}/og?title=${encodeURIComponent(
                   post.currentPost.title
                 )}`,
-            url: `${getResourcesUrl("thoughts", post.currentPost.slug)}`,
+            url: `${getResourcesUrl(PageType.THOUGHT, post.currentPost.slug)}`,
             author: {
               "@type": "Person",
               name: siteConfig.details.nameShared,
