@@ -9,6 +9,7 @@ import { getAllProjects } from "@/module/content/utils/lib";
 import logger from "@/utils/logger";
 import { Project } from "@/module/content/types";
 import { cn } from "@/utils";
+import { useTranslations } from "use-intl";
 
 const config: ProjectPreviewCardContainerSectionProps = {
   allWide: false,
@@ -17,6 +18,7 @@ const config: ProjectPreviewCardContainerSectionProps = {
 };
 
 export function ProjectsSection() {
+  const t = useTranslations();
   const { allWide, wideCardsCount, limit } = config;
   const [projects, setProjects] = useState<Project[]>([]);
 
@@ -35,10 +37,10 @@ export function ProjectsSection() {
 
   return (
     <SectionLayout
-      title="Projets"
-      description="Chaque projet est une opportunité de transformer une idée en expérience réelle, avec un design qui séduit et une stratégie qui fonctionne."
+      title={t("common.page-sections.projects.title")}
+      description={t("common.page-sections.projects.description")}
       link={routes.projects.link}
-      badge="Problem Solver 🦄"
+      badge={t("common.page-sections.projects.badge")}
       asFade
     >
       {projects.map((project, index) => {
@@ -54,7 +56,10 @@ export function ProjectsSection() {
                 project_title: project.title,
               })
             }
-            className={cn(isWide && "md:flex-row md:col-span-2")}
+            className={cn(
+              "size-full",
+              isWide ? "md:flex-row md:col-span-2" : "md:flex-col md:col-span-1"
+            )}
           >
             <ProjectCard
               title={project.title}

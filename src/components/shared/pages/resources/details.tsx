@@ -1,3 +1,5 @@
+"use client";
+
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
@@ -5,6 +7,7 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { PageType, ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useProductTitleRequestsCount } from "@/hooks/useSubscriberStats";
+import { useTranslations } from "use-intl";
 
 export function CardInfo({
   title,
@@ -25,6 +28,7 @@ export function CardInfo({
   avatars: string[];
   userCount: number;
 }) {
+  const t = useTranslations();
   const { count: avatarCount, loading: avatarCountLoading } =
     useProductTitleRequestsCount(title);
   return (
@@ -35,10 +39,12 @@ export function CardInfo({
         <Tags
           primaryTag={
             resourceType === ResourceType.COURSE
-              ? "Formation 🎥"
+              ? t("common.page-sections.hub.base.resources-type.course.title")
               : resourceType === ResourceType.EBOOK
-                ? "E-book 📕"
-                : "Masterclass 🎬"
+                ? t("common.page-sections.hub.base.resources-type.ebook.title")
+                : t(
+                    "common.page-sections.hub.base.resources-type.masterclass.title"
+                  )
           }
           tags={tags.map((tag) => tag.name)}
         />
@@ -111,6 +117,7 @@ function Action({
   slug: string;
   resourceType: ResourceType;
 }) {
+  const t = useTranslations();
   return (
     <Link
       href={getResourcesUrl(PageType.HUB, slug)}
@@ -121,10 +128,12 @@ function Action({
     >
       <span className="flex items-center gap-1">
         {resourceType === ResourceType.COURSE
-          ? "Enroll Now"
+          ? t("common.page-sections.hub.base.resources-type.course.button")
           : resourceType === ResourceType.EBOOK
-            ? "Read Now"
-            : "Watch Now"}
+            ? t("common.page-sections.hub.base.resources-type.ebook.button")
+            : t(
+                "common.page-sections.hub.base.resources-type.masterclass.button"
+              )}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>

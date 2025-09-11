@@ -2,19 +2,20 @@
 import posthog from "posthog-js";
 import { routes } from "@/data/route";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { PreviewCardContainerSectionProps } from "@/types/type";
 import { useState, useEffect } from "react";
 import { getAllPosts } from "@/module/content/utils/lib/posts";
-import { Resource, Post } from "@/module/content/types";
+import { Post } from "@/module/content/types";
 import logger from "@/utils/logger";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
+import { useTranslations } from "use-intl";
 
 const config: PreviewCardContainerSectionProps = {
   limit: 2,
 };
 
 export function ThoughtsSection() {
+  const t = useTranslations();
   const { limit } = config;
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -33,10 +34,10 @@ export function ThoughtsSection() {
 
   return (
     <SectionLayout
-      title="Thoughts"
-      description="Des guides, modèles et conseils pour maîtriser l'UI/UX, les design systems et Figma, et créer des produits qui donnent envie d'être utilisés."
+      title={t("common.page-sections.thoughts.title")}
+      description={t("common.page-sections.thoughts.description")}
       link={routes.thoughts.link}
-      badge="Ma vision 🤯"
+      badge={t("common.page-sections.thoughts.badge")}
     >
       {posts.map((post, index) => {
         return (

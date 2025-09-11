@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,6 +30,7 @@ import { cn } from "@/utils";
 import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
+import { useTranslations } from "use-intl";
 
 // Form Info Schema for ensuring name and phone
 const FormInfoSchema = z.object({
@@ -59,6 +61,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   productType,
   onClose,
 }) => {
+  const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [userCountry, setUserCountry] = useState("FR");
@@ -77,7 +80,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         const country = await useGetIpInfo(undefined, true);
         setUserCountry(country.data?.country?.code ?? "FR");
       } catch (error) {
-        logger.error("Erreur lors de la récupération du pays:", error);
+        logger.error(t("logger.ip.fetch.country-failed"), error);
       }
     };
 
@@ -115,7 +118,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         const res = await apiSubscribe({
           email,
           subscribedFromPage,
-          updateExisting: false, // Première inscription
+          updateExisting: false,
           productId,
           productType,
           updateLayer: false,
@@ -128,7 +131,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         setHasInitialSubscription(true);
       } catch (error) {
-        toast.error("Erreur lors de l'inscription. Veuillez réessayer.");
+        toast.error(t("logger.newsletter.subscribe.failed"));
+        logger.error(t("logger.newsletter.subscribe.failed"), error);
       }
     };
 
@@ -205,10 +209,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         animateConfetti();
       }, 200000);
     } catch (error) {
-      logger.error("Erreur lors de la mise à jour:", error);
-      toast.error(
-        "Une erreur est survenue lors de la mise à jour. Veuillez réessayer."
-      );
+      logger.error(t("logger.newsletter.subscribe.failed"), error);
+      toast.error(t("logger.form.submit-update-failed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -230,12 +232,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center">
-            🎁 Recevoir les cadeaux
+            {t("common.page-sections.newsletter.title")}
           </DialogTitle>
           <DialogDescription className="text-center text-gray-600">
             {hasInitialSubscription
-              ? "Votre inscription est confirmée ! Vous pouvez ajouter vos informations pour personnaliser votre expérience."
-              : "Inscription en cours... Vous pouvez ajouter vos informations personnelles."}
+              ? t("common.page-sections.newsletter.description.state")
+              : t("common.page-sections.newsletter.description.default")}
           </DialogDescription>
         </DialogHeader>
 
@@ -243,10 +245,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           <div className="flex flex-col items-center justify-center py-8 space-y-4">
             <CheckCircle className="w-16 h-16 text-green-500" />
             <h3 className="text-xl font-semibold text-green-600">
-              Informations mises à jour !
+              {t("common.page-sections.newsletter.form.success.message.title")}
             </h3>
             <p className="text-center text-gray-600">
-              Vos informations ont été mises à jour avec succès. Merci ! 🎉
+              {t(
+                "common.page-sections.newsletter.form.success.message.description"
+              )}
             </p>
           </div>
         ) : (
@@ -260,10 +264,16 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium">Nom</FormLabel>
+                    <FormLabel className="text-sm font-medium">
+                      {t(
+                        "common.page-sections.newsletter.form.fields.name.label"
+                      )}
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Votre nom et prénom"
+                        placeholder={t(
+                          "common.page-sections.newsletter.form.fields.name.placeholder"
+                        )}
                         className="h-12 border-2 border-input"
                         {...field}
                       />
@@ -279,7 +289,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="tesxt-sm font-medium">
-                      Numéro de téléphone
+                      {t(
+                        "common.page-sections.newsletter.form.fields.phone.label"
+                      )}
                     </FormLabel>
                     <FormControl>
                       <PhoneInput
@@ -320,11 +332,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   {isSubmitting ? (
                     <>
                       <Loader color="bg-zinc-100" />
-                      <span>Un instant...</span>
+                      <span>{t("common.button.sending")}...</span>
                     </>
                   ) : (
                     <>
-                      <span>Recevoir 🦄</span>
+                      <span>{t("common.button.receive")} 🦄</span>
                     </>
                   )}
                 </Button>

@@ -5,11 +5,11 @@ import { appConfig } from "@data/app-config";
 
 const withNextIntl = nextIntlPlugin({
   requestConfig: "./src/module/i18n/request.ts",
-  experimental: {
-    createMessagesDeclaration: Object.keys(appConfig.i18n.locales).map(
-      (locale) => `./src/module/i18n/translations/${locale}.json`
-    ),
-  },
+  // experimental: {
+  //   createMessagesDeclaration: Object.keys(appConfig.i18n.locales).map(
+  //     (locale) => `./src/module/i18n/translations/${locale}.json`
+  //   ),
+  // },
 });
 
 

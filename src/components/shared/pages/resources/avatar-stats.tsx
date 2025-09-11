@@ -44,12 +44,13 @@ function UserAvatars({
 }) {
   const numPeople = avatars?.length ?? userCount ?? 0;
 
-  // ✅ Génère toutes les couleurs une seule fois, hors du .map()
+  // ✅ Generate all colors in one time, outside of .map()
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: numPeople }).map(() =>
       Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
     );
   }, [numPeople]);
+
   return (
     <div className="inline-flex items-start">
       <AvatarGroup numPeople={numPeople}>

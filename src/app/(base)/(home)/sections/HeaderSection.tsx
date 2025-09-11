@@ -1,5 +1,5 @@
+"use client";
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { routes } from "@/data/route";
 import { Link } from "@/components/ui/link";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
@@ -7,6 +7,7 @@ import { useTranslations } from "use-intl";
 
 export function HeaderSection() {
   const t = useTranslations();
+
   return (
     <SectionBase sectionClassName="p-0 mt-20" isWide>
       <h1 className="w-full relative">{t("home.page.header-section.title")}</h1>

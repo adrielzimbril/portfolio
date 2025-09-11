@@ -1,15 +1,15 @@
+"use client";
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
-import { routes } from "@/data/route";
 import {
   ProjectCategories,
   ProjectTags,
 } from "@/components/shared/pages/projects/tags";
 import { cn } from "@/utils/utils";
-import { ProjectPreviewCardInfoProps } from "@/types/type";
 import { getResourcesUrl } from "@/utils/base-url";
 import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types";
 import { PageType } from "@/types";
+import { useTranslations } from "use-intl";
 
 export function CardInfo({
   title,
@@ -74,6 +74,7 @@ function Description({ description }: { description: string }) {
 }
 
 function Action({ slug }: { slug: string }) {
+  const t = useTranslations();
   return (
     <Link
       href={getResourcesUrl(PageType.PROJECT, slug)}
@@ -83,7 +84,7 @@ function Action({ slug }: { slug: string }) {
       asIcon
     >
       <span className="flex items-center gap-1">
-        Voir
+        {t("common.button.see")}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>

@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { PageType, ResourceType } from "@/types/enum";
 import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import { BookOne, ClapperboardPlay, VideoLibrary } from "@aurthle/icons";
 import { Link } from "@/components/ui/link";
+import { useTranslations } from "use-intl";
 
 interface PreviewProps {
   title?: string;
@@ -24,6 +26,7 @@ export function CardPreview({
   isWide,
   resourceType,
 }: PreviewProps) {
+  const t = useTranslations();
   return (
     <div
       className={cn(
@@ -45,11 +48,10 @@ export function CardPreview({
           </div>
         ) : (
           <PreviewContent
-            emoji={coverText?.emoji ?? "😎"}
-            title={coverText?.title ?? "I made you looked."}
+            emoji={coverText?.emoji ?? t("page-sections.preview.emoji")}
+            title={coverText?.title ?? t("page-sections.preview.title")}
             description={
-              coverText?.description ??
-              "You can have the rest of the empty space here."
+              coverText?.description ?? t("page-sections.preview.description")
             }
           />
         )}

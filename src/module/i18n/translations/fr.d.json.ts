@@ -8,7 +8,7 @@ declare const messages: {
     "page": {
       "header-section": {
         "title": "Transformez vos idées en produits que vos utilisateurs adorent",
-        "description": "Product designer spécialisé dans la simplification des expériences SaaS + formateur pour les équipes qui veulent créer l&#39;évidence plutôt que la complexité",
+        "description": "Product designer spécialisé dans la simplification des expériences SaaS + formateur pour les équipes qui veulent créer l'évidence plutôt que la complexité",
         "cta": "Discutons 👋",
         "cta-2": "Voir mes projets client 💡"
       }
@@ -73,6 +73,83 @@ declare const messages: {
       "contact": "Contact",
       "newsletter": "Newsletter"
     },
+    "button": {
+      "read": "Lire",
+      "read-more": "Lire plus",
+      "see": "Voir",
+      "see-more": "Voir plus",
+      "back": "Retour",
+      "continue": "Continuer",
+      "receive": "Recevoir",
+      "obtain": "Obtenir",
+      "loading": "Chargement...",
+      "loaded": "Chargé"
+    },
+    "base": {
+      "website": "Site web",
+      "linkedin": "LinkedIn",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "dribbble": "Dribbble"
+    },
+    "page-sections": {
+      "preview": {
+        "emoji": "😎",
+        "title": "I made you looked.",
+        "description": "You can have the rest of the empty space here."
+      },
+      "testimonials": {
+        "badge": "On a construit ensemble 🫱🏾‍🫲🏻",
+        "title": "Témoignages",
+        "description": "Découvrez les témoignages de mes clients et partenaires qui ont fait confiance à mon expertise."
+      },
+      "hub": {
+        "badge": "Hub 🫶",
+        "title": "Ressources",
+        "description": "Des guides, modèles et conseils pour maîtriser l'UI/UX, les design systems et Figma, et créer des produits qui donnent envie d'être utilisés.",
+        "base": {
+          "resources-type": {
+            "course": {
+              "title": "Formation 🎥",
+              "button": "S'inscrire"
+            },
+            "ebook": {
+              "title": "E-book 📕",
+              "button": "Lire"
+            },
+            "masterclass": {
+              "title": "Masterclass 🎬",
+              "button": "Participer"
+            }
+          }
+        }
+      },
+      "projects": {
+        "badge": "Problem Solver 🦄",
+        "title": "Projets",
+        "description": "Chaque projet est une opportunité de transformer une idée en expérience réelle, avec un design qui séduit et une stratégie qui fonctionne."
+      },
+      "thoughts": {
+        "badge": "Ma vision 🤯",
+        "title": "Thoughts",
+        "description": "Des guides, modèles et conseils pour maîtriser l'UI/UX, les design systems et Figma, et créer des produits qui donnent envie d'être utilisés."
+      },
+      "cta": {
+        "variant-one": {
+          "title": "Envie de parler de SaaS ?",
+          "description": "<p>Je partage régulièrement mes réflexions, retours d'expérience et conseils sur mon <blog>Blog</blog> et sur <linkedin>Linkedin</linkedin>.<br></br>Que ce soit pour discuter design, produit ou innovation, n'hésitez pas à me contacter.</p>",
+          "button": "Parler de SaaS 🦄"
+        },
+        "variant-two": {
+          "title": "Discutons de votre prochain projet !",
+          "description": "<p>Je partage régulièrement mes réflexions, retours d'expérience et conseils sur mon <blog>Blog</blog> et sur <linkedin>Linkedin</linkedin>.<br></br>Que ce soit pour discuter design, produit ou innovation, n'hésitez pas à me contacter.</p>",
+          "form": {
+            "placeholder": "😏 Voulez-vous recevoir des cadeaux ?",
+            "button": "Parler de SaaS 🦄"
+          }
+        }
+      }
+    },
     "actions": {
       "continue": "Continuer",
       "verify": "Vérifier"
@@ -115,12 +192,13 @@ declare const messages: {
       "subject": "You have been invited to join an organization"
     }
   },
-  "start": {
-    "subtitle": "See the latest stats of your awesome business.",
-    "welcome": "Welcome {name}!"
-  },
   "zod": {
     "errors": {
+      "customized": {
+        "email": {
+          "invalid": "Oups ! Veuillez entrer une adresse email valide, s'il vous plaît 🦄"
+        }
+      },
       "invalid_arguments": "Invalid function arguments",
       "invalid_date": "Invalid date",
       "invalid_enum_value": "Invalid enum value. Expected {- options}, received '{received}'",

@@ -1,9 +1,10 @@
+"use client";
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { Post } from "@/module/content/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { PageType } from "@/types";
+import { useTranslations } from "use-intl";
 
 export function CardInfo({
   title,
@@ -27,7 +28,7 @@ export function CardInfo({
 
         {tags && (
           <Tags
-            primaryTag={primaryTag ?? tags[0].name}
+            primaryTag={primaryTag ?? tags[0]?.name}
             tags={tags
               .slice(primaryTag ? 0 : 1, primaryTag ? 4 : 5)
               .map((tag) => tag.name)}
@@ -61,6 +62,7 @@ function Description({ description }: { description: string }) {
 }
 
 function Action({ slug }: { slug: string }) {
+  const t = useTranslations();
   return (
     <Link
       href={getResourcesUrl(PageType.THOUGHT, slug)}
@@ -70,7 +72,7 @@ function Action({ slug }: { slug: string }) {
       asIcon
     >
       <span className="flex items-center gap-1">
-        Lire
+        {t("common.button.read")}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>

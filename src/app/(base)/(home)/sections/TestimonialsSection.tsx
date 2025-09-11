@@ -1,14 +1,16 @@
 "use client";
 import { Link, Linkedin, LinkOne } from "@aurthle/icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import BoringAvatar from "boring-avatars";
 import { cn, pickRandomColorCode } from "@/utils";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useLocale, useTranslations } from "use-intl";
 
-interface Testimonial {
+interface TestimonialCard {
   id: number;
+  locale: string;
   name: string;
   position: string;
   testimonial: string;
@@ -17,9 +19,10 @@ interface Testimonial {
   avatar?: string;
 }
 
-const testimonials: Testimonial[] = [
+const testimonials: TestimonialCard[] = [
   {
     id: 1,
+    locale: "fr",
     name: "Christian Junior Braffo",
     position: "Développeur Web & Certifié Cloud Practitioner",
     testimonial:
@@ -29,6 +32,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 2,
+    locale: "fr",
     name: "Youssouf Aboubacar Yvan Gamby",
     position: "Chargé d’affaires chez Witti Finances Côte d'Ivoire",
     testimonial:
@@ -38,6 +42,7 @@ const testimonials: Testimonial[] = [
   },
   {
     id: 3,
+    locale: "fr",
     name: "Angaman Brou Cedrick Delmas",
     position: "Developer Backend Java/Python",
     testimonial:
@@ -48,23 +53,36 @@ const testimonials: Testimonial[] = [
 ];
 
 export function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const t = useTranslations();
+  const locale = useLocale();
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const localeTestimonials = testimonials.filter(
+    (testimonial) => testimonial.locale === locale
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      setCurrentIndex((prev) => (prev + 1) % localeTestimonials.length);
     }, 10000); // Time interval to change testimonial cards is 10 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [locale, localeTestimonials]);
 
-  const currentTestimonial = testimonials[currentIndex];
+  const currentTestimonial: TestimonialCard =
+    localeTestimonials[currentIndex] ?? localeTestimonials[0]!;
+
+  const colorSets: string[][] = useMemo(() => {
+    return Array.from({ length: localeTestimonials.length }).map(() =>
+      Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
+    );
+  }, [localeTestimonials]);
 
   return (
     <SectionLayout
-      title="Témoignages"
-      description="Découvrez les témoignages de mes clients et partenaires qui ont fait confiance à mon expertise."
-      badge="On a construit ensemble 🫱🏾‍🫲🏻"
+      title={t("common.page-sections.testimonials.title")}
+      description={t("common.page-sections.testimonials.description")}
+      badge={t("common.page-sections.testimonials.badge")}
       isFlex
     >
       <div className="flex flex-col gap-4 md:gap-8 items-center justify-center px-6 max-w-5xl mx-auto">
@@ -88,18 +106,18 @@ export function TestimonialsSection() {
                   {(currentTestimonial.linkedinUrl ||
                     currentTestimonial.websiteUrl) && (
                     <>
-                      {currentTestimonial.linkedinUrl ? (
+                      {currentTestimonial?.linkedinUrl ? (
                         <>
                           <Linkedin size={18} variant="bulk" />
                           <span className="hidden md:block leading-0">
-                            LinkedIn
+                            {t("common.base.linkedin")}
                           </span>
                         </>
                       ) : (
                         <>
                           <LinkOne size={18} variant="bulk" />
                           <span className="hidden md:block leading-0">
-                            Website
+                            {t("common.base.website")}
                           </span>
                         </>
                       )}
@@ -115,13 +133,8 @@ export function TestimonialsSection() {
                   <div className="flex gap-4 max-w-lg md:max-w-2xl">
                     <div className="size-10 md:size-12 rounded-full flex items-center justify-center">
                       <BoringAvatar
-                        name={currentTestimonial.avatar ?? ""}
-                        colors={[
-                          pickRandomColorCode(),
-                          pickRandomColorCode(),
-                          pickRandomColorCode(),
-                          pickRandomColorCode(),
-                        ]}
+                        name={currentTestimonial?.avatar ?? ""}
+                        colors={colorSets[currentIndex] ?? []}
                         variant="beam"
                         className="size-10 md:size-12"
                       />

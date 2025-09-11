@@ -25,6 +25,7 @@ import logger from "@/utils/logger";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
 import { AvatarsStats } from "./avatar-stats";
+import { useTranslations } from "use-intl";
 
 export function GetResource({
   id,
@@ -51,6 +52,7 @@ export function GetResource({
   locale?: string;
   slug?: string;
 }) {
+  const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const emailValidator = useEmailValidator({ label: "Email", required: true });
@@ -134,16 +136,16 @@ export function GetResource({
                 if (isEmailValid) {
                   setIsModalOpen(true);
                 } else {
-                  toast.error(
-                    "Oups ! Veuillez entrer une adresse email valide, s'il vous plaît 🦄"
-                  );
+                  toast.error(t("zod.errors.customized.email.invalid"));
                 }
               }}
               asFull
               whileTap
               asPointer
             >
-              <span className="font-bold text-base">Recevoir !🦄</span>
+              <span className="font-bold text-base">
+                {t("common.button.receive")} !🦄
+              </span>
             </Button>
           </div>
         </div>
