@@ -5,12 +5,12 @@ import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
 import { ThoughtsSection } from "./sections/ThoughtsSection";
 import { TestimonialsSection } from "./sections/TestimonialsSection";
-import { getPathUrl } from "@/utils";
-import { routes } from "@/data/route";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
+  const t = await getTranslations();
   const metadata = {
-    title: "Home",
+    title: t("home.title"),
   };
   return metadata;
 }

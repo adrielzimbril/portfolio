@@ -1,3 +1,4 @@
 {
-  "i18n-ally.localesPaths": ["src/module/i18n/translations"]
+  "i18n-ally.localesPaths": ["src/module/i18n/translations"],
+  "i18n-ally.keystyle": "nested"
 }

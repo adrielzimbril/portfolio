@@ -17,6 +17,21 @@ export const size = {
 };
 export const contentType = "image/png";
 
+
+export async function generateImageMetadata(props: {
+  params: Promise<PageParams>;
+}) {
+  const { slug } = await props.params;
+  const images = [{ text: slug }];
+
+  return images.map((image, idx) => ({
+    id: idx,
+    size: { width: 1200, height: 600 },
+    alt: image.text,
+    contentType: "image/png",
+  }));
+}
+
 export default async function Image(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;
 
