@@ -1,6 +1,6 @@
 "use client";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section-new";
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useState, useEffect } from "react";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Project } from "@/module/content/types";

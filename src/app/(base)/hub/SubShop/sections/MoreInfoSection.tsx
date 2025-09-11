@@ -1,6 +1,6 @@
 "use client";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
-import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section-new";
+import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
 import logger from "@/utils/logger";
 import { Resource } from "@/module/content/types";
 import { useState, useEffect } from "react";

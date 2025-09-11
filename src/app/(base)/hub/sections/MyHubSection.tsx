@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
-import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section-new";
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import logger from "@/utils/logger";
 import { Resource } from "@/module/content/types";

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section-new";
+import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
 import { Project } from "@/module/content/types";
 import { useTranslations } from "next-intl";
 

@@ -1,63 +1,23 @@
 "use client";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode } from "react";
+import { useLoadMore } from "@/hooks/useLoadMore";
+import { PreviewItem } from "@/types";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
-import { useLoadMore } from "@/hooks/useLoadMore";
-import { getJsonDataCached } from "@/utils";
-import { PreviewItem } from "@/types";
+import { Loader } from "@/components/shared/_layouts/loader";
+import { Link } from "@/components/ui/link";
+import { routes } from "@/data/route";
 
-interface LoadMoreProps {
-  children: ReactNode;
-  hasMore: boolean;
-  loading: boolean;
-  onLoadMore: () => void;
-  loadedItems: number;
-  totalItems: number;
-  incrementCount?: number;
-  showCounter?: boolean;
-}
-
-interface LoadMoreListProps {
-  dataPath: string;
-  subPath: string;
-  renderItem: (item: PreviewItem, index: number) => ReactNode;
-  initialCount?: number;
-  incrementCount?: number;
-  showCounter?: boolean;
-}
-
-function LoadingSpinner() {
-  return (
-    <div className="relative w-5 h-5">
-      <div className="absolute inset-0 rounded-full border-2 border-zinc-200" />
-      <div className="absolute inset-0 rounded-full border-2 border-zinc-200 border-t-transparent animate-spin" />
-    </div>
-  );
-}
-
-function useLoadMoreData<T>({
-  dataPath,
-  subPath,
-  initialCount = 3,
-  incrementCount = 3,
+export function useLoadMoreItems({
+  dataSource,
+  initialCount = 4,
+  incrementCount = 4,
 }: {
-  dataPath: string;
-  subPath: string;
+  dataSource: PreviewItem[];
   initialCount?: number;
   incrementCount?: number;
 }) {
-  const [dataSource, setDataSource] = useState<T[]>([]);
-
-  useEffect(() => {
-    const loadInitialData = async () => {
-      const data = (await getJsonDataCached(dataPath, subPath)) as T[];
-      setDataSource(data);
-    };
-
-    loadInitialData();
-  }, [dataPath, subPath]);
-
   const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
     useLoadMore({ dataSource, initialCount, incrementCount });
 
@@ -71,7 +31,26 @@ function useLoadMoreData<T>({
   };
 }
 
-function LoadMoreContainer({
+interface LoadMoreUIProps {
+  children: ReactNode;
+  hasMore: boolean;
+  loading: boolean;
+  onLoadMore: () => void;
+  loadedItems: number;
+  totalItems: number;
+  showCounter?: boolean;
+}
+
+function LoadingSpinner() {
+  return (
+    <div className="relative w-5 h-5">
+      <div className="absolute inset-0 rounded-full border-2 border-zinc-200" />
+      <div className="absolute inset-0 rounded-full border-2 border-zinc-200 border-t-transparent animate-spin" />
+    </div>
+  );
+}
+
+export function LoadMoreSection({
   children,
   hasMore,
   loading,
@@ -79,7 +58,7 @@ function LoadMoreContainer({
   loadedItems,
   totalItems,
   showCounter = false,
-}: LoadMoreProps) {
+}: LoadMoreUIProps) {
   return (
     <SectionLayout className="p-0">
       {children}
@@ -88,7 +67,7 @@ function LoadMoreContainer({
           <Button onClick={onLoadMore} disabled={loading} whileTap asPointer>
             {loading ? (
               <span className="flex gap-2 items-center">
-                <LoadingSpinner /> Chargement... 🙏
+                <Loader variant="single" /> <span>Chargement... 🦄</span>
               </span>
             ) : (
               "Voir plus 📂"
@@ -97,18 +76,21 @@ function LoadMoreContainer({
         ) : (
           <>
             <motion.div
-              className="content-stretch flex flex-col text-center gap-2 text-zinc-400 items-center justify-center relative shrink-0 max-w-md"
+              className="content-stretch flex flex-col text-center gap-2 text-zinc-500 items-center justify-center relative shrink-0 max-w-md"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
               <p>
-                <span className="text-zinc-500">
-                  Hello, vous avez tout vu !👋
+                <span className="text-foreground">
+                  Hello, c'est tout pour l'instant ! 🦄
                 </span>
                 <br />
-                N&apos;hésitez pas à me contacter pour discuter de votre
-                prochain projet 🦄
+                N&apos;hésitez pas à vous abonner à ma{" "}
+                <Link href={routes.newsletter.link}>
+                  <span className="text-foreground underline">newsletter</span>
+                </Link>{" "}
+                pour ne rien rater 🦄
               </p>
 
               {showCounter && (
@@ -121,35 +103,5 @@ function LoadMoreContainer({
         )}
       </div>
     </SectionLayout>
-  );
-}
-
-export function LoadMoreSection({
-  dataPath,
-  subPath,
-  renderItem,
-  initialCount = 4,
-  incrementCount = 4,
-  ...loadMoreProps
-}: LoadMoreListProps) {
-  const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
-    useLoadMoreData<PreviewItem>({
-      dataPath,
-      subPath,
-      initialCount,
-      incrementCount,
-    });
-
-  return (
-    <LoadMoreContainer
-      hasMore={hasMore}
-      loading={loading}
-      onLoadMore={loadMore}
-      loadedItems={loadedItems}
-      totalItems={totalItems}
-      {...loadMoreProps}
-    >
-      {data.map(renderItem)}
-    </LoadMoreContainer>
   );
 }

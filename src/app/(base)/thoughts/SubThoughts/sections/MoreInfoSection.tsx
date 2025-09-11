@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
-import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section-new";
+import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
 import { getAllPosts } from "@/module/content/utils/lib";
 import { Post } from "@/module/content/types";
 import logger from "@/utils/logger";
