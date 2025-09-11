@@ -33,6 +33,39 @@ function getLocaleFromFilePath(path: string) {
   );
 }
 
+async function compileBodyMDX(context: any, document: any) {
+  const remarkPluginsList: any = [
+    remarkGfm,
+    remarkParse,
+    remarkRehype,
+    remarkFrontmatter,
+    remarkMdxFrontmatter,
+    // mdxAnnotations.remark,
+  ];
+
+  const rehypePluginsList: any = [
+    [rehypeVideo, { allowDangerousHtml: true, details: false }],
+    // [mdxAnnotations.rehype],
+    [rehypeUnwrapImages],
+    [
+      rehypeShiki,
+      {
+        themes: {
+          light: "one-dark-pro",
+          dark: "github-dark",
+        },
+      },
+    ],
+    [rehypePrettyCode],
+    [rehypeStringify],
+  ];
+
+  return await compileMDX(context, document, {
+    remarkPlugins: remarkPluginsList,
+    rehypePlugins: rehypePluginsList,
+  });
+}
+
 // Collection of authors (dans posts/authors/)
 const authors = defineCollection({
   name: "authors",
@@ -206,32 +239,6 @@ const resourceTags = defineCollection({
   },
 });
 
-const remarkPluginsList: any = [
-  remarkGfm,
-  remarkParse,
-  remarkRehype,
-  remarkFrontmatter,
-  remarkMdxFrontmatter,
-  mdxAnnotations.remark,
-];
-
-const rehypePluginsList: any = [
-  [rehypeVideo, { allowDangerousHtml: true, details: false }],
-  [mdxAnnotations.rehype],
-  [rehypeUnwrapImages],
-  [
-    rehypeShiki,
-    {
-      themes: {
-        light: "one-dark-pro",
-        dark: "github-dark",
-      },
-    },
-  ],
-  [rehypePrettyCode],
-  [rehypeStringify],
-];
-
 // Collection of posts with relations
 const posts = defineCollection({
   name: "posts",
@@ -250,10 +257,7 @@ const posts = defineCollection({
     featured: z.boolean().optional().default(false),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      remarkPlugins: remarkPluginsList,
-      rehypePlugins: rehypePluginsList,
-    });
+    const body = await compileBodyMDX(context, document);
 
     // Resolve relations
     const categories = context
@@ -344,10 +348,7 @@ const projects = defineCollection({
       .optional(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      remarkPlugins: remarkPluginsList,
-      rehypePlugins: rehypePluginsList,
-    });
+    const body = await compileBodyMDX(context, document);
 
     // Resolve relations
     const categories = context
@@ -397,10 +398,7 @@ const resources = defineCollection({
     published: z.boolean(),
   }),
   transform: async (document, context) => {
-    const body = await compileMDX(context, document, {
-      remarkPlugins: remarkPluginsList,
-      rehypePlugins: rehypePluginsList,
-    });
+    const body = await compileBodyMDX(context, document);
 
     // Use resourcesTags or postTags according to your preference
     const tags = context

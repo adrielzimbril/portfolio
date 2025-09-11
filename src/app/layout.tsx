@@ -22,6 +22,7 @@ import { Toaster } from "@/components/shiro/providers/toast-provider";
 import { AnalyticsScript } from "@/module/analytics";
 import getRequestConfig from "@/module/i18n/request";
 import { getUserLocale } from "@/module/i18n/lib/locale-cookie";
+import { DefaultSeo } from "@/components/shared/_layouts/_default-seo";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -38,14 +39,6 @@ export const viewport: Viewport = {
       color: "black",
     },
   ],
-};
-
-export const metadata: Metadata = {
-  ...metadataBase,
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
 };
 
 const locales = Object.keys(appConfig.i18n.locales);
@@ -79,6 +72,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <DefaultSeo />
           <NextIntlClientProvider locale={locale} messages={messages}>
             <LayoutProvider>
               <TooltipProvider openDelay={0} closeDelay={0}>

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/data/config";
 
-export interface innerPageSeo {
+export interface InnerPageSeo {
   title: string;
   description: string;
   keywords: string[];
@@ -13,16 +13,17 @@ export interface innerPageSeo {
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    default: siteConfig.details.nameShared,
+    template: `%s | ${siteConfig.details.nameShared}`,
   },
-  description: siteConfig.description,
+  description: "Shiro - " + siteConfig.description,
   keywords: siteConfig.keywords,
   alternates: {
     canonical: siteConfig.url,
     languages: {
-      en: `/en`,
-      fr: `/fr`,
+      en: "/",
+      fr: "/",
+      ch: "/",
     },
   },
   authors: [
@@ -43,17 +44,17 @@ export const metadata: Metadata = {
     locale: siteConfig.languagePrimary,
     url: siteConfig.url,
     title: {
-      default: siteConfig.name,
-      template: `%s - ${siteConfig.name}`,
+      default: siteConfig.details.nameShared,
+      template: `%s | ${siteConfig.details.nameShared}`,
     },
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    description: "Shirdvdvdvdvdveeo - " + siteConfig.description,
+    siteName: "Shirocddv - " + siteConfig.details.nameShared,
   },
   twitter: {
     card: "summary_large_image",
     title: {
-      default: siteConfig.name,
-      template: `%s - ${siteConfig.name}`,
+      default: siteConfig.details.nameShared,
+      template: `%s | ${siteConfig.details.nameShared}`,
     },
     description: siteConfig.description,
     creator: siteConfig.details.nameShared,

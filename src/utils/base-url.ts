@@ -17,6 +17,21 @@ export function getBaseUrl(): string {
 }
 
 /**
+ * Gets the URL of a path.
+ * @param {string} path - The path.
+ *
+ * Returns the URL of a path.
+ * @returns {string} The URL of the path.
+ *
+ * @example
+ * getPathUrl("/about"); // returns "https://base-url/about"
+ */
+export function getPathUrl(path: string): string {
+  const BASE_URL = getBaseUrl();
+  return new URL(path, BASE_URL).href;
+}
+
+/**
  * Gets the API base URL.
  *
  * Returns the API base URL.
@@ -36,9 +51,9 @@ export function getApiBaseUrl(): string {
  * @returns {string} The resources URL.
  *
  * @example
- * getResourcesUrl("hub", "slug"); // returns "https://shirofolio.com/hub/slug"
- * getResourcesUrl("projects"); // returns "https://shirofolio.com/projects"
- * getResourcesUrl("thoughts", "slug"); // returns "https://shirofolio.com/thoughts/slug"
+ * getResourcesUrl("hub", "slug"); // returns "https://base-url/hub/slug"
+ * getResourcesUrl("projects"); // returns "https://base-url/projects"
+ * getResourcesUrl("thoughts", "slug"); // returns "https://base-url/thoughts/slug"
  */
 export function getResourcesUrl(
   resource: PageType,
@@ -57,7 +72,7 @@ export function getResourcesUrl(
  *
  * @example
  * getImageUrl(""); // returns ""
- * getImageUrl("slug"); // returns "https://shirofolio.com/images/slug"
+ * getImageUrl("slug"); // returns "https://base-url/images/slug"
  * getImageUrl("https://example.com/image.jpg"); // returns "https://example.com/image.jpg"
  */
 export function getImageUrl(slug: string): string {

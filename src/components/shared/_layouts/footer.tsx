@@ -16,8 +16,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LangSwitcherIcon } from "@/components/icons/lang-switcher-icon";
-import { LangIcon } from "@/components/icons/lang-icon";
+import { USFlag } from "@/components/icons/flags/USFlag";
+import { FRFlag } from "@/components/icons/flags/FRFlag";
+import { CNFlag } from "@/components/icons/flags/CNFlag";
 
 export function Footer() {
   return (
@@ -53,7 +54,7 @@ export function LocaleSwitch() {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent>
+      <DropdownMenuContent className="w-fit min-w-32">
         <DropdownMenuRadioGroup
           value={value}
           onValueChange={(value) => {
@@ -62,18 +63,30 @@ export function LocaleSwitch() {
             updateLocale(value as Locale);
             router.refresh();
           }}
+          className="flex flex-col w-fit items-start gap-1"
         >
-          {Object.entries(locales).map(
-            ([locale, { label, icon, iconMobile }]) => {
-              return (
-                <DropdownMenuRadioItem key={locale} value={locale}>
-                  {label}
-                  {icon}
-                  {iconMobile}
-                </DropdownMenuRadioItem>
-              );
-            }
-          )}
+          {Object.entries(locales).map(([locale, { label, icon }]) => {
+            const iconsMap = {
+              FRFlag,
+              USFlag,
+              CNFlag,
+            } as const;
+
+            const IconComponent = iconsMap[icon as keyof typeof iconsMap];
+            return (
+              <DropdownMenuRadioItem
+                className="flex gap-2 items-center justify-between data-[state=checked]:bg-indigo-100 focus:bg-indigo-200 focus:text-foreground w-full"
+                key={locale}
+                value={locale}
+              >
+                {label}
+                <span className="text-xl">
+                  {<IconComponent width="20px" height="15px" />}
+                </span>
+                {/* <span className="text-xl">{iconMobile}</span> */}
+              </DropdownMenuRadioItem>
+            );
+          })}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
