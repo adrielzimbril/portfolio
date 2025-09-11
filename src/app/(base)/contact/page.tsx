@@ -6,17 +6,21 @@ import { cn } from "@/utils/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { Metadata } from "next";
-
-const tags = ["Adriel Zimbril 🦄", "Shirospace 🚀", "Aurthle ✨"];
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
+  const t = await getTranslations();
   const metadata: Metadata = {
-    title: "Contact",
+    title: t("contact.title"),
+    description: t("contact.description"),
   };
   return metadata;
 }
 
-export default function Newsletter() {
+const tags = ["Adriel Zimbril 🦄", "Shirospace 🚀", "Aurthle ✨"];
+
+export default async function Newsletter() {
+  const t = await getTranslations();
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "hello-adrielzimbril" });
@@ -42,11 +46,9 @@ export default function Newsletter() {
         >
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4">
             <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[115%] text-zinc-600">
-              Problem Solver & Your SaaS Product designer ❣️
+              {t("contact.page.badge")}
             </Badge>
-            <h2 className="self-stretch">
-              Transforme tes idées en produits que tes utilisateurs adorent 🦄
-            </h2>
+            <h2 className="self-stretch">{t("contact.page.title")}</h2>
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600"></p>
           </div>
 
@@ -73,7 +75,9 @@ export default function Newsletter() {
               data-cal-config='{"layout":"month_view"}'
               className={cn("hidden")}
             >
-              <span className="font-bold text-base">Recevoir !🦄</span>
+              <span className="font-bold text-base">
+                {t("contact.page.form.submit")}
+              </span>
             </Button>
           </div>
         </div>

@@ -12,17 +12,21 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { NewsletterSubscribersBadge } from "@/components/SubscriberBadges";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
 
 export async function generateMetadata() {
+  const t = await getTranslations();
   const metadata: Metadata = {
-    title: "Newsletter",
+    title: t("newsletter.title"),
+    description: t("newsletter.description"),
   };
   return metadata;
 }
 
-export default function Newsletter() {
+export default async function Newsletter() {
+  const t = await getTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -48,15 +52,13 @@ export default function Newsletter() {
             }
           >
             <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
-              Pour les développeurs freelances qui galèrent à trouver des
-              clients.
+              {t("newsletter.page.badge")}
             </Badge>
             <h2 className="self-stretch">
-              Trouve des clients en continu grâce à la méthode Tsunami 🌊
+              {t("newsletter.page.title")}
             </h2>
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600">
-              Je te montre comment utiliser l&#39;IA et l&#39;AUTOMATISATION
-              pour trouver des missions en boucle.
+              {t("newsletter.page.desc")}
             </p>
           </div>
           <Tags tags={tags} isCentered />

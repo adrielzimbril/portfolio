@@ -11,6 +11,7 @@ export async function generateMetadata() {
   const t = await getTranslations();
   const metadata = {
     title: t("home.title"),
+    description: t("home.description"),
   };
   return metadata;
 }

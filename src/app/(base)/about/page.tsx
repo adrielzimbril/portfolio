@@ -5,10 +5,13 @@ import { HeaderSection } from "./sections/HeaderSection";
 import { CraftSection } from "./sections/CraftSection";
 import { InteractiveFunFacts } from "./sections/InteractiveFunFactsSection";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
+  const t = await getTranslations();
   const metadata: Metadata = {
-    title: "About",
+    title: t("about.title"),
+    description: t("about.description"),
   };
   return metadata;
 }
