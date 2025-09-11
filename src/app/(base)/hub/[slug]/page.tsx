@@ -16,12 +16,9 @@ import { getImageUrl, getResourcesUrl } from "@/utils";
 import { PageType } from "@/types";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
-  const params = await props.params;
-
-  const { path } = params;
+  const { slug } = await props.params;
 
   const locale = await getLocale();
-  const slug = getActivePathFromUrlParam(path);
   const resource = await getResourceBySlug(slug, { locale });
 
   return {
@@ -42,10 +39,10 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
 }
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
-  const { path } = await props.params;
+  const { slug } = await props.params;
+
   const locale = await getLocale();
 
-  const slug = getActivePathFromUrlParam(path);
   const resource = await getResourceWithAdjacent(slug, { locale });
 
   if (!resource) {

@@ -10,14 +10,10 @@ const getRequestConfig = getRequestConfigOriginal(async ({ requestLocale }) => {
 
   if (!locale) {
     locale = await getUserLocale();
-    logger.info(`Step 1: User locale: ${locale}`);
-  } else {
-    logger.info(`Step 1: Locale found: ${locale}`);
   }
 
   if (!(routing.locales.includes(locale) && appConfig.i18n.enabled)) {
     locale = routing.defaultLocale;
-    logger.info(`Step 2: Locale not found, using default locale: ${locale}`);
   }
 
   return {

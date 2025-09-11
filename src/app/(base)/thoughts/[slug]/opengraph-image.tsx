@@ -5,7 +5,6 @@ import logger from "@/utils/logger";
 import { PageParams } from "@/types";
 import { getPostBySlug } from "@/module/content/utils/lib/posts";
 import { getLocale } from "next-intl/server";
-import { getActivePathFromUrlParam } from "@/utils/route-utils";
 import { routes } from "@/data/route";
 import { localeRedirect } from "@i18n/routing";
 
@@ -19,12 +18,10 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image(props: { params: Promise<PageParams> }) {
-  const params = await props.params;
-
-  const { path } = params;
+  const { slug } = await props.params;
 
   const locale = await getLocale();
-  const slug = getActivePathFromUrlParam(path);
+
   const post = await getPostBySlug(slug, { locale });
 
   if (!post) {

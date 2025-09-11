@@ -114,5 +114,5 @@ export type GetServerMode = {
 };
 
 export interface PageParams {
-  path: string;
+  slug: string;
 };

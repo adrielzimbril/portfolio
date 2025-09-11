@@ -15,14 +15,12 @@ import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
 import { PageParams, PageType } from "@/types";
 import { Metadata } from "next";
+import logger from "@/utils/logger";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
-  const params = await props.params;
-
-  const { path } = params;
+  const { slug } = await props.params;
 
   const locale = await getLocale();
-  const slug = getActivePathFromUrlParam(path);
   const post = await getPostBySlug(slug, { locale });
 
   const metadata: Metadata = {
@@ -47,10 +45,8 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
 export default async function BlogPostPage(props: {
   params: Promise<PageParams>;
 }) {
-  const { path } = await props.params;
+  const { slug } = await props.params;
   const locale = await getLocale();
-
-  const slug = getActivePathFromUrlParam(path);
   const post = await getPostWithAdjacent(slug, { locale });
 
   if (!post) {

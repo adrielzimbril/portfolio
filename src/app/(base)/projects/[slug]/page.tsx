@@ -24,12 +24,9 @@ import { PageParams, PageType } from "@/types";
 import { getImageUrl, getResourcesUrl } from "@/utils";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
-  const params = await props.params;
-
-  const { path } = params;
+  const { slug } = await props.params;
 
   const locale = await getLocale();
-  const slug = getActivePathFromUrlParam(path);
   const project = await getProjectBySlug(slug, { locale });
 
   return {
@@ -52,11 +49,10 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
 export default async function SubProject(props: {
   params: Promise<PageParams>;
 }) {
-  const { path } = await props.params;
-  const locale = await getLocale();
-  setRequestLocale(locale);
+  const { slug } = await props.params;
 
-  const slug = getActivePathFromUrlParam(path);
+  const locale = await getLocale();
+
   const project = await getProjectWithAdjacent(slug, { locale });
 
   if (!project) {
@@ -142,5 +138,4 @@ export default async function SubProject(props: {
       <CallToAction isPage />
     </>
   );
-} 
-
+}
