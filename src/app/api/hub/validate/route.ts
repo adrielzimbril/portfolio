@@ -3,7 +3,7 @@ import { supabase } from "@/module/supabase/client";
 import logger from "@/utils/logger";
 import { sendEmail } from "@/module/mail";
 import { ResourceType } from "@/types";
-import { validateJwtToken, validateJwtToken, validateToken } from "@/utils";
+import { validateJwtToken, validateToken } from "@/utils";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
         customText,
       },
       templateId: "productDelivery",
-      locale: "en",
+      locale: "fr",
     });
 
     logger.info("Email sent successfully", sendMailResult);

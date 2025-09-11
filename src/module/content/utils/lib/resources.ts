@@ -80,7 +80,7 @@ interface ResourcesResult {
  *
  * @example
  * ```typescript
- * const resources = await getResourceWithAdjacent("my-resource-slug", { locale: "en" });
+ * const resources = await getResourceWithAdjacent("my-resource-slug", { locale: "fr" });
  * ```
  * // Returns the resource with slug "my-resource-slug" and its adjacent resources
  */

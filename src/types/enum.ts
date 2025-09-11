@@ -2,6 +2,13 @@ export enum SortOrder {
   Asc = "asc",
   Desc = "desc",
 }
+
+export enum Locale {
+  EN = "en",
+  FR = "fr",
+  CN = "cn",
+}
+
 export enum ResourceType {
   COURSE = "course",
   EBOOK = "ebook",

@@ -71,7 +71,7 @@ interface ProjectsResult {
  *
  * @example
  * ```typescript
- * const projects = await getProjectWithAdjacent("my-project-slug", { locale: "en" });
+ * const projects = await getProjectWithAdjacent("my-project-slug", { locale: "fr" });
  * ```
  * // Returns the project with slug "my-project-slug" and its adjacent projects
  */

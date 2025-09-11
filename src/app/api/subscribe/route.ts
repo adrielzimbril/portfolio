@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
         to: [{ email, name }],
         context: { name },
         templateId: "welcome",
-        locale: "en",
+        locale: "fr",
       });
     } catch (e) {
       logger.warn(
@@ -177,7 +177,7 @@ export async function POST(req: NextRequest) {
               customText,
             },
             templateId: "productDelivery",
-            locale: "en",
+            locale: "fr",
           });
         } catch (e) {
           logger.warn(

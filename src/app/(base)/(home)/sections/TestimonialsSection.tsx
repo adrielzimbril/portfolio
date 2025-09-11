@@ -1,5 +1,5 @@
 "use client";
-import { Link, Linkedin, LinkOne } from "@aurthle/icons";
+import { Linkedin, LinkOne } from "@aurthle/icons";
 import { useState, useEffect, useMemo } from "react";
 import BoringAvatar from "boring-avatars";
 import { cn, pickRandomColorCode } from "@/utils";
@@ -7,10 +7,11 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLocale, useTranslations } from "use-intl";
+import { Locale } from "@/types";
 
 interface TestimonialCard {
   id: number;
-  locale: string;
+  locale: Locale;
   name: string;
   position: string;
   testimonial: string;
@@ -22,7 +23,7 @@ interface TestimonialCard {
 const testimonials: TestimonialCard[] = [
   {
     id: 1,
-    locale: "fr",
+    locale: Locale.FR,
     name: "Christian Junior Braffo",
     position: "Développeur Web & Certifié Cloud Practitioner",
     testimonial:
@@ -32,7 +33,7 @@ const testimonials: TestimonialCard[] = [
   },
   {
     id: 2,
-    locale: "fr",
+    locale: Locale.FR,
     name: "Youssouf Aboubacar Yvan Gamby",
     position: "Chargé d’affaires chez Witti Finances Côte d'Ivoire",
     testimonial:
@@ -42,7 +43,7 @@ const testimonials: TestimonialCard[] = [
   },
   {
     id: 3,
-    locale: "fr",
+    locale: Locale.FR,
     name: "Angaman Brou Cedrick Delmas",
     position: "Developer Backend Java/Python",
     testimonial:

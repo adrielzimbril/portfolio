@@ -15,3 +15,4 @@ export * from "@/utils/key-encrypt";
 
 export * from "@/utils/route-utils";
 
+export * from "@/utils/locale";

@@ -9,7 +9,6 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
@@ -21,12 +20,14 @@ import {
   DialogFooter,
   DialogSeparator,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import posthog from 'posthog-js';
+import posthog from "posthog-js";
+import { useLocale, useTranslations } from "use-intl";
+import { Locale } from "@/types";
 
 // Interface pour les questions
 interface Question {
   id: number;
+  locale: Locale;
   emoji: string;
   title: string;
   description: string;
@@ -41,6 +42,7 @@ interface Question {
 const questions: Question[] = [
   {
     id: 1,
+    locale: Locale.FR,
     emoji: "💣",
     title: "J'ai détruit un SaaS rentable",
     description: "J’ai fermé un projet qui faisait de l’argent.",
@@ -54,6 +56,7 @@ const questions: Question[] = [
   },
   {
     id: 2,
+    locale: Locale.FR,
     emoji: "🍕",
     title: "Mon premier client m’a payé en pizzas",
     description: "Au lieu de me donner de l’argent, il m’a offert des pizzas.",
@@ -67,6 +70,7 @@ const questions: Question[] = [
   },
   {
     id: 3,
+    locale: Locale.FR,
     emoji: "🚀",
     title: "4 SaaS présentés, 4 sélectionnés",
     description:
@@ -79,6 +83,7 @@ const questions: Question[] = [
   },
   {
     id: 4,
+    locale: Locale.FR,
     emoji: "🚫",
     title: "Je déteste les beaux designs inutiles",
     description: "Un mockup magnifique mais jamais codé, ça ne sert à rien.",
@@ -91,6 +96,7 @@ const questions: Question[] = [
   },
   {
     id: 5,
+    locale: Locale.FR,
     emoji: "🧀",
     title: "J'adore le fromage, j'en mange tous les jours",
     description: "Gourmand en mozzarella, je ne peux pas m'en passer.",
@@ -102,6 +108,7 @@ const questions: Question[] = [
   },
   {
     id: 6,
+    locale: Locale.FR,
     emoji: "😮‍💨",
     title: "J’ai failli arrêter le code à 18 ans",
     description: "Burnout, plus envie de toucher un clavier.",
@@ -113,6 +120,7 @@ const questions: Question[] = [
   },
   {
     id: 7,
+    locale: Locale.FR,
     emoji: "🎨",
     title: "Le design m’a appris la discipline",
     description: "Reproduire, ajuster, recommencer encore et encore.",
@@ -125,6 +133,7 @@ const questions: Question[] = [
   },
   {
     id: 8,
+    locale: Locale.FR,
     emoji: "🎤",
     title: "J’ai appris le design en clonant des sites de rappeurs",
     description: "Je m’entraînais en refaisant leurs pages pour le fun.",
@@ -137,6 +146,7 @@ const questions: Question[] = [
   },
   {
     id: 9,
+    locale: Locale.FR,
     emoji: "🖼️",
     title: "J’ai recopié 50 designs sur Dribbble",
     description:
@@ -149,6 +159,7 @@ const questions: Question[] = [
   },
   {
     id: 10,
+    locale: Locale.FR,
     emoji: "🏦",
     title: "Je veux créer une néobanque un jour",
     description: "Pas juste une app, une vraie banque digitale.",
@@ -161,6 +172,7 @@ const questions: Question[] = [
   },
   {
     id: 11,
+    locale: Locale.FR,
     emoji: "🔤",
     title: "Toutes mes marques commencent par A",
     description: "Je ne lance que des noms en A.",
@@ -174,6 +186,7 @@ const questions: Question[] = [
   },
   {
     id: 12,
+    locale: Locale.FR,
     emoji: "😭",
     title: "J’ai pleuré devant une erreur 500",
     description: "Après deux jours de blocage, c’était juste un ';' oublié.",
@@ -185,6 +198,7 @@ const questions: Question[] = [
   },
   {
     id: 13,
+    locale: Locale.FR,
     emoji: "🎰",
     title: "Mon domaine est devenu un site de casino",
     description:
@@ -197,6 +211,7 @@ const questions: Question[] = [
   },
   {
     id: 14,
+    locale: Locale.FR,
     emoji: "🧑‍💻",
     title: "Je rêve de créer un langage qui porte mon prénom",
     description: "Imagine 'AdrielLang', ça sonne bien non?",
@@ -209,6 +224,7 @@ const questions: Question[] = [
   },
   {
     id: 15,
+    locale: Locale.FR,
     emoji: "🐢",
     title: "Mon premier PC mettait 10 minutes à démarrer",
     description: "Je devais attendre une éternité avant de coder.",
@@ -231,6 +247,7 @@ function GuessButton({
   onClick: () => void;
   canAnswer: boolean;
 }) {
+  const t = useTranslations();
   const imgEmojiFalse = "/emoji-false.png";
   const imgEmojiTrue = "/emoji-true.png";
 
@@ -267,7 +284,13 @@ function GuessButton({
             animate={{ scale: 1 }}
             transition={{ delay: 0.2 }}
           >
-            {isFalse ? "FAUX" : "VRAI"}
+            {isFalse
+              ? t(
+                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.false"
+                )
+              : t(
+                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.true"
+                )}
           </motion.span>
         )}
       </div>
@@ -393,6 +416,7 @@ function CustomAlert({
   question: Question | null;
   onClose: () => void;
 }) {
+  const t = useTranslations();
   useEffect(() => {
     if (isVisible) {
       const timer = setTimeout(() => {
@@ -420,13 +444,23 @@ function CustomAlert({
                 "text-red-600": !isCorrect,
               })}
             >
-              {isCorrect ? "Bravo !" : "Pas tout à fait !"}
+              {isCorrect
+                ? t(
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.title"
+                  )
+                : t(
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.title"
+                  )}
             </DialogTitle>
 
             <DialogDescription>
               {isCorrect
-                ? "Tu as trouvé la bonne réponse ! 😆"
-                : "Ce n'était pas la bonne réponse... 😖"}
+                ? t(
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.description"
+                  )
+                : t(
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.description"
+                  )}
             </DialogDescription>
           </div>
         </DialogHeader>
@@ -434,7 +468,10 @@ function CustomAlert({
         {question?.funFact && (
           <DialogCard variant="default" className="text-center">
             <DialogBadge variant="colored" className="mb-2">
-              Réponse 🥸
+              {t(
+                "about.page.interactive-fun-facts-section.sections.fact-alert.response"
+              )}{" "}
+              🥸
             </DialogBadge>
             <p className="text-zinc-800">{question.funFact}</p>
           </DialogCard>
@@ -442,7 +479,9 @@ function CustomAlert({
 
         <DialogFooter>
           <Button onClick={onClose} asFull asPointer whileTap>
-            {isCorrect ? "Continuer 😍" : "Réessayer 😩"}
+            {isCorrect
+              ? `${t("common.button.continue")} 😍`
+              : `${t("common.button.retry")} 😩`}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -455,11 +494,14 @@ function AllFactsModal({
   isOpen,
   onClose,
   guessedFacts,
+  questions,
 }: {
   isOpen: boolean;
   onClose: () => void;
   guessedFacts: { [key: number]: boolean };
+  questions: Question[];
 }) {
+  const t = useTranslations();
   const totalGuessed = Object.keys(guessedFacts).length;
   const totalQuestions = questions.length;
   const correctGuesses = questions.filter(
@@ -475,7 +517,9 @@ function AllFactsModal({
       >
         <DialogHeader>
           <DialogTitle className="text-base font-normal md:font-medium md:text-xl text-zinc-600">
-            Créateur et Amoureux de SaaS 🦄❣️
+            {t(
+              "about.page.interactive-fun-facts-section.sections.facts-modal.title"
+            )}
           </DialogTitle>
         </DialogHeader>
 
@@ -491,14 +535,24 @@ function AllFactsModal({
             >
               <DialogCard variant="default">
                 <h5 className="font-bold mb-2">
-                  🎯 Ton score : {correctGuesses}/{totalQuestions}
+                  🎯{" "}
+                  {t(
+                    "about.page.interactive-fun-facts-section.sections.facts-modal.score.title",
+                    { score: correctGuesses, total: totalQuestions }
+                  )}
                 </h5>
                 <p className="text-gray-700">
                   {correctGuesses === totalQuestions
-                    ? "Tu as tout bon, Oula tu me connais un peu trop 😄🏆"
+                    ? t(
+                        "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.good"
+                      )
                     : correctGuesses > totalQuestions / 2
-                      ? "Pas mal du tout ! 👏"
-                      : "Tu peux mieux faire ! 😅"}
+                      ? t(
+                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.medium"
+                        )
+                      : t(
+                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.bad"
+                        )}
                 </p>
               </DialogCard>
             </motion.div>
@@ -536,7 +590,13 @@ function AllFactsModal({
                             question.isTrue ? "text-green-800" : "text-red-800"
                           )}
                         >
-                          {question.isTrue ? "✅ Vérité" : "❌ Mensonge"}
+                          {question.isTrue
+                            ? t(
+                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-true"
+                              )
+                            : t(
+                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-false"
+                              )}
                         </DialogBadge>
 
                         {userGuessed && (
@@ -548,7 +608,13 @@ function AllFactsModal({
                             )}
                             variant="colored"
                           >
-                            {userGuessedCorrect ? "🎯 Correct!" : "❌ Raté!"}
+                            {userGuessedCorrect
+                              ? t(
+                                  "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.correct"
+                                )
+                              : t(
+                                  "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.incorrect"
+                                )}
                           </DialogBadge>
                         )}
                       </div>
@@ -564,7 +630,7 @@ function AllFactsModal({
 
         <DialogFooter>
           <Button onClick={onClose} size="lg" whileTap asPointer asFull>
-            Compris 😊
+            {t("common.button.understood")} 😊
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -574,10 +640,12 @@ function AllFactsModal({
 
 // Interactive Fun Facts Component
 export function InteractiveFunFacts() {
+  const t = useTranslations();
+  const locale = useLocale();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>({
-
-  });
+  const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>(
+    {}
+  );
   const [showAlert, setShowAlert] = useState(false);
   const [alertData, setAlertData] = useState<{
     isCorrect: boolean;
@@ -586,26 +654,30 @@ export function InteractiveFunFacts() {
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(true);
   const [showAllFacts, setShowAllFacts] = useState(false);
+  const questionsLocale = questions.filter(
+    (question) => question.locale === locale
+  );
 
   // Derive calculations based on guessedFacts
   const answeredQuestionsCount = Object.keys(guessedFacts).length;
-  const allQuestionsAnswered = answeredQuestionsCount === questions.length;
+  const allQuestionsAnswered =
+    answeredQuestionsCount === questionsLocale.length;
 
   // Verify if there is a false in the guessed answers
   const hasGuessedFalse = Object.values(guessedFacts).includes(false);
 
   const handleEmojiClick = (isTrue: boolean) => {
-    const currentQuestion = questions[currentQuestionIndex];
+    const currentQuestion = questionsLocale[currentQuestionIndex];
     if (!currentQuestion || guessedFacts[currentQuestion.id] !== undefined) {
       return;
     }
 
     const isCorrect = currentQuestion.isTrue === isTrue;
 
-    posthog.capture('fun-fact-guess-submitted', {
+    posthog.capture("fun-fact-guess-submitted", {
       question_id: currentQuestion.id,
       question_title: currentQuestion.title,
-      user_guess: isTrue ? 'true' : 'false',
+      user_guess: isTrue ? "true" : "false",
       is_correct: isCorrect,
     });
 
@@ -623,7 +695,7 @@ export function InteractiveFunFacts() {
     setAlertData({ isCorrect: false, question: null });
 
     // Pass to the next question after closing the alert
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < questionsLocale.length - 1) {
       setTimeout(() => {
         setCurrentQuestionIndex((prev) => prev + 1);
       }, 300);
@@ -631,9 +703,9 @@ export function InteractiveFunFacts() {
   };
 
   const resetGame = () => {
-    posthog.capture('fun-facts-game-reset', {
+    posthog.capture("fun-facts-game-reset", {
       final_score: score,
-      total_questions: questions.length,
+      total_questions: questionsLocale.length,
     });
     setCurrentQuestionIndex(0);
     setGuessedFacts({});
@@ -654,16 +726,16 @@ export function InteractiveFunFacts() {
   const canAnswer = gameStarted && !showAllFacts && !allQuestionsAnswered;
   const badge =
     gameStarted || showAllFacts
-      ? `Score: ${score}/${questions.length}`
-      : "Jouons";
+      ? `${t("about.page.interactive-fun-facts-section.badge-score")}: ${score}/${questionsLocale.length}`
+      : t("about.page.interactive-fun-facts-section.badge");
 
   return (
     <SectionLayout
       isFlex
-      badge="Jouons 🤭"
+      badge={t("about.page.interactive-fun-facts-section.badge") ?? badge}
       //badge={`${badge} 🤭`}
-      title="Faits amusants sur moi"
-      description="L'un d'eux est un mensonge que tu devras deviner, essaie de ne pas te tromper 🤭"
+      title={t("about.page.interactive-fun-facts-section.title")}
+      description={t("about.page.interactive-fun-facts-section.description")}
     >
       {/* Zone de jeu principale */}
       <div className="content-center flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-between w-full">
@@ -683,13 +755,13 @@ export function InteractiveFunFacts() {
 
         {/* Zone des cartes */}
         <div className="relative flex items-center justify-center order-1 sm:order-2 size-full py-8 md:py-14">
-          {questions.map((question, index) => (
+          {questionsLocale.map((question, index) => (
             <QuestionCard
               key={question.id}
               question={question}
               index={index}
               currentQuestionIndex={currentQuestionIndex}
-              totalQuestions={questions.length}
+              totalQuestions={questionsLocale.length}
             />
           ))}
         </div>
@@ -707,6 +779,7 @@ export function InteractiveFunFacts() {
           <AllFactsModal
             isOpen={showAllFacts}
             onClose={() => setShowAllFacts(false)}
+            questions={questionsLocale}
             guessedFacts={guessedFacts}
           />
         )}
@@ -715,7 +788,7 @@ export function InteractiveFunFacts() {
       <div className="relative">
         {/* Responsive progression indicators */}
         <div className="flex gap-2 sm:gap-3 z-10">
-          {questions.map((question, index) => {
+          {questionsLocale.map((question, index) => {
             const isGuessed = guessedFacts[question.id] !== undefined;
             const isCorrect = isGuessed && guessedFacts[question.id];
 
@@ -731,8 +804,8 @@ export function InteractiveFunFacts() {
                       ? "bg-green-500 border-green-500"
                       : "bg-red-500 border-red-500"
                     : index === currentQuestionIndex
-                    ? "bg-[#2a2a2a] border-[#2a2a2a]"
-                    : "bg-zinc-100 border-zinc-200"
+                      ? "bg-[#2a2a2a] border-[#2a2a2a]"
+                      : "bg-zinc-100 border-zinc-200"
                 )}
               >
                 {isGuessed && (
@@ -751,9 +824,9 @@ export function InteractiveFunFacts() {
         <Button
           onClick={() => {
             setShowAllFacts(true);
-            posthog.capture('fun-facts-answers-viewed', {
+            posthog.capture("fun-facts-answers-viewed", {
               score: score,
-              total_questions: questions.length,
+              total_questions: questionsLocale.length,
               answered_questions_count: answeredQuestionsCount,
             });
           }}
@@ -764,11 +837,19 @@ export function InteractiveFunFacts() {
         >
           {allQuestionsAnswered
             ? hasGuessedFalse
-              ? "Je veux les réponses 😣"
-              : "Je veux les réponses 😄"
+              ? t(
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-false"
+                )
+              : t(
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true"
+                )
             : showAllFacts
-            ? "Recommencer le quiz 🔄"
-            : "Je veux les réponses 😄"}
+              ? t(
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-retry"
+                )
+              : t(
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true"
+                )}
         </Button>
 
         {allQuestionsAnswered && (
@@ -785,7 +866,7 @@ export function InteractiveFunFacts() {
               size="lg"
               asFull
             >
-              Rejouer 🔄
+              {t("about.page.interactive-fun-facts-section.buttons.retry")}
             </Button>
           </motion.div>
         )}

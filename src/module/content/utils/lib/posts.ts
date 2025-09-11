@@ -68,7 +68,7 @@ interface PostsResult {
  *
  * @example
  * ```typescript
- * const posts = await getPostWithAdjacent("my-post-slug", { locale: "en" });
+ * const posts = await getPostWithAdjacent("my-post-slug", { locale: "fr" });
  * ```
  * // Returns the post with slug "my-post-slug" and its adjacent posts
  */

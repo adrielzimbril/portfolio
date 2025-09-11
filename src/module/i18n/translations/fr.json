@@ -24,6 +24,64 @@
         "badge": "Votre partenaire 🫶",
         "title": "Ce que je peux faire pour vous.",
         "description": "Product designer spécialisé dans la simplification des expériences SaaS + formateur pour les équipes qui veulent créer l'évidence plutôt que la complexité"
+      },
+      "interactive-fun-facts-section": {
+        "badge": "Jouons 🤭",
+        "badge-score": "Score:",
+        "title": "Faits amusants sur moi",
+        "description": "L'un d'eux est un mensonge que tu devras deviner, essaie de ne pas te tromper 🤭",
+        "buttons": {
+          "show-all": {
+            "want-response": {
+              "has-false": "Je veux les réponses 😣",
+              "has-true": "Je veux les réponses 😄"
+            },
+            "want-retry": "Recommencer le quiz 🔄"
+          },
+          "retry": "Rejouer 🔄"
+        },
+        "sections": {
+          "fact-alert": {
+            "is-correct": {
+              "true": {
+                "title": "Bravo !",
+                "description": "Tu as trouvé la bonne réponse ! 😆"
+              },
+              "false": {
+                "title": "Pas tout à fait !",
+                "description": "Ce n'était pas la bonne réponse... 😖"
+              }
+            },
+            "response": "Réponse"
+          },
+          "facts-modal": {
+            "title": "Créateur et Amoureux de SaaS 🦄❣️",
+            "score": {
+              "title": "Ton score : {score}/{total}",
+              "state": {
+                "good": "Tu as tout bon, Oula tu me connais un peu trop 😄🏆",
+                "medium": "Tu peux mieux faire ! 😅",
+                "bad": "Tu peux mieux faire ! 😅"
+              }
+            },
+            "badge": {
+              "fact": {
+                "is-true": "✅ Vérité",
+                "is-false": "❌ Mensonge"
+              },
+              "guessed": {
+                "correct": "🎯 Correct!",
+                "incorrect": "❌ Raté!"
+              }
+            }
+          },
+          "guess-buttons": {
+            "buttons": {
+              "true": "VRAI",
+              "false": "FAUX"
+            }
+          }
+        }
       }
     }
   },
@@ -86,9 +144,11 @@
       "read": "Lire",
       "read-more": "Lire plus",
       "see": "Voir",
+      "understood": "Compris",
       "see-more": "Voir plus",
       "back": "Retour",
       "continue": "Continuer",
+      "retry": "Réessayer",
       "receive": "Recevoir",
       "obtain": "Obtenir",
       "loading": "Chargement...",
