@@ -41,7 +41,12 @@ export default function ContactForm({}) {
           <Cal
             namespace="shiro-decouverte"
             calLink="shirospace-saas-agency/shiro-decouverte"
-            style={{ width: "100%", height: "100%", overflow: "scroll" }}
+            style={{
+              width: "100%",
+              height: "100%",
+              overflow: "scroll",
+              minHeight: "400px",
+            }}
             className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden size-full"
             config={{ layout: "month_view" }}
           />

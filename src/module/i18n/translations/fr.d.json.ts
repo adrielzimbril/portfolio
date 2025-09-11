@@ -16,12 +16,156 @@ declare const messages: {
   },
   "about": {
     "title": "A propos",
-    "description": "Welcome to our about page"
+    "description": "Welcome to our about page",
+    "page": {
+      "header-section": {
+        "title": "Hello, je suis \n Adriel Zimbril - \n Product designer",
+        "description": "Donnez à votre entreprise les moyens d'une conception centrée sur l'utilisateur et de l'IA pour offrir des expériences client fluides et accélérer la croissance.",
+        "cta": "Voir mes projets"
+      },
+      "craft-section": {
+        "badge": "Votre partenaire 🫶",
+        "title": "Ce que je peux faire pour vous.",
+        "description": "Product designer spécialisé dans la simplification des expériences SaaS + formateur pour les équipes qui veulent créer l'évidence plutôt que la complexité"
+      },
+      "interactive-fun-facts-section": {
+        "badge": "Jouons 🤭",
+        "badge-score": "Score:",
+        "title": "Faits amusants sur moi",
+        "description": "L'un d'eux est un mensonge que tu devras deviner, essaie de ne pas te tromper 🤭",
+        "buttons": {
+          "show-all": {
+            "want-response": {
+              "has-false": "Je veux les réponses 😣",
+              "has-true": "Je veux les réponses 😄"
+            },
+            "want-retry": "Recommencer le quiz 🔄"
+          },
+          "retry": "Rejouer 🔄"
+        },
+        "sections": {
+          "fact-alert": {
+            "is-correct": {
+              "true": {
+                "title": "Bravo !",
+                "description": "Tu as trouvé la bonne réponse ! 😆"
+              },
+              "false": {
+                "title": "Pas tout à fait !",
+                "description": "Ce n'était pas la bonne réponse... 😖"
+              }
+            },
+            "response": "Réponse"
+          },
+          "facts-modal": {
+            "title": "Créateur et Amoureux de SaaS 🦄❣️",
+            "score": {
+              "title": "Ton score : {score}/{total}",
+              "state": {
+                "good": "Tu as tout bon, Oula tu me connais un peu trop 😄🏆",
+                "medium": "Tu peux mieux faire ! 😅",
+                "bad": "Tu peux mieux faire ! 😅"
+              }
+            },
+            "badge": {
+              "fact": {
+                "is-true": "✅ Vérité",
+                "is-false": "❌ Mensonge"
+              },
+              "guessed": {
+                "correct": "🎯 Correct!",
+                "incorrect": "❌ Raté!"
+              }
+            }
+          },
+          "guess-buttons": {
+            "buttons": {
+              "true": "VRAI",
+              "false": "FAUX"
+            }
+          }
+        }
+      },
+      "philosophy-section": {
+        "badge": "Unicorn 🦄",
+        "title": "Ma philosophie",
+        "description": "Ma philosophie est de transformer les idées en produits que les utilisateurs adorent."
+      }
+    }
+  },
+  "hub": {
+    "title": "Hub",
+    "description": "Welcome to our hub page",
+    "page": {
+      "header-section": {
+        "title": "Shop",
+        "description": "Donnez à votre entreprise les moyens d'une conception centrée sur l'utilisateur et de l'IA pour offrir des expériences client fluides et accélérer la croissance.",
+        "cta": "Voir mes ressources"
+      }
+    },
+    "inner-page": {
+      "more-preview-section": {
+        "title": "Autres ressources."
+      }
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "description": "Welcome to our projects page",
+    "page": {
+      "header-section": {
+        "title": "Mes projets",
+        "description": "Donnez à votre entreprise les moyens d'une conception centrée sur l'utilisateur et de l'IA pour offrir des expériences client fluides et accélérer la croissance.",
+        "cta": "Voir mes projets"
+      }
+    },
+    "inner-page": {
+      "header-section": {
+        "cta": "Voir mes projets"
+      },
+      "project-research-section": {
+        "title": "Cadrage du problème",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "goal-research-section": {
+        "title": "Objectif ?"
+      },
+      "project-statement-section": {
+        "title": "Recherche utilisateur",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "project-points-research-section": {
+        "title": "Points clés",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "project-preview-section": {
+        "title": "Idéation",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "project-result-section": {
+        "title": "Résultats",
+        "description": "Vous pouvez poser quelques concepts initiaux."
+      },
+      "more-preview-section": {
+        "title": "Autres projets."
+      }
+    }
   },
   "thoughts": {
     "description": "Read the latest news from our company",
     "title": "My awesome blog",
-    "back": "Back to blog"
+    "page": {
+      "header-section": {
+        "title": "Réflexions",
+        "description": "Voici un espace où vous pouvez publier des articles sur vraiment tout, par exemple des conseils sur le design, des engrenages qui boostent votre productivité",
+        "cta": "Voir mes réflexions"
+      }
+    },
+    "inner-page": {
+      "more-preview-section": {
+        "title": "Autres réflexions."
+      }
+    }
   },
   "contact": {
     "title": "Dire bonjour 👋",
@@ -44,7 +188,7 @@ declare const messages: {
     "page": {
       "badge": "Pour les développeurs freelances qui galèrent à trouver des clients.",
       "title": "Trouve des clients en continu grâce à la méthode Tsunami 🌊",
-      "desc": "Je te montre comment utiliser l&#39;IA et l&#39;AUTOMATISATION pour trouver des missions en boucle."
+      "desc": "Je te montre comment utiliser l'IA et l'AUTOMATISATION pour trouver des missions en boucle."
     },
     "email": "Email",
     "hints": {
@@ -77,13 +221,25 @@ declare const messages: {
       "read": "Lire",
       "read-more": "Lire plus",
       "see": "Voir",
+      "understood": "Compris",
       "see-more": "Voir plus",
       "back": "Retour",
       "continue": "Continuer",
+      "retry": "Réessayer",
       "receive": "Recevoir",
       "obtain": "Obtenir",
       "loading": "Chargement...",
-      "loaded": "Chargé"
+      "loaded": "Chargé",
+      "sending": "Envoi...",
+      "sent": "Envoyé"
+    },
+    "shared": {
+      "text": {
+        "presentation": "Présentation",
+        "results": "Résultats",
+        "role": "Role",
+        "duration": "Durée"
+      }
     },
     "base": {
       "website": "Site web",
@@ -93,6 +249,9 @@ declare const messages: {
       "dribbble": "Dribbble"
     },
     "page-sections": {
+      "header": {
+        "cta": "Parler de SaaS 👋"
+      },
       "preview": {
         "emoji": "😎",
         "title": "I made you looked.",
@@ -148,11 +307,40 @@ declare const messages: {
             "button": "Parler de SaaS 🦄"
           }
         }
+      },
+      "newsletter": {
+        "title": "🎁 Recevoir les cadeaux",
+        "description": {
+          "default": "Inscription en cours... Vous pouvez ajouter vos informations personnelles.",
+          "state": "Votre inscription est confirmée ! Vous pouvez ajouter vos informations pour personnaliser votre expérience."
+        },
+        "form": {
+          "fields": {
+            "email": {
+              "label": "Email",
+              "placeholder": "Votre email"
+            },
+            "email-page": {
+              "label": "Email",
+              "placeholder": "😏 Prêt à recevoir quelque chose d'interessant ?"
+            },
+            "name": {
+              "label": "Nom",
+              "placeholder": "Votre nom et prénom"
+            },
+            "phone": {
+              "label": "Téléphone",
+              "placeholder": "Numéro de téléphone"
+            }
+          },
+          "success": {
+            "message": {
+              "title": "Merci pour votre inscription !",
+              "description": "os informations ont été mises à jour avec succès. Merci ! 🎉"
+            }
+          }
+        }
       }
-    },
-    "actions": {
-      "continue": "Continuer",
-      "verify": "Vérifier"
     }
   },
   "mail": {
@@ -310,6 +498,23 @@ declare const messages: {
       "ulid": "ulid",
       "url": "url",
       "uuid": "uuid"
+    }
+  },
+  "logger": {
+    "ip": {
+      "fetch": {
+        "failed": "Erreur lors de la récupération de l'IP",
+        "country-failed": "Erreur lors de la récupération du pays"
+      }
+    },
+    "newsletter": {
+      "subscribe": {
+        "failed": "Erreur lors de l'inscription. Veuillez réessayer plus tard s'il vous plaît."
+      }
+    },
+    "form": {
+      "submit-failed": "Erreur lors du soumission du formulaire. Veuillez réessayer plus tard s'il vous plaît.",
+      "submit-update-failed": "Erreur lors de la mise à jour du formulaire. Veuillez réessayer plus tard s'il vous plaît."
     }
   }
 };

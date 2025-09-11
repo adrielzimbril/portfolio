@@ -246,6 +246,9 @@
       "dribbble": "Dribbble"
     },
     "page-sections": {
+      "header": {
+        "cta": "Parler de SaaS 👋"
+      },
       "preview": {
         "emoji": "😎",
         "title": "I made you looked.",
@@ -335,10 +338,6 @@
           }
         }
       }
-    },
-    "actions": {
-      "continue": "Continuer",
-      "verify": "Vérifier"
     }
   },
   "mail": {

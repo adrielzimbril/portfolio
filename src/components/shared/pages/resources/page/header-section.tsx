@@ -5,8 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/utils/utils";
-
-import { ResourceHeaderTag } from "@/types/componentType";
 import { PreviewContentType } from "@/types/enum";
 import {
   HeaderPreviewCard,
@@ -18,12 +16,8 @@ import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
 import { Button } from "@/components/ui/button";
 import { useScrollTo } from "@/hooks/useScrollTo";
 import { ResourceType } from "@/types/enum";
-import {
-  ProductTypeSubscribersBadge,
-  ProductTitleRequestsBadge,
-  ProductAvatarsStats,
-} from "@/components/SubscriberBadges";
-import { PreviewIcon } from "@/components/shared/pages/shared/preview";
+import { ProductAvatarsStats } from "@/components/SubscriberBadges";
+import { useTranslations } from "use-intl";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -55,12 +49,7 @@ interface HeaderSectionProps {
 }
 
 export function HeaderSection({
-  previewContent = {
-    type: PreviewContentType.TEXT,
-    emoji: "😎",
-    title: "I made you looked.",
-    subtitle: "You can have the rest of the empty space here.",
-  } as TextPreviewContent,
+  previewContent: initPreviewContent,
   mainTitle,
   description,
   tags,
@@ -69,7 +58,23 @@ export function HeaderSection({
   ctaButtonText,
   sectionClassName,
 }: HeaderSectionProps) {
+  const t = useTranslations();
+
+  const basePreviewContent = {
+    type: PreviewContentType.TEXT,
+    emoji: t("common.page-sections.preview.emoji"),
+    title: t("common.page-sections.preview.title"),
+    subtitle: t("common.page-sections.preview.description"),
+  } as TextPreviewContent;
+
+  const previewContent = initPreviewContent || basePreviewContent;
   const scrollTo = useScrollTo();
+
+  const scrollToKey = (key: string) => {
+    const element = document.getElementById(key);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <SectionBase
       sectionClassName={cn("p-0 mt-20 mb-10 md:mb-20", sectionClassName)}

@@ -1,32 +1,20 @@
 "use client";
-
-import { routes } from "@/data/route";
+import React, { useState } from "react";
 import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { getActivePathInArray } from "@/utils";
 
-export function NavMenu({ hasScrolled }: { hasScrolled: boolean }) {
-  const route = usePathname();
-  const menuRoutes = Object.values(routes);
-  const menuRoutesFiltered = menuRoutes.filter((item) => item.inHeader);
-
-  const activePath = getActivePathInArray({
-    path: route,
-    array: menuRoutes.map((item) => item.link),
-    withSlash: true,
-  });
-
-  // Find the current route directly from filtered menu routes
-  const currentRoute = menuRoutesFiltered.find(
-    (item) => item.link === activePath
-  );
-  const currentKey = currentRoute?.key || routes.home.key;
-
-  const [activeTab, setActiveTab] = useState<string>(currentKey);
-
+export function NavMenu({
+  hasScrolled,
+  menuRoutes,
+  activeTab,
+  setActiveTab,
+}: {
+  hasScrolled: boolean;
+  menuRoutes: { key: string; link: string; name: string }[];
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}) {
   return (
     <div className="w-fit hidden md:block">
       <div className={cn("mx-auto flex w-full items-center justify-center")}>
@@ -37,7 +25,7 @@ export function NavMenu({ hasScrolled }: { hasScrolled: boolean }) {
             "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-secondary"
           )}
         >
-          {menuRoutesFiltered.map((item) => (
+          {menuRoutes.map((item) => (
             <Link
               key={item.key}
               href={item.link}

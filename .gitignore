@@ -47,6 +47,11 @@ package-lock.json
 # content collections
 .content-collections
 
+# trigger
 .trigger/
 
+# env files
 .env.local
+
+# Ignore all lang d.ts files
+src/module/i18n/translations/*.d.json

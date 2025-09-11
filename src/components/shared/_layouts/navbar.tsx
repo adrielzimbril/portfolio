@@ -1,20 +1,20 @@
 "use client";
-
-import { Icons } from "@/components/shared/icons";
 import { NavMenu } from "@/components/shared/_layouts/nav-menu";
-import { Header as NavMenuSec } from "@/components/shared/_layouts/navbarsec";
 import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/utils/utils";
 import { Menu, X } from "lucide-react";
-import { AnimatePresence, motion, useScroll } from "motion/react";
+import { AnimatePresence, motion, useScroll, Variants } from "motion/react";
 import { useEffect, useState } from "react";
-import { LogoName } from "../icons/logo-name";
+import { LogoName } from "@/components/shared/icons/logo-name";
 import Image from "next/image";
 import { routes } from "@/data/route";
 import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
 import { getImageUrl } from "@/utils/base-url";
+import { useTranslations } from "next-intl";
+import { getActivePathInArray, sleep } from "@/utils";
+import { usePathname } from "next/navigation";
 
 const INITIAL_WIDTH = "70rem";
 const MAX_WIDTH = "70rem";
@@ -26,7 +26,7 @@ const overlayVariants = {
   exit: { opacity: 0 },
 };
 
-const drawerVariants = {
+const drawerVariants: Variants = {
   hidden: { opacity: 0, y: 100 },
   visible: {
     opacity: 1,
@@ -57,6 +57,7 @@ const drawerMenuVariants = {
 };
 
 export function Navbar() {
+  const t = useTranslations();
   const { scrollY } = useScroll();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -96,6 +97,23 @@ export function Navbar() {
   const toggleDrawer = () => setIsDrawerOpen((prev) => !prev);
   const handleOverlayClick = () => setIsDrawerOpen(false);
 
+  const route = usePathname();
+  const menuRoutes = Object.values(routes);
+  const menuRoutesFiltered = menuRoutes.filter((item) => item.inHeader);
+
+  const activePath = getActivePathInArray({
+    path: route,
+    array: menuRoutes.map((item) => item.link),
+    withSlash: true,
+  });
+
+  // Find the current route directly from filtered menu routes
+  const currentRoute = menuRoutesFiltered.find(
+    (item) => item.link === activePath
+  );
+  const currentKey = currentRoute?.key || routes.home.key;
+  const [activeTab, setActiveTab] = useState<string>(currentKey);
+
   return (
     <header
       className={cn(
@@ -111,13 +129,13 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto container rounded-2xl transition-all duration-300 xl:px-0",
+            "mx-auto container rounded-2xl transition-all duration-300 px-0",
             hasScrolled
               ? "px-2 shadow-lg backdrop-blur-lg bg-background/70"
-              : "shadow-none px-7"
+              : "shadow-none"
           )}
         >
-          <div className="flex h-[56px] items-center justify-between p-4">
+          <div className="flex h-[56px] items-center justify-between md:p-4">
             <Link
               href={routes.home.link}
               variant="none"
@@ -144,14 +162,17 @@ export function Navbar() {
               />
             </Link>
 
-            {/* <NavMenu hasScrolled={hasScrolled} /> */}
-            <NavMenu hasScrolled={hasScrolled} />
-            {/* <NavMenuSec /> */}
+            <NavMenu
+              hasScrolled={hasScrolled}
+              menuRoutes={menuRoutesFiltered}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
               <div className="hidden md:flex items-center space-x-6">
                 <Link href={routes.contact.link} likeButton whileTap>
-                  Parler de SaaS 👋
+                  {t("common.page-sections.header.cta")}
                 </Link>
               </div>
               <ThemeToggle />
@@ -216,38 +237,38 @@ export function Navbar() {
                   </div>
 
                   <motion.ul
-                    className="flex flex-col text-sm mb-4 border border-border rounded-md"
+                    className="flex flex-col gap-2 text-sm mb-4"
                     variants={drawerMenuContainerVariants}
                   >
                     <AnimatePresence>
-                      {Object.values(routes)
-                        .filter((item) => item.inHeader)
-                        .map((item) => (
-                          <motion.li
-                            key={item.name}
-                            className="p-2.5 border-b border-border last:border-b-0"
-                            variants={drawerMenuVariants}
+                      {menuRoutesFiltered.map((item) => (
+                        <motion.li
+                          key={item.name}
+                          className={cn(
+                            "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-stone-200 hover:squircle-stone-100",
+                            activeTab === item.key
+                              ? "squircle-stone-200"
+                              : "squircle-white"
+                          )}
+                          variants={drawerMenuVariants}
+                        >
+                          <Link
+                            href={item.link}
+                            className={`underline-offset-4 hover:text-primary/80 transition-colors ${
+                              activeTab === item.key
+                                ? "text-primary font-medium"
+                                : "text-primary/60"
+                            }`}
+                            onClick={async () => {
+                              setActiveTab(item.key);
+                              await sleep(5000);
+                              toggleDrawer();
+                            }}
                           >
-                            <a
-                              href={item.link}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                const element = document.getElementById(
-                                  item.link.substring(1)
-                                );
-                                element?.scrollIntoView({ behavior: "smooth" });
-                                setIsDrawerOpen(false);
-                              }}
-                              className={`underline-offset-4 hover:text-primary/80 transition-colors ${
-                                activeSection === item.link.substring(1)
-                                  ? "text-primary font-medium"
-                                  : "text-primary/60"
-                              }`}
-                            >
-                              {item.name}
-                            </a>
-                          </motion.li>
-                        ))}
+                            {item.name}
+                          </Link>
+                        </motion.li>
+                      ))}
                     </AnimatePresence>
                   </motion.ul>
                 </div>
@@ -255,7 +276,7 @@ export function Navbar() {
                 {/* Action buttons */}
                 <div className="flex flex-col gap-2">
                   <Link href={routes.contact.link} likeButton whileTap asFull>
-                    Parler de SaaS 👋
+                    {t("common.page-sections.header.cta")}
                   </Link>
                 </div>
               </div>

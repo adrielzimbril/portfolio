@@ -1,0 +1,86 @@
+"use client";
+import posthog from "posthog-js";
+import React from "react";
+import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { cn } from "@/utils/utils";
+import { Tags } from "@/components/shared/pages/resources/tags";
+import { SectionBase } from "@/components/shared/pages/shared/section-base";
+import { useTranslations } from "next-intl";
+
+const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
+
+export function NewsletterForm() {
+  const t = useTranslations();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+
+  return (
+    <>
+      <SectionBase
+        sectionClassName="w-full"
+        sectionContentClassName="w-full"
+        cardClassName="w-full"
+        cardContentClassName="w-full p-6 md:p-8"
+        className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      >
+        <div
+          className={cn(
+            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto"
+          )}
+        >
+          <div
+            className={
+              "flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4"
+            }
+          >
+            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
+              {t("newsletter.page.badge")}
+            </Badge>
+            <h2 className="self-stretch">{t("newsletter.page.title")}</h2>
+            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600">
+              {t("newsletter.page.desc")}
+            </p>
+          </div>
+          <Tags tags={tags} isCentered />
+
+          <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
+            <Input
+              placeholder={t(
+                "common.page-sections.newsletter.form.fields.email.placeholder"
+              )}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <Button
+              onClick={() => {
+                posthog.capture("newsletter_subscribe_clicked", {
+                  has_email_entered: !!email,
+                });
+                setIsModalOpen(true);
+              }}
+              asFull
+              whileTap
+              asPointer
+            >
+              <span className="font-bold text-base">
+                {t("contact.page.form.submit")}
+              </span>
+            </Button>
+          </div>
+        </div>
+      </SectionBase>
+
+      <SubscriptionModal
+        isOpen={isModalOpen}
+        email={email || undefined}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
+  );
+}

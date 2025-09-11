@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
+import { usePathname, useRouter } from "next/navigation";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
