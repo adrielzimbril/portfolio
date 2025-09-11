@@ -12,7 +12,8 @@ import {
 } from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/route";
-import { getImageUrl, getBaseUrl } from "@/utils";
+import { getImageUrl, getResourcesUrl } from "@/utils";
+import { PageType } from "@/types";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
@@ -31,7 +32,10 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       description: resource?.excerpt,
       images: [
         getImageUrl(resource?.cover ?? ""),
-        getImageUrl(`og?title=${slug}`),
+        getResourcesUrl(
+          PageType.HUB,
+          `${slug}/opengraph-image?${new Date().getTime()}`
+        ),
       ],
     },
   };

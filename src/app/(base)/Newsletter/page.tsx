@@ -11,8 +11,16 @@ import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { NewsletterSubscribersBadge } from "@/components/SubscriberBadges";
+import { Metadata } from "next";
 
 const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
+
+export async function generateMetadata() {
+  const metadata: Metadata = {
+    title: "Newsletter",
+  };
+  return metadata;
+}
 
 export default function Newsletter() {
   const [isModalOpen, setIsModalOpen] = useState(false);

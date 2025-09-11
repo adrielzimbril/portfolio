@@ -5,8 +5,16 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import Cal, { getCalApi } from "@calcom/embed-react";
+import { Metadata } from "next";
 
 const tags = ["Adriel Zimbril 🦄", "Shirospace 🚀", "Aurthle ✨"];
+
+export async function generateMetadata() {
+  const metadata: Metadata = {
+    title: "Contact",
+  };
+  return metadata;
+}
 
 export default function Newsletter() {
   useEffect(() => {

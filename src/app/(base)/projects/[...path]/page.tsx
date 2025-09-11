@@ -21,7 +21,7 @@ import { getActivePathFromUrlParam } from "@/utils/route-utils";
 import { getLocale, setRequestLocale } from "next-intl/server";
 import { routes } from "@/data/route";
 import { PageParams, PageType } from "@/types";
-import { getBaseUrl, getImageUrl } from "@/utils";
+import { getImageUrl, getResourcesUrl } from "@/utils";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const params = await props.params;
@@ -40,7 +40,10 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       description: project?.excerpt,
       images: [
         getImageUrl(project?.image_big ?? ""),
-        getImageUrl(`og?title=${slug}`),
+        getResourcesUrl(
+          PageType.PROJECT,
+          `${slug}/opengraph-image?${new Date().getTime()}`
+        ),
       ],
     },
   };

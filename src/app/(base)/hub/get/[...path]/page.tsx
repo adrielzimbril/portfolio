@@ -1,17 +1,50 @@
 import React from "react";
 import { getActivePathFromUrlParam } from "@/utils/route-utils";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale, setRequestLocale } from "next-intl/server";
 import { PageParams } from "@/types";
-import { getResourceWithAdjacent } from "@/module/content/utils/lib/resources";
+import {
+  getResourceWithAdjacent,
+  getResourceBySlug,
+} from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/route";
 import { GetResource } from "@/components/shared/pages/resources/get-resource";
+import { Metadata } from "next";
+import { PageType } from "@/types";
+import { getImageUrl, getResourcesUrl } from "@/utils";
+
+export async function generateMetadata(props: { params: Promise<PageParams> }) {
+  const params = await props.params;
+
+  const { path } = params;
+
+  const locale = await getLocale();
+  const slug = getActivePathFromUrlParam(path);
+  const resource = await getResourceBySlug(slug, { locale });
+
+  return {
+    title: resource?.title,
+    description: resource?.excerpt,
+    openGraph: {
+      title: resource?.title,
+      description: resource?.excerpt,
+      images: [
+        getImageUrl(resource?.cover ?? ""),
+        getResourcesUrl(
+          PageType.HUB,
+          `${slug}/opengraph-image?${new Date().getTime()}`
+        ),
+      ],
+    },
+  };
+}
 
 export default async function SubShopGet(props: {
   params: Promise<PageParams>;
 }) {
-  const { path, locale } = await props.params;
-  setRequestLocale(locale);
+  const { path } = await props.params;
+
+  const locale = await getLocale();
 
   const slug = getActivePathFromUrlParam(path);
   const resource = await getResourceWithAdjacent(slug, { locale });
