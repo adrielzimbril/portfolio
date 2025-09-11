@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { cn } from "@/utils";
+import { useTranslations } from "use-intl";
 
 // Interface for page details props
 interface PageDetailsProps {
@@ -10,6 +12,8 @@ interface PageDetailsProps {
 
 // Component to render page details
 export function PageDetails({ content, className }: PageDetailsProps) {
+  const t = useTranslations();
+
   return (
     <section className="relative w-full">
       <div className="relative w-full max-w-3xl mx-auto">
@@ -20,7 +24,7 @@ export function PageDetails({ content, className }: PageDetailsProps) {
           )}
         >
           <h2 className="relative self-stretch h3 font-normal-not">
-            Présentation
+            {t("common.shared.text.presentation")}
           </h2>
 
           <MarkdownContentRender content={content} />

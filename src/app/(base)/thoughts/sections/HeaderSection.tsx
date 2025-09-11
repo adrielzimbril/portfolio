@@ -2,14 +2,17 @@ import { LightbulbIcon } from "lucide-react";
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { routes } from "@/data/route";
+import { useTranslations } from "next-intl";
 
 export function HeaderSection() {
+  const t = useTranslations();
+
   return (
     <PageHero
-      title="Réflexions"
-      description="Voici un espace où vous pouvez publier des articles sur vraiment tout, par exemple des conseils sur le design, des engrenages qui boostent votre productivité"
+      title={t("thoughts.page.header-section.title")}
+      description={t("thoughts.page.header-section.description")}
       buttonLink={routes.hub.link}
-      buttonText="Voir mes réflexions"
+      buttonText={t("thoughts.page.header-section.cta")}
       imagePath="/image-657.png"
       actionButton
     />

@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { routes } from "@/data/route";
 import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section";
 import { PreviewContentType } from "@/types";
 import { ResourceType } from "@/types/enum";
 import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
+import { useTranslations } from "use-intl";
 
 export function HeaderSection({
   title,
@@ -23,6 +23,8 @@ export function HeaderSection({
   type?: ResourceType;
   pageViewsData: { slug: string; locale: string };
 }) {
+  const t = useTranslations();
+
   usePageViews(
     getResourcesUrl(PageType.HUB, pageViewsData.slug),
     pageViewsData.slug,
@@ -50,7 +52,7 @@ export function HeaderSection({
       tags={tags}
       type={type}
       ctaButton={pageViewsData.slug}
-      ctaButtonText="Obtenir 🦄"
+      ctaButtonText={`${t("common.page-sections.cta.variant-one.button")} 🦄`}
     />
   );
 }
