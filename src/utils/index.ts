@@ -12,3 +12,6 @@ export * from "@/utils/states/catch-error";
 export * from "@/utils/format-content";
 
 export * from "@/utils/key-encrypt";
+
+export * from "@/utils/route-utils";
+

@@ -1,8 +1,18 @@
 import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
 import nextIntlPlugin from "next-intl/plugin";
+import { appConfig } from "@data/app-config";
 
-const withNextIntl = nextIntlPlugin("./src/module/i18n/request.ts");
+const withNextIntl = nextIntlPlugin({
+  requestConfig: "./src/module/i18n/request.ts",
+  experimental: {
+    createMessagesDeclaration: Object.keys(appConfig.i18n.locales).map(
+      (locale) => `./src/module/i18n/translations/${locale}.json`
+    ),
+  },
+});
+
+
 
 const nextConfig: NextConfig = {
   /* config options here */

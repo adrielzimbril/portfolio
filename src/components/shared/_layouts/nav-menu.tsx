@@ -6,29 +6,26 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { getActivePathInArray } from "@/utils";
 
 export function NavMenu({ hasScrolled }: { hasScrolled: boolean }) {
-  const router = usePathname();
-const menuRoutes = Object.values(routes).filter((item) => item.inHeader);
+  const route = usePathname();
+  const menuRoutes = Object.values(routes);
+  const menuRoutesFiltered = menuRoutes.filter((item) => item.inHeader);
 
-// Create a copy of the sorted array (does not modify menuRoutes)
-const menuRoutesSorted = [...menuRoutes].sort((a, b) =>
-  b.name.localeCompare(a.name)
-);
+  const activePath = getActivePathInArray({
+    path: route,
+    array: menuRoutes.map((item) => item.link),
+    withSlash: true,
+  });
 
-const [activeTab, setActiveTab] = useState<string>(
-  menuRoutesSorted.find((item) => router.startsWith(item.link))?.name ||
-    menuRoutesSorted.find((item) => item.link === router)?.name ||
-    routes.home.name
-);
+  // Find the current route directly from filtered menu routes
+  const currentRoute = menuRoutesFiltered.find(
+    (item) => item.link === activePath
+  );
+  const currentKey = currentRoute?.key || routes.home.key;
 
-useEffect(() => {
-  const current =
-    menuRoutesSorted.find((item) => router.startsWith(item.link)) ||
-    menuRoutesSorted.find((item) => item.link === router);
-  if (current) setActiveTab(current.name);
-}, [router, menuRoutesSorted]);
-
+  const [activeTab, setActiveTab] = useState<string>(currentKey);
 
   return (
     <div className="w-fit hidden md:block">
@@ -40,11 +37,11 @@ useEffect(() => {
             "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-secondary"
           )}
         >
-          {menuRoutes.map((item) => (
+          {menuRoutesFiltered.map((item) => (
             <Link
-              key={item.name}
+              key={item.key}
               href={item.link}
-              onClick={() => setActiveTab(item.name)}
+              onClick={() => setActiveTab(item.key)}
               className={cn(
                 "relative transition-all duration-200",
                 "px-4 py-2"
@@ -52,7 +49,7 @@ useEffect(() => {
                 //activeTab === item.name ? "z-1" : "z-0"
               )}
             >
-              {activeTab === item.name && (
+              {activeTab === item.key && (
                 <motion.div
                   layoutId="active-tab"
                   className={cn(
@@ -70,7 +67,7 @@ useEffect(() => {
               <span
                 className={cn(
                   "relative block text-sm font-medium transition-colors duration-200 hover:text-primary tracking-tight",
-                  activeTab === item.name ? "text-primary" : "text-primary/60"
+                  activeTab === item.key ? "text-primary" : "text-primary/60"
                 )}
               >
                 {item.name}
