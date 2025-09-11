@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/utils/utils";
@@ -737,7 +736,7 @@ export function InteractiveFunFacts() {
       title={t("about.page.interactive-fun-facts-section.title")}
       description={t("about.page.interactive-fun-facts-section.description")}
     >
-      {/* Zone de jeu principale */}
+      {/* Main Game Zone */}
       <div className="content-center flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-between w-full">
         <div className="flex flex-row gap-6 sm:gap-0 justify-center w-full sm:w-auto order-2 sm:order-1">
           <GuessButton
@@ -753,7 +752,7 @@ export function InteractiveFunFacts() {
           </div>
         </div>
 
-        {/* Zone des cartes */}
+        {/* Cards Zone */}
         <div className="relative flex items-center justify-center order-1 sm:order-2 size-full py-8 md:py-14">
           {questionsLocale.map((question, index) => (
             <QuestionCard

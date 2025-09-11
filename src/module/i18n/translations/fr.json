@@ -82,6 +82,11 @@
             }
           }
         }
+      },
+      "philosophy-section": {
+        "badge": "Unicorn 🦄",
+        "title": "Ma philosophie",
+        "description": "Ma philosophie est de transformer les idées en produits que les utilisateurs adorent."
       }
     }
   },

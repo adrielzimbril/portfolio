@@ -43,7 +43,7 @@ export function CraftSection() {
     <SectionLayout
       badge={t("about.page.craft-section.badge")}
       title={t("about.page.craft-section.title")}
-      description={t("about.page.craft-section.description")}
+      //description={t("about.page.craft-section.description")}
       layoutStart
     >
       {data
