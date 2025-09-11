@@ -166,22 +166,22 @@
   },
   "contact": {
     "title": "Dire bonjour 👋",
-    "description": "We are here to help you. Please use the form below to get in touch with us.",
+    "description": "Nous sommes là pour vous aider. Veuillez utiliser le formulaire ci-dessous pour nous contacter.",
     "page": {
       "badge": "Problem Solver & Your SaaS Product designer ❣️",
       "title": "Transforme tes idées en produits que tes utilisateurs adorent 🦄",
       "form": {
         "notifications": {
-          "error": "We are sorry, but we were unable to send your message. Please try again later.",
-          "success": "Your message has been sent successfully. We will get back to you as soon as possible."
+          "error": "Désolé, mais nous n'avons pas pu envoyer votre message. Veuillez réessayer plus tard.",
+          "success": "Votre message a été envoyé avec succès. Nous vous recontacterons au plus vite."
         },
         "submit": "Recevoir !🦄"
       }
     }
   },
   "newsletter": {
-    "title": "Get early access",
-    "description": "Be among the first to get access to supastarter.nextjs.",
+    "title": "Reçois les nouveautés",
+    "description": "Sois parmi les premiers à accéder à supastarter.nextjs.",
     "page": {
       "badge": "Pour les développeurs freelances qui galèrent à trouver des clients.",
       "title": "Trouve des clients en continu grâce à la méthode Tsunami 🌊",
@@ -190,15 +190,15 @@
     "email": "Email",
     "hints": {
       "error": {
-        "message": "Could not subscribe to newsletter. Please try again later."
+        "message": "Nous sommes désolés, mais nous n'avons pas pu vous abonner à la newsletter. Veuillez réessayer plus tard."
       },
       "success": {
-        "message": "Thank you for subscribing to our newsletter. We will keep you posted.",
-        "title": "Subscribed"
+        "message": "Merci d'avoir vous abonné à notre newsletter. Nous vous recontacterons au plus vite.",
+        "title": "Abonné"
       }
     },
-    "submit": "Subscribe",
-    "subtitle": "Be among the first to get access to supastarter.nextjs."
+    "submit": "S'abonner",
+    "subtitle": "Sois parmi les premiers à accéder à mes nouveautés."
   },
   "common": {
     "confirmation": {
