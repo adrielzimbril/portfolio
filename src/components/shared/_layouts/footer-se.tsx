@@ -94,162 +94,105 @@ export const FooterSec: React.FC = () => {
     <>
       <footer className="w-full bg-white">
         <SectionBase
-          sectionClassName="w-full"
+          sectionClassName="w-full pt-0 pb-10"
           sectionContentClassName="w-full"
-          cardClassName="w-full rounded-3xl bg-stone-100"
+          cardClassName="w-full rounded-4xl bg-stone-100"
           cardContentClassName="w-full p-6 md:p-8"
-          className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none min-h-60 py-4 md:py-12"
+          className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
         >
-          <div
-            className={cn(
-              "flex relative flex-col w-full min-h-60 items-center justify-center px-4 gap-4 md:gap-8 mx-auto"
-            )}
-          >
-            <div className="w-full  md:px-8">
-              {/* Header du footer avec logo et description */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:flex-row justify-between items-start mb-12 gap-8">
-                <div className="flex flex-col gap-4 md:gap-6 w-full rounded-2xl">
-                  <div className="flex flex-col gap-6 rounded-3xl bg-zinc-100s bg-zinc-100 py-4 px-4">
-                    <div className="flex flex-col gap-2">
-                      <Badge
-                        variant="colored"
-                        className="relative text-base font-normal squircle-white md:font-medium md:text-xl max-w-3xl leading-[115%]"
-                      >
-                        {t("common.shared.base.title")} 🦄
-                      </Badge>
-                      <span className="relative text-base text-zinc-600 px-2">
-                        {t("common.shared.base.subtitle")}
-                      </span>
-                    </div>
-                  </div>
-                  {/* <Separator orientation={"horizontal"} /> */}
-                  <div className="flex items-center flex-wrap content-center place-content-center md:place-content-start md:justify-start gap-3">
-                    {Object.entries(siteConfig.links.contact.social)
-                      .filter(([_, social]) => social.available)
-                      .map(([name, social]) => (
-                        <Link
-                          key={name}
-                          href={social.url}
-                          likeButton
-                          size="xs"
-                          //variant="outline"
-                          aria-label={name}
-                        >
-                          <span className="flex items-center size-full justify-center m-auto">
-                            {/* <social.icon /> */}
-                            <span className="capsitalize">{social.name}</span>
-                          </span>
-                        </Link>
-                      ))}
-                  </div>
-
-                  {/* Réseaux sociaux */}
-                  <div className="hidden sflex flex-col eitems-center gap-3">
-                    <div className="flex items-center flex-wrap content-center place-content-center md:place-content-start md:justify-start gap-3">
-                      {socialIcons.map((social, index) => (
-                        <Link
-                          key={index}
-                          href={social.href}
-                          likeButton
-                          variant="outline"
-                          size="icon"
-                          asIcon
-                          aria-label={social.alt}
-                        >
-                          <span className="flex items-center size-full justify-center m-auto">
-                            <social.icon className="size-5!" />
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Newsletter signup */}
-                <div className="flex flex-col justify-self-end gap-6 w-full smax-w-md rounded-2xl bg-zinc-100s bg-zinc-100 py-4 px-4">
-                  <div className="flex flex-col gap-4 max-w-sms">
-                    <h4 className="text-3xl">🎁 Recevoir les cadeaux</h4>
-                    <p className="text-base text-zinc-500">
-                      Rejoignez plus de 90K entrepreneurs qui reçoivent nos
-                      stratégies exclusives
-                    </p>
-                    <div className="flex flex-col gap-2">
-                      <Button asPointer>S'inscrire maintenant</Button>
-                      <span className="relative text-base font-medium text-zinc-500">
-                        {t("common.shared.base.subtitle")}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="hidden sflex flex-col eitems-center gap-3">
-                    <div className="flex items-center flex-wrap content-center place-content-center md:place-content-start md:justify-start gap-3">
-                      <Separator orientation={"horizontal"} />
-                      {Object.entries(siteConfig.links.contact.social)
-                        .filter(([_, social]) => social.available)
-                        .map(([name, social]) => (
-                          <Link
-                            href={social.url}
-                            likeButton
-                            key={name}
-                            size="xs"
-                            //variant="outline"
-                            aria-label={name}
-                          >
-                            <span className="flex items-center size-full justify-center m-auto">
-                              {/* <social.icon /> */}
-                              <span className="capitalize">{name}</span>
-                            </span>
-                          </Link>
-                        ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full place-self-center rounded-2xl bg-zinc-100 bg-whites">
-                <Separator className="my-4 md:mt-8 md:mb-6 bg-inherit" />
-
-                <div className="w-full flex justify-center place-content-center items-center">
-                  <div className="flex flex-col md:flex-row justify-center items-center place-content-center gap-2">
-                    {resources.map((resource, index) => (
-                      <>
-                        <Link
-                          key={index}
-                          href={resource.slug}
-                          className="text-base text-center md:text-left bg-white rounded-xl py-2 px-4"
-                        >
-                          {resource.title}
-                        </Link>
-                        {index < resources.length - 1 && (
-                          <Separator
-                            className={cn("bg-zinc-400", {
-                              hidden: isMobile,
-                              "h-5": !isMobile,
-                            })}
-                            orientation={isMobile ? "horizontal" : "vertical"}
-                          />
-                        )}
-                      </>
-                    ))}
-                  </div>
-                </div>
-
-                <Separator className="my-4 md:mt-6 md:mb-8 bg-inherit" />
-              </div>
-
-              <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-zinc-100">
-                <div className="flex items-center md:items-start gap-2 text-zinc-700">
-                  <p className="relative font-medium text-base text-center md:text-left">
-                    <span className="relative">
-                      {t("common.shared.text.copyright", {
-                        year: new Date().getFullYear(),
-                        author: siteConfig.details.name,
-                      })}
+          <div className="flex relative flex-col w-full items-center justify-center p-4 md:p-16 gap-4 md:gap-8 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:flex-row justify-between items-start gap-8">
+              <div className="flex flex-col gap-4 md:gap-6 w-full rounded-2xl">
+                <div className="flex flex-col gap-6 rounded-3xl bg-zinc-100s bg-zinc-100 py-4 px-4">
+                  <div className="flex flex-col gap-2">
+                    <Badge
+                      variant="colored"
+                      className="relative text-base font-normal squircle-white md:font-medium md:text-xl max-w-3xl leading-[115%]"
+                    >
+                      {t("common.shared.base.title")} 🦄
+                    </Badge>
+                    <span className="relative text-base text-zinc-600 px-2">
+                      {t("common.shared.base.subtitle")}
                     </span>
+                  </div>
+                </div>
+                <div className="flex items-center flex-wrap content-center place-content-center md:place-content-start md:justify-start gap-3">
+                  {Object.entries(siteConfig.links.contact.social)
+                    .filter(([_, social]) => social.available)
+                    .map(([name, social]) => (
+                      <Link
+                        key={name}
+                        href={social.url}
+                        likeButton
+                        size="xs"
+                        //variant="outline"
+                        aria-label={name}
+                      >
+                        <span className="flex items-center size-full justify-center m-auto">
+                          <span className="capsitalize">{social.name}</span>
+                        </span>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-self-end gap-6 w-full md:max-w-md rounded-2xl bg-zinc-100s bg-zinc-100 p-4">
+                <div className="flex flex-col gap-4 max-w-sms">
+                  <h4 className="text-3xl">🎁 Recevoir les cadeaux</h4>
+                  <p className="text-base text-zinc-500">
+                    Rejoignez plus de 90K entrepreneurs qui reçoivent nos
+                    stratégies exclusives
                   </p>
+                  <div className="flex flex-col gap-2">
+                    <Button asPointer>S'inscrire maintenant</Button>
+                    <span className="relative text-base text-zinc-600 bg-white p-2 rounded-xl">
+                      {t("common.shared.base.subtitle")}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center md:items-end gap-2">
-                  <LocaleSwitch />
+              </div>
+            </div>
+
+            <div className="w-full place-self-center rounded-2xl bg-zinc-100 py-4 md:py-8">
+              <div className="w-full flex justify-center place-content-center items-center">
+                <div className="flex flex-col md:flex-row justify-center items-center place-content-center gap-2">
+                  {resources.map((resource, index) => (
+                    <>
+                      <Link
+                        key={index}
+                        href={resource.slug}
+                        className="text-base text-center md:text-left bg-white rounded-xl py-2 px-4"
+                      >
+                        {resource.title}
+                      </Link>
+                      {index < resources.length - 1 && (
+                        <Separator
+                          className={cn("bg-zinc-300", {
+                            hidden: isMobile,
+                            "h-5": !isMobile,
+                          })}
+                          orientation={isMobile ? "horizontal" : "vertical"}
+                        />
+                      )}
+                    </>
+                  ))}
                 </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-zinc-100">
+              <div className="flex items-center md:items-start gap-2 text-zinc-700">
+                <p className="relative font-medium text-base text-center md:text-left">
+                  <span className="relative">
+                    {t("common.shared.text.copyright", {
+                      year: new Date().getFullYear(),
+                      author: siteConfig.details.name,
+                    })}
+                  </span>
+                </p>
+              </div>
+              <div className="flex items-center md:items-end gap-2">
+                <LocaleSwitch />
               </div>
             </div>
           </div>

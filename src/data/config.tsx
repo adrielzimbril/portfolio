@@ -161,7 +161,7 @@ export const siteConfig = {
           url: "https://dub.sh/adrielzimbril-youtube",
           icon: AurthleIcons.Youtube,
           navbar: true,
-          available: false,
+          available: true,
         },
         figma: {
           name: "Figma",
