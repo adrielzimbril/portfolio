@@ -27,6 +27,8 @@ import { cn } from "@/utils";
 import { SectionBase } from "../pages/shared/section-base";
 import { getEmojiByName, getEmojiFromString } from "@aurthle/emoji-hub";
 import { siteConfig } from "@/data/config";
+import { ButtonCopy } from "@/components/ui/button-copy";
+import { Mail } from "@aurthle/icons";
 
 const socialIcons = [
   { icon: LinkedinIcon, alt: "LinkedIn", href: "#" },
@@ -136,23 +138,32 @@ export const FooterSec: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex items-center md:items-end gap-2">
-                    <LocaleSwitch />
+                    {/* <LocaleSwitch /> */}
+                    <span className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white">
+                      {/* <Mail size={20} variant="bulk" /> */}
+                      <ButtonCopy
+                        //variant="outline"
+                        content={siteConfig.links.contact.email}
+                        node={<Mail size={20} variant="bulk" />}
+                        asIcon
+                      />
+                      <span className="text-xl font-semibold font-sf-pro-display">
+                        {siteConfig.links.contact.email}
+                      </span>
+                    </span>
                   </div>
                 </div>
 
                 {/* Newsletter signup */}
-                <div className="flex flex-col gap-6 max-w-md rounded-2xl bg-zinc-100s bg-white border-4 border-white py-4 px-4">
+                <div className="flex flex-col justify-self-end gap-6 max-w-md rounded-2xl bg-zinc-100s bg-white border-4 border-white py-4 px-4">
                   <div className="flex flex-col gap-4 max-w-sm">
-                    <h3 className="font-title-03-28 font-[number:var(--title-03-28-font-weight)] text-[length:var(--title-03-28-font-size)] tracking-[var(--title-03-28-letter-spacing)] leading-[var(--title-03-28-line-height)]">
-                      🎁 Recevoir les cadeaux
-                    </h3>
-                    <p className="[font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-text-iconslight-medium-emphasis text-[15px] tracking-[0.07px] leading-[20px]">
+                    <h4 className="text-3xl">🎁 Recevoir les cadeaux</h4>
+                    <p className="text-base text-zinc-400">
                       Rejoignez plus de 90K entrepreneurs qui reçoivent nos
                       stratégies exclusives
                     </p>
                     <Button asPointer>S'inscrire maintenant</Button>
                   </div>
-                  {/* Réseaux sociaux */}
                   <div className="flex flex-col eitems-center gap-3">
                     <div className="flex items-center flex-wrap content-center place-content-center md:place-content-start md:justify-start gap-3">
                       {socialIcons.map((social, index) => (

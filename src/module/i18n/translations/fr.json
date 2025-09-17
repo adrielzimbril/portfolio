@@ -237,7 +237,12 @@
         "role": "Role",
         "duration": "Durée",
         "language": "Langue",
-        "copyright": "Copyright Holder © {year} - All Right Reserved - Crafted with ❣️ by {author}"
+        "copyright": "Copyright Holder © {year} - All Right Reserved - Crafted with ❣️ by {author}",
+        "copy": "Copier",
+        "copied": "Copié"
+      },
+      "components": {
+        "button-copy": {}
       }
     },
     "base": {
@@ -514,6 +519,11 @@
     "form": {
       "submit-failed": "Erreur lors du soumission du formulaire. Veuillez réessayer plus tard s'il vous plaît.",
       "submit-update-failed": "Erreur lors de la mise à jour du formulaire. Veuillez réessayer plus tard s'il vous plaît."
+    },
+    "components": {
+      "button-copy": {
+        "failed": "Erreur lors de la copie"
+      }
     }
   }
 }
