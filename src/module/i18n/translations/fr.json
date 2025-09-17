@@ -235,7 +235,9 @@
         "presentation": "Présentation",
         "results": "Résultats",
         "role": "Role",
-        "duration": "Durée"
+        "duration": "Durée",
+        "language": "Langue",
+        "copyright": "Copyright Holder © {year} - All Right Reserved - Crafted with ❣️ by {author}"
       }
     },
     "base": {

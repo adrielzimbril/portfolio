@@ -85,6 +85,20 @@ export function ProductAvatarsStats({
   return (
     <AvatarsStats
       userCount={count ?? 0}
+      avatars={
+        count < 1
+          ? ["image1"]
+          : [
+              "image1",
+              "image2",
+              "image3",
+              "image4",
+              "image5",
+              "image6",
+              "image7",
+              "image8",
+            ]
+      }
       resourceType={type}
       colorName={cn(colorName ?? "squircle-zinc-100")}
     />

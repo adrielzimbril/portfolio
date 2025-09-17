@@ -20,6 +20,7 @@ import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { Toaster } from "@/components/shiro/providers/toast-provider";
 import { getUserLocale } from "@/module/i18n/lib/locale-cookie";
+import { FooterSec } from "@/components/shared/_layouts/footer-se";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -87,7 +88,8 @@ export default async function RootLayout({
                         <ScrollToTop />
                         <Toaster position="bottom-right" />
                         {/* <SplashCursor /> */}
-                        <Footer />
+                        {/* <Footer /> */}
+                        <FooterSec />
                       </div>
                     </main>
                   </ReactLenis>

@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/utils/utils";
 
 const buttonVariants = cva(
-  "inline-flex squircle squircle-7xl squircle-smooth-xl hover:squircle-xl items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex squircle squircle-7xl squircle-smooth-xl hover:squircle-xl items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {

@@ -1,9 +1,6 @@
 "use client";
-
 import { useState } from "react";
 import { updateLocale } from "@/module/i18n/lib/update-locale";
-import { useLocaleRouter, useLocalePathname } from "@/module/i18n/routing";
-import { LanguagesIcon } from "lucide-react";
 import type { Locale } from "@i18n/types";
 import { useLocale } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -19,6 +16,7 @@ import {
 import { USFlag } from "@/components/icons/flags/USFlag";
 import { FRFlag } from "@/components/icons/flags/FRFlag";
 import { CNFlag } from "@/components/icons/flags/CNFlag";
+import { useTranslations } from "use-intl";
 
 export function Footer() {
   return (
@@ -37,20 +35,38 @@ export function Footer() {
 const { locales } = appConfig.i18n;
 
 export function LocaleSwitch() {
+  const t = useTranslations();
   const router = useRouter();
   const currentLocale = useLocale();
   const [value, setValue] = useState<Locale>(currentLocale as Locale);
+  const iconsMap = {
+    FRFlag,
+    USFlag,
+    CNFlag,
+  } as const;
+
+  const currentIcon = Object.entries(locales).find(
+    ([locale]) => locale === currentLocale
+  )?.[1].icon as keyof typeof iconsMap;
+
+  const SelectedFlag = iconsMap[currentIcon];
 
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="flex items-center"
-          size="icon"
+          className="flex w-fit items-center gap-2 squircle-white min-w-10"
+          size="xs"
+          asIcon
+          asPointer
           aria-label="Language"
         >
-          <LanguagesIcon className="size-4" aria-hidden="true" />
+          {/* <LanguagesIcon className="size-4" aria-hidden="true" /> */}
+          {SelectedFlag && (
+            <SelectedFlag className="transform scale-125 rounded-sm" />
+          )}
+          <span className="relative">{t("common.shared.text.language")}</span>
         </Button>
       </DropdownMenuTrigger>
 
@@ -66,12 +82,6 @@ export function LocaleSwitch() {
           className="flex flex-col w-fit items-start gap-1"
         >
           {Object.entries(locales).map(([locale, { label, icon }]) => {
-            const iconsMap = {
-              FRFlag,
-              USFlag,
-              CNFlag,
-            } as const;
-
             const IconComponent = iconsMap[icon as keyof typeof iconsMap];
             return (
               <DropdownMenuRadioItem
@@ -81,7 +91,13 @@ export function LocaleSwitch() {
               >
                 {label}
                 <span className="text-xl">
-                  {<IconComponent width="20px" height="15px" />}
+                  {
+                    <IconComponent
+                      width="20px"
+                      height="15px"
+                      className="rounded-xs"
+                    />
+                  }
                 </span>
                 {/* <span className="text-xl">{iconMobile}</span> */}
               </DropdownMenuRadioItem>

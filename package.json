@@ -14,7 +14,7 @@
     "trigger:deploy": "pnpm dlx trigger.dev deploy"
   },
   "dependencies": {
-    "@aurthle/emoji-hub": "^1.0.4",
+    "@aurthle/emoji-hub": "^1.0.5",
     "@aurthle/icons": "^1.0.10",
     "@aurthle/react-hooks": "^1.0.5",
     "@aurthle/react-layout-kit": "^1.0.1",
