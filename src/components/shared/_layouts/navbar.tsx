@@ -17,7 +17,7 @@ import { getActivePathInArray, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
 
 const INITIAL_WIDTH = "70rem";
-const MAX_WIDTH = "70rem";
+const MAX_WIDTH = "65rem";
 
 // Animation variants
 const overlayVariants = {
@@ -125,7 +125,7 @@ export function Navbar() {
         initial={{ width: INITIAL_WIDTH }}
         animate={{ width: hasScrolled ? MAX_WIDTH : INITIAL_WIDTH }}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-        className="container p-0 w-full!"
+        className="container p-0 sw-full!"
       >
         <div
           className={cn(
@@ -140,7 +140,7 @@ export function Navbar() {
               href={routes.home.link}
               variant="none"
               size="none"
-              className="flex items-center gap-1 md:gap-1"
+              className="flex items-center gap-1 md:gap-2"
             >
               <Image
                 width={56}
@@ -156,7 +156,7 @@ export function Navbar() {
               <LogoName
                 className={cn(
                   "hidden md:block",
-                  "h-5! md:h-6! w-48! md:w-60! flex-shrink-0"
+                  "h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0"
                   // hasScrolled && "h-3.5! w-36!"
                 )}
               />

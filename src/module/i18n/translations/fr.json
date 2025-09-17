@@ -323,6 +323,12 @@
           "default": "Inscription en cours... Vous pouvez ajouter vos informations personnelles.",
           "state": "Votre inscription est confirmée ! Vous pouvez ajouter vos informations pour personnaliser votre expérience."
         },
+        "footer": {
+          "title": "🎁 Recevoir les cadeaux",
+          "description": "Rejoignez plus de 90K entrepreneurs qui reçoivent nos stratégies exclusives",
+          "button": "S'inscrire maintenant",
+          "subText": "Rejoignez plus de 90K entrepreneurs qui"
+        },
         "form": {
           "fields": {
             "email": {

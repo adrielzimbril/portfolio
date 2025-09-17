@@ -11,7 +11,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const t = useTranslations();
 
   useEffect(() => {
-    sleep(5000).then(() => setIsLoaded(true));
+    sleep(6000).then(() => setIsLoaded(true));
   }, []);
 
   return (

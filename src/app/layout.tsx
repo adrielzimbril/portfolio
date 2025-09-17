@@ -82,7 +82,7 @@ export default async function RootLayout({
                     <main>
                       <div className="container mx-auto relative">
                         <Navbar />
-                        <Dockbar asFade={false} />
+                        {/* <Dockbar asFade={false} /> */}
                         {/* <SmoothCursor /> */}
                         {children}
                         <ScrollToTop />
