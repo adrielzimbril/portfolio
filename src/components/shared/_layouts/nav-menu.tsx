@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function NavMenu({
   hasScrolled,
@@ -15,6 +16,7 @@ export function NavMenu({
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }) {
+  const t = useTranslations();
   return (
     <div className="w-fit hidden md:block">
       <div className={cn("mx-auto flex w-full items-center justify-center")}>
@@ -58,7 +60,7 @@ export function NavMenu({
                   activeTab === item.key ? "text-primary" : "text-primary/60"
                 )}
               >
-                {item.name}
+                {t("common.menu." + item.key)}
               </span>
             </Link>
           ))}

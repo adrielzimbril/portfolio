@@ -265,7 +265,7 @@ export function Navbar() {
                               toggleDrawer();
                             }}
                           >
-                            {item.name}
+                            {t("common.menu." + item.key)}
                           </Link>
                         </motion.li>
                       ))}

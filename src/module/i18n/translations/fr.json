@@ -255,7 +255,14 @@
       "linkedin": "LinkedIn",
       "facebook": "Facebook",
       "instagram": "Instagram",
-      "dribbble": "Dribbble"
+      "dribbble": "Dribbble",
+      "github": "Github",
+      "figma": "Figma",
+      "email": "Email",
+      "x": "X",
+      "youtube": "Youtube",
+      "product-hunt": "Product Hunt",
+      "peerlist": "Peerlist"
     },
     "page-sections": {
       "header": {

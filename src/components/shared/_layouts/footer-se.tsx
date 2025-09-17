@@ -93,13 +93,13 @@ export const FooterSec: React.FC = () => {
 
   return (
     <>
-      <footer className="w-full bg-white">
+      <footer className="w-full">
         <SectionBase
           sectionClassName="w-full pt-0 pb-10"
           sectionContentClassName="w-full"
-          cardClassName="w-full rounded-4xl bg-stone-100"
+          cardClassName="w-full rounded-4xl bg-stone-100 dark:bg-zinc-900"
           cardContentClassName="w-full p-6 md:p-8"
-          className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
+          className="squircle squircle-white dark:squircle-zinc-800 squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
         >
           <div className="flex relative flex-col w-full items-center justify-center p-4 md:p-16 gap-4 md:gap-8 mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:flex-row justify-between items-start gap-8">
@@ -131,7 +131,11 @@ export const FooterSec: React.FC = () => {
                         aria-label={name}
                       >
                         <span className="flex items-center size-full justify-center m-auto">
-                          <span className="capsitalize">{social.name}</span>
+                          <span className="capsitalize">
+                            {social.key != "email"
+                              ? t("common.base." + social.key)
+                              : social.name}
+                          </span>
                         </span>
                       </Link>
                     ))}
@@ -158,14 +162,14 @@ export const FooterSec: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-full place-self-center rounded-3xl bg-zinc-100 py-4 md:py-6">
+            <div className="w-full place-self-center rounded-3xl bg-zinc-100 dark:bg-zinc-900 py-4 md:py-6">
               <div className="w-full flex flex-col md:flex-row justify-center place-content-center items-center gap-2">
                 {resources.map((resource, index) => (
                   <>
                     <Link
                       key={index}
                       href={resource.slug}
-                      className="text-base text-center md:text-left bg-white rounded-xl py-2 px-4"
+                      className="text-base text-center md:text-left bg-white dark:bg-neutral-800 rounded-xl py-2 px-4"
                     >
                       {resource.title}
                     </Link>
@@ -183,8 +187,8 @@ export const FooterSec: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-zinc-100">
-              <div className="flex items-center md:items-start gap-2 text-zinc-700">
+            <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-zinc-100 dark:bg-zinc-900">
+              <div className="flex items-center md:items-start gap-2 text-zinc-700 dark:text-zinc-200">
                 <p className="relative font-medium text-base text-center md:text-left">
                   <span className="relative">
                     {t("common.shared.text.copyright", {

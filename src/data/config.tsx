@@ -102,6 +102,7 @@ export const siteConfig = {
       social: {
         email: {
           name: "hello@adrielzimbril.com",
+          key: "email",
           url: "mailto:hello@adrielzimbril.com",
           icon: AurthleIcons.Mail,
           navbar: false,
@@ -109,6 +110,7 @@ export const siteConfig = {
         },
         linkedin: {
           name: "LinkedIn",
+          key: "linkedin",
           url: "https://dub.sh/adrielzimbril-linkedin",
           icon: AurthleIcons.Linkedin,
           navbar: true,
@@ -116,6 +118,7 @@ export const siteConfig = {
         },
         instagram: {
           name: "Instagram",
+          key: "instagram",
           url: "https://dub.sh/adrielzimbril-instagram",
           icon: AurthleIcons.Instagram,
           navbar: true,
@@ -123,6 +126,7 @@ export const siteConfig = {
         },
         github: {
           name: "GitHub",
+          key: "github",
           url: "https://dub.sh/adrielzimbril-github",
           icon: AurthleIcons.Github,
           navbar: true,
@@ -130,6 +134,7 @@ export const siteConfig = {
         },
         producthunt: {
           name: "Product Hunt",
+          key: "product-hunt",
           url: "https://dub.sh/adrielzimbril-producthunt",
           icon: "",
           navbar: false,
@@ -137,6 +142,7 @@ export const siteConfig = {
         },
         peerlist: {
           name: "Peerlist",
+          key: "peerlist",
           url: "https://dub.sh/adrielzimbril-peerlist",
           icon: "",
           navbar: false,
@@ -144,6 +150,7 @@ export const siteConfig = {
         },
         dribbble: {
           name: "Dribbble",
+          key: "dribbble",
           url: "https://dub.sh/adrielzimbril-dribbble",
           icon: AurthleIcons.Dribbble,
           navbar: true,
@@ -151,6 +158,7 @@ export const siteConfig = {
         },
         x: {
           name: "X",
+          key: "x",
           url: "https://dub.sh/adrielzimbril-x",
           icon: AurthleIcons.Xtwitter,
           navbar: false,
@@ -158,6 +166,7 @@ export const siteConfig = {
         },
         youtube: {
           name: "Youtube",
+          key: "youtube",
           url: "https://dub.sh/adrielzimbril-youtube",
           icon: AurthleIcons.Youtube,
           navbar: true,
@@ -165,6 +174,7 @@ export const siteConfig = {
         },
         figma: {
           name: "Figma",
+          key: "figma",
           url: "https://dub.sh/adrielzimbril-figma",
           icon: AurthleIcons.Figma,
           navbar: false,
