@@ -29,6 +29,12 @@ import { getEmojiByName, getEmojiFromString } from "@aurthle/emoji-hub";
 import { siteConfig } from "@/data/config";
 import { ButtonCopy } from "@/components/ui/button-copy";
 import { Mail } from "@aurthle/icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
 
 const socialIcons = [
   { icon: LinkedinIcon, alt: "LinkedIn", href: "#" },
@@ -103,7 +109,7 @@ export const FooterSec: React.FC = () => {
               {/* Header du footer avec logo et description */}
               <div className="flexs flex-cols grid grid-cols-1 md:grid-cols-2 lg:flex-row justify-between items-start mb-12 gap-8">
                 <div className="flex flex-col gap-6 max-w-md  rounded-2xl bg-zinc-100s sbg-white spy-6 spx-4">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flesx items-center hidden gap-2.5">
                     <img className="w-14 h-14" alt="Icon" src="/icon.svg" />
                     <img
                       className="flex-shrink-0"
@@ -111,11 +117,55 @@ export const FooterSec: React.FC = () => {
                       src="/adriel-zimbril.svg"
                     />
                   </div>
-                  <p className="font-normal hidsden">
+                  <p className="font-normal hidden">
                     Expert en automatisation IA et acquisition client. Je
                     partage mes stratégies pour aider les entrepreneurs à
                     développer leur business grâce à la méthode Tsunami 🌊
                   </p>
+
+                  <div className="flex items-center md:items-end gap-2 hidden">
+                    <span className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white">
+                      <ButtonCopy
+                        content={siteConfig.links.contact.email}
+                        node={<Mail size={20} variant="bulk" />}
+                        className="cursor-pointer"
+                        asIcon
+                      />
+                      <span className="text-lg texts-zinc-600">
+                        <Link href={`mailto:${siteConfig.links.contact.email}`}>
+                          {siteConfig.links.contact.email}
+                        </Link>
+                      </span>
+                    </span>
+                  </div>
+                  <div className="flex items-center md:items-end gap-2">
+                    <Badge
+                      variant="colored"
+                      className="relative text-base font-normal squircle-white md:font-medium md:text-xl max-w-3xl leading-[115%] tesxt-zinc-600"
+                    >
+                      {t("common.shared.base.badge")}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center flex-wrap content-center place-content-center md:place-content-start md:justify-start gap-3">
+                    {/* <Separator orientation={"horizontal"} /> */}
+                    {Object.entries(siteConfig.links.contact.social)
+                      .filter(([_, social]) => social.available)
+                      .map(([name, social]) => (
+                        <Link
+                          href={social.url}
+                          likeButton
+                          key={name}
+                          size="xs"
+                          //variant="outline"
+                          aria-label={name}
+                        >
+                          <span className="flex items-center size-full justify-center m-auto">
+                            {/* <social.icon /> */}
+                            <span className="capsitalize">{social.name}</span>
+                          </span>
+                        </Link>
+                      ))}
+                  </div>
 
                   {/* Réseaux sociaux */}
                   <div className="hidden sflex flex-col eitems-center gap-3">
@@ -137,21 +187,6 @@ export const FooterSec: React.FC = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="flex items-center md:items-end gap-2">
-                    {/* <LocaleSwitch /> */}
-                    <span className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white">
-                      {/* <Mail size={20} variant="bulk" /> */}
-                      <ButtonCopy
-                        //variant="outline"
-                        content={siteConfig.links.contact.email}
-                        node={<Mail size={20} variant="bulk" />}
-                        asIcon
-                      />
-                      <span className="text-xl font-semibold font-sf-pro-display">
-                        {siteConfig.links.contact.email}
-                      </span>
-                    </span>
-                  </div>
                 </div>
 
                 {/* Newsletter signup */}
@@ -164,9 +199,9 @@ export const FooterSec: React.FC = () => {
                     </p>
                     <Button asPointer>S'inscrire maintenant</Button>
                   </div>
-                  <div className="flex flex-col eitems-center gap-3">
+                  <div className="hidden sflex flex-col eitems-center gap-3">
                     <div className="flex items-center flex-wrap content-center place-content-center md:place-content-start md:justify-start gap-3">
-                      {socialIcons.map((social, index) => (
+                      {/* {socialIcons.map((social, index) => (
                         <Link
                           key={index}
                           href={social.href}
@@ -181,48 +216,53 @@ export const FooterSec: React.FC = () => {
                           </span>
                         </Link>
                       ))}
+                      <Separator orientation={"horizontal"} /> */}
+                      {/* {Object.entries(siteConfig.links.contact.social)
+                        .filter(
+                          ([_, social]) => social.navbar && social.available
+                        )
+                        .map(([name, social]) => (
+                          <Tooltip key={name}>
+                            <TooltipTrigger>
+                              <Link
+                                href={social.url}
+                                likeButton
+                                asIcon
+                                //variant="outline"
+                                size="icon"
+                                aria-label={name}
+                              >
+                                <span className="flex items-center size-full justify-center m-auto">
+                                  <social.icon />
+                                </span>
+                              </Link>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <span className="capitalize">{name}</span>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      <Separator orientation={"horizontal"} /> */}
+                      <Separator orientation={"horizontal"} />
+                      {Object.entries(siteConfig.links.contact.social)
+                        .filter(([_, social]) => social.available)
+                        .map(([name, social]) => (
+                          <Link
+                            href={social.url}
+                            likeButton
+                            key={name}
+                            size="xs"
+                            //variant="outline"
+                            aria-label={name}
+                          >
+                            <span className="flex items-center size-full justify-center m-auto">
+                              {/* <social.icon /> */}
+                              <span className="capitalize">{name}</span>
+                            </span>
+                          </Link>
+                        ))}
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Liens du footer */}
-              <div className="hidden qgrid md:grid-cols-3 gap-8 mb-12">
-                {footerLinks.map((section, index) => (
-                  <div key={index} className="flex flex-col gap-4">
-                    <h4 className="font-medium-17 font-[number:var(--medium-17-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--medium-17-font-size)] tracking-[var(--medium-17-letter-spacing)] leading-[var(--medium-17-line-height)]">
-                      {section.title}
-                    </h4>
-                    <ul className="flex flex-col gap-3">
-                      {section.links.map((link, linkIndex) => (
-                        <li key={linkIndex}>
-                          <a
-                            href={link.href}
-                            className="[font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-text-iconslight-medium-emphasis text-[15px] tracking-[0.07px] leading-[20px] hover:text-text-iconslight-high-emphasis transition-colors duration-200"
-                          >
-                            {link.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-                <div className="flex flex-col gap-4">
-                  <h4 className="font-medium-17 font-[number:var(--medium-17-font-weight)] text-text-iconslight-high-emphasis text-[length:var(--medium-17-font-size)] tracking-[var(--medium-17-letter-spacing)] leading-[var(--medium-17-line-height)]">
-                    Ressources
-                  </h4>
-                  <ul className="flex flex-col gap-3">
-                    {resources.map((resource, linkIndex) => (
-                      <li key={linkIndex}>
-                        <a
-                          href={resource.slug}
-                          className="[font-family:'SF_Pro_Text-Regular',Helvetica] font-normal text-text-iconslight-medium-emphasis text-[15px] tracking-[0.07px] leading-[20px] hover:text-text-iconslight-high-emphasis transition-colors duration-200"
-                        >
-                          {resource.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </div>
 

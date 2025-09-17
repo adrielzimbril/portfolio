@@ -241,6 +241,11 @@
         "copy": "Copier",
         "copied": "Copié"
       },
+      "base": {
+        "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
+        "title": "Your ideas into products that your users adore",
+        "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+      },
       "components": {
         "button-copy": {}
       }

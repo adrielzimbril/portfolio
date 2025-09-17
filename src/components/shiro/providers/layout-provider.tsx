@@ -2,29 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
-import { usePathname, useRouter } from "next/navigation";
+import { sleep } from "@/utils";
+import { useTranslations } from "next-intl";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const asLoader = true;
+  const t = useTranslations();
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 5000);
-  }, [isLoaded]);
-
-  // useEffect(() => {
-  //   sleep(5000).then(() => setIsLoaded(true));
-  // }, []);
+    sleep(5000).then(() => setIsLoaded(true));
+  }, []);
 
   return (
     <>
       {asLoader && !isLoaded ? (
         <GenericLoadingPage
-          title="Your ideas into products that your users adore"
+          title={t("common.shared.base.title")}
           emoji="🦄"
-          subtitle="Problem Solver & Your SaaS Product designer ❣️"
+          subtitle={t("common.shared.base.subtitle")}
         />
       ) : (
         children

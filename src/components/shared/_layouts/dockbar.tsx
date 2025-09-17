@@ -48,7 +48,7 @@ export function Dockbar({ asFade }: { asFade?: boolean }) {
         ))}
         <Separator orientation={"vertical"} className={cn("h-full")} />
         {Object.entries(siteConfig.links.contact.social)
-          .filter(([_, social]) => social.navbar)
+          .filter(([_, social]) => social.navbar && social.available)
           .map(([name, social]) => (
             <DockIcon key={name}>
               <Tooltip>
@@ -60,7 +60,7 @@ export function Dockbar({ asFade }: { asFade?: boolean }) {
                     variant="outline"
                     size="iconSmall"
                   >
-                    <social.icon variant="linear" size="18" />
+                    {social.icon && <social.icon size="18" />}
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>
