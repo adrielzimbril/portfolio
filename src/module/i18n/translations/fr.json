@@ -241,6 +241,20 @@
         "copy": "Copier",
         "copied": "Copié"
       },
+      "months": {
+        "january": "Janvier",
+        "february": "Février",
+        "march": "Mars",
+        "april": "Avril",
+        "may": "Mai",
+        "june": "Juin",
+        "july": "Juillet",
+        "august": "Août",
+        "september": "Septembre",
+        "october": "Octobre",
+        "november": "Novembre",
+        "december": "Décembre"
+      },
       "base": {
         "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
         "title": "Your ideas into products that your users adore",
@@ -248,6 +262,17 @@
       },
       "components": {
         "button-copy": {}
+      },
+      "planning-badge": {
+        "available": {
+          "title": "Disponible",
+          "description": "{limit, plural, one {# place disponible} other {# places disponibles}} pour {date}",
+          "description-secondary": "{showLimit, select, true {{limit, plural, one {# place disponible} other {# places disponibles}}} other {}}{showMission, select, true { pour Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, jusqu'au {date}} other {}}"
+        },
+        "unavailable": {
+          "title": "Non disponible",
+          "description": "De nouveau disponible pour Full-Stack Development and Web Design Mission{hasDate, select, true {, à partir du {date}} other {}}"
+        }
       }
     },
     "base": {
