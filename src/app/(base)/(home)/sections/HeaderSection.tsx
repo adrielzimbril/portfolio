@@ -12,6 +12,13 @@ export function HeaderSection() {
   const t = useTranslations();
   const locale = useLocale();
 
+  const getThisMonth = () => {
+    const date = new Date();
+    return new Intl.DateTimeFormat("en", { month: "long" })
+      .format(date)
+      .toLowerCase();
+  };
+
   return (
     <SectionBase sectionClassName="p-0 mt-20" isWide>
       <StatusBadge
@@ -25,8 +32,8 @@ export function HeaderSection() {
         <Link href={routes.contact.link}>
           <span className="flex items-center gap-2 lowercase">
             {t("common.shared.planning-badge.available.description", {
-              limit: 2,
-              date: t("common.shared.months.october"),
+              limit: 1,
+              date: t("common.shared.months." + getThisMonth()),
             })}
             <LinkOne variant="bulk" size={18} />
           </span>

@@ -124,6 +124,7 @@
 	--base-white: rgba(255, 255, 255, 1);
 
 	/* Text colors */
+  --b-base: var(--color-stone-100)
 
 	/* Design system colors - Light mode */
 	--background: hsl(0 0% 100%);
@@ -154,6 +155,9 @@
 	}
 
 	.dark {
+	/* Text colors */
+  --b-base: var(--color-zinc-900)
+
 	/* Design system colors - Dark mode */
 	--background: hsl(0 0% 13%);
 	--foreground: hsl(213 31% 91%);

@@ -75,12 +75,12 @@ function StatusBadge({
         className={cn(
           "absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping-slow",
           {
-            "bg-green-200": status === "online" || status === "available",
-            "bg-purple-200": status === "info",
-            "bg-red-200": status === "busy" || status === "error",
-            "bg-gray-200": status === "offline",
-            "bg-yellow-200": status === "away",
-            "bg-orange-200": status === "warning",
+            "bg-green-300": status === "online" || status === "available",
+            "bg-purple-300": status === "info",
+            "bg-red-300": status === "busy" || status === "error",
+            "bg-gray-300": status === "offline",
+            "bg-yellow-300": status === "away",
+            "bg-orange-300": status === "warning",
           }
         )}
       />
