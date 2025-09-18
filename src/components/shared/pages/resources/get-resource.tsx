@@ -78,7 +78,7 @@ export function GetResource({
           )} */}
 
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4">
-            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
+            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-b-white-invert-sec">
               {type === ResourceType.COURSE
                 ? t("common.page-sections.hub.base.resources-type.course.title")
                 : type === ResourceType.EBOOK

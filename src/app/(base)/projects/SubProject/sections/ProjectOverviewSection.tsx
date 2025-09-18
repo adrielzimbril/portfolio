@@ -42,7 +42,7 @@ function MetricParagraph({
     <div className="flex flex-col items-start gap-2 w-full">
       {subtitle && <h4 className="h2 tracking-wide">{subtitle}</h4>}
       {secondarySubtitle && (
-        <p className="text-xl text-zinc-600 font-bosld leading-[120%]">
+        <p className="text-xl text-b-white-invert-sec font-bosld leading-[120%]">
           {secondarySubtitle}
         </p>
       )}

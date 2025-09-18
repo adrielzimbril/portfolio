@@ -76,7 +76,7 @@ export default function HubProductValidationPage() {
         <CardContent className="p-6 md:p-8 space-y-6">
           <div>
             <h1 className="h3">Valider un produit du Hub</h1>
-            <p className="text-zinc-600">
+            <p className="text-b-white-invert-sec">
               Renseignez les informations ci-dessous pour recevoir le produit
               par email.
             </p>

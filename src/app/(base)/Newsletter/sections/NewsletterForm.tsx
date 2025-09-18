@@ -37,11 +37,11 @@ export function NewsletterForm() {
               "flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4"
             }
           >
-            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
+            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-b-white-invert-sec">
               {t("newsletter.page.badge")}
             </Badge>
             <h2 className="self-stretch">{t("newsletter.page.title")}</h2>
-            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600">
+            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-b-white-invert-sec">
               {t("newsletter.page.desc")}
             </p>
           </div>

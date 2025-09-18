@@ -112,7 +112,7 @@ export const FooterSec: React.FC = () => {
                     >
                       {t("common.shared.base.title")} 🦄
                     </Badge>
-                    <span className="relative text-base text-zinc-600 px-2">
+                    <span className="relative text-base text-b-white-invert-sec px-2">
                       {t("common.shared.base.subtitle")}
                     </span>
                   </div>
@@ -154,7 +154,7 @@ export const FooterSec: React.FC = () => {
                     <Link href={routes.newsletter.link} likeButton asFull>
                       {t("common.page-sections.newsletter.footer.button")}
                     </Link>
-                    <span className="relative text-base text-zinc-600 bg-white p-2 rounded-xl">
+                    <span className="relative text-base text-b-white-invert-sec bg-white p-2 rounded-xl">
                       {t("common.page-sections.newsletter.footer.subText")}
                     </span>
                   </div>

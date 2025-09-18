@@ -515,7 +515,7 @@ function AllFactsModal({
         className="flex flex-col gap-4 md:gap-6 p-4 sm:max-h-[min(640px,80vh)]"
       >
         <DialogHeader>
-          <DialogTitle className="text-base font-normal md:font-medium md:text-xl text-zinc-600">
+          <DialogTitle className="text-base font-normal md:font-medium md:text-xl text-b-white-invert-sec">
             {t(
               "about.page.interactive-fun-facts-section.sections.facts-modal.title"
             )}

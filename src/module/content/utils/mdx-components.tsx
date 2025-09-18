@@ -160,7 +160,7 @@ export const mdxComponents = {
   ),
   td: ({ children, ...rest }) => (
     <td
-      className="px-4 py-2 text-zinc-600 align-top h-min border-b border-l border-zinc-200"
+      className="px-4 py-2 text-b-white-invert-sec align-top h-min border-b border-l border-zinc-200"
       {...rest}
     >
       {children}

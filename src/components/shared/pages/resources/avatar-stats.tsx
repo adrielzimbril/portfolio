@@ -86,7 +86,7 @@ function UserCount({
   resourceType: ResourceType;
 }) {
   return (
-    <span className="relative flex items-center gap-1 font-bold text-sm text-zinc-600">
+    <span className="relative flex items-center gap-1 font-bold text-sm text-b-white-invert-sec">
       {count > 2 ? `+${count}` : count}{" "}
       {resourceType === ResourceType.COURSE
         ? "Étudiants 🧑‍🎓"
