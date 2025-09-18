@@ -183,7 +183,7 @@
   --b-white-unchanged: var(--color-zinc-800);
   --b-white-invert: var(--color-white);
   --b-white-invert-sec: var(--color-zinc-200);
-  --b-white-invert-thr: var(--color-zinc-500);
+  --b-white-invert-thr: var(--color-zinc-400);
   --b-accent: var(--color-zinc-500);
 
 
@@ -201,7 +201,7 @@
 	--card: transparent;
 	--card-foreground: hsl(213 31% 91%);
 	--primary: var(--color-zinc-950);
-	--primary-foreground: var(--color-zinc-200);
+	--primary-foreground: var(--color-white);
 	--secondary: hsl(222.2 47.4% 11.2%);
 	--secondary-foreground: hsl(210 40% 98%);
 	--destructive: hsl(0 63% 31%);

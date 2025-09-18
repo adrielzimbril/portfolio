@@ -15,7 +15,7 @@ function PreviewContent({
     <div className="flex flex-col items-start gap-4 md:gap-6 w-full">
       <h4 className="text-3xl leading-[120%]">{title}</h4>
 
-      <p className="text-zinc-500 leading-[120%]">{description}</p>
+      <p className="text-b-white-invert-thr leading-[120%]">{description}</p>
     </div>
   );
 }

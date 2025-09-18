@@ -15,7 +15,7 @@ function PointCard({
   return (
     <div className="flex flex-col gap-1">
       <h4 className="relative">{title}</h4>
-      <p className="text-zinc-500">{description}</p>
+      <p className="text-b-white-invert-thr">{description}</p>
     </div>
   );
 }

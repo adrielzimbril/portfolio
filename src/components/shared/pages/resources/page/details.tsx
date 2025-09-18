@@ -33,7 +33,7 @@ function PreviewContent({
       <>
         <h4 className="h2 tracking-wide">{number}</h4>
 
-        <p className="text-zinc-500 leading-[120%]">{description}</p>
+        <p className="text-b-white-invert-thr leading-[120%]">{description}</p>
       </>
     </div>
   );

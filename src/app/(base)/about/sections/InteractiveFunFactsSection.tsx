@@ -389,7 +389,7 @@ function QuestionCard({
                 {question.title}
               </h3>
 
-              <p className="text-zinc-500 text-xl leading-[140%]">
+              <p className="text-b-white-invert-thr text-xl leading-[140%]">
                 {question.description}
               </p>
               <p className="text-zinc-400 text-lg leading-[120%]">

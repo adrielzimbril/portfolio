@@ -399,7 +399,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
               <div className="relative shrink-0 text-2x">
                 <p className="leading-[120%]">{stat.number}</p>
               </div>
-              <div className="relative shrink-0 text-base text-zinc-500">
+              <div className="relative shrink-0 text-base text-b-white-invert-thr">
                 <p className="leading-[120%]">{stat.label}</p>
               </div>
             </motion.div>

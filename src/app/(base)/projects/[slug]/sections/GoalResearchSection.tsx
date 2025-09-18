@@ -25,7 +25,7 @@ function ContentSection({
         {description}
       </p>
       {subDescription && (
-        <FormattedText className="relative text-base text-zinc-500">
+        <FormattedText className="relative text-base text-b-white-invert-thr">
           {subDescription}
         </FormattedText>
       )}

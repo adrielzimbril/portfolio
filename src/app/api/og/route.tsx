@@ -30,7 +30,9 @@ export async function GET(request: NextRequest) {
                 <div tw="flex flex-col items-start gap-2 w-full max-w-[90%] mx-auto">
                   <h1 tw="text-4xl sm:text-5xl tracking-wide">{title}</h1>
 
-                  <p tw="text-zinc-500 leading-[120%]">{description}</p>
+                  <p tw="text-b-white-invert-thr leading-[120%]">
+                    {description}
+                  </p>
                 </div>
               </div>
               <h2 tw="flex flex-col text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 text-left">

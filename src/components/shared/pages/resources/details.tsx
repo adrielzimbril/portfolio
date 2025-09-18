@@ -100,7 +100,7 @@ function Description({
         {description}
       </p>
 
-      <p className="w-full relative text-base text-zinc-500 leading-6 whitespace-pre-line">
+      <p className="w-full relative text-base text-b-white-invert-thr leading-6 whitespace-pre-line">
         {features.slice(0, 4).map((feature) => (
           <span key={feature} className="ml-2 md:ml-4 block">
             - {feature}

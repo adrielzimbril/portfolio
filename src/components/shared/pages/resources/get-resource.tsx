@@ -90,7 +90,7 @@ export function GetResource({
                     )}
             </Badge>
             <h2 className="self-stretch">{title}</h2>
-            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-500">
+            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-b-white-invert-thr">
               {excerpt}
             </p>
           </div>

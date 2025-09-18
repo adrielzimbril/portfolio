@@ -147,7 +147,7 @@ export const FooterSec: React.FC = () => {
                   <h4 className="text-3xl">
                     {t("common.page-sections.newsletter.footer.title")}
                   </h4>
-                  <p className="text-base text-zinc-500">
+                  <p className="text-base text-b-white-invert-thr">
                     {t("common.page-sections.newsletter.footer.description")}
                   </p>
                   <div className="flex flex-col gap-2">

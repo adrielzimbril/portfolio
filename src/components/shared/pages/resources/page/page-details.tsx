@@ -28,7 +28,7 @@ export function PageDetails({
         <div className="flex flex-col w-full max-w-[90%] mx-auto items-start justify-center gap-4 relative">
           <h2 className="relative self-stretch h3 font-normal">Présentation</h2>
 
-          <div className="flex flex-col gap-8 md:gap-12 text-zinc-500 font-normal text-base">
+          <div className="flex flex-col gap-8 md:gap-12 text-b-white-invert-thr font-normal text-base">
             {/* Top description */}
             {descriptionTop && (
               <FormattedText useMarkdown={useMarkdown}>

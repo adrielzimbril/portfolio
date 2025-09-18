@@ -12,7 +12,7 @@ function ContentSection() {
         Après avoir expliqué le problème, il serait bon de définir
         l&#39;objectif et les indicateurs de réussite.
       </p>
-      <p className="relative text-base text-zinc-500">
+      <p className="relative text-base text-b-white-invert-thr">
         <span className="font-medium tracking-[0]">
           Il peut s&#39;agir d&#39;un simple chiffre. Par exemple, en résolvant
           ce problème, nous sommes en mesure d&#39;augmenter le nombre

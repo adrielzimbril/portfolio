@@ -79,7 +79,7 @@ function PreviewContent({
           {title}
         </h4>
 
-        <p className="font-medium text-zinc-500 text-2xl leading-[120%]">
+        <p className="font-medium text-b-white-invert-thr text-2xl leading-[120%]">
           {description}
         </p>
       </>
