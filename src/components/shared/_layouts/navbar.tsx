@@ -248,7 +248,7 @@ export function Navbar() {
                             "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-stone-200 hover:squircle-stone-100",
                             activeTab === item.key
                               ? "squircle-stone-200"
-                              : "squircle-white"
+                              : "squircle-b-white"
                           )}
                           variants={drawerMenuVariants}
                         >

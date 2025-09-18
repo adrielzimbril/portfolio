@@ -129,7 +129,7 @@ function FloatingCard({
   return (
     <motion.div
       className={cn(
-        "absolute bg-zinc-100 backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
+        "absolute bg-b-base backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
         position === "top-left" && "top-32 left-2 md:top-32 md:left-32",
         position === "top-right" && "top-32 right-2 md:top-32 md:right-32",
         position === "bottom-left" &&

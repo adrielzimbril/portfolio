@@ -67,11 +67,11 @@ export function ProjectOverviewSection() {
             <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
               <div
                 className={cn(
-                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-white overflow-hidden"
+                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-b-white overflow-hidden"
                 )}
               >
                 <Badge>{metric.category}</Badge>
-                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-b-base rounded-full overflow-hidden">
                   <Image
                     width={100}
                     height={100}
@@ -129,7 +129,7 @@ export function ProjectOverviewSection() {
             >
               <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
                 <Badge>{metric.category}</Badge>
-                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-b-base rounded-full overflow-hidden">
                   <Image
                     width={100}
                     height={100}

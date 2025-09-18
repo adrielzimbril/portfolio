@@ -99,16 +99,16 @@ export const FooterSec: React.FC = () => {
           sectionContentClassName="w-full"
           cardClassName="w-full rounded-4xl bg-stone-100 dark:bg-zinc-900"
           cardContentClassName="w-full p-6 md:p-8"
-          className="squircle squircle-white dark:squircle-zinc-800 squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
+          className="squircle squircle-b-white dark:squircle-zinc-800 squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
         >
           <div className="flex relative flex-col w-full items-center justify-center p-4 md:p-16 gap-4 md:gap-8 mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:flex-row justify-between items-start gap-8">
               <div className="flex flex-col gap-4 md:gap-6 w-full rounded-2xl">
-                <div className="flex flex-col gap-6 rounded-3xl bg-zinc-100s bg-zinc-100 py-4 px-4">
+                <div className="flex flex-col gap-6 rounded-3xl bg-b-bases bg-b-base py-4 px-4">
                   <div className="flex flex-col gap-2">
                     <Badge
                       variant="colored"
-                      className="relative text-base squircle-white md:text-xl max-w-3xl leading-[115%]"
+                      className="relative text-base squircle-b-white md:text-xl max-w-3xl leading-[115%]"
                     >
                       {t("common.shared.base.title")} 🦄
                     </Badge>
@@ -142,7 +142,7 @@ export const FooterSec: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-self-end gap-6 w-full md:max-w-md rounded-2xl bg-zinc-100s bg-zinc-100 p-4">
+              <div className="flex flex-col justify-self-end gap-6 w-full md:max-w-md rounded-2xl bg-b-bases bg-b-base p-4">
                 <div className="flex flex-col gap-4 max-w-sms">
                   <h4 className="text-3xl">
                     {t("common.page-sections.newsletter.footer.title")}
@@ -162,7 +162,7 @@ export const FooterSec: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-full place-self-center rounded-3xl bg-zinc-100 dark:bg-zinc-900 py-4 md:py-6">
+            <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
               <div className="w-full flex flex-col md:flex-row justify-center place-content-center items-center gap-2">
                 {resources.map((resource, index) => (
                   <>
@@ -187,7 +187,7 @@ export const FooterSec: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-zinc-100 dark:bg-zinc-900">
+            <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-b-base dark:bg-zinc-900">
               <div className="flex items-center md:items-start gap-2 text-zinc-700 dark:text-zinc-200">
                 <p className="relative font-medium text-base text-center md:text-left">
                   <span className="relative">

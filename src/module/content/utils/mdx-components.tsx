@@ -104,9 +104,9 @@ export const mdxComponents = {
   blockquote: ({ children, ...rest }) => (
     <blockquote
       {...rest}
-      className="mb-6 squircle-zinc-100 p-2 md:p-3 squircle squircle-2xl md:squircle-4xl"
+      className="mb-6 squircle-b-base p-2 md:p-3 squircle squircle-2xl md:squircle-4xl"
     >
-      <div className="flex flex-col not-italic squircle-white p-2 md:p-4 squircle squircle-xl md:squircle-3xl [&>p]:mb-2 [&>p:last-child]:mb-0">
+      <div className="flex flex-col not-italic squircle-b-white p-2 md:p-4 squircle squircle-xl md:squircle-3xl [&>p]:mb-2 [&>p:last-child]:mb-0">
         {children}
       </div>
     </blockquote>
@@ -137,10 +137,7 @@ export const mdxComponents = {
     </div>
   ),
   thead: ({ children, ...rest }) => (
-    <thead
-      className="bg-zinc-100 border border-zinc-300 rounded-t-2xl"
-      {...rest}
-    >
+    <thead className="bg-b-base border border-zinc-300 rounded-t-2xl" {...rest}>
       {children}
     </thead>
   ),

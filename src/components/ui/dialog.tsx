@@ -75,9 +75,9 @@ function DialogContent({
     default:
       "squircle squircle-background squircle-5xl squircle-smooth-xl border-0",
     modern:
-      "squircle squircle-white squircle-5xl squircle-smooth-xl squircle-border squircle-border-white/20",
+      "squircle squircle-b-white squircle-5xl squircle-smooth-xl squircle-border squircle-border-white/20",
     glass:
-      "squircle squircle-white/80 squircle-5xl squircle-smooth-xl backdrop-blur-xl squircle-border squircle-border-white/20",
+      "squircle squircle-b-white/80 squircle-5xl squircle-smooth-xl backdrop-blur-xl squircle-border squircle-border-white/20",
   };
 
   return (
@@ -224,7 +224,7 @@ function DialogBadge({
     success: "squircle-green-100 text-green-800",
     warning: "squircle-orange-100 text-orange-800",
     info: "squircle-blue-100 text-blue-800",
-    colored: "squircle-white squircle-border-2 squircle-border-stone-200",
+    colored: "squircle-b-white squircle-border-2 squircle-border-stone-200",
   };
 
   return (

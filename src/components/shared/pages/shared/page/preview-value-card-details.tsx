@@ -22,7 +22,7 @@ function PreviewContent({
 
 function PreviewIcon({ icon }: { icon: string }) {
   return (
-    <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+    <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-b-base rounded-full overflow-hidden">
       <Image
         width={100}
         height={100}
@@ -43,7 +43,7 @@ export function PreviewValueCardDetails({
   return (
     <div
       className={cn(
-        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-14 squircle squircle-smooth-md squircle-2xl md:squircle-4xl squircle-white overflow-hidden"
+        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-14 squircle squircle-smooth-md squircle-2xl md:squircle-4xl squircle-b-white overflow-hidden"
       )}
     >
       <div className="flex flex-row items-center justify-between w-full mx-auto">

@@ -47,7 +47,7 @@ export function GoalResearchSection({
         sectionClassName="md:max-w-[80%] mx-auto"
         cardContentClassName="p-4 md:p-6"
         className={cn(
-          "size-full max-w md:gap-16 px-6 py-12 md:px-14 md:py-20 squircle squircle-smooth-xl squircle-6xl squircle-white overflow-hidden"
+          "size-full max-w md:gap-16 px-6 py-12 md:px-14 md:py-20 squircle squircle-smooth-xl squircle-6xl squircle-b-white overflow-hidden"
         )}
       >
         <EmojiPlaceholder

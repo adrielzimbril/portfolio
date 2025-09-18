@@ -25,7 +25,7 @@ export function HeaderSection() {
         mode="inline"
         status="available"
         primaryText={t("common.shared.planning-badge.available.title")}
-        className="squircle-white"
+        className="squircle-b-white"
         variant="colored"
         size="md"
       >
@@ -43,7 +43,7 @@ export function HeaderSection() {
         mode="inline"
         status="available"
         primaryText={t("common.shared.planning-badge.available.title")}
-        className="squircle-white"
+        className="squircle-b-white"
         variant="colored"
         size="md"
       >
@@ -68,7 +68,7 @@ export function HeaderSection() {
         mode="inline"
         status="offline"
         primaryText={t("common.shared.planning-badge.unavailable.title")}
-        className="squircle-white"
+        className="squircle-b-white"
         variant="colored"
         size="md"
       >

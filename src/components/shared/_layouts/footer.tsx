@@ -20,7 +20,7 @@ import { useTranslations } from "use-intl";
 
 export function Footer() {
   return (
-    <footer className="relative w-full py-6 bg-zinc-100 rounded-2xl mb-4">
+    <footer className="relative w-full py-6 bg-b-base rounded-2xl mb-4">
       <LocaleSwitch />
       <div className="text-center mt-8">
         <p className="w-full relative font-medium text-zinc-700">
@@ -56,7 +56,7 @@ export function LocaleSwitch() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="flex w-fit items-center gap-2 squircle-white min-w-10"
+          className="flex w-fit items-center gap-2 squircle-b-white min-w-10"
           size="xs"
           asIcon
           asPointer

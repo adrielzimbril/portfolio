@@ -307,10 +307,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                           "text-base"
                         )}
                         triggerClassName={cn(
-                          "bg-zinc-50 hover:bg-zinc-100 h-auto rounded-s-xl peer z-10",
+                          "bg-zinc-50 hover:bg-b-base h-auto rounded-s-xl peer z-10",
                           "h-auto border-2"
                         )}
-                        contentClassName="data-[selected=true]:bg-zinc-100 data-[selected=true]:text-inherit"
+                        contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"
                         {...field}
                       />
                     </FormControl>
@@ -331,7 +331,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader color="bg-zinc-100" />
+                      <Loader color="bg-b-base" />
                       <span>{t("common.button.sending")}...</span>
                     </>
                   ) : (

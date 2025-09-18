@@ -100,7 +100,7 @@ export function ProductAvatarsStats({
             ]
       }
       resourceType={type}
-      colorName={cn(colorName ?? "squircle-zinc-100")}
+      colorName={cn(colorName ?? "squircle-b-base")}
     />
   );
 }

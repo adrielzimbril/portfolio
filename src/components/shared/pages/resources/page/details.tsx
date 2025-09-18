@@ -9,7 +9,7 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-8 squircle squircle-smooth-xl squircle-6xl squircle-white overflow-hidden"
+        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-8 squircle squircle-smooth-xl squircle-6xl squircle-b-white overflow-hidden"
       )}
     >
       <PreviewIcon icon={details.icon} />
@@ -41,7 +41,7 @@ function PreviewContent({
 
 function PreviewIcon({ icon }: { icon: string }) {
   return (
-    <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+    <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-b-base rounded-full overflow-hidden">
       <Image
         width={100}
         height={100}

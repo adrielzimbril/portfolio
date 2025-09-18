@@ -30,7 +30,7 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-white overflow-hidden",
+        "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-b-white overflow-hidden",
         isWide && "md:min-h-80",
         cover ? "p-2 h-48 md:h-80" : "p-4"
       )}
@@ -89,7 +89,7 @@ function PreviewContent({
 
 export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
   return (
-    <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-zinc-100 [&_svg,_svg_*]:fill-stone-800 [&_svg,_svg_*]:color-stone-800 rounded-full pointer-events-none overflow-hidden">
+    <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-b-base [&_svg,_svg_*]:fill-stone-800 [&_svg,_svg_*]:color-stone-800 rounded-full pointer-events-none overflow-hidden">
       {resourceType === ResourceType.COURSE ? (
         <BookOne size={24} variant="bulk" />
       ) : resourceType === ResourceType.EBOOK ? (

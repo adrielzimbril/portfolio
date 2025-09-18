@@ -70,9 +70,9 @@ export default function HubProductValidationPage() {
       sectionContentClassName="w-full"
       cardClassName="w-full"
       cardContentClassName="w-full p-6 md:p-8"
-      className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      className="squircle squircle-b-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
     >
-      <Card className="w-full squircle squircle-white squircle-smooth-xl">
+      <Card className="w-full squircle squircle-b-white squircle-smooth-xl">
         <CardContent className="p-6 md:p-8 space-y-6">
           <div>
             <h1 className="h3">Valider un produit du Hub</h1>

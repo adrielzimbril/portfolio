@@ -44,7 +44,7 @@ export function ProjectDetailsSection({
 
         <Card className="squircle size-full md:max-w-[30%] squircle-stone-100 squircle-6xl squircle-smooth-md border-0 overflow-hidden mx-auto">
           <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
-            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-white overflow-hidden">
+            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-b-white overflow-hidden">
               <div className="flex w-full flex-col gap-2">
                 <span className="font-normal text-zinc-700">
                   {t("common.shared.text.role")}

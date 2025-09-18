@@ -12,7 +12,14 @@
   /* Base colors */
   --color-base-white: var(--base-white);
 
+	/* Custom colors */
+	--color-b-base: var(--b-base);
+  --color-b-base-second: var(--b-base-second);
+  --color-b-white: var(--b-white);
+  --color-b-accent: var(--b-accent);
+
   /* Text colors */
+
 
   /* Design system colors */
   --color-background: var(--background);
@@ -123,8 +130,11 @@
 	/* Base colors */
 	--base-white: rgba(255, 255, 255, 1);
 
-	/* Text colors */
-  --b-base: var(--color-stone-100)
+	/* Custom colors */
+  --b-base: var(--color-stone-100);
+  --b-base-second: var(--color-neutral-200);
+  --b-white: var(--color-white);
+  --b-accent: var(--color-zinc-200);
 
 	/* Design system colors - Light mode */
 	--background: hsl(0 0% 100%);
@@ -155,11 +165,14 @@
 	}
 
 	.dark {
-	/* Text colors */
-  --b-base: var(--color-zinc-900)
+	/* Custom colors */
+  --b-base: var(--color-zinc-900);
+  --b-base-second: var(--color-zinc-800);
+  --b-white: var(--color-zinc-800);
+  --b-accent: var(--color-zinc-700);
 
 	/* Design system colors - Dark mode */
-	--background: hsl(0 0% 13%);
+	--background: var(--color-stone-950);
 	--foreground: hsl(213 31% 91%);
 	--muted: hsl(223 47% 11%);
 	--muted-foreground: hsl(215.4 16.3% 56.9%);

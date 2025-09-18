@@ -11,7 +11,7 @@ type LoaderProps = {
 
 export function Loader({
   variant = "dots",
-  color = "bg-zinc-100",
+  color = "bg-b-base",
   className,
 }: LoaderProps) {
   switch (variant) {

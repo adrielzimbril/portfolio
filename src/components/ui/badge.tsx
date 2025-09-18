@@ -7,9 +7,8 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-inherit squircle-zinc-100 text-gray-900",
-        colored: "border-transparent bg-inherit text-gray-900",
+        default: "border-transparent bg-inherit squircle-b-base",
+        colored: "border-transparent bg-inherit",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
