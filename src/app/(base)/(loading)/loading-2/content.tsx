@@ -105,12 +105,12 @@ function LoadingProgressBar({ isPage }: { isPage: boolean }) {
         {isPage ? (
           <>
             <div
-              className="bg-stone-800 size-full rounded-full transition-all duration-300 ease-in-out"
+              className="bg-b-white-invert size-full rounded-full transition-all duration-300 ease-in-out"
               style={{ width: `${progress}%` }}
             />
           </>
         ) : (
-          <div className="bg-stone-800 size-full rounded-full animate-loading-progress" />
+          <div className="bg-b-white-invert size-full rounded-full animate-loading-progress" />
         )}
       </div>
     </>
@@ -273,7 +273,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         >
           {isPage ? (
             <motion.div
-              className="size-24 border-4 border-stone-100 border-t-stone-800 rounded-full"
+              className="size-24 border-4 border-stone-100 border-t-b-white-invert rounded-full"
               animate={{ rotate: 360 }}
               transition={{
                 duration: 1,

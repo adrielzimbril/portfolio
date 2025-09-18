@@ -261,7 +261,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         >
           {isPage ? (
             <motion.div
-              className="size-24 border-4 border-stone-100 border-t-stone-800 rounded-full"
+              className="size-24 border-4 border-stone-100 border-t-b-white-invert rounded-full"
               animate={{ rotate: 360 }}
               transition={{
                 duration: 1,
