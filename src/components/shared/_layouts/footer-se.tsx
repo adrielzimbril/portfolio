@@ -188,7 +188,7 @@ export const FooterSec: React.FC = () => {
             </div>
 
             <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-b-base dark:bg-zinc-900">
-              <div className="flex items-center md:items-start gap-2 text-b-white-foreground: dark:text-zinc-200">
+              <div className="flex items-center md:items-start gap-2 text-b-white-foreground dark:text-zinc-200">
                 <p className="relative font-medium text-base text-center md:text-left">
                   <span className="relative">
                     {t("common.shared.text.copyright", {

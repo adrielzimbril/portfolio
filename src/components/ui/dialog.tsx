@@ -224,7 +224,8 @@ function DialogBadge({
     success: "squircle-green-100 text-green-800",
     warning: "squircle-orange-100 text-orange-800",
     info: "squircle-blue-100 text-blue-800",
-    colored: "squircle-b-white squircle-border-2 squircle-border-stone-200",
+    colored:
+      "squircle-b-white squircle-border-2 squircle-border-stone-200 text-b-white-unchanged",
   };
 
   return (

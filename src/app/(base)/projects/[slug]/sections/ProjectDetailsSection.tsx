@@ -46,7 +46,7 @@ export function ProjectDetailsSection({
           <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
             <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-b-white overflow-hidden">
               <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-b-white-foreground:">
+                <span className="font-normal text-b-white-foreground">
                   {t("common.shared.text.role")}
                 </span>
 
@@ -71,7 +71,7 @@ export function ProjectDetailsSection({
                 duration.length >= 1 &&
                 duration.every((d) => typeof d === "string") && (
                   <div className="flex w-full flex-col gap-2">
-                    <span className="font-normal text-b-white-foreground:">
+                    <span className="font-normal text-b-white-foreground">
                       {t("common.shared.text.duration")}
                     </span>
 
@@ -87,7 +87,7 @@ export function ProjectDetailsSection({
                 )}
 
               <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-b-white-foreground:">
+                <span className="font-normal text-b-white-foreground">
                   {t("common.shared.text.results")}
                 </span>
 

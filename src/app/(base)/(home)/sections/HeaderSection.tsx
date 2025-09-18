@@ -25,7 +25,7 @@ export function HeaderSection() {
         mode="inline"
         status="available"
         primaryText={t("common.shared.planning-badge.available.title")}
-        className="squircle-b-white"
+        className="squircle-b-white text-b-white-invert"
         variant="colored"
         size="md"
       >

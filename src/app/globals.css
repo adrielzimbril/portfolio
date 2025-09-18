@@ -17,6 +17,7 @@
   --color-b-base-second: var(--b-base-second);
   --color-b-white: var(--b-white);
   --color-b-white-foreground: var(--b-white-foreground);
+  --color-b-white-unchanged: var(--b-white-unchanged);
   --color-b-accent: var(--b-accent);
 
   /* Text colors */
@@ -133,9 +134,11 @@
 
 	/* Custom colors */
   --b-base: var(--color-stone-100);
-  --b-base-second: var(--color-neutral-200);
+  --b-base-second: var(--color-neutral-100);
   --b-white: var(--color-white);
   --b-white-foreground: var(--color-zinc-700);
+  --b-white-unchanged: var(--color-zinc-800);
+  --b-white-invert: var(--color-zinc-800);
   --b-accent: var(--color-zinc-200);
 
 	/* Design system colors - Light mode */
@@ -171,8 +174,10 @@
   --b-base: var(--color-zinc-900);
   --b-base-second: var(--color-neutral-900);
   --b-white: var(--color-zinc-800);
-  --b-white-foreground: var(--color-zinc-400);
-  --b-accent: var(--color-zinc-700);
+  --b-white-foreground: var(--color-zinc-300);
+  --b-white-unchanged: var(--color-zinc-800);
+  --b-white-invert: var(--color-white);
+  --b-accent: var(--color-zinc-500);
 
 	/* Design system colors - Dark mode */
 	--background: var(--color-stone-950);
@@ -187,8 +192,8 @@
 	--input: hsl(216 34% 17%);
 	--card: transparent;
 	--card-foreground: hsl(213 31% 91%);
-	--primary: hsl(210 40% 98%);
-	--primary-foreground: hsl(0 0% 16%);
+	--primary: var(--color-zinc-950);
+	--primary-foreground: var(--color-zinc-200);
 	--secondary: hsl(222.2 47.4% 11.2%);
 	--secondary-foreground: hsl(210 40% 98%);
 	--destructive: hsl(0 63% 31%);

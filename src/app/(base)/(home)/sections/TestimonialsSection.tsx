@@ -125,7 +125,7 @@ export function TestimonialsSection() {
                     </>
                   )}
                 </Badge>
-                <blockquote className="text-xl md:text-2xl tracking-tighter font-medium whitespace-pre-line text-b-white-foreground: leading-[150%] p-0">
+                <blockquote className="text-xl md:text-2xl tracking-tighter font-medium whitespace-pre-line text-b-white-foreground leading-[150%] p-0">
                   "{currentTestimonial.testimonial}"
                 </blockquote>
 
