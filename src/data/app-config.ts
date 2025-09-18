@@ -1,5 +1,3 @@
-import { getBaseUrl } from "@/utils";
-
 export type Config = {
   i18n: {
     enabled: boolean;
@@ -32,8 +30,6 @@ export type Config = {
   };
 };
 
-const BASE_URL = getBaseUrl();
-
 export const appConfig = {
   // Internationalization
   i18n: {
@@ -47,21 +43,21 @@ export const appConfig = {
         label: "English",
         currency: "USD",
         icon: "USFlag",
-        url: BASE_URL,
+        url: "https://www.adrielzimbril.com",
       },
       fr: {
         code: "fr_FR",
         label: "Français",
         currency: "EUR",
         icon: "FRFlag",
-        url: BASE_URL,
+        url: "https://www.adrielzimbril.com",
       },
       cn: {
         code: "cn_CN",
         label: "中文",
         currency: "RMB",
         icon: "CNFlag",
-        url: BASE_URL,
+        url: "https://www.adrielzimbril.com",
       },
     },
     // The default locale is used if no locale is provided

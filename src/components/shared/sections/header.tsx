@@ -29,7 +29,7 @@ export function SectionHeader({
         !layoutStart && " mx-auto items-center justify-center text-center"
       )}
     >
-      {badge && <Badge>{badge}</Badge>}
+      {badge && <Badge size="md">{badge}</Badge>}
 
       <h2
         className={cn(

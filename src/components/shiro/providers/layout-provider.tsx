@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
-import { getActivePathInArray, sleep } from "@/utils";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { routes } from "@/data/routes";
 import logger from "@/utils/logger";
+import { getActivePathInArray, sleep } from "@/utils";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -23,7 +23,6 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     withSlash: true,
   });
 
-  // Find the current route directly from filtered menu routes
   const currentRoute = menuRoutesFiltered.find(
     (item) => item.link === activePath
   );
@@ -34,15 +33,24 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     logger.info("currentRoute", currentRoute);
     logger.info("currentKey", currentKey);
     logger.info("pathname", route);
-  }, []);
+  }, [route, currentRoute, currentKey]);
+
+  const pageLoader = (key: string) => ({
+    emoji: t(`common.shared.page-loader.${key}.emoji`),
+    title: t(`common.shared.page-loader.${key}.title`),
+    subtitle: t(`common.shared.page-loader.${key}.subtitle`),
+  });
+
+  const loader = pageLoader(currentKey);
 
   return (
     <>
       {asLoader && !isLoaded ? (
         <GenericLoadingPage
-          title={t("common.shared.base.title")}
-          emoji="🦄"
-          subtitle={t("common.shared.base.subtitle")}
+          title={loader.title}
+          emoji={loader.emoji}
+          subtitle={loader.subtitle}
+          isPage={currentRoute?.key === routes.home.key}
         />
       ) : (
         children

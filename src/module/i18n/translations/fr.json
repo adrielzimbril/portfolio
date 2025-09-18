@@ -260,6 +260,43 @@
         "title": "Your ideas into products that your users adore",
         "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
       },
+      "page-loader": {
+        "home": {
+          "emoji": "🦄",
+          "title": "Your ideas into products that your users adore",
+          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        },
+        "about": {
+          "emoji": "👨‍💻",
+          "title": "Your ideas into products that your users adore",
+          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        },
+        "thoughts": {
+          "emoji": "📝",
+          "title": "Your ideas into products that your users adore",
+          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        },
+        "hub": {
+          "emoji": "🛠️",
+          "title": "Your ideas into products that your users adore",
+          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        },
+        "projects": {
+          "emoji": "🚀",
+          "title": "Your ideas into products that your users adore",
+          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        },
+        "contact": {
+          "emoji": "📞",
+          "title": "Your ideas into products that your users adore",
+          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        },
+        "newsletter": {
+          "emoji": "💌",
+          "title": "Your ideas into products that your users adore",
+          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        }
+      },
       "components": {
         "button-copy": {}
       },
