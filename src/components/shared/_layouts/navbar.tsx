@@ -254,10 +254,10 @@ export function Navbar() {
                         >
                           <Link
                             href={item.link}
-                            className={`underline-offset-4 hover:text-primary/80 transition-colors ${
+                            className={`underline-offset-4 hover:text-b-white-invert/80 transition-colors ${
                               activeTab === item.key
-                                ? "text-primary font-medium"
-                                : "text-primary/60"
+                                ? "text-b-white-invert font-medium"
+                                : "text-b-white-invert/60"
                             }`}
                             onClick={async () => {
                               setActiveTab(item.key);

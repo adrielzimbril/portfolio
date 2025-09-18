@@ -56,8 +56,10 @@ export function NavMenu({
               )}
               <span
                 className={cn(
-                  "relative block text-sm font-medium transition-colors duration-200 hover:text-primary tracking-tight",
-                  activeTab === item.key ? "text-primary" : "text-primary/60"
+                  "relative block text-sm font-medium transition-colors duration-200 hover:text-b-white-invert tracking-tight",
+                  activeTab === item.key
+                    ? "text-b-white-invert"
+                    : "text-b-white-invert/60"
                 )}
               >
                 {t("common.menu." + item.key)}

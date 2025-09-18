@@ -141,10 +141,10 @@ export function TestimonialsSection() {
                       />
                     </div>
                     <div className="text-start">
-                      <cite className="text-lg font-medium text-primary not-italic">
+                      <cite className="text-lg font-medium text-b-white-invert not-italic">
                         {currentTestimonial.name}
                       </cite>
-                      <p className="text-sm text-primary">
+                      <p className="text-sm text-b-white-invert">
                         {currentTestimonial.position}
                       </p>
                     </div>
@@ -163,7 +163,7 @@ export function TestimonialsSection() {
                 className={cn(
                   "rounded-full transition-all duration-800 ease",
                   index === currentIndex
-                    ? "bg-primary w-6 h-2"
+                    ? "bg-b-white-invert-sec w-6 h-2"
                     : "bg-b-base w-2 h-2"
                 )}
                 onClick={() => setCurrentIndex(index)}

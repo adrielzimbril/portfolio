@@ -46,8 +46,10 @@ export function Header() {
               )}
               <span
                 className={cn(
-                  "relative block text-sm font-medium transition-colors duration-200 hover:text-primary tracking-tight",
-                  activeTab === option.name ? "text-primary" : "text-primary/60"
+                  "relative block text-sm font-medium transition-colors duration-200 hover:text-b-white-invert tracking-tight",
+                  activeTab === option.name
+                    ? "text-b-white-invert"
+                    : "text-b-white-invert/60"
                 )}
               >
                 {option.name}
