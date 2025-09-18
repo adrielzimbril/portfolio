@@ -301,7 +301,7 @@ function TooltipOverlay() {
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               exit={{ opacity: 0, scale: 0, ...position.initial }}
               transition={transition}
-              className="relative rounded-lg bg-b-white-invert-sec fill-primary px-3 py-1.5 text-sm text-b-white-invert-foreground shadow-md w-fit text-balance"
+              className="relative rounded-lg bg-b-white-invert-sec fill-primary px-3 py-1.5 text-sm text-b-black-unchanged shadow-md w-fit text-balance"
             >
               {currentTooltip.content}
 

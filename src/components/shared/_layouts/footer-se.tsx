@@ -154,7 +154,7 @@ export const FooterSec: React.FC = () => {
                     <Link href={routes.newsletter.link} likeButton asFull>
                       {t("common.page-sections.newsletter.footer.button")}
                     </Link>
-                    <span className="relative text-base text-b-white-invert-sec bg-white p-2 rounded-xl">
+                    <span className="relative text-base text-b-white-invert-sec bg-b-white p-2 rounded-xl">
                       {t("common.page-sections.newsletter.footer.subText")}
                     </span>
                   </div>
@@ -169,7 +169,7 @@ export const FooterSec: React.FC = () => {
                     <Link
                       key={index}
                       href={resource.slug}
-                      className="text-base text-center md:text-left bg-white dark:bg-neutral-800 rounded-xl py-2 px-4"
+                      className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
                     >
                       {resource.title}
                     </Link>

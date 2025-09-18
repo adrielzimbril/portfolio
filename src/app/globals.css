@@ -18,9 +18,11 @@
   --color-b-white: var(--b-white);
   --color-b-white-foreground: var(--b-white-foreground);
   --color-b-white-unchanged: var(--b-white-unchanged);
+  --color-b-black-unchanged: var(--b-black-unchanged);
   --color-b-white-invert: var(--b-white-invert);
   --color-b-white-invert-sec: var(--b-white-invert-sec);
   --color-b-white-invert-thr: var(--b-white-invert-thr);
+  --color-b-white-invert-fr: var(--b-white-invert-fr);
   --color-b-accent: var(--b-accent);
 
   /* Text colors */
@@ -141,9 +143,11 @@
   --b-white: var(--color-white);
   --b-white-foreground: var(--color-zinc-700);
   --b-white-unchanged: var(--color-zinc-800);
+  --b-black-unchanged: var(--color-zinc-100);
   --b-white-invert: var(--color-zinc-800);
   --b-white-invert-sec: var(--color-zinc-600);
   --b-white-invert-thr: var(--color-zinc-500);
+  --b-white-invert-fr: var(--color-zinc-200);
   --b-accent: var(--color-zinc-200);
 
 	/* Design system colors - Light mode */
@@ -181,6 +185,7 @@
   --b-white: var(--color-zinc-800);
   --b-white-foreground: var(--color-zinc-300);
   --b-white-unchanged: var(--color-zinc-800);
+  --b-black-unchanged: var(--color-zinc-100);
   --b-white-invert: var(--color-white);
   --b-white-invert-sec: var(--color-zinc-200);
   --b-white-invert-thr: var(--color-zinc-400);
