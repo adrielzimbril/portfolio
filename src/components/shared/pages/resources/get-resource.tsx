@@ -66,7 +66,7 @@ export function GetResource({
           )}
         >
           {/* {cover && (
-            <div className="flex flex-col items-start gap-4 w-full mb-6 rounded-lg md:rounded-4xl overflow-hidden border-4 md:border-8 border-zinc-200">
+            <div className="flex flex-col items-start gap-4 w-full mb-6 rounded-lg md:rounded-4xl overflow-hidden border-4 md:border-8 border-b-base-accent">
               <Image
                 src={cover}
                 alt={title}

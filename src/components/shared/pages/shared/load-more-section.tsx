@@ -44,8 +44,8 @@ interface LoadMoreUIProps {
 function LoadingSpinner() {
   return (
     <div className="relative w-5 h-5">
-      <div className="absolute inset-0 rounded-full border-2 border-zinc-200" />
-      <div className="absolute inset-0 rounded-full border-2 border-zinc-200 border-t-transparent animate-spin" />
+      <div className="absolute inset-0 rounded-full border-2 border-b-base-accent" />
+      <div className="absolute inset-0 rounded-full border-2 border-b-base-accent border-t-transparent animate-spin" />
     </div>
   );
 }
