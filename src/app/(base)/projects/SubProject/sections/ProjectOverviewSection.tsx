@@ -62,7 +62,7 @@ export function ProjectOverviewSection() {
         {metricsData.map((metric, index) => (
           <Card
             key={index}
-            className="squircle size-full max-w-[75%] md:max-w-full squircle-stone-100 squircle-6xl squircle-smooth-md border-0 overflow-hidden"
+            className="squircle size-full max-w-[75%] md:max-w-full squircle-b-base squircle-6xl squircle-smooth-md border-0 overflow-hidden"
           >
             <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
               <div
@@ -125,7 +125,7 @@ export function ProjectOverviewSection() {
           {metricsData.map((metric, index) => (
             <Card
               key={index}
-              className="squircle size-full max-w-[75%] md:max-w-[95%] squircle-stone-100 squircle-7xl squircle-smooth-lg border-0 overflow-hidden"
+              className="squircle size-full max-w-[75%] md:max-w-[95%] squircle-b-base squircle-7xl squircle-smooth-lg border-0 overflow-hidden"
             >
               <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
                 <Badge>{metric.category}</Badge>

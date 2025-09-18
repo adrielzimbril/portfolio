@@ -86,7 +86,7 @@ export function HeaderSection({
       <Card className="w-full squircle squircle-b-white squircle-smooth-xl squircle-6xl overflow-hidden p-5">
         <CardContent
           className={cn(
-            "w-full squircle squircle-stone-100 squircle-smooth-xl squircle-5xl overflow-hidden flex flex-col justify-center",
+            "w-full squircle squircle-b-base squircle-smooth-xl squircle-5xl overflow-hidden flex flex-col justify-center",
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"

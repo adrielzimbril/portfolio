@@ -87,7 +87,7 @@ export function TestimonialsSection() {
       isFlex
     >
       <div className="flex flex-col gap-4 md:gap-8 items-center justify-center px-6 max-w-5xl mx-auto">
-        <Card className="squircle squircle-stone-100 squircle-3xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
+        <Card className="squircle squircle-b-base squircle-3xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
           <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
             <div
               className={cn(
@@ -164,7 +164,7 @@ export function TestimonialsSection() {
                   "rounded-full transition-all duration-800 ease",
                   index === currentIndex
                     ? "bg-primary w-6 h-2"
-                    : "bg-muted w-2 h-2"
+                    : "bg-b-base w-2 h-2"
                 )}
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Testimonial ${index + 1}`}

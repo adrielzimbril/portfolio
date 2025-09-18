@@ -167,7 +167,7 @@
 	.dark {
 	/* Custom colors */
   --b-base: var(--color-zinc-900);
-  --b-base-second: var(--color-zinc-800);
+  --b-base-second: var(--color-neutral-900);
   --b-white: var(--color-zinc-800);
   --b-accent: var(--color-zinc-700);
 
@@ -292,12 +292,12 @@
 
   /* Typography - Code */
   code {
-    @apply text-[0.875rem] font-mono bg-muted px-1.5 py-0.5 rounded;
+    @apply text-[0.875rem] font-mono bg-b-base px-1.5 py-0.5 rounded;
     @apply border border-border;
   }
 
   pre {
-    @apply bg-muted p-4 rounded-lg overflow-x-auto;
+    @apply bg-b-base p-4 rounded-lg overflow-x-auto;
     @apply border border-border mb-4;
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;

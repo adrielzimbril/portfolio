@@ -245,7 +245,7 @@ export function Navbar() {
                         <motion.li
                           key={item.name}
                           className={cn(
-                            "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-stone-200 hover:squircle-stone-100",
+                            "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-stone-200 hover:squircle-b-base",
                             activeTab === item.key
                               ? "squircle-stone-200"
                               : "squircle-b-white"

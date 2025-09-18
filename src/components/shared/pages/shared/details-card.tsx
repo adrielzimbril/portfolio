@@ -14,7 +14,7 @@ export function DetailsCard({
   description: string;
 }) {
   return (
-    <Card className="squircle squircle-stone-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full md:max-w-xl">
+    <Card className="squircle squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full md:max-w-xl">
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
           className={cn(
