@@ -16,6 +16,7 @@
 	--color-b-base: var(--b-base);
   --color-b-base-second: var(--b-base-second);
   --color-b-white: var(--b-white);
+  --color-b-white-foreground: var(--b-white-foreground);
   --color-b-accent: var(--b-accent);
 
   /* Text colors */
@@ -134,6 +135,7 @@
   --b-base: var(--color-stone-100);
   --b-base-second: var(--color-neutral-200);
   --b-white: var(--color-white);
+  --b-white-foreground: var(--color-zinc-700);
   --b-accent: var(--color-zinc-200);
 
 	/* Design system colors - Light mode */
@@ -169,6 +171,7 @@
   --b-base: var(--color-zinc-900);
   --b-base-second: var(--color-neutral-900);
   --b-white: var(--color-zinc-800);
+  --b-white-foreground: var(--color-zinc-400);
   --b-accent: var(--color-zinc-700);
 
 	/* Design system colors - Dark mode */

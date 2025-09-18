@@ -152,7 +152,7 @@ export const mdxComponents = {
   tr: ({ children, ...rest }) => <tr {...rest}>{children}</tr>,
   th: ({ children, ...rest }) => (
     <th
-      className="px-4 py-2 text-zinc-700 font-medium text-left align-top h-min border-b border-l border-zinc-300"
+      className="px-4 py-2 text-b-white-foreground: font-medium text-left align-top h-min border-b border-l border-zinc-300"
       {...rest}
     >
       {children}

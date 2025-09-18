@@ -39,7 +39,9 @@ export function ProjectDetailsSection() {
           <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
             <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-b-white overflow-hidden">
               <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Role</span>
+                <span className="font-normal text-b-white-foreground:">
+                  Role
+                </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   {projectDetails.role.map((role, index) => (
@@ -59,7 +61,9 @@ export function ProjectDetailsSection() {
               </div>
 
               <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Durée</span>
+                <span className="font-normal text-b-white-foreground:">
+                  Durée
+                </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
@@ -72,7 +76,9 @@ export function ProjectDetailsSection() {
               </div>
 
               <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Résultats</span>
+                <span className="font-normal text-b-white-foreground:">
+                  Résultats
+                </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   {projectDetails.results.map((result, index) => (
