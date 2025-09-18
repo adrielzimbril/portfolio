@@ -571,7 +571,7 @@ function AllFactsModal({
               >
                 <DialogCard variant="default">
                   <div className="flex items-start gap-3 sm:gap-4">
-                    <h4 className="bg-white center leading-[140%] rounded-full p-2 aspect-square shrink-0">
+                    <h4 className="bg-b-white center leading-[140%] rounded-full p-2 aspect-square shrink-0">
                       {question.emoji}
                     </h4>
 

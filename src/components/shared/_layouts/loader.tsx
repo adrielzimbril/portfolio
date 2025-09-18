@@ -86,7 +86,7 @@ export function Loader({
     case "single":
       return (
         <motion.div
-          className={cn("size-4 bg-white rounded-full", className)}
+          className={cn("size-4 bg-b-white rounded-full", className)}
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.6, 1, 0.4],

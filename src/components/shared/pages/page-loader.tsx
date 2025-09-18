@@ -170,7 +170,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
   isPage = true,
 }) => {
   return (
-    <div className="flex flex-col mx-auto items-center justify-center relative bg-white size-full min-h-dvh">
+    <div className="flex flex-col mx-auto items-center justify-center relative bg-b-white size-full min-h-dvh">
       {/* Floating background elements */}
       {floatingSkills.map((skill, index) => (
         <FloatingCard

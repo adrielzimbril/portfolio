@@ -29,7 +29,7 @@ export function EmojiPlaceholder({
         !unOrdered && "md:order-2",
         (variant === "default" || variant === "bordered") &&
           "size-fit md:size-[90%] aspect-square",
-        variant === "default" && "bg-white rounded-full",
+        variant === "default" && "bg-b-white rounded-full",
         variant === "bordered" &&
           "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-zinc-100",
         variant === "squircle" &&
