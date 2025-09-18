@@ -56,7 +56,7 @@ export function LocaleSwitch() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="flex w-fit items-center gap-2 squircle-b-white min-w-10"
+          className="flex w-fit items-center gap-2 squircle-b-white text-b-white-foreground min-w-10"
           size="xs"
           asIcon
           asPointer
@@ -85,7 +85,7 @@ export function LocaleSwitch() {
             const IconComponent = iconsMap[icon as keyof typeof iconsMap];
             return (
               <DropdownMenuRadioItem
-                className="flex gap-2 items-center justify-between data-[state=checked]:bg-indigo-100 focus:bg-indigo-200 focus:text-foreground w-full"
+                className="flex gap-2 items-center justify-between text-b-white-unchanged data-[state=checked]:bg-indigo-100 focus:bg-indigo-200 focus:text-b-white-unchanged w-full"
                 key={locale}
                 value={locale}
               >

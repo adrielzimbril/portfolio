@@ -53,7 +53,7 @@ export function GoalResearchSection({
         <EmojiPlaceholder
           src={getImageUrl("/image-1310-2.png")}
           //isMobileHidden
-          variant="bordered"
+          variant="squircle"
         />
         <ContentSection
           description={description}

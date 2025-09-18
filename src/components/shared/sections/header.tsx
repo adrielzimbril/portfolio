@@ -42,7 +42,7 @@ export function SectionHeader({
 
       <p
         className={cn(
-          "text-xl md:text-2xl text-gray-600",
+          "text-xl md:text-2xl text-b-white-invert-sec",
           !layoutStart && "font-medium"
         )}
       >

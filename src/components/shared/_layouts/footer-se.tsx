@@ -23,7 +23,7 @@ import {
 } from "@/module/content/utils/lib";
 import { Resource } from "content-collections";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { cn } from "@/utils";
+import { cn, getResourcesUrl } from "@/utils";
 import { SectionBase } from "../pages/shared/section-base";
 import { getEmojiByName, getEmojiFromString } from "@aurthle/emoji-hub";
 import { siteConfig } from "@/data/config";
@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 import { routes } from "@/data/route";
+import { PageType } from "@/types";
 
 const socialIcons = [
   { icon: LinkedinIcon, alt: "LinkedIn", href: "#" },
@@ -168,7 +169,7 @@ export const FooterSec: React.FC = () => {
                   <>
                     <Link
                       key={index}
-                      href={resource.slug}
+                      href={getResourcesUrl(PageType.HUB, resource.slug)}
                       className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
                     >
                       {resource.title}

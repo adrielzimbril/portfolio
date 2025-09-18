@@ -24,7 +24,7 @@ export function NavMenu({
           className={cn(
             "relative flex w-fit overflow-hidden items-center p-1",
             //"rounded-2xl overflow-hidden border-2 border-solid border-secondary",
-            "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-secondary"
+            "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-b-base-accent"
           )}
         >
           {menuRoutes.map((item) => (
@@ -43,7 +43,7 @@ export function NavMenu({
                 <motion.div
                   layoutId="active-tab"
                   className={cn(
-                    "absolute inset-0 rounded-xl bg-secondary squircle-secondary",
+                    "absolute inset-0 rounded-xl bg-b-base-accent squircle-b-base-accent",
                     "squircle squircle-7xl"
                   )}
                   transition={{

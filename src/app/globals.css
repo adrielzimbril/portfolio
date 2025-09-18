@@ -189,11 +189,12 @@
   --b-white-invert: var(--color-white);
   --b-white-invert-sec: var(--color-zinc-200);
   --b-white-invert-thr: var(--color-zinc-400);
+  --b-white-invert-fr: var(--color-zinc-700);
   --b-base-accent: var(--color-zinc-500);
 
 
 	/* Design system colors - Dark mode */
-	--background: var(--color-stone-950);
+	--background: var(--color-neutrals-900);
 	--foreground: hsl(213 31% 91%);
 	--muted: hsl(223 47% 11%);
 	--muted-foreground: hsl(215.4 16.3% 56.9%);

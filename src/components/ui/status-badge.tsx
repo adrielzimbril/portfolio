@@ -129,7 +129,7 @@ function StatusBadge({
   return (
     <div
       className={cn(
-        "flex items-center gap-2",
+        "flex flex-wrap items-center gap-2",
         badgeVariants({ variant, size }),
         className
       )}

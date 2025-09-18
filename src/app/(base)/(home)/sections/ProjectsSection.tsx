@@ -41,7 +41,6 @@ export function ProjectsSection() {
       description={t("common.page-sections.projects.description")}
       link={routes.projects.link}
       badge={t("common.page-sections.projects.badge")}
-      asFade
     >
       {projects.map((project, index) => {
         const isWide =

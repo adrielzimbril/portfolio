@@ -35,7 +35,7 @@ export function HeaderSection() {
               limit: 1,
               date: t("common.shared.months." + getThisMonth()),
             })}
-            <LinkOne variant="bulk" size={18} />
+            <LinkOne variant="bulk" size={20} />
           </span>
         </Link>
       </StatusBadge>

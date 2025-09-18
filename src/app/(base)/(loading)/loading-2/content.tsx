@@ -101,7 +101,7 @@ function LoadingProgressBar({ isPage }: { isPage: boolean }) {
 
   return (
     <>
-      <div className="w-full bg-stone-200 rounded-full h-2 overflow-hidden max-w-md flex flex-col gap-2">
+      <div className="w-full bg-b-base-accent rounded-full h-2 overflow-hidden max-w-md flex flex-col gap-2">
         {isPage ? (
           <>
             <div

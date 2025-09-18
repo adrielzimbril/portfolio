@@ -94,7 +94,7 @@ export default async function SubProject(props: {
       />
       <ProjectDetailsSection
         content={body || ""}
-        duration={date_project?.map((date) => date || "") || []}
+        duration={date_project?.map((date) => date || null) || []}
         tags={tags}
       />
       {cardSectionDescription && cards && (

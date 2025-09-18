@@ -86,7 +86,7 @@ export function TestimonialsSection() {
       badge={t("common.page-sections.testimonials.badge")}
       isFlex
     >
-      <div className="flex flex-col gap-4 md:gap-8 items-center justify-center px-6 max-w-5xl mx-auto">
+      <div className="flex flex-col gap-4 md:gap-8 items-center justify-center md:px-6 md:max-w-5xl mx-auto">
         <Card className="squircle squircle-b-base squircle-3xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
           <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
             <div

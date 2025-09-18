@@ -15,6 +15,7 @@ import { getImageUrl } from "@/utils/base-url";
 import { useTranslations } from "next-intl";
 import { getActivePathInArray, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
+import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 
 const INITIAL_WIDTH = "70rem";
 const MAX_WIDTH = "65rem";
@@ -62,6 +63,7 @@ export function Navbar() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const isDarkMode = useIsDarkMode();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -129,15 +131,21 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto container rounded-2xl transition-all duration-300 px-0",
+            "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white",
             hasScrolled
-              ? "px-2 shadow-lg backdrop-blur-lg bg-background/70"
+              ? "px-2 shadow-lg backdrop-blur-md bg-b-white/60"
               : "shadow-none"
           )}
         >
-          <div className="flex h-[56px] items-center justify-between md:p-4">
+          <div className="flex h-[56px] items-center justify-between px-2 md:p-4">
             <Link
               href={routes.home.link}
+              onClick={async () => {
+                setActiveTab(routes.home.key);
+                sleep(2000).then(() => {
+                  toggleDrawer();
+                });
+              }}
               variant="none"
               size="none"
               className="flex items-center gap-1 md:gap-2"
@@ -150,7 +158,11 @@ export function Navbar() {
                   // hasScrolled && "w-10! h-10!"
                 )}
                 alt="Icon"
-                src={getImageUrl("/icon.svg")}
+                src={
+                  isDarkMode
+                    ? getImageUrl("/icon-dark.svg")
+                    : getImageUrl("/icon.svg")
+                }
               />
               {/* <LogoIcon className="size-7 md:size-10" /> */}
               <LogoName
@@ -171,7 +183,17 @@ export function Navbar() {
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
               <div className="hidden md:flex items-center space-x-6">
-                <Link href={routes.contact.link} likeButton whileTap>
+                <Link
+                  href={routes.contact.link}
+                  likeButton
+                  whileTap
+                  onClick={async () => {
+                    setActiveTab(routes.contact.key);
+                    sleep(2000).then(() => {
+                      toggleDrawer();
+                    });
+                  }}
+                >
                   {t("common.page-sections.header.cta")}
                 </Link>
               </div>
@@ -208,7 +230,7 @@ export function Navbar() {
             />
 
             <motion.div
-              className="fixed inset-x-0 w-[95%] h-[95%] mx-auto top-3 bg-background border border-border p-4 rounded-xl shadow-lg"
+              className="fixed inset-x-0 w-[95%] h-[95%] mx-auto top-3 bg-b-white border-4 border-b-base-accent p-4 rounded-xl shadow-lg"
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -218,13 +240,26 @@ export function Navbar() {
               <div className="flex flex-col h-full justify-between gap-4">
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-3">
+                    <Link
+                      href={routes.home.link}
+                      className="flex items-center gap-3"
+                      onClick={async () => {
+                        setActiveTab(routes.home.key);
+                        sleep(2000).then(() => {
+                          toggleDrawer();
+                        });
+                      }}
+                    >
                       <Image
                         width={56}
                         height={56}
                         className={cn("size-12")}
                         alt="Icon"
-                        src={getImageUrl("/icon.svg")}
+                        src={
+                          isDarkMode
+                            ? getImageUrl("/icon-dark.svg")
+                            : getImageUrl("/icon.svg")
+                        }
                       />
                       <LogoName className={cn("h-8! flex-shrink-0")} />
                     </Link>
@@ -245,9 +280,9 @@ export function Navbar() {
                         <motion.li
                           key={item.name}
                           className={cn(
-                            "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-stone-200 hover:squircle-b-base",
+                            "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
                             activeTab === item.key
-                              ? "squircle-stone-200"
+                              ? "squircle-b-white-invert-fr"
                               : "squircle-b-white"
                           )}
                           variants={drawerMenuVariants}
@@ -257,12 +292,13 @@ export function Navbar() {
                             className={`underline-offset-4 hover:text-b-white-invert/80 transition-colors ${
                               activeTab === item.key
                                 ? "text-b-white-invert font-medium"
-                                : "text-b-white-invert/60"
+                                : "text-b-white-invert/80"
                             }`}
                             onClick={async () => {
                               setActiveTab(item.key);
-                              await sleep(5000);
-                              toggleDrawer();
+                              sleep(2000).then(() => {
+                                toggleDrawer();
+                              });
                             }}
                           >
                             {t("common.menu." + item.key)}

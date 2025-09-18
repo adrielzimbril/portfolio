@@ -31,9 +31,9 @@ export function EmojiPlaceholder({
           "size-fit md:size-[90%] aspect-square",
         variant === "default" && "bg-b-white rounded-full",
         variant === "bordered" &&
-          "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-zinc-100",
+          "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-b-base-accent",
         variant === "squircle" &&
-          "squircle squircle-b-white squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-zinc-100 aspect-square size-full md:size-96 p-12 overflow-hidden",
+          "squircle squircle-b-white squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-b-base-accent aspect-square size-full md:size-96 p-12 overflow-hidden",
         isMobileHidden && isMobile && "hidden",
         className
       )}
@@ -58,8 +58,8 @@ export function EmojiPlaceholder({
             "size-full object-cover pointer-events-none",
             imgClassName
           )}
-          width={100}
-          height={100}
+          width={600}
+          height={600}
           alt=""
         />
       </div>

@@ -234,7 +234,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           <DialogTitle className="text-2xl font-bold text-center">
             {t("common.page-sections.newsletter.title")}
           </DialogTitle>
-          <DialogDescription className="text-center text-gray-600">
+          <DialogDescription className="text-center text-b-white-invert-sec">
             {hasInitialSubscription
               ? t("common.page-sections.newsletter.description.state")
               : t("common.page-sections.newsletter.description.default")}
@@ -247,7 +247,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             <h3 className="text-xl font-semibold text-green-600">
               {t("common.page-sections.newsletter.form.success.message.title")}
             </h3>
-            <p className="text-center text-gray-600">
+            <p className="text-center text-b-white-invert-sec">
               {t(
                 "common.page-sections.newsletter.form.success.message.description"
               )}

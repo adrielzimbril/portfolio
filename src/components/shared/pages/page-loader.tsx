@@ -7,7 +7,8 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";
 import { getImageUrl } from "@/utils/base-url";
-import { Loader } from "../_layouts/loader";
+import { Loader } from "@/components/shared/_layouts/loader";
+import { useTheme } from "next-themes";
 
 interface GenericLoadingPageProps {
   title?: string;
@@ -101,16 +102,16 @@ function LoadingProgressBar({ isPage }: { isPage: boolean }) {
 
   return (
     <>
-      <div className="w-full bg-stone-200 rounded-full h-2 overflow-hidden max-w-md flex flex-col gap-2">
+      <div className="w-full bg-b-base-accent rounded-full h-2 overflow-hidden max-w-md flex flex-col gap-2">
         {isPage ? (
           <>
             <div
-              className="bg-stone-800 size-full rounded-full transition-all duration-300 ease-in-out"
+              className="bg-b-white-unchanged size-full rounded-full transition-all duration-300 ease-in-out"
               style={{ width: `${progress}%` }}
             />
           </>
         ) : (
-          <div className="bg-stone-800 size-full rounded-full animate-loading-progress" />
+          <div className="bg-b-white-unchanged size-full rounded-full animate-loading-progress" />
         )}
       </div>
     </>
@@ -169,6 +170,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
   emoji = "🦄",
   isPage = true,
 }) => {
+  const { isDarkMode } = useTheme();
   return (
     <div className="flex flex-col mx-auto items-center justify-center relative bg-b-white size-full min-h-dvh">
       {/* Floating background elements */}
@@ -217,7 +219,11 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
               <Image
                 className="relative flex-shrink-0 size-14"
                 alt="Icon"
-                src={getImageUrl("/icon.svg")}
+                src={
+                  isDarkMode
+                    ? getImageUrl("/icon-dark.svg")
+                    : getImageUrl("/icon.svg")
+                }
                 width="56"
                 height="56"
               />

@@ -73,11 +73,11 @@ function DialogContent({
 
   const variantClasses = {
     default:
-      "squircle squircle-background squircle-5xl squircle-smooth-xl border-0",
+      "squircle squircle-background squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl border-0",
     modern:
-      "squircle squircle-b-white squircle-5xl squircle-smooth-xl squircle-border squircle-border-white/20",
+      "squircle squircle-b-white squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl squircle-border-4 squircle-border-b-base-accent",
     glass:
-      "squircle squircle-b-white/80 squircle-5xl squircle-smooth-xl backdrop-blur-xl squircle-border squircle-border-white/20",
+      "squircle squircle-b-white/80 squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl backdrop-blur-xl squircle-border-4 squircle-border-b-base-accent",
   };
 
   return (
@@ -180,7 +180,7 @@ function DialogDescription({
 // Composants supplémentaires dans le style de référence
 function DialogSeparator({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("h-px bg-stone-200 w-full", className)} {...props} />
+    <div className={cn("h-px bg-b-base-accent w-full", className)} {...props} />
   );
 }
 
@@ -192,7 +192,8 @@ function DialogCard({
   variant?: "default" | "highlight" | "success" | "warning" | "info";
 }) {
   const variantClasses = {
-    default: "squircle-stone-50 squircle-border-2 squircle-border-stone-200",
+    default:
+      "squircle-stone-50 dark:squircle-b-white squircle-border-2 dark:squircle-border-b-base-accent",
     highlight: "squircle-blue-50 squircle-border-2 squircle-border-blue-200",
     success: "squircle-green-50 squircle-border-2 squircle-border-green-200",
     warning: "squircle-orange-50 squircle-border-2 squircle-border-orange-200",
