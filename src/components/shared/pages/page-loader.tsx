@@ -217,7 +217,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           >
             {isPage ? (
               <motion.div
-                className="w-12 h-12 bg-greys-08 rounded-full flex items-center justify-center"
+                className="w-12 h-12 bg-zinc-900 dark:bg-zinc-950 rounded-full flex items-center justify-center"
                 animate={{
                   scale: [1, 1.1, 1],
                   opacity: [0.8, 1, 0.8],
@@ -231,7 +231,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
                 <span className="text-white text-xl">{emoji}</span>
               </motion.div>
             ) : (
-              <div className="w-12 h-12 bg-greys-08 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-zinc-900 dark:bg-zinc-950 rounded-full flex items-center justify-center">
                 <span className="text-white text-xl">{emoji}</span>
               </div>
             )}
