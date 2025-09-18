@@ -32,19 +32,6 @@ import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useTranslations } from "use-intl";
 
-const t = useTranslations();
-
-// Form Info Schema for ensuring name and phone
-const FormInfoSchema = z.object({
-  name: z
-    .string({ error: t("zod.errors.customized.name.invalid") })
-    .min(4, { message: t("zod.errors.customized.name.required") }),
-  phone: z.string({ error: t("zod.errors.customized.phone.invalid") }).min(10, {
-    message: t("zod.errors.customized.phone.required"),
-  }),
-});
-
-type FormInfoForm = z.infer<typeof FormInfoSchema>;
 
 interface SubscriptionModalProps {
   isOpen: boolean;
@@ -61,6 +48,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   productType,
   onClose,
 }) => {
+  const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [userCountry, setUserCountry] = useState("FR");
@@ -138,6 +126,20 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     subscribeWithEmail();
     ipInfoFetched.current = true;
   }, [isOpen, email, hasInitialSubscription]);
+
+  // Form Info Schema for ensuring name and phone
+  const FormInfoSchema = z.object({
+    name: z
+      .string({ error: t("zod.errors.customized.name.invalid") })
+      .min(4, { message: t("zod.errors.customized.name.required") }),
+    phone: z
+      .string({ error: t("zod.errors.customized.phone.invalid") })
+      .min(10, {
+        message: t("zod.errors.customized.phone.required"),
+      }),
+  });
+
+  type FormInfoForm = z.infer<typeof FormInfoSchema>;
 
   const formSchemaValidate = useForm<FormInfoForm>({
     resolver: zodResolver(FormInfoSchema),

@@ -30,13 +30,10 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const currentKey = currentRoute?.key || routes.home.key;
 
   useEffect(() => {
-    // sleep(6000).then(() => setIsLoaded(true));
+    sleep(6000).then(() => setIsLoaded(true));
     logger.info("currentRoute", currentRoute);
     logger.info("currentKey", currentKey);
-    if (route === "/") {
-      logger.info("pathname", route);
-      setIsLoaded(true);
-    }
+    logger.info("pathname", route);
   }, []);
 
   return (
