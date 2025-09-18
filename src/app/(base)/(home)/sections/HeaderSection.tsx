@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations, useLocale } from "use-intl";

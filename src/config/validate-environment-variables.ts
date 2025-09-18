@@ -9,12 +9,6 @@ const environmentVariablesSchema = z.object({
   NEXT_PUBLIC_WEBSITE_URL: z
     .string()
     .min(1, "[⚠️ ENV_VAR_WARNING] NEXT_PUBLIC_WEBSITE_URL is required"),
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z
-    .string()
-    .min(
-      1,
-      "[⚠️ ENV_VAR_WARNING] NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is required"
-    ),
 });
 
 export type EnvVars = z.infer<typeof environmentVariablesSchema>;

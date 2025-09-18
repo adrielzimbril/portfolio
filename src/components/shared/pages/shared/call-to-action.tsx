@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { siteConfig } from "@/data/config";
 import { useTranslations } from "use-intl";

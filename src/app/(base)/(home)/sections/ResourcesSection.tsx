@@ -1,5 +1,5 @@
 "use client";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { PreviewCardContainerSectionProps } from "@/types/type";

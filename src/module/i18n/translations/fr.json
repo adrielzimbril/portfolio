@@ -430,8 +430,18 @@
   "zod": {
     "errors": {
       "customized": {
+        "hint": "Oups ! Erreur lors de l'inscription, veuillez réessayer plus tard s'il vous plaît 🦄",
         "email": {
-          "invalid": "Oups ! Veuillez entrer une adresse email valide, s'il vous plaît 🦄"
+          "invalid": "Oups ! Veuillez entrer une adresse email valide, s'il vous plaît 🦄",
+          "update-required": "Oups, l'email est requis pour la mise à jour 😅"
+        },
+        "phone": {
+          "invalid": "Oups ! Veuillez entrer un numéro de téléphone valide, s'il vous plaît 🦄",
+          "required": "Oups, le numéro de téléphone ne semble pas être valide 😅"
+        },
+        "name": {
+          "invalid": "Oups ! Veuillez entrer un nom valide, s'il vous plaît 🦄",
+          "required": "Oups, le nom doit contenir au moins 4 caractères 😅"
         }
       },
       "invalid_arguments": "Invalid function arguments",

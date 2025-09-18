@@ -32,16 +32,16 @@ import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useTranslations } from "use-intl";
 
+const t = useTranslations();
+
 // Form Info Schema for ensuring name and phone
 const FormInfoSchema = z.object({
   name: z
-    .string({ error: "Oups, le nom est requis 😅" })
-    .min(4, { message: "Le nom doit contenir au moins 4 caractères 😅" }),
-  phone: z
-    .string({ error: "Oups, le numéro de téléphone est requis 😅" })
-    .min(10, {
-      message: "Le numéro de téléphone ne semble pas être valide 😅",
-    }),
+    .string({ error: t("zod.errors.customized.name.invalid") })
+    .min(4, { message: t("zod.errors.customized.name.required") }),
+  phone: z.string({ error: t("zod.errors.customized.phone.invalid") }).min(10, {
+    message: t("zod.errors.customized.phone.required"),
+  }),
 });
 
 type FormInfoForm = z.infer<typeof FormInfoSchema>;
@@ -61,7 +61,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   productType,
   onClose,
 }) => {
-  const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [userCountry, setUserCountry] = useState("FR");
@@ -126,7 +125,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         const json = await res.json();
         if (!res.ok) {
-          throw new Error(json?.error || "Erreur lors de l'inscription");
+          throw new Error(json?.error || t("zod.errors.customized.hint"));
         }
 
         setHasInitialSubscription(true);
@@ -175,7 +174,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   const onSubmit = async (values: FormInfoForm) => {
     if (!email) {
-      toast.error("Oups, l'email est requis pour la mise à jour 😅");
+      toast.error(t("zod.errors.customized.email.update-required"));
       return;
     }
 

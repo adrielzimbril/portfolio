@@ -1,6 +1,6 @@
 "use client";
 import posthog from "posthog-js";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { PreviewCardContainerSectionProps } from "@/types/type";
 import { useState, useEffect } from "react";

@@ -1,6 +1,6 @@
 "use client";
 import posthog from "posthog-js";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { ProjectPreviewCardContainerSectionProps } from "@/types/type";

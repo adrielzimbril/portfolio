@@ -1,4 +1,4 @@
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import * as AurthleIcons from "@aurthle/icons";
 import { getBaseUrl, getImageUrl } from "@/utils";
 

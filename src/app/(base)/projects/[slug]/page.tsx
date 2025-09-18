@@ -19,7 +19,7 @@ import {
 } from "@/module/content/utils/lib/projects";
 import { getActivePathFromUrlParam } from "@/utils/route-utils";
 import { getLocale, setRequestLocale } from "next-intl/server";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { PageParams, PageType } from "@/types";
 import { getImageUrl, getResourcesUrl } from "@/utils";
 

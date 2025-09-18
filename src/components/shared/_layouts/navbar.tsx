@@ -8,7 +8,7 @@ import { AnimatePresence, motion, useScroll, Variants } from "motion/react";
 import { useEffect, useState } from "react";
 import { LogoName } from "@/components/shared/icons/logo-name";
 import Image from "next/image";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
 import { getImageUrl } from "@/utils/base-url";

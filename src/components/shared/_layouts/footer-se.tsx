@@ -35,7 +35,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { PageType } from "@/types";
 
 const socialIcons = [

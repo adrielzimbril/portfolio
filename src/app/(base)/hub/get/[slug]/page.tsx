@@ -6,7 +6,7 @@ import {
   getResourceBySlug,
 } from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { GetResource } from "@/components/shared/pages/resources/get-resource";
 import { Metadata } from "next";
 import { PageType } from "@/types";

@@ -1,5 +1,5 @@
 import React from "react";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { HeaderSection } from "@/components/shared/pages/resources/page/header-section";
 import { ResourceHeaderTag } from "@/types/componentType";
 import { PreviewContentType } from "@/types";

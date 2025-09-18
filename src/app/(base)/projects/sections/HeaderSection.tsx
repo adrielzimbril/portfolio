@@ -1,6 +1,6 @@
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { useTranslations } from "next-intl";
 
 export function HeaderSection() {

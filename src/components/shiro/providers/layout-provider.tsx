@@ -5,7 +5,7 @@ import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
 import { getActivePathInArray, sleep } from "@/utils";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import logger from "@/utils/logger";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {

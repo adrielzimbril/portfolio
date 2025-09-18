@@ -7,7 +7,7 @@ import type { MetadataRoute } from "next";
 import { Post, Resource, Project } from "@/module/content/types/types";
 import { appConfig } from "@data/app-config";
 import { getBaseUrl } from "@/utils/base-url";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 
 const baseUrl = getBaseUrl();
 const locales = appConfig.i18n.enabled
