@@ -11,11 +11,11 @@ const buttonVariants = cva(
         default:
           "bg-inherit squircle-primary text-b-black-unchanged hover:squircle-primary/90",
         secondary:
-          "bg-inherit squircle-b-white squircle-border-2 squircle-border-b-accent text-b-white-invert hover:bg-secondary/80 hover:squircle-primary/90 hover:text-white",
+          "bg-inherit squircle-b-white squircle-border-2 squircle-border-b-base-accent text-b-white-invert hover:bg-secondary/80 hover:squircle-primary/90 hover:text-white",
         destructive:
           "squircle-destructive text-destructive-foreground hover:squircle-destructive/90",
         outline:
-          "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-b-accent",
+          "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-b-base-accent",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         icon: "hover:bg-accent hover:text-accent-foreground",
         link: "text-b-white-invert underline-offset-4 hover:underline",

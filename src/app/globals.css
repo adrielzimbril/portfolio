@@ -23,7 +23,7 @@
   --color-b-white-invert-sec: var(--b-white-invert-sec);
   --color-b-white-invert-thr: var(--b-white-invert-thr);
   --color-b-white-invert-fr: var(--b-white-invert-fr);
-  --color-b-accent: var(--b-accent);
+  --color-b-base-accent: var(--b-base-accent);
 
   /* Text colors */
 
@@ -148,7 +148,7 @@
   --b-white-invert-sec: var(--color-zinc-600);
   --b-white-invert-thr: var(--color-zinc-500);
   --b-white-invert-fr: var(--color-zinc-200);
-  --b-accent: var(--color-zinc-200);
+  --b-base-accent: var(--color-zinc-200);
 
 	/* Design system colors - Light mode */
 	--background: hsl(0 0% 100%);
@@ -189,7 +189,7 @@
   --b-white-invert: var(--color-white);
   --b-white-invert-sec: var(--color-zinc-200);
   --b-white-invert-thr: var(--color-zinc-400);
-  --b-accent: var(--color-zinc-500);
+  --b-base-accent: var(--color-zinc-500);
 
 
 	/* Design system colors - Dark mode */
