@@ -180,17 +180,7 @@ export function Navbar() {
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
               <div className="hidden md:flex items-center space-x-6">
-                <Link
-                  href={routes.contact.link}
-                  likeButton
-                  whileTap
-                  onClick={async () => {
-                    setActiveTab(routes.contact.key);
-                    sleep(2000).then(() => {
-                      toggleDrawer();
-                    });
-                  }}
-                >
+                <Link href={routes.contact.link} likeButton whileTap>
                   {t("common.page-sections.header.cta")}
                 </Link>
               </div>

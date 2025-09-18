@@ -30,6 +30,8 @@ export type Config = {
   };
 };
 
+const BASE_URL = "https://www.adrielzimbril.com";
+
 export const appConfig = {
   // Internationalization
   i18n: {
@@ -38,27 +40,27 @@ export const appConfig = {
     // Define all locales here that should be available in the app
     // You need to define a label that is shown in the language selector and a currency that should be used for pricing with this locale
     locales: {
-      en: {
-        code: "en_US",
-        label: "English",
-        currency: "USD",
-        icon: "USFlag",
-        url: "https://www.adrielzimbril.com",
-      },
+      // en: {
+      //   code: "en_US",
+      //   label: "English",
+      //   currency: "USD",
+      //   icon: "USFlag",
+      //   url: BASE_URL,
+      // },
       fr: {
         code: "fr_FR",
         label: "Français",
         currency: "EUR",
         icon: "FRFlag",
-        url: "https://www.adrielzimbril.com",
+        url: BASE_URL,
       },
-      cn: {
-        code: "cn_CN",
-        label: "中文",
-        currency: "RMB",
-        icon: "CNFlag",
-        url: "https://www.adrielzimbril.com",
-      },
+      // cn: {
+      //   code: "cn_CN",
+      //   label: "中文",
+      //   currency: "RMB",
+      //   icon: "CNFlag",
+      //   url: BASE_URL,
+      // },
     },
     // The default locale is used if no locale is provided
     defaultLocale: "fr",

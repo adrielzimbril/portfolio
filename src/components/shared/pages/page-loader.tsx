@@ -11,9 +11,9 @@ import { LogoName } from "@/components/shared/icons/logo-name";
 import { siteConfig } from "@/data/config";
 
 interface GenericLoadingPageProps {
-  title?: string;
-  subtitle?: string;
-  emoji?: string;
+  title: string;
+  subtitle: string;
+  emoji: string;
   isPage?: boolean;
 }
 
@@ -82,12 +82,17 @@ const statsData = [
   { number: "100%", label: "Enthusiast" },
 ];
 
-const floatingSkills = ["SaaS 🦄", "Design 🎨", "Innovation 💡", "Web App 📱"];
+const floatingSkills = [
+  "SaaS 🦄",
+  "Design 🎨",
+  "Innovation 💡",
+  "Go To Market ✨",
+];
 
 export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
-  title = "Your ideas into products that your users adore",
-  subtitle = "Problem Solver & Your SaaS Product designer ❣️",
-  emoji = "🦄",
+  title,
+  subtitle,
+  emoji,
   isPage = true,
 }) => {
   const isDarkMode = useIsDarkMode();
@@ -164,20 +169,6 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </nav>
         </motion.header>
 
-        {/* Logo section */}
-        {/* <motion.div
-          className="content-stretch flex flex-col gap-6 items-center justify-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <LoadingIcon />
-          <div className="content-stretch flex gap-3 items-center justify-center">
-            <LoadingAdriel />
-            <LoadingZimbrilu />
-          </div>
-        </motion.div> */}
-
         {/* Main loading animation */}
         <motion.div
           className="relative"
@@ -197,7 +188,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
             />
           ) : (
             <motion.div
-              className="size-24 bg-zinc-100 dark:bg-zinc-950 rounded-full"
+              className="size-24 bg-zinc-100 dark:bg-zinc-900 rounded-full"
               animate={{
                 scale: [1, 1.1, 1],
                 opacity: [0.8, 1, 0.8],

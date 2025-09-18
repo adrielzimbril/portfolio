@@ -253,7 +253,7 @@ function GuessButton({
   return (
     <motion.div
       className={cn(
-        "relative bg-stone-100 border-2 border-b-base-accent content-stretch flex items-center justify-start p-4 md:p-6 rounded-full shrink-0 cursor-pointer transition-all duration-300",
+        "relative bg-b-base border-2 border-b-base-accent content-stretch flex items-center justify-start p-4 md:p-6 rounded-full shrink-0 cursor-pointer transition-all duration-400",
         canAnswer
           ? isFalse
             ? "hover:bg-red-100 hover:border-red-500"

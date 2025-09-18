@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { usePathname } from "next/navigation";
 import { routes } from "@/data/routes";
 import logger from "@/utils/logger";
@@ -30,9 +30,9 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     sleep(6000).then(() => setIsLoaded(true));
-    logger.info("currentRoute", currentRoute);
-    logger.info("currentKey", currentKey);
-    logger.info("pathname", route);
+    // logger.info("currentRoute", currentRoute);
+    // logger.info("currentKey", currentKey);
+    // logger.info("pathname", route);
   }, [route, currentRoute, currentKey]);
 
   const pageLoader = (key: string) => ({
@@ -50,7 +50,9 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
           title={loader.title}
           emoji={loader.emoji}
           subtitle={loader.subtitle}
-          isPage={currentRoute?.key === routes.home.key}
+          isPage={
+            currentRoute?.key === routes.home.key || currentRoute === undefined
+          }
         />
       ) : (
         children
