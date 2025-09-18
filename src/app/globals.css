@@ -17,7 +17,7 @@
   --color-b-base-second: var(--b-base-second);
   --color-b-base-it: var(--b-base-it);
   --color-b-white: var(--b-white);
-  --color-b-base-white: var(--b-base-white);
+  --color-sh-base-white: var(--sh-base-white);
   --color-b-white-foreground: var(--b-white-foreground);
   --color-b-white-unchanged: var(--b-white-unchanged);
   --color-b-black-unchanged: var(--b-black-unchanged);
@@ -144,7 +144,7 @@
   --b-base-second: var(--color-neutral-100);
   --b-base-it: var(--color-zinc-50);
   --b-white: var(--color-white);
-  --b-base-white: var(--color-white);
+  --sh-base-white: var(--color-white);
   --b-white-foreground: var(--color-zinc-700);
   --b-white-unchanged: var(--color-zinc-800);
   --b-black-unchanged: var(--color-zinc-100);
@@ -188,7 +188,7 @@
   --b-base-second: var(--color-neutral-900);
   --b-base-it: var(--color-zinc-900);
   --b-white: var(--color-zinc-800);
-  --b-base-white: var(--color-zinc-800);
+  --sh-base-white: var(--color-zinc-800);
   --b-white-foreground: var(--color-zinc-300);
   --b-white-unchanged: var(--color-zinc-800);
   --b-black-unchanged: var(--color-zinc-100);
