@@ -20,7 +20,7 @@ export function HeaderSection() {
   };
 
   return (
-    <SectionBase sectionClassName="p-0 mt-20" isWide>
+    <SectionBase sectionClassName="p-0 mt-16" isWide>
       <StatusBadge
         mode="inline"
         status="available"

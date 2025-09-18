@@ -59,7 +59,7 @@ export function HeaderSection({
 
   return (
     <SectionBase
-      sectionClassName="p-0 mt-20 mb-10 md:mb-20"
+      sectionClassName="p-0 mt-16 mb-10 md:mb-20"
       isWide
       cardClassName="w-full"
       cardContentClassName="px-4 md:px-12 py-6 md:py-12"

@@ -77,7 +77,7 @@ export function HeaderSection({
 
   return (
     <SectionBase
-      sectionClassName={cn("p-0 mt-20 mb-10 md:mb-20", sectionClassName)}
+      sectionClassName={cn("p-0 mt-16 mb-10 md:mb-20", sectionClassName)}
       isWide
       cardClassName="w-full"
       cardContentClassName="md:px-12 py-6 md:py-12"
