@@ -274,7 +274,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         placeholder={t(
                           "common.page-sections.newsletter.form.fields.name.placeholder"
                         )}
-                        className="h-12 border-2 border-input"
+                        className="h-12 border-2"
                         {...field}
                       />
                     </FormControl>
@@ -307,7 +307,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                           "text-base"
                         )}
                         triggerClassName={cn(
-                          "bg-zinc-50 hover:bg-b-base h-auto rounded-s-xl peer z-10",
+                          "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
                           "h-auto border-2"
                         )}
                         contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"

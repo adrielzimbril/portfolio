@@ -96,7 +96,7 @@ export const FooterSec: React.FC = () => {
     <>
       <footer className="w-full">
         <SectionBase
-          sectionClassName="w-full pt-0 pb-10"
+          sectionClassName="w-full pt-0! pb-8!"
           sectionContentClassName="w-full"
           cardClassName="w-full rounded-4xl bg-stone-100 dark:bg-zinc-900"
           cardContentClassName="w-full p-6 md:p-8"
@@ -176,6 +176,7 @@ export const FooterSec: React.FC = () => {
                     </Link>
                     {index < resources.length - 1 && (
                       <Separator
+                        key={index + 8 * (index + 1) * (index + 8)}
                         className={cn("bg-zinc-300", {
                           hidden: isMobile,
                           "h-5": !isMobile,

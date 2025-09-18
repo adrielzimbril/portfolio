@@ -10,6 +10,8 @@ import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations } from "next-intl";
+import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
+import { toast } from "sonner";
 
 const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
 
@@ -17,6 +19,8 @@ export function NewsletterForm() {
   const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+    const emailValidator = useEmailValidator({ label: "Email", required: true });
+    const isEmailValid = !Boolean(emailValidator(email));
 
   return (
     <>
@@ -62,7 +66,11 @@ export function NewsletterForm() {
                 posthog.capture("newsletter_subscribe_clicked", {
                   has_email_entered: !!email,
                 });
-                setIsModalOpen(true);
+                if (isEmailValid) {
+                  setIsModalOpen(true);
+                } else {
+                  toast.error(t("zod.errors.customized.email.invalid"));
+                }
               }}
               asFull
               whileTap

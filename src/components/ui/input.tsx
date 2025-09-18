@@ -6,7 +6,7 @@ import { VariantProps } from "class-variance-authority";
 const inputVariants = cva("relative rounded-2xl border-2 overflow-hidden", {
   variants: {
     variant: {
-      default: "bg-zinc-50 border-b-base-accent",
+      default: "bg-b-base-it border-b-base-accent",
       secondary: "bg-b-white border-b-base-accent",
       outline: "bg-transparent border-b-base-accent",
     },
