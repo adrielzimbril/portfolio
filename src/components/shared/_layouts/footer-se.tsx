@@ -108,7 +108,7 @@ export const FooterSec: React.FC = () => {
                   <div className="flex flex-col gap-2">
                     <Badge
                       variant="colored"
-                      className="relative text-base squircle-b-white md:text-xl max-w-3xl leading-[115%]"
+                      className="relative text-base squircle-b-white text-b-white-invert md:text-xl max-w-3xl leading-[115%]"
                     >
                       {t("common.shared.base.title")} 🦄
                     </Badge>
