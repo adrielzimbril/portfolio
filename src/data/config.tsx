@@ -8,20 +8,8 @@ export const siteConfig = {
   name: "Adriel Zimbril",
   description: "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
   url: BASE_URL,
-  languages: [
-    {
-      code: "en",
-      name: "English",
-      href: "/",
-    },
-    {
-      code: "fr",
-      name: "Français",
-      href: "/fr",
-    },
-  ],
-  languagePrimary: "en_US",
-  languagesArray: ["en_US", "fr_FR"],
+  languagePrimary: "fr_FR",
+  languagesArray: ["fr_FR", "en_US", "cn_CN"],
   keywords: [
     "Product designer",
     "UI/UX",
@@ -43,11 +31,6 @@ export const siteConfig = {
       index: true,
       follow: true,
     },
-    languages: {
-      en: { name: "English", alternateUrl: BASE_URL },
-      fr: { name: "Français", alternateUrl: BASE_URL },
-      cn: { name: "中文", alternateUrl: BASE_URL },
-    },
   },
   details: {
     id: "adrielzimbril",
@@ -58,10 +41,6 @@ export const siteConfig = {
     hook: "Let's chat about your next project 👋",
   },
   links: {
-    twitter: "https://twitter.com/adrielzimbril",
-    discord: "https://discord.gg/adrielzimbril",
-    github: "https://github.com/adrielzimbril",
-    instagram: "https://instagram.com/adrielzimbril",
     navbar: [
       // {
       //   href: routes.home.link,
@@ -171,36 +150,6 @@ export const siteConfig = {
         question: "What is an AI Agent?",
         answer:
           "An AI Agent is an intelligent software program that can perform tasks autonomously, learn from interactions, and make decisions to help achieve specific goals. It combines artificial intelligence and machine learning to provide personalized assistance and automation.",
-      },
-      {
-        id: 2,
-        question: "How does SkyAgent work?",
-        answer:
-          "SkyAgent works by analyzing your requirements, leveraging advanced AI algorithms to understand context, and executing tasks based on your instructions. It can integrate with your workflow, learn from feedback, and continuously improve its performance.",
-      },
-      {
-        id: 3,
-        question: "How secure is my data?",
-        answer:
-          "We implement enterprise-grade security measures including end-to-end encryption, secure data centers, and regular security audits. Your data is protected according to industry best practices and compliance standards.",
-      },
-      {
-        id: 4,
-        question: "Can I integrate my existing tools?",
-        answer:
-          "Yes, SkyAgent is designed to be highly compatible with popular tools and platforms. We offer APIs and pre-built integrations for seamless connection with your existing workflow tools and systems.",
-      },
-      {
-        id: 5,
-        question: "Is there a free trial available?",
-        answer:
-          "Yes, we offer a 14-day free trial that gives you full access to all features. No credit card is required to start your trial, and you can upgrade or cancel at any time.",
-      },
-      {
-        id: 6,
-        question: "How does SkyAgent save me time?",
-        answer:
-          "SkyAgent automates repetitive tasks, streamlines workflows, and provides quick solutions to common challenges. This automation and efficiency can save hours of manual work, allowing you to focus on more strategic activities.",
       },
     ],
   },

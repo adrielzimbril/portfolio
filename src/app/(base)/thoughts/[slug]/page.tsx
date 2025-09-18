@@ -87,7 +87,7 @@ export default async function BlogPostPage(props: {
               "@type": "Person",
               name: siteConfig.details.nameShared,
               url: siteConfig.url,
-              sameAs: [siteConfig.links.twitter],
+              sameAs: [siteConfig.links.contact.social.x.url],
             },
           }),
         }}
