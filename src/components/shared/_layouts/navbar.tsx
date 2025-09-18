@@ -142,9 +142,6 @@ export function Navbar() {
               href={routes.home.link}
               onClick={async () => {
                 setActiveTab(routes.home.key);
-                sleep(2000).then(() => {
-                  toggleDrawer();
-                });
               }}
               variant="none"
               size="none"

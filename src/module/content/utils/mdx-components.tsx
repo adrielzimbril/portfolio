@@ -7,6 +7,7 @@ import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { PortfolioProjectResearchScope } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
+import { cn } from "@/utils";
 
 export const mdxComponents = {
   a: (props) => {
@@ -172,11 +173,29 @@ export const mdxCustomComponents = {
   SectionLayout,
   PreviewValueCard,
   SmartSection,
+  Highlight,
 } satisfies MDXComponents;
 
-{
-  /* Composant qui se cache si title est vide */
+export function Highlight({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <span
+      className={cn(
+        "p-1 py-0.5 font-medium dark:font-semibold text-secondary",
+        className
+      )}
+    >
+      {children}
+    </span>
+  );
 }
+
+/* Component that hides if title is empty */
 export function SmartSection({
   title,
   description,
@@ -186,7 +205,7 @@ export function SmartSection({
   description: string;
   children: React.ReactNode;
 }) {
-  // Ne pas afficher si title est vide ou undefined
+  // Do not display if title is empty or undefined
   if (!title?.trim()) return null;
 
   return (

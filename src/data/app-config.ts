@@ -37,24 +37,24 @@ export const appConfig = {
     // Define all locales here that should be available in the app
     // You need to define a label that is shown in the language selector and a currency that should be used for pricing with this locale
     locales: {
-      // en: {
-      //   code: "en_US",
-      //   label: "English",
-      //   currency: "USD",
-      //   icon: "USFlag",
-      // },
+      en: {
+        code: "en_US",
+        label: "English",
+        currency: "USD",
+        icon: "USFlag",
+      },
       fr: {
         code: "fr_FR",
         label: "Français",
         currency: "EUR",
         icon: "FRFlag",
       },
-      // cn: {
-      //   code: "cn_CN",
-      //   label: "中文",
-      //   currency: "RMB",
-      //   icon: "CNFlag",
-      // },
+      cn: {
+        code: "cn_CN",
+        label: "中文",
+        currency: "RMB",
+        icon: "CNFlag",
+      },
     },
     // The default locale is used if no locale is provided
     defaultLocale: "fr",
