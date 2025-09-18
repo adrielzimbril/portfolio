@@ -472,7 +472,7 @@ function CustomAlert({
               )}{" "}
               🥸
             </DialogBadge>
-            <p className="text-zinc-800">{question.funFact}</p>
+            <p className="text-white-invert-fr">{question.funFact}</p>
           </DialogCard>
         )}
 
@@ -512,7 +512,7 @@ function AllFactsModal({
       <DialogContent
         size="xl"
         variant="modern"
-        className="flex flex-col gap-4 md:gap-6 p-4 sm:max-h-[min(640px,80vh)]"
+        className="flex flex-col gap-4 md:gap-6 px-4 py-4.5 sm:max-h-[min(640px,80vh)]"
       >
         <DialogHeader>
           <DialogTitle className="text-base font-normal md:font-medium md:text-xl text-b-white-invert-sec">
@@ -524,7 +524,7 @@ function AllFactsModal({
 
         <DialogSeparator />
 
-        <div className="flex flex-col gap-4 px-2 overflow-y-auto  max-h-[calc(100vh-200px)] scroll-smooth">
+        <div className="flex flex-col gap-4 px-2 overflow-y-auto max-h-[calc(100vh-200px)] scroll-smooth">
           {/* Score Section */}
           {totalGuessed > 0 && (
             <motion.div
@@ -540,7 +540,7 @@ function AllFactsModal({
                     { score: correctGuesses, total: totalQuestions }
                   )}
                 </h5>
-                <p className="text-gray-700">
+                <p className="text-white-invert-fr">
                   {correctGuesses === totalQuestions
                     ? t(
                         "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.good"
@@ -577,7 +577,7 @@ function AllFactsModal({
 
                     <div className="flex-1 min-w-0">
                       <h5 className="font-bold mb-1">{question.title}</h5>
-                      <p className="text-base text-gray-700 mb-3">
+                      <p className="text-base text-white-invert-fr mb-3">
                         {question.description}
                       </p>
 
@@ -586,7 +586,9 @@ function AllFactsModal({
                         <DialogBadge
                           variant="colored"
                           className={cn(
-                            question.isTrue ? "text-green-800" : "text-red-800"
+                            question.isTrue
+                              ? "text-green-800 dark:text-green-400"
+                              : "text-red-800 dark:text-red-500"
                           )}
                         >
                           {question.isTrue
