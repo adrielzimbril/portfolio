@@ -22,6 +22,17 @@ interface TestimonialCard {
 
 const testimonials: TestimonialCard[] = [
   {
+    id: 0,
+    locale: Locale.FR,
+    name: "Koffi Éric Emmanuel YAO",
+    position: "Country Marketing and Sales Manager | Social seller advanced",
+    testimonial:
+      "Travailler avec Adriel est un plaisir. Il est professionnel et disponible. J'ai apprécié son sens de la promptitude dans les feedback et son accompagnement même en fin de projet. Il a bossé sur la maquette d'une application qui sera dévoilée bientôt (🤫, je tais le nom pour l'instant). Ce sera un carton, je suis rassuré !",
+    linkedinUrl:
+      "https://www.linkedin.com/in/koffi-%C3%A9ric-emmanuel-y-292a3a137",
+    avatar: "KEEY",
+  },
+  {
     id: 1,
     locale: Locale.FR,
     name: "Christian Junior Braffo",
