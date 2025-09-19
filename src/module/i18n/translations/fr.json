@@ -429,39 +429,106 @@
   },
   "mail": {
     "common": {
-      "openLinkInBrowser": "If you want to open the link in a different browser than your default one, copy and paste this link:",
-      "otp": "One-time password",
-      "useLink": "or use the following link:"
+      "defaultName": "ami designer",
+      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product Designer 🦄",
+      "contact": "Si tu veux échanger ou juste dire bonjour, réponds simplement à cet email. Je lis tout personnellement.",
+      "copyright": "Crafted with ❤️ by Adriel Zimbril"
     },
-    "emailVerification": {
-      "body": "Hey,\nplease click the link below to verify this new email address.",
-      "confirmEmail": "Verify email",
-      "subject": "Verify your email"
+    "newsletter-signup": {
+      "preview": "Salut ! Je voulais te parler de quelque chose qui me tient à cœur...",
+      "greeting": "Salut {firstName}",
+      "tagline": "Problem Solver & Your SaaS Product Designer 🦄",
+      "story": {
+        "intro": "Il y a quelques semaines, un utilisateur de l'une de mes apps m'a écrit pour me dire qu'il avait mis du temps à annuler une action. Je me suis rendu compte que c'était à cause d'un choix de design que j'aimais bien… mais qui compliquait l'expérience.",
+        "presentation": "Je m'appelle Adriel, et depuis 5 ans je crée des interfaces pour des SaaS et j'ai remarqué quelque chose : on complique souvent les choses alors que les utilisateurs cherchent juste de la simplicité.",
+        "philosophy": "Ce qui m'intéresse vraiment, c'est comprendre comment les gens utilisent ce qu'on crée. Pourquoi ils abandonnent à tel endroit, pourquoi ils reviennent, ce qui les aide vraiment dans leur quotidien."
+      },
+      "content": {
+        "title": "Dans cette newsletter, je partage simplement ce que j'apprends.",
+        "subtitle": "Mes observations sur :",
+        "item1": "Ce qui fonctionne (et ce qui ne fonctionne pas) dans les interfaces que je crée",
+        "item2": "Les retours utilisateurs qui m'ont fait changer d'avis",
+        "item3": "Mes erreurs et comment j'essaie de les éviter",
+        "item4": "Des réflexions sur le design de produits SaaS",
+        "conclusion": "Des faits, des chiffres, des échecs cuisants et des victoires inattendues. Le design tel qu'il se passe vraiment ❤️."
+      },
+      "why": {
+        "title": "Pourquoi j'écris vraiment ?",
+        "reason": "Parce que j'aime bien comprendre comment les choses fonctionnent. Et dans le design, il y a souvent un écart entre ce qu'on pense qui va marcher et ce qui marche vraiment.",
+        "motivation": "J'ai envie de partager ces petites découvertes, ces moments où on se dit \"ah tiens, je n'aurais pas pensé à ça\". Sans prétention, juste par curiosité partagée ❤️."
+      },
+      "cta": {
+        "title": "J'ai préparé quelque chose pour commencer.",
+        "description": "Un guide sur les erreurs UX que je remarque souvent dans les SaaS. Des observations concrètes que j'ai rassemblées au fil de mes projets.",
+        "button": "Récupérer le guide (c'est gratuit)",
+        "note": "Et bien sûr, tu peux te désabonner quand tu veux. Je t'écris seulement quand j'ai quelque chose d'utile à partager."
+      }
     },
-    "forgotPassword": {
-      "body": "Hey,\nyou requested a password reset.\n\nClick the button below to reset your password.",
-      "resetPassword": "Reset password",
-      "subject": "Reset your password"
+    "welcome": {
+      "defaultName": "ami designer",
+      "preview": "Bienvenue ! Quelques mots sur ce qui t'attend...",
+      "greeting": "Bienvenue {firstName}",
+      "tagline": "C'est parti pour cette petite aventure ensemble",
+      "content": {
+        "intro": "Merci de faire confiance à ma newsletter. Ça me fait vraiment plaisir de savoir qu'on va pouvoir échanger sur le design et les SaaS.",
+        "nextSteps": "Dans les prochains jours, tu vas recevoir le guide sur les erreurs UX que j'ai préparé. En attendant, laisse-moi te dire rapidement à quoi t'attendre.",
+        "frequency": "Je t'écris environ une fois par semaine, parfois moins si je n'ai rien d'intéressant à partager. L'idée c'est que chaque email apporte quelque chose d'utile.",
+        "whatYouReceive": {
+          "title": "Ce que tu vas recevoir :",
+          "item1": "Des observations concrètes sur le design de produits SaaS",
+          "item2": "Mes apprentissages (y compris les ratés)",
+          "item3": "Des ressources utiles quand j'en découvre",
+          "item4": "Pas de spam, promis"
+        }
+      },
+      "question": {
+        "title": "Une petite question pour mieux te connaître :",
+        "text": "Sur quoi travailles-tu en ce moment ? Un produit SaaS ? Une startup ? Ou tu t'intéresses juste au design d'interfaces ?",
+        "encouragement": "N'hésite pas à me répondre, j'aime bien savoir qui lit mes emails. Et si tu as des questions ou des sujets que tu aimerais que j'aborde, dis-le moi."
+      },
+      "reminder": {
+        "title": "Au fait, petite précision :",
+        "text": "Si tu n'es pas à l'origine de cette inscription, pas de souci. Tu peux simplement ignorer cet email ou te désabonner via le lien en bas de page."
+      }
     },
-    "magicLink": {
-      "body": "Hey,\nyou requested a login email from supastarter.\n\nClick the link below to login.",
-      "login": "Login",
-      "subject": "Login to supastarter"
+    "free-product-delivery": {
+      "defaultName": "ami designer",
+      "preview": "Comme promis, voici ta ressource !",
+      "greeting": "Salut {firstName}",
+      "intro": "Comme promis, voici ta ressource :",
+      "featuresTitle": "Ce que tu vas y trouver :",
+      "ctaButton": "Accéder à la ressource",
+      "message1": "J'espère que cette ressource te sera utile dans tes projets. Si tu as des questions ou des retours après l'avoir consultée, n'hésite pas à me répondre directement.",
+      "message2": "Et si jamais tu l'utilises sur un projet concret, j'aimerais bien savoir comment ça s'est passé !"
     },
-    "newUser": {
-      "body": "Hey,\nthanks for signing up for supastarter.\n\nTo start using our app, please confirm your email address by clicking the link below.",
-      "confirmEmail": "Confirm email",
-      "subject": "Confirm your email"
-    },
-    "newsletterSignup": {
-      "body": "Thank you for signing up for the supastarter newsletter. We will keep you updated with the latest news and updates.",
-      "subject": "Welcome to our newsletter"
-    },
-    "organizationInvitation": {
-      "body": "You have been invited to join the organization {organizationName}. Click the button below or copy and paste the link into your browser of choice to accept the invitation and join the organization.",
-      "headline": "Join the organization {organizationName}",
-      "join": "Join the organization",
-      "subject": "You have been invited to join an organization"
+    "product-delivery": {
+      "defaultName": "ami designer",
+      "preview": "Votre {productType} est prêt à être téléchargé !",
+      "greeting": "Salut {firstName}",
+      "featuresTitle": "Ce qui t'attend :",
+      "thankYou": "Merci pour ta confiance 🙌",
+      "message1": "Je suis content que tu fasses partie de cette aventure. J'espère que cette ressource t'aidera à aller plus loin, plus vite.",
+      "message2": "Ton avis m'aide vraiment à améliorer mes contenus pour les prochaines personnes. Et si tu as des questions en cours de route, n'hésite pas à me les poser !",
+      "productTypes": {
+        "formation": {
+          "intro": "Ta formation est prête !",
+          "access": "Commencer la formation",
+          "feedback": "Après avoir suivi quelques modules, j'aimerais beaucoup avoir ton retour. Est-ce que le contenu correspond à tes attentes ? Y a-t-il des points que tu aimerais approfondir ?",
+          "tip": "💡 Petite astuce : prends des notes pendant que tu suis les modules, ça aide vraiment à retenir et appliquer."
+        },
+        "masterclass": {
+          "intro": "Ta masterclass t'attend !",
+          "access": "Regarder la masterclass",
+          "feedback": "Une fois que tu auras regardé la masterclass, dis-moi ce que tu en penses ! Est-ce que ça répond à tes questions ? Qu'est-ce qui t'a le plus marqué ?",
+          "tip": "🎯 Conseil : regarde-la dans un endroit calme avec un carnet à côté. Les meilleures idées viennent souvent pendant qu'on écoute."
+        },
+        "ebook": {
+          "intro": "Ton ebook est disponible !",
+          "access": "Télécharger l'ebook",
+          "feedback": "Quand tu auras eu le temps de le parcourir, j'aimerais savoir ce que tu en penses. Est-ce que c'est utile pour tes projets actuels ? Qu'est-ce qui te pose encore question ?",
+          "tip": "📖 Suggestion : lis-le par petites sections et essaie d'appliquer directement ce que tu apprends."
+        }
+      }
     }
   },
   "zod": {
