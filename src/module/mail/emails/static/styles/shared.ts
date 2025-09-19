@@ -26,7 +26,7 @@ export const contentSection: CSSProperties = {
 export const greeting: CSSProperties = {
   color: "#1a1a1a",
   fontSize: "24px",
-  fontWeight: 400,
+  fontWeight: 500,
   lineHeight: "1.3",
   margin: "0 0 8px 0",
 };
