@@ -11,8 +11,8 @@ import {
   Section,
   Text,
   Hr,
+  Tailwind,
 } from "@react-email/components";
-import { newsletterSignupStyles as styles } from "./static/styles";
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
@@ -34,104 +34,113 @@ export function NewsletterSignup({
     <Html>
       <Head />
       <Preview>{t("mail.newsletter-signup.preview")}</Preview>
-      <Body style={styles.main}>
-        <Container style={styles.container}>
-          {/* Simple Header */}
-          <Section style={styles.headerSection}>
-            <Heading as="h1" style={styles.greeting}>
-              {t("mail.newsletter-signup.greeting", {
-                firstName,
-              })}{" "}
-              👋
-            </Heading>
-            <Text style={styles.tagline}>
-              {t("mail.newsletter-signup.tagline")}
-            </Text>
-          </Section>
-
-          {/* Story Content */}
-          <Section style={styles.contentSection}>
-            <Text style={styles.paragraph}>
-              {t("mail.newsletter-signup.story.intro")}
-            </Text>
-            <Text style={styles.paragraph}>
-              {t("mail.newsletter-signup.story.presentation")}
-            </Text>
-            <Text style={styles.paragraph}>
-              {t("mail.newsletter-signup.story.philosophy")}
-            </Text>
-            <Hr style={styles.divider} />
-            <Text style={styles.paragraph}>
-              <strong>{t("mail.newsletter-signup.content.title")}</strong>
-            </Text>
-            <Text style={styles.paragraph}>
-              {t("mail.newsletter-signup.content.subtitle")}
-            </Text>
-            <Section style={styles.listSection}>
-              <Text style={styles.listItem}>
-                → {t("mail.newsletter-signup.content.item1")}
-              </Text>
-              <Text style={styles.listItem}>
-                → {t("mail.newsletter-signup.content.item2")}
-              </Text>
-              <Text style={styles.listItem}>
-                → {t("mail.newsletter-signup.content.item3")}
-              </Text>
-              <Text style={styles.listItem}>
-                → {t("mail.newsletter-signup.content.item4")}
-              </Text>
-            </Section>
-            <Text style={styles.paragraph}>
-              {t("mail.newsletter-signup.content.conclusion")}
-            </Text>
-            <Hr style={styles.divider} />
-            <Text style={styles.paragraph}>
-              <strong>{t("mail.newsletter-signup.why.title")}</strong>
-            </Text>
-            <Text style={styles.paragraph}>
-              {t("mail.newsletter-signup.why.reason")}
-            </Text>
-            <Text style={styles.paragraph}>
-              {t("mail.newsletter-signup.why.motivation")}
-            </Text>
-            <Hr style={styles.divider} />
-            {/* Simple CTA */}
-            <Section style={styles.ctaSection}>
-              <Text style={styles.paragraph}>
-                <strong>{t("mail.newsletter-signup.cta.title")}</strong>
-              </Text>
-
-              <Text style={styles.paragraph}>
-                {t("mail.newsletter-signup.cta.description")}
-              </Text>
-
-              <Link
-                href="https://adrielzimbril.com/guide-gratuit"
-                style={styles.ctaLink}
+      <Tailwind>
+        <Body className="bg-[#f5f5f5] font-sans">
+          <Container className="max-w-[600px] my-0 mx-auto bg-white">
+            {/* Simple Header */}
+            <Section className="px-10 pt-10 pb-5 bg-white">
+              <Heading
+                as="h1"
+                className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                → {t("mail.newsletter-signup.cta.button")}
-              </Link>
-
-              <Text style={styles.ctaNote}>
-                {t("mail.newsletter-signup.cta.note")}
+                {t("mail.newsletter-signup.greeting", { firstName })} 👋
+              </Heading>
+              <Text className="text-[#666666] text-base m-0">
+                {t("mail.newsletter-signup.tagline")}
               </Text>
             </Section>
-          </Section>
 
-          {/* Simple Footer */}
-          <Section style={styles.footer}>
-            <Hr style={styles.footerDivider} />
+            {/* Story Content */}
+            <Section className="px-10 pb-10 bg-white">
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.newsletter-signup.story.intro")}
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.newsletter-signup.story.presentation")}
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.newsletter-signup.story.philosophy")}
+              </Text>
+              <Hr className="border-t border-[#e0e0e0] my-8" />
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                <strong>{t("mail.newsletter-signup.content.title")}</strong>
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.newsletter-signup.content.subtitle")}
+              </Text>
+              <Section className="my-6">
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.newsletter-signup.content.item1")}
+                </Text>
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.newsletter-signup.content.item2")}
+                </Text>
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.newsletter-signup.content.item3")}
+                </Text>
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.newsletter-signup.content.item4")}
+                </Text>
+              </Section>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.newsletter-signup.content.conclusion")}
+              </Text>
+              <Hr className="border-t border-[#e0e0e0] my-8" />
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                <strong>{t("mail.newsletter-signup.why.title")}</strong>
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.newsletter-signup.why.reason")}
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.newsletter-signup.why.motivation")}
+              </Text>
+              <Hr className="border-t border-[#e0e0e0] my-8" />
 
-            <Text style={styles.signature}>{t("mail.common.signature")}</Text>
+              {/* Simple CTA */}
+              <Section className="text-center my-8">
+                <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                  <strong>{t("mail.newsletter-signup.cta.title")}</strong>
+                </Text>
 
-            <Text style={styles.footerNote}>{t("mail.common.contact")}</Text>
+                <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                  {t("mail.newsletter-signup.cta.description")}
+                </Text>
 
-            <Hr style={styles.footerDivider} />
+                <Link
+                  href="https://adrielzimbril.com/guide-gratuit"
+                  className="text-[#5c73f6] text-lg font-medium no-underline inline-block my-4 border-b border-[#4e68fa] pb-0.5"
+                >
+                  → {t("mail.newsletter-signup.cta.button")}
+                </Link>
 
-            <Text style={styles.copyright}>{t("mail.common.copyright")}</Text>
-          </Section>
-        </Container>
-      </Body>
+                <Text className="text-[#777777] text-sm mt-4 italic">
+                  {t("mail.newsletter-signup.cta.note")}
+                </Text>
+              </Section>
+            </Section>
+
+            {/* Simple Footer */}
+            <Section className="p-10 bg-[#fafafa]">
+              <Hr className="border-t border-[#e0e0e0] mb-6" />
+
+              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">
+                {t("mail.common.signature")}
+              </Text>
+
+              <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
+                {t("mail.common.contact")}
+              </Text>
+
+              <Hr className="border-t border-[#e0e0e0] mb-6" />
+
+              <Text className="text-xs text-[#999999] text-center mb-3">
+                {t("mail.common.copyright")}
+              </Text>
+            </Section>
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   );
 }

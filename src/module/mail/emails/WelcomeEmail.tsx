@@ -11,8 +11,8 @@ import {
   Section,
   Text,
   Hr,
+  Tailwind,
 } from "@react-email/components";
-import { welcomeStyles } from "./static/styles";
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
@@ -35,101 +35,108 @@ export function WelcomeEmail({
     <Html>
       <Head />
       <Preview>{t("mail.welcome.preview")}</Preview>
-      <Body style={welcomeStyles.main}>
-        <Container style={welcomeStyles.container}>
-          {/* Simple Header */}
-          <Section style={welcomeStyles.headerSection}>
-            <Heading as="h1" style={welcomeStyles.greeting}>
-              {t("mail.welcome.greeting", { firstName })} 👋
-            </Heading>
-            <Text style={welcomeStyles.tagline}>
-              {t("mail.welcome.tagline")}
-            </Text>
-          </Section>
-
-          {/* Welcome Content */}
-          <Section style={welcomeStyles.contentSection}>
-            <Text style={welcomeStyles.paragraph}>
-              {t("mail.welcome.content.intro")}
-            </Text>
-
-            <Text style={welcomeStyles.paragraph}>
-              {t("mail.welcome.content.nextSteps")}
-            </Text>
-
-            <Hr style={welcomeStyles.divider} />
-
-            <Text style={welcomeStyles.paragraph}>
-              <strong>{t("mail.welcome.content.whatYouReceive.title")}</strong>
-            </Text>
-
-            <Section style={welcomeStyles.listSection}>
-              <Text style={welcomeStyles.listItem}>
-                → {t("mail.welcome.content.whatYouReceive.item1")}
-              </Text>
-              <Text style={welcomeStyles.listItem}>
-                → {t("mail.welcome.content.whatYouReceive.item2")}
-              </Text>
-              <Text style={welcomeStyles.listItem}>
-                → {t("mail.welcome.content.whatYouReceive.item3")}
-              </Text>
-              <Text style={welcomeStyles.listItem}>
-                → {t("mail.welcome.content.whatYouReceive.item4")}
+      <Tailwind>
+        <Body className="bg-[#f5f5f5] font-sans">
+          <Container className="max-w-[600px] my-0 mx-auto bg-white">
+            {/* Simple Header */}
+            <Section className="px-10 pt-10 pb-5 bg-white">
+              <Heading
+                as="h1"
+                className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
+              >
+                {t("mail.welcome.greeting", { firstName })} 👋
+              </Heading>
+              <Text className="text-[#666666] text-base m-0">
+                {t("mail.welcome.tagline")}
               </Text>
             </Section>
 
-            <Text style={welcomeStyles.paragraph}>
-              {t("mail.welcome.content.frequency")}
-            </Text>
-
-            <Hr style={welcomeStyles.divider} />
-
-            <Text style={welcomeStyles.paragraph}>
-              <strong>{t("mail.welcome.question.title")}</strong>
-            </Text>
-
-            <Text style={welcomeStyles.paragraph}>
-              {t("mail.welcome.question.text")}
-            </Text>
-
-            <Text style={welcomeStyles.paragraph}>
-              {t("mail.welcome.question.encouragement")}
-            </Text>
-
-            <Hr style={welcomeStyles.divider} />
-
-            {/* Simple reminder */}
-            <Section style={welcomeStyles.reminderSection}>
-              <Text style={welcomeStyles.paragraph}>
-                <strong>{t("mail.welcome.reminder.title")}</strong>
+            {/* Welcome Content */}
+            <Section className="px-10 pb-10 bg-white">
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.welcome.content.intro")}
               </Text>
 
-              <Text style={welcomeStyles.paragraph}>
-                {t("mail.welcome.reminder.text")}
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.welcome.content.nextSteps")}
+              </Text>
+
+              <Hr className="border-t border-[#e0e0e0] my-8" />
+
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                <strong>
+                  {t("mail.welcome.content.whatYouReceive.title")}
+                </strong>
+              </Text>
+
+              <Section className="my-6">
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.welcome.content.whatYouReceive.item1")}
+                </Text>
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.welcome.content.whatYouReceive.item2")}
+                </Text>
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.welcome.content.whatYouReceive.item3")}
+                </Text>
+                <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
+                  → {t("mail.welcome.content.whatYouReceive.item4")}
+                </Text>
+              </Section>
+
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.welcome.content.frequency")}
+              </Text>
+
+              <Hr className="border-t border-[#e0e0e0] my-8" />
+
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                <strong>{t("mail.welcome.question.title")}</strong>
+              </Text>
+
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.welcome.question.text")}
+              </Text>
+
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.welcome.question.encouragement")}
+              </Text>
+
+              <Hr className="border-t border-[#e0e0e0] my-8" />
+
+              {/* Simple reminder */}
+              <Section className="bg-[#fafafa] p-6 rounded-xl border border-[#f0f0f0] my-6">
+                <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                  <strong>{t("mail.welcome.reminder.title")}</strong>
+                </Text>
+
+                <Text className="text-[#333333] text-base leading-relaxed mb-0">
+                  {t("mail.welcome.reminder.text")}
+                </Text>
+              </Section>
+            </Section>
+
+            {/* Simple Footer */}
+            <Section className="p-10 bg-[#fafafa]">
+              <Hr className="border-t border-[#e0e0e0] mb-6" />
+
+              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">
+                {t("mail.common.signature")}
+              </Text>
+
+              <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
+                {t("mail.common.contact")}
+              </Text>
+
+              <Hr className="border-t border-[#e0e0e0] mb-6" />
+
+              <Text className="text-xs text-[#999999] text-center mb-3">
+                {t("mail.common.copyright")}
               </Text>
             </Section>
-          </Section>
-
-          {/* Simple Footer */}
-          <Section style={welcomeStyles.footer}>
-            <Hr style={welcomeStyles.footerDivider} />
-
-            <Text style={welcomeStyles.signature}>
-              {t("mail.common.signature")}
-            </Text>
-
-            <Text style={welcomeStyles.footerNote}>
-              {t("mail.common.contact")}
-            </Text>
-
-            <Hr style={welcomeStyles.footerDivider} />
-
-            <Text style={welcomeStyles.copyright}>
-              {t("mail.common.copyright")}
-            </Text>
-          </Section>
-        </Container>
-      </Body>
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   );
 }

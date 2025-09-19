@@ -13,8 +13,8 @@ import {
   Text,
   Hr,
   Button,
+  Tailwind,
 } from "@react-email/components";
-import { productDeliveryStyles } from "./static/styles";
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
@@ -63,111 +63,119 @@ export function ProductDeliveryEmail({
     <Html>
       <Head />
       <Preview>{t("mail.product-delivery.preview", { productType })}</Preview>
-      <Body style={productDeliveryStyles.main}>
-        <Container style={productDeliveryStyles.container}>
-          {/* Header with greeting */}
-          <Section style={productDeliveryStyles.headerSection}>
-            <Text style={productDeliveryStyles.greeting}>
-              {t("mail.product-delivery.greeting", { firstName })} 👋
-            </Text>
-            <Text style={productDeliveryStyles.intro}>
-              {typeMessages.intro}
-            </Text>
-          </Section>
-
-          {/* Product Section */}
-          <Section style={productDeliveryStyles.productSection}>
-            <Heading as="h1" style={productDeliveryStyles.productTitle}>
-              {productTitle}
-            </Heading>
-
-            {coverImage && (
-              <Img
-                src={coverImage}
-                alt={productTitle}
-                width="100%"
-                style={productDeliveryStyles.productImage}
-              />
-            )}
-
-            {customText && (
-              <Text style={productDeliveryStyles.productDescription}>
-                {customText}
+      <Tailwind>
+        <Body className="bg-[#f5f5f5] font-sans">
+          <Container className="max-w-[600px] my-0 mx-auto bg-white">
+            {/* Header with greeting */}
+            <Section className="px-10 pt-10 pb-5 bg-white">
+              <Text className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
+                {t("mail.product-delivery.greeting", { firstName })} 👋
               </Text>
-            )}
+              <Text className="text-[#666666] text-base m-0">
+                {typeMessages.intro}
+              </Text>
+            </Section>
 
-            {features && features.length > 0 && (
-              <Section style={productDeliveryStyles.featuresSection}>
-                <Text style={productDeliveryStyles.featureTitle}>
-                  <strong>{t("mail.product-delivery.featuresTitle")}</strong>
+            {/* Product Section */}
+            <Section className="p-5 bg-white">
+              <Heading
+                as="h1"
+                className="text-2xl font-medium leading-tight text-[#1a1a1a] text-center mb-5"
+              >
+                {productTitle}
+              </Heading>
+
+              {coverImage && (
+                <Img
+                  src={coverImage}
+                  alt={productTitle}
+                  width="100%"
+                  className="w-full max-h-[360px] object-cover rounded-xl my-5 border border-[#f0f0f0]"
+                />
+              )}
+
+              {customText && (
+                <Text className="text-[#333333] text-base leading-relaxed mb-6">
+                  {customText}
                 </Text>
-                <Section style={productDeliveryStyles.featureList}>
-                  {features.map((feature, index) => (
-                    <Text key={index} style={productDeliveryStyles.featureItem}>
-                      → {feature}
-                    </Text>
-                  ))}
+              )}
+
+              {features && features.length > 0 && (
+                <Section className="my-6">
+                  <Text className="text-[#333333] text-base leading-relaxed mb-3">
+                    <strong>{t("mail.product-delivery.featuresTitle")}</strong>
+                  </Text>
+                  <Section className="my-3">
+                    {features.map((feature, index) => (
+                      <Text
+                        key={index}
+                        className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal"
+                      >
+                        → {feature}
+                      </Text>
+                    ))}
+                  </Section>
                 </Section>
-              </Section>
-            )}
+              )}
 
-            {productUrl && (
-              <Section style={productDeliveryStyles.ctaSection}>
-                <Button
-                  href={productUrl}
-                  style={productDeliveryStyles.ctaButton}
-                >
-                  {typeMessages.access}
-                </Button>
-              </Section>
-            )}
-          </Section>
+              {productUrl && (
+                <Section className="text-center my-8">
+                  <Button
+                    href={productUrl}
+                    className="bg-[#1a1a1a] text-white text-base font-medium py-3.5 px-7 rounded-lg no-underline inline-block border-none"
+                  >
+                    {typeMessages.access}
+                  </Button>
+                </Section>
+              )}
+            </Section>
 
-          {/* Personal touch with feedback request */}
-          <Section style={productDeliveryStyles.personalSection}>
-            <Hr style={productDeliveryStyles.divider} />
+            {/* Personal touch with feedback request */}
+            <Section className="p-5 bg-white">
+              <Hr className="border-t border-[#e0e0e0] my-8" />
 
-            <Text style={productDeliveryStyles.paragraph}>
-              <strong>{t("mail.product-delivery.thankYou")}</strong>
-            </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                <strong>{t("mail.product-delivery.thankYou")}</strong>
+              </Text>
 
-            <Text style={productDeliveryStyles.paragraph}>
-              {t("mail.product-delivery.message1")}
-            </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.product-delivery.message1")}
+              </Text>
 
-            <Text style={productDeliveryStyles.tipText}>
-              {typeMessages.tip}
-            </Text>
+              <Text className="text-[#555555] text-sm leading-relaxed mb-5 italic">
+                {typeMessages.tip}
+              </Text>
 
-            <Text style={productDeliveryStyles.paragraph}>
-              {typeMessages.feedback}
-            </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {typeMessages.feedback}
+              </Text>
 
-            <Text style={productDeliveryStyles.paragraph}>
-              {t("mail.product-delivery.message2")}
-            </Text>
-          </Section>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                {t("mail.product-delivery.message2")}
+              </Text>
+            </Section>
 
-          {/* Footer */}
-          <Section style={productDeliveryStyles.footer}>
-            <Hr style={productDeliveryStyles.footerDivider} />
+            {/* Footer */}
+            <Section className="p-10 bg-[#fafafa]">
+              <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-            <Text style={productDeliveryStyles.signature}>
-              {t("mail.common.signature")}
-            </Text>
+              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">
+                {t("mail.common.signature")}
+              </Text>
 
-            <Text style={productDeliveryStyles.footerNote}>
-              {t("mail.common.contact")}
-            </Text>
+              <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
+                {t("mail.common.contact")}
+              </Text>
 
-            <Hr style={productDeliveryStyles.footerDivider} />
+              <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-            <Text style={productDeliveryStyles.copyright}>
-              {t("mail.common.copyright")}
-            </Text>
-          </Section>
-        </Container>
-      </Body>
+              <Text className="text-xs text-[#999999] text-center mb-3">
+                {t("mail.common.copyright")}
+              </Text>
+            </Section>
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   );
 }
