@@ -225,9 +225,9 @@
       "retry": "Réessayer",
       "receive": "Recevoir",
       "obtain": "Obtenir",
-      "loading": "Chargement...",
+      "loading": "Chargement",
       "loaded": "Chargé",
-      "sending": "Envoi...",
+      "sending": "Envoi",
       "sent": "Envoyé"
     },
     "shared": {
@@ -510,13 +510,13 @@
       "message1": "Je suis content que tu fasses partie de cette aventure. J'espère que cette ressource t'aidera à aller plus loin, plus vite.",
       "message2": "Ton avis m'aide vraiment à améliorer mes contenus pour les prochaines personnes. Et si tu as des questions en cours de route, n'hésite pas à me les poser !",
       "productTypes": {
-        "formation": {
+        "course": {
           "intro": "Ta formation est prête !",
           "access": "Commencer la formation",
           "feedback": "Après avoir suivi quelques modules, j'aimerais beaucoup avoir ton retour. Est-ce que le contenu correspond à tes attentes ? Y a-t-il des points que tu aimerais approfondir ?",
           "tip": "💡 Petite astuce : prends des notes pendant que tu suis les modules, ça aide vraiment à retenir et appliquer."
         },
-        "masterclass": {
+        "video": {
           "intro": "Ta masterclass t'attend !",
           "access": "Regarder la masterclass",
           "feedback": "Une fois que tu auras regardé la masterclass, dis-moi ce que tu en penses ! Est-ce que ça répond à tes questions ? Qu'est-ce qui t'a le plus marqué ?",

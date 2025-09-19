@@ -105,7 +105,7 @@ export function WelcomeEmail({
               <Hr className="border-t border-[#e0e0e0] my-8" />
 
               {/* Simple reminder */}
-              <Section className="bg-[#fafafa] p-6 rounded-xl border border-[#f0f0f0] my-6">
+              <Section className="bg-[#fafafa] p-6 rounded-2xl border border-[#f0f0f0] my-6">
                 <Text className="text-[#333333] text-base leading-relaxed mb-5">
                   <strong>{t("mail.welcome.reminder.title")}</strong>
                 </Text>
@@ -117,7 +117,7 @@ export function WelcomeEmail({
             </Section>
 
             {/* Simple Footer */}
-            <Section className="p-10 bg-[#fafafa]">
+            <Section className="p-10 bg-[#f5f5f4]">
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
               <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">

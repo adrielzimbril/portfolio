@@ -13,6 +13,7 @@ import {
 } from "@/utils";
 import { getAllResources, getResourceById } from "@/module/content/utils/lib";
 import { PageType, ResourceType } from "@/types";
+import NewsletterSignup from "@/module/mail/emails/NewsletterSignup";
 
 function getListIdByProduct(product?: string) {
   const map: Record<string, number | undefined> = {
@@ -127,6 +128,13 @@ export async function POST(req: NextRequest) {
         e
       );
     }
+  } else {
+    await sendEmail({
+      to: [{ email, name }],
+      context: { name },
+      templateId: "newsletterSignup",
+      locale: "fr",
+    });
   }
 
   if (productIdToken) {
@@ -174,6 +182,7 @@ export async function POST(req: NextRequest) {
               features,
               coverImage: cover,
               productUrl,
+              productType: type,
               customText,
             },
             templateId: "productDelivery",

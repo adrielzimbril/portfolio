@@ -114,7 +114,7 @@ export function FreeProductDeliveryEmail({
                 <Section className="text-center my-8">
                   <Button
                     href={productUrl}
-                    className="bg-[#1a1a1a] text-white text-base font-medium py-3.5 px-7 rounded-lg no-underline inline-block border-none"
+                    className="bg-[#1a1a1a] text-white text-base font-medium py-3.5 px-7 rounded-2xl no-underline inline-block border-none"
                   >
                     {t("mail.free-product-delivery.ctaButton")}
                   </Button>
@@ -136,7 +136,7 @@ export function FreeProductDeliveryEmail({
             </Section>
 
             {/* Footer */}
-            <Section className="p-10 bg-[#fafafa]">
+            <Section className="p-10 bg-[#f5f5f4]">
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
               <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">

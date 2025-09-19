@@ -16,6 +16,7 @@ import {
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
+import { getResourceAskUrl } from "@/utils";
 
 export function NewsletterSignup({
   locale,
@@ -98,7 +99,7 @@ export function NewsletterSignup({
               <Hr className="border-t border-[#e0e0e0] my-8" />
 
               {/* Simple CTA */}
-              <Section className="text-center my-8">
+              <Section className="text-center my-8 bg-[#fafafa] p-6 rounded-2xl border border-[#f0f0f0]">
                 <Text className="text-[#333333] text-base leading-relaxed mb-5">
                   <strong>{t("mail.newsletter-signup.cta.title")}</strong>
                 </Text>
@@ -108,8 +109,8 @@ export function NewsletterSignup({
                 </Text>
 
                 <Link
-                  href="https://adrielzimbril.com/guide-gratuit"
-                  className="text-[#5c73f6] text-lg font-medium no-underline inline-block my-4 border-b border-[#4e68fa] pb-0.5"
+                  href={getResourceAskUrl("guide-gratuit")}
+                  className="bg-[#1a1a1a] text-white font-medium py-3 px-8 rounded-2xl text-base no-underline inline-block"
                 >
                   → {t("mail.newsletter-signup.cta.button")}
                 </Link>
@@ -121,7 +122,7 @@ export function NewsletterSignup({
             </Section>
 
             {/* Simple Footer */}
-            <Section className="p-10 bg-[#fafafa]">
+            <Section className="p-10 bg-[#f5f5f4]">
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
               <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">

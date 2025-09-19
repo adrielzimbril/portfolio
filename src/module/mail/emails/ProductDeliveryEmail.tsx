@@ -18,6 +18,7 @@ import {
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
+import { ResourceTypeKey } from "@/types";
 
 export function ProductDeliveryEmail({
   locale,
@@ -26,7 +27,7 @@ export function ProductDeliveryEmail({
 }: BaseMailProps & {
   name?: string;
   productTitle: string;
-  productType: "formation" | "masterclass" | "ebook";
+  productType: ResourceTypeKey;
   features?: string[];
   coverImage?: string;
   productUrl?: string;
@@ -122,7 +123,7 @@ export function ProductDeliveryEmail({
                 <Section className="text-center my-8">
                   <Button
                     href={productUrl}
-                    className="bg-[#1a1a1a] text-white text-base font-medium py-3.5 px-7 rounded-lg no-underline inline-block border-none"
+                    className="bg-[#1a1a1a] text-white text-base font-medium py-3.5 px-7 rounded-2xl no-underline inline-block border-none"
                   >
                     {typeMessages.access}
                   </Button>
@@ -156,7 +157,7 @@ export function ProductDeliveryEmail({
             </Section>
 
             {/* Footer */}
-            <Section className="p-10 bg-[#fafafa]">
+            <Section className="p-10 bg-[#f5f5f4]">
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
               <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">

@@ -333,7 +333,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   {isSubmitting ? (
                     <>
                       <Loader color="bg-b-base" />
-                      <span>{t("common.button.sending")}...</span>
+                      <span>{t("common.button.sending")}</span>
                     </>
                   ) : (
                     <>
