@@ -13,6 +13,9 @@ export enum ResourceType {
   COURSE = "course",
   EBOOK = "ebook",
   VIDEO = "video",
+  MASTERCLASS = "masterclass",
+  FIGMA_TEMPLATE = "figma_template",
+  CODE = "code",
 }
 
 export type ResourceTypeKey = (typeof ResourceType)[keyof typeof ResourceType];

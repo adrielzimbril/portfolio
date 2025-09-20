@@ -17,11 +17,11 @@ export const routes = {
     link: "/hub",
     inHeader: true,
   },
-  hubSub: {
-    name: "Hub Sub",
-    key: "hubSub",
-    link: "/hub/SubShop",
-    inHeader: false,
+  playground: {
+    name: "Playground",
+    key: "playground",
+    link: "/playground",
+    inHeader: true,
   },
   projects: {
     name: "Projets",
@@ -29,23 +29,11 @@ export const routes = {
     link: "/projects",
     inHeader: true,
   },
-  projectSub: {
-    name: "Projet Sub",
-    key: "projectSub",
-    link: "/projects/SubProject",
-    inHeader: false,
-  },
   thoughts: {
     name: "Réflexions",
     key: "thoughts",
     link: "/thoughts",
     inHeader: true,
-  },
-  thoughtSub: {
-    name: "Réflexion Sub",
-    key: "thoughtSub",
-    link: "/thoughts/SubThought",
-    inHeader: false,
   },
   contact: {
     name: "Contact",

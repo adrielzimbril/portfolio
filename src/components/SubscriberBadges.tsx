@@ -10,6 +10,7 @@ import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
 import { ResourceType } from "@/types";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
 import { cn } from "@/utils";
+import { useTranslations } from "use-intl";
 
 function formatCount(n: number) {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
@@ -49,13 +50,32 @@ export function ProductTitleRequestsBadge({
   type?: ResourceType;
 }): JSX.Element | null {
   if (!type) return null;
+  const t = useTranslations();
   const { count, loading } = useProductTitleRequestsCount(title);
-  const productType =
-    type === ResourceType.COURSE
-      ? "Étudiants 🧑‍🎓"
-      : type === ResourceType.EBOOK
-        ? "Lecteurs 📖"
-        : "Participants 🍿";
+
+  const productTypeMap: Record<ResourceType, string> = {
+    [ResourceType.COURSE]: t(
+      "common.page-sections.hub.base.resources-type.course.badge"
+    ),
+    [ResourceType.EBOOK]: t(
+      "common.page-sections.hub.base.resources-type.ebook.badge"
+    ),
+    [ResourceType.VIDEO]: t(
+      "common.page-sections.hub.base.resources-type.video.badge"
+    ),
+    [ResourceType.MASTERCLASS]: t(
+      "common.page-sections.hub.base.resources-type.masterclass.badge"
+    ),
+    [ResourceType.FIGMA_TEMPLATE]: t(
+      "common.page-sections.hub.base.resources-type.figma-template.badge"
+    ),
+    [ResourceType.CODE]: t(
+      "common.page-sections.hub.base.resources-type.code.badge"
+    ),
+  };
+
+  const productType = productTypeMap[type] ?? "";
+
   return (
     <Badge className="squircle squircle-amber-100" variant="colored">
       <span className="flex items-center gap-1">

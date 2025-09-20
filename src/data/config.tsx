@@ -68,7 +68,7 @@ export const siteConfig = {
         linkedin: {
           name: "LinkedIn",
           key: "linkedin",
-          url: "https://dub.sh/adrielzimbril-linkedin",
+          url: "https://go.adrielzimbril.com/link",
           icon: AurthleIcons.Linkedin,
           navbar: true,
           available: true,
@@ -76,7 +76,7 @@ export const siteConfig = {
         instagram: {
           name: "Instagram",
           key: "instagram",
-          url: "https://dub.sh/adrielzimbril-instagram",
+          url: "https://go.adrielzimbril.com/in",
           icon: AurthleIcons.Instagram,
           navbar: true,
           available: true,
@@ -84,7 +84,7 @@ export const siteConfig = {
         github: {
           name: "GitHub",
           key: "github",
-          url: "https://dub.sh/adrielzimbril-github",
+          url: "https://go.adrielzimbril.com/gh",
           icon: AurthleIcons.Github,
           navbar: true,
           available: true,
@@ -92,7 +92,7 @@ export const siteConfig = {
         producthunt: {
           name: "Product Hunt",
           key: "product-hunt",
-          url: "https://dub.sh/adrielzimbril-producthunt",
+          url: "https://go.adrielzimbril.com/ph",
           icon: "",
           navbar: false,
           available: true,
@@ -100,15 +100,23 @@ export const siteConfig = {
         peerlist: {
           name: "Peerlist",
           key: "peerlist",
-          url: "https://dub.sh/adrielzimbril-peerlist",
+          url: "https://go.adrielzimbril.com/pl",
           icon: "",
+          navbar: false,
+          available: true,
+        },
+        layers: {
+          name: "Layers",
+          key: "layers",
+          url: "https://go.adrielzimbril.com/ly",
+          icon: AurthleIcons.Layersto,
           navbar: false,
           available: true,
         },
         dribbble: {
           name: "Dribbble",
           key: "dribbble",
-          url: "https://dub.sh/adrielzimbril-dribbble",
+          url: "https://go.adrielzimbril.com/db",
           icon: AurthleIcons.Dribbble,
           navbar: true,
           available: true,
@@ -116,7 +124,7 @@ export const siteConfig = {
         x: {
           name: "X",
           key: "x",
-          url: "https://dub.sh/adrielzimbril-x",
+          url: "https://go.adrielzimbril.com/x",
           icon: AurthleIcons.Xtwitter,
           navbar: false,
           available: true,
@@ -124,7 +132,7 @@ export const siteConfig = {
         youtube: {
           name: "Youtube",
           key: "youtube",
-          url: "https://dub.sh/adrielzimbril-youtube",
+          url: "https://go.adrielzimbril.com/yt",
           icon: AurthleIcons.Youtube,
           navbar: true,
           available: true,
@@ -132,7 +140,7 @@ export const siteConfig = {
         figma: {
           name: "Figma",
           key: "figma",
-          url: "https://dub.sh/adrielzimbril-figma",
+          url: "https://go.adrielzimbril.com/fg",
           icon: AurthleIcons.Figma,
           navbar: false,
           available: false,

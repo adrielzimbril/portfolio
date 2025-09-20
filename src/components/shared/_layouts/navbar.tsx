@@ -18,7 +18,7 @@ import { usePathname } from "next/navigation";
 import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 
 const INITIAL_WIDTH = "70rem";
-const MAX_WIDTH = "65rem";
+const MAX_WIDTH = "68rem";
 
 // Animation variants
 const overlayVariants = {

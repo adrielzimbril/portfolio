@@ -1,13 +1,14 @@
 {
   "home": {
-    "title": "Hey 👋",
+    "title": "Hey 👋🏻",
     "description": "Welcome to our home page",
     "page": {
       "header-section": {
         "title": "Transformez vos idées en produits que vos utilisateurs adorent 🦄",
         "description-2": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design pour les les fondateurs et porteurs de projets qui veulent structurer, tester et valider leurs idées pour en faire des solutions qui trouvent leur place.",
-        "description": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design, j’aide les fondateurs et porteurs de projets à structurer, tester et valider leurs idées pour en faire des solutions avec un réel impact.",
-        "cta": "Discutons 👋",
+        "description-3": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design, j’aide les fondateurs et porteurs de projets à structurer, tester et valider leurs idées pour en faire des solutions avec un réel impact.",
+        "description": "Product designer spécialisé dans la simplification des expériences SaaS et formateur en design, j’accompagne les fondateurs et porteurs de projets pour structurer, tester et transformer leurs idées en solutions concrètes et à fort impact.",
+        "cta": "Discutons 👋🏻",
         "cta-2": "Voir mes projets client 💡"
       }
     }
@@ -22,7 +23,7 @@
         "cta": "Voir mes projets"
       },
       "craft-section": {
-        "badge": "Votre partenaire 🫶",
+        "badge": "Votre partenaire 🫶🏻",
         "title": "Ce que je peux faire pour vous.",
         "description": "Product designer spécialisé dans la simplification des expériences SaaS + formateur pour les équipes qui veulent créer l'évidence plutôt que la complexité"
       },
@@ -207,10 +208,11 @@
       "confirm": "Confirmer"
     },
     "menu": {
-      "home": "Hey 👋",
-      "about": "Me connaître",
+      "home": "Hey 👋🏻",
+      "about": "Moi 🦄️",
       "thoughts": "Réflexions",
-      "hub": "Hub",
+      "hub": "Ressources",
+      "playground": "Jouons",
       "projects": "Projets",
       "contact": "Contact",
       "newsletter": "Newsletter"
@@ -325,7 +327,8 @@
       "x": "X",
       "youtube": "Youtube",
       "product-hunt": "Product Hunt",
-      "peerlist": "Peerlist"
+      "peerlist": "Peerlist",
+      "layers": "Layers"
     },
     "page-sections": {
       "header": {
@@ -336,29 +339,47 @@
         "title": "I made you looked.",
         "description": "You can have the rest of the empty space here."
       },
-      "testimonials": {
-        "badge": "On a construit ensemble 🫱🏾‍🫲🏻",
-        "title": "Témoignages",
-        "description": "Découvrez les témoignages de mes clients et partenaires qui ont fait confiance à mon expertise.",
-        "button": "Voir sur LinkedIn"
-      },
       "hub": {
-        "badge": "Hub 🫶",
+        "badge": "Hub 🫶🏻",
         "title": "Ressources",
-        "description": "Des guides, modèles et conseils pour maîtriser l'UI/UX, les design systems et Figma, et créer des produits qui donnent envie d'être utilisés.",
+        "description": "Formations, e-books, vidéos, templates et code pour t’aider à simplifier, tester, transformer tes idées en produits et créer des solutions qui comptent.",
         "base": {
           "resources-type": {
             "course": {
-              "title": "Formation 🎥",
-              "button": "S'inscrire"
+              "badge": "Étudiants 🧑🏻‍🎓",
+              "title": "Formations 🎥",
+              "description": "Apprends à ton rythme avec des cours clairs et concrets pour passer de l'idée à un vrai produit.",
+              "button": "Commencer"
             },
             "ebook": {
-              "title": "E-book 📕",
+              "badge": "Lecteurs 📖",
+              "title": "E-books 📕",
+              "description": "Des guides pratiques, simples et concrets, pour t'aider à éviter les erreurs et avancer plus vite.",
               "button": "Lire"
             },
             "masterclass": {
+              "badge": "Participants 🍿",
               "title": "Masterclass 🎬",
-              "button": "Participer"
+              "description": "Participe à des sessions interactives où on décortique ensemble des sujets clés et des vrais cas concrets.",
+              "button": "Rejoindre"
+            },
+            "video": {
+              "badge": "Curieux 🎥",
+              "title": "Vidéos 📺",
+              "description": "Des vidéos courtes et pratiques — YouTube et autres — pour t’inspirer, apprendre et passer à l’action.",
+              "button": "Regarder"
+            },
+            "figma-template": {
+              "badge": "Créateurs 🖌️",
+              "title": "Templates Figma 🎨",
+              "description": "Des modèles prêts à l’emploi, issues de mes frénésies de design, pour t’aider à créer des produits qui donnent envie d'être utilisés.",
+              "button": "Explorer"
+            },
+            "code": {
+              "badge": "Développeurs 🤖",
+              "title": "Snippets & Code 🧑🏻‍💻",
+              "description": "Des bouts de code simples et documentés issues de mes expériences, pour t'aider à concevoir tes propres produits.",
+              "button": "Obtenir"
             }
           }
         }
@@ -366,12 +387,18 @@
       "projects": {
         "badge": "Problem Solver 🦄",
         "title": "Projets",
-        "description": "Chaque projet est une opportunité de transformer une idée en expérience réelle, avec un design qui séduit et une stratégie qui fonctionne."
+        "description": "Chaque projet est une aventure unique où l'objectif est de transformer une idée en expérience réelle, avec un design qui séduit et une stratégie qui fonctionne."
+      },
+      "testimonials": {
+        "badge": "On a conçu ensemble 🫱🏾‍🫲🏻",
+        "title": "Partenaires",
+        "description": "Avec ces fondateurs, créateurs et équipes, nous avons testé, itéré et construit ensemble. Découvrez leurs retours sur nos collaborations et les solutions que nous avons créées.",
+        "button": "Voir sur LinkedIn"
       },
       "thoughts": {
-        "badge": "Ma vision 🤯",
+        "badge": "Laboratoire ✍🏻",
         "title": "Réflexions",
-        "description": "Des guides, modèles et conseils pour maîtriser l'UI/UX, les design systems et Figma, et créer des produits qui donnent envie d'être utilisés."
+        "description": "Mes expériences, réflexions, et conseils sur le design de produits complexes où la simplicité devient un super-pouvoir."
       },
       "cta": {
         "variant-one": {

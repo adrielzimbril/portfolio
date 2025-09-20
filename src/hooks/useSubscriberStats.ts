@@ -1,5 +1,6 @@
 "use client";
 
+import { ResourceTypeKey } from "@/types";
 import useSWR from "swr";
 
 async function fetchJSON(url: string) {
@@ -26,9 +27,7 @@ export function useNewsletterSubscribersCount() {
   } as const;
 }
 
-export function useProductTypeSubscribersCount(
-  type: "course" | "ebook" | "video"
-) {
+export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
   const { data, error, isLoading, mutate } = useSWR(
     type
       ? `/api/stats/subscribers?scope=productType&type=${encodeURIComponent(type)}`
