@@ -29,7 +29,7 @@ export function NewsletterSignup({
   });
 
   const { name } = props;
-  const firstName: string = name?.split(" ")[0] ?? t("mail.common.defaultName");
+  const firstName: string = name?.split(" ")[0] ?? "";
 
   return (
     <Html>
@@ -149,7 +149,7 @@ export function NewsletterSignup({
 NewsletterSignup.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
-  name: "John Doe",
+  name: "",
 };
 
 export default NewsletterSignup;
