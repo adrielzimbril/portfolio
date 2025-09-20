@@ -13,7 +13,7 @@ import {
   ResourcePreview,
 } from "@/module/content/utils/lib";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { cn, getResourcesUrl } from "@/utils";
+import { cn, getResourcesUrl, getThisMonth } from "@/utils";
 import { SectionBase } from "../pages/shared/section-base";
 import { siteConfig } from "@/data/config";
 import { ButtonCopy } from "@/components/ui/button-copy";
@@ -31,6 +31,8 @@ import { Badge } from "@/components/ui/badge";
 import { routes } from "@/data/routes";
 import { PageType } from "@/types";
 import { appConfig } from "@/data/app-config";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { LinkOne } from "@aurthle/icons";
 
 export const Footer: React.FC = () => {
   const t = useTranslations();
@@ -71,13 +73,29 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col gap-4 md:gap-6 w-full rounded-2xl">
               <div className="flex flex-col gap-6 rounded-3xl bg-b-bases bg-b-base py-4 px-4">
                 <div className="flex flex-col gap-2">
-                  <Badge
+                  <StatusBadge
+                    mode="inline"
+                    status="available"
+                    primaryText={t(
+                      "common.shared.planning-badge.available.title"
+                    )}
+                    className="squircle-b-white text-b-white-invert"
                     variant="colored"
-                    className="relative text-base squircle-b-white text-b-white-invert md:text-xl max-w-3xl leading-[115%]"
+                    size="md"
                   >
-                    {t("common.shared.base.title")} 🦄
-                  </Badge>
-                  <span className="relative text-base text-b-white-invert-sec px-2">
+                    <Link href={routes.contact.link}>
+                      <span className="flex items-center gap-2">
+                        {t(
+                          "common.shared.planning-badge.available.description-simple",
+                          {
+                            date: t("common.shared.months." + getThisMonth()),
+                          }
+                        )}
+                        <LinkOne variant="bulk" size={20} />
+                      </span>
+                    </Link>
+                  </StatusBadge>
+                  <span className="relative text-base font-medium text-b-white-invert-sec px-2">
                     {t("common.shared.base.subtitle")}
                   </span>
                 </div>

@@ -6,19 +6,11 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations, useLocale } from "use-intl";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { ArrowRightOne, LinkOne } from "@aurthle/icons";
-import { getDate } from "@/utils";
+import { getThisMonth } from "@/utils";
 
 export function HeaderSection() {
   const t = useTranslations();
   const locale = useLocale();
-
-  const getThisMonth = () => {
-    const date = new Date();
-    return new Intl.DateTimeFormat("en", { month: "long" })
-      .format(date)
-      .toLowerCase();
-  };
-
   return (
     <SectionBase sectionClassName="p-0 mt-16" isWide>
       <StatusBadge

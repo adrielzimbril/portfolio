@@ -261,7 +261,9 @@
       "base": {
         "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
         "title": "Your ideas into products that your users adore",
-        "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+        "subtitle-simple": "Innovative Problem Solver & Your Go-To SaaS Product Designer ❣️",
+        "subtitle": "Innovative Problem Solver & SaaS Product Designer 🦄❣️",
+        "subtitle-secondary": "Turning Ideas into Impact | SaaS Product Designer & Problem Solver ❣️"
       },
       "page-loader": {
         "home": {
@@ -307,6 +309,7 @@
         "available": {
           "title": "Disponible",
           "description": "{limit, plural, one {# place disponible} other {# places disponibles}} pour {date}",
+          "description-simple": "Disponible pour collaborations 🫶🏻",
           "description-secondary": "{showLimit, select, true {{limit, plural, one {# place disponible} other {# places disponibles}}} other {}}{showMission, select, true { pour Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, jusqu'au {date}} other {}}"
         },
         "unavailable": {
