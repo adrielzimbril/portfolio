@@ -24,7 +24,7 @@ export async function getTemplate<T extends TemplateId>({
   });
 
   const mailTranslations = translations.mail;
-  // Exclure 'common' et 'basic' des clés
+  // Exclude 'common' and 'basic' keys
   const templateKey = templateId as Exclude<
     keyof typeof mailTranslations,
     "common" | "basic"

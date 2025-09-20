@@ -69,7 +69,7 @@ export function FreeProductDeliveryEmail({
         <Body className="bg-[#fafaf9] my-8 font-sans">
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             {/* Header with greeting */}
-            <Section className="px-10 pt-10 pb-5 bg-white">
+            <Section className="px-10 pt-10 pb-5 bg-white text-center">
               <Text className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
                 {t("mail.freeProductDelivery.greeting", { firstName })} 👋
               </Text>
