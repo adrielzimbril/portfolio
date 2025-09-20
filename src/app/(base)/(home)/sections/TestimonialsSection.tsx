@@ -8,6 +8,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLocale, useTranslations } from "use-intl";
 import { Locale } from "@/types";
+import { Link } from "@/components/ui/link";
+import { siteConfig } from "@/data/config";
 
 interface TestimonialCard {
   id: number;
@@ -181,6 +183,24 @@ export function TestimonialsSection() {
                 aria-label={`Testimonial ${index + 1}`}
               />
             ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-6">
+          <div className="flex items-center gap-2">
+            <Link
+              href={siteConfig.links.contact.social.linkedin.url}
+              //variant="outline"
+              likeButton
+              asIcon
+              whileTap
+              //size="xs"
+            >
+              <span className="flex items-center gap-1">
+                {t("common.page-sections.testimonials.button")}{" "}
+                <LinkOne size={16} />
+              </span>
+            </Link>
           </div>
         </div>
       </div>

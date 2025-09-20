@@ -339,7 +339,8 @@
       "testimonials": {
         "badge": "On a construit ensemble 🫱🏾‍🫲🏻",
         "title": "Témoignages",
-        "description": "Découvrez les témoignages de mes clients et partenaires qui ont fait confiance à mon expertise."
+        "description": "Découvrez les témoignages de mes clients et partenaires qui ont fait confiance à mon expertise.",
+        "button": "Voir sur LinkedIn"
       },
       "hub": {
         "badge": "Hub 🫶",
@@ -369,7 +370,7 @@
       },
       "thoughts": {
         "badge": "Ma vision 🤯",
-        "title": "Thoughts",
+        "title": "Réflexions",
         "description": "Des guides, modèles et conseils pour maîtriser l'UI/UX, les design systems et Figma, et créer des produits qui donnent envie d'être utilisés."
       },
       "cta": {
