@@ -12,6 +12,7 @@ import {
   Text,
   Hr,
   Tailwind,
+  Font,
 } from "@react-email/components";
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
@@ -33,90 +34,101 @@ export function NewsletterSignup({
 
   return (
     <Html>
-      <Head />
-      <Preview>{t("mail.newsletter-signup.preview")}</Preview>
+      <Head>
+        <Font
+          fontFamily="Hanken Grotesk"
+          fallbackFontFamily="Arial"
+          webFont={{
+            url: "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVn2YZDLWuGJpnzaiwFXS9tYtpd59A.woff2",
+            format: "woff2",
+          }}
+          fontWeight={500}
+          fontStyle="medium"
+        />
+      </Head>
+      <Preview>{t("mail.newsletterSignup.preview")}</Preview>
       <Tailwind>
-        <Body className="bg-[#f5f5f5] font-sans">
-          <Container className="max-w-[600px] my-0 mx-auto bg-white">
+        <Body className="bg-[#fafaf9] my-8 font-sans">
+          <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             {/* Simple Header */}
-            <Section className="px-10 pt-10 pb-5 bg-white">
+            <Section className="px-10 pt-10 pb-5 bg-white text-center">
               <Heading
                 as="h1"
-                className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
+                className="text-3xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                {t("mail.newsletter-signup.greeting", { firstName })} 👋
+                {t("mail.newsletterSignup.greeting", { firstName })} 👋
               </Heading>
               <Text className="text-[#666666] text-base m-0">
-                {t("mail.newsletter-signup.tagline")}
+                {t("mail.newsletterSignup.tagline")}
               </Text>
             </Section>
 
             {/* Story Content */}
             <Section className="px-10 pb-10 bg-white">
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.newsletter-signup.story.intro")}
+                {t("mail.newsletterSignup.story.intro")}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.newsletter-signup.story.presentation")}
+                {t("mail.newsletterSignup.story.presentation")}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.newsletter-signup.story.philosophy")}
+                {t("mail.newsletterSignup.story.philosophy")}
               </Text>
               <Hr className="border-t border-[#e0e0e0] my-8" />
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                <strong>{t("mail.newsletter-signup.content.title")}</strong>
+                <strong>{t("mail.newsletterSignup.content.title")}</strong>
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.newsletter-signup.content.subtitle")}
+                {t("mail.newsletterSignup.content.subtitle")}
               </Text>
-              <Section className="my-6">
+              <Section className="my-4">
                 <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
-                  → {t("mail.newsletter-signup.content.item1")}
+                  → {t("mail.newsletterSignup.content.item1")}
                 </Text>
                 <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
-                  → {t("mail.newsletter-signup.content.item2")}
+                  → {t("mail.newsletterSignup.content.item2")}
                 </Text>
                 <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
-                  → {t("mail.newsletter-signup.content.item3")}
+                  → {t("mail.newsletterSignup.content.item3")}
                 </Text>
                 <Text className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
-                  → {t("mail.newsletter-signup.content.item4")}
+                  → {t("mail.newsletterSignup.content.item4")}
                 </Text>
               </Section>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.newsletter-signup.content.conclusion")}
+                {t("mail.newsletterSignup.content.conclusion")}
               </Text>
               <Hr className="border-t border-[#e0e0e0] my-8" />
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                <strong>{t("mail.newsletter-signup.why.title")}</strong>
+                <strong>{t("mail.newsletterSignup.why.title")}</strong>
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.newsletter-signup.why.reason")}
+                {t("mail.newsletterSignup.why.reason")}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.newsletter-signup.why.motivation")}
+                {t("mail.newsletterSignup.why.motivation")}
               </Text>
               <Hr className="border-t border-[#e0e0e0] my-8" />
 
               {/* Simple CTA */}
               <Section className="text-center my-8 bg-[#fafafa] p-6 rounded-2xl border border-[#f0f0f0]">
                 <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                  <strong>{t("mail.newsletter-signup.cta.title")}</strong>
+                  <strong>{t("mail.newsletterSignup.cta.title")}</strong>
                 </Text>
 
                 <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                  {t("mail.newsletter-signup.cta.description")}
+                  {t("mail.newsletterSignup.cta.description")}
                 </Text>
 
                 <Link
                   href={getResourceAskUrl("guide-gratuit")}
                   className="bg-[#1a1a1a] text-white font-medium py-3 px-8 rounded-2xl text-base no-underline inline-block"
                 >
-                  → {t("mail.newsletter-signup.cta.button")}
+                  → {t("mail.newsletterSignup.cta.button")}
                 </Link>
 
                 <Text className="text-[#777777] text-sm mt-4 italic">
-                  {t("mail.newsletter-signup.cta.note")}
+                  {t("mail.newsletterSignup.cta.note")}
                 </Text>
               </Section>
             </Section>

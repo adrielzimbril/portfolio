@@ -14,6 +14,7 @@ import {
   Hr,
   Button,
   Tailwind,
+  Font,
 } from "@react-email/components";
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
@@ -49,20 +50,31 @@ export function FreeProductDeliveryEmail({
 
   return (
     <Html>
-      <Head />
+      <Head>
+        <Font
+          fontFamily="Hanken Grotesk"
+          fallbackFontFamily="Arial"
+          webFont={{
+            url: "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVn2YZDLWuGJpnzaiwFXS9tYtpd59A.woff2",
+            format: "woff2",
+          }}
+          fontWeight={500}
+          fontStyle="medium"
+        />
+      </Head>
       <Preview>
-        {productTitle} - {t("mail.free-product-delivery.preview")}
+        {productTitle} - {t("mail.freeProductDelivery.preview")}
       </Preview>
       <Tailwind>
-        <Body className="bg-[#f5f5f5] font-sans">
-          <Container className="max-w-[600px] my-0 mx-auto bg-white">
+        <Body className="bg-[#fafaf9] my-8 font-sans">
+          <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             {/* Header with greeting */}
             <Section className="px-10 pt-10 pb-5 bg-white">
               <Text className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
-                {t("mail.free-product-delivery.greeting", { firstName })} 👋
+                {t("mail.freeProductDelivery.greeting", { firstName })} 👋
               </Text>
               <Text className="text-[#666666] text-base m-0">
-                {t("mail.free-product-delivery.intro")}
+                {t("mail.freeProductDelivery.intro")}
               </Text>
             </Section>
 
@@ -94,7 +106,7 @@ export function FreeProductDeliveryEmail({
                 <Section className="my-6">
                   <Text className="text-[#333333] text-base leading-relaxed mb-3">
                     <strong>
-                      {t("mail.free-product-delivery.featuresTitle")}
+                      {t("mail.freeProductDelivery.featuresTitle")}
                     </strong>
                   </Text>
                   <Section className="my-3">
@@ -116,7 +128,7 @@ export function FreeProductDeliveryEmail({
                     href={productUrl}
                     className="bg-[#1a1a1a] text-white text-base font-medium py-3.5 px-7 rounded-2xl no-underline inline-block border-none"
                   >
-                    {t("mail.free-product-delivery.ctaButton")}
+                    {t("mail.freeProductDelivery.ctaButton")}
                   </Button>
                 </Section>
               )}
@@ -127,11 +139,11 @@ export function FreeProductDeliveryEmail({
               <Hr className="border-t border-[#e0e0e0] my-8" />
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.free-product-delivery.message1")}
+                {t("mail.freeProductDelivery.message1")}
               </Text>
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.free-product-delivery.message2")}
+                {t("mail.freeProductDelivery.message2")}
               </Text>
             </Section>
 

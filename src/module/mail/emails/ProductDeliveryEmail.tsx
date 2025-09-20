@@ -14,6 +14,7 @@ import {
   Hr,
   Button,
   Tailwind,
+  Font,
 } from "@react-email/components";
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
@@ -62,15 +63,26 @@ export function ProductDeliveryEmail({
 
   return (
     <Html>
-      <Head />
-      <Preview>{t("mail.product-delivery.preview", { productType })}</Preview>
+      <Head>
+        <Font
+          fontFamily="Hanken Grotesk"
+          fallbackFontFamily="Arial"
+          webFont={{
+            url: "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVn2YZDLWuGJpnzaiwFXS9tYtpd59A.woff2",
+            format: "woff2",
+          }}
+          fontWeight={500}
+          fontStyle="medium"
+        />
+      </Head>
+      <Preview>{t("mail.productDelivery.preview", { productType })}</Preview>
       <Tailwind>
-        <Body className="bg-[#f5f5f5] font-sans">
-          <Container className="max-w-[600px] my-0 mx-auto bg-white">
+        <Body className="bg-[#fafaf9] my-8 font-sans">
+          <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             {/* Header with greeting */}
             <Section className="px-10 pt-10 pb-5 bg-white">
               <Text className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
-                {t("mail.product-delivery.greeting", { firstName })} 👋
+                {t("mail.productDelivery.greeting", { firstName })} 👋
               </Text>
               <Text className="text-[#666666] text-base m-0">
                 {typeMessages.intro}
@@ -104,7 +116,7 @@ export function ProductDeliveryEmail({
               {features && features.length > 0 && (
                 <Section className="my-6">
                   <Text className="text-[#333333] text-base leading-relaxed mb-3">
-                    <strong>{t("mail.product-delivery.featuresTitle")}</strong>
+                    <strong>{t("mail.productDelivery.featuresTitle")}</strong>
                   </Text>
                   <Section className="my-3">
                     {features.map((feature, index) => (
@@ -136,11 +148,11 @@ export function ProductDeliveryEmail({
               <Hr className="border-t border-[#e0e0e0] my-8" />
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                <strong>{t("mail.product-delivery.thankYou")}</strong>
+                <strong>{t("mail.productDelivery.thankYou")}</strong>
               </Text>
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.product-delivery.message1")}
+                {t("mail.productDelivery.message1")}
               </Text>
 
               <Text className="text-[#555555] text-sm leading-relaxed mb-5 italic">
@@ -152,7 +164,7 @@ export function ProductDeliveryEmail({
               </Text>
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.product-delivery.message2")}
+                {t("mail.productDelivery.message2")}
               </Text>
             </Section>
 

@@ -4,6 +4,7 @@ import {
   Body,
   Container,
   Head,
+  Font,
   Heading,
   Html,
   Link,
@@ -33,11 +34,22 @@ export function WelcomeEmail({
 
   return (
     <Html>
-      <Head />
+      <Head>
+        <Font
+          fontFamily="Hanken Grotesk"
+          fallbackFontFamily="Arial"
+          webFont={{
+            url: "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVn2YZDLWuGJpnzaiwFXS9tYtpd59A.woff2",
+            format: "woff2",
+          }}
+          fontWeight={500}
+          fontStyle="medium"
+        />
+      </Head>
       <Preview>{t("mail.welcome.preview")}</Preview>
       <Tailwind>
-        <Body className="bg-[#f5f5f5] font-sans">
-          <Container className="max-w-[600px] my-0 mx-auto bg-white">
+        <Body className="bg-[#fafaf9] my-8 font-sans">
+          <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             {/* Simple Header */}
             <Section className="px-10 pt-10 pb-5 bg-white">
               <Heading
