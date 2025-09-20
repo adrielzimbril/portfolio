@@ -1,11 +1,12 @@
 {
   "home": {
-    "title": "Accueil",
+    "title": "Hey 👋",
     "description": "Welcome to our home page",
     "page": {
       "header-section": {
-        "title": "Transformez vos idées en produits que vos utilisateurs adorent",
-        "description": "Product designer spécialisé dans la simplification des expériences SaaS + formateur pour les équipes qui veulent créer l'évidence plutôt que la complexité",
+        "title": "Transformez vos idées en produits que vos utilisateurs adorent 🦄",
+        "description-2": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design pour les les fondateurs et porteurs de projets qui veulent structurer, tester et valider leurs idées pour en faire des solutions qui trouvent leur place.",
+        "description": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design, j’aide les fondateurs et porteurs de projets à structurer, tester et valider leurs idées pour en faire des solutions avec un réel impact.",
         "cta": "Discutons 👋",
         "cta-2": "Voir mes projets client 💡"
       }
@@ -206,8 +207,8 @@
       "confirm": "Confirmer"
     },
     "menu": {
-      "home": "Accueil",
-      "about": "A propos",
+      "home": "Hey 👋",
+      "about": "Me connaître",
       "thoughts": "Réflexions",
       "hub": "Hub",
       "projects": "Projets",

@@ -172,7 +172,7 @@ export function TestimonialsSection() {
               <button
                 key={index}
                 className={cn(
-                  "rounded-full transition-all duration-800 ease",
+                  "rounded-full cursor-pointer transition-all duration-800 ease",
                   index === currentIndex
                     ? "bg-b-white-invert-sec w-6 h-2"
                     : "bg-b-base w-2 h-2"
