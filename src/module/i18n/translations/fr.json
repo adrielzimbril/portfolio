@@ -5,9 +5,9 @@
     "page": {
       "header-section": {
         "title": "Transformez vos idées en produits que vos utilisateurs adorent 🦄",
-        "description-2": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design pour les les fondateurs et porteurs de projets qui veulent structurer, tester et valider leurs idées pour en faire des solutions qui trouvent leur place.",
-        "description-3": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design, j’aide les fondateurs et porteurs de projets à structurer, tester et valider leurs idées pour en faire des solutions avec un réel impact.",
-        "description": "Product designer spécialisé dans la simplification des expériences SaaS et formateur en design, j’accompagne les fondateurs et porteurs de projets pour structurer, tester et transformer leurs idées en solutions concrètes et à fort impact.",
+        "description-2": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design pour les les fondateurs et porteurs de projets qui veulent structurer, tester et valider leurs idées pour en faire des solutions qui trouvent leur place 🫶🏻.",
+        "description-3": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design, j’aide les fondateurs et porteurs de projets à structurer, tester et valider leurs idées pour en faire des solutions avec un réel impact 🫶🏻.",
+        "description": "Product designer spécialisé dans la simplification des expériences SaaS et formateur en design, j’accompagne les fondateurs et porteurs de projets pour structurer, tester et transformer leurs idées en solutions concrètes et à fort impact 🫶🏻.",
         "cta": "Discutons 👋🏻",
         "cta-2": "Voir mes projets client 💡"
       }
@@ -306,7 +306,7 @@
         "available": {
           "title": "Disponible",
           "description": "{limit, plural, one {# place disponible} other {# places disponibles}} pour {date}",
-          "description-simple": "Disponible pour collaborations 🦄",
+          "description-simple": "Disponible pour collaborations",
           "description-secondary": "{showLimit, select, true {{limit, plural, one {# place disponible} other {# places disponibles}}} other {}}{showMission, select, true { pour Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, jusqu'au {date}} other {}}"
         },
         "unavailable": {

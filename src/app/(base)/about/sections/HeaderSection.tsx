@@ -11,8 +11,8 @@ export function HeaderSection() {
     <PageHero
       title={t("about.page.header-section.title")}
       description={t("about.page.header-section.description")}
-      buttonLink={routes.about.link}
-      buttonText={t("about.page.header-section.cta")}
+      // buttonLink={routes.about.link}
+      // buttonText={t("about.page.header-section.cta")}
       //buttonVariant="secondary"
       imagePath="/portrait.png"
     />

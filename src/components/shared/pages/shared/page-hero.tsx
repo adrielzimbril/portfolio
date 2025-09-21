@@ -35,8 +35,8 @@ function ContentSection({
 }: {
   title: string;
   description: string;
-  buttonLink: string;
-  buttonText: string;
+  buttonLink?: string;
+  buttonText?: string;
   buttonVariant: "default" | "secondary";
   actionButton: boolean;
   onClick: () => void;
@@ -45,30 +45,32 @@ function ContentSection({
     <div className="flex flex-col gap-8 items-start justify-start relative md:max-w-[50%]">
       <h1 className="relative whitespace-pre-line">{title}</h1>
       <p className="relative text-2xl whitespace-pre-line">{description}</p>
-      {actionButton ? (
-        <Button
-          onClick={onClick}
-          variant={buttonVariant}
-          size="lg"
-          asIcon
-          whileTap
-          asPointer
-        >
-          <ButtonContent variant={buttonVariant} buttonText={buttonText} />
-        </Button>
-      ) : (
-        <Link
-          href={buttonLink}
-          variant={buttonVariant}
-          size="lg"
-          onClick={onClick}
-          asIcon
-          whileTap
-          likeButton
-        >
-          <ButtonContent variant={buttonVariant} buttonText={buttonText} />
-        </Link>
-      )}
+      {buttonLink &&
+        buttonText &&
+        (actionButton ? (
+          <Button
+            onClick={onClick}
+            variant={buttonVariant}
+            size="lg"
+            asIcon
+            whileTap
+            asPointer
+          >
+            <ButtonContent variant={buttonVariant} buttonText={buttonText} />
+          </Button>
+        ) : (
+          <Link
+            href={buttonLink}
+            variant={buttonVariant}
+            size="lg"
+            onClick={onClick}
+            asIcon
+            whileTap
+            likeButton
+          >
+            <ButtonContent variant={buttonVariant} buttonText={buttonText} />
+          </Link>
+        ))}
     </div>
   );
 }
@@ -87,8 +89,8 @@ export function PageHero({
 }: {
   title: string;
   description: string;
-  buttonLink: string;
-  buttonText: string;
+  buttonLink?: string;
+  buttonText?: string;
   buttonVariant?: "default" | "secondary";
   imagePath?: string;
   isMobileHidden?: boolean;

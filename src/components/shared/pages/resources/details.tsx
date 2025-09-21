@@ -32,49 +32,61 @@ export function CardInfo({
   const { count: avatarCount, loading: avatarCountLoading } =
     useProductTitleRequestsCount(title);
 
-  return (
-    <div className="flex flex-col items-start justify-between gap-4 w-full">
-      <div className="flex flex-col items-start justify-center gap-4 w-full">
-        <Header title={title} slug={slug} />
+      const productTypeMap: Record<ResourceType, string> = {
+        [ResourceType.COURSE]: t(
+          "common.page-sections.hub.base.resources-type.course.badge"
+        ),
+        [ResourceType.EBOOK]: t(
+          "common.page-sections.hub.base.resources-type.ebook.badge"
+        ),
+        [ResourceType.VIDEO]: t(
+          "common.page-sections.hub.base.resources-type.video.badge"
+        ),
+        [ResourceType.MASTERCLASS]: t(
+          "common.page-sections.hub.base.resources-type.masterclass.badge"
+        ),
+        [ResourceType.FIGMA_TEMPLATE]: t(
+          "common.page-sections.hub.base.resources-type.figma-template.badge"
+        ),
+        [ResourceType.CODE]: t(
+          "common.page-sections.hub.base.resources-type.code.badge"
+        ),
+      };
 
-        <Tags
-          primaryTag={
-            resourceType === ResourceType.COURSE
-              ? t("common.page-sections.hub.base.resources-type.course.title")
-              : resourceType === ResourceType.EBOOK
-                ? t("common.page-sections.hub.base.resources-type.ebook.title")
-                : t(
-                    "common.page-sections.hub.base.resources-type.masterclass.title"
-                  )
-          }
-          tags={tags.map((tag) => tag.name)}
-        />
+      const productType = productTypeMap[resourceType] ?? "";
 
-        <Description description={description} features={features} />
+      return (
+        <div className="flex flex-col items-start justify-between gap-4 w-full">
+          <div className="flex flex-col items-start justify-center gap-4 w-full">
+            <Header title={title} slug={slug} />
 
-        <AvatarsStats
-          avatars={
-            avatarCount < 1
-              ? ["image1"]
-              : (avatars ?? [
-                  "image1",
-                  "image2",
-                  "image3",
-                  "image4",
-                  "image5",
-                  "image6",
-                  "image7",
-                  "image8",
-                ])
-          }
-          userCount={avatarCount ?? userCount}
-          resourceType={resourceType}
-        />
-      </div>
+            <Tags primaryTag={productType} tags={tags.map((tag) => tag.name)} />
 
-      <Action slug={slug} resourceType={resourceType} />
-    </div>
-  );
+            <Description description={description} features={features} />
+
+            <AvatarsStats
+              avatars={
+                avatarCount < 1
+                  ? ["image1"]
+                  : (avatars ?? [
+                      "image1",
+                      "image2",
+                      "image3",
+                      "image4",
+                      "image5",
+                      "image6",
+                      "image7",
+                      "image8",
+                    ])
+              }
+              userCount={avatarCount ?? userCount}
+              resourceType={resourceType}
+            />
+          </div>
+
+          <Action slug={slug} resourceType={resourceType} />
+        </div>
+      );
 }
 
 function Header({ title, slug }: { title: string; slug: string }) {

@@ -199,9 +199,7 @@ export function Highlight({
 }
 
 export const richTextComponent = {
-  p: (chunks: React.ReactNode) => (
-    <p className="relative leading-tight">{chunks}</p>
-  ),
+  p: (chunks: React.ReactNode) => <p className="relative">{chunks}</p>,
   strike: (chunks: React.ReactNode) => (
     <span className="relative line-through">{chunks}</span>
   ),

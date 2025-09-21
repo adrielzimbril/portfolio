@@ -90,7 +90,8 @@ export const Footer: React.FC = () => {
                           {
                             date: t("common.shared.months." + getThisMonth()),
                           }
-                        )}
+                        )}{" "}
+                        🦄
                         <LinkOne variant="bulk" size={20} />
                       </span>
                     </Link>
