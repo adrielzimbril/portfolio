@@ -102,19 +102,66 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         const subscribedFromPage =
           typeof window !== "undefined" ? window.location.pathname : undefined;
 
-        const res = await apiSubscribe({
+        await apiSubscribe({
           email,
           subscribedFromPage,
           updateExisting: false,
           productId,
           productType,
           updateLayer: false,
-        });
+        }).then(async (res) => {
+          const json = await res.json();
+          if (!res.ok) {
+            throw new Error(json?.error || t("zod.errors.customized.hint"));
+          }
 
-        const json = await res.json();
-        if (!res.ok) {
-          throw new Error(json?.error || t("zod.errors.customized.hint"));
-        }
+          const handleClick = () => {
+            const end = Date.now() + 3 * 1000; // 3 seconds
+            const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+
+            const scalar = 2;
+            const triangle = confetti.shapeFromPath({
+              path: "M0 10 L5 0 L10 10z",
+            });
+            const square = confetti.shapeFromPath({
+              path: "M0 0 L10 0 L10 10 L0 10 Z",
+            });
+            const coin = confetti.shapeFromPath({
+              path: "M5 0 A5 5 0 1 0 5 10 A5 5 0 1 0 5 0 Z",
+            });
+            const tree = confetti.shapeFromPath({
+              path: "M5 0 L10 10 L0 10 Z",
+            });
+
+            const frame = () => {
+              if (Date.now() > end) return;
+              confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 0, y: 0.5 },
+                colors: colors,
+                shapes: [triangle, square, coin, tree],
+                scalar,
+              });
+              confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 1, y: 0.5 },
+                colors: colors,
+                shapes: [triangle, square, coin, tree],
+                scalar,
+              });
+              requestAnimationFrame(frame);
+            };
+            frame();
+          };
+
+          handleClick();
+        });
 
         setHasInitialSubscription(true);
       } catch (error) {
@@ -232,10 +279,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">
+          <DialogTitle className="text-2xl font-bold text-start">
             {t("common.page-sections.newsletter.title")}
           </DialogTitle>
-          <DialogDescription className="text-center text-b-white-invert-sec">
+          <DialogDescription className="text-center hidden text-b-white-invert-sec">
             {hasInitialSubscription
               ? t("common.page-sections.newsletter.description.state")
               : t("common.page-sections.newsletter.description.default")}

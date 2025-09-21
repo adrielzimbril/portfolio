@@ -189,7 +189,7 @@ export function Highlight({
   return (
     <span
       className={cn(
-        "p-1 py-0.5 bg-violet-200 dark:bgviolet-400 text-b-white-unchanged rounded-md font-medium dark:font-semibold",
+        "p-1 py-0.5 bg-violet-200 text-b-white-unchanged rounded-md font-medium font-bold",
         className
       )}
     >
@@ -199,7 +199,9 @@ export function Highlight({
 }
 
 export const richTextComponent = {
-  p: (chunks: React.ReactNode) => <p className="relative">{chunks}</p>,
+  p: (chunks: React.ReactNode) => (
+    <p className="relative leading-tight">{chunks}</p>
+  ),
   strike: (chunks: React.ReactNode) => (
     <span className="relative line-through">{chunks}</span>
   ),
@@ -217,7 +219,7 @@ export const richTextComponent = {
     <Link
       href={routes.thoughts.link}
       variant="ghost"
-      className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline px-1"
+      className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline px-0"
     >
       {chunks}
     </Link>
@@ -226,7 +228,7 @@ export const richTextComponent = {
     <Link
       href={siteConfig.links.contact.social.linkedin.url}
       variant="ghost"
-      className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-1"
+      className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-0"
     >
       {chunks}
     </Link>

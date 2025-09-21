@@ -54,28 +54,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await getAllProjects();
 
   return [
-    ...staticMarketingPages.flatMap((page: string) =>
-      locales.map((locale) => ({
-        url: new URL(`/${locale}${page}`, baseUrl).href,
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: getPriority(page === "/" ? "home" : "marketing"),
-      }))
-    ),
+    ...staticMarketingPages.flatMap((page: string) => ({
+      url: new URL(`${page === "/" ? "" : "/"}${page}`, baseUrl).href,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: getPriority(page === "/" ? "home" : "marketing"),
+    })),
     ...posts.map((post: Post) => ({
-      url: new URL(`/${post.locale}/thoughts/${post.path}`, baseUrl).href,
+      url: new URL(`/thoughts/${post.path}`, baseUrl).href,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: getPriority("resources"),
     })),
     ...resources.map((resource: Resource) => ({
-      url: new URL(`/${resource.locale}/hub/${resource.path}`, baseUrl).href,
+      url: new URL(`/hub/${resource.path}`, baseUrl).href,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: getPriority("resources"),
     })),
     ...projects.map((project: Project) => ({
-      url: new URL(`/${project.locale}/projects/${project.path}`, baseUrl).href,
+      url: new URL(`/projects/${project.path}`, baseUrl).href,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: getPriority("resources"),

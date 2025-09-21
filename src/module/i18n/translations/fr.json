@@ -187,7 +187,7 @@
     "page": {
       "badge": "Pour les fondateurs et créateurs qui veulent passer à l’action 🚀",
       "title": "Passe de l'idée au <thin>produit</thin> grâce à la <thin>Méthode</thin> ShiroSaaS 🦄",
-      "desc": "Chaque semaine, <highlight>découvre</highlight> des <strong>astuces</strong>, <strong>templates</strong>, <strong>guides</strong> et <strong>vidéos</strong> pour tester, structurer et lancer ton <highlight>SaaS</highlight> que tes utilisateurs vont adorer 🫶🏻."
+      "desc": "Chaque semaine <highlight>découvre</highlight> des <strong>astuces</strong>, <strong>templates</strong>, <strong>guides</strong> et <strong>vidéos</strong> pour tester, structurer et lancer ton <highlight>SaaS</highlight> que tes utilisateurs vont adorer 🫶🏻."
     },
     "hints": {
       "error": {
@@ -328,7 +328,8 @@
       "youtube": "Youtube",
       "product-hunt": "Product Hunt",
       "peerlist": "Peerlist",
-      "layers": "Layers"
+      "layers": "Layers",
+      "tiktok": "Tiktok"
     },
     "page-sections": {
       "header": {
@@ -403,20 +404,20 @@
       "cta": {
         "variant-one": {
           "title": "Envie de parler de SaaS ?",
-          "description": "<p>Je partage régulièrement mes réflexions, retours d'expérience et conseils sur mon <blog>Blog</blog> et sur <linkedin>Linkedin</linkedin>.<br></br>Que ce soit pour discuter design, produit ou innovation, n'hésitez pas à me contacter.</p>",
+          "description": "<p>Je partage des ressources, mes réflexions, expériences et des conseils sur mon <blog>Blog</blog> et sur <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Envie de parler de SaaS, design, produit ou innovation ? 💡 Écris-moi, j’adore échanger 👋🏻</p>",
           "button": "Parler de SaaS 🦄"
         },
         "variant-two": {
           "title": "Discutons de votre prochain projet !",
-          "description": "<p>Je partage régulièrement mes réflexions, retours d'expérience et conseils sur mon <blog>Blog</blog> et sur <linkedin>Linkedin</linkedin>.<br></br>Que ce soit pour discuter design, produit ou innovation, n'hésitez pas à me contacter.</p>",
+          "description": "<p>Je partage des ressources, mes réflexions, expériences et des conseils sur mon <blog>Blog</blog> et sur <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Envie de parler de SaaS, design, produit ou innovation ? 💡 Écris-moi, j’adore échanger 👋🏻</p>",
           "form": {
-            "placeholder": "😏 Voulez-vous recevoir des cadeaux ?",
+            "placeholder": "Ton email ici… ✉️",
             "button": "Parler de SaaS 🦄"
           }
         }
       },
       "newsletter": {
-        "title": "🎁 Recevoir les cadeaux",
+        "title": "💌 Ton kit créatif t’attend 🫶🏻",
         "description": {
           "default": "Inscription en cours... Vous pouvez ajouter vos informations personnelles.",
           "state": "Votre inscription est confirmée ! Vous pouvez ajouter vos informations pour personnaliser votre expérience."
@@ -440,7 +441,7 @@
             },
             "name": {
               "label": "Nom",
-              "placeholder": "Votre nom et prénom"
+              "placeholder": "Comment je peux t'appeler ?"
             },
             "phone": {
               "label": "Téléphone",

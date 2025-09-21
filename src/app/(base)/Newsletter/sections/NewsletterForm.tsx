@@ -48,7 +48,7 @@ export function NewsletterForm() {
             <h2 className="self-stretch">{t.rich("newsletter.page.title", {
               ...richTextComponent,
             })}</h2>
-            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-b-white-invert-sec">
+            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-snug text-b-white-invert-sec">
               {t.rich("newsletter.page.desc", {
                 ...richTextComponent,
               })}
