@@ -8,6 +8,7 @@ import { getImageUrl } from "@/utils/base-url";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 import { LogoName } from "@/components/shared/icons/logo-name";
+import { LogoIcon } from "@/components/shared/icons/logo-icon";
 import { siteConfig } from "@/data/config";
 
 interface GenericLoadingPageProps {
@@ -141,17 +142,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <Image
-                className="relative flex-shrink-0 size-14"
-                alt="Icon"
-                src={
-                  isDarkMode
-                    ? getImageUrl("/icon-dark.svg")
-                    : getImageUrl("/icon.svg")
-                }
-                width="56"
-                height="56"
-              />
+              <LogoIcon className={cn("flex-shrink-0 size-14")} />
               <LogoName
                 className={cn(
                   "h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0"

@@ -3,6 +3,7 @@ import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 export function HeaderSection() {
   const t = useTranslations();
@@ -14,7 +15,7 @@ export function HeaderSection() {
       // buttonLink={routes.about.link}
       // buttonText={t("about.page.header-section.cta")}
       //buttonVariant="secondary"
-      imagePath="/portrait.png"
+      imagePath={getEmojiHub("🧑🏻")} // getEmojiHub("🤔")
     />
   );
 }

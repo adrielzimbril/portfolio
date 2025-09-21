@@ -7,15 +7,13 @@ import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useScroll, Variants } from "motion/react";
 import { useEffect, useState } from "react";
 import { LogoName } from "@/components/shared/icons/logo-name";
-import Image from "next/image";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
-import { getImageUrl } from "@/utils/base-url";
 import { useTranslations } from "next-intl";
 import { getActivePathInArray, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
-import { useIsDarkMode } from "@/hooks/useIsDarkMode";
+import { LogoIcon } from "../icons/logo-icon";
 
 const INITIAL_WIDTH = "70rem";
 const MAX_WIDTH = "68rem";
@@ -63,7 +61,6 @@ export function Navbar() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
-  const isDarkMode = useIsDarkMode();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -147,21 +144,12 @@ export function Navbar() {
               size="none"
               className="flex items-center gap-1 md:gap-2"
             >
-              <Image
-                width={56}
-                height={56}
+              <LogoIcon
                 className={cn(
                   "w-10! lg:w-12! h-10! lg:h-12!"
                   // hasScrolled && "w-10! h-10!"
                 )}
-                alt="Icon"
-                src={
-                  isDarkMode
-                    ? getImageUrl("/icon-dark.svg")
-                    : getImageUrl("/icon.svg")
-                }
               />
-              {/* <LogoIcon className="size-7 lg:size-10" /> */}
               <LogoName
                 className={cn(
                   "hidden lg:block",
@@ -237,17 +225,7 @@ export function Navbar() {
                         });
                       }}
                     >
-                      <Image
-                        width={56}
-                        height={56}
-                        className={cn("size-12")}
-                        alt="Icon"
-                        src={
-                          isDarkMode
-                            ? getImageUrl("/icon-dark.svg")
-                            : getImageUrl("/icon.svg")
-                        }
-                      />
+                      <LogoIcon className={cn("size-12")} />
                       <LogoName className={cn("h-8! flex-shrink-0")} />
                     </Link>
                     <Button
