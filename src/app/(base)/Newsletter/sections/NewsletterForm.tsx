@@ -12,6 +12,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations } from "next-intl";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
+import { richTextComponent } from "@/module/content/utils/mdx-components";
 
 const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
 
@@ -46,15 +47,20 @@ export function NewsletterForm() {
             </Badge>
             <h2 className="self-stretch">{t("newsletter.page.title")}</h2>
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-b-white-invert-sec">
-              {t("newsletter.page.desc")}
+              {t.rich("newsletter.page.desc", {
+                ...richTextComponent,
+              })}
             </p>
           </div>
-          <Tags tags={tags} isCentered />
+          <Tags
+            tags={t("common.page-sections.newsletter.tags").split(",")}
+            isCentered
+          />
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <Input
               placeholder={t(
-                "common.page-sections.newsletter.form.fields.email.placeholder"
+                "common.page-sections.newsletter.form.fields.email-page.placeholder"
               )}
               type="email"
               value={email}

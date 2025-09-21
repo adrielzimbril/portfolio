@@ -182,14 +182,13 @@
     }
   },
   "newsletter": {
-    "title": "Reçois les nouveautés",
-    "description": "Sois parmi les premiers à accéder à supastarter.nextjs.",
+    "title": "Ressources exclusives",
+    "description": "Sois parmi les premiers à recevoir nos guides, astuces et kits pour transformer tes idées en produits SaaS qui cartonnent 🦄.",
     "page": {
-      "badge": "Pour les développeurs freelances qui galèrent à trouver des clients.",
-      "title": "Trouve des clients en continu grâce à la méthode Tsunami 🌊",
-      "desc": "Je te montre comment utiliser l'IA et l'AUTOMATISATION pour trouver des missions en boucle."
+      "badge": "Pour les fondateurs et créateurs qui veulent passer à l’action 🚀",
+      "title": "Tes idées en produits impactants grâce à la Méthode ShiroSaaS 🦄",
+      "desc": "Chaque semaine, <highlight>découvre</highlight> des <strong>astuces</strong>, <strong>templates</strong>, <strong>guides</strong> et <strong>vidéos</strong> pour tester, structurer et lancer des produits SaaS que tes <highlight>utilisateurs</highlight> vont adorer 🫶🏻."
     },
-    "email": "Email",
     "hints": {
       "error": {
         "message": "Nous sommes désolés, mais nous n'avons pas pu vous abonner à la newsletter. Veuillez réessayer plus tard."
@@ -198,9 +197,7 @@
         "message": "Merci d'avoir vous abonné à notre newsletter. Nous vous recontacterons au plus vite.",
         "title": "Abonné"
       }
-    },
-    "submit": "S'abonner",
-    "subtitle": "Sois parmi les premiers à accéder à mes nouveautés."
+    }
   },
   "common": {
     "confirmation": {
@@ -262,7 +259,7 @@
         "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
         "title": "Your ideas into products that your users adore",
         "subtitle-simple": "Innovative Problem Solver & Your Go-To SaaS Product Designer ❣️",
-        "subtitle": "Innovative Problem Solver & SaaS Product Designer 🦄❣️",
+        "subtitle": "Innovative Problem Solver & SaaS Product Designer ❣️",
         "subtitle-secondary": "Turning Ideas into Impact | SaaS Product Designer & Problem Solver ❣️"
       },
       "page-loader": {
@@ -309,7 +306,7 @@
         "available": {
           "title": "Disponible",
           "description": "{limit, plural, one {# place disponible} other {# places disponibles}} pour {date}",
-          "description-simple": "Disponible pour collaborations 🫶🏻",
+          "description-simple": "Disponible pour collaborations 🦄",
           "description-secondary": "{showLimit, select, true {{limit, plural, one {# place disponible} other {# places disponibles}}} other {}}{showMission, select, true { pour Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, jusqu'au {date}} other {}}"
         },
         "unavailable": {
@@ -425,11 +422,12 @@
           "state": "Votre inscription est confirmée ! Vous pouvez ajouter vos informations pour personnaliser votre expérience."
         },
         "footer": {
-          "title": "🎁 Recevoir les cadeaux",
-          "description": "Rejoignez plus de 90K entrepreneurs qui reçoivent nos stratégies exclusives",
-          "button": "S'inscrire maintenant",
-          "subText": "Rejoignez plus de 90K entrepreneurs qui"
+          "title": "💌 Ton kit créatif t’attend 🫶🏻",
+          "description": "Des conseils, astuces et ressources exclusives pour transformer tes idées en produits qui cartonnent 🦄",
+          "button": "Oui, je le veux 🤭",
+          "subText": "Promis, que du contenu inspirant et zéro spam ✨"
         },
+        "tags": "Product Design 🎨, SaaS 🦄, UX/UI 🖌️, Design System 🧩, Figma 🎨, Startups 🚀",
         "form": {
           "fields": {
             "email": {
@@ -438,7 +436,7 @@
             },
             "email-page": {
               "label": "Email",
-              "placeholder": "😏 Prêt à recevoir quelque chose d'interessant ?"
+              "placeholder": "Ton email ici… ✉️"
             },
             "name": {
               "label": "Nom",

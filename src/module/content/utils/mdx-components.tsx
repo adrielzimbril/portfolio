@@ -5,9 +5,12 @@ import type { ImageProps } from "next/image";
 import Image from "next/image";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { PortfolioProjectResearchScope } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
 import { cn } from "@/utils";
+import { Link } from "@/components/ui/link";
+import { siteConfig } from "@/data/config";
+import { RichTagsFunction, useTranslations } from "next-intl";
+import { routes } from "@/data/routes";
 
 export const mdxComponents = {
   a: (props) => {
@@ -186,7 +189,7 @@ export function Highlight({
   return (
     <span
       className={cn(
-        "p-1 py-0.5 font-medium dark:font-semibold text-secondary",
+        "p-1 py-0.5 bg-orange-200 dark:bg-amber-400 text-b-white-unchanged rounded-md font-medium dark:font-semibold",
         className
       )}
     >
@@ -194,6 +197,40 @@ export function Highlight({
     </span>
   );
 }
+
+export const richTextComponent = {
+  p: (chunks: React.ReactNode) => <p className="relative">{chunks}</p>,
+  strike: (chunks: React.ReactNode) => (
+    <span className="relative line-through">{chunks}</span>
+  ),
+  strong: (chunks: React.ReactNode) => (
+    <span className="relative font-bold">{chunks}</span>
+  ),
+  markup: (chunks: React.ReactNode) => (
+    <span className="relative">{chunks}</span>
+  ),
+  highlight: (chunks: React.ReactNode) => <Highlight>{chunks}</Highlight>,
+  blog: (chunks: React.ReactNode) => (
+    <Link
+      href={routes.thoughts.link}
+      variant="ghost"
+      className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline px-1"
+    >
+      {chunks}
+    </Link>
+  ),
+  linkedin: (chunks: React.ReactNode) => (
+    <Link
+      href={siteConfig.links.contact.social.linkedin.url}
+      variant="ghost"
+      className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-1"
+    >
+      {chunks}
+    </Link>
+  ),
+  br: () => <br aria-hidden="true" />,
+};
+
 
 /* Component that hides if title is empty */
 export function SmartSection({

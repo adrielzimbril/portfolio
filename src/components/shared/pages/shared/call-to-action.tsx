@@ -13,6 +13,7 @@ import { useTranslations } from "use-intl";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
 import { toast } from "sonner";
+import { richTextComponent } from "@/module/content/utils/mdx-components";
 
 function EmailForm() {
   const t = useTranslations();
@@ -66,31 +67,6 @@ function EmailForm() {
 function ContentSection({ isPage }: { isPage?: boolean }) {
   const t = useTranslations();
 
-  const formatRichText = (text: string) => {
-    return t.rich(text, {
-      p: (chunks) => <p className="relative">{chunks}</p>,
-      blog: (chunks) => (
-        <Link
-          href={routes.thoughts.link}
-          variant="ghost"
-          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline px-1"
-        >
-          {chunks}
-        </Link>
-      ),
-      linkedin: (chunks) => (
-        <Link
-          href={siteConfig.links.contact.social.linkedin.url}
-          variant="ghost"
-          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-1"
-        >
-          {chunks}
-        </Link>
-      ),
-      br: () => <br aria-hidden="true" />,
-    });
-  };
-
   return (
     <div className="flex flex-col gap-8 items-start justify-start relative">
       {isPage ? (
@@ -99,7 +75,9 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
             {t("common.page-sections.cta.variant-one.title")}
           </h2>
 
-          {formatRichText("common.page-sections.cta.variant-one.description")}
+          {t.rich("common.page-sections.cta.variant-one.description", {
+            ...richTextComponent,
+          })}
           <Link href={routes.contact.link} likeButton whileTap size="lg">
             {t("common.page-sections.cta.variant-one.button")}
           </Link>
@@ -110,7 +88,9 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
             {t("common.page-sections.cta.variant-two.title")}
           </h2>
 
-          {formatRichText("common.page-sections.cta.variant-two.description")}
+          {t.rich("common.page-sections.cta.variant-two.description", {
+            ...richTextComponent,
+          })}
           <EmailForm />
         </>
       )}
