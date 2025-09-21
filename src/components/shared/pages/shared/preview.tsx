@@ -3,7 +3,17 @@ import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { PageType, ResourceType } from "@/types/enum";
 import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
-import { BookOne, ClapperboardPlay, VideoLibrary } from "@aurthle/icons";
+import {
+  BookOne,
+  ClapperboardPlay,
+  DeveloperFile,
+  Figma,
+  Notebook,
+  QueueTwo,
+  VideoFolder,
+  VideoLibrary,
+  VideoPlaylistOne,
+} from "@aurthle/icons";
 import { Link } from "@/components/ui/link";
 import { useTranslations } from "use-intl";
 
@@ -91,9 +101,17 @@ export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
   return (
     <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-b-base [&_svg,_svg_*]:fill-b-white-invert [&_svg,_svg_*]:color-b-white-invert rounded-full pointer-events-none overflow-hidden">
       {resourceType === ResourceType.COURSE ? (
-        <BookOne size={24} variant="bulk" />
+        <VideoFolder size={24} variant="bulk" />
       ) : resourceType === ResourceType.EBOOK ? (
-        <ClapperboardPlay size={24} variant="bulk" />
+        <Notebook size={24} variant="bulk" />
+      ) : resourceType === ResourceType.VIDEO ? (
+        <VideoPlaylistOne size={24} variant="bulk" />
+      ) : resourceType === ResourceType.MASTERCLASS ? (
+        <QueueTwo size={24} variant="bulk" />
+      ) : resourceType === ResourceType.FIGMA_TEMPLATE ? (
+        <Figma size={24} variant="bulk" />
+      ) : resourceType === ResourceType.CODE ? (
+        <DeveloperFile size={24} variant="bulk" />
       ) : (
         <VideoLibrary size={24} variant="bulk" />
       )}

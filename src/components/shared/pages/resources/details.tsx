@@ -32,61 +32,61 @@ export function CardInfo({
   const { count: avatarCount, loading: avatarCountLoading } =
     useProductTitleRequestsCount(title);
 
-      const productTypeMap: Record<ResourceType, string> = {
-        [ResourceType.COURSE]: t(
-          "common.page-sections.hub.base.resources-type.course.badge"
-        ),
-        [ResourceType.EBOOK]: t(
-          "common.page-sections.hub.base.resources-type.ebook.badge"
-        ),
-        [ResourceType.VIDEO]: t(
-          "common.page-sections.hub.base.resources-type.video.badge"
-        ),
-        [ResourceType.MASTERCLASS]: t(
-          "common.page-sections.hub.base.resources-type.masterclass.badge"
-        ),
-        [ResourceType.FIGMA_TEMPLATE]: t(
-          "common.page-sections.hub.base.resources-type.figma-template.badge"
-        ),
-        [ResourceType.CODE]: t(
-          "common.page-sections.hub.base.resources-type.code.badge"
-        ),
-      };
+  const productTypeMap: Record<ResourceType, string> = {
+    [ResourceType.COURSE]: t(
+      "common.page-sections.hub.base.resources-type.course.title"
+    ),
+    [ResourceType.EBOOK]: t(
+      "common.page-sections.hub.base.resources-type.ebook.title"
+    ),
+    [ResourceType.VIDEO]: t(
+      "common.page-sections.hub.base.resources-type.video.title"
+    ),
+    [ResourceType.MASTERCLASS]: t(
+      "common.page-sections.hub.base.resources-type.masterclass.title"
+    ),
+    [ResourceType.FIGMA_TEMPLATE]: t(
+      "common.page-sections.hub.base.resources-type.figma-template.title"
+    ),
+    [ResourceType.CODE]: t(
+      "common.page-sections.hub.base.resources-type.code.title"
+    ),
+  };
 
-      const productType = productTypeMap[resourceType] ?? "";
+  const productType = productTypeMap[resourceType] ?? "";
 
-      return (
-        <div className="flex flex-col items-start justify-between gap-4 w-full">
-          <div className="flex flex-col items-start justify-center gap-4 w-full">
-            <Header title={title} slug={slug} />
+  return (
+    <div className="flex flex-col items-start justify-between gap-4 w-full">
+      <div className="flex flex-col items-start justify-center gap-4 w-full">
+        <Header title={title} slug={slug} />
 
-            <Tags primaryTag={productType} tags={tags.map((tag) => tag.name)} />
+        <Tags primaryTag={productType} tags={tags.map((tag) => tag.name)} />
 
-            <Description description={description} features={features} />
+        <Description description={description} features={features} />
 
-            <AvatarsStats
-              avatars={
-                avatarCount < 1
-                  ? ["image1"]
-                  : (avatars ?? [
-                      "image1",
-                      "image2",
-                      "image3",
-                      "image4",
-                      "image5",
-                      "image6",
-                      "image7",
-                      "image8",
-                    ])
-              }
-              userCount={avatarCount ?? userCount}
-              resourceType={resourceType}
-            />
-          </div>
+        <AvatarsStats
+          avatars={
+            avatarCount < 1
+              ? ["image1"]
+              : (avatars ?? [
+                  "image1",
+                  "image2",
+                  "image3",
+                  "image4",
+                  "image5",
+                  "image6",
+                  "image7",
+                  "image8",
+                ])
+          }
+          userCount={avatarCount ?? userCount}
+          resourceType={resourceType}
+        />
+      </div>
 
-          <Action slug={slug} resourceType={resourceType} />
-        </div>
-      );
+      <Action slug={slug} resourceType={resourceType} />
+    </div>
+  );
 }
 
 function Header({ title, slug }: { title: string; slug: string }) {
@@ -131,6 +131,29 @@ function Action({
   resourceType: ResourceType;
 }) {
   const t = useTranslations();
+
+  const productTypeMap: Record<ResourceType, string> = {
+    [ResourceType.COURSE]: t(
+      "common.page-sections.hub.base.resources-type.course.button"
+    ),
+    [ResourceType.EBOOK]: t(
+      "common.page-sections.hub.base.resources-type.ebook.button"
+    ),
+    [ResourceType.VIDEO]: t(
+      "common.page-sections.hub.base.resources-type.video.button"
+    ),
+    [ResourceType.MASTERCLASS]: t(
+      "common.page-sections.hub.base.resources-type.masterclass.button"
+    ),
+    [ResourceType.FIGMA_TEMPLATE]: t(
+      "common.page-sections.hub.base.resources-type.figma-template.button"
+    ),
+    [ResourceType.CODE]: t(
+      "common.page-sections.hub.base.resources-type.code.button"
+    ),
+  };
+
+  const productType = productTypeMap[resourceType] ?? "";
   return (
     <Link
       href={getResourcesUrl(PageType.HUB, slug)}
@@ -140,13 +163,7 @@ function Action({
       asIcon
     >
       <span className="flex items-center gap-1">
-        {resourceType === ResourceType.COURSE
-          ? t("common.page-sections.hub.base.resources-type.course.button")
-          : resourceType === ResourceType.EBOOK
-            ? t("common.page-sections.hub.base.resources-type.ebook.button")
-            : t(
-                "common.page-sections.hub.base.resources-type.masterclass.button"
-              )}
+        {productType}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>
