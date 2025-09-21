@@ -9,7 +9,7 @@ import { useTheme } from "next-themes";
 export function useIsDarkMode(): boolean {
   const { resolvedTheme } = useTheme();
 
-  const isDarkMode = resolvedTheme === "dark";
+  const isDarkMode = resolvedTheme !== "light";
 
   return isDarkMode;
 }

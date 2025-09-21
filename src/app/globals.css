@@ -247,6 +247,18 @@
   .border-0:not(input):not(textarea):not(select):not(button)::file-selector-button {
     @apply border-none outline-none;
   }
+  
+  /* @supports not (background: paint(squircle)) {
+    [class*="squircle-"] {
+      border-radius: 0 !important;
+    }
+  } */
+  
+  @supports not (background: paint(squircle)) {
+    [class*="squircle-5xl"], [class*="squircle-6xl"]:not(.text-card-foreground), [class*="squircle-7xl"] {
+      border-radius: var(--squircle-border-radius-2xl)!important;
+    }
+  }
 
   html {
     scroll-behavior: smooth;

@@ -151,7 +151,7 @@ export function Navbar() {
                 width={56}
                 height={56}
                 className={cn(
-                  "w-10! md:w-12! h-10! md:h-12!"
+                  "w-10! lg:w-12! h-10! lg:h-12!"
                   // hasScrolled && "w-10! h-10!"
                 )}
                 alt="Icon"
@@ -161,11 +161,11 @@ export function Navbar() {
                     : getImageUrl("/icon.svg")
                 }
               />
-              {/* <LogoIcon className="size-7 md:size-10" /> */}
+              {/* <LogoIcon className="size-7 lg:size-10" /> */}
               <LogoName
                 className={cn(
-                  "hidden md:block",
-                  "h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0"
+                  "hidden lg:block",
+                  "h-5! qlg:h-6! w-48! qlg:w-60! flex-shrink-0"
                   // hasScrolled && "h-3.5! w-36!"
                 )}
               />
@@ -179,14 +179,14 @@ export function Navbar() {
             />
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
-              <div className="hidden md:flex items-center space-x-6">
+              <div className="hidden lg:flex items-center space-x-6">
                 <Link href={routes.contact.link} likeButton whileTap>
                   {t("common.page-sections.header.cta")}
                 </Link>
               </div>
               <ThemeToggle />
               <Button
-                className="md:hidden"
+                className="lg:hidden"
                 size="icon"
                 //variant="secondary"
                 onClick={toggleDrawer}

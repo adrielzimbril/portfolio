@@ -45,7 +45,9 @@ export function NewsletterForm() {
             <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-b-white-invert-sec">
               {t("newsletter.page.badge")}
             </Badge>
-            <h2 className="self-stretch">{t("newsletter.page.title")}</h2>
+            <h2 className="self-stretch">{t.rich("newsletter.page.title", {
+              ...richTextComponent,
+            })}</h2>
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-b-white-invert-sec">
               {t.rich("newsletter.page.desc", {
                 ...richTextComponent,

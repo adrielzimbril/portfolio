@@ -9,11 +9,16 @@ import { MoonIcon } from "@radix-ui/react-icons";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
-  const changeTheme = async () => {
-    if (!buttonRef.current) return;
+const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
-    await document.startViewTransition(() => {
+const changeTheme = async () => {
+  if (!buttonRef.current) return;
+
+  // Check if the browser supports the View Transition API
+  const supportsViewTransition = "startViewTransition" in document;
+
+  if (supportsViewTransition) {
+    await (document as any).startViewTransition(() => {
       flushSync(() => {
         setTheme(theme === "light" ? "dark" : "light");
       });
@@ -41,7 +46,11 @@ export function ThemeToggle() {
         pseudoElement: "::view-transition-new(root)",
       }
     );
-  };
+  } else {
+    // Fallback simple : just change the theme without animation
+    setTheme(theme === "light" ? "dark" : "light");
+  }
+};
 
   return (
     <Button

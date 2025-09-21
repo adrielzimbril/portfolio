@@ -186,8 +186,8 @@
     "description": "Sois parmi les premiers à recevoir nos guides, astuces et kits pour transformer tes idées en produits SaaS qui cartonnent 🦄.",
     "page": {
       "badge": "Pour les fondateurs et créateurs qui veulent passer à l’action 🚀",
-      "title": "Tes idées en produits impactants grâce à la Méthode ShiroSaaS 🦄",
-      "desc": "Chaque semaine, <highlight>découvre</highlight> des <strong>astuces</strong>, <strong>templates</strong>, <strong>guides</strong> et <strong>vidéos</strong> pour tester, structurer et lancer des produits SaaS que tes <highlight>utilisateurs</highlight> vont adorer 🫶🏻."
+      "title": "Passe de l'idée au <thin>produit</thin> grâce à la <thin>Méthode</thin> ShiroSaaS 🦄",
+      "desc": "Chaque semaine, <highlight>découvre</highlight> des <strong>astuces</strong>, <strong>templates</strong>, <strong>guides</strong> et <strong>vidéos</strong> pour tester, structurer et lancer ton <highlight>SaaS</highlight> que tes utilisateurs vont adorer 🫶🏻."
     },
     "hints": {
       "error": {

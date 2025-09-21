@@ -189,7 +189,7 @@ export function Highlight({
   return (
     <span
       className={cn(
-        "p-1 py-0.5 bg-orange-200 dark:bg-amber-400 text-b-white-unchanged rounded-md font-medium dark:font-semibold",
+        "p-1 py-0.5 bg-violet-200 dark:bgviolet-400 text-b-white-unchanged rounded-md font-medium dark:font-semibold",
         className
       )}
     >
@@ -205,6 +205,9 @@ export const richTextComponent = {
   ),
   strong: (chunks: React.ReactNode) => (
     <span className="relative font-bold">{chunks}</span>
+  ),
+  thin: (chunks: React.ReactNode) => (
+    <span className="relative font-light">{chunks}</span>
   ),
   markup: (chunks: React.ReactNode) => (
     <span className="relative">{chunks}</span>

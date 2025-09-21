@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
         className="squircle squircle-b-white squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
       >
         <div className="flex relative flex-col w-full items-center justify-center p-4 md:p-16 gap-4 md:gap-8 mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:flex-row justify-between items-start gap-8">
+          <div className="flex flex-col justify-center items-center lg:grid grid-cols-1 lg:grid-cols-2 lg:flex-row lg:justify-between lg:items-start gap-8">
             <div className="flex flex-col gap-4 md:gap-6 w-full rounded-2xl">
               <div className="flex flex-col gap-6 rounded-3xl bg-b-bases bg-b-base py-4 px-4">
                 <div className="flex flex-col gap-2">
@@ -146,7 +146,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
-            <div className="w-full flex flex-col md:flex-row justify-center place-content-center items-center gap-2">
+            <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
               {resources.map((resource, index) => (
                 <React.Fragment key={resource.slug ?? index}>
                   <Link

@@ -18,7 +18,7 @@ export function NavMenu({
 }) {
   const t = useTranslations();
   return (
-    <div className="w-fit hidden md:block">
+    <div className="w-fit hidden lg:block">
       <div className={cn("mx-auto flex w-full items-center justify-center")}>
         <div
           className={cn(
@@ -43,8 +43,8 @@ export function NavMenu({
                 <motion.div
                   layoutId="active-tab"
                   className={cn(
-                    "absolute inset-0 rounded-xl bg-b-base-accent squircle-b-base-accent",
-                    "squircle squircle-7xl"
+                    "absolute inset-0 bg-b-base-accent squircle-b-base-accent",
+                    "squircle squircle-2xl md:squircle-7xl squircle-smooth-lg md:squircle-smooth-xl rounded-xl"
                   )}
                   transition={{
                     duration: 0.2,
