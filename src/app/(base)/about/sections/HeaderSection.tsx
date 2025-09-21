@@ -15,7 +15,10 @@ export function HeaderSection() {
       // buttonLink={routes.about.link}
       // buttonText={t("about.page.header-section.cta")}
       //buttonVariant="secondary"
-      imagePath={getEmojiHub("🧑🏻")} // getEmojiHub("🤔")
+      // imagePath="/portrait.png"
+      //imagePath={getEmojiHub("🧑‍💻", "apple")} // getEmojiHub("🤔")
+      //imagePath={getEmojiHub("👨🏽‍💻", "fluent", "anim")} // getEmojiHub("🤔")
+      imagePath={{ emoji: "👨🏽‍💻" }}
     />
   );
 }

@@ -92,7 +92,7 @@ export function PageHero({
   buttonLink?: string;
   buttonText?: string;
   buttonVariant?: "default" | "secondary";
-  imagePath?: string;
+  imagePath?: string | { emoji: string };
   isMobileHidden?: boolean;
   imageContent?: React.ReactNode;
   actionButton?: boolean;

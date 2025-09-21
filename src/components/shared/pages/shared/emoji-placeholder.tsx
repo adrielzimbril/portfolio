@@ -13,7 +13,7 @@ export function EmojiPlaceholder({
   imgContainerClassName,
   unOrdered = false,
 }: {
-  src: string;
+  src: string | { emoji: string };
   variant?: "default" | "bordered" | "squircle";
   isMobileHidden?: boolean;
   className?: string;
@@ -42,7 +42,7 @@ export function EmojiPlaceholder({
         className={cn(
           "relative shrink-0 size-11 md:size-24",
           (variant === "default" || variant === "bordered") &&
-            "size-11 md:size-20",
+            "size-11 md:size-48",
           variant === "squircle" && "size-11 md:size-22",
           imgContainerClassName
         )}
@@ -52,16 +52,29 @@ export function EmojiPlaceholder({
           data-name="image 1001"
           style={{ backgroundImage: `url('${getImageUrl(src)}')` }}
         /> */}
-        <Image
-          src={getImageUrl(src)}
-          className={cn(
-            "size-full object-cover pointer-events-none",
-            imgClassName
-          )}
-          width={600}
-          height={600}
-          alt=""
-        />
+        {typeof src === "object" && src.emoji ? (
+          <span
+            className={cn(
+              "size-full flex items-center justify-center text-5xl md:text-[10rem] object-cover pointer-events-none",
+              imgClassName
+            )}
+          >
+            {src.emoji}
+          </span>
+        ) : (
+          typeof src === "string" && (
+            <Image
+              src={getImageUrl(src)}
+              className={cn(
+                "size-full object-cover pointer-events-none",
+                imgClassName
+              )}
+              width={600}
+              height={600}
+              alt=""
+            />
+          )
+        )}
       </div>
     </div>
   );
