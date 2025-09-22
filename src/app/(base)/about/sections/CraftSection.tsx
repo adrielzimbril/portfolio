@@ -4,7 +4,7 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { DetailsCard } from "@/components/shared/pages/shared/details-card";
 import { useLocale, useTranslations } from "use-intl";
 import {
-  DefaultIcon,
+  BalanceIcon,
   PlayingCardsIcon,
   ShapeIcon,
   ThreeDIcon,

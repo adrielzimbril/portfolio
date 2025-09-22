@@ -4,6 +4,7 @@ import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
 import { getEmojiHub } from "@aurthle/emoji-hub";
+import { getImageUrl } from "@/utils";
 
 export function HeaderSection() {
   const t = useTranslations();
@@ -18,7 +19,8 @@ export function HeaderSection() {
       // imagePath="/portrait.png"
       //imagePath={getEmojiHub("🧑‍💻", "apple")} // getEmojiHub("🤔")
       //imagePath={getEmojiHub("👨🏽‍💻", "fluent", "anim")} // getEmojiHub("🤔")
-      imagePath={{ emoji: "👨🏽‍💻" }}
+      //imagePath={{ emoji: "👨🏽‍💻" }}
+      imagePath={getImageUrl("/img/me/memoji/me-eye.png")}
     />
   );
 }

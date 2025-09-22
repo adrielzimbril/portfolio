@@ -1,10 +1,10 @@
 import React from "react";
 
-interface DefaultIconProps extends React.SVGProps<SVGSVGElement> {
+interface BalanceIconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
-export const DefaultIcon = ({ size = 49, ...props }: DefaultIconProps) => {
+export const BalanceIcon = ({ size = 49, ...props }: BalanceIconProps) => {
   return (
     <svg
       width={size}
