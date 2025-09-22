@@ -200,6 +200,15 @@
       }
     }
   },
+  "not-found": {
+    "badge": "Oups… tu es dans un univers d’infini créativité 🪐",
+    "title": "On <thin>dirait</thin> que tu t’es <thin>perdu</thin> dans les <thin>étoiles</thin> ✨",
+    "desc": "La page que tu cherches n’existe pas… ou plus 🕳️. Mais chaque détour est une aventure 🌠. Sic itur ad astra 🌟 : chaque pas, même perdu, nous rapproche des étoiles 🌌✨.",
+    "cta": {
+      "home": "Retour à l’accueil",
+      "newsletter": "Kit de créativité 💌"
+    }
+  },
   "newsletter": {
     "title": "Ton kit créatif t’attend 💌",
     "description": "Reçois chaque semaine des idées, astuces et ressources pour transformer tes idées en produits SaaS que les gens adorent.",
