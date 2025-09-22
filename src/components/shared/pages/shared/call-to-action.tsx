@@ -14,6 +14,7 @@ import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
 import { toast } from "sonner";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function EmailForm() {
   const t = useTranslations();
@@ -101,7 +102,11 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
 export function CallToAction({ isPage }: { isPage?: boolean }) {
   return (
     <SectionBase isCallToAction>
-      <EmojiPlaceholder src={getImageUrl("/image-1001.png")} isMobileHidden />
+      <EmojiPlaceholder
+        //src={getImageUrl(getEmojiHub("📥", "fluent", "anim"))}
+        src={{ emoji: "📥" }}
+        isMobileHidden
+      />
       <ContentSection isPage={isPage} />
     </SectionBase>
   );

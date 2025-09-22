@@ -3,6 +3,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { cn } from "@/utils/utils";
 import { getImageUrl } from "@/utils/base-url";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function ContentSection() {
   return (
@@ -41,7 +42,7 @@ export function UserResearchSection() {
         )}
       >
         <EmojiPlaceholder
-          src={getImageUrl("/image-1310-2.png")}
+          src={getImageUrl(getEmojiHub("🎯", "apple"))}
           //isMobileHidden
           variant="bordered"
         />

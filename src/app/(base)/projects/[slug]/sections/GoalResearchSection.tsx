@@ -6,6 +6,7 @@ import { cn } from "@/utils/utils";
 import { FormattedText } from "@/components/shared/formatted-text";
 import { getImageUrl } from "@/utils/base-url";
 import { useTranslations } from "next-intl";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function ContentSection({
   description,
@@ -51,7 +52,8 @@ export function GoalResearchSection({
         )}
       >
         <EmojiPlaceholder
-          src={getImageUrl("/image-1310-2.png")}
+          //src={getImageUrl(getEmojiHub("🎯", "apple"))}
+          src={{ emoji: "🎯" }}
           //isMobileHidden
           variant="squircle"
         />

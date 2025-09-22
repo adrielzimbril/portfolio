@@ -3,6 +3,7 @@ import { cn } from "@/utils/utils";
 import { CardInfoProps } from "@/components/shared/pages/shared/page/preview-value-card";
 import { Badge } from "@/components/ui/badge";
 import { getImageUrl } from "@/utils/base-url";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function PreviewContent({
   title,
@@ -23,13 +24,18 @@ function PreviewContent({
 function PreviewIcon({ icon }: { icon: string }) {
   return (
     <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-b-base rounded-full overflow-hidden">
-      <Image
+      {/* <Image
         width={100}
         height={100}
-        className="size-10 object-cover pointer-events-none"
+        className="size-12 object-cover pointer-events-none"
         alt={icon}
-        src={getImageUrl(icon)}
-      />
+        //src={getImageUrl(getEmojiHub(icon!, "apple"))}
+        src={getImageUrl(getEmojiHub(icon!, "fluent", "anim"))}
+        //src={{ emoji: icon }}
+      /> */}
+      <span className="size-full flex items-center justify-center text-4xl object-cover pointer-events-none">
+        {icon}
+      </span>
     </div>
   );
 }
