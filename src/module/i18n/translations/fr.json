@@ -2,13 +2,7 @@
   "home": {
     "title": "Hey 👋🏻",
     "description": "Designer produit et créateur de la méthode ShiroSaaS, j'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles, beaux et rentables.",
-    "keywords": [
-      "design produit SaaS",
-      "SaaS Adriel Zimbril",
-      "Product Designer SaaS",
-      "création SaaS",
-      "UX UI SaaS"
-    ],
+    "keywords": "design produit SaaS, SaaS Adriel Zimbril, Product Designer SaaS, création SaaS, UX UI SaaS",
     "page": {
       "header-section": {
         "title": "Transformez vos idées en produits que vos utilisateurs adorent 🦄",
@@ -23,13 +17,7 @@
   "about": {
     "title": "Je suis 🧑🏻‍🚀",
     "description": "Je suis Adriel, product designer et formateur. Ma mission : simplifier la création de SaaS, inspirer et guider ceux qui veulent donner vie à leurs idées.",
-    "keywords": [
-      "à propos Adriel Zimbril",
-      "Product Designer SaaS",
-      "formateur SaaS",
-      "parcours design produit SaaS",
-      "méthode ShiroSaaS"
-    ],
+    "keywords": "à propos Adriel Zimbril, Product Designer SaaS, formateur SaaS, parcours design produit SaaS, méthode ShiroSaaS",
     "page": {
       "header-section": {
         "title": "Hello, je suis 👋 \n Adriel Zimbril 🐼 \n Product Designer & Formateur 🎨 ",
@@ -111,6 +99,7 @@
   "hub": {
     "title": "Le Hub 🌒",
     "description": "Ressources exclusives : checklists, modèles Figma, guides pratiques et idées pour t’aider à lancer ton produit sans stress.",
+    "keywords": "ressources SaaS Adriel Zimbril, outils SaaS, templates SaaS, Product Designer SaaS, UI kit SaaS",
     "page": {
       "header-section": {
         "title": "Ton hub de créativité 🔗",
@@ -127,6 +116,7 @@
   "projects": {
     "title": "Mes projets 🐼",
     "description": "Un aperçu des projets que j’ai conçus et lancés, avec le process et les résultats. Pas juste des écrans jolis : des histoires de collaboration et de succès.",
+    "keywords": "projets SaaS Adriel Zimbril, portfolio SaaS, Product Designer SaaS, études de cas design, création SaaS",
     "page": {
       "header-section": {
         "title": "Études de cas 🚀",
@@ -169,6 +159,7 @@
   "thoughts": {
     "title": "Carnet de Bord 📒",
     "description": "Mes pensées brutes sur le design produit, l’innovation et la création de SaaS. Des réflexions sans filtre pour progresser et voir les choses autrement.",
+    "keywords": "blog SaaS Adriel Zimbril, design produit SaaS, Product Designer SaaS, réflexions design, innovation SaaS",
     "page": {
       "header-section": {
         "title": "Réflexions & Déclics ✍️",
@@ -182,9 +173,21 @@
       }
     }
   },
+  "playground": {
+    "title": "Expérimentations 🧑🏻‍🔬",
+    "description": "L'espace d'Adriel Zimbril pour tester de nouvelles idées, concepts et expériences design avant qu'elles ne deviennent des projets concrets.",
+    "keywords": "playground SaaS, expériences design Adriel Zimbril, prototypes SaaS, Product Designer SaaS, expérimentation design",
+    "page": {
+      "header-section": {
+        "title": "Labo d'expérimentation 🧪",
+        "description": "Un terrain de jeu où j’expérimente des concepts, j’explore des interfaces et je partage des idées encore en chantier. Ici, tout n’est pas fini — mais tout est authentique."
+      }
+    }
+  },
   "contact": {
-    "title": "Dire bonjour 👋",
-    "description": "Nous sommes là pour vous aider. Veuillez utiliser le formulaire ci-dessous pour nous contacter.",
+    "title": "Construisons ensemble 🤝",
+    "description": "Je réponds à vos messages personnellement. Que ce soit pour un projet, une collaboration ou simplement pour échanger sur le design produit et l’innovation, ma boîte mail est ouverte.",
+    "keywords": "Contact SaaS, Adriel Zimbril, Product Designer, discuter idée SaaS, collaboration produit, design SaaS, contact freelance SaaS, expert SaaS, accompagnement produit, mentor SaaS, formateur design",
     "page": {
       "badge": "Problem Solver & Your SaaS Product designer ❣️",
       "title": "Transforme tes idées en produits que tes utilisateurs adorent 🦄",
@@ -198,8 +201,9 @@
     }
   },
   "newsletter": {
-    "title": "Ressources exclusives",
-    "description": "Sois parmi les premiers à recevoir nos guides, astuces et kits pour transformer tes idées en produits SaaS qui cartonnent 🦄.",
+    "title": "Ton kit créatif t’attend 💌",
+    "description": "Reçois chaque semaine des idées, astuces et ressources pour transformer tes idées en produits SaaS que les gens adorent.",
+    "keywords": "newsletter SaaS Adriel Zimbril, conseils SaaS, Product Designer SaaS, growth SaaS, stratégie produit SaaS",
     "page": {
       "badge": "Pour les fondateurs et créateurs qui veulent passer à l’action 🚀",
       "title": "Passe de l'idée au <thin>produit</thin> grâce à la <thin>Méthode</thin> ShiroSaaS 🦄",
@@ -442,7 +446,7 @@
       "testimonials": {
         "badge": "On a conçu ensemble 🫱🏾‍🫲🏻",
         "title": "Partenaires",
-        "description": "Avec ces fondateurs, créateurs et équipes, nous avons testé, itéré et construit ensemble. Découvrez leurs retours sur nos collaborations et les solutions que nous avons créées.",
+        "description": "Avec ces fondateurs, créateurs et équipes, nous avons testé, itéré et construit et trouvé des solutions ensemble 🫶🏻.",
         "button": "Voir sur LinkedIn"
       },
       "thoughts": {
