@@ -3,24 +3,27 @@ import { cn } from "@/utils/utils";
 import { cva } from "class-variance-authority";
 import { VariantProps } from "class-variance-authority";
 
-const inputVariants = cva("relative rounded-2xl border-2 overflow-hidden", {
-  variants: {
-    variant: {
-      default: "bg-b-base-it border-b-base-accent",
-      secondary: "bg-b-white border-b-base-accent",
-      outline: "bg-transparent border-b-base-accent",
+export const inputVariants = cva(
+  "relative rounded-2xl border-2 overflow-hidden",
+  {
+    variants: {
+      variant: {
+        default: "bg-b-base-it border-b-base-accent",
+        secondary: "bg-b-white border-b-base-accent",
+        outline: "bg-transparent border-b-base-accent",
+      },
+      inputSize: {
+        default: "px-6 py-3",
+        sm: "px-3 py-2",
+        lg: "px-6 py-3 text-lg",
+      },
     },
-    inputSize: {
-      default: "px-6 py-3",
-      sm: "px-3 py-2",
-      lg: "px-6 py-3 text-lg",
+    defaultVariants: {
+      variant: "default",
+      inputSize: "default",
     },
-  },
-  defaultVariants: {
-    variant: "default",
-    inputSize: "default",
-  },
-});
+  }
+);
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,

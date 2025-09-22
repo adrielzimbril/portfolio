@@ -137,6 +137,16 @@ export const siteConfig = {
           navbar: false,
           available: true,
         },
+        youtubeConcept: {
+          shirosaasLab: {
+            name: "Youtube",
+            key: "youtube",
+            url: "https://go.adrielzimbril.com/yt",
+            icon: AurthleIcons.Youtube,
+            navbar: false,
+            available: true,
+          },
+        },
         figma: {
           name: "Figma",
           key: "figma",

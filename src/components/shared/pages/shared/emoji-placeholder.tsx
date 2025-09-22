@@ -50,6 +50,7 @@ export function EmojiPlaceholder({
           (variant === "default" || variant === "bordered") &&
             "size-72 md:size-96",
           variant === "squircle" && "size-72 md:size-96",
+          typeof src === "string" && "size-48 md:size-64",
           imgContainerClassName
         )}
       >

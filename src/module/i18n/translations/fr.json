@@ -173,6 +173,93 @@
       }
     }
   },
+  "submit": {
+    "title": "Soumets ton projet | ShiroSaaS Lab",
+    "description": "Partage ton projet, idée ou produit pour une analyse UX, un redesign Figma ou un feedback produit. Adriel Zimbril t'accompagne pour transformer tes idées en expériences impactantes.",
+    "keywords": "Soumission projet SaaS, Adriel Zimbril, Product Designer, UX Review, Redesign Figma, Analyse site web, Feedback produit, ShiroSaaS, Design System, Product Design",
+    "page": {
+      "header-section": {
+        "badge": "Participe a la Shirosaas Lab 😮‍💨🧪",
+        "title": "Ton design dans l’arène du panda ✨🐼",
+        "description": "Propose ton site, ton app ou ton Figma et je te donne mon feedback en live ou en vidéo sur ma <youtube>chaîne</youtube> lors d'un episode de <ytSaasLab><strong>Shirosaas Lab</strong></ytSaasLab>."
+      },
+      "fields": {
+        "intention": { "label": "Panel" },
+        "url": {
+          "label": "Lien (site, app, Figma…)",
+          "placeholder": "https://www.figma.com/design/4qgzkFPOb3YhzpHCmFc41d2/"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "hello@adrielzimbril.com"
+        },
+        "name": {
+          "label": "Nom",
+          "placeholder": "Adriel Zimbril"
+        },
+        "target": { "label": "Type" },
+        "focus": { "label": "Objectif" },
+        "detail": { "label": "Niveau de détail" },
+        "figmaType": { "label": "Type de fichier Figma" },
+        "redesignGoal": { "label": "Objectif du redesign" },
+        "productType": { "label": "Type de produit" },
+        "ideaDescription": {
+          "label": "Décris ton idée",
+          "placeholder": "Explique le contexte, l’utilisateur, le problème, la valeur…"
+        },
+        "validationGoal": { "label": "Objectif de validation" },
+        "freeText": {
+          "label": "Explique ta demande",
+          "placeholder": "Dis-m’en plus en quelques lignes…"
+        }
+      },
+      "options": {
+        "ux_review": "UI/UX Review",
+        "redesign_figma": "Re-design Figma",
+        "analysis": "Analyse site/app",
+        "feature_idea": "Idée de fonctionnalité",
+        "other": "Autre projet / Divers",
+        "support": {
+          "website": "Site web",
+          "mobile": "App mobile",
+          "saas": "SaaS",
+          "prototype": "Prototype"
+        },
+        "focus": {
+          "ui-ux": "UX/UI",
+          "accessibility": "Accessibilité",
+          "performance": "Performance"
+        },
+        "detail": {
+          "quick": "Résumé rapide",
+          "deep": "Analyse approfondie"
+        },
+        "figma": {
+          "prototype": "Prototype complet",
+          "uikit": "UI Kit",
+          "wireframe": "Wireframe"
+        },
+        "redesign": {
+          "fun": "Fun",
+          "productivity": "Productivité",
+          "engagement": "Engagement",
+          "aesthetic": "Esthétique"
+        },
+        "productType": {
+          "saas": "SaaS",
+          "webapp": "Web app",
+          "mobileapp": "Mobile app"
+        },
+        "validation": {
+          "feedback": "Feedback",
+          "mvp": "MVP",
+          "usertest": "Test utilisateur"
+        }
+      },
+      "actions": { "submit": "Allons-y !" },
+      "toast": { "success": "Merci ! Ta soumission a bien été envoyée." }
+    }
+  },
   "playground": {
     "title": "Expérimentations 🧑🏻‍🔬",
     "description": "L'espace d'Adriel Zimbril pour tester de nouvelles idées, concepts et expériences design avant qu'elles ne deviennent des projets concrets.",
@@ -286,6 +373,7 @@
       "retry": "Réessayer",
       "receive": "Recevoir",
       "obtain": "Obtenir",
+      "select": "Sélectionner",
       "loading": "Chargement",
       "loaded": "Chargé",
       "sending": "Envoi",
@@ -301,7 +389,8 @@
         "copyright": "Copyright Holder © {year} - All Right Reserved - Crafted with ❣️ by {author}",
         "copy": "Copier",
         "copied": "Copié",
-        "browser-does-not-support-video": "Votre navigateur ne supporte pas la vidéo."
+        "browser-does-not-support-video": "Votre navigateur ne supporte pas la vidéo.",
+        "characters-left": "caractères restants"
       },
       "months": {
         "january": "Janvier",
@@ -349,6 +438,11 @@
           "emoji": "🧪",
           "title": "Mon terrain de jeu",
           "subtitle": "Expérimentations, prototypes et idées en chantier pour booster ta créativité 🧪"
+        },
+        "submit": {
+          "emoji": "🧑🏻‍🔬",
+          "title": "Propose ton projet ou idée pour le ShiroSaaS Lab",
+          "subtitle": "Tes idées, nos analyses et redesigns 🎨"
         },
         "projects": {
           "emoji": "🚀",
