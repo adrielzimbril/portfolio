@@ -318,38 +318,43 @@
       "page-loader": {
         "home": {
           "emoji": "🦄",
-          "title": "Your ideas into products that your users adore",
-          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+          "title": "Transforme tes idées en produits qui cartonnent",
+          "subtitle": "Product Designer & Guide pour créateurs SaaS ❣️"
         },
         "about": {
           "emoji": "👨‍💻",
-          "title": "Your ideas into products that your users adore",
-          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+          "title": "Mon univers de créateur et formateur",
+          "subtitle": "Simplifier le design, inspirer les équipes et lancer des produits 🌌"
         },
         "thoughts": {
           "emoji": "📝",
-          "title": "Your ideas into products that your users adore",
-          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+          "title": "Carnet de bord créatif",
+          "subtitle": "Réflexions, leçons et idées pour concevoir des produits que tes utilisateurs adorent ✍️"
         },
         "hub": {
           "emoji": "⚡",
-          "title": "Your ideas into products that your users adore",
-          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+          "title": "Ton Hub créatif",
+          "subtitle": "Guides, templates et ressources pour passer de l’idée au produit sans perdre de temps ⚡"
+        },
+        "playground": {
+          "emoji": "🧪",
+          "title": "Mon terrain de jeu",
+          "subtitle": "Expérimentations, prototypes et idées en chantier pour booster ta créativité 🧪"
         },
         "projects": {
           "emoji": "🚀",
-          "title": "Your ideas into products that your users adore",
-          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+          "title": "Projets & études de cas",
+          "subtitle": "Chaque produit a une histoire : défis, solutions et impact 🚀"
         },
         "contact": {
           "emoji": "📞",
-          "title": "Your ideas into products that your users adore",
-          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+          "title": "Parlons de ton prochain projet",
+          "subtitle": "Échangeons sur ton idée, un projet SaaS ou une collaboration 🤝"
         },
         "newsletter": {
           "emoji": "💌",
-          "title": "Your ideas into products that your users adore",
-          "subtitle": "Problem Solver & Your SaaS Product designer ❣️"
+          "title": "Ton kit créatif t’attend",
+          "subtitle": "Conseils, ressources et inspirations pour créer des produits qui comptent 🎨"
         }
       },
       "components": {
