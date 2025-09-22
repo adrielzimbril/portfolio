@@ -29,6 +29,12 @@ export const routes = {
     link: "/projects",
     inHeader: true,
   },
+  submit: {
+    name: "Soumettre",
+    key: "submit",
+    link: "/submit",
+    inHeader: false,
+  },
   thoughts: {
     name: "Réflexions",
     key: "thoughts",
