@@ -25,7 +25,7 @@ export function HeaderSection() {
         //imagePath={getEmojiHub("👨🏽‍💻", "fluent", "anim")} // getEmojiHub("🤔")
         //imagePath={{ emoji: "👨🏽‍💻" }}
         //imagePath={getImageUrl("/img/me/memoji/me-love.png")}
-        isMobileHidden={false}
+        isMobileShowed
         imageVariant="squircle"
         imgClassName="rounded-full"
         imagePath={{

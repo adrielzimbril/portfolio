@@ -8,7 +8,7 @@ import { useTranslations } from "use-intl";
 export function EmojiPlaceholder({
   src,
   variant = "default",
-  isMobileHidden,
+  isMobileShowed,
   className,
   imgClassName,
   imgContainerClassName,
@@ -19,7 +19,7 @@ export function EmojiPlaceholder({
     | { emoji: string }
     | { mp4: string; webm: string; poster: string };
   variant?: "default" | "bordered" | "squircle";
-  isMobileHidden?: boolean;
+  isMobileShowed?: boolean;
   className?: string;
   imgClassName?: string;
   imgContainerClassName?: string;
@@ -40,7 +40,7 @@ export function EmojiPlaceholder({
           "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-b-base-accent",
         variant === "squircle" &&
           "squircle squircle-b-white squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-b-base-accent aspect-square size-full md:size-96 p-12 overflow-hidden",
-        isMobileHidden && isMobile && "hidden",
+        !isMobileShowed && isMobile && "hidden",
         className
       )}
     >

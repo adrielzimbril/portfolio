@@ -1,7 +1,8 @@
-import { IntentionForm } from "./sections/IntentionForm";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { HeaderSection } from "./sections/HeaderSection";
+import { IntentionForm } from "./sections/IntentionForm";
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -27,5 +28,10 @@ export async function generateMetadata() {
 }
 
 export default async function ThoughtsSubmitPage() {
-  return <IntentionForm />;
+  return (
+    <>
+      <HeaderSection />
+      <IntentionForm />
+    </>
+  );
 }

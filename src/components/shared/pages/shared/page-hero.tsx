@@ -97,7 +97,7 @@ export function PageHero({
   imagePath,
   imgClassName,
   imageVariant = "default",
-  isMobileHidden = true,
+  isMobileShowed = false,
   imageContent,
   actionButton = false,
   onClick = () => {},
@@ -114,7 +114,7 @@ export function PageHero({
     | { mp4: string; webm: string; poster: string };
   imgClassName?: string;
   imageVariant?: "default" | "bordered" | "squircle";
-  isMobileHidden?: boolean;
+  isMobileShowed?: boolean;
   imageContent?: React.ReactNode;
   actionButton?: boolean;
   onClick?: () => void;
@@ -125,7 +125,7 @@ export function PageHero({
         <EmojiPlaceholder
           src={imagePath}
           imgClassName={imgClassName}
-          isMobileHidden={isMobileHidden}
+          isMobileShowed={isMobileShowed}
           variant={imageVariant}
         />
       )}

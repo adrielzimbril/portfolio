@@ -42,7 +42,7 @@ export function ElementHomeWorkContactSubsection() {
       >
         <EmojiPlaceholder
           src={getImageUrl("/image-1310-2.png")}
-          //isMobileHidden
+          //isMobileShowed
           variant="bordered"
         />
         <ContentSection />

@@ -43,7 +43,7 @@ export function UserResearchSection() {
       >
         <EmojiPlaceholder
           src={getImageUrl(getEmojiHub("🎯", "apple"))}
-          //isMobileHidden
+          //isMobileShowed
           variant="bordered"
         />
         <ContentSection />

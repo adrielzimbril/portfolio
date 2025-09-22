@@ -105,7 +105,7 @@ export function CallToAction({ isPage }: { isPage?: boolean }) {
       <EmojiPlaceholder
         //src={getImageUrl(getEmojiHub("📥", "fluent", "anim"))}
         src={{ emoji: "📥" }}
-        isMobileHidden
+        isMobileShowed
       />
       <ContentSection isPage={isPage} />
     </SectionBase>

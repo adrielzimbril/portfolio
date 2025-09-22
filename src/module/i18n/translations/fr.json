@@ -180,7 +180,9 @@
     "page": {
       "header-section": {
         "badge": "Participe a la Shirosaas Lab 😮‍💨🧪",
+        "subBadge": "Ride créative ☄️🌚",
         "title": "Ton design dans l’arène ✨🐼",
+        "subTitle": "On analyse ca ensemble 🧑🏻‍🔬🌒",
         "description": "Propose ton site, ton app ou ton Figma et je te donne mon feedback en live ou en vidéo sur ma <youtube>chaîne</youtube> lors d'un episode de <ytSaasLab><strong>Shirosaas Lab</strong></ytSaasLab> 🫶🏻👨🏻‍🚀.",
         "subDescription": "Propose ton site, ton app ou ton fichier Figma — et je le décortiquer, l’améliorer et te donner du feedback en direct ou en vidéo sur ma chaîne. Chaque épisode est l’occasion de transformer des idées en pépites et d’apprendre 🫶🏻👨🏻‍🚀 "
       },
@@ -213,7 +215,7 @@
           "prototype": "Prototype"
         }
       },
-      "actions": { "submit": "Allons-y !" },
+      "actions": { "submit": "Here we go ! 🤩" },
       "toast": {
         "success": "Merci ! Ton design est en orbite ! 🪐",
         "error": "Oups ! Une erreur est survenue, veuillez réessayer s'il vous plaît 😅"
