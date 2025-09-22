@@ -231,6 +231,15 @@ export const richTextComponent = {
       {chunks}
     </Link>
   ),
+  youtube: (chunks: React.ReactNode) => (
+    <Link
+      href={siteConfig.links.contact.social.youtube.url}
+      variant="ghost"
+      className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-0"
+    >
+      {chunks}
+    </Link>
+  ),
   ytSaasLab: (chunks: React.ReactNode) => (
     <Link
       href={siteConfig.links.contact.social.youtubeConcept.shirosaasLab.url}

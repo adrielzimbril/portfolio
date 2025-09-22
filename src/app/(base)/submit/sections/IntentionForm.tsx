@@ -33,13 +33,17 @@ import {
 } from "@/components/ui/select";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { Widget as Typeform } from "@typeform/embed-react";
+import { getBaseUrl } from "@/utils";
 
 const intentions = ["ux_review"] as const;
 
 const schema = z.object({
   intention: z.enum(intentions),
   url: z.string().url().optional().or(z.literal("")),
-  email: z.string().email().optional().or(z.literal("")),
+  name: z.string(),
+  email: z.email().or(z.literal("")),
+  description: z.string().optional(),
   // A/C
   target: z.string().optional(),
   focus: z.string().optional(),
@@ -141,16 +145,27 @@ export function IntentionForm() {
           <CardContent className="p-6 md:p-8 space-y-6 gap-6">
             <div className="flex flex-col items-center text-center gap-2 hodd">
               <Badge size="lg">{t("submit.page.header-section.badge")}</Badge>
-              <h1 className="h2">{t("submit.page.header-section.title")}</h1>
+              <h1 className="h2 hidden">
+                {t("submit.page.header-section.title")}
+              </h1>
               <p className="text-b-white-invert-sec max-w-2xl hidden">
                 {t("submit.page.header-section.description")}
               </p>
             </div>
 
+            <Typeform
+              id="U8M1Kz01"
+              style={{ width: "100%", height: "100%" }}
+              className="min-h-[60dvh] hidden"
+              hideHeaders
+              hideFooter
+              onSubmit={() => toast.success(t("submit.page.toast.success"))}
+            />
+
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6 w-full max-w-xl self-center place-self-center "
+                className="space-y-6 w-full max-w-xl self-center place-self-center"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
@@ -159,7 +174,7 @@ export function IntentionForm() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <Label>{t("submit.page.fields.name.label")}</Label>
+                          <Label>{t("submit.page.fields.name.label")} *</Label>
                           <FormControl>
                             <Input
                               placeholder={t(
@@ -181,7 +196,7 @@ export function IntentionForm() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <Label>{t("submit.page.fields.email.label")}</Label>
+                          <Label>{t("submit.page.fields.email.label")} *</Label>
                           <FormControl>
                             <Input
                               placeholder={t(
@@ -204,13 +219,34 @@ export function IntentionForm() {
                   name="url"
                   render={({ field }) => (
                     <FormItem>
-                      <Label>{t("submit.page.fields.url.label")}</Label>
+                      <Label>{t("submit.page.fields.url.label")} *</Label>
                       <FormControl>
                         <Input
                           placeholder={t("submit.page.fields.url.placeholder")}
                           variant="secondary"
                           type="url"
                           {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>{t("submit.page.fields.description.label")}</Label>
+                      <FormControl>
+                        <Textarea
+                          rows={5}
+                          variant="secondary"
+                          placeholder={t(
+                            "submit.page.fields.description.placeholder"
+                          )}
+                          value={field.value ?? ""}
+                          onChange={field.onChange}
                         />
                       </FormControl>
                       <FormMessage />
@@ -275,240 +311,6 @@ export function IntentionForm() {
                     </div>
                   )}
                 </div>
-
-                {/* Conditional sections */}
-                {intention === "redesign_figma" && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label>{t("submit.page.fields.figmaType.label")}</Label>
-                      <Select
-                        name="figmaType"
-                        options={[
-                          {
-                            value: "prototype",
-                            label: t("submit.page.options.figma.prototype"),
-                          },
-                          {
-                            value: "uikit",
-                            label: t("submit.page.options.figma.uikit"),
-                          },
-                          {
-                            value: "wireframe",
-                            label: t("submit.page.options.figma.wireframe"),
-                          },
-                        ]}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>
-                        {t("submit.page.fields.redesignGoal.label")}
-                      </Label>
-                      <Select
-                        name="redesignGoal"
-                        options={[
-                          {
-                            value: "fun",
-                            label: t("submit.page.options.redesign.fun"),
-                          },
-                          {
-                            value: "productivity",
-                            label: t(
-                              "submit.page.options.redesign.productivity"
-                            ),
-                          },
-                          {
-                            value: "engagement",
-                            label: t("submit.page.options.redesign.engagement"),
-                          },
-                          {
-                            value: "aesthetic",
-                            label: t("submit.page.options.redesign.aesthetic"),
-                          },
-                        ]}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {intention === "analysis" && (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="space-y-2">
-                      <Label>{t("submit.page.fields.target.label")}</Label>
-                      <Select
-                        name="target"
-                        options={[
-                          {
-                            value: "website",
-                            label: `🌐 ${t("submit.page.options.support.website")}`,
-                          },
-                          {
-                            value: "mobile",
-                            label: `📱 ${t("submit.page.options.support.mobile")}`,
-                          },
-                          {
-                            value: "saas",
-                            label: `🧩 ${t("submit.page.options.support.saas")}`,
-                          },
-                          {
-                            value: "prototype",
-                            label: `🧪 ${t("submit.page.options.support.prototype")}`,
-                          },
-                        ]}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>{t("submit.page.fields.focus.label")}</Label>
-                      <Select
-                        name="focus"
-                        options={[
-                          {
-                            value: "ux",
-                            label: t("submit.page.options.focus.ux"),
-                          },
-                          {
-                            value: "ui",
-                            label: t("submit.page.options.focus.ui"),
-                          },
-                          {
-                            value: "performance",
-                            label: t("submit.page.options.focus.performance"),
-                          },
-                          {
-                            value: "accessibility",
-                            label: t("submit.page.options.focus.accessibility"),
-                          },
-                        ]}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>{t("submit.page.fields.detail.label")}</Label>
-                      <Select
-                        name="detail"
-                        options={[
-                          {
-                            value: "quick",
-                            label: t("submit.page.options.detail.quick"),
-                          },
-                          {
-                            value: "deep",
-                            label: t("submit.page.options.detail.deep"),
-                          },
-                        ]}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {intention === "feature_idea" && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label>
-                          {t("submit.page.fields.productType.label")}
-                        </Label>
-                        <Select
-                          name="productType"
-                          options={[
-                            {
-                              value: "saas",
-                              label: t("submit.page.options.productType.saas"),
-                            },
-                            {
-                              value: "webapp",
-                              label: t(
-                                "submit.page.options.productType.webapp"
-                              ),
-                            },
-                            {
-                              value: "mobileapp",
-                              label: t(
-                                "submit.page.options.productType.mobileapp"
-                              ),
-                            },
-                          ]}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label>
-                          {t("submit.page.fields.validationGoal.label")}
-                        </Label>
-                        <Select
-                          name="validationGoal"
-                          options={[
-                            {
-                              value: "feedback",
-                              label: t(
-                                "submit.page.options.validation.feedback"
-                              ),
-                            },
-                            {
-                              value: "mvp",
-                              label: t("submit.page.options.validation.mvp"),
-                            },
-                            {
-                              value: "usertest",
-                              label: t(
-                                "submit.page.options.validation.usertest"
-                              ),
-                            },
-                          ]}
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label>
-                        {t("submit.page.fields.ideaDescription.label")}
-                      </Label>
-                      <FormField
-                        control={form.control}
-                        name="ideaDescription"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Textarea
-                                rows={5}
-                                variant="secondary"
-                                placeholder={t(
-                                  "submit.page.fields.ideaDescription.placeholder"
-                                )}
-                                value={field.value ?? ""}
-                                onChange={field.onChange}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {intention === "other" && (
-                  <div className="space-y-2">
-                    <Label>{t("submit.page.fields.freeText.label")}</Label>
-                    <FormField
-                      control={form.control}
-                      name="freeText"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <Textarea
-                              rows={5}
-                              variant="secondary"
-                              placeholder={t(
-                                "submit.page.fields.freeText.placeholder"
-                              )}
-                              value={field.value ?? ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                )}
-
                 <div className="pt-2">
                   <Button type="submit" whileTap asPointer asFull size="lg">
                     {t("submit.page.actions.submit")}
