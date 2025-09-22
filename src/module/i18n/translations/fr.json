@@ -181,7 +181,8 @@
       "header-section": {
         "badge": "Participe a la Shirosaas Lab 😮‍💨🧪",
         "title": "Ton design dans l’arène ✨🐼",
-        "description": "Propose ton site, ton app ou ton Figma et je te donne mon feedback en live ou en vidéo sur ma <youtube>chaîne</youtube> lors d'un episode de <ytSaasLab><strong>Shirosaas Lab</strong></ytSaasLab> 🫶🏻👨🏻‍🚀."
+        "description": "Propose ton site, ton app ou ton Figma et je te donne mon feedback en live ou en vidéo sur ma <youtube>chaîne</youtube> lors d'un episode de <ytSaasLab><strong>Shirosaas Lab</strong></ytSaasLab> 🫶🏻👨🏻‍🚀.",
+        "subDescription": "Propose ton site, ton app ou ton fichier Figma — et je le décortiquer, l’améliorer et te donner du feedback en direct ou en vidéo sur ma chaîne. Chaque épisode est l’occasion de transformer des idées en pépites et d’apprendre 🫶🏻👨🏻‍🚀 "
       },
       "fields": {
         "intention": { "label": "Panel de feedback demandé" },
@@ -571,7 +572,7 @@
           "success": {
             "message": {
               "title": "Merci pour votre inscription !",
-              "description": "os informations ont été mises à jour avec succès. Merci ! 🎉"
+              "description": "Vos informations ont été mises à jour avec succès. Merci ! 🎉"
             }
           }
         }
@@ -698,6 +699,10 @@
         "name": {
           "invalid": "Oups ! Veuillez entrer un nom valide, s'il vous plaît 🦄",
           "required": "Oups, le nom doit contenir au moins 4 caractères 😅"
+        },
+        "url": {
+          "invalid": "Oups ! Veuillez entrer une URL valide, s'il vous plaît 🦄",
+          "required": "Oups, l'URL est requise 😅"
         }
       },
       "invalid_arguments": "Invalid function arguments",

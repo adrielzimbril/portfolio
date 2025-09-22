@@ -14,8 +14,6 @@ import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
 
-const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
-
 export function NewsletterForm() {
   const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);

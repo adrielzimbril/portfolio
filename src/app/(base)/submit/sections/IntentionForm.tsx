@@ -17,7 +17,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { cn } from "@/utils/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -33,40 +32,33 @@ import {
 } from "@/components/ui/select";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
-import { Widget as Typeform } from "@typeform/embed-react";
-import { getBaseUrl } from "@/utils";
 
-const intentions = ["ux_review"] as const;
+enum Intention {
+  UX_REVIEW = "ux_review",
+}
 
-const schema = z.object({
-  intention: z.enum(intentions),
-  url: z.string().url().optional().or(z.literal("")),
-  name: z.string(),
-  email: z.email().or(z.literal("")),
-  description: z.string().optional(),
-  // A/C
-  target: z.string().optional(),
-  focus: z.string().optional(),
-  detail: z.string().optional(),
-  // B
-  figmaType: z.string().optional(),
-  redesignGoal: z.string().optional(),
-  // D
-  productType: z.string().optional(),
-  ideaDescription: z.string().optional(),
-  validationGoal: z.string().optional(),
-  // E
-  freeText: z.string().optional(),
-});
-
-export type IntentionFormValues = z.infer<typeof schema>;
+const intentions = Object.values(Intention);
 
 export function IntentionForm() {
   const t = useTranslations();
 
+  const schema = z.object({
+    intention: z.enum(intentions),
+    name: z
+      .string({ error: t("zod.errors.customized.name.invalid") })
+      .min(4, { message: t("zod.errors.customized.name.required") }),
+    email: z.email({ error: t("zod.errors.customized.email.invalid") }),
+    url: z.url({ error: t("zod.errors.customized.url.invalid") }),
+    description: z.string().optional(),
+    // A/C
+    target: z.string().optional(),
+  });
+
+  type IntentionFormValues = z.infer<typeof schema>;
+
   const form = useForm<IntentionFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { intention: "ux_review" },
+    defaultValues: { intention: Intention.UX_REVIEW },
   });
 
   const intention = form.watch("intention");
@@ -75,14 +67,16 @@ export function IntentionForm() {
     // TODO: wire to backend or email/service later
     console.log("submit_thought_intention", values);
     toast.success(t("submit.page.toast.success"));
-    form.reset({ intention: values.intention });
+    form.reset();
   };
 
   const Select = ({
+    label,
     name,
     options,
     placeholder,
   }: {
+    label: string;
     name: keyof IntentionFormValues;
     options: Array<{ value: string; label: string }>;
     placeholder?: string;
@@ -94,12 +88,17 @@ export function IntentionForm() {
         name={name as any}
         render={({ field }) => (
           <FormItem>
+            <Label>{label}</Label>
             <FormControl>
               <SelectComponent
                 value={field.value ?? ""}
                 onValueChange={field.onChange}
               >
-                <SelectTrigger id={id} variant="secondary">
+                <SelectTrigger
+                  id={id}
+                  variant="secondary"
+                  className="rounded-xl"
+                >
                   <SelectValue
                     placeholder={placeholder ?? t("common.button.select")}
                   />
@@ -142,26 +141,16 @@ export function IntentionForm() {
         className="squircle squircle-b-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
       >
         <Card className="w-full squircle squircle-b-white squircle-smooth-xl">
-          <CardContent className="p-6 md:p-8 space-y-6 gap-6">
+          <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2 hodd">
               <Badge size="lg">{t("submit.page.header-section.badge")}</Badge>
               <h1 className="h2 hidden">
                 {t("submit.page.header-section.title")}
               </h1>
               <p className="text-b-white-invert-sec max-w-2xl hidden">
-                {t("submit.page.header-section.description")}
+                {t("submit.page.header-section.subDescription")}
               </p>
             </div>
-
-            <Typeform
-              id="U8M1Kz01"
-              style={{ width: "100%", height: "100%" }}
-              className="min-h-[60dvh] hidden"
-              hideHeaders
-              hideFooter
-              onSubmit={() => toast.success(t("submit.page.toast.success"))}
-            />
-
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -174,12 +163,16 @@ export function IntentionForm() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <Label>{t("submit.page.fields.name.label")} *</Label>
+                          <Label>
+                            {t("submit.page.fields.name.label")}{" "}
+                            <span className="text-red-500">*</span>
+                          </Label>
                           <FormControl>
                             <Input
                               placeholder={t(
                                 "submit.page.fields.name.placeholder"
                               )}
+                              className="rounded-xl"
                               variant="secondary"
                               type="text"
                               {...field}
@@ -196,12 +189,16 @@ export function IntentionForm() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <Label>{t("submit.page.fields.email.label")} *</Label>
+                          <Label>
+                            {t("submit.page.fields.email.label")}{" "}
+                            <span className="text-red-500">*</span>
+                          </Label>
                           <FormControl>
                             <Input
                               placeholder={t(
                                 "submit.page.fields.email.placeholder"
                               )}
+                              className="rounded-xl"
                               variant="secondary"
                               type="email"
                               {...field}
@@ -219,10 +216,14 @@ export function IntentionForm() {
                   name="url"
                   render={({ field }) => (
                     <FormItem>
-                      <Label>{t("submit.page.fields.url.label")} *</Label>
+                      <Label>
+                        {t("submit.page.fields.url.label")}{" "}
+                        <span className="text-red-500">*</span>
+                      </Label>
                       <FormControl>
                         <Input
                           placeholder={t("submit.page.fields.url.placeholder")}
+                          className="rounded-xl"
                           variant="secondary"
                           type="url"
                           {...field}
@@ -232,53 +233,16 @@ export function IntentionForm() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <Label>{t("submit.page.fields.description.label")}</Label>
-                      <FormControl>
-                        <Textarea
-                          rows={5}
-                          variant="secondary"
-                          placeholder={t(
-                            "submit.page.fields.description.placeholder"
-                          )}
-                          value={field.value ?? ""}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>{t("submit.page.fields.intention.label")}</Label>
                     <Select
+                      label={t("submit.page.fields.intention.label")}
                       name="intention"
                       options={[
                         {
                           value: "ux_review",
                           label: `🕵️ ${t("submit.page.options.ux_review")}`,
-                        },
-                        {
-                          value: "redesign_figma",
-                          label: `🎨 ${t("submit.page.options.redesign_figma")}`,
-                        },
-                        {
-                          value: "analysis",
-                          label: `🌐 ${t("submit.page.options.analysis")}`,
-                        },
-                        {
-                          value: "feature_idea",
-                          label: `💡 ${t("submit.page.options.feature_idea")}`,
-                        },
-                        {
-                          value: "other",
-                          label: `✨ ${t("submit.page.options.other")}`,
                         },
                       ]}
                     />
@@ -286,8 +250,8 @@ export function IntentionForm() {
                   {/* Conditional sections */}
                   {intention === "ux_review" && (
                     <div className="space-y-2">
-                      <Label>{t("submit.page.fields.target.label")}</Label>
                       <Select
+                        label={t("submit.page.fields.target.label")}
                         name="target"
                         options={[
                           {
@@ -311,6 +275,29 @@ export function IntentionForm() {
                     </div>
                   )}
                 </div>
+
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>{t("submit.page.fields.description.label")}</Label>
+                      <FormControl>
+                        <Textarea
+                          rows={5}
+                          placeholder={t(
+                            "submit.page.fields.description.placeholder"
+                          )}
+                          className="rounded-xl"
+                          variant="secondary"
+                          value={field.value ?? ""}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div className="pt-2">
                   <Button type="submit" whileTap asPointer asFull size="lg">
                     {t("submit.page.actions.submit")}
@@ -321,146 +308,6 @@ export function IntentionForm() {
           </CardContent>
         </Card>
       </SectionBase>
-      <Card className="w-full squircle squircle-b-white squircle-smooth-xl">
-        <CardContent className="p-6 md:p-8 space-y-6 gap-6">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-6 w-full max-w-xl self-center place-self-center "
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Label>{t("submit.page.fields.name.label")}</Label>
-                        <FormControl>
-                          <Input
-                            placeholder={t(
-                              "submit.page.fields.name.placeholder"
-                            )}
-                            variant="secondary"
-                            type="text"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Label>{t("submit.page.fields.email.label")}</Label>
-                        <FormControl>
-                          <Input
-                            placeholder={t(
-                              "submit.page.fields.email.placeholder"
-                            )}
-                            variant="secondary"
-                            type="email"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              </div>
-
-              <FormField
-                control={form.control}
-                name="url"
-                render={({ field }) => (
-                  <FormItem>
-                    <Label>{t("submit.page.fields.url.label")}</Label>
-                    <FormControl>
-                      <Input
-                        placeholder={t("submit.page.fields.url.placeholder")}
-                        variant="secondary"
-                        type="url"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>{t("submit.page.fields.intention.label")}</Label>
-                  <Select
-                    name="intention"
-                    options={[
-                      {
-                        value: "ux_review",
-                        label: `🕵️ ${t("submit.page.options.ux_review")}`,
-                      },
-                      {
-                        value: "redesign_figma",
-                        label: `🎨 ${t("submit.page.options.redesign_figma")}`,
-                      },
-                      {
-                        value: "analysis",
-                        label: `🌐 ${t("submit.page.options.analysis")}`,
-                      },
-                      {
-                        value: "feature_idea",
-                        label: `💡 ${t("submit.page.options.feature_idea")}`,
-                      },
-                      {
-                        value: "other",
-                        label: `✨ ${t("submit.page.options.other")}`,
-                      },
-                    ]}
-                  />
-                </div>
-                {/* Conditional sections */}
-                {intention === "ux_review" && (
-                  <div className="space-y-2">
-                    <Label>{t("submit.page.fields.target.label")}</Label>
-                    <Select
-                      name="target"
-                      options={[
-                        {
-                          value: "website",
-                          label: `🌐 ${t("submit.page.options.support.website")}`,
-                        },
-                        {
-                          value: "mobile",
-                          label: `📱 ${t("submit.page.options.support.mobile")}`,
-                        },
-                        {
-                          value: "saas",
-                          label: `🧩 ${t("submit.page.options.support.saas")}`,
-                        },
-                        {
-                          value: "prototype",
-                          label: `🧪 ${t("submit.page.options.support.prototype")}`,
-                        },
-                      ]}
-                    />
-                  </div>
-                )}
-              </div>
-
-              <div className="pt-2">
-                <Button type="submit" whileTap asPointer asFull size="lg">
-                  {t("submit.page.actions.submit")}
-                </Button>
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
     </>
   );
 }

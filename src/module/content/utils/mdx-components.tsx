@@ -242,7 +242,7 @@ export const richTextComponent = {
   ),
   ytSaasLab: (chunks: React.ReactNode) => (
     <Link
-      href={siteConfig.links.contact.social.youtubeConcept.shirosaasLab.url}
+      href={siteConfig.links.contact.socialConcept.youtube.shirosaasLab.url}
       variant="ghost"
       className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-0"
     >

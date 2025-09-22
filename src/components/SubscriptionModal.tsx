@@ -32,7 +32,6 @@ import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useTranslations } from "use-intl";
 
-
 interface SubscriptionModalProps {
   isOpen: boolean;
   email?: string;
