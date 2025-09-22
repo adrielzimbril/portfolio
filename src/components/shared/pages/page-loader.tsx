@@ -7,8 +7,8 @@ import { useRealisticLoading } from "./useRealisticLoading";
 import { getImageUrl } from "@/utils/base-url";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useIsDarkMode } from "@/hooks/useIsDarkMode";
-import { LogoName } from "@/components/shared/icons/logo-name";
-import { LogoIcon } from "@/components/shared/icons/logo-icon";
+import { LogoName } from "@/components/shared/icons/logo/logo-name";
+import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
 import { siteConfig } from "@/data/config";
 
 interface GenericLoadingPageProps {

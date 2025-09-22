@@ -6,14 +6,14 @@ import { cn } from "@/utils/utils";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useScroll, Variants } from "motion/react";
 import { useEffect, useState } from "react";
-import { LogoName } from "@/components/shared/icons/logo-name";
+import { LogoName } from "@/components/shared/icons/logo/logo-name";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { getActivePathInArray, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
-import { LogoIcon } from "../icons/logo-icon";
+import { LogoIcon } from "../icons/logo/logo-icon";
 
 const INITIAL_WIDTH = "70rem";
 const MAX_WIDTH = "68rem";

@@ -1,5 +1,5 @@
 import { cn } from "@/utils/utils";
-import { IconProps } from "./type";
+import { IconProps } from "@/components/shared/icons/type";
 
 export const LogoIcon = ({ className }: IconProps) => (
   <svg

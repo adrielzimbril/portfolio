@@ -24,9 +24,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { USFlag } from "@/components/icons/flags/USFlag";
-import { FRFlag } from "@/components/icons/flags/FRFlag";
-import { CNFlag } from "@/components/icons/flags/CNFlag";
+import { USFlag } from "@/components/shared/icons/flags/USFlag";
+import { FRFlag } from "@/components/shared/icons/flags/FRFlag";
+import { CNFlag } from "@/components/shared/icons/flags/CNFlag";
 import { Badge } from "@/components/ui/badge";
 import { routes } from "@/data/routes";
 import { PageType } from "@/types";

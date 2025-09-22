@@ -22,6 +22,8 @@ import {
 import posthog from "posthog-js";
 import { useLocale, useTranslations } from "use-intl";
 import { Locale } from "@/types";
+import { getImageUrl } from "@/utils/base-url";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 // Interface pour les questions
 interface Question {
@@ -247,24 +249,26 @@ function GuessButton({
   canAnswer: boolean;
 }) {
   const t = useTranslations();
-  const imgEmojiFalse = "/emoji-false.png";
-  const imgEmojiTrue = "/emoji-true.png";
+  // const imgEmojiFalse = getImageUrl(getEmojiHub("🤥", "fluent", "anim"));
+  // const imgEmojiTrue = getImageUrl(getEmojiHub("😀", "fluent", "anim"));
+  const imgEmojiFalse = getImageUrl(getEmojiHub("🤥", "apple"));
+  const imgEmojiTrue = getImageUrl(getEmojiHub("😀", "apple"));
 
   return (
     <motion.div
       className={cn(
-        "relative bg-b-base border-2 border-b-base-accent content-stretch flex items-center justify-start p-4 md:p-6 rounded-full shrink-0 cursor-pointer transition-all duration-400",
+        "relative bg-b-base border-4 border-b-base-accent content-stretch flex items-center justify-start p-4 md:p-6 rounded-full shrink-0 cursor-pointer transition-all duration-400",
         canAnswer
           ? isFalse
-            ? "hover:bg-red-100 hover:border-red-500"
-            : "hover:bg-green-100 hover:border-green-500"
+            ? "hover:bg-red-100 hover:border-red-500 dark:hover:border-red-400"
+            : "hover:bg-green-100 hover:border-green-500 dark:hover:border-green-400"
           : "pointer-events-none cursor-default"
       )}
       onClick={onClick}
       whileTap={{ scale: 0.95 }}
     >
       <div className="relative shrink-0 size-11 md:size-20">
-        <Image
+        {/* <Image
           src={isFalse ? imgEmojiFalse : imgEmojiTrue}
           width={100}
           height={100}
@@ -273,7 +277,15 @@ function GuessButton({
             "w-full h-full object-cover transition-opacity duration-300 pointer-events-none",
             !canAnswer && "opacity-50"
           )}
-        />
+        /> */}
+        <span
+          className={cn(
+            "size-full flex items-center justify-center text-7xl object-cover pointer-events-none",
+            !canAnswer && "opacity-50"
+          )}
+        >
+          {isFalse ? "🤥" : "😀"}
+        </span>
         {canAnswer && (
           <motion.span
             className={`absolute -top-2 -right-2 text-xs font-bold px-2 py-1 rounded-full text-white ${
