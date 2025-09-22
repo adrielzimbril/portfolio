@@ -62,7 +62,9 @@ export function EmojiPlaceholder({
           // Cas emoji
           <span
             className={cn(
-              "size-full flex items-center justify-center text-5xl md:text-[10rem] object-cover pointer-events-none",
+              "relative size-full flex items-center justify-center text-5xl md:text-[10rem] object-cover pointer-events-none",
+              variant === "squircle" &&
+                "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName
             )}
           >
@@ -71,7 +73,9 @@ export function EmojiPlaceholder({
         ) : typeof src === "object" && "mp4" in src && "webm" in src ? (
           <video
             className={cn(
-              "size-full object-cover pointer-events-none",
+              "relative size-full object-cover pointer-events-none",
+              variant === "squircle" &&
+                "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName
             )}
             autoPlay
@@ -95,7 +99,9 @@ export function EmojiPlaceholder({
           <Image
             src={getImageUrl(src)}
             className={cn(
-              "size-full object-cover pointer-events-none",
+              "relative size-full object-cover pointer-events-none",
+              variant === "squircle" &&
+                "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName
             )}
             width={600}

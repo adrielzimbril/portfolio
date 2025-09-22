@@ -121,10 +121,10 @@ export function Navbar() {
       )}
     >
       <motion.div
-        initial={{ width: INITIAL_WIDTH }}
+        //initial={{ width: INITIAL_WIDTH }}
         animate={{ width: hasScrolled ? MAX_WIDTH : INITIAL_WIDTH }}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-        className="container p-0 sw-full!"
+        className="container p-0 w-full!"
       >
         <div
           className={cn(
@@ -266,7 +266,7 @@ export function Navbar() {
                               });
                             }}
                           >
-                            {t("common.menu." + item.key)}
+                            {t("common.menu." + item.key + ".mobile")}
                           </Link>
                         </motion.li>
                       ))}

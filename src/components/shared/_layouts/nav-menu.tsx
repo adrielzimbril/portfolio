@@ -62,7 +62,7 @@ export function NavMenu({
                     : "text-b-white-invert/60"
                 )}
               >
-                {t("common.menu." + item.key)}
+                {t("common.menu." + item.key + ".desktop")}
               </span>
             </Link>
           ))}

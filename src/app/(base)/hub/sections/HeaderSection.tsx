@@ -13,8 +13,8 @@ export function HeaderSection() {
     <PageHero
       title={t("hub.page.header-section.title")}
       description={t("hub.page.header-section.description")}
-      buttonLink={routes.hub.link}
-      buttonText={t("hub.page.header-section.cta")}
+      //buttonLink={routes.hub.link}
+      //buttonText={t("hub.page.header-section.cta")}
       //imagePath={getImageUrl(getEmojiHub("🧑🏻‍🎨", "fluent", "anim"))}
       imagePath={{ emoji: "🧑🏻‍🎨" }}
       actionButton

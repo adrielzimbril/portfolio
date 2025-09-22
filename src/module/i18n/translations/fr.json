@@ -1,7 +1,14 @@
 {
   "home": {
     "title": "Hey 👋🏻",
-    "description": "Welcome to our home page",
+    "description": "Designer produit et créateur de la méthode ShiroSaaS, j'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles, beaux et rentables.",
+    "keywords": [
+      "design produit SaaS",
+      "SaaS Adriel Zimbril",
+      "Product Designer SaaS",
+      "création SaaS",
+      "UX UI SaaS"
+    ],
     "page": {
       "header-section": {
         "title": "Transformez vos idées en produits que vos utilisateurs adorent 🦄",
@@ -14,14 +21,21 @@
     }
   },
   "about": {
-    "title": "A propos",
-    "description": "Welcome to our about page",
+    "title": "Je suis 🧑🏻‍🚀",
+    "description": "Je suis Adriel, product designer et formateur. Ma mission : simplifier la création de SaaS, inspirer et guider ceux qui veulent donner vie à leurs idées.",
+    "keywords": [
+      "à propos Adriel Zimbril",
+      "Product Designer SaaS",
+      "formateur SaaS",
+      "parcours design produit SaaS",
+      "méthode ShiroSaaS"
+    ],
     "page": {
       "header-section": {
         "title": "Hello, je suis 👋 \n Adriel Zimbril 🐼 \n Product Designer & Formateur 🎨 ",
         "description": "Depuis mes débuts dans le design, j’ai appris que le produit le plus réussi n’est pas celui qu’on voit en premier, mais celui qu’on comprend, teste et fait évoluer avec intention.",
         "title-secondary": "Créer, simplifier, inspirer 🌒🧑🏻‍🚀🫶🏻 \n Bienvenue dans mon univers 🌌",
-        "description-secondary": "Sic itur ad astra — ainsi on va vers les étoiles ✨.\n\nDepuis que je suis petit, j’ai toujours été fasciné par la technologie et l’invention. Iron Man m’a donné le goût du possible : je me souviens de mes yeux qui pétillaient en voyant son armure et de l’inspiration qui me traversait à chaque épisode. Je passais des heures à imaginer, bricoler, et rêver de créer mes propres robots.\n\nEn laissant libre cours à cette passion j'ai decouvert le design et avec le temps, j’ai compris que mon rêve ne se limitait pas à construire des machines : je voulais créer des expériences qui touchent les gens, qui résolvent de vrais problèmes et qui donnent envie d’être utilisées. Le design est devenu mon terrain de jeu, mon laboratoire pour imaginer, construire et transformer des idées brutes en produits concrets et concevoir des expériences qui comptent.\n\nAujourd'hui, je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.\n\nJ’aime questionner ce qui existe, explorer ce qui fonctionne et ce qui ne fonctionne pas, et construire de manière intentionnelle. Je préfère faire les choses avec un pourquoi plutôt que par habitude.\n\nEn parallèle, je partage les méthodes et ressources issues de mes expériences créatives pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance.\n\nPour moi, le design n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain ❣️.",
+        "description-secondary": "Sic itur ad astra — c'est ainsi qu'on atteint les étoiles 🫰🏻✨.\n\nDepuis que je suis petit, j’ai toujours été fasciné par la technologie et l’invention. Iron Man m’a donné le goût du possible : je me souviens de mes yeux qui pétillaient en voyant son armure et de l’inspiration qui me traversait à chaque épisode. Je passais des heures à imaginer, bricoler, et rêver de créer mes propres robots.\n\nEn laissant libre cours à cette passion j'ai decouvert le design et avec le temps, j’ai compris que mon rêve ne se limitait pas à construire des machines : je voulais créer des expériences qui touchent les gens, qui résolvent de vrais problèmes et qui donnent envie d’être utilisées. Le design est devenu mon terrain de jeu, mon laboratoire pour imaginer, construire et transformer des idées brutes en produits concrets et concevoir des expériences qui comptent.\n\nAujourd'hui, je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.\n\nJ’aime questionner ce qui existe, explorer ce qui fonctionne et ce qui ne fonctionne pas, et construire de manière intentionnelle. Je préfère faire les choses avec un pourquoi plutôt que par habitude.\n\nEn parallèle, je partage les méthodes et ressources issues de mes expériences créatives pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance.\n\nPour moi, le design n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain ❣️.",
         "cta": "Voir mes projets"
       },
       "craft-section": {
@@ -95,12 +109,12 @@
     }
   },
   "hub": {
-    "title": "Hub",
-    "description": "Welcome to our hub page",
+    "title": "Le Hub 🌒",
+    "description": "Ressources exclusives : checklists, modèles Figma, guides pratiques et idées pour t’aider à lancer ton produit sans stress.",
     "page": {
       "header-section": {
-        "title": "Shop",
-        "description": "Donnez à votre entreprise les moyens d'une conception centrée sur l'utilisateur et de l'IA pour offrir des expériences client fluides et accélérer la croissance.",
+        "title": "Ton hub de créativité 🔗",
+        "description": "Un espace où je regroupe tout ce que j’aurais aimé avoir quand j’ai commencé : des guides clairs, des templates, des idées et des outils pour te faire gagner du temps.",
         "cta": "Voir mes ressources"
       }
     },
@@ -111,12 +125,12 @@
     }
   },
   "projects": {
-    "title": "Projets",
-    "description": "Welcome to our projects page",
+    "title": "Mes projets 🐼",
+    "description": "Un aperçu des projets que j’ai conçus et lancés, avec le process et les résultats. Pas juste des écrans jolis : des histoires de collaboration et de succès.",
     "page": {
       "header-section": {
-        "title": "Mes projets",
-        "description": "Donnez à votre entreprise les moyens d'une conception centrée sur l'utilisateur et de l'IA pour offrir des expériences client fluides et accélérer la croissance.",
+        "title": "Études de cas 🚀",
+        "description": "Chaque projet est une aventure. Ici je partage les coulisses : les défis, les solutions trouvées et les résultats obtenus.",
         "cta": "Voir mes projets"
       }
     },
@@ -153,12 +167,12 @@
     }
   },
   "thoughts": {
-    "description": "Read the latest news from our company",
-    "title": "My awesome blog",
+    "title": "Carnet de Bord 📒",
+    "description": "Mes pensées brutes sur le design produit, l’innovation et la création de SaaS. Des réflexions sans filtre pour progresser et voir les choses autrement.",
     "page": {
       "header-section": {
-        "title": "Réflexions",
-        "description": "Voici un espace où vous pouvez publier des articles sur vraiment tout, par exemple des conseils sur le design, des engrenages qui boostent votre productivité",
+        "title": "Réflexions & Déclics ✍️",
+        "description": "Ici je partage mes découvertes, mes erreurs et les leçons qui m’ont permis d’avancer. C’est le coin un peu plus intime, où je parle sans jargon ni paillettes.",
         "cta": "Voir mes réflexions"
       }
     },
@@ -207,14 +221,46 @@
       "confirm": "Confirmer"
     },
     "menu": {
-      "home": "Hey 👋🏻",
-      "about": "I am 🦄️",
-      "thoughts": "Réflexions",
-      "hub": "Ressources",
-      "playground": "Jouons",
-      "projects": "Projets",
-      "contact": "Contact",
-      "newsletter": "Newsletter"
+      "home": {
+        "default": "Accueil",
+        "desktop": "Hey 👋🏻",
+        "mobile": "Bienvenue 🏠"
+      },
+      "about": {
+        "default": "À propos",
+        "desktop": "Je suis 🧑🏻‍🚀",
+        "mobile": "À propos de moi 🧑🏻‍🚀"
+      },
+      "thoughts": {
+        "default": "Réflexions",
+        "desktop": "Pensées ✍️",
+        "mobile": "Carnet de Bord 📝"
+      },
+      "hub": {
+        "default": "Ressources",
+        "desktop": "Hub 🔗",
+        "mobile": "Boîte à Outils 🧰"
+      },
+      "playground": {
+        "default": "Jouons",
+        "desktop": "Labo 🧪",
+        "mobile": "Expérimentons 🧑🏻‍🔬"
+      },
+      "projects": {
+        "default": "Projets",
+        "desktop": "Créations 🚀",
+        "mobile": "Mes Œuvres 🎨"
+      },
+      "contact": {
+        "default": "Contact",
+        "desktop": "Discutons ☕",
+        "mobile": "Dire Bonjour 👋"
+      },
+      "newsletter": {
+        "default": "Newsletter",
+        "desktop": "Cercle Privé 💌",
+        "mobile": "Rejoins le Cercle 💌"
+      }
     },
     "button": {
       "read": "Lire",
