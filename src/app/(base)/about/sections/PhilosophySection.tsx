@@ -21,36 +21,36 @@ interface PhilosophyCard {
 
 const data: PhilosophyCard[] = [
   {
-    title: "Innovation centrée sur l'utilisateur",
+    title: "L’utilisateur avant tout",
     locale: Locale.FR,
     icon: <WandIcon />,
     alt: "Symbol",
     description:
-      "Garder les besoins des utilisateurs finaux au premier plan pour créer des produits qui non seulement résolvent les problèmes mais dépassent également les attentes.",
+      "Chaque projet commence par une question simple : qu’est-ce qui compte vraiment pour l’utilisateur ?\nMon rôle : transformer cette réponse en expériences qui donnent envie d’être utilisées et qui dépassent les attentes.",
   },
   {
-    title: "Leadership d'équipe",
-    locale: Locale.FR,
-    icon: <LongitudeIcon />,
-    alt: "Longitude",
-    description:
-      "Construire et responsabiliser des équipes interfonctionnelles pour atteindre des objectifs ambitieux.",
-  },
-  {
-    title: "Agilité stratégique",
-    locale: Locale.FR,
-    icon: <BalanceIcon />,
-    alt: "Balance default",
-    description:
-      "Équilibrer l'innovation avec une stratégie pratique pour naviguer dans une dynamique de marché complexe et saisir les opportunités émergentes.",
-  },
-  {
-    title: "Apprentissage continu",
+    title: "Toujours en apprentissage",
     locale: Locale.FR,
     icon: <BookIcon />,
     alt: "Book",
     description:
-      "Rester à la pointe des tendances en matière d'IA et de conception, en veillant à ce que mes équipes soient équipées pour relever les défis.",
+      "Design, IA, growth, systèmes… J’aime rester curieux et explorer ce qui vient ensuite.\nChaque nouveauté est une occasion d’améliorer ce que je crée — et d’inspirer ceux avec qui je travaille.",
+  },
+  {
+    title: "Des équipes qui s’élèvent",
+    locale: Locale.FR,
+    icon: <LongitudeIcon />,
+    alt: "Longitude",
+    description:
+      "Un produit réussi est un travail d’équipe. J’adore créer des espaces où les idées circulent, où chacun se sent impliqué et où l’on construit quelque chose dont tout le monde est fier.",
+  },
+  {
+    title: "Agir vite, agir bien",
+    locale: Locale.FR,
+    icon: <BalanceIcon />,
+    alt: "Balance default",
+    description:
+      "Je crois aux itérations rapides et aux décisions intentionnelles.\nChaque test est une boussole, chaque ajustement rapproche le produit de sa meilleure version.",
   },
 ];
 

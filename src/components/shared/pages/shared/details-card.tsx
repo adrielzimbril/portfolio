@@ -40,7 +40,7 @@ export function DetailsCard({
             </Badge>
             <h3 className="text-3xl tracking-wide leading-[120%]">{title}</h3>
 
-            <p className="text-b-white-invert-thr text-xl leading-[140%]">
+            <p className="text-b-white-invert-thr whitespace-pre-line text-xl leading-[140%]">
               {description}
             </p>
           </div>
