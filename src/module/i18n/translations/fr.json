@@ -18,21 +18,22 @@
     "description": "Welcome to our about page",
     "page": {
       "header-section": {
-        "title": "Hello, je suis \n Adriel Zimbril - \n Product designer",
-        "description": "Depuis mes débuts dans le design, j’ai appris que le produit le plus réussi n’est pas celui qu’on voit en premier, mais celui qu’on comprend, teste et fait évoluer avec intention. \n Je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.",
-        "description-d": "Depuis mes débuts dans le design, j’ai appris que le produit le plus réussi n’est pas celui qu’on voit en premier, mais celui qu’on comprend, teste et fait évoluer avec intention. \n Je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact. \n En parallèle, je partage mes méthodes et mes ressources pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance. Le design, pour moi, n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain.",
+        "title": "Hello, je suis 👋 \n Adriel Zimbril 🐼 \n Product Designer & Formateur 🎨 ",
+        "description": "Depuis mes débuts dans le design, j’ai appris que le produit le plus réussi n’est pas celui qu’on voit en premier, mais celui qu’on comprend, teste et fait évoluer avec intention.",
+        "title-secondary": "Créer, simplifier, inspirer 🌒🧑🏻‍🚀🫶🏻 \n Bienvenue dans mon univers 🌌",
+        "description-secondary": "Sic itur ad astra — ainsi on va vers les étoiles ✨.\n\nDepuis que je suis petit, j’ai toujours été fasciné par la technologie et l’invention. Iron Man m’a donné le goût du possible : je me souviens de mes yeux qui pétillaient en voyant son armure et de l’inspiration qui me traversait à chaque épisode. Je passais des heures à imaginer, bricoler, et rêver de créer mes propres robots.\n\nEn laissant libre cours à cette passion j'ai decouvert le design et avec le temps, j’ai compris que mon rêve ne se limitait pas à construire des machines : je voulais créer des expériences qui touchent les gens, qui résolvent de vrais problèmes et qui donnent envie d’être utilisées. Le design est devenu mon terrain de jeu, mon laboratoire pour imaginer, construire et transformer des idées brutes en produits concrets et concevoir des expériences qui comptent.\n\nAujourd'hui, je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.\n\nJ’aime questionner ce qui existe, explorer ce qui fonctionne et ce qui ne fonctionne pas, et construire de manière intentionnelle. Je préfère faire les choses avec un pourquoi plutôt que par habitude.\n\nEn parallèle, je partage les méthodes et ressources issues de mes expériences créatives pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance.\n\nPour moi, le design n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain ❣️.",
         "cta": "Voir mes projets"
       },
       "craft-section": {
         "badge": "Votre allié produit & design 🫶🏻",
         "title": "Transformer des idées en produits qui comptent.",
-        "description": "Product designer spécialisé dans la simplification des expériences SaaS + formateur pour les équipes qui veulent créer l'évidence plutôt que la complexité"
+        "description": "Placer l’utilisateur au centre de chaque décision, guider et enseigner aux créateurs pour transformer chaque idées en expériences inoubliables."
       },
       "interactive-fun-facts-section": {
         "badge": "Jouons 🤭",
         "badge-score": "Score:",
-        "title": "Faits amusants sur moi",
-        "description": "L'un d'eux est un mensonge que tu devras deviner, essaie de ne pas te tromper 🤭",
+        "title": "Qui suis-je vraiment ? 🕵️‍♂️",
+        "description": "Parmi ces anecdotes, une seule est un mensonge… sauras-tu la démasquer ? Essaie de ne pas te tromper 😏",
         "buttons": {
           "show-all": {
             "want-response": {
@@ -88,8 +89,8 @@
       },
       "philosophy-section": {
         "badge": "Unicorn 🦄",
-        "title": "Ma philosophie",
-        "description": "Ma philosophie est de transformer les idées en produits que les utilisateurs adorent."
+        "title": "Mon approche du design & du produit",
+        "description": "Concevoir des produits en plaçant l’utilisateur au centre, tout en valorisant les équipes et les idées partagées pour construire ensemble."
       }
     }
   },
@@ -207,7 +208,7 @@
     },
     "menu": {
       "home": "Hey 👋🏻",
-      "about": "Moi 🦄️",
+      "about": "I am 🦄️",
       "thoughts": "Réflexions",
       "hub": "Ressources",
       "playground": "Jouons",

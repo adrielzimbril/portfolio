@@ -23,7 +23,7 @@ const data: CraftSectionCard[] = [
     locale: "fr",
     title: "Pour les entreprises",
     description:
-      "J’aime concevoir des interfaces qui respirent la simplicité, qui s’intègrent naturellement dans la vie de vos utilisateurs et qui respectent vos objectifs business.\n\n🎯 Impact : des clients satisfaits, des équipes techniques qui implémentent sans stress et un produit qui prouve sa valeur sur le long terme.",
+      "J’aime concevoir des interfaces qui respirent la simplicité, qui s’intègrent naturellement dans la vie de vos utilisateurs et qui respectent vos objectifs business sur le long terme.\n\n🎯 Impact : des clients satisfaits, des équipes techniques qui implémentent sans stress et un produit qui prouve sa valeur sur le long terme.",
   },
   {
     icon: <ThreeDIcon />,
@@ -42,7 +42,7 @@ const data: CraftSectionCard[] = [
   {
     icon: <ShapeIcon />,
     locale: "fr",
-    title: "Pour les étudiants & créateurs",
+    title: "Pour les étudiants",
     description:
       "Apprendre le design, ce n’est pas seulement suivre un cours : c’est comprendre comment passer d’une idée brute à un projet qui tient la route. Mes formations et ressources sont là pour vous donner les bons réflexes dès le départ.\n\n🎯 Impact : plus de confiance, moins d’abandon, et la satisfaction de voir vos idées devenir réelles.",
   },

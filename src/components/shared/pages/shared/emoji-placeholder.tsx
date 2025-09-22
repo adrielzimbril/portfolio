@@ -46,10 +46,10 @@ export function EmojiPlaceholder({
     >
       <div
         className={cn(
-          "relative shrink-0 size-11 md:size-24 pointer-events-none",
+          "relative shrink-0 size-48 md:size-80 pointer-events-none",
           (variant === "default" || variant === "bordered") &&
-            "size-11 md:size-96",
-          variant === "squircle" && "size-11 md:size-22",
+            "size-72 md:size-96",
+          variant === "squircle" && "size-72 md:size-96",
           imgContainerClassName
         )}
       >

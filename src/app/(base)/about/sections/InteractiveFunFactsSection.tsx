@@ -60,14 +60,15 @@ const questions: Question[] = [
     locale: Locale.FR,
     emoji: "🍕",
     title: "Mon premier client m’a payé en pizzas",
-    description: "Au lieu de me donner de l’argent, il m’a offert des pizzas.",
+    description:
+      "Au lieu de me donner de l’argent, il m’a offert des pizzas, par contre... 😝.",
     subtitle: "Pepperoni > facture ?",
     isTrue: false,
     funFact:
       "J'ai eu des petits budgets… mais toujours en cash, jamais en mozzarella.",
     funnyTruthMessage: "Bien vu! 🎯 C'était faux, jamais payé en pizza.",
     funnyLieMessage:
-      "Haha, tu m'as cru! 😅 Mais non, je préfère l'argent aux parts de pizza.",
+      "Haha, tu y as cru! 😅 Mais non, ca aurait pu être une belle expérience.",
   },
   {
     id: 3,
@@ -78,7 +79,7 @@ const questions: Question[] = [
       "Mes 4 projets ont passé les premières phases d’un incubateur.",
     subtitle: "Mission validée!",
     isTrue: true,
-    funFact: "C'était avec le programme Y’ELLO Startup.",
+    funFact: "C'était avec le programme Y’ELLO Startup de MTN CI.",
     funnyTruthMessage: "Exact! 🎯 Une de mes plus belles validations.",
     funnyLieMessage: "Ah non, celui-là est vrai 😉",
   },
@@ -93,19 +94,22 @@ const questions: Question[] = [
     funFact:
       "Un design non UX-ready ou inaccessible est une cata pour l’utilisateur, même s’il est joli.",
     funnyTruthMessage: "Exact! 🎯 L’esthétique seule ne me séduit pas.",
-    funnyLieMessage: "Ah non, c’est vrai… j’ai horreur de ça.",
+    funnyLieMessage:
+      "Ah non, c’est vrai… j’ai horreur de ça, l'accessibilité n'est pas à négliger.",
   },
   {
     id: 5,
     locale: Locale.FR,
     emoji: "🧀",
-    title: "J'adore le fromage, j'en mange tous les jours",
+    title: "J'adore le fromage",
     description: "Gourmand en mozzarella, je ne peux pas m'en passer.",
-    subtitle: "Fromage addict.",
+    subtitle: "Fromage addict 😋.",
     isTrue: true,
     funFact: "Je peux en manger à chaque repas, sans jamais me lasser.",
-    funnyTruthMessage: "Exact! 🎯 Le fromage, c’est ma faiblesse.",
-    funnyLieMessage: "Ah non, c’est vrai… 🧀 forever.",
+    funnyTruthMessage:
+      "Exact! 🎯 Le fromage, c’est ma faiblesse, alors si tu veux me faire un cadeau tu sais quoi offrir 🧀😝.",
+    funnyLieMessage:
+      "Ah non, c’est vrai… 🧀 c'est la base d'une bonne amitié pour moi 😝.",
   },
   {
     id: 6,
@@ -117,7 +121,7 @@ const questions: Question[] = [
     isTrue: true,
     funFact: "Ce break m’a recentré sur le produit et le design.",
     funnyTruthMessage: "Exact! 🎯 Ça m'a permis de revenir plus fort.",
-    funnyLieMessage: "Ah non, c'est vrai… et dur à vivre.",
+    funnyLieMessage: "Ah non, c'est vrai… et ça à été dur à vivre 😅.",
   },
   {
     id: 7,
@@ -130,20 +134,7 @@ const questions: Question[] = [
     funFact:
       "Le design m’a appris la patience et la précision plus que le code.",
     funnyTruthMessage: "Exact! 🎯 C’est mon école invisible.",
-    funnyLieMessage: "Non non, celui-là est vrai.",
-  },
-  {
-    id: 8,
-    locale: Locale.FR,
-    emoji: "🎤",
-    title: "J’ai appris le design en clonant des sites de rappeurs",
-    description: "Je m’entraînais en refaisant leurs pages pour le fun.",
-    subtitle: "Training mode.",
-    isTrue: false,
-    funFact:
-      "J’ai appris le design autrement, mais pas avec des sites de rappeurs.",
-    funnyTruthMessage: "Bien vu! 🎯 Ce n’était qu’un mensonge.",
-    funnyLieMessage: "Haha tu m'as cru! 😅 Mais non, pas de sites de rappeurs.",
+    funnyLieMessage: "Non non, celle-là est vrai 😅.",
   },
   {
     id: 9,
@@ -155,8 +146,9 @@ const questions: Question[] = [
     subtitle: "50 clones plus tard…",
     isTrue: true,
     funFact: "C’était ma meilleure école: observer et reproduire.",
-    funnyTruthMessage: "Exact! 🎯 C’était mon entraînement intensif.",
-    funnyLieMessage: "Non non, c'est bien vrai 😉",
+    funnyTruthMessage: "Exact! 🎯 C’était un entraînement intensif 😆.",
+    funnyLieMessage:
+      "Non non, celle-là est vrai, et c'etais une super expérience 😅.",
   },
   {
     id: 10,
@@ -166,8 +158,7 @@ const questions: Question[] = [
     description: "Pas juste une app, une vraie banque digitale.",
     subtitle: "Projet long terme.",
     isTrue: false,
-    funFact:
-      "Je garde ça privé pour l’instant, mais disons que ce n’est pas mon projet actuel.",
+    funFact: "Disons que ce n’est pas mon projet actuel, mais qui sait 🤭 ?",
     funnyTruthMessage: "Bien vu! 🎯 Ce n’est pas mon projet officiel.",
     funnyLieMessage: "Haha, tu m'as cru? 😅 Mais non, pas encore de néobanque.",
   },
@@ -193,8 +184,9 @@ const questions: Question[] = [
     description: "Après deux jours de blocage, c’était juste un ';' oublié.",
     subtitle: "Le drame du dev.",
     isTrue: true,
-    funFact: "Une ligne, deux jours de ma vie perdus. Lesson learned.",
-    funnyTruthMessage: "Exact! 🎯 C’était douloureux mais formateur.",
+    funFact:
+      "Deux jours de blocage pour juste un ';'. Je me souviens encore de ma frustration, lesson learned 😭",
+    funnyTruthMessage: "Exact! 🎯 C’était douloureux mais formateur 😆.",
     funnyLieMessage: "Ah non, c'est bien vrai 😅",
   },
   {
@@ -206,7 +198,7 @@ const questions: Question[] = [
       "J’ai oublié de renouveler un domaine, il a fini en machines à sous.",
     subtitle: "Jackpot?",
     isTrue: true,
-    funFact: "C’était un ancien domaine d’un projet perso. Gros fail.",
+    funFact: "C’était un ancien domaine d’un projet perso. Gros fail 😭.",
     funnyTruthMessage: "Exact! 🎯 Ça pique quand ça arrive.",
     funnyLieMessage: "Non non, c’est vrai… et douloureux.",
   },
@@ -221,18 +213,19 @@ const questions: Question[] = [
     funFact:
       "J’aimerais, mais ce n’est pas dans mes plans concrets (pour l’instant).",
     funnyTruthMessage: "Bien vu! 🎯 Pas encore de 'AdrielLang'.",
-    funnyLieMessage: "Haha tu m'as cru! 😅 Non non, pas de langage maison.",
+    funnyLieMessage:
+      "Haha tu y as cru! 😅 Non non, pas de langage pour l’instant.",
   },
   {
     id: 15,
     locale: Locale.FR,
     emoji: "🐢",
-    title: "Mon premier PC mettait 10 minutes à démarrer",
+    title: "Mon premier PC mettait 5-10 minutes à démarrer",
     description: "Je devais attendre une éternité avant de coder.",
     subtitle: "Patience mode.",
     isTrue: true,
     funFact:
-      "Celeron 1.10ghz, impossible de lancer un serveur Next.js. Une vraie tortue.",
+      "Celeron 1.10ghz, impossible de lancer un serveur Next.js. Une vraie tortue 😭.",
     funnyTruthMessage: "Exact! 🎯 Ça forge la patience du dev.",
     funnyLieMessage: "Ah non, c'est bien vrai 😉",
   },
@@ -280,7 +273,7 @@ function GuessButton({
         /> */}
         <span
           className={cn(
-            "size-full flex items-center justify-center text-7xl object-cover pointer-events-none",
+            "size-full flex items-center justify-center  text-5xl md:text-7xl object-cover pointer-events-none",
             !canAnswer && "opacity-50"
           )}
         >
@@ -326,7 +319,7 @@ function QuestionCard({
 
   // Calculate rotation and position
   const getCardTransform = () => {
-    const rotation = index * (index % 2 === 0 ? 4 : -4);
+    const rotation = index * (index % 2 === 0 ? 1.5 : -1.5);
     const x = Math.sin(((rotation * Math.PI) / 180) * 40);
     const y = Math.cos(((rotation * Math.PI) / 180) * 20);
 
@@ -355,7 +348,7 @@ function QuestionCard({
     // Future cards - stacked behind with rotation
     const distanceFromCurrent = index - currentQuestionIndex;
     return {
-      rotate: rotation || (distanceFromCurrent % 2 === 0 ? 2 : -2),
+      rotate: rotation || (distanceFromCurrent % 2 === 0 ? 0.8 : -0.8),
       scale: 1 - distanceFromCurrent * 0.05,
       x,
       y,
@@ -377,7 +370,7 @@ function QuestionCard({
         scale: transform.scale,
         x: transform.x,
         y: transform.y,
-        opacity: isPast ? 0.3 : 1,
+        opacity: isPast ? 0.8 : 1,
       }}
       transition={{
         type: "spring",

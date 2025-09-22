@@ -42,8 +42,8 @@ function ContentSection({
   onClick: () => void;
 }) {
   return (
-    <div className="flex flex-col gap-8 items-start justify-start relative md:max-w-[50%]">
-      <h1 className="relative whitespace-pre-line">{title}</h1>
+    <div className="flex flex-col gap-8 items-start justify-start relative md:max-w-[52%]">
+      <h1 className="relative leading-[1.1] whitespace-pre-line">{title}</h1>
       <p className="relative text-2xl whitespace-pre-line">{description}</p>
       {buttonLink &&
         buttonText &&
@@ -83,6 +83,7 @@ export function PageHero({
   buttonVariant = "default",
   imagePath,
   imgClassName,
+  imageVariant = "default",
   isMobileHidden = true,
   imageContent,
   actionButton = false,
@@ -98,6 +99,7 @@ export function PageHero({
     | { emoji: string }
     | { mp4: string; webm: string; poster: string };
   imgClassName?: string;
+  imageVariant?: "default" | "bordered" | "squircle";
   isMobileHidden?: boolean;
   imageContent?: React.ReactNode;
   actionButton?: boolean;
@@ -110,6 +112,7 @@ export function PageHero({
           src={imagePath}
           imgClassName={imgClassName}
           isMobileHidden={isMobileHidden}
+          variant={imageVariant}
         />
       )}
       {imageContent}
