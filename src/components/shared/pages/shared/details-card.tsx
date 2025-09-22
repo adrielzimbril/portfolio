@@ -9,7 +9,7 @@ export function DetailsCard({
   title,
   description,
 }: {
-  icon: string;
+  icon: string | React.ReactNode;
   title: string;
   description: string;
 }) {
@@ -26,13 +26,17 @@ export function DetailsCard({
               className="aspect-square p-4 rounded-full"
               contentClassName="size-12"
             >
-              <Image
-                className="w-full h-full object-cover pointer-events-none"
-                src={icon}
-                alt={title}
-                width={100}
-                height={100}
-              />
+              {typeof icon === "string" ? (
+                <Image
+                  className="w-full h-full object-cover pointer-events-none"
+                  src={icon}
+                  alt={title}
+                  width={100}
+                  height={100}
+                />
+              ) : (
+                icon
+              )}
             </Badge>
             <h3 className="text-3xl tracking-wide leading-[120%]">{title}</h3>
 

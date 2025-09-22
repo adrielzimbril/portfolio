@@ -8,7 +8,7 @@ const ICONS_SRC_DIR = path.join(
 );
 const ICONS_DEST_DIR = path.join(
   __dirname,
-  "../src/components/shared/icons/icons-tsx"
+  "../src/components/shared/icons/break-icons"
 );
 
 // Fonction pour nettoyer les attributs SVG non valides en React
@@ -64,14 +64,14 @@ interface ${componentName}Props extends React.SVGProps<SVGSVGElement> {
 }
 
 export const ${componentName} = ({
-  size = 24,
+  size = 49,
   ...props
 }: ${componentName}Props) => {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
+      viewBox="0 0 49 49"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
@@ -130,13 +130,12 @@ async function main() {
     const indexContent =
       svgFiles
         .map((svgFile) => {
-          const componentName =
+          const componentFileName =
             svgFile
               .replace(/\.svg$/, "")
               .split(/[-_]/)
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join("") + "Icon";
-          return `export * from './${componentName}';`;
+              .join("-") + "-icon";
+          return `export * from '@/components/shared/icons/break-icons/${componentFileName}';`;
         })
         .join("\n") + "\n";
 
