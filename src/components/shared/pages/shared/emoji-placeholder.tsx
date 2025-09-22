@@ -3,6 +3,7 @@ import { cn } from "@/utils/utils";
 import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { getImageUrl } from "@/utils/base-url";
+import { useTranslations } from "use-intl";
 
 export function EmojiPlaceholder({
   src,
@@ -13,7 +14,10 @@ export function EmojiPlaceholder({
   imgContainerClassName,
   unOrdered = false,
 }: {
-  src: string | { emoji: string };
+  src:
+    | string
+    | { emoji: string }
+    | { mp4: string; webm: string; poster: string };
   variant?: "default" | "bordered" | "squircle";
   isMobileHidden?: boolean;
   className?: string;
@@ -21,7 +25,9 @@ export function EmojiPlaceholder({
   imgContainerClassName?: string;
   unOrdered?: boolean;
 }) {
+  const t = useTranslations();
   const isMobile = useIsMobile();
+
   return (
     <div
       className={cn(
@@ -40,9 +46,9 @@ export function EmojiPlaceholder({
     >
       <div
         className={cn(
-          "relative shrink-0 size-11 md:size-24",
+          "relative shrink-0 size-11 md:size-24 pointer-events-none",
           (variant === "default" || variant === "bordered") &&
-            "size-11 md:size-48",
+            "size-11 md:size-96",
           variant === "squircle" && "size-11 md:size-22",
           imgContainerClassName
         )}
@@ -52,7 +58,8 @@ export function EmojiPlaceholder({
           data-name="image 1001"
           style={{ backgroundImage: `url('${getImageUrl(src)}')` }}
         /> */}
-        {typeof src === "object" && src.emoji ? (
+        {typeof src === "object" && "emoji" in src ? (
+          // Cas emoji
           <span
             className={cn(
               "size-full flex items-center justify-center text-5xl md:text-[10rem] object-cover pointer-events-none",
@@ -61,20 +68,41 @@ export function EmojiPlaceholder({
           >
             {src.emoji}
           </span>
-        ) : (
-          typeof src === "string" && (
-            <Image
-              src={getImageUrl(src)}
-              className={cn(
-                "size-full object-cover pointer-events-none",
-                imgClassName
-              )}
-              width={600}
-              height={600}
-              alt=""
-            />
-          )
-        )}
+        ) : typeof src === "object" && "mp4" in src && "webm" in src ? (
+          <video
+            className={cn(
+              "size-full object-cover pointer-events-none",
+              imgClassName
+            )}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls={false}
+            disablePictureInPicture
+            disableRemotePlayback
+            controlsList="nodownload"
+            width={640}
+            height={480}
+            poster={getImageUrl(src.poster)}
+            key={src.mp4.trim().split(".").slice(0, -1).join(".")}
+          >
+            <source src={getImageUrl(src.webm)} type="video/webm" />
+            <source src={getImageUrl(src.mp4)} type="video/mp4" />
+            {t("common.shared.text.browser-does-not-support-video")}
+          </video>
+        ) : typeof src === "string" ? (
+          <Image
+            src={getImageUrl(src)}
+            className={cn(
+              "size-full object-cover pointer-events-none",
+              imgClassName
+            )}
+            width={600}
+            height={600}
+            alt=""
+          />
+        ) : null}
       </div>
     </div>
   );

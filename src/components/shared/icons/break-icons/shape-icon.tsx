@@ -14,8 +14,8 @@ export const ShapeIcon = ({ size = 49, ...props }: ShapeIconProps) => {
       {...props}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M32.8889 25.012C29.5752 25.012 26.8889 27.6983 26.8889 31.012V38.012C26.8889 41.3257 29.5752 44.012 32.8889 44.012H39.8889C43.2026 44.012 45.8889 41.3257 45.8889 38.012V31.012C45.8889 27.6983 43.2026 25.012 39.8889 25.012H32.8889Z"
         fill="url(#paint0_linear_622_965)"
       />

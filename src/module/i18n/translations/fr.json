@@ -239,7 +239,8 @@
         "language": "Langue",
         "copyright": "Copyright Holder © {year} - All Right Reserved - Crafted with ❣️ by {author}",
         "copy": "Copier",
-        "copied": "Copié"
+        "copied": "Copié",
+        "browser-does-not-support-video": "Votre navigateur ne supporte pas la vidéo."
       },
       "months": {
         "january": "Janvier",

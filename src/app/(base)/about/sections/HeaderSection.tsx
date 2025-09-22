@@ -5,9 +5,12 @@ import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
 import { getEmojiHub } from "@aurthle/emoji-hub";
 import { getImageUrl } from "@/utils";
+import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 
 export function HeaderSection() {
   const t = useTranslations();
+
+  const isDarkMode = useIsDarkMode();
 
   return (
     <PageHero
@@ -16,11 +19,24 @@ export function HeaderSection() {
       // buttonLink={routes.about.link}
       // buttonText={t("about.page.header-section.cta")}
       //buttonVariant="secondary"
-      // imagePath="/portrait.png"
       //imagePath={getEmojiHub("🧑‍💻", "apple")} // getEmojiHub("🤔")
       //imagePath={getEmojiHub("👨🏽‍💻", "fluent", "anim")} // getEmojiHub("🤔")
       //imagePath={{ emoji: "👨🏽‍💻" }}
-      imagePath={getImageUrl("/img/me/memoji/me-eye.png")}
+      //imagePath={getImageUrl("/img/me/memoji/me-love.png")}
+      imgClassName="rounded-full"
+      imagePath={{
+        mp4: getImageUrl(
+          isDarkMode
+            ? "/img/me/memoji/me-dark-out.mp4"
+            : "/img/me/memoji/me-out.mp4"
+        ),
+        webm: getImageUrl(
+          isDarkMode
+            ? "/img/me/memoji/me-dark-out.webm"
+            : "/img/me/memoji/me-out.webm"
+        ),
+        poster: getImageUrl("/img/me/memoji/me.png"),
+      }}
     />
   );
 }

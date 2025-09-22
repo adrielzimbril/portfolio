@@ -82,6 +82,7 @@ export function PageHero({
   buttonText,
   buttonVariant = "default",
   imagePath,
+  imgClassName,
   isMobileHidden = true,
   imageContent,
   actionButton = false,
@@ -92,7 +93,11 @@ export function PageHero({
   buttonLink?: string;
   buttonText?: string;
   buttonVariant?: "default" | "secondary";
-  imagePath?: string | { emoji: string };
+  imagePath?:
+    | string
+    | { emoji: string }
+    | { mp4: string; webm: string; poster: string };
+  imgClassName?: string;
   isMobileHidden?: boolean;
   imageContent?: React.ReactNode;
   actionButton?: boolean;
@@ -101,7 +106,11 @@ export function PageHero({
   return (
     <SectionBase>
       {imagePath && (
-        <EmojiPlaceholder src={imagePath} isMobileHidden={isMobileHidden} />
+        <EmojiPlaceholder
+          src={imagePath}
+          imgClassName={imgClassName}
+          isMobileHidden={isMobileHidden}
+        />
       )}
       {imageContent}
       <ContentSection
