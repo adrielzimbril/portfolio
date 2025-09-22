@@ -11,9 +11,9 @@ const ICONS_DEST_DIR = path.join(
   "../src/components/shared/icons/break-icons"
 );
 
-// Fonction pour nettoyer les attributs SVG non valides en React
+// Function to clean SVG attributes that are not valid in React
 function cleanSvgAttributes(svgContent) {
-  // Remplacer les tirets par la version en camelCase
+  // Replace hyphens with camelCase version
   return svgContent
     .replace(/\b(stroke|fill|stop)-opacity=/g, "$1Opacity=")
     .replace(/\b(stroke|fill|stop)-width=/g, "$1Width=")
@@ -41,22 +41,22 @@ function cleanSvgAttributes(svgContent) {
     .replace(/\bbaseline-shift=/g, "baselineShift=");
 }
 
-// Fonction pour convertir un SVG en composant React TSX
+// Function to convert an SVG to a React TSX component
 async function convertSvgToTsx(svgPath, componentName) {
   try {
-    // Lire le contenu du fichier SVG
+    // Read the content of the SVG file
     let svgContent = await readFile(svgPath, "utf-8");
 
-    // Nettoyer les attributs SVG non valides en React
+    // Clean SVG attributes that are not valid in React
     svgContent = cleanSvgAttributes(svgContent);
 
-    // Extraire le contenu du SVG (sans la balise d'ouverture et de fermeture)
+    // Extract the SVG content (without the opening and closing tags)
     const svgInnerContent = svgContent
       .replace(/<svg[^>]*>/, "")
       .replace(/<\/svg>/, "")
       .trim();
 
-    // Créer le contenu du composant TSX
+    // Create the TSX component content
     const tsxContent = `import React from 'react';
 
 interface ${componentName}Props extends React.SVGProps<SVGSVGElement> {
@@ -87,19 +87,19 @@ export const ${componentName} = ({
   }
 }
 
-// Fonction principale
+// Main function
 async function main() {
   try {
-    // Créer le répertoire de destination s'il n'existe pas
+    // Create the destination directory if it doesn't exist
     await mkdir(ICONS_DEST_DIR, { recursive: true });
 
-    // Lire tous les fichiers SVG du répertoire source
+    // Read all SVG files from the source directory
     const files = await fs.readdir(ICONS_SRC_DIR);
     const svgFiles = files.filter((file) => file.endsWith(".svg"));
 
     console.log(`Found ${svgFiles.length} SVG files to convert.`);
 
-    // Convertir chaque fichier SVG en composant TSX
+    // Convert each SVG file to a React TSX component
     for (const svgFile of svgFiles) {
       const svgPath = path.join(ICONS_SRC_DIR, svgFile);
       const componentName =
@@ -126,7 +126,7 @@ async function main() {
       }
     }
 
-    // Créer un fichier index.ts pour exporter tous les composants
+    // Create an index.ts file to export all components
     const indexContent =
       svgFiles
         .map((svgFile) => {
@@ -153,5 +153,5 @@ async function main() {
   }
 }
 
-// Exécuter le script
+// Execute the script
 main();

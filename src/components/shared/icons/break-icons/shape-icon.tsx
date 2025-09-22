@@ -4,12 +4,12 @@ interface ShapeIconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
-export const ShapeIcon = ({ size = 24, ...props }: ShapeIconProps) => {
+export const ShapeIcon = ({ size = 49, ...props }: ShapeIconProps) => {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
+      viewBox="0 0 49 49"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >

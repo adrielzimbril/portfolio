@@ -4,12 +4,12 @@ interface DefaultIconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
-export const DefaultIcon = ({ size = 24, ...props }: DefaultIconProps) => {
+export const DefaultIcon = ({ size = 49, ...props }: DefaultIconProps) => {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
+      viewBox="0 0 49 49"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
