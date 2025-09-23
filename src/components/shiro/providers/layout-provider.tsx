@@ -9,7 +9,8 @@ import { getActivePathInArray, sleep } from "@/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsScript } from "@/module/analytics";
 import ReactLenis from "lenis/react";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { useIsMobile, useIsIOS } from "@/hooks/useIsMobile";
+import { init } from "@squircle/core";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,6 +18,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const t = useTranslations();
 
   const isMobile = useIsMobile();
+  const isIOS = useIsIOS();
 
   const route = usePathname();
   const menuRoutes = Object.values(routes);
@@ -34,7 +36,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const currentKey = currentRoute?.key || routes.home.key;
 
   useEffect(() => {
-    sleep(6000).then(() => setIsLoaded(true));
+    init().then(() => sleep(4000).then(() => setIsLoaded(true)));
     // logger.info("currentRoute", currentRoute);
     // logger.info("currentKey", currentKey);
     // logger.info("pathname", route);
@@ -53,7 +55,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
       <SpeedInsights />
       <AnalyticsScript />
 
-      {isMobile ? (
+      {isIOS ? (
         asLoader && !isLoaded ? (
           <GenericLoadingPage
             title={loader.title}

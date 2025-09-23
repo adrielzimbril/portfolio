@@ -3,12 +3,10 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { metadata as metadataBase } from "./metadata";
 import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
-import { SquircleProvider } from "@/components/shiro/providers/squircle-provider";
 import { Toaster } from "@/components/shiro/providers/toast-provider";
 import { Navbar } from "@/components/shared/_layouts/navbar";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
 import { Footer } from "@/components/shared/_layouts/footer";
-import { ReactLenis } from "lenis/react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import type { PropsWithChildren } from "react";
@@ -74,20 +72,18 @@ export default async function RootLayout({
           <NextIntlClientProvider locale={locale} messages={messages}>
             <LayoutProvider>
               <TooltipProvider openDelay={0} closeDelay={0}>
-                <SquircleProvider>
-                  <main>
-                    <div className="container mx-auto relative">
-                      <Navbar />
-                      {/* <Dockbar asFade={false} /> */}
-                      {/* <SmoothCursor /> */}
-                      {children}
-                      <ScrollToTop />
-                      <Toaster position="bottom-right" />
-                      {/* <SplashCursor /> */}
-                      <Footer />
-                    </div>
-                  </main>
-                </SquircleProvider>
+                <main>
+                  <div className="container mx-auto relative">
+                    <Navbar />
+                    {/* <Dockbar asFade={false} /> */}
+                    {/* <SmoothCursor /> */}
+                    {children}
+                    <ScrollToTop />
+                    <Toaster position="bottom-right" />
+                    {/* <SplashCursor /> */}
+                    <Footer />
+                  </div>
+                </main>
               </TooltipProvider>
             </LayoutProvider>
           </NextIntlClientProvider>
