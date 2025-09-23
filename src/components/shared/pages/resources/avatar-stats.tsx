@@ -26,7 +26,7 @@ export function AvatarsStats({
     <div
       className={cn(
         "inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl",
-        colorName ?? "squircle-b-white",
+        colorName ?? "squircle-sh-white",
         className
       )}
     >
