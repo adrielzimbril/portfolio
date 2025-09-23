@@ -1,27 +1,9 @@
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { useState, useEffect } from "react";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Project } from "@/module/content/types";
-import logger from "@/utils/logger";
-import { getAllProjects } from "@/module/content/utils/lib";
 
-export function MyProjectsSection() {
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    async function loadProjects() {
-      try {
-        const data = await getAllProjects();
-        setProjects(data);
-      } catch (err) {
-        logger.error(err);
-      }
-    }
-
-    loadProjects();
-  }, []);
-
+export function MyProjectsSection({ data: projects }: { data: Project[] }) {
   const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
     useLoadMore({
       dataSource: projects,

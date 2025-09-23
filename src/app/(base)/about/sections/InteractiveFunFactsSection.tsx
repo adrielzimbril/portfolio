@@ -21,8 +21,6 @@ import {
 import posthog from "posthog-js";
 import { useLocale, useTranslations } from "use-intl";
 import { Locale } from "@/types";
-import { getImageUrl } from "@/utils/base-url";
-import { getEmojiHub } from "@aurthle/emoji-hub";
 
 // Interface pour les questions
 interface Question {

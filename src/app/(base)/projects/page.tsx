@@ -5,6 +5,8 @@ import { HeaderSection } from "./sections/HeaderSection";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { getAllProjects } from "@/module/content/utils/lib";
+import logger from "@/utils/logger";
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -28,11 +30,16 @@ export async function generateMetadata() {
   return metadata;
 }
 
-export default function MyProject() {
+export default async function MyProject() {
+  const data = await getAllProjects().catch((err) => {
+    logger.error(err);
+    return [];
+  });
+
   return (
     <>
       <HeaderSection />
-      <MyProjectsSection />
+      <MyProjectsSection data={data} />
       <CallToAction isPage />
     </>
   );

@@ -5,6 +5,8 @@ import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
+import logger from "@/utils/logger";
+import { getAllPosts } from "@/module/content/utils/lib";
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -29,11 +31,16 @@ export async function generateMetadata() {
   return metadata;
 }
 
-export default function MyThoughts() {
+export default async function MyThoughts() {
+  const data = await getAllPosts().catch((err) => {
+    logger.error(err);
+    return [];
+  });
+
   return (
     <>
       <HeaderSection />
-      <MyThoughtsSection />
+      <MyThoughtsSection data={data} />
       <CallToAction isPage />
     </>
   );
