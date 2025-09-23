@@ -106,6 +106,7 @@
   --squircle-background-color: --alpha(
     --value(--color- *, [color], 'transparent') / var(--squircle-opacity, 100%)
   );
+
   @supports (color: color-mix(in lab,red,red)) {
     --squircle-background-color: --value(--color-*, [color], transparent) !important;
   }
@@ -436,4 +437,8 @@
     --value(--color- *, [color], 'transparent') /
       var(--squircle-border-opacity, 100%)
   );
+  
+  @supports (color: color-mix(in lab,red,red)) {
+    --squircle-border-color: --value(--color-*, [color], transparent) !important;
+  }
 }
