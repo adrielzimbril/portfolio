@@ -14,7 +14,6 @@ import rehypeVideo from "rehype-video";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { PortfolioProjectResearchScope, ResourceType } from "@/types";
-import { mdxAnnotations } from "mdx-annotations";
 
 const BASE_COLLECTION_PATH = "src/content";
 
