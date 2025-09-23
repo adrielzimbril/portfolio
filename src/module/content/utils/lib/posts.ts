@@ -100,7 +100,7 @@ export async function getPostWithAdjacent(
     return null;
   }
 
-  const currentPost = sortedPosts[currentIndex];
+  const currentPost = sortedPosts[currentIndex]!;
 
   // Intelligent logic to always have 2 posts
   const availableBefore = currentIndex;
