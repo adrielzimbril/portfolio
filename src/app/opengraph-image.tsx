@@ -31,7 +31,7 @@ export default async function Image() {
           {alt}
           <img
             src={getAbsolutePathUrl({
-              type: "default",
+              type: "s3",
               path: "/agent-template-og.png",
             })}
             alt={alt}

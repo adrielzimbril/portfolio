@@ -77,7 +77,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
           }
         />
       ) : (
-        <ReactLenis root>children</ReactLenis>
+        <ReactLenis root>{children}</ReactLenis>
       )}
     </>
   );
