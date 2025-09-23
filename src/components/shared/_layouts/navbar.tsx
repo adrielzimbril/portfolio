@@ -10,7 +10,7 @@ import { LogoName } from "@/components/shared/icons/logo/logo-name";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { getActivePathInArray, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
 import { LogoIcon } from "../icons/logo/logo-icon";

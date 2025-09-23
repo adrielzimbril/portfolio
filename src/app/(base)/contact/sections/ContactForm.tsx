@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import Cal, { getCalApi } from "@calcom/embed-react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 
 export default function ContactForm({}) {
   const t = useTranslations();

@@ -2,7 +2,7 @@
 import React from "react";
 import { ResourceCard } from "@/components/shared/pages/resources/page/card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 
 export function ProjectStatementSection({
   description,

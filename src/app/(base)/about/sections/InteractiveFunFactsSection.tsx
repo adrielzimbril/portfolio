@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/utils/utils";
-import Image from "next/image";
 import { toast } from "sonner";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Button } from "@/components/ui/button";
@@ -244,8 +243,8 @@ function GuessButton({
   const t = useTranslations();
   // const imgEmojiFalse = getImageUrl(getEmojiHub("🤥", "fluent", "anim"));
   // const imgEmojiTrue = getImageUrl(getEmojiHub("😀", "fluent", "anim"));
-  const imgEmojiFalse = getImageUrl(getEmojiHub("🤥", "apple"));
-  const imgEmojiTrue = getImageUrl(getEmojiHub("😀", "apple"));
+  // const imgEmojiFalse = getImageUrl(getEmojiHub("🤥", "apple"));
+  // const imgEmojiTrue = getImageUrl(getEmojiHub("😀", "apple"));
 
   return (
     <motion.div

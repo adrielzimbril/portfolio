@@ -5,7 +5,7 @@ import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeho
 import { cn } from "@/utils/utils";
 import { FormattedText } from "@/components/shared/formatted-text";
 import { getImageUrl } from "@/utils/base-url";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function ContentSection({

@@ -3,8 +3,7 @@ import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
-import { getActivePathFromUrlParam } from "@/utils/route-utils";
-import { getLocale, setRequestLocale } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { PageParams } from "@/types";
 import {
   getResourceWithAdjacent,

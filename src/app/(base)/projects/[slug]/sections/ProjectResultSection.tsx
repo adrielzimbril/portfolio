@@ -7,7 +7,7 @@ import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { getImageUrl } from "@/utils/base-url";
 import { FormattedText } from "@/components/shared/formatted-text";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { getEmojiHub } from "@aurthle/emoji-hub";
 
 export function ProjectResultSection({

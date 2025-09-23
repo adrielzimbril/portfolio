@@ -3,7 +3,7 @@ import React from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { getImageUrl } from "@/utils/base-url";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 
 export function ProjectPreviewSection({
   title,

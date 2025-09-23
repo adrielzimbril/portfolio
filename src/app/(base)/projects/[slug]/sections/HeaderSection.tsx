@@ -5,7 +5,7 @@ import { PreviewContentType } from "@/types/enum";
 import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 
 export function HeaderSection({
   title,

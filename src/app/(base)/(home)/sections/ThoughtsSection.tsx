@@ -30,7 +30,7 @@ export function ThoughtsSection() {
     }
 
     loadPosts();
-  }, []);
+  }, [limit]);
 
   return (
     <SectionLayout

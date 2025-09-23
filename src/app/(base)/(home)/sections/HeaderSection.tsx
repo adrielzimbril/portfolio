@@ -5,10 +5,10 @@ import { Link } from "@/components/ui/link";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations, useLocale } from "use-intl";
 import { StatusBadge } from "@/components/ui/status-badge";
-import { ArrowRightOne, LinkOne } from "@aurthle/icons";
+import { LinkOne } from "@aurthle/icons";
 import { getDate, getThisMonth } from "@/utils";
 
-const planningBadge = (type: "simple" | "secondary" | "tertiary") => {
+const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -109,7 +109,6 @@ const planningBadge = (type: "simple" | "secondary" | "tertiary") => {
 
 export function HeaderSection() {
   const t = useTranslations();
-  const locale = useLocale();
 
   return (
     <SectionBase sectionClassName="p-0 mt-16" isWide>

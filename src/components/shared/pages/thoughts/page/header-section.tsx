@@ -12,7 +12,7 @@ import {
   TextPreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { formatCount, getDate } from "@/utils";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 
 interface HeaderSectionProps {
   // Preview Content

@@ -9,7 +9,7 @@ import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
 import { richTextComponent } from "@/module/content/utils/mdx-components";

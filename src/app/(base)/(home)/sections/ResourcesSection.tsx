@@ -31,7 +31,7 @@ export function ResourcesSection() {
     }
 
     loadResources();
-  }, []);
+  }, [limit, locale]);
 
   return (
     <SectionLayout

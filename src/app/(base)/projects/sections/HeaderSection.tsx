@@ -1,9 +1,6 @@
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { routes } from "@/data/routes";
-import { useTranslations } from "next-intl";
-import { getImageUrl } from "@/utils/base-url";
-import { getEmojiHub } from "@aurthle/emoji-hub";
+import { useTranslations } from "use-intl";
 
 export function HeaderSection() {
   const t = useTranslations();

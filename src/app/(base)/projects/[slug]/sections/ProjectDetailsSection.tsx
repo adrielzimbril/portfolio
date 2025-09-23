@@ -5,7 +5,7 @@ import { pickRandomColor } from "@/utils/pick-random-color";
 import { Card, CardContent } from "@/components/ui/card";
 import { getDateDifference } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 
 const projectDetails = {
   role: ["Product designer", "product designer"],

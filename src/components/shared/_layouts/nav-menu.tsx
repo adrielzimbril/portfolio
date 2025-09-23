@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 
 export function NavMenu({
   hasScrolled,

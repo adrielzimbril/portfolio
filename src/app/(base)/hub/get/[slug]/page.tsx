@@ -60,11 +60,11 @@ export default async function SubShopGet(props: {
     excerpt,
     type,
     created_at,
-    body,
+    // body,
     id,
-    content,
-    tags_id,
-    published,
+    // content,
+    // tags_id,
+    // published,
   } = resource!.currentResource;
 
   return (
