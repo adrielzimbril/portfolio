@@ -4,7 +4,7 @@ import { siteConfig } from "@/data/config";
 import logger from "@/utils/logger";
 
 // Configuration exports
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const alt = siteConfig.details.nameShared;
 export const size = {
   width: 1200,

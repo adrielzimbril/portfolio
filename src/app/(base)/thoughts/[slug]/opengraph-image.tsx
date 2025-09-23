@@ -1,6 +1,6 @@
-import { getBaseUrl } from "@/utils/base-url";
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/data/config";
+import { getAbsolutePathUrl } from "@/utils/base-url";
 import logger from "@/utils/logger";
 import { PageParams } from "@/types";
 import { getPostBySlug } from "@/module/content/utils/lib/posts";
@@ -9,14 +9,13 @@ import { routes } from "@/data/routes";
 import { localeRedirect } from "@i18n/routing";
 
 // Configuration exports
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const alt = siteConfig.details.nameShared;
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = "image/png";
-
 
 export async function generateImageMetadata(props: {
   params: Promise<PageParams>;
@@ -44,8 +43,6 @@ export default async function Image(props: { params: Promise<PageParams> }) {
   }
 
   try {
-    const baseUrl = getBaseUrl();
-
     return new ImageResponse(
       (
         <div
@@ -60,7 +57,7 @@ export default async function Image(props: { params: Promise<PageParams> }) {
         >
           <picture>
             <img
-              src={`${baseUrl}/agent-template-og.png`}
+              src={getAbsolutePathUrl("s3", "/agent-template-og.png")}
               alt={alt}
               style={{
                 width: "100%",
