@@ -38,7 +38,7 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white/100 overflow-hidden",
+        "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white/99 overflow-hidden",
         isWide && "md:min-h-80",
         cover ? "p-2 h-48 md:h-80" : "p-4"
       )}

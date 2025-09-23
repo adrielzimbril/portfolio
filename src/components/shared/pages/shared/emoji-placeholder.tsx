@@ -39,7 +39,7 @@ export function EmojiPlaceholder({
         variant === "bordered" &&
           "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-b-base-accent",
         variant === "squircle" &&
-          "squircle squircle-sh-white/100 squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-b-base-accent aspect-square size-full md:size-96 p-12 overflow-hidden",
+          "squircle squircle-sh-white/99 squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-b-base-accent aspect-square size-full md:size-96 p-12 overflow-hidden",
         !isMobileShowed && isMobile && "hidden",
         className
       )}

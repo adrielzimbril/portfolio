@@ -224,8 +224,8 @@ export function Navbar() {
                           className={cn(
                             "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
                             activeTab === item.key
-                              ? "squircle-sh-white/100-invert-fr"
-                              : "squircle-sh-white/100"
+                              ? "squircle-sh-white/99-invert-fr"
+                              : "squircle-sh-white/99"
                           )}
                           variants={drawerMenuVariants}
                         >

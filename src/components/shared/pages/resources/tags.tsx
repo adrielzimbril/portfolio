@@ -13,7 +13,7 @@ export function Tags({ primaryTag, tags, isCentered, className }: TagsProps) {
   return (
     <div
       className={cn(
-        "flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white/100 overflow-hidden",
+        "flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white/99 overflow-hidden",
         isCentered && "text-center items-center justify-center",
         className
       )}

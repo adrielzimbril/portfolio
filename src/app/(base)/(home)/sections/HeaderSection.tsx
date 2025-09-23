@@ -18,7 +18,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
         mode="inline"
         status="available"
         primaryText={t("common.shared.planning-badge.available.title")}
-        className="squircle-sh-white/100 text-b-white-invert"
+        className="squircle-sh-white/99 text-b-white-invert"
         variant="colored"
         size="md"
       >
@@ -38,7 +38,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
         mode="inline"
         status="offline"
         primaryText={t("common.shared.planning-badge.unavailable.title")}
-        className="squircle-sh-white/100 text-b-white-invert"
+        className="squircle-sh-white/99 text-b-white-invert"
         variant="colored"
         size="md"
       >
@@ -62,7 +62,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
         mode="inline"
         status="available"
         primaryText={t("common.shared.planning-badge.available.title")}
-        className="squircle-sh-white/100 text-b-white-invert"
+        className="squircle-sh-white/99 text-b-white-invert"
         variant="colored"
         size="md"
       >
@@ -89,7 +89,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
         mode="inline"
         status="available"
         primaryText={t("common.shared.planning-badge.available.title")}
-        className="squircle-sh-white/100 text-b-white-invert"
+        className="squircle-sh-white/99 text-b-white-invert"
         variant="colored"
         size="md"
       >
@@ -116,7 +116,7 @@ export function HeaderSection() {
         mode="inline"
         status="available"
         primaryText={t("common.shared.planning-badge.available.title")}
-        className="squircle-sh-white/100 text-b-white-invert"
+        className="squircle-sh-white/99 text-b-white-invert"
         variant="colored"
         size="md"
       >
