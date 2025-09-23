@@ -263,7 +263,7 @@
     }
   }
 
-  [class*="squircle-"] {
+  /* [class*="squircle-"] {
     @supports (color: color-mix(in lab,red,red)) {
       --squircle-background-colors: inherit;
     }
@@ -274,7 +274,7 @@
     @supports (color: color-mix(in lab,red,red)) {
       --squircle-background-color: var(--color-white)!important;
     }
-  }
+  } */
 
   html {
     scroll-behavior: smooth;
