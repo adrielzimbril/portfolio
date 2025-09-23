@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { routes } from "@/data/routes";
 import logger from "@/utils/logger";
 import { getActivePathInArray, sleep } from "@/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <SpeedInsights />
       {asLoader && !isLoaded ? (
         <GenericLoadingPage
           title={loader.title}
