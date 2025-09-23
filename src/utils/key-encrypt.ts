@@ -46,7 +46,7 @@ export async function createHmac(
   algorithm: string,
   key: string,
   data: string
-): Promise<string | undefined> {
+): Promise<string> {
   if (typeof window !== "undefined" && window.crypto && window.crypto.subtle) {
     // Version browser with Web Crypto API
     const encoder = new TextEncoder();
@@ -83,7 +83,7 @@ export async function createHmac(
       return signature;
     } catch (err) {
       logger.error("Unable to generate HMAC on server fallback", err);
-      return undefined;
+      return "";
     }
   }
 }
