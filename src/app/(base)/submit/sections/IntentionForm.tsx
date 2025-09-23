@@ -75,7 +75,6 @@ export function IntentionForm() {
         throw new Error(data?.error || "REQUEST_FAILED");
       }
       toast.success(t("submit.page.toast.success"));
-      form.reset({ intention: values.intention });
     } catch (e) {
       toast.error(t("submit.page.toast.error"));
     }

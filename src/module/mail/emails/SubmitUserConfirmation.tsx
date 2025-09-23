@@ -65,10 +65,11 @@ export function SubmitUserConfirmation({
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.submitUserConfirmation.greeting")} {firstName},
+                {t("mail.submitUserConfirmation.greeting", { firstName })},
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
                 {t.rich("mail.submitUserConfirmation.content.intro", {
+                  intention,
                   ...richTextComponent,
                 })}
               </Text>
