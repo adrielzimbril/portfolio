@@ -1,4 +1,5 @@
 "use client";
+import { sleep } from "@/utils";
 import { useState, useCallback, useMemo, useEffect } from "react";
 
 interface UseLoadMoreReturn<T> {
@@ -9,11 +10,6 @@ interface UseLoadMoreReturn<T> {
   totalItems: number;
   loadedItems: number;
 }
-
-// Function sleep integrated to avoid import issues
-const sleep = (ms: number): Promise<void> => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
 
 /**
  * A hook that loads more items from a data source
@@ -56,10 +52,11 @@ export function useLoadMore<T>({
     setLoading(true);
 
     try {
-      await sleep(800);
-      setLoadedItems((prev) =>
-        Math.min(prev + incrementCount, dataSource.length)
-      );
+      await sleep(800).then(() => {
+        setLoadedItems((prev) =>
+          Math.min(prev + incrementCount, dataSource.length)
+        );
+      });
     } catch (error) {
       console.error("Error loading more items:", error);
     } finally {

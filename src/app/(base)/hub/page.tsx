@@ -6,8 +6,6 @@ import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllResources } from "@/module/content/utils/lib/resources";
-import { ResourceWrapper } from "@/components/shared/pages/shared/resource-wrapper";
-import { PageType } from "@/types";
 import { MyHubSection } from "./sections/MyHubSection";
 
 export async function generateMetadata() {
