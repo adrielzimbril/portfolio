@@ -94,7 +94,7 @@ export function IntentionForm() {
     return (
       <FormField
         control={form.control}
-        name={name as any}
+        name={name}
         render={({ field }) => (
           <FormItem>
             <SelectLabel>{label}</SelectLabel>

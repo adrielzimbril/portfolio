@@ -83,10 +83,10 @@ export function LoadMoreSection({
             >
               <p>
                 <span className="text-foreground">
-                  Hello, c'est tout pour l'instant ! 🦄
+                  Hello, c&lsquo;est tout pour l&lsquo;instant ! 🦄
                 </span>
                 <br />
-                N&apos;hésitez pas à vous abonner à ma{" "}
+                N&lsquo;hésitez pas à vous abonner à ma{" "}
                 <Link href={routes.newsletter.link}>
                   <span className="text-foreground underline">newsletter</span>
                 </Link>{" "}

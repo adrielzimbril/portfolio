@@ -63,8 +63,8 @@ export const add: AddContactHandler = async ({
     // });
     const alreadyExists: boolean = Boolean(res) || Boolean(phoneRes);
     return { ok: true, alreadyExists } as const;
-  } catch (err: any) {
-    if (err.status === 400 || err.message.includes("400")) {
+  } catch (err: unknown) {
+    if (err && (err as { status: number }).status === 400 && (err as { message: string }).message.includes("400")) {
       try {
         const updateRes = await provider.updateContact(email, nameContact);
         // logger.info("Brevo contact name update response", {
@@ -102,7 +102,7 @@ export const add: AddContactHandler = async ({
     }
     const message =
       (err as { body: { message: string } })?.body?.message ||
-      err?.message ||
+      (err as { message: string })?.message ||
       "Unknown Brevo error";
 
     // logger.error("Brevo add contact failed", JSON.stringify(err));
