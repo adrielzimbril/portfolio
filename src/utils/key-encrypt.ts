@@ -374,30 +374,58 @@ const API_KEYS = new Set([
 ]);
 
 /**
+ * Universal crypto.getRandomValues, works in Node 19+ and browsers
+ * 
+ * @param size The number of bytes to generate
+ * 
+ * @returns A Uint8Array of random bytes
+ * 
+ * @example
+ * ```typescript
+ * const randomBytes = getRandomBytes(16); // Generate 16 random bytes Like : "B1npudHN2b2loeGJ1eGJ6Iiw"
+ * ```
+ */
+function getRandomBytes(size: number): Uint8Array {
+  if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+    const array = new Uint8Array(size);
+    crypto.getRandomValues(array);
+    return array;
+  }
+  // Fallback for older Node versions
+  const { randomBytes } = require("crypto");
+  return randomBytes(size);
+}
+
+/**
  * Generate a new API key
+ * 
+ * @returns A new API key
+ * 
+ * @example
+ * ```typescript
+ * const apiKey = generateApiKey(); // Generate a new API key
+ * ```
  */
 export function generateApiKey(): string {
   const prefix = "api_";
-
-  if (isServer && serverCrypto) {
-    const randomPart = serverCrypto.randomBytes(16).toString("hex");
-    return `${prefix}${randomPart}`;
-  } else if (typeof window !== "undefined" && window.crypto) {
-    const array = new Uint8Array(16);
-    window.crypto.getRandomValues(array);
-    const randomPart = Array.from(array, (byte) =>
-      byte.toString(16).padStart(2, "0")
-    ).join("");
-    return `${prefix}${randomPart}`;
-  } else {
-    // Basic fallback
-    const randomPart = Math.random().toString(36).substring(2, 18);
-    return `${prefix}${randomPart}`;
-  }
+  const array = getRandomBytes(16);
+  const randomPart = Array.from(array, (b) =>
+    b.toString(16).padStart(2, "0")
+  ).join("");
+  return `${prefix}${randomPart}`;
 }
 
 /**
  * Validate a static API key
+ * 
+ * @param apiKey The API key to validate
+ * 
+ * @returns Whether the API key is valid
+ * 
+ * @example
+ * ```typescript
+ * const isValid = validateApiKey("api_key_trigger_task_2024"); // Validate an API key
+ * ```
  */
 export function validateApiKey(apiKey: string): boolean {
   return API_KEYS.has(apiKey);
