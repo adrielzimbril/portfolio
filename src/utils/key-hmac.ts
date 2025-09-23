@@ -1,5 +1,4 @@
 "use server";
-import { createHmac as nodeCreateHmac } from "node:crypto";
 
 // Check if we are on the server or client
 const isServer = typeof window === "undefined";
@@ -11,8 +10,8 @@ export async function createHmac(
   data: string
 ): Promise<string> {
   if (isServer) {
-    // Version server without node:crypto
-    return nodeCreateHmac(algorithm, key).update(data).digest("hex");
+    const { createServerHmac } = await import("@/utils/key-hmac-server");
+    return createServerHmac(algorithm, key, data);
   } else if (
     typeof window !== "undefined" &&
     window.crypto &&
