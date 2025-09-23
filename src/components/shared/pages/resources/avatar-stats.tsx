@@ -111,7 +111,7 @@ function UserCount({
   const productType = productTypeMap[resourceType] ?? "";
 
   return (
-    <span className="relative flex items-center gap-1 font-bold text-sm text-b-white-invert-sec">
+    <span className="relative flex items-center gap-1 font-bold text-sm text-b-white-unchanged">
       {count > 2 ? `+${count}` : count} {productType}
     </span>
   );
