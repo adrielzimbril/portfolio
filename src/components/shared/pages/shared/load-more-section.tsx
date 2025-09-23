@@ -1,4 +1,3 @@
-"use client";
 import React, { ReactNode } from "react";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { PreviewItem } from "@/types";
@@ -6,30 +5,8 @@ import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { Link } from "@/components/ui/link";
-import { routes } from "@/data/routes";
-
-export function useLoadMoreItems({
-  dataSource,
-  initialCount = 4,
-  incrementCount = 4,
-}: {
-  dataSource: PreviewItem[];
-  initialCount?: number;
-  incrementCount?: number;
-}) {
-  const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
-    useLoadMore({ dataSource, initialCount, incrementCount });
-
-  return {
-    data,
-    loadMore,
-    loading,
-    hasMore,
-    loadedItems,
-    totalItems,
-  };
-}
+import { useTranslations } from "use-intl";
+import { richTextComponent } from "@/module/content/utils/mdx-components";
 
 interface LoadMoreUIProps {
   children: ReactNode;
@@ -41,15 +18,6 @@ interface LoadMoreUIProps {
   showCounter?: boolean;
 }
 
-function LoadingSpinner() {
-  return (
-    <div className="relative w-5 h-5">
-      <div className="absolute inset-0 rounded-full border-2 border-b-base-accent" />
-      <div className="absolute inset-0 rounded-full border-2 border-b-base-accent border-t-transparent animate-spin" />
-    </div>
-  );
-}
-
 export function LoadMoreSection({
   children,
   hasMore,
@@ -59,6 +27,7 @@ export function LoadMoreSection({
   totalItems,
   showCounter = false,
 }: LoadMoreUIProps) {
+  const t = useTranslations();
   return (
     <SectionLayout className="p-0">
       {children}
@@ -67,10 +36,11 @@ export function LoadMoreSection({
           <Button onClick={onLoadMore} disabled={loading} whileTap asPointer>
             {loading ? (
               <span className="flex gap-2 items-center">
-                <Loader variant="single" /> <span>Chargement... 🦄</span>
+                <Loader variant="pulse" />{" "}
+                {/* <span>{t("common.button.loading")} 🦄</span> */}
               </span>
             ) : (
-              "Voir plus 📂"
+              t("common.button.view-more")
             )}
           </Button>
         ) : (
@@ -83,19 +53,20 @@ export function LoadMoreSection({
             >
               <p>
                 <span className="text-foreground">
-                  Hello, c&lsquo;est tout pour l&lsquo;instant ! 🦄
+                  {t("common.shared.loadMore.greeting")}
                 </span>
                 <br />
-                N&lsquo;hésitez pas à vous abonner à ma{" "}
-                <Link href={routes.newsletter.link}>
-                  <span className="text-foreground underline">newsletter</span>
-                </Link>{" "}
-                pour ne rien rater 🦄
+                {t.rich("common.shared.loadMore.end.cta", {
+                  ...richTextComponent,
+                })}
               </p>
 
               {showCounter && (
                 <p>
-                  Affiché {loadedItems} de {totalItems} éléments
+                  {t("common.shared.loadMore.counter", {
+                    loadedItems,
+                    totalItems,
+                  })}
                 </p>
               )}
             </motion.div>

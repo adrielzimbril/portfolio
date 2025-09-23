@@ -7,7 +7,8 @@ import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata() {
-  const t = await getTranslations();
+  //const t = await getTranslations();
+  const t = (key: string) => key;
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -32,7 +33,7 @@ export default function MyProject() {
   return (
     <>
       <HeaderSection />
-      <MyProjectsSection />
+      {/* <MyProjectsSection /> */}
       <CallToAction isPage />
     </>
   );

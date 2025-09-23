@@ -339,7 +339,8 @@
       "loading": "Chargement",
       "loaded": "Chargé",
       "sending": "Envoi",
-      "sent": "Envoyé"
+      "sent": "Envoyé",
+      "view-more": "Voir plus"
     },
     "shared": {
       "text": {
@@ -353,6 +354,13 @@
         "copied": "Copié",
         "browser-does-not-support-video": "Votre navigateur ne supporte pas la vidéo.",
         "characters-left": "caractères restants"
+      },
+      "loadMore": {
+        "greeting": "Hello, c'est tout pour l'instant ! 🦄",
+        "counter": "Affiché {loadedItems} sur {totalItems} éléments",
+        "end": {
+          "cta": "N'hésitez pas à vous abonner à ma <newsletter>newsletter</newsletter> pour ne rien rater 🦄"
+        }
       },
       "months": {
         "january": "Janvier",

@@ -51,7 +51,7 @@ export function useLoadMore<T>({
     [loadedItems, dataSource.length]
   );
 
-  const totalItems = useMemo(() => dataSource.length, [dataSource.length]);
+  const totalItems = dataSource.length;
 
   // ⚡ Callback stable (ideal if we pass loadMore to children components)
   const loadMore = useCallback(() => {
