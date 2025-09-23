@@ -7,8 +7,9 @@ const urlRegex: RegExp =
 export const useUrlValidator = ({
   label,
   required = true,
-}: RequiredValidatorProps): ((value: string) => string | null) => {
+}: RequiredValidatorProps<string>): ((value: string) => string | null) => {
   const stringValidator = useStringValidator({
+    value: "",
     label,
     required,
     regex: urlRegex,

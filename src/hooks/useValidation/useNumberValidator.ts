@@ -3,7 +3,7 @@ import {
   RequiredValidatorProps,
 } from "@/hooks/useValidation/useRequiredValidator";
 
-export type NumberValidatorProps = RequiredValidatorProps & {
+export type NumberValidatorProps = RequiredValidatorProps<number> & {
   min?: number;
   max?: number;
 };
@@ -14,7 +14,7 @@ export const useNumberValidator = ({
   min,
   max,
 }: NumberValidatorProps): ((value: number) => string | null) => {
-  const requiredValidator = useRequiredValidator({ label, required });
+  const requiredValidator = useRequiredValidator({ value: 0, label, required });
 
   return (value: number): string | null => {
     if (value && min && value < min) {

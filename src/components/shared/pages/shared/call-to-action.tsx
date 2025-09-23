@@ -20,7 +20,11 @@ function EmailForm() {
   const isMobile = useIsMobile();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const emailValidator = useEmailValidator({ label: "Email", required: true });
+  const emailValidator = useEmailValidator({
+    value: email,
+    label: "Email",
+    required: true,
+  });
   const isEmailValid = !Boolean(emailValidator(email));
 
   return (

@@ -18,8 +18,8 @@ export function NewsletterForm() {
   const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-    const emailValidator = useEmailValidator({ label: "Email", required: true });
-    const isEmailValid = !Boolean(emailValidator(email));
+    const emailValidator = useEmailValidator({ value: email, label: "Email", required: true });
+     const isEmailValid = !Boolean(emailValidator(email));
 
   return (
     <>

@@ -3,7 +3,7 @@ import {
   useRequiredValidator,
 } from "@/hooks/useValidation/useRequiredValidator";
 
-export type FileValidatorProps = RequiredValidatorProps & {
+export type FileValidatorProps = RequiredValidatorProps<File> & {
   max?: number;
   allowedExtensions: string[];
 };
@@ -14,7 +14,11 @@ export const useFileValidator = ({
   max,
   allowedExtensions,
 }: FileValidatorProps): ((value: File) => string | null) => {
-  const requiredValidator = useRequiredValidator({ label, required });
+  const requiredValidator = useRequiredValidator({
+    value: "",
+    label,
+    required,
+  });
 
   return (value: File): string | null => {
     if (required || value) {

@@ -3,7 +3,7 @@ import {
   RequiredValidatorProps,
 } from "@/hooks/useValidation/useRequiredValidator";
 
-export type StringValidatorProps = RequiredValidatorProps & {
+export type StringValidatorProps = RequiredValidatorProps<string> & {
   min?: number;
   max?: number;
   regex?: RegExp;
@@ -16,7 +16,11 @@ export const useStringValidator = ({
   max,
   regex,
 }: StringValidatorProps): ((value: string) => string | null) => {
-  const requiredValidator = useRequiredValidator({ label, required });
+  const requiredValidator = useRequiredValidator({
+    value: "",
+    label,
+    required,
+  });
 
   return (value: string) => {
     if (value) {

@@ -8,7 +8,7 @@ export type DateBetween = {
   max: Date;
 };
 
-export type DateValidatorProps = RequiredValidatorProps & {
+export type DateValidatorProps = RequiredValidatorProps<string> & {
   min?: Date;
   max?: Date;
   between?: DateBetween;
@@ -21,7 +21,11 @@ export const useDateValidator = ({
   max,
   between,
 }: DateValidatorProps): ((value: Date) => string | null) => {
-  const requiredValidator = useRequiredValidator({ label, required });
+  const requiredValidator = useRequiredValidator({
+    value: "",
+    label,
+    required,
+  });
 
   return (value: Date): string | null => {
     if (min && value && value.getTime() < min.getTime()) {
