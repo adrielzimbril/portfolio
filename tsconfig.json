@@ -51,8 +51,7 @@
     "**/*.mjs",
     "**/*.mdx",
     ".next/types/**/*.ts",
-    "node_modules/@aurthle/**/*",
-    "scripts/**/*"
+    "node_modules/@aurthle/**/*"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "scripts/**/*"]
 }
