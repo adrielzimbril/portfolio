@@ -4,8 +4,6 @@ import { cn } from "@/utils/utils";
 import { PageType, ResourceType } from "@/types/enum";
 import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import {
-  BookOne,
-  ClapperboardPlay,
   DeveloperFile,
   Figma,
   Notebook,

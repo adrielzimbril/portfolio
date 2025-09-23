@@ -7,14 +7,11 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { routes } from "@/data/routes";
-import { getImageUrl } from "@/utils/base-url";
-import { siteConfig } from "@/data/config";
 import { useTranslations } from "use-intl";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
 import { toast } from "sonner";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
-import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function EmailForm() {
   const t = useTranslations();

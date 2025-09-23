@@ -52,7 +52,7 @@ export default async function SubShopGet(props: {
     return localeRedirect({ href: routes.projects.link, locale });
   }
 
-  const { title, cover, tags, features, excerpt, type, created_at, id } =
+  const { title, tags, excerpt, type, created_at, id } =
     resource!.currentResource;
 
   return (
@@ -60,14 +60,10 @@ export default async function SubShopGet(props: {
       <GetResource
         id={id}
         title={title}
-        cover={cover}
         tags={tags}
-        features={features}
         excerpt={excerpt}
         type={type}
         created_at={created_at}
-        locale={locale}
-        slug={slug}
       />
     </>
   );

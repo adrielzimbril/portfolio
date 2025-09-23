@@ -49,7 +49,6 @@ export function MyThoughtsSection() {
           excerpt={post.excerpt || ""}
           primaryTag={getDate({ date: post.created_at })}
           tags={post.tags}
-          created_at={post.created_at}
         />
       ))}
     </LoadMoreSection>

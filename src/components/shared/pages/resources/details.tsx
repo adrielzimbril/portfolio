@@ -29,8 +29,7 @@ export function CardInfo({
   userCount: number;
 }) {
   const t = useTranslations();
-  const { count: avatarCount, loading: avatarCountLoading } =
-    useProductTitleRequestsCount(title);
+  const { count: avatarCount } = useProductTitleRequestsCount(title);
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(

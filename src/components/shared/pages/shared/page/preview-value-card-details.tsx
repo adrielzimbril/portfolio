@@ -1,9 +1,6 @@
-import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { CardInfoProps } from "@/components/shared/pages/shared/page/preview-value-card";
 import { Badge } from "@/components/ui/badge";
-import { getImageUrl } from "@/utils/base-url";
-import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function PreviewContent({
   title,

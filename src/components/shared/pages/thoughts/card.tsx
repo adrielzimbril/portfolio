@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/thoughts/details";
-import { Post } from "@/module/content/types";
 import { PageType } from "@/types";
 
 export function ThoughtCard({
@@ -11,7 +10,6 @@ export function ThoughtCard({
   excerpt,
   primaryTag,
   tags,
-  created_at,
 }: {
   title: string;
   cover?: string;
@@ -19,7 +17,6 @@ export function ThoughtCard({
   excerpt: string;
   primaryTag?: string;
   tags: { name: string }[];
-  created_at: string;
 }) {
   return (
     <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl h-full border-0 overflow-hidden">
@@ -35,7 +32,6 @@ export function ThoughtCard({
           excerpt={excerpt}
           primaryTag={primaryTag}
           tags={tags}
-          created_at={created_at}
           slug={slug}
         />
       </CardContent>

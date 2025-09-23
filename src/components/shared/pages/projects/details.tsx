@@ -13,7 +13,6 @@ import { useTranslations } from "use-intl";
 
 export function CardInfo({
   title,
-  cover,
   description,
   slug,
   tags,
@@ -21,7 +20,6 @@ export function CardInfo({
   isWide,
 }: {
   title: string;
-  cover?: string;
   description: string;
   slug: string;
   tags: { name: string }[];

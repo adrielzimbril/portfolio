@@ -96,7 +96,6 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
   emoji,
   isPage = true,
 }) => {
-  const isDarkMode = useIsDarkMode();
   return (
     <div className="flex flex-col mx-auto items-center justify-center relative bg-b-white size-full min-h-dvh">
       {/* Floating background elements */}

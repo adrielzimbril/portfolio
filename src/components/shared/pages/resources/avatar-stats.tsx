@@ -3,7 +3,7 @@ import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
 import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types";
 import BoringAvatar from "boring-avatars";
-import { getImageUrl, pickRandomColor, pickRandomColorCode } from "@/utils";
+import { getImageUrl, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { useTranslations } from "use-intl";
 

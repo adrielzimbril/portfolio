@@ -70,10 +70,10 @@ export function HeaderSection({
   const previewContent = initPreviewContent || basePreviewContent;
   const scrollTo = useScrollTo();
 
-  const scrollToKey = (key: string) => {
-    const element = document.getElementById(key);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const scrollToKey = (key: string) => {
+  //   const element = document.getElementById(key);
+  //   element?.scrollIntoView({ behavior: "smooth" });
+  // };
 
   return (
     <SectionBase

@@ -12,14 +12,12 @@ export function CardInfo({
   primaryTag,
   tags,
   slug,
-  created_at,
 }: {
   title: string;
   excerpt: string;
   primaryTag?: string;
   tags: { name: string }[];
   slug: string;
-  created_at: string;
 }) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">

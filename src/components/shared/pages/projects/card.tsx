@@ -2,7 +2,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
 import { cn } from "@/utils/utils";
-import { ProjectPreviewCardInfoProps } from "@/types/type";
 import { PageType } from "@/types";
 
 export function ProjectCard({
@@ -44,7 +43,6 @@ export function ProjectCard({
         />
         <CardInfo
           title={title}
-          cover={cover}
           description={description}
           slug={slug}
           tags={tags}

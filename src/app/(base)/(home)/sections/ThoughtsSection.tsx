@@ -56,7 +56,6 @@ export function ThoughtsSection() {
               slug={post.slug}
               excerpt={post.excerpt || ""}
               tags={post.tags}
-              created_at={post.created_at}
             />
           </div>
         );

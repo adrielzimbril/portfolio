@@ -1,8 +1,5 @@
-import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { ResourceInnerStatementPreviewCardInfoProps } from "@/types/type";
-import { getImageUrl } from "@/utils/base-url";
-import { getEmojiHub } from "@aurthle/emoji-hub";
 
 export function CardPreview({
   details,
