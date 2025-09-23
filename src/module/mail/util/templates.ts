@@ -1,6 +1,7 @@
 import { render } from "@react-email/render";
-import { Locale, Messages, getMessagesForLocale } from "@/module/i18n";
+import { Messages, getMessagesForLocale } from "@/module/i18n";
 import { mailTemplates } from "@/module/mail/emails";
+import { Locale } from "@/types";
 
 export async function getTemplate<T extends TemplateId>({
   templateId,

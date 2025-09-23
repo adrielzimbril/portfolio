@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { toast } from "sonner";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";
@@ -40,6 +40,7 @@ const intentions = Object.values(Intention);
 
 export function IntentionForm() {
   const t = useTranslations();
+  const locale = useLocale();
 
   const schema = z.object({
     intention: z.enum(intentions),
@@ -67,7 +68,7 @@ export function IntentionForm() {
       const res = await fetch(apiRoutes.submit.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, locale }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {

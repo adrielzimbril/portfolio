@@ -12,7 +12,7 @@ import {
   validateToken,
 } from "@/utils";
 import { getAllResources, getResourceById } from "@/module/content/utils/lib";
-import { PageType, ResourceType } from "@/types";
+import { Locale, PageType, ResourceType } from "@/types";
 import NewsletterSignup from "@/module/mail/emails/NewsletterSignup";
 
 function getListIdByProduct(product?: string) {
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
     subscribedFromPage,
     updateExisting,
     updateLayer,
+    locale,
   }: {
     email: string;
     name?: string;
@@ -44,6 +45,7 @@ export async function POST(req: NextRequest) {
     subscribedFromPage?: string;
     updateExisting?: boolean;
     updateLayer?: boolean;
+    locale?: Locale;
   } = body;
 
   if (!email) {
@@ -120,7 +122,7 @@ export async function POST(req: NextRequest) {
         to: [{ email, name }],
         context: { name },
         templateId: "welcome",
-        locale: "fr",
+        locale: locale,
       });
     } catch (e) {
       logger.warn(
@@ -133,7 +135,7 @@ export async function POST(req: NextRequest) {
       to: [{ email, name }],
       context: { name },
       templateId: "newsletterSignup",
-      locale: "fr",
+      locale: locale,
     });
   }
 
@@ -186,7 +188,7 @@ export async function POST(req: NextRequest) {
               customText,
             },
             templateId: "productDelivery",
-            locale: "fr",
+            locale: locale,
           });
         } catch (e) {
           logger.warn(

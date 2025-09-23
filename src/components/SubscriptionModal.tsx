@@ -30,7 +30,8 @@ import { cn } from "@/utils";
 import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { useTranslations } from "use-intl";
+import { useTranslations, useLocale, Locale } from "use-intl";
+import { apiRoutes } from "@/data/api-routes";
 
 interface SubscriptionModalProps {
   isOpen: boolean;
@@ -48,6 +49,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   onClose,
 }) => {
   const t = useTranslations();
+  const locale = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [userCountry, setUserCountry] = useState("FR");
@@ -84,10 +86,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     productType?: ResourceTypeKey;
     updateLayer?: boolean;
   }) => {
-    return fetch("/api/subscribe", {
+    return fetch(apiRoutes.subscribe.link, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, locale }),
     });
   };
 
