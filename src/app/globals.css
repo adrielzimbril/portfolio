@@ -145,8 +145,8 @@
   --b-base: var(--color-stone-100);
   --b-base-second: var(--color-neutral-100);
   --b-base-it: var(--color-zinc-50);
-  --b-white: var(--color-white);
-  --sh-base-white: var(--color-white);
+  --b-white: hsl(0 0% 100%);
+  --sh-base-white: hsl(0 0% 100%);
   --b-white-foreground: var(--color-zinc-700);
   --b-white-unchanged: var(--color-zinc-800);
   --b-black-unchanged: var(--color-zinc-100);

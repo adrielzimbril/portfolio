@@ -11,7 +11,6 @@ export async function GET(req: NextRequest) {
   const wantResponse = searchParams.get("wantResponse") === "true";
 
   try {
-    // Utiliser la fonction RPC pour récupérer les analytics
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
       "get_page_analytics",
       {
@@ -25,7 +24,6 @@ export async function GET(req: NextRequest) {
       throw rpcError;
     }
 
-    // La fonction RPC retourne un array, prendre le premier élément
     const result = analyticsData?.[0] || {
       total_views: 0,
       unique_users: 0,

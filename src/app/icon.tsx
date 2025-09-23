@@ -34,7 +34,8 @@ export default async function Icon() {
           }}
         >
           <img
-            src={url}
+            // src={url}
+            src="/icon.svg"
             alt={alt}
             style={{
               width: "100%",

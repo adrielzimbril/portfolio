@@ -8,11 +8,15 @@ import { routes } from "@/data/routes";
 import { getActivePathInArray, sleep } from "@/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsScript } from "@/module/analytics";
+import ReactLenis from "lenis/react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const asLoader = true;
   const t = useTranslations();
+
+  const isMobile = useIsMobile();
 
   const route = usePathname();
   const menuRoutes = Object.values(routes);
@@ -48,7 +52,22 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     <>
       <SpeedInsights />
       <AnalyticsScript />
-      {asLoader && !isLoaded ? (
+
+      {isMobile ? (
+        asLoader && !isLoaded ? (
+          <GenericLoadingPage
+            title={loader.title}
+            emoji={loader.emoji}
+            subtitle={loader.subtitle}
+            isPage={
+              currentRoute?.key === routes.home.key ||
+              currentRoute === undefined
+            }
+          />
+        ) : (
+          <ReactLenis root>{children}</ReactLenis>
+        )
+      ) : asLoader && !isLoaded ? (
         <GenericLoadingPage
           title={loader.title}
           emoji={loader.emoji}
@@ -58,7 +77,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
           }
         />
       ) : (
-        children
+        <ReactLenis root>children</ReactLenis>
       )}
     </>
   );

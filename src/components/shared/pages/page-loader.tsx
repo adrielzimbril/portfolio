@@ -10,6 +10,7 @@ import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 import { LogoName } from "@/components/shared/icons/logo/logo-name";
 import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
 import { siteConfig } from "@/data/config";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface GenericLoadingPageProps {
   title: string;
@@ -96,25 +97,27 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
   emoji,
   isPage = true,
 }) => {
+  const isMobile = useIsMobile();
   return (
     <div className="flex flex-col mx-auto items-center justify-center relative bg-b-white size-full min-h-dvh">
       {/* Floating background elements */}
-      {floatingSkills.map((skill, index) => (
-        <FloatingCard
-          key={skill}
-          delay={index * 0.5}
-          position={
-            index % 4 === 0
-              ? "top-left"
-              : index % 4 === 1
-                ? "top-right"
-                : index % 4 === 2
-                  ? "bottom-left"
-                  : "bottom-right"
-          }
-          title={skill}
-        />
-      ))}
+      {!isMobile &&
+        floatingSkills.map((skill, index) => (
+          <FloatingCard
+            key={skill}
+            delay={index * 0.5}
+            position={
+              index % 4 === 0
+                ? "top-left"
+                : index % 4 === 1
+                  ? "top-right"
+                  : index % 4 === 2
+                    ? "bottom-left"
+                    : "bottom-right"
+            }
+            title={skill}
+          />
+        ))}
 
       {/* Principal content with sequential animations */}
       <motion.div

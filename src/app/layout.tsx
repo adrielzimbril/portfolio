@@ -21,9 +21,9 @@ import { notFound } from "next/navigation";
 
 export const viewport: Viewport = {
   width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  // initialScale: 1,
+  // maximumScale: 1,
+  // userScalable: false,
   themeColor: [
     {
       media: "(prefers-color-scheme: light)",
@@ -75,20 +75,18 @@ export default async function RootLayout({
             <LayoutProvider>
               <TooltipProvider openDelay={0} closeDelay={0}>
                 <SquircleProvider>
-                  <ReactLenis root>
-                    <main>
-                      <div className="container mx-auto relative">
-                        <Navbar />
-                        {/* <Dockbar asFade={false} /> */}
-                        {/* <SmoothCursor /> */}
-                        {children}
-                        <ScrollToTop />
-                        <Toaster position="bottom-right" />
-                        {/* <SplashCursor /> */}
-                        <Footer />
-                      </div>
-                    </main>
-                  </ReactLenis>
+                  <main>
+                    <div className="container mx-auto relative">
+                      <Navbar />
+                      {/* <Dockbar asFade={false} /> */}
+                      {/* <SmoothCursor /> */}
+                      {children}
+                      <ScrollToTop />
+                      <Toaster position="bottom-right" />
+                      {/* <SplashCursor /> */}
+                      <Footer />
+                    </div>
+                  </main>
                 </SquircleProvider>
               </TooltipProvider>
             </LayoutProvider>
