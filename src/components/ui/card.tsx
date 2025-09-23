@@ -7,10 +7,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "rounded-xl w-full bg-inherit text-card-foreground",
-      className
-    )}
+    className={cn("xl w-full bg-inherit text-card-foreground", className)}
     {...props}
   />
 ));
