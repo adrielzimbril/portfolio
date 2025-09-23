@@ -55,20 +55,18 @@ export default async function Image(props: { params: Promise<PageParams> }) {
             background: "black",
           }}
         >
-          <picture>
-            <img
-              src={getAbsolutePathUrl({
-                type: "s3",
-                path: "/agent-template-og.png",
-              })}
-              alt={alt}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-              }}
-            />
-          </picture>
+          <img
+            src={getAbsolutePathUrl({
+              type: "s3",
+              path: "/agent-template-og.png",
+            })}
+            alt={alt}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }}
+          />
         </div>
       ),
       { ...size }

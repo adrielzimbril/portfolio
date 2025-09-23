@@ -28,7 +28,6 @@ export default async function Image() {
             background: "black",
           }}
         >
-          {alt}
           <img
             src={getAbsolutePathUrl({
               type: "s3",

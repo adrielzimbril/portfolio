@@ -146,9 +146,9 @@
   --b-base: var(--color-stone-100);
   --b-base-second: var(--color-neutral-100);
   --b-base-it: var(--color-zinc-50);
-  --b-white: #fefefe;
-  --sh-white: #fefefe;
-  --sh-base-white: #fefefe;
+  --b-white: #fbfbfb;
+  --sh-white: #fbfbfb;
+  --sh-base-white: #fbfbfb;
   --b-white-foreground: var(--color-zinc-700);
   --b-white-unchanged: var(--color-zinc-800);
   --b-black-unchanged: var(--color-zinc-100);
@@ -266,6 +266,15 @@
   @supports not (background: paint(squircle)) {
     [class*="squircle-5xl"], [class*="squircle-6xl"]:not(.text-card-foreground), [class*="squircle-7xl"] {
       border-radius: var(--squircle-border-radius-2xl)!important;
+    }
+  }
+
+  @supports (color: color-mix(in lab,red,red)) {
+    [class*="squircle-*"] {
+      --squircle-background-colors: inherit;
+    }
+    .squircle-sh-white {
+      --squircle-background-color: var(--sh-white);
     }
   }
 
