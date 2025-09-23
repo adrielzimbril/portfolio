@@ -40,8 +40,7 @@
       "@i18n/*": ["./src/module/i18n/*"],
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
-      "content-collections": ["./.content-collections/generated"],
-      "@squircle/*": ["./src/module/squircle/*"]
+      "content-collections": ["./.content-collections/generated"]
     }
   },
   "include": [

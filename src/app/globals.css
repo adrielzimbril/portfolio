@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@import "@squircle/tailwindcss";
+/* @import "@squircle/tailwindcss"; */
+@import "./style/squircle.css";
 @import "tw-animate-css";
 @import "./style/tailwind-animate.css";
 
@@ -273,7 +274,7 @@
       --squircle-background-colors: inherit;
     }
     .squircle-sh-white {
-      --squircle-background-color: var(--sh-white);
+      --squircle-background-color: var(--b-white);
     }
   }
 
