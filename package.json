@@ -97,7 +97,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@mdx-js/mdx": "^3.1.1",
     "@shikijs/rehype": "^3.13.0",
-    "@tailwindcss/postcss": "4.1.4",
+    "@tailwindcss/postcss": "^4.1.13",
     "@trigger.dev/build": "4.0.4",
     "@types/bcrypt": "^6.0.0",
     "@types/canvas-confetti": "^1.9.0",
@@ -117,7 +117,7 @@
     "prettier": "^3.6.2",
     "react-phone-number-input": "^3.4.12",
     "supabase": "^2.45.5",
-    "tailwindcss": "4.1.4",
+    "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
     "zod": "^4.1.11"
   }
