@@ -31,7 +31,7 @@ export default async function Icon() {
           }}
         >
           <img
-            src={getAbsolutePathUrl("/icon.svg")}
+            src={getAbsolutePathUrl("s3", "/icon.svg")}
             alt={alt}
             style={{
               width: "100%",

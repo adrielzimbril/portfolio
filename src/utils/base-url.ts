@@ -17,17 +17,6 @@ export function getBaseUrl(): string {
 }
 
 /**
- * Gets the base URL of the application.
- *
- * Returns the base URL of the application.
- * @returns {string} The base URL of the application.
- */
-export function getAbsoluteUrl(): string {
-  return process.env.NEXT_PUBLIC_DOMAIN_SITE_URL ?? "";
-  
-}
-
-/**
  * Gets the URL of a path.
  * @param {string} path - The path.
  *
@@ -43,6 +32,23 @@ export function getPathUrl(path: string): string {
 }
 
 /**
+ * Gets the base URL of the application.
+ *
+ * @param {"default" | "s3"} type - The type of the URL.
+ * @default "default"
+ *
+ * Returns the base URL of the application.
+ *
+ * @returns {string} The base URL of the application.
+ */
+export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
+  if (type === "s3") {
+    return `${process.env.NEXT_PUBLIC_S3_DOMAIN_SITE_URL}/`;
+  }
+  return `${process.env.NEXT_PUBLIC_DOMAIN_SITE_URL}/`;
+}
+
+/**
  * Gets the URL of a path.
  * @param {string} path - The path.
  *
@@ -52,9 +58,19 @@ export function getPathUrl(path: string): string {
  * @example
  * getAbsolutePathUrl("/about"); // returns "https://base-url/about"
  */
-export function getAbsolutePathUrl(path: string): string {
-  const BASE_URL = getAbsoluteUrl();
-  return new URL(path, BASE_URL).href;
+export function getAbsolutePathUrl(
+  type: "default" | "s3" = "default",
+  path: string
+): string {
+  const BASE_URL = getAbsoluteUrl(type);
+
+  // ✅ Remove the leading slash from the path to avoid overwriting the path
+  const safePath = path.replace(/^\//, "");
+
+  // ✅ Ensure that BASE_URL ends with a single slash
+  const safeBase = BASE_URL.replace(/\/+$/, "") + "/";
+
+  return new URL(safePath, safeBase).href;
 }
 
 /**
