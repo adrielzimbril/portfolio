@@ -25,7 +25,6 @@ import logger from "@/utils/logger";
 import { toast } from "sonner";
 import { PhoneInput } from "@aurthle/react-phone";
 import * as RPNInput from "react-phone-number-input";
-// @ts-expect-error: canvas-confetti has no TypeScript types
 import confetti from "canvas-confetti";
 import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";

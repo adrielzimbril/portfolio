@@ -101,6 +101,7 @@
     "@tailwindcss/postcss": "^4.1.13",
     "@trigger.dev/build": "4.0.2",
     "@types/bcrypt": "^6.0.0",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.19.17",
