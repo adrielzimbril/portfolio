@@ -67,7 +67,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
             }
           />
         ) : (
-          { children }
+          children
         )
       ) : asLoader && !isLoaded ? (
         <GenericLoadingPage
