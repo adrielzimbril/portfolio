@@ -20,7 +20,7 @@ export function HeaderSection({
   readingTime: string;
   pageViewsData: { slug: string; locale: string };
 }) {
-  const { count, loading } = usePageViews(
+  const { count } = usePageViews(
     getResourcesUrl(PageType.THOUGHT, pageViewsData.slug),
     pageViewsData.slug,
     PageType.THOUGHT,

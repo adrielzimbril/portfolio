@@ -61,11 +61,14 @@ export async function GET(req: NextRequest) {
     }
 
     return json({ error: 'Invalid scope' }, 400)
-  } catch (e: any) {
-    return json({ error: e?.message || 'Failed to fetch stats' }, 500)
+  } catch (e: unknown) {
+    return json({ error: (e as Error)?.message || 'Failed to fetch stats' }, 500)
   }
 }
 
-function json(body: any, status = 200) {
-  return new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } })
+function json(body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
 }

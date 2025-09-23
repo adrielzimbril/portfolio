@@ -15,9 +15,9 @@ import type { PropsWithChildren } from "react";
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Dockbar } from "@/components/shared/_layouts/dockbar";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { getUserLocale } from "@/module/i18n/lib/locale-cookie";
+import { notFound } from "next/navigation";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -48,15 +48,14 @@ export function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params,
 }: PropsWithChildren<{ params: Promise<{ locale: string }> }>) {
   const locale = await getUserLocale();
 
   setRequestLocale(locale);
 
-  if (!locales.includes(locale as any)) {
-    //notFound();
+  if (!locales.includes(locale)) {
     logger.error("Layout : Locale not found", locale);
+    return notFound();
   }
 
   const messages = await getMessages();

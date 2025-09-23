@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useTranslations, useLocale } from "next-intl";
 import { toast } from "sonner";
@@ -98,7 +97,7 @@ export function IntentionForm() {
         name={name as any}
         render={({ field }) => (
           <FormItem>
-            <Label>{label}</Label>
+            <SelectLabel>{label}</SelectLabel>
             <FormControl>
               <SelectComponent
                 value={field.value ?? ""}
@@ -162,10 +161,10 @@ export function IntentionForm() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <Label>
+                        <FormLabel>
                           {t("submit.page.fields.name.label")}{" "}
                           <span className="text-red-500">*</span>
-                        </Label>
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder={t(
@@ -188,10 +187,10 @@ export function IntentionForm() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <Label>
+                        <FormLabel>
                           {t("submit.page.fields.email.label")}{" "}
                           <span className="text-red-500">*</span>
-                        </Label>
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder={t(
@@ -215,10 +214,10 @@ export function IntentionForm() {
                 name="url"
                 render={({ field }) => (
                   <FormItem>
-                    <Label>
+                    <FormLabel>
                       {t("submit.page.fields.url.label")}{" "}
                       <span className="text-red-500">*</span>
-                    </Label>
+                    </FormLabel>
                     <FormControl>
                       <Input
                         placeholder={t("submit.page.fields.url.placeholder")}
@@ -280,7 +279,9 @@ export function IntentionForm() {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <Label>{t("submit.page.fields.description.label")}</Label>
+                    <FormLabel>
+                      {t("submit.page.fields.description.label")}
+                    </FormLabel>
                     <FormControl>
                       <Textarea
                         rows={5}

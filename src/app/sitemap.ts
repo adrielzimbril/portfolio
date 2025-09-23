@@ -10,9 +10,6 @@ import { getBaseUrl } from "@/utils/base-url";
 import { routes } from "@/data/routes";
 
 const baseUrl = getBaseUrl();
-const locales = appConfig.i18n.enabled
-  ? Object.keys(appConfig.i18n.locales)
-  : [appConfig.i18n.defaultLocale];
 
 const baseRoutes = Object.values(routes)
   .map((route) => {

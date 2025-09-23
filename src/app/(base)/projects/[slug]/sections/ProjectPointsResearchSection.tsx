@@ -2,9 +2,7 @@
 import React from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { getImageUrl } from "@/utils/base-url";
 import { useTranslations } from "use-intl";
-import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function PointCard({
   title,

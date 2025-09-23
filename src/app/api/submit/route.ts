@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     // Link or create the user record first (users table)
     let userId: string | undefined;
     // search user by email
-    const { data: existingUser, error: findError } = await supabase
+    const { data: existingUser } = await supabase
       .from("users")
       .select("*")
       .eq("email", email)
@@ -118,30 +118,28 @@ export async function POST(req: NextRequest) {
           provider: ContactProvider.BREVO,
         });
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       // Do not fail the flow if Brevo fails
       logger.warn(
         `Brevo add contact error for user ${userId} - ${email}:`,
-        e?.message || e
+        (e as Error)?.message || e
       );
     }
 
     // Store to Supabase
-    const { error: dbError } = await supabase
-      .from("submit_entries" as any)
-      .insert({
-        intention,
-        name,
-        email,
-        url,
-        description,
-        target,
-        meta,
-        ip,
-        user_agent: userAgent,
-        status: "received",
-        created_at: new Date().toISOString(),
-      } as any);
+    const { error: dbError } = await supabase.from("submit_entries").insert({
+      intention,
+      name,
+      email,
+      url,
+      description,
+      target,
+      meta,
+      ip,
+      user_agent: userAgent,
+      status: "received",
+      created_at: new Date().toISOString(),
+    });
 
     if (dbError) {
       logger.error("submit_entries insert failed", dbError);
@@ -184,8 +182,8 @@ export async function POST(req: NextRequest) {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-  } catch (e: any) {
-    logger.error("/api/submit failed", e);
+  } catch (e: unknown) {
+    logger.error("/api/submit failed", (e as Error)?.message || e);
     return new Response(JSON.stringify({ error: "UNKNOWN_ERROR" }), {
       status: 500,
     });

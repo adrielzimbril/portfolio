@@ -5,11 +5,7 @@ import logger from "@/utils/logger";
 import { sendEmail } from "@/module/mail";
 import { addContact } from "@/module/contact";
 import { ContactProvider } from "@/module/contact/types/types";
-import {
-  getResourcesUrl,
-  validateJwtToken,
-  validateSimpleClientToken,
-} from "@/utils";
+import { getResourcesUrl, validateSimpleClientToken } from "@/utils";
 import { getResourceById } from "@/module/content/utils/lib";
 import { Locale, PageType, ResourceType } from "@/types";
 
@@ -23,7 +19,6 @@ export async function POST(req: NextRequest) {
     productType,
     subscribedFromPage,
     updateExisting,
-    updateLayer,
     locale,
   }: {
     email: string;
@@ -33,7 +28,6 @@ export async function POST(req: NextRequest) {
     productType?: ResourceType;
     subscribedFromPage?: string;
     updateExisting?: boolean;
-    updateLayer?: boolean;
     locale?: Locale;
   } = body;
 
@@ -155,10 +149,10 @@ export async function POST(req: NextRequest) {
               url: req.url,
             }),
           });
-        } catch (e: any) {
+        } catch (e: unknown) {
           logger.error(
             `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
-            e
+            (e as Error)?.message || e
           );
         }
       }
@@ -179,10 +173,10 @@ export async function POST(req: NextRequest) {
             templateId: "productDelivery",
             locale: locale,
           });
-        } catch (e) {
+        } catch (e: unknown) {
           logger.warn(
             `Product delivery email send failed for user ${userId} - ${email}:`,
-            e
+            (e as Error)?.message || e
           );
         }
       }
@@ -220,11 +214,11 @@ export async function POST(req: NextRequest) {
         provider: ContactProvider.BREVO,
       });
     }
-  } catch (e: any) {
+  } catch (e: unknown) {
     // Do not fail the flow if Brevo fails
     logger.warn(
       `Brevo add contact error for user ${userId} - ${email}:`,
-      e?.message || e
+      (e as Error)?.message || e
     );
   }
 

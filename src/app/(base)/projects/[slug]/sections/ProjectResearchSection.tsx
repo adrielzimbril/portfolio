@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { PortfolioProjectResearchScope } from "@/types/enum";

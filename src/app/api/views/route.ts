@@ -1,10 +1,7 @@
 import { NextRequest } from "next/server";
 import { supabase } from "@/module/supabase/client";
-import { useGetIpInfo } from "@/hooks/useIpInfo";
+import { getIpInfo } from "@/hooks/useIpInfo";
 import logger from "@/utils/logger";
-
-// API: GET ?path=/some/path -> returns { totalViews, uniqueUsers }
-//      POST { path } -> increments and returns { totalViews, uniqueUsers }
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -50,11 +47,17 @@ export async function GET(req: NextRequest) {
         headers: { "Content-Type": "application/json" },
       }
     );
-  } catch (error: any) {
-    logger.error("Error fetching analytics:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-    });
+  } catch (error: unknown) {
+    logger.error(
+      "Error fetching analytics:",
+      (error as Error)?.message || error
+    );
+    return new Response(
+      JSON.stringify({ error: (error as Error)?.message || "UNKNOWN_ERROR" }),
+      {
+        status: 500,
+      }
+    );
   }
 }
 
@@ -63,6 +66,9 @@ export async function POST(req: NextRequest) {
     req.headers.get("x-forwarded-for") ||
     req.headers.get("x-real-ip") ||
     "unknown";
+
+  const blockedIp: string[] = ["::1", "127.0.0.1"];
+  const ipInfo = blockedIp.includes(ip) ? null : await getIpInfo(ip);
 
   try {
     const body = await req.json().catch(() => ({}));
@@ -74,10 +80,7 @@ export async function POST(req: NextRequest) {
       wantResponse = true,
     } = body;
 
-    const blockedIp: string[] = ["::1", "127.0.0.1"];
-    const ipInfo = useGetIpInfo(blockedIp.includes(ip) ? "" : ip);
-
-    // Utiliser la fonction RPC PostgreSQL pour tout gérer atomiquement
+    // Use the PostgreSQL RPC function to handle everything atomically
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
       "increment_page_analytics",
       {
@@ -93,7 +96,7 @@ export async function POST(req: NextRequest) {
       throw rpcError;
     }
 
-    // La fonction RPC retourne un array, prendre le premier élément
+    // The RPC function returns an array, take the first element
     const result = analyticsData?.[0] || {
       total_views: 1,
       unique_users: 1,
@@ -119,10 +122,16 @@ export async function POST(req: NextRequest) {
         headers: { "Content-Type": "application/json" },
       }
     );
-  } catch (error: any) {
-    logger.error("Error incrementing analytics:", error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-    });
+  } catch (error: unknown) {
+    logger.error(
+      "Error incrementing analytics:",
+      (error as Error)?.message || error
+    );
+    return new Response(
+      JSON.stringify({ error: (error as Error)?.message || "UNKNOWN_ERROR" }),
+      {
+        status: 500,
+      }
+    );
   }
 }

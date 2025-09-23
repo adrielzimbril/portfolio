@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { supabaseKey } from "@/module/supabase/client";
-import { generateToken, getApiBaseUrl, validateToken } from "@/utils";
+import { generateToken, validateToken } from "@/utils";
 import { NextResponse } from "next/server";
 import { apiRoutes } from "@/data/api-routes";
 
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: false,
-        error: "Request processing failed",
+        error: `Request processing failed: ${error}`,
         timestamp: new Date().toISOString(),
       },
       { status: 500 }
@@ -65,7 +65,10 @@ export async function GET() {
 
   if (!response.ok) {
     return NextResponse.json(
-      { success: false, error: "Request processing failed" },
+      {
+        success: false,
+        error: `Request processing failed: ${response.status}`,
+      },
       { status: response.status }
     );
   }

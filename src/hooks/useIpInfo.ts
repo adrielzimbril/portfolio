@@ -221,7 +221,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
  *   return result.data?.location;
  * }
  */
-export async function useIpInfo<T = IpInfoResponse>(
+export async function getIpInfo<T = IpInfoResponse>(
   ip?: string,
   options: GetIpInfoOptions = {}
 ): Promise<IpInfoResult<T>> {
@@ -351,8 +351,8 @@ export async function useIpInfo<T = IpInfoResponse>(
  */
 export async function useGetIpInfo(ip?: string, simplified: boolean = false) {
   return simplified
-    ? await useIpInfo<IpInfoSummary>(ip, { simplified: true })
-    : await useIpInfo(ip);
+    ? await getIpInfo<IpInfoSummary>(ip, { simplified: true })
+    : await getIpInfo(ip);
 }
 
 /**
