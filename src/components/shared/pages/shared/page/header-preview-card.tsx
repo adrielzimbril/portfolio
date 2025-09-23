@@ -82,7 +82,7 @@ export function HeaderPreviewCard({
             alt={content.alt}
             width={1200}
             height={630}
-            className="size-auto object-cover hover:scale-105 transition-all duration-800 rounded-2xl md:rounded-[2rem]"
+            className="size-auto min-w-full min-h-full object-cover hover:scale-105 transition-all duration-800 rounded-2xl md:rounded-[2rem]"
           />
           {type && <PreviewIcon resourceType={type} />}
         </div>
