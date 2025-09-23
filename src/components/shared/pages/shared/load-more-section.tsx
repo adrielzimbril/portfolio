@@ -1,10 +1,11 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { useTranslations } from "use-intl";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { useTranslations } from "use-intl";
 
 interface LoadMoreUIProps {
   children: React.ReactNode;

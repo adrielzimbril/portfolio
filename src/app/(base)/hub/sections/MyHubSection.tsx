@@ -1,19 +1,23 @@
+"use client";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Resource } from "@/module/content/types";
 
-export function MyHubSection({ data: resources }: { data: Resource[] }) {
+interface MyHubSectionProps {
+  data: Resource[];
+}
+
+export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
   const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
     useLoadMore({
-      dataSource: resources,
+      dataSource: initialResources,
       initialCount: 4,
       incrementCount: 4,
     });
 
   return (
     <LoadMoreSection
-      key={resources.length}
       hasMore={hasMore}
       loading={loading}
       onLoadMore={loadMore}

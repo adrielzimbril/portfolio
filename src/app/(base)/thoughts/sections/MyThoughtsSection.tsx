@@ -1,20 +1,27 @@
+"use client";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Post } from "@/module/content/types";
 import { getDate } from "@/utils";
 
-export function MyThoughtsSection({ data: posts }: { data: Post[] }) {
+interface MyThoughtsSectionProps {
+  data: Post[];
+}
+
+export function MyThoughtsSection({
+  data: initialPosts,
+}: MyThoughtsSectionProps) {
   const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
     useLoadMore({
-      dataSource: posts,
+      dataSource: initialPosts,
       initialCount: 4,
       incrementCount: 4,
     });
 
   return (
     <LoadMoreSection
-      key={posts.length}
+      key={initialPosts.length}
       hasMore={hasMore}
       loading={loading}
       onLoadMore={loadMore}

@@ -1,5 +1,5 @@
-import { useState, useCallback, useMemo } from "react";
-import { sleep } from "@/utils";
+"use client";
+import { useState, useCallback, useMemo, useEffect } from "react";
 
 interface UseLoadMoreReturn<T> {
   data: T[];
@@ -10,22 +10,13 @@ interface UseLoadMoreReturn<T> {
   loadedItems: number;
 }
 
+// Function sleep integrated to avoid import issues
+const sleep = (ms: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 /**
  * A hook that loads more items from a data source
- *
- * @param {Object} options - The options for the hook
- * @param {T[]} options.dataSource - The array of items to load
- * @param {number} [options.initialCount=3] - The number of items to load initially
- * @param {number} [options.incrementCount=3] - The number of items to load when load more is called
- *
- * @returns {UseLoadMoreReturn<T>} - An object containing the loaded items, loading state, and load more function
- *
- * @template T - The type of items in the data source
- *
- * @example
- * const { data, loadMore, loading, hasMore, loadedItems, totalItems } = useLoadMore({ dataSource: items, initialCount: 3, incrementCount: 3 });
- * // Use the loadMore function
- * loadMore();
  */
 export function useLoadMore<T>({
   dataSource,
@@ -39,33 +30,42 @@ export function useLoadMore<T>({
   const [loadedItems, setLoadedItems] = useState(initialCount);
   const [loading, setLoading] = useState(false);
 
+  // Reset loadedItems when dataSource changes
+  useEffect(() => {
+    setLoadedItems(initialCount);
+  }, [dataSource, initialCount]);
+
   // 🧠 Preserve the portion of data to avoid recalculating slice unnecessarily
-  const data = useMemo(
-    () => dataSource.slice(0, loadedItems),
-    [dataSource, loadedItems]
-  );
+  const data = useMemo(() => {
+    if (!dataSource || dataSource.length === 0) return [];
+    return dataSource.slice(0, loadedItems);
+  }, [dataSource, loadedItems]);
 
   // 🧠 Preserve the derived values
-  const hasMore = useMemo(
-    () => loadedItems < dataSource.length,
-    [loadedItems, dataSource.length]
-  );
+  const hasMore = useMemo(() => {
+    if (!dataSource || dataSource.length === 0) return false;
+    return loadedItems < dataSource.length;
+  }, [loadedItems, dataSource]);
 
-  const totalItems = dataSource.length;
+  const totalItems = dataSource ? dataSource.length : 0;
 
   // ⚡ Callback stable (ideal if we pass loadMore to children components)
-  const loadMore = useCallback(() => {
-    if (loading || !hasMore) return;
+  const loadMore = useCallback(async () => {
+    if (loading || !hasMore || !dataSource) return;
 
     setLoading(true);
 
-    sleep(800).then(() => {
+    try {
+      await sleep(800);
       setLoadedItems((prev) =>
         Math.min(prev + incrementCount, dataSource.length)
       );
+    } catch (error) {
+      console.error("Error loading more items:", error);
+    } finally {
       setLoading(false);
-    });
-  }, [loading, hasMore, incrementCount, dataSource.length]);
+    }
+  }, [loading, hasMore, incrementCount, dataSource]);
 
   return {
     data,

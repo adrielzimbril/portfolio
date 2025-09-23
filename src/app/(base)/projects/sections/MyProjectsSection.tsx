@@ -1,19 +1,25 @@
+"use client";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Project } from "@/module/content/types";
+interface MyProjectsSectionProps {
+  data: Project[];
+}
 
-export function MyProjectsSection({ data: projects }: { data: Project[] }) {
+export function MyProjectsSection({
+  data: initialProjects,
+}: MyProjectsSectionProps) {
   const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
     useLoadMore({
-      dataSource: projects,
+      dataSource: initialProjects,
       initialCount: 3,
       incrementCount: 4,
     });
 
   return (
     <LoadMoreSection
-      key={projects.length}
+      key={initialProjects.length}
       hasMore={hasMore}
       loading={loading}
       onLoadMore={loadMore}
