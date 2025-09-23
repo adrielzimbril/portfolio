@@ -152,7 +152,6 @@ export function useLocalStorage<T>(
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setStoredValue(readValue());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   const handleStorageChange = useCallback(
