@@ -1,13 +1,14 @@
 import React from "react";
-// import { HeaderSection } from "./sections/HeaderSection";
+import { HeaderSection } from "./sections/HeaderSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllResources } from "@/module/content/utils/lib/resources";
-// import { ResourceWrapper } from "@/components/shared/pages/shared/resource-wrapper";
-// import { PageType } from "@/types";
+import { ResourceWrapper } from "@/components/shared/pages/shared/resource-wrapper";
+import { PageType } from "@/types";
+import { MyHubSection } from "./sections/MyHubSection";
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -40,7 +41,8 @@ export default async function MyHub() {
 
   return (
     <>
-      {/* <HeaderSection /> */}
+      <HeaderSection />
+      <MyHubSection data={data} />
       {/* <ResourceWrapper initialData={data} type={PageType.HUB} /> */}
       <CallToAction isPage />
     </>

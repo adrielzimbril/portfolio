@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
-import { getBaseUrl } from "@/utils/base-url";
 import { siteConfig } from "@/data/config";
 import logger from "@/utils/logger";
+import { getAbsolutePathUrl } from "@/utils/base-url";
 
 // Configuration exports
 export const alt = siteConfig.details.nameShared;
@@ -15,7 +15,6 @@ export const contentType = "image/png";
 export default async function Icon() {
   try {
     // Get the host from headers
-    const baseUrl = getBaseUrl();
     return new ImageResponse(
       (
         // ImageResponse JSX element
@@ -32,7 +31,7 @@ export default async function Icon() {
           }}
         >
           <img
-            src={`${baseUrl}/icon.svg`}
+            src={getAbsolutePathUrl("/icon.svg")}
             alt={alt}
             style={{
               width: "100%",
@@ -40,6 +39,7 @@ export default async function Icon() {
               objectFit: "contain",
             }}
           />
+          {alt}
         </div>
       ),
       // ImageResponse options

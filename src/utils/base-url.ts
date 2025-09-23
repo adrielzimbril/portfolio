@@ -17,6 +17,17 @@ export function getBaseUrl(): string {
 }
 
 /**
+ * Gets the base URL of the application.
+ *
+ * Returns the base URL of the application.
+ * @returns {string} The base URL of the application.
+ */
+export function getAbsoluteUrl(): string {
+  return process.env.NEXT_PUBLIC_DOMAIN_SITE_URL ?? "";
+  
+}
+
+/**
  * Gets the URL of a path.
  * @param {string} path - The path.
  *
@@ -28,6 +39,21 @@ export function getBaseUrl(): string {
  */
 export function getPathUrl(path: string): string {
   const BASE_URL = getBaseUrl();
+  return new URL(path, BASE_URL).href;
+}
+
+/**
+ * Gets the URL of a path.
+ * @param {string} path - The path.
+ *
+ * Returns the URL of a path.
+ * @returns {string} The URL of the path.
+ *
+ * @example
+ * getAbsolutePathUrl("/about"); // returns "https://base-url/about"
+ */
+export function getAbsolutePathUrl(path: string): string {
+  const BASE_URL = getAbsoluteUrl();
   return new URL(path, BASE_URL).href;
 }
 
