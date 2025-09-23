@@ -20,7 +20,7 @@ const eslintConfig = [
     },
   },
   {
-    ignores: ["src/module/supabase/types.ts", "scripts/*"],
+    ignores: ["src/module/supabase/types.ts", "scripts"],
   },
 ];
 
