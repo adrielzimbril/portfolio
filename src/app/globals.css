@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" prefix(tw);
 @import "tw-animate-css";
 /* @import "@squircle/tailwindcss"; */
 @source '../../node_modules/@aurthle/*';
@@ -73,9 +73,9 @@
   --b-base: var(--color-stone-100);
   --b-base-second: var(--color-neutral-100);
   --b-base-it: var(--color-zinc-50);
-  --b-white: #fbfbfb;
-  --sh-white: #fbfbfb;
-  --sh-base-white: #fbfbfb;
+  --b-white: var(--color-white);
+  --sh-white: var(--color-white);
+  --sh-base-white: var(--color-white);
   --b-white-foreground: var(--color-zinc-700);
   --b-white-unchanged: var(--color-zinc-800);
   --b-black-unchanged: var(--color-zinc-100);
@@ -257,24 +257,22 @@
     @apply border-none outline-none;
   }
   
-  /* @supports not (background: paint(squircle)) {
-    [class*="squircle-"] {
-      border-radius: 0 !important;
-    }
-  } */
-  
   @supports not (background: paint(squircle)) {
     [class*="squircle-5xl"], [class*="squircle-6xl"]:not(.text-card-foreground), [class*="squircle-7xl"] {
       border-radius: var(--squircle-border-radius-2xl)!important;
     }
   }
 
-  @supports (color: color-mix(in lab,red,red)) {
-    [class*="squircle-*"] {
+  [class*="squircle-"] {
+    @supports (color: color-mix(in lab,red,red)) {
       --squircle-background-colors: inherit;
     }
-    .squircle-sh-white {
-      --squircle-background-color: var(--b-white);
+  }
+
+  html body .squircle-sh-white, .squircle-sh-white {
+    --squircle-background-color: var(--color-white)!important;
+    @supports (color: color-mix(in lab,red,red)) {
+      --squircle-background-color: var(--color-white)!important;
     }
   }
 

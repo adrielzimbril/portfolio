@@ -110,7 +110,7 @@ export const mdxComponents = {
       {...rest}
       className="mb-6 squircle-b-base p-2 md:p-3 squircle squircle-2xl md:squircle-4xl"
     >
-      <div className="flex flex-col not-italic squircle-sh-white/99 p-2 md:p-4 squircle squircle-xl md:squircle-3xl [&>p]:mb-2 [&>p:last-child]:mb-0">
+      <div className="flex flex-col not-italic squircle-sh-white p-2 md:p-4 squircle squircle-xl md:squircle-3xl [&>p]:mb-2 [&>p:last-child]:mb-0">
         {children}
       </div>
     </blockquote>

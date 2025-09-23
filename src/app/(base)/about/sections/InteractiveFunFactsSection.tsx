@@ -380,7 +380,7 @@ function QuestionCard({
         <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4">
           <div
             className={cn(
-              "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white/99 overflow-hidden"
+              "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden"
             )}
           >
             <div className="flex flex-col items-start gap-4 w-full max-w-[90%] py-12 mx-auto">

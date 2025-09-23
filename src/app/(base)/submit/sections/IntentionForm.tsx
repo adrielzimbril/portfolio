@@ -136,9 +136,9 @@ export function IntentionForm() {
       sectionContentClassName="w-full"
       cardClassName="w-full"
       cardContentClassName="w-full p-6 md:p-8"
-      className="squircle squircle-sh-white/99 squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
     >
-      <Card className="w-full squircle squircle-sh-white/99 squircle-smooth-xl">
+      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
         <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
           <div className="flex flex-col items-center text-center gap-2">
             <Badge size="lg">{t("submit.page.header-section.subBadge")}</Badge>

@@ -7,7 +7,7 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-8 squircle squircle-smooth-xl squircle-6xl squircle-sh-white/99 overflow-hidden"
+        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-8 squircle squircle-smooth-xl squircle-6xl squircle-sh-white overflow-hidden"
       )}
     >
       <PreviewIcon icon={details.icon} />

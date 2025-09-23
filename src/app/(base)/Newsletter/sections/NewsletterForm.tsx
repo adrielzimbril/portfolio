@@ -28,7 +28,7 @@ export function NewsletterForm() {
         sectionContentClassName="w-full"
         cardClassName="w-full"
         cardContentClassName="w-full p-6 md:p-8"
-        className="squircle squircle-sh-white/99 squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+        className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
       >
         <div
           className={cn(

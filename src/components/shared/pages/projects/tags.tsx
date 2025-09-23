@@ -9,7 +9,7 @@ function ProjectTags({ tags }: { tags: string[] }) {
       {tags.map((tag, index) => (
         <Badge
           key={index}
-          className="squircle-sh-white/99 text-b-white-invert"
+          className="squircle-sh-white text-b-white-invert"
           variant="colored"
         >
           {tag}
@@ -28,7 +28,7 @@ function ProjectCategories({
   }[];
 }) {
   return (
-    <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white/99 overflow-hidden">
+    <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white overflow-hidden">
       {categories.map((category, index) => (
         <Badge
           key={index}

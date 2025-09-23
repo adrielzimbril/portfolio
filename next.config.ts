@@ -12,8 +12,6 @@ const withNextIntl = nextIntlPlugin({
   },
 });
 
-
-
 const nextConfig: NextConfig = {
   /* config options here */
   images: {

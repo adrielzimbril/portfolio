@@ -83,7 +83,7 @@ export function HeaderSection({
       cardContentClassName="md:px-12 py-6 md:py-12"
     >
       {/* Header Preview Card */}
-      <Card className="w-full squircle squircle-sh-white/99 squircle-smooth-xl squircle-6xl overflow-hidden p-5">
+      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl squircle-6xl overflow-hidden p-5">
         <CardContent
           className={cn(
             "w-full squircle squircle-b-base squircle-smooth-xl squircle-5xl overflow-hidden flex flex-col justify-center",
@@ -104,7 +104,7 @@ export function HeaderSection({
       {description && <p className="text-b-white-invert-sec">{description}</p>}
 
       {tags && tags.length > 0 && (
-        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white/99 overflow-hidden">
+        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white overflow-hidden">
           {mainTitle && type && (
             <ProductAvatarsStats
               colorName="squircle-indigo-100"

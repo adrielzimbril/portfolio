@@ -38,7 +38,7 @@ export function ProjectResultSection({
             <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
               <div
                 className={cn(
-                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-sh-white/99 overflow-hidden"
+                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-sh-white overflow-hidden"
                 )}
               >
                 <Badge>{result.badge}</Badge>
