@@ -51,7 +51,7 @@ export function ScrollToTop() {
       window.removeEventListener("scroll", updateScroll);
       if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
     };
-  }, [isMobile]);
+  }, [isIOS]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -75,7 +75,7 @@ export function ScrollToTop() {
         asIcon
         style={{ width: size, height: size }}
       >
-        {!isMobile && (
+        {!isIOS && (
           <svg
             className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
             width={size}
