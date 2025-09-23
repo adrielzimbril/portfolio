@@ -1,11 +1,12 @@
-"use server"; // force le code à rester côté serveur
+"use server";
 
-import { createHmac as nodeCreateHmac } from "crypto";
+import { createHmac } from "crypto";
 
 export async function createServerHmac(
   algorithm: string,
   key: string,
   data: string
 ): Promise<string> {
-  return nodeCreateHmac(algorithm, key).update(data).digest("hex");
+  const { createHmac } = await import("crypto");
+  return createHmac(algorithm, key).update(data).digest("hex");
 }
