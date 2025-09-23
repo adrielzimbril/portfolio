@@ -19,7 +19,6 @@ export async function getTemplate<T extends TemplateId>({
   const translations = await getMessagesForLocale(locale);
 
   const email = template({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ...(context as any),
     locale,
     translations,

@@ -7,13 +7,11 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
   return createServerClient<Database>(supabaseKey.url, supabaseKey.anonKey, {
     cookies: {
       getAll() {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return (cookieStore as unknown as any).getAll();
       },
       setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (cookieStore as unknown as any).set(name, value, options)
           );
         } catch {

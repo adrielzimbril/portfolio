@@ -58,16 +58,17 @@ export default async function Image(props: { params: Promise<PageParams> }) {
             background: "black",
           }}
         >
-          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-          <img
-            src={`${baseUrl}/agent-template-og.png`}
-            alt={alt}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-            }}
-          />
+          <picture>
+            <img
+              src={`${baseUrl}/agent-template-og.png`}
+              alt={alt}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </picture>
         </div>
       ),
       { ...size }

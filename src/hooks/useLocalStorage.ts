@@ -5,7 +5,6 @@ import { useEventListener } from "@/hooks/useEventListener";
 import type { Dispatch, SetStateAction } from "react";
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface WindowEventMap {
     "local-storage": CustomEvent;
   }
