@@ -30,7 +30,10 @@ export default async function Image() {
         >
           {alt}
           <img
-            src={getAbsolutePathUrl("s3", "/agent-template-og.png")}
+            src={getAbsolutePathUrl({
+              type: "default",
+              path: "/agent-template-og.png",
+            })}
             alt={alt}
             style={{
               width: "100%",

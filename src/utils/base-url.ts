@@ -58,10 +58,13 @@ export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
  * @example
  * getAbsolutePathUrl("/about"); // returns "https://base-url/about"
  */
-export function getAbsolutePathUrl(
-  type: "default" | "s3" = "default",
-  path: string
-): string {
+export function getAbsolutePathUrl({
+  type = "default",
+  path,
+}: {
+  type?: "default" | "s3";
+  path: string;
+}): string {
   const BASE_URL = getAbsoluteUrl(type);
 
   // ✅ Remove the leading slash from the path to avoid overwriting the path // Eg: /about -> about

@@ -14,7 +14,7 @@ export const contentType = "image/png";
 
 // Image generation
 export default async function Icon() {
-  const url = getAbsolutePathUrl("s3", "/icon.svg");
+  const url = getAbsolutePathUrl({ type: "default", path: "/icon.svg" });
   logger.info("Icon url:", url);
   try {
     // Get the host from headers
@@ -24,7 +24,7 @@ export default async function Icon() {
         <div
           style={{
             fontSize: 24,
-            background: "black",
+            background: "transparent",
             width: "100%",
             height: "100%",
             display: "flex",
