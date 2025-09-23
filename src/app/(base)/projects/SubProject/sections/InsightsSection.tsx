@@ -80,7 +80,6 @@ export function InsightsSection() {
             </div>
           ))}
         </div>
-        <div className="absolute w-full pointer-events-none h-[249px] bottom-0 left-0 bg-[linear-gradient(0deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)]" />
       </SectionLayout>
     </>
   );

@@ -5,7 +5,7 @@ import logger from "@/utils/logger";
 import { PageParams } from "@/types";
 import { getPostBySlug } from "@/module/content/utils/lib/posts";
 import { getLocale } from "next-intl/server";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { localeRedirect } from "@i18n/routing";
 
 // Configuration exports

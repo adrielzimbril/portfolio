@@ -7,7 +7,7 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { Link } from "@/components/ui/link";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 
 export function useLoadMoreItems({
   dataSource,
@@ -44,8 +44,8 @@ interface LoadMoreUIProps {
 function LoadingSpinner() {
   return (
     <div className="relative w-5 h-5">
-      <div className="absolute inset-0 rounded-full border-2 border-zinc-200" />
-      <div className="absolute inset-0 rounded-full border-2 border-zinc-200 border-t-transparent animate-spin" />
+      <div className="absolute inset-0 rounded-full border-2 border-b-base-accent" />
+      <div className="absolute inset-0 rounded-full border-2 border-b-base-accent border-t-transparent animate-spin" />
     </div>
   );
 }
@@ -76,7 +76,7 @@ export function LoadMoreSection({
         ) : (
           <>
             <motion.div
-              className="content-stretch flex flex-col text-center gap-2 text-zinc-500 items-center justify-center relative shrink-0 max-w-md"
+              className="content-stretch flex flex-col text-center gap-2 text-b-white-invert-thr items-center justify-center relative shrink-0 max-w-md"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}

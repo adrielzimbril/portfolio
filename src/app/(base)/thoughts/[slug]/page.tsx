@@ -10,7 +10,7 @@ import { HeaderSection } from "./sections/HeaderSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
 import { ContentsSection } from "./sections/ContentSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
 import { PageParams, PageType } from "@/types";
@@ -87,7 +87,7 @@ export default async function BlogPostPage(props: {
               "@type": "Person",
               name: siteConfig.details.nameShared,
               url: siteConfig.url,
-              sameAs: [siteConfig.links.twitter],
+              sameAs: [siteConfig.links.contact.social.x.url],
             },
           }),
         }}

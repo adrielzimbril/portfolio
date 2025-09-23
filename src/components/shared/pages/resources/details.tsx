@@ -32,23 +32,35 @@ export function CardInfo({
   const { count: avatarCount, loading: avatarCountLoading } =
     useProductTitleRequestsCount(title);
 
+  const productTypeMap: Record<ResourceType, string> = {
+    [ResourceType.COURSE]: t(
+      "common.page-sections.hub.base.resources-type.course.title"
+    ),
+    [ResourceType.EBOOK]: t(
+      "common.page-sections.hub.base.resources-type.ebook.title"
+    ),
+    [ResourceType.VIDEO]: t(
+      "common.page-sections.hub.base.resources-type.video.title"
+    ),
+    [ResourceType.MASTERCLASS]: t(
+      "common.page-sections.hub.base.resources-type.masterclass.title"
+    ),
+    [ResourceType.FIGMA_TEMPLATE]: t(
+      "common.page-sections.hub.base.resources-type.figma-template.title"
+    ),
+    [ResourceType.CODE]: t(
+      "common.page-sections.hub.base.resources-type.code.title"
+    ),
+  };
+
+  const productType = productTypeMap[resourceType] ?? "";
+
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
         <Header title={title} slug={slug} />
 
-        <Tags
-          primaryTag={
-            resourceType === ResourceType.COURSE
-              ? t("common.page-sections.hub.base.resources-type.course.title")
-              : resourceType === ResourceType.EBOOK
-                ? t("common.page-sections.hub.base.resources-type.ebook.title")
-                : t(
-                    "common.page-sections.hub.base.resources-type.masterclass.title"
-                  )
-          }
-          tags={tags.map((tag) => tag.name)}
-        />
+        <Tags primaryTag={productType} tags={tags.map((tag) => tag.name)} />
 
         <Description description={description} features={features} />
 
@@ -96,11 +108,11 @@ function Description({
 }) {
   return (
     <>
-      <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-zinc-600">
+      <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
         {description}
       </p>
 
-      <p className="w-full relative text-base text-zinc-500 leading-6 whitespace-pre-line">
+      <p className="w-full relative text-base text-b-white-invert-thr leading-6 whitespace-pre-line">
         {features.slice(0, 4).map((feature) => (
           <span key={feature} className="ml-2 md:ml-4 block">
             - {feature}
@@ -119,6 +131,29 @@ function Action({
   resourceType: ResourceType;
 }) {
   const t = useTranslations();
+
+  const productTypeMap: Record<ResourceType, string> = {
+    [ResourceType.COURSE]: t(
+      "common.page-sections.hub.base.resources-type.course.button"
+    ),
+    [ResourceType.EBOOK]: t(
+      "common.page-sections.hub.base.resources-type.ebook.button"
+    ),
+    [ResourceType.VIDEO]: t(
+      "common.page-sections.hub.base.resources-type.video.button"
+    ),
+    [ResourceType.MASTERCLASS]: t(
+      "common.page-sections.hub.base.resources-type.masterclass.button"
+    ),
+    [ResourceType.FIGMA_TEMPLATE]: t(
+      "common.page-sections.hub.base.resources-type.figma-template.button"
+    ),
+    [ResourceType.CODE]: t(
+      "common.page-sections.hub.base.resources-type.code.button"
+    ),
+  };
+
+  const productType = productTypeMap[resourceType] ?? "";
   return (
     <Link
       href={getResourcesUrl(PageType.HUB, slug)}
@@ -128,13 +163,7 @@ function Action({
       asIcon
     >
       <span className="flex items-center gap-1">
-        {resourceType === ResourceType.COURSE
-          ? t("common.page-sections.hub.base.resources-type.course.button")
-          : resourceType === ResourceType.EBOOK
-            ? t("common.page-sections.hub.base.resources-type.ebook.button")
-            : t(
-                "common.page-sections.hub.base.resources-type.masterclass.button"
-              )}
+        {productType}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>

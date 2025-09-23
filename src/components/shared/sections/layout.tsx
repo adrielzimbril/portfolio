@@ -10,7 +10,6 @@ export function SectionLayout({
   link,
   badge,
   children,
-  asFade,
   isFlex,
   layoutStart,
   isPage,
@@ -23,13 +22,15 @@ export function SectionLayout({
   link?: string;
   badge?: string;
   children: React.ReactNode;
-  asFade?: boolean;
   isFlex?: boolean;
   layoutStart?: boolean;
   isPage?: boolean;
 }) {
   return (
-    <section className={cn("relative w-full py-[104px]", className)} id={id}>
+    <section
+      className={cn("relative w-full py-14 md:py-[104px]", className)}
+      id={id}
+    >
       {title && (
         <SectionHeader
           title={title}
@@ -49,10 +50,6 @@ export function SectionLayout({
         )}
       >
         {children}
-
-        {asFade && (
-          <div className="absolute w-full pointer-events-none h-[249px] bottom-0 left-0 bg-[linear-gradient(0deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_100%)]" />
-        )}
       </div>
     </section>
   );

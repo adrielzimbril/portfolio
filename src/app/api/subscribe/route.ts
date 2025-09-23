@@ -9,19 +9,9 @@ import {
   getResourcesUrl,
   validateJwtToken,
   validateSimpleClientToken,
-  validateToken,
 } from "@/utils";
-import { getAllResources, getResourceById } from "@/module/content/utils/lib";
-import { PageType, ResourceType } from "@/types";
-
-function getListIdByProduct(product?: string) {
-  const map: Record<string, number | undefined> = {
-    course: Number(process.env.BREVO_COURSE_LIST_ID),
-    ebook: Number(process.env.BREVO_EBOOKS_LIST_ID),
-    video: Number(process.env.BREVO_VIDEO_LIST_ID),
-  };
-  return product ? map[product] : undefined;
-}
+import { getResourceById } from "@/module/content/utils/lib";
+import { Locale, PageType, ResourceType } from "@/types";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -34,15 +24,17 @@ export async function POST(req: NextRequest) {
     subscribedFromPage,
     updateExisting,
     updateLayer,
+    locale,
   }: {
     email: string;
     name?: string;
     phone?: string;
     productId?: string;
-    productType?: "course" | "ebook" | "video";
+    productType?: ResourceType;
     subscribedFromPage?: string;
     updateExisting?: boolean;
     updateLayer?: boolean;
+    locale?: Locale;
   } = body;
 
   if (!email) {
@@ -119,7 +111,7 @@ export async function POST(req: NextRequest) {
         to: [{ email, name }],
         context: { name },
         templateId: "welcome",
-        locale: "fr",
+        locale: locale,
       });
     } catch (e) {
       logger.warn(
@@ -127,6 +119,13 @@ export async function POST(req: NextRequest) {
         e
       );
     }
+  } else {
+    await sendEmail({
+      to: [{ email, name }],
+      context: { name },
+      templateId: "newsletterSignup",
+      locale: locale,
+    });
   }
 
   if (productIdToken) {
@@ -174,10 +173,11 @@ export async function POST(req: NextRequest) {
               features,
               coverImage: cover,
               productUrl,
+              productType: type,
               customText,
             },
             templateId: "productDelivery",
-            locale: "fr",
+            locale: locale,
           });
         } catch (e) {
           logger.warn(
@@ -191,7 +191,20 @@ export async function POST(req: NextRequest) {
 
   // 2) Add to Brevo lists (general + product-specific)
   const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
-  const productTypeId = Number(process.env.BREVO_PRODUCT_LIST_ID);
+
+  function getListIdByProduct(product?: ResourceType) {
+    const map: Record<ResourceType, number | undefined> = {
+      course: Number(process.env.BREVO_COURSE_LIST_ID),
+      ebook: Number(process.env.BREVO_EBOOKS_LIST_ID),
+      video: Number(process.env.BREVO_VIDEO_LIST_ID),
+      masterclass: Number(process.env.BREVO_MASTERCLASS_LIST_ID),
+      figma_template: Number(process.env.BREVO_FIGMA_TEMPLATE_LIST_ID),
+      code: Number(process.env.BREVO_CODE_LIST_ID),
+    };
+    return product ? map[product] : undefined;
+  }
+
+  const productTypeId = getListIdByProduct(productType);
 
   const listIds = [generalId, productTypeId].filter(
     (n): n is number => !!n && !Number.isNaN(n)

@@ -8,11 +8,11 @@ export default function PrimaryButton({
 	href: string;
 }>) {
 	return (
-		<Button
-			href={href}
-			className="rounded-full bg-primary px-4 py-2 text-lg text-primary-foreground"
-		>
-			{children}
-		</Button>
-	);
+    <Button
+      href={href}
+      className="rounded-full bg-primary px-4 py-2 text-lg text-b-black-unchanged"
+    >
+      {children}
+    </Button>
+  );
 }

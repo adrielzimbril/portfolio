@@ -4,6 +4,7 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { getImageUrl } from "@/utils/base-url";
 import { useTranslations } from "next-intl";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function PointCard({
   title,
@@ -15,7 +16,7 @@ function PointCard({
   return (
     <div className="flex flex-col gap-1">
       <h4 className="relative">{title}</h4>
-      <p className="text-zinc-500">{description}</p>
+      <p className="text-b-white-invert-thr">{description}</p>
     </div>
   );
 }
@@ -41,7 +42,9 @@ export function ProjectPointsResearchSection({
         contentClassName="lg:max-w-[80%] items-start"
       >
         <EmojiPlaceholder
-          src={getImageUrl("/image-989-1.png")}
+          //src={getImageUrl(getEmojiHub("✏️", "apple"))}
+          //src={getImageUrl(getEmojiHub("✍🏻", "fluent", "anim"))}
+          src={{ emoji: "✍🏻" }}
           variant="squircle"
           unOrdered
         />

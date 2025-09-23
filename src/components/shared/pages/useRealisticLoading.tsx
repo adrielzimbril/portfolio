@@ -15,7 +15,8 @@ function useRealisticLoading() {
     const steps = [
       { target: 15, duration: 400 },
       { target: 35, duration: 800 },
-      { target: 65, duration: 600 },
+      { target: 55, duration: 400 },
+      { target: 78, duration: 600 },
       { target: 90, duration: 500 },
       { target: 100, duration: 300 },
     ];
@@ -24,7 +25,7 @@ function useRealisticLoading() {
 
     const executeStep = () => {
       if (stepIndex < steps.length) {
-        const step = steps[stepIndex];
+        const step = steps[stepIndex] || { target: 100, duration: 2000 };
         const startProgress = currentProgress;
         const startTime = Date.now();
 

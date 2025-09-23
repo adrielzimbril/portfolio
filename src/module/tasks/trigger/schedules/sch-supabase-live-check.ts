@@ -1,5 +1,6 @@
 import { logger, task, schedules } from "@trigger.dev/sdk";
 import { getApiBaseUrl, generateToken } from "@/utils";
+import { apiRoutes } from "@/data/api-routes";
 
 const API_BASE_URL = getApiBaseUrl();
 
@@ -27,7 +28,7 @@ export const supabaseLiveCheckTask = schedules.task({
       // Validation token generation
       const token = generateToken();
 
-      const response = await fetch(`${API_BASE_URL}/health/check-rmd`, {
+      const response = await fetch(`${API_BASE_URL}${apiRoutes.health.link}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

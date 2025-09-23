@@ -42,7 +42,7 @@ function MetricParagraph({
     <div className="flex flex-col items-start gap-2 w-full">
       {subtitle && <h4 className="h2 tracking-wide">{subtitle}</h4>}
       {secondarySubtitle && (
-        <p className="text-xl text-zinc-600 font-bosld leading-[120%]">
+        <p className="text-xl text-b-white-invert-sec font-bosld leading-[120%]">
           {secondarySubtitle}
         </p>
       )}
@@ -62,16 +62,16 @@ export function ProjectOverviewSection() {
         {metricsData.map((metric, index) => (
           <Card
             key={index}
-            className="squircle size-full max-w-[75%] md:max-w-full squircle-stone-100 squircle-6xl squircle-smooth-md border-0 overflow-hidden"
+            className="squircle size-full max-w-[75%] md:max-w-full squircle-b-base squircle-6xl squircle-smooth-md border-0 overflow-hidden"
           >
             <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
               <div
                 className={cn(
-                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-white overflow-hidden"
+                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-b-white overflow-hidden"
                 )}
               >
                 <Badge>{metric.category}</Badge>
-                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-b-base rounded-full overflow-hidden">
                   <Image
                     width={100}
                     height={100}
@@ -125,11 +125,11 @@ export function ProjectOverviewSection() {
           {metricsData.map((metric, index) => (
             <Card
               key={index}
-              className="squircle size-full max-w-[75%] md:max-w-[95%] squircle-stone-100 squircle-7xl squircle-smooth-lg border-0 overflow-hidden"
+              className="squircle size-full max-w-[75%] md:max-w-[95%] squircle-b-base squircle-7xl squircle-smooth-lg border-0 overflow-hidden"
             >
               <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
                 <Badge>{metric.category}</Badge>
-                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-zinc-100 rounded-full overflow-hidden">
+                <div className="inline-flex items-center justify-center gap-3 p-4 aspect-square bg-b-base rounded-full overflow-hidden">
                   <Image
                     width={100}
                     height={100}

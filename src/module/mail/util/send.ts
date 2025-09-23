@@ -4,11 +4,12 @@ import type { mailTemplates } from "@/module/mail/emails";
 import { send } from "@/module/mail/provider";
 import type { TemplateId } from "@/module/mail/util/templates";
 import { getTemplate } from "@/module/mail/util/templates";
+import { Locale } from "@/types";
 
 export async function sendEmail<T extends TemplateId>(
   params: {
     to: { email: string; name?: string }[];
-    locale?: keyof typeof appConfig.i18n.locales;
+    locale?: Locale;
   } & (
     | {
         templateId: T;
@@ -25,7 +26,7 @@ export async function sendEmail<T extends TemplateId>(
       }
   )
 ) {
-  const { to, locale = appConfig.i18n.defaultLocale } = params;
+  const { to, locale = Locale.FR } = params;
 
   let html: string = "";
   let text: string;

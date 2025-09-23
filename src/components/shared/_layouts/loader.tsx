@@ -11,7 +11,7 @@ type LoaderProps = {
 
 export function Loader({
   variant = "dots",
-  color = "bg-zinc-100",
+  color = "bg-b-base",
   className,
 }: LoaderProps) {
   switch (variant) {
@@ -86,7 +86,7 @@ export function Loader({
     case "single":
       return (
         <motion.div
-          className={cn("size-4 bg-white rounded-full", className)}
+          className={cn("size-4 bg-b-white rounded-full", className)}
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.6, 1, 0.4],

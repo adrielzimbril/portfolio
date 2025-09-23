@@ -1,99 +1,21 @@
 "use client";
 import React from "react";
-import svgPaths from "./svg-bgtumon3tx";
-import imgIcon from "./576887334bdcab59385ed7ed507c00d867dd7f03.png";
 import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useRealisticLoading } from "./useRealisticLoading";
 import { getImageUrl } from "@/utils/base-url";
-import { Loader } from "../_layouts/loader";
+import { Loader } from "@/components/shared/_layouts/loader";
+import { useIsDarkMode } from "@/hooks/useIsDarkMode";
+import { LogoName } from "@/components/shared/icons/logo/logo-name";
+import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
+import { siteConfig } from "@/data/config";
 
 interface GenericLoadingPageProps {
-  title?: string;
-  subtitle?: string;
-  emoji?: string;
+  title: string;
+  subtitle: string;
+  emoji: string;
   isPage?: boolean;
-}
-
-function LoadingIcon() {
-  return (
-    <motion.div
-      className="bg-[#f9f9f9] relative rounded-2xl shrink-0 size-20"
-      animate={{
-        scale: [1, 1.1, 1],
-        opacity: [0.8, 1, 0.8],
-      }}
-      transition={{
-        duration: 2,
-        ease: "easeInOut",
-        repeat: Infinity,
-      }}
-    >
-      <Image
-        className="block max-w-none size-full"
-        height="80"
-        src={imgIcon}
-        width="80"
-        alt=""
-      />
-    </motion.div>
-  );
-}
-
-function LoadingAdriel() {
-  return (
-    <motion.div
-      className="h-[25px] relative shrink-0 w-[110px]"
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.5, duration: 0.6 }}
-    >
-      <svg
-        className="block size-full"
-        fill="none"
-        preserveAspectRatio="none"
-        viewBox="0 0 89 20"
-      >
-        <g id="Adriel">
-          <path d={svgPaths.p127baef2} fill="var(--fill-0, black)" id="A" />
-          <path d={svgPaths.p189b7900} fill="var(--fill-0, black)" id="d" />
-          <path d={svgPaths.p32b71ce0} fill="var(--fill-0, black)" id="r" />
-          <path d={svgPaths.pb616900} fill="var(--fill-0, black)" id="i" />
-          <path d={svgPaths.p1b7d5600} fill="var(--fill-0, black)" id="e" />
-          <path d={svgPaths.p18ec27b2} fill="var(--fill-0, black)" id="l" />
-        </g>
-      </svg>
-    </motion.div>
-  );
-}
-
-function LoadingZimbrilu() {
-  return (
-    <motion.div
-      className="h-[25px] relative shrink-0 w-[122px]"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.7, duration: 0.6 }}
-    >
-      <svg
-        className="block size-full"
-        fill="none"
-        preserveAspectRatio="none"
-        viewBox="0 0 98 20"
-      >
-        <g id="Zimbril">
-          <path d={svgPaths.pb138a00} fill="var(--fill-0, black)" id="Z" />
-          <path d={svgPaths.p3db2a800} fill="var(--fill-0, black)" id="i" />
-          <path d={svgPaths.pae82b00} fill="var(--fill-0, black)" id="m" />
-          <path d={svgPaths.p91fbf00} fill="var(--fill-0, black)" id="b" />
-          <path d={svgPaths.p306c2600} fill="var(--fill-0, black)" id="r" />
-          <path d={svgPaths.p25f9cf80} fill="var(--fill-0, black)" id="i_2" />
-          <path d={svgPaths.p29e08500} fill="var(--fill-0, black)" id="l" />
-        </g>
-      </svg>
-    </motion.div>
-  );
 }
 
 function LoadingProgressBar({ isPage }: { isPage: boolean }) {
@@ -101,16 +23,16 @@ function LoadingProgressBar({ isPage }: { isPage: boolean }) {
 
   return (
     <>
-      <div className="w-full bg-stone-200 rounded-full h-2 overflow-hidden max-w-md flex flex-col gap-2">
+      <div className="w-full bg-b-base-accent rounded-full h-2  max-w-md flex flex-col gap-2">
         {isPage ? (
           <>
             <div
-              className="bg-stone-800 size-full rounded-full transition-all duration-300 ease-in-out"
+              className="bg-zinc-800 dark:bg-zinc-900 size-full rounded-full transition-all duration-300 ease-in-out"
               style={{ width: `${progress}%` }}
             />
           </>
         ) : (
-          <div className="bg-stone-800 size-full rounded-full animate-loading-progress" />
+          <div className="bg-zinc-800 dark:bg-zinc-900 size-full rounded-full animate-loading-progress" />
         )}
       </div>
     </>
@@ -129,7 +51,7 @@ function FloatingCard({
   return (
     <motion.div
       className={cn(
-        "absolute bg-zinc-100 backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
+        "absolute bg-b-base backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
         position === "top-left" && "top-32 left-2 md:top-32 md:left-32",
         position === "top-right" && "top-32 right-2 md:top-32 md:right-32",
         position === "bottom-left" &&
@@ -161,16 +83,22 @@ const statsData = [
   { number: "100%", label: "Enthusiast" },
 ];
 
-const floatingSkills = ["SaaS 🦄", "Design 🎨", "Innovation 💡", "Web App 📱"];
+const floatingSkills = [
+  "SaaS 🦄",
+  "Design 🎨",
+  "Innovation 💡",
+  "Go To Market ✨",
+];
 
 export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
-  title = "Your ideas into products that your users adore",
-  subtitle = "Problem Solver & Your SaaS Product designer ❣️",
-  emoji = "🦄",
+  title,
+  subtitle,
+  emoji,
   isPage = true,
 }) => {
+  const isDarkMode = useIsDarkMode();
   return (
-    <div className="flex flex-col mx-auto items-center justify-center relative bg-white size-full min-h-dvh">
+    <div className="flex flex-col mx-auto items-center justify-center relative bg-b-white size-full min-h-dvh">
       {/* Floating background elements */}
       {floatingSkills.map((skill, index) => (
         <FloatingCard
@@ -214,16 +142,16 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <Image
-                className="relative flex-shrink-0 size-14"
-                alt="Icon"
-                src={getImageUrl("/icon.svg")}
-                width="56"
-                height="56"
+              <LogoIcon className={cn("flex-shrink-0 size-14")} />
+              <LogoName
+                className={cn(
+                  "h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0"
+                  // hasScrolled && "h-3.5! w-36!"
+                )}
               />
               <Image
-                className="relative flex-shrink-0 h-5"
-                alt="Adriel zimbril"
+                className="relative hidden flex-shrink-0 h-5"
+                alt={siteConfig.details.name}
                 src={getImageUrl("/adriel-zimbril.svg")}
                 width="195"
                 height="20"
@@ -231,20 +159,6 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
             </motion.div>
           </nav>
         </motion.header>
-
-        {/* Logo section */}
-        {/* <motion.div
-          className="content-stretch flex flex-col gap-6 items-center justify-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <LoadingIcon />
-          <div className="content-stretch flex gap-3 items-center justify-center">
-            <LoadingAdriel />
-            <LoadingZimbrilu />
-          </div>
-        </motion.div> */}
 
         {/* Main loading animation */}
         <motion.div
@@ -255,7 +169,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         >
           {isPage ? (
             <motion.div
-              className="size-24 border-4 border-stone-100 border-t-stone-800 rounded-full"
+              className="size-24 border-4 border-zinc-100 dark:border-zinc-700 border-t-zinc-800 dark:border-t-zinc-950 rounded-full"
               animate={{ rotate: 360 }}
               transition={{
                 duration: 1,
@@ -265,7 +179,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
             />
           ) : (
             <motion.div
-              className="size-24 bg-stone-100 rounded-full"
+              className="size-24 bg-zinc-100 dark:bg-zinc-900 rounded-full"
               animate={{
                 scale: [1, 1.1, 1],
                 opacity: [0.8, 1, 0.8],
@@ -285,7 +199,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           >
             {isPage ? (
               <motion.div
-                className="w-12 h-12 bg-greys-08 rounded-full flex items-center justify-center"
+                className="w-12 h-12 bg-zinc-900 dark:bg-zinc-950 rounded-full flex items-center justify-center"
                 animate={{
                   scale: [1, 1.1, 1],
                   opacity: [0.8, 1, 0.8],
@@ -299,7 +213,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
                 <span className="text-white text-xl">{emoji}</span>
               </motion.div>
             ) : (
-              <div className="w-12 h-12 bg-greys-08 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-zinc-900 dark:bg-zinc-950 rounded-full flex items-center justify-center">
                 <span className="text-white text-xl">{emoji}</span>
               </div>
             )}
@@ -323,7 +237,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           </motion.h1>
 
           <motion.p
-            className="text-xl text-stone-400 font-normal max-w-md"
+            className="text-xl text-zinc-400 font-normal max-w-md"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.6 }}
@@ -343,7 +257,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         </motion.div>
 
         <div className="flex items-center gap-2">
-          <Loader color="bg-zinc-900" />
+          <Loader color="bg-zinc-900 dark:bg-zinc-100" />
         </div>
       </motion.div>
 
@@ -369,7 +283,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
               <div className="relative shrink-0 text-2x">
                 <p className="leading-[120%]">{stat.number}</p>
               </div>
-              <div className="relative shrink-0 text-base text-zinc-500">
+              <div className="relative shrink-0 text-base text-b-white-invert-thr">
                 <p className="leading-[120%]">{stat.label}</p>
               </div>
             </motion.div>

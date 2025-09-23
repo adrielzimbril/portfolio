@@ -35,51 +35,61 @@ export function ProjectDetailsSection() {
           </FormattedText>
         </div>
 
-        <Card className="squircle size-full md:max-w-[30%] squircle-stone-100 squircle-6xl squircle-smooth-md border-0 overflow-hidden mx-auto">
+        <Card className="squircle size-full md:max-w-[30%] squircle-b-base squircle-6xl squircle-smooth-md border-0 overflow-hidden mx-auto">
           <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
-            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-white overflow-hidden">
-              <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Role</span>
+            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-b-white overflow-hidden">
+              {projectDetails.role && (
+                <div className="flex w-full flex-col gap-2">
+                  <span className="font-normal text-b-white-foreground">
+                    Role
+                  </span>
 
-                <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
-                  {projectDetails.role.map((role, index) => (
+                  <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
+                    {projectDetails.role.map((role, index) => (
+                      <Badge
+                        key={index}
+                        className={
+                          index % 2 === 0
+                            ? pickRandomColor("INDIGO")
+                            : pickRandomColor("YELLOW")
+                        }
+                        variant="colored"
+                      >
+                        {role}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {projectDetails.duration && (
+                <div className="flex w-full flex-col gap-2">
+                  <span className="font-normal text-b-white-foreground">
+                    Durée
+                  </span>
+
+                  <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                     <Badge
-                      key={index}
-                      className={
-                        index % 2 === 0
-                          ? pickRandomColor("INDIGO")
-                          : pickRandomColor("YELLOW")
-                      }
+                      className={pickRandomColor("PINKISH_BLUE")}
                       variant="colored"
                     >
-                      {role}
+                      {projectDetails.duration}
                     </Badge>
-                  ))}
+                  </div>
                 </div>
-              </div>
+              )}
+              {projectDetails.results && (
+                <div className="flex w-full flex-col gap-2">
+                  <span className="font-normal text-b-white-foreground">
+                    Résultats
+                  </span>
 
-              <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Durée</span>
-
-                <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
-                  <Badge
-                    className={pickRandomColor("PINKISH_BLUE")}
-                    variant="colored"
-                  >
-                    {projectDetails.duration}
-                  </Badge>
+                  <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
+                    {projectDetails.results.map((result, index) => (
+                      <Badge key={index}>{result}</Badge>
+                    ))}
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex w-full flex-col gap-2">
-                <span className="font-normal text-zinc-700">Résultats</span>
-
-                <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
-                  {projectDetails.results.map((result, index) => (
-                    <Badge key={index}>{result}</Badge>
-                  ))}
-                </div>
-              </div>
+              )}
             </div>
           </CardContent>
         </Card>

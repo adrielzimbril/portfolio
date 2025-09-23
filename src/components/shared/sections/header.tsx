@@ -29,7 +29,7 @@ export function SectionHeader({
         !layoutStart && " mx-auto items-center justify-center text-center"
       )}
     >
-      {badge && <Badge>{badge}</Badge>}
+      {badge && <Badge size="md">{badge}</Badge>}
 
       <h2
         className={cn(
@@ -42,7 +42,7 @@ export function SectionHeader({
 
       <p
         className={cn(
-          "text-xl md:text-2xl text-gray-600",
+          "text-xl md:text-2xl text-b-white-invert-sec whitespace-pre-line",
           !layoutStart && "font-medium"
         )}
       >

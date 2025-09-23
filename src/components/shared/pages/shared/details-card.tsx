@@ -9,16 +9,16 @@ export function DetailsCard({
   title,
   description,
 }: {
-  icon: string;
+  icon: string | React.ReactNode;
   title: string;
   description: string;
 }) {
   return (
-    <Card className="squircle squircle-stone-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full md:max-w-xl">
+    <Card className="squircle squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full md:max-w-xl">
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
           className={cn(
-            "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-white overflow-hidden"
+            "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-b-white overflow-hidden"
           )}
         >
           <div className="flex flex-col items-start gap-4 w-full max-w-[90%] py-12 mx-auto">
@@ -26,17 +26,21 @@ export function DetailsCard({
               className="aspect-square p-4 rounded-full"
               contentClassName="size-12"
             >
-              <Image
-                className="w-full h-full object-cover pointer-events-none"
-                src={icon}
-                alt={title}
-                width={100}
-                height={100}
-              />
+              {typeof icon === "string" ? (
+                <Image
+                  className="w-full h-full object-cover pointer-events-none"
+                  src={icon}
+                  alt={title}
+                  width={100}
+                  height={100}
+                />
+              ) : (
+                icon
+              )}
             </Badge>
             <h3 className="text-3xl tracking-wide leading-[120%]">{title}</h3>
 
-            <p className="text-zinc-500 text-xl leading-[140%]">
+            <p className="text-b-white-invert-thr whitespace-pre-line text-xl leading-[140%]">
               {description}
             </p>
           </div>

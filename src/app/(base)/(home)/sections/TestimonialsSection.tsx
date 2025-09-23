@@ -8,6 +8,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLocale, useTranslations } from "use-intl";
 import { Locale } from "@/types";
+import { Link } from "@/components/ui/link";
+import { siteConfig } from "@/data/config";
 
 interface TestimonialCard {
   id: number;
@@ -22,7 +24,30 @@ interface TestimonialCard {
 
 const testimonials: TestimonialCard[] = [
   {
+    id: 0,
+    locale: Locale.FR,
+    name: "Koffi Éric Emmanuel YAO",
+    position: "Fondateur de Li-Zo | Service de livraison",
+    testimonial:
+      "Travailler avec Adriel est un plaisir. Il est professionnel et disponible. J'ai apprécié son sens de la promptitude dans les feedback et son accompagnement même en fin de projet. Il a bossé sur la maquette d'une application qui sera dévoilée bientôt (🤫, je tais le nom pour l'instant). Ce sera un carton, je suis rassuré !",
+    linkedinUrl:
+      "https://www.linkedin.com/in/koffi-%C3%A9ric-emmanuel-y-292a3a137",
+    avatar: "KEEY",
+  },
+  {
     id: 1,
+    locale: Locale.FR,
+    name: "Youssouf Aboubacar Yvan Gamby",
+    position:
+      "Fondateur de Etudiant CI | Plateforme de renforcement pour étudiants",
+    testimonial:
+      "J’avais besoin d’un développeur pour m’aider à lancer mon SaaS pour étudiants, mais au final, Adriel a été bien plus que ça. Il m’a accompagné comme un vrai conseiller. Il m’a aidé à clarifier mon idée, à structurer mon produit, et à mieux comprendre ce que je voulais vraiment proposer.\n Grâce à lui, j’ai pu poser des bases solides, éviter pas mal d’erreurs et avancer beaucoup plus vite. Si vous avez un projet en tête mais que c’est encore flou, Adriel est clairement la bonne personne pour vous aider à le rendre concret.",
+    linkedinUrl: "https://www.linkedin.com/in/youssoufgamby",
+    avatar: "YAG",
+  },
+
+  {
+    id: 2,
     locale: Locale.FR,
     name: "Christian Junior Braffo",
     position: "Développeur Web & Certifié Cloud Practitioner",
@@ -32,23 +57,24 @@ const testimonials: TestimonialCard[] = [
     avatar: "CJB",
   },
   {
-    id: 2,
+    id: 3,
     locale: Locale.FR,
-    name: "Youssouf Aboubacar Yvan Gamby",
-    position: "Chargé d’affaires chez Witti Finances Côte d'Ivoire",
+    name: "Oumar Dagnogo",
+    position:
+      "Étudiant en BIHAR (Big Data Intelligence for Human Augmented Reality)",
     testimonial:
-      "J’avais besoin d’un développeur pour m’aider à lancer mon SaaS pour étudiants, mais au final, Adriel a été bien plus que ça. Il m’a accompagné comme un vrai conseiller. Il m’a aidé à clarifier mon idée, à structurer mon produit, et à mieux comprendre ce que je voulais vraiment proposer.\n Grâce à lui, j’ai pu poser des bases solides, éviter pas mal d’erreurs et avancer beaucoup plus vite. Si vous avez un projet en tête mais que c’est encore flou, Adriel est clairement la bonne personne pour vous aider à le rendre concret.",
-    linkedinUrl: "https://www.linkedin.com/in/youssoufgamby",
-    avatar: "YAG",
+      "Adriel Zimbril n’est pas un simple développeur, c’est un développeur qui repousse ses limites à chaque fois, il est capable d’implémenter n’importe quelle maquette que vous lui proposer , Il est très ouvert et est toujours prêt à aider, c’est probablement le meilleur Dev que je connaisse",
+    linkedinUrl: "https://www.linkedin.com/in/oumar-dagnogo-66274530b",
+    avatar: "OD",
   },
   {
-    id: 3,
+    id: 4,
     locale: Locale.FR,
     name: "Angaman Brou Cedrick Delmas",
     position: "Developer Backend Java/Python",
     testimonial:
-      "J’ai eu la chance de travailler avec Adriel Zimbril sur mon tout premier projet professionnel en intelligence artificielle. Il était Lead Project et en même temps mon mentor tout au long de l’aventure. Adriel m’a énormément appris, aussi bien sur la gestion de projet que sur les aspects techniques. Il m’a guidé avec patience, m’a challengé quand il fallait, et m’a surtout aidé à monter en compétence rapidement. \n J’ai pu prendre confiance, mieux structurer mon travail et comprendre les vrais enjeux d’un projet tech. Travailler avec lui a été une vraie opportunité, et je le recommande sincèrement à toute personne ou entreprise qui cherche un leader passionné, pédagogue et efficace.",
-    websiteUrl: "https://growthlab.com",
+      "J’ai eu la chance d’être formé par Adriel en ui design et en développement, et cette expérience a vraiment changé ma manière de travailler et de m’organiser. Il explique de façon claire et directe, ce qui m’a permis de progresser vite. Grâce à lui, j’ai pu décrocher mon emploi et valider mon CDI.",
+    linkedinUrl: "https://www.linkedin.com/in/oumar-dagnogo-66274530b",
     avatar: "CR",
   },
 ];
@@ -86,12 +112,12 @@ export function TestimonialsSection() {
       badge={t("common.page-sections.testimonials.badge")}
       isFlex
     >
-      <div className="flex flex-col gap-4 md:gap-8 items-center justify-center px-6 max-w-5xl mx-auto">
-        <Card className="squircle squircle-stone-100 squircle-3xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
+      <div className="flex flex-col gap-4 md:gap-8 items-center justify-center md:px-6 md:max-w-5xl mx-auto">
+        <Card className="squircle squircle-b-base squircle-3xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
           <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
             <div
               className={cn(
-                "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-white overflow-hidden"
+                "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-b-white overflow-hidden"
               )}
             >
               <div className="flex flex-col items-start gap-4 md:gap-6 w-full max-w-[90%] py-6 md:py-8 mx-auto">
@@ -125,7 +151,7 @@ export function TestimonialsSection() {
                     </>
                   )}
                 </Badge>
-                <blockquote className="text-xl md:text-2xl tracking-tighter font-medium whitespace-pre-line text-zinc-700 leading-[150%] p-0">
+                <blockquote className="text-xl md:text-2xl tracking-tighter font-medium whitespace-pre-line text-b-white-foreground leading-[150%] p-0">
                   "{currentTestimonial.testimonial}"
                 </blockquote>
 
@@ -141,10 +167,10 @@ export function TestimonialsSection() {
                       />
                     </div>
                     <div className="text-start">
-                      <cite className="text-lg font-medium text-primary not-italic">
+                      <cite className="text-lg font-medium text-b-white-invert not-italic">
                         {currentTestimonial.name}
                       </cite>
-                      <p className="text-sm text-primary">
+                      <p className="text-sm text-b-white-invert">
                         {currentTestimonial.position}
                       </p>
                     </div>
@@ -161,15 +187,33 @@ export function TestimonialsSection() {
               <button
                 key={index}
                 className={cn(
-                  "rounded-full transition-all duration-800 ease",
+                  "rounded-full cursor-pointer transition-all duration-800 ease",
                   index === currentIndex
-                    ? "bg-primary w-6 h-2"
-                    : "bg-muted w-2 h-2"
+                    ? "bg-b-white-invert-sec w-6 h-2"
+                    : "bg-b-base w-2 h-2"
                 )}
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Testimonial ${index + 1}`}
               />
             ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-6">
+          <div className="flex items-center gap-2">
+            <Link
+              href={siteConfig.links.contact.social.linkedin.url}
+              //variant="outline"
+              likeButton
+              asIcon
+              whileTap
+              //size="xs"
+            >
+              <span className="flex items-center gap-1">
+                {t("common.page-sections.testimonials.button")}{" "}
+                <LinkOne size={16} />
+              </span>
+            </Link>
           </div>
         </div>
       </div>

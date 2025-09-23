@@ -72,7 +72,7 @@ export function getResourcesUrl(
  *
  * @example
  * getImageUrl(""); // returns ""
- * getImageUrl("slug"); // returns "https://base-url/images/slug"
+ * getImageUrl("slug"); // returns "https://base-url/slug"
  * getImageUrl("https://example.com/image.jpg"); // returns "https://example.com/image.jpg"
  */
 export function getImageUrl(slug: string): string {

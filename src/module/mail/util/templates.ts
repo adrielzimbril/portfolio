@@ -1,6 +1,7 @@
 import { render } from "@react-email/render";
-import { Locale, Messages, getMessagesForLocale } from "@/module/i18n";
+import { Messages, getMessagesForLocale } from "@/module/i18n";
 import { mailTemplates } from "@/module/mail/emails";
+import { Locale } from "@/types";
 
 export async function getTemplate<T extends TemplateId>({
   templateId,
@@ -24,7 +25,7 @@ export async function getTemplate<T extends TemplateId>({
   });
 
   const mailTranslations = translations.mail;
-  // Exclure 'common' et 'basic' des clés
+  // Exclude 'common' and 'basic' keys
   const templateKey = templateId as Exclude<
     keyof typeof mailTranslations,
     "common" | "basic"

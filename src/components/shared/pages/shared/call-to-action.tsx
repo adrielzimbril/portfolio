@@ -6,13 +6,15 @@ import { Input } from "@/components/ui/input";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { siteConfig } from "@/data/config";
 import { useTranslations } from "use-intl";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
 import { toast } from "sonner";
+import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function EmailForm() {
   const t = useTranslations();
@@ -66,31 +68,6 @@ function EmailForm() {
 function ContentSection({ isPage }: { isPage?: boolean }) {
   const t = useTranslations();
 
-  const formatRichText = (text: string) => {
-    return t.rich(text, {
-      p: (chunks) => <p className="relative">{chunks}</p>,
-      blog: (chunks) => (
-        <Link
-          href={routes.thoughts.link}
-          variant="ghost"
-          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline px-1"
-        >
-          {chunks}
-        </Link>
-      ),
-      linkedin: (chunks) => (
-        <Link
-          href={siteConfig.links.contact.social.linkedin.url}
-          variant="ghost"
-          className="[text-decoration-skip-ink:none] [text-underline-position:from-font] decoration-solid underline ps-1"
-        >
-          {chunks}
-        </Link>
-      ),
-      br: () => <br aria-hidden="true" />,
-    });
-  };
-
   return (
     <div className="flex flex-col gap-8 items-start justify-start relative">
       {isPage ? (
@@ -99,7 +76,9 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
             {t("common.page-sections.cta.variant-one.title")}
           </h2>
 
-          {formatRichText("common.page-sections.cta.variant-one.description")}
+          {t.rich("common.page-sections.cta.variant-one.description", {
+            ...richTextComponent,
+          })}
           <Link href={routes.contact.link} likeButton whileTap size="lg">
             {t("common.page-sections.cta.variant-one.button")}
           </Link>
@@ -110,7 +89,9 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
             {t("common.page-sections.cta.variant-two.title")}
           </h2>
 
-          {formatRichText("common.page-sections.cta.variant-two.description")}
+          {t.rich("common.page-sections.cta.variant-two.description", {
+            ...richTextComponent,
+          })}
           <EmailForm />
         </>
       )}
@@ -121,7 +102,11 @@ function ContentSection({ isPage }: { isPage?: boolean }) {
 export function CallToAction({ isPage }: { isPage?: boolean }) {
   return (
     <SectionBase isCallToAction>
-      <EmojiPlaceholder src={getImageUrl("/image-1001.png")} isMobileHidden />
+      <EmojiPlaceholder
+        //src={getImageUrl(getEmojiHub("📥", "fluent", "anim"))}
+        src={{ emoji: "📥" }}
+        isMobileShowed
+      />
       <ContentSection isPage={isPage} />
     </SectionBase>
   );

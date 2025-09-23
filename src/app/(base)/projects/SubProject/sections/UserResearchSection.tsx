@@ -3,6 +3,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { cn } from "@/utils/utils";
 import { getImageUrl } from "@/utils/base-url";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function ContentSection() {
   return (
@@ -12,7 +13,7 @@ function ContentSection() {
         Après avoir expliqué le problème, il serait bon de définir
         l&#39;objectif et les indicateurs de réussite.
       </p>
-      <p className="relative text-base text-zinc-500">
+      <p className="relative text-base text-b-white-invert-thr">
         <span className="font-medium tracking-[0]">
           Il peut s&#39;agir d&#39;un simple chiffre. Par exemple, en résolvant
           ce problème, nous sommes en mesure d&#39;augmenter le nombre
@@ -37,12 +38,12 @@ export function UserResearchSection() {
         sectionClassName="md:max-w-[80%] mx-auto"
         cardContentClassName="p-4 md:p-6"
         className={cn(
-          "size-full max-w md:gap-16 px-6 py-12 md:px-14 md:py-20 squircle squircle-smooth-xl squircle-6xl squircle-white overflow-hidden"
+          "size-full max-w md:gap-16 px-6 py-12 md:px-14 md:py-20 squircle squircle-smooth-xl squircle-6xl squircle-b-white overflow-hidden"
         )}
       >
         <EmojiPlaceholder
-          src={getImageUrl("/image-1310-2.png")}
-          //isMobileHidden
+          src={getImageUrl(getEmojiHub("🎯", "apple"))}
+          //isMobileShowed
           variant="bordered"
         />
         <ContentSection />

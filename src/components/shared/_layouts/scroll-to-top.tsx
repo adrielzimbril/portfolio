@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpOne } from "@aurthle/icons";
 
@@ -7,20 +7,45 @@ export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  const ticking = useRef(false);
+  const targetProgress = useRef(0); // The true value we want to reach
+  const animationFrame = useRef<number | null>(null);
+
   useEffect(() => {
-    const handleScroll = () => {
+    const updateScroll = () => {
       const scrollTop = window.pageYOffset;
       const docHeight =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-
-      setScrollProgress(scrollPercent);
+      targetProgress.current = (scrollTop / docHeight) * 100;
       setIsVisible(scrollTop > 300);
+
+      if (!ticking.current) {
+        ticking.current = true;
+        animateProgress();
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const animateProgress = () => {
+      setScrollProgress((prev) => {
+        const diff = targetProgress.current - prev;
+        const step = diff * 0.2; // 0.2 = speed of catchup (20%)
+        const next =
+          Math.abs(step) < 0.1 ? targetProgress.current : prev + step;
+        if (next !== targetProgress.current) {
+          animationFrame.current = requestAnimationFrame(animateProgress);
+        } else {
+          ticking.current = false;
+        }
+        return next;
+      });
+    };
+
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", updateScroll);
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -30,7 +55,6 @@ export function ScrollToTop() {
     });
   };
 
-  // Correct calculation for the SVG
   const size = 48;
   const strokeWidth = 4;
   const radius = (size - strokeWidth) / 2;
@@ -66,7 +90,7 @@ export function ScrollToTop() {
                 r={radius}
                 strokeWidth={strokeWidth}
                 fill="none"
-                className="stroke-zinc-200"
+                className="stroke-b-base-accent"
               />
               {/* Progress Circle */}
               <circle
@@ -77,12 +101,12 @@ export function ScrollToTop() {
                 fill="none"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
-                className="transition-all duration-300 ease-out stroke-blue-400"
+                className="stroke-b-white-invert-sec"
                 strokeLinecap="round"
               />
             </svg>
 
-            {/* Arrow Icon with subtle animation */}
+            {/* Arrow Icon */}
             <div className="flex items-center justify-center relative z-10">
               <ArrowUpOne />
             </div>

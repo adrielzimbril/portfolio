@@ -8,6 +8,7 @@ type GetAllResourcesOptions = {
   sort?: "asc" | "desc";
   limit?: number;
 };
+export type ResourcePreview = Pick<Resource, "id" | "slug" | "title">;
 
 export async function getAllResources(
   options: Partial<GetAllResourcesOptions> = {}
@@ -33,6 +34,33 @@ export async function getAllResources(
       .slice(0, limit)
   );
 }
+
+export async function getBestResourcesLink(
+  options: Partial<GetAllResourcesOptions> = {}
+): Promise<ResourcePreview[]> {
+  const { published, locale, pageSlug, sort, limit } = {
+    published: true,
+    locale: undefined,
+    pageSlug: undefined,
+    sort: "desc",
+    limit: Number.MAX_SAFE_INTEGER,
+    ...options,
+  };
+
+  return Promise.resolve(
+    allResources
+      .filter(
+        (resource) =>
+          resource.published === published &&
+          (!locale || resource.locale === locale)
+      )
+      .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
+      .filter((resource) => resource.slug !== pageSlug)
+      .slice(0, limit)
+      .map(({ id, slug, title }) => ({ id, slug, title }))
+  );
+}
+
 
 export async function getResourceBySlug(
   slug: string,

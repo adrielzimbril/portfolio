@@ -1,6 +1,6 @@
 "use client";
 import posthog from "posthog-js";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { ProjectPreviewCardContainerSectionProps } from "@/types/type";
@@ -41,7 +41,6 @@ export function ProjectsSection() {
       description={t("common.page-sections.projects.description")}
       link={routes.projects.link}
       badge={t("common.page-sections.projects.badge")}
-      asFade
     >
       {projects.map((project, index) => {
         const isWide =

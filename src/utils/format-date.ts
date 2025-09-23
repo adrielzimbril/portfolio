@@ -78,6 +78,25 @@ export function getDate({
     : Intl.DateTimeFormat(lang, { dateStyle }).format(d);
 }
 
+
+
+/**
+ * Get the current month
+ * 
+ * @returns The current month
+ *
+ * @example
+ * const month = getThisMonth();
+ * console.log(month); // Output: "august"
+ */
+export const getThisMonth = () => {
+    const date = new Date();
+    return new Intl.DateTimeFormat("en", { month: "long" })
+      .format(date)
+      .toLowerCase();
+  };
+
+
 /**
  * Calculate the difference between two dates with different output formats
  *

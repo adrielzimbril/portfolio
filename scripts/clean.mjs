@@ -87,13 +87,20 @@ async function cleanFolders(directory) {
 
     if (entry.isDirectory()) {
       if (
-        //	["_source", "dist", ".turbo", "node_modules"].some((pattern) =>
-        ["_source", ".turbo", "node_modules", ".content-collections", ".next", ".trigger"].some((pattern) =>
+        [
+          "_source",
+          "node_modules",
+          ".turbo",
+          ".next",
+          ".content-collections",
+          ".trigger",
+          ".superdesign",
+        ].some((pattern) =>
           // @ts-ignore
           typeof pattern === "string"
             ? entry.name === pattern
             : // @ts-ignore
-              pattern.test(entry.name),
+              pattern.test(entry.name)
         )
       ) {
         deleteFolder(fullPath);

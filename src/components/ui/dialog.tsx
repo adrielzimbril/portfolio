@@ -73,11 +73,11 @@ function DialogContent({
 
   const variantClasses = {
     default:
-      "squircle squircle-background squircle-5xl squircle-smooth-xl border-0",
+      "squircle squircle-background squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl border-0",
     modern:
-      "squircle squircle-white squircle-5xl squircle-smooth-xl squircle-border squircle-border-white/20",
+      "squircle squircle-b-white squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl squircle-border-4 squircle-border-b-base-accent",
     glass:
-      "squircle squircle-white/80 squircle-5xl squircle-smooth-xl backdrop-blur-xl squircle-border squircle-border-white/20",
+      "squircle squircle-b-white/80 squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl backdrop-blur-xl squircle-border-4 squircle-border-b-base-accent",
   };
 
   return (
@@ -106,7 +106,7 @@ function DialogContent({
         {closeButton && (
           <DialogPrimitive.Close
             className={cn(
-              "group absolute top-6 right-6 flex size-8 items-center justify-center disabled:pointer-events-none",
+              "group absolute top-2.5 md:top-6 right-4 md:right-6 flex size-8 items-center justify-center disabled:pointer-events-none",
               "p-0"
             )}
             asChild
@@ -129,7 +129,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+      className={cn("flex flex-col gap-2", className)}
       {...props}
     />
   );
@@ -156,7 +156,7 @@ function DialogTitle({
     <DialogPrimitive.Title
       data-slot="dialog-title"
       className={cn(
-        "text-xl font-bold leading-[120%] text-zinc-800",
+        "text-xl font-bold leading-[120%] text-white-invert-fr",
         className
       )}
       {...props}
@@ -171,7 +171,7 @@ function DialogDescription({
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
-      className={cn("text-base text-gray-700", className)}
+      className={cn("text-base text-white-invert-fr", className)}
       {...props}
     />
   );
@@ -180,7 +180,7 @@ function DialogDescription({
 // Composants supplémentaires dans le style de référence
 function DialogSeparator({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("h-px bg-stone-200 w-full", className)} {...props} />
+    <div className={cn("h-px bg-b-base-accent w-full", className)} {...props} />
   );
 }
 
@@ -192,7 +192,8 @@ function DialogCard({
   variant?: "default" | "highlight" | "success" | "warning" | "info";
 }) {
   const variantClasses = {
-    default: "squircle-stone-50 squircle-border-2 squircle-border-stone-200",
+    default:
+      "squircle-stone-50 dark:squircle-b-base-second squircle-border-2 dark:squircle-border-b-base-accent",
     highlight: "squircle-blue-50 squircle-border-2 squircle-border-blue-200",
     success: "squircle-green-50 squircle-border-2 squircle-border-green-200",
     warning: "squircle-orange-50 squircle-border-2 squircle-border-orange-200",
@@ -220,11 +221,12 @@ function DialogBadge({
   variant?: "default" | "success" | "warning" | "info" | "colored";
 }) {
   const variantClasses = {
-    default: "squircle-gray-100 text-gray-800",
+    default: "squircle-b-base text-white-invert-fr",
     success: "squircle-green-100 text-green-800",
     warning: "squircle-orange-100 text-orange-800",
     info: "squircle-blue-100 text-blue-800",
-    colored: "squircle-white squircle-border-2 squircle-border-stone-200",
+    colored:
+      "squircle-b-base-accent squircle-border-2 squircle-border-b-base-accent text-white-invert-fr",
   };
 
   return (

@@ -5,6 +5,7 @@ import { ResourceType } from "@/types";
 import BoringAvatar from "boring-avatars";
 import { getImageUrl, pickRandomColor, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
+import { useTranslations } from "use-intl";
 
 interface StatsProps {
   avatars?: string[];
@@ -25,7 +26,7 @@ export function AvatarsStats({
     <div
       className={cn(
         "inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl",
-        colorName ?? "squircle-white",
+        colorName ?? "squircle-b-white",
         className
       )}
     >
@@ -85,14 +86,33 @@ function UserCount({
   count: number;
   resourceType: ResourceType;
 }) {
+  const t = useTranslations();
+  const productTypeMap: Record<ResourceType, string> = {
+    [ResourceType.COURSE]: t(
+      "common.page-sections.hub.base.resources-type.course.badge"
+    ),
+    [ResourceType.EBOOK]: t(
+      "common.page-sections.hub.base.resources-type.ebook.badge"
+    ),
+    [ResourceType.VIDEO]: t(
+      "common.page-sections.hub.base.resources-type.video.badge"
+    ),
+    [ResourceType.MASTERCLASS]: t(
+      "common.page-sections.hub.base.resources-type.masterclass.badge"
+    ),
+    [ResourceType.FIGMA_TEMPLATE]: t(
+      "common.page-sections.hub.base.resources-type.figma-template.badge"
+    ),
+    [ResourceType.CODE]: t(
+      "common.page-sections.hub.base.resources-type.code.badge"
+    ),
+  };
+
+  const productType = productTypeMap[resourceType] ?? "";
+
   return (
-    <span className="relative flex items-center gap-1 font-bold text-sm text-zinc-600">
-      {count > 2 ? `+${count}` : count}{" "}
-      {resourceType === ResourceType.COURSE
-        ? "Étudiants 🧑‍🎓"
-        : resourceType === ResourceType.EBOOK
-          ? "Lecteurs 📖"
-          : "Participants 🍿"}
+    <span className="relative flex items-center gap-1 font-bold text-sm text-b-white-invert-sec">
+      {count > 2 ? `+${count}` : count} {productType}
     </span>
   );
 }

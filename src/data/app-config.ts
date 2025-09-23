@@ -7,6 +7,7 @@ export type Config = {
         label: string;
         currency: string;
         icon: string;
+        url: string;
       };
     };
     defaultLocale: string;
@@ -29,6 +30,8 @@ export type Config = {
   };
 };
 
+const BASE_URL = "https://www.adrielzimbril.com";
+
 export const appConfig = {
   // Internationalization
   i18n: {
@@ -42,18 +45,21 @@ export const appConfig = {
       //   label: "English",
       //   currency: "USD",
       //   icon: "USFlag",
+      //   url: BASE_URL,
       // },
       fr: {
         code: "fr_FR",
         label: "Français",
         currency: "EUR",
         icon: "FRFlag",
+        url: BASE_URL,
       },
       // cn: {
       //   code: "cn_CN",
       //   label: "中文",
       //   currency: "RMB",
       //   icon: "CNFlag",
+      //   url: BASE_URL,
       // },
     },
     // The default locale is used if no locale is provided

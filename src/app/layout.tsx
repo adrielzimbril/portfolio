@@ -1,24 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { siteConfig } from "@/data/config";
 import { ThemeProvider } from "next-themes";
-import { Dockbar } from "@/components/shared/_layouts/dockbar";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Navbar } from "@/components/shared/_layouts/navbar";
-import { SquircleProvider } from "@/components/shiro/providers/squircle-provider";
-import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { metadata as metadataBase } from "./metadata";
+import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
+import { SquircleProvider } from "@/components/shiro/providers/squircle-provider";
+import { Toaster } from "@/components/shiro/providers/toast-provider";
+import { Navbar } from "@/components/shared/_layouts/navbar";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
 import { Footer } from "@/components/shared/_layouts/footer";
-import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
 import { ReactLenis } from "lenis/react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
-import { notFound } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
-import { Toaster } from "@/components/shiro/providers/toast-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Dockbar } from "@/components/shared/_layouts/dockbar";
+import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { getUserLocale } from "@/module/i18n/lib/locale-cookie";
 
 export const viewport: Viewport = {
@@ -69,8 +67,9 @@ export default async function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
+          enableColorScheme
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
@@ -81,7 +80,7 @@ export default async function RootLayout({
                     <main>
                       <div className="container mx-auto relative">
                         <Navbar />
-                        <Dockbar asFade={false} />
+                        {/* <Dockbar asFade={false} /> */}
                         {/* <SmoothCursor /> */}
                         {children}
                         <ScrollToTop />

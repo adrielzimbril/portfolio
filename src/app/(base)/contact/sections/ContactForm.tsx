@@ -23,7 +23,7 @@ export default function ContactForm({}) {
         sectionContentClassName="w-full"
         cardClassName="w-full"
         cardContentClassName="w-full p-6 md:p-8"
-        className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+        className="squircle squircle-b-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
       >
         <div
           className={cn(
@@ -31,11 +31,11 @@ export default function ContactForm({}) {
           )}
         >
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4">
-            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[115%] text-zinc-600">
+            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[115%] text-b-white-invert-sec">
               {t("contact.page.badge")}
             </Badge>
             <h2 className="self-stretch">{t("contact.page.title")}</h2>
-            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600"></p>
+            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-b-white-invert-sec"></p>
           </div>
 
           <Cal
@@ -47,7 +47,7 @@ export default function ContactForm({}) {
               overflow: "scroll",
               minHeight: "400px",
             }}
-            className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden size-full"
+            className="squircle squircle-b-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden size-full"
             config={{ layout: "month_view" }}
           />
 

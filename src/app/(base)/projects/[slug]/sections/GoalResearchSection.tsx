@@ -6,6 +6,7 @@ import { cn } from "@/utils/utils";
 import { FormattedText } from "@/components/shared/formatted-text";
 import { getImageUrl } from "@/utils/base-url";
 import { useTranslations } from "next-intl";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 function ContentSection({
   description,
@@ -25,7 +26,7 @@ function ContentSection({
         {description}
       </p>
       {subDescription && (
-        <FormattedText className="relative text-base text-zinc-500">
+        <FormattedText className="relative text-base text-b-white-invert-thr">
           {subDescription}
         </FormattedText>
       )}
@@ -47,13 +48,14 @@ export function GoalResearchSection({
         sectionClassName="md:max-w-[80%] mx-auto"
         cardContentClassName="p-4 md:p-6"
         className={cn(
-          "size-full max-w md:gap-16 px-6 py-12 md:px-14 md:py-20 squircle squircle-smooth-xl squircle-6xl squircle-white overflow-hidden"
+          "size-full max-w md:gap-16 px-6 py-12 md:px-14 md:py-20 squircle squircle-smooth-xl squircle-6xl squircle-b-white overflow-hidden"
         )}
       >
         <EmojiPlaceholder
-          src={getImageUrl("/image-1310-2.png")}
-          //isMobileHidden
-          variant="bordered"
+          //src={getImageUrl(getEmojiHub("🎯", "apple"))}
+          src={{ emoji: "🎯" }}
+          //isMobileShowed
+          variant="squircle"
         />
         <ContentSection
           description={description}

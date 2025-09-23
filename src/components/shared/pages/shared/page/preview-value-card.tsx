@@ -20,7 +20,7 @@ export function PreviewValueCard({
   return (
     <Card
       className={cn(
-        "squircle size-full max-w-[95%] squircle-stone-100 squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto",
+        "squircle size-full max-w-[95%] squircle-b-base squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto",
         className
       )}
     >

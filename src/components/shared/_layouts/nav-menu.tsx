@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function NavMenu({
   hasScrolled,
@@ -15,14 +16,15 @@ export function NavMenu({
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }) {
+  const t = useTranslations();
   return (
-    <div className="w-fit hidden md:block">
+    <div className="w-fit hidden lg:block">
       <div className={cn("mx-auto flex w-full items-center justify-center")}>
         <div
           className={cn(
             "relative flex w-fit overflow-hidden items-center p-1",
             //"rounded-2xl overflow-hidden border-2 border-solid border-secondary",
-            "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-secondary"
+            "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-b-base-accent"
           )}
         >
           {menuRoutes.map((item) => (
@@ -41,8 +43,8 @@ export function NavMenu({
                 <motion.div
                   layoutId="active-tab"
                   className={cn(
-                    "absolute inset-0 rounded-xl bg-secondary squircle-secondary",
-                    "squircle squircle-7xl"
+                    "absolute inset-0 bg-b-base-accent squircle-b-base-accent",
+                    "squircle squircle-2xl md:squircle-7xl squircle-smooth-lg md:squircle-smooth-xl rounded-xl"
                   )}
                   transition={{
                     duration: 0.2,
@@ -54,11 +56,13 @@ export function NavMenu({
               )}
               <span
                 className={cn(
-                  "relative block text-sm font-medium transition-colors duration-200 hover:text-primary tracking-tight",
-                  activeTab === item.key ? "text-primary" : "text-primary/60"
+                  "relative block text-sm font-medium transition-colors duration-200 hover:text-b-white-invert tracking-tight",
+                  activeTab === item.key
+                    ? "text-b-white-invert"
+                    : "text-b-white-invert/60"
                 )}
               >
-                {item.name}
+                {t("common.menu." + item.key + ".desktop")}
               </span>
             </Link>
           ))}

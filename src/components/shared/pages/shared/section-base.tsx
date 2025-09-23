@@ -29,7 +29,7 @@ export function SectionBase({
     >
       <Card
         className={cn(
-          "squircle squircle-stone-100  squircle-smooth-xl",
+          "squircle squircle-b-base squircle-smooth-xl",
           isCallToAction ? "squircle-7xl" : "squircle-6xl",
           cardClassName
         )}

@@ -101,16 +101,16 @@ function LoadingProgressBar({ isPage }: { isPage: boolean }) {
 
   return (
     <>
-      <div className="w-full bg-stone-200 rounded-full h-2 overflow-hidden max-w-md flex flex-col gap-2">
+      <div className="w-full bg-b-base-accent rounded-full h-2 overflow-hidden max-w-md flex flex-col gap-2">
         {isPage ? (
           <>
             <div
-              className="bg-stone-800 size-full rounded-full transition-all duration-300 ease-in-out"
+              className="bg-b-white-invert size-full rounded-full transition-all duration-300 ease-in-out"
               style={{ width: `${progress}%` }}
             />
           </>
         ) : (
-          <div className="bg-stone-800 size-full rounded-full animate-loading-progress" />
+          <div className="bg-b-white-invert size-full rounded-full animate-loading-progress" />
         )}
       </div>
     </>
@@ -129,7 +129,7 @@ function FloatingCard({
   return (
     <motion.div
       className={cn(
-        "absolute bg-zinc-100 backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
+        "absolute bg-b-base backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
         position === "top-left" && "top-32 left-2 md:top-32 md:left-32",
         position === "top-right" && "top-32 right-2 md:top-32 md:right-32",
         position === "bottom-left" &&
@@ -197,7 +197,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
   isPage = true,
 }) => {
   return (
-    <div className="flex flex-col mx-auto items-center justify-center relative bg-white size-full min-h-dvh">
+    <div className="flex flex-col mx-auto items-center justify-center relative bg-b-white size-full min-h-dvh">
       {/* Floating background elements */}
       <FloatingCard delay={0} position="top-left" title="SaaS 🦄" />
 
@@ -273,7 +273,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         >
           {isPage ? (
             <motion.div
-              className="size-24 border-4 border-stone-100 border-t-stone-800 rounded-full"
+              className="size-24 border-4 border-stone-100 border-t-b-white-invert rounded-full"
               animate={{ rotate: 360 }}
               transition={{
                 duration: 1,
@@ -399,7 +399,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
               <div className="relative shrink-0 text-2x">
                 <p className="leading-[120%]">{stat.number}</p>
               </div>
-              <div className="relative shrink-0 text-base text-zinc-500">
+              <div className="relative shrink-0 text-base text-b-white-invert-thr">
                 <p className="leading-[120%]">{stat.label}</p>
               </div>
             </motion.div>

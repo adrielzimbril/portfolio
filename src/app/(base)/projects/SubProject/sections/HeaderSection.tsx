@@ -1,5 +1,5 @@
 import React from "react";
-import { routes } from "@/data/route";
+import { routes } from "@/data/routes";
 import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section";
 import { DEFAULT_TAG_COLOR } from "@/types/default";
 import { PreviewContentType } from "@/types/enum";

@@ -30,21 +30,8 @@ import { cn } from "@/utils";
 import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { useTranslations } from "use-intl";
-
-// Form Info Schema for ensuring name and phone
-const FormInfoSchema = z.object({
-  name: z
-    .string({ error: "Oups, le nom est requis 😅" })
-    .min(4, { message: "Le nom doit contenir au moins 4 caractères 😅" }),
-  phone: z
-    .string({ error: "Oups, le numéro de téléphone est requis 😅" })
-    .min(10, {
-      message: "Le numéro de téléphone ne semble pas être valide 😅",
-    }),
-});
-
-type FormInfoForm = z.infer<typeof FormInfoSchema>;
+import { useTranslations, useLocale, Locale } from "use-intl";
+import { apiRoutes } from "@/data/api-routes";
 
 interface SubscriptionModalProps {
   isOpen: boolean;
@@ -62,6 +49,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   onClose,
 }) => {
   const t = useTranslations();
+  const locale = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [userCountry, setUserCountry] = useState("FR");
@@ -98,10 +86,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     productType?: ResourceTypeKey;
     updateLayer?: boolean;
   }) => {
-    return fetch("/api/subscribe", {
+    return fetch(apiRoutes.subscribe.link, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, locale }),
     });
   };
 
@@ -115,19 +103,66 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         const subscribedFromPage =
           typeof window !== "undefined" ? window.location.pathname : undefined;
 
-        const res = await apiSubscribe({
+        await apiSubscribe({
           email,
           subscribedFromPage,
           updateExisting: false,
           productId,
           productType,
           updateLayer: false,
-        });
+        }).then(async (res) => {
+          const json = await res.json();
+          if (!res.ok) {
+            throw new Error(json?.error || t("zod.errors.customized.hint"));
+          }
 
-        const json = await res.json();
-        if (!res.ok) {
-          throw new Error(json?.error || "Erreur lors de l'inscription");
-        }
+          const handleClick = () => {
+            const end = Date.now() + 3 * 1000; // 3 seconds
+            const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+
+            const scalar = 2;
+            const triangle = confetti.shapeFromPath({
+              path: "M0 10 L5 0 L10 10z",
+            });
+            const square = confetti.shapeFromPath({
+              path: "M0 0 L10 0 L10 10 L0 10 Z",
+            });
+            const coin = confetti.shapeFromPath({
+              path: "M5 0 A5 5 0 1 0 5 10 A5 5 0 1 0 5 0 Z",
+            });
+            const tree = confetti.shapeFromPath({
+              path: "M5 0 L10 10 L0 10 Z",
+            });
+
+            const frame = () => {
+              if (Date.now() > end) return;
+              confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 0, y: 0.5 },
+                colors: colors,
+                shapes: [triangle, square, coin, tree],
+                scalar,
+              });
+              confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 1, y: 0.5 },
+                colors: colors,
+                shapes: [triangle, square, coin, tree],
+                scalar,
+              });
+              requestAnimationFrame(frame);
+            };
+            frame();
+          };
+
+          handleClick();
+        });
 
         setHasInitialSubscription(true);
       } catch (error) {
@@ -139,6 +174,20 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     subscribeWithEmail();
     ipInfoFetched.current = true;
   }, [isOpen, email, hasInitialSubscription]);
+
+  // Form Info Schema for ensuring name and phone
+  const FormInfoSchema = z.object({
+    name: z
+      .string({ error: t("zod.errors.customized.name.invalid") })
+      .min(4, { message: t("zod.errors.customized.name.required") }),
+    phone: z
+      .string({ error: t("zod.errors.customized.phone.invalid") })
+      .min(10, {
+        message: t("zod.errors.customized.phone.required"),
+      }),
+  });
+
+  type FormInfoForm = z.infer<typeof FormInfoSchema>;
 
   const formSchemaValidate = useForm<FormInfoForm>({
     resolver: zodResolver(FormInfoSchema),
@@ -175,7 +224,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   const onSubmit = async (values: FormInfoForm) => {
     if (!email) {
-      toast.error("Oups, l'email est requis pour la mise à jour 😅");
+      toast.error(t("zod.errors.customized.email.update-required"));
       return;
     }
 
@@ -231,10 +280,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">
+          <DialogTitle className="text-2xl font-bold text-start">
             {t("common.page-sections.newsletter.title")}
           </DialogTitle>
-          <DialogDescription className="text-center text-gray-600">
+          <DialogDescription className="text-center hidden text-b-white-invert-sec">
             {hasInitialSubscription
               ? t("common.page-sections.newsletter.description.state")
               : t("common.page-sections.newsletter.description.default")}
@@ -247,7 +296,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             <h3 className="text-xl font-semibold text-green-600">
               {t("common.page-sections.newsletter.form.success.message.title")}
             </h3>
-            <p className="text-center text-gray-600">
+            <p className="text-center text-b-white-invert-sec">
               {t(
                 "common.page-sections.newsletter.form.success.message.description"
               )}
@@ -274,7 +323,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         placeholder={t(
                           "common.page-sections.newsletter.form.fields.name.placeholder"
                         )}
-                        className="h-12 border-2 border-input"
+                        className="h-12 border-2"
                         {...field}
                       />
                     </FormControl>
@@ -307,10 +356,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                           "text-base"
                         )}
                         triggerClassName={cn(
-                          "bg-zinc-50 hover:bg-zinc-100 h-auto rounded-s-xl peer z-10",
+                          "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
                           "h-auto border-2"
                         )}
-                        contentClassName="data-[selected=true]:bg-zinc-100 data-[selected=true]:text-inherit"
+                        contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"
                         {...field}
                       />
                     </FormControl>
@@ -331,8 +380,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader color="bg-zinc-100" />
-                      <span>{t("common.button.sending")}...</span>
+                      <Loader color="bg-b-base" />
+                      <span>{t("common.button.sending")}</span>
                     </>
                   ) : (
                     <>

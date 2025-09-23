@@ -25,7 +25,7 @@ export function ProjectCard({
   return (
     <Card
       className={cn(
-        "flex flex-col items-center justify-center squircle squircle-neutral-100 squircle-6xl squircle-smooth-xl border-0 overflow-hidden size-full",
+        "flex flex-col items-center justify-center squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden size-full",
         isWide && "md:flex-row md:col-span-2"
       )}
     >

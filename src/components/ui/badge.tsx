@@ -3,13 +3,12 @@ import * as React from "react";
 import { cn } from "@/utils/utils";
 
 const badgeVariants = cva(
-  "squircle squircle-7xl squircle-smooth-xl inline-flex items-center border-none px-3 py-1.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "squircle squircle-2xl md:squircle-7xl  squircle-smooth-lg md:squircle-smooth-xl inline-flex items-center border-none px-3 py-1.5 font-semibold transition-colors",
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-inherit squircle-zinc-100 text-gray-900",
-        colored: "border-transparent bg-inherit text-gray-900",
+        default: "border-transparent bg-inherit squircle-b-base",
+        colored: "border-transparent bg-inherit text-b-white-unchanged",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:

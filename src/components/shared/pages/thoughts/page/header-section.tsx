@@ -59,16 +59,16 @@ export function HeaderSection({
 
   return (
     <SectionBase
-      sectionClassName="p-0 mt-20 mb-10 md:mb-20"
+      sectionClassName="p-0 mt-16 mb-10 md:mb-20"
       isWide
       cardClassName="w-full"
       cardContentClassName="px-4 md:px-12 py-6 md:py-12"
     >
       {/* Header Preview Card */}
-      <Card className="w-full squircle squircle-white squircle-smooth-xl squircle-2xl md:squircle-4xl overflow-hidden p-3 md:p-5">
+      <Card className="w-full squircle squircle-b-white squircle-smooth-xl squircle-2xl md:squircle-4xl overflow-hidden p-3 md:p-5">
         <CardContent
           className={cn(
-            "w-full squircle squircle-stone-100 squircle-smooth-xl squircle-xl md:squircle-3xl overflow-hidden flex flex-col justify-center",
+            "w-full squircle squircle-b-base squircle-smooth-xl squircle-xl md:squircle-3xl overflow-hidden flex flex-col justify-center",
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
@@ -124,7 +124,7 @@ export function HeaderSection({
       )}
 
       {tags && tags.length > 0 && (
-        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-white overflow-hidden">
+        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-b-white overflow-hidden">
           {tags.map((tag, index) => (
             <Badge key={index} size="sm">
               {tag.name || (tag as unknown as string)}

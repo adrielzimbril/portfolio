@@ -4,6 +4,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { ArrowRightOne, ArrowDownOne } from "@aurthle/icons";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 function ButtonContent({
   variant,
@@ -27,6 +28,7 @@ function ButtonContent({
 function ContentSection({
   title,
   description,
+  badge,
   buttonLink,
   buttonText,
   buttonVariant,
@@ -34,41 +36,53 @@ function ContentSection({
   onClick,
 }: {
   title: string;
-  description: string;
-  buttonLink: string;
-  buttonText: string;
+  description: string | React.ReactNode;
+  badge?: string;
+  buttonLink?: string;
+  buttonText?: string;
   buttonVariant: "default" | "secondary";
   actionButton: boolean;
   onClick: () => void;
 }) {
   return (
-    <div className="flex flex-col gap-8 items-start justify-start relative md:max-w-[50%]">
-      <h1 className="relative whitespace-pre-line">{title}</h1>
-      <p className="relative text-2xl whitespace-pre-line">{description}</p>
-      {actionButton ? (
-        <Button
-          onClick={onClick}
-          variant={buttonVariant}
+    <div className="flex flex-col gap-8 items-start justify-start relative md:max-w-[52%]">
+      {badge && (
+        <Badge
           size="lg"
-          asIcon
-          whileTap
-          asPointer
+          variant="colored"
+          className="squircle-b-white text-b-white-invert"
         >
-          <ButtonContent variant={buttonVariant} buttonText={buttonText} />
-        </Button>
-      ) : (
-        <Link
-          href={buttonLink}
-          variant={buttonVariant}
-          size="lg"
-          onClick={onClick}
-          asIcon
-          whileTap
-          likeButton
-        >
-          <ButtonContent variant={buttonVariant} buttonText={buttonText} />
-        </Link>
+          {badge}
+        </Badge>
       )}
+      <h1 className="relative leading-[1.1] whitespace-pre-line">{title}</h1>
+      <p className="relative text-2xl whitespace-pre-line">{description}</p>
+      {buttonLink &&
+        buttonText &&
+        (actionButton ? (
+          <Button
+            onClick={onClick}
+            variant={buttonVariant}
+            size="lg"
+            asIcon
+            whileTap
+            asPointer
+          >
+            <ButtonContent variant={buttonVariant} buttonText={buttonText} />
+          </Button>
+        ) : (
+          <Link
+            href={buttonLink}
+            variant={buttonVariant}
+            size="lg"
+            onClick={onClick}
+            asIcon
+            whileTap
+            likeButton
+          >
+            <ButtonContent variant={buttonVariant} buttonText={buttonText} />
+          </Link>
+        ))}
     </div>
   );
 }
@@ -76,22 +90,31 @@ function ContentSection({
 export function PageHero({
   title,
   description,
+  badge,
   buttonLink,
   buttonText,
   buttonVariant = "default",
   imagePath,
-  isMobileHidden = true,
+  imgClassName,
+  imageVariant = "default",
+  isMobileShowed = false,
   imageContent,
   actionButton = false,
   onClick = () => {},
 }: {
   title: string;
-  description: string;
-  buttonLink: string;
-  buttonText: string;
+  description: string | React.ReactNode;
+  badge?: string;
+  buttonLink?: string;
+  buttonText?: string;
   buttonVariant?: "default" | "secondary";
-  imagePath?: string;
-  isMobileHidden?: boolean;
+  imagePath?:
+    | string
+    | { emoji: string }
+    | { mp4: string; webm: string; poster: string };
+  imgClassName?: string;
+  imageVariant?: "default" | "bordered" | "squircle";
+  isMobileShowed?: boolean;
   imageContent?: React.ReactNode;
   actionButton?: boolean;
   onClick?: () => void;
@@ -99,12 +122,18 @@ export function PageHero({
   return (
     <SectionBase>
       {imagePath && (
-        <EmojiPlaceholder src={imagePath} isMobileHidden={isMobileHidden} />
+        <EmojiPlaceholder
+          src={imagePath}
+          imgClassName={imgClassName}
+          isMobileShowed={isMobileShowed}
+          variant={imageVariant}
+        />
       )}
       {imageContent}
       <ContentSection
         title={title}
         description={description}
+        badge={badge}
         buttonLink={buttonLink}
         buttonText={buttonText}
         buttonVariant={buttonVariant}

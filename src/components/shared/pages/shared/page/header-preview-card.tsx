@@ -56,7 +56,7 @@ export function HeaderPreviewCard({
   switch (content.type) {
     case PreviewContentType.TEXT:
       return (
-        <>
+        <div className="relative w-full">
           <h3 className="h2 w-full relative mb-4">
             {content.emoji && (
               <>
@@ -71,12 +71,12 @@ export function HeaderPreviewCard({
               {content.subtitle}
             </p>
           )}
-        </>
+        </div>
       );
 
     case PreviewContentType.IMAGE:
       return (
-        <div className="w-full h-full min-h-[170px] md:min-h-[500px] md:h-[500px] flex flex-col items-center justify-center overflow-hidden rounded-2xl md:rounded-[2rem]">
+        <div className="relative w-full h-full min-h-[170px] md:min-h-[500px] md:h-[500px] flex flex-col items-center justify-center overflow-hidden rounded-2xl md:rounded-[2rem]">
           <Image
             src={getImageUrl(content.src)}
             alt={content.alt}
@@ -90,7 +90,7 @@ export function HeaderPreviewCard({
 
     case PreviewContentType.VIDEO:
       return (
-        <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className="relative w-full h-full flex flex-col items-center justify-center">
           <video
             src={getImageUrl(content.src)}
             poster={content.poster}
@@ -111,10 +111,10 @@ export function HeaderPreviewCard({
 
     case PreviewContentType.CUSTOM:
       return (
-        <>
+        <div className="relative w-full">
           {content.content}
           {type && <PreviewIcon resourceType={type} />}
-        </>
+        </div>
       );
 
     default:

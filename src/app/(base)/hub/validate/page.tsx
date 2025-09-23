@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { generateJwtToken, generateToken } from "@/utils/key-encrypt";
+import { apiRoutes } from "@/data/api-routes";
 
 export default function HubProductValidationPage() {
   const [email, setEmail] = useState("");
@@ -32,7 +33,7 @@ export default function HubProductValidationPage() {
     try {
       const subscribedFromPage =
         typeof window !== "undefined" ? window.location.pathname : undefined;
-      const res = await fetch("/api/hub/validate", {
+      const res = await fetch(apiRoutes.hubValidate.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -70,13 +71,13 @@ export default function HubProductValidationPage() {
       sectionContentClassName="w-full"
       cardClassName="w-full"
       cardContentClassName="w-full p-6 md:p-8"
-      className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      className="squircle squircle-b-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
     >
-      <Card className="w-full squircle squircle-white squircle-smooth-xl">
+      <Card className="w-full squircle squircle-b-white squircle-smooth-xl">
         <CardContent className="p-6 md:p-8 space-y-6">
           <div>
             <h1 className="h3">Valider un produit du Hub</h1>
-            <p className="text-zinc-600">
+            <p className="text-b-white-invert-sec">
               Renseignez les informations ci-dessous pour recevoir le produit
               par email.
             </p>

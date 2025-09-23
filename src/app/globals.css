@@ -11,18 +11,25 @@
 @theme inline {
   /* Base colors */
   --color-base-white: var(--base-white);
-  --color-gray-900: var(--gray-900);
-  --color-greys-00: var(--greys-00);
-  --color-greys-01: var(--greys-01);
-  --color-greys-02: var(--greys-02);
-  --color-greys-06: var(--greys-06);
-  --color-greys-08: var(--greys-08);
+
+	/* Custom colors */
+	--color-b-base: var(--b-base);
+  --color-b-base-second: var(--b-base-second);
+  --color-b-base-it: var(--b-base-it);
+  --color-b-white: var(--b-white);
+  --color-sh-base-white: var(--sh-base-white);
+  --color-b-white-foreground: var(--b-white-foreground);
+  --color-b-white-unchanged: var(--b-white-unchanged);
+  --color-b-black-unchanged: var(--b-black-unchanged);
+  --color-b-white-invert: var(--b-white-invert);
+  --color-b-white-invert-sec: var(--b-white-invert-sec);
+  --color-b-white-invert-thr: var(--b-white-invert-thr);
+  --color-b-white-invert-fr: var(--b-white-invert-fr);
+  --color-b-white-invert-qr: var(--b-white-invert-qr);
+  --color-b-base-accent: var(--b-base-accent);
 
   /* Text colors */
-  --color-text-iconsdark-high-emphasis: var(--text-iconsdark-high-emphasis);
-  --color-text-iconslight-disabled: var(--text-iconslight-disabled);
-  --color-text-iconslight-high-emphasis: var(--text-iconslight-high-emphasis);
-  --color-text-iconslight-medium-emphasis: var(--text-iconslight-medium-emphasis);
+
 
   /* Design system colors */
   --color-background: var(--background);
@@ -53,56 +60,6 @@
   --font-sf-pro-text: var(--font-sf-pro-text);
   --font-sans: var(--font-sf-pro-display);
 
-  /* Typography - Font families */
-  --font-family-large-24: var(--large-24-font-family);
-  --font-family-medium-17: var(--medium-17-font-family);
-  --font-family-sf-pro-medium-17-m: var(--SF-pro-medium-17-m-font-family);
-  --font-family-sf-pro-title-01-64: var(--SF-pro-title-01-64-font-family);
-  --font-family-sf-pro-title-02-34: var(--SF-pro-title-02-34-font-family);
-  --font-family-tiny-12: var(--tiny-12-font-family);
-  --font-family-title-01-64: var(--title-01-64-font-family);
-  --font-family-title-03-28: var(--title-03-28-font-family);
-
-  /* Typography - Font sizes */
-  --font-size-large-24: var(--large-24-font-size);
-  --font-size-medium-17: var(--medium-17-font-size);
-  --font-size-sf-pro-medium-17-m: var(--SF-pro-medium-17-m-font-size);
-  --font-size-sf-pro-title-01-64: var(--SF-pro-title-01-64-font-size);
-  --font-size-sf-pro-title-02-34: var(--SF-pro-title-02-34-font-size);
-  --font-size-tiny-12: var(--tiny-12-font-size);
-  --font-size-title-01-64: var(--title-01-64-font-size);
-  --font-size-title-03-28: var(--title-03-28-font-size);
-
-  /* Typography - Font weights */
-  --font-weight-large-24: var(--large-24-font-weight);
-  --font-weight-medium-17: var(--medium-17-font-weight);
-  --font-weight-sf-pro-medium-17-m: var(--SF-pro-medium-17-m-font-weight);
-  --font-weight-sf-pro-title-01-64: var(--SF-pro-title-01-64-font-weight);
-  --font-weight-sf-pro-title-02-34: var(--SF-pro-title-02-34-font-weight);
-  --font-weight-tiny-12: var(--tiny-12-font-weight);
-  --font-weight-title-01-64: var(--title-01-64-font-weight);
-  --font-weight-title-03-28: var(--title-03-28-font-weight);
-
-  /* Typography - Line heights */
-  --line-height-large-24: var(--large-24-line-height);
-  --line-height-medium-17: var(--medium-17-line-height);
-  --line-height-sf-pro-medium-17-m: var(--SF-pro-medium-17-m-line-height);
-  --line-height-sf-pro-title-01-64: var(--SF-pro-title-01-64-line-height);
-  --line-height-sf-pro-title-02-34: var(--SF-pro-title-02-34-line-height);
-  --line-height-tiny-12: var(--tiny-12-line-height);
-  --line-height-title-01-64: var(--title-01-64-line-height);
-  --line-height-title-03-28: var(--title-03-28-line-height);
-
-  /* Typography - Letter spacing */
-  --letter-spacing-large-24: var(--large-24-letter-spacing);
-  --letter-spacing-medium-17: var(--medium-17-letter-spacing);
-  --letter-spacing-sf-pro-medium-17-m: var(--SF-pro-medium-17-m-letter-spacing);
-  --letter-spacing-sf-pro-title-01-64: var(--SF-pro-title-01-64-letter-spacing);
-  --letter-spacing-sf-pro-title-02-34: var(--SF-pro-title-02-34-letter-spacing);
-  --letter-spacing-tiny-12: var(--tiny-12-letter-spacing);
-  --letter-spacing-title-01-64: var(--title-01-64-letter-spacing);
-  --letter-spacing-title-03-28: var(--title-03-28-letter-spacing);
-
   /* Radius */
   --radius: var(--radius);
 }
@@ -114,6 +71,7 @@
   --animate-collapsible-down: collapsible-down 0.2s ease-out;
   --animate-collapsible-up: collapsible-up 0.2s ease-out;
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-ping-slow: ping-slow 2.25s ease infinite;
  
   @keyframes loading-progress {
     0% { width: 0%; }
@@ -163,24 +121,40 @@
       opacity: 0;
     }
   }
+  @keyframes ping-slow {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
 }
 
 @layer base {
 	:root {
 	/* Base colors */
 	--base-white: rgba(255, 255, 255, 1);
-	--gray-900: rgba(24, 29, 39, 1);
-	--greys-00: rgba(255, 255, 255, 1);
-	--greys-01: rgba(245, 245, 245, 1);
-	--greys-02: rgba(231, 231, 231, 1);
-	--greys-06: rgba(79, 79, 79, 1);
-	--greys-08: rgba(42, 42, 42, 1);
 
-	/* Text colors */
-	--text-iconsdark-high-emphasis: rgba(255, 255, 255, 1);
-	--text-iconslight-disabled: rgba(0, 0, 0, 0.38);
-	--text-iconslight-high-emphasis: rgba(0, 0, 0, 0.87);
-	--text-iconslight-medium-emphasis: rgba(0, 0, 0, 0.6);
+	/* Custom colors */
+  --b-base: var(--color-stone-100);
+  --b-base-second: var(--color-neutral-100);
+  --b-base-it: var(--color-zinc-50);
+  --b-white: var(--color-white);
+  --sh-base-white: var(--color-white);
+  --b-white-foreground: var(--color-zinc-700);
+  --b-white-unchanged: var(--color-zinc-800);
+  --b-black-unchanged: var(--color-zinc-100);
+  --b-white-invert: var(--color-zinc-800);
+  --b-white-invert-sec: var(--color-zinc-600);
+  --b-white-invert-thr: var(--color-zinc-500);
+  --b-white-invert-fr: var(--color-zinc-200);
+  --b-white-invert-qr: var(--color-stone-200);
+  --b-base-accent: var(--color-zinc-200);
 
 	/* Design system colors - Light mode */
 	--background: hsl(0 0% 100%);
@@ -206,63 +180,30 @@
 	/* Shadows */
 	--elevation-02: 0px 16px 24px 0px rgba(0, 0, 0, 0.12);
 
-	/* Typography */
-	--large-24-font-family: "SF Pro Display", Helvetica;
-	--large-24-font-size: 24px;
-	--large-24-font-style: normal;
-	--large-24-font-weight: 500;
-	--large-24-letter-spacing: 0.016800000071525573px;
-	--large-24-line-height: 120.00000762939453%;
-	--medium-17-font-family: "SF Pro Text", Helvetica;
-	--medium-17-font-size: 17px;
-	--medium-17-font-style: normal;
-	--medium-17-font-weight: 500;
-	--medium-17-letter-spacing: 0.07310000121593475px;
-	--medium-17-line-height: 22px;
-	--SF-pro-medium-17-m-font-family: "SF Pro Text", Helvetica;
-	--SF-pro-medium-17-m-font-size: 17px;
-	--SF-pro-medium-17-m-font-style: normal;
-	--SF-pro-medium-17-m-font-weight: 400;
-	--SF-pro-medium-17-m-letter-spacing: 0.07310000121593475px;
-	--SF-pro-medium-17-m-line-height: 22px;
-	--SF-pro-title-01-64-font-family: "SF Pro Display", Helvetica;
-	--SF-pro-title-01-64-font-size: 64px;
-	--SF-pro-title-01-64-font-style: normal;
-	--SF-pro-title-01-64-font-weight: 400;
-	--SF-pro-title-01-64-letter-spacing: 0.14079999923706055px;
-	--SF-pro-title-01-64-line-height: 100%;
-	--SF-pro-title-02-34-font-family: "SF Pro Display", Helvetica;
-	--SF-pro-title-02-34-font-size: 34px;
-	--SF-pro-title-02-34-font-style: normal;
-	--SF-pro-title-02-34-font-weight: 400;
-	--SF-pro-title-02-34-letter-spacing: 0.13939999878406525px;
-	--SF-pro-title-02-34-line-height: 120.00000762939453%;
-	--tiny-12-font-family: "SF Pro Text", Helvetica;
-	--tiny-12-font-size: 12px;
-	--tiny-12-font-style: normal;
-	--tiny-12-font-weight: 500;
-	--tiny-12-letter-spacing: 0px;
-	--tiny-12-line-height: 16px;
-	--title-01-64-font-family: "SF Pro Display", Helvetica;
-	--title-01-64-font-size: 64px;
-	--title-01-64-font-style: normal;
-	--title-01-64-font-weight: 400;
-	--title-01-64-letter-spacing: 0.14079999923706055px;
-	--title-01-64-line-height: 68px;
-	--title-03-28-font-family: "SF Pro Display", Helvetica;
-	--title-03-28-font-size: 28px;
-	--title-03-28-font-style: normal;
-	--title-03-28-font-weight: 500;
-	--title-03-28-letter-spacing: 0px;
-	--title-03-28-line-height: 42px;
-
 	/* Radius */
 	--radius: 0.5rem;
 	}
 
 	.dark {
+	/* Custom colors */
+  --b-base: var(--color-zinc-900);
+  --b-base-second: var(--color-neutral-900);
+  --b-base-it: var(--color-zinc-900);
+  --b-white: var(--color-zinc-800);
+  --sh-base-white: var(--color-zinc-800);
+  --b-white-foreground: var(--color-zinc-300);
+  --b-white-unchanged: var(--color-zinc-800);
+  --b-black-unchanged: var(--color-zinc-100);
+  --b-white-invert: var(--color-white);
+  --b-white-invert-sec: var(--color-zinc-200);
+  --b-white-invert-thr: var(--color-zinc-400);
+  --b-white-invert-fr: var(--color-zinc-700);
+  --b-white-invert-qr: hsl(0 0% 6.67%);
+  --b-base-accent: var(--color-zinc-500);
+
+
 	/* Design system colors - Dark mode */
-	--background: hsl(0 0% 13%);
+	--background: var(--color-neutrals-900);
 	--foreground: hsl(213 31% 91%);
 	--muted: hsl(223 47% 11%);
 	--muted-foreground: hsl(215.4 16.3% 56.9%);
@@ -274,8 +215,8 @@
 	--input: hsl(216 34% 17%);
 	--card: transparent;
 	--card-foreground: hsl(213 31% 91%);
-	--primary: hsl(210 40% 98%);
-	--primary-foreground: hsl(0 0% 16%);
+	--primary: var(--color-zinc-950);
+	--primary-foreground: var(--color-white);
 	--secondary: hsl(222.2 47.4% 11.2%);
 	--secondary-foreground: hsl(210 40% 98%);
 	--destructive: hsl(0 63% 31%);
@@ -308,6 +249,18 @@
   .border-0:not(input):not(textarea):not(select):not(button)::backdrop,
   .border-0:not(input):not(textarea):not(select):not(button)::file-selector-button {
     @apply border-none outline-none;
+  }
+  
+  /* @supports not (background: paint(squircle)) {
+    [class*="squircle-"] {
+      border-radius: 0 !important;
+    }
+  } */
+  
+  @supports not (background: paint(squircle)) {
+    [class*="squircle-5xl"], [class*="squircle-6xl"]:not(.text-card-foreground), [class*="squircle-7xl"] {
+      border-radius: var(--squircle-border-radius-2xl)!important;
+    }
   }
 
   html {
@@ -382,12 +335,12 @@
 
   /* Typography - Code */
   code {
-    @apply text-[0.875rem] font-mono bg-muted px-1.5 py-0.5 rounded;
+    @apply text-[0.875rem] font-mono bg-b-base px-1.5 py-0.5 rounded;
     @apply border border-border;
   }
 
   pre {
-    @apply bg-muted p-4 rounded-lg overflow-x-auto;
+    @apply bg-b-base p-4 rounded-lg overflow-x-auto;
     @apply border border-border mb-4;
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;

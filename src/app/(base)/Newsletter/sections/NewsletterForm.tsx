@@ -10,13 +10,16 @@ import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations } from "next-intl";
-
-const tags = ["Newsletter", "Shiro", "Tsunami", "IA", "Automatisation"];
+import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
+import { toast } from "sonner";
+import { richTextComponent } from "@/module/content/utils/mdx-components";
 
 export function NewsletterForm() {
   const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+    const emailValidator = useEmailValidator({ label: "Email", required: true });
+    const isEmailValid = !Boolean(emailValidator(email));
 
   return (
     <>
@@ -25,7 +28,7 @@ export function NewsletterForm() {
         sectionContentClassName="w-full"
         cardClassName="w-full"
         cardContentClassName="w-full p-6 md:p-8"
-        className="squircle squircle-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+        className="squircle squircle-b-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
       >
         <div
           className={cn(
@@ -33,24 +36,30 @@ export function NewsletterForm() {
           )}
         >
           <div
-            className={
+            className=
               "flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4"
-            }
           >
-            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-zinc-600">
+            <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-b-white-invert-sec">
               {t("newsletter.page.badge")}
             </Badge>
-            <h2 className="self-stretch">{t("newsletter.page.title")}</h2>
-            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-[120%] text-zinc-600">
-              {t("newsletter.page.desc")}
+            <h2 className="self-stretch">{t.rich("newsletter.page.title", {
+              ...richTextComponent,
+            })}</h2>
+            <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-snug text-b-white-invert-sec">
+              {t.rich("newsletter.page.desc", {
+                ...richTextComponent,
+              })}
             </p>
           </div>
-          <Tags tags={tags} isCentered />
+          <Tags
+            tags={t("common.page-sections.newsletter.tags").split(",")}
+            isCentered
+          />
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <Input
               placeholder={t(
-                "common.page-sections.newsletter.form.fields.email.placeholder"
+                "common.page-sections.newsletter.form.fields.email-page.placeholder"
               )}
               type="email"
               value={email}
@@ -62,7 +71,11 @@ export function NewsletterForm() {
                 posthog.capture("newsletter_subscribe_clicked", {
                   has_email_entered: !!email,
                 });
-                setIsModalOpen(true);
+                if (isEmailValid) {
+                  setIsModalOpen(true);
+                } else {
+                  toast.error(t("zod.errors.customized.email.invalid"));
+                }
               }}
               asFull
               whileTap

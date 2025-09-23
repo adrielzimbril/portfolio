@@ -1,19 +1,9 @@
-import logger from "@/utils/logger";
+import { createHmac } from "@/utils/key-hmac";
 
 const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
 
 // Check if we are on the server or client
 const isServer = typeof window === "undefined";
-
-// Import dynamic crypto for server only
-let serverCrypto: any = null;
-if (isServer) {
-  try {
-    serverCrypto = require("node:crypto");
-  } catch (e) {
-    logger.warn("Failed to load node:crypto:", e);
-  }
-}
 
 // Convert to Base64URL
 function toBase64Url(input: Buffer | string | object) {
@@ -47,46 +37,6 @@ function fromBase64Url(input: string) {
     // Version browser using atob
     const decoded = atob(input);
     return decoded;
-  }
-}
-
-// Function HMAC compatible client/server
-async function createHmac(
-  algorithm: string,
-  key: string,
-  data: string
-): Promise<string> {
-  if (isServer && serverCrypto) {
-    // Version server with node:crypto
-    return serverCrypto.createHmac(algorithm, key).update(data).digest("hex");
-  } else if (
-    typeof window !== "undefined" &&
-    window.crypto &&
-    window.crypto.subtle
-  ) {
-    // Version browser with Web Crypto API
-    const encoder = new TextEncoder();
-    const keyData = encoder.encode(key);
-    const dataBuffer = encoder.encode(data);
-
-    const cryptoKey = await window.crypto.subtle.importKey(
-      "raw",
-      keyData,
-      { name: "HMAC", hash: "SHA-256" },
-      false,
-      ["sign"]
-    );
-
-    const signature = await window.crypto.subtle.sign(
-      "HMAC",
-      cryptoKey,
-      dataBuffer
-    );
-    return Array.from(new Uint8Array(signature))
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
-  } else {
-    throw new Error("No crypto implementation available");
   }
 }
 
@@ -374,30 +324,57 @@ const API_KEYS = new Set([
 ]);
 
 /**
+ * Universal crypto.getRandomValues, works in Node 19+ and browsers
+ *
+ * @param size The number of bytes to generate
+ *
+ * @returns A Uint8Array of random bytes
+ *
+ * @example
+ * ```typescript
+ * const randomBytes = getRandomBytes(16); // Generate 16 random bytes Like : "B1npudHN2b2loeGJ1eGJ6Iiw"
+ * ```
+ */
+function getRandomBytes(size: number): Uint8Array {
+  if (typeof crypto !== "undefined" && crypto.getRandomValues) {
+    const array = new Uint8Array(size);
+    crypto.getRandomValues(array);
+    return array;
+  }
+  // Fallback for older Node versions
+  return new Uint8Array(size).map(() => Math.floor(Math.random() * 256));
+}
+
+/**
  * Generate a new API key
+ *
+ * @returns A new API key
+ *
+ * @example
+ * ```typescript
+ * const apiKey = generateApiKey(); // Generate a new API key
+ * ```
  */
 export function generateApiKey(): string {
   const prefix = "api_";
-
-  if (isServer && serverCrypto) {
-    const randomPart = serverCrypto.randomBytes(16).toString("hex");
-    return `${prefix}${randomPart}`;
-  } else if (typeof window !== "undefined" && window.crypto) {
-    const array = new Uint8Array(16);
-    window.crypto.getRandomValues(array);
-    const randomPart = Array.from(array, (byte) =>
-      byte.toString(16).padStart(2, "0")
-    ).join("");
-    return `${prefix}${randomPart}`;
-  } else {
-    // Basic fallback
-    const randomPart = Math.random().toString(36).substring(2, 18);
-    return `${prefix}${randomPart}`;
-  }
+  const array = getRandomBytes(16);
+  const randomPart = Array.from(array, (b) =>
+    b.toString(16).padStart(2, "0")
+  ).join("");
+  return `${prefix}${randomPart}`;
 }
 
 /**
  * Validate a static API key
+ *
+ * @param apiKey The API key to validate
+ *
+ * @returns Whether the API key is valid
+ *
+ * @example
+ * ```typescript
+ * const isValid = validateApiKey("api_key_trigger_task_2024"); // Validate an API key
+ * ```
  */
 export function validateApiKey(apiKey: string): boolean {
   return API_KEYS.has(apiKey);
