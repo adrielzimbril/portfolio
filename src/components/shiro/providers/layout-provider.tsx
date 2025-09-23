@@ -67,7 +67,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
             }
           />
         ) : (
-          <ReactLenis root>{children}</ReactLenis>
+          { children }
         )
       ) : asLoader && !isLoaded ? (
         <GenericLoadingPage
