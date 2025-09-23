@@ -3,7 +3,7 @@ import { Database } from "@/module/supabase/types";
 
 export const supabaseKey = {
   url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-  anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
+  anonKey: process.env.NEXT_PRIVATE_SUPABASE_ANON_KEY ?? "",
 };
 
 if (!supabaseKey.url || !supabaseKey.anonKey) {

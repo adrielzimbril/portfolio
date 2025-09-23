@@ -3,7 +3,7 @@
 import posthog from "posthog-js";
 import { useEffect } from "react";
 
-const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY as string;
+const posthogKey = process.env.NEXT_PRIVATE_POSTHOG_KEY as string;
 
 export function AnalyticsScript() {
 	useEffect(() => {
