@@ -5,7 +5,6 @@ import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
 import { useTranslations } from "use-intl";
 import { usePathname } from "next/navigation";
 import { routes } from "@/data/routes";
-import logger from "@/utils/logger";
 import { getActivePathInArray, sleep } from "@/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 

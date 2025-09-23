@@ -66,7 +66,8 @@ export function useLocalStorage<T>(
       let parsed: unknown;
       try {
         parsed = JSON.parse(value);
-      } catch (_error) {
+      } catch (error) {
+        console.error(error);
         return defaultValue; // Return initialValue if parsing fails
       }
 
@@ -89,7 +90,8 @@ export function useLocalStorage<T>(
     try {
       const raw = window.localStorage.getItem(key);
       return raw ? deserializer(raw) : initialValueToUse;
-    } catch (_error) {
+    } catch (error) {
+      console.error(error);
       return initialValueToUse;
     }
   }, [initialValue, key, deserializer]);
@@ -122,7 +124,8 @@ export function useLocalStorage<T>(
 
       // We dispatch a custom event so every similar useLocalStorage hook is notified
       window.dispatchEvent(new StorageEvent("local-storage", { key }));
-    } catch (_error) {
+    } catch (error) {
+      console.error(error);
       // A more advanced implementation would handle the error case
     }
   });

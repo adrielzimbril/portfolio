@@ -49,9 +49,10 @@ export function ProductTitleRequestsBadge({
   title: string;
   type?: ResourceType;
 }): JSX.Element | null {
-  if (!type) return null;
   const t = useTranslations();
   const { count, loading } = useProductTitleRequestsCount(title);
+
+  if (!type) return null;
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
@@ -101,7 +102,8 @@ export function ProductAvatarsStats({
   type: ResourceType;
   colorName?: string;
 }) {
-  const { count, loading } = useProductTitleRequestsCount(title);
+  const { count } = useProductTitleRequestsCount(title);
+
   return (
     <AvatarsStats
       userCount={count ?? 0}

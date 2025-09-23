@@ -122,12 +122,6 @@ interface CalculateReadingTimeParams {
   options?: ReadingTimeOptions;
 }
 
-// Interface for the hook (separated parameters)
-interface UseReadingTimeParams {
-  content: string;
-  options?: ReadingTimeOptions;
-}
-
 // ================== CALCULATION FUNCTIONS (SAFE ON SERVER SIDE) ==================
 
 export const calculateReadingTime = ({
@@ -252,7 +246,11 @@ export function useReadingTime(
     codeMultiplier: 0.5,
   }
 ): ReadingTimeResult | null {
-  const memoizedOptions = useMemo(() => options, [JSON.stringify(options)]);
+  const stringifiedOptions = JSON.stringify(options);
+  const memoizedOptions = useMemo(
+    () => JSON.parse(stringifiedOptions),
+    [stringifiedOptions]
+  );
 
   const memoizedReadingTime = useMemo(() => {
     if (!content) return null;

@@ -73,7 +73,8 @@ function StatusBadge({
     <span className="relative flex justify-center items-center h-3 w-3">
       <span
         className={cn(
-          "absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping-slow",
+          "absolute inline-flex h-full w-full rounded-full opacity-75",
+          animated ? "animate-ping-slow" : "",
           {
             "bg-green-300": status === "online" || status === "available",
             "bg-purple-300": status === "info",

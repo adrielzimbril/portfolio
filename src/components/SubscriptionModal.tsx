@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -24,13 +24,14 @@ import { Button } from "@/components/ui/button";
 import logger from "@/utils/logger";
 import { toast } from "sonner";
 import { PhoneInput } from "@aurthle/react-phone";
+import * as RPNInput from "react-phone-number-input";
 import confetti from "canvas-confetti";
-import { useGetIpInfo } from "@/hooks/useIpInfo";
+import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
 import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { useTranslations, useLocale, Locale } from "use-intl";
+import { useTranslations, useLocale } from "use-intl";
 import { apiRoutes } from "@/data/api-routes";
 
 interface SubscriptionModalProps {
@@ -52,7 +53,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   const locale = useLocale();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [userCountry, setUserCountry] = useState("FR");
+  const [userCountry, setUserCountry] = useState<RPNInput.Country>("FR");
   const [hasInitialSubscription, setHasInitialSubscription] = useState(false);
 
   // Use of useRef to ensure we only fetch the IP once
@@ -65,8 +66,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
     const getCountry = async () => {
       try {
-        const country = await useGetIpInfo(undefined, true);
-        setUserCountry(country.data?.country?.code ?? "FR");
+        const country = await getIpInfo();
+        setUserCountry(country.data?.country?.iso2 ?? "FR");
       } catch (error) {
         logger.error(t("logger.ip.fetch.country-failed"), error);
       }
@@ -344,7 +345,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     </FormLabel>
                     <FormControl>
                       <PhoneInput
-                        defaultCountry={userCountry as unknown as any}
+                        defaultCountry={userCountry}
                         wrapperClassName="rounded-xl w-full h-12"
                         className="rounded-xl w-full h-12"
                         inputComponent={Input}

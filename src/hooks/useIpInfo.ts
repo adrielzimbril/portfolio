@@ -285,7 +285,7 @@ export async function getIpInfo<T = IpInfoResponse>(
               return {
                 data: null,
                 error: `Données invalides: ${JSON.stringify(
-                  (validationError as any).errors
+                  validationError.issues
                 )}`,
                 isValid: false,
                 validationErrors: validationError,
@@ -294,7 +294,7 @@ export async function getIpInfo<T = IpInfoResponse>(
               // Permissive mode : use raw data
               logger.warn(
                 "Validation échouée, utilisation des données brutes:",
-                (validationError as any).errors
+                (validationError as z.ZodError).message
               );
               const finalData =
                 simplified && rawResult
