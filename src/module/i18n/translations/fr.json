@@ -174,7 +174,7 @@
     }
   },
   "submit": {
-    "title": "Soumets ton projet | ShiroSaaS Lab",
+    "title": "Shirosaas Lab 😮‍💨🧪",
     "description": "Partage ton projet, idée ou produit pour une analyse UX, un redesign Figma ou un feedback produit. Adriel Zimbril t'accompagne pour transformer tes idées en expériences impactantes.",
     "keywords": "Soumission projet SaaS, Adriel Zimbril, Product Designer, UX Review, Redesign Figma, Analyse site web, Feedback produit, ShiroSaaS, Design System, Product Design",
     "page": {
@@ -587,6 +587,20 @@
       "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product Designer 🦄",
       "contact": "Si tu veux échanger ou juste dire bonjour, réponds simplement à cet email. Je lis tout personnellement.",
       "copyright": "Crafted with ❤️ by Adriel Zimbril"
+    },
+    "submitAdminNotification": {
+      "subject": "🚀 Nouveau formulaire soumis — ShiroSaaS Lab",
+      "preview": "Shirosaas Lab | Un nouveau formulaire a été soumis !"
+    },
+    "submitUserConfirmation": {
+      "subject": "✅ Bien reçu ! Ton projet est en orbite 🪐",
+      "preview": "Ton projet bientôt sous les projecteurs 🔦🐼",
+      "greeting": "Bienvenue {firstName}",
+      "content": {
+        "intro": "Merci d'avoir soumis ton projet au ShiroSaaS Lab. Nous avons bien reçu ta demande pour (<strong>{intention}</strong>) et on va y jeter un œil rapidement ! 🐼",
+        "link": "Lien reçu",
+        "wait": "Si ton projet est accepté, tu recevras un email quand ton projet sera planifié pour une review / vidéo. En attendant, n'hésite pas à répondre à ce mail si tu veux ajouter des précisions, à bientôt 🌚."
+      }
     },
     "welcome": {
       "subject": "Bienvenue sur ma newsletter !",

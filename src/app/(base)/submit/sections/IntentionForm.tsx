@@ -30,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { apiRoutes } from "@/data/api-routes";
 
 enum Intention {
   UX_REVIEW = "ux_review",
@@ -44,7 +45,7 @@ export function IntentionForm() {
     intention: z.enum(intentions),
     name: z
       .string({ error: t("zod.errors.customized.name.invalid") })
-      .min(4, { message: t("zod.errors.customized.name.required") }),
+      .min(4, { error: t("zod.errors.customized.name.required") }),
     email: z.email({ error: t("zod.errors.customized.email.invalid") }),
     url: z.url({ error: t("zod.errors.customized.url.invalid") }),
     description: z.string().optional(),
@@ -61,11 +62,22 @@ export function IntentionForm() {
 
   const intention = form.watch("intention");
 
-  const onSubmit: SubmitHandler<IntentionFormValues> = (values) => {
-    // TODO: wire to backend or email/service later
-    console.log("submit_thought_intention", values);
-    toast.success(t("submit.page.toast.success"));
-    form.reset();
+  const onSubmit: SubmitHandler<IntentionFormValues> = async (values) => {
+    try {
+      const res = await fetch(apiRoutes.submit.link, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data?.error || "REQUEST_FAILED");
+      }
+      toast.success(t("submit.page.toast.success"));
+      form.reset({ intention: values.intention });
+    } catch (e) {
+      toast.error(t("submit.page.toast.error"));
+    }
   };
 
   const Select = ({
@@ -147,7 +159,7 @@ export function IntentionForm() {
                 <div className="space-y-2">
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
                         <Label>
