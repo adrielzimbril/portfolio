@@ -54,7 +54,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticMarketingPages.flatMap((page: string) => ({
       url: new URL(`${page === "/" ? "" : "/"}${page}`, baseUrl).href,
       lastModified: new Date(),
-      changeFrequency: "monthly",
       priority: getPriority(page === "/" ? "home" : "marketing"),
     })),
     ...posts.map((post: Post) => ({
