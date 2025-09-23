@@ -3,25 +3,19 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpOne } from "@aurthle/icons";
-
-// Detect mobile basic (iOS/Android)
-const isMobileDevice = () => /Mobi|Android/i.test(navigator.userAgent);
+import { useIsIOS } from "@/hooks/useIsMobile";
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const isIOS = useIsIOS();
 
   const ticking = useRef(false);
   const targetProgress = useRef(0);
   const animationFrame = useRef<number | null>(null);
-  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    setIsMobile(isMobileDevice());
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return; // Do nothing on mobile
+    if (isIOS) return; // Do nothing on mobile
 
     const updateScroll = () => {
       const scrollTop = window.pageYOffset;

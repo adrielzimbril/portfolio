@@ -23,3 +23,18 @@ export const useIsMobile = (breakpoint = 768) => {
 
   return isMobile;
 };
+
+export const useIsIOS = () => {
+  const [isIOS, setIsIOS] = useState(false);
+
+  useEffect(() => {
+    const checkIOS = () =>
+      setIsIOS(
+        /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+      );
+    checkIOS();
+  }, []);
+
+  return isIOS;
+};
+
