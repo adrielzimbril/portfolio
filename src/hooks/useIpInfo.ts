@@ -1,5 +1,6 @@
 import { z } from "zod";
 import logger from "@/utils/logger";
+import { sleep } from "@/utils";
 
 // 🎯 Zod schemas for validation and automatic typing
 const TimezoneSchema = z.object({
@@ -182,9 +183,6 @@ function transformToSummary(data: IpInfoResponse): IpInfoSummary {
         : undefined,
   };
 }
-
-// 🕐 Helper for delays
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
  * SERVER-SIDE function to retrieve information about an IP address

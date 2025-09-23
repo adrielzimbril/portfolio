@@ -1,4 +1,3 @@
-"use client";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useLoadMore } from "@/hooks/useLoadMore";

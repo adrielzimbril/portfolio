@@ -7,8 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata() {
-  //const t = await getTranslations();
-  const t = (key: string) => key;
+  const t = await getTranslations();
 
   const metadata: Metadata = {
     ...baseMetadata,

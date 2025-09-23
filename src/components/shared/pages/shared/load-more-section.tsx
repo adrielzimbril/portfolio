@@ -1,6 +1,4 @@
-import React, { ReactNode } from "react";
-import { useLoadMore } from "@/hooks/useLoadMore";
-import { PreviewItem } from "@/types";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
@@ -9,7 +7,7 @@ import { useTranslations } from "use-intl";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
 
 interface LoadMoreUIProps {
-  children: ReactNode;
+  children: React.ReactNode;
   hasMore: boolean;
   loading: boolean;
   onLoadMore: () => void;

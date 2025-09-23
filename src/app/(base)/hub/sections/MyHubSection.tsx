@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from "react";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
