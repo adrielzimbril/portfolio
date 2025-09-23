@@ -136,7 +136,7 @@ export async function getResourceWithAdjacent(
     return null;
   }
 
-  const currentResource = sortedResources[currentIndex];
+  const currentResource = sortedResources[currentIndex]!;
 
   // Intelligent logic to always have 2 resources
   const availableBefore = currentIndex;

@@ -103,7 +103,7 @@ export async function getProjectWithAdjacent(
     return null;
   }
 
-  const currentProject = sortedProjects[currentIndex];
+  const currentProject = sortedProjects[currentIndex]!;
 
   // Intelligent logic to always have 2 projects
   const availableBefore = currentIndex;
