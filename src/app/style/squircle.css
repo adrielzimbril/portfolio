@@ -108,11 +108,11 @@
   );
 
   @supports (color: color-mix(in lab,red,red)) {
-    --squircle-background-color: --value(--color-*, [color], transparent) !important;
+    --squircle-background-color: --value(--color- *, [color], 'transparent') !important;
   }
 
   @supports not (background: paint(squircle)) {
-    background-color: --value(--color-*, [color], transparent) !important;
+    background-color: --value(--color- *, [color], 'transparent') !important;
     border-radius: --value(
       --squircle-border-radius- *,
       [length],
@@ -440,6 +440,6 @@
   );
   
   @supports (color: color-mix(in lab,red,red)) {
-    --squircle-border-color: --value(--color-*, [color], transparent) !important;
+    --squircle-border-color: --value(--color- *, [color], 'transparent') !important;
   }
 }
