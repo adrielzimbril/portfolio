@@ -1,4 +1,5 @@
-import { createHmac } from "@/utils/key-hmac";
+import { apiRoutes } from "@/data/api-routes";
+import logger from "@/utils/logger";
 
 const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
 
@@ -40,12 +41,63 @@ function fromBase64Url(input: string) {
   }
 }
 
+// Function HMAC compatible client/server
+export async function createHmac(
+  algorithm: string,
+  key: string,
+  data: string
+): Promise<string | undefined> {
+  if (typeof window !== "undefined" && window.crypto && window.crypto.subtle) {
+    // Version browser with Web Crypto API
+    const encoder = new TextEncoder();
+    const keyData = encoder.encode(key);
+    const dataBuffer = encoder.encode(data);
+
+    const cryptoKey = await window.crypto.subtle.importKey(
+      "raw",
+      keyData,
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+
+    const signature = await window.crypto.subtle.sign(
+      "HMAC",
+      cryptoKey,
+      dataBuffer
+    );
+    return Array.from(new Uint8Array(signature))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  } else {
+    try {
+      const res = await fetch(apiRoutes.sign.link, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ algorithm, key, data }),
+      });
+
+      if (!res.ok) throw new Error(`Server HMAC failed: ${res.status}`);
+
+      const { signature } = await res.json();
+      return signature;
+    } catch (err) {
+      logger.error("Unable to generate HMAC on server fallback", err);
+      return undefined;
+    }
+  }
+}
+
 // ==========================================
 // SOLUTION 1: Simple token with timestamp (ASYNC)
 // ==========================================
 
 /**
- * Generate a simple token with timestamp
+ * Generate a simple token with timestamp | Use on client/server
+ *
+ * @param input - The input to include in the token
+ *
+ * @returns A promise that resolves to the generated token
  */
 export async function generateToken(input?: string | object): Promise<string> {
   const timestamp = Date.now();
@@ -59,7 +111,12 @@ export async function generateToken(input?: string | object): Promise<string> {
 }
 
 /**
- * Validate a simple token
+ * Validate a simple token | Use on client/server
+ *
+ * @param token - The token to validate
+ * @param maxAgeMinutes - The maximum age of the token in minutes
+ *
+ * @returns A promise that resolves to a boolean indicating whether the token is valid
  */
 export async function validateToken(
   token: string,
@@ -95,7 +152,17 @@ export async function validateToken(
 // ==========================================
 
 /**
- * Create a simple JWT without library
+ * Create a simple JWT without library | Use on client/server
+ *
+ * @param payload - The payload to include in the JWT
+ * @param expiresInMinutes - The time in minutes after which the JWT expires
+ *
+ * @returns An object containing the JWT token, expiration time, and debug information
+ *
+ * @example
+ * ```typescript
+ * const { token, expiresAt, debug } = await generateJwtToken(payload);
+ * ```
  */
 export async function generateJwtToken(
   payload: any,
@@ -157,7 +224,16 @@ export async function generateJwtToken(
 }
 
 /**
- * Validate a simple JWT
+ * Validate a simple JWT | Use on client/server
+ *
+ * @param token - The JWT token to validate
+ *
+ * @returns An object containing the validation result and debug information
+ *
+ * @example
+ * ```typescript
+ * const { valid, payload, debug } = await validateJwtToken(token);
+ * ```
  */
 export async function validateJwtToken(token: string): Promise<{
   valid: boolean;

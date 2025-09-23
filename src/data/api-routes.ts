@@ -51,6 +51,11 @@ export const apiRoutes = {
     link: "api/subscribe",
     accept: [requestType.POST],
   },
+  sign: {
+    key: "sign",
+    link: "api/sign",
+    accept: [requestType.POST],
+  },
   views: {
     key: "views",
     link: "api/views",
