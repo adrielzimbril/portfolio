@@ -64,10 +64,10 @@ export function getAbsolutePathUrl(
 ): string {
   const BASE_URL = getAbsoluteUrl(type);
 
-  // ✅ Remove the leading slash from the path to avoid overwriting the path
+  // ✅ Remove the leading slash from the path to avoid overwriting the path // Eg: /about -> about
   const safePath = path.replace(/^\//, "");
 
-  // ✅ Ensure that BASE_URL ends with a single slash
+  // ✅ Ensure that BASE_URL ends with a single slash // Eg: https://example.com -> https://example.com/
   const safeBase = BASE_URL.replace(/\/+$/, "") + "/";
 
   return new URL(safePath, safeBase).href;
