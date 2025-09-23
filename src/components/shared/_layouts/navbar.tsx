@@ -14,7 +14,7 @@ import { useTranslations } from "use-intl";
 import { getActivePathInArray, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
 import { LogoIcon } from "../icons/logo/logo-icon";
-import { useIsIOS } from "@/hooks/useIsMobile";
+import { useCompareIOSVersion } from "@/hooks/useIsMobile";
 
 const INITIAL_WIDTH = "70rem";
 const MAX_WIDTH = "68rem";
@@ -61,15 +61,15 @@ export function Navbar() {
   const { scrollY } = useScroll();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const isIOS = useIsIOS();
+  const isBadIOS = useCompareIOSVersion();
 
   useEffect(() => {
-    if (isIOS) return;
+    if (isBadIOS) return;
     const unsubscribe = scrollY.on("change", (latest) => {
       setHasScrolled(latest > 10);
     });
     return unsubscribe;
-  }, [scrollY, isIOS]);
+  }, [scrollY, isBadIOS]);
 
   const toggleDrawer = () => setIsDrawerOpen((prev) => !prev);
   const handleOverlayClick = () => setIsDrawerOpen(false);

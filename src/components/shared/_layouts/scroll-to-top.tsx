@@ -3,19 +3,20 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpOne } from "@aurthle/icons";
-import { useIsIOS } from "@/hooks/useIsMobile";
+import { useCompareIOSVersion } from "@/hooks/useIsMobile";
+import { cn } from "@/utils";
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const isIOS = useIsIOS();
+  const isBadIOS = useCompareIOSVersion();
 
   const ticking = useRef(false);
   const targetProgress = useRef(0);
   const animationFrame = useRef<number | null>(null);
 
   useEffect(() => {
-    if (isIOS) return; // Do nothing on mobile
+    if (isBadIOS) return; // Do nothing on mobile
 
     const updateScroll = () => {
       const scrollTop = window.pageYOffset;
@@ -51,7 +52,7 @@ export function ScrollToTop() {
       window.removeEventListener("scroll", updateScroll);
       if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
     };
-  }, [isIOS]);
+  }, [isBadIOS]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -67,15 +68,18 @@ export function ScrollToTop() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-20 md:bottom-6 right-6 z-40">
+    <div className="fixed bottom-6 right-6 z-40">
       <Button
         onClick={scrollToTop}
-        className="relative rounded-full p-3 transition-all duration-200 group active:scale-95"
-        variant="outline"
+        className={cn(
+          "relative p-3 transition-all duration-200 group active:scale-95",
+          isBadIOS ? "squircle-b-base-accent" : "rounded-full"
+        )}
+        variant={isBadIOS ? "colored" : "outline"}
         asIcon
         style={{ width: size, height: size }}
       >
-        {!isIOS && (
+        {!isBadIOS && (
           <svg
             className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
             width={size}

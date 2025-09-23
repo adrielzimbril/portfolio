@@ -9,16 +9,14 @@ import { getActivePathInArray, sleep } from "@/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsScript } from "@/module/analytics";
 import ReactLenis from "lenis/react";
-import { useIsMobile, useIsIOS } from "@/hooks/useIsMobile";
+import { useCompareIOSVersion } from "@/hooks/useIsMobile";
 import { init } from "@squircle/core";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const asLoader = true;
   const t = useTranslations();
-
-  const isMobile = useIsMobile();
-  const isIOS = useIsIOS();
+  const isBadIOS = useCompareIOSVersion();
 
   const route = usePathname();
   const menuRoutes = Object.values(routes);
@@ -55,7 +53,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
       <SpeedInsights />
       <AnalyticsScript />
 
-      {isIOS ? (
+      {isBadIOS ? (
         asLoader && !isLoaded ? (
           <GenericLoadingPage
             title={loader.title}
