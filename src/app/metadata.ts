@@ -17,6 +17,11 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.details.nameShared}`,
   },
   description: siteConfig.description,
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   keywords: siteConfig.keywords,
   alternates: {
     canonical: siteConfig.url,
