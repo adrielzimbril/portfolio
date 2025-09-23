@@ -1,15 +1,13 @@
 @import "tailwindcss";
-/* @import "@squircle/tailwindcss"; */
-@import "./style/squircle.css";
 @import "tw-animate-css";
-@import "./style/tailwind-animate.css";
-
+/* @import "@squircle/tailwindcss"; */
 @source '../../node_modules/@aurthle/*';
 @source '@aurthle/react-phone';
+@import "./style/squircle.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
+@theme inline {
   /* Base colors */
   --color-base-white: var(--base-white);
 
