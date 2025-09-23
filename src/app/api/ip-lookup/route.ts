@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
       });
     }
     
-    const data: IPData = await response.json();
+    const data: IPData<string> = await response.json();
     
     return new Response(JSON.stringify(data), {
       status: 200,
