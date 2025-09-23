@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { apiRoutes } from "@/data/api-routes";
+import { Label } from "@/components/ui/label";
 
 enum Intention {
   UX_REVIEW = "ux_review",
@@ -97,7 +98,7 @@ export function IntentionForm() {
         name={name}
         render={({ field }) => (
           <FormItem>
-            <SelectLabel>{label}</SelectLabel>
+            <Label htmlFor={id}>{label}</Label>
             <FormControl>
               <SelectComponent
                 value={field.value ?? ""}
@@ -114,6 +115,7 @@ export function IntentionForm() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
+                    <SelectLabel>{label}</SelectLabel>
                     {options.map((opt) => (
                       <SelectItem key={opt.value} value={opt.value}>
                         {opt.label}

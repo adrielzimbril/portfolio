@@ -109,7 +109,6 @@ export const Footer: React.FC = () => {
                       likeButton
                       whileTap
                       size="xs"
-                      //variant="outline"
                       aria-label={name}
                     >
                       <span className="flex items-center size-full justify-center m-auto">
