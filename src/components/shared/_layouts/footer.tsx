@@ -214,8 +214,8 @@ export function LocaleSwitch() {
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
-          className="flex w-fit items-center gap-2 squircle-sh-white! text-b-white-foreground min-w-10"
+          variant="colored"
+          className="flex w-fit items-center gap-2 squircle-sh-white! squircle-7xl squircle-border-2 squircle-border-b-base-accent text-b-white-foreground min-w-10"
           size="xs"
           asIcon
           asPointer

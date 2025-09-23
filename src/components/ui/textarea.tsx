@@ -37,7 +37,7 @@ function Textarea({
         id={id}
         data-slot="textarea"
         className={cn(
-          "border-input placeholder:text-muted-foreground/70 focus-visible:ring-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex min-h-19.5 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-none transition-[color,box-shadow] outline-none disabled:cursor-not-allowed disabled:opacity-50 [resize:none]",
+          "border-b-base-accent text-inherit focus-visible:ring-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex min-h-19.5 w-full rounded-md border bg-transparent px-3 py-2 text-lg shadow-none outline-none disabled:cursor-not-allowed disabled:opacity-50 [resize:none]",
           className,
           autoGrow &&
             "field-sizing-content max-h-29.5 min-h-0 resize-none py-1.75",
