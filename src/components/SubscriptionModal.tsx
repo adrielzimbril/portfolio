@@ -25,6 +25,7 @@ import logger from "@/utils/logger";
 import { toast } from "sonner";
 import { PhoneInput } from "@aurthle/react-phone";
 import * as RPNInput from "react-phone-number-input";
+// @ts-ignore
 import confetti from "canvas-confetti";
 import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
@@ -67,7 +68,10 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     const getCountry = async () => {
       try {
         const country = await getIpInfo();
-        setUserCountry(country.data?.country?.iso2 ?? "FR");
+        setUserCountry(
+          (country.data?.country?.iso2 as RPNInput.Country) ??
+            ("FR" as unknown as RPNInput.Country)
+        );
       } catch (error) {
         logger.error(t("logger.ip.fetch.country-failed"), error);
       }
