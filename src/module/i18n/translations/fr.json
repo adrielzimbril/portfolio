@@ -422,9 +422,6 @@
           "subtitle": "Conseils, ressources et inspirations pour créer des produits qui comptent 🎨"
         }
       },
-      "components": {
-        "button-copy": {}
-      },
       "planning-badge": {
         "available": {
           "title": "Disponible",
