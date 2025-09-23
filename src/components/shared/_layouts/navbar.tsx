@@ -214,7 +214,7 @@ export function Navbar() {
                   </div>
 
                   <motion.ul
-                    className="flex flex-col gap-2 text-sm mb-4"
+                    className="w-full flex flex-col gap-2 text-sm mb-4"
                     variants={drawerMenuContainerVariants}
                   >
                     <AnimatePresence>
@@ -222,7 +222,7 @@ export function Navbar() {
                         <motion.li
                           key={item.name}
                           className={cn(
-                            "p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
+                            "w-full p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
                             activeTab === item.key
                               ? "squircle-b-white-invert-fr"
                               : "squircle-sh-white"
@@ -231,11 +231,12 @@ export function Navbar() {
                         >
                           <Link
                             href={item.link}
-                            className={`underline-offset-4 hover:text-b-white-invert/80 transition-colors ${
+                            className={cn(
+                              "w-full underline-offset-4 hover:text-b-white-invert/80 transition-colors",
                               activeTab === item.key
                                 ? "text-b-white-invert font-medium"
                                 : "text-b-white-invert/80"
-                            }`}
+                            )}
                             onClick={async () => {
                               setActiveTab(item.key);
                               sleep(2000).then(() => {
