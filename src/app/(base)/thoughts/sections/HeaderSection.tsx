@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { useTranslations } from "use-intl";

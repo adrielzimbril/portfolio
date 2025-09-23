@@ -1,13 +1,13 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { HeaderSection } from "./sections/HeaderSection";
+// import { HeaderSection } from "./sections/HeaderSection";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { getAllProjects } from "@/module/content/utils/lib";
 import logger from "@/utils/logger";
-import { PageType } from "@/types";
-import { ResourceWrapper } from "@/components/shared/pages/shared/resource-wrapper";
+import { getAllProjects } from "@/module/content/utils/lib";
+// import { ResourceWrapper } from "@/components/shared/pages/shared/resource-wrapper";
+// import { PageType } from "@/types";
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -39,8 +39,8 @@ export default async function MyProject() {
 
   return (
     <>
-      <HeaderSection />
-      <ResourceWrapper initialData={data} type={PageType.PROJECT} />
+      {/* <HeaderSection /> */}
+      {/* <ResourceWrapper initialData={data} type={PageType.PROJECT} /> */}
       <CallToAction isPage />
     </>
   );

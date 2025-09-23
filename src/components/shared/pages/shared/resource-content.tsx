@@ -1,10 +1,9 @@
 "use client";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { useLoadMore } from "@/hooks/useLoadMore";
 import { Project, Post, Resource } from "@/module/content/types";
-import { PageType, ResourceType } from "@/types";
+import { PageType } from "@/types";
 import { getDate } from "@/utils";
-import { useCallback, useMemo, useState, useEffect } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
