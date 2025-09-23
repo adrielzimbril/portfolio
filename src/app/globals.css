@@ -33,7 +33,6 @@
 
 
   /* Design system colors */
-  --color-white: var(--white);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
