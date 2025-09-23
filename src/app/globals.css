@@ -263,18 +263,18 @@
     }
   }
 
-  /* [class*="squircle-"] {
+  [class*="squircle-"] {
     @supports (color: color-mix(in lab,red,red)) {
       --squircle-background-colors: inherit;
     }
   }
 
   html body .squircle-sh-white, .squircle-sh-white {
-    --squircle-background-color: var(--color-white)!important;
+    --squircle-background-color: var(--sh-white)!important;
     @supports (color: color-mix(in lab,red,red)) {
-      --squircle-background-color: var(--color-white)!important;
+      --squircle-background-color: var(--sh-white)!important;
     }
-  } */
+  }
 
   html {
     scroll-behavior: smooth;
