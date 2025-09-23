@@ -112,6 +112,7 @@
   }
 
   @supports not (background: paint(squircle)) {
+    background-color: --value(--color-*, [color], transparent) !important;
     border-radius: --value(
       --squircle-border-radius- *,
       [length],
