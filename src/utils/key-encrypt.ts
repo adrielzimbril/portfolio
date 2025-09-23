@@ -392,8 +392,7 @@ function getRandomBytes(size: number): Uint8Array {
     return array;
   }
   // Fallback for older Node versions
-  const { randomBytes } = require("crypto");
-  return randomBytes(size);
+  return new Uint8Array(size).map(() => Math.floor(Math.random() * 256));
 }
 
 /**
