@@ -58,3 +58,6 @@ package-lock.json
 
 # Ignore supabase auto generated types
 /src/module/supabase/types.ts
+
+# Ignore scripts folder
+/scripts
