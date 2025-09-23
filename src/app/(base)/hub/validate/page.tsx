@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { generateJwtToken, generateToken } from "@/utils/key-encrypt";
+import { apiRoutes } from "@/data/api-routes";
 
 export default function HubProductValidationPage() {
   const [email, setEmail] = useState("");
@@ -32,7 +33,7 @@ export default function HubProductValidationPage() {
     try {
       const subscribedFromPage =
         typeof window !== "undefined" ? window.location.pathname : undefined;
-      const res = await fetch("/api/hub/validate", {
+      const res = await fetch(apiRoutes.hubValidate.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
