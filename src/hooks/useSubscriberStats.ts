@@ -2,6 +2,7 @@
 
 import { ResourceTypeKey } from "@/types";
 import useSWR from "swr";
+import { apiRoutes } from "@/data/api-routes";
 
 async function fetchJSON(url: string) {
   const res = await fetch(url, { cache: "no-store" }); // 👈 no-store = fresh data
@@ -12,7 +13,7 @@ async function fetchJSON(url: string) {
 
 export function useNewsletterSubscribersCount() {
   const { data, error, isLoading, mutate } = useSWR(
-    "/api/stats/subscribers?scope=newsletter",
+    `${apiRoutes.statsSubscribers.link}?scope=newsletter`,
     fetchJSON,
     {
       revalidateOnFocus: true, // 👈 re-fetch when we come back to the page
@@ -30,7 +31,7 @@ export function useNewsletterSubscribersCount() {
 export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
   const { data, error, isLoading, mutate } = useSWR(
     type
-      ? `/api/stats/subscribers?scope=productType&type=${encodeURIComponent(type)}`
+      ? `${apiRoutes.statsSubscribers.link}?scope=productType&type=${encodeURIComponent(type)}`
       : null, // null = skip fetch if no type
     fetchJSON
   );
@@ -46,7 +47,7 @@ export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
 export function useProductTitleRequestsCount(title: string) {
   const { data, error, isLoading, mutate } = useSWR(
     title
-      ? `/api/stats/subscribers?scope=productTitle&title=${encodeURIComponent(
+      ? `${apiRoutes.statsSubscribers.link}?scope=productTitle&title=${encodeURIComponent(
           title
         )}`
       : null, // null = skip fetch if no title

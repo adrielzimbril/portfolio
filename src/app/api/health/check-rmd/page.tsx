@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { supabaseKey } from "@/module/supabase/client";
 import { generateToken, getApiBaseUrl, validateToken } from "@/utils";
 import { NextResponse } from "next/server";
+import { apiRoutes } from "@/data/api-routes";
 
 export async function POST(request: Request) {
   try {
@@ -56,7 +57,7 @@ export async function POST(request: Request) {
 export async function GET() {
   const token = generateToken();
 
-  const response = await fetch(`${getApiBaseUrl()}/api/health/mgo`, {
+  const response = await fetch(apiRoutes.healthMgo.link, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token: token }),

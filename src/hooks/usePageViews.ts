@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { PageType } from "@/types";
+import { apiRoutes } from "@/data/api-routes";
 
 export function usePageViews(
   path: string,
@@ -20,7 +21,7 @@ export function usePageViews(
     async function run() {
       try {
         // Increment view count
-        const incRes = await fetch(`/api/views`, {
+        const incRes = await fetch(apiRoutes.views.link, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ path, slug, type, details, wantResponse }),
@@ -33,7 +34,7 @@ export function usePageViews(
         try {
           // Fallback: just read
           const res = await fetch(
-            `/api/views?path=${encodeURIComponent(
+            `${apiRoutes.views.link}?path=${encodeURIComponent(
               path
             )}&slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
               type

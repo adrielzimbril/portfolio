@@ -43,7 +43,7 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       className={cn(
-        "border-b-base-accent focus-visible:border-0 text-inherit focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-0 flex h-12 w-full items-center justify-between gap-2 rounded-xl border bg-transparent px-3 py-2 text-lg shadow-none transition-none outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&>span]:line-clamp-1",
+        "border-b-base-accent text-inherit focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-0 flex h-12 w-full items-center justify-between gap-2 rounded-xl border bg-transparent px-3 py-2 text-lg shadow-none transition-none outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&>span]:line-clamp-1",
         "text-b-white-foreground",
         inputVariants({ variant, inputSize, className })
       )}

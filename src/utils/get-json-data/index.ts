@@ -1,5 +1,6 @@
 import { JsonData } from "@/types/type";
 import logger from "../logger";
+import { apiRoutes } from "@/data/api-routes";
 
 /**
  * CLIENT-ONLY: Fetches JSON data from an API endpoint
@@ -26,7 +27,7 @@ export async function getJsonData<T>(
       params.set("subfolder", subfolder);
     }
 
-    const response = await fetch(`/api/json-data?${params}`);
+    const response = await fetch(`${apiRoutes.jsonData.link}?${params}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch data: ${response.statusText}`);

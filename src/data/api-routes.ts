@@ -16,6 +16,11 @@ export const apiRoutes = {
     link: "api/health/check-rmd",
     accept: [requestType.GET],
   },
+  healthMgo: {
+    key: "health-mgo",
+    link: "api/health/check-mgo",
+    accept: [requestType.GET],
+  },
   ipLookup: {
     key: "ip-lookup",
     link: "api/ip-lookup",
@@ -25,6 +30,11 @@ export const apiRoutes = {
     key: "image-proxy",
     link: "api/image-proxy",
     accept: [requestType.GET],
+  },
+  hubValidate: {
+    key: "hub-validate",
+    link: "api/hub/validate",
+    accept: [requestType.POST],
   },
   jsonData: {
     key: "json-data",
