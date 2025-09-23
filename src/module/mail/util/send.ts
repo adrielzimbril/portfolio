@@ -1,4 +1,3 @@
-import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import type { mailTemplates } from "@/module/mail/emails";
 import { send } from "@/module/mail/provider";

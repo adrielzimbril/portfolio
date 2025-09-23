@@ -39,9 +39,9 @@ export const send: SendEmailHandler = async ({ to, subject, body }) => {
         logger.error("Error sending email", JSON.stringify(err));
         // throw new Error("Could not send email", { cause: err });
       });
-  } catch (err: any) {
+  } catch (err: unknown) {
     const message =
-      (err?.body?.message as string) || err?.message || "Unknown Brevo error";
+      (err as { body?: { message: string } })?.body?.message || (err as { message: string })?.message || "Unknown Brevo error";
     // Treat "exists" as success for idempotency
     if (
       typeof message === "string" &&

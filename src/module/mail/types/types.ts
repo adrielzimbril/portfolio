@@ -31,5 +31,6 @@ export interface MailProvider {
 
 export type BaseMailProps = {
   locale: Locale;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   translations: any;
 };

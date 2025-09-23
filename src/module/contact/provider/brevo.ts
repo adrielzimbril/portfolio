@@ -1,4 +1,3 @@
-import logger from "@/utils/logger";
 import type { AddContactHandler } from "@/module/contact/types/types";
 import {
   ContactsApi,
@@ -40,10 +39,10 @@ export const add: AddContactHandler = async ({
     LASTNAME: lastName || undefined,
     SMS: undefined,
     TAGS: tags || undefined,
-  } as any;
+  } as unknown as Record<string, unknown>;
   phoneContact.attributes = {
     SMS: phone || undefined,
-  } as any;
+  } as unknown as Record<string, unknown>;
 
   try {
     const res = await provider.createContact(nameContact);
@@ -92,17 +91,19 @@ export const add: AddContactHandler = async ({
           ok: true,
           alreadyExists,
         } as const;
-      } catch (updateErr: any) {
+      } catch (updateErr: unknown) {
         const message =
-          (updateErr?.body?.message as string) ||
-          updateErr?.message ||
+          (updateErr as { body: { message: string } })?.body?.message ||
+          (updateErr as { message: string })?.message ||
           "Unknown Brevo error";
         // logger.error("Brevo update contact failed", JSON.stringify(updateErr));
         throw new Error(message);
       }
     }
     const message =
-      (err?.body?.message as string) || err?.message || "Unknown Brevo error";
+      (err as { body: { message: string } })?.body?.message ||
+      err?.message ||
+      "Unknown Brevo error";
 
     // logger.error("Brevo add contact failed", JSON.stringify(err));
     throw new Error(message);

@@ -45,7 +45,7 @@ const useShare = ({ share, onSuccess, onError }: UseShareOptions): boolean => {
     } else {
       onError?.();
     }
-  }, []);
+  }, [isShareSupported, share, onSuccess, onError]);
 
   return isShareSupported;
 };

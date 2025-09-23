@@ -11,6 +11,7 @@ export const createClient = (request: NextRequest) => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const supabase = createServerClient<Database>(
     supabaseKey.url,
     supabaseKey.anonKey,

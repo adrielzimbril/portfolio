@@ -9,7 +9,6 @@ import { getImageUrl } from "@/utils/base-url";
 import { cn } from "@/utils";
 import { Link } from "@/components/ui/link";
 import { siteConfig } from "@/data/config";
-import { RichTagsFunction, useTranslations } from "next-intl";
 import { routes } from "@/data/routes";
 
 export const mdxComponents = {
@@ -41,6 +40,7 @@ export const mdxComponents = {
         src={getImageUrl(props.src as string)}
         width={2000}
         height={2000}
+        alt={props.alt || ""}
         className="w-full h-auto rounded-lg pointer-events-none mb-6 md:mb-12"
         loading="lazy"
       />

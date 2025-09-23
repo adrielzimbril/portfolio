@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiRoutes } from "@/data/api-routes";
 import logger from "@/utils/logger";
 

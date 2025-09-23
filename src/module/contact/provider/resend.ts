@@ -1,8 +1,5 @@
 import logger from "@/utils/logger";
-import type {
-  AddContactHandler,
-  ContactInput,
-} from "@/module/contact/types/types";
+import type { AddContactHandler } from "@/module/contact/types/types";
 import { Resend } from "resend";
 
 const CONTACT_PROVIDER_API_KEY = process.env.RESEND_API_KEY;

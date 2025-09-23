@@ -6,7 +6,6 @@ import { useEventListener } from "@/hooks/useEventListener";
 import logger from "@/utils/logger";
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface WindowEventMap {
     "session-storage": CustomEvent;
   }

@@ -9,9 +9,6 @@
  * getActivePathFromUrlParam("/about") // returns "/about"
  * getActivePathFromUrlParam(["/about", "contact"]) // returns "/about/contact"
  */
-
-import logger from "./logger";
-
 export function getActivePathFromUrlParam(path: string | string[]) {
   return Array.isArray(path) ? path.join("/") : path || "";
 }

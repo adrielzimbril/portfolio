@@ -1,4 +1,4 @@
-import { logger, task, schedules } from "@trigger.dev/sdk";
+import { logger, schedules } from "@trigger.dev/sdk";
 import { getApiBaseUrl, generateToken } from "@/utils";
 import { apiRoutes } from "@/data/api-routes";
 
@@ -21,7 +21,7 @@ export const supabaseLiveCheckTask = schedules.task({
     concurrencyLimit: 1,
   },
   //run the task
-  run: async (payload) => {
+  run: async () => {
     try {
       logger.info("Starting Supabase health check via API...");
 

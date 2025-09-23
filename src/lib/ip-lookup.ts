@@ -1,10 +1,10 @@
 import logger from "@/utils/logger";
 
-export interface IPData {
-  [key: string]: any;
+export interface IPData<T> {
+  [key: string]: string | number | T[] | Date | File;
 }
 
-export async function lookupIP(ipAddress?: string): Promise<IPData> {
+export async function lookupIP<T>(ipAddress?: string): Promise<IPData<T>> {
   try {
     const url = `https://api.oricodes.com/ip/${ipAddress || ""}`;
     const response = await fetch(url);
