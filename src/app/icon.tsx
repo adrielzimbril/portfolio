@@ -4,6 +4,7 @@ import logger from "@/utils/logger";
 import { getAbsolutePathUrl } from "@/utils/base-url";
 
 // Configuration exports
+export const runtime = "nodejs";
 export const alt = siteConfig.details.nameShared;
 export const size = {
   width: 32,
@@ -13,6 +14,8 @@ export const contentType = "image/png";
 
 // Image generation
 export default async function Icon() {
+  const url = getAbsolutePathUrl("s3", "/icon.svg");
+  logger.info("Icon url:", url);
   try {
     // Get the host from headers
     return new ImageResponse(
@@ -31,7 +34,7 @@ export default async function Icon() {
           }}
         >
           <img
-            src={getAbsolutePathUrl("s3", "/icon.svg")}
+            src={url}
             alt={alt}
             style={{
               width: "100%",
