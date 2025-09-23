@@ -1,8 +1,6 @@
 import { logger, schedules } from "@trigger.dev/sdk";
-import { getApiBaseUrl, generateToken } from "@/utils";
+import { getAbsolutePathUrl } from "@/utils";
 import { apiRoutes } from "@/data/api-routes";
-
-const API_BASE_URL = getApiBaseUrl();
 
 export const supabaseLiveCheckTask = schedules.task({
   //unique id for the schedule
@@ -26,15 +24,18 @@ export const supabaseLiveCheckTask = schedules.task({
       logger.info("Starting Supabase health check via API...");
 
       // Validation token generation
-      const token = generateToken();
+      // const token = generateToken();
 
-      const response = await fetch(`${API_BASE_URL}${apiRoutes.health.link}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token }),
-      });
+      const response = await fetch(
+        getAbsolutePathUrl({ path: apiRoutes.health.link }),
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify({ token }),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();

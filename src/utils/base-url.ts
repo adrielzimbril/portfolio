@@ -45,7 +45,9 @@ export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
   if (type === "s3") {
     return `${process.env.NEXT_PUBLIC_S3_DOMAIN_SITE_URL}/`;
   }
-  return `${process.env.NEXT_PUBLIC_DOMAIN_SITE_URL}/`;
+  return process.env.NEXT_PUBLIC_DOMAIN_SITE_URL
+    ? `${process.env.NEXT_PUBLIC_DOMAIN_SITE_URL}/`
+    : "https://www.adrielzimbril.com/";
 }
 
 /**

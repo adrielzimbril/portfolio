@@ -63,7 +63,7 @@ export const getIOSMajorVersion = (): number => {
 
   const match = navigator.appVersion.match(/OS (\d+)_?\d*/);
 
-  logger.info("Your iOS version match", match);
+  // logger.info("Your iOS version match", match);
 
   if (!match) return 0;
 
@@ -87,7 +87,7 @@ export const useCompareIOSVersion = (
   const iosVersion = getIOSMajorVersion();
 
   if (iosVersion < 17) logger.warn("Your iOS version Is Outdated", iosVersion);
-  else logger.info("Your iOS version is supported", iosVersion);
+  // else logger.info("Your iOS version is supported", iosVersion);
 
   if (iosVersion === 0) return false;
 

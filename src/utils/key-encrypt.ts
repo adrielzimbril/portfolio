@@ -1,5 +1,6 @@
 import { apiRoutes } from "@/data/api-routes";
 import logger from "@/utils/logger";
+import { getAbsolutePathUrl } from "./base-url";
 
 const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
 
@@ -71,13 +72,19 @@ export async function createHmac(
       .join("");
   } else {
     try {
-      const res = await fetch(apiRoutes.sign.link, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ algorithm, key, data }),
-      });
+      const res = await fetch(
+        getAbsolutePathUrl({ path: apiRoutes.sign.link }),
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ algorithm, key, data }),
+        }
+      );
 
-      if (!res.ok) throw new Error(`Server HMAC failed: ${res.status}`);
+      if (!res.ok)
+        throw new Error(
+          `Server HMAC failed: ${res.status} \n\ With Data: ${data} | Algorithm: ${algorithm} | Key: ${key}`
+        );
 
       const { signature } = await res.json();
       return signature;

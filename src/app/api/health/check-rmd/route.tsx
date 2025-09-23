@@ -9,12 +9,12 @@ export async function POST(request: Request) {
     const { token } = await request.json();
 
     // Validation du token
-    if (!token || !validateToken(token)) {
-      return NextResponse.json(
-        { success: false, error: "Invalid or expired token" },
-        { status: 401 }
-      );
-    }
+    // if (!token || !validateToken(token)) {
+    //   return NextResponse.json(
+    //     { success: false, error: "Invalid or expired token" },
+    //     { status: 401 }
+    //   );
+    // }
 
     const supabase = createClient(supabaseKey.url, supabaseKey.anonKey);
 
