@@ -1,4 +1,4 @@
-@import "tailwindcss" prefix(tw);
+@import "tailwindcss";
 @import "tw-animate-css";
 /* @import "@squircle/tailwindcss"; */
 @source '../../node_modules/@aurthle/*';
