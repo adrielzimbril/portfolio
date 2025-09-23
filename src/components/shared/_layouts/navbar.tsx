@@ -60,31 +60,6 @@ export function Navbar() {
   const { scrollY } = useScroll();
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = siteConfig.links.navbar.map((item) =>
-        item.href.substring(1)
-      );
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const unsubscribe = scrollY.on("change", (latest) => {
@@ -160,7 +135,6 @@ export function Navbar() {
             </Link>
 
             <NavMenu
-              hasScrolled={hasScrolled}
               menuRoutes={menuRoutesFiltered}
               activeTab={activeTab}
               setActiveTab={setActiveTab}

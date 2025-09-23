@@ -1,17 +1,14 @@
 "use client";
-import React, { useState } from "react";
 import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useTranslations } from "use-intl";
 
 export function NavMenu({
-  hasScrolled,
   menuRoutes,
   activeTab,
   setActiveTab,
 }: {
-  hasScrolled: boolean;
   menuRoutes: { key: string; link: string; name: string }[];
   activeTab: string;
   setActiveTab: (tab: string) => void;

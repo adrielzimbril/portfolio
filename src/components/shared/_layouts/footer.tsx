@@ -16,7 +16,6 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { cn, getResourcesUrl, getThisMonth } from "@/utils";
 import { SectionBase } from "../pages/shared/section-base";
 import { siteConfig } from "@/data/config";
-import { ButtonCopy } from "@/components/ui/button-copy";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +26,6 @@ import {
 import { USFlag } from "@/components/shared/icons/flags/USFlag";
 import { FRFlag } from "@/components/shared/icons/flags/FRFlag";
 import { CNFlag } from "@/components/shared/icons/flags/CNFlag";
-import { Badge } from "@/components/ui/badge";
 import { routes } from "@/data/routes";
 import { PageType } from "@/types";
 import { appConfig } from "@/data/app-config";
@@ -57,7 +55,7 @@ export const Footer: React.FC = () => {
     }
 
     loadResources();
-  }, []);
+  }, [config.limit, locale]);
 
   return (
     <footer className="w-full">
