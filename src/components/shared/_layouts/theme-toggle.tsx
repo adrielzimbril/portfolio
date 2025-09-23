@@ -18,7 +18,7 @@ const changeTheme = async () => {
   const supportsViewTransition = "startViewTransition" in document;
 
   if (supportsViewTransition) {
-    await (document as any).startViewTransition(() => {
+    await document.startViewTransition(() => {
       flushSync(() => {
         setTheme(theme === "light" ? "dark" : "light");
       });

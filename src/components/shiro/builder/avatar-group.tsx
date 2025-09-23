@@ -12,7 +12,6 @@ import {
   type TooltipProps,
   type TooltipContentProps,
 } from "@/components/ui/tooltip";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 type AvatarProps = TooltipProps & {
   children: React.ReactNode;
@@ -101,6 +100,9 @@ function AvatarGroup({
             {child}
           </AvatarContainer>
         ))}
+        <span className="sr-only">
+          +{numPeople} {numPeople === 1 ? "person" : "people"}
+        </span>
         {/* {(numPeople ?? 0) > 0 && (
           <AvatarContainer
             zIndex={React.Children.count(children)}
