@@ -3,6 +3,8 @@
 // Do not convert this file to ESModule format unless all dependencies support it.
 const { defineConfig } = require("@lobehub/i18n-cli");
 
+const isMdx = true;
+
 module.exports = defineConfig({
   modelName: "gpt-4.1-nano",
   entry: "src/module/i18n/translations/fr.json",
@@ -15,14 +17,14 @@ module.exports = defineConfig({
     jsonMode: true,
   },
   markdown: {
-    entry: ["src/content/**/*.mdx"],
+    entry: [isMdx ? "src/content/**/*.mdx" : "src/content/**/*.md"],
     entryLocale: "fr",
-    entryExtension: ".mdx",
+    entryExtension: isMdx ? ".mdx" : ".md",
     outputLocales: ["en", "zh_CN"],
     includeMatter: true,
     outputExtensions: (locale, { getDefaultExtension }) => {
-      if (locale === "fr") return ".mdx";
-      return getDefaultExtension(locale);
+      if (locale === "fr") return isMdx ? ".mdx" : ".md";
+      return isMdx ? `.${locale}.mdx` : getDefaultExtension(locale);
     },
   },
 });
