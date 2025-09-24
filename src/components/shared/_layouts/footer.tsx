@@ -243,7 +243,7 @@ export function LocaleSwitch() {
             const IconComponent = iconsMap[icon as keyof typeof iconsMap];
             return (
               <DropdownMenuRadioItem
-                className="flex gap-2 items-center justify-between text-b-white-unchanged data-[state=checked]:bg-indigo-100 focus:bg-indigo-200 focus:text-b-white-unchanged w-full"
+                className="flex gap-2 items-center justify-between text-b-white-foreground data-[state=checked]:text-b-white-unchanged data-[state=checked]:bg-indigo-100 focus:bg-indigo-200 focus:text-b-white-unchanged w-full"
                 key={locale}
                 value={locale}
               >

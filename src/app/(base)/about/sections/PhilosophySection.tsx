@@ -38,7 +38,7 @@ const data: PhilosophyCard[] = [
   },
   {
     title: "以用户为先",
-    locale: Locale.zh - CN,
+    locale: Locale.ZH_CN,
     icon: <WandIcon />,
     alt: "Symbol",
     description:
@@ -62,7 +62,7 @@ const data: PhilosophyCard[] = [
   },
   {
     title: "持续学习",
-    locale: Locale.zh - CN,
+    locale: Locale.ZH_CN,
     icon: <BookIcon />,
     alt: "Book",
     description:
@@ -86,7 +86,7 @@ const data: PhilosophyCard[] = [
   },
   {
     title: "团队共同成长",
-    locale: Locale.zh - CN,
+    locale: Locale.ZH_CN,
     icon: <LongitudeIcon />,
     alt: "Longitude",
     description:
@@ -110,7 +110,7 @@ const data: PhilosophyCard[] = [
   },
   {
     title: "快速且正确地行动",
-    locale: Locale.zh - CN,
+    locale: Locale.ZH_CN,
     icon: <BalanceIcon />,
     alt: "Balance default",
     description:

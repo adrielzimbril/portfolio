@@ -17,19 +17,39 @@ import { PortfolioProjectResearchScope, ResourceType } from "@/types";
 
 const BASE_COLLECTION_PATH = "src/content";
 
-function sanitizePath(path: string) {
-  return path
-    .replace(/(\.[a-zA-Z-]{2,5})$/, "")
-    .replace(/^\//, "")
-    .replace(/\/$/, "")
-    .replace(/index$/, "");
+/**
+ * Gets the locale from a file path.
+ * Supports formats: fr, en, zh-CN, es-ES, etc.
+ * Returns defaultLocale if nothing is found.
+ */
+export function getLocaleFromFilePath(
+  filePath: string,
+  defaultLocale = "en"
+): string {
+  // matches .xx or .xx-XX before the extension
+  const match = filePath.match(/\.([a-z]{2}(?:-[A-Z]{2})?)\.[^.]+$/i);
+  if (!match) return defaultLocale;
+
+  // normalization: zh-cn -> zh-CN
+  return match[1]!.replace(/^[a-z]{2}-[a-z]{2}$/, (l) =>
+    l.split("-").map((p, i) => (i ? p.toUpperCase() : p.toLowerCase())).join("-")
+  );
 }
 
-function getLocaleFromFilePath(path: string) {
-  return (
-    path.match(/(\.[a-zA-Z-]{2,5})+\.(md|mdx|json)$/)?.[1]?.replace(".", "") ??
-    appConfig.i18n.defaultLocale
-  );
+/**
+ * Sanitizes a path to make it a "clean route".
+ * Removes locale, extension, extra slashes, and "index".
+ */
+export function sanitizePath(filePath: string): string {
+  return filePath
+    // removes the locale (.fr, .en, .zh-CN, etc.)
+    .replace(/\.([a-z]{2}(?:-[A-Z]{2})?)$/, "")
+    // removes the extension (any after the last dot)
+    .replace(/\.[^.]+$/, "")
+    // cleans the start and end slashes
+    .replace(/^\/|\/$/g, "")
+    // removes "index"
+    .replace(/index$/, "");
 }
 
 async function compileBodyMDX(context: any, document: any) {
