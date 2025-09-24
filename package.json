@@ -90,11 +90,11 @@
     "use-intl": "^4.3.9"
   },
   "devDependencies": {
-    "@aurthle/i18n-cli": "^1.0.3",
     "@content-collections/core": "^0.11.1",
     "@content-collections/mdx": "^0.2.2",
     "@content-collections/next": "^0.2.7",
     "@eslint/eslintrc": "^3.3.1",
+    "@lobehub/i18n-cli": "^1.25.1",
     "@mdx-js/mdx": "^3.1.1",
     "@shikijs/rehype": "^3.13.0",
     "@tailwindcss/postcss": "^4.1.13",

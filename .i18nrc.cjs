@@ -1,9 +1,10 @@
-const { defineConfig } = require("@aurthle/i18n-cli");
+const { defineConfig } = require("@lobehub/i18n-cli");
 
 module.exports = defineConfig({
+  modelName: "gpt-4.1-nano",
   entry: "src/module/i18n/translations/fr.json",
   entryLocale: "fr",
-  output: "src/module/i18n/translations/translations",
+  output: "src/module/i18n/translations",
   outputLocales: ["en", "zh_CN"],
   markdown: {
     entry: ["src/content/**/*.md", "src/content/**/*.mdx"],
