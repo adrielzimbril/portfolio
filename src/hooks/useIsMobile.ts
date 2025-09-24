@@ -56,7 +56,13 @@ export const useIsIOS = (): boolean => {
  * const iosVersion = getIOSMajorVersion(); // 17, 18, etc.
  */
 export const getIOSMajorVersion = (): number | null => {
-  if (typeof navigator === undefined) return null;
+  if (
+    typeof navigator === "undefined" ||
+    typeof document === "undefined" ||
+    !navigator ||
+    !document
+  )
+    return null;
 
   const isIOS =
     /iP(hone|od|ad)/.test(navigator.platform) ||

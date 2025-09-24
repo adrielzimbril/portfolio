@@ -9,9 +9,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-inherit squircle-primary text-b-black-unchanged hover:squircle-primary/90",
+          "bg-inherit squircle-primary squircle-border-2 squircle-border-primary text-b-black-unchanged hover:squircle-primary/90",
         secondary:
-          "bg-inherit squircle-sh-white squircle-border-2 squircle-border-b-base-accent text-b-white-invert hover:bg-secondary/80 hover:squircle-primary/90 hover:text-white!",
+          "bg-inherit squircle-sh-white squircle-border-2 squircle-border-b-base-accent text-b-white-invert",
         destructive:
           "squircle-destructive text-destructive-foreground hover:squircle-destructive/90",
         outline:
