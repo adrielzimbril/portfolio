@@ -6,7 +6,7 @@ export enum SortOrder {
 export enum Locale {
   EN = "en",
   FR = "fr",
-  CN = "cn",
+  ZH_CN = "zh_CN",
 }
 
 export enum ResourceType {
