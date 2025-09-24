@@ -26,11 +26,11 @@ export function HeaderSection({
   const t = useTranslations();
 
   usePageViews(
-    getResourcesUrl(PageType.HUB, pageViewsData.slug),
     pageViewsData.slug,
     PageType.HUB,
     {
       locale: pageViewsData.locale,
+      path: getResourcesUrl(PageType.HUB, pageViewsData.slug),
     },
     false
   );

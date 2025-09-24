@@ -4,7 +4,6 @@ import { PageType } from "@/types";
 import { apiRoutes } from "@/data/api-routes";
 
 export function usePageViews(
-  path: string,
   slug: string,
   type: PageType,
   details?: Record<string, unknown>,
@@ -15,7 +14,7 @@ export function usePageViews(
   const [error, setError] = useState<string | null>(null);
   const stringifiedDetails = details ? JSON.stringify(details) : null;
   const memoizedDetails = useMemo(
-    () => stringifiedDetails,
+    () => JSON.parse(stringifiedDetails ?? "{}"),
     [stringifiedDetails]
   );
 
@@ -29,7 +28,6 @@ export function usePageViews(
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            path,
             slug,
             type,
             details: memoizedDetails,
@@ -44,9 +42,7 @@ export function usePageViews(
         try {
           // Fallback: just read
           const res = await fetch(
-            `${apiRoutes.views.link}?path=${encodeURIComponent(
-              path
-            )}&slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
+            `${apiRoutes.views.link}?slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
               type
             )}&details=${encodeURIComponent(
               memoizedDetails ?? ""
@@ -68,7 +64,7 @@ export function usePageViews(
     return () => {
       cancelled = true;
     };
-  }, [path, slug, type, memoizedDetails, wantResponse]);
+  }, [slug, type, memoizedDetails, wantResponse]);
 
   return { count, loading, error } as const;
 }

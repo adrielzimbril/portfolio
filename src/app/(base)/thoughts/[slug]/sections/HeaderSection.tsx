@@ -21,11 +21,11 @@ export function HeaderSection({
   pageViewsData: { slug: string; locale: string };
 }) {
   const { count } = usePageViews(
-    getResourcesUrl(PageType.THOUGHT, pageViewsData.slug),
     pageViewsData.slug,
     PageType.THOUGHT,
     {
       locale: pageViewsData.locale,
+      path: getResourcesUrl(PageType.THOUGHT, pageViewsData.slug),
     },
     true
   );

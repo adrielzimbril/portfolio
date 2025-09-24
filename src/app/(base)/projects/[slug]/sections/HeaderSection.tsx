@@ -25,11 +25,11 @@ export function HeaderSection({
   const t = useTranslations();
 
   usePageViews(
-    getResourcesUrl(PageType.PROJECT, pageViewsData.slug),
     pageViewsData.slug,
     PageType.PROJECT,
     {
       locale: pageViewsData.locale,
+      path: getResourcesUrl(PageType.PROJECT, pageViewsData.slug),
     },
     false
   );

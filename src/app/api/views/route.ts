@@ -14,9 +14,8 @@ export async function GET(req: NextRequest) {
     logger.info("Supabase Views | Human access detected", { url: req.url });
   }
 
-  const path = searchParams.get("path") || "/";
   const type = searchParams.get("type") || "page";
-  const slug = searchParams.get("slug");
+  const slug = searchParams.get("slug") || "/";
   const wantResponse = searchParams.get("wantResponse") === "true";
 
   if (!slug) {
@@ -85,7 +84,6 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
     const {
-      path,
       type = "page",
       slug = null,
       details = null,
@@ -99,7 +97,7 @@ export async function POST(req: NextRequest) {
         p_type: type,
         p_slug: slug,
         p_user_ip: ip,
-        p_details: { ...details, userInfo: ipInfo, legacy_path: path },
+        p_details: { ...details, userInfo: ipInfo },
       }
     );
 
