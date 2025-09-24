@@ -6,7 +6,7 @@ import { apiRoutes } from "@/data/api-routes";
 
 export async function POST(request: Request) {
   try {
-    const { token } = await request.json();
+    // const { token } = await request.json();
 
     // Validation du token
     // if (!token || !validateToken(token)) {
@@ -29,7 +29,11 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           success: false,
-          error: error.message || error,
+          error: {
+            message: error.message,
+            error: error,
+            data: data,
+          },
           timestamp: new Date().toISOString(),
         },
         { status: 500 }

@@ -20,50 +20,52 @@ export const supabaseLiveCheckTask = schedules.task({
   },
   //run the task
   run: async () => {
-    try {
-      logger.info("Starting Supabase health check via API...");
+      const url = getAbsolutePathUrl({ path: apiRoutes.views.link });
 
-      // Validation token generation
-      // const token = generateToken();
+      try {
+        logger.info("Starting Supabase health check via API...");
 
-      const response = await fetch(
-        getAbsolutePathUrl({ path: apiRoutes.health.link }),
-        {
+        logger.info("Fetching health check API", { url });
+
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          // body: JSON.stringify({ token }),
-        }
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(
-          `API responded with status: ${response.status} - ${errorText}`
-        );
-      }
-
-      const result = await response.json();
-
-      if (!result.success) {
-        logger.error(`Health check failed`, {
-          status: "error",
-          error: result.error,
         });
-        throw new Error(`Health check failed: ${result.error}`);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(
+            `API responded with status: ${response.status} - ${errorText}`
+          );
+        }
+
+        const result = await response.json();
+
+        if (!result.success) {
+          logger.error(`Health check failed`, {
+            status: "error",
+            error: result.error,
+          });
+          throw new Error(`Health check failed: ${result.error}`);
+        }
+
+        logger.info("Health check successful:", {
+          status: "success",
+          dataCount: result.dataCount,
+          timestamp: result.timestamp,
+        });
+
+        return result;
+      } catch (error) {
+        logger.info("Fetching health check API", { url });
+
+        logger.error(`Task execution failed`, {
+          status: "error",
+          error: error,
+        });
+        throw error;
       }
-
-      logger.info("Health check successful:", {
-        status: "success",
-        dataCount: result.dataCount,
-        timestamp: result.timestamp,
-      });
-
-      return result;
-    } catch (error) {
-      logger.error(`Task execution failed`, { status: "error", error: error });
-      throw error;
-    }
   },
 });
