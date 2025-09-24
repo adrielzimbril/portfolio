@@ -4,7 +4,7 @@
 const { defineConfig } = require("@lobehub/i18n-cli");
 
 const config = {
-  mode: "content", // "default" or "content"
+  mode: "default", // "default" or "content"
   isMdx: false, // Set to true if you are using MDX files
 };
 
