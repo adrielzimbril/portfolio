@@ -1,6 +1,6 @@
 // rename-locale-files.js
-import fs from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 
 const ROOT_DIR = process.cwd();
 
@@ -12,9 +12,9 @@ function walkDir(dir) {
       walkDir(fullPath);
     } else if (
       /\.(md|mdx)$/i.test(entry.name) &&
-      entry.name.includes("zh_CN")
+      entry.name.includes("zh-CN")
     ) {
-      const newName = entry.name.replace(/zh_CN/g, "zh-CN");
+      const newName = entry.name.replace(/zh-cn/g, "zh_CN");
       const newPath = path.join(dir, newName);
 
       fs.renameSync(fullPath, newPath);
