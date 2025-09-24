@@ -8,7 +8,7 @@ import { getAllPosts } from "@/module/content/utils/lib/posts";
 import { Post } from "@/module/content/types";
 import logger from "@/utils/logger";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
-import { useTranslations } from "use-intl";
+import { useTranslations, useLocale } from "use-intl";
 
 const config: PreviewCardContainerSectionProps = {
   limit: 2,
@@ -16,13 +16,14 @@ const config: PreviewCardContainerSectionProps = {
 
 export function ThoughtsSection() {
   const t = useTranslations();
+  const locale = useLocale();
   const { limit } = config;
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     async function loadPosts() {
       try {
-        const data = await getAllPosts({ limit: limit });
+        const data = await getAllPosts({ limit: limit, locale });
         setPosts(data);
       } catch (err) {
         logger.error(err);

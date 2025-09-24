@@ -170,7 +170,7 @@
     },
     "inner-page": {
       "more-preview-section": {
-        "title": "Autres réflexions."
+        "title": "Autres articles."
       }
     }
   },
@@ -702,6 +702,18 @@
           "access": "Télécharger l'ebook",
           "feedback": "Quand tu auras eu le temps de le parcourir, j'aimerais savoir ce que tu en penses. Est-ce que c'est utile pour tes projets actuels ? Qu'est-ce qui te pose encore question ?",
           "tip": "📖 Suggestion : lis-le par petites sections et essaie d'appliquer directement ce que tu apprends."
+        },
+        "code": {
+          "intro": "Ton code est disponible !",
+          "access": "Télécharger le code",
+          "feedback": "Quand tu auras eu le temps de le parcourir, j'aimerais savoir ce que tu en penses. Est-ce que c'est utile pour tes projets actuels ? Qu'est-ce qui te pose encore question ?",
+          "tip": "🚀 Conseil : essaie d'appliquer directement ce que tu apprends."
+        },
+        "figma-template": {
+          "intro": "Ton template Figma est disponible !",
+          "access": "Ouvrir le template",
+          "feedback": "Quand tu auras eu le temps de le parcourir, j'aimerais savoir ce que tu en penses. Est-ce que c'est utile pour tes projets actuels ? Qu'est-ce qui te pose encore question ?",
+          "tip": "🚀 Conseil : essaie d'appliquer directement ce que tu apprends."
         }
       }
     }

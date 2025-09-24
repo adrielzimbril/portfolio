@@ -2,10 +2,14 @@
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
 import { Post } from "@/module/content/types";
+import { useTranslations } from "next-intl";
 
 export function MorePreviewSection({ data }: { data: Post[] }) {
+  const t = useTranslations();
   return (
-    <CardPreviewSection title="Autres articles.">
+    <CardPreviewSection
+      title={t("thoughts.inner-page.more-preview-section.title")}
+    >
       {data.map((post, index) => (
         <ThoughtCard
           key={post.slug || index}

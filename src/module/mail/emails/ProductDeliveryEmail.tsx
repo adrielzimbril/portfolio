@@ -52,10 +52,10 @@ export function ProductDeliveryEmail({
 
   const getProductTypeMessage = (type: string) => {
     return {
-      intro: t(`productDelivery.productTypes.${type}.intro`),
-      access: t(`productDelivery.productTypes.${type}.access`),
-      feedback: t(`productDelivery.productTypes.${type}.feedback`),
-      tip: t(`productDelivery.productTypes.${type}.tip`),
+      intro: t(`mail.productDelivery.productTypes.${type}.intro`),
+      access: t(`mail.productDelivery.productTypes.${type}.access`),
+      feedback: t(`mail.productDelivery.productTypes.${type}.feedback`),
+      tip: t(`mail.productDelivery.productTypes.${type}.tip`),
     };
   };
 

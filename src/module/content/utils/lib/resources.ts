@@ -26,8 +26,7 @@ export async function getAllResources(
     allResources
       .filter(
         (resource) =>
-          resource.published === published &&
-          (!locale || resource.locale === locale)
+          resource.published === published && resource.locale === locale
       )
       .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
       .filter((resource) => resource.slug !== pageSlug)
@@ -51,8 +50,7 @@ export async function getBestResourcesLink(
     allResources
       .filter(
         (resource) =>
-          resource.published === published &&
-          (!locale || resource.locale === locale)
+          resource.published === published && resource.locale === locale
       )
       .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
       .filter((resource) => resource.slug !== pageSlug)

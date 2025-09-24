@@ -2,7 +2,7 @@ import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeaderSection } from "./sections/HeaderSection";
 import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllProjects } from "@/module/content/utils/lib";
@@ -31,7 +31,8 @@ export async function generateMetadata() {
 }
 
 export default async function MyProject() {
-  const data = await getAllProjects().catch((err) => {
+  const locale = await getLocale();
+  const data = await getAllProjects({ locale }).catch((err) => {
     logger.error(err);
     return [];
   });

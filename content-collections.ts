@@ -257,20 +257,29 @@ const posts = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
 
     // Resolve relations
     const categories = context
       .documents(postCategories)
-      .filter((c) => document.categories_id.includes(c.id));
+      .filter(
+        (c) =>
+          document.categories_id.includes(c.id) &&
+          getLocaleFromFilePath(c._meta.filePath) === locale
+      );
 
     const tags = context
       .documents(postTags)
-      .filter((t) => document.tags_id.includes(t.id));
+      .filter(
+        (t) =>
+          document.tags_id.includes(t.id) &&
+          getLocaleFromFilePath(t._meta.filePath) === locale
+      );
 
     return {
       ...document,
       body,
-      locale: getLocaleFromFilePath(document._meta.filePath),
+      locale: locale,
       path: sanitizePath(document._meta.path),
       //slug: document._meta.path,
       // Relations resolved
@@ -348,25 +357,38 @@ const projects = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
 
     // Resolve relations
     const categories = context
       .documents(projectCategories)
-      .filter((c) => document.categories_id.includes(c.id));
+      .filter(
+        (c) =>
+          document.categories_id.includes(c.id) &&
+          getLocaleFromFilePath(c._meta.filePath) === locale
+      );
 
     // Use projectTags or postTags according to your preference
     const tags = context
       .documents(projectTags)
-      .filter((t) => document.tags_id.includes(t.id));
+      .filter(
+        (t) =>
+          document.tags_id.includes(t.id) &&
+          getLocaleFromFilePath(t._meta.filePath) === locale
+      );
 
     const project_type = context
       .documents(projectTypes)
-      .filter((t) => document.project_type_id === t.id);
+      .filter(
+        (t) =>
+          document.project_type_id === t.id &&
+          getLocaleFromFilePath(t._meta.filePath) === locale
+      );
 
     return {
       ...document,
       body,
-      locale: getLocaleFromFilePath(document._meta.filePath),
+      locale: locale,
       path: sanitizePath(document._meta.path),
       //slug: document._meta.path,
       // Resolved relations
@@ -398,16 +420,21 @@ const resources = defineCollection({
   }),
   transform: async (document, context) => {
     const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
 
     // Use resourcesTags or postTags according to your preference
     const tags = context
       .documents(resourceTags)
-      .filter((t) => document.tags_id.includes(t.id));
+      .filter(
+        (t) =>
+          document.tags_id.includes(t.id) &&
+          getLocaleFromFilePath(t._meta.filePath) === locale
+      );
 
     return {
       ...document,
       body,
-      locale: getLocaleFromFilePath(document._meta.filePath),
+      locale: locale,
       path: sanitizePath(document._meta.path),
       //slug: document._meta.path,
       // Resolved relations

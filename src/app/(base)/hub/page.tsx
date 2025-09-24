@@ -2,7 +2,7 @@ import React from "react";
 import { HeaderSection } from "./sections/HeaderSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllResources } from "@/module/content/utils/lib/resources";
@@ -32,7 +32,8 @@ export async function generateMetadata() {
 }
 
 export default async function MyHub() {
-  const data = await getAllResources().catch((err) => {
+  const locale = await getLocale();
+  const data = await getAllResources({ locale }).catch((err) => {
     logger.error(err);
     return [];
   });

@@ -230,18 +230,6 @@
         "title": "Creative logbook"
       }
     },
-    "planning-badge": {
-      "available": {
-        "description": "{limit, plural, one {# spot available} other {# spots available}} for {date}",
-        "description-secondary": "{showLimit, select, true {{limit, plural, one {# spot available} other {# spots available}}} other {}}{showMission, select, true { for Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, until {date}} other {}}",
-        "description-simple": "Available for collaboration",
-        "title": "Available"
-      },
-      "unavailable": {
-        "description": "Available again for Full-Stack Development and Web Design Mission{hasDate, select, true {, from {date}} other {}}",
-        "title": "Unavailable"
-      }
-    },
     "shared": {
       "loadMore": {
         "counter": "Showing {loadedItems} of {totalItems} items",
@@ -261,6 +249,144 @@
         "presentation": "Presentation",
         "results": "Results",
         "role": "Role"
+      },
+      "planning-badge": {
+        "available": {
+          "description": "{limit, plural, one {# spot available} other {# spots available}} for {date}",
+          "description-secondary": "{showLimit, select, true {{limit, plural, one {# spot available} other {# spots available}}} other {}}{showMission, select, true { for Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, until {date}} other {}}",
+          "description-simple": "Available for collaboration",
+          "title": "Available"
+        },
+        "unavailable": {
+          "description": "Available again for Full-Stack Development and Web Design Mission{hasDate, select, true {, from {date}} other {}}",
+          "title": "Unavailable"
+        }
+      }
+    },
+    "page-sections": {
+      "cta": {
+        "variant-one": {
+          "button": "Let’s talk SaaS 🦄",
+          "description": "<p>I share resources, thoughts, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Want to talk SaaS, design, product, or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
+          "title": "Want to talk SaaS?"
+        },
+        "variant-two": {
+          "description": "<p>I share resources, thoughts, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Want to talk SaaS, design, product, or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
+          "form": {
+            "button": "Let’s talk SaaS 🦄",
+            "placeholder": "Your email here… ✉️"
+          },
+          "title": "Let’s discuss your next project!"
+        }
+      },
+      "header": {
+        "cta": "Let’s talk SaaS 👋"
+      },
+      "hub": {
+        "badge": "Hub 🫶🏻",
+        "base": {
+          "resources-type": {
+            "code": {
+              "badge": "Developers 🤖",
+              "button": "Get",
+              "description": "Simple, documented code snippets from my experience to help you build your own products.",
+              "title": "Code 🧑🏻‍💻"
+            },
+            "course": {
+              "badge": "Students 🧑🏻‍🎓",
+              "button": "Start",
+              "description": "Learn at your own pace with clear, practical lessons to go from idea to real product.",
+              "title": "Courses 🎥"
+            },
+            "ebook": {
+              "badge": "Readers 📖",
+              "button": "Read",
+              "description": "Practical, simple, and actionable guides to help you avoid mistakes and move faster.",
+              "title": "E-books 📕"
+            },
+            "figma-template": {
+              "badge": "Creators 🖌️",
+              "button": "Explore",
+              "description": "Ready-to-use templates from my design frenzies to help you create products people want to use.",
+              "title": "Figma Templates 🎨"
+            },
+            "masterclass": {
+              "badge": "Participants 🍿",
+              "button": "Join",
+              "description": "Join interactive sessions where we break down key topics and real-world cases together.",
+              "title": "Masterclass 🎬"
+            },
+            "video": {
+              "badge": "Curious 🎥",
+              "button": "Watch",
+              "description": "Short, practical videos — YouTube and more — to inspire, teach, and help you take action.",
+              "title": "Videos 📺"
+            }
+          }
+        },
+        "description": "Courses, e-books, videos, templates, and code to help you simplify, test, and turn your ideas into products and create solutions that matter.",
+        "title": "Resources"
+      },
+      "newsletter": {
+        "description": {
+          "default": "Signing up... You can add your personal information.",
+          "state": "Your registration is confirmed! You can add your details to personalize your experience."
+        },
+        "footer": {
+          "button": "Yes, I want it 🤭",
+          "description": "Exclusive tips, tricks, and resources to turn your ideas into products that shine 🦄",
+          "subText": "Promise, only inspiring content and zero spam ✨",
+          "title": "💌 Your creative kit is waiting 🫶🏻"
+        },
+        "form": {
+          "fields": {
+            "email": {
+              "label": "Email",
+              "placeholder": "Your email"
+            },
+            "email-page": {
+              "label": "Email",
+              "placeholder": "Your email here… ✉️"
+            },
+            "name": {
+              "label": "Name",
+              "placeholder": "How should I call you?"
+            },
+            "phone": {
+              "label": "Phone",
+              "placeholder": "Phone number"
+            }
+          },
+          "success": {
+            "message": {
+              "description": "Your information has been updated successfully. Thank you! 🎉",
+              "title": "Thank you for signing up!"
+            }
+          }
+        },
+        "tags": "Product Design 🎨, SaaS 🦄, UX/UI 🖌️, Design System 🧩, Figma 🎨, Startups 🚀",
+        "title": "💌 Your creative kit is waiting 🫶🏻"
+      },
+      "preview": {
+        "description": "You can have the rest of the empty space here.",
+        "emoji": "😎",
+        "title": "I made you look."
+      },
+      "projects": {
+        "badge": "Problem Solver 🦄",
+        "description": "Every project is a unique adventure where the goal is to turn an idea into a real experience, with design that delights and strategy that works.",
+        "title": "Projects"
+      },
+      "testimonials": {
+        "badge": "We designed together 🫱🏾‍🫲🏻",
+        "button": "See on LinkedIn",
+        "description": "With these founders, creators, and teams, we tested, iterated, built, and found solutions together 🫶🏻.",
+        "title": "Partners"
+      },
+      "thoughts": {
+        "badge": "Lab ✍🏻",
+        "description": "My experiences, reflections, and advice on designing complex products where simplicity becomes a superpower.",
+        "title": "Thoughts"
       }
     }
   },
@@ -406,6 +532,18 @@
           "feedback": "Once you've watched the masterclass, let me know what you think! Did it answer your questions? What stood out the most?",
           "intro": "Your masterclass is waiting!",
           "tip": "🎯 Tip: Watch it in a quiet place with a notebook nearby. The best ideas often come while you're listening."
+        },
+        "code": {
+          "intro": "Your code is ready!",
+          "access": "Download the code",
+          "feedback": "When you've had a chance to use it, I'd love to know what you think. Is it useful for your current projects? Is there anything you're still wondering about?",
+          "tip": "🚀 Tip: Try to apply what you learn right away."
+        },
+        "figma-template": {
+          "intro": "Your Figma template is ready!",
+          "access": "Open the template",
+          "feedback": "When you've had a chance to use it, I'd love to know what you think. Is it useful for your current projects? Is there anything you're still wondering about?",
+          "tip": "🚀 Tip: Try to apply what you learn right away."
         }
       },
       "subject": "🎁 Get your gifts",
@@ -480,132 +618,6 @@
     },
     "desc": "The page you’re looking for doesn’t exist… or not anymore 🕳️. But every detour is an adventure 🌠. Sic itur ad astra 🌟: every step, even lost, brings us closer to the stars 🌌✨.",
     "title": "Looks like you’ve <thin>lost</thin> yourself among the <thin>stars</thin> ✨"
-  },
-  "page-sections": {
-    "cta": {
-      "variant-one": {
-        "button": "Let’s talk SaaS 🦄",
-        "description": "<p>I share resources, thoughts, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Want to talk SaaS, design, product, or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
-        "title": "Want to talk SaaS?"
-      },
-      "variant-two": {
-        "description": "<p>I share resources, thoughts, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Want to talk SaaS, design, product, or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
-        "form": {
-          "button": "Let’s talk SaaS 🦄",
-          "placeholder": "Your email here… ✉️"
-        },
-        "title": "Let’s discuss your next project!"
-      }
-    },
-    "header": {
-      "cta": "Let’s talk SaaS 👋"
-    },
-    "hub": {
-      "badge": "Hub 🫶🏻",
-      "base": {
-        "resources-type": {
-          "code": {
-            "badge": "Developers 🤖",
-            "button": "Get",
-            "description": "Simple, documented code snippets from my experience to help you build your own products.",
-            "title": "Code 🧑🏻‍💻"
-          },
-          "course": {
-            "badge": "Students 🧑🏻‍🎓",
-            "button": "Start",
-            "description": "Learn at your own pace with clear, practical lessons to go from idea to real product.",
-            "title": "Courses 🎥"
-          },
-          "ebook": {
-            "badge": "Readers 📖",
-            "button": "Read",
-            "description": "Practical, simple, and actionable guides to help you avoid mistakes and move faster.",
-            "title": "E-books 📕"
-          },
-          "figma-template": {
-            "badge": "Creators 🖌️",
-            "button": "Explore",
-            "description": "Ready-to-use templates from my design frenzies to help you create products people want to use.",
-            "title": "Figma Templates 🎨"
-          },
-          "masterclass": {
-            "badge": "Participants 🍿",
-            "button": "Join",
-            "description": "Join interactive sessions where we break down key topics and real-world cases together.",
-            "title": "Masterclass 🎬"
-          },
-          "video": {
-            "badge": "Curious 🎥",
-            "button": "Watch",
-            "description": "Short, practical videos — YouTube and more — to inspire, teach, and help you take action.",
-            "title": "Videos 📺"
-          }
-        }
-      },
-      "description": "Courses, e-books, videos, templates, and code to help you simplify, test, and turn your ideas into products and create solutions that matter.",
-      "title": "Resources"
-    },
-    "newsletter": {
-      "description": {
-        "default": "Signing up... You can add your personal information.",
-        "state": "Your registration is confirmed! You can add your details to personalize your experience."
-      },
-      "footer": {
-        "button": "Yes, I want it 🤭",
-        "description": "Exclusive tips, tricks, and resources to turn your ideas into products that shine 🦄",
-        "subText": "Promise, only inspiring content and zero spam ✨",
-        "title": "💌 Your creative kit is waiting 🫶🏻"
-      },
-      "form": {
-        "fields": {
-          "email": {
-            "label": "Email",
-            "placeholder": "Your email"
-          },
-          "email-page": {
-            "label": "Email",
-            "placeholder": "Your email here… ✉️"
-          },
-          "name": {
-            "label": "Name",
-            "placeholder": "How should I call you?"
-          },
-          "phone": {
-            "label": "Phone",
-            "placeholder": "Phone number"
-          }
-        },
-        "success": {
-          "message": {
-            "description": "Your information has been updated successfully. Thank you! 🎉",
-            "title": "Thank you for signing up!"
-          }
-        }
-      },
-      "tags": "Product Design 🎨, SaaS 🦄, UX/UI 🖌️, Design System 🧩, Figma 🎨, Startups 🚀",
-      "title": "💌 Your creative kit is waiting 🫶🏻"
-    },
-    "preview": {
-      "description": "You can have the rest of the empty space here.",
-      "emoji": "😎",
-      "title": "I made you look."
-    },
-    "projects": {
-      "badge": "Problem Solver 🦄",
-      "description": "Every project is a unique adventure where the goal is to turn an idea into a real experience, with design that delights and strategy that works.",
-      "title": "Projects"
-    },
-    "testimonials": {
-      "badge": "We designed together 🫱🏾‍🫲🏻",
-      "button": "See on LinkedIn",
-      "description": "With these founders, creators, and teams, we tested, iterated, built, and found solutions together 🫶🏻.",
-      "title": "Partners"
-    },
-    "thoughts": {
-      "badge": "Lab ✍🏻",
-      "description": "My experiences, reflections, and advice on designing complex products where simplicity becomes a superpower.",
-      "title": "Thoughts"
-    }
   },
   "playground": {
     "description": "Adriel Zimbril’s space to test new ideas, concepts, and design experiences before they become real projects.",
@@ -721,7 +733,7 @@
     "description": "My raw thoughts on product design, innovation, and SaaS creation. Unfiltered reflections to grow and see things differently.",
     "inner-page": {
       "more-preview-section": {
-        "title": "Other reflections."
+        "title": "Other articles."
       }
     },
     "keywords": "Adriel Zimbril SaaS blog, SaaS product design, SaaS Product Designer, design reflections, SaaS innovation",

@@ -9,7 +9,7 @@ import { getAllProjects } from "@/module/content/utils/lib";
 import logger from "@/utils/logger";
 import { Project } from "@/module/content/types";
 import { cn } from "@/utils";
-import { useTranslations } from "use-intl";
+import { useTranslations, useLocale } from "use-intl";
 
 const config: ProjectPreviewCardContainerSectionProps = {
   allWide: false,
@@ -19,13 +19,14 @@ const config: ProjectPreviewCardContainerSectionProps = {
 
 export function ProjectsSection() {
   const t = useTranslations();
+  const locale = useLocale();
   const { allWide, wideCardsCount, limit } = config;
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
     async function loadProjects() {
       try {
-        const data = await getAllProjects({ limit: limit });
+        const data = await getAllProjects({ limit: limit, locale });
         setProjects(data);
       } catch (err) {
         logger.error(err);

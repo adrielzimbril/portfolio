@@ -2,7 +2,7 @@ import React from "react";
 import { HeaderSection } from "./sections/HeaderSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllPosts } from "@/module/content/utils/lib";
@@ -32,7 +32,8 @@ export async function generateMetadata() {
 }
 
 export default async function MyThoughts() {
-  const data = await getAllPosts().catch((err) => {
+  const locale = await getLocale();
+  const data = await getAllPosts({ locale }).catch((err) => {
     logger.error(err);
     return [];
   });
