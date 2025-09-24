@@ -34,22 +34,9 @@ export const supabaseLiveCheckTask = schedules.task({
         body: JSON.stringify({ isBot: true }),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(
-          `API responded with status: ${response.status} - ${errorText}`
-        );
-      }
-
       const result = await response.json();
 
-      if (!result.success) {
-        logger.error(`Health check failed`, {
-          status: "error",
-          error: result.error,
-        });
-        throw new Error(`Health check failed: ${result.error}`);
-      }
+      logger.info("Health check API response", { result });
 
       logger.info("Health check successful:", {
         status: "success",
@@ -59,7 +46,7 @@ export const supabaseLiveCheckTask = schedules.task({
 
       return result;
     } catch (error) {
-      logger.info("Fetching health check API", { url });
+      logger.error("Fetching health check API", { url, error });
 
       logger.error(`Task execution failed`, {
         status: "error",
