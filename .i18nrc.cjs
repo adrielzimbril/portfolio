@@ -3,9 +3,9 @@
 // Do not convert this file to ESModule format unless all dependencies support it.
 const { defineConfig } = require("@lobehub/i18n-cli");
 
-const isMdx = true; // Set to true if you are using MDX files
+const isMdx = false; // Set to true if you are using MDX files
 
-const mode = "content"; // "default" or "content"
+const mode = "default"; // "default" or "content"
 
 module.exports = defineConfig({
   modelName: "gpt-4.1-nano",
@@ -20,7 +20,7 @@ module.exports = defineConfig({
       : "src/data/personal/translate",
   outputLocales: ["en", "zh_CN"],
   saveImmediately: true,
-  splitToken: "1024",
+  //splitToken: "1024",
   experimental: {
     jsonMode: true,
   },

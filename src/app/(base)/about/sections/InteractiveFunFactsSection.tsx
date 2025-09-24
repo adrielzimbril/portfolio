@@ -21,6 +21,7 @@ import {
 import posthog from "posthog-js";
 import { useLocale, useTranslations } from "use-intl";
 import { Locale } from "@/types";
+import GameJson from "@/data/personal/translate/game.json";
 
 // Interface pour les questions
 interface Question {
@@ -37,196 +38,10 @@ interface Question {
 }
 
 // Quiz Questions
-const questions: Question[] = [
-  {
-    id: 1,
-    locale: Locale.FR,
-    emoji: "💣",
-    title: "J'ai détruit un SaaS rentable",
-    description: "J’ai fermé un projet qui faisait de l’argent.",
-    subtitle: "Un choix volontaire, pas une erreur.",
-    isTrue: true,
-    funFact:
-      "C'était un projet qui rapportait, mais qui ne me ressemblait pas.",
-    funnyTruthMessage:
-      "Exact! 🎯 Parfois il faut détruire pour mieux reconstruire.",
-    funnyLieMessage: "Ahah non, là c'est bien réel… 💥",
-  },
-  {
-    id: 2,
-    locale: Locale.FR,
-    emoji: "🍕",
-    title: "Mon premier client m’a payé en pizzas",
-    description:
-      "Au lieu de me donner de l’argent, il m’a offert des pizzas, par contre... 😝.",
-    subtitle: "Pepperoni > facture ?",
-    isTrue: false,
-    funFact:
-      "J'ai eu des petits budgets… mais toujours en cash, jamais en mozzarella.",
-    funnyTruthMessage: "Bien vu! 🎯 C'était faux, jamais payé en pizza.",
-    funnyLieMessage:
-      "Haha, tu y as cru! 😅 Mais non, ca aurait pu être une belle expérience.",
-  },
-  {
-    id: 3,
-    locale: Locale.FR,
-    emoji: "🚀",
-    title: "4 SaaS présentés, 4 sélectionnés",
-    description:
-      "Mes 4 projets ont passé les premières phases d’un incubateur.",
-    subtitle: "Mission validée!",
-    isTrue: true,
-    funFact: "C'était avec le programme Y’ELLO Startup de MTN CI.",
-    funnyTruthMessage: "Exact! 🎯 Une de mes plus belles validations.",
-    funnyLieMessage: "Ah non, celui-là est vrai 😉",
-  },
-  {
-    id: 4,
-    locale: Locale.FR,
-    emoji: "🚫",
-    title: "Je déteste les beaux designs inutiles",
-    description: "Un mockup magnifique mais jamais codé, ça ne sert à rien.",
-    subtitle: "Forme ≠ fond.",
-    isTrue: true,
-    funFact:
-      "Un design non UX-ready ou inaccessible est une cata pour l’utilisateur, même s’il est joli.",
-    funnyTruthMessage: "Exact! 🎯 L’esthétique seule ne me séduit pas.",
-    funnyLieMessage:
-      "Ah non, c’est vrai… j’ai horreur de ça, l'accessibilité n'est pas à négliger.",
-  },
-  {
-    id: 5,
-    locale: Locale.FR,
-    emoji: "🧀",
-    title: "J'adore le fromage",
-    description: "Gourmand en mozzarella, je ne peux pas m'en passer.",
-    subtitle: "Fromage addict 😋.",
-    isTrue: true,
-    funFact: "Je peux en manger à chaque repas, sans jamais me lasser.",
-    funnyTruthMessage:
-      "Exact! 🎯 Le fromage, c’est ma faiblesse, alors si tu veux me faire un cadeau tu sais quoi offrir 🧀😝.",
-    funnyLieMessage:
-      "Ah non, c’est vrai… 🧀 c'est la base d'une bonne amitié pour moi 😝.",
-  },
-  {
-    id: 6,
-    locale: Locale.FR,
-    emoji: "😮‍💨",
-    title: "J’ai failli arrêter le code à 18 ans",
-    description: "Burnout, plus envie de toucher un clavier.",
-    subtitle: "Presque la fin, mais pas tout à fait.",
-    isTrue: true,
-    funFact: "Ce break m’a recentré sur le produit et le design.",
-    funnyTruthMessage: "Exact! 🎯 Ça m'a permis de revenir plus fort.",
-    funnyLieMessage: "Ah non, c'est vrai… et ça à été dur à vivre 😅.",
-  },
-  {
-    id: 7,
-    locale: Locale.FR,
-    emoji: "🎨",
-    title: "Le design m’a appris la discipline",
-    description: "Reproduire, ajuster, recommencer encore et encore.",
-    subtitle: "Design = rigueur.",
-    isTrue: true,
-    funFact:
-      "Le design m’a appris la patience et la précision plus que le code.",
-    funnyTruthMessage: "Exact! 🎯 C’est mon école invisible.",
-    funnyLieMessage: "Non non, celle-là est vrai 😅.",
-  },
-  {
-    id: 9,
-    locale: Locale.FR,
-    emoji: "🖼️",
-    title: "J’ai recopié 50 designs sur Dribbble",
-    description:
-      "J’ai progressé en design en reproduisant les sites de mes designers préférés.",
-    subtitle: "50 clones plus tard…",
-    isTrue: true,
-    funFact: "C’était ma meilleure école: observer et reproduire.",
-    funnyTruthMessage: "Exact! 🎯 C’était un entraînement intensif 😆.",
-    funnyLieMessage:
-      "Non non, celle-là est vrai, et c'etais une super expérience 😅.",
-  },
-  {
-    id: 10,
-    locale: Locale.FR,
-    emoji: "🏦",
-    title: "Je veux créer une néobanque un jour",
-    description: "Pas juste une app, une vraie banque digitale.",
-    subtitle: "Projet long terme.",
-    isTrue: false,
-    funFact: "Disons que ce n’est pas mon projet actuel, mais qui sait 🤭 ?",
-    funnyTruthMessage: "Bien vu! 🎯 Ce n’est pas mon projet officiel.",
-    funnyLieMessage: "Haha, tu m'as cru? 😅 Mais non, pas encore de néobanque.",
-  },
-  {
-    id: 11,
-    locale: Locale.FR,
-    emoji: "🔤",
-    title: "Toutes mes marques commencent par A",
-    description: "Je ne lance que des noms en A.",
-    subtitle: "Alphabet power.",
-    isTrue: false,
-    funFact:
-      "J’adore les noms en A (flow, mémorisation), mais ce n’est pas une règle stricte.",
-    funnyTruthMessage: "Bien vu! 🎯 J’aime les 'A' mais je ne suis pas rigide.",
-    funnyLieMessage:
-      "Haha tu m'as cru? 😅 Pas toutes mes marques commencent par A.",
-  },
-  {
-    id: 12,
-    locale: Locale.FR,
-    emoji: "😭",
-    title: "J’ai pleuré devant une erreur 500",
-    description: "Après deux jours de blocage, c’était juste un ';' oublié.",
-    subtitle: "Le drame du dev.",
-    isTrue: true,
-    funFact:
-      "Deux jours de blocage pour juste un ';'. Je me souviens encore de ma frustration, lesson learned 😭",
-    funnyTruthMessage: "Exact! 🎯 C’était douloureux mais formateur 😆.",
-    funnyLieMessage: "Ah non, c'est bien vrai 😅",
-  },
-  {
-    id: 13,
-    locale: Locale.FR,
-    emoji: "🎰",
-    title: "Mon domaine est devenu un site de casino",
-    description:
-      "J’ai oublié de renouveler un domaine, il a fini en machines à sous.",
-    subtitle: "Jackpot?",
-    isTrue: true,
-    funFact: "C’était un ancien domaine d’un projet perso. Gros fail 😭.",
-    funnyTruthMessage: "Exact! 🎯 Ça pique quand ça arrive.",
-    funnyLieMessage: "Non non, c’est vrai… et douloureux.",
-  },
-  {
-    id: 14,
-    locale: Locale.FR,
-    emoji: "🧑‍💻",
-    title: "Je rêve de créer un langage qui porte mon prénom",
-    description: "Imagine 'AdrielLang', ça sonne bien non?",
-    subtitle: "Geek dream.",
-    isTrue: false,
-    funFact:
-      "J’aimerais, mais ce n’est pas dans mes plans concrets (pour l’instant).",
-    funnyTruthMessage: "Bien vu! 🎯 Pas encore de 'AdrielLang'.",
-    funnyLieMessage:
-      "Haha tu y as cru! 😅 Non non, pas de langage pour l’instant.",
-  },
-  {
-    id: 15,
-    locale: Locale.FR,
-    emoji: "🐢",
-    title: "Mon premier PC mettait 5-10 minutes à démarrer",
-    description: "Je devais attendre une éternité avant de coder.",
-    subtitle: "Patience mode.",
-    isTrue: true,
-    funFact:
-      "Celeron 1.10ghz, impossible de lancer un serveur Next.js. Une vraie tortue 😭.",
-    funnyTruthMessage: "Exact! 🎯 Ça forge la patience du dev.",
-    funnyLieMessage: "Ah non, c'est bien vrai 😉",
-  },
-];
+const questions: Question[] = GameJson.map((game) => ({
+  ...game,
+  locale: game.locale as Locale,
+}));
 
 // Custom Emoji Component
 function GuessButton({
@@ -657,6 +472,7 @@ export function InteractiveFunFacts() {
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(true);
   const [showAllFacts, setShowAllFacts] = useState(false);
+
   const questionsLocale = questions.filter(
     (question) => question.locale === locale
   );
