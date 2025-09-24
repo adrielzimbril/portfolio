@@ -46,7 +46,7 @@ export function PreviewValueCardDetails({
   return (
     <div
       className={cn(
-        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-14 squircle squircle-smooth-md squircle-xl md:squircle-4xl squircle-sh-white overflow-hidden"
+        "flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-14 squircle squircle-smooth-md squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden"
       )}
     >
       <div className="flex flex-row items-center justify-between w-full mx-auto">

@@ -40,7 +40,7 @@ export function NavMenu({
                 <motion.div
                   layoutId="active-tab"
                   className={cn(
-                    "absolute inset-0 bg-b-base-accent squircle-b-base-accent",
+                    "absolute inset-0 bg-b-base-accent squircle-b-base-accent size-[95%] self-center place-self-center",
                     "squircle squircle-2xl md:squircle-7xl squircle-smooth-lg md:squircle-smooth-xl rounded-xl"
                   )}
                   transition={{

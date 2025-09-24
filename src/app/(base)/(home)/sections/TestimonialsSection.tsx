@@ -113,11 +113,11 @@ export function TestimonialsSection() {
       isFlex
     >
       <div className="flex flex-col gap-4 md:gap-8 items-center justify-center md:px-6 md:max-w-5xl mx-auto">
-        <Card className="squircle squircle-b-base squircle-3xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
+        <Card className="squircle squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
           <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
             <div
               className={cn(
-                "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-xl md:squircle-4xl squircle-sh-white overflow-hidden"
+                "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden"
               )}
             >
               <div className="flex flex-col items-start gap-4 md:gap-6 w-full max-w-[90%] py-6 md:py-8 mx-auto">
