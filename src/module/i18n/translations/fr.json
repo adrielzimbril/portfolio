@@ -435,7 +435,7 @@
         "available": {
           "title": "Disponible",
           "description": "{limit, plural, one {# place disponible} other {# places disponibles}} pour {date}",
-          "description-simple": "Disponible pour collaborations",
+          "description-simple": "Disponible pour collaboration",
           "description-secondary": "{showLimit, select, true {{limit, plural, one {# place disponible} other {# places disponibles}}} other {}}{showMission, select, true { pour Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, jusqu'au {date}} other {}}"
         },
         "unavailable": {

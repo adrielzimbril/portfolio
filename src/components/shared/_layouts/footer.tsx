@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
         <div className="flex relative flex-col w-full items-center justify-center p-2 md:p-16 gap-4 md:gap-8 mx-auto">
           <div className="flex flex-col justify-center items-center lg:grid grid-cols-1 lg:grid-cols-2 lg:flex-row lg:justify-between lg:items-start gap-8">
             <div className="flex flex-col gap-4 md:gap-6 w-full rounded-2xl">
-              <div className="flex flex-col gap-6 rounded-3xl bg-b-bases bg-b-base py-4 px-4">
+              <div className="flex flex-col gap-6 rounded-3xl bg-b-bases bg-b-base px-2 py-4 md:px-4">
                 <div className="flex flex-col gap-2">
                   <StatusBadge
                     mode="inline"

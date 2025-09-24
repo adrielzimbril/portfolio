@@ -17,12 +17,12 @@ export const routes = {
     link: "/hub",
     inHeader: true,
   },
-  playground: {
-    name: "Playground",
-    key: "playground",
-    link: "/playground",
-    inHeader: true,
-  },
+  // playground: {
+  //   name: "Playground",
+  //   key: "playground",
+  //   link: "/playground",
+  //   inHeader: true,
+  // },
   projects: {
     name: "Projets",
     key: "projects",
