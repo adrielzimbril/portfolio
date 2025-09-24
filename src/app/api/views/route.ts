@@ -19,13 +19,18 @@ export async function GET(req: NextRequest) {
   const slug = searchParams.get("slug");
   const wantResponse = searchParams.get("wantResponse") === "true";
 
+  if (!slug) {
+    return new Response(JSON.stringify({ error: "Page not found" }), {
+      status: 400,
+    });
+  }
+
   try {
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
       "get_page_analytics",
       {
-        p_path: path,
         p_type: type,
-        p_slug: slug ?? undefined,
+        p_slug: slug,
       }
     );
 
@@ -80,7 +85,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
     const {
-      path = "/",
+      path,
       type = "page",
       slug = null,
       details = null,
@@ -91,11 +96,10 @@ export async function POST(req: NextRequest) {
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
       "increment_page_analytics",
       {
-        p_path: path,
         p_type: type,
         p_slug: slug,
         p_user_ip: ip,
-        p_details: { ...details, userInfo: ipInfo },
+        p_details: { ...details, userInfo: ipInfo, legacy_path: path },
       }
     );
 
