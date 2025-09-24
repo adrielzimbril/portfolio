@@ -72,14 +72,11 @@ export async function createHmac(
       .join("");
   } else {
     try {
-      const res = await fetch(
-        getAbsolutePathUrl({ path: apiRoutes.sign.link }),
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ algorithm, key, data }),
-        }
-      );
+      const res = await fetch(getAbsolutePathUrl({ path: `/api/sign` }), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ algorithm, key, data }),
+      });
 
       if (!res.ok)
         throw new Error(

@@ -7,9 +7,9 @@ export const supabaseLiveCheckTask = schedules.task({
   //description for the schedule
   description:
     "This is a scheduled task for checking supabase project database status",
-  //every 3 months (UTC timezone)
+  //every weeks (UTC timezone)
   cron: {
-    pattern: "0 0 * * 1",
+    pattern: "0 0 * * 0",
     timezone: "UTC",
   },
   //queue the task to run with a max concurrency limit of 1
@@ -19,7 +19,7 @@ export const supabaseLiveCheckTask = schedules.task({
   },
   //run the task
   run: async () => {
-    const url = `${process.env.NEXT_PUBLIC_APP_URL}/${apiRoutes.views.link}`;
+    const url = `${process.env.NEXT_SHIROFOLIO_PUBLIC_APP_URL}/api/views`;
 
     try {
       logger.info("Starting Supabase health check via API...");
