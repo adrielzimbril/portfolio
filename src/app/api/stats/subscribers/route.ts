@@ -39,6 +39,16 @@ export async function GET(req: NextRequest) {
       return json({ count: count ?? 0 })
     }
 
+    if (scope === "productUrl") {
+      const url = searchParams.get("url") || "";
+      const { count, error } = await supabase
+        .from("hub_product_requests")
+        .select("*", { count: "exact", head: true })
+        .eq("product_url", url);
+      if (error) throw error;
+      return json({ count: count ?? 0 });
+    }
+
     if (scope === 'summary') {
       const [{ count: newsletterCount, error: e1 }, cCourse, cEbook, cVideo, totalReq] = await Promise.all([
         supabase.from('newsletter_subscribers').select('*', { count: 'exact', head: true }),

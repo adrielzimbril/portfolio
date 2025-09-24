@@ -47,7 +47,7 @@ export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
 export function useProductTitleRequestsCount(title: string) {
   const { data, error, isLoading, mutate } = useSWR(
     title
-      ? `${apiRoutes.statsSubscribers.link}?scope=productTitle&title=${encodeURIComponent(
+      ? `${apiRoutes.statsSubscribers.link}?scope=productUrl&url=${encodeURIComponent(
           title
         )}`
       : null, // null = skip fetch if no title
