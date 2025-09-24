@@ -19,38 +19,51 @@ const BASE_COLLECTION_PATH = "src/content";
 
 /**
  * Gets the locale from a file path.
- * Supports formats: fr, en, zh-CN, es-ES, etc.
  * Returns defaultLocale if nothing is found.
  */
-export function getLocaleFromFilePath(
-  filePath: string,
-  defaultLocale = "en"
-): string {
+export function getLocaleFromFilePath(filePath: string): string {
   // matches .xx or .xx-XX before the extension
   const match = filePath.match(/\.([a-z]{2}(?:-[A-Z]{2})?)\.[^.]+$/i);
-  if (!match) return defaultLocale;
+  if (match) {
+    // normalization: zh-cn -> zh-CN
+    return match[1]!.replace(/^[a-z]{2}-[a-z]{2}$/, (l) =>
+      l
+        .split("-")
+        .map((p, i) => (i ? p.toUpperCase() : p.toLowerCase()))
+        .join("-")
+    );
+  }
 
-  // normalization: zh-cn -> zh-CN
-  return match[1]!.replace(/^[a-z]{2}-[a-z]{2}$/, (l) =>
-    l.split("-").map((p, i) => (i ? p.toUpperCase() : p.toLowerCase())).join("-")
-  );
+  // no locale found, return default
+  return appConfig.i18n.defaultLocale;
 }
 
 /**
  * Sanitizes a path to make it a "clean route".
- * Removes locale, extension, extra slashes, and "index".
+ * Removes locale (if any), extension, extra slashes, and "index".
  */
 export function sanitizePath(filePath: string): string {
-  return filePath
-    // removes the locale (.fr, .en, .zh-CN, etc.)
-    .replace(/\.([a-z]{2}(?:-[A-Z]{2})?)$/, "")
-    // removes the extension (any after the last dot)
-    .replace(/\.[^.]+$/, "")
-    // cleans the start and end slashes
+  // separate filename from path
+  const parts = filePath.split("/");
+
+  // get last segment
+  const last = parts.pop() || "";
+
+  // remove locale and extension if any
+  const cleanLast = last
+    .replace(/\.([a-z]{2}(?:-[A-Z]{2})?)$/, "") // remove locale
+    .replace(/\.[^.]+$/, ""); // remove extension
+
+  // push back cleaned segment
+  if (cleanLast) parts.push(cleanLast);
+
+  // join path, clean leading/trailing slashes, remove "index"
+  return parts
+    .join("/")
     .replace(/^\/|\/$/g, "")
-    // removes "index"
     .replace(/index$/, "");
 }
+
 
 async function compileBodyMDX(context: any, document: any) {
   const remarkPluginsList: any = [
