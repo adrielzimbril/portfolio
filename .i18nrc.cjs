@@ -8,7 +8,7 @@ const isMdx = false; // Set to true if you are using MDX files
 const mode = "default"; // "default" or "content"
 
 module.exports = defineConfig({
-  modelName: "gpt-4.1-mini",
+  modelName: "gpt-4.1",
   entry:
     mode === "default"
       ? "src/module/i18n/translations/fr.json"
@@ -20,7 +20,7 @@ module.exports = defineConfig({
       : "src/data/personal/translate",
   outputLocales: ["en", "zh_CN"],
   saveImmediately: true,
-  //splitToken: "4096",
+  splitToken: "4096",
   experimental: {
     jsonMode: true,
   },
