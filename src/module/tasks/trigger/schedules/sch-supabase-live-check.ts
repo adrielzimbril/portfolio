@@ -32,6 +32,7 @@ export const supabaseLiveCheckTask = schedules.task({
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({ isBot: true }),
         });
 
         if (!response.ok) {

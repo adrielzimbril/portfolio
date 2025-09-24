@@ -5,12 +5,18 @@ import logger from "@/utils/logger";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
+  
   const isBot = searchParams.get("isBot") === "true";
-  if (isBot)
+
+  if (isBot) {
+    logger.info("Bot detected", { url: req.url });
     return new Response(JSON.stringify({ status: 200, success: true }), {
       status: 200,
     });
-  
+  } else {
+    logger.info("Human detected", { url: req.url });
+  }
+
   const path = searchParams.get("path") || "/";
   const type = searchParams.get("type") || "page";
   const slug = searchParams.get("slug");

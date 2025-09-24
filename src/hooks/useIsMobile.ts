@@ -56,6 +56,8 @@ export const useIsIOS = (): boolean => {
  * const iosVersion = getIOSMajorVersion(); // 17, 18, etc.
  */
 export const getIOSMajorVersion = (): number => {
+  if (!navigator) return 20;
+  
   const isIOS =
     /iP(hone|od|ad)/.test(navigator.platform) ||
     (navigator.userAgent.includes("Mac") && "ontouchend" in document);
