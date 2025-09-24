@@ -55,9 +55,9 @@ export const useIsIOS = (): boolean => {
  * @example
  * const iosVersion = getIOSMajorVersion(); // 17, 18, etc.
  */
-export const getIOSMajorVersion = (): number => {
-  if (!navigator) return 20;
-  
+export const getIOSMajorVersion = (): number | null => {
+  if (typeof navigator === undefined) return null;
+
   const isIOS =
     /iP(hone|od|ad)/.test(navigator.platform) ||
     (navigator.userAgent.includes("Mac") && "ontouchend" in document);
@@ -87,6 +87,8 @@ export const useCompareIOSVersion = (
   type: "equals" | "sup" | "sup-eq" | "inf" | "inf-eq" = "inf"
 ): boolean => {
   const iosVersion = getIOSMajorVersion();
+
+  if (iosVersion === null) return false;
 
   if (iosVersion < 17) logger.warn("Your iOS version Is Outdated", iosVersion);
   // else logger.info("Your iOS version is supported", iosVersion);

@@ -64,20 +64,7 @@ export function CardInfo({
         <Description description={description} features={features} />
 
         <AvatarsStats
-          avatars={
-            avatarCount < 1
-              ? ["image1"]
-              : (avatars ?? [
-                  "image1",
-                  "image2",
-                  "image3",
-                  "image4",
-                  "image5",
-                  "image6",
-                  "image7",
-                  "image8",
-                ])
-          }
+          avatars={avatarCount < 1 ? [""] : ["", "", "", "", "", "", "", ""]}
           userCount={avatarCount ?? userCount}
           resourceType={resourceType}
         />
