@@ -1,8 +1,8 @@
 ---
 id: 11
-ref: "croissance"
+ref: "growth"
 name: "Croissance"
 description: "Ressources liées au tag Croissance"
 color: "PINKISH_BLUE"
-slug: "croissance"
+slug: "growth"
 ---

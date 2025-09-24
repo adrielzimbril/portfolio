@@ -53,7 +53,7 @@ function walkDir(dir) {
 // console.log("✨ Done!");
 
 
-const LANGS = ["en", "zh-CN"];
+const LANGS = ["", "zh-CN"]; // "" = default file
 const allowedFileExtensions = [".md", ".mdx"];
 let updatedFilesCount = 0;
 
@@ -62,7 +62,6 @@ function walkMdFiles(dir) {
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      // recurse into subfolders
       walkMdFiles(fullPath);
       return;
     }
@@ -72,38 +71,51 @@ function walkMdFiles(dir) {
 
     const base = path.basename(entry.name, ext);
 
-    // skip files that already have a lang suffix
-    if (LANGS.some((l) => base.endsWith(`.${l}`))) return;
+    // on ne touche qu'aux fichiers anglais source
+    if (!base.endsWith(".en")) return;
 
-    // default file
-    const defaultFile = fullPath;
-    if (!fs.existsSync(defaultFile)) return;
+    const nameBase = base.replace(/\.en$/, ""); // "name"
 
-    const defaultContent = matter.read(defaultFile);
+    // lire le fichier anglais
+    const enRaw = fs.readFileSync(fullPath, "utf8");
 
+    // extraire slug et ref
+    const enMatches = {};
+    ["slug", "ref"].forEach((field) => {
+      const match = enRaw.match(new RegExp(`^${field}:\\s*(.*)$`, "m"));
+      if (match) enMatches[field] = match[1];
+    });
+
+    // copier vers toutes les langues configurées
     LANGS.forEach((lang) => {
-      const langFile = path.join(dir, `${base}.${lang}${ext}`);
-      let langContent;
+      const targetFileName = lang
+        ? `${nameBase}.${lang}${ext}`
+        : `${nameBase}${ext}`;
+      const targetFile = path.join(dir, targetFileName);
 
-      if (fs.existsSync(langFile)) {
-        langContent = matter.read(langFile);
+      let targetRaw;
+      if (fs.existsSync(targetFile)) {
+        targetRaw = fs.readFileSync(targetFile, "utf8");
       } else {
-        // create a new file with the default content
-        langContent = { content: defaultContent.content, data: {} };
+        // fallback : si le fichier n'existe pas, copier le contenu anglais
+        targetRaw = enRaw;
       }
 
-      // copy slug and ref if exist
-      ["slug", "ref"].forEach((field) => {
-        if (defaultContent.data[field]) {
-          langContent.data[field] = defaultContent.data[field];
+      // remplacer ou ajouter slug/ref
+      Object.entries(enMatches).forEach(([field, value]) => {
+        if (targetRaw.match(new RegExp(`^${field}:\\s*(.*)$`, "m"))) {
+          targetRaw = targetRaw.replace(
+            new RegExp(`^${field}:\\s*(.*)$`, "m"),
+            `${field}: ${value}`
+          );
+        } else {
+          targetRaw = targetRaw.replace(/^---\n/, `---\n${field}: ${value}\n`);
         }
       });
 
-      // write back the file
-      const output = matter.stringify(langContent.content, langContent.data);
-      fs.writeFileSync(langFile, output);
+      fs.writeFileSync(targetFile, targetRaw, "utf8");
       updatedFilesCount++;
-      console.log(`✅ Updated: ${langFile}`);
+      console.log(`✅ Updated: ${targetFile}`);
     });
   });
 }

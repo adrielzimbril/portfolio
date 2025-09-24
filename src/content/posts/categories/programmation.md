@@ -1,8 +1,8 @@
 ---
 id: 3
-ref: "programmation"
+ref: "programming"
 name: "Programmation"
 description: "Articles dans la catégorie Programmation"
 color: "PURPLE"
-slug: "programmation"
+slug: "programming"
 ---

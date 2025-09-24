@@ -1,8 +1,8 @@
 ---
 id: 3
-ref: "conseils"
+ref: "advice"
 name: "Conseils"
 description: "Ressources liées au tag Conseils"
 color: "PINKISH_GREEN"
-slug: "conseils"
+slug: "advice"
 ---
