@@ -54,7 +54,7 @@ export function GoalResearchSection({
         <EmojiPlaceholder
           //src={getImageUrl(getEmojiHub("🎯", "apple"))}
           src={{ emoji: "🎯" }}
-          //isMobileShowed
+          isMobileShowed
           variant="squircle"
         />
         <ContentSection

@@ -97,10 +97,12 @@ export function ProductAvatarsStats({
   title,
   type,
   colorName,
+  badgeClassName,
 }: {
   title: string;
   type: ResourceType;
   colorName?: string;
+  badgeClassName?: string;
 }) {
   const { count } = useProductTitleRequestsCount(title);
 
@@ -110,7 +112,7 @@ export function ProductAvatarsStats({
       avatars={count < 1 ? [""] : ["", "", "", "", "", "", "", ""]}
       resourceType={type}
       colorName={cn(colorName ?? "squircle-b-base")}
-      badgeClassName={"text-b-white-unchanged"}
+      badgeClassName={badgeClassName}
     />
   );
 }

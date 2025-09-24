@@ -81,7 +81,6 @@ export function ProjectDetailsSection({
                         className={pickRandomColor("PINKISH_BLUE")}
                         variant="colored"
                       >
-                        {duration.toString()}
                         {getDateDifference(duration).toString()}
                       </Badge>
                     </div>

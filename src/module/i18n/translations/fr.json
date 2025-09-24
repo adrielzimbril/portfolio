@@ -130,26 +130,27 @@
       },
       "project-research-section": {
         "title": "Cadrage du problème",
-        "description": "Vous pouvez poser quelques concepts initiaux."
+        "description": "Tout commence par le problème : qui est concerné, dans quel contexte et pourquoi il mérite notre attention."
       },
       "goal-research-section": {
-        "title": "Objectif ?"
+        "title": "Objectif ?",
+        "description": "À partir de ce problème, nous dessinons la boussole du projet : les objectifs et les indicateurs qui montreront si nous sommes sur la bonne voie."
       },
       "project-statement-section": {
         "title": "Recherche utilisateur",
-        "description": "Vous pouvez poser quelques concepts initiaux."
+        "description": "Les besoins et comportements des utilisateurs se révèlent au fil des interviews, observations, échanges et nous révèlent leurs besoins, frustrations et motivation."
       },
       "project-points-research-section": {
-        "title": "Points clés",
-        "description": "Vous pouvez poser quelques concepts initiaux."
+        "title": "Insights",
+        "description": "Chaque donnée et chaque retour se transforme en enseignements qui éclairent les choix de conception et guide nos décisions."
       },
       "project-preview-section": {
-        "title": "Idéation",
-        "description": "Vous pouvez poser quelques concepts initiaux."
+        "title": "Aperçu",
+        "description": "Chaque écran raconte une histoire : comment les utilisateurs découvrent le produit, interagissent avec lui et vivent l’expérience dans son contexte réel."
       },
       "project-result-section": {
         "title": "Résultats",
-        "description": "Vous pouvez poser quelques concepts initiaux."
+        "description": "Le projet prend vie et raconte son succès à travers l’adoption, la rétention et l’impact sur les utilisateurs et le business."
       },
       "more-preview-section": {
         "title": "Autres projets."

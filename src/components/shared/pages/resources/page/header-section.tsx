@@ -110,6 +110,7 @@ export function HeaderSection({
               colorName="squircle-indigo-100"
               title={mainTitle}
               type={type}
+              badgeClassName="text-b-white-unchanged"
             />
           )}
           {tags.map((tag, index) => (

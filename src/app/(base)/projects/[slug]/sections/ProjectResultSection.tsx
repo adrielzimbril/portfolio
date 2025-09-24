@@ -33,7 +33,7 @@ export function ProjectResultSection({
         {results.map((result, index) => (
           <Card
             key={index}
-            className="squircle size-full max-w-[75%] md:max-w-full squircle-b-base squircle-6xl squircle-smooth-md border-0 overflow-hidden"
+            className="squircle size-full max-w-[90%] md:max-w-full squircle-b-base squircle-6xl squircle-smooth-md border-0 overflow-hidden"
           >
             <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
               <div

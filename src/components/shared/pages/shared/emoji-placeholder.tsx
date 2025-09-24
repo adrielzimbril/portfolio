@@ -63,7 +63,7 @@ export function EmojiPlaceholder({
           // Cas emoji
           <span
             className={cn(
-              "relative size-full flex items-center justify-center text-5xl md:text-[10rem] object-cover pointer-events-none",
+              "relative size-full flex items-center justify-center text-9xl md:text-[10rem] object-cover pointer-events-none",
               variant === "squircle" &&
                 "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName
