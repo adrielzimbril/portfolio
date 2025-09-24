@@ -301,7 +301,7 @@ export type Database = {
         Returns: string
       }
       get_page_analytics: {
-        Args: { p_type: string; p_slug?: string | null }
+        Args: { p_path: string; p_slug?: string; p_type: string }
         Returns: {
           total_views: number
           unique_users: number
@@ -310,7 +310,8 @@ export type Database = {
       increment_page_analytics: {
         Args: {
           p_details?: Json
-          p_slug?: string | null
+          p_path: string
+          p_slug?: string
           p_type: string
           p_user_ip?: string
         }
@@ -336,16 +337,18 @@ export type Database = {
       upsert_page_counter: {
         Args: {
           p_increment?: number
+          p_path: string
+          p_slug?: string
           p_type: string
-          p_slug?: string | null
         }
         Returns: number
       }
       upsert_unique_view: {
         Args: {
           p_details?: Json
+          p_path: string
+          p_slug?: string
           p_type: string
-          p_slug?: string | null
           p_user_ip: string
         }
         Returns: {

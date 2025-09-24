@@ -23,8 +23,9 @@ export async function GET(req: NextRequest) {
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
       "get_page_analytics",
       {
+        p_path: path,
         p_type: type,
-        p_slug: slug ?? null,
+        p_slug: slug ?? undefined,
       }
     );
 
@@ -79,7 +80,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => ({}));
     const {
-      path = "/", // Gardé pour la rétrocompatibilité
+      path = "/",
       type = "page",
       slug = null,
       details = null,
@@ -87,20 +88,15 @@ export async function POST(req: NextRequest) {
     } = body;
 
     // Use the PostgreSQL RPC function to handle everything atomically
-    // Appel de la fonction RPC avec les nouveaux paramètres
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
       "increment_page_analytics",
       {
+        p_path: path,
         p_type: type,
         p_slug: slug,
         p_user_ip: ip,
-        p_details: {
-          ...(details || {}),
-          userInfo: ipInfo,
-          // Ajouter le path dans les détails pour la rétrocompatibilité
-          legacy_path: path,
-        },
-      } as any // Type assertion temporaire pour éviter les erreurs de type
+        p_details: { ...details, userInfo: ipInfo },
+      }
     );
 
     if (rpcError) {
