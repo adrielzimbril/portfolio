@@ -34,7 +34,7 @@ const data: CraftSectionCard[] = [
   },
   {
     icon: <PlayingCardsIcon />,
-    locale: "zh_CN",
+    locale: "zh-CN",
     title: "面向企业",
     description:
       "我喜欢设计简洁、自然融入用户生活的界面，并符合您长期的业务目标。\n\n🎯 影响：客户满意，技术团队无压力地实现，产品长期证明其价值。",
@@ -55,7 +55,7 @@ const data: CraftSectionCard[] = [
   },
   {
     icon: <ThreeDIcon />,
-    locale: "zh_CN",
+    locale: "zh-CN",
     title: "面向初创公司",
     description:
       "构建产品首先要理解真正重要的事情。我们一起明确问题，设计一个可行的 MVP，并选择合适的工具快速验证您的假设。\n\n🎯 影响：减少盲目下注，获得更多真实的学习成果，打造吸引真实用户的首款产品。",
@@ -76,7 +76,7 @@ const data: CraftSectionCard[] = [
   },
   {
     icon: <HandshakeIcon />,
-    locale: "zh_CN",
+    locale: "zh-CN",
     title: "面向产品团队",
     description:
       "最好的产品来自于团结且好奇的团队。通过工作坊和协作会议，我帮助您的团队以新的视角看待挑战，找到推动产品成长的解决方案。\n\n🎯 影响：产品沿着正确方向发展，团队充满动力并为自己的成果感到自豪。",
@@ -97,7 +97,7 @@ const data: CraftSectionCard[] = [
   },
   {
     icon: <ShapeIcon />,
-    locale: "zh_CN",
+    locale: "zh-CN",
     title: "面向学生",
     description:
       "学习设计不仅仅是上课，而是理解如何将一个原始想法变成可行的项目。我的培训和资源能让你从一开始就养成正确的思维习惯。\n\n🎯 影响：更多自信，更少放弃，看到自己的想法变为现实的满足感。",

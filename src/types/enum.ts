@@ -6,7 +6,7 @@ export enum SortOrder {
 export enum Locale {
   EN = "en",
   FR = "fr",
-  ZH_CN = "zh_CN",
+  ZH_CN = "zh-CN",
 }
 
 export type LocaleKey = (typeof Locale)[keyof typeof Locale];

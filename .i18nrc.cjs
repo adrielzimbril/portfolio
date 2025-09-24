@@ -18,7 +18,7 @@ module.exports = defineConfig({
     mode === "default"
       ? "src/module/i18n/translations"
       : "src/data/personal/translate",
-  outputLocales: ["en", "zh_CN"],
+  outputLocales: ["en", "zh-CN"],
   saveImmediately: true,
   splitToken: "4096",
   experimental: {
@@ -28,7 +28,7 @@ module.exports = defineConfig({
     entry: [isMdx ? "src/content/**/*.mdx" : "src/content/**/*.md"],
     entryLocale: "fr",
     entryExtension: isMdx ? ".mdx" : ".md",
-    outputLocales: ["en", "zh_CN"],
+    outputLocales: ["en", "zh-CN"],
     includeMatter: true,
     outputExtensions: (locale, { getDefaultExtension }) => {
       if (locale === "fr") return isMdx ? ".mdx" : ".md";

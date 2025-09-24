@@ -54,8 +54,8 @@ export const appConfig = {
         icon: "FRFlag",
         url: BASE_URL,
       },
-      zh_CN: {
-        code: "zh_CN",
+      "zh-CN": {
+        code: "zh-CN",
         label: "中文",
         currency: "RMB",
         icon: "CNFlag",

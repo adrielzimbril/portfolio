@@ -13,7 +13,7 @@
   },
   {
     "id": 1,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "💣",
     "title": "我亲手关掉了一个赚钱的SaaS",
     "description": "我关闭了一个本来赚钱的项目。",
@@ -37,7 +37,7 @@
   },
   {
     "id": 2,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🍕",
     "title": "我的第一个客户用披萨付我钱",
     "description": "他没给钱，直接给了我披萨 😝。",
@@ -61,7 +61,7 @@
   },
   {
     "id": 3,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🚀",
     "title": "4个SaaS参赛，4个入选",
     "description": "我的4个项目全部通过了孵化器的第一轮。",
@@ -85,7 +85,7 @@
   },
   {
     "id": 4,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🚫",
     "title": "我讨厌华而不实的设计",
     "description": "漂亮但永远不会上线的设计毫无意义。",
@@ -109,7 +109,7 @@
   },
   {
     "id": 5,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🧀",
     "title": "我爱奶酪",
     "description": "我是马苏里拉控，没有它活不下去。",
@@ -133,7 +133,7 @@
   },
   {
     "id": 6,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "😮‍💨",
     "title": "我18岁差点放弃编程",
     "description": "烧尽症，再也不想碰键盘。",
@@ -157,7 +157,7 @@
   },
   {
     "id": 7,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🎨",
     "title": "设计教会了我纪律",
     "description": "不断复刻、调整、再复刻。",
@@ -181,7 +181,7 @@
   },
   {
     "id": 9,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🖼️",
     "title": "我抄过Dribbble上的50个设计",
     "description": "我通过复刻喜欢的设计师作品来提升设计能力。",
@@ -205,7 +205,7 @@
   },
   {
     "id": 10,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🏦",
     "title": "我想有一天创建一家新型银行",
     "description": "不仅仅是App，要做真正的数字银行。",
@@ -229,7 +229,7 @@
   },
   {
     "id": 11,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🔤",
     "title": "我的品牌都以A开头",
     "description": "我只发布以A开头的名字。",
@@ -253,7 +253,7 @@
   },
   {
     "id": 12,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "😭",
     "title": "我为一个500错误哭了",
     "description": "卡住两天，结果只是少了个';'。",
@@ -277,7 +277,7 @@
   },
   {
     "id": 13,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🎰",
     "title": "我的域名变成了赌场网站",
     "description": "忘记续费，域名变成老虎机网站。",
@@ -301,7 +301,7 @@
   },
   {
     "id": 14,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🧑‍💻",
     "title": "我梦想创造一门以我名字命名的语言",
     "description": "想象一下 'AdrielLang'，很酷吧？",
@@ -325,7 +325,7 @@
   },
   {
     "id": 15,
-    "locale": "zh_CN",
+    "locale": "zh-CN",
     "emoji": "🐢",
     "title": "我的第一台电脑启动要5-10分钟",
     "description": "我得等很久才能开始编码。",
