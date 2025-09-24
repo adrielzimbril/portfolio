@@ -18,6 +18,7 @@ import { useScrollTo } from "@/hooks/useScrollTo";
 import { ResourceType } from "@/types/enum";
 import { ProductAvatarsStats } from "@/components/SubscriberBadges";
 import { useTranslations } from "use-intl";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -69,6 +70,7 @@ export function HeaderSection({
 
   const previewContent = initPreviewContent || basePreviewContent;
   const scrollTo = useScrollTo();
+  const isMobile = useIsMobile();
 
   // const scrollToKey = (key: string) => {
   //   const element = document.getElementById(key);
@@ -131,8 +133,8 @@ export function HeaderSection({
         <div className="relative w-full">
           <Link
             href={type ? getResourceAskUrl(ctaButton) : ctaButton}
-            className="w-full font-bold text-2xl py-5"
-            size="lg"
+            className="w-full font-bold md:text-2xl md:py-5"
+            size={isMobile ? "default" : "lg"}
             likeButton
             asFull
             data-project-url={type ? getResourceAskUrl(ctaButton) : ctaButton}
@@ -144,8 +146,8 @@ export function HeaderSection({
         <div className="relative w-full">
           <Button
             onClick={() => scrollTo("gallery-section")}
-            className="w-full font-bold text-2xl py-5"
-            size="lg"
+            className="w-full font-bold md:text-2xl md:py-5"
+            size={isMobile ? "default" : "lg"}
             asFull
             asPointer
             data-scroll-to="gallery-section"
