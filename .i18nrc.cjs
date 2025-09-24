@@ -3,7 +3,7 @@
 // Do not convert this file to ESModule format unless all dependencies support it.
 const { defineConfig } = require("@lobehub/i18n-cli");
 
-const isMdx = false;
+const isMdx = true; // Set to true if you are using MDX files
 
 const mode = "content"; // "default" or "content"
 
