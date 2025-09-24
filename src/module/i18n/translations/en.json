@@ -81,29 +81,22 @@
     },
     "title": "I am 🧑🏻‍🚀"
   },
-  "base": {
-    "dribbble": "Dribbble",
-    "email": "Email",
-    "facebook": "Facebook",
-    "figma": "Figma",
-    "github": "Github",
-    "instagram": "Instagram",
-    "layers": "Layers",
-    "linkedin": "LinkedIn",
-    "peerlist": "Peerlist",
-    "product-hunt": "Product Hunt",
-    "tiktok": "Tiktok",
-    "website": "Website",
-    "x": "X",
-    "youtube": "Youtube"
-  },
   "common": {
     "base": {
-      "badge": "Problem Solver & Your SaaS Product Designer 🦄❣️",
-      "subtitle": "Innovative Problem Solver & SaaS Product Designer ❣️",
-      "subtitle-secondary": "Turning Ideas into Impact | SaaS Product Designer & Problem Solver ❣️",
-      "subtitle-simple": "Innovative Problem Solver & Your Go-To SaaS Product Designer ❣️",
-      "title": "Your ideas into products your users adore"
+      "dribbble": "Dribbble",
+      "email": "Email",
+      "facebook": "Facebook",
+      "figma": "Figma",
+      "github": "Github",
+      "instagram": "Instagram",
+      "layers": "Layers",
+      "linkedin": "LinkedIn",
+      "peerlist": "Peerlist",
+      "product-hunt": "Product Hunt",
+      "tiktok": "Tiktok",
+      "website": "Website",
+      "x": "X",
+      "youtube": "YouTube"
     },
     "button": {
       "back": "Back",
@@ -167,100 +160,6 @@
         "default": "Thoughts",
         "desktop": "Ideas ✍️",
         "mobile": "Logbook 📝"
-      }
-    },
-    "months": {
-      "april": "April",
-      "august": "August",
-      "december": "December",
-      "february": "February",
-      "january": "January",
-      "july": "July",
-      "june": "June",
-      "march": "March",
-      "may": "May",
-      "november": "November",
-      "october": "October",
-      "september": "September"
-    },
-    "page-loader": {
-      "about": {
-        "emoji": "👨‍💻",
-        "subtitle": "Simplifying design, inspiring teams, and launching products 🌌",
-        "title": "My world as a creator and trainer"
-      },
-      "contact": {
-        "emoji": "📞",
-        "subtitle": "Let’s discuss your idea, a SaaS project, or a collaboration 🤝",
-        "title": "Let’s talk about your next project"
-      },
-      "home": {
-        "emoji": "🦄",
-        "subtitle": "Product Designer & Guide for SaaS Creators ❣️",
-        "title": "Turn your ideas into products that shine"
-      },
-      "hub": {
-        "emoji": "⚡",
-        "subtitle": "Guides, templates, and resources to go from idea to product without wasting time ⚡",
-        "title": "Your creative Hub"
-      },
-      "newsletter": {
-        "emoji": "💌",
-        "subtitle": "Tips, resources, and inspiration to create products that matter 🎨",
-        "title": "Your creative kit is waiting"
-      },
-      "playground": {
-        "emoji": "🧪",
-        "subtitle": "Experiments, prototypes, and work-in-progress ideas to boost your creativity 🧪",
-        "title": "My playground"
-      },
-      "projects": {
-        "emoji": "🚀",
-        "subtitle": "Every product has a story: challenges, solutions, and impact 🚀",
-        "title": "Projects & case studies"
-      },
-      "submit": {
-        "emoji": "🧑🏻‍🔬",
-        "subtitle": "Your ideas, our analysis and redesigns 🎨",
-        "title": "Submit your project or idea for the ShiroSaaS Lab"
-      },
-      "thoughts": {
-        "emoji": "📝",
-        "subtitle": "Thoughts, lessons, and ideas for designing products your users will love ✍️",
-        "title": "Creative logbook"
-      }
-    },
-    "shared": {
-      "loadMore": {
-        "counter": "Showing {loadedItems} of {totalItems} items",
-        "end": {
-          "cta": "Feel free to subscribe to my <newsletter>newsletter</newsletter> so you don’t miss a thing 🦄"
-        },
-        "greeting": "Hello, that’s all for now! 🦄"
-      },
-      "text": {
-        "browser-does-not-support-video": "Your browser does not support video.",
-        "characters-left": "characters left",
-        "copied": "Copied",
-        "copy": "Copy",
-        "copyright": "Copyright Holder © {year} - All Rights Reserved - Crafted with ❣️ by {author}",
-        "duration": "Duration",
-        "language": "Language",
-        "presentation": "Presentation",
-        "results": "Results",
-        "role": "Role"
-      },
-      "planning-badge": {
-        "available": {
-          "description": "{limit, plural, one {# spot available} other {# spots available}} for {date}",
-          "description-secondary": "{showLimit, select, true {{limit, plural, one {# spot available} other {# spots available}}} other {}}{showMission, select, true { for Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, until {date}} other {}}",
-          "description-simple": "Available for collaboration",
-          "title": "Available"
-        },
-        "unavailable": {
-          "description": "Available again for Full-Stack Development and Web Design Mission{hasDate, select, true {, from {date}} other {}}",
-          "title": "Unavailable"
-        }
       }
     },
     "page-sections": {
@@ -387,6 +286,107 @@
         "badge": "Lab ✍🏻",
         "description": "My experiences, reflections, and advice on designing complex products where simplicity becomes a superpower.",
         "title": "Thoughts"
+      }
+    },
+    "shared": {
+      "base": {
+        "badge": "Problem Solver & Your SaaS Product Designer 🦄❣️",
+        "subtitle": "Innovative Problem Solver & SaaS Product Designer ❣️",
+        "subtitle-secondary": "Turning Ideas into Impact | SaaS Product Designer & Problem Solver ❣️",
+        "subtitle-simple": "Innovative Problem Solver & Your Go-To SaaS Product Designer ❣️",
+        "title": "Turning your ideas into products your users love"
+      },
+      "loadMore": {
+        "counter": "Showing {loadedItems} of {totalItems} items",
+        "end": {
+          "cta": "Feel free to subscribe to my <newsletter>newsletter</newsletter> so you don’t miss a thing 🦄"
+        },
+        "greeting": "Hello, that’s all for now! 🦄"
+      },
+      "months": {
+        "april": "April",
+        "august": "August",
+        "december": "December",
+        "february": "February",
+        "january": "January",
+        "july": "July",
+        "june": "June",
+        "march": "March",
+        "may": "May",
+        "november": "November",
+        "october": "October",
+        "september": "September"
+      },
+      "page-loader": {
+        "about": {
+          "emoji": "👨‍💻",
+          "subtitle": "Simplifying design, inspiring teams, and launching products 🌌",
+          "title": "My world as a creator and mentor"
+        },
+        "contact": {
+          "emoji": "📞",
+          "subtitle": "Let's discuss your idea, a SaaS project, or a collaboration 🤝",
+          "title": "Let's talk about your next project"
+        },
+        "home": {
+          "emoji": "🦄",
+          "subtitle": "Product Designer & Guide for SaaS Creators ❣️",
+          "title": "Turn your ideas into products that stand out"
+        },
+        "hub": {
+          "emoji": "⚡",
+          "subtitle": "Guides, templates, and resources to take your idea to product—fast ⚡",
+          "title": "Your Creative Hub"
+        },
+        "newsletter": {
+          "emoji": "💌",
+          "subtitle": "Tips, resources, and inspiration to create products that matter 🎨",
+          "title": "Your creative kit is waiting"
+        },
+        "playground": {
+          "emoji": "🧪",
+          "subtitle": "Experiments, prototypes, and work-in-progress ideas to spark your creativity 🧪",
+          "title": "My Playground"
+        },
+        "projects": {
+          "emoji": "🚀",
+          "subtitle": "Every product has a story: challenges, solutions, and impact 🚀",
+          "title": "Projects & Case Studies"
+        },
+        "submit": {
+          "emoji": "🧑🏻‍🔬",
+          "subtitle": "Your ideas, our analysis and redesigns 🎨",
+          "title": "Submit your project or idea to the ShiroSaaS Lab"
+        },
+        "thoughts": {
+          "emoji": "📝",
+          "subtitle": "Insights, lessons, and ideas for building products your users will love ✍️",
+          "title": "Creative Journal"
+        }
+      },
+      "planning-badge": {
+        "available": {
+          "description": "{limit, plural, one {# spot available} other {# spots available}} for {date}",
+          "description-secondary": "{showLimit, select, true {{limit, plural, one {# spot available} other {# spots available}}} other {}}{showMission, select, true { for Full-Stack Development and Web Design Mission} other {Full-Stack Development and Web Design Mission}}{hasDate, select, true {, until {date}} other {}}",
+          "description-simple": "Available for collaboration",
+          "title": "Available"
+        },
+        "unavailable": {
+          "description": "Available again for Full-Stack Development and Web Design Mission{hasDate, select, true {, from {date}} other {}}",
+          "title": "Unavailable"
+        }
+      },
+      "text": {
+        "browser-does-not-support-video": "Your browser does not support video.",
+        "characters-left": "characters left",
+        "copied": "Copied",
+        "copy": "Copy",
+        "copyright": "Copyright Holder © {year} - All Rights Reserved - Crafted with ❣️ by {author}",
+        "duration": "Duration",
+        "language": "Language",
+        "presentation": "Presentation",
+        "results": "Results",
+        "role": "Role"
       }
     }
   },
@@ -515,6 +515,12 @@
       "message2": "Your feedback really helps me improve my content for others. And if you have any questions along the way, don't hesitate to ask!",
       "preview": "Your {productType} is ready to download!",
       "productTypes": {
+        "code": {
+          "access": "Download the code",
+          "feedback": "When you've had a chance to use it, I'd love to know what you think. Is it useful for your current projects? Is there anything you're still wondering about?",
+          "intro": "Your code is ready!",
+          "tip": "🚀 Tip: Try to apply what you learn right away."
+        },
         "course": {
           "access": "Start the course",
           "feedback": "After going through a few modules, I'd love to hear your thoughts. Does the content meet your expectations? Are there topics you'd like to dive deeper into?",
@@ -527,23 +533,17 @@
           "intro": "Your ebook is available!",
           "tip": "📖 Suggestion: Read it in small sections and try to apply what you learn right away."
         },
+        "figma-template": {
+          "access": "Open the template",
+          "feedback": "When you've had a chance to use it, I'd love to know what you think. Is it useful for your current projects? Is there anything you're still wondering about?",
+          "intro": "Your Figma template is ready!",
+          "tip": "🚀 Tip: Try to apply what you learn right away."
+        },
         "video": {
           "access": "Watch the masterclass",
           "feedback": "Once you've watched the masterclass, let me know what you think! Did it answer your questions? What stood out the most?",
           "intro": "Your masterclass is waiting!",
           "tip": "🎯 Tip: Watch it in a quiet place with a notebook nearby. The best ideas often come while you're listening."
-        },
-        "code": {
-          "intro": "Your code is ready!",
-          "access": "Download the code",
-          "feedback": "When you've had a chance to use it, I'd love to know what you think. Is it useful for your current projects? Is there anything you're still wondering about?",
-          "tip": "🚀 Tip: Try to apply what you learn right away."
-        },
-        "figma-template": {
-          "intro": "Your Figma template is ready!",
-          "access": "Open the template",
-          "feedback": "When you've had a chance to use it, I'd love to know what you think. Is it useful for your current projects? Is there anything you're still wondering about?",
-          "tip": "🚀 Tip: Try to apply what you learn right away."
         }
       },
       "subject": "🎁 Get your gifts",

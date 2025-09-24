@@ -81,29 +81,22 @@
     },
     "title": "自我介绍 🧑🏻‍🚀"
   },
-  "base": {
-    "dribbble": "Dribbble",
-    "email": "邮箱",
-    "facebook": "Facebook",
-    "figma": "Figma",
-    "github": "Github",
-    "instagram": "Instagram",
-    "layers": "Layers",
-    "linkedin": "LinkedIn",
-    "peerlist": "Peerlist",
-    "product-hunt": "Product Hunt",
-    "tiktok": "Tiktok",
-    "website": "网站",
-    "x": "X",
-    "youtube": "Youtube"
-  },
   "common": {
     "base": {
-      "badge": "问题解决者 & 你的SaaS产品设计师 🦄❣️",
-      "subtitle": "创新型问题解决者 & SaaS产品设计师 ❣️",
-      "subtitle-secondary": "让想法产生影响 | SaaS产品设计师 & 问题解决者 ❣️",
-      "subtitle-simple": "创新型问题解决者 & 你的SaaS产品设计师 ❣️",
-      "title": "让你的想法成为用户喜爱的产品"
+      "dribbble": "Dribbble",
+      "email": "邮箱",
+      "facebook": "Facebook",
+      "figma": "Figma",
+      "github": "Github",
+      "instagram": "Instagram",
+      "layers": "Layers",
+      "linkedin": "LinkedIn",
+      "peerlist": "Peerlist",
+      "product-hunt": "Product Hunt",
+      "tiktok": "Tiktok",
+      "website": "网站",
+      "x": "X",
+      "youtube": "Youtube"
     },
     "button": {
       "back": "返回",
@@ -169,86 +162,219 @@
         "mobile": "航海日志 📝"
       }
     },
-    "months": {
-      "april": "四月",
-      "august": "八月",
-      "december": "十二月",
-      "february": "二月",
-      "january": "一月",
-      "july": "七月",
-      "june": "六月",
-      "march": "三月",
-      "may": "五月",
-      "november": "十一月",
-      "october": "十月",
-      "september": "九月"
-    },
-    "page-loader": {
-      "about": {
-        "emoji": "👨‍💻",
-        "subtitle": "简化设计，激励团队，发布产品 🌌",
-        "title": "我的创作与教学宇宙"
+    "page-sections": {
+      "cta": {
+        "variant-one": {
+          "button": "聊聊SaaS 🦄",
+          "description": "<p>我在<blog>博客</blog>和<linkedin>LinkedIn</linkedin>上分享资源、思考、经验与建议 🫶🏻。<br></br>想聊SaaS、设计、产品或创新？💡欢迎联系我，我很乐意交流 👋🏻</p>",
+          "title": "想聊聊SaaS吗？"
+        },
+        "variant-two": {
+          "description": "<p>我在<blog>博客</blog>和<linkedin>LinkedIn</linkedin>上分享资源、思考、经验与建议 🫶🏻。<br></br>想聊SaaS、设计、产品或创新？💡欢迎联系我，我很乐意交流 👋🏻</p>",
+          "form": {
+            "button": "聊聊SaaS 🦄",
+            "placeholder": "请输入您的邮箱… ✉️"
+          },
+          "title": "聊聊您的下一个项目！"
+        }
       },
-      "contact": {
-        "emoji": "📞",
-        "subtitle": "一起探讨你的想法、SaaS项目或合作 🤝",
-        "title": "聊聊你的下一个项目"
-      },
-      "home": {
-        "emoji": "🦄",
-        "subtitle": "产品设计师 & SaaS创作者引路人 ❣️",
-        "title": "让你的想法变成爆款产品"
+      "header": {
+        "cta": "聊聊SaaS 👋"
       },
       "hub": {
-        "emoji": "⚡",
-        "subtitle": "指南、模板与资源，助你高效从想法到产品 ⚡",
-        "title": "你的创意中心"
+        "badge": "中心 🫶🏻",
+        "base": {
+          "resources-type": {
+            "code": {
+              "badge": "开发者 🤖",
+              "button": "获取",
+              "description": "源自实践的简单文档代码，助你开发自己的产品。",
+              "title": "代码 🧑🏻‍💻"
+            },
+            "course": {
+              "badge": "学员 🧑🏻‍🎓",
+              "button": "开始学习",
+              "description": "通过清晰实用的课程，按自己的节奏学习，从想法到真正的产品。",
+              "title": "课程 🎥"
+            },
+            "ebook": {
+              "badge": "读者 📖",
+              "button": "阅读",
+              "description": "实用、简明的指南，帮你避坑加速前进。",
+              "title": "电子书 📕"
+            },
+            "figma-template": {
+              "badge": "创作者 🖌️",
+              "button": "探索",
+              "description": "精选设计模板，助你打造令人心动的产品。",
+              "title": "Figma模板 🎨"
+            },
+            "masterclass": {
+              "badge": "参与者 🍿",
+              "button": "加入",
+              "description": "参与互动课程，一起深入剖析关键主题与真实案例。",
+              "title": "大师课 🎬"
+            },
+            "video": {
+              "badge": "好奇者 🎥",
+              "button": "观看",
+              "description": "短小实用的视频——YouTube等，激发灵感，助你行动。",
+              "title": "视频 📺"
+            }
+          }
+        },
+        "description": "课程、电子书、视频、模板与代码，助你简化、测试、转化想法为产品，创造有价值的解决方案。",
+        "title": "资源"
       },
       "newsletter": {
-        "emoji": "💌",
-        "subtitle": "建议、资源与灵感，助你打造有影响力的产品 🎨",
-        "title": "你的创意工具包在等你"
+        "description": {
+          "default": "正在注册中……你可以添加个人信息。",
+          "state": "您的注册已确认！可添加信息以个性化体验。"
+        },
+        "footer": {
+          "button": "我愿意 🤭",
+          "description": "独家建议、技巧与资源，助你将想法变成爆款产品 🦄",
+          "subText": "保证只发有价值内容，绝不骚扰 ✨",
+          "title": "💌 你的创意工具包已备好 🫶🏻"
+        },
+        "form": {
+          "fields": {
+            "email": {
+              "label": "邮箱",
+              "placeholder": "您的邮箱"
+            },
+            "email-page": {
+              "label": "邮箱",
+              "placeholder": "请输入您的邮箱… ✉️"
+            },
+            "name": {
+              "label": "姓名",
+              "placeholder": "我该怎么称呼你？"
+            },
+            "phone": {
+              "label": "电话",
+              "placeholder": "电话号码"
+            }
+          },
+          "success": {
+            "message": {
+              "description": "您的信息已成功更新。谢谢！🎉",
+              "title": "感谢您的订阅！"
+            }
+          }
+        },
+        "tags": "产品设计 🎨, SaaS 🦄, UX/UI 🖌️, 设计系统 🧩, Figma 🎨, 初创公司 🚀",
+        "title": "💌 你的创意工具包已备好 🫶🏻"
       },
-      "playground": {
-        "emoji": "🧪",
-        "subtitle": "实验、原型与创意孵化，激发你的创造力 🧪",
-        "title": "我的创意乐园"
+      "preview": {
+        "description": "剩下的空间都归你。",
+        "emoji": "😎",
+        "title": "你被吸引了。"
       },
       "projects": {
-        "emoji": "🚀",
-        "subtitle": "每个产品都有故事：挑战、解决方案与影响 🚀",
-        "title": "项目与案例研究"
+        "badge": "问题解决者 🦄",
+        "description": "每个项目都是独特的冒险，目标是将创意转化为真实体验，兼具吸引力设计与有效策略。",
+        "title": "项目"
       },
-      "submit": {
-        "emoji": "🧑🏻‍🔬",
-        "subtitle": "你的创意，我们来分析与再设计 🎨",
-        "title": "为ShiroSaaS Lab提交你的项目或想法"
+      "testimonials": {
+        "badge": "我们共同设计 🫱🏾‍🫲🏻",
+        "button": "在LinkedIn上查看",
+        "description": "与这些创始人、创作者和团队，我们共同测试、迭代、构建并找到解决方案 🫶🏻。",
+        "title": "合作伙伴"
       },
       "thoughts": {
-        "emoji": "📝",
-        "subtitle": "思考、经验与灵感，助你打造用户喜爱的产品 ✍️",
-        "title": "创意日志"
-      }
-    },
-    "planning-badge": {
-      "available": {
-        "description": "{limit, plural, one {# 个名额可用} other {# 个名额可用}}，日期：{date}",
-        "description-secondary": "{showLimit, select, true {{limit, plural, one {# 个名额可用} other {# 个名额可用}}} other {}}{showMission, select, true {，全栈开发与网页设计任务} other {全栈开发与网页设计任务}}{hasDate, select, true {，截止至 {date}} other {}}",
-        "description-simple": "可合作",
-        "title": "可用"
-      },
-      "unavailable": {
-        "description": "全栈开发与网页设计任务将于{hasDate, select, true { {date} 起} other {}}重新开放",
-        "title": "不可用"
+        "badge": "实验室 ✍🏻",
+        "description": "我在复杂产品设计中的经验、思考与建议，让简约成为超级力量。",
+        "title": "思考"
       }
     },
     "shared": {
+      "base": {
+        "badge": "问题解决者 & 您的SaaS产品设计师 🦄❣️",
+        "subtitle": "创新型问题解决者 & SaaS产品设计师 ❣️",
+        "subtitle-secondary": "将创意转化为影响力 | SaaS产品设计师 & 问题解决者 ❣️",
+        "subtitle-simple": "创新型问题解决者 & 您的SaaS产品设计师 ❣️",
+        "title": "将您的想法变为用户喜爱的产品"
+      },
       "loadMore": {
         "counter": "已显示 {loadedItems} / {totalItems} 项",
         "end": {
           "cta": "欢迎订阅我的<newsletter>通讯</newsletter>，不错过任何精彩 🦄"
         },
         "greeting": "Hello，暂时就这些啦！🦄"
+      },
+      "months": {
+        "april": "四月",
+        "august": "八月",
+        "december": "十二月",
+        "february": "二月",
+        "january": "一月",
+        "july": "七月",
+        "june": "六月",
+        "march": "三月",
+        "may": "五月",
+        "november": "十一月",
+        "october": "十月",
+        "september": "九月"
+      },
+      "page-loader": {
+        "about": {
+          "emoji": "👨‍💻",
+          "subtitle": "简化设计，激励团队，推出产品 🌌",
+          "title": "我的创作与教学世界"
+        },
+        "contact": {
+          "emoji": "📞",
+          "subtitle": "欢迎交流你的想法、SaaS项目或合作 🤝",
+          "title": "聊聊你的下一个项目"
+        },
+        "home": {
+          "emoji": "🦄",
+          "subtitle": "产品设计师 & SaaS创作者引路人 ❣️",
+          "title": "将你的想法变成爆款产品"
+        },
+        "hub": {
+          "emoji": "⚡",
+          "subtitle": "指南、模板与资源，助你高效从想法到产品 ⚡",
+          "title": "你的创意中心"
+        },
+        "newsletter": {
+          "emoji": "💌",
+          "subtitle": "建议、资源与灵感，助你打造有影响力的产品 🎨",
+          "title": "你的创意工具包已备好"
+        },
+        "playground": {
+          "emoji": "🧪",
+          "subtitle": "实验、原型与创意孵化，激发你的创造力 🧪",
+          "title": "我的实验场"
+        },
+        "projects": {
+          "emoji": "🚀",
+          "subtitle": "每个产品都有故事：挑战、解决方案与影响 🚀",
+          "title": "项目与案例研究"
+        },
+        "submit": {
+          "emoji": "🧑🏻‍🔬",
+          "subtitle": "你的创意，我们来分析与重设计 🎨",
+          "title": "为ShiroSaaS Lab提交你的项目或想法"
+        },
+        "thoughts": {
+          "emoji": "📝",
+          "subtitle": "思考、经验与灵感，助你打造用户喜爱的产品 ✍️",
+          "title": "创意日志"
+        }
+      },
+      "planning-badge": {
+        "available": {
+          "description": "{limit, plural, one {# 个名额可用} other {# 个名额可用}}，日期：{date}",
+          "description-secondary": "{showLimit, select, true {{limit, plural, one {# 个名额可用} other {# 个名额可用}}} other {}}{showMission, select, true {，全栈开发与网页设计任务} other {全栈开发与网页设计任务}}{hasDate, select, true {，截止至 {date}} other {}}",
+          "description-simple": "可合作",
+          "title": "可用"
+        },
+        "unavailable": {
+          "description": "全栈开发与网页设计任务将于{hasDate, select, true { {date} 后} other {}}重新开放",
+          "title": "不可用"
+        }
       },
       "text": {
         "browser-does-not-support-video": "您的浏览器不支持视频。",
@@ -389,6 +515,12 @@
       "message2": "你的反馈对我改进内容非常重要。如果有任何疑问，欢迎随时提问！",
       "preview": "你的{productType}已准备好下载！",
       "productTypes": {
+        "code": {
+          "access": "下载代码",
+          "feedback": "等你有空看过后，欢迎告诉我你的想法。对你当前的项目有帮助吗？还有哪些疑问？",
+          "intro": "你的代码已准备好！",
+          "tip": "🚀 小贴士：试着直接应用你学到的内容。"
+        },
         "course": {
           "access": "开始学习课程",
           "feedback": "学习了几个模块后，非常希望听到你的反馈。内容是否符合你的预期？有哪些你想深入了解的地方？",
@@ -400,6 +532,12 @@
           "feedback": "有空翻阅后，欢迎告诉我你的看法。对你当前的项目有帮助吗？还有哪些疑问？",
           "intro": "你的电子书已上线！",
           "tip": "📖 建议：分章节阅读，并尝试立即应用所学内容。"
+        },
+        "figma-template": {
+          "access": "打开模板",
+          "feedback": "等你有空看过后，欢迎告诉我你的想法。对你当前的项目有帮助吗？还有哪些疑问？",
+          "intro": "你的Figma模板已准备好！",
+          "tip": "🚀 小贴士：试着直接应用你学到的内容。"
         },
         "video": {
           "access": "观看大师课",
@@ -480,132 +618,6 @@
     },
     "desc": "你要找的页面不存在……或已消失 🕳️。但每一次绕路都是一场冒险 🌠。Sic itur ad astra 🌟：即使迷失，每一步都让我们更接近星辰 🌌✨。",
     "title": "看起来你在<thin>星辰</thin>之间<thin>迷路</thin>了 ✨"
-  },
-  "page-sections": {
-    "cta": {
-      "variant-one": {
-        "button": "聊聊SaaS 🦄",
-        "description": "<p>我在<blog>博客</blog>和<linkedin>LinkedIn</linkedin>上分享资源、思考、经验与建议 🫶🏻。<br></br>想聊SaaS、设计、产品或创新？💡欢迎写信，我很乐意交流 👋🏻</p>",
-        "title": "想聊聊SaaS吗？"
-      },
-      "variant-two": {
-        "description": "<p>我在<blog>博客</blog>和<linkedin>LinkedIn</linkedin>上分享资源、思考、经验与建议 🫶🏻。<br></br>想聊SaaS、设计、产品或创新？💡欢迎写信，我很乐意交流 👋🏻</p>",
-        "form": {
-          "button": "聊聊SaaS 🦄",
-          "placeholder": "你的邮箱… ✉️"
-        },
-        "title": "聊聊您的下一个项目！"
-      }
-    },
-    "header": {
-      "cta": "聊聊SaaS 👋"
-    },
-    "hub": {
-      "badge": "中心 🫶🏻",
-      "base": {
-        "resources-type": {
-          "code": {
-            "badge": "开发者 🤖",
-            "button": "获取",
-            "description": "简单、文档齐全的代码片段，源自我的经验，助你开发自己的产品。",
-            "title": "代码 🧑🏻‍💻"
-          },
-          "course": {
-            "badge": "学员 🧑🏻‍🎓",
-            "button": "开始学习",
-            "description": "用清晰实用的课程，按自己的节奏从想法到产品。",
-            "title": "课程 🎥"
-          },
-          "ebook": {
-            "badge": "读者 📖",
-            "button": "阅读",
-            "description": "实用、简明的指南，帮你避坑加速成长。",
-            "title": "电子书 📕"
-          },
-          "figma-template": {
-            "badge": "创作者 🖌️",
-            "button": "探索",
-            "description": "现成设计模板，源自我的设计灵感，助你打造令人心动的产品。",
-            "title": "Figma模板 🎨"
-          },
-          "masterclass": {
-            "badge": "参与者 🍿",
-            "button": "加入",
-            "description": "参与互动课程，一起深入剖析关键主题与真实案例。",
-            "title": "大师课 🎬"
-          },
-          "video": {
-            "badge": "好奇者 🎥",
-            "button": "观看",
-            "description": "短小实用的视频——YouTube等，激发灵感，助你行动。",
-            "title": "视频 📺"
-          }
-        }
-      },
-      "description": "课程、电子书、视频、模板和代码，帮你简化、测试、转化想法为产品，创造有价值的解决方案。",
-      "title": "资源"
-    },
-    "newsletter": {
-      "description": {
-        "default": "正在注册……你可以补充个人信息。",
-        "state": "注册已确认！你可以补充信息，个性化你的体验。"
-      },
-      "footer": {
-        "button": "是的，我要 🤭",
-        "description": "独家建议、技巧与资源，助你将想法变成爆款产品 🦄",
-        "subText": "承诺只发有价值的内容，绝不骚扰 ✨",
-        "title": "💌 你的创意工具包在等你 🫶🏻"
-      },
-      "form": {
-        "fields": {
-          "email": {
-            "label": "邮箱",
-            "placeholder": "你的邮箱"
-          },
-          "email-page": {
-            "label": "邮箱",
-            "placeholder": "你的邮箱… ✉️"
-          },
-          "name": {
-            "label": "姓名",
-            "placeholder": "我该怎么称呼你？"
-          },
-          "phone": {
-            "label": "电话",
-            "placeholder": "电话号码"
-          }
-        },
-        "success": {
-          "message": {
-            "description": "你的信息已成功更新，谢谢！🎉",
-            "title": "感谢你的注册！"
-          }
-        }
-      },
-      "tags": "产品设计 🎨, SaaS 🦄, UX/UI 🖌️, 设计系统 🧩, Figma 🎨, 初创公司 🚀",
-      "title": "💌 你的创意工具包在等你 🫶🏻"
-    },
-    "preview": {
-      "description": "剩下的空间都归你。",
-      "emoji": "😎",
-      "title": "你被我吸引了。"
-    },
-    "projects": {
-      "badge": "问题解决者 🦄",
-      "description": "每个项目都是独特的冒险，目标是将想法转化为真实体验，兼具吸引力的设计与有效的策略。",
-      "title": "项目"
-    },
-    "testimonials": {
-      "badge": "我们共同设计 🫱🏾‍🫲🏻",
-      "button": "在LinkedIn上查看",
-      "description": "与这些创始人、创作者和团队，我们一起测试、迭代、共创解决方案 🫶🏻。",
-      "title": "合作伙伴"
-    },
-    "thoughts": {
-      "badge": "实验室 ✍🏻",
-      "description": "我的经验、思考与建议，专注于复杂产品设计，让简约成为超级力量。",
-      "title": "思考"
-    }
   },
   "playground": {
     "description": "Adriel Zimbril的创意实验空间，测试新想法、概念和设计体验，助力项目落地前的探索。",
