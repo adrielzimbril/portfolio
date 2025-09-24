@@ -2,14 +2,26 @@
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { routes } from "@/data/routes";
-import { useTranslations } from "use-intl";
-import { getEmojiHub } from "@aurthle/emoji-hub";
+import { useTranslations, useLocale } from "use-intl";
 import { getImageUrl } from "@/utils";
 import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
+import { usePageViews } from "@/hooks/usePageViews";
+import { getPathUrl } from "@/utils";
 
 export function HeaderSection() {
   const t = useTranslations();
+  const locale = useLocale();
+
+  usePageViews(
+    routes.about.key,
+    undefined,
+    {
+      locale: locale,
+      path: getPathUrl(routes.about.link),
+    },
+    false
+  );
 
   const isDarkMode = useIsDarkMode();
 

@@ -5,7 +5,7 @@ import { apiRoutes } from "@/data/api-routes";
 
 export function usePageViews(
   slug: string,
-  type: PageType,
+  type?: PageType,
   details?: Record<string, unknown>,
   wantResponse?: boolean
 ) {
@@ -43,7 +43,7 @@ export function usePageViews(
           // Fallback: just read
           const res = await fetch(
             `${apiRoutes.views.link}?slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
-              type
+              type ?? "page"
             )}&details=${encodeURIComponent(
               memoizedDetails ?? ""
             )}&wantResponse=${wantResponse}`

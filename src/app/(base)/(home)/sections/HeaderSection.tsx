@@ -6,7 +6,8 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations, useLocale } from "use-intl";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { LinkOne } from "@aurthle/icons";
-import { getDate, getThisMonth } from "@/utils";
+import { getDate, getPathUrl, getThisMonth } from "@/utils";
+import { usePageViews } from "@/hooks/usePageViews";
 
 const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
   const t = useTranslations();
@@ -109,6 +110,17 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
 
 export function HeaderSection() {
   const t = useTranslations();
+  const locale = useLocale();
+
+  usePageViews(
+    routes.home.key,
+    undefined,
+    {
+      locale: locale,
+      path: getPathUrl(routes.home.link),
+    },
+    false
+  );
 
   return (
     <SectionBase sectionClassName="p-0 mt-16" isWide>

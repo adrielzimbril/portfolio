@@ -5,10 +5,25 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import Cal, { getCalApi } from "@calcom/embed-react";
-import { useTranslations } from "use-intl";
+import { useTranslations, useLocale } from "use-intl";
+import { usePageViews } from "@/hooks/usePageViews";
+import { routes } from "@/data/routes";
+import { getPathUrl } from "@/utils";
 
 export default function ContactForm({}) {
   const t = useTranslations();
+  const locale = useLocale();
+
+  usePageViews(
+    routes.contact.key,
+    undefined,
+    {
+      locale: locale,
+      path: getPathUrl(routes.contact.link),
+    },
+    false
+  );
+
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "hello-adrielzimbril" });

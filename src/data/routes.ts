@@ -17,6 +17,12 @@ export const routes = {
     link: "/hub",
     inHeader: true,
   },
+  hubGet: {
+    name: "Hub",
+    key: "hub-get",
+    link: "/hub/get",
+    inHeader: false,
+  },
   // playground: {
   //   name: "Playground",
   //   key: "playground",

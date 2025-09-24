@@ -12,7 +12,10 @@ import { generateSimpleClientToken, getDate } from "@/utils";
 import { ResourceType } from "@/types";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
-import { useTranslations } from "use-intl";
+import { useTranslations, useLocale } from "use-intl";
+import { usePageViews } from "@/hooks/usePageViews";
+import { routes } from "@/data/routes";
+import { getPathUrl } from "@/utils";
 
 export function GetResource({
   id,
@@ -30,6 +33,17 @@ export function GetResource({
   created_at: string;
 }) {
   const t = useTranslations();
+  const locale = useLocale();
+
+  usePageViews(
+    routes.hubGet.key,
+    undefined,
+    {
+      locale: locale,
+      path: getPathUrl(routes.hubGet.link),
+    },
+    false
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const emailValidator = useEmailValidator({

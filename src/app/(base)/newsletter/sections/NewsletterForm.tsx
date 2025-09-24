@@ -8,16 +8,30 @@ import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { useTranslations } from "use-intl";
+import { useTranslations, useLocale } from "use-intl";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { routes } from "@/data/routes";
+import { usePageViews } from "@/hooks/usePageViews";
+import { getPathUrl } from "@/utils";
 
 export function NewsletterForm() {
   const t = useTranslations();
+  const locale = useLocale();
+  usePageViews(
+    routes.newsletter.key,
+    undefined,
+    { locale: locale, path: getPathUrl(routes.newsletter.link) },
+    false
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const emailValidator = useEmailValidator({ value: email, label: "Email", required: true });
+  const emailValidator = useEmailValidator({
+    value: email,
+    label: "Email",
+    required: true,
+  });
   const isEmailValid = !Boolean(emailValidator(email));
 
   return (

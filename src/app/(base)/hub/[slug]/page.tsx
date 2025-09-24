@@ -45,7 +45,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
   const resource = await getResourceWithAdjacent(slug, { locale });
 
   if (!resource) {
-    return localeRedirect({ href: routes.projects.link, locale });
+    return localeRedirect({ href: routes.hub.link, locale });
   }
 
   const { title, cover, tags, body, excerpt, type } = resource!.currentResource;
