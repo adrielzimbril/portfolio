@@ -46,22 +46,22 @@ export function GetResource({
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.badge"
+      "common.page-sections.hub.base.resources-type.course.title"
     ),
     [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.badge"
+      "common.page-sections.hub.base.resources-type.ebook.title"
     ),
     [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.badge"
+      "common.page-sections.hub.base.resources-type.video.title"
     ),
     [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.badge"
+      "common.page-sections.hub.base.resources-type.masterclass.title"
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.badge"
+      "common.page-sections.hub.base.resources-type.figma-template.title"
     ),
     [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.badge"
+      "common.page-sections.hub.base.resources-type.code.title"
     ),
   };
 

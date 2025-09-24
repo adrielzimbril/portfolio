@@ -1,7 +1,6 @@
 "use client";
 import posthog from "posthog-js";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,8 +17,8 @@ export function NewsletterForm() {
   const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
-    const emailValidator = useEmailValidator({ value: email, label: "Email", required: true });
-     const isEmailValid = !Boolean(emailValidator(email));
+  const emailValidator = useEmailValidator({ value: email, label: "Email", required: true });
+  const isEmailValid = !Boolean(emailValidator(email));
 
   return (
     <>
