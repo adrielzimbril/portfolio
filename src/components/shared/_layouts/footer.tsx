@@ -63,10 +63,10 @@ export const Footer: React.FC = () => {
         sectionClassName="w-full pt-0! pb-8!"
         sectionContentClassName="w-full"
         cardClassName="w-full rounded-4xl bg-stone-100 dark:bg-zinc-900"
-        cardContentClassName="w-full p-6 md:p-8"
+        cardContentClassName="w-full px-4 py-6 md:p-8"
         className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
       >
-        <div className="flex relative flex-col w-full items-center justify-center p-4 md:p-16 gap-4 md:gap-8 mx-auto">
+        <div className="flex relative flex-col w-full items-center justify-center p-2 md:p-16 gap-4 md:gap-8 mx-auto">
           <div className="flex flex-col justify-center items-center lg:grid grid-cols-1 lg:grid-cols-2 lg:flex-row lg:justify-between lg:items-start gap-8">
             <div className="flex flex-col gap-4 md:gap-6 w-full rounded-2xl">
               <div className="flex flex-col gap-6 rounded-3xl bg-b-bases bg-b-base py-4 px-4">

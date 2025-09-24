@@ -33,12 +33,12 @@ export function ProjectResultSection({
         {results.map((result, index) => (
           <Card
             key={index}
-            className="squircle size-full max-w-[90%] md:max-w-full squircle-b-base squircle-6xl squircle-smooth-md border-0 overflow-hidden"
+            className="squircle size-full max-w-[90%] md:max-w-full squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-md border-0 overflow-hidden"
           >
             <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
               <div
                 className={cn(
-                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-5xl squircle-sh-white overflow-hidden"
+                  "flex relative flex-col gap-6 md:gap-4 min-h-60 items-start justify-between p-6 md:p-8 squircle squircle-smooth-xl squircle-3xl md:squircle-5xl squircle-sh-white overflow-hidden"
                 )}
               >
                 <Badge>{result.badge}</Badge>

@@ -82,13 +82,13 @@ export function HeaderSection({
       sectionClassName={cn("p-0 mt-16 mb-10 md:mb-20", sectionClassName)}
       isWide
       cardClassName="w-full"
-      cardContentClassName="md:px-12 py-6 md:py-12"
+      cardContentClassName="px-4 md:px-12 py-6 md:py-12"
     >
       {/* Header Preview Card */}
-      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl squircle-6xl overflow-hidden p-5">
+      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl squircle-4xl md:squircle-6xl overflow-hidden p-2 md:p-5">
         <CardContent
           className={cn(
-            "w-full squircle squircle-b-base squircle-smooth-xl squircle-5xl overflow-hidden flex flex-col justify-center",
+            "w-full squircle squircle-b-base squircle-smooth-xl squircle-3xl md:squircle-5xl overflow-hidden flex flex-col justify-center",
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"

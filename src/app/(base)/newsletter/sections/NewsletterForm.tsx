@@ -26,7 +26,7 @@ export function NewsletterForm() {
         sectionClassName="w-full"
         sectionContentClassName="w-full"
         cardClassName="w-full"
-        cardContentClassName="w-full p-6 md:p-8"
+        cardContentClassName="w-full px-4 py-6 md:p-8"
         className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
       >
         <div
@@ -34,16 +34,15 @@ export function NewsletterForm() {
             "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto"
           )}
         >
-          <div
-            className=
-              "flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4"
-          >
+          <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4">
             <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-b-white-invert-sec">
               {t("newsletter.page.badge")}
             </Badge>
-            <h2 className="self-stretch">{t.rich("newsletter.page.title", {
-              ...richTextComponent,
-            })}</h2>
+            <h2 className="self-stretch">
+              {t.rich("newsletter.page.title", {
+                ...richTextComponent,
+              })}
+            </h2>
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-snug text-b-white-invert-sec">
               {t.rich("newsletter.page.desc", {
                 ...richTextComponent,

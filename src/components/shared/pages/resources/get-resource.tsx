@@ -73,7 +73,7 @@ export function GetResource({
         sectionClassName="w-full"
         sectionContentClassName="w-full"
         cardClassName="w-full"
-        cardContentClassName="w-full p-6 md:p-8"
+        cardContentClassName="w-full px-4 py-6 md:p-8"
         //cardContentClassName="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60"
         className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
       >
