@@ -9,6 +9,8 @@ export enum Locale {
   ZH_CN = "zh_CN",
 }
 
+export type LocaleKey = (typeof Locale)[keyof typeof Locale];
+
 export enum ResourceType {
   COURSE = "course",
   EBOOK = "ebook",

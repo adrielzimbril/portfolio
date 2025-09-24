@@ -3,13 +3,21 @@
 // Do not convert this file to ESModule format unless all dependencies support it.
 const { defineConfig } = require("@lobehub/i18n-cli");
 
-const isMdx = true;
+const isMdx = false;
+
+const mode = "content"; // "default" or "content"
 
 module.exports = defineConfig({
   modelName: "gpt-4.1-nano",
-  entry: "src/module/i18n/translations/fr.json",
+  entry:
+    mode === "default"
+      ? "src/module/i18n/translations/fr.json"
+      : "src/data/personal/translate",
   entryLocale: "fr",
-  output: "src/module/i18n/translations",
+  output:
+    mode === "default"
+      ? "src/module/i18n/translations"
+      : "src/data/personal/translate",
   outputLocales: ["en", "zh_CN"],
   saveImmediately: true,
   splitToken: "1024",

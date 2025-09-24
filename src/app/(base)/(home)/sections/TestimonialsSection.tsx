@@ -7,13 +7,14 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLocale, useTranslations } from "use-intl";
-import { Locale } from "@/types";
+import { Locale, LocaleKey } from "@/types";
 import { Link } from "@/components/ui/link";
 import { siteConfig } from "@/data/config";
+import testimonialsJson from "@/data/personal/translate/testimonials.json";
 
 interface TestimonialCard {
   id: number;
-  locale: Locale;
+  locale: LocaleKey;
   name: string;
   position: string;
   testimonial: string;
@@ -22,7 +23,7 @@ interface TestimonialCard {
   avatar?: string;
 }
 
-const testimonials: TestimonialCard[] = [
+const testimonialss = [
   {
     id: 0,
     locale: Locale.FR,
@@ -45,7 +46,6 @@ const testimonials: TestimonialCard[] = [
     linkedinUrl: "https://www.linkedin.com/in/youssoufgamby",
     avatar: "YAG",
   },
-
   {
     id: 2,
     locale: Locale.FR,
@@ -78,6 +78,11 @@ const testimonials: TestimonialCard[] = [
     avatar: "CR",
   },
 ];
+
+const testimonials: TestimonialCard[] = testimonialsJson.map((testimonial) => ({
+  ...testimonial,
+  locale: testimonial.locale as LocaleKey,
+}));
 
 export function TestimonialsSection() {
   const t = useTranslations();
