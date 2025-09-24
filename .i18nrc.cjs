@@ -20,7 +20,7 @@ module.exports = defineConfig({
       : "src/data/personal/translate",
   outputLocales: ["en", "zh_CN"],
   saveImmediately: true,
-  //splitToken: "1024",
+  splitToken: "3400",
   experimental: {
     jsonMode: true,
   },

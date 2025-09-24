@@ -1,2 +1,871 @@
 {
+  "about": {
+    "craft-section": {
+      "badge": "你的产品与设计伙伴 🫶🏻",
+      "description": "以用户为中心做决策，指导和教育创作者，将每个想法变成难忘的体验。",
+      "title": "将想法转变为重要的产品。"
+    },
+    "description": "我是Adriel，一名产品设计师和培训师。我的使命：简化SaaS的创建，激励并引导那些想要实现自己想法的人。",
+    "interactive-fun-facts-section": {
+      "badge": "来玩吧 🤭",
+      "badge-score": "得分：",
+      "buttons": {
+        "retry": "再玩一次 🔄",
+        "show-all": {
+          "want-response": {
+            "has-false": "我想知道答案 😣",
+            "has-true": "我想知道答案 😄"
+          },
+          "want-retry": "重新测验 🔄"
+        }
+      },
+      "description": "在这些趣闻中，只有一个是谎言……你能识破吗？试试看别出错 😏",
+      "sections": {
+        "fact-alert": {
+          "is-correct": {
+            "false": {
+              "description": "那不是正确答案…… 😖",
+              "title": "还差一点！"
+            },
+            "true": {
+              "description": "你猜对了！ 😆",
+              "title": "太棒了！"
+            }
+          },
+          "response": "回答"
+        },
+        "facts-modal": {
+          "badge": {
+            "fact": {
+              "is-false": "❌ 谎言",
+              "is-true": "✅ 事实"
+            },
+            "guessed": {
+              "correct": "🎯 正确！",
+              "incorrect": "❌ 错了！"
+            }
+          },
+          "score": {
+            "state": {
+              "bad": "还能更好！ 😅",
+              "good": "全答正确，哇，你太了解我了 😄🏆",
+              "medium": "还能更好！ 😅"
+            },
+            "title": "你的得分：{score}/{total}"
+          },
+          "title": "SaaS的创造者与爱好者 🦄❣️"
+        },
+        "guess-buttons": {
+          "buttons": {
+            "false": "错误",
+            "true": "正确"
+          }
+        }
+      },
+      "title": "我到底是谁？ 🕵️‍♂️"
+    },
+    "keywords": "关于Adriel Zimbril, SaaS产品设计师, SaaS培训师, SaaS产品设计路径, ShiroSaaS方法",
+    "page": {
+      "header-section": {
+        "cta": "查看我的项目",
+        "description": "从我开始设计的那天起，我就明白，最成功的产品不是最先看到的那个，而是那个我们能理解、测试并有意愿不断改进的产品。",
+        "description-secondary": "Sic itur ad astra — 这就是我们到达星辰的方式 🫰🏻✨。\n\n从小我就对科技和发明充满热情。钢铁侠让我相信一切皆有可能：我记得看到他的盔甲时眼睛闪闪发光，每一集都让我充满灵感。我花了数小时想象、动手制作，梦想着创造自己的机器人。\n\n随着这份热情的不断发展，我发现了设计，并逐渐明白我的梦想不仅仅是制造机器：我想创造触动人心、解决真实问题、令人渴望使用的体验。设计成为了我的游戏场、实验室，让我能将原始的想法变成具体的产品，设计出有意义的体验。\n\n如今，我将想法转化为具体的体验，帮助创始人、团队和创作者理清问题、构思解决方案并快速推出。我的方法结合了深思熟虑的设计、敏捷策略和持续学习，确保每个项目都能产生真正的影响。\n\n我喜欢质疑现有的事物，探索有效与无效的方案，并有目的地进行构建。我更喜欢带着“为什么”去做事，而不是出于习惯。\n\n同时，我分享我在创意实践中的方法和资源，让其他人也能自信地设计和推出自己的产品。\n\n对我来说，设计不仅仅是一个孤立的交付物：它是一个合作、创造和以人为本的过程 ❣️。",
+        "title": "你好，我是 👋 \n Adriel Zimbril 🐼 \n 产品设计师 & 培训师 🎨 ",
+        "title-secondary": "创造、简化、启发 🌒🧑🏻‍🚀🫶🏻 \n 欢迎来到我的世界 🌌"
+      }
+    },
+    "philosophy-section": {
+      "badge": "独角兽 🦄",
+      "description": "以用户为中心设计产品，同时重视团队和共享的想法，共同构建。",
+      "title": "我对设计与产品的看法"
+    },
+    "title": "我是 🧑🏻‍🚀"
+  },
+  "common": {
+    "base": {
+      "dribbble": "Dribbble",
+      "email": "邮箱",
+      "facebook": "脸书",
+      "figma": "Figma",
+      "github": "Github",
+      "instagram": "Instagram",
+      "layers": "Layers",
+      "linkedin": "领英",
+      "peerlist": "Peerlist",
+      "product-hunt": "Product Hunt",
+      "tiktok": "抖音",
+      "website": "网站",
+      "x": "X",
+      "youtube": "YouTube"
+    },
+    "button": {
+      "back": "返回",
+      "continue": "继续",
+      "loaded": "已加载",
+      "loading": "加载中",
+      "obtain": "获取",
+      "read": "阅读",
+      "read-more": "了解更多",
+      "receive": "接收",
+      "retry": "重试",
+      "see": "查看",
+      "see-more": "查看更多",
+      "select": "选择",
+      "sending": "发送中",
+      "sent": "已发送",
+      "understood": "知道了",
+      "view-more": "查看更多"
+    },
+    "confirmation": {
+      "cancel": "取消",
+      "confirm": "确认"
+    },
+    "menu": {
+      "about": {
+        "default": "关于我",
+        "desktop": "我 🧑🏻‍🚀",
+        "mobile": "关于我 🧑🏻‍🚀"
+      },
+      "contact": {
+        "default": "联系我",
+        "desktop": "聊聊 ☕",
+        "mobile": "打个招呼 👋"
+      },
+      "home": {
+        "default": "首页",
+        "desktop": "嘿 👋🏻",
+        "mobile": "欢迎 🏠"
+      },
+      "hub": {
+        "default": "资源库",
+        "desktop": "中心 🔗",
+        "mobile": "工具箱 🧰"
+      },
+      "newsletter": {
+        "default": "订阅",
+        "desktop": "私享圈 💌",
+        "mobile": "加入圈子 💌"
+      },
+      "playground": {
+        "default": "试验场",
+        "desktop": "实验室 🧪",
+        "mobile": "试验 🧑🏻‍🔬"
+      },
+      "projects": {
+        "default": "项目",
+        "desktop": "作品 🚀",
+        "mobile": "我的作品 🎨"
+      },
+      "thoughts": {
+        "default": "思考",
+        "desktop": "思考 ✍️",
+        "mobile": "日志 📝"
+      }
+    },
+    "page-sections": {
+      "cta": {
+        "variant-one": {
+          "button": "聊聊SaaS 🦄",
+          "description": "<p>我分享资源、思考、经验和建议，见于我的<blog>博客</blog>和<linkedin>领英</linkedin> 🫶🏻。<br></br> 想谈SaaS、设计、产品或创新？写信给我，我喜欢交流 👋🏻</p>",
+          "title": "想聊聊SaaS？"
+        },
+        "variant-two": {
+          "description": "<p>我分享资源、思考、经验和建议，见于我的<blog>博客</blog>和<linkedin>领英</linkedin> 🫶🏻。<br></br> 想谈SaaS、设计、产品或创新？写信给我，我喜欢交流 👋🏻</p>",
+          "form": {
+            "button": "聊聊SaaS 🦄",
+            "placeholder": "你的邮箱在这里… ✉️"
+          },
+          "title": "让我们讨论你的下一个项目！"
+        }
+      },
+      "header": {
+        "cta": "聊聊SaaS 👋"
+      },
+      "hub": {
+        "badge": "资源库 🫶🏻",
+        "base": {
+          "resources-type": {
+            "code": {
+              "badge": "开发者 🤖",
+              "button": "获取",
+              "description": "简单且有文档的代码片段，来自我的经验，帮你设计自己的产品。",
+              "title": "代码 🧑🏻‍💻"
+            },
+            "course": {
+              "badge": "学员 🧑🏻‍🎓",
+              "button": "开始学习",
+              "description": "跟随清晰具体的课程，按自己的节奏从想法到真正的产品。",
+              "title": "培训 🎥"
+            },
+            "ebook": {
+              "badge": "读者 📖",
+              "button": "阅读",
+              "description": "实用、简单、具体的指南，帮你避免错误，更快前进。",
+              "title": "电子书 📕"
+            },
+            "figma-template": {
+              "badge": "创作者 🖌️",
+              "button": "探索",
+              "description": "现成模板，源自我的设计热情，帮你创建令人想用的产品。",
+              "title": "Figma模板 🎨"
+            },
+            "masterclass": {
+              "badge": "参与者 🍿",
+              "button": "加入",
+              "description": "参加互动课程，一起拆解关键话题和真实案例。",
+              "title": "大师班 🎬"
+            },
+            "video": {
+              "badge": "好奇者 🎥",
+              "button": "观看",
+              "description": "短小实用的视频——YouTube及其他平台——激发灵感、学习和行动。",
+              "title": "视频 📺"
+            }
+          }
+        },
+        "description": "培训、电子书、视频、模板和代码，帮你简化、测试、转化你的想法，打造有影响力的解决方案。",
+        "title": "资源"
+      },
+      "newsletter": {
+        "description": {
+          "default": "正在注册……你可以填写你的信息。",
+          "state": "你的注册已确认！可以填写信息，个性化你的体验。"
+        },
+        "footer": {
+          "button": "是的，我要！🤭",
+          "description": "独家建议、技巧和资源，帮你打造受欢迎的产品 🦄",
+          "subText": "保证内容启发灵感，绝不垃圾邮件 ✨",
+          "title": "💌 你的创意工具包在等你"
+        },
+        "form": {
+          "fields": {
+            "email": {
+              "label": "邮箱",
+              "placeholder": "你的邮箱"
+            },
+            "email-page": {
+              "label": "邮箱",
+              "placeholder": "你的邮箱在这里… ✉️"
+            },
+            "name": {
+              "label": "名字",
+              "placeholder": "我可以叫你什么？"
+            },
+            "phone": {
+              "label": "电话",
+              "placeholder": "电话号码"
+            }
+          },
+          "success": {
+            "message": {
+              "description": "你的信息已成功更新。谢谢！ 🎉",
+              "title": "感谢你的注册！"
+            }
+          }
+        },
+        "tags": "产品设计 🎨, SaaS 🦄, UX/UI 🖌️, 设计系统 🧩, Figma 🎨, 初创公司 🚀",
+        "title": "💌 你的创意工具包在等你 🫶🏻"
+      },
+      "preview": {
+        "description": "你可以在这里留下空白空间。",
+        "emoji": "😎",
+        "title": "我帮你看过了。"
+      },
+      "projects": {
+        "badge": "问题解决者 🦄",
+        "description": "每个项目都是一次独特的冒险，目标是将想法转变为真实体验，设计吸引人，策略有效。",
+        "title": "项目"
+      },
+      "testimonials": {
+        "badge": "合作伙伴 🫱🏾‍🫲🏻",
+        "button": "在LinkedIn查看",
+        "description": "与这些创始人、创作者和团队合作，我们测试、迭代、构建，找到解决方案 🫶🏻。",
+        "title": "合作伙伴"
+      },
+      "thoughts": {
+        "badge": "实验室 ✍🏻",
+        "description": "我关于复杂产品设计的经验、思考和建议，简化成为一种超级力量。",
+        "title": "思考"
+      }
+    },
+    "shared": {
+      "base": {
+        "badge": "问题解决者 & 你的SaaS产品设计师 🦄❣️",
+        "subtitle": "创新问题解决者 & SaaS产品设计师 ❣️",
+        "subtitle-secondary": "将想法变成影响力 | SaaS产品设计师 & 问题解决者 ❣️",
+        "subtitle-simple": "创新问题解决者 & 你的首选SaaS产品设计师 ❣️",
+        "title": "让你的想法变成用户喜爱的产品"
+      },
+      "loadMore": {
+        "counter": "已显示 {loadedItems} / {total} 项",
+        "end": {
+          "cta": "别忘了订阅我的<newsletter>通讯</newsletter>，不错过任何更新 🦄"
+        },
+        "greeting": "你好，目前就这些啦！ 🦄"
+      },
+      "months": {
+        "april": "四月",
+        "august": "八月",
+        "december": "十二月",
+        "february": "二月",
+        "january": "一月",
+        "july": "七月",
+        "june": "六月",
+        "march": "三月",
+        "may": "五月",
+        "november": "十一月",
+        "october": "十月",
+        "september": "九月"
+      },
+      "page-loader": {
+        "about": {
+          "emoji": "👨‍💻",
+          "subtitle": "简化设计，激励团队，推出产品 🌌",
+          "title": "我的创作与培训世界"
+        },
+        "contact": {
+          "emoji": "📞",
+          "subtitle": "交流你的想法、SaaS项目或合作 🤝",
+          "title": "聊聊你的下一个项目"
+        },
+        "home": {
+          "emoji": "🦄",
+          "subtitle": "产品设计师 & 创作者指南，助你SaaS之路 ❣️",
+          "title": "将你的想法变成爆款产品"
+        },
+        "hub": {
+          "emoji": "⚡",
+          "subtitle": "指南、模板和资源，帮你快速从想法到产品 ⚡",
+          "title": "你的创意中心"
+        },
+        "newsletter": {
+          "emoji": "💌",
+          "subtitle": "建议、资源和灵感，帮你打造有影响力的产品 🎨",
+          "title": "你的创意工具包在等你"
+        },
+        "playground": {
+          "emoji": "🧪",
+          "subtitle": "试验、原型和未完成的点子，激发你的创造力 🧪",
+          "title": "我的试验场"
+        },
+        "projects": {
+          "emoji": "🚀",
+          "subtitle": "每个产品都讲述一个故事：挑战、解决方案和影响 🚀",
+          "title": "项目与案例研究"
+        },
+        "submit": {
+          "emoji": "🧑🏻‍🔬",
+          "subtitle": "你的点子，我们的分析和重设计 🎨",
+          "title": "提交你的项目或想法到ShiroSaaS实验室"
+        },
+        "thoughts": {
+          "emoji": "📝",
+          "subtitle": "关于设计、创新和SaaS的思考、经验和建议 ✍️",
+          "title": "创意日志"
+        }
+      },
+      "planning-badge": {
+        "available": {
+          "description": "{limit, plural, one {# 名额} other {共# 名额}}，截止到 {date}",
+          "description-secondary": "{showLimit, select, true {{limit, plural, one {# 名额} other {共# 名额}}} other {}}{showMission, select, true {，全栈开发与网页设计任务} other {}}{hasDate, select, true {，截止到 {date}} other {}}",
+          "description-simple": "可合作",
+          "title": "可用"
+        },
+        "unavailable": {
+          "description": "重新提供全栈开发与网页设计服务{hasDate, select, true {，从 {date} 开始} other {}}",
+          "title": "暂不可用"
+        }
+      },
+      "text": {
+        "browser-does-not-support-video": "您的浏览器不支持视频。",
+        "characters-left": "剩余字符",
+        "copied": "已复制",
+        "copy": "复制",
+        "copyright": "版权所有 © {year} - 保留所有权利 - 由 {author} 用❣️精心打造",
+        "duration": "时长",
+        "language": "语言",
+        "presentation": "介绍",
+        "results": "结果",
+        "role": "角色"
+      }
+    }
+  },
+  "contact": {
+    "description": "我会亲自回复你的消息。无论是项目合作、交流设计或创新，欢迎随时联系我。",
+    "keywords": "联系 SaaS, Adriel Zimbril, 产品设计师, 讨论想法, 合作, 设计咨询, 自由职业联系, SaaS专家, 产品辅导, 导师, 设计培训",
+    "page": {
+      "badge": "问题解决者 & 你的SaaS产品设计师 ❣️",
+      "form": {
+        "notifications": {
+          "error": "抱歉，消息未能成功发送。请稍后再试。",
+          "success": "你的消息已成功发送，我们会尽快联系你。"
+        },
+        "submit": "收到！🦄"
+      },
+      "title": "将你的想法变成用户喜爱的产品 🦄"
+    },
+    "title": "让我们一起合作 🤝"
+  },
+  "home": {
+    "description": "产品设计师和ShiroSaaS方法的创始人，我帮助创业者和企业将他们的想法转化为有用、美观且盈利的SaaS解决方案。",
+    "keywords": "产品设计 SaaS, Adriel Zimbril SaaS, 产品设计师 SaaS, 创建 SaaS, UX UI SaaS",
+    "page": {
+      "header-section": {
+        "cta": "让我们聊聊 👋🏻",
+        "cta-2": "查看我的客户项目 💡",
+        "description": "我是一名专注于简化SaaS体验的产品设计师和设计培训师，协助创始人和团队梳理、测试并将他们的想法转化为具体且具有深远影响的产品 🫶🏻。",
+        "description-2": "专注于简化SaaS体验的产品设计师兼设计培训师，帮助创始人和项目负责人构建、测试和验证他们的想法，打造具有实际影响力的解决方案 🫶🏻。",
+        "description-3": "专注于简化SaaS体验的产品设计师兼培训师，我帮助创始人和项目负责人构建、测试和验证他们的想法，打造具有真正影响力的解决方案 🫶🏻。",
+        "title": "将你的想法转变为用户喜爱的产品 🦄"
+      }
+    },
+    "title": "嘿 👋🏻"
+  },
+  "hub": {
+    "description": "独家资源：清单、Figma模板、实用指南和点子，帮你轻松启动你的产品。",
+    "inner-page": {
+      "more-preview-section": {
+        "title": "其他资源"
+      }
+    },
+    "keywords": "SaaS资源 Adriel Zimbril, SaaS工具, SaaS模板, SaaS产品设计师,UI套件",
+    "page": {
+      "header-section": {
+        "cta": "查看我的资源",
+        "description": "我整理了我开始时希望拥有的所有资源：清晰的指南、模板、点子和工具，帮你节省时间。",
+        "title": "你的创意中心 🔗"
+      }
+    },
+    "title": "创意中心 🌒"
+  },
+  "logger": {
+    "components": {
+      "button-copy": {
+        "failed": "复制失败"
+      }
+    },
+    "form": {
+      "submit-failed": "提交表单失败，请稍后重试。",
+      "submit-update-failed": "更新表单失败，请稍后重试。"
+    },
+    "ip": {
+      "fetch": {
+        "country-failed": "获取国家失败",
+        "failed": "获取IP失败"
+      }
+    },
+    "newsletter": {
+      "subscribe": {
+        "failed": "订阅失败，请稍后重试。"
+      }
+    }
+  },
+  "mail": {
+    "common": {
+      "contact": "如果你想交流或打招呼，只需回复此邮件。我会亲自阅读。",
+      "copyright": "由Adriel Zimbril ❤️ 精心打造",
+      "defaultName": "朋友设计师",
+      "signature": "Adriel Zimbril | 问题解决者 & 你的SaaS产品设计师 🦄"
+    },
+    "freeProductDelivery": {
+      "ctaButton": "访问资源",
+      "featuresTitle": "你会找到：",
+      "greeting": "嗨 {firstName}",
+      "intro": "如约而至，这就是你的资源：",
+      "message1": "希望这个资源能帮到你的项目。如果你有问题或反馈，随时回复我。",
+      "message2": "如果你用在实际项目中，也希望你告诉我效果如何！",
+      "preview": "如约而至，这就是你的资源！",
+      "subject": "🎁 收到礼物"
+    },
+    "newsletterSignup": {
+      "content": {
+        "conclusion": "事实、数据、惨痛的失败和意外的胜利。设计的真实状态 ❤️。",
+        "item1": "我设计的SaaS界面中有效与无效的部分",
+        "item2": "用户反馈让我改变的观点",
+        "item3": "我的错误以及我如何避免它们",
+        "item4": "关于SaaS产品设计的思考",
+        "subtitle": "我的观察包括：",
+        "title": "在这份通讯中，我会分享我学到的东西。"
+      },
+      "cta": {
+        "button": "获取指南（免费）",
+        "description": "关于我经常在SaaS中看到的UX错误的指南。整理了我在项目中积累的具体观察。",
+        "note": "当然，你可以随时取消订阅。我只在有有用内容时写信。",
+        "title": "我准备了一份指南帮你开始。"
+      },
+      "greeting": "嗨 {firstName}",
+      "preview": "嗨！我想告诉你一些我关心的事……",
+      "story": {
+        "intro": "几周前，我的一个应用用户告诉我，他花了很长时间才取消一项操作。我意识到这是因为我喜欢的一个设计选择，虽然我觉得不错，但却让体验变得复杂。",
+        "philosophy": "我真正关心的是理解人们如何使用我们创造的东西。为什么他们在某个点放弃，为什么他们会回来，什么真正帮助他们的日常生活。",
+        "presentation": "我叫Adriel，五年来我一直为SaaS设计界面，我发现：我们常常让事情变得复杂，而用户其实只想要简单。"
+      },
+      "subject": "🎁 收到礼物",
+      "tagline": "问题解决者 & 你的SaaS产品设计师 🦄",
+      "why": {
+        "motivation": "我想分享这些小发现、那些让人“哦，原来如此”的瞬间。没有炫耀，只是出于好奇 ❤️。",
+        "reason": "因为我喜欢理解事物的运作方式。在设计中，经常存在一个差距：我们以为会成功，但实际情况可能不同。",
+        "title": "我为什么真的要写？"
+      }
+    },
+    "productDelivery": {
+      "featuresTitle": "你可以期待：",
+      "greeting": "嗨 {firstName}",
+      "message1": "很高兴你加入了这次旅程。希望这个资源能帮你更快更好地前进。",
+      "message2": "你的反馈对我很重要，能帮我改进内容。如果有问题，随时问我！",
+      "preview": "你的 {productType} 已准备好下载！",
+      "productTypes": {
+        "course": {
+          "access": "开始培训",
+          "feedback": "学习几个模块后，我很想听听你的反馈。内容符合你的期待吗？有没有想深入的部分？",
+          "intro": "你的培训已准备好！",
+          "tip": "💡 小提示：边学边记笔记，效果更佳。"
+        },
+        "ebook": {
+          "access": "下载电子书",
+          "feedback": "看完后，告诉我你的感受。对你的项目有帮助吗？还有疑问？",
+          "intro": "你的电子书到啦！",
+          "tip": "📖 小建议：分段阅读，试着直接应用学到的东西。"
+        },
+        "video": {
+          "access": "观看大师班",
+          "feedback": "看完后告诉我你的感受！是否解答了你的疑问？最喜欢哪个部分？",
+          "intro": "你的大师班来了！",
+          "tip": "🎯 建议：找个安静的地方，准备个笔记本，边看边写。"
+        }
+      },
+      "subject": "🎁 收到礼物",
+      "thankYou": "感谢你的信任 🙌"
+    },
+    "submitAdminNotification": {
+      "preview": "Shirosaas 实验室 | 有新表单提交！",
+      "subject": "🚀 新表单提交 — ShiroSaaS实验室"
+    },
+    "submitUserConfirmation": {
+      "content": {
+        "intro": "感谢你提交你的项目到ShiroSaaS实验室。我们已收到你关于（<strong>{intention}</strong>）的请求，会尽快查看！🐼",
+        "link": "链接已收到",
+        "wait": "如果你的项目被接受，你会收到一封邮件，通知你项目安排的评审/视频。期间，如果你想补充信息，也可以回复此邮件。再见啦 🌚。"
+      },
+      "greeting": "欢迎 {firstName}",
+      "preview": "你的项目即将亮相 🔦🐼",
+      "subject": "✅ 收到！你的项目已进入轨道 🪐"
+    },
+    "welcome": {
+      "content": {
+        "frequency": "我大约每周写一次，有时更少，视内容而定。每封邮件都希望带来实用的东西。",
+        "intro": "感谢你信任我的通讯。很高兴知道我们可以一起讨论设计和SaaS。",
+        "nextSteps": "接下来几天，你会收到我准备的UX错误指南。与此同时，简单告诉你我会带来什么内容。",
+        "whatYouReceive": {
+          "item1": "关于SaaS产品设计的具体观察",
+          "item2": "我的学习（包括失败）",
+          "item3": "我发现的有用资源",
+          "item4": "没有垃圾邮件，保证",
+          "title": "你会收到："
+        }
+      },
+      "greeting": "欢迎 {firstName}",
+      "preview": "欢迎！这里是你可以期待的内容……",
+      "question": {
+        "encouragement": "欢迎回复我，我很喜欢知道谁在看我的邮件。如果你有问题或想让我讨论的话题，也请告诉我。",
+        "text": "你目前在做什么？一个SaaS产品？一个创业公司？还是只对界面设计感兴趣？",
+        "title": "想更了解你："
+      },
+      "reminder": {
+        "text": "如果你不是自己注册的，也没关系。你可以忽略这封邮件，或者通过底部链接取消订阅。",
+        "title": "顺便说一句："
+      },
+      "subject": "欢迎订阅我的通讯！",
+      "tagline": "让我们一起开启这段小冒险"
+    }
+  },
+  "newsletter": {
+    "description": "每周收到点子、技巧和资源，帮你将想法变成受欢迎的SaaS产品。",
+    "hints": {
+      "error": {
+        "message": "抱歉，订阅失败，请稍后再试。"
+      },
+      "success": {
+        "message": "感谢你的订阅！我们会尽快联系你。",
+        "title": "已订阅"
+      }
+    },
+    "keywords": "SaaS通讯, Adriel Zimbril, 产品设计师, 增长策略, 产品策略",
+    "page": {
+      "badge": "面向创始人和创作者，助你行动 🚀",
+      "desc": "每周<highlight>发现</highlight>一些<strong>技巧</strong>、<strong>模板</strong>、<strong>指南</strong>和<<strong>视频</strong>，帮你测试、构建和发布你的<highlight>SaaS</highlight>，让用户爱不释手 🫶🏻。",
+      "title": "从想法到<thin>产品</thin>，用ShiroSaaS方法 🦄"
+    },
+    "title": "你的创意工具包在等你 💌"
+  },
+  "not-found": {
+    "badge": "哎呀……你进入了无限创意的世界 🪐",
+    "cta": {
+      "home": "返回首页",
+      "newsletter": "创意工具包 💌"
+    },
+    "desc": "你找的页面不存在……或者已经被删除 🕳️。但每一次偏离都是一次冒险 🌠。Sic itur ad astra — 每一步，即使迷失，也让我们更接近星辰 🌌✨。",
+    "title": "看起来你迷失在星空中 ✨"
+  },
+  "playground": {
+    "description": "Adriel Zimbril的空间，用于测试新想法、概念和设计体验，直到它们成为具体项目。",
+    "keywords": "SaaS试验场, 设计体验, 原型, SaaS产品设计师, 试验与创新",
+    "page": {
+      "header-section": {
+        "description": "一个我试验概念、探索界面、分享未完成想法的空间。这里一切都还在进行中——但都是真实的。",
+        "title": "实验室 🧪"
+      }
+    },
+    "title": "试验场 🧑🏻‍🔬"
+  },
+  "projects": {
+    "description": "我设计和推出的项目一览，包含流程和成果。不仅仅是漂亮的界面，更是合作与成功的故事。",
+    "inner-page": {
+      "goal-research-section": {
+        "description": "基于这个问题，我们绘制项目的指南针：目标和指标，显示我们是否走在正确的轨道上。",
+        "title": "目标？"
+      },
+      "header-section": {
+        "cta": "查看项目"
+      },
+      "more-preview-section": {
+        "title": "其他项目"
+      },
+      "project-points-research-section": {
+        "description": "每一条数据和反馈都转化为启示，指导设计决策。",
+        "title": "洞察"
+      },
+      "project-preview-section": {
+        "description": "每个界面都讲述一个故事：用户如何发现产品、与之互动、在真实环境中体验。",
+        "title": "预览"
+      },
+      "project-research-section": {
+        "description": "一切都从问题开始：谁受影响、在什么背景下、为什么值得关注。",
+        "title": "问题定义"
+      },
+      "project-result-section": {
+        "description": "项目落地，展现成功：用户采纳、留存和对业务的影响。",
+        "title": "成果"
+      },
+      "project-statement-section": {
+        "description": "用户的需求和行为通过访谈、观察和交流逐渐揭示，展现他们的需求、挫折和动机。",
+        "title": "用户调研"
+      }
+    },
+    "keywords": "SaaS项目 Adriel Zimbril, 作品集 SaaS, SaaS产品设计师, 设计案例研究, 创建 SaaS",
+    "page": {
+      "header-section": {
+        "cta": "查看我的项目",
+        "description": "每个项目都是一次冒险。这里我分享幕后故事：挑战、解决方案和成果。",
+        "title": "案例研究 🚀"
+      }
+    },
+    "title": "我的项目 🐼"
+  },
+  "submit": {
+    "description": "分享你的项目、想法或产品，获取UX分析、Figma重设计或产品反馈。Adriel Zimbril将协助你将想法转变为有影响力的体验。",
+    "keywords": "SaaS项目提交, Adriel Zimbril, 产品设计师, UX评审, Figma重设计, 网站分析, 产品反馈, ShiroSaaS, 设计系统, 产品设计",
+    "page": {
+      "actions": {
+        "submit": "开始啦！🤩"
+      },
+      "fields": {
+        "description": {
+          "label": "说明你的需求",
+          "placeholder": "简要描述你的项目和你希望我们分析的内容"
+        },
+        "email": {
+          "label": "你的邮箱",
+          "placeholder": "hello@adrielzimbril.com"
+        },
+        "intention": {
+          "label": "请求的反馈类型"
+        },
+        "name": {
+          "label": "你的名字或昵称",
+          "placeholder": "Adriel Zimbril"
+        },
+        "target": {
+          "label": "类型"
+        },
+        "url": {
+          "label": "项目链接（网站、应用、Figma等）",
+          "placeholder": "https://www.figma.com/design/4qgzkFPOb3YhzpHCmFc41d2/"
+        }
+      },
+      "header-section": {
+        "badge": "参加Shirosaas实验室 😮‍💨🧪",
+        "description": "提交你的网站、应用或Figma文件，我会在直播或视频中给出反馈，观看我的<youtube>频道</youtube>，参与<ytSaasLab><strong>Shirosaas 实验室</strong></ytSaasLab>的每一期 🫶🏻👨🏻‍🚀。",
+        "subBadge": "创意之旅 ☄️🌚",
+        "subDescription": "提交你的网站、应用或Figma文件，我会逐步拆解、优化并在直播或视频中提供反馈。每一期都是将想法变成宝藏、学习的好机会 🫶🏻👨🏻‍🚀。",
+        "subTitle": "我们一起分析 🧑🏻‍🔬🌒",
+        "title": "你的设计在舞台上 ✨🐼"
+      },
+      "options": {
+        "support": {
+          "mobile": "移动应用",
+          "prototype": "原型",
+          "saas": "SaaS",
+          "website": "网站"
+        },
+        "ux_review": "UI/UX评审"
+      },
+      "toast": {
+        "error": "哎呀！出错了，请稍后重试 😅",
+        "success": "谢谢！你的设计已进入轨道！🪐"
+      }
+    },
+    "title": "Shirosaas 实验室 😮‍💨🧪"
+  },
+  "thoughts": {
+    "description": "我对产品设计、创新和SaaS创建的原始想法。无滤镜的思考，助你进步，换个角度看问题。",
+    "inner-page": {
+      "more-preview-section": {
+        "title": "其他反思"
+      }
+    },
+    "keywords": "SaaS博客 Adriel Zimbril, 产品设计, SaaS设计师, 思考与反思, SaaS创新",
+    "page": {
+      "header-section": {
+        "cta": "查看我的反思",
+        "description": "在这里我分享我的发现、错误和经验教训，帮助你设计出用户喜爱的产品。",
+        "title": "反思与启发 ✍️"
+      }
+    },
+    "title": "日志 📒"
+  },
+  "zod": {
+    "errors": {
+      "customized": {
+        "email": {
+          "invalid": "哎呀！请输入有效的邮箱地址 🦄",
+          "update-required": "哎呀，邮箱是更新所必需的 😅"
+        },
+        "hint": "哎呀！注册出错，请稍后再试 🦄",
+        "name": {
+          "invalid": "哎呀！请输入有效的名字 🦄",
+          "required": "哎呀，名字至少要4个字符 😅"
+        },
+        "phone": {
+          "invalid": "哎呀！请输入有效的电话号码 🦄",
+          "required": "哎呀，电话号码似乎不正确 😅"
+        },
+        "url": {
+          "invalid": "哎呀！请输入有效的URL 🦄",
+          "required": "哎呀，URL是必填项 😅"
+        }
+      },
+      "invalid_arguments": "参数无效",
+      "invalid_date": "日期无效",
+      "invalid_enum_value": "枚举值无效。预期 {- options}，但收到 '{received}'",
+      "invalid_intersection_types": "交集结果无法合并",
+      "invalid_literal": "字面值无效，预期 {expected}",
+      "invalid_return_type": "函数返回类型无效",
+      "invalid_string": {
+        "cuid": "{validation} 无效",
+        "datetime": "{validation} 无效",
+        "email": "{validation} 无效",
+        "endsWith": "无效输入：必须以 \"{endsWith}\" 结尾",
+        "regex": "无效",
+        "startsWith": "无效输入：必须以 \"{startsWith}\" 开头",
+        "url": "{validation} 无效",
+        "uuid": "{validation} 无效"
+      },
+      "invalid_type": "预期 {expected}，但收到 {received}",
+      "invalid_type_received_undefined": "必填项",
+      "invalid_union": "无效的输入",
+      "invalid_union_discriminator": "无效的判别器值。预期 {- options}",
+      "not_finite": "数字必须是有限的",
+      "not_multiple_of": "数字必须是 {multipleOf} 的倍数",
+      "too_big": {
+        "array": {
+          "exact": "数组必须恰好包含 {maximum} 个元素",
+          "inclusive": "数组最多包含 {maximum} 个元素",
+          "not_inclusive": "数组不能超过 {maximum} 个元素"
+        },
+        "date": {
+          "exact": "日期必须恰好是 {- maximum, datetime}",
+          "inclusive": "日期必须小于或等于 {- maximum, datetime}",
+          "not_inclusive": "日期必须小于 {- maximum, datetime}"
+        },
+        "number": {
+          "exact": "数字必须是 {maximum}",
+          "inclusive": "数字必须小于或等于 {maximum}",
+          "not_inclusive": "数字必须小于 {maximum}"
+        },
+        "set": {
+          "exact": "无效输入",
+          "inclusive": "无效输入",
+          "not_inclusive": "无效输入"
+        },
+        "string": {
+          "exact": "字符串必须恰好包含 {maximum} 个字符",
+          "inclusive": "字符串最多包含 {maximum} 个字符",
+          "not_inclusive": "字符串少于 {maximum} 个字符"
+        }
+      },
+      "too_small": {
+        "array": {
+          "exact": "数组必须恰好包含 {minimum} 个元素",
+          "inclusive": "数组至少包含 {minimum} 个元素",
+          "not_inclusive": "数组多于 {minimum} 个元素"
+        },
+        "date": {
+          "exact": "日期必须恰好是 {- minimum, datetime}",
+          "inclusive": "日期必须大于或等于 {- minimum, datetime}",
+          "not_inclusive": "日期必须大于 {minimum}"
+        },
+        "number": {
+          "exact": "数字必须是 {minimum}",
+          "inclusive": "数字必须大于或等于 {minimum}",
+          "not_inclusive": "数字必须大于 {minimum}"
+        },
+        "set": {
+          "exact": "无效输入",
+          "inclusive": "无效输入",
+          "not_inclusive": "无效输入"
+        },
+        "string": {
+          "exact": "字符串必须恰好包含 {minimum} 个字符",
+          "inclusive": "字符串至少包含 {minimum} 个字符",
+          "not_inclusive": "字符串多于 {minimum} 个字符"
+        }
+      },
+      "unrecognized_keys": "对象中存在未识别的键：{- keys}"
+    },
+    "types": {
+      "array": "数组",
+      "bigint": "大整数",
+      "boolean": "布尔值",
+      "date": "日期",
+      "float": "浮点数",
+      "function": "函数",
+      "integer": "整数",
+      "map": "映射",
+      "nan": "非数",
+      "never": "从不",
+      "null": "空值",
+      "number": "数字",
+      "object": "对象",
+      "promise": "Promise",
+      "set": "集合",
+      "string": "字符串",
+      "symbol": "符号",
+      "undefined": "未定义",
+      "unknown": "未知",
+      "void": "无返回值"
+    },
+    "validations": {
+      "cuid": "CUID",
+      "cuid2": "CUID2",
+      "datetime": "日期时间",
+      "email": "电子邮箱",
+      "emoji": "表情符号",
+      "ip": "IP地址",
+      "regex": "正则表达式",
+      "ulid": "ULID",
+      "url": "网址",
+      "uuid": "UUID"
+    }
+  }
 }
