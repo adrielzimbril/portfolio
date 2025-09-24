@@ -433,7 +433,7 @@ const resources = defineCollection({
     type: z.enum(Object.values(ResourceType)),
     tags_id: z.array(z.number()),
     studentsNumber: z.number(),
-    studentsProfilImage: z.array(z.string()),
+    studentsProfileImage: z.array(z.string()),
     created_at: z.string(),
     updated_at: z.string().optional(),
     published: z.boolean(),

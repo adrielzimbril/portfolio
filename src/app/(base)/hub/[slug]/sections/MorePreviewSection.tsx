@@ -19,7 +19,7 @@ export function MorePreviewSection({ data }: { data: Resource[] }) {
           tags={resource.tags}
           description={resource.excerpt}
           features={resource.features ?? []}
-          avatars={resource.studentsProfilImage}
+          avatars={resource.studentsProfileImage}
           userCount={resource.studentsNumber}
         />
       ))}

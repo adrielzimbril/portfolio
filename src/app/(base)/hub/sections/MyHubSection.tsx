@@ -34,7 +34,7 @@ export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
           tags={item.tags}
           description={item.excerpt}
           features={item.features ?? []}
-          avatars={item.studentsProfilImage}
+          avatars={item.studentsProfileImage}
           userCount={item.studentsNumber}
         />
       ))}

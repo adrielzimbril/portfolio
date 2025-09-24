@@ -51,7 +51,7 @@ export function ResourcesSection() {
             tags={resource.tags}
             description={resource.excerpt}
             features={resource.features ?? []}
-            avatars={resource.studentsProfilImage}
+            avatars={resource.studentsProfileImage}
             userCount={resource.studentsNumber}
           />
         );
