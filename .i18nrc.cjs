@@ -9,6 +9,11 @@ module.exports = defineConfig({
   entryLocale: "fr",
   output: "src/module/i18n/translations",
   outputLocales: ["en", "zh_CN"],
+  saveImmediately: true,
+  splitToken: "1024",
+  experimental: {
+    jsonMode: true,
+  },
   markdown: {
     entry: ["src/content/**/*.mdx"],
     entryLocale: "fr",
