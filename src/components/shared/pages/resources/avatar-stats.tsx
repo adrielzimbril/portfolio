@@ -13,6 +13,7 @@ interface StatsProps {
   resourceType: ResourceType;
   colorName?: string;
   className?: string;
+  badgeClassName?: string;
 }
 
 export function AvatarsStats({
@@ -21,17 +22,22 @@ export function AvatarsStats({
   resourceType,
   colorName,
   className,
+  badgeClassName,
 }: StatsProps) {
   return (
     <div
       className={cn(
         "inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl",
-        colorName ?? "squircle-sh-white",
+        colorName ?? "squircle-sh-white/99",
         className
       )}
     >
       <UserAvatars avatars={avatars} userCount={userCount} />
-      <UserCount count={userCount} resourceType={resourceType} />
+      <UserCount
+        count={userCount}
+        resourceType={resourceType}
+        className={badgeClassName}
+      />
     </div>
   );
 }
@@ -82,9 +88,11 @@ function UserAvatars({
 function UserCount({
   count,
   resourceType,
+  className,
 }: {
   count: number;
   resourceType: ResourceType;
+  className?: string;
 }) {
   const t = useTranslations();
   const productTypeMap: Record<ResourceType, string> = {
@@ -111,7 +119,12 @@ function UserCount({
   const productType = productTypeMap[resourceType] ?? "";
 
   return (
-    <span className="relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec">
+    <span
+      className={cn(
+        "relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec",
+        className
+      )}
+    >
       {count > 2 ? `${count}` : count} {productType}
     </span>
   );

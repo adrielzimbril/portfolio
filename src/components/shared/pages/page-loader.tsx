@@ -146,17 +146,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
             >
               <LogoIcon className={cn("flex-shrink-0 size-14")} />
               <LogoName
-                className={cn(
-                  "h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0"
-                  // hasScrolled && "h-3.5! w-36!"
-                )}
-              />
-              <Image
-                className="relative hidden flex-shrink-0 h-5"
-                alt={siteConfig.details.name}
-                src={getImageUrl("/adriel-zimbril.svg")}
-                width="195"
-                height="20"
+                className={cn("h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0")}
               />
             </motion.div>
           </nav>
