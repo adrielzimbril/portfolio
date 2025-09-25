@@ -17,7 +17,7 @@ function getOnlineStatus() {
  * const onlineStatus = useOnlineStatus();
  * // returns true or false
  */
-export function useOnlineStatus() {
+export function useOnlineStatus(): boolean {
   const [onlineStatus, setOnlineStatus] = useState(getOnlineStatus());
 
   useEffect(() => {

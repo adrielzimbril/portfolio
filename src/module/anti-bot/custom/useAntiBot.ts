@@ -1,4 +1,3 @@
-// hooks/useAntiBot.ts
 import { useState, useEffect } from "react";
 import { z } from "zod";
 
@@ -17,7 +16,7 @@ export const createProtectedSchema = <T extends z.ZodRawShape>(
 };
 
 // Hook for anti-bot protection
-export const useAntiBot = (minTime = 3000) => {
+export const useAntiBot = ({ minTime = 3000, hasTimeExpire = false }) => {
   // 3 secondes minimum
   const [botProtection, setBotProtection] = useState({
     token: "",
@@ -58,7 +57,7 @@ export const useAntiBot = (minTime = 3000) => {
       throw new Error("Form submitted too quickly");
     }
 
-    if (timeDiff > 30 * 60 * 1000) {
+    if (hasTimeExpire && timeDiff > 30 * 60 * 1000) {
       // 30 minutes max
       throw new Error("Form expired");
     }

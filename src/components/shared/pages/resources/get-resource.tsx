@@ -8,7 +8,7 @@ import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { ProductAvatarsStats } from "@/components/SubscriberBadges";
-import { generateSimpleClientToken, getDate } from "@/utils";
+import { generateSimpleClientToken, getDate, sleep } from "@/utils";
 import { ResourceType } from "@/types";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
@@ -36,7 +36,7 @@ export function GetResource({
 }) {
   const t = useTranslations();
   const locale = useLocale();
-  usePageViews(
+  const { count } = usePageViews(
     routes.hubGet.key,
     undefined,
     {
@@ -53,9 +53,16 @@ export function GetResource({
     required: true,
   });
   const isEmailValid = !Boolean(emailValidator(email));
-  const [isBotPassed, setIsBotPassed] = useState<boolean>(false);
 
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
+
+  const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
+    appearance: "execute",
+    execution: "execute",
+    "retry-interval": 1000,
+    theme: "auto",
+  });
+  sleep(1000).then(() => execute());
 
   const productId = generateSimpleClientToken({
     action: "validate-product-id",
@@ -141,19 +148,7 @@ export function GetResource({
             <ProductAvatarsStats title={title} type={type} />
           </div>
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
-            <Turnstile
-              siteKey={siteKey}
-              onVerify={() => setIsBotPassed(true)}
-              appearance="execute"
-              execution="execute"
-              retryInterval={1000}
-              theme="auto"
-            />
-            {isBotPassed ? (
-              <span className="text-green-500">Bot passed</span>
-            ) : (
-              <span className="text-red-500">Bot not passed</span>
-            )}
+            <div ref={ref} className="hidden" />
             <Input
               placeholder={t(
                 "common.page-sections.newsletter.form.fields.email-page.placeholder"
@@ -163,11 +158,13 @@ export function GetResource({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {error && <span className="text-red-500">{error}</span>}
             <Button
               onClick={() => {
-                if (isEmailValid && isBotPassed) {
+                if (isEmailValid && token) {
                   setIsModalOpen(true);
                 } else {
+                  execute();
                   toast.error(t("zod.errors.customized.email.invalid"));
                 }
               }}
