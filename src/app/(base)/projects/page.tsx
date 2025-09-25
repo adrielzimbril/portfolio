@@ -40,7 +40,7 @@ export default async function MyProject() {
   return (
     <>
       <HeaderSection />
-      <MyProjectsSection data={data} />
+      {data.length > 0 && <MyProjectsSection data={data} />}
       {/* <ResourceWrapper initialData={data} type={PageType.PROJECT} /> */}
       <CallToAction isPage />
     </>

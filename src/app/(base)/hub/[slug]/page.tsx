@@ -85,7 +85,9 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         pageViewsData={{ slug, locale }}
       />
       <ProjectDetailsSection content={body || ""} />
-      <MorePreviewSection data={resource!.adjacentResources} />
+      {resource!.adjacentResources.length > 0 && (
+        <MorePreviewSection data={resource!.adjacentResources} />
+      )}
       <CallToAction isPage />
     </>
   );

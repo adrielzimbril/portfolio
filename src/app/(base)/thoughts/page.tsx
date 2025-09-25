@@ -41,7 +41,7 @@ export default async function MyThoughts() {
   return (
     <>
       <HeaderSection />
-      <MyThoughtsSection data={data} />
+      {data.length > 0 && <MyThoughtsSection data={data} />}
       {/* <ResourceWrapper initialData={data} type={PageType.THOUGHT} /> */}
       <CallToAction isPage />
     </>
