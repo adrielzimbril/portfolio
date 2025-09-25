@@ -7,21 +7,13 @@ const BASE_URL = getBaseUrl();
 export const siteConfig = {
   name: "Adriel Zimbril",
   description: "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
+  seoDescription:
+    "J'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles.",
   url: BASE_URL,
   languagePrimary: "fr_FR",
   languagesArray: ["fr_FR", "en_US", "cn_CN"],
   keywords: [
-    "Product designer",
-    "UI/UX",
-    "Freelancer",
-    "UI/UX",
-    "Developer",
-    "React Template",
-    "Next.js Template",
-    "Tailwind",
-    "Shadcn",
-    "Tailwind V4",
-    "Time Management",
+    "design produit SaaS, SaaS Adriel Zimbril, Product Designer SaaS, création SaaS, UX UI SaaS",
   ],
   seo: {
     ogImage: {
