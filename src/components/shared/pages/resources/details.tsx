@@ -6,7 +6,7 @@ import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { PageType, ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
-import { useProductTitleRequestsCount } from "@/hooks/useSubscriberStats";
+import { useProductSlugRequestsCount } from "@/hooks/useSubscriberStats";
 import { useTranslations } from "use-intl";
 
 export function CardInfo({
@@ -29,7 +29,7 @@ export function CardInfo({
   userCount: number;
 }) {
   const t = useTranslations();
-  const { count: avatarCount } = useProductTitleRequestsCount(title);
+  const { count: avatarCount } = useProductSlugRequestsCount(slug);
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(

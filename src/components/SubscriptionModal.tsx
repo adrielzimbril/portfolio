@@ -285,7 +285,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-start">
-            {t("common.page-sections.newsletter.title")}
+            {productId
+              ? t("common.page-sections.newsletter.hub-title")
+              : t("common.page-sections.newsletter.title")}
           </DialogTitle>
           <DialogDescription className="text-center hidden text-b-white-invert-sec">
             {hasInitialSubscription

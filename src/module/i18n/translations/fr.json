@@ -547,6 +547,7 @@
       },
       "newsletter": {
         "title": "💌 Ton kit créatif t’attend 🫶🏻",
+        "hub-title": "💌 Tu es dans l'espace Shiro 🪐",
         "description": {
           "default": "Inscription en cours... Vous pouvez ajouter vos informations personnelles.",
           "state": "Votre inscription est confirmée ! Vous pouvez ajouter vos informations pour personnaliser votre expérience."

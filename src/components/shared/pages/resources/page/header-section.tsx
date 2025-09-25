@@ -27,6 +27,9 @@ interface HeaderSectionProps {
   // Main Title
   mainTitle?: string;
 
+  // Main Slug
+  slug: string;
+
   // Description
   description?: string;
 
@@ -52,6 +55,7 @@ interface HeaderSectionProps {
 export function HeaderSection({
   previewContent: initPreviewContent,
   mainTitle,
+  slug,
   description,
   tags,
   type,
@@ -110,7 +114,7 @@ export function HeaderSection({
           {mainTitle && type && (
             <ProductAvatarsStats
               colorName="squircle-indigo-100"
-              title={mainTitle}
+              slug={slug}
               type={type}
               badgeClassName="text-b-white-unchanged"
             />

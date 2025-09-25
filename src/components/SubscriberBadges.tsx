@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   useNewsletterSubscribersCount,
   useProductTypeSubscribersCount,
-  useProductTitleRequestsCount,
+  useProductSlugRequestsCount,
 } from "@/hooks/useSubscriberStats";
 import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
 import { ResourceType } from "@/types";
@@ -42,15 +42,15 @@ export function ProductTypeSubscribersBadge({ type }: { type: ResourceType }) {
   );
 }
 
-export function ProductTitleRequestsBadge({
-  title,
+export function ProductSlugRequestsBadge({
+  slug,
   type,
 }: {
-  title: string;
+  slug: string;
   type?: ResourceType;
 }): JSX.Element | null {
   const t = useTranslations();
-  const { count, loading } = useProductTitleRequestsCount(title);
+  const { count, loading } = useProductSlugRequestsCount(slug);
 
   if (!type) return null;
 
@@ -94,17 +94,17 @@ export function ProductTitleRequestsBadge({
 }
 
 export function ProductAvatarsStats({
-  title,
+  slug,
   type,
   colorName,
   badgeClassName,
 }: {
-  title: string;
+  slug: string;
   type: ResourceType;
   colorName?: string;
   badgeClassName?: string;
 }) {
-  const { count } = useProductTitleRequestsCount(title);
+  const { count } = useProductSlugRequestsCount(slug);
 
   return (
     <AvatarsStats

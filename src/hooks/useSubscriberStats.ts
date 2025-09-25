@@ -44,11 +44,11 @@ export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
   } as const;
 }
 
-export function useProductTitleRequestsCount(title: string) {
+export function useProductSlugRequestsCount(slug: string) {
   const { data, error, isLoading, mutate } = useSWR(
-    title
+    slug
       ? `${apiRoutes.statsSubscribers.link}?scope=productUrl&url=${encodeURIComponent(
-          title
+          slug
         )}`
       : null, // null = skip fetch if no title
     fetchJSON

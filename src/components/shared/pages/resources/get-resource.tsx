@@ -21,6 +21,7 @@ import { useTurnstile } from "@/module/anti-bot/turnstile";
 export function GetResource({
   id,
   title,
+  slug,
   tags,
   excerpt,
   type,
@@ -28,6 +29,7 @@ export function GetResource({
 }: {
   id?: string | number;
   title: string;
+  slug: string;
   tags: { name: string; color: string }[];
   excerpt: string;
   type: ResourceType;
@@ -140,11 +142,7 @@ export function GetResource({
             isCentered
           />
           <div className="mt-2 flex items-center gap-2">
-            {/* <NewsletterSubscribersBadge />
-            <ProductTypeSubscribersBadge type={type} /> */}
-            {/* <ProductTitleRequestsBadge title={title} type={type} /> */}
-
-            <ProductAvatarsStats title={title} type={type} />
+            <ProductAvatarsStats slug={slug} type={type} />
           </div>
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <div ref={ref} className="hidden" />

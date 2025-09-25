@@ -47,6 +47,7 @@ export function HeaderSection({
           : undefined
       }
       mainTitle={title}
+      slug={pageViewsData.slug}
       description={description}
       tags={tags}
       ctaButton={projectLink ?? undefined}
