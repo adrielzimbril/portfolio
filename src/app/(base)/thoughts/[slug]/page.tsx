@@ -32,6 +32,9 @@ export async function generateMetadata(props: {
       description: post?.excerpt,
       images: [
         getImageUrl("/opengraph-image"),
+        getImageUrl(
+          `/api/og?type=${PageType.THOUGHT}&slug=${slug}&title=${post?.title}`
+        ),
         post?.cover ? getImageUrl(post?.cover ?? "") : "",
         getResourcesUrl(
           PageType.THOUGHT,
@@ -43,6 +46,17 @@ export async function generateMetadata(props: {
       ...baseMetadata.twitter,
       title: post?.title,
       description: post?.excerpt,
+      images: [
+        getImageUrl("/opengraph-image"),
+        getImageUrl(
+          `/api/og?type=${PageType.THOUGHT}&slug=${slug}&title=${post?.title}`
+        ),
+        post?.cover ? getImageUrl(post?.cover ?? "") : "",
+        getResourcesUrl(
+          PageType.THOUGHT,
+          `${slug}/opengraph-image?${new Date().getTime()}`
+        ),
+      ],
     },
   };
 

@@ -38,6 +38,9 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       description: project?.excerpt,
       images: [
         getImageUrl(project?.image_big ?? ""),
+        getImageUrl(
+          `/api/og?type=${PageType.PROJECT}&slug=${slug}&title=${project?.title}`
+        ),
         getResourcesUrl(
           PageType.PROJECT,
           `${slug}/opengraph-image?${new Date().getTime()}`
@@ -48,6 +51,16 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       ...baseMetadata.twitter,
       title: project?.title,
       description: project?.excerpt,
+      images: [
+        getImageUrl(project?.image_big ?? ""),
+        getImageUrl(
+          `/api/og?type=${PageType.PROJECT}&slug=${slug}&title=${project?.title}`
+        ),
+        getResourcesUrl(
+          PageType.PROJECT,
+          `${slug}/opengraph-image?${new Date().getTime()}`
+        ),
+      ],
     },
   };
 }

@@ -7,8 +7,10 @@ import {
   getPostBySlug,
   getResourceBySlug,
   getProjectBySlug,
+  getAllPosts,
 } from "@/module/content/utils/lib";
 import { getLocale } from "next-intl/server";
+import { getAbsolutePathUrl, getPathUrl } from "@/utils";
 
 export async function GET(request: NextRequest) {
   try {
@@ -37,12 +39,19 @@ export async function GET(request: NextRequest) {
       switch (type) {
         case PageType.PROJECT:
           data = await getProjectBySlug(slug, { locale });
+          console.log(`type: ${PageType.PROJECT} | ${type}`);
           break;
         case PageType.HUB:
           data = await getResourceBySlug(slug, { locale });
+          console.log(`type: ${PageType.HUB} | ${type}`);
           break;
         case PageType.THOUGHT:
           data = await getPostBySlug(slug, { locale });
+          const dataAll = await getAllPosts({ locale });
+          console.log(`slug: ${slug}`);
+          console.log(`type: ${PageType.THOUGHT} | ${type}`);
+          console.log(`data: ${JSON.stringify(data)}`);
+          // console.log(`dataAll: ${JSON.stringify(dataAll)}`);
           break;
         default:
           data = {
@@ -53,6 +62,27 @@ export async function GET(request: NextRequest) {
           };
           break;
       }
+    }
+
+    if (!data) {
+      return new ImageResponse(
+        (
+          <div tw="flex flex-col w-full h-full items-center justify-center bg-indigo-100">
+            <img
+              src={getPathUrl("/opengraph-image")}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+        ),
+        {
+          width: 1200,
+          height: 630,
+        }
+      );
     }
 
     return new ImageResponse(

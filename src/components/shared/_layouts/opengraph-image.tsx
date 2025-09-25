@@ -79,7 +79,7 @@ export default async function OpenGraphImage(
             </div>
             <div tw="flex flex-col gap-2 flex-none items-center justify-center text-center mt-2 max-w-[100%]">
               {title && (
-                <p tw="text-6xl font-bold text-black">{fontFormated.title}</p>
+                <p tw="text-4xl font-bold text-black">{fontFormated.title}</p>
               )}
               {(description || alt) && (
                 <p tw="text-2xl font-normal text-black/80">
