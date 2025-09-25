@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
             requested_at: new Date().toISOString(),
             features: features,
             cover: getImageUrl(cover || ""),
-            product_url: productUrl,
+            product_url: slug,
             custom_text: customText,
             subscribed_from_page: JSON.stringify({
               path: subscribedFromPage,
