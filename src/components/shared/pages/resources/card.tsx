@@ -22,7 +22,7 @@ export function ResourceCard({
   description: string;
   features: string[];
   avatars: string[];
-  userCount: number;
+  userCount?: number;
 }) {
   return (
     <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden">

@@ -26,7 +26,7 @@ export function CardInfo({
   description: string;
   features: string[];
   avatars: string[];
-  userCount: number;
+  userCount?: number;
 }) {
   const t = useTranslations();
   const { count: avatarCount } = useProductSlugRequestsCount(slug);
