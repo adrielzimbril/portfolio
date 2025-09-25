@@ -128,6 +128,7 @@ export async function POST(req: NextRequest) {
     if (productData) {
       const { title, features, cover, slug, type } = productData;
       const productUrl = getResourcesUrl(PageType.HUB, slug);
+      const productEndUrl = getResourcesUrl(PageType.HUB, slug);
       const customText = undefined;
 
       if (userId) {

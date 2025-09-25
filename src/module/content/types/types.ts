@@ -7,7 +7,6 @@ import type {
   ProjectCategory as ContentCollectionsProjectCategory,
   Resource as ContentCollectionsResource,
   ResourceTag as ContentCollectionsResourceTag,
-  ProjectType as ContentCollectionsProjectType,
 } from "content-collections";
 
 /**
@@ -33,7 +32,7 @@ export type ProjectCategory = Omit<ContentCollectionsProjectCategory, "_meta">;
 /**
  * Types for types
  */
-export type ProjectType = Omit<ContentCollectionsProjectType, "_meta">;
+// export type ProjectType = Omit<ContentCollectionsProjectType, "_meta">;
 
 
 
