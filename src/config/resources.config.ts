@@ -7,37 +7,28 @@
  * Resources are managed through content collections and can be accessed by their slugs.
  */
 
-import { getAllResourceSlugs } from "@/module/content/utils/lib";
-
-/**
- * Type for custom data that can be associated with a resource
- */
-type CustomResourceData<T = any> = {
-  // The URL for this resource (if different from default)
-  url?: string;
-  // Any additional custom data
-  data: T;
-};
-
-/**
- * Type representing a resource slug
- */
-type ResourceSlug = string;
+import { getResourceBySlug } from "@/module/content/utils/lib";
 
 /**
  * Base URL for all resources
  */
-const RESOURCE_BASE = await getAllResourceSlugs();
+export enum AllUserResourceSlug {
+  THE_MISTAKE_THAT_STOPS_YOU_FROM_IMPROVING = "the-mistake-that-stops-you-from-improving",
+  TEST = "test",
+}
 
 /**
  * Map of resource slugs to their custom data
  * You can define custom data for any resource here
- * 
+ *
  * only existing resources slug in RESOURCE_BASE are allowed
  */
-const CUSTOM_RESOURCES: Record<typeof RESOURCE_BASE, string> = {
+const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
   // Example:
   // 'custom-resource': "url string"
+  test: "https://shirofolio.com/projects/test",
+  "the-mistake-that-stops-you-from-improving":
+    "https://shirofolio.com/projects/the-mistake-that-stops-you-from-improving",
 };
 
 /**
@@ -48,13 +39,13 @@ const CUSTOM_RESOURCES: Record<typeof RESOURCE_BASE, string> = {
  *
  * @example
  * ```typescript
- * const data = getResourceData('custom-resource');
- * // Returns: { url: '...', data: { ... } } or null if not found
+ * const data = getResourceUserUrl('custom-resource');
+ * // Returns: 'url string' or null if not found
  * ```
  */
-export const getResourceData = <T = any>(
-  slug: string
-): CustomResourceData<T> | null => {
+export const getResourceUserUrl = <T = any>(
+  slug: AllUserResourceSlug
+): string | null => {
   return CUSTOM_RESOURCES[slug] || null;
 };
 
@@ -64,7 +55,9 @@ export const getResourceData = <T = any>(
  * @param slug - The slug of the resource to check
  * @returns Promise that resolves to true if the resource exists, false otherwise
  */
-export const resourceExists = async (slug: string): Promise<boolean> => {
+export const resourceUserExists = async (
+  slug: AllUserResourceSlug
+): Promise<boolean> => {
   try {
     const resource = await getResourceBySlug(slug);
     return resource !== null;

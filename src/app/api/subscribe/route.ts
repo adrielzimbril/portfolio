@@ -8,6 +8,10 @@ import { ContactProvider } from "@/module/contact/types/types";
 import { getResourcesUrl, validateSimpleClientToken } from "@/utils";
 import { getResourceById } from "@/module/content/utils/lib";
 import { Locale, PageType, ResourceType } from "@/types";
+import {
+  AllUserResourceSlug,
+  getResourceUserUrl,
+} from "@/config/resources.config";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -128,7 +132,7 @@ export async function POST(req: NextRequest) {
     if (productData) {
       const { title, features, cover, slug, type } = productData;
       const productUrl = getResourcesUrl(PageType.HUB, slug);
-      const productEndUrl = getResourcesUrl(PageType.HUB, slug);
+      const productEndUrl = getResourceUserUrl(slug as AllUserResourceSlug);
       const customText = undefined;
 
       if (userId) {
