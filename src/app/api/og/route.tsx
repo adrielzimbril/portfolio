@@ -10,7 +10,8 @@ import {
   getAllPosts,
 } from "@/module/content/utils/lib";
 import { getLocale } from "next-intl/server";
-import { getAbsolutePathUrl, getPathUrl } from "@/utils";
+import { getPathUrl } from "@/utils";
+import OpenGraphImage from "@/components/shared/_layouts/opengraph-image";
 
 export async function GET(request: NextRequest) {
   try {
@@ -47,11 +48,6 @@ export async function GET(request: NextRequest) {
           break;
         case PageType.THOUGHT:
           data = await getPostBySlug(slug, { locale });
-          const dataAll = await getAllPosts({ locale });
-          console.log(`slug: ${slug}`);
-          console.log(`type: ${PageType.THOUGHT} | ${type}`);
-          console.log(`data: ${JSON.stringify(data)}`);
-          // console.log(`dataAll: ${JSON.stringify(dataAll)}`);
           break;
         default:
           data = {
@@ -85,40 +81,12 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return new ImageResponse(
-      (
-        <div tw="flex flex-col w-full h-full items-center justify-center bg-indigo-100">
-          <div tw="bg-orange-50 flex h-full w-full">
-            <div tw="flex flex-col w-full text-center py-12 px-4 md:items-center justify-between h-full w-full p-8">
-              <div tw="flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-8">
-                <div tw="flex flex-col items-start gap-2 w-full max-w-[90%] mx-auto">
-                  <h1 tw="text-4xl sm:text-5xl tracking-wide">{data?.title}</h1>
-
-                  <p tw="text-b-white-invert-thr leading-[120%]">
-                    {data?.excerpt}
-                  </p>
-                  <p tw="text-b-white-invert-thr leading-[120%]">{locale}</p>
-                </div>
-              </div>
-              <h2 tw="flex flex-col text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 text-left">
-                <span>{data?.title}</span>
-                <span tw="text-indigo-600">
-                  {type === "page" ? "Start your free trial today." : ""}
-                </span>
-              </h2>
-              <div tw="text-3xl">👋 😄 🎉 🎄 🦋</div>
-            </div>
-          </div>
-        </div>
-      ),
-      {
-        width: 1200,
-        height: 630,
-        debug: true,
-        emoji: "fluent",
-        status: 200,
-      }
-    );
+    return await OpenGraphImage({
+      title: data?.title,
+      alt: data?.title,
+      description: data?.excerpt,
+      withCover: false,
+    });
   } catch (e: unknown) {
     console.log(`${(e as Error)?.message}`);
     return new Response(`Failed to generate the image`, {
