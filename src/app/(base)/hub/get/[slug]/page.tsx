@@ -60,6 +60,7 @@ export default async function SubShopGet(props: {
       <GetResource
         id={id}
         title={title}
+        slug={slug}
         tags={tags}
         excerpt={excerpt}
         type={type}

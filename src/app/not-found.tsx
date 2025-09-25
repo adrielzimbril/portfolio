@@ -5,6 +5,21 @@ import { richTextComponent } from "@/module/content/utils/mdx-components";
 import { routes } from "@/data/routes";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/components/ui/link";
+import { Metadata } from "next";
+import { metadata as baseMetadata } from "@/app/metadata";
+
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  const metadata: Metadata = {
+    ...baseMetadata,
+    title: t("not-found.title"),
+    description: t("not-found.description"),
+    keywords: t("not-found.keywords"),
+  };
+
+  return metadata;
+}
 
 export default async function NotFound() {
   const t = await getTranslations();
@@ -25,7 +40,7 @@ export default async function NotFound() {
         >
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-6">
             <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-b-white-invert-sec">
-              {t("not-found.badge")}
+              {t("not-found.page.badge")}
             </Badge>
 
             <div className="text-7xl md:text-9xl py-2 leading-none select-none">
@@ -33,18 +48,18 @@ export default async function NotFound() {
             </div>
 
             <h1 className="self-stretch">
-              {t.rich("not-found.title", { ...richTextComponent })}
+              {t.rich("not-found.page.title", { ...richTextComponent })}
             </h1>
 
             <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-snug text-b-white-invert-sec">
-              {t("not-found.desc")}
+              {t("not-found.page.desc")}
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
             <Link href={routes.home.link} likeButton whileTap>
               <span className="font-bold text-base">
-                {t("not-found.cta.home")}
+                {t("not-found.page.cta.home")}
               </span>
             </Link>
 
@@ -55,7 +70,7 @@ export default async function NotFound() {
               whileTap
             >
               <span className="font-bold text-base">
-                {t("not-found.cta.newsletter")}
+                {t("not-found.page.cta.newsletter")}
               </span>
             </Link>
           </div>

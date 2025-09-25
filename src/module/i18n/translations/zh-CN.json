@@ -612,13 +612,18 @@
     "title": "你的创意工具包在等你 💌"
   },
   "not-found": {
-    "badge": "哎呀……你正处于无限创意的宇宙中 🪐",
-    "cta": {
-      "home": "返回首页",
-      "newsletter": "创意工具包 💌"
-    },
-    "desc": "你要找的页面不存在……或已消失 🕳️。但每一次绕路都是一场冒险 🌠。Sic itur ad astra 🌟：即使迷失，每一步都让我们更接近星辰 🌌✨。",
-    "title": "看起来你在<thin>星辰</thin>之间<thin>迷路</thin>了 ✨"
+    "title": "404 | 页面未找到🪐",
+    "description": "你要找的页面不存在……或者已经不存在了 🕳️。",
+    "keywords": "404 SaaS，未找到页面 SaaS，Adriel Zimbril，SaaS 产品设计师，404 SaaS，未找到页面 SaaS",
+    "page": {
+      "badge": "哎呀……你正处于无限创意的宇宙中 🪐",
+      "title": "看<thin>起来</thin>你在<thin>星星</thin>之间<thin>迷路了</thin> ✨",
+      "desc": "你要找的页面不存在……或者已经不存在了 🕳️。但每一次绕路都是一场冒险 🌠。Sic itur ad astra 🌟：每一步，即使迷失，也让我们更接近星辰 🌌✨。",
+      "cta": {
+        "home": "返回首页",
+        "newsletter": "创意工具包 💌"
+      }
+    }
   },
   "playground": {
     "description": "Adriel Zimbril的创意实验空间，测试新想法、概念和设计体验，助力项目落地前的探索。",
