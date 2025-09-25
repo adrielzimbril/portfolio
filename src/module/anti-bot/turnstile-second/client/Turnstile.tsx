@@ -42,7 +42,7 @@ export const Turnstile: React.FC<TurnstileProps> = ({
   sandbox = false,
   feedbackEnabled = TURNSTILE_CONSTANTS.DEFAULT_FEEDBACK_ENABLED,
 }) => {
-  const widgetRef = useRef<string>();
+  const widgetRef = useRef<string>(undefined);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const cleanup = useCallback(() => {

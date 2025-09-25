@@ -173,7 +173,7 @@ export const calculateReadingTime = ({
   const detectedFormat = format === "auto" ? detectFormat(content) : format;
   let cleanText = "";
   let imageCount = 0;
-  let codeWordCount = { cjkCount: 0, nonCjkCount: 0 };
+  const codeWordCount = { cjkCount: 0, nonCjkCount: 0 };
 
   // Parse according to the format
   switch (detectedFormat) {
