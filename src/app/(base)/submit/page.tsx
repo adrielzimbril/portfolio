@@ -4,7 +4,7 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { HeaderSection } from "./sections/HeaderSection";
 import { IntentionForm } from "./sections/IntentionForm";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   const metadata: Metadata = {

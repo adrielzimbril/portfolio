@@ -6,8 +6,8 @@ import { getAbsolutePathUrl } from "@/utils/base-url";
 export const runtime = "nodejs";
 export const alt = siteConfig.details.nameShared;
 export const size = {
-  width: 32,
-  height: 32,
+  width: 2048,
+  height: 2048,
 };
 export const contentType = "image/png";
 
@@ -16,18 +16,48 @@ export function generateImageMetadata() {
   return [
     {
       contentType: "image/png",
+      size: { width: 32, height: 32 },
+      id: "32",
+    },
+    {
+      contentType: "image/svg+xml",
       size: { width: 48, height: 48 },
-      id: "small",
+      id: "ico",
+    },
+    {
+      contentType: "image/png",
+      size: { width: 48, height: 48 },
+      id: "48",
     },
     {
       contentType: "image/png",
       size: { width: 72, height: 72 },
-      id: "medium",
+      id: "72",
     },
     {
       contentType: "image/png",
       size: { width: 156, height: 156 },
-      id: "large",
+      id: "156",
+    },
+    {
+      contentType: "image/png",
+      size: { width: 192, height: 192 },
+      id: "192",
+    },
+    {
+      contentType: "image/png",
+      size: { width: 256, height: 256 },
+      id: "256",
+    },
+    {
+      contentType: "image/png",
+      size: { width: 512, height: 512 },
+      id: "512",
+    },
+    {
+      contentType: "image/png",
+      size: { width: 1024, height: 1024 },
+      id: "1024",
     },
   ];
 }

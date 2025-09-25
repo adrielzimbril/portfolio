@@ -17,12 +17,14 @@ export const size = {
 };
 export const contentType = "image/png";
 
-
 export async function generateImageMetadata(props: {
   params: Promise<PageParams>;
 }) {
   const { slug } = await props.params;
   const images = [{ text: slug }];
+  console.log(slug);
+  console.log(images);
+  console.log(images[0]?.text);
 
   return images.map((image, idx) => ({
     id: idx,
@@ -33,7 +35,9 @@ export async function generateImageMetadata(props: {
 }
 
 export default async function Image(props: { params: Promise<PageParams> }) {
-  const { slug } = await props.params;
+  const propsResolved = await props;
+  const { slug } = await propsResolved.params;
+  console.log("propsResolved", propsResolved);
 
   const locale = await getLocale();
 

@@ -8,7 +8,7 @@ import logger from "@/utils/logger";
 import { getAllProjects } from "@/module/content/utils/lib";
 import { MyProjectsSection } from "./sections/MyProjectsSection";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   const metadata: Metadata = {

@@ -13,6 +13,7 @@ import { routes } from "@/data/routes";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { PageParams, PageType } from "@/types";
 import { Metadata } from "next";
+import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -26,15 +27,22 @@ export async function generateMetadata(props: {
     title: post?.title,
     description: post?.excerpt,
     openGraph: {
+      ...baseMetadata.openGraph,
       title: post?.title,
       description: post?.excerpt,
       images: [
-        getImageUrl(post?.cover ?? ""),
+        getImageUrl("/opengraph-image"),
+        post?.cover ? getImageUrl(post?.cover ?? "") : "",
         getResourcesUrl(
           PageType.THOUGHT,
           `${slug}/opengraph-image?${new Date().getTime()}`
         ),
       ],
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: post?.title,
+      description: post?.excerpt,
     },
   };
 

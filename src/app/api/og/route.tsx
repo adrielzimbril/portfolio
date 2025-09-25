@@ -2,6 +2,13 @@ import { NextRequest } from "next/server";
 import { ImageResponse } from "next/og";
 // App router includes @vercel/og.
 // No need to install it.
+import { PageType } from "@/types";
+import {
+  getPostBySlug,
+  getResourceBySlug,
+  getProjectBySlug,
+} from "@/module/content/utils/lib";
+import { getLocale } from "next-intl/server";
 
 export async function GET(request: NextRequest) {
   try {
@@ -14,12 +21,39 @@ export async function GET(request: NextRequest) {
       : "My default title";
     // url?description=<description>
     const hasDescription = searchParams.has("description");
-    const description = hasDescription
+    const excerpt = hasDescription
       ? searchParams.get("description")?.slice(0, 100)
       : "My default description";
     // url?type=<type>
     const hasType = searchParams.has("type");
     const type = hasType ? searchParams.get("type") : "page";
+    const hasSlug = searchParams.has("slug");
+    const slug = hasSlug ? searchParams.get("slug") : "";
+
+    let data;
+    const locale = await getLocale();
+
+    if (hasSlug && slug && hasType && type) {
+      switch (type) {
+        case PageType.PROJECT:
+          data = await getProjectBySlug(slug, { locale });
+          break;
+        case PageType.HUB:
+          data = await getResourceBySlug(slug, { locale });
+          break;
+        case PageType.THOUGHT:
+          data = await getPostBySlug(slug, { locale });
+          break;
+        default:
+          data = {
+            title,
+            excerpt,
+            type,
+            slug,
+          };
+          break;
+      }
+    }
 
     return new ImageResponse(
       (
@@ -28,15 +62,16 @@ export async function GET(request: NextRequest) {
             <div tw="flex flex-col w-full text-center py-12 px-4 md:items-center justify-between h-full w-full p-8">
               <div tw="flex relative flex-col gap-12 md:gap-16 min-h-60 items-start justify-between px-6 py-8 md:px-8 md:py-8">
                 <div tw="flex flex-col items-start gap-2 w-full max-w-[90%] mx-auto">
-                  <h1 tw="text-4xl sm:text-5xl tracking-wide">{title}</h1>
+                  <h1 tw="text-4xl sm:text-5xl tracking-wide">{data?.title}</h1>
 
                   <p tw="text-b-white-invert-thr leading-[120%]">
-                    {description}
+                    {data?.excerpt}
                   </p>
+                  <p tw="text-b-white-invert-thr leading-[120%]">{locale}</p>
                 </div>
               </div>
               <h2 tw="flex flex-col text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 text-left">
-                <span>{title}</span>
+                <span>{data?.title}</span>
                 <span tw="text-indigo-600">
                   {type === "page" ? "Start your free trial today." : ""}
                 </span>

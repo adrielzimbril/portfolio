@@ -12,18 +12,22 @@ import {
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/routes";
 import { getImageUrl, getResourcesUrl } from "@/utils";
+import { Metadata } from "next";
 import { PageType } from "@/types";
+import { metadata as baseMetadata } from "@/app/metadata";
 
-export async function generateMetadata(props: { params: Promise<PageParams> }) {
+export async function generateMetadata(props: {
+  params: Promise<PageParams>;
+}): Promise<Metadata> {
   const { slug } = await props.params;
 
   const locale = await getLocale();
   const resource = await getResourceBySlug(slug, { locale });
-
-  return {
+  const metadata: Metadata = {
     title: resource?.title,
     description: resource?.excerpt,
     openGraph: {
+      ...baseMetadata.openGraph,
       title: resource?.title,
       description: resource?.excerpt,
       images: [
@@ -34,7 +38,14 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
         ),
       ],
     },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: resource?.title,
+      description: resource?.excerpt,
+    },
   };
+
+  return metadata;
 }
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {

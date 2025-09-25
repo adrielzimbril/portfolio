@@ -21,6 +21,7 @@ import { getLocale } from "next-intl/server";
 import { routes } from "@/data/routes";
 import { PageParams, PageType } from "@/types";
 import { getImageUrl, getResourcesUrl } from "@/utils";
+import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;
@@ -32,6 +33,7 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
     title: project?.title,
     description: project?.excerpt,
     openGraph: {
+      ...baseMetadata.openGraph,
       title: project?.title,
       description: project?.excerpt,
       images: [
@@ -41,6 +43,11 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
           `${slug}/opengraph-image?${new Date().getTime()}`
         ),
       ],
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: project?.title,
+      description: project?.excerpt,
     },
   };
 }

@@ -11,8 +11,11 @@ import { GetResource } from "@/components/shared/pages/resources/get-resource";
 import { Metadata } from "next";
 import { PageType } from "@/types";
 import { getImageUrl, getResourcesUrl } from "@/utils";
+import { metadata as baseMetadata } from "@/app/metadata";
 
-export async function generateMetadata(props: { params: Promise<PageParams> }) {
+export async function generateMetadata(props: {
+  params: Promise<PageParams>;
+}): Promise<Metadata> {
   const params = await props.params;
 
   const { slug } = params;
@@ -24,6 +27,7 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
     title: resource?.title,
     description: resource?.excerpt,
     openGraph: {
+      ...baseMetadata.openGraph,
       title: resource?.title,
       description: resource?.excerpt,
       images: [
@@ -33,6 +37,11 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
           `${slug}/opengraph-image?${new Date().getTime()}`
         ),
       ],
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: resource?.title,
+      description: resource?.excerpt,
     },
   };
 
