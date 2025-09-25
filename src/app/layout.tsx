@@ -19,9 +19,9 @@ import { notFound } from "next/navigation";
 
 export const viewport: Viewport = {
   width: "device-width",
-  // initialScale: 1,
-  // maximumScale: 1,
-  // userScalable: false,
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
   themeColor: [
     {
       media: "(prefers-color-scheme: light)",

@@ -1,19 +1,16 @@
 import type { MetadataRoute } from "next";
-import { getPathUrl } from "@/utils";
+import { getBaseUrl, getPathUrl } from "@/utils";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "Googlebot",
-        allow: ["/"],
-        disallow: "/private/",
-      },
-      {
-        userAgent: ["Applebot", "Bingbot"],
-        disallow: ["/"],
+        userAgent: "*",
+        allow: ["*", "/api/og/*"],
+        disallow: ["/private/", "/private/*"],
       },
     ],
     sitemap: getPathUrl("sitemap.xml"),
+    host: getBaseUrl(),
   };
 }

@@ -1,7 +1,5 @@
-import { getAbsolutePathUrl, getBaseUrl } from "@/utils/base-url";
-import { ImageResponse } from "next/og";
+import OpenGraphImage from "@/components/shared/_layouts/opengraph-image";
 import { siteConfig } from "@/data/config";
-import logger from "@/utils/logger";
 
 // Configuration exports
 export const runtime = "nodejs";
@@ -13,39 +11,8 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
-  try {
-    // Get the host from headers
-
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "black",
-          }}
-        >
-          <img
-            src={getAbsolutePathUrl({
-              type: "s3",
-              path: "/agent-template-og.png",
-            })}
-            alt={alt}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-            }}
-          />
-        </div>
-      ),
-      { ...size }
-    );
-  } catch (error) {
-    logger.error("Error generating OpenGraph image:", error);
-    return new Response(`Failed to generate image`, { status: 500 });
-  }
+  return await OpenGraphImage({
+    title: siteConfig.details.nameShared,
+    alt: siteConfig.details.nameShared,
+  });
 }

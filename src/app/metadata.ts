@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/data/config";
+import { getBaseUrl, getPathUrl } from "@/utils";
 
 export interface InnerPageSeo {
   title: string;
@@ -10,6 +11,8 @@ export interface InnerPageSeo {
   };
 }
 
+const BASE_URL = getBaseUrl();
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -17,18 +20,13 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.details.nameShared}`,
   },
   description: siteConfig.description,
-  icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
-  },
   keywords: siteConfig.keywords,
   alternates: {
     canonical: siteConfig.url,
     languages: {
-      en: "/",
-      fr: "/",
-      ch: "/",
+      en: BASE_URL,
+      fr: BASE_URL,
+      ch: BASE_URL,
     },
   },
   authors: [
@@ -54,6 +52,14 @@ export const metadata: Metadata = {
     },
     description: siteConfig.description,
     siteName: siteConfig.details.nameShared,
+    images: [
+      {
+        url: getPathUrl("/opengraph-image"),
+        width: 1200,
+        height: 630,
+        alt: siteConfig.details.nameShared,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -63,6 +69,14 @@ export const metadata: Metadata = {
     },
     description: siteConfig.description,
     creator: siteConfig.details.nameShared,
+    images: [
+      {
+        url: getPathUrl("/opengraph-image"),
+        width: 1200,
+        height: 630,
+        alt: siteConfig.details.nameShared,
+      },
+    ],
   },
   robots: {
     index: true,

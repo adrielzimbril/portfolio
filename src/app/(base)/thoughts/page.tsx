@@ -8,7 +8,7 @@ import logger from "@/utils/logger";
 import { getAllPosts } from "@/module/content/utils/lib";
 import { MyThoughtsSection } from "./sections/MyThoughtsSection";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   const metadata: Metadata = {

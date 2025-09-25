@@ -11,11 +11,12 @@ import { ContentsSection } from "./sections/ContentSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { routes } from "@/data/routes";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
-import { siteConfig } from "@/data/config";
-import { Locale, PageParams, PageType } from "@/types";
+import { PageParams, PageType } from "@/types";
 import { Metadata } from "next";
 
-export async function generateMetadata(props: { params: Promise<PageParams> }) {
+export async function generateMetadata(props: {
+  params: Promise<PageParams>;
+}): Promise<Metadata> {
   const { slug } = await props.params;
 
   const locale = await getLocale();
@@ -63,33 +64,6 @@ export default async function BlogPostPage(props: {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.currentPost.title,
-            datePublished: post.currentPost.created_at,
-            dateModified:
-              post.currentPost.updated_at || post.currentPost.created_at,
-            description: post.currentPost.excerpt,
-            image: post.currentPost.cover
-              ? `${getImageUrl(post.currentPost.cover)}`
-              : `${getBaseUrl()}/og?title=${encodeURIComponent(
-                  post.currentPost.title
-                )}`,
-            url: `${getResourcesUrl(PageType.THOUGHT, post.currentPost.slug)}`,
-            author: {
-              "@type": "Person",
-              name: siteConfig.details.nameShared,
-              url: siteConfig.url,
-              sameAs: [siteConfig.links.contact.social.x.url],
-            },
-          }),
-        }}
-      />
       <HeaderSection
         title={title}
         cover={cover || ""}
