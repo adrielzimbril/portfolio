@@ -28,7 +28,7 @@ const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
   // 'custom-resource': "url string"
   test: "https://shirofolio.com/projects/test",
   "the-mistake-that-stops-you-from-improving":
-    "https://shirofolio.com/projects/the-mistake-that-stops-you-from-improving",
+    "https://docs.google.com/document/d/1oWOfuqpznMF6rKObGimkBsnmShVTEw6LuZjV82Kuy-o/edit?usp=sharing",
 };
 
 /**

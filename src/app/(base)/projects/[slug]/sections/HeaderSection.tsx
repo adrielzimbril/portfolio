@@ -6,10 +6,6 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useTranslations } from "use-intl";
-import {
-  AllUserResourceSlug,
-  getResourceUserUrl,
-} from "@/config/resources.config";
 
 export function HeaderSection({
   title,
@@ -39,28 +35,23 @@ export function HeaderSection({
   );
 
   return (
-    <>
-      <ResourceHeaderSection
-        sectionClassName="md:w-[90%] mx-auto"
-        previewContent={
-          cover
-            ? {
-                type: PreviewContentType.IMAGE,
-                src: cover,
-                alt: title,
-              }
-            : undefined
-        }
-        mainTitle={title}
-        slug={pageViewsData.slug}
-        description={description}
-        tags={tags}
-        ctaButton={projectLink ?? undefined}
-        ctaButtonText={`${t("projects.inner-page.header-section.cta")} 🦄`}
-      />
-      <span className="h-[1px] w-full bg-gray-200">
-        {getResourceUserUrl(pageViewsData.slug as AllUserResourceSlug)}
-      </span>
-    </>
+    <ResourceHeaderSection
+      sectionClassName="md:w-[90%] mx-auto"
+      previewContent={
+        cover
+          ? {
+              type: PreviewContentType.IMAGE,
+              src: cover,
+              alt: title,
+            }
+          : undefined
+      }
+      mainTitle={title}
+      slug={pageViewsData.slug}
+      description={description}
+      tags={tags}
+      ctaButton={projectLink ?? undefined}
+      ctaButtonText={`${t("projects.inner-page.header-section.cta")} 🦄`}
+    />
   );
 }

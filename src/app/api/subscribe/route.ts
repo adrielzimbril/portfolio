@@ -171,7 +171,7 @@ export async function POST(req: NextRequest) {
               productTitle: title,
               features,
               coverImage: cover,
-              productUrl,
+              productUrl: productEndUrl || productUrl,
               productType: type,
               customText,
             },
