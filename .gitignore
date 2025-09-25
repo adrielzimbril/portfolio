@@ -56,5 +56,3 @@ package-lock.json
 # Ignore all lang d.ts files
 /src/module/i18n/translations/*.d.json.ts
 
-# Ignore scripts folder
-/scripts
