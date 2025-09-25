@@ -52,7 +52,8 @@ export default async function RootLayout({
   setRequestLocale(locale);
 
   if (!locales.includes(locale)) {
-    logger.error("Layout : Locale not found", locale);
+    logger.error("Locale not found", locale);
+    setRequestLocale(appConfig.i18n.defaultLocale);
     return notFound();
   }
 

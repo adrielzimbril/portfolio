@@ -104,7 +104,7 @@ export default async function OpenGraphImage(
               </div>
             )}
             <div
-              tw="flex flex-col gap-2 flex-none items-center justify-center text-center"
+              tw="flex flex-col gap-2 flex-none items-center justify-center text-center max-h-[30%] overflow-hidden"
               style={{
                 marginTop: !withCover ? "2.25rem" : "",
                 maxWidth: !withCover ? "90%" : "100%",
