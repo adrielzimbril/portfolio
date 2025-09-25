@@ -644,7 +644,7 @@
       }
     },
     "newsletterSignup": {
-      "subject": "🎁 Recevoir les cadeaux",
+      "subject": "Hello, c'est Adriel !",
       "preview": "Salut ! Je voulais te parler de quelque chose qui me tient à cœur...",
       "greeting": "Salut {firstName}",
       "tagline": "Problem Solver & Your SaaS Product Designer 🦄",
@@ -675,7 +675,7 @@
       }
     },
     "freeProductDelivery": {
-      "subject": "🎁 Recevoir les cadeaux",
+      "subject": "Ton cadeaux est arrivé !",
       "preview": "Comme promis, voici ta ressource !",
       "greeting": "Salut {firstName}",
       "intro": "Comme promis, voici ta ressource :",
@@ -685,7 +685,7 @@
       "message2": "Et si jamais tu l'utilises sur un projet concret, j'aimerais bien savoir comment ça s'est passé !"
     },
     "productDelivery": {
-      "subject": "🎁 Recevoir les cadeaux",
+      "subject": "Hey, ta ressource est prête !",
       "preview": "Votre {productType} est prêt à être téléchargé !",
       "greeting": "Salut {firstName}",
       "featuresTitle": "Ce qui t'attend :",

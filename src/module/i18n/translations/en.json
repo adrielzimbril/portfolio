@@ -478,7 +478,7 @@
       "message1": "I hope this resource will be useful for your projects. If you have any questions or feedback after checking it out, feel free to reply directly.",
       "message2": "And if you use it on a real project, I'd love to hear how it went!",
       "preview": "As promised, here’s your resource!",
-      "subject": "🎁 Get your gifts"
+      "subject": "Your gift has arrived !"
     },
     "newsletterSignup": {
       "content": {
@@ -503,7 +503,7 @@
         "philosophy": "What really interests me is understanding how people use what we create. Why do they drop off at certain points, why do they come back, what really helps them in their daily lives.",
         "presentation": "My name is Adriel, and for 5 years I've been designing interfaces for SaaS. I've noticed something: we often make things more complicated, while users just want simplicity."
       },
-      "subject": "🎁 Get your gifts",
+      "subject": "Hello, it's Adriel !",
       "tagline": "Problem Solver & Your SaaS Product Designer 🦄",
       "why": {
         "motivation": "I want to share those little discoveries, those moments when you think, \"Oh, I wouldn't have thought of that.\" No pretension, just shared curiosity ❤️.",
@@ -549,7 +549,7 @@
           "tip": "🎯 Tip: Watch it in a quiet place with a notebook nearby. The best ideas often come while you're listening."
         }
       },
-      "subject": "🎁 Get your gifts",
+      "subject": "Hey, your resource is ready !",
       "thankYou": "Thank you for your trust 🙌"
     },
     "submitAdminNotification": {
