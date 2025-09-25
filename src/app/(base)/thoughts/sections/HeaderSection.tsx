@@ -23,6 +23,7 @@ export function HeaderSection() {
       //buttonLink={routes.thoughts.link}
       //buttonText={t("thoughts.page.header-section.cta")}
       //imagePath={getImageUrl(getEmojiHub("🧑🏻‍🎨", "fluent", "anim"))}
+      isMobileShowed
       imagePath={{ emoji: "😮‍💨" }}
       actionButton
     />

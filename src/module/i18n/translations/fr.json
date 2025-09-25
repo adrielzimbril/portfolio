@@ -292,32 +292,32 @@
       "home": {
         "default": "Accueil",
         "desktop": "Hey 👋🏻",
-        "mobile": "Bienvenue 🏠"
+        "mobile": "Accueil 🏠"
       },
       "about": {
         "default": "À propos",
         "desktop": "Je suis 🧑🏻‍🚀",
-        "mobile": "À propos de moi 🧑🏻‍🚀"
+        "mobile": "À propos 🧑🏻‍🚀"
       },
       "thoughts": {
         "default": "Réflexions",
-        "desktop": "Pensées ✍️",
-        "mobile": "Carnet de Bord 📝"
+        "desktop": "Blog ✍️",
+        "mobile": "Blog 📝"
       },
       "hub": {
         "default": "Ressources",
         "desktop": "Hub 🔗",
-        "mobile": "Boîte à Outils 🧰"
+        "mobile": "Hub 🧰"
       },
       "playground": {
         "default": "Jouons",
         "desktop": "Labo 🧪",
-        "mobile": "Expérimentons 🧑🏻‍🔬"
+        "mobile": "Expérimentations 🧑🏻‍🔬"
       },
       "projects": {
         "default": "Projets",
-        "desktop": "Créations 🚀",
-        "mobile": "Mes Œuvres 🎨"
+        "desktop": "Projets 🚀",
+        "mobile": "Projets 🎨"
       },
       "contact": {
         "default": "Contact",

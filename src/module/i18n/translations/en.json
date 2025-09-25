@@ -134,12 +134,12 @@
       "home": {
         "default": "Home",
         "desktop": "Hey 👋🏻",
-        "mobile": "Welcome 🏠"
+        "mobile": "Home 🏠"
       },
       "hub": {
         "default": "Resources",
         "desktop": "Hub 🔗",
-        "mobile": "Toolbox 🧰"
+        "mobile": "Resources 🧰"
       },
       "newsletter": {
         "default": "Newsletter",
@@ -153,13 +153,13 @@
       },
       "projects": {
         "default": "Projects",
-        "desktop": "Creations 🚀",
+        "desktop": "Projects 🚀",
         "mobile": "My Works 🎨"
       },
       "thoughts": {
         "default": "Thoughts",
         "desktop": "Ideas ✍️",
-        "mobile": "Logbook 📝"
+        "mobile": "Blog 📝"
       }
     },
     "page-sections": {

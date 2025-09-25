@@ -28,6 +28,7 @@ export function HeaderSection() {
       //buttonText={t("hub.page.header-section.cta")}
       //imagePath={getImageUrl(getEmojiHub("🧑🏻‍🎨", "fluent", "anim"))}
       imagePath={{ emoji: "🧑🏻‍🎨" }}
+      isMobileShowed
       actionButton
     />
   );
