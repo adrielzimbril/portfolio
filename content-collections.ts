@@ -226,27 +226,6 @@ const projectTags = defineCollection({
   },
 });
 
-// Collection of project types (in projects/types/)
-const projectTypes = defineCollection({
-  name: "projectTypes",
-  directory: `${BASE_COLLECTION_PATH}/projects/types`,
-  include: "**/*.{md,mdx}",
-  schema: z.object({
-    id: z.number(),
-    name: z.string(),
-  }),
-  transform: async (document, context) => {
-    const body = await compileMDX(context, document);
-
-    return {
-      ...document,
-      body,
-      locale: getLocaleFromFilePath(document._meta.filePath),
-      path: sanitizePath(document._meta.path),
-    };
-  },
-});
-
 // Collection of tags for resources (in resources/tags/) - If you want separate tags
 const resourceTags = defineCollection({
   name: "resourceTags",
@@ -331,11 +310,9 @@ const projects = defineCollection({
     title: z.string(),
     slug: z.string(),
     excerpt: z.string().optional(),
-    project_type: z.string().optional(),
-    project_type_id: z.number().optional(), // ID of the project type
-    project_type_label: z.string().optional(),
     project_link: z.string().optional(),
     project_keywords: z.string().optional(),
+    role: z.array(z.string()).optional(),
     categories_id: z.array(z.number()), // ID of the project category
     tags_id: z.array(z.number()), // Array of tag IDs
     image_big: z.string().optional(),
@@ -343,7 +320,6 @@ const projects = defineCollection({
     gallery: z.array(z.string()).optional(),
     date_project: z.array(z.string().nullable().optional()),
     client: z.string().optional(),
-    button_text: z.string().optional(),
     button_link: z.string().optional(),
     created_at: z.string(),
     updated_at: z.string().optional(),
@@ -410,14 +386,6 @@ const projects = defineCollection({
           getLocaleFromFilePath(t._meta.filePath) === locale
       );
 
-    const project_type = context
-      .documents(projectTypes)
-      .filter(
-        (t) =>
-          document.project_type_id === t.id &&
-          getLocaleFromFilePath(t._meta.filePath) === locale
-      );
-
     return {
       ...document,
       body,
@@ -427,7 +395,6 @@ const projects = defineCollection({
       // Resolved relations
       categories: categories || [],
       tags: tags || [],
-      project_type: project_type || [],
     };
   },
 });
@@ -484,7 +451,6 @@ export default defineConfig({
     postTags,
     projectCategories,
     projectTags,
-    projectTypes,
     resourceTags,
     // Main collections with relations
     posts,

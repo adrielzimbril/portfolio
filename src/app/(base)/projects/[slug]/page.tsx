@@ -100,6 +100,7 @@ export default async function SubProject(props: {
     previewSectionDescription,
     resultSectionDescription,
     results,
+    role,
   } = project!.currentProject;
   return (
     <>
@@ -115,13 +116,15 @@ export default async function SubProject(props: {
         content={body || ""}
         duration={date_project?.map((date) => date || null) || []}
         tags={tags}
+        role={role}
       />
-      {cardSectionDescription && cards && (
-        <ProjectResearchSection
-          cards={cards as CardData[]}
-          cardSectionDescription={cardSectionDescription}
-        />
-      )}
+      {cardSectionDescription ||
+        (cards && (
+          <ProjectResearchSection
+            cards={cards as CardData[]}
+            cardSectionDescription={cardSectionDescription}
+          />
+        ))}
       {goalSectionDescription && (
         <GoalResearchSection
           description={goalSectionDescription}

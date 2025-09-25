@@ -1,8 +1,8 @@
 ---
 id: 1
 ref: "website"
-name: "Website"
-description: "Projets dans la catégorie Website"
-color: "INDIGO"
+name: "Site Web"
+description: "Projets dans la catégorie Site Web"
+color: "TURQUOISE"
 slug: "website"
 ---

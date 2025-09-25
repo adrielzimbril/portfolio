@@ -17,7 +17,7 @@ export function ProjectResearchSection({
   cardSectionDescription,
 }: {
   cards: CardData[];
-  cardSectionDescription: string;
+  cardSectionDescription?: string;
 }) {
   const t = useTranslations();
 
