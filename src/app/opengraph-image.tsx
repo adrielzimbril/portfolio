@@ -14,6 +14,5 @@ export default async function Image() {
   return await OpenGraphImage({
     title: siteConfig.details.nameShared,
     alt: siteConfig.details.nameShared,
-    size,
   });
 }
