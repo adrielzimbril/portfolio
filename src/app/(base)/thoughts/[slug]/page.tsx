@@ -12,9 +12,8 @@ import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { routes } from "@/data/routes";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { siteConfig } from "@/data/config";
-import { PageParams, PageType } from "@/types";
+import { Locale, PageParams, PageType } from "@/types";
 import { Metadata } from "next";
-
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;

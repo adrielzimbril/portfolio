@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,8 @@ import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils";
+import { useTurnstile } from "@/module/anti-bot/turnstile";
+import { Turnstile } from "@/module/anti-bot/turnstile-second";
 
 export function GetResource({
   id,
@@ -34,7 +36,6 @@ export function GetResource({
 }) {
   const t = useTranslations();
   const locale = useLocale();
-
   usePageViews(
     routes.hubGet.key,
     undefined,
@@ -52,6 +53,9 @@ export function GetResource({
     required: true,
   });
   const isEmailValid = !Boolean(emailValidator(email));
+  const [isBotPassed, setIsBotPassed] = useState<boolean>(false);
+
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
 
   const productId = generateSimpleClientToken({
     action: "validate-product-id",
@@ -137,6 +141,19 @@ export function GetResource({
             <ProductAvatarsStats title={title} type={type} />
           </div>
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
+            <Turnstile
+              siteKey={siteKey}
+              onVerify={() => setIsBotPassed(true)}
+              appearance="execute"
+              execution="execute"
+              retryInterval={1000}
+              theme="auto"
+            />
+            {isBotPassed ? (
+              <span className="text-green-500">Bot passed</span>
+            ) : (
+              <span className="text-red-500">Bot not passed</span>
+            )}
             <Input
               placeholder={t(
                 "common.page-sections.newsletter.form.fields.email-page.placeholder"
@@ -146,10 +163,9 @@ export function GetResource({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-
             <Button
               onClick={() => {
-                if (isEmailValid) {
+                if (isEmailValid && isBotPassed) {
                   setIsModalOpen(true);
                 } else {
                   toast.error(t("zod.errors.customized.email.invalid"));

@@ -70,11 +70,29 @@ const parseMarkdown = (markdownString: string) => {
 
 // Function to count words
 const countWords = (text: string) => {
-  if (!text || text.trim().length === 0) return 0;
-  return text
+  if (!text || text.trim().length === 0) return { cjkCount: 0, nonCjkCount: 0 };
+
+  // Split CJK characters and non-CJK words
+  const cjkMatches =
+    text.match(
+      /[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF\u3400-\u4DBF]/g
+    ) || [];
+
+  // Remove CJK characters from text to count non-CJK words
+  const nonCjkText = text
+    .replace(
+      /[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF\u3400-\u4DBF]/g,
+      " "
+    )
+    .replace(/[，。！？：；""''（）【】]/g, " "); // Chinese punctuation: comma, period, exclamation, question, colon, semicolon, double quotes, single quotes, parentheses, brackets
+
+  const nonCjkWords = nonCjkText
     .trim()
     .split(/\s+/)
-    .filter((word) => word.length > 0).length;
+    .filter((word) => word.length > 0 && word.match(/[a-zA-Z0-9]/)); // Exclude empty strings and non-alphanumeric characters
+
+  // Total = CJK characters + non-CJK words
+  return { cjkCount: cjkMatches.length, nonCjkCount: nonCjkWords.length };
 };
 
 // Function to detect format
@@ -105,6 +123,12 @@ interface ReadingTimeResult {
     code: number;
     images: number;
   };
+  debug?: {
+    cjkCharacters: number;
+    nonCjkWords: number;
+    cjkWPM: number;
+    nonCjkWPM: number;
+  };
 }
 
 interface ReadingTimeOptions {
@@ -123,13 +147,12 @@ interface CalculateReadingTimeParams {
 }
 
 // ================== CALCULATION FUNCTIONS (SAFE ON SERVER SIDE) ==================
-
 export const calculateReadingTime = ({
   content,
   options = {},
 }: CalculateReadingTimeParams): ReadingTimeResult => {
   const {
-    wordsPerMinute = 200,
+    wordsPerMinute = 250,
     format = "auto",
     includeImages = true,
     imageTime = 12,
@@ -150,7 +173,7 @@ export const calculateReadingTime = ({
   const detectedFormat = format === "auto" ? detectFormat(content) : format;
   let cleanText = "";
   let imageCount = 0;
-  let codeWordCount = 0;
+  let codeWordCount = { cjkCount: 0, nonCjkCount: 0 };
 
   // Parse according to the format
   switch (detectedFormat) {
@@ -164,7 +187,9 @@ export const calculateReadingTime = ({
         const preBlocks = content.match(/<pre[^>]*>[\s\S]*?<\/pre>/gi) || [];
         [...codeBlocks, ...preBlocks].forEach((block) => {
           const codeText = parseHTML(block);
-          codeWordCount += countWords(codeText);
+          const codeWords = countWords(codeText);
+          codeWordCount.cjkCount += codeWords.cjkCount;
+          codeWordCount.nonCjkCount += codeWords.nonCjkCount;
         });
       }
       break;
@@ -178,7 +203,9 @@ export const calculateReadingTime = ({
         const inlineCode = content.match(/`[^`]+`/g) || [];
         [...codeBlocks, ...inlineCode].forEach((block) => {
           const codeText = block.replace(/```.*?\n?/g, "").replace(/`/g, "");
-          codeWordCount += countWords(codeText);
+          const codeWords = countWords(codeText);
+          codeWordCount.cjkCount += codeWords.cjkCount;
+          codeWordCount.nonCjkCount += codeWords.nonCjkCount;
         });
       }
       cleanText = parseMarkdown(content);
@@ -189,33 +216,54 @@ export const calculateReadingTime = ({
       break;
   }
 
-  const mainWordCount = countWords(cleanText);
-  const totalWordCount = mainWordCount + codeWordCount * codeMultiplier;
+  const mainWords = countWords(cleanText);
 
-  const readingTimeMinutes = totalWordCount / wordsPerMinute;
+  const cjkWPFactor = 1.2;
+
+  // Separated calculation for CJK and non-CJK
+  const cjkWPM = wordsPerMinute / cjkWPFactor; // Reading speed for Chinese/Japanese/Korean characters
+  const nonCjkWPM = wordsPerMinute; // Reading speed for Western words
+
+  // Reading time for the main text
+  const mainCjkTime = mainWords.cjkCount / cjkWPM;
+  const mainNonCjkTime = mainWords.nonCjkCount / nonCjkWPM;
+
+  // Reading time for the code (with multiplier)
+  const codeCjkTime = (codeWordCount.cjkCount * codeMultiplier) / cjkWPM;
+  const codeNonCjkTime =
+    (codeWordCount.nonCjkCount * codeMultiplier) / nonCjkWPM;
+
+  const totalReadingTimeMinutes =
+    mainCjkTime + mainNonCjkTime + codeCjkTime + codeNonCjkTime;
+
+  // Time for images
   const imageTimeMinutes = includeImages ? (imageCount * imageTime) / 60 : 0;
 
-  const totalMinutes = readingTimeMinutes + imageTimeMinutes;
+  const totalMinutes = totalReadingTimeMinutes + imageTimeMinutes;
   const totalSeconds = Math.round(totalMinutes * 60);
 
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
 
+  const totalWordCount =
+    mainWords.cjkCount +
+    mainWords.nonCjkCount +
+    codeWordCount.cjkCount +
+    codeWordCount.nonCjkCount;
+
   return {
     minutes,
     seconds,
     totalSeconds,
-    wordCount: mainWordCount + codeWordCount,
-    mainWordCount,
-    codeWordCount,
+    wordCount: totalWordCount,
+    mainWordCount: mainWords.cjkCount + mainWords.nonCjkCount,
+    codeWordCount: codeWordCount.cjkCount + codeWordCount.nonCjkCount,
     imageCount,
     format: detectedFormat,
     breakdown: {
-      text: Math.round(readingTimeMinutes * 60),
+      text: Math.round((mainCjkTime + mainNonCjkTime) * 60),
       images: Math.round(imageTimeMinutes * 60),
-      code: Math.round(
-        ((codeWordCount * codeMultiplier) / wordsPerMinute) * 60
-      ),
+      code: Math.round((codeCjkTime + codeNonCjkTime) * 60),
     },
   };
 };
@@ -299,12 +347,11 @@ export function formatTime(
       return minutes > 0 && seconds > 0
         ? `${minutes} min ${seconds} sec`
         : minutes > 0
-        ? `${minutes} min`
-        : `${seconds} sec`;
+          ? `${minutes} min`
+          : `${seconds} sec`;
     case "short":
       return minutes > 0 ? `${minutes}m` : `${seconds}s`;
     default:
       return minutes > 0 ? `${minutes} min` : `${seconds} sec`;
   }
 }
-
