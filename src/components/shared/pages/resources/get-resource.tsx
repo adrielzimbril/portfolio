@@ -17,7 +17,6 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils";
 import { useTurnstile } from "@/module/anti-bot/turnstile";
-import { Turnstile } from "@/module/anti-bot/turnstile-second";
 
 export function GetResource({
   id,

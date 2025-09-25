@@ -14,7 +14,8 @@ import { toast } from "sonner";
 import { richTextComponent } from "@/module/content/utils/mdx-components";
 import { routes } from "@/data/routes";
 import { usePageViews } from "@/hooks/usePageViews";
-import { getPathUrl } from "@/utils";
+import { getPathUrl, sleep } from "@/utils";
+import { useTurnstile } from "@/module/anti-bot/turnstile";
 
 export function NewsletterForm() {
   const t = useTranslations();
@@ -33,6 +34,15 @@ export function NewsletterForm() {
     required: true,
   });
   const isEmailValid = !Boolean(emailValidator(email));
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
+
+  const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
+    appearance: "execute",
+    execution: "execute",
+    "retry-interval": 1000,
+    theme: "auto",
+  });
+  sleep(1000).then(() => execute());
 
   return (
     <>
@@ -69,6 +79,7 @@ export function NewsletterForm() {
           />
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
+            <div ref={ref} className="hidden" />
             <Input
               placeholder={t(
                 "common.page-sections.newsletter.form.fields.email-page.placeholder"
@@ -83,9 +94,10 @@ export function NewsletterForm() {
                 posthog.capture("newsletter_subscribe_clicked", {
                   has_email_entered: !!email,
                 });
-                if (isEmailValid) {
+                if (isEmailValid && token) {
                   setIsModalOpen(true);
                 } else {
+                  execute();
                   toast.error(t("zod.errors.customized.email.invalid"));
                 }
               }}
