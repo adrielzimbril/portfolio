@@ -60,8 +60,8 @@ export default async function OpenGraphImage(
     return new ImageResponse(
       (
         <div tw="flex flex-col p-8 h-full w-full bg-white items-center justify-center">
-          <div tw="flex flex-col py-4 px-16 h-full w-full bg-white items-center justify-center border-8 border-stone-200 rounded-3xl">
-            <div tw="flex flex-none items-center justify-center border-4 border-stone-200 rounded-2xl h-[250px] w-[60%] overflow-hidden">
+          <div tw="flex flex-col gap-4 py-4 px-16 h-full w-full bg-white items-center justify-center border-8 border-stone-200 rounded-3xl">
+            <div tw="flex flex-none items-center justify-center border-4 border-stone-200 rounded-2xl h-[250px] w-[50%] overflow-hidden mb-4">
               <img
                 src={getAbsolutePathUrl({
                   type: "s3",
@@ -72,14 +72,17 @@ export default async function OpenGraphImage(
               />
             </div>
             <div
-              tw="flex flex-none justify-center items-center mt-2 rounded-xl bg-stone-200"
-              style={{ transform: "scale(1.5)" }}
+              tw="flex flex-none justify-center items-center rounded-xl bg-stone-200 mb-4"
+              //style={{ transform: "scale(1.5)" }}
             >
-              <LogoIcon tw="flex-shrink-0" />
+              <LogoIcon
+                tw="flex-shrink-0"
+                style={{ transform: "scale(1.5)" }}
+              />
             </div>
-            <div tw="flex flex-col gap-2 flex-none items-center justify-center text-center mt-2 max-w-[100%]">
+            <div tw="flex flex-col gap-2 flex-none items-center justify-center text-center max-w-[100%]">
               {title && (
-                <p tw="text-4xl font-bold text-black">{fontFormated.title}</p>
+                <p tw="text-6xl font-bold text-black">{fontFormated.title}</p>
               )}
               {(description || alt) && (
                 <p tw="text-2xl font-normal text-black/80">
