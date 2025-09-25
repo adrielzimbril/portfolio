@@ -121,7 +121,9 @@ export function NewsletterSignup({
                 </Text>
 
                 <Link
-                  href={getResourceAskUrl("guide-gratuit")}
+                  href={getResourceAskUrl(
+                    "the-mistake-that-stops-you-from-improving"
+                  )}
                   className="bg-[#1a1a1a] text-white font-medium py-3 px-8 rounded-2xl text-base no-underline inline-block"
                 >
                   → {t("mail.newsletterSignup.cta.button")}

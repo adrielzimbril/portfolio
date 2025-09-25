@@ -387,7 +387,9 @@
         "language": "Language",
         "presentation": "Presentation",
         "results": "Results",
-        "role": "Role"
+        "role": "Role",
+        "stack": "Stack",
+        "year": "Year"
       }
     }
   },
@@ -612,18 +614,18 @@
     "title": "Your creative kit is waiting 💌"
   },
   "not-found": {
-    "title": "404 | Page not found 🪐",
     "description": "The page you’re looking for doesn’t exist… or no longer exists 🕳️.",
     "keywords": "404 SaaS, SaaS Page Not Found, Adriel Zimbril, SaaS Product Designer, 404 SaaS, SaaS Page Not Found",
     "page": {
       "badge": "Oops… you’re in a universe of infinite creativity 🪐",
-      "title": "It <thin>looks</thin> like you’ve <thin>gotten lost</thin> among the <thin>stars</thin> ✨",
-      "desc": "The page you’re looking for doesn’t exist… or no longer exists 🕳️. But every detour is an adventure 🌠. Sic itur ad astra 🌟: every step, even lost, brings us closer to the stars 🌌✨.",
       "cta": {
         "home": "Back to home",
         "newsletter": "Creativity kit 💌"
-      }
-    }
+      },
+      "desc": "The page you’re looking for doesn’t exist… or no longer exists 🕳️. But every detour is an adventure 🌠. Sic itur ad astra 🌟: every step, even lost, brings us closer to the stars 🌌✨.",
+      "title": "It <thin>looks</thin> like you’ve <thin>gotten lost</thin> among the <thin>stars</thin> ✨"
+    },
+    "title": "404 | Page not found 🪐"
   },
   "playground": {
     "description": "Adriel Zimbril’s space to test new ideas, concepts, and design experiences before they become real projects.",
