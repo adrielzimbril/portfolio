@@ -1,8 +1,8 @@
 ---
 id: 4
-ref: "css"
-name: "CSS"
+ref: "tailwind"
+name: "Tailwind CSS"
 description: "Feuilles de style et design"
 color: "VIOLET"
-slug: "css"
+slug: "tailwind"
 ---
