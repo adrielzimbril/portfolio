@@ -34,7 +34,7 @@ export function ProjectsSection() {
     }
 
     loadProjects();
-  }, [limit]);
+  }, [limit, locale]);
 
   return (
     <SectionLayout
