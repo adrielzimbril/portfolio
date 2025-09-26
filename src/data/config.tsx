@@ -17,7 +17,7 @@ export const siteConfig = {
   ],
   seo: {
     ogImage: {
-      original: getImageUrl("/og-image.png"),
+      original: getImageUrl("/opengraph-image"),
     },
     robots: {
       index: true,
@@ -31,6 +31,8 @@ export const siteConfig = {
     nameShared:
       "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
     hook: "Let's chat about your next project 👋",
+    avatar: getImageUrl(routes.avatar.link),
+    avatarReal: getImageUrl(routes.avatarReal.link),
   },
   links: {
     navbar: [

@@ -48,6 +48,7 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
     language: localeForTranslation,
     image: getImageUrl("/opengraph-image"),
     favicon: getImageUrl("/icon/ico"),
+    hub: getPathUrl(routes.hub.link),
     copyright: t("common.rss.copyright", {
       date: new Date().getFullYear(),
       siteName: siteConfig.details.name,
@@ -62,6 +63,7 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
       name: siteConfig.details.name,
       email: siteConfig.links.contact.email,
       link: siteConfig.url,
+      avatar: siteConfig.details.avatar,
     },
   });
 
@@ -72,9 +74,18 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
       title: post.title,
       id: url,
       link: url,
+      image: getImageUrl(post.cover || routes.openGraphResource.link),
       description: post.excerpt || "",
       content: post.excerpt || "",
       date: new Date(post.updated_at || post.created_at),
+      author: [
+        {
+          name: siteConfig.details.name,
+          email: siteConfig.links.contact.email,
+          link: siteConfig.url,
+          avatar: siteConfig.details.avatar,
+        },
+      ],
       category: [
         {
           name: "Thought",
@@ -91,9 +102,20 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
       title: project.title,
       id: url,
       link: url,
+      image: getImageUrl(
+        project.image_thumbnail || routes.openGraphResource.link
+      ),
       description: project.excerpt || "",
       content: project.excerpt || "",
       date: new Date(project.updated_at || project.created_at),
+      author: [
+        {
+          name: siteConfig.details.name,
+          email: siteConfig.links.contact.email,
+          link: siteConfig.url,
+          avatar: siteConfig.details.avatar,
+        },
+      ],
       category: [
         {
           name: "Project",
@@ -110,9 +132,18 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
       title: resource.title,
       id: url,
       link: url,
+      image: getImageUrl(resource.cover || routes.openGraphResource.link),
       description: resource.excerpt || "",
       content: resource.excerpt || "",
       date: new Date(resource.updated_at || resource.created_at),
+      author: [
+        {
+          name: siteConfig.details.name,
+          email: siteConfig.links.contact.email,
+          link: siteConfig.url,
+          avatar: siteConfig.details.avatar,
+        },
+      ],
       category: [
         {
           name: "Resource",
