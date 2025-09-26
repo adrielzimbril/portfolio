@@ -1,49 +1,52 @@
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { siteConfig } from "@/data/config";
+import { Locale } from "@/types";
+import { routes } from "@/data/routes";
 
-type RssFormat = 'rss' | 'atom' | 'json';
+enum RssFormat {
+  RSS = "rss",
+  ATOM = "atom",
+  JSON = "json",
+}
 
-export async function generateMetadata(
-  { params }: { params: any },
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const title = `RSS Feed - ${siteConfig.name}`;
   const description = `Subscribe to the RSS feed to follow the latest news, projects and resources of ${siteConfig.name}`;
-  
+
   return {
     title,
     description,
     alternates: {
       types: {
-        'application/rss+xml': '/rss',
-        'application/atom+xml': '/rss/atom',
-        'application/feed+json': '/rss/json',
+        "application/rss+xml": "/rss",
+        "application/atom+xml": "/rss/atom",
+        "application/feed+json": "/rss/json",
       },
     },
     openGraph: {
       title,
       description,
-      type: 'website',
+      type: "website",
     },
   };
 }
 
-type SearchParams = {
-  searchParams: {
-    format?: RssFormat;
-  };
-};
+interface PageProps {
+  params: { locale: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
-export default function RssPage({ searchParams }: SearchParams) {
-  const format = searchParams?.format || 'rss';
-  
-  // Redirect to the appropriate feed format
-  if (format === 'atom') {
-    redirect('/rss/atom');
-  } else if (format === 'json') {
-    redirect('/rss/json');
+export default function RssPage({ searchParams, params }: PageProps) {
+  const format =
+    (searchParams?.format as RssFormat | undefined) || RssFormat.RSS;
+  const locale = params?.locale || Locale.FR;
+
+  if (format === RssFormat.ATOM) {
+    redirect(`${routes.rssAtom.link}?locale=${locale}`);
+  } else if (format === RssFormat.JSON) {
+    redirect(`${routes.rssJson.link}?locale=${locale}`);
   } else {
-    redirect('/rss');
+    redirect(`${routes.rss.link}?locale=${locale}`);
   }
 }

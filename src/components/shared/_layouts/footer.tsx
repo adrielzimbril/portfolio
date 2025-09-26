@@ -179,7 +179,7 @@ export const Footer: React.FC = () => {
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <Link
+              {/* <Link
                 href={routes.rss.link}
                 variant="secondary"
                 likeButton
@@ -188,7 +188,7 @@ export const Footer: React.FC = () => {
                 aria-label={t("common.rss.subscribe")}
               >
                 {t("common.rss.rss")}
-              </Link>
+              </Link> */}
               <LocaleSwitch />
             </div>
           </div>

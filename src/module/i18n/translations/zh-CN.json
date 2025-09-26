@@ -83,6 +83,7 @@
   },
   "common": {
     "rss": {
+      "copyright": "版权所有 {date}, {siteName}",
       "subscribe": "订阅 RSS",
       "rss": "RSS"
     },
