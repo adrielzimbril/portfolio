@@ -113,14 +113,14 @@ export const routes = {
   avatar: {
     name: "Avatar",
     key: "avatar",
-    link: "/img/me/avatar.jpg",
+    link: "/img/me/avatar.png",
     inHeader: false,
     inSitemap: false,
   },
   avatarReal: {
     name: "Avatar Real",
     key: "avatar-real",
-    link: "/img/me/avatar-real.jpg",
+    link: "/img/me/avatar-real.png",
     inHeader: false,
     inSitemap: false,
   },
