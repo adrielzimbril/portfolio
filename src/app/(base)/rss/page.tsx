@@ -32,12 +32,13 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-interface PageProps {
+interface PageParams {
   params: { locale: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default function RssPage({ searchParams, params }: PageProps) {
+export default async function RssPage(props: { params: Promise<PageParams> }) {
+  const { params, searchParams } = await props.params;
   const format =
     (searchParams?.format as RssFormat | undefined) || RssFormat.RSS;
   const locale = params?.locale || Locale.FR;
