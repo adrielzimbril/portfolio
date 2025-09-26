@@ -75,4 +75,18 @@ export const routes = {
     inHeader: false,
     inSitemap: true,
   },
+  rssAtom: {
+    name: "RSS Atom",
+    key: "rss-atom",
+    link: "/rss/atom",
+    inHeader: false,
+    inSitemap: true,
+  },
+  rssJson: {
+    name: "RSS JSON",
+    key: "rss-json",
+    link: "/rss/json",
+    inHeader: false,
+    inSitemap: true,
+  },
 };
