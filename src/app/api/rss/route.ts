@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { generateRssFeed } from '@/lib/rss';
+import { Locale } from "@/types";
 
 export const dynamic = 'force-dynamic';
 
@@ -7,8 +8,9 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const format = searchParams.get('format') || 'rss2';
+    const locale = searchParams.get("locale") || Locale.FR;
     
-    const feed = await generateRssFeed();
+    const feed = await generateRssFeed({ locale: locale as Locale });
     
     let contentType = 'application/xml';
     let content = feed.rss2;

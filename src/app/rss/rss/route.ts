@@ -1,21 +1,24 @@
 import { NextResponse } from 'next/server';
 import { generateRssFeed } from '@/lib/rss';
+import { Locale } from "@/types";
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const feed = await generateRssFeed();
-    
+    const { searchParams } = new URL(request.url);
+    const locale = searchParams.get("locale") || Locale.FR;
+    const feed = await generateRssFeed({ locale: locale as Locale });
+
     return new NextResponse(feed.rss2, {
       status: 200,
       headers: {
-        'Content-Type': 'application/rss+xml',
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=1800'
+        "Content-Type": "application/rss+xml",
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=1800",
       },
     });
   } catch (error) {
-    console.error('Error generating RSS feed:', error);
-    return new NextResponse('Error generating RSS feed', { status: 500 });
+    console.error("Error generating RSS feed:", error);
+    return new NextResponse("Error generating RSS feed", { status: 500 });
   }
 }

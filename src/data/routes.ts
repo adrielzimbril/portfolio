@@ -71,7 +71,7 @@ export const routes = {
   rss: {
     name: "RSS",
     key: "rss",
-    link: "/rss",
+    link: "/rss/rss",
     inHeader: false,
     inSitemap: true,
   },

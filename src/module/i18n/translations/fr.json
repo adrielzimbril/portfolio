@@ -286,7 +286,8 @@
   "common": {
     "rss": {
       "subscribe": "S'abonner au flux RSS",
-      "rss": "RSS"
+      "rss": "RSS",
+      "copyright": "Tous droits réservés {date}, {siteName}"
     },
     "confirmation": {
       "cancel": "Annuler",

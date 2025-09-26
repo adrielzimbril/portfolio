@@ -8,12 +8,36 @@ import { Locale, PageType } from "@/types";
 import { getImageUrl, getPathUrl, getResourcesUrl } from "@/utils";
 import { siteConfig } from "@/data/config";
 import { routes } from "@/data/routes";
+import { getTranslations } from "next-intl/server";
 
-export async function generateRssFeed() {
+/**
+ * Normalize locale to be used in getTranslations
+ * 
+ * @param locale 
+ * @returns 
+ * 
+ * @example
+ * normalizeLocale("en") -> "en"
+ * normalizeLocale("zh-cn") -> "zh-CN"
+ */
+function normalizeLocale(locale: string): string {
+  const parts = locale.split("-");
+  if (parts.length === 1) {
+    // ex: "en"
+    return parts[0] || "";
+  }
+  // ex: "zh-cn" -> "zh-CN"
+  return `${parts[0]}-${parts[1]!.toUpperCase()}`;
+}
+
+export async function generateRssFeed({ locale }: { locale: Locale }) {
+  const localeForTranslation = normalizeLocale(locale);
+
+  const t = await getTranslations({ locale: localeForTranslation });
   const [posts, projects, resources] = await Promise.all([
-    getAllPosts({ locale: Locale.FR }),
-    getAllProjects({ locale: Locale.FR }),
-    getAllResources({ locale: Locale.FR }),
+    getAllPosts({ locale: localeForTranslation }),
+    getAllProjects({ locale: localeForTranslation }),
+    getAllResources({ locale: localeForTranslation }),
   ]);
 
   const feed = new Feed({
@@ -21,10 +45,13 @@ export async function generateRssFeed() {
     description: siteConfig.description,
     id: siteConfig.url,
     link: siteConfig.url,
-    language: Locale.FR,
+    language: localeForTranslation,
     image: getImageUrl("/opengraph-image"),
     favicon: getImageUrl("/icon/ico"),
-    copyright: `All rights reserved ${new Date().getFullYear()}, ${siteConfig.details.name}`,
+    copyright: t("common.rss.copyright", {
+      date: new Date().getFullYear(),
+      siteName: siteConfig.details.name,
+    }),
     updated: new Date(),
     feedLinks: {
       rss2: getPathUrl(routes.rss.link),

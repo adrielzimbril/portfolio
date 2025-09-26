@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/data/config";
 import { getBaseUrl, getPathUrl } from "@/utils";
+import { Locale } from "@/types";
+import { routes } from "@/data/routes";
 
 export interface InnerPageSeo {
   title: string;
@@ -12,6 +14,18 @@ export interface InnerPageSeo {
 }
 
 const BASE_URL = getBaseUrl();
+
+const rssRoutes = Object.values(Locale).map((locale) => ({
+  [`application/rss+xml;lang=${locale}`]: getPathUrl(
+    `${routes.rss.link}/?locale=${locale}`
+  ),
+  [`application/atom+xml;lang=${locale}`]: getPathUrl(
+    `${routes.rssAtom.link}/?locale=${locale}`
+  ),
+  [`application/feed+json;lang=${locale}`]: getPathUrl(
+    `${routes.rssJson.link}/?locale=${locale}`
+  ),
+}));
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -27,6 +41,9 @@ export const metadata: Metadata = {
       en: BASE_URL,
       fr: BASE_URL,
       ch: BASE_URL,
+    },
+    types: {
+      ...rssRoutes.reduce((acc, rssRoute) => ({ ...acc, ...rssRoute }), {}),
     },
   },
   authors: [

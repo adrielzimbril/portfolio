@@ -84,7 +84,8 @@
   "common": {
     "rss": {
       "subscribe": "Subscribe to RSS feed",
-      "rss": "RSS"
+      "rss": "RSS",
+      "copyright": "All rights reserved {date}, {siteName}"
     },
     "base": {
       "dribbble": "Dribbble",
