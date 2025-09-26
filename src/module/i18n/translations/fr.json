@@ -284,6 +284,10 @@
     }
   },
   "common": {
+    "rss": {
+      "subscribe": "S'abonner au flux RSS",
+      "rss": "RSS"
+    },
     "confirmation": {
       "cancel": "Annuler",
       "confirm": "Confirmer"

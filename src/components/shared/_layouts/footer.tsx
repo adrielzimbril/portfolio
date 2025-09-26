@@ -178,7 +178,17 @@ export const Footer: React.FC = () => {
                 </span>
               </p>
             </div>
-            <div className="flex items-center md:items-end gap-2">
+            <div className="flex items-center gap-4">
+              <Link
+                href={routes.rss.link}
+                variant="secondary"
+                likeButton
+                className="hover:underline flex items-center gap-1"
+                title={t("common.rss.subscribe")}
+                aria-label={t("common.rss.subscribe")}
+              >
+                {t("common.rss.rss")}
+              </Link>
               <LocaleSwitch />
             </div>
           </div>

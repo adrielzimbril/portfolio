@@ -6,11 +6,20 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["*", "/api/og/*"],
-        disallow: ["/private/", "/private/*"],
+        allow: ["*", "/api/og/*", "/api/preview", "/api/rss/*", "/rss/*"],
+        disallow: [
+          "/private/",
+          "/private/*",
+          "/admin/",
+          "/api/",
+          "/*?*draft=true",
+          "/*/drafts/*",
+          "/admin/",
+        ],
       },
     ],
     sitemap: getPathUrl("sitemap.xml"),
     host: getBaseUrl(),
   };
 }
+

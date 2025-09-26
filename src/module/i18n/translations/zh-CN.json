@@ -82,6 +82,10 @@
     "title": "自我介绍 🧑🏻‍🚀"
   },
   "common": {
+    "rss": {
+      "subscribe": "订阅 RSS",
+      "rss": "RSS"
+    },
     "base": {
       "dribbble": "Dribbble",
       "email": "邮箱",

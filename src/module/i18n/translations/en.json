@@ -82,6 +82,10 @@
     "title": "I am 🧑🏻‍🚀"
   },
   "common": {
+    "rss": {
+      "subscribe": "Subscribe to RSS feed",
+      "rss": "RSS"
+    },
     "base": {
       "dribbble": "Dribbble",
       "email": "Email",
