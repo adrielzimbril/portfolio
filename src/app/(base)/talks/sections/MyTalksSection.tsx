@@ -1,9 +1,6 @@
 "use client";
 
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Link } from "@/components/ui/link";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { getHumanDate } from "@/utils";
 import type { Talk } from "@/module/content/utils/lib/talks";
@@ -31,17 +28,34 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
       loadedItems={loadedItems}
       totalItems={totalItems}
     >
-      {list.map((talk) => (
-        <TalksCard
-          key={talk.slug}
-          title={talk.title}
-          cover={talk.cover}
-          slug={talk.slug}
-          excerpt={talk.excerpt || ""}
-          primaryTag={getHumanDate(talk.event_date)}
-          tags={[{ name: talk.role }]}
-        />
-      ))}
+      {list.map((talk) => {
+        const eventTime = new Date(talk.event_date).getTime();
+        const isPastEvent = Number.isFinite(eventTime) && Date.now() >= eventTime;
+        const replayUrl = talk.replay_url?.trim();
+        const eventUrl = talk.event_url?.trim();
+
+        const action = isPastEvent
+          ? replayUrl
+            ? { label: "Voir replay", href: replayUrl }
+            : null
+          : {
+              label: "Participer",
+              href: eventUrl || `/talks#${talk.slug}`,
+            };
+
+        return (
+          <TalksCard
+            key={talk.slug}
+            title={talk.title}
+            cover={talk.cover}
+            slug={talk.slug}
+            excerpt={talk.excerpt || ""}
+            primaryTag={getHumanDate(talk.event_date)}
+            tags={[{ name: talk.role }]}
+            action={action}
+          />
+        );
+      })}
     </LoadMoreSection>
   );
 }

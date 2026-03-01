@@ -10,6 +10,7 @@ export function TalksCard({
   excerpt,
   primaryTag,
   tags = [],
+  action,
 }: {
   title: string;
   cover?: string;
@@ -17,6 +18,10 @@ export function TalksCard({
   excerpt: string;
   primaryTag?: string;
   tags?: { name: string }[];
+  action?: {
+    label: string;
+    href: string;
+  } | null;
 }) {
   return (
     <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl h-full border-0 overflow-hidden">
@@ -33,6 +38,7 @@ export function TalksCard({
           primaryTag={primaryTag}
           tags={tags}
           slug={slug}
+          action={action}
         />
       </CardContent>
     </Card>
