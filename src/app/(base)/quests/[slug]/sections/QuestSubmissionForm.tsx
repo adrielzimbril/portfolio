@@ -35,7 +35,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-export function ChallengeSubmissionForm({
+export function QuestSubmissionForm({
   quest,
   isClosed,
 }: {
@@ -69,10 +69,10 @@ export function ChallengeSubmissionForm({
         throw new Error(data?.error || "SUBMIT_FAILED");
       }
       toast.success(
-        "Soumission reçue. Tu as reçu un email de confirmation, il ne reste plus qu'à patienter."
+        "Soumission recue. Tu as recu un email de confirmation, il ne reste plus qu'a patienter."
       );
       form.reset();
-    } catch (error) {
+    } catch {
       toast.error("Impossible d'envoyer ta soumission.");
     }
   };
@@ -84,14 +84,14 @@ export function ChallengeSubmissionForm({
           <div>
             <h3 className="h5">Soumettre son travail</h3>
             <p className="text-sm text-b-white-invert-sec">
-              Deadline: {getHumanDate(quest.submission_deadline)}. Après cette
-              date, les soumissions sont verrouillées.
+              Deadline: {getHumanDate(quest.submission_deadline)}. Apres cette date, les
+              soumissions sont verrouillees.
             </p>
           </div>
           {isClosed ? (
             <Card className="squircle squircle-b-base squircle-smooth-xl border">
               <CardContent className="p-4 text-sm text-b-white-invert-sec">
-                Les soumissions sont fermées pour ce quest.
+                Les soumissions sont fermees pour ce quest.
               </CardContent>
             </Card>
           ) : (
@@ -118,7 +118,12 @@ export function ChallengeSubmissionForm({
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input {...field} type="email" variant="secondary" placeholder="ton@email.com" />
+                          <Input
+                            {...field}
+                            type="email"
+                            variant="secondary"
+                            placeholder="ton@email.com"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -132,7 +137,11 @@ export function ChallengeSubmissionForm({
                     <FormItem>
                       <FormLabel>Titre du travail</FormLabel>
                       <FormControl>
-                        <Input {...field} variant="secondary" placeholder="Ex: Refonte dashboard analytics" />
+                        <Input
+                          {...field}
+                          variant="secondary"
+                          placeholder="Ex: Refonte dashboard analytics"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -172,7 +181,11 @@ export function ChallengeSubmissionForm({
                       <FormItem>
                         <FormLabel>Figma (optionnel)</FormLabel>
                         <FormControl>
-                          <Input {...field} variant="secondary" placeholder="https://figma.com/..." />
+                          <Input
+                            {...field}
+                            variant="secondary"
+                            placeholder="https://figma.com/..."
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

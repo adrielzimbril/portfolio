@@ -21,7 +21,7 @@ export async function GET(
       .order("created_at", { ascending: false });
 
     if (error) {
-      logger.error("challenge participants fetch failed", error);
+      logger.error("quest participants fetch failed", error);
       return new Response(JSON.stringify({ error: "DB_ERROR" }), {
         status: 500,
       });
@@ -38,4 +38,3 @@ export async function GET(
     });
   }
 }
-

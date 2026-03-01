@@ -17,19 +17,18 @@ export async function POST(
   try {
     const db = supabase as any;
     const { slug } = await params;
-    const challenge = await getQuestBySlug(slug);
+    const quest = await getQuestBySlug(slug);
 
-    if (!challenge) {
-      return new Response(JSON.stringify({ error: "CHALLENGE_NOT_FOUND" }), {
+    if (!quest) {
+      return new Response(JSON.stringify({ error: "QUEST_NOT_FOUND" }), {
         status: 404,
       });
     }
 
-    if (isRegistrationClosed(challenge)) {
-      return new Response(
-        JSON.stringify({ error: "CHALLENGE_REGISTRATION_CLOSED" }),
-        { status: 400 }
-      );
+    if (isRegistrationClosed(quest)) {
+      return new Response(JSON.stringify({ error: "QUEST_REGISTRATION_CLOSED" }), {
+        status: 400,
+      });
     }
 
     const body = await req.json().catch(() => ({}));
@@ -97,7 +96,7 @@ export async function POST(
       );
 
     if (registrationError) {
-      logger.error("challenge_registrations upsert failed", registrationError);
+      logger.error("quest_registrations upsert failed", registrationError);
       return new Response(JSON.stringify({ error: "DB_ERROR" }), {
         status: 500,
       });
@@ -132,15 +131,17 @@ export async function POST(
     await sendEmail({
       to: [{ email, name }],
       locale,
-      subject: `Inscription confirmée: ${challenge.title}`,
-      text: `Bonjour ${name},\n\nTon inscription au challenge "${challenge.title}" est bien enregistrée.\nTu recevras les prochaines infos par email.\n\nÀ bientôt,\nAdriel`,
+      subject: `Inscription confirmee: ${quest.title}`,
+      text: `Bonjour ${name},\n\nTon inscription au quest "${quest.title}" est bien enregistree.\nTu recevras les prochaines infos par email.\n\nA bientot,\nAdriel`,
     });
 
     await sendEmail({
       to: [{ email: appConfig.contactForm.to }],
       locale,
-      subject: `Nouvelle inscription challenge: ${challenge.title}`,
-      text: `Nom: ${name}\nEmail: ${email}\nChallenge: ${challenge.title}\nPortfolio: ${portfolioUrl || "-"}\nMessage: ${motivation || "-"}`,
+      subject: `Nouvelle inscription quest: ${quest.title}`,
+      text: `Nom: ${name}\nEmail: ${email}\nQuest: ${quest.title}\nPortfolio: ${
+        portfolioUrl || "-"
+      }\nMessage: ${motivation || "-"}`,
     });
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });

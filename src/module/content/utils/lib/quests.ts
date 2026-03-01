@@ -53,6 +53,6 @@ export function isSubmissionClosed(quest: Quest): boolean {
   const now = Date.now();
   return (
     now > new Date(quest.submission_deadline).getTime() ||
-    now > new Date(quest.challenge_end).getTime()
+    now > new Date(quest.quest_end).getTime()
   );
 }

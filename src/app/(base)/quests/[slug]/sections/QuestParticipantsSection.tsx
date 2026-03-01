@@ -18,17 +18,13 @@ type Participant = {
   winner_rank: number | null;
 };
 
-export function ChallengeParticipantsSection({
-  challengeSlug,
-}: {
-  challengeSlug: string;
-}) {
+export function QuestParticipantsSection({ questSlug }: { questSlug: string }) {
   const [participants, setParticipants] = useState<Participant[]>([]);
 
   useEffect(() => {
     const run = async () => {
       try {
-        const res = await fetch(apiRoutes.questsParticipants(challengeSlug).link);
+        const res = await fetch(apiRoutes.questsParticipants(questSlug).link);
         const data = await res.json();
         setParticipants(data.participants || []);
       } catch {
@@ -36,7 +32,7 @@ export function ChallengeParticipantsSection({
       }
     };
     run();
-  }, [challengeSlug]);
+  }, [questSlug]);
 
   return (
     <SectionLayout>
@@ -62,7 +58,7 @@ export function ChallengeParticipantsSection({
                     {participant.work_title}
                   </p>
                 </div>
-                {participant.winner_rank && <Badge>🏆 Top {participant.winner_rank}</Badge>}
+                {participant.winner_rank && <Badge>Top {participant.winner_rank}</Badge>}
               </div>
               <div className="flex flex-wrap gap-2">
                 <Link href={participant.work_url} likeButton whileTap>
@@ -91,4 +87,3 @@ export function ChallengeParticipantsSection({
     </SectionLayout>
   );
 }
-

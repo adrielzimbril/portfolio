@@ -8,9 +8,9 @@ import {
   getQuestBySlug,
   isSubmissionClosed,
 } from "@/module/content/utils/lib/quests";
-import { ChallengeSubmissionForm } from "../sections/ChallengeSubmissionForm";
+import { QuestSubmissionForm } from "../../sections/QuestSubmissionForm";
 
-export default async function ChallengeWorkSubmitPage(props: {
+export default async function QuestWorkSubmitPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
@@ -26,7 +26,7 @@ export default async function ChallengeWorkSubmitPage(props: {
   return (
     <>
       <PageHero
-        title={`Soumission · ${quest.title}`}
+        title={`Soumission | ${quest.title}`}
         description="Soumets ton travail ici jusqu'a la date limite de soumission."
         badge="Work submission"
         imagePath={{ emoji: "🚀" }}
@@ -46,7 +46,7 @@ export default async function ChallengeWorkSubmitPage(props: {
           </Card>
         </SectionLayout>
       ) : (
-        <ChallengeSubmissionForm quest={quest} isClosed={closed} />
+        <QuestSubmissionForm quest={quest} isClosed={closed} />
       )}
     </>
   );

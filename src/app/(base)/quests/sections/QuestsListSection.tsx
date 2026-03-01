@@ -28,54 +28,45 @@ export function QuestsListSection({ data }: { data: Quest[] }) {
       loadedItems={loadedItems}
       totalItems={totalItems}
     >
-      {list.map((challenge) => (
+      {list.map((quest) => (
         <Card
-          key={challenge.slug}
+          key={quest.slug}
           className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
         >
           <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
             <div className="flex flex-col gap-4">
-              <h3 className="h4">{challenge.title}</h3>
+              <h3 className="h4">{quest.title}</h3>
               <p className="text-xl font-medium text-b-white-invert-sec line-clamp-3">
-                {challenge.excerpt}
+                {quest.excerpt}
               </p>
               <div className="flex flex-wrap gap-2">
                 <Badge>
-                  Inscription: {getHumanDate(challenge.registration_deadline)}
+                  Inscription: {getHumanDate(quest.registration_deadline)}
                 </Badge>
                 <Badge variant="secondary">
-                  Soumission: {getHumanDate(challenge.submission_deadline)}
+                  Soumission: {getHumanDate(quest.submission_deadline)}
                 </Badge>
                 <Badge
-                  variant={
-                    isRegistrationClosed(challenge) ? "secondary" : "default"
-                  }
+                  variant={isRegistrationClosed(quest) ? "secondary" : "default"}
                 >
-                  {isRegistrationClosed(challenge)
+                  {isRegistrationClosed(quest)
                     ? "Inscriptions fermees"
                     : "Inscriptions ouvertes"}
                 </Badge>
                 <Badge
-                  variant={
-                    isSubmissionClosed(challenge) ? "secondary" : "default"
-                  }
+                  variant={isSubmissionClosed(quest) ? "secondary" : "default"}
                 >
-                  {isSubmissionClosed(challenge)
+                  {isSubmissionClosed(quest)
                     ? "Soumissions fermees"
                     : "Soumissions ouvertes"}
                 </Badge>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link
-                  href={`/quests/${challenge.slug}`}
-                  likeButton
-                  whileTap
-                  size="xs"
-                >
-                  Voir le challenge
+                <Link href={`/quests/${quest.slug}`} likeButton whileTap size="xs">
+                  Voir le quest
                 </Link>
                 <Link
-                  href={`/quests/${challenge.slug}/register`}
+                  href={`/quests/${quest.slug}/register`}
                   likeButton
                   whileTap
                   size="xs"
@@ -84,7 +75,7 @@ export function QuestsListSection({ data }: { data: Quest[] }) {
                   S'inscrire
                 </Link>
                 <Link
-                  href={`/quests/${challenge.slug}/submit`}
+                  href={`/quests/${quest.slug}/travail/submit`}
                   likeButton
                   whileTap
                   size="xs"

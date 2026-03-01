@@ -29,7 +29,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-export function ChallengeRegisterForm({ questSlug }: { questSlug: string }) {
+export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
   const locale = useLocale();
 
   const form = useForm<FormValues>({
@@ -55,9 +55,9 @@ export function ChallengeRegisterForm({ questSlug }: { questSlug: string }) {
         throw new Error(data?.error || "REGISTER_FAILED");
       }
 
-      toast.success("Inscription validée. Un email vient d'être envoyé.");
+      toast.success("Inscription validee. Un email vient d'etre envoye.");
       form.reset();
-    } catch (error) {
+    } catch {
       toast.error("Impossible de finaliser l'inscription.");
     }
   };
@@ -69,7 +69,7 @@ export function ChallengeRegisterForm({ questSlug }: { questSlug: string }) {
           <div>
             <h3 className="h5">Inscription au quest</h3>
             <p className="text-sm text-b-white-invert-sec">
-              Tu seras ajouté à la newsletter du quest et recontacté par email.
+              Tu seras ajoute a la newsletter du quest et recontacte par email.
             </p>
           </div>
           <Form {...form}>
@@ -95,7 +95,12 @@ export function ChallengeRegisterForm({ questSlug }: { questSlug: string }) {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input {...field} type="email" variant="secondary" placeholder="ton@email.com" />
+                        <Input
+                          {...field}
+                          type="email"
+                          variant="secondary"
+                          placeholder="ton@email.com"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -109,7 +114,11 @@ export function ChallengeRegisterForm({ questSlug }: { questSlug: string }) {
                   <FormItem>
                     <FormLabel>Portfolio (optionnel)</FormLabel>
                     <FormControl>
-                      <Input {...field} variant="secondary" placeholder="https://ton-portfolio.com" />
+                      <Input
+                        {...field}
+                        variant="secondary"
+                        placeholder="https://ton-portfolio.com"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -144,4 +153,3 @@ export function ChallengeRegisterForm({ questSlug }: { questSlug: string }) {
     </SectionLayout>
   );
 }
-

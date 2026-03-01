@@ -38,13 +38,7 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       description: project?.excerpt,
       images: [
         getImageUrl(project?.image_big ?? ""),
-        getImageUrl(
-          `/api/og?type=${PageType.PROJECT}&slug=${slug}&title=${project?.title}`
-        ),
-        getResourcesUrl(
-          PageType.PROJECT,
-          `${slug}/opengraph-image?${new Date().getTime()}`
-        ),
+        getImageUrl("opengraph-image.png"),
       ],
     },
     twitter: {
@@ -53,13 +47,7 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       description: project?.excerpt,
       images: [
         getImageUrl(project?.image_big ?? ""),
-        getImageUrl(
-          `/api/og?type=${PageType.PROJECT}&slug=${slug}&title=${project?.title}`
-        ),
-        getResourcesUrl(
-          PageType.PROJECT,
-          `${slug}/opengraph-image?${new Date().getTime()}`
-        ),
+        getImageUrl("opengraph-image.png"),
       ],
     },
   };

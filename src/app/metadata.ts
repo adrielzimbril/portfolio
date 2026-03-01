@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/data/config";
-import { getBaseUrl, getPathUrl } from "@/utils";
+import { getBaseUrl, getImageUrl, getPathUrl } from "@/utils";
 import { Locale } from "@/types";
 import { routes } from "@/data/routes";
 
@@ -17,13 +17,13 @@ const BASE_URL = getBaseUrl();
 
 const rssRoutes = Object.values(Locale).map((locale) => ({
   [`application/rss+xml;lang=${locale}`]: getPathUrl(
-    `${routes.rss.link}/?locale=${locale}`
+    `${routes.rss.link}/?locale=${locale}`,
   ),
   [`application/atom+xml;lang=${locale}`]: getPathUrl(
-    `${routes.rssAtom.link}/?locale=${locale}`
+    `${routes.rssAtom.link}/?locale=${locale}`,
   ),
   [`application/feed+json;lang=${locale}`]: getPathUrl(
-    `${routes.rssJson.link}/?locale=${locale}`
+    `${routes.rssJson.link}/?locale=${locale}`,
   ),
 }));
 
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.details.nameShared,
     images: [
       {
-        url: getPathUrl("/opengraph-image"),
+        url: getImageUrl("opengraph-image.png"),
         width: 1200,
         height: 630,
         alt: siteConfig.details.nameShared,
@@ -88,7 +88,8 @@ export const metadata: Metadata = {
     creator: siteConfig.details.nameShared,
     images: [
       {
-        url: getPathUrl("/opengraph-image"),
+        //url: getPathUrl("/opengraph-image"),
+        url: getImageUrl("opengraph-image.png"),
         width: 1200,
         height: 630,
         alt: siteConfig.details.nameShared,

@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { getLocale } from "next-intl/server";
 import { getQuestBySlug } from "@/module/content/utils/lib/quests";
-import { ChallengeOverviewSection } from "./sections/ChallengeOverviewSection";
-import { ChallengeParticipantsSection } from "./sections/ChallengeParticipantsSection";
+import { QuestOverviewSection } from "./sections/QuestOverviewSection";
+import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
 import { PageDetails } from "@/components/shared/pages/shared/page/page-details";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,52 +21,48 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await props.params;
   const locale = await getLocale();
-  const challenge = await getQuestBySlug(slug, { locale });
+  const quest = await getQuestBySlug(slug, { locale });
 
-  if (!challenge) {
+  if (!quest) {
     return baseMetadata;
   }
 
   return {
     ...baseMetadata,
-    title: `${challenge.title} | Quests`,
-    description: challenge.excerpt,
+    title: `${quest.title} | Quests`,
+    description: quest.excerpt,
   };
 }
 
-export default async function ChallengeDetailPage(
+export default async function QuestDetailPage(
   props: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await props.params;
   const locale = await getLocale();
-  const challenge = await getQuestBySlug(slug, { locale });
+  const quest = await getQuestBySlug(slug, { locale });
 
-  if (!challenge) {
+  if (!quest) {
     notFound();
   }
 
-  const registrationClosed = isRegistrationClosed(challenge);
-  const submissionClosed = isSubmissionClosed(challenge);
+  const registrationClosed = isRegistrationClosed(quest);
+  const submissionClosed = isSubmissionClosed(quest);
 
   return (
     <>
-      <ChallengeOverviewSection quest={challenge} />
+      <QuestOverviewSection quest={quest} />
       <SectionLayout>
         <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
           <CardContent className="p-5 md:p-6 space-y-4">
             <div className="flex flex-wrap gap-2">
-              <Badge>
-                Fin inscription: {getHumanDate(challenge.registration_deadline)}
-              </Badge>
+              <Badge>Fin inscription: {getHumanDate(quest.registration_deadline)}</Badge>
               <Badge variant="secondary">
-                Fin soumission: {getHumanDate(challenge.submission_deadline)}
+                Fin soumission: {getHumanDate(quest.submission_deadline)}
               </Badge>
             </div>
             <div className="flex flex-wrap gap-2">
               <Badge variant={registrationClosed ? "secondary" : "default"}>
-                {registrationClosed
-                  ? "Inscriptions fermees"
-                  : "Inscriptions ouvertes"}
+                {registrationClosed ? "Inscriptions fermees" : "Inscriptions ouvertes"}
               </Badge>
               <Badge variant={submissionClosed ? "secondary" : "default"}>
                 {submissionClosed ? "Soumissions fermees" : "Soumissions ouvertes"}
@@ -75,17 +71,17 @@ export default async function ChallengeDetailPage(
             <div className="space-y-2">
               <p className="font-medium">Recompenses</p>
               <ul className="space-y-1 text-b-white-invert-sec">
-                {challenge.rewards.map((reward: string) => (
-                  <li key={reward}>• {reward}</li>
+                {quest.rewards.map((reward: string) => (
+                  <li key={reward}>- {reward}</li>
                 ))}
               </ul>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Link href={`/quests/${challenge.slug}/register`} likeButton whileTap>
-                S'inscrire au challenge
+              <Link href={`/quests/${quest.slug}/register`} likeButton whileTap>
+                S'inscrire au quest
               </Link>
               <Link
-                href={`/quests/${challenge.slug}/travail/submit`}
+                href={`/quests/${quest.slug}/travail/submit`}
                 likeButton
                 whileTap
                 variant="secondary"
@@ -96,8 +92,8 @@ export default async function ChallengeDetailPage(
           </CardContent>
         </Card>
       </SectionLayout>
-      <PageDetails content={challenge.body || ""} />
-      <ChallengeParticipantsSection challengeSlug={challenge.slug} />
+      <PageDetails content={quest.body || ""} />
+      <QuestParticipantsSection questSlug={quest.slug} />
     </>
   );
 }

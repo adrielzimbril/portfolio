@@ -4,10 +4,10 @@ import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { getQuestBySlug, isRegistrationClosed } from "@/module/content/utils/lib/quests";
-import { ChallengeRegisterForm } from "../sections/ChallengeRegisterForm";
+import { QuestRegisterForm } from "../sections/QuestRegisterForm";
 import { Link } from "@/components/ui/link";
 
-export default async function ChallengeRegisterPage(props: {
+export default async function QuestRegisterPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
@@ -23,7 +23,7 @@ export default async function ChallengeRegisterPage(props: {
   return (
     <>
       <PageHero
-        title={`Inscription · ${quest.title}`}
+        title={`Inscription | ${quest.title}`}
         description="Inscris-toi d'abord. Une fois inscrit, tu recevras les infos du quest."
         badge="Quest registration"
         imagePath={{ emoji: "📝" }}
@@ -43,9 +43,8 @@ export default async function ChallengeRegisterPage(props: {
           </Card>
         </SectionLayout>
       ) : (
-        <ChallengeRegisterForm questSlug={slug} />
+        <QuestRegisterForm questSlug={slug} />
       )}
     </>
   );
 }
-

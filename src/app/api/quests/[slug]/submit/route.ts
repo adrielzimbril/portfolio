@@ -16,19 +16,18 @@ export async function POST(
   try {
     const db = supabase as any;
     const { slug } = await params;
-    const challenge = await getQuestBySlug(slug);
+    const quest = await getQuestBySlug(slug);
 
-    if (!challenge) {
-      return new Response(JSON.stringify({ error: "CHALLENGE_NOT_FOUND" }), {
+    if (!quest) {
+      return new Response(JSON.stringify({ error: "QUEST_NOT_FOUND" }), {
         status: 404,
       });
     }
 
-    if (isSubmissionClosed(challenge)) {
-      return new Response(
-        JSON.stringify({ error: "CHALLENGE_SUBMISSION_CLOSED" }),
-        { status: 400 }
-      );
+    if (isSubmissionClosed(quest)) {
+      return new Response(JSON.stringify({ error: "QUEST_SUBMISSION_CLOSED" }), {
+        status: 400,
+      });
     }
 
     const body = await req.json().catch(() => ({}));
@@ -111,7 +110,7 @@ export async function POST(
       );
 
     if (submissionError) {
-      logger.error("challenge_submissions upsert failed", submissionError);
+      logger.error("quest_submissions upsert failed", submissionError);
       return new Response(JSON.stringify({ error: "DB_ERROR" }), {
         status: 500,
       });
@@ -120,15 +119,17 @@ export async function POST(
     await sendEmail({
       to: [{ email, name }],
       locale,
-      subject: `Soumission reçue: ${challenge.title}`,
-      text: `Bonjour ${name},\n\nTa soumission pour "${challenge.title}" a bien été reçue.\nNous revenons vers toi après la fin du challenge.\n\nLien soumis: ${workUrl}\n\nMerci,\nAdriel`,
+      subject: `Soumission recue: ${quest.title}`,
+      text: `Bonjour ${name},\n\nTa soumission pour "${quest.title}" a bien ete recue.\nNous revenons vers toi apres la fin du quest.\n\nLien soumis: ${workUrl}\n\nMerci,\nAdriel`,
     });
 
     await sendEmail({
       to: [{ email: appConfig.contactForm.to }],
       locale,
-      subject: `Nouvelle soumission challenge: ${challenge.title}`,
-      text: `Nom: ${name}\nEmail: ${email}\nChallenge: ${challenge.title}\nTitre: ${workTitle}\nLien: ${workUrl}\nMessage: ${message || "-"}`,
+      subject: `Nouvelle soumission quest: ${quest.title}`,
+      text: `Nom: ${name}\nEmail: ${email}\nQuest: ${quest.title}\nTitre: ${workTitle}\nLien: ${workUrl}\nMessage: ${
+        message || "-"
+      }`,
     });
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });

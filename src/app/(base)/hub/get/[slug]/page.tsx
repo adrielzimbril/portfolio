@@ -32,13 +32,7 @@ export async function generateMetadata(props: {
       description: resource?.excerpt,
       images: [
         getImageUrl(resource?.cover ?? ""),
-        getImageUrl(
-          `/api/og?type=${PageType.HUB}&slug=${slug}&title=${resource?.title}`
-        ),
-        getResourcesUrl(
-          PageType.HUB,
-          `${slug}/opengraph-image?${new Date().getTime()}`
-        ),
+        getImageUrl("opengraph-image.png"),
       ],
     },
     twitter: {
@@ -47,13 +41,7 @@ export async function generateMetadata(props: {
       description: resource?.excerpt,
       images: [
         getImageUrl(resource?.cover ?? ""),
-        getImageUrl(
-          `/api/og?type=${PageType.HUB}&slug=${slug}&title=${resource?.title}`
-        ),
-        getResourcesUrl(
-          PageType.HUB,
-          `${slug}/opengraph-image?${new Date().getTime()}`
-        ),
+        getImageUrl("opengraph-image.png"),
       ],
     },
   };
