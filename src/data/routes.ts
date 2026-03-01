@@ -72,14 +72,14 @@ export const routes = {
     name: "Talks",
     key: "talks",
     link: "/talks",
-    inHeader: false,
+    inHeader: true,
     inSitemap: true,
   },
   quests: {
     name: "Quests",
     key: "quests",
     link: "/quests",
-    inHeader: false,
+    inHeader: true,
     inSitemap: true,
   },
   rss: {

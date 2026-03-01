@@ -7,6 +7,7 @@ import { Link } from "@/components/ui/link";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { getHumanDate } from "@/utils";
 import type { Talk } from "@/module/content/utils/lib/talks";
+import { TalksCard } from "@/components/shared/pages/talks/card";
 
 export function MyTalksSection({ data }: { data: Talk[] }) {
   const {
@@ -30,31 +31,16 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
       loadedItems={loadedItems}
       totalItems={totalItems}
     >
-      {list.map((item) => (
-        <Card
-          key={item.slug}
-          className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
-        >
-          <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
-            <div className="flex flex-col gap-4">
-              <div className="rounded-2xl border p-4 bg-b-white-invert-fr">
-                <p className="text-sm font-medium text-b-base-accent">
-                  {item.title}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <Badge>{getHumanDate(item.event_date)}</Badge>
-                <Badge variant="secondary">{item.role}</Badge>
-              </div>
-              <p className="text-xl font-medium text-b-white-invert-sec line-clamp-3">
-                {item.excerpt}
-              </p>
-              <Link href={`/talks#${item.slug}`} likeButton whileTap size="xs">
-                Voir le talk
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+      {list.map((talk) => (
+        <TalksCard
+          key={talk.slug}
+          title={talk.title}
+          cover={talk.cover}
+          slug={talk.slug}
+          excerpt={talk.excerpt || ""}
+          primaryTag={getHumanDate(talk.event_date)}
+          tags={[{ name: talk.role }]}
+        />
       ))}
     </LoadMoreSection>
   );
