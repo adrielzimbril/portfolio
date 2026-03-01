@@ -28,7 +28,7 @@ export function ChallengeParticipantsSection({
   useEffect(() => {
     const run = async () => {
       try {
-        const res = await fetch(apiRoutes.challengesParticipants(challengeSlug).link);
+        const res = await fetch(apiRoutes.questsParticipants(challengeSlug).link);
         const data = await res.json();
         setParticipants(data.participants || []);
       } catch {

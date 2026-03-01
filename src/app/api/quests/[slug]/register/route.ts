@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server";
 import { appConfig } from "@/data/app-config";
 import {
-  getChallengeBySlug,
+  getQuestBySlug,
   isRegistrationClosed,
-} from "@/module/content/utils/lib/challenges";
+} from "@/module/content/utils/lib/quests";
 import { addContact, ContactProvider } from "@/module/contact";
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
@@ -17,7 +17,7 @@ export async function POST(
   try {
     const db = supabase as any;
     const { slug } = await params;
-    const challenge = await getChallengeBySlug(slug);
+    const challenge = await getQuestBySlug(slug);
 
     if (!challenge) {
       return new Response(JSON.stringify({ error: "CHALLENGE_NOT_FOUND" }), {
@@ -108,7 +108,7 @@ export async function POST(
         {
           user_id: userId,
           subscribed_from_page: JSON.stringify({
-            path: `/challenges/${slug}`,
+            path: `/quests/${slug}`,
             origin: req.headers.get("origin"),
             referer: req.headers.get("referer"),
             url: req.url,
@@ -145,7 +145,7 @@ export async function POST(
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
-    logger.error("/api/challenges/[slug]/register failed", error);
+    logger.error("/api/quests/[slug]/register failed", error);
     return new Response(JSON.stringify({ error: "UNKNOWN_ERROR" }), {
       status: 500,
     });

@@ -1,17 +1,17 @@
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import type { Challenge } from "@/module/content/utils/lib/challenges";
+import type { Quest } from "@/module/content/utils/lib/quests";
 
 export function ChallengeOverviewSection({
-  challenge,
+  quest,
 }: {
-  challenge: Challenge;
+  quest: Quest;
 }) {
   return (
     <>
       <PageHero
-        title={challenge.title}
-        description={challenge.excerpt}
-        badge="Challenge detail"
+        title={quest.title}
+        description={quest.excerpt}
+        badge="Quest detail"
         imagePath={{ emoji: "🎯" }}
         isMobileShowed
       />

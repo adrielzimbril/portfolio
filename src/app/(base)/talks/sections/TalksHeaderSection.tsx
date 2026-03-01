@@ -6,22 +6,22 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { getPathUrl } from "@/utils";
 import { useLocale } from "use-intl";
 
-export function ChallengesHeaderSection() {
+export function TalksHeaderSection() {
   const locale = useLocale();
 
   usePageViews(
-    routes.challenges.key,
+    routes.talks.key,
     undefined,
-    { locale, path: getPathUrl(routes.challenges.link) },
+    { locale, path: getPathUrl(routes.talks.link) },
     false
   );
 
   return (
     <PageHero
-      title="Challenges"
-      description="Mes challenges en cours et passés: brief, récompenses, participants, gagnants et soumissions."
-      badge="Build in public"
-      imagePath={{ emoji: "🏆" }}
+      title="Talks"
+      description="Toutes les sessions talks: affiches, role, date et ressources."
+      badge="Talks & workshops"
+      imagePath={{ emoji: "🎤" }}
       isMobileShowed
     />
   );

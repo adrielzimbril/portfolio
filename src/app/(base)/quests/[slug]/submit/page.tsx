@@ -3,30 +3,33 @@ import { getLocale } from "next-intl/server";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
-import { getChallengeBySlug, isRegistrationClosed } from "@/module/content/utils/lib/challenges";
-import { ChallengeRegisterForm } from "../sections/ChallengeRegisterForm";
 import { Link } from "@/components/ui/link";
+import {
+  getQuestBySlug,
+  isSubmissionClosed,
+} from "@/module/content/utils/lib/quests";
+import { ChallengeSubmissionForm } from "../sections/ChallengeSubmissionForm";
 
-export default async function ChallengeRegisterPage(props: {
+export default async function ChallengeWorkSubmitPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
   const locale = await getLocale();
-  const challenge = await getChallengeBySlug(slug, { locale });
+  const quest = await getQuestBySlug(slug, { locale });
 
-  if (!challenge) {
+  if (!quest) {
     notFound();
   }
 
-  const closed = isRegistrationClosed(challenge);
+  const closed = isSubmissionClosed(quest);
 
   return (
     <>
       <PageHero
-        title={`Inscription · ${challenge.title}`}
-        description="Inscris-toi d'abord. Une fois inscrit, tu recevras les infos du challenge."
-        badge="Challenge registration"
-        imagePath={{ emoji: "📝" }}
+        title={`Soumission · ${quest.title}`}
+        description="Soumets ton travail ici jusqu'a la date limite de soumission."
+        badge="Work submission"
+        imagePath={{ emoji: "🚀" }}
         isMobileShowed
       />
       {closed ? (
@@ -34,18 +37,17 @@ export default async function ChallengeRegisterPage(props: {
           <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
             <CardContent className="p-5 md:p-6 space-y-3">
               <p className="text-b-white-invert-sec">
-                Les inscriptions sont fermees pour ce challenge.
+                La periode de soumission est terminee.
               </p>
-              <Link href={`/challenges/${slug}`} likeButton whileTap>
-                Retour au challenge
+              <Link href={`/quests/${slug}`} likeButton whileTap>
+                Retour au quest
               </Link>
             </CardContent>
           </Card>
         </SectionLayout>
       ) : (
-        <ChallengeRegisterForm challengeSlug={slug} />
+        <ChallengeSubmissionForm quest={quest} isClosed={closed} />
       )}
     </>
   );
 }
-

@@ -6,9 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/components/ui/link";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { getHumanDate } from "@/utils";
-import type { Masterclass } from "@/module/content/utils/lib/masterclasses";
+import type { Talk } from "@/module/content/utils/lib/talks";
 
-export function MasterclassesListSection({ data }: { data: Masterclass[] }) {
+export function TalksListSection({ data }: { data: Talk[] }) {
   const { data: list, loadMore, loading, hasMore, loadedItems, totalItems } =
     useLoadMore({
       dataSource: data,
@@ -43,7 +43,7 @@ export function MasterclassesListSection({ data }: { data: Masterclass[] }) {
               <p className="text-xl font-medium text-b-white-invert-sec line-clamp-3">
                 {item.excerpt}
               </p>
-              <Link href={`/masterclasses#${item.slug}`} likeButton whileTap size="xs">
+              <Link href={`/talks#${item.slug}`} likeButton whileTap size="xs">
                 Voir la masterclass
               </Link>
             </div>
@@ -53,4 +53,3 @@ export function MasterclassesListSection({ data }: { data: Masterclass[] }) {
     </LoadMoreSection>
   );
 }
-

@@ -1,6 +1,6 @@
-import { allChallenges } from "content-collections";
+import { allQuests } from "content-collections";
 
-export type Challenge = (typeof allChallenges)[number];
+export type Quest = (typeof allQuests)[number];
 
 type Options = {
   published?: boolean;
@@ -10,9 +10,9 @@ type Options = {
   limit?: number;
 };
 
-export async function getAllChallenges(
+export async function getAllQuests(
   options: Partial<Options> = {}
-): Promise<Challenge[]> {
+): Promise<Quest[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
@@ -23,7 +23,7 @@ export async function getAllChallenges(
   };
 
   return Promise.resolve(
-    allChallenges
+    allQuests
       .filter(
         (item) => item.published === published && (!locale || item.locale === locale)
       )
@@ -33,27 +33,26 @@ export async function getAllChallenges(
   );
 }
 
-export async function getChallengeBySlug(
+export async function getQuestBySlug(
   slug: string,
   options?: { locale?: string }
-): Promise<Challenge | null> {
+): Promise<Quest | null> {
   const { locale } = options ?? {};
   return Promise.resolve(
-    allChallenges.find(
+    allQuests.find(
       (item) => item.slug === slug && (!locale || item.locale === locale)
     ) ?? null
   );
 }
 
-export function isRegistrationClosed(challenge: Challenge): boolean {
-  return Date.now() > new Date(challenge.registration_deadline).getTime();
+export function isRegistrationClosed(quest: Quest): boolean {
+  return Date.now() > new Date(quest.registration_deadline).getTime();
 }
 
-export function isSubmissionClosed(challenge: Challenge): boolean {
+export function isSubmissionClosed(quest: Quest): boolean {
   const now = Date.now();
   return (
-    now > new Date(challenge.submission_deadline).getTime() ||
-    now > new Date(challenge.challenge_end).getTime()
+    now > new Date(quest.submission_deadline).getTime() ||
+    now > new Date(quest.challenge_end).getTime()
   );
 }
-

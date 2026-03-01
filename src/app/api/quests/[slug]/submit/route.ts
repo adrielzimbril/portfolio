@@ -1,9 +1,9 @@
 import { NextRequest } from "next/server";
 import { appConfig } from "@/data/app-config";
 import {
-  getChallengeBySlug,
+  getQuestBySlug,
   isSubmissionClosed,
-} from "@/module/content/utils/lib/challenges";
+} from "@/module/content/utils/lib/quests";
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
 import { Locale } from "@/types";
@@ -16,7 +16,7 @@ export async function POST(
   try {
     const db = supabase as any;
     const { slug } = await params;
-    const challenge = await getChallengeBySlug(slug);
+    const challenge = await getQuestBySlug(slug);
 
     if (!challenge) {
       return new Response(JSON.stringify({ error: "CHALLENGE_NOT_FOUND" }), {
@@ -133,7 +133,7 @@ export async function POST(
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {
-    logger.error("/api/challenges/[slug]/submit failed", error);
+    logger.error("/api/quests/[slug]/submit failed", error);
     return new Response(JSON.stringify({ error: "UNKNOWN_ERROR" }), {
       status: 500,
     });

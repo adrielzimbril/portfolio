@@ -443,9 +443,9 @@ const resources = defineCollection({
   },
 });
 
-const masterclasses = defineCollection({
-  name: "masterclasses",
-  directory: `${BASE_COLLECTION_PATH}/masterclasses`,
+const talks = defineCollection({
+  name: "talks",
+  directory: `${BASE_COLLECTION_PATH}/talks`,
   include: "*.{mdx,md}",
   schema: z.object({
     id: z.number(),
@@ -471,9 +471,9 @@ const masterclasses = defineCollection({
   },
 });
 
-const challenges = defineCollection({
-  name: "challenges",
-  directory: `${BASE_COLLECTION_PATH}/challenges`,
+const quests = defineCollection({
+  name: "quests",
+  directory: `${BASE_COLLECTION_PATH}/quests`,
   include: "*.{mdx,md}",
   schema: z.object({
     id: z.number(),
@@ -514,7 +514,7 @@ export default defineConfig({
     posts,
     projects,
     resources,
-    masterclasses,
-    challenges,
+    talks,
+    quests,
   ],
 });

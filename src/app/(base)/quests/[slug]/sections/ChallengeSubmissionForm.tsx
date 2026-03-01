@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { apiRoutes } from "@/data/api-routes";
-import type { Challenge } from "@/module/content/utils/lib/challenges";
+import type { Quest } from "@/module/content/utils/lib/quests";
 import { getHumanDate } from "@/utils";
 
 const schema = z.object({
@@ -36,10 +36,10 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export function ChallengeSubmissionForm({
-  challenge,
+  quest,
   isClosed,
 }: {
-  challenge: Challenge;
+  quest: Quest;
   isClosed: boolean;
 }) {
   const locale = useLocale();
@@ -59,7 +59,7 @@ export function ChallengeSubmissionForm({
 
   const onSubmit = async (values: FormValues) => {
     try {
-      const res = await fetch(apiRoutes.challengesSubmit(challenge.slug).link, {
+      const res = await fetch(apiRoutes.questsSubmit(quest.slug).link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...values, locale }),
@@ -84,14 +84,14 @@ export function ChallengeSubmissionForm({
           <div>
             <h3 className="h5">Soumettre son travail</h3>
             <p className="text-sm text-b-white-invert-sec">
-              Deadline: {getHumanDate(challenge.submission_deadline)}. Après cette
+              Deadline: {getHumanDate(quest.submission_deadline)}. Après cette
               date, les soumissions sont verrouillées.
             </p>
           </div>
           {isClosed ? (
             <Card className="squircle squircle-b-base squircle-smooth-xl border">
               <CardContent className="p-4 text-sm text-b-white-invert-sec">
-                Les soumissions sont fermées pour ce challenge.
+                Les soumissions sont fermées pour ce quest.
               </CardContent>
             </Card>
           ) : (

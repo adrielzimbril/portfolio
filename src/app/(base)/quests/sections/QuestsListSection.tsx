@@ -6,13 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/components/ui/link";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { getHumanDate } from "@/utils";
-import type { Challenge } from "@/module/content/utils/lib/challenges";
+import type { Quest } from "@/module/content/utils/lib/quests";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/utils/lib/challenges";
+} from "@/module/content/utils/lib/quests";
 
-export function ChallengesListSection({ data }: { data: Challenge[] }) {
+export function QuestsListSection({ data }: { data: Quest[] }) {
   const { data: list, loadMore, loading, hasMore, loadedItems, totalItems } =
     useLoadMore({
       dataSource: data,
@@ -40,25 +40,56 @@ export function ChallengesListSection({ data }: { data: Challenge[] }) {
                 {challenge.excerpt}
               </p>
               <div className="flex flex-wrap gap-2">
-                <Badge>Inscription: {getHumanDate(challenge.registration_deadline)}</Badge>
+                <Badge>
+                  Inscription: {getHumanDate(challenge.registration_deadline)}
+                </Badge>
                 <Badge variant="secondary">
                   Soumission: {getHumanDate(challenge.submission_deadline)}
                 </Badge>
-                <Badge variant={isRegistrationClosed(challenge) ? "secondary" : "default"}>
-                  {isRegistrationClosed(challenge) ? "Inscriptions fermees" : "Inscriptions ouvertes"}
+                <Badge
+                  variant={
+                    isRegistrationClosed(challenge) ? "secondary" : "default"
+                  }
+                >
+                  {isRegistrationClosed(challenge)
+                    ? "Inscriptions fermees"
+                    : "Inscriptions ouvertes"}
                 </Badge>
-                <Badge variant={isSubmissionClosed(challenge) ? "secondary" : "default"}>
-                  {isSubmissionClosed(challenge) ? "Soumissions fermees" : "Soumissions ouvertes"}
+                <Badge
+                  variant={
+                    isSubmissionClosed(challenge) ? "secondary" : "default"
+                  }
+                >
+                  {isSubmissionClosed(challenge)
+                    ? "Soumissions fermees"
+                    : "Soumissions ouvertes"}
                 </Badge>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link href={`/challenges/${challenge.slug}`} likeButton whileTap size="xs">
+                <Link
+                  href={`/quests/${challenge.slug}`}
+                  likeButton
+                  whileTap
+                  size="xs"
+                >
                   Voir le challenge
                 </Link>
-                <Link href={`/challenges/${challenge.slug}/register`} likeButton whileTap size="xs" variant="secondary">
+                <Link
+                  href={`/quests/${challenge.slug}/register`}
+                  likeButton
+                  whileTap
+                  size="xs"
+                  variant="secondary"
+                >
                   S'inscrire
                 </Link>
-                <Link href={`/challenges/${challenge.slug}/travail/submit`} likeButton whileTap size="xs" variant="secondary">
+                <Link
+                  href={`/quests/${challenge.slug}/submit`}
+                  likeButton
+                  whileTap
+                  size="xs"
+                  variant="secondary"
+                >
                   Soumettre son travail
                 </Link>
               </div>

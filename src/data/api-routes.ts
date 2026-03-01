@@ -73,19 +73,19 @@ export const apiRoutes = {
     link: getPathUrl("/api/stats/views"),
     accept: [requestType.GET],
   },
-  challengesRegister: (slug: string) => ({
-    key: "challenges-register",
-    link: getPathUrl(`/api/challenges/${slug}/register`),
+  questsRegister: (slug: string) => ({
+    key: "quests-register",
+    link: getPathUrl(`/api/quests/${slug}/register`),
     accept: [requestType.POST],
   }),
-  challengesSubmit: (slug: string) => ({
-    key: "challenges-submit",
-    link: getPathUrl(`/api/challenges/${slug}/submit`),
+  questsSubmit: (slug: string) => ({
+    key: "quests-submit",
+    link: getPathUrl(`/api/quests/${slug}/submit`),
     accept: [requestType.POST],
   }),
-  challengesParticipants: (slug: string) => ({
-    key: "challenges-participants",
-    link: getPathUrl(`/api/challenges/${slug}/participants`),
+  questsParticipants: (slug: string) => ({
+    key: "quests-participants",
+    link: getPathUrl(`/api/quests/${slug}/participants`),
     accept: [requestType.GET],
   }),
 };

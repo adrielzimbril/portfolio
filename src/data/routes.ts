@@ -68,17 +68,17 @@ export const routes = {
     inHeader: false,
     inSitemap: true,
   },
-  masterclasses: {
-    name: "Masterclasses",
-    key: "masterclasses",
-    link: "/masterclasses",
+  talks: {
+    name: "Talks",
+    key: "talks",
+    link: "/talks",
     inHeader: false,
     inSitemap: true,
   },
-  challenges: {
-    name: "Challenges",
-    key: "challenges",
-    link: "/challenges",
+  quests: {
+    name: "Quests",
+    key: "quests",
+    link: "/quests",
     inHeader: false,
     inSitemap: true,
   },

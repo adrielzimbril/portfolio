@@ -29,7 +29,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-export function ChallengeRegisterForm({ challengeSlug }: { challengeSlug: string }) {
+export function ChallengeRegisterForm({ questSlug }: { questSlug: string }) {
   const locale = useLocale();
 
   const form = useForm<FormValues>({
@@ -44,7 +44,7 @@ export function ChallengeRegisterForm({ challengeSlug }: { challengeSlug: string
 
   const onSubmit = async (values: FormValues) => {
     try {
-      const res = await fetch(apiRoutes.challengesRegister(challengeSlug).link, {
+      const res = await fetch(apiRoutes.questsRegister(questSlug).link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...values, locale }),
@@ -67,9 +67,9 @@ export function ChallengeRegisterForm({ challengeSlug }: { challengeSlug: string
       <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
         <CardContent className="p-5 md:p-6 space-y-4">
           <div>
-            <h3 className="h5">Inscription au challenge</h3>
+            <h3 className="h5">Inscription au quest</h3>
             <p className="text-sm text-b-white-invert-sec">
-              Tu seras ajouté à la newsletter du challenge et recontacté par email.
+              Tu seras ajouté à la newsletter du quest et recontacté par email.
             </p>
           </div>
           <Form {...form}>
@@ -127,7 +127,7 @@ export function ChallengeRegisterForm({ challengeSlug }: { challengeSlug: string
                         onChange={field.onChange}
                         variant="secondary"
                         rows={4}
-                        placeholder="Ton objectif dans ce challenge"
+                        placeholder="Ton objectif dans ce quest"
                       />
                     </FormControl>
                     <FormMessage />

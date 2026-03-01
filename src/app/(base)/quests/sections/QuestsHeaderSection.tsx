@@ -6,22 +6,22 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { getPathUrl } from "@/utils";
 import { useLocale } from "use-intl";
 
-export function MasterclassesHeaderSection() {
+export function QuestsHeaderSection() {
   const locale = useLocale();
 
   usePageViews(
-    routes.masterclasses.key,
+    routes.quests.key,
     undefined,
-    { locale, path: getPathUrl(routes.masterclasses.link) },
+    { locale, path: getPathUrl(routes.quests.link) },
     false
   );
 
   return (
     <PageHero
-      title="Masterclasses"
-      description="Toutes les sessions auxquelles j'ai participé: affiches, rôle, date et ressources."
-      badge="Talks & workshops"
-      imagePath={{ emoji: "🎤" }}
+      title="Quests"
+      description="Mes quests en cours et passés: brief, récompenses, participants, gagnants et soumissions."
+      badge="Build in public"
+      imagePath={{ emoji: "🏆" }}
       isMobileShowed
     />
   );

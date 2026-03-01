@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { getLocale } from "next-intl/server";
-import { getChallengeBySlug } from "@/module/content/utils/lib/challenges";
+import { getQuestBySlug } from "@/module/content/utils/lib/quests";
 import { ChallengeOverviewSection } from "./sections/ChallengeOverviewSection";
 import { ChallengeParticipantsSection } from "./sections/ChallengeParticipantsSection";
 import { PageDetails } from "@/components/shared/pages/shared/page/page-details";
@@ -14,14 +14,14 @@ import { getHumanDate } from "@/utils";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/utils/lib/challenges";
+} from "@/module/content/utils/lib/quests";
 
 export async function generateMetadata(
   props: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const { slug } = await props.params;
   const locale = await getLocale();
-  const challenge = await getChallengeBySlug(slug, { locale });
+  const challenge = await getQuestBySlug(slug, { locale });
 
   if (!challenge) {
     return baseMetadata;
@@ -29,7 +29,7 @@ export async function generateMetadata(
 
   return {
     ...baseMetadata,
-    title: `${challenge.title} | Challenges`,
+    title: `${challenge.title} | Quests`,
     description: challenge.excerpt,
   };
 }
@@ -39,7 +39,7 @@ export default async function ChallengeDetailPage(
 ) {
   const { slug } = await props.params;
   const locale = await getLocale();
-  const challenge = await getChallengeBySlug(slug, { locale });
+  const challenge = await getQuestBySlug(slug, { locale });
 
   if (!challenge) {
     notFound();
@@ -50,7 +50,7 @@ export default async function ChallengeDetailPage(
 
   return (
     <>
-      <ChallengeOverviewSection challenge={challenge} />
+      <ChallengeOverviewSection quest={challenge} />
       <SectionLayout>
         <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
           <CardContent className="p-5 md:p-6 space-y-4">
@@ -81,11 +81,11 @@ export default async function ChallengeDetailPage(
               </ul>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Link href={`/challenges/${challenge.slug}/register`} likeButton whileTap>
+              <Link href={`/quests/${challenge.slug}/register`} likeButton whileTap>
                 S'inscrire au challenge
               </Link>
               <Link
-                href={`/challenges/${challenge.slug}/travail/submit`}
+                href={`/quests/${challenge.slug}/travail/submit`}
                 likeButton
                 whileTap
                 variant="secondary"

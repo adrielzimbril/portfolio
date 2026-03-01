@@ -32,7 +32,7 @@ export async function GET(
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    logger.error("/api/challenges/[slug]/participants failed", error);
+    logger.error("/api/quests/[slug]/participants failed", error);
     return new Response(JSON.stringify({ error: "UNKNOWN_ERROR" }), {
       status: 500,
     });

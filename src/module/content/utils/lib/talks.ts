@@ -1,6 +1,6 @@
-import { allMasterclasses } from "content-collections";
+import { allTalks } from "content-collections";
 
-export type Masterclass = (typeof allMasterclasses)[number];
+export type Talk = (typeof allTalks)[number];
 
 type Options = {
   published?: boolean;
@@ -10,9 +10,9 @@ type Options = {
   limit?: number;
 };
 
-export async function getAllMasterclasses(
+export async function getAllTalks(
   options: Partial<Options> = {}
-): Promise<Masterclass[]> {
+): Promise<Talk[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
@@ -23,7 +23,7 @@ export async function getAllMasterclasses(
   };
 
   return Promise.resolve(
-    allMasterclasses
+    allTalks
       .filter(
         (item) => item.published === published && (!locale || item.locale === locale)
       )
@@ -32,4 +32,3 @@ export async function getAllMasterclasses(
       .slice(0, limit)
   );
 }
-
