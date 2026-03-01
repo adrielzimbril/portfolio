@@ -16,7 +16,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["*", "/api/og/*", "/api/preview", "/api/rss/*", "/rss/*"],
+        allow: ["*", "/api/preview", "/api/rss/*", "/rss/*"],
         disallow: [
           "/private/",
           "/private/*",

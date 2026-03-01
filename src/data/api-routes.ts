@@ -43,11 +43,6 @@ export const apiRoutes = {
     link: getPathUrl("/api/json-data"),
     accept: [requestType.GET],
   },
-  og: {
-    key: "og",
-    link: getPathUrl("/api/og"),
-    accept: [requestType.GET],
-  },
   subscribe: {
     key: "subscribe",
     link: getPathUrl("/api/subscribe"),

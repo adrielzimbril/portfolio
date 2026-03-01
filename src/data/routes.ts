@@ -120,7 +120,7 @@ export const routes = {
   openGraphResource: {
     name: "Open Graph Resource",
     key: "open-graph-resource",
-    link: "/api/og",
+    link: "opengraph-image.png",
     inHeader: false,
     inSitemap: false,
   },
