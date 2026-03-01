@@ -97,7 +97,7 @@ function PreviewContent({
 
 export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
   return (
-    <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-b-base [&_svg,_svg_*]:fill-b-white-invert [&_svg,_svg_*]:color-b-white-invert rounded-full pointer-events-none overflow-hidden">
+    <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-b-base [&_svg,svg_*]:fill-b-white-invert [&_svg,_svg_*]:color-b-white-invert rounded-full pointer-events-none overflow-hidden">
       {resourceType === ResourceType.COURSE ? (
         <VideoFolder size={24} variant="bulk" />
       ) : resourceType === ResourceType.EBOOK ? (

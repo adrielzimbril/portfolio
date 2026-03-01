@@ -71,6 +71,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.details.nameShared,
     images: [
       {
+        //url: getPathUrl("/opengraph-image"),
         url: getImageUrl("opengraph-image.png"),
         width: 1200,
         height: 630,
@@ -88,7 +89,6 @@ export const metadata: Metadata = {
     creator: siteConfig.details.nameShared,
     images: [
       {
-        //url: getPathUrl("/opengraph-image"),
         url: getImageUrl("opengraph-image.png"),
         width: 1200,
         height: 630,

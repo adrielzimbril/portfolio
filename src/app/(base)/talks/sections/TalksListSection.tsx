@@ -8,13 +8,19 @@ import { useLoadMore } from "@/hooks/useLoadMore";
 import { getHumanDate } from "@/utils";
 import type { Talk } from "@/module/content/utils/lib/talks";
 
-export function TalksListSection({ data }: { data: Talk[] }) {
-  const { data: list, loadMore, loading, hasMore, loadedItems, totalItems } =
-    useLoadMore({
-      dataSource: data,
-      initialCount: 4,
-      incrementCount: 4,
-    });
+export function MyTalksSection({ data }: { data: Talk[] }) {
+  const {
+    data: list,
+    loadMore,
+    loading,
+    hasMore,
+    loadedItems,
+    totalItems,
+  } = useLoadMore({
+    dataSource: data,
+    initialCount: 4,
+    incrementCount: 4,
+  });
 
   return (
     <LoadMoreSection
@@ -32,7 +38,9 @@ export function TalksListSection({ data }: { data: Talk[] }) {
           <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
             <div className="flex flex-col gap-4">
               <div className="rounded-2xl border p-4 bg-b-white-invert-fr">
-                <p className="text-sm font-medium text-b-base-accent">{item.title}</p>
+                <p className="text-sm font-medium text-b-base-accent">
+                  {item.title}
+                </p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <Badge>{getHumanDate(item.event_date)}</Badge>
