@@ -46,7 +46,7 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
     id: siteConfig.url,
     link: siteConfig.url,
     language: localeForTranslation,
-    image: getImageUrl("/opengraph-image"),
+    image: getImageUrl("opengraph-image.png"),
     favicon: getImageUrl("/icon/ico"),
     hub: getPathUrl(routes.hub.link),
     copyright: t("common.rss.copyright", {

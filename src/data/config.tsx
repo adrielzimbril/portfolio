@@ -17,7 +17,7 @@ export const siteConfig = {
   ],
   seo: {
     ogImage: {
-      original: getImageUrl("/opengraph-image"),
+      original: getImageUrl("opengraph-image.png"),
     },
     robots: {
       index: true,
