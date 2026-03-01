@@ -6,7 +6,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllTalks } from "@/module/content/utils/lib";
-import { MyTalksSection } from "./sections/TalksListSection";
+import { MyTalksSection } from "./sections/MyTalksSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -31,11 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return metadata;
 }
 
-export default function TalksPage() {
-  return <TalksPageContent />;
-}
-
-async function TalksPageContent() {
+export default async function MyTalks() {
   const locale = await getLocale();
   const data = await getAllTalks({ locale }).catch((err) => {
     logger.error(err);

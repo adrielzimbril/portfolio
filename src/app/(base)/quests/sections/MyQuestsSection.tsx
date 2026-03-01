@@ -12,13 +12,19 @@ import {
   isSubmissionClosed,
 } from "@/module/content/utils/lib/quests";
 
-export function QuestsListSection({ data }: { data: Quest[] }) {
-  const { data: list, loadMore, loading, hasMore, loadedItems, totalItems } =
-    useLoadMore({
-      dataSource: data,
-      initialCount: 4,
-      incrementCount: 4,
-    });
+export function MyQuestsSection({ data }: { data: Quest[] }) {
+  const {
+    data: list,
+    loadMore,
+    loading,
+    hasMore,
+    loadedItems,
+    totalItems,
+  } = useLoadMore({
+    dataSource: data,
+    initialCount: 4,
+    incrementCount: 4,
+  });
 
   return (
     <LoadMoreSection
@@ -47,7 +53,9 @@ export function QuestsListSection({ data }: { data: Quest[] }) {
                   Soumission: {getHumanDate(quest.submission_deadline)}
                 </Badge>
                 <Badge
-                  variant={isRegistrationClosed(quest) ? "secondary" : "default"}
+                  variant={
+                    isRegistrationClosed(quest) ? "secondary" : "default"
+                  }
                 >
                   {isRegistrationClosed(quest)
                     ? "Inscriptions fermees"
@@ -62,7 +70,12 @@ export function QuestsListSection({ data }: { data: Quest[] }) {
                 </Badge>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Link href={`/quests/${quest.slug}`} likeButton whileTap size="xs">
+                <Link
+                  href={`/quests/${quest.slug}`}
+                  likeButton
+                  whileTap
+                  size="xs"
+                >
                   Voir le quest
                 </Link>
                 <Link

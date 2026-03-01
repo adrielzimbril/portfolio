@@ -1,24 +1,37 @@
+import React from "react";
+import { HeaderSection } from "./sections/HeaderSection";
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { getLocale } from "next-intl/server";
 import logger from "@/utils/logger";
 import { getAllQuests } from "@/module/content/utils/lib/quests";
-import { HeaderSection } from "./sections/HeaderSection";
-import { QuestsListSection } from "./sections/QuestsListSection";
-import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { MyQuestsSection } from "./sections/MyQuestsSection";
 
-export const metadata: Metadata = {
-  ...baseMetadata,
-  title: "Quests | Adriel Zimbril",
-  description:
-    "Liste des quests: objectifs, recompenses, participants et gagnants.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
 
-export default function QuestsPage() {
-  return <QuestsPageContent />;
+  const metadata: Metadata = {
+    ...baseMetadata,
+    title: t("quests.title"),
+    description: t("quests.description"),
+    keywords: t("quests.keywords"),
+    openGraph: {
+      ...baseMetadata.openGraph,
+      title: t("quests.title"),
+      description: t("quests.description"),
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: t("quests.title"),
+      description: t("quests.description"),
+    },
+  };
+
+  return metadata;
 }
 
-async function QuestsPageContent() {
+export default async function MyQuests() {
   const locale = await getLocale();
   const data = await getAllQuests({ locale }).catch((err) => {
     logger.error(err);
@@ -28,7 +41,7 @@ async function QuestsPageContent() {
   return (
     <>
       <HeaderSection />
-      <QuestsListSection data={data} />
+      <MyQuestsSection data={data} />
       <CallToAction isPage />
     </>
   );
