@@ -73,4 +73,14 @@ export const apiRoutes = {
     link: getPathUrl("/api/stats/views"),
     accept: [requestType.GET],
   },
+  challengesRegister: (slug: string) => ({
+    key: "challenges-register",
+    link: getPathUrl(`/api/challenges/${slug}/register`),
+    accept: [requestType.POST],
+  }),
+  challengesSubmit: (slug: string) => ({
+    key: "challenges-submit",
+    link: getPathUrl(`/api/challenges/${slug}/submit`),
+    accept: [requestType.POST],
+  }),
 };

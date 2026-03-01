@@ -12,9 +12,12 @@ const withNextIntl = nextIntlPlugin({
   },
 });
 
+const IsDEV = process.env.NODE_ENV === "development";
+
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
+    dangerouslyAllowLocalIP: IsDEV,
     remotePatterns: [
       {
         protocol: "https",

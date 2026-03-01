@@ -68,6 +68,20 @@ export const routes = {
     inHeader: false,
     inSitemap: true,
   },
+  masterclasses: {
+    name: "Masterclasses",
+    key: "masterclasses",
+    link: "/masterclasses",
+    inHeader: false,
+    inSitemap: true,
+  },
+  challenges: {
+    name: "Challenges",
+    key: "challenges",
+    link: "/challenges",
+    inHeader: false,
+    inSitemap: true,
+  },
   rss: {
     name: "RSS",
     key: "rss",
