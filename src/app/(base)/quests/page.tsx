@@ -3,7 +3,7 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { getLocale } from "next-intl/server";
 import logger from "@/utils/logger";
 import { getAllQuests } from "@/module/content/utils/lib/quests";
-import { QuestsHeaderSection } from "./sections/QuestsHeaderSection";
+import { HeaderSection } from "./sections/HeaderSection";
 import { QuestsListSection } from "./sections/QuestsListSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 
@@ -27,7 +27,7 @@ async function QuestsPageContent() {
 
   return (
     <>
-      <QuestsHeaderSection />
+      <HeaderSection />
       <QuestsListSection data={data} />
       <CallToAction isPage />
     </>

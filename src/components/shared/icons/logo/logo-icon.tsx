@@ -3,9 +3,9 @@ import { IconProps } from "@/components/shared/icons/type";
 
 export const LogoIcon = ({ className }: IconProps) => (
   <svg
-    width="56"
-    height="56"
-    viewBox="0 0 56 56"
+    width="1024"
+    height="1024"
+    viewBox="0 0 1024 1024"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

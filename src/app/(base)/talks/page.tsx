@@ -6,6 +6,7 @@ import { getAllTalks } from "@/module/content/utils/lib/talks";
 import { TalksHeaderSection } from "./sections/TalksHeaderSection";
 import { TalksListSection } from "./sections/TalksListSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { HeaderSection } from "./sections/HeaderSection";
 
 export const metadata: Metadata = {
   ...baseMetadata,
@@ -27,7 +28,7 @@ async function TalksPageContent() {
 
   return (
     <>
-      <TalksHeaderSection />
+      <HeaderSection />
       <TalksListSection data={data} />
       <CallToAction isPage />
     </>

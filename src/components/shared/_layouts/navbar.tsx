@@ -6,18 +6,18 @@ import { cn } from "@/utils/utils";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion, useScroll, Variants } from "motion/react";
 import { useEffect, useState } from "react";
-import { LogoName } from "@/components/shared/icons/logo/logo-name";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
-import { getActivePathInArray, sleep } from "@/utils";
+import { getActivePathInArray, getImageUrl, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
 import { LogoIcon } from "../icons/logo/logo-icon";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
+import Image from "next/image";
 
-const INITIAL_WIDTH = "70rem";
-const MAX_WIDTH = "68rem";
+const INITIAL_WIDTH = "68rem";
+const MAX_WIDTH = "65rem";
 
 // Animation variants
 const overlayVariants = {
@@ -86,7 +86,7 @@ export function Navbar() {
 
   // Find the current route directly from filtered menu routes
   const currentRoute = menuRoutesFiltered.find(
-    (item) => item.link === activePath
+    (item) => item.link === activePath,
   );
   const currentKey = currentRoute?.key || routes.home.key;
   const [activeTab, setActiveTab] = useState<string>(currentKey);
@@ -95,21 +95,24 @@ export function Navbar() {
     <header
       className={cn(
         "sticky z-50 flex justify-center transition-all duration-300 md:mx-0",
-        hasScrolled ? "top-6" : "top-4 mx-0"
+        hasScrolled ? "top-6" : "top-4 mx-0",
       )}
     >
       <motion.div
         //initial={{ width: INITIAL_WIDTH }}
         animate={{ width: hasScrolled ? MAX_WIDTH : INITIAL_WIDTH }}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-        className="container p-0 w-full!"
+        className={cn(
+          "container p-0",
+          // "w-full!"
+        )}
       >
         <div
           className={cn(
             "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white",
             hasScrolled
               ? "px-2 py-1 shadow-lg backdrop-blur-lg bg-b-white/80"
-              : "shadow-none"
+              : "shadow-none",
           )}
         >
           <div className="flex h-[56px] items-center justify-between px-2 md:p-4">
@@ -122,19 +125,20 @@ export function Navbar() {
               size="none"
               className="flex items-center gap-1 md:gap-2"
             >
-              <LogoIcon
-                className={cn(
-                  "w-10! lg:w-12! h-10! lg:h-12!"
-                  // hasScrolled && "w-10! h-10!"
-                )}
+              <Image
+                className="size-10! lg:size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
+                src={getImageUrl("icon-three.png")}
+                alt={siteConfig.description}
+                width={256}
+                height={256}
               />
-              <LogoName
+              {/* <LogoName
                 className={cn(
                   "hidden lg:block",
                   "h-5! qlg:h-6! w-48! qlg:w-60! flex-shrink-0"
                   // hasScrolled && "h-3.5! w-36!"
                 )}
-              />
+              /> */}
             </Link>
 
             <NavMenu
@@ -202,8 +206,20 @@ export function Navbar() {
                         });
                       }}
                     >
-                      <LogoIcon className={cn("size-12")} />
-                      <LogoName className={cn("h-8! flex-shrink-0")} />
+                      <Image
+                        className="size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
+                        src={getImageUrl("icon-three.png")}
+                        alt={siteConfig.description}
+                        width={256}
+                        height={256}
+                      />
+                      {/* <LogoIcon
+                        className={cn(
+                          "size-12! rounded-2xl overflow-hidden",
+                          // hasScrolled && "w-10! h-10!"
+                        )}
+                      /> */}
+                      {/* <LogoName className={cn("h-8! shrink-0")} /> */}
                     </Link>
                     <Button
                       onClick={toggleDrawer}
@@ -225,7 +241,7 @@ export function Navbar() {
                             "w-full p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
                             activeTab === item.key
                               ? "squircle-b-white-invert-fr"
-                              : "squircle-sh-white"
+                              : "squircle-sh-white",
                           )}
                           variants={drawerMenuVariants}
                         >
@@ -235,7 +251,7 @@ export function Navbar() {
                               "w-full underline-offset-4 hover:text-b-white-invert/80 transition-colors",
                               activeTab === item.key
                                 ? "text-b-white-invert font-medium"
-                                : "text-b-white-invert/80"
+                                : "text-b-white-invert/80",
                             )}
                             onClick={async () => {
                               setActiveTab(item.key);
