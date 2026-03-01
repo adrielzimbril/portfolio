@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { appConfig } from "@/data/app-config";
-import { getChallengeBySlug, isSubmissionClosed } from "@/data/challenges-masterclasses";
+import {
+  getChallengeBySlug,
+  isRegistrationClosed,
+} from "@/module/content/utils/lib/challenges";
 import { addContact, ContactProvider } from "@/module/contact";
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
@@ -14,7 +17,7 @@ export async function POST(
   try {
     const db = supabase as any;
     const { slug } = await params;
-    const challenge = getChallengeBySlug(slug);
+    const challenge = await getChallengeBySlug(slug);
 
     if (!challenge) {
       return new Response(JSON.stringify({ error: "CHALLENGE_NOT_FOUND" }), {
@@ -22,7 +25,7 @@ export async function POST(
       });
     }
 
-    if (isSubmissionClosed(challenge)) {
+    if (isRegistrationClosed(challenge)) {
       return new Response(
         JSON.stringify({ error: "CHALLENGE_REGISTRATION_CLOSED" }),
         { status: 400 }

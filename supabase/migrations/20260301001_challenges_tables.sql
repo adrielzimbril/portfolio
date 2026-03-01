@@ -28,8 +28,13 @@ create table if not exists public.challenge_submissions (
   email text not null,
   work_title text not null,
   work_url text not null,
+  portfolio_url text,
+  figma_url text,
+  poster_url text,
   message text,
   status text not null default 'received',
+  is_public boolean not null default false,
+  winner_rank int,
   ip text,
   meta jsonb
 );
@@ -39,4 +44,3 @@ create unique index if not exists challenge_submissions_unique
 
 create index if not exists challenge_submissions_challenge_idx
   on public.challenge_submissions (challenge_slug);
-

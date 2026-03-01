@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { apiRoutes } from "@/data/api-routes";
-import { ChallengeItem } from "@/data/challenges-masterclasses";
+import type { Challenge } from "@/module/content/utils/lib/challenges";
 import { getHumanDate } from "@/utils";
 
 const schema = z.object({
@@ -27,6 +27,9 @@ const schema = z.object({
   email: z.email("Email invalide"),
   workTitle: z.string().min(3, "Titre requis"),
   workUrl: z.url("URL invalide"),
+  portfolioUrl: z.url("URL invalide").optional().or(z.literal("")),
+  figmaUrl: z.url("URL invalide").optional().or(z.literal("")),
+  posterUrl: z.url("URL invalide").optional().or(z.literal("")),
   message: z.string().max(1500, "Message trop long").optional(),
 });
 
@@ -36,7 +39,7 @@ export function ChallengeSubmissionForm({
   challenge,
   isClosed,
 }: {
-  challenge: ChallengeItem;
+  challenge: Challenge;
   isClosed: boolean;
 }) {
   const locale = useLocale();
@@ -47,6 +50,9 @@ export function ChallengeSubmissionForm({
       email: "",
       workTitle: "",
       workUrl: "",
+      portfolioUrl: "",
+      figmaUrl: "",
+      posterUrl: "",
       message: "",
     },
   });
@@ -78,7 +84,7 @@ export function ChallengeSubmissionForm({
           <div>
             <h3 className="h5">Soumettre son travail</h3>
             <p className="text-sm text-b-white-invert-sec">
-              Deadline: {getHumanDate(challenge.submissionDeadline)}. Après cette
+              Deadline: {getHumanDate(challenge.submission_deadline)}. Après cette
               date, les soumissions sont verrouillées.
             </p>
           </div>
@@ -145,6 +151,47 @@ export function ChallengeSubmissionForm({
                     </FormItem>
                   )}
                 />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="portfolioUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Portfolio (optionnel)</FormLabel>
+                        <FormControl>
+                          <Input {...field} variant="secondary" placeholder="https://..." />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="figmaUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Figma (optionnel)</FormLabel>
+                        <FormControl>
+                          <Input {...field} variant="secondary" placeholder="https://figma.com/..." />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="posterUrl"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Affiche (optionnel)</FormLabel>
+                        <FormControl>
+                          <Input {...field} variant="secondary" placeholder="https://..." />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <FormField
                   control={form.control}
                   name="message"
@@ -175,4 +222,3 @@ export function ChallengeSubmissionForm({
     </SectionLayout>
   );
 }
-

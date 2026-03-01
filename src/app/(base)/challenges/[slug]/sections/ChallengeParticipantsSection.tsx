@@ -1,28 +1,57 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/components/ui/link";
-import { ChallengeItem } from "@/data/challenges-masterclasses";
+import { apiRoutes } from "@/data/api-routes";
+
+type Participant = {
+  id: string;
+  name: string;
+  work_title: string;
+  work_url: string;
+  portfolio_url: string | null;
+  figma_url: string | null;
+  poster_url: string | null;
+  winner_rank: number | null;
+};
 
 export function ChallengeParticipantsSection({
-  challenge,
+  challengeSlug,
 }: {
-  challenge: ChallengeItem;
+  challengeSlug: string;
 }) {
+  const [participants, setParticipants] = useState<Participant[]>([]);
+
+  useEffect(() => {
+    const run = async () => {
+      try {
+        const res = await fetch(apiRoutes.challengesParticipants(challengeSlug).link);
+        const data = await res.json();
+        setParticipants(data.participants || []);
+      } catch {
+        setParticipants([]);
+      }
+    };
+    run();
+  }, [challengeSlug]);
+
   return (
     <SectionLayout>
       <div className="space-y-4 w-full">
-        <h2 className="h4">Participants</h2>
-        {challenge.participants.length === 0 && (
+        <h2 className="h4">Participants et vainqueurs</h2>
+        {participants.length === 0 && (
           <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
             <CardContent className="p-5 md:p-6 text-b-white-invert-sec">
-              Aucun participant publié pour le moment.
+              Les participants seront affiches ici depuis le backend.
             </CardContent>
           </Card>
         )}
-        {challenge.participants.map((participant, index) => (
+        {participants.map((participant) => (
           <Card
-            key={`${participant.name}-${participant.projectTitle}-${index}`}
+            key={participant.id}
             className="w-full squircle squircle-b-base squircle-smooth-xl border"
           >
             <CardContent className="p-5 md:p-6 space-y-3">
@@ -30,32 +59,28 @@ export function ChallengeParticipantsSection({
                 <div>
                   <p className="font-semibold">{participant.name}</p>
                   <p className="text-sm text-b-white-invert-sec">
-                    {participant.projectTitle}
+                    {participant.work_title}
                   </p>
                 </div>
-                {participant.winnerRank && (
-                  <Badge>🏆 Top {participant.winnerRank}</Badge>
-                )}
+                {participant.winner_rank && <Badge>🏆 Top {participant.winner_rank}</Badge>}
               </div>
-              {participant.posterLabel && (
-                <div className="rounded-2xl border p-3 bg-b-white-invert-fr text-sm font-medium text-b-base-accent">
-                  {participant.posterLabel}
-                </div>
-              )}
               <div className="flex flex-wrap gap-2">
-                {participant.portfolioUrl && (
-                  <Link href={participant.portfolioUrl} likeButton whileTap>
+                <Link href={participant.work_url} likeButton whileTap>
+                  Travail
+                </Link>
+                {participant.portfolio_url && (
+                  <Link href={participant.portfolio_url} likeButton whileTap variant="secondary">
                     Portfolio
                   </Link>
                 )}
-                {participant.figmaUrl && (
-                  <Link href={participant.figmaUrl} likeButton whileTap>
+                {participant.figma_url && (
+                  <Link href={participant.figma_url} likeButton whileTap variant="secondary">
                     Figma
                   </Link>
                 )}
-                {participant.projectUrl && (
-                  <Link href={participant.projectUrl} likeButton whileTap>
-                    Projet
+                {participant.poster_url && (
+                  <Link href={participant.poster_url} likeButton whileTap variant="secondary">
+                    Affiche
                   </Link>
                 )}
               </div>

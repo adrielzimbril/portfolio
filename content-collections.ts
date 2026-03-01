@@ -443,6 +443,64 @@ const resources = defineCollection({
   },
 });
 
+const masterclasses = defineCollection({
+  name: "masterclasses",
+  directory: `${BASE_COLLECTION_PATH}/masterclasses`,
+  include: "*.{mdx,md}",
+  schema: z.object({
+    id: z.number(),
+    title: z.string(),
+    slug: z.string(),
+    excerpt: z.string(),
+    cover: z.string().optional(),
+    role: z.enum(["panel", "author", "speaker", "mentor"]),
+    event_date: z.string(),
+    created_at: z.string(),
+    updated_at: z.string().optional(),
+    published: z.boolean(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
+    return {
+      ...document,
+      body,
+      locale,
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+
+const challenges = defineCollection({
+  name: "challenges",
+  directory: `${BASE_COLLECTION_PATH}/challenges`,
+  include: "*.{mdx,md}",
+  schema: z.object({
+    id: z.number(),
+    title: z.string(),
+    slug: z.string(),
+    excerpt: z.string(),
+    cover: z.string().optional(),
+    registration_deadline: z.string(),
+    submission_deadline: z.string(),
+    challenge_end: z.string(),
+    rewards: z.array(z.string()).default([]),
+    created_at: z.string(),
+    updated_at: z.string().optional(),
+    published: z.boolean(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
+    return {
+      ...document,
+      body,
+      locale,
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+
 export default defineConfig({
   collections: [
     // Metadata collections
@@ -456,5 +514,7 @@ export default defineConfig({
     posts,
     projects,
     resources,
+    masterclasses,
+    challenges,
   ],
 });

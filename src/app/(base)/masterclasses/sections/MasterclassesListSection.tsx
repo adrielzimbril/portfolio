@@ -1,54 +1,56 @@
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "@/components/ui/link";
-import {
-  getMasterclassRoleLabel,
-  masterclasses,
-} from "@/data/challenges-masterclasses";
-import { getHumanDate } from "@/utils";
+"use client";
 
-export function MasterclassesListSection() {
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "@/components/ui/link";
+import { useLoadMore } from "@/hooks/useLoadMore";
+import { getHumanDate } from "@/utils";
+import type { Masterclass } from "@/module/content/utils/lib/masterclasses";
+
+export function MasterclassesListSection({ data }: { data: Masterclass[] }) {
+  const { data: list, loadMore, loading, hasMore, loadedItems, totalItems } =
+    useLoadMore({
+      dataSource: data,
+      initialCount: 4,
+      incrementCount: 4,
+    });
+
   return (
-    <SectionLayout>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
-        {masterclasses.map((item) => (
-          <Card
-            key={item.slug}
-            className="squircle squircle-b-base squircle-smooth-xl border"
-          >
-            <CardContent className="p-5 md:p-6 space-y-4">
+    <LoadMoreSection
+      hasMore={hasMore}
+      loading={loading}
+      onLoadMore={loadMore}
+      loadedItems={loadedItems}
+      totalItems={totalItems}
+    >
+      {list.map((item) => (
+        <Card
+          key={item.slug}
+          className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
+        >
+          <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
+            <div className="flex flex-col gap-4">
               <div className="rounded-2xl border p-4 bg-b-white-invert-fr">
                 <p className="text-sm font-medium text-b-base-accent">
-                  {item.posterLabel}
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h2 className="text-xl font-semibold">{item.title}</h2>
-                <p className="text-b-white-invert-sec text-sm">
-                  {item.description}
+                  {item.title}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <Badge>{getHumanDate(item.date)}</Badge>
-                <Badge variant="secondary">
-                  {getMasterclassRoleLabel(item.role)}
-                </Badge>
+                <Badge>{getHumanDate(item.event_date)}</Badge>
+                <Badge variant="secondary">{item.role}</Badge>
               </div>
-              {item.links && item.links.length > 0 && (
-                <div className="flex gap-2 flex-wrap">
-                  {item.links.map((link) => (
-                    <Link key={link.href} href={link.href} likeButton whileTap>
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </SectionLayout>
+              <p className="text-xl font-medium text-b-white-invert-sec line-clamp-3">
+                {item.excerpt}
+              </p>
+              <Link href={`/masterclasses#${item.slug}`} likeButton whileTap size="xs">
+                Voir la masterclass
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </LoadMoreSection>
   );
 }
 

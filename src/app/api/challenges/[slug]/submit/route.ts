@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { appConfig } from "@/data/app-config";
-import { getChallengeBySlug, isSubmissionClosed } from "@/data/challenges-masterclasses";
+import {
+  getChallengeBySlug,
+  isSubmissionClosed,
+} from "@/module/content/utils/lib/challenges";
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
 import { Locale } from "@/types";
@@ -13,7 +16,7 @@ export async function POST(
   try {
     const db = supabase as any;
     const { slug } = await params;
-    const challenge = getChallengeBySlug(slug);
+    const challenge = await getChallengeBySlug(slug);
 
     if (!challenge) {
       return new Response(JSON.stringify({ error: "CHALLENGE_NOT_FOUND" }), {
@@ -34,6 +37,9 @@ export async function POST(
       email,
       workTitle,
       workUrl,
+      portfolioUrl,
+      figmaUrl,
+      posterUrl,
       message,
       locale,
     }: {
@@ -41,6 +47,9 @@ export async function POST(
       email?: string;
       workTitle?: string;
       workUrl?: string;
+      portfolioUrl?: string;
+      figmaUrl?: string;
+      posterUrl?: string;
       message?: string;
       locale?: Locale;
     } = body;
@@ -84,9 +93,14 @@ export async function POST(
           email,
           work_title: workTitle,
           work_url: workUrl,
+          portfolio_url: portfolioUrl ?? null,
+          figma_url: figmaUrl ?? null,
+          poster_url: posterUrl ?? null,
           message: message ?? null,
           ip: ip ?? null,
           status: "received",
+          is_public: false,
+          winner_rank: null,
           meta: {
             origin: req.headers.get("origin"),
             referer: req.headers.get("referer"),
