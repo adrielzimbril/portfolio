@@ -179,22 +179,16 @@ export default async function Icon() {
   try {
     // Get the host from headers
     return new ImageResponse(
-      (
-        // ImageResponse JSX element
-        <div tw="flex flex-col h-full w-full justify-center items-center bg-transparent color-white text-2xl font-bold">
-          <img
-            src={url}
-            alt={alt}
-            tw="flex-shrink-0 h-full w-full object-contain"
-          />
-        </div>
-      ),
+      // ImageResponse JSX element
+      <div tw="flex flex-col h-full w-full justify-center items-center bg-transparent text-2xl font-bold">
+        <img src={url} alt={alt} tw="flex-shrink-0 h-full w-full" />
+      </div>,
       // ImageResponse options
       {
         // For convenience, we can re-use the exported icons size metadata
         // config to also set the ImageResponse's width and height.
         ...size,
-      }
+      },
     );
   } catch (error) {
     return new Response(`Failed to generate image`, { status: 500 });
