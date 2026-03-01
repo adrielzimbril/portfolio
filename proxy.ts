@@ -6,7 +6,7 @@ import { type NextRequest } from "next/server";
 
 const intlMiddleware = createMiddleware(routing);
 
-export default async function middleware(req: NextRequest) {
+export default async function proxy(req: NextRequest) {
   const { nextUrl, headers } = req;
   const { pathname, origin } = nextUrl;
   const { country, forwardedIp, realIp } = {

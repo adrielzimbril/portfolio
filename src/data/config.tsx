@@ -89,7 +89,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/ph",
           icon: "",
           navbar: false,
-          available: true,
+          available: false,
         },
         peerlist: {
           name: "Peerlist",
@@ -97,7 +97,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/pl",
           icon: "",
           navbar: false,
-          available: true,
+          available: false,
         },
         layers: {
           name: "Layers",
@@ -105,7 +105,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/ly",
           icon: AurthleIcons.Layersto,
           navbar: false,
-          available: true,
+          available: false,
         },
         dribbble: {
           name: "Dribbble",
@@ -113,7 +113,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/db",
           icon: AurthleIcons.Dribbble,
           navbar: true,
-          available: true,
+          available: false,
         },
         x: {
           name: "X",
@@ -121,7 +121,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/x",
           icon: AurthleIcons.Xtwitter,
           navbar: false,
-          available: true,
+          available: false,
         },
         youtube: {
           name: "Youtube",
@@ -137,7 +137,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/fg",
           icon: AurthleIcons.Figma,
           navbar: false,
-          available: true,
+          available: false,
         },
         tiktok: {
           name: "Tiktok",
@@ -145,7 +145,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/tt",
           icon: AurthleIcons.Tiktok,
           navbar: false,
-          available: true,
+          available: false,
         },
       },
       socialConcept: {
@@ -161,19 +161,6 @@ export const siteConfig = {
         },
       },
     },
-  },
-  faqSection: {
-    title: "Frequently Asked Questions",
-    description:
-      "Answers to common questions about SkyAgent and its features. If you have any other questions, please don't hesitate to contact us.",
-    faQitems: [
-      {
-        id: 1,
-        question: "What is an AI Agent?",
-        answer:
-          "An AI Agent is an intelligent software program that can perform tasks autonomously, learn from interactions, and make decisions to help achieve specific goals. It combines artificial intelligence and machine learning to provide personalized assistance and automation.",
-      },
-    ],
   },
 };
 
