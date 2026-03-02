@@ -8,7 +8,7 @@ interface TagsProps {
   primaryTagColor?: DEFAULT_COLOR_CODE_NAME_LIST;
   secondaryTag?: string;
   secondaryTagColor?: DEFAULT_COLOR_CODE_NAME_LIST;
-  tags?: string[];
+  tags: string[];
   isCentered?: boolean;
   className?: string;
 }
@@ -56,7 +56,7 @@ export function Tags({
         </Badge>
       )}
 
-      {tags?.map((tag, index) => (
+      {tags.map((tag, index) => (
         <Badge key={index}>{tag}</Badge>
       ))}
     </div>
