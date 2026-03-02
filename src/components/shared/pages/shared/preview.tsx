@@ -47,7 +47,7 @@ export function CardPreview({
     >
       <Link
         href={isCustomUrl ? getExternalUrl(slug) : getResourcesUrl(type, slug!)}
-        className="flex w-full"
+        className="flex size-full"
       >
         {cover ? (
           <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
@@ -84,18 +84,18 @@ function PreviewContent({
   description: string;
 }) {
   return (
-    <div className="flex flex-col items-start gap-3 w-full max-w-[90%] mx-auto">
-      <>
+    <div className="flex flex-col size-full h-48 md:h-72 max-w-[90%] mx-auto transition-all duration-800 ease hover:scale-105">
+      <div className="flex flex-col items-start place-content-center gap-3 size-full pointer-events-none">
         <h4 className="text-3xl tracking-wide leading-[120%]">
           {emoji}
           <br />
           {title}
         </h4>
 
-        <p className="font-medium text-b-white-invert-thr text-2xl leading-[120%]">
+        <p className="font-medium text-b-white-invert-thr text-2xl line-clamp-3 leading-[120%]">
           {description}
         </p>
-      </>
+      </div>
     </div>
   );
 }

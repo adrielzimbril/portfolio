@@ -18,6 +18,7 @@ export function CardInfo({
   features,
   //avatars,
   userCount,
+  action,
 }: {
   title: string;
   slug: string;
@@ -27,39 +28,19 @@ export function CardInfo({
   features: string[];
   //avatars: string[];
   userCount?: number;
+  action?: {
+    label: string;
+    href: string;
+  } | null;
 }) {
   const t = useTranslations();
   const { count: avatarCount } = useProductSlugRequestsCount(slug);
-
-  const productTypeMap: Record<ResourceType, string> = {
-    [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.title",
-    ),
-    [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.title",
-    ),
-    [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.title",
-    ),
-    [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.title",
-    ),
-    [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.title",
-    ),
-    [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.title",
-    ),
-  };
-
-  // const productType = productTypeMap[resourceType] ?? "";
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 w-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
         <Header title={title} slug={slug} />
 
-        {/* <Tags primaryTag={productType} tags={tags.map((tag) => tag.name)} /> */}
         <Tags
           primaryTag={tags[0]?.name}
           primaryTagColor={tags[0]?.meta?.color}
@@ -78,7 +59,7 @@ export function CardInfo({
         /> */}
       </div>
 
-      <Action slug={slug} />
+      {action ? <Action label={action.label} href={action.href} /> : null}
     </div>
   );
 }
@@ -117,42 +98,14 @@ function Description({
   );
 }
 
-function Action({ slug }: { slug: string }) {
-  const t = useTranslations();
-
-  const productTypeMap: Record<ResourceType, string> = {
-    [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.button",
-    ),
-    [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.button",
-    ),
-    [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.button",
-    ),
-    [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.button",
-    ),
-    [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.button",
-    ),
-    [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.button",
-    ),
-  };
-
+function Action({ label, href }: { label: string; href: string }) {
   return (
-    <Link
-      href={getResourcesUrl(PageType.HUB, slug)}
-      likeButton
-      whileTap
-      size="xs"
-      asIcon
-    >
+    <Link href={href} likeButton whileTap size="xs" asIcon>
       <span className="flex items-center gap-1">
-        Participer
+        {label}
         <LinkDiagonalOne size={16} />
       </span>
     </Link>
   );
 }
+

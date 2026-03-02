@@ -22,14 +22,49 @@ export async function getAllQuests(
     ...options,
   };
 
+  const now = new Date();
+  
   return Promise.resolve(
     allQuests
       .filter(
-        (item) => item.published === published && (!locale || item.locale === locale)
+        (item) =>
+          item.published === published && (!locale || item.locale === locale),
       )
-      .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
+      .sort((a, b) => {
+        const inscriptionA = new Date(a.registration_deadline);
+        const submissionA = new Date(a.submission_deadline);
+        const resultsA = new Date(a.quest_end);
+
+        const inscriptionB = new Date(b.registration_deadline);
+        const submissionB = new Date(b.submission_deadline);
+        const resultsB = new Date(b.quest_end);
+
+        // Categorize items
+        const getStatus = (
+          inscription: Date,
+          submission: Date,
+          results: Date,
+        ) => {
+          // Priority: Ongoing (0) > Upcoming (1) > In Submission (1.5) > Past (2)
+          if (now < inscription) return { priority: 1, date: inscription }; // upcoming
+          if (now < submission) return { priority: 0, date: inscription }; // ongoing - sort by end of registration
+          if (now < results) return { priority: 1.5, date: submission }; // in submission - then by submission
+          return { priority: 2, date: results }; // past
+        };
+
+        const statusA = getStatus(inscriptionA, submissionA, resultsA);
+        const statusB = getStatus(inscriptionB, submissionB, resultsB);
+
+        // Sort by priority first, then by date
+        if (statusA.priority !== statusB.priority) {
+          return statusA.priority - statusB.priority;
+        }
+
+        // In the same category, sort by date (the closest first)
+        return statusA.date.getTime() - statusB.date.getTime();
+      })
       .filter((item) => item.slug !== pageSlug)
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
@@ -55,4 +90,9 @@ export function isSubmissionClosed(quest: Quest): boolean {
     now > new Date(quest.submission_deadline).getTime() ||
     now > new Date(quest.quest_end).getTime()
   );
+}
+
+export function isResultsPublished(quest: Quest): boolean {
+  const now = Date.now();
+  return now > new Date(quest.quest_end).getTime();
 }
