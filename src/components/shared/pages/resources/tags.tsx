@@ -6,6 +6,8 @@ import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
 interface TagsProps {
   primaryTag?: string;
   primaryTagColor?: DEFAULT_COLOR_CODE_NAME_LIST;
+  secondaryTag?: string;
+  secondaryTagColor?: DEFAULT_COLOR_CODE_NAME_LIST;
   tags: string[];
   isCentered?: boolean;
   className?: string;
@@ -14,6 +16,8 @@ interface TagsProps {
 export function Tags({
   primaryTag,
   primaryTagColor,
+  secondaryTag,
+  secondaryTagColor,
   tags,
   isCentered,
   className,
@@ -36,6 +40,19 @@ export function Tags({
           variant="colored"
         >
           {primaryTag}
+        </Badge>
+      )}
+
+      {secondaryTag && (
+        <Badge
+          className={cn(
+            pickRandomColor(
+              secondaryTagColor ?? DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+            ),
+          )}
+          variant="colored"
+        >
+          {secondaryTag}
         </Badge>
       )}
 

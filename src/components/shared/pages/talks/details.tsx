@@ -33,9 +33,7 @@ export function CardInfo({
         <Header title={title} slug={action?.href ?? ""} />
         {tags && (
           <Tags
-            primaryTag={`${
-              date ?? tags[0]?.name
-            } ${isToday ? " • Aujourd'hui" : ""}`}
+            primaryTag={date ?? tags[0]?.name}
             primaryTagColor={
               isDatePast
                 ? DEFAULT_COLOR_CODE_NAME_LIST.RED
@@ -43,13 +41,18 @@ export function CardInfo({
                   ? DEFAULT_COLOR_CODE_NAME_LIST.YELLOW
                   : DEFAULT_COLOR_CODE_NAME_LIST.BLUE
             }
+            secondaryTag={
+              isToday ? "Aujourd'hui" : isDatePast ? "Passé" : "À venir"
+            }
+            secondaryTagColor={
+              isDatePast
+                ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
+                : isToday
+                  ? DEFAULT_COLOR_CODE_NAME_LIST.PURPLE
+                  : DEFAULT_COLOR_CODE_NAME_LIST.GREEN
+            }
             className="capitalize"
-            tags={[
-              // First tag: date status
-              isToday ? "Aujourd'hui" : isDatePast ? "Passé" : "À venir",
-              // Then the other tags
-              ...tags.slice(date ? 0 : 1, date ? 4 : 5).map((tag) => tag.name),
-            ]}
+            tags={tags.map((tag) => tag.name)}
           />
         )}
         <Description description={excerpt} />
