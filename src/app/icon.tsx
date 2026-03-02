@@ -57,8 +57,8 @@ export function generateImageMetadata() {
 
 // Image generation
 export default async function Icon() {
-  // const url = getAbsolutePathUrl({ type: "s3", path: "/icon.svg" });
-  const url = getAbsolutePathUrl({ type: "s3", path: "/icon-three.png" });
+  const url = getAbsolutePathUrl({ type: "s3", path: "icon.svg" });
+  //const url = getAbsolutePathUrl({ type: "s3", path: "icon-three.png" });
   try {
     // Get the host from headers
     return new ImageResponse(

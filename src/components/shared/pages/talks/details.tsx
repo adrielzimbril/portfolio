@@ -48,7 +48,7 @@ export function CardInfo({
                   : DEFAULT_COLOR_CODE_NAME_LIST.BLUE
             }
             secondaryTag={
-              isToday ? "Aujourd'hui" : isDatePast ? "Passé" : "À venir"
+              isToday ? "Aujourd'hui" : isDatePast ? "Terminé" : "À venir"
             }
             secondaryTagColor={
               isDatePast

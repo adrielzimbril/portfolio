@@ -116,6 +116,7 @@ export function getApiBaseUrl(): string {
  * getResourcesUrl("hub", "slug"); // returns "https://base-url/hub/slug"
  * getResourcesUrl("projects"); // returns "https://base-url/projects"
  * getResourcesUrl("thoughts", "slug"); // returns "https://base-url/thoughts/slug"
+ * getResourcesUrl("quests", "slug"); // returns "https://base-url/quests/slug"
  */
 export function getResourcesUrl(
   resource: PageType,
@@ -123,6 +124,23 @@ export function getResourcesUrl(
 ): string {
   return `${getBaseUrl()}/${resource}${slug ? `/${slug}` : ""}`;
 }
+
+/**
+ * Gets the resource ask URL.
+ *
+ * @param {string} slug - The slug of the resource.
+ *
+ * Returns the resource ask URL.
+ * @returns {string} The resource ask URL.
+ *
+ * @example
+ * getResourceAskUrl("slug"); // returns "https://base-url/hub/get/slug"
+ */
+export function getResourceAskUrl(slug?: string): string {
+  if (!slug) return "";
+  return getResourcesUrl(PageType.HUB, `get/${slug}`);
+}
+
 
 /**
  * Gets the image URL.
@@ -147,9 +165,4 @@ export function getImageUrl(slug: string): string {
   const path = slug.replace(/^\/+/, "");
 
   return `${base}/${path}`;
-}
-
-export function getResourceAskUrl(slug?: string): string {
-  if (!slug) return "";
-  return getResourcesUrl(PageType.HUB, `get/${slug}`);
 }

@@ -26,6 +26,7 @@ export enum PageType {
   PROJECT = "projects",
   HUB = "hub",
   THOUGHT = "thoughts",
+  QUESTS = "quests",
 }
 
 export enum PreviewContentType {

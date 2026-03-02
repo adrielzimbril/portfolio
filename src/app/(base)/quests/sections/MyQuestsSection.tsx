@@ -52,6 +52,9 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
                 <Badge variant="secondary">
                   Soumission: {getHumanDate(quest.submission_deadline)}
                 </Badge>
+                <Badge variant="secondary">
+                  Résultats: {getHumanDate(quest.quest_end)}
+                </Badge>
                 <Badge
                   variant={
                     isRegistrationClosed(quest) ? "secondary" : "default"
@@ -78,24 +81,28 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
                 >
                   Voir le quest
                 </Link>
-                <Link
-                  href={`/quests/${quest.slug}/register`}
-                  likeButton
-                  whileTap
-                  size="xs"
-                  variant="secondary"
-                >
-                  S'inscrire
-                </Link>
-                <Link
-                  href={`/quests/${quest.slug}/travail/submit`}
-                  likeButton
-                  whileTap
-                  size="xs"
-                  variant="secondary"
-                >
-                  Soumettre son travail
-                </Link>
+                {!isRegistrationClosed(quest) && (
+                  <Link
+                    href={`/quests/${quest.slug}/register`}
+                    likeButton
+                    whileTap
+                    size="xs"
+                    variant="secondary"
+                  >
+                    S'inscrire
+                  </Link>
+                )}
+                {!isSubmissionClosed(quest) && (
+                  <Link
+                    href={`/quests/${quest.slug}/travail/submit`}
+                    likeButton
+                    whileTap
+                    size="xs"
+                    variant="secondary"
+                  >
+                    Soumettre son travail
+                  </Link>
+                )}
               </div>
             </div>
           </CardContent>

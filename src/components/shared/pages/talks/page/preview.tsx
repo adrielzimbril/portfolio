@@ -1,17 +1,8 @@
 "use client";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
-import { getExternalUrl, getImageUrl, getResourcesUrl } from "@/utils/base-url";
-import {
-  DeveloperFile,
-  Figma,
-  Notebook,
-  QueueTwo,
-  VideoFolder,
-  VideoLibrary,
-  VideoPlaylistOne,
-} from "@aurthle/icons";
-import { Link } from "@/components/ui/link";
+import { getImageUrl } from "@/utils/base-url";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useTranslations } from "use-intl";
 
 interface PreviewProps {
@@ -34,13 +25,39 @@ export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
       <div className="flex w-full cursor-pointer">
         {cover ? (
           <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
-            <Image
-              width={1200}
-              height={630}
-              className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
-              alt={title ?? ""}
-              src={getImageUrl(cover!)}
-            />
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  className="w-full text-left"
+                  aria-label={`Voir la cover de ${title ?? "l'event"}`}
+                >
+                  <Image
+                    width={1200}
+                    height={630}
+                    className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
+                    alt={title ?? ""}
+                    src={getImageUrl(cover)}
+                  />
+                </button>
+              </DialogTrigger>
+              <DialogContent
+                size="full"
+                className="max-w-6xl p-2 sm:p-3"
+                variant="glass"
+              >
+                <div className="w-full h-full max-h-[85vh] overflow-hidden rounded-xl pointer-events-none">
+                  <Image
+                    width={1920}
+                    height={1080}
+                    className="w-full h-full max-h-[85vh] object-contain pointer-events-none"
+                    alt={title ?? ""}
+                    src={getImageUrl(cover)}
+                    priority
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         ) : (
           <PreviewContent

@@ -40,6 +40,20 @@ export const routes = {
     inHeader: true,
     inSitemap: true,
   },
+  talks: {
+    name: "Talks",
+    key: "talks",
+    link: "/talks",
+    inHeader: true,
+    inSitemap: true,
+  },
+  quests: {
+    name: "Quests",
+    key: "quests",
+    link: "/quests",
+    inHeader: true,
+    inSitemap: true,
+  },
   submit: {
     name: "Soumettre",
     key: "submit",
@@ -66,20 +80,6 @@ export const routes = {
     key: "newsletter",
     link: "/newsletter",
     inHeader: false,
-    inSitemap: true,
-  },
-  talks: {
-    name: "Talks",
-    key: "talks",
-    link: "/talks",
-    inHeader: true,
-    inSitemap: true,
-  },
-  quests: {
-    name: "Quests",
-    key: "quests",
-    link: "/quests",
-    inHeader: true,
     inSitemap: true,
   },
   rss: {

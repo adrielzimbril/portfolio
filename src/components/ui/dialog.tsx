@@ -77,7 +77,7 @@ function DialogContent({
     modern:
       "squircle squircle-sh-white squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl squircle-border-4 squircle-border-b-base-accent",
     glass:
-      "squircle squircle-sh-white/80 squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl backdrop-blur-xl squircle-border-4 squircle-border-b-base-accent",
+      "squircle squircle-sh-white squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl squircle-border-4 squircle-border-b-base-accent",
   };
 
   return (
