@@ -53,7 +53,7 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
             title={talk.title}
             cover={talk.cover}
             excerpt={talk.excerpt || ""}
-            primaryTag={getHumanDate(talk.event_date)}
+            date={getHumanDate(talk.event_date, true)}
             tags={[{ name: talk.role }]}
             action={action}
           />

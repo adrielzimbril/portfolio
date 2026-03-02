@@ -78,11 +78,9 @@ export function getDate({
     : Intl.DateTimeFormat(lang, { dateStyle }).format(d);
 }
 
-
-
 /**
  * Get the current month
- * 
+ *
  * @returns The current month
  *
  * @example
@@ -90,12 +88,11 @@ export function getDate({
  * console.log(month); // Output: "august"
  */
 export const getThisMonth = () => {
-    const date = new Date();
-    return new Intl.DateTimeFormat("en", { month: "long" })
-      .format(date)
-      .toLowerCase();
-  };
-
+  const date = new Date();
+  return new Intl.DateTimeFormat("en", { month: "long" })
+    .format(date)
+    .toLowerCase();
+};
 
 /**
  * Calculate the difference between two dates with different output formats
@@ -127,7 +124,7 @@ export function getDateDifference(
   options?: {
     format?: "auto" | "short" | "precise" | "detailed";
     returnObject?: boolean;
-  }
+  },
 ):
   | string
   | {
@@ -298,14 +295,13 @@ export function getDateDifference(
   return formatted;
 }
 
-
 /**
  * Formats a number with K or M
- * 
+ *
  * @param n - The number to format
- * 
+ *
  * @returns A string representing the formatted number
- * 
+ *
  * @example
  * formatCount(1000) // returns "1K"
  */
@@ -315,18 +311,17 @@ export function formatCount(n: number) {
   return `${n}`;
 }
 
-
 /**
  * Formats a date string to a human-readable date
- * 
+ *
  * @param dateString - The date string to format
- * 
+ *
  * @returns A string representing the formatted date
- * 
+ *
  * @example
  * getHumanDate("2023-01-01") // returns "1 January 2023"
  */
-export function getHumanDate(dateString: string): string {
+export function getHumanDate(dateString: string, withTime?: boolean): string {
   const date = new Date(dateString);
 
   const formatted = date.toLocaleDateString("fr-FR", {
@@ -335,9 +330,101 @@ export function getHumanDate(dateString: string): string {
     year: "numeric",
   });
 
-  return formatted.replace(
+  const formattedDate = formatted.replace(
     /(\d{1,2}) (\w)(\w+)( \d{4})/,
     (_, d, firstLetter, rest, year) =>
-      `${d} ${firstLetter.toUpperCase()}${rest}${year}`
+      `${d} ${firstLetter.toUpperCase()}${rest}${year}`,
   );
+
+  if (withTime) {
+    const time = date.toLocaleTimeString("fr-FR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short",
+    });
+    return `${formattedDate} à ${time}`;
+  }
+
+  return formattedDate;
+}
+
+/**
+ * Formats a date string to a machine-readable date
+ *
+ * @param dateString - The date string to format
+ *
+ * @returns A string representing the formatted date
+ *
+ * @example
+ * getMachineDate("2023-01-01") // returns "2023-01-01T00:00:00[Europe/Paris]"
+ * getMachineDate("25 Avril 2026 à 14:30 UTC"); // returns "2026-04-25T14:30:00[UTC]"
+ * getMachineDate("April 25, 2026 at 2:30 PM"); // returns "2026-04-25T14:30:00[Europe/Paris]"
+ * getMachineDate("2026年4月25日 14:30"); // returns "2026-04-25T14:30:00[Europe/Paris]"
+ * getMachineDate("2026-04-25T14:30:00Z"); // returns "2026-04-25T14:30:00[Europe/Paris]"
+ */
+/**
+ * Formats a date string to a machine-readable date
+ *
+ * @param dateString - The date string to format
+ *
+ * @returns A string representing the formatted date
+ *
+ * @example
+ * getMachineDate("2023-01-01") // returns "2023-01-01T00:00:00[Europe/Paris]"
+ * getMachineDate("25 Avril 2026 à 14:30 UTC"); // returns "2026-04-25T14:30:00[UTC]"
+ * getMachineDate("April 25, 2026 at 2:30 PM"); // returns "2026-04-25T14:30:00[Europe/Paris]"
+ * getMachineDate("2026年4月25日 14:30"); // returns "2026-04-25T14:30:00[Europe/Paris]"
+ * getMachineDate("2026-04-25T14:30:00Z"); // returns "2026-04-25T14:30:00[Europe/Paris]"
+ */
+export function getMachineDate(dateString: string, withTimezone: boolean = false): string {
+  // Try to parse directly (works for ISO, timestamps, etc)
+  let date = new Date(dateString);
+
+  if (isNaN(date.getTime())) {
+    // Pattern: "25 Avril 2026 à 14:30" or "April 25, 2026 at 2:30 PM" or "2026年4月25日 14:30"
+    const numberMatch = dateString.match(
+      /(\d{1,2})[^\d\w]*(\d{1,2}|\w+)[^\d]*(\d{4})[^\d]*(\d{1,2})?[^\d]*(\d{1,2})?/,
+    );
+
+    if (numberMatch) {
+      const [, day, monthOrNum, year, hours = "0", minutes = "0"] = numberMatch;
+      
+      let month = Number(monthOrNum);
+      
+      // Si ce n'est pas un nombre, c'est le nom du mois
+      if (isNaN(month)) {
+        const monthNames: { [key: string]: number } = {
+          // Français
+          janvier: 1, février: 2, mars: 3, avril: 4, mai: 5, juin: 6,
+          juillet: 7, août: 8, septembre: 9, octobre: 10, novembre: 11, décembre: 12,
+          // Anglais
+          january: 1, february: 2, march: 3, april: 4, may: 5, june: 6,
+          july: 7, august: 8, september: 9, october: 10, november: 11, december: 12,
+          jan: 1, feb: 2, mar: 3, apr: 4, jun: 6,
+          jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
+          // Chinois
+          一月: 1, 二月: 2, 三月: 3, 四月: 4, 五月: 5, 六月: 6,
+          七月: 7, 八月: 8, 九月: 9, 十月: 10, 十一月: 11, 十二月: 12,
+        };
+        month = monthNames[monthOrNum?.toLowerCase() || ""] || 1;
+      }
+
+      date = new Date(
+        Number(year),
+        month - 1,
+        Number(day),
+        Number(hours),
+        Number(minutes),
+      );
+    }
+  }
+
+  if (isNaN(date.getTime())) {
+    throw new Error(`Invalid date format: ${dateString}`);
+  }
+
+  const isoDate = date.toISOString().replace("Z", "");
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  return withTimezone ? `${isoDate}[${timezone}]` : isoDate;
 }

@@ -7,14 +7,14 @@ export function TalksCard({
   title,
   cover,
   excerpt,
-  primaryTag,
+  date,
   tags = [],
   action,
 }: {
   title: string;
   cover?: string;
   excerpt: string;
-  primaryTag?: string;
+  date: string;
   tags?: { name: string }[];
   action?: {
     label: string;
@@ -28,7 +28,7 @@ export function TalksCard({
         <CardInfo
           title={title}
           excerpt={excerpt}
-          primaryTag={primaryTag}
+          date={date}
           tags={tags}
           action={action}
         />
