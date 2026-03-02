@@ -18,6 +18,21 @@ export function getBaseUrl(): string {
 
 /**
  * Gets the URL of a path.
+ * @param {string} url - The URL.
+ *
+ * Returns the URL of a path.
+ * @returns {string} The URL of the path.
+ *
+ * @example
+ * getExternalUrl("https://example.com"); // returns "https://example.com"
+ */
+export function getExternalUrl(url: string | null | undefined): string {
+  if (!url) return "";
+  return new URL(url, getBaseUrl()).href;
+}
+
+/**
+ * Gets the URL of a path.
  * @param {string} path - The path.
  *
  * Returns the URL of a path.

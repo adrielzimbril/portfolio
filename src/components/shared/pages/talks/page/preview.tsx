@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
-import { PageType, ResourceType } from "@/types/enum";
 import { getExternalUrl, getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import {
   DeveloperFile,
@@ -18,24 +17,11 @@ import { useTranslations } from "use-intl";
 interface PreviewProps {
   title?: string;
   cover?: string;
-  type: PageType;
-  slug?: string;
-  isCustomUrl?: boolean;
   coverText?: { emoji: string; title: string; description: string };
   isWide?: boolean;
-  resourceType?: ResourceType;
 }
 
-export function CardPreview({
-  title,
-  cover,
-  type,
-  slug,
-  isCustomUrl,
-  coverText,
-  isWide,
-  resourceType,
-}: PreviewProps) {
+export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
   const t = useTranslations();
   return (
     <div
@@ -45,10 +31,7 @@ export function CardPreview({
         cover ? "p-2 h-48 md:h-80" : "p-4",
       )}
     >
-      <Link
-        href={isCustomUrl ? getExternalUrl(slug) : getResourcesUrl(type, slug!)}
-        className="flex w-full"
-      >
+      <div className="flex w-full cursor-pointer">
         {cover ? (
           <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
             <Image
@@ -68,8 +51,7 @@ export function CardPreview({
             }
           />
         )}
-        {resourceType && <PreviewIcon resourceType={resourceType} />}
-      </Link>
+      </div>
     </div>
   );
 }
@@ -96,28 +78,6 @@ function PreviewContent({
           {description}
         </p>
       </>
-    </div>
-  );
-}
-
-export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
-  return (
-    <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-b-base [&_svg,svg_*]:fill-b-white-invert [&_svg,_svg_*]:color-b-white-invert rounded-full pointer-events-none overflow-hidden">
-      {resourceType === ResourceType.COURSE ? (
-        <VideoFolder size={24} variant="bulk" />
-      ) : resourceType === ResourceType.EBOOK ? (
-        <Notebook size={24} variant="bulk" />
-      ) : resourceType === ResourceType.VIDEO ? (
-        <VideoPlaylistOne size={24} variant="bulk" />
-      ) : resourceType === ResourceType.MASTERCLASS ? (
-        <QueueTwo size={24} variant="bulk" />
-      ) : resourceType === ResourceType.FIGMA_TEMPLATE ? (
-        <Figma size={24} variant="bulk" />
-      ) : resourceType === ResourceType.CODE ? (
-        <DeveloperFile size={24} variant="bulk" />
-      ) : (
-        <VideoLibrary size={24} variant="bulk" />
-      )}
     </div>
   );
 }

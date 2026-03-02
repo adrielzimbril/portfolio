@@ -2,22 +2,19 @@
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { getResourcesUrl } from "@/utils/base-url";
-import { PageType } from "@/types";
+import { getExternalUrl } from "@/utils/base-url";
 
 export function CardInfo({
   title,
   excerpt,
   primaryTag,
   tags,
-  slug,
   action,
 }: {
   title: string;
   excerpt: string;
   primaryTag?: string;
   tags: { name: string }[];
-  slug: string;
   action?: {
     label: string;
     href: string;
@@ -26,7 +23,7 @@ export function CardInfo({
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
-        <Header title={title} slug={slug} />
+        <Header title={title} slug={action?.href ?? ""} />
 
         {tags && (
           <Tags
@@ -47,7 +44,7 @@ export function CardInfo({
 
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
-    <Link href={getResourcesUrl(PageType.THOUGHT, slug)}>
+    <Link href={getExternalUrl(slug)}>
       <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
         {title}
       </h3>

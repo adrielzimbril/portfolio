@@ -63,8 +63,8 @@ export default async function Icon() {
     // Get the host from headers
     return new ImageResponse(
       // ImageResponse JSX element
-      <div tw="flex flex-col h-full w-full justify-center items-center bg-transparent text-2xl font-bold">
-        <img src={url} alt={alt} tw="flex-shrink-0 h-full w-full rounded-2xl" />
+      <div tw="flex flex-col h-full w-full justify-center items-center bg-transparent rounded-2xl text-2xl font-bold">
+        <img src={url} alt={alt} tw="flex-shrink-0 h-full w-full" />
       </div>,
       // ImageResponse options
       {
