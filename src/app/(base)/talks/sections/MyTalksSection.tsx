@@ -37,17 +37,8 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
         const eventTime = eventDate.getTime();
         const isPastEvent =
           Number.isFinite(eventTime) && currentTime >= eventTime;
-        const isToday =
-          eventDate.getFullYear() === today.getFullYear() &&
-          eventDate.getMonth() === today.getMonth() &&
-          eventDate.getDate() === today.getDate();
-        const canShowParticipants = isPastEvent || isToday;
         const replayUrl = getExternalUrl(talk.replay_url);
         const eventUrl = getExternalUrl(talk.event_url);
-        const participantsTag =
-          canShowParticipants && typeof talk.participants === "number"
-            ? [{ name: `${talk.participants} participants` }]
-            : [];
 
         const action = isPastEvent
           ? replayUrl
@@ -65,7 +56,8 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
             cover={talk.cover}
             excerpt={talk.excerpt || ""}
             date={getHumanDate(talk.event_date, true)}
-            tags={[{ name: talk.role }, ...participantsTag]}
+            tags={[{ name: talk.role }]}
+            participantsCount={talk.participants || 0}
             action={action}
           />
         );

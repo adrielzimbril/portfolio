@@ -3,21 +3,27 @@ import { useState } from "react";
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
 import { getExternalUrl } from "@/utils/base-url";
 import { getMachineDate } from "@/utils/format-date";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
+import { pickRandomColorCode } from "@/utils";
+import BoringAvatar from "boring-avatars";
 
 export function CardInfo({
   title,
   excerpt,
   date,
   tags,
+  participantsCount,
   action,
 }: {
   title: string;
   excerpt: string;
   date: string;
   tags: { name: string }[];
+  participantsCount: number;
   action?: {
     label: string;
     href: string;
@@ -56,9 +62,42 @@ export function CardInfo({
           />
         )}
         <Description description={excerpt} />
+        {(isDatePast || isToday) && participantsCount > 0 ? (
+          <ParticipantsStats count={participantsCount} />
+        ) : null}
       </div>
 
       {action ? <Action label={action.label} href={action.href} /> : null}
+    </div>
+  );
+}
+
+function ParticipantsStats({ count }: { count: number }) {
+  const visibleCount = Math.min(count, 5);
+  const colorSets = Array.from({ length: visibleCount }).map(() =>
+    Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
+  );
+
+  return (
+    <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl squircle-sh-white/99">
+      <div className="inline-flex items-start">
+        <AvatarGroup numPeople={count}>
+          {Array.from({ length: visibleCount }).map((_, index) => (
+            <Avatar key={index} className="w-6 h-6">
+              <AvatarFallback className="relative pointer-events-none">
+                <BoringAvatar
+                  name={`participant-${index + 1}`}
+                  colors={colorSets[index] ?? []}
+                  variant="beam"
+                />
+              </AvatarFallback>
+            </Avatar>
+          ))}
+        </AvatarGroup>
+      </div>
+      <span className="relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec">
+        {count} participants
+      </span>
     </div>
   );
 }
