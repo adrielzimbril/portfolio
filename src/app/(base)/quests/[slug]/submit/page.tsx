@@ -26,9 +26,9 @@ export default async function QuestWorkSubmitPage(props: {
   return (
     <>
       <PageHero
-        title={`Soumission | ${quest.title}`}
-        description="Soumets ton travail ici jusqu'a la date limite de soumission."
-        badge="Work submission"
+        title={`Soumettre pour ${quest.title}`}
+        description="Depose ton travail final ici avec tes liens et ton contexte. On confirme la reception juste apres l'envoi."
+        badge="Quest submission"
         imagePath={{ emoji: "🚀" }}
         isMobileShowed
       />

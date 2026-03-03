@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useId } from "react";
+import React, { useCallback, useId, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations, useLocale } from "next-intl";
-import { toast } from "sonner";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import { apiRoutes } from "@/data/api-routes";
 import { Label } from "@/components/ui/label";
+import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 
 enum Intention {
   UX_REVIEW = "ux_review",
@@ -41,6 +41,20 @@ const intentions = Object.values(Intention);
 export function IntentionForm() {
   const t = useTranslations();
   const locale = useLocale();
+  const [feedback, setFeedback] = useState<{
+    open: boolean;
+    status: "success" | "error";
+    title: string;
+    description: string;
+  }>({
+    open: false,
+    status: "success",
+    title: "",
+    description: "",
+  });
+  const closeFeedback = useCallback(() => {
+    setFeedback((prev) => ({ ...prev, open: false }));
+  }, []);
 
   const schema = z.object({
     intention: z.enum(intentions),
@@ -74,9 +88,22 @@ export function IntentionForm() {
       if (!res.ok) {
         throw new Error(data?.error || "REQUEST_FAILED");
       }
-      toast.success(t("submit.page.toast.success"));
-    } catch (e) {
-      toast.error(t("submit.page.toast.error"));
+      setFeedback({
+        open: true,
+        status: "success",
+        title: t("submit.page.toast.success"),
+        description:
+          "Ton projet a ete recu. On revient vers toi tres vite par email.",
+      });
+      form.reset({ intention: Intention.UX_REVIEW });
+    } catch {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("submit.page.toast.error"),
+        description:
+          "Une erreur est survenue pendant l'envoi. Merci de reessayer.",
+      });
     }
   };
 
@@ -133,15 +160,16 @@ export function IntentionForm() {
   };
 
   return (
-    <SectionBase
-      sectionClassName="w-full"
-      sectionContentClassName="w-full"
-      cardClassName="w-full"
-      cardContentClassName="w-full px-4 py-6 md:p-8"
-      className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
-    >
-      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
-        <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
+    <>
+      <SectionBase
+        sectionClassName="w-full"
+        sectionContentClassName="w-full"
+        cardClassName="w-full"
+        cardContentClassName="w-full px-4 py-6 md:p-8"
+        className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      >
+        <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
+          <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
           <div className="flex flex-col items-center text-center gap-2">
             <Badge size="lg">{t("submit.page.header-section.subBadge")}</Badge>
             <h1 className="h3 hidsden">
@@ -300,15 +328,32 @@ export function IntentionForm() {
                   </FormItem>
                 )}
               />
-              <div className="pt-2">
-                <Button type="submit" whileTap asPointer asFull size="lg">
-                  {t("submit.page.actions.submit")}
-                </Button>
-              </div>
+                <div className="pt-2">
+                  <Button
+                    type="submit"
+                    whileTap
+                    asPointer
+                    asFull
+                    size="lg"
+                    disabled={form.formState.isSubmitting}
+                  >
+                    {form.formState.isSubmitting
+                      ? t("common.button.sending")
+                      : t("submit.page.actions.submit")}
+                  </Button>
+                </div>
             </form>
           </Form>
-        </CardContent>
-      </Card>
-    </SectionBase>
+          </CardContent>
+        </Card>
+      </SectionBase>
+      <FormFeedbackModal
+        open={feedback.open}
+        status={feedback.status}
+        title={feedback.title}
+        description={feedback.description}
+        onClose={closeFeedback}
+      />
+    </>
   );
 }

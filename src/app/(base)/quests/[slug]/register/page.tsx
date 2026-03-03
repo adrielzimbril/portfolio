@@ -3,7 +3,10 @@ import { getLocale } from "next-intl/server";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
-import { getQuestBySlug, isRegistrationClosed } from "@/module/content/utils/lib/quests";
+import {
+  getQuestBySlug,
+  isRegistrationClosed,
+} from "@/module/content/utils/lib/quests";
 import { QuestRegisterForm } from "../sections/QuestRegisterForm";
 import { Link } from "@/components/ui/link";
 
@@ -23,9 +26,9 @@ export default async function QuestRegisterPage(props: {
   return (
     <>
       <PageHero
-        title={`Inscription | ${quest.title}`}
-        description="Inscris-toi d'abord. Une fois inscrit, tu recevras les infos du quest."
-        badge="Quest registration"
+        title={`Rejoindre ${quest.title}`}
+        description="Entre dans l'arene: inscris-toi maintenant pour recevoir le brief, les etapes et les updates du quest."
+        badge="Quest enrollment"
         imagePath={{ emoji: "📝" }}
         isMobileShowed
       />

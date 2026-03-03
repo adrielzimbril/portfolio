@@ -12,7 +12,7 @@ import { CheckCircle2, CircleAlert } from "lucide-react";
 
 type Status = "success" | "error";
 
-export function QuestFormFeedbackModal({
+export function FormFeedbackModal({
   open,
   status,
   title,

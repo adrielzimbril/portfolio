@@ -22,7 +22,7 @@ import { getHumanDate } from "@/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { QuestFormFeedbackModal } from "./QuestFormFeedbackModal";
+import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 
 const schema = z.object({
   name: z.string().min(2, "Nom requis"),
@@ -318,7 +318,7 @@ export function QuestSubmissionForm({
           </CardContent>
         </Card>
       </SectionBase>
-      <QuestFormFeedbackModal
+      <FormFeedbackModal
         open={feedback.open}
         status={feedback.status}
         title={feedback.title}
