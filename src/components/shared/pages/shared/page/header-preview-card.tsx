@@ -2,6 +2,7 @@ import Image from "next/image";
 import { PreviewContentType, ResourceType } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
 import { PreviewIcon } from "@/components/shared/pages/shared/preview";
+import { cn } from "@/utils";
 
 interface BasePreviewContent {
   type: PreviewContentType;
@@ -56,21 +57,29 @@ export function HeaderPreviewCard({
   switch (content.type) {
     case PreviewContentType.TEXT:
       return (
-        <div className="relative w-full">
-          <h3 className="h2 w-full relative mb-4">
-            {content.emoji && (
-              <>
-                {content.emoji}
-                <br />
-              </>
+        <div className="relative size-full mx-auto transition-all duration-800 hover:scale-105">
+          <div className="relative size-full pointer-events-none">
+            <h3 className="h2 w-full relative mb-4">
+              {content.emoji && (
+                <>
+                  <span
+                    className={cn(
+                      "inline-block h2 px-2 py-5 rounded-full bg-sh-white",
+                    )}
+                  >
+                    {content.emoji}
+                  </span>
+                  <br />
+                </>
+              )}
+              {content.title}
+            </h3>
+            {content.subtitle && (
+              <p className="relative text-4xl text-zinc-400">
+                {content.subtitle}
+              </p>
             )}
-            {content.title}
-          </h3>
-          {content.subtitle && (
-            <p className="relative text-4xl text-zinc-400">
-              {content.subtitle}
-            </p>
-          )}
+          </div>
         </div>
       );
 

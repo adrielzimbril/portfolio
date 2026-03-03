@@ -30,6 +30,11 @@ export enum PageType {
   TALKS = "talks",
 }
 
+export enum QuestAskType {
+  ENROLL = "enroll",
+  SUBMIT = "submit",
+}
+
 export enum PreviewContentType {
   TEXT = "text",
   IMAGE = "image",

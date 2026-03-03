@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getDateDifference } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { useTranslations } from "use-intl";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
 
 export function ProjectDetailsSection({
   content,
@@ -46,8 +47,10 @@ export function ProjectDetailsSection({
                         key={index}
                         className={
                           index % 2 === 0
-                            ? pickRandomColor("PINK")
-                            : pickRandomColor("YELLOW")
+                            ? pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.PINK)
+                            : pickRandomColor(
+                                DEFAULT_COLOR_CODE_NAME_LIST.YELLOW,
+                              )
                         }
                         variant="colored"
                       >
@@ -69,7 +72,9 @@ export function ProjectDetailsSection({
 
                         <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                           <Badge
-                            className={pickRandomColor("PURPLE")}
+                            className={pickRandomColor(
+                              DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+                            )}
                             variant="colored"
                           >
                             {getDateDifference(duration).toString()}
@@ -83,7 +88,9 @@ export function ProjectDetailsSection({
 
                         <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                           <Badge
-                            className={pickRandomColor("GREENISH_YELLOW")}
+                            className={pickRandomColor(
+                              DEFAULT_COLOR_CODE_NAME_LIST.GREENISH_YELLOW,
+                            )}
                             variant="colored"
                           >
                             {new Date(duration[0] || "").getFullYear()}

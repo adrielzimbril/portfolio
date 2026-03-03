@@ -1,4 +1,4 @@
-import { PageType } from "@/types";
+import { PageType, QuestAskType } from "@/types";
 
 /**
  * Gets the base URL of the application.
@@ -120,7 +120,7 @@ export function getApiBaseUrl(): string {
  */
 export function getResourcesUrl(
   resource: PageType,
-  slug?: string | undefined
+  slug?: string | undefined,
 ): string {
   return `${getBaseUrl()}/${resource}${slug ? `/${slug}` : ""}`;
 }
@@ -152,7 +152,7 @@ export function getResourceAskUrl(slug?: string): string {
  * @example
  * getResourceAskUrl("slug"); // returns "https://base-url/hub/get/slug"
  */
-export function getQuestAskUrl(slug: string, type: "enroll" | "submit"): string {
+export function getQuestAskUrl(slug: string, type: QuestAskType): string {
   return getResourcesUrl(PageType.QUESTS, `${slug}/${type}`);
 }
 

@@ -88,14 +88,18 @@ export function PreviewContent({
     <div className="flex flex-col size-full h-48 md:h-72 max-w-[90%] mx-auto transition-all duration-800 ease hover:scale-105">
       <div className="flex flex-col items-start place-content-center gap-3 size-full pointer-events-none">
         <h4 className="text-3xl tracking-wide leading-[120%]">
-          <span
-            className={cn(
-              "inline-block text-5xl px-2 py-4 rounded-full bg-[#f9f9f9]",
-            )}
-          >
-            {emoji}
-          </span>
-          <br />
+          {emoji && (
+            <>
+              <span
+                className={cn(
+                  "inline-block text-5xl px-2 py-4 rounded-full bg-[#f9f9f9]",
+                )}
+              >
+                {emoji}
+              </span>
+              <br />
+            </>
+          )}
           {title}
         </h4>
 
