@@ -12,9 +12,7 @@ export async function GET(
 
     const { data, error } = await db
       .from("challenge_submissions")
-      .select(
-        "id,name,work_title,work_url,portfolio_url,figma_url,poster_url,winner_rank"
-      )
+      .select("id,name,work_url,message,winner_rank")
       .eq("challenge_slug", slug)
       .eq("is_public", true)
       .order("winner_rank", { ascending: true, nullsFirst: false })

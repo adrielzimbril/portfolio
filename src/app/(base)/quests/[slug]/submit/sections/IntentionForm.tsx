@@ -33,7 +33,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-export function QuestSubmissionForm({
+export function IntentionForm({
   quest,
   isClosed,
 }: {
@@ -186,7 +186,9 @@ export function QuestSubmissionForm({
                             {...field}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder={t("submit.page.fields.url.placeholder")}
+                            placeholder={t(
+                              "submit.page.fields.url.placeholder",
+                            )}
                           />
                         </FormControl>
                         <FormMessage />

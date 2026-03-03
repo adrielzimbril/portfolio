@@ -7,8 +7,7 @@ create table if not exists public.challenge_registrations (
   user_id uuid references public.users(id) on delete set null,
   name text not null,
   email text not null,
-  portfolio_url text,
-  motivation text,
+  message text,
   ip text,
   meta jsonb
 );
@@ -26,11 +25,7 @@ create table if not exists public.challenge_submissions (
   user_id uuid references public.users(id) on delete set null,
   name text not null,
   email text not null,
-  work_title text not null,
   work_url text not null,
-  portfolio_url text,
-  figma_url text,
-  poster_url text,
   message text,
   status text not null default 'received',
   is_public boolean not null default false,

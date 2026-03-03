@@ -86,7 +86,7 @@ export function QuestSubmitAdminNotification({
 
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                {message || "-"}
+                <strong>Message 💬</strong>: {message || "-"}
               </Text>
             </Section>
 

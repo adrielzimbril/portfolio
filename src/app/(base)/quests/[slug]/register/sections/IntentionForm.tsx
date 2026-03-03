@@ -30,7 +30,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
+export function IntentionForm({ questSlug }: { questSlug: string }) {
   const locale = useLocale();
   const [feedback, setFeedback] = useState<{
     open: boolean;

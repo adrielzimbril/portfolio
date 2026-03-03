@@ -8,7 +8,8 @@ import {
   getQuestBySlug,
   isSubmissionClosed,
 } from "@/module/content/utils/lib/quests";
-import { QuestSubmissionForm } from "../sections/QuestSubmissionForm";
+import { IntentionForm } from "./sections/IntentionForm";
+import { HeaderSection } from "./sections/HeaderSection";
 
 export default async function QuestWorkSubmitPage(props: {
   params: Promise<{ slug: string }>;
@@ -25,13 +26,7 @@ export default async function QuestWorkSubmitPage(props: {
 
   return (
     <>
-      <PageHero
-        title={`Soumettre ton rendu: ${quest.title} 🚀`}
-        description="Depose ton travail final ici. On confirme la reception juste apres l'envoi ✅"
-        badge="Soumission du challenge 🧪"
-        imagePath={{ emoji: "🚀" }}
-        isMobileShowed
-      />
+      <HeaderSection title={quest.title} />
       {closed ? (
         <SectionLayout>
           <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
@@ -46,7 +41,7 @@ export default async function QuestWorkSubmitPage(props: {
           </Card>
         </SectionLayout>
       ) : (
-        <QuestSubmissionForm quest={quest} isClosed={closed} />
+        <IntentionForm quest={quest} isClosed={closed} />
       )}
     </>
   );

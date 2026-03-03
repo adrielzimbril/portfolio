@@ -72,6 +72,16 @@ export async function POST(
       userId = existingUserData.id;
     }
 
+    if (!userId) {
+      logger.error("quest submit: missing user_id after upsert_user", {
+        email,
+        slug,
+      });
+      return new Response(JSON.stringify({ error: "USER_UPSERT_FAILED" }), {
+        status: 500,
+      });
+    }
+
     const { error: submissionError } = await db
       .from("challenge_submissions")
       .upsert(
@@ -80,11 +90,7 @@ export async function POST(
           user_id: userId ?? null,
           name,
           email,
-          work_title: quest.title,
           work_url: workUrl,
-          portfolio_url: null,
-          figma_url: null,
-          poster_url: null,
           message: message || null,
           ip: ip ?? null,
           status: "received",
@@ -106,28 +112,40 @@ export async function POST(
       });
     }
 
-    if (userId) {
-      await db.from("newsletter_subscribers").upsert(
-        {
-          user_id: userId,
-          subscribed_from_page: JSON.stringify({
-            path: `/quests/${slug}/submit`,
-            origin: req.headers.get("origin"),
-            referer: req.headers.get("referer"),
-            url: req.url,
-          }),
-          updateexisting: Boolean(existingUserData),
-        },
-        { onConflict: "user_id" }
-      );
+    const { error: newsletterError } = await db
+      .from("newsletter_subscribers")
+      .upsert(
+      {
+        user_id: userId,
+        subscribed_from_page: JSON.stringify({
+          path: `/quests/${slug}/submit`,
+          origin: req.headers.get("origin"),
+          referer: req.headers.get("referer"),
+          url: req.url,
+        }),
+        updateexisting: Boolean(existingUserData),
+      },
+      { onConflict: "user_id" }
+    );
+
+    if (newsletterError) {
+      logger.error("quest submit newsletter upsert failed", newsletterError);
+      return new Response(JSON.stringify({ error: "NEWSLETTER_DB_ERROR" }), {
+        status: 500,
+      });
     }
 
-    const generalId = Number(process.env.BREVO_QUESTS_SUBMISSIONS_ID);
-    if (generalId) {
+    const globalListId = Number(process.env.BREVO_GENERAL_LIST_ID);
+    const submissionsListId = Number(process.env.BREVO_QUESTS_SUBMISSIONS_ID);
+    const listIds = [globalListId, submissionsListId].filter(
+      (id): id is number => Boolean(id) && !Number.isNaN(id)
+    );
+
+    if (listIds.length > 0) {
       await addContact({
         email,
         firstName: name,
-        listIds: [generalId],
+        listIds,
         provider: ContactProvider.BREVO,
       });
     }
