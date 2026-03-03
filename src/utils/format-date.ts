@@ -337,12 +337,12 @@ export function getHumanDate(dateString: string, withTime?: boolean): string {
   );
 
   if (withTime) {
-    const time = date.toLocaleTimeString("fr-FR", {
+    const time = date.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
       timeZoneName: "short",
     });
-    return `${formattedDate} à ${time}`;
+    return `${formattedDate} • ${time}`;
   }
 
   return formattedDate;

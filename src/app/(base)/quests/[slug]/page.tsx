@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { getLocale } from "next-intl/server";
 import { getQuestBySlug } from "@/module/content/utils/lib/quests";
-import { QuestOverviewSection } from "./sections/QuestOverviewSection";
+import { HeaderSection } from "./sections/HeaderSection";
 import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
 import { PageDetails } from "@/components/shared/pages/shared/page/page-details";
 import { SectionLayout } from "@/components/shared/sections/layout";
@@ -50,22 +50,28 @@ export default async function QuestDetailPage(
 
   return (
     <>
-      <QuestOverviewSection quest={quest} />
+      <HeaderSection quest={quest} />
       <SectionLayout>
         <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
           <CardContent className="p-5 md:p-6 space-y-4">
             <div className="flex flex-wrap gap-2">
-              <Badge>Fin inscription: {getHumanDate(quest.registration_deadline)}</Badge>
+              <Badge>
+                Fin inscription: {getHumanDate(quest.registration_deadline)}
+              </Badge>
               <Badge variant="secondary">
                 Fin soumission: {getHumanDate(quest.submission_deadline)}
               </Badge>
             </div>
             <div className="flex flex-wrap gap-2">
               <Badge variant={registrationClosed ? "secondary" : "default"}>
-                {registrationClosed ? "Inscriptions fermees" : "Inscriptions ouvertes"}
+                {registrationClosed
+                  ? "Inscriptions fermees"
+                  : "Inscriptions ouvertes"}
               </Badge>
               <Badge variant={submissionClosed ? "secondary" : "default"}>
-                {submissionClosed ? "Soumissions fermees" : "Soumissions ouvertes"}
+                {submissionClosed
+                  ? "Soumissions fermees"
+                  : "Soumissions ouvertes"}
               </Badge>
             </div>
             <div className="space-y-2">

@@ -31,9 +31,9 @@ export function ProjectDetailsSection({
           <MarkdownContentRender content={content} />
         </div>
 
-        <Card className="squircle size-full md:max-w-[30%] squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-md border-0 overflow-hidden mx-auto">
+        <Card className="squircle size-full md:max-w-[30%] squircle-b-base squircle-4xl squircle-smooth-md border-0 overflow-hidden mx-auto">
           <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
-            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden">
+            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl squircle-sh-white overflow-hidden">
               {role && (
                 <div className="flex w-full flex-col gap-2">
                   <span className="font-normal text-b-white-foreground">

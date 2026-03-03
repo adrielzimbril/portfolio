@@ -27,6 +27,7 @@ export enum PageType {
   HUB = "hub",
   THOUGHT = "thoughts",
   QUESTS = "quests",
+  TALKS = "talks",
 }
 
 export enum PreviewContentType {

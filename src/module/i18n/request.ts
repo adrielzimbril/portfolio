@@ -3,7 +3,6 @@ import { routing } from "@i18n/routing";
 import { appConfig } from "@data/app-config";
 import { getMessagesForLocale } from "@i18n/hooks/get-message-from-local";
 import { getRequestConfig as getRequestConfigOriginal } from "next-intl/server";
-import logger from "@/utils/logger";
 
 const getRequestConfig = getRequestConfigOriginal(async ({ requestLocale }) => {
   let locale = await requestLocale;

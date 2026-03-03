@@ -20,9 +20,6 @@ export function HeaderSection() {
     <PageHero
       title="Quests"
       description="Mes quests en cours et passés: brief, récompenses, participants, gagnants et soumissions."
-      //buttonLink={routes.thoughts.link}
-      //buttonText={t("thoughts.page.header-section.cta")}
-      //imagePath={getImageUrl(getEmojiHub("🧑🏻‍🎨", "fluent", "anim"))}
       isMobileShowed
       imagePath={{ emoji: "🏆" }}
       actionButton

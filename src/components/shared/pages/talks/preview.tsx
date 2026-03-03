@@ -4,6 +4,7 @@ import { cn } from "@/utils/utils";
 import { getImageUrl } from "@/utils/base-url";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useTranslations } from "use-intl";
+import { PreviewContent } from "@/components/shared/pages/shared/preview";
 
 interface PreviewProps {
   title?: string;
@@ -69,32 +70,6 @@ export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
           />
         )}
       </div>
-    </div>
-  );
-}
-
-function PreviewContent({
-  emoji,
-  title,
-  description,
-}: {
-  emoji: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="flex flex-col items-start gap-3 w-full max-w-[90%] mx-auto">
-      <>
-        <h4 className="text-3xl tracking-wide leading-[120%]">
-          {emoji}
-          <br />
-          {title}
-        </h4>
-
-        <p className="font-medium text-b-white-invert-thr text-2xl leading-[120%]">
-          {description}
-        </p>
-      </>
     </div>
   );
 }

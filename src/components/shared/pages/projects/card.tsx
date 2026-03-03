@@ -25,13 +25,13 @@ export function ProjectCard({
     <Card
       className={cn(
         "flex flex-col items-center justify-center squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden size-full",
-        isWide && "md:flex-row md:col-span-2"
+        isWide && "md:flex-row md:col-span-2",
       )}
     >
       <CardContent
         className={cn(
           `flex flex-col px-6 md:px-8 py-8 md:py-10 gap-4 h-full w-full`,
-          isWide && "md:flex-row"
+          isWide && "md:flex-row",
         )}
       >
         <CardPreview
@@ -40,6 +40,11 @@ export function ProjectCard({
           cover={cover}
           isWide={isWide}
           type={PageType.PROJECT}
+          coverText={{
+            emoji: "🧑🏻‍🚀",
+            title: title,
+            description: description,
+          }}
         />
         <CardInfo
           title={title}

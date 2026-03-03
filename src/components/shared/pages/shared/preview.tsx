@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { cn } from "@/utils/utils";
+import { cn, pickRandomColor, pickRandomColorCode } from "@/utils";
 import { PageType, ResourceType } from "@/types/enum";
 import { getExternalUrl, getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import {
@@ -14,6 +14,8 @@ import {
 } from "@aurthle/icons";
 import { Link } from "@/components/ui/link";
 import { useTranslations } from "use-intl";
+import { Badge } from "@/components/ui/badge";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
 
 interface PreviewProps {
   title?: string;
@@ -73,8 +75,7 @@ export function CardPreview({
     </div>
   );
 }
-
-function PreviewContent({
+export function PreviewContent({
   emoji,
   title,
   description,
@@ -87,12 +88,18 @@ function PreviewContent({
     <div className="flex flex-col size-full h-48 md:h-72 max-w-[90%] mx-auto transition-all duration-800 ease hover:scale-105">
       <div className="flex flex-col items-start place-content-center gap-3 size-full pointer-events-none">
         <h4 className="text-3xl tracking-wide leading-[120%]">
-          {emoji}
+          <span
+            className={cn(
+              "inline-block text-5xl px-2 py-4 rounded-full bg-[#f9f9f9]",
+            )}
+          >
+            {emoji}
+          </span>
           <br />
           {title}
         </h4>
 
-        <p className="font-medium text-b-white-invert-thr text-2xl line-clamp-3 leading-[120%]">
+        <p className="font-medium text-b-white-invert-thr text-xl line-clamp-3 leading-[120%]">
           {description}
         </p>
       </div>
