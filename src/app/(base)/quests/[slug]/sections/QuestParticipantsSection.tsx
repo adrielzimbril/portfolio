@@ -1,7 +1,6 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
-import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/components/ui/link";
@@ -19,83 +18,15 @@ import { cn, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
+import type { Quest } from "@/module/content/utils/lib/quests";
 
-type DemoParticipant = {
-  id: string;
-  name: string;
-  role?: string;
-  avatar?: string;
-  profileUrl?: string;
-  workUrl: string;
-  workCover: string;
-  rank: 1 | 2 | 3;
-  pixelPerfect?: boolean;
-  juryFavorite?: boolean;
-  originalIdea: boolean;
-  tags: string[];
-};
+type Winner = NonNullable<Quest["winners"]>[number];
 
-const DEMO_PARTICIPANTS_BY_QUEST: Record<string, DemoParticipant[]> = {
-  "saas-landing-breakdown": [
-    {
-      id: "winner-1",
-      name: "Awa D.",
-      role: "Product Designer",
-      avatar: "",
-      profileUrl: "https://dribbble.com",
-      workUrl: "https://www.figma.com",
-      workCover: "/img/projects/0.png",
-      rank: 1,
-      pixelPerfect: true,
-      juryFavorite: true,
-      originalIdea: true,
-      tags: ["Idee originale"],
-    },
-    {
-      id: "winner-2",
-      name: "Koffi M.",
-      role: "UI Designer",
-      profileUrl: "https://www.behance.net",
-      avatar: "",
-      workUrl: "https://www.figma.com",
-      workCover: "/img/projects/1.png",
-      rank: 2,
-      pixelPerfect: false,
-      juryFavorite: false,
-      originalIdea: true,
-      tags: ["Clean UI"],
-    },
-    {
-      id: "winner-3",
-      name: "Nina K.",
-      role: "UX Designer",
-      profileUrl: "https://www.linkedin.com",
-      avatar: "",
-      workUrl: "https://www.figma.com",
-      workCover: "/img/projects/2.png",
-      rank: 3,
-      pixelPerfect: false,
-      juryFavorite: false,
-      originalIdea: false,
-      tags: ["Storytelling"],
-    },
-  ],
-};
-
-const RANK_BADGE = {
+const RANK_BADGE: Record<number, { emoji: string; label: string }> = {
   1: { emoji: "🥇", label: "Premier prix" },
   2: { emoji: "🥈", label: "Deuxième prix" },
   3: { emoji: "🥉", label: "Troisième prix" },
 };
-
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase())
-    .join("");
-}
 
 function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
   if (!tooltip) {
@@ -118,17 +49,21 @@ function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
   );
 }
 
-function WinnerCard({ participant }: { participant: DemoParticipant }) {
-  const workUrl = getExternalUrl(participant.workUrl);
-  const profileUrl = getExternalUrl(participant.profileUrl);
+function WinnerCard({ participant }: { participant: Winner }) {
+  const workUrl = getExternalUrl(participant.work_url);
+  const profileUrl = getExternalUrl(participant.profile_url);
   const WINNER_NUMBER = 3;
 
-  // ✅ Generate all colors in one time, outside of .map()
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: WINNER_NUMBER }).map(() =>
       Array.from({ length: 4 }).map(() => pickRandomColorCode() ?? "#ffffff"),
     );
   }, [WINNER_NUMBER]);
+
+  const rankBadge = RANK_BADGE[participant.rank] ?? {
+    emoji: "🏆",
+    label: `Rang #${participant.rank}`,
+  };
 
   return (
     <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
@@ -147,34 +82,29 @@ function WinnerCard({ participant }: { participant: DemoParticipant }) {
                   height={630}
                   className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
                   alt={participant.name}
-                  src={getImageUrl(participant.workCover)}
+                  src={getImageUrl(participant.work_cover)}
                 />
               </div>
             </Link>
             <div className="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
-              {participant.rank && (
-                <OverlayTag
-                  label={RANK_BADGE[participant.rank].emoji}
-                  tooltip={RANK_BADGE[participant.rank].label}
-                />
-              )}
-              {participant.pixelPerfect && (
+              <OverlayTag label={rankBadge.emoji} tooltip={rankBadge.label} />
+              {participant.pixel_perfect && (
                 <OverlayTag label="🎖️" tooltip="Pixel Perfect" />
               )}
-              {participant.juryFavorite && (
+              {participant.jury_favorite && (
                 <OverlayTag label="❤️" tooltip="Coup de cœur du jury" />
               )}
             </div>
           </div>
         </div>
 
-        {(participant.pixelPerfect ||
-          participant.originalIdea ||
-          participant.tags?.length > 0) && (
+        {(participant.pixel_perfect ||
+          participant.original_idea ||
+          (participant.tags?.length ?? 0) > 0) && (
           <Tags
-            primaryTag={participant.originalIdea ? "Idée originale" : undefined}
+            primaryTag={participant.original_idea ? "Idée originale" : undefined}
             primaryTagColor={DEFAULT_COLOR_CODE_NAME_LIST.PURPLE}
-            tags={participant.tags}
+            tags={participant.tags ?? []}
           />
         )}
 
@@ -188,14 +118,10 @@ function WinnerCard({ participant }: { participant: DemoParticipant }) {
             >
               <Avatar className="size-11">
                 <AvatarImage src={getImageUrl(participant.avatar || "")} />
-                {/* <AvatarFallback>{getInitials(participant.name)}</AvatarFallback> */}
                 <AvatarFallback>
                   <BoringAvatar
-                    name={
-                      participant.name.slice(8)?.replace(".png", "") ??
-                      participant.name
-                    }
-                    colors={colorSets[participant.rank - 1] ?? []}
+                    name={participant.name}
+                    colors={colorSets[(participant.rank - 1) % WINNER_NUMBER] ?? []}
                     variant="beam"
                   />
                 </AvatarFallback>
@@ -240,15 +166,27 @@ function WinnerCard({ participant }: { participant: DemoParticipant }) {
   );
 }
 
-export function QuestParticipantsSection({ questSlug }: { questSlug: string }) {
-  const participants = DEMO_PARTICIPANTS_BY_QUEST[questSlug] ?? [];
+export function QuestParticipantsSection({
+  winners,
+}: {
+  winners: Quest["winners"];
+}) {
+  const participants = winners ?? [];
+
+  if (participants.length === 0) {
+    return null;
+  }
 
   return (
     <CardPreviewSection title="Vainqueurs 🏆">
       {participants
+        .slice()
         .sort((a, b) => a.rank - b.rank)
         .map((participant) => (
-          <WinnerCard key={participant.id} participant={participant} />
+          <WinnerCard
+            key={participant.id ?? `${participant.rank}-${participant.name}`}
+            participant={participant}
+          />
         ))}
     </CardPreviewSection>
   );

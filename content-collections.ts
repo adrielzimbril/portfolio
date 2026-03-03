@@ -489,6 +489,25 @@ const quests = defineCollection({
     quest_end: z.string(),
     results_published: z.boolean().default(false),
     rewards: z.array(z.string()).default([]),
+    winners: z
+      .array(
+        z.object({
+          id: z.string().optional(),
+          name: z.string(),
+          role: z.string().optional(),
+          avatar: z.string().optional(),
+          profile_url: z.string().optional(),
+          work_url: z.string(),
+          work_cover: z.string(),
+          rank: z.number().int().positive(),
+          pixel_perfect: z.boolean().optional().default(false),
+          jury_favorite: z.boolean().optional().default(false),
+          original_idea: z.boolean().optional().default(false),
+          tags: z.array(z.string()).optional().default([]),
+        }),
+      )
+      .optional()
+      .default([]),
     created_at: z.string(),
     updated_at: z.string().optional(),
     published: z.boolean(),

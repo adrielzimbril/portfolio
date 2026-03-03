@@ -71,6 +71,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
     submission_deadline,
     quest_end,
     results_published,
+    winners,
   } = quest.currentQuest;
 
   const registrationClosed = isRegistrationClosed(registration_deadline);
@@ -136,7 +137,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         tags={tags}
       />
       {isResultsPublished(quest_end, results_published) && (
-        <QuestParticipantsSection questSlug={slug} />
+        <QuestParticipantsSection winners={winners} />
       )}
       {quest!.adjacentQuests.length > 0 && (
         <MorePreviewSection data={quest!.adjacentQuests} />
