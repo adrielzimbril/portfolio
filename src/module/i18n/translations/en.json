@@ -471,7 +471,7 @@
   "mail": {
     "common": {
       "contact": "If you want to chat or just say hi, simply reply to this email. I personally read every message.",
-      "adminContact": "Admin contact (reply)",
+      "contactAdmin": "Adriel Zimbril, you received a new message. Someone recognizes your impact and wants to connect with you. You are the king of this world, now show them why. Just do it 🚀",
       "copyright": "Crafted with ❤️ by Adriel Zimbril",
       "defaultName": "designer friend",
       "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product Designer 🦄"
@@ -786,6 +786,18 @@
       }
     },
     "title": "Logbook 📒"
+  },
+  "talks": {
+    "title": "Talks & Masterclasses 🎤",
+    "description": "Explore my talks and masterclasses: posters, roles, event dates, and replays to level up faster.",
+    "keywords": "Adriel Zimbril talks, SaaS design masterclass, product conferences, UX UI talks, design replay",
+    "page": {
+      "header-section": {
+        "title": "Talks & Masterclasses live 🎤",
+        "description": "A dedicated space to revisit each session: topic, role, event date, and actionable resources you can apply right away.",
+        "cta": "Explore talks"
+      }
+    }
   },
   "zod": {
     "errors": {

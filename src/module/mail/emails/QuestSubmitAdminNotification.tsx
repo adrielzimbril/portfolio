@@ -101,7 +101,7 @@ export function QuestSubmitAdminNotification({
                 {t("mail.common.signature")}
               </Text>
               <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.adminContact")} :{" "}
+                {t("mail.common.contactAdmin")} :{" "}
                 <Link href={`mailto:${siteConfig.links.contact.email}`}>
                   {siteConfig.links.contact.email}
                 </Link>

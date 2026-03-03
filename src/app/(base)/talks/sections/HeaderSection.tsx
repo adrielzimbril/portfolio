@@ -9,20 +9,18 @@ import { getPathUrl } from "@/utils";
 export function HeaderSection() {
   const t = useTranslations();
   const locale = useLocale();
+
   usePageViews(
-    routes.thoughts.key,
+    routes.talks.key,
     undefined,
-    { locale: locale, path: getPathUrl(routes.thoughts.link) },
+    { locale, path: getPathUrl(routes.talks.link) },
     false,
   );
 
   return (
     <PageHero
-      title="Talks"
-      description="Toutes les sessions talks: affiches, role, date et ressources."
-      //buttonLink={routes.thoughts.link}
-      //buttonText={t("thoughts.page.header-section.cta")}
-      //imagePath={getImageUrl(getEmojiHub("🧑🏻‍🎨", "fluent", "anim"))}
+      title={t("talks.page.header-section.title")}
+      description={t("talks.page.header-section.description")}
       isMobileShowed
       imagePath={{ emoji: "🎤" }}
       actionButton

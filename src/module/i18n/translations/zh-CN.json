@@ -471,7 +471,7 @@
   "mail": {
     "common": {
       "contact": "如果你想交流或只是打个招呼，直接回复这封邮件即可。我会亲自阅读每一封邮件。",
-      "adminContact": "管理员联系邮箱（回复）",
+      "contactAdmin": "Adriel Zimbril，你收到了一条新消息。有人认可你的影响力并希望与你交流。你是这个世界的王者，现在就向对方证明为什么。Just do it 🚀",
       "copyright": "由 Adriel Zimbril 用 ❤️ 精心打造",
       "defaultName": "ami designer",
       "signature": "Adriel Zimbril | 问题解决者 & 您的SaaS产品设计师 🦄"
@@ -786,6 +786,18 @@
       }
     },
     "title": "航海日志 📒"
+  },
+  "talks": {
+    "title": "Talks 与 Masterclasses 🎤",
+    "description": "查看我的 talks 与 masterclasses：海报、角色、活动日期与回放，帮助你更快进步。",
+    "keywords": "Adriel Zimbril talks, SaaS 设计 masterclass, 产品分享, UX UI 演讲, 设计回放",
+    "page": {
+      "header-section": {
+        "title": "Talks 与 Masterclasses 现场 🎤",
+        "description": "在这里回看每场内容：主题、我的角色、活动日期，以及可直接实践的资源。",
+        "cta": "查看 talks"
+      }
+    }
   },
   "zod": {
     "errors": {
