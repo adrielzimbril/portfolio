@@ -109,18 +109,18 @@ export function QuestSubmissionForm({
         <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
-              <Badge size="lg">Quest submission</Badge>
+              <Badge size="lg">Soumission du defi</Badge>
               <h2 className="h3">Soumettre son travail</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
-                Deadline: {getHumanDate(quest.submission_deadline, true)}. Apres
-                cette date, les soumissions sont fermees.
+                Date limite: {getHumanDate(quest.submission_deadline, true)}.
+                Apres cette date, les soumissions sont fermees.
               </p>
             </div>
 
             {isClosed ? (
               <Card className="w-full max-w-xl squircle squircle-b-base squircle-smooth-xl border">
                 <CardContent className="p-4 text-sm text-b-white-invert-sec text-center">
-                  La periode de soumission est terminee pour ce quest.
+                  La periode de soumission est terminee pour ce defi.
                 </CardContent>
               </Card>
             ) : (

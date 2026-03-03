@@ -623,16 +623,16 @@
     },
     "questRegisterUserConfirmation": {
       "subject": "✅ Inscription bien recue",
-      "preview": "Ton inscription au quest est confirmee",
+      "preview": "Ton inscription au defi est confirmee",
       "greeting": "Bonjour {firstName},",
       "content": {
-        "intro": "Ton inscription au quest \"{questTitle}\" a bien ete enregistree.",
+        "intro": "Ton inscription au defi \"{questTitle}\" a bien ete enregistree.",
         "wait": "Tu recevras les prochaines informations par email."
       }
     },
     "questRegisterAdminNotification": {
-      "subject": "🧾 Nouvelle inscription quest",
-      "preview": "Un nouveau participant vient de s'inscrire au quest"
+      "subject": "🧾 Nouvelle inscription defi",
+      "preview": "Un nouveau participant vient de s'inscrire au defi"
     },
     "questSubmitUserConfirmation": {
       "subject": "🚀 Soumission bien recue",
@@ -641,11 +641,11 @@
       "content": {
         "intro": "Ta soumission pour \"{questTitle}\" a bien ete recue.",
         "link": "Lien soumis",
-        "wait": "Merci de patienter jusqu'a la fin du quest pour le retour."
+        "wait": "Merci de patienter jusqu'a la fin du defi pour le retour."
       }
     },
     "questSubmitAdminNotification": {
-      "subject": "🧪 Nouvelle soumission quest",
+      "subject": "🧪 Nouvelle soumission defi",
       "preview": "Une nouvelle soumission de travail est disponible"
     },
     "welcome": {

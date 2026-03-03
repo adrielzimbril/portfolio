@@ -69,7 +69,7 @@ export function QuestSubmitAdminNotification({
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Quest</strong>: {questTitle}
+                <strong>Defi</strong>: {questTitle}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
                 <strong>Slug</strong>: {questSlug}

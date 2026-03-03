@@ -101,8 +101,8 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
         <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
-              <Badge size="lg">Quest enrollment</Badge>
-              <h2 className="h3">Rejoins le quest</h2>
+              <Badge size="lg">Inscription au defi</Badge>
+              <h2 className="h3">Rejoins le defi</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
                 Reserve ta place pour recevoir le brief, les regles et toutes
                 les infos pratiques avant le lancement.
@@ -171,7 +171,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                           rows={5}
                           variant="secondary"
                           className="rounded-xl"
-                          placeholder="Ton contexte, ce que tu veux travailler et ce que tu attends du quest..."
+                          placeholder="Ton contexte, ce que tu veux travailler et ce que tu attends du defi..."
                         />
                       </FormControl>
                       <FormMessage />
