@@ -1,6 +1,11 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/data/config";
-import { getBaseUrl, getImageUrl, getPathUrl } from "@/utils";
+import {
+  getAbsolutePathUrl,
+  getBaseUrl,
+  getImageUrl,
+  getPathUrl,
+} from "@/utils";
 import { Locale } from "@/types";
 import { routes } from "@/data/routes";
 
@@ -45,6 +50,11 @@ export const metadata: Metadata = {
     types: {
       ...rssRoutes.reduce((acc, rssRoute) => ({ ...acc, ...rssRoute }), {}),
     },
+  },
+  icons: {
+    icon: getAbsolutePathUrl({ type: "s3", path: "/icon.svg" }),
+    shortcut: getAbsolutePathUrl({ type: "s3", path: "/icon.svg" }),
+    apple: getAbsolutePathUrl({ type: "s3", path: "/icon.svg" }),
   },
   authors: [
     {
