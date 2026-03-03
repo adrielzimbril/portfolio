@@ -471,6 +471,7 @@
   "mail": {
     "common": {
       "contact": "如果你想交流或只是打个招呼，直接回复这封邮件即可。我会亲自阅读每一封邮件。",
+      "adminContact": "管理员联系邮箱（回复）",
       "copyright": "由 Adriel Zimbril 用 ❤️ 精心打造",
       "defaultName": "ami designer",
       "signature": "Adriel Zimbril | 问题解决者 & 您的SaaS产品设计师 🦄"

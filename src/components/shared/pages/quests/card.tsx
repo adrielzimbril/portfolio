@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/quests/details";
-import { PageType, ResourceType } from "@/types";
+import { PageType } from "@/types";
 
 export function QuestCard({
   title,
@@ -10,8 +10,6 @@ export function QuestCard({
   tags,
   description,
   features,
-  //avatars,
-  userCount,
   action,
 }: {
   title: string;
@@ -20,8 +18,6 @@ export function QuestCard({
   tags: { name: string; meta?: Record<string, any> }[];
   description: string;
   features: string[];
-  //avatars: string[];
-  userCount?: number;
   action?: {
     label: string;
     href: string;
@@ -47,8 +43,6 @@ export function QuestCard({
           tags={tags}
           description={description}
           features={features}
-          //avatars={avatars}
-          userCount={userCount}
           action={action}
         />
       </CardContent>

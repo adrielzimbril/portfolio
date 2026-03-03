@@ -61,3 +61,27 @@ export function useProductSlugRequestsCount(slug: string) {
     refresh: mutate,
   } as const;
 }
+
+type QuestParticipantsStats = {
+  registered: number;
+  submitted: number;
+  totalParticipants: number;
+};
+
+export function useQuestParticipantsStats(slug: string) {
+  const { data, error, isLoading, mutate } = useSWR(
+    slug ? apiRoutes.questsParticipants(slug).link : null,
+    fetchJSON,
+  );
+
+  return {
+    stats: (data?.stats ?? {
+      registered: 0,
+      submitted: 0,
+      totalParticipants: 0,
+    }) as QuestParticipantsStats,
+    loading: isLoading,
+    error: error?.message ?? null,
+    refresh: mutate,
+  } as const;
+}

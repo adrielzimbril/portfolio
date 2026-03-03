@@ -2,39 +2,35 @@
 
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
-import { AvatarsStats } from "@/components/shared/pages/quests/avatar-stats";
 import { Tags } from "@/components/shared/pages/quests/tags";
-import { PageType, ResourceType } from "@/types";
+import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
-import { useProductSlugRequestsCount } from "@/hooks/useSubscriberStats";
-import { useTranslations } from "use-intl";
+import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
+import BoringAvatar from "boring-avatars";
+import { pickRandomColorCode } from "@/utils";
+import { useMemo } from "react";
 
 export function CardInfo({
   title,
   slug,
-  //resourceType,
   tags,
   description,
   features,
-  //avatars,
-  userCount,
   action,
 }: {
   title: string;
   slug: string;
-  //resourceType: ResourceType;
   tags: { name: string; meta?: Record<string, any> }[];
   description: string;
   features: string[];
-  //avatars: string[];
-  userCount?: number;
   action?: {
     label: string;
     href: string;
   } | null;
 }) {
-  const t = useTranslations();
-  const { count: avatarCount } = useProductSlugRequestsCount(slug);
+  const { stats } = useQuestParticipantsStats(slug);
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -52,11 +48,13 @@ export function CardInfo({
 
         <Description description={description} features={features} />
 
-        {/* <AvatarsStats
-          avatars={avatarCount < 1 ? [""] : ["", "", "", "", "", "", "", ""]}
-          userCount={avatarCount ?? userCount}
-          resourceType={resourceType}
-        /> */}
+        {stats.totalParticipants > 0 ? (
+          <ParticipantsStats
+            total={stats.totalParticipants}
+            registered={stats.registered}
+            submitted={stats.submitted}
+          />
+        ) : null}
       </div>
 
       {action ? <Action label={action.label} href={action.href} /> : null}
@@ -66,7 +64,7 @@ export function CardInfo({
 
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
-    <Link href={getResourcesUrl(PageType.HUB, slug)}>
+    <Link href={getResourcesUrl(PageType.QUESTS, slug)}>
       <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
         {title}
       </h3>
@@ -95,6 +93,54 @@ function Description({
         ))}
       </p>
     </>
+  );
+}
+
+function ParticipantsStats({
+  total,
+  registered,
+  submitted,
+}: {
+  total: number;
+  registered: number;
+  submitted: number;
+}) {
+  const visibleCount = Math.min(total, 5);
+  const colorSets = useMemo(
+    () =>
+      Array.from({ length: visibleCount }).map(() =>
+        Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
+      ),
+    [visibleCount],
+  );
+
+  return (
+    <div className="flex flex-col items-start gap-1">
+      <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl squircle-sh-white/99">
+        <div className="inline-flex items-start">
+          <AvatarGroup numPeople={total}>
+            {Array.from({ length: visibleCount }).map((_, index) => (
+              <Avatar key={index} className="w-6 h-6">
+                <AvatarFallback className="relative pointer-events-none">
+                  <BoringAvatar
+                    name={`quest-participant-${index + 1}`}
+                    colors={colorSets[index] ?? []}
+                    variant="beam"
+                  />
+                </AvatarFallback>
+              </Avatar>
+            ))}
+          </AvatarGroup>
+        </div>
+        <span className="relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec">
+          {total} participants
+        </span>
+      </div>
+
+      {/* <p className="text-xs text-b-white-invert-thr ps-2">
+        {registered} inscrits • {submitted} soumis
+      </p> */}
+    </div>
   );
 }
 

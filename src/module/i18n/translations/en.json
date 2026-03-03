@@ -471,6 +471,7 @@
   "mail": {
     "common": {
       "contact": "If you want to chat or just say hi, simply reply to this email. I personally read every message.",
+      "adminContact": "Admin contact (reply)",
       "copyright": "Crafted with ❤️ by Adriel Zimbril",
       "defaultName": "designer friend",
       "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product Designer 🦄"

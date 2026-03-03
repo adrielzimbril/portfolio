@@ -10,24 +10,57 @@ export async function GET(
     const db = supabase as any;
     const { slug } = await params;
 
-    const { data, error } = await db
-      .from("challenge_submissions")
-      .select("id,name,work_url,message")
-      .eq("challenge_slug", slug)
-      .eq("is_public", true)
-      .order("created_at", { ascending: false });
+    const [registrationsRes, submissionsRes] = await Promise.all([
+      db
+        .from("challenge_registrations")
+        .select("email")
+        .eq("challenge_slug", slug),
+      db.from("challenge_submissions").select("email").eq("challenge_slug", slug),
+    ]);
 
-    if (error) {
-      logger.error("quest participants fetch failed", error);
+    if (registrationsRes.error || submissionsRes.error) {
+      logger.error("quest participants stats fetch failed", {
+        registrationsError: registrationsRes.error,
+        submissionsError: submissionsRes.error,
+      });
       return new Response(JSON.stringify({ error: "DB_ERROR" }), {
         status: 500,
       });
     }
 
-    return new Response(JSON.stringify({ participants: data || [] }), {
+    const normalized = (email: string | null | undefined) =>
+      (email ?? "").trim().toLowerCase();
+
+    const registrationEmails = new Set<string>(
+      (registrationsRes.data ?? [])
+        .map((row: { email?: string | null }) => normalized(row.email))
+        .filter(Boolean),
+    );
+
+    const submissionEmails = new Set<string>(
+      (submissionsRes.data ?? [])
+        .map((row: { email?: string | null }) => normalized(row.email))
+        .filter(Boolean),
+    );
+
+    const uniqueParticipants = new Set<string>([
+      ...registrationEmails,
+      ...submissionEmails,
+    ]);
+
+    return new Response(
+      JSON.stringify({
+        stats: {
+          registered: registrationEmails.size,
+          submitted: submissionEmails.size,
+          totalParticipants: uniqueParticipants.size,
+        },
+      }),
+      {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    });
+      },
+    );
   } catch (error) {
     logger.error("/api/quests/[slug]/participants failed", error);
     return new Response(JSON.stringify({ error: "UNKNOWN_ERROR" }), {
