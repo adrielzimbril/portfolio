@@ -113,29 +113,32 @@ export function QuestDetailsSection({
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2">
-                {isRegistrationClosed(dates.registration_end) && (
-                  <Link
-                    href={getQuestAskUrl(slug, QuestAskType.ENROLL)}
-                    asFull
-                    likeButton
-                    whileTap
-                  >
-                    S&apos;inscrire au quest
-                  </Link>
-                )}
-                {!isSubmissionClosed(dates.submission_end, dates.results) && (
-                  <Link
-                    href={getQuestAskUrl(slug, QuestAskType.SUBMIT)}
-                    asFull
-                    likeButton
-                    whileTap
-                    variant="secondary"
-                  >
-                    Soumettre son travail
-                  </Link>
-                )}
-              </div>
+              {(!isRegistrationClosed(dates.registration_end) ||
+                !isSubmissionClosed(dates.submission_end, dates.results)) && (
+                <div className="flex w-full flex-wrap gap-2">
+                  {!isRegistrationClosed(dates.registration_end) && (
+                    <Link
+                      href={getQuestAskUrl(slug, QuestAskType.ENROLL)}
+                      asFull
+                      likeButton
+                      whileTap
+                    >
+                      S&apos;inscrire au quest
+                    </Link>
+                  )}
+                  {!isSubmissionClosed(dates.submission_end, dates.results) && (
+                    <Link
+                      href={getQuestAskUrl(slug, QuestAskType.SUBMIT)}
+                      asFull
+                      likeButton
+                      whileTap
+                      variant="secondary"
+                    >
+                      Soumettre son travail
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

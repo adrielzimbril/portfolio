@@ -14,6 +14,7 @@ import {
   getQuestBySlug,
   isRegistrationClosed,
   isSubmissionClosed,
+  isResultsPublished,
 } from "@/module/content/utils/lib/quests";
 import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
 
@@ -59,50 +60,80 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
     return localeRedirect({ href: routes.hub.link, locale });
   }
 
-  const registrationClosed = isRegistrationClosed(quest.registration_deadline);
-  const submissionClosed = isSubmissionClosed(
-    quest.submission_deadline,
-    quest.quest_end
-  );
+  const {
+    title,
+    cover,
+    body,
+    excerpt,
+    registration_deadline,
+    submission_deadline,
+    quest_end,
+    results_published,
+  } = quest;
+
+  const registrationClosed = isRegistrationClosed(registration_deadline);
+  const submissionClosed = isSubmissionClosed(submission_deadline, quest_end);
+  const resultsPublished = isResultsPublished(quest_end, results_published);
+  const tags: {
+    name: string;
+    meta: {
+      [key: string]: any;
+    };
+  }[] = [
+    {
+      name: `Inscriptions ${registrationClosed ? "cloturees" : "ouvertes"}`,
+      meta: {
+        color: registrationClosed
+          ? DEFAULT_COLOR_CODE_NAME_LIST.RED
+          : DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+      },
+    },
+    {
+      name: `Soumissions ${submissionClosed ? "cloturees" : "ouvertes"}`,
+      meta: {
+        color: submissionClosed
+          ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
+          : DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+      },
+    },
+    {
+      name: `Résultats ${resultsPublished ? "publiés" : "à venir"}`,
+      meta: {
+        color: DEFAULT_COLOR_CODE_NAME_LIST.WHITE_GOLD,
+      },
+    },
+  ];
+
+  const dates: {
+    registration_end: string;
+    submission_end: string;
+    results: string;
+  } = {
+    registration_end: registration_deadline,
+    submission_end: submission_deadline,
+    results: quest_end,
+  };
 
   return (
     <>
       <HeaderSection
-        title={quest.title}
+        title={title}
         slug={slug}
-        cover={quest.cover ?? ""}
-        description={quest.excerpt}
+        cover={cover ?? ""}
+        description={excerpt}
+        dates={dates}
+        tags={tags.map((tag) => ({
+          name: tag.name,
+          color: tag.meta.color as any,
+        }))}
       />
       <QuestDetailsSection
-        content={quest.body || ""}
+        content={body || ""}
         slug={slug}
-        dates={{
-          registration_end: quest.registration_deadline,
-          submission_end: quest.submission_deadline,
-          results: quest.quest_end,
-        }}
-        tags={[
-          {
-            name: `Inscriptions ${
-              registrationClosed ? "cloturees" : "ouvertes"
-            }`,
-            meta: {
-              color: registrationClosed
-                ? DEFAULT_COLOR_CODE_NAME_LIST.RED
-                : DEFAULT_COLOR_CODE_NAME_LIST.WHITE_GOLD,
-            },
-          },
-          {
-            name: `Soumissions ${submissionClosed ? "cloturees" : "ouvertes"}`,
-            meta: {
-              color: submissionClosed
-                ? DEFAULT_COLOR_CODE_NAME_LIST.RED
-                : DEFAULT_COLOR_CODE_NAME_LIST.WHITE_GOLD,
-            },
-          },
-        ]}
+        dates={dates}
+        tags={tags}
       />
-      <QuestParticipantsSection questSlug={quest.slug} />
+      <QuestParticipantsSection questSlug={slug} />
       <CallToAction isPage />
     </>
   );

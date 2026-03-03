@@ -2,19 +2,20 @@
 import React from "react";
 import { HeaderSection as QuestHeaderSection } from "@/components/shared/pages/quests/page/header-section";
 import { PreviewContentType } from "@/types";
-import { ResourceType } from "@/types/enum";
-import { usePageViews } from "@/hooks/usePageViews";
-import { PageType } from "@/types";
-import { getResourcesUrl } from "@/utils/base-url";
 import { useTranslations } from "use-intl";
 import { getQuestAskUrl } from "@/utils/base-url";
 import { QuestAskType } from "@/types/enum";
+import {
+  isRegistrationClosed,
+  isSubmissionClosed,
+} from "@/module/content/utils/lib";
 
 export function HeaderSection({
   title,
   slug,
   cover,
   description,
+  dates,
   tags,
   //pageViewsData,
 }: {
@@ -22,6 +23,11 @@ export function HeaderSection({
   slug: string;
   cover: string;
   description: string;
+  dates: {
+    registration_end: string;
+    submission_end: string;
+    results: string;
+  };
   tags?: { name: string; color: string }[];
   //pageViewsData: { slug: string; locale: string };
 }) {
@@ -58,8 +64,14 @@ export function HeaderSection({
       slug={slug}
       description={description}
       tags={tags}
-      ctaButton={getQuestAskUrl(slug, QuestAskType.ENROLL)}
-      ctaButtonText={`${t("common.button.participate")} 🦄`}
+      ctaButton={
+        !isRegistrationClosed(dates.registration_end)
+          ? getQuestAskUrl(slug, QuestAskType.ENROLL)
+          : !isSubmissionClosed(dates.submission_end, dates.results)
+            ? getQuestAskUrl(slug, QuestAskType.SUBMIT)
+            : undefined
+      }
+      ctaButtonText={`${isRegistrationClosed(dates.registration_end) ? "Soumettre mon travail" : "Participer"} 🦄`}
     />
   );
 }

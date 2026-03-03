@@ -95,6 +95,9 @@ export function isSubmissionClosed(
   );
 }
 
-export function isResultsPublished(questEnd: string): boolean {
-  return Date.now() > new Date(questEnd).getTime();
+export function isResultsPublished(
+  questEnd: string,
+  resultsPublished: boolean,
+): boolean {
+  return resultsPublished && Date.now() > new Date(questEnd).getTime();
 }

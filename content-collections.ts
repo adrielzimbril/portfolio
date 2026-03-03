@@ -487,6 +487,7 @@ const quests = defineCollection({
     registration_deadline: z.string(),
     submission_deadline: z.string(),
     quest_end: z.string(),
+    results_published: z.boolean().default(false),
     rewards: z.array(z.string()).default([]),
     created_at: z.string(),
     updated_at: z.string().optional(),
