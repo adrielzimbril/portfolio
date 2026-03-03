@@ -73,18 +73,18 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
       setFeedback({
         open: true,
         status: "success",
-        title: "Inscription enregistree",
+        title: "Inscription enregistree ✅",
         description:
-          "Message recu. Un email de confirmation vient de t'etre envoye.",
+          "Message recu. Un email de confirmation vient de t'etre envoye 📨",
       });
       form.reset();
     } catch {
       setFeedback({
         open: true,
         status: "error",
-        title: "Envoi impossible",
+        title: "Envoi impossible ⚠️",
         description:
-          "Une erreur est survenue pendant l'inscription. Merci de reessayer.",
+          "Une erreur est survenue pendant l'inscription. Merci de reessayer 🙏",
       });
     }
   };

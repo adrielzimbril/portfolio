@@ -623,30 +623,30 @@
     },
     "questRegisterUserConfirmation": {
       "subject": "✅ Inscription bien recue",
-      "preview": "Ton inscription au challenge est confirmee",
+      "preview": "Ton inscription au challenge est confirmee 📝",
       "greeting": "Bonjour {firstName},",
       "content": {
-        "intro": "Ton inscription au challenge \"{questTitle}\" a bien ete enregistree.",
-        "wait": "Tu recevras les prochaines informations par email."
+        "intro": "Ton inscription au challenge \"{questTitle}\" a bien ete enregistree 🎉",
+        "wait": "Tu recevras les prochaines informations par email 📨"
       }
     },
     "questRegisterAdminNotification": {
       "subject": "🧾 Nouvelle inscription challenge",
-      "preview": "Un nouveau participant vient de s'inscrire au challenge"
+      "preview": "Un nouveau participant vient de s'inscrire au challenge 📝"
     },
     "questSubmitUserConfirmation": {
       "subject": "🚀 Soumission bien recue",
-      "preview": "Ta soumission a bien ete enregistree",
+      "preview": "Ta soumission a bien ete enregistree 🧪",
       "greeting": "Bonjour {firstName},",
       "content": {
-        "intro": "Ta soumission pour \"{questTitle}\" a bien ete recue.",
+        "intro": "Ta soumission pour \"{questTitle}\" a bien ete recue 🚀",
         "link": "Lien soumis",
-        "wait": "Merci de patienter jusqu'a la fin du challenge pour le retour."
+        "wait": "Merci de patienter jusqu'a la fin du challenge pour le retour ⏳"
       }
     },
     "questSubmitAdminNotification": {
       "subject": "🧪 Nouvelle soumission challenge",
-      "preview": "Une nouvelle soumission de travail est disponible"
+      "preview": "Une nouvelle soumission de travail est disponible 🚀"
     },
     "welcome": {
       "subject": "Bienvenue sur ma newsletter !",

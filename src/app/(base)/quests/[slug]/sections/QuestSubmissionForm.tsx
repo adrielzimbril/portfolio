@@ -81,18 +81,18 @@ export function QuestSubmissionForm({
       setFeedback({
         open: true,
         status: "success",
-        title: "Soumission envoyee",
+        title: "Soumission envoyee ✅",
         description:
-          "Message recu. Tu recevras un email de confirmation dans quelques instants.",
+          "Message recu. Tu recevras un email de confirmation dans quelques instants 📨",
       });
       form.reset();
     } catch {
       setFeedback({
         open: true,
         status: "error",
-        title: "Envoi impossible",
+        title: "Envoi impossible ⚠️",
         description:
-          "Une erreur est survenue pendant la soumission. Merci de reessayer.",
+          "Une erreur est survenue pendant la soumission. Merci de reessayer 🙏",
       });
     }
   };
