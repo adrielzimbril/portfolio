@@ -123,7 +123,7 @@ export function QuestDetailsSection({
                       likeButton
                       whileTap
                     >
-                      S&apos;inscrire au defi
+                      S&apos;inscrire au challenge
                     </Link>
                   )}
                   {!isSubmissionClosed(dates.submission_end, dates.results) && (

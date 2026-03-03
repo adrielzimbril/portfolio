@@ -28,7 +28,7 @@ export default async function QuestWorkSubmitPage(props: {
       <PageHero
         title={`Soumettre ton rendu: ${quest.title}`}
         description="Depose ton travail final ici. On confirme la reception juste apres l'envoi."
-        badge="Soumission du defi"
+        badge="Soumission du challenge"
         imagePath={{ emoji: "🚀" }}
         isMobileShowed
       />
@@ -40,7 +40,7 @@ export default async function QuestWorkSubmitPage(props: {
                 La periode de soumission est terminee.
               </p>
               <Link href={`/quests/${slug}`} likeButton whileTap>
-                Retour au defi
+                Retour au challenge
               </Link>
             </CardContent>
           </Card>

@@ -26,9 +26,9 @@ export default async function QuestRegisterPage(props: {
   return (
     <>
       <PageHero
-        title={`Rejoindre le defi: ${quest.title}`}
-        description="Inscris-toi pour recevoir le brief officiel, les consignes et toutes les etapes du defi directement par email."
-        badge="Inscription au defi"
+        title={`Rejoindre le challenge: ${quest.title}`}
+        description="Inscris-toi pour recevoir le brief officiel, les consignes et toutes les etapes du challenge directement par email."
+        badge="Inscription au challenge"
         imagePath={{ emoji: "📝" }}
         isMobileShowed
       />
@@ -37,10 +37,10 @@ export default async function QuestRegisterPage(props: {
           <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
             <CardContent className="p-5 md:p-6 space-y-3">
               <p className="text-b-white-invert-sec">
-                Les inscriptions sont fermees pour ce defi.
+                Les inscriptions sont fermees pour ce challenge.
               </p>
               <Link href={`/quests/${slug}`} likeButton whileTap>
-                Retour au defi
+                Retour au challenge
               </Link>
             </CardContent>
           </Card>
