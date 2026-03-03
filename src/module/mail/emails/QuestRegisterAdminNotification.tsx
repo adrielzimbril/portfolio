@@ -26,15 +26,13 @@ export function QuestRegisterAdminNotification({
   email,
   questTitle,
   questSlug,
-  portfolioUrl,
-  motivation,
+  contexte,
 }: BaseMailProps & {
   name: string;
   email: string;
   questTitle: string;
   questSlug: string;
-  portfolioUrl?: string;
-  motivation?: string;
+  contexte?: string;
 }) {
   const t = createTranslator({ locale, messages: translations });
 
@@ -78,12 +76,9 @@ export function QuestRegisterAdminNotification({
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
                 <strong>Email</strong>: {email}
               </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Portfolio</strong>: {portfolioUrl || "-"}
-              </Text>
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                {motivation || "-"}
+                <strong>Contexte</strong>: {contexte || "-"}
               </Text>
             </Section>
           </Container>
@@ -100,8 +95,7 @@ QuestRegisterAdminNotification.PreviewProps = {
   email: "jane@example.com",
   questTitle: "SaaS Landing Breakdown",
   questSlug: "saas-landing-breakdown",
-  portfolioUrl: "https://example.com",
-  motivation: "Je veux progresser sur mes process UX.",
+  contexte: "Je veux progresser sur mes process UX.",
 };
 
 export default QuestRegisterAdminNotification;

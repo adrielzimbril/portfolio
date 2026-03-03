@@ -14,8 +14,7 @@ import logger from "@/utils/logger";
 const registerSchema = z.object({
   name: z.string().min(2),
   email: z.email(),
-  portfolioUrl: z.url().optional().or(z.literal("")),
-  motivation: z.string().max(1200).optional(),
+  contexte: z.string().max(1200).optional(),
   locale: z.nativeEnum(Locale).optional(),
 });
 
@@ -48,7 +47,7 @@ export async function POST(
       });
     }
 
-    const { name, email, portfolioUrl, motivation, locale } = parsed.data;
+    const { name, email, contexte, locale } = parsed.data;
     const ipHeader = req.headers.get("x-forwarded-for");
     const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined;
 
@@ -79,8 +78,8 @@ export async function POST(
           user_id: userId ?? null,
           name,
           email,
-          portfolio_url: portfolioUrl || null,
-          motivation: motivation || null,
+          portfolio_url: null,
+          motivation: contexte || null,
           ip: ip ?? null,
           meta: {
             origin: req.headers.get("origin"),
@@ -143,8 +142,7 @@ export async function POST(
         email,
         questTitle: quest.title,
         questSlug: slug,
-        portfolioUrl: portfolioUrl || undefined,
-        motivation: motivation || undefined,
+        contexte: contexte || undefined,
       },
     });
 

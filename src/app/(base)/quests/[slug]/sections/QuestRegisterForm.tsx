@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useLocale, useTranslations } from "use-intl";
+import { useLocale } from "use-intl";
 import {
   Form,
   FormControl,
@@ -25,14 +25,12 @@ import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 const schema = z.object({
   name: z.string().min(2, "Nom requis"),
   email: z.email("Email invalide"),
-  portfolioUrl: z.url("URL portfolio invalide").optional().or(z.literal("")),
-  motivation: z.string().max(1200, "Message trop long").optional(),
+  contexte: z.string().max(1200, "Message trop long").optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
 
 export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
-  const t = useTranslations();
   const locale = useLocale();
   const [feedback, setFeedback] = useState<{
     open: boolean;
@@ -55,8 +53,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
     defaultValues: {
       name: "",
       email: "",
-      portfolioUrl: "",
-      motivation: "",
+      contexte: "",
     },
   });
 
@@ -163,10 +160,10 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
 
                 <FormField
                   control={form.control}
-                  name="motivation"
+                  name="contexte"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Message (optionnel)</FormLabel>
+                      <FormLabel>Contexte (optionnel)</FormLabel>
                       <FormControl>
                         <Textarea
                           value={field.value ?? ""}

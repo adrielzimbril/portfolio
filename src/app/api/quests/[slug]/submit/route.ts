@@ -14,11 +14,7 @@ import logger from "@/utils/logger";
 const submitSchema = z.object({
   name: z.string().min(2),
   email: z.email(),
-  workTitle: z.string().min(3),
   workUrl: z.url(),
-  portfolioUrl: z.url().optional().or(z.literal("")),
-  figmaUrl: z.url().optional().or(z.literal("")),
-  posterUrl: z.url().optional().or(z.literal("")),
   message: z.string().max(1500).optional(),
   locale: z.nativeEnum(Locale).optional(),
 });
@@ -52,17 +48,7 @@ export async function POST(
       });
     }
 
-    const {
-      name,
-      email,
-      workTitle,
-      workUrl,
-      portfolioUrl,
-      figmaUrl,
-      posterUrl,
-      message,
-      locale,
-    } = parsed.data;
+    const { name, email, workUrl, message, locale } = parsed.data;
 
     const ipHeader = req.headers.get("x-forwarded-for");
     const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined;
@@ -94,11 +80,11 @@ export async function POST(
           user_id: userId ?? null,
           name,
           email,
-          work_title: workTitle,
+          work_title: quest.title,
           work_url: workUrl,
-          portfolio_url: portfolioUrl || null,
-          figma_url: figmaUrl || null,
-          poster_url: posterUrl || null,
+          portfolio_url: null,
+          figma_url: null,
+          poster_url: null,
           message: message || null,
           ip: ip ?? null,
           status: "received",
@@ -166,11 +152,7 @@ export async function POST(
         email,
         questTitle: quest.title,
         questSlug: slug,
-        workTitle,
         workUrl,
-        portfolioUrl: portfolioUrl || undefined,
-        figmaUrl: figmaUrl || undefined,
-        posterUrl: posterUrl || undefined,
         message: message || undefined,
       },
     });

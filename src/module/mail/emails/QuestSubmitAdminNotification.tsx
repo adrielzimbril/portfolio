@@ -27,22 +27,14 @@ export function QuestSubmitAdminNotification({
   email,
   questTitle,
   questSlug,
-  workTitle,
   workUrl,
-  portfolioUrl,
-  figmaUrl,
-  posterUrl,
   message,
 }: BaseMailProps & {
   name: string;
   email: string;
   questTitle: string;
   questSlug: string;
-  workTitle: string;
   workUrl: string;
-  portfolioUrl?: string;
-  figmaUrl?: string;
-  posterUrl?: string;
   message?: string;
 }) {
   const t = createTranslator({ locale, messages: translations });
@@ -88,19 +80,7 @@ export function QuestSubmitAdminNotification({
                 <strong>Email</strong>: {email}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Titre</strong>: {workTitle}
-              </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-2">
                 <strong>Lien travail</strong>: <Link href={workUrl}>{workUrl}</Link>
-              </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Portfolio</strong>: {portfolioUrl || "-"}
-              </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Figma</strong>: {figmaUrl || "-"}
-              </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Affiche</strong>: {posterUrl || "-"}
               </Text>
 
               <Hr className="border-t border-[#e0e0e0] my-6" />
@@ -122,11 +102,7 @@ QuestSubmitAdminNotification.PreviewProps = {
   email: "john@example.com",
   questTitle: "SaaS Landing Breakdown",
   questSlug: "saas-landing-breakdown",
-  workTitle: "Landing redesign",
   workUrl: "https://www.figma.com",
-  portfolioUrl: "https://example.com",
-  figmaUrl: "https://www.figma.com/file/abc",
-  posterUrl: "https://example.com/poster.png",
   message: "Voici mon travail.",
 };
 
