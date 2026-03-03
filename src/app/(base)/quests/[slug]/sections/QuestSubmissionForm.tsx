@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useLocale } from "use-intl";
+import { useLocale, useTranslations } from "use-intl";
 import {
   Form,
   FormControl,
@@ -27,11 +27,7 @@ import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 const schema = z.object({
   name: z.string().min(2, "Nom requis"),
   email: z.email("Email invalide"),
-  workTitle: z.string().min(3, "Titre requis"),
   workUrl: z.url("URL invalide"),
-  portfolioUrl: z.url("URL invalide").optional().or(z.literal("")),
-  figmaUrl: z.url("URL invalide").optional().or(z.literal("")),
-  posterUrl: z.url("URL invalide").optional().or(z.literal("")),
   message: z.string().max(1500, "Message trop long").optional(),
 });
 
@@ -44,6 +40,7 @@ export function QuestSubmissionForm({
   quest: Quest;
   isClosed: boolean;
 }) {
+  const t = useTranslations();
   const locale = useLocale();
   const [feedback, setFeedback] = useState<{
     open: boolean;
@@ -65,11 +62,7 @@ export function QuestSubmissionForm({
     defaultValues: {
       name: "",
       email: "",
-      workTitle: "",
       workUrl: "",
-      portfolioUrl: "",
-      figmaUrl: "",
-      posterUrl: "",
       message: "",
     },
   });
@@ -117,10 +110,10 @@ export function QuestSubmissionForm({
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
               <Badge size="lg">Quest submission</Badge>
-              <h2 className="h4">Soumettre son travail</h2>
+              <h2 className="h3">Soumettre son travail</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
-                Deadline: {getHumanDate(quest.submission_deadline, true)}.
-                Apres cette date, les soumissions sont fermees.
+                Deadline: {getHumanDate(quest.submission_deadline, true)}. Apres
+                cette date, les soumissions sont fermees.
               </p>
             </div>
 
@@ -136,169 +129,93 @@ export function QuestSubmissionForm({
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-6 w-full max-w-xl self-center place-self-center"
                 >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            Nom <span className="text-red-500">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              variant="secondary"
+                              className="rounded-xl"
+                              placeholder="Ton nom"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            Email <span className="text-red-500">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              type="email"
+                              variant="secondary"
+                              className="rounded-xl"
+                              placeholder="ton@email.com"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
                   <FormField
                     control={form.control}
-                    name="name"
+                    name="workUrl"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          Nom <span className="text-red-500">*</span>
+                          Lien du rendu <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder="Ton nom"
+                            placeholder={t(
+                              "submit.page.fields.url.placeholder",
+                            )}
                           />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
+
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>
-                          Email <span className="text-red-500">*</span>
-                        </FormLabel>
+                        <FormLabel>Contexte (optionnel)</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            type="email"
+                          <Textarea
+                            value={field.value ?? ""}
+                            onChange={field.onChange}
+                            rows={5}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder="ton@email.com"
+                            placeholder="Contexte, contraintes, decisions, notes..."
                           />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="workTitle"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Titre du travail <span className="text-red-500">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          variant="secondary"
-                          className="rounded-xl"
-                          placeholder="Ex: SaaS Landing Redesign"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="workUrl"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Lien du travail <span className="text-red-500">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          variant="secondary"
-                          className="rounded-xl"
-                          placeholder="https://..."
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="portfolioUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Portfolio (optionnel)</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            variant="secondary"
-                            className="rounded-xl"
-                            placeholder="https://..."
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="figmaUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Figma (optionnel)</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            variant="secondary"
-                            className="rounded-xl"
-                            placeholder="https://figma.com/..."
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="posterUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Affiche (optionnel)</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            variant="secondary"
-                            className="rounded-xl"
-                            placeholder="https://..."
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Contexte (optionnel)</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          value={field.value ?? ""}
-                          onChange={field.onChange}
-                          rows={5}
-                          variant="secondary"
-                          className="rounded-xl"
-                          placeholder="Contexte, contraintes, decisions, notes..."
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
 
                   <Button
                     type="submit"

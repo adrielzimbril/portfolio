@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useLocale } from "use-intl";
+import { useLocale, useTranslations } from "use-intl";
 import {
   Form,
   FormControl,
@@ -32,6 +32,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
+  const t = useTranslations();
   const locale = useLocale();
   const [feedback, setFeedback] = useState<{
     open: boolean;
@@ -104,7 +105,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
               <Badge size="lg">Quest enrollment</Badge>
-              <h2 className="h4">Inscription au quest</h2>
+              <h2 className="h3">Inscription au quest</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
                 Tu seras ajoute a la newsletter et tu recevras les prochaines
                 informations par email.
@@ -116,89 +117,70 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6 w-full max-w-xl self-center place-self-center"
               >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Nom <span className="text-red-500">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            variant="secondary"
+                            className="rounded-xl"
+                            placeholder="Ton nom"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Email <span className="text-red-500">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="email"
+                            variant="secondary"
+                            className="rounded-xl"
+                            placeholder="ton@email.com"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 <FormField
                   control={form.control}
-                  name="name"
+                  name="motivation"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        Nom <span className="text-red-500">*</span>
-                      </FormLabel>
+                      <FormLabel>Message (optionnel)</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
+                        <Textarea
+                          value={field.value ?? ""}
+                          onChange={field.onChange}
+                          rows={5}
                           variant="secondary"
                           className="rounded-xl"
-                          placeholder="Ton nom"
+                          placeholder="Ton objectif, ton niveau, ce que tu veux travailler..."
                         />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Email <span className="text-red-500">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          type="email"
-                          variant="secondary"
-                          className="rounded-xl"
-                          placeholder="ton@email.com"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <FormField
-                control={form.control}
-                name="portfolioUrl"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Portfolio (optionnel)</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        variant="secondary"
-                        className="rounded-xl"
-                        placeholder="https://ton-portfolio.com"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="motivation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Contexte (optionnel)</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        value={field.value ?? ""}
-                        onChange={field.onChange}
-                        rows={5}
-                        variant="secondary"
-                        className="rounded-xl"
-                        placeholder="Ton objectif, ton niveau, ce que tu veux travailler..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
 
                 <Button
                   type="submit"
