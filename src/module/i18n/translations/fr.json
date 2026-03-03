@@ -178,6 +178,10 @@
     "title": "Conférences & Masterclasses 🎤",
     "description": "Découvre les événements où j'ai été invité : conférences, webinaires et masterclasses en ligne et en présentiel.",
     "keywords": "conférences Adriel Zimbril, masterclass design SaaS, webinaires produit, UX UI design, événements",
+    "badges": {
+      "online": "En ligne",
+      "inPerson": "Présentiel"
+    },
     "page": {
       "header-section": {
         "title": "Conférences & Masterclasses 🎤",

@@ -13,7 +13,11 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeVideo from "rehype-video";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import { PortfolioProjectResearchScope, ResourceType } from "@/types";
+import {
+  AttendanceType,
+  PortfolioProjectResearchScope,
+  ResourceType,
+} from "@/types";
 
 const BASE_COLLECTION_PATH = "src/content";
 
@@ -454,7 +458,7 @@ const talks = defineCollection({
     excerpt: z.string(),
     cover: z.string().optional(),
     role: z.string(),
-    attendance_mode: z.string().optional(),
+    attendance_mode: z.enum(Object.values(AttendanceType)).optional(),
     event_date: z.string(),
     participants: z.number().int().nonnegative().optional(),
     event_url: z.string().optional(),

@@ -791,6 +791,10 @@
     "title": "Conferences & Masterclasses 🎤",
     "description": "Discover the events where I was invited: conferences, webinars, and masterclasses online and in person.",
     "keywords": "Adriel Zimbril conferences, SaaS design masterclass, product webinars, UX UI design, events",
+    "badges": {
+      "online": "Online",
+      "inPerson": "In person"
+    },
     "page": {
       "header-section": {
         "title": "Conferences & Masterclasses 🎤",

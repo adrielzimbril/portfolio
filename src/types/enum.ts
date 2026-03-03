@@ -35,6 +35,11 @@ export enum QuestAskType {
   SUBMIT = "submit",
 }
 
+export enum AttendanceType {
+  IN_PERSON = "in_person",
+  ONLINE = "online",
+}
+
 export enum PreviewContentType {
   TEXT = "text",
   IMAGE = "image",

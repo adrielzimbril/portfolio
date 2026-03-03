@@ -791,6 +791,10 @@
     "title": "会议与大师课 🎤",
     "description": "探索我受邀参与的活动：线上与线下的会议、网络研讨会和大师课。",
     "keywords": "Adriel Zimbril 会议, SaaS 设计 大师课, 产品 网络研讨会, UX UI 设计, 活动",
+    "badges": {
+      "online": "线上",
+      "inPerson": "线下"
+    },
     "page": {
       "header-section": {
         "title": "会议和大师班🎤",
