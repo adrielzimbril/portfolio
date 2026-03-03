@@ -71,7 +71,7 @@ export function HeaderSection({
             ? getQuestAskUrl(slug, QuestAskType.SUBMIT)
             : undefined
       }
-      ctaButtonText={`${isRegistrationClosed(dates.registration_end) ? "Soumettre mon travail" : "Participer"} 🦄`}
+      ctaButtonText={`${!isRegistrationClosed(dates.registration_end) ? "Participer" : !isSubmissionClosed(dates.submission_end, dates.results) ? "Soumettre mon travail" : ""} 🦄`}
     />
   );
 }

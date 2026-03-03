@@ -96,7 +96,7 @@ export function HeaderSection({
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
-              : "p-0"
+              : "p-0",
           )}
         >
           <HeaderPreviewCard content={previewContent} type={type} />
@@ -123,7 +123,7 @@ export function HeaderSection({
             <Badge
               key={index}
               className={pickRandomColor(
-                tag.color as DEFAULT_CATEGORY_COLOR_NAME
+                tag.color as DEFAULT_CATEGORY_COLOR_NAME,
               )}
               variant="colored"
               size="sm"
@@ -141,7 +141,6 @@ export function HeaderSection({
             size={isMobile ? "default" : "lg"}
             likeButton
             asFull
-            data-project-url={type ? getResourceAskUrl(ctaButton) : ctaButton}
           >
             <span>{ctaButtonText}</span>
           </Link>

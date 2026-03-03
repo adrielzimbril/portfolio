@@ -72,15 +72,15 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
             ]}
             description={quest.excerpt}
             features={[
-              `Fin des inscriptions : ${getHumanDate(
+              `📅 Fin des inscriptions : ${getHumanDate(
                 quest.registration_deadline,
-                true
+                true,
               )}`,
-              `Date limite de soumission : ${getHumanDate(
+              `📤 Date limite de soumission : ${getHumanDate(
                 quest.submission_deadline,
-                true
+                true,
               )}`,
-              `Annonce des resultats : ${getHumanDate(quest.quest_end, true)}`,
+              `🏆 Annonce des resultats : ${getHumanDate(quest.quest_end, true)}`,
             ]}
             action={{
               label: submissionClosed ? "Voir les resultats" : "Participer",
