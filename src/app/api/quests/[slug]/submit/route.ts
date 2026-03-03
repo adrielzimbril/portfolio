@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { z } from "zod";
 import { appConfig } from "@/data/app-config";
 import {
   getQuestBySlug,
@@ -6,8 +7,21 @@ import {
 } from "@/module/content/utils/lib/quests";
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
+import { addContact, ContactProvider } from "@/module/contact";
 import { Locale } from "@/types";
 import logger from "@/utils/logger";
+
+const submitSchema = z.object({
+  name: z.string().min(2),
+  email: z.email(),
+  workTitle: z.string().min(3),
+  workUrl: z.url(),
+  portfolioUrl: z.url().optional().or(z.literal("")),
+  figmaUrl: z.url().optional().or(z.literal("")),
+  posterUrl: z.url().optional().or(z.literal("")),
+  message: z.string().max(1500).optional(),
+  locale: z.nativeEnum(Locale).optional(),
+});
 
 export async function POST(
   req: NextRequest,
@@ -31,6 +45,13 @@ export async function POST(
     }
 
     const body = await req.json().catch(() => ({}));
+    const parsed = submitSchema.safeParse(body);
+    if (!parsed.success) {
+      return new Response(JSON.stringify({ error: "INVALID_INPUT" }), {
+        status: 400,
+      });
+    }
+
     const {
       name,
       email,
@@ -41,23 +62,7 @@ export async function POST(
       posterUrl,
       message,
       locale,
-    }: {
-      name?: string;
-      email?: string;
-      workTitle?: string;
-      workUrl?: string;
-      portfolioUrl?: string;
-      figmaUrl?: string;
-      posterUrl?: string;
-      message?: string;
-      locale?: Locale;
-    } = body;
-
-    if (!name || !email || !workTitle || !workUrl) {
-      return new Response(JSON.stringify({ error: "MISSING_REQUIRED_FIELDS" }), {
-        status: 400,
-      });
-    }
+    } = parsed.data;
 
     const ipHeader = req.headers.get("x-forwarded-for");
     const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined;
@@ -68,7 +73,6 @@ export async function POST(
       .select("*")
       .eq("email", email)
       .limit(1);
-
     const existingUserData = existingUser?.[0];
 
     if (!existingUserData) {
@@ -92,10 +96,10 @@ export async function POST(
           email,
           work_title: workTitle,
           work_url: workUrl,
-          portfolio_url: portfolioUrl ?? null,
-          figma_url: figmaUrl ?? null,
-          poster_url: posterUrl ?? null,
-          message: message ?? null,
+          portfolio_url: portfolioUrl || null,
+          figma_url: figmaUrl || null,
+          poster_url: posterUrl || null,
+          message: message || null,
           ip: ip ?? null,
           status: "received",
           is_public: false,
@@ -116,20 +120,64 @@ export async function POST(
       });
     }
 
+    if (userId) {
+      await db.from("newsletter_subscribers").upsert(
+        {
+          user_id: userId,
+          subscribed_from_page: JSON.stringify({
+            path: `/quests/${slug}/submit`,
+            origin: req.headers.get("origin"),
+            referer: req.headers.get("referer"),
+            url: req.url,
+          }),
+          updateexisting: Boolean(existingUserData),
+        },
+        { onConflict: "user_id" }
+      );
+    }
+
+    const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
+    if (generalId) {
+      await addContact({
+        email,
+        firstName: name,
+        listIds: [generalId],
+        provider: ContactProvider.BREVO,
+      });
+    }
+
     await sendEmail({
       to: [{ email, name }],
       locale,
-      subject: `Soumission recue: ${quest.title}`,
-      text: `Bonjour ${name},\n\nTa soumission pour "${quest.title}" a bien ete recue.\nNous revenons vers toi apres la fin du quest.\n\nLien soumis: ${workUrl}\n\nMerci,\nAdriel`,
+      subject: `Message recu - soumission au quest ${quest.title}`,
+      text: `Bonjour ${name},
+
+Ta soumission pour "${quest.title}" a bien ete recue.
+Tu recevras un retour apres la fin du quest.
+
+Lien soumis: ${workUrl}
+
+Merci,
+Adriel`,
     });
 
     await sendEmail({
       to: [{ email: appConfig.contactForm.to }],
       locale,
-      subject: `Nouvelle soumission quest: ${quest.title}`,
-      text: `Nom: ${name}\nEmail: ${email}\nQuest: ${quest.title}\nTitre: ${workTitle}\nLien: ${workUrl}\nMessage: ${
-        message || "-"
-      }`,
+      subject: `[BRIEF ADMIN] Nouvelle soumission quest - ${quest.title}`,
+      text: `Brief admin:
+- Quest: ${quest.title}
+- Slug: ${slug}
+- Nom: ${name}
+- Email: ${email}
+- Titre du travail: ${workTitle}
+- Lien du travail: ${workUrl}
+- Portfolio: ${portfolioUrl || "-"}
+- Figma: ${figmaUrl || "-"}
+- Affiche: ${posterUrl || "-"}
+- Message: ${message || "-"}
+- Date fin soumission: ${quest.submission_deadline}
+- Date fin quest: ${quest.quest_end}`,
     });
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });

@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { z } from "zod";
 import { appConfig } from "@/data/app-config";
 import {
   getQuestBySlug,
@@ -9,6 +10,14 @@ import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
 import { Locale } from "@/types";
 import logger from "@/utils/logger";
+
+const registerSchema = z.object({
+  name: z.string().min(2),
+  email: z.email(),
+  portfolioUrl: z.url().optional().or(z.literal("")),
+  motivation: z.string().max(1200).optional(),
+  locale: z.nativeEnum(Locale).optional(),
+});
 
 export async function POST(
   req: NextRequest,
@@ -32,26 +41,14 @@ export async function POST(
     }
 
     const body = await req.json().catch(() => ({}));
-    const {
-      name,
-      email,
-      portfolioUrl,
-      motivation,
-      locale,
-    }: {
-      name?: string;
-      email?: string;
-      portfolioUrl?: string;
-      motivation?: string;
-      locale?: Locale;
-    } = body;
-
-    if (!name || !email) {
-      return new Response(JSON.stringify({ error: "MISSING_REQUIRED_FIELDS" }), {
+    const parsed = registerSchema.safeParse(body);
+    if (!parsed.success) {
+      return new Response(JSON.stringify({ error: "INVALID_INPUT" }), {
         status: 400,
       });
     }
 
+    const { name, email, portfolioUrl, motivation, locale } = parsed.data;
     const ipHeader = req.headers.get("x-forwarded-for");
     const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined;
 
@@ -63,7 +60,6 @@ export async function POST(
       .limit(1);
 
     const existingUserData = existingUser?.[0];
-
     if (!existingUserData) {
       const { data: userData } = await db.rpc("upsert_user", {
         p_name: name,
@@ -83,8 +79,8 @@ export async function POST(
           user_id: userId ?? null,
           name,
           email,
-          portfolio_url: portfolioUrl ?? null,
-          motivation: motivation ?? null,
+          portfolio_url: portfolioUrl || null,
+          motivation: motivation || null,
           ip: ip ?? null,
           meta: {
             origin: req.headers.get("origin"),
@@ -107,7 +103,7 @@ export async function POST(
         {
           user_id: userId,
           subscribed_from_page: JSON.stringify({
-            path: `/quests/${slug}`,
+            path: `/quests/${slug}/register`,
             origin: req.headers.get("origin"),
             referer: req.headers.get("referer"),
             url: req.url,
@@ -131,17 +127,30 @@ export async function POST(
     await sendEmail({
       to: [{ email, name }],
       locale,
-      subject: `Inscription confirmee: ${quest.title}`,
-      text: `Bonjour ${name},\n\nTon inscription au quest "${quest.title}" est bien enregistree.\nTu recevras les prochaines infos par email.\n\nA bientot,\nAdriel`,
+      subject: `Message recu - inscription au quest ${quest.title}`,
+      text: `Bonjour ${name},
+
+Ton inscription au quest "${quest.title}" est bien recue.
+Tu seras recontacte par email pour la suite.
+
+Merci,
+Adriel`,
     });
 
     await sendEmail({
       to: [{ email: appConfig.contactForm.to }],
       locale,
-      subject: `Nouvelle inscription quest: ${quest.title}`,
-      text: `Nom: ${name}\nEmail: ${email}\nQuest: ${quest.title}\nPortfolio: ${
-        portfolioUrl || "-"
-      }\nMessage: ${motivation || "-"}`,
+      subject: `[BRIEF ADMIN] Nouvelle inscription quest - ${quest.title}`,
+      text: `Brief admin:
+- Quest: ${quest.title}
+- Slug: ${slug}
+- Nom: ${name}
+- Email: ${email}
+- Portfolio: ${portfolioUrl || "-"}
+- Message: ${motivation || "-"}
+- Date fin inscription: ${quest.registration_deadline}
+- Date fin soumission: ${quest.submission_deadline}
+- Date fin quest: ${quest.quest_end}`,
     });
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });

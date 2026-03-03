@@ -31,7 +31,7 @@ export enum PageType {
 }
 
 export enum QuestAskType {
-  ENROLL = "enroll",
+  ENROLL = "register",
   SUBMIT = "submit",
 }
 

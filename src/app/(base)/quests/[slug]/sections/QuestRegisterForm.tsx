@@ -16,15 +16,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Card, CardContent } from "@/components/ui/card";
 import { apiRoutes } from "@/data/api-routes";
+import { SectionBase } from "@/components/shared/pages/shared/section-base";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const schema = z.object({
   name: z.string().min(2, "Nom requis"),
   email: z.email("Email invalide"),
   portfolioUrl: z.url("URL portfolio invalide").optional().or(z.literal("")),
-  motivation: z.string().max(1000, "Message trop long").optional(),
+  motivation: z.string().max(1200, "Message trop long").optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -55,7 +56,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
         throw new Error(data?.error || "REGISTER_FAILED");
       }
 
-      toast.success("Inscription validee. Un email vient d'etre envoye.");
+      toast.success("Message recu. Ton inscription est enregistree.");
       form.reset();
     } catch {
       toast.error("Impossible de finaliser l'inscription.");
@@ -63,26 +64,45 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
   };
 
   return (
-    <SectionLayout>
-      <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
-        <CardContent className="p-5 md:p-6 space-y-4">
-          <div>
-            <h3 className="h5">Inscription au quest</h3>
-            <p className="text-sm text-b-white-invert-sec">
-              Tu seras ajoute a la newsletter du quest et recontacte par email.
+    <SectionBase
+      sectionClassName="w-full"
+      sectionContentClassName="w-full"
+      cardClassName="w-full squircle-sh-white"
+      cardContentClassName="w-full px-4 py-6 md:p-8"
+      className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+    >
+      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
+        <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
+          <div className="flex flex-col items-center text-center gap-2">
+            <Badge size="lg">Quest enrollment</Badge>
+            <h2 className="h4">Inscription au quest</h2>
+            <p className="text-b-white-invert-sec max-w-2xl">
+              Tu seras ajoute a la newsletter et tu recevras les prochaines
+              informations par email.
             </p>
           </div>
+
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-6 w-full max-w-xl self-center place-self-center"
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Nom</FormLabel>
+                      <FormLabel>
+                        Nom <span className="text-red-500">*</span>
+                      </FormLabel>
                       <FormControl>
-                        <Input {...field} variant="secondary" placeholder="Ton nom" />
+                        <Input
+                          {...field}
+                          variant="secondary"
+                          className="rounded-xl"
+                          placeholder="Ton nom"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -93,12 +113,15 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>
+                        Email <span className="text-red-500">*</span>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           type="email"
                           variant="secondary"
+                          className="rounded-xl"
                           placeholder="ton@email.com"
                         />
                       </FormControl>
@@ -107,6 +130,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                   )}
                 />
               </div>
+
               <FormField
                 control={form.control}
                 name="portfolioUrl"
@@ -117,6 +141,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                       <Input
                         {...field}
                         variant="secondary"
+                        className="rounded-xl"
                         placeholder="https://ton-portfolio.com"
                       />
                     </FormControl>
@@ -124,32 +149,44 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="motivation"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Message (optionnel)</FormLabel>
+                    <FormLabel>Contexte (optionnel)</FormLabel>
                     <FormControl>
                       <Textarea
                         value={field.value ?? ""}
                         onChange={field.onChange}
+                        rows={5}
                         variant="secondary"
-                        rows={4}
-                        placeholder="Ton objectif dans ce quest"
+                        className="rounded-xl"
+                        placeholder="Ton objectif, ton niveau, ce que tu veux travailler..."
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" asPointer whileTap>
-                S'inscrire
+
+              <Button
+                type="submit"
+                whileTap
+                asPointer
+                asFull
+                size="lg"
+                disabled={form.formState.isSubmitting}
+              >
+                {form.formState.isSubmitting
+                  ? "Enregistrement..."
+                  : "Valider mon inscription"}
               </Button>
             </form>
           </Form>
         </CardContent>
       </Card>
-    </SectionLayout>
+    </SectionBase>
   );
 }
