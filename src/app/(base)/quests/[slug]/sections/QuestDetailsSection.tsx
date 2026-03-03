@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { Card, CardContent } from "@/components/ui/card";
-import { getDateDifference, getHumanDate, getQuestAskUrl } from "@/utils";
+import { getHumanDate, getQuestAskUrl } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { useTranslations } from "use-intl";
 import { DEFAULT_COLOR_CODE_NAME_LIST, QuestAskType } from "@/types";
@@ -18,6 +18,7 @@ export function QuestDetailsSection({
   slug,
   tags,
   dates,
+  rewards,
 }: {
   content: string;
   slug: string;
@@ -27,6 +28,7 @@ export function QuestDetailsSection({
     submission_end: string;
     results: string;
   };
+  rewards: string[];
 }) {
   const t = useTranslations();
 
@@ -39,6 +41,30 @@ export function QuestDetailsSection({
           </h2>
 
           <MarkdownContentRender content={content} />
+
+          {rewards.length > 0 && (
+            <div className="flex w-full flex-col gap-3 md:gap-4">
+              <h3 className="h4">Récompenses 🎁</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
+                {rewards.map((reward, index) => (
+                  <Card
+                    key={`${reward}-${index}`}
+                    className="squircle squircle-b-base squircle-2xl squircle-smooth-md border-0 overflow-hidden"
+                  >
+                    <CardContent className="p-2 md:p-3">
+                      <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
+                        <div className="flex w-full flex-col gap-2">
+                          <p className="text-b-white-foreground leading-[130%]">
+                            🪽 {reward}
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <Card className="squircle size-full md:max-w-[30%] squircle-b-base squircle-4xl squircle-smooth-md border-0 overflow-hidden mx-auto">

@@ -71,6 +71,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
     submission_deadline,
     quest_end,
     results_published,
+    rewards,
     winners,
   } = quest.currentQuest;
 
@@ -135,6 +136,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         slug={slug}
         dates={dates}
         tags={tags}
+        rewards={rewards}
       />
       {isResultsPublished(quest_end, results_published) && (
         <QuestParticipantsSection winners={winners} />
