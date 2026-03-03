@@ -24,7 +24,7 @@ export async function POST(
       });
     }
 
-    if (isSubmissionClosed(quest)) {
+    if (isSubmissionClosed(quest.submission_deadline, quest.quest_end)) {
       return new Response(JSON.stringify({ error: "QUEST_SUBMISSION_CLOSED" }), {
         status: 400,
       });

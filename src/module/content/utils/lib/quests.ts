@@ -80,19 +80,21 @@ export async function getQuestBySlug(
   );
 }
 
-export function isRegistrationClosed(quest: Quest): boolean {
-  return Date.now() > new Date(quest.registration_deadline).getTime();
+export function isRegistrationClosed(registrationDeadline: string): boolean {
+  return Date.now() > new Date(registrationDeadline).getTime();
 }
 
-export function isSubmissionClosed(quest: Quest): boolean {
+export function isSubmissionClosed(
+  submissionDeadline: string,
+  questEnd: string
+): boolean {
   const now = Date.now();
   return (
-    now > new Date(quest.submission_deadline).getTime() ||
-    now > new Date(quest.quest_end).getTime()
+    now > new Date(submissionDeadline).getTime() ||
+    now > new Date(questEnd).getTime()
   );
 }
 
-export function isResultsPublished(quest: Quest): boolean {
-  const now = Date.now();
-  return now > new Date(quest.quest_end).getTime();
+export function isResultsPublished(questEnd: string): boolean {
+  return Date.now() > new Date(questEnd).getTime();
 }

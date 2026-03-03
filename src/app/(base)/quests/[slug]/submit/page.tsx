@@ -8,7 +8,7 @@ import {
   getQuestBySlug,
   isSubmissionClosed,
 } from "@/module/content/utils/lib/quests";
-import { QuestSubmissionForm } from "../../sections/QuestSubmissionForm";
+import { QuestSubmissionForm } from "../sections/QuestSubmissionForm";
 
 export default async function QuestWorkSubmitPage(props: {
   params: Promise<{ slug: string }>;
@@ -21,7 +21,7 @@ export default async function QuestWorkSubmitPage(props: {
     notFound();
   }
 
-  const closed = isSubmissionClosed(quest);
+  const closed = isSubmissionClosed(quest.submission_deadline, quest.quest_end);
 
   return (
     <>

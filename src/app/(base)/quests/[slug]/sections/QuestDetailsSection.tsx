@@ -8,6 +8,10 @@ import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown
 import { useTranslations } from "use-intl";
 import { DEFAULT_COLOR_CODE_NAME_LIST, QuestAskType } from "@/types";
 import { Link } from "@/components/ui/link";
+import {
+  isRegistrationClosed,
+  isSubmissionClosed,
+} from "@/module/content/utils/lib";
 
 export function QuestDetailsSection({
   content,
@@ -110,23 +114,27 @@ export function QuestDetailsSection({
               </div>
 
               <div className="flex flex-wrap gap-2">
-                <Link
-                  href={getQuestAskUrl(slug, QuestAskType.ENROLL)}
-                  asFull
-                  likeButton
-                  whileTap
-                >
-                  S'inscrire au quest
-                </Link>
-                <Link
-                  href={getQuestAskUrl(slug, QuestAskType.SUBMIT)}
-                  asFull
-                  likeButton
-                  whileTap
-                  variant="secondary"
-                >
-                  Soumettre son travail
-                </Link>
+                {isRegistrationClosed(dates.registration_end) && (
+                  <Link
+                    href={getQuestAskUrl(slug, QuestAskType.ENROLL)}
+                    asFull
+                    likeButton
+                    whileTap
+                  >
+                    S&apos;inscrire au quest
+                  </Link>
+                )}
+                {!isSubmissionClosed(dates.submission_end, dates.results) && (
+                  <Link
+                    href={getQuestAskUrl(slug, QuestAskType.SUBMIT)}
+                    asFull
+                    likeButton
+                    whileTap
+                    variant="secondary"
+                  >
+                    Soumettre son travail
+                  </Link>
+                )}
               </div>
             </div>
           </CardContent>

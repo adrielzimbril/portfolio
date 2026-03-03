@@ -18,7 +18,7 @@ export default async function QuestRegisterPage(props: {
     notFound();
   }
 
-  const closed = isRegistrationClosed(quest);
+  const closed = isRegistrationClosed(quest.registration_deadline);
 
   return (
     <>

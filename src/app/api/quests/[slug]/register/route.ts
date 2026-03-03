@@ -25,7 +25,7 @@ export async function POST(
       });
     }
 
-    if (isRegistrationClosed(quest)) {
+    if (isRegistrationClosed(quest.registration_deadline)) {
       return new Response(JSON.stringify({ error: "QUEST_REGISTRATION_CLOSED" }), {
         status: 400,
       });
