@@ -788,14 +788,14 @@
     "title": "Logbook 📒"
   },
   "talks": {
-    "title": "Talks & Masterclasses 🎤",
-    "description": "Explore my talks and masterclasses: posters, roles, event dates, and replays to level up faster.",
-    "keywords": "Adriel Zimbril talks, SaaS design masterclass, product conferences, UX UI talks, design replay",
+    "title": "Talks & Masterclasses 💡",
+    "description": "Discover the events where I was invited: conferences, webinars, and masterclasses online and in person.",
+    "keywords": "Adriel Zimbril talks, SaaS design masterclass, product conferences, UX UI talks, design webinars",
     "page": {
       "header-section": {
-        "title": "Talks & Masterclasses live 🎤",
-        "description": "A dedicated space to revisit each session: topic, role, event date, and actionable resources you can apply right away.",
-        "cta": "Explore talks"
+        "title": "My Talks & Masterclasses 💡",
+        "description": "Events, conferences, and webinars where I shared my expertise.",
+        "cta": "See all talks"
       }
     }
   },

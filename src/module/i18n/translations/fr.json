@@ -175,14 +175,14 @@
     }
   },
   "talks": {
-    "title": "Talks & Masterclasses 🎤",
-    "description": "Retrouve mes talks, sessions et masterclasses : affiches, rôles, dates et replays pour progresser plus vite.",
-    "keywords": "talks Adriel Zimbril, masterclass design SaaS, conférences produit, UX UI talks, replay design",
+    "title": "Talks & Masterclasses 💡",
+    "description": "Découvre les événements où j'ai été invité : conférences, webinaires et masterclasses en ligne et en présentiel.",
+    "keywords": "talks Adriel Zimbril, masterclass design SaaS, conférences produit, UX UI talks, webinaires design",
     "page": {
       "header-section": {
-        "title": "Talks & Masterclasses en live 🎤",
-        "description": "Un espace pour revoir chaque session : le sujet, mon rôle, la date et les ressources utiles pour passer de l'inspiration à l'action.",
-        "cta": "Voir les talks"
+        "title": "Mes Talks & Masterclasses 💡",
+        "description": "Les événements, conférences et webinaires où j'ai partagé mon expertise.",
+        "cta": "Voir tous les talks"
       }
     }
   },
@@ -200,7 +200,9 @@
         "subDescription": "Propose ton site, ton app ou ton fichier Figma — et je le décortiquer, l’améliorer et te donner du feedback en direct ou en vidéo sur ma chaîne. Chaque épisode est l’occasion de transformer des idées en pépites et d’apprendre 🫶🏻👨🏻‍🚀 "
       },
       "fields": {
-        "intention": { "label": "Panel de feedback demandé" },
+        "intention": {
+          "label": "Panel de feedback demandé"
+        },
         "name": {
           "label": "Ton nom ou pseudo",
           "placeholder": "Adriel Zimbril"
@@ -217,7 +219,9 @@
           "label": "Explique ta demande",
           "placeholder": "Décris brièvement ton projet et ce que tu aimerais qu’on analyse"
         },
-        "target": { "label": "Type" }
+        "target": {
+          "label": "Type"
+        }
       },
       "options": {
         "ux_review": "UI/UX Review",
@@ -228,7 +232,9 @@
           "prototype": "Prototype"
         }
       },
-      "actions": { "submit": "Here we go ! 🤩" },
+      "actions": {
+        "submit": "Here we go ! 🤩"
+      },
       "toast": {
         "success": "Merci ! Ton design est en orbite ! 🪐",
         "error": "Oups ! Une erreur est survenue, veuillez réessayer s'il vous plaît 😅"

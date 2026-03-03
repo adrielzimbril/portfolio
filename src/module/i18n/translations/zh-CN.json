@@ -788,14 +788,14 @@
     "title": "航海日志 📒"
   },
   "talks": {
-    "title": "Talks 与 Masterclasses 🎤",
-    "description": "查看我的 talks 与 masterclasses：海报、角色、活动日期与回放，帮助你更快进步。",
-    "keywords": "Adriel Zimbril talks, SaaS 设计 masterclass, 产品分享, UX UI 演讲, 设计回放",
+    "title": "Talks & Masterclasses 💡",
+    "description": "探索我受邀参与的活动：线上与线下的大会、网络研讨会和大师课。",
+    "keywords": "Adriel Zimbril talks, SaaS 设计 masterclass, 产品大会, UX UI talks, 设计网络研讨会",
     "page": {
       "header-section": {
-        "title": "Talks 与 Masterclasses 现场 🎤",
-        "description": "在这里回看每场内容：主题、我的角色、活动日期，以及可直接实践的资源。",
-        "cta": "查看 talks"
+        "title": "我的 Talks & Masterclasses 💡",
+        "description": "我分享专业经验的活动、大会与网络研讨会合集。",
+        "cta": "查看全部 talks"
       }
     }
   },

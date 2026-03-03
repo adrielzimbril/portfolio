@@ -64,7 +64,7 @@ export function ParticipantsStats({
             badgeClassName,
           )}
         >
-          {total} participants 🪽
+          {total} participants 🎮
         </span>
       </div>
 

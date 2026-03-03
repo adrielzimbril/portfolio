@@ -44,7 +44,7 @@ export function QuestDetailsSection({
 
           {rewards.length > 0 && (
             <div className="flex w-full flex-col gap-3 md:gap-4">
-              <h3 className="h4">Récompenses 🎁</h3>
+              <h3 className="h3">Récompenses 🎁</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
                 {rewards.map((reward, index) => (
                   <Card
@@ -55,7 +55,7 @@ export function QuestDetailsSection({
                       <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
                         <div className="flex w-full flex-col gap-2">
                           <p className="text-b-white-foreground leading-[130%]">
-                            🏁 {reward}
+                            🎲 {reward}
                           </p>
                         </div>
                       </div>
