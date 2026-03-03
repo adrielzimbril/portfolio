@@ -12,7 +12,8 @@ type ParticipantsStatsProps = {
   registered: number;
   submitted: number;
   className?: string;
-  textClassName?: string;
+  colorName?: string;
+  badgeClassName?: string;
 };
 
 export function ParticipantsStats({
@@ -20,7 +21,8 @@ export function ParticipantsStats({
   registered,
   submitted,
   className,
-  textClassName,
+  colorName,
+  badgeClassName,
 }: ParticipantsStatsProps) {
   const groupCount = Math.max(1, total);
   const visibleCount = Math.max(1, Math.min(total, 5));
@@ -35,7 +37,12 @@ export function ParticipantsStats({
 
   return (
     <div className={cn("flex flex-col items-start gap-1", className)}>
-      <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl squircle-sh-white/99">
+      <div
+        className={cn(
+          "inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl",
+          colorName ?? "squircle-sh-white/99",
+        )}
+      >
         <div className="inline-flex items-start">
           <AvatarGroup numPeople={groupCount}>
             {Array.from({ length: visibleCount }).map((_, index) => (
@@ -51,8 +58,13 @@ export function ParticipantsStats({
             ))}
           </AvatarGroup>
         </div>
-        <span className="relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec">
-          {total} participants
+        <span
+          className={cn(
+            "relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec",
+            badgeClassName,
+          )}
+        >
+          {total} participants 🪽
         </span>
       </div>
 

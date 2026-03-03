@@ -104,6 +104,8 @@ export function HeaderSection({
             total={stats.totalParticipants}
             registered={stats.registered}
             submitted={stats.submitted}
+            colorName="squircle-indigo-100"
+            badgeClassName="text-b-white-unchanged"
           />
           {tags.map((tag, index) => (
             <Badge

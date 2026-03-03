@@ -55,7 +55,7 @@ export function QuestDetailsSection({
                       <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
                         <div className="flex w-full flex-col gap-2">
                           <p className="text-b-white-foreground leading-[130%]">
-                            🪽 {reward}
+                            🏁 {reward}
                           </p>
                         </div>
                       </div>
