@@ -19,6 +19,7 @@ import {
   defaultLocale,
 } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
+import { siteConfig } from "@/data/config";
 
 export function QuestSubmitAdminNotification({
   locale,
@@ -86,6 +87,19 @@ export function QuestSubmitAdminNotification({
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
                 {message || "-"}
+              </Text>
+            </Section>
+
+            <Section className="p-10 bg-[#f5f5f4]">
+              <Hr className="border-t border-[#e0e0e0] mb-6" />
+              <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
+                {t("mail.common.signature")}
+              </Text>
+              <Text className="text-[#666666] text-sm leading-relaxed">
+                {t("mail.common.contact")} :{" "}
+                <Link href={`mailto:${siteConfig.links.contact.email}`}>
+                  {siteConfig.links.contact.email}
+                </Link>
               </Text>
             </Section>
           </Container>

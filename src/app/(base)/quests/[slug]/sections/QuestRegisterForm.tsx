@@ -102,10 +102,10 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
               <Badge size="lg">Quest enrollment</Badge>
-              <h2 className="h3">Inscription au quest</h2>
+              <h2 className="h3">Rejoins le quest</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
-                Tu seras ajoute a la newsletter et tu recevras les prochaines
-                informations par email.
+                Reserve ta place pour recevoir le brief, les regles et toutes
+                les infos pratiques avant le lancement.
               </p>
             </div>
 
@@ -171,7 +171,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                           rows={5}
                           variant="secondary"
                           className="rounded-xl"
-                          placeholder="Ton objectif, ton niveau, ce que tu veux travailler..."
+                          placeholder="Ton contexte, ce que tu veux travailler et ce que tu attends du quest..."
                         />
                       </FormControl>
                       <FormMessage />
@@ -189,7 +189,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                 >
                   {form.formState.isSubmitting
                     ? "Enregistrement..."
-                    : "Valider mon inscription"}
+                    : "Confirmer mon inscription"}
                 </Button>
               </form>
             </Form>

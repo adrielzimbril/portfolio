@@ -27,7 +27,7 @@ export default async function QuestRegisterPage(props: {
     <>
       <PageHero
         title={`Rejoindre ${quest.title}`}
-        description="Entre dans l'arene: inscris-toi maintenant pour recevoir le brief, les etapes et les updates du quest."
+        description="Inscris-toi pour recevoir le brief officiel, les consignes et toutes les etapes du quest directement par email."
         badge="Quest enrollment"
         imagePath={{ emoji: "📝" }}
         isMobileShowed
