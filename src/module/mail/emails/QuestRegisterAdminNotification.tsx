@@ -95,7 +95,7 @@ export function QuestRegisterAdminNotification({
                 {t("mail.common.signature")}
               </Text>
               <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.contact")} :{" "}
+                {t("mail.common.adminContact")} :{" "}
                 <Link href={`mailto:${siteConfig.links.contact.email}`}>
                   {siteConfig.links.contact.email}
                 </Link>
@@ -120,4 +120,3 @@ QuestRegisterAdminNotification.PreviewProps = {
 };
 
 export default QuestRegisterAdminNotification;
-
