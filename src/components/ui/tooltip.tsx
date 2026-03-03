@@ -245,7 +245,7 @@ function TooltipArrow({ side }: TooltipArrowProps) {
   return (
     <div
       className={cn(
-        "absolute bg-b-base z-50 size-2.5 rotate-45 rounded-[2px]",
+        "absolute bg-sh-base-white z-50 size-2.5 rotate-45 rounded-[2px]",
         (side === "top" || side === "bottom") && "left-1/2 -translate-x-1/2",
         (side === "left" || side === "right") && "top-1/2 -translate-y-1/2",
         side === "top" && "-bottom-[3px]",
@@ -301,7 +301,7 @@ function TooltipOverlay() {
               animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
               exit={{ opacity: 0, scale: 0, ...position.initial }}
               transition={transition}
-              className="relative rounded-lg bg-b-base fill-primary px-3 py-1.5 text-sm text-b-white-invert-sec shadow-md w-fit text-balance"
+              className="relative rounded-lg bg-sh-base-white fill-primary px-3 py-1.5 text-sm text-b-white-invert-sec shadow-md w-fit text-balance"
             >
               {currentTooltip.content}
 

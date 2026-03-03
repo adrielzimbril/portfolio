@@ -30,8 +30,8 @@ export function ProjectCard({
     >
       <CardContent
         className={cn(
-          `flex flex-col px-6 md:px-8 py-8 md:py-10 gap-4 h-full w-full`,
-          isWide && "md:flex-row",
+          `flex flex-col px-6 md:px-8 py-8 md:py-10 gap-4 size-full`,
+          isWide ? "md:flex-row" : "grid-rows-[auto_1fr]",
         )}
       >
         <CardPreview

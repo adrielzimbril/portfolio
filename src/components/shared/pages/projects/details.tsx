@@ -29,8 +29,8 @@ export function CardInfo({
   return (
     <div
       className={cn(
-        "flex flex-col flex-1 items-start justify-between gap-4 w-full",
-        isWide && "justify-center"
+        "flex flex-col flex-1 items-start justify-between gap-4 size-full",
+        isWide && "justify-center",
       )}
     >
       <div className="flex flex-col items-start justify-center gap-4 w-full">

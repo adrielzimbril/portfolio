@@ -26,7 +26,7 @@ export function ResourceCard({
 }) {
   return (
     <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
-      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
+      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
         <CardPreview
           title={title}
           type={PageType.HUB}

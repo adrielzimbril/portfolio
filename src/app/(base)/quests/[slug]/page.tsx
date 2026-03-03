@@ -11,12 +11,14 @@ import { Metadata } from "next";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
 import { metadata as baseMetadata } from "@/app/metadata";
 import {
+  getQuestWithAdjacent,
   getQuestBySlug,
   isRegistrationClosed,
   isSubmissionClosed,
   isResultsPublished,
 } from "@/module/content/utils/lib/quests";
 import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
+import { MorePreviewSection } from "./sections/MorePreviewSection";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -54,7 +56,7 @@ export async function generateMetadata(props: {
 export default async function SubShop(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;
   const locale = await getLocale();
-  const quest = await getQuestBySlug(slug, { locale });
+  const quest = await getQuestWithAdjacent(slug, { locale });
 
   if (!quest) {
     return localeRedirect({ href: routes.hub.link, locale });
@@ -69,7 +71,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
     submission_deadline,
     quest_end,
     results_published,
-  } = quest;
+  } = quest.currentQuest;
 
   const registrationClosed = isRegistrationClosed(registration_deadline);
   const submissionClosed = isSubmissionClosed(submission_deadline, quest_end);
@@ -133,7 +135,12 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         dates={dates}
         tags={tags}
       />
-      <QuestParticipantsSection questSlug={slug} />
+      {isResultsPublished(quest_end, results_published) && (
+        <QuestParticipantsSection questSlug={slug} />
+      )}
+      {quest!.adjacentQuests.length > 0 && (
+        <MorePreviewSection data={quest!.adjacentQuests} />
+      )}
       <CallToAction isPage />
     </>
   );

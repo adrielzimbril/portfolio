@@ -15,7 +15,7 @@ import BoringAvatar from "boring-avatars";
 import { getExternalUrl, getImageUrl } from "@/utils/base-url";
 import { Tags } from "@/components/shared/pages/quests/tags";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
-import { pickRandomColorCode } from "@/utils";
+import { cn, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
@@ -109,7 +109,7 @@ function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
   return (
     <Tooltip>
       <TooltipTrigger>
-        <Badge className="relative rounded-full px-2 py-2">
+        <Badge className="relative rounded-full cursor-pointer px-2 py-2">
           <span className="text-2xl">{label}</span>
         </Badge>
       </TooltipTrigger>
@@ -131,37 +131,40 @@ function WinnerCard({ participant }: { participant: DemoParticipant }) {
   }, [WINNER_NUMBER]);
 
   return (
-    <Card className="squircle size-full squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
+    <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
       <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
         <div className="relative min-h-52 md:min-h-72 squircle squircle-smooth-xl squircle-3xl squircle-sh-white overflow-hidden">
-          <Image
-            width={1200}
-            height={630}
-            src={getImageUrl(participant.workCover)}
-            alt={participant.name}
-            className="size-full object-cover"
-          />
-
-          <Link
-            href={workUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0"
-            aria-label={`Voir le travail de ${participant.name}`}
-          />
-          <div className="absolute top-3 right-3 flex flex-wrap gap-2 justify-end">
-            {participant.rank && (
-              <OverlayTag
-                label={RANK_BADGE[participant.rank].emoji}
-                tooltip={RANK_BADGE[participant.rank].label}
-              />
+          <div
+            className={cn(
+              "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
+              "p-2 h-48 md:h-80",
             )}
-            {participant.pixelPerfect && (
-              <OverlayTag label="🎖️" tooltip="Pixel Perfect" />
-            )}
-            {participant.juryFavorite && (
-              <OverlayTag label="❤️" tooltip="Coup de cœur du jury" />
-            )}
+          >
+            <Link href={workUrl} className="flex size-full">
+              <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
+                <Image
+                  width={1200}
+                  height={630}
+                  className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
+                  alt={participant.name}
+                  src={getImageUrl(participant.workCover)}
+                />
+              </div>
+            </Link>
+            <div className="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
+              {participant.rank && (
+                <OverlayTag
+                  label={RANK_BADGE[participant.rank].emoji}
+                  tooltip={RANK_BADGE[participant.rank].label}
+                />
+              )}
+              {participant.pixelPerfect && (
+                <OverlayTag label="🎖️" tooltip="Pixel Perfect" />
+              )}
+              {participant.juryFavorite && (
+                <OverlayTag label="❤️" tooltip="Coup de cœur du jury" />
+              )}
+            </div>
           </div>
         </div>
 

@@ -144,7 +144,9 @@ export default async function SubProject(props: {
           results={results}
         />
       )}
-      <MorePreviewSection data={project!.adjacentProjects} />
+      {project!.adjacentProjects.length > 0 && (
+        <MorePreviewSection data={project!.adjacentProjects} />
+      )}
       <CallToAction isPage />
     </>
   );
