@@ -143,7 +143,9 @@ export function IntentionForm({
                               {...field}
                               variant="secondary"
                               className="rounded-xl"
-                              placeholder="Ton nom"
+                              placeholder={t(
+                                "submit.page.fields.name.placeholder",
+                              )}
                             />
                           </FormControl>
                           <FormMessage />
@@ -164,7 +166,9 @@ export function IntentionForm({
                               type="email"
                               variant="secondary"
                               className="rounded-xl"
-                              placeholder="ton@email.com"
+                              placeholder={t(
+                                "submit.page.fields.email.placeholder",
+                              )}
                             />
                           </FormControl>
                           <FormMessage />
@@ -179,7 +183,7 @@ export function IntentionForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          Lien du rendu <span className="text-red-500">*</span>
+                          Lien <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -209,7 +213,7 @@ export function IntentionForm({
                             rows={5}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder="Ajoute un message sur ton rendu, tes choix ou tes contraintes..."
+                            placeholder="Ajoute un message pour nous aider à mieux comprendre tes choix..."
                           />
                         </FormControl>
                         <FormMessage />

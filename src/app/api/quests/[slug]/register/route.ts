@@ -85,7 +85,7 @@ export async function POST(
       .upsert(
         {
           challenge_slug: slug,
-          user_id: userId ?? null,
+          user_id: userId,
           name,
           email,
           message: message || null,

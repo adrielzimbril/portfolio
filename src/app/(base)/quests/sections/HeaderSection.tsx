@@ -18,8 +18,8 @@ export function HeaderSection() {
 
   return (
     <PageHero
-      title="Challenges 🏆"
-      description="Mes challenges en cours et passes: brief, recompenses, participants, gagnants et soumissions."
+      title="Challenges des créatifs 🎖️"
+      description="Repousse tes limites et remporte des récompenses. Intègre le top 3 et sois affiché en vedette sur le site, termine premier et ton travail sera partagé en exclusivité sur mes réseaux."
       isMobileShowed
       imagePath={{ emoji: "🏆" }}
       actionButton

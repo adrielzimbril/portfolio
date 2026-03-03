@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useLocale } from "use-intl";
+import { useLocale, useTranslations } from "use-intl";
 import {
   Form,
   FormControl,
@@ -31,6 +31,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export function IntentionForm({ questSlug }: { questSlug: string }) {
+  const t = useTranslations();
   const locale = useLocale();
   const [feedback, setFeedback] = useState<{
     open: boolean;
@@ -84,7 +85,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
         status: "error",
         title: "Envoi impossible ⚠️",
         description:
-          "Une erreur est survenue pendant l'inscription. Merci de reessayer 🙏",
+          "Une erreur est survenue pendant l'inscription. Merci de réessayer 🙏",
       });
     }
   };
@@ -128,7 +129,9 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                             {...field}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder="Ton nom"
+                            placeholder={t(
+                              "submit.page.fields.name.placeholder",
+                            )}
                           />
                         </FormControl>
                         <FormMessage />
@@ -149,7 +152,9 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                             type="email"
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder="ton@email.com"
+                            placeholder={t(
+                              "submit.page.fields.email.placeholder",
+                            )}
                           />
                         </FormControl>
                         <FormMessage />

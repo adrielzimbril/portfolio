@@ -87,7 +87,7 @@ export async function POST(
       .upsert(
         {
           challenge_slug: slug,
-          user_id: userId ?? null,
+          user_id: userId,
           name,
           email,
           work_url: workUrl,
@@ -95,14 +95,13 @@ export async function POST(
           ip: ip ?? null,
           status: "received",
           is_public: false,
-          winner_rank: null,
           meta: {
             origin: req.headers.get("origin"),
             referer: req.headers.get("referer"),
             url: req.url,
           },
         },
-        { onConflict: "challenge_slug,email" }
+        { onConflict: "challenge_slug,email" },
       );
 
     if (submissionError) {
