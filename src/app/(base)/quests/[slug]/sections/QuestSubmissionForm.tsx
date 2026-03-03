@@ -109,7 +109,7 @@ export function QuestSubmissionForm({
         <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
-              <Badge size="lg">Soumission du challenge 🧪</Badge>
+              <Badge size="lg">Soumission du challenge 🏆</Badge>
               <h2 className="h3">Soumettre son travail 🚀</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
                 Date limite: {getHumanDate(quest.submission_deadline, true)}.
@@ -186,9 +186,7 @@ export function QuestSubmissionForm({
                             {...field}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder={t(
-                              "submit.page.fields.url.placeholder",
-                            )}
+                            placeholder={t("submit.page.fields.url.placeholder")}
                           />
                         </FormControl>
                         <FormMessage />
@@ -201,7 +199,7 @@ export function QuestSubmissionForm({
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Contexte (optionnel) 💬</FormLabel>
+                        <FormLabel>Message (optionnel) 💬</FormLabel>
                         <FormControl>
                           <Textarea
                             value={field.value ?? ""}
@@ -209,7 +207,7 @@ export function QuestSubmissionForm({
                             rows={5}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder="Contexte, contraintes, decisions, notes..."
+                            placeholder="Ajoute un message sur ton rendu, tes choix ou tes contraintes..."
                           />
                         </FormControl>
                         <FormMessage />

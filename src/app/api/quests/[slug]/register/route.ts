@@ -14,7 +14,7 @@ import logger from "@/utils/logger";
 const registerSchema = z.object({
   name: z.string().min(2),
   email: z.email(),
-  contexte: z.string().max(1200).optional(),
+  message: z.string().max(1200).optional(),
   locale: z.nativeEnum(Locale).optional(),
 });
 
@@ -47,7 +47,7 @@ export async function POST(
       });
     }
 
-    const { name, email, contexte, locale } = parsed.data;
+    const { name, email, message, locale } = parsed.data;
     const ipHeader = req.headers.get("x-forwarded-for");
     const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined;
 
@@ -79,7 +79,7 @@ export async function POST(
           name,
           email,
           portfolio_url: null,
-          motivation: contexte || null,
+          motivation: message || null,
           ip: ip ?? null,
           meta: {
             origin: req.headers.get("origin"),
@@ -87,7 +87,7 @@ export async function POST(
             url: req.url,
           },
         },
-        { onConflict: "challenge_slug,email" }
+        { onConflict: "challenge_slug,email" },
       );
 
     if (registrationError) {
@@ -113,7 +113,7 @@ export async function POST(
       );
     }
 
-    const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
+    const generalId = Number(process.env.BREVO_QUESTS_REGISTER_ID);
     if (generalId) {
       await addContact({
         email,
@@ -142,7 +142,7 @@ export async function POST(
         email,
         questTitle: quest.title,
         questSlug: slug,
-        contexte: contexte || undefined,
+        message: message || undefined,
       },
     });
 

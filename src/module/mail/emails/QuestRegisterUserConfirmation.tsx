@@ -12,6 +12,7 @@ import {
   Text,
   Hr,
   Tailwind,
+  Link,
 } from "@react-email/components";
 import {
   defaultTranslations,
@@ -80,7 +81,10 @@ export function QuestRegisterUserConfirmation({
                 {t("mail.common.signature")}
               </Text>
               <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.contact")} : {siteConfig.links.contact.email}
+                {t("mail.common.contact")} :{" "}
+                <Link href={`mailto:${siteConfig.links.contact.email}`}>
+                  {siteConfig.links.contact.email}
+                </Link>
               </Text>
             </Section>
           </Container>

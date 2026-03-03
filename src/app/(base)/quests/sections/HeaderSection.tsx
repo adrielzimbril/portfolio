@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { useLocale } from "use-intl";
@@ -11,14 +12,14 @@ export function HeaderSection() {
   usePageViews(
     routes.quests.key,
     undefined,
-    { locale: locale, path: getPathUrl(routes.quests.link) },
+    { locale, path: getPathUrl(routes.quests.link) },
     false,
   );
 
   return (
     <PageHero
       title="Challenges 🏆"
-      description="Mes challenges en cours et passes: brief, recompenses, participants, gagnants et soumissions ✨"
+      description="Mes challenges en cours et passes: brief, recompenses, participants, gagnants et soumissions."
       isMobileShowed
       imagePath={{ emoji: "🏆" }}
       actionButton

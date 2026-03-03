@@ -122,7 +122,7 @@ export async function POST(
       );
     }
 
-    const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
+    const generalId = Number(process.env.BREVO_QUESTS_SUBMISSIONS_ID);
     if (generalId) {
       await addContact({
         email,

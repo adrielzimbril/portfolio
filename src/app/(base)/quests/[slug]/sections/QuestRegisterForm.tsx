@@ -25,7 +25,7 @@ import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 const schema = z.object({
   name: z.string().min(2, "Nom requis"),
   email: z.email("Email invalide"),
-  contexte: z.string().max(1200, "Message trop long").optional(),
+  message: z.string().max(1200, "Message trop long").optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -53,7 +53,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
     defaultValues: {
       name: "",
       email: "",
-      contexte: "",
+      message: "",
     },
   });
 
@@ -160,10 +160,10 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
 
                 <FormField
                   control={form.control}
-                  name="contexte"
+                  name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Contexte (optionnel) 💬</FormLabel>
+                      <FormLabel>Message (optionnel) 💬</FormLabel>
                       <FormControl>
                         <Textarea
                           value={field.value ?? ""}
@@ -171,7 +171,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                           rows={5}
                           variant="secondary"
                           className="rounded-xl"
-                          placeholder="Ton contexte, ce que tu veux travailler et ce que tu attends du challenge..."
+                          placeholder="Parle-nous de ton profil, ton niveau et ce que tu attends du challenge..."
                         />
                       </FormControl>
                       <FormMessage />
