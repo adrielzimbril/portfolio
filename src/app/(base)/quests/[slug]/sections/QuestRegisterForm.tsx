@@ -101,11 +101,11 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
         <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
-              <Badge size="lg">Inscription au challenge</Badge>
-              <h2 className="h3">Rejoins le challenge</h2>
+              <Badge size="lg">Inscription au challenge 📝</Badge>
+              <h2 className="h3">Rejoins le challenge ✨</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
                 Reserve ta place pour recevoir le brief, les regles et toutes
-                les infos pratiques avant le lancement.
+                les infos pratiques avant le lancement 🚀
               </p>
             </div>
 
@@ -163,7 +163,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                   name="contexte"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Contexte (optionnel)</FormLabel>
+                      <FormLabel>Contexte (optionnel) 💬</FormLabel>
                       <FormControl>
                         <Textarea
                           value={field.value ?? ""}
@@ -189,7 +189,7 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                 >
                   {form.formState.isSubmitting
                     ? "Enregistrement..."
-                    : "Confirmer mon inscription"}
+                    : "Confirmer mon inscription ✨"}
                 </Button>
               </form>
             </Form>
