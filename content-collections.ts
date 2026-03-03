@@ -454,6 +454,7 @@ const talks = defineCollection({
     excerpt: z.string(),
     cover: z.string().optional(),
     role: z.string(),
+    attendance_mode: z.string().optional(),
     event_date: z.string(),
     participants: z.number().int().nonnegative().optional(),
     event_url: z.string().optional(),

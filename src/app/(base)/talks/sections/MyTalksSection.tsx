@@ -6,10 +6,47 @@ import { getExternalUrl, getHumanDate } from "@/utils";
 import type { Talk } from "@/module/content/utils/lib/talks";
 import { TalksCard } from "@/components/shared/pages/talks/card";
 import { useState } from "react";
+import { useLocale } from "use-intl";
+
+function getTalkModeLabel(
+  rawMode: string | undefined,
+  locale: string,
+): string | null {
+  if (!rawMode) return null;
+
+  const normalized = rawMode
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  const isOnline = [
+    "online",
+    "remote",
+    "virtual",
+    "webinar",
+    "webinaire",
+    "en ligne",
+  ].some((value) => normalized.includes(value));
+  const isOnsite = [
+    "onsite",
+    "on-site",
+    "in person",
+    "in-person",
+    "presentiel",
+    "sur place",
+  ].some((value) => normalized.includes(value));
+
+  if (!isOnline && !isOnsite) return null;
+
+  if (locale.startsWith("fr")) return isOnline ? "En ligne" : "Présentiel";
+  if (locale.startsWith("zh")) return isOnline ? "线上" : "线下";
+  return isOnline ? "Online" : "In person";
+}
 
 export function MyTalksSection({ data }: { data: Talk[] }) {
   const [currentTime] = useState(() => Date.now());
-  const [today] = useState(() => new Date());
+  const locale = useLocale();
 
   const {
     data: list,
@@ -48,6 +85,17 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
               label: "Participer",
               href: eventUrl || `/talks#${talk.slug}`,
             };
+        const talkWithMode = talk as Talk & {
+          attendance_mode?: string;
+          mode?: string;
+        };
+        const modeLabel = getTalkModeLabel(
+          talkWithMode.attendance_mode ?? talkWithMode.mode,
+          locale,
+        );
+        const tags = [talk.role, modeLabel]
+          .filter(Boolean)
+          .map((name) => ({ name: name as string }));
 
         return (
           <TalksCard
@@ -56,7 +104,7 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
             cover={talk.cover}
             excerpt={talk.excerpt || ""}
             date={getHumanDate(talk.event_date, true)}
-            tags={[{ name: talk.role }]}
+            tags={tags}
             participantsCount={talk.participants || 0}
             action={action}
           />
