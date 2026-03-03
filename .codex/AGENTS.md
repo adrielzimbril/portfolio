@@ -1,109 +1,61 @@
-# Shirofolio - Agent Operating Guide
+﻿# AGENTS Guidance - Shirofolio
 
-Ce fichier fixe les regles de travail pour intervenir proprement sur ce projet.
-Objectif: respecter le style produit, la qualite des textes, et eviter toute casse d'encodage (accents/emojis).
+This file contains durable instructions for Codex in this repo.
+Keep it short, specific, and updated whenever user feedback corrects an assumption.
 
-## 1) Regles de base
+## Core Workflow
 
-- Langue par defaut: francais.
-- Ton: premium, clair, humain, jamais generique.
-- Ne pas casser l'existant: se baser sur les modules deja en place (`submit`, `thoughts`, `hub`, `resources`, `quests`, `talks`).
-- Si une version existe deja dans le design system, la reutiliser avant d'inventer un nouveau composant.
+- When user corrects a coding/content assumption, update this file in the same task.
+- Prefer existing project patterns over creating new patterns.
+- Keep changes focused and reviewable.
 
-## 2) Terminologie obligatoire
+## Build / Validation
 
-- `thoughts` = blog.
-- `talks` = masterclasses/talks.
-- `quests` = challenges (route/feature en anglais), mais dans le texte FR on peut afficher "challenge".
-- Ne pas melanger les termes de facon incoherente dans une meme page.
+- Type check: `pnpm exec tsc --noEmit`
+- Lint (if needed): `pnpm lint`
+- For content/i18n/email edits, always validate rendered text (accents + emojis).
 
-## 3) Style de copywriting (important)
+## Project Conventions
 
-- Textes courts, impactants, orientes action.
-- Qualite equivalente aux sections deja fortes du projet (`submit`, cards de `hub/resources`).
-- Eviter les formulations plates et systematiques.
-- Les emojis sont autorises et attendus dans ce projet, mais:
-  - jamais en surcharge,
-  - toujours thematiques (challenge, creation, design, feedback).
+- Naming:
+  - `thoughts` = blog
+  - `talks` = masterclasses/talks
+  - `quests` = challenges (route in EN, FR copy can say "challenge")
+- Quests flow:
+  - info page
+  - register page (`/quests/[slug]/register`)
+  - submit page (`/quests/[slug]/submit`)
+  - respect registration/submission deadlines
+- MDX-first for editorial quest data (`rewards`, `winners`) unless backend is explicitly required.
 
-## 4) Donnees contenu (MDX first)
+## UI / Components
 
-- Priorite au contenu MDX/frontmatter quand possible (pas de BDD si inutile).
-- Pour `quests`, les sections editoriales comme `rewards` et `winners` doivent vivre dans le frontmatter.
-- Garder des schemas stricts dans `content-collections.ts` pour eviter les regressions.
+- Reuse design-system and existing modules (`submit`, `resources`, `talks`, `quests`).
+- If a UI block is needed in multiple places, extract a shared component.
+- For quest participants stats, use shared component style (avatars + count + breakdown), reusable in cards and inner header.
 
-## 5) UX/Flow Quests
+## Copy / Content
 
-- Flux attendu:
-  - page info du challenge,
-  - page inscription (`/quests/[slug]/register`) avec fermeture a la deadline d'inscription,
-  - page soumission (`/quests/[slug]/submit`) avec fermeture a la deadline de soumission/fin.
-- Ne pas fusionner inscription + soumission sur la meme vue.
-- Etats fermes: composants dedies, pas du inline spaghetti.
+- Default writing language: French.
+- Tone: concise, premium, human, action-oriented.
+- Emojis are part of the brand style; keep them intentional and thematic.
+- Admin mail labels/text must stay admin-oriented and professional.
 
-## 6) Mails (qualite + coherence)
+## i18n Rules
 
-- Utiliser les templates React Email existants (design reusable).
-- Copy propre, ton humain, CTA clair.
-- Pour les mails admin, utiliser un libelle admin explicite (pas un texte "contact user" inadapté).
-- Inclure les liens utiles (ex: URL challenge) quand pertinent.
+- Any new key used in UI/mail must exist in:
+  - `fr.json`
+  - `en.json`
+  - `zh-CN.json`
+- If FR source text is corrected, EN/ZH must be translated from that FR source intent.
 
-## 7) Encodage UTF-8 (critique)
+## Encoding Safety (Critical)
 
-Probleme connu: accents/emojis peuvent etre corrompus si ecriture non UTF-8.
+- Save text files as UTF-8.
+- In PowerShell writes, use `-Encoding utf8`.
+- Never leave mojibake sequences in final files (examples: `Ã©`, `ðŸ`, `â€™`).
 
-Regles:
-- Tous les fichiers texte en UTF-8.
-- Si ecriture via PowerShell: toujours `-Encoding utf8`.
-- Eviter les manipulations qui reserialisent en ANSI.
-- Apres edition de fichiers i18n/email/UI, verifier visuellement les accents + emojis.
+## Skills / Repeatable Procedures
 
-Checklist anti-corruption:
-- Pas de caracteres type `Ã©`, `ðŸ`, `â€™` dans les textes finaux.
-- Si corruption detectee:
-  - restaurer la chaine correcte,
-  - re-sauvegarder en UTF-8,
-  - recontroler les fichiers FR/EN/ZH touches.
-
-## 8) I18n
-
-- Toute nouvelle cle doit etre ajoutee dans:
-  - `fr.json`,
-  - `en.json`,
-  - `zh-CN.json` (minimum fallback propre).
-- Eviter les hardcodes quand une cle i18n existe deja.
-- Si hardcode volontaire (UX local), le justifier dans le PR/message.
-
-## 9) Standards UI
-
-- Reutiliser les patterns cartes/squircles/badges existants.
-- Respecter la densite visuelle des pages `submit` et `resources`.
-- Mobile et desktop obligatoires.
-- Etats vides/fermes/erreurs: design propre (modal > toast quand c'est l'experience cible du module).
-
-## 10) Qualite avant livraison
-
-Avant de finir une tache:
-- `pnpm exec tsc --noEmit`
-- verifier la/les pages modifiees
-- verifier texte/accents/emojis
-- verifier routes et liens
-- verifier que la structure des donnees suit le schema content/API
-
-## 11) Journal de suivi (a tenir a jour)
-
-Pour chaque modification significative, ajouter une entree concise ci-dessous:
-
-- Date:
-- Zone:
-- Changement:
-- Risque:
-- Validation:
-
-Exemple:
-- Date: 2026-03-03
-- Zone: quests details + content schema
-- Changement: ajout `winners` en frontmatter MDX et rendu dynamique
-- Risque: encodage FR sur labels
-- Validation: `pnpm exec tsc --noEmit` + verification visuelle
-
+Use repo skills/process docs for repeatable workflows (release, review routine, docs updates).
+When a workflow becomes recurrent, encode it as durable guidance here.

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
@@ -6,11 +6,7 @@ import { Tags } from "@/components/shared/pages/quests/tags";
 import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
-import BoringAvatar from "boring-avatars";
-import { pickRandomColorCode } from "@/utils";
-import { useMemo } from "react";
+import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
 
 export function CardInfo({
   title,
@@ -48,13 +44,11 @@ export function CardInfo({
 
         <Description description={description} features={features} />
 
-        {stats.totalParticipants > 0 ? (
-          <ParticipantsStats
-            total={stats.totalParticipants}
-            registered={stats.registered}
-            submitted={stats.submitted}
-          />
-        ) : null}
+        <ParticipantsStats
+          total={stats.totalParticipants}
+          registered={stats.registered}
+          submitted={stats.submitted}
+        />
       </div>
 
       {action ? <Action label={action.label} href={action.href} /> : null}
@@ -96,54 +90,6 @@ function Description({
   );
 }
 
-function ParticipantsStats({
-  total,
-  registered,
-  submitted,
-}: {
-  total: number;
-  registered: number;
-  submitted: number;
-}) {
-  const visibleCount = Math.min(total, 5);
-  const colorSets = useMemo(
-    () =>
-      Array.from({ length: visibleCount }).map(() =>
-        Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
-      ),
-    [visibleCount],
-  );
-
-  return (
-    <div className="flex flex-col items-start gap-1">
-      <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl squircle-sh-white/99">
-        <div className="inline-flex items-start">
-          <AvatarGroup numPeople={total}>
-            {Array.from({ length: visibleCount }).map((_, index) => (
-              <Avatar key={index} className="w-6 h-6">
-                <AvatarFallback className="relative pointer-events-none">
-                  <BoringAvatar
-                    name={`quest-participant-${index + 1}`}
-                    colors={colorSets[index] ?? []}
-                    variant="beam"
-                  />
-                </AvatarFallback>
-              </Avatar>
-            ))}
-          </AvatarGroup>
-        </div>
-        <span className="relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec">
-          {total} participants
-        </span>
-      </div>
-
-      {/* <p className="text-xs text-b-white-invert-thr ps-2">
-        {registered} inscrits • {submitted} soumis
-      </p> */}
-    </div>
-  );
-}
-
 function Action({ label, href }: { label: string; href: string }) {
   return (
     <Link href={href} likeButton whileTap size="xs" asIcon>
@@ -154,4 +100,3 @@ function Action({ label, href }: { label: string; href: string }) {
     </Link>
   );
 }
-

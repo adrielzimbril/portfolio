@@ -13,9 +13,10 @@ import {
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { pickRandomColor } from "@/utils";
 import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
-import { ProductAvatarsStats } from "@/components/SubscriberBadges";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
+import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -57,6 +58,7 @@ export function HeaderSection({
   sectionClassName,
 }: HeaderSectionProps) {
   const t = useTranslations();
+  const { stats } = useQuestParticipantsStats(slug);
 
   const basePreviewContent = {
     type: PreviewContentType.TEXT,
@@ -98,13 +100,11 @@ export function HeaderSection({
 
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white overflow-hidden">
-          {/* {mainTitle && (
-            <ProductAvatarsStats
-              colorName="squircle-indigo-100"
-              slug={slug}
-              badgeClassName="text-b-white-unchanged"
-            />
-          )} */}
+          <ParticipantsStats
+            total={stats.totalParticipants}
+            registered={stats.registered}
+            submitted={stats.submitted}
+          />
           {tags.map((tag, index) => (
             <Badge
               key={index}
@@ -119,6 +119,7 @@ export function HeaderSection({
           ))}
         </div>
       )}
+
       {ctaButton && (
         <div className="relative w-full">
           <Link
