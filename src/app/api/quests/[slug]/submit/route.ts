@@ -146,39 +146,40 @@ export async function POST(
       });
     }
 
-    await sendEmail({
+    const userMailSent = await sendEmail({
       to: [{ email, name }],
       locale,
-      subject: `Message recu - soumission au quest ${quest.title}`,
-      text: `Bonjour ${name},
-
-Ta soumission pour "${quest.title}" a bien ete recue.
-Tu recevras un retour apres la fin du quest.
-
-Lien soumis: ${workUrl}
-
-Merci,
-Adriel`,
+      templateId: "questSubmitUserConfirmation",
+      context: {
+        name,
+        questTitle: quest.title,
+        workUrl,
+      },
     });
 
-    await sendEmail({
+    const adminMailSent = await sendEmail({
       to: [{ email: appConfig.contactForm.to }],
       locale,
-      subject: `[BRIEF ADMIN] Nouvelle soumission quest - ${quest.title}`,
-      text: `Brief admin:
-- Quest: ${quest.title}
-- Slug: ${slug}
-- Nom: ${name}
-- Email: ${email}
-- Titre du travail: ${workTitle}
-- Lien du travail: ${workUrl}
-- Portfolio: ${portfolioUrl || "-"}
-- Figma: ${figmaUrl || "-"}
-- Affiche: ${posterUrl || "-"}
-- Message: ${message || "-"}
-- Date fin soumission: ${quest.submission_deadline}
-- Date fin quest: ${quest.quest_end}`,
+      templateId: "questSubmitAdminNotification",
+      context: {
+        name,
+        email,
+        questTitle: quest.title,
+        questSlug: slug,
+        workTitle,
+        workUrl,
+        portfolioUrl: portfolioUrl || undefined,
+        figmaUrl: figmaUrl || undefined,
+        posterUrl: posterUrl || undefined,
+        message: message || undefined,
+      },
     });
+
+    if (!userMailSent || !adminMailSent) {
+      return new Response(JSON.stringify({ error: "MAIL_SEND_FAILED" }), {
+        status: 500,
+      });
+    }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {

@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { toast } from "sonner";
 import { useLocale } from "use-intl";
 import {
   Form,
@@ -20,6 +20,7 @@ import { apiRoutes } from "@/data/api-routes";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { QuestFormFeedbackModal } from "./QuestFormFeedbackModal";
 
 const schema = z.object({
   name: z.string().min(2, "Nom requis"),
@@ -32,6 +33,21 @@ type FormValues = z.infer<typeof schema>;
 
 export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
   const locale = useLocale();
+  const [feedback, setFeedback] = useState<{
+    open: boolean;
+    status: "success" | "error";
+    title: string;
+    description: string;
+  }>({
+    open: false,
+    status: "success",
+    title: "",
+    description: "",
+  });
+
+  const closeFeedback = useCallback(() => {
+    setFeedback((prev) => ({ ...prev, open: false }));
+  }, []);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -56,37 +72,50 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
         throw new Error(data?.error || "REGISTER_FAILED");
       }
 
-      toast.success("Message recu. Ton inscription est enregistree.");
+      setFeedback({
+        open: true,
+        status: "success",
+        title: "Inscription enregistree",
+        description:
+          "Message recu. Un email de confirmation vient de t'etre envoye.",
+      });
       form.reset();
     } catch {
-      toast.error("Impossible de finaliser l'inscription.");
+      setFeedback({
+        open: true,
+        status: "error",
+        title: "Envoi impossible",
+        description:
+          "Une erreur est survenue pendant l'inscription. Merci de reessayer.",
+      });
     }
   };
 
   return (
-    <SectionBase
-      sectionClassName="w-full"
-      sectionContentClassName="w-full"
-      cardClassName="w-full squircle-sh-white"
-      cardContentClassName="w-full px-4 py-6 md:p-8"
-      className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
-    >
-      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
-        <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Badge size="lg">Quest enrollment</Badge>
-            <h2 className="h4">Inscription au quest</h2>
-            <p className="text-b-white-invert-sec max-w-2xl">
-              Tu seras ajoute a la newsletter et tu recevras les prochaines
-              informations par email.
-            </p>
-          </div>
+    <>
+      <SectionBase
+        sectionClassName="w-full"
+        sectionContentClassName="w-full"
+        cardClassName="w-full"
+        cardContentClassName="w-full px-4 py-6 md:p-8"
+        className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      >
+        <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
+          <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
+            <div className="flex flex-col items-center text-center gap-2">
+              <Badge size="lg">Quest enrollment</Badge>
+              <h2 className="h4">Inscription au quest</h2>
+              <p className="text-b-white-invert-sec max-w-2xl">
+                Tu seras ajoute a la newsletter et tu recevras les prochaines
+                informations par email.
+              </p>
+            </div>
 
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-6 w-full max-w-xl self-center place-self-center"
-            >
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6 w-full max-w-xl self-center place-self-center"
+              >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
@@ -171,22 +200,30 @@ export function QuestRegisterForm({ questSlug }: { questSlug: string }) {
                 )}
               />
 
-              <Button
-                type="submit"
-                whileTap
-                asPointer
-                asFull
-                size="lg"
-                disabled={form.formState.isSubmitting}
-              >
-                {form.formState.isSubmitting
-                  ? "Enregistrement..."
-                  : "Valider mon inscription"}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-    </SectionBase>
+                <Button
+                  type="submit"
+                  whileTap
+                  asPointer
+                  asFull
+                  size="lg"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting
+                    ? "Enregistrement..."
+                    : "Valider mon inscription"}
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </SectionBase>
+      <QuestFormFeedbackModal
+        open={feedback.open}
+        status={feedback.status}
+        title={feedback.title}
+        description={feedback.description}
+        onClose={closeFeedback}
+      />
+    </>
   );
 }

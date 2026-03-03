@@ -571,6 +571,33 @@
       "preview": "你的项目即将闪耀登场 🔦🐼",
       "subject": "✅ 已收到！你的项目已进入轨道 🪐"
     },
+    "questRegisterUserConfirmation": {
+      "subject": "✅ 报名已收到",
+      "preview": "你的 quest 报名已确认",
+      "greeting": "你好 {firstName}，",
+      "content": {
+        "intro": "你报名的 \"{questTitle}\" 已成功记录。",
+        "wait": "后续进展会通过邮件通知你。"
+      }
+    },
+    "questRegisterAdminNotification": {
+      "subject": "🧾 新的 quest 报名",
+      "preview": "有新的参与者完成了 quest 报名"
+    },
+    "questSubmitUserConfirmation": {
+      "subject": "🚀 作品提交已收到",
+      "preview": "你的作品提交已记录",
+      "greeting": "你好 {firstName}，",
+      "content": {
+        "intro": "你为 \"{questTitle}\" 提交的作品已收到。",
+        "link": "提交链接",
+        "wait": "请等待 quest 结束后获取反馈。"
+      }
+    },
+    "questSubmitAdminNotification": {
+      "subject": "🧪 新的 quest 作品提交",
+      "preview": "有新的作品提交可供审核"
+    },
     "welcome": {
       "content": {
         "frequency": "我大约每周写一次邮件，如果没有有趣的内容也可能更少。我的目标是每封邮件都能带来实际价值。",

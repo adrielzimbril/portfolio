@@ -124,34 +124,35 @@ export async function POST(
       });
     }
 
-    await sendEmail({
+    const userMailSent = await sendEmail({
       to: [{ email, name }],
       locale,
-      subject: `Message recu - inscription au quest ${quest.title}`,
-      text: `Bonjour ${name},
-
-Ton inscription au quest "${quest.title}" est bien recue.
-Tu seras recontacte par email pour la suite.
-
-Merci,
-Adriel`,
+      templateId: "questRegisterUserConfirmation",
+      context: {
+        name,
+        questTitle: quest.title,
+      },
     });
 
-    await sendEmail({
+    const adminMailSent = await sendEmail({
       to: [{ email: appConfig.contactForm.to }],
       locale,
-      subject: `[BRIEF ADMIN] Nouvelle inscription quest - ${quest.title}`,
-      text: `Brief admin:
-- Quest: ${quest.title}
-- Slug: ${slug}
-- Nom: ${name}
-- Email: ${email}
-- Portfolio: ${portfolioUrl || "-"}
-- Message: ${motivation || "-"}
-- Date fin inscription: ${quest.registration_deadline}
-- Date fin soumission: ${quest.submission_deadline}
-- Date fin quest: ${quest.quest_end}`,
+      templateId: "questRegisterAdminNotification",
+      context: {
+        name,
+        email,
+        questTitle: quest.title,
+        questSlug: slug,
+        portfolioUrl: portfolioUrl || undefined,
+        motivation: motivation || undefined,
+      },
     });
+
+    if (!userMailSent || !adminMailSent) {
+      return new Response(JSON.stringify({ error: "MAIL_SEND_FAILED" }), {
+        status: 500,
+      });
+    }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (error) {

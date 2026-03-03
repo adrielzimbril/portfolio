@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { toast } from "sonner";
 import { useLocale } from "use-intl";
 import {
   Form,
@@ -22,6 +22,7 @@ import { getHumanDate } from "@/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { QuestFormFeedbackModal } from "./QuestFormFeedbackModal";
 
 const schema = z.object({
   name: z.string().min(2, "Nom requis"),
@@ -44,6 +45,21 @@ export function QuestSubmissionForm({
   isClosed: boolean;
 }) {
   const locale = useLocale();
+  const [feedback, setFeedback] = useState<{
+    open: boolean;
+    status: "success" | "error";
+    title: string;
+    description: string;
+  }>({
+    open: false,
+    status: "success",
+    title: "",
+    description: "",
+  });
+  const closeFeedback = useCallback(() => {
+    setFeedback((prev) => ({ ...prev, open: false }));
+  }, []);
+
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -69,44 +85,57 @@ export function QuestSubmissionForm({
       if (!res.ok) {
         throw new Error(data?.error || "SUBMIT_FAILED");
       }
-      toast.success("Message recu. Ta soumission a bien ete enregistree.");
+      setFeedback({
+        open: true,
+        status: "success",
+        title: "Soumission envoyee",
+        description:
+          "Message recu. Tu recevras un email de confirmation dans quelques instants.",
+      });
       form.reset();
     } catch {
-      toast.error("Impossible d'envoyer ta soumission.");
+      setFeedback({
+        open: true,
+        status: "error",
+        title: "Envoi impossible",
+        description:
+          "Une erreur est survenue pendant la soumission. Merci de reessayer.",
+      });
     }
   };
 
   return (
-    <SectionBase
-      sectionClassName="w-full"
-      sectionContentClassName="w-full"
-      cardClassName="w-full squircle-sh-white"
-      cardContentClassName="w-full px-4 py-6 md:p-8"
-      className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
-    >
-      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
-        <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Badge size="lg">Quest submission</Badge>
-            <h2 className="h4">Soumettre son travail</h2>
-            <p className="text-b-white-invert-sec max-w-2xl">
-              Deadline: {getHumanDate(quest.submission_deadline, true)}.
-              Apres cette date, les soumissions sont fermees.
-            </p>
-          </div>
+    <>
+      <SectionBase
+        sectionClassName="w-full"
+        sectionContentClassName="w-full"
+        cardClassName="w-full"
+        cardContentClassName="w-full px-4 py-6 md:p-8"
+        className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+      >
+        <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
+          <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
+            <div className="flex flex-col items-center text-center gap-2">
+              <Badge size="lg">Quest submission</Badge>
+              <h2 className="h4">Soumettre son travail</h2>
+              <p className="text-b-white-invert-sec max-w-2xl">
+                Deadline: {getHumanDate(quest.submission_deadline, true)}.
+                Apres cette date, les soumissions sont fermees.
+              </p>
+            </div>
 
-          {isClosed ? (
-            <Card className="w-full max-w-xl squircle squircle-b-base squircle-smooth-xl border">
-              <CardContent className="p-4 text-sm text-b-white-invert-sec text-center">
-                La periode de soumission est terminee pour ce quest.
-              </CardContent>
-            </Card>
-          ) : (
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6 w-full max-w-xl self-center place-self-center"
-              >
+            {isClosed ? (
+              <Card className="w-full max-w-xl squircle squircle-b-base squircle-smooth-xl border">
+                <CardContent className="p-4 text-sm text-b-white-invert-sec text-center">
+                  La periode de soumission est terminee pour ce quest.
+                </CardContent>
+              </Card>
+            ) : (
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-6 w-full max-w-xl self-center place-self-center"
+                >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
@@ -271,23 +300,31 @@ export function QuestSubmissionForm({
                   )}
                 />
 
-                <Button
-                  type="submit"
-                  whileTap
-                  asPointer
-                  asFull
-                  size="lg"
-                  disabled={form.formState.isSubmitting}
-                >
-                  {form.formState.isSubmitting
-                    ? "Envoi en cours..."
-                    : "Envoyer ma soumission"}
-                </Button>
-              </form>
-            </Form>
-          )}
-        </CardContent>
-      </Card>
-    </SectionBase>
+                  <Button
+                    type="submit"
+                    whileTap
+                    asPointer
+                    asFull
+                    size="lg"
+                    disabled={form.formState.isSubmitting}
+                  >
+                    {form.formState.isSubmitting
+                      ? "Envoi en cours..."
+                      : "Envoyer ma soumission"}
+                  </Button>
+                </form>
+              </Form>
+            )}
+          </CardContent>
+        </Card>
+      </SectionBase>
+      <QuestFormFeedbackModal
+        open={feedback.open}
+        status={feedback.status}
+        title={feedback.title}
+        description={feedback.description}
+        onClose={closeFeedback}
+      />
+    </>
   );
 }

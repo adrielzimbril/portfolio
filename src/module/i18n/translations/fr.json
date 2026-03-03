@@ -621,6 +621,33 @@
         "wait": "Si ton projet est accepté, tu recevras un email quand ton projet sera planifié pour une review / vidéo. En attendant, n'hésite pas à répondre à ce mail si tu veux ajouter des précisions, à bientôt 🌚."
       }
     },
+    "questRegisterUserConfirmation": {
+      "subject": "✅ Inscription bien recue",
+      "preview": "Ton inscription au quest est confirmee",
+      "greeting": "Bonjour {firstName},",
+      "content": {
+        "intro": "Ton inscription au quest \"{questTitle}\" a bien ete enregistree.",
+        "wait": "Tu recevras les prochaines informations par email."
+      }
+    },
+    "questRegisterAdminNotification": {
+      "subject": "🧾 Nouvelle inscription quest",
+      "preview": "Un nouveau participant vient de s'inscrire au quest"
+    },
+    "questSubmitUserConfirmation": {
+      "subject": "🚀 Soumission bien recue",
+      "preview": "Ta soumission a bien ete enregistree",
+      "greeting": "Bonjour {firstName},",
+      "content": {
+        "intro": "Ta soumission pour \"{questTitle}\" a bien ete recue.",
+        "link": "Lien soumis",
+        "wait": "Merci de patienter jusqu'a la fin du quest pour le retour."
+      }
+    },
+    "questSubmitAdminNotification": {
+      "subject": "🧪 Nouvelle soumission quest",
+      "preview": "Une nouvelle soumission de travail est disponible"
+    },
     "welcome": {
       "subject": "Bienvenue sur ma newsletter !",
       "preview": "Bienvenue ! Quelques mots sur ce qui t'attend...",

@@ -571,6 +571,33 @@
       "preview": "Your project will soon be in the spotlight 🔦🐼",
       "subject": "✅ Got it! Your project is in orbit 🪐"
     },
+    "questRegisterUserConfirmation": {
+      "subject": "✅ Registration received",
+      "preview": "Your quest registration is confirmed",
+      "greeting": "Hello {firstName},",
+      "content": {
+        "intro": "Your registration for \"{questTitle}\" has been recorded.",
+        "wait": "You will receive the next updates by email."
+      }
+    },
+    "questRegisterAdminNotification": {
+      "subject": "🧾 New quest registration",
+      "preview": "A new participant registered for the quest"
+    },
+    "questSubmitUserConfirmation": {
+      "subject": "🚀 Submission received",
+      "preview": "Your work submission has been recorded",
+      "greeting": "Hello {firstName},",
+      "content": {
+        "intro": "Your submission for \"{questTitle}\" was received.",
+        "link": "Submitted link",
+        "wait": "Please wait until the quest ends for feedback."
+      }
+    },
+    "questSubmitAdminNotification": {
+      "subject": "🧪 New quest submission",
+      "preview": "A new work submission is available"
+    },
     "welcome": {
       "content": {
         "frequency": "I write to you about once a week, sometimes less if I don't have anything interesting to share. The idea is that every email brings you something useful.",
