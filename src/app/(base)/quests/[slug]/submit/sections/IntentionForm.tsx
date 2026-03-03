@@ -113,7 +113,7 @@ export function IntentionForm({
               <h2 className="h3">Soumettre son travail 🚀</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
                 Date limite: {getHumanDate(quest.submission_deadline, true)}.
-                Apres cette date, les soumissions sont fermees 🔒
+                Apres cette date, les soumissions ne seront plus acceptées 🔒
               </p>
             </div>
 

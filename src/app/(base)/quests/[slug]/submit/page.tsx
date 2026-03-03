@@ -1,15 +1,14 @@
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
-import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "@/components/ui/link";
 import {
   getQuestBySlug,
   isSubmissionClosed,
 } from "@/module/content/utils/lib/quests";
 import { IntentionForm } from "./sections/IntentionForm";
 import { HeaderSection } from "./sections/HeaderSection";
+import { getResourcesUrl } from "@/utils";
+import { PageType } from "@/types";
+import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state";
 
 export default async function QuestWorkSubmitPage(props: {
   params: Promise<{ slug: string }>;
@@ -28,18 +27,13 @@ export default async function QuestWorkSubmitPage(props: {
     <>
       <HeaderSection title={quest.title} />
       {closed ? (
-        <SectionLayout>
-          <Card className="w-full squircle squircle-b-base squircle-smooth-xl border">
-            <CardContent className="p-5 md:p-6 space-y-3">
-              <p className="text-b-white-invert-sec">
-                La periode de soumission est terminee 🔒
-              </p>
-              <Link href={`/quests/${slug}`} likeButton whileTap>
-                Retour au challenge ↩️
-              </Link>
-            </CardContent>
-          </Card>
-        </SectionLayout>
+        <ChallengeClosedState
+          badge="Soumissions fermees 🔒"
+          title="La periode de soumission est terminee"
+          description="Les depots sont fermes pour ce challenge. Tu peux consulter les details et revenir pour les prochains challenges 🚀"
+          href={getResourcesUrl(PageType.QUESTS, slug)}
+          actionLabel="Voir le challenge ↩️"
+        />
       ) : (
         <IntentionForm quest={quest} isClosed={closed} />
       )}
