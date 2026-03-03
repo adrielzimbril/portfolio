@@ -28,6 +28,7 @@ export function QuestSubmitAdminNotification({
   email,
   questTitle,
   questSlug,
+  challengeUrl,
   workUrl,
   message,
 }: BaseMailProps & {
@@ -35,6 +36,7 @@ export function QuestSubmitAdminNotification({
   email: string;
   questTitle: string;
   questSlug: string;
+  challengeUrl: string;
   workUrl: string;
   message?: string;
 }) {
@@ -72,6 +74,9 @@ export function QuestSubmitAdminNotification({
                 <strong>Challenge 🏆</strong>: {questTitle}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
+                <strong>URL</strong>: <Link href={challengeUrl}>{challengeUrl}</Link>
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-2">
                 <strong>Slug</strong>: {questSlug}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
@@ -81,7 +86,7 @@ export function QuestSubmitAdminNotification({
                 <strong>Email</strong>: {email}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Lien 🔗</strong>: <Link href={workUrl}>{workUrl}</Link>
+                <strong>Lien rendu 🔗</strong>: <Link href={workUrl}>{workUrl}</Link>
               </Text>
 
               <Hr className="border-t border-[#e0e0e0] my-6" />
@@ -116,8 +121,10 @@ QuestSubmitAdminNotification.PreviewProps = {
   email: "john@example.com",
   questTitle: "SaaS Landing Breakdown",
   questSlug: "saas-landing-breakdown",
+  challengeUrl: "https://example.com/quests/saas-landing-breakdown",
   workUrl: "https://www.figma.com",
   message: "Voici mon travail.",
 };
 
 export default QuestSubmitAdminNotification;
+

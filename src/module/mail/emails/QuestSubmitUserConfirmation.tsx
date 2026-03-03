@@ -26,10 +26,12 @@ export function QuestSubmitUserConfirmation({
   translations,
   name,
   questTitle,
+  challengeUrl,
   workUrl,
 }: BaseMailProps & {
   name?: string;
   questTitle: string;
+  challengeUrl: string;
   workUrl: string;
 }) {
   const t = createTranslator({ locale, messages: translations });
@@ -72,6 +74,9 @@ export function QuestSubmitUserConfirmation({
                 })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                Challenge : <Link href={challengeUrl}>{challengeUrl}</Link>
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
                 {t("mail.questSubmitUserConfirmation.content.link")} :{" "}
                 <Link href={workUrl}>{workUrl}</Link>
               </Text>
@@ -107,7 +112,9 @@ QuestSubmitUserConfirmation.PreviewProps = {
   translations: defaultTranslations,
   name: "Adriel",
   questTitle: "SaaS Landing Breakdown",
+  challengeUrl: "https://example.com/quests/saas-landing-breakdown",
   workUrl: "https://www.figma.com",
 };
 
 export default QuestSubmitUserConfirmation;
+

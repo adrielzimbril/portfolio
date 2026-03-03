@@ -26,9 +26,11 @@ export function QuestRegisterUserConfirmation({
   translations,
   name,
   questTitle,
+  challengeUrl,
 }: BaseMailProps & {
   name?: string;
   questTitle: string;
+  challengeUrl: string;
 }) {
   const t = createTranslator({ locale, messages: translations });
   const firstName: string = name?.split(" ")[0] ?? "";
@@ -69,6 +71,9 @@ export function QuestRegisterUserConfirmation({
                   questTitle,
                 })}
               </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">
+                Voir le challenge : <Link href={challengeUrl}>{challengeUrl}</Link>
+              </Text>
               <Hr className="border-t border-[#e0e0e0] my-8" />
               <Text className="text-[#666666] text-sm leading-relaxed">
                 {t("mail.questRegisterUserConfirmation.content.wait")}
@@ -99,6 +104,8 @@ QuestRegisterUserConfirmation.PreviewProps = {
   translations: defaultTranslations,
   name: "Adriel",
   questTitle: "SaaS Landing Breakdown",
+  challengeUrl: "https://example.com/quests/saas-landing-breakdown",
 };
 
 export default QuestRegisterUserConfirmation;
+

@@ -8,8 +8,9 @@ import {
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
 import { addContact, ContactProvider } from "@/module/contact";
-import { Locale } from "@/types";
+import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
+import { getResourcesUrl } from "@/utils";
 
 const submitSchema = z.object({
   name: z.string().min(2),
@@ -27,6 +28,7 @@ export async function POST(
     const db = supabase as any;
     const { slug } = await params;
     const quest = await getQuestBySlug(slug);
+    const challengeUrl = getResourcesUrl(PageType.QUESTS, slug);
 
     if (!quest) {
       return new Response(JSON.stringify({ error: "QUEST_NOT_FOUND" }), {
@@ -156,6 +158,7 @@ export async function POST(
       context: {
         name,
         questTitle: quest.title,
+        challengeUrl,
         workUrl,
       },
     });
@@ -169,6 +172,7 @@ export async function POST(
         email,
         questTitle: quest.title,
         questSlug: slug,
+        challengeUrl,
         workUrl,
         message: message || undefined,
       },
