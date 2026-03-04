@@ -9,7 +9,31 @@ import { HeaderSection } from "./sections/HeaderSection";
 import { getResourcesUrl } from "@/utils";
 import { PageType } from "@/types";
 import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state";
+import { metadata as baseMetadata } from "@/app/metadata";
+import { Metadata } from "next";
 
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+
+  const metadata: Metadata = {
+    ...baseMetadata,
+    title: t("quests.register.title"),
+    description: t("quests.register.description"),
+    keywords: t("quests.register.keywords"),
+    openGraph: {
+      ...baseMetadata.openGraph,
+      title: t("quests.register.title"),
+      description: t("quests.register.description"),
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: t("quests.register.title"),
+      description: t("quests.register.description"),
+    },
+  };
+
+  return metadata;
+}
 export default async function QuestRegisterPage(props: {
   params: Promise<{ slug: string }>;
 }) {

@@ -38,7 +38,9 @@ export function QuestDetailsSection({
 
           {rewards.length > 0 && (
             <div className="flex w-full flex-col gap-3 md:gap-4">
-              <h3 className="h3">{t("quests.inner-page.details.rewardsTitle")}</h3>
+              <h3 className="h3">
+                {t("quests.inner-page.details.rewardsTitle")}
+              </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
                 {rewards.map((reward, index) => (
                   <Card
@@ -51,7 +53,9 @@ export function QuestDetailsSection({
                     <CardContent className="p-2 md:p-3">
                       <div className="flex relative flex-col size-full gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
                         <div className="flex size-full flex-col gap-2">
-                          <p className="text-b-white-foreground leading-[130%]">{reward}</p>
+                          <p className="text-b-white-foreground leading-[130%]">
+                            {reward}
+                          </p>
                         </div>
                       </div>
                     </CardContent>
@@ -89,7 +93,9 @@ export function QuestDetailsSection({
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
-                    className={pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.BLUE)}
+                    className={pickRandomColor(
+                      DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+                    )}
                     variant="colored"
                   >
                     {getHumanDate(dates.submission_end, true)}
@@ -104,7 +110,9 @@ export function QuestDetailsSection({
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
-                    className={pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.PURPLE)}
+                    className={pickRandomColor(
+                      DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+                    )}
                     variant="colored"
                   >
                     {getHumanDate(dates.results, true)}
@@ -112,7 +120,7 @@ export function QuestDetailsSection({
                 </div>
               </div>
 
-              <div className="flex w-full flex-col gap-2">
+              {/* <div className="flex w-full flex-col gap-2">
                 <span className="font-normal text-b-white-foreground">
                   {t("quests.inner-page.details.status")}
                 </span>
@@ -128,7 +136,7 @@ export function QuestDetailsSection({
                     </Badge>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </CardContent>
         </Card>
