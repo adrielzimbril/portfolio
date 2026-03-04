@@ -260,7 +260,8 @@ export function Navbar() {
                               });
                             }}
                           >
-                            {t("common.menu." + item.key + ".mobile")}
+                            {/* {t("common.menu." + item.key + ".mobile")} */}
+                            {t("common.menu." + item.key + ".desktop")}
                           </Link>
                         </motion.li>
                       ))}

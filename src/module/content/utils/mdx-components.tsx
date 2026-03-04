@@ -48,7 +48,7 @@ export const mdxComponents = {
   h1: ({ children, ...rest }) => (
     <h1
       id={slugifyHeadline(children as string)}
-      className="mb-6 font-bold text-4xl leading-[120%]"
+      className="mb-6 font-bold h3 leading-[120%]"
       {...rest}
     >
       {children}
@@ -57,7 +57,7 @@ export const mdxComponents = {
   h2: ({ children, ...rest }) => (
     <h2
       id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold text-2xl leading-[120%]"
+      className="mb-4 font-bold h4 leading-[120%]"
       {...rest}
     >
       {children}
@@ -66,7 +66,7 @@ export const mdxComponents = {
   h3: ({ children, ...rest }) => (
     <h3
       id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold text-xl leading-[120%]"
+      className="mb-4 font-bold h5 leading-[120%]"
       {...rest}
     >
       {children}
@@ -75,7 +75,7 @@ export const mdxComponents = {
   h4: ({ children, ...rest }) => (
     <h4
       id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold text-lg leading-[120%]"
+      className="mb-4 font-bold h6 leading-[120%]"
       {...rest}
     >
       {children}

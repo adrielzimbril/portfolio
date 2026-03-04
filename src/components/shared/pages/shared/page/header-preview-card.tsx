@@ -75,9 +75,7 @@ export function HeaderPreviewCard({
               {content.title}
             </h3>
             {content.subtitle && (
-              <p className="relative text-4xl text-zinc-400">
-                {content.subtitle}
-              </p>
+              <p className="relative h3 text-zinc-400">{content.subtitle}</p>
             )}
           </div>
         </div>
