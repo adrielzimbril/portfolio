@@ -18,29 +18,9 @@ export const apiRoutes = {
     link: getPathUrl("/api/health/check-rmd"),
     accept: [requestType.GET],
   },
-  healthMgo: {
-    key: "health-mgo",
-    link: getPathUrl("/api/health/check-mgo"),
-    accept: [requestType.GET],
-  },
-  ipLookup: {
-    key: "ip-lookup",
-    link: getPathUrl("/api/ip-lookup"),
-    accept: [requestType.GET],
-  },
   imageProxy: {
     key: "image-proxy",
     link: getPathUrl("/api/image-proxy"),
-    accept: [requestType.GET],
-  },
-  hubValidate: {
-    key: "hub-validate",
-    link: getPathUrl("/api/hub/validate"),
-    accept: [requestType.POST],
-  },
-  jsonData: {
-    key: "json-data",
-    link: getPathUrl("/api/json-data"),
     accept: [requestType.GET],
   },
   subscribe: {
@@ -61,11 +41,6 @@ export const apiRoutes = {
   statsSubscribers: {
     key: "stats-subscribers",
     link: getPathUrl("/api/stats/subscribers"),
-    accept: [requestType.GET],
-  },
-  statsViews: {
-    key: "stats-views",
-    link: getPathUrl("/api/stats/views"),
     accept: [requestType.GET],
   },
   questsRegister: (slug: string) => ({

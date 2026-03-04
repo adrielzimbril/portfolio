@@ -1120,7 +1120,7 @@
       "datetime": "datetime",
       "email": "email",
       "emoji": "emoji",
-      "ip": "up",
+      "ip": "ip",
       "regex": "regex",
       "ulid": "ulid",
       "url": "url",
