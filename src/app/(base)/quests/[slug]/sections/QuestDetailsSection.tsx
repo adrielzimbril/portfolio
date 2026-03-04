@@ -142,7 +142,7 @@ export function QuestDetailsSection({
                 </div>
               </div>
 
-              {(!isRegistrationClosed(dates.registration_end) ||
+              {/* {(!isRegistrationClosed(dates.registration_end) ||
                 !isSubmissionClosed(dates.submission_end, dates.results)) && (
                 <div className="flex w-full flex-wrap gap-2">
                   {!isRegistrationClosed(dates.registration_end) && (
@@ -167,7 +167,7 @@ export function QuestDetailsSection({
                     </Link>
                   )}
                 </div>
-              )}
+              )} */}
             </div>
           </CardContent>
         </Card>
