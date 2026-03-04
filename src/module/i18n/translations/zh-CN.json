@@ -378,6 +378,16 @@
           "emoji": "📝",
           "subtitle": "反思、经验与灵感，帮助设计出用户喜爱的产品 ✍️",
           "title": "创意日志"
+        },
+        "talks": {
+          "emoji": "🎤",
+          "title": "演讲、会议与大师课",
+          "subtitle": "线上与线下课程，帮助你更快成长 🎤"
+        },
+        "quests": {
+          "emoji": "🏆",
+          "title": "进行中的挑战与 Quest",
+          "subtitle": "报名、提交作品并冲击领奖台 🏆"
         }
       },
       "planning-badge": {

@@ -378,6 +378,16 @@
           "emoji": "📝",
           "subtitle": "Reflections, lessons and ideas to design products your users love ✍️",
           "title": "Creative logbook"
+        },
+        "talks": {
+          "emoji": "🎤",
+          "title": "Talks, conferences & masterclasses",
+          "subtitle": "Online and in-person sessions to learn faster ??"
+        },
+        "quests": {
+          "emoji": "🏆",
+          "title": "Active challenges & quests",
+          "subtitle": "Register, submit your work and aim for the podium ??"
         }
       },
       "planning-badge": {

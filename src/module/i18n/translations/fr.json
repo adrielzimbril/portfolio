@@ -656,6 +656,16 @@
           "emoji": "💌",
           "title": "Ton kit créatif t’attend",
           "subtitle": "Conseils, ressources et inspirations pour créer des produits qui comptent 🎨"
+        },
+        "talks": {
+          "emoji": "🎤",
+          "title": "Talks, conf?rences & masterclasses",
+          "subtitle": "Sessions en ligne et en pr?sentiel pour apprendre plus vite ??"
+        },
+        "quests": {
+          "emoji": "🏆",
+          "title": "Challenges & quests en cours",
+          "subtitle": "Inscris-toi, soumets ton travail et vise le podium ??"
         }
       },
       "planning-badge": {
