@@ -659,13 +659,13 @@
         },
         "talks": {
           "emoji": "🎤",
-          "title": "Talks, conf?rences & masterclasses",
-          "subtitle": "Sessions en ligne et en pr?sentiel pour apprendre plus vite ??"
+          "title": "Talks, conférences & masterclasses",
+          "subtitle": "Sessions en ligne et en présentiel pour apprendre plus vite 🎤"
         },
         "quests": {
           "emoji": "🏆",
           "title": "Challenges & quests en cours",
-          "subtitle": "Inscris-toi, soumets ton travail et vise le podium ??"
+          "subtitle": "Inscris-toi, soumets ton travail et vise le podium 🏆"
         }
       },
       "planning-badge": {
