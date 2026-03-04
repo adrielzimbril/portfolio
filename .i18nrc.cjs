@@ -5,7 +5,7 @@ const { defineConfig } = require("@lobehub/i18n-cli");
 
 const config = {
   modelName: "gpt-5-mini",
-  mode: "default", // "default" or "content"
+  mode: "content", // "default" or "content"
   isMdx: false, // Set to true if you are using MDX files
 };
 

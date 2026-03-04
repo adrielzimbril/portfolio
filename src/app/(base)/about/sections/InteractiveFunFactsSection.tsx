@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/utils/utils";
 import { toast } from "sonner";
@@ -20,28 +20,9 @@ import {
 } from "@/components/ui/dialog";
 import posthog from "posthog-js";
 import { useLocale, useTranslations } from "use-intl";
-import { Locale } from "@/types";
-import GameJson from "@/data/personal/translate/game.json";
+import { getGamesByLocale, type GameItem } from "@/types/personalData";
 
-// Interface pour les questions
-interface Question {
-  id: number;
-  locale: Locale;
-  emoji: string;
-  title: string;
-  description: string;
-  subtitle: string;
-  isTrue: boolean;
-  funFact?: string;
-  funnyTruthMessage?: string;
-  funnyLieMessage?: string;
-}
-
-// Quiz Questions
-const questions: Question[] = GameJson.map((game) => ({
-  ...game,
-  locale: game.locale as Locale,
-}));
+type Question = GameItem;
 
 // Custom Emoji Component
 function GuessButton({
@@ -473,9 +454,7 @@ export function InteractiveFunFacts() {
   const [gameStarted, setGameStarted] = useState(true);
   const [showAllFacts, setShowAllFacts] = useState(false);
 
-  const questionsLocale = questions.filter(
-    (question) => question.locale === locale
-  );
+  const questionsLocale = useMemo(() => getGamesByLocale(locale), [locale]);
 
   // Derive calculations based on guessedFacts
   const answeredQuestionsCount = Object.keys(guessedFacts).length;

@@ -1,7 +1,6 @@
 [
   {
     "id": 0,
-    "locale": "fr",
     "name": "Koffi Éric Emmanuel YAO",
     "position": "Fondateur de Li-Zo | Service de livraison",
     "testimonial": "Travailler avec Adriel est un plaisir. Il est professionnel et disponible. J'ai apprécié son sens de la promptitude dans les feedback et son accompagnement même en fin de projet. Il a bossé sur la maquette d'une application qui sera dévoilée bientôt (🤫, je tais le nom pour l'instant). Ce sera un carton, je suis rassuré !",
@@ -10,7 +9,6 @@
   },
   {
     "id": 1,
-    "locale": "fr",
     "name": "Youssouf Aboubacar Yvan Gamby",
     "position": "Fondateur de Etudiant CI | Plateforme de renforcement pour étudiants",
     "testimonial": "J’avais besoin d’un développeur pour m’aider à lancer mon SaaS pour étudiants, mais au final, Adriel a été bien plus que ça. Il m’a accompagné comme un vrai conseiller. Il m’a aidé à clarifier mon idée, à structurer mon produit, et à mieux comprendre ce que je voulais vraiment proposer.\n Grâce à lui, j’ai pu poser des bases solides, éviter pas mal d’erreurs et avancer beaucoup plus vite. Si vous avez un projet en tête mais que c’est encore flou, Adriel est clairement la bonne personne pour vous aider à le rendre concret.",
@@ -19,7 +17,6 @@
   },
   {
     "id": 2,
-    "locale": "fr",
     "name": "Christian Junior Braffo",
     "position": "Développeur Web & Certifié Cloud Practitioner",
     "testimonial": "Adriel Zimbril n’est pas un simple développeur, c’est un développeur qui repousse ses limites à chaque fois, il est capable d’implémenter n’importe quelle maquette que vous lui proposer , Il est très ouvert et est toujours prêt à aider, c’est probablement le meilleur Dev que je connaisse",
@@ -28,16 +25,14 @@
   },
   {
     "id": 3,
-    "locale": "fr",
     "name": "Espérance Yannick Kouakou",
     "position": "Développeur Front-end | Next.js",
     "testimonial": "J’ai eu la chance de travailler avec Adriel Zimbril sur un projet SaaS ambitieux. Au-delà de ses compétences en product design, ce qui m’a le plus marqué, c’est sa capacité à expliquer clairement, à guider l’équipe et à nous faire monter en compétences. Travailler avec lui a été un vrai apprentissage et une expérience très enrichissante. Je recommande vivement Adriel à toute équipe qui cherche un product designer talentueux et pédagogue !",
-    "linkedinUrl": "https://www.linkedin.com/in/esp%C3%A9rance-yannick-kouakou-4b2ba937b/",
+    "linkedinUrl": "https://www.linkedin.com/in/esp%C3%A9rance-yannick-kouakou-4b2ba937b",
     "avatar": "EYK"
   },
   {
     "id": 4,
-    "locale": "fr",
     "name": "Oumar Dagnogo",
     "position": "Étudiant en BIHAR (Big Data Intelligence for Human Augmented Reality)",
     "testimonial": "Adriel Zimbril n’est pas un simple développeur, c’est un développeur qui repousse ses limites à chaque fois, il est capable d’implémenter n’importe quelle maquette que vous lui proposer , Il est très ouvert et est toujours prêt à aider, c’est probablement le meilleur Dev que je connaisse",
@@ -46,7 +41,6 @@
   },
   {
     "id": 5,
-    "locale": "fr",
     "name": "Angaman Brou Cedrick Delmas",
     "position": "Developer Backend Java/Python",
     "testimonial": "J’ai eu la chance d’être formé par Adriel en ui design et en développement, et cette expérience a vraiment changé ma manière de travailler et de m’organiser. Il explique de façon claire et directe, ce qui m’a permis de progresser vite. Grâce à lui, j’ai pu décrocher mon emploi et valider mon CDI.",
@@ -54,111 +48,11 @@
     "avatar": "CR"
   },
   {
-    "avatar": "KEEY",
-    "id": 0,
-    "linkedinUrl": "https://www.linkedin.com/in/koffi-%C3%A9ric-emmanuel-y-292a3a137",
-    "locale": "zh-CN",
-    "name": "Koffi Éric Emmanuel YAO",
-    "position": "Li-Zo 创始人 | 配送服务",
-    "testimonial": "与 Adriel 合作非常愉快。他专业且随时待命。我欣赏他在反馈方面的迅速反应以及在项目结束后仍提供的支持。他曾为即将发布的应用程序设计模型（🤫，暂不透露名称），相信一定会大获成功，我很有信心！"
-  },
-  {
-    "avatar": "YAG",
-    "id": 1,
-    "linkedinUrl": "https://www.linkedin.com/in/youssoufgamby",
-    "locale": "zh-CN",
-    "name": "Youssouf Aboubacar Yvan Gamby",
-    "position": "Etudiant CI 创始人 | 学生增强平台",
-    "testimonial": "我需要一位开发者帮助我启动面向学生的 SaaS，但最终，Adriel 不仅仅是这样。他像真正的顾问一样陪伴我，帮助我理清思路，结构化产品，更好地理解我真正想要提供的内容。多亏了他，我打下了坚实的基础，避免了许多错误，进展也快了许多。如果你有一个想法但还不清楚，Adriel 绝对是帮你实现它的最佳人选。"
-  },
-  {
-    "avatar": "CJB",
-    "id": 2,
-    "linkedinUrl": "https://www.linkedin.com/in/christian-junior-braffo-",
-    "locale": "zh-CN",
-    "name": "Christian Junior Braffo",
-    "position": "Web 开发者 & 云计算认证专家",
-    "testimonial": "Adriel Zimbril 不仅仅是普通的开发者，他不断突破自己的极限，能够实现你提供的任何模型。他非常开放，总是乐于助人，可能是我认识的最优秀的开发者。"
-  },
-  {
-    "id": 3,
-    "locale": "zh-CN",
-    "name": "Espérance Yannick Kouakou",
-    "position": "前端开发者 | Next.js",
-    "testimonial": "我有幸与 Adriel Zimbril 合作一个野心勃勃的 SaaS 项目。在他的产品设计技能之外，最让我印象深刻的是他解释清晰、指导团队和帮助我们提高技能的能力。与他合作是一次真正的学习经历和非常丰富的经历。我强烈推荐 Adriel 给任何寻找才华横溢且富有教学精神的产品设计师的团队！",
-    "linkedinUrl": "https://www.linkedin.com/in/esp%C3%A9rance-yannick-kouakou-4b2ba937b/",
-    "avatar": "EYK"
-  },
-  {
-    "avatar": "OD",
-    "id": 4,
-    "linkedinUrl": "https://www.linkedin.com/in/oumar-dagnogo-66274530b",
-    "locale": "zh-CN",
-    "name": "Oumar Dagnogo",
-    "position": "BIHAR（大数据智能增强现实）学生",
-    "testimonial": "Adriel Zimbril 不仅仅是普通的开发者，他不断突破自己的极限，能够实现你提供的任何模型。他非常开放，总是乐于助人，可能是我认识的最优秀的开发者。"
-  },
-  {
-    "avatar": "CR",
-    "id": 5,
-    "linkedinUrl": "https://www.linkedin.com/in/angaman-b-0755b5b6",
-    "locale": "zh-CN",
-    "name": "Angaman Brou Cedrick Delmas",
-    "position": "Java/Python 后端开发",
-    "testimonial": "我有幸接受 Adriel 在 UI 设计和开发方面的培训，这次经历真正改变了我的工作和组织方式。他讲解清晰直白，让我进步很快。多亏了他，我成功找到了工作并签订了正式合同。"
-  },
-  {
-    "avatar": "KEEY",
-    "id": 0,
-    "linkedinUrl": "https://www.linkedin.com/in/koffi-%C3%A9ric-emmanuel-y-292a3a137",
-    "locale": "en",
-    "name": "Koffi Éric Emmanuel YAO",
-    "position": "Founder of Li-Zo | Delivery Service",
-    "testimonial": "Working with Adriel is a pleasure. He is professional and available. I appreciated his promptness in providing feedback and his support even at the end of the project. He worked on the mockup of an app that will be unveiled soon (🤫, I’m keeping the name under wraps for now). It’s going to be a hit, I’m confident!"
-  },
-  {
-    "avatar": "YAG",
-    "id": 1,
-    "linkedinUrl": "https://www.linkedin.com/in/youssoufgamby",
-    "locale": "en",
-    "name": "Youssouf Aboubacar Yvan Gamby",
-    "position": "Founder of Etudiant CI | Student Support Platform",
-    "testimonial": "I needed a developer to help me launch my SaaS for students, but in the end, Adriel was much more than that. He supported me like a true advisor. He helped clarify my idea, structure my product, and better understand what I really wanted to offer.\n Thanks to him, I was able to lay solid foundations, avoid many mistakes, and move forward much faster. If you have a project in mind but it’s still unclear, Adriel is definitely the right person to help turn it into reality."
-  },
-  {
-    "avatar": "CJB",
-    "id": 2,
-    "linkedinUrl": "https://www.linkedin.com/in/christian-junior-braffo-",
-    "locale": "en",
-    "name": "Christian Junior Braffo",
-    "position": "Web Developer & Certified Cloud Practitioner",
-    "testimonial": "Adriel Zimbril is not just a developer; he pushes his limits every time. He is capable of implementing any mockup you propose, very open-minded and always ready to help. He is probably the best developer I know."
-  },
-  {
-    "id": 3,
-    "locale": "en",
-    "name": "Espérance Yannick Kouakou",
-    "position": "Front-end Developer | Next.js",
-    "testimonial": "I had the chance to work with Adriel Zimbril on an ambitious SaaS project. Beyond his product design skills, what most impressed me was his ability to explain clearly, guide the team, and help us improve our skills. Working with him was a real learning experience and a very enriching experience. I highly recommend Adriel to any team looking for a talented and pedagogical product designer!",
-    "linkedinUrl": "https://www.linkedin.com/in/esp%C3%A9rance-yannick-kouakou-4b2ba937b/",
-    "avatar": "EYK"
-  },
-  {
-    "avatar": "OD",
-    "id": 4,
-    "linkedinUrl": "https://www.linkedin.com/in/oumar-dagnogo-66274530b",
-    "locale": "en",
-    "name": "Oumar Dagnogo",
-    "position": "Student in BIHAR (Big Data Intelligence for Human Augmented Reality)",
-    "testimonial": "Adriel Zimbril is not just a developer; he pushes his limits every time. He is capable of implementing any mockup you propose, very open-minded and always ready to help. He is probably the best developer I know."
-  },
-  {
-    "avatar": "CR",
-    "id": 5,
-    "linkedinUrl": "https://www.linkedin.com/in/angaman-b-0755b5b6",
-    "locale": "en",
-    "name": "Angaman Brou Cedrick Delmas",
-    "position": "Backend Developer Java/Python",
-    "testimonial": "I had the opportunity to be trained by Adriel in UI design and development, and this experience truly changed my way of working and organizing. He explains clearly and directly, which helped me progress quickly. Thanks to him, I secured my job and validated my permanent contract."
+    "id": 6,
+    "name": "Julius KONAN",
+    "position": "Analyste qualité",
+    "testimonial": "Adriel est un excellent designer avec qui j’ai eu l’opportunité de collaborer à plusieurs reprises, notamment lors de la création de ma bannière LinkedIn. Il est également intervenu en tant que panéliste sur le thème de l’UX/UI Design au sein de ma communauté VISION, où il a su démontrer avec clarté son expertise, son sérieux et sa véritable passion pour ce domaine. Au-delà de ses compétences techniques, Adriel se distingue par son professionnalisme, sa pédagogie et sa capacité à apporter une réelle valeur ajoutée à chaque projet. Je le recommande vivement en tant que Product Designer, en tant que formateur et tout simplement en tant que collaborateur de confiance.",
+    "linkedinUrl": "https://www.linkedin.com/in/julius-konan-3b527b238",
+    "avatar": "CR"
   }
 ]

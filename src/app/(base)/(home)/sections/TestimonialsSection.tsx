@@ -7,46 +7,41 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLocale, useTranslations } from "use-intl";
-import { Locale, LocaleKey } from "@/types";
 import { Link } from "@/components/ui/link";
 import { siteConfig } from "@/data/config";
-import testimonialsJson from "@/data/personal/translate/testimonials.json";
-
-interface TestimonialCard {
-  id: number;
-  locale: LocaleKey;
-  name: string;
-  position: string;
-  testimonial: string;
-  linkedinUrl?: string;
-  websiteUrl?: string;
-  avatar?: string;
-}
-
-const testimonials: TestimonialCard[] = testimonialsJson.map((testimonial) => ({
-  ...testimonial,
-  locale: testimonial.locale as LocaleKey,
-}));
+import {
+  getTestimonialsByLocale,
+  type TestimonialItem,
+} from "@/types/personalData";
 
 export function TestimonialsSection() {
   const t = useTranslations();
   const locale = useLocale();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const localeTestimonials = testimonials.filter(
-    (testimonial) => testimonial.locale === locale
+  const localeTestimonials = useMemo(
+    () => getTestimonialsByLocale(locale),
+    [locale]
   );
 
   useEffect(() => {
+    if (localeTestimonials.length === 0) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % localeTestimonials.length);
     }, 10000); // Time interval to change testimonial cards is 10 seconds
 
     return () => clearInterval(interval);
-  }, [locale, localeTestimonials]);
+  }, [localeTestimonials]);
 
-  const currentTestimonial: TestimonialCard =
-    localeTestimonials[currentIndex] ?? localeTestimonials[0]!;
+  const currentTestimonial: TestimonialItem | undefined =
+    localeTestimonials[currentIndex] ?? localeTestimonials[0];
+
+  if (!currentTestimonial) {
+    return null;
+  }
 
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: localeTestimonials.length }).map(() =>

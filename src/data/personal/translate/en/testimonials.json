@@ -1,0 +1,58 @@
+[
+  {
+    "avatar": "KEEY",
+    "id": 0,
+    "linkedinUrl": "https://www.linkedin.com/in/koffi-%C3%A9ric-emmanuel-y-292a3a137",
+    "name": "Koffi Éric Emmanuel YAO",
+    "position": "Founder of Li-Zo | Delivery Service",
+    "testimonial": "Working with Adriel is a pleasure. He is professional and available. I appreciated his promptness in providing feedback and his support even at the end of the project. He worked on the mockup of an application that will be unveiled soon (🤫, I'm keeping the name to myself for now). It will be a hit, I'm reassured!"
+  },
+  {
+    "avatar": "YAG",
+    "id": 1,
+    "linkedinUrl": "https://www.linkedin.com/in/youssoufgamby",
+    "name": "Youssouf Aboubacar Yvan Gamby",
+    "position": "Founder of Etudiant CI | Student support platform",
+    "testimonial": "I needed a developer to help me launch my SaaS for students, but in the end, Adriel was much more than that. He supported me like a true advisor. He helped me clarify my idea, structure my product, and better understand what I really wanted to offer.\n Thanks to him, I was able to lay solid foundations, avoid quite a few mistakes, and move forward much faster. If you have a project in mind but it's still unclear, Adriel is clearly the right person to help make it concrete."
+  },
+  {
+    "avatar": "CJB",
+    "id": 2,
+    "linkedinUrl": "https://www.linkedin.com/in/christian-junior-braffo-",
+    "name": "Christian Junior Braffo",
+    "position": "Web Developer & Certified Cloud Practitioner",
+    "testimonial": "Adriel Zimbril is not just a developer; he is a developer who pushes his limits every time. He is able to implement any mockup you present to him. He is very open and always ready to help; he is probably the best Dev I know"
+  },
+  {
+    "avatar": "EYK",
+    "id": 3,
+    "linkedinUrl": "https://www.linkedin.com/in/esp%C3%A9rance-yannick-kouakou-4b2ba937b",
+    "name": "Espérance Yannick Kouakou",
+    "position": "Front-end Developer | Next.js",
+    "testimonial": "I had the chance to work with Adriel Zimbril on an ambitious SaaS project. Beyond his product design skills, what impressed me most was his ability to explain clearly, guide the team, and help us improve our skills. Working with him was a real learning experience and very enriching. I highly recommend Adriel to any team looking for a talented and pedagogical product designer!"
+  },
+  {
+    "avatar": "OD",
+    "id": 4,
+    "linkedinUrl": "https://www.linkedin.com/in/oumar-dagnogo-66274530b",
+    "name": "Oumar Dagnogo",
+    "position": "Student in BIHAR (Big Data Intelligence for Human Augmented Reality)",
+    "testimonial": "Adriel Zimbril is not just a developer; he is a developer who pushes his limits every time. He is able to implement any mockup you present to him. He is very open and always ready to help; he is probably the best Dev I know"
+  },
+  {
+    "avatar": "CR",
+    "id": 5,
+    "linkedinUrl": "https://www.linkedin.com/in/angaman-b-0755b5b6",
+    "name": "Angaman Brou Cedrick Delmas",
+    "position": "Backend Developer Java/Python",
+    "testimonial": "I had the chance to be trained by Adriel in UI design and development, and this experience truly changed the way I work and organize myself. He explains things clearly and directly, which allowed me to progress quickly. Thanks to him, I was able to land my job and secure my permanent contract (CDI)."
+  },
+  {
+    "avatar": "CR",
+    "id": 6,
+    "linkedinUrl": "https://www.linkedin.com/in/julius-konan-3b527b238",
+    "name": "Julius KONAN",
+    "position": "Quality Analyst",
+    "testimonial": "Adriel is an excellent designer with whom I had the opportunity to collaborate several times, notably when creating my LinkedIn banner. He also took part as a panelist on the topic of UX/UI Design within my VISION community, where he was able to demonstrate clearly his expertise, seriousness, and genuine passion for the field. Beyond his technical skills, Adriel stands out for his professionalism, pedagogy, and ability to bring real added value to each project. I highly recommend him as a Product Designer, as a trainer, and simply as a trusted collaborator."
+  }
+]
