@@ -26,10 +26,7 @@ export async function getAllQuests(
   
   return Promise.resolve(
     allQuests
-      .filter(
-        (item) =>
-          item.published === published && (!locale || item.locale === locale),
-      )
+      .filter((item) => item.published === published)
       .sort((a, b) => {
         const inscriptionA = new Date(a.registration_deadline);
         const submissionA = new Date(a.submission_deadline);
@@ -75,8 +72,8 @@ export async function getQuestBySlug(
   const { locale } = options ?? {};
   return Promise.resolve(
     allQuests.find(
-      (item) => item.slug === slug && (!locale || item.locale === locale)
-    ) ?? null
+      (quest) => quest.slug === slug && quest.published === true,
+    ) ?? null,
   );
 }
 
@@ -110,7 +107,8 @@ export async function getQuestWithAdjacent(
   const { locale } = options ?? {};
   // Filter by locale if specified
   const filteredQuests = allQuests.filter(
-    (quest: Quest) => !locale || quest.locale === locale,
+    //(quest: Quest) => !locale || quest.locale === locale,
+    (quest: Quest) => quest.published === true,
   );
 
   const now = new Date();

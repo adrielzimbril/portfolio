@@ -49,8 +49,10 @@ export async function getProjectBySlug(
   return Promise.resolve(
     allProjects.find(
       (project: Project) =>
-        project.slug === slug && (!locale || project.locale === locale)
-    ) ?? null
+        project.slug === slug &&
+        (!locale || project.locale === locale) &&
+        project.published === true,
+    ) ?? null,
   );
 }
 
@@ -84,7 +86,8 @@ export async function getProjectWithAdjacent(
   const { locale } = options ?? {};
   // Filter by locale if specified
   const filteredProjects = allProjects.filter(
-    (project: Project) => !locale || project.locale === locale
+    (project: Project) =>
+      project.published === true && (!locale || project.locale === locale),
   );
 
   // Sort by date (most recent first)

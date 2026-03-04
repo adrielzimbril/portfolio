@@ -24,10 +24,7 @@ export async function getAllTalks(options: Partial<Options> = {}): Promise<Talk[
 
   return Promise.resolve(
     allTalks
-      .filter(
-        (item) =>
-          item.published === published && (!locale || item.locale === locale),
-      )
+      .filter((item) => item.published === published)
       .sort((a, b) => {
         const dateA = new Date(a.event_date);
         const dateB = new Date(b.event_date);

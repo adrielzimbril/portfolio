@@ -46,8 +46,11 @@ export async function getPostBySlug(
 
   return Promise.resolve(
     allPosts.find(
-      (post: Post) => post.slug === slug && (!locale || post.locale === locale)
-    ) ?? null
+      (post: Post) =>
+        post.slug === slug &&
+        (!locale || post.locale === locale) &&
+        post.published === true,
+    ) ?? null,
   );
 }
 
@@ -81,7 +84,8 @@ export async function getPostWithAdjacent(
   const { locale } = options ?? {};
   // Filter by locale if specified
   const filteredPosts = allPosts.filter(
-    (post: Post) => !locale || post.locale === locale
+    (post: Post) =>
+      post.published === true && (!locale || post.locale === locale),
   );
 
   // Sort by date (most recent first)

@@ -84,8 +84,10 @@ export async function getResourceById(
   return Promise.resolve(
     allResources.find(
       (resource: Resource) =>
-        resource.id === id && (!locale || resource.locale === locale)
-    ) ?? null
+        resource.id === id &&
+        (!locale || resource.locale === locale) &&
+        resource.published === true,
+    ) ?? null,
   );
 }
 
@@ -119,7 +121,8 @@ export async function getResourceWithAdjacent(
   const { locale } = options ?? {};
   // Filter by locale if specified
   const filteredResources = allResources.filter(
-    (resource: Resource) => !locale || resource.locale === locale
+    (resource: Resource) =>
+      resource.published === true && (!locale || resource.locale === locale),
   );
 
   // Sort by date (most recent first)
