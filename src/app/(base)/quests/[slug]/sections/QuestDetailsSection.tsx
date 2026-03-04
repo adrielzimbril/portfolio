@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { Card, CardContent } from "@/components/ui/card";
-import { getHumanDate, getQuestAskUrl } from "@/utils";
+import { cn, getHumanDate, getQuestAskUrl } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { useTranslations } from "use-intl";
 import { DEFAULT_COLOR_CODE_NAME_LIST, QuestAskType } from "@/types";
@@ -49,13 +49,16 @@ export function QuestDetailsSection({
                 {rewards.map((reward, index) => (
                   <Card
                     key={`${reward}-${index}`}
-                    className="squircle squircle-b-base squircle-2xl squircle-smooth-md border-0 overflow-hidden"
+                    className={cn(
+                      "squircle squircle-b-base squircle-2xl squircle-smooth-md border-0 overflow-hidden",
+                      index === 0 ? "col-span-2" : "col-span-2",
+                    )}
                   >
                     <CardContent className="p-2 md:p-3">
-                      <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
-                        <div className="flex w-full flex-col gap-2">
+                      <div className="flex relative flex-col size-full gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
+                        <div className="flex size-full flex-col gap-2">
                           <p className="text-b-white-foreground leading-[130%]">
-                            🎲 {reward}
+                            {reward}
                           </p>
                         </div>
                       </div>
