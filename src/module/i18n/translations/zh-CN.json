@@ -82,11 +82,6 @@
     "title": "自我介绍 🧑🏻‍🚀"
   },
   "common": {
-    "rss": {
-      "copyright": "版权所有 {date}, {siteName}",
-      "subscribe": "订阅 RSS",
-      "rss": "RSS"
-    },
     "base": {
       "dribbble": "Dribbble",
       "email": "邮箱",
@@ -160,6 +155,16 @@
         "default": "项目",
         "desktop": "创作 🚀",
         "mobile": "我的作品 🎨"
+      },
+      "quests": {
+        "default": "挑战",
+        "desktop": "挑战",
+        "mobile": "挑战 🏆"
+      },
+      "talks": {
+        "default": "演讲",
+        "desktop": "演讲",
+        "mobile": "演讲 🎤"
       },
       "thoughts": {
         "default": "思考",
@@ -293,6 +298,11 @@
         "description": "我在复杂产品设计中的经验、思考与建议，让简约成为超级力量。",
         "title": "思考"
       }
+    },
+    "rss": {
+      "copyright": "版权所有 {date}, {siteName}",
+      "rss": "RSS",
+      "subscribe": "订阅 RSS"
     },
     "shared": {
       "base": {
@@ -558,6 +568,52 @@
       "subject": "嘿，您的资源已准备好",
       "thankYou": "感谢你的信任 🙌"
     },
+    "questRegisterAdminNotification": {
+      "labels": {
+        "challenge": "?? ??",
+        "email": "??",
+        "message": "?? ??",
+        "name": "??",
+        "slug": "Slug",
+        "url": "URL"
+      },
+      "preview": "有新的参与者完成了 quest 报名",
+      "subject": "🧾 新的 quest 报名"
+    },
+    "questRegisterUserConfirmation": {
+      "content": {
+        "challengeLinkLabel": "????",
+        "intro": "你报名的 \"{questTitle}\" 已成功记录。",
+        "wait": "后续进展会通过邮件通知你。"
+      },
+      "greeting": "你好 {firstName}，",
+      "preview": "你的 quest 报名已确认",
+      "subject": "✅ 报名已收到"
+    },
+    "questSubmitAdminNotification": {
+      "labels": {
+        "challenge": "?? ??",
+        "email": "??",
+        "message": "?? ??",
+        "name": "??",
+        "slug": "Slug",
+        "submittedWork": "?????? ??",
+        "url": "URL"
+      },
+      "preview": "有新的作品提交可供审核",
+      "subject": "🧪 新的 quest 作品提交"
+    },
+    "questSubmitUserConfirmation": {
+      "content": {
+        "challengeLinkLabel": "????",
+        "intro": "你为 \"{questTitle}\" 提交的作品已收到。",
+        "link": "提交链接",
+        "wait": "请等待 quest 结束后获取反馈。"
+      },
+      "greeting": "你好 {firstName}，",
+      "preview": "你的作品提交已记录",
+      "subject": "🚀 作品提交已收到"
+    },
     "submitAdminNotification": {
       "preview": "Shirosaas Lab | 有新的表单提交啦！",
       "subject": "🚀 新表单提交 — ShiroSaaS Lab"
@@ -571,52 +627,6 @@
       "greeting": "欢迎 {firstName}",
       "preview": "你的项目即将闪耀登场 🔦🐼",
       "subject": "✅ 已收到！你的项目已进入轨道 🪐"
-    },
-    "questRegisterUserConfirmation": {
-      "subject": "✅ 报名已收到",
-      "preview": "你的 quest 报名已确认",
-      "greeting": "你好 {firstName}，",
-      "content": {
-        "intro": "你报名的 \"{questTitle}\" 已成功记录。",
-        "wait": "后续进展会通过邮件通知你。",
-        "challengeLinkLabel": "????"
-      }
-    },
-    "questRegisterAdminNotification": {
-      "subject": "🧾 新的 quest 报名",
-      "preview": "有新的参与者完成了 quest 报名",
-      "labels": {
-        "challenge": "?? ??",
-        "url": "URL",
-        "slug": "Slug",
-        "name": "??",
-        "email": "??",
-        "message": "?? ??"
-      }
-    },
-    "questSubmitUserConfirmation": {
-      "subject": "🚀 作品提交已收到",
-      "preview": "你的作品提交已记录",
-      "greeting": "你好 {firstName}，",
-      "content": {
-        "intro": "你为 \"{questTitle}\" 提交的作品已收到。",
-        "link": "提交链接",
-        "wait": "请等待 quest 结束后获取反馈。",
-        "challengeLinkLabel": "????"
-      }
-    },
-    "questSubmitAdminNotification": {
-      "subject": "🧪 新的 quest 作品提交",
-      "preview": "有新的作品提交可供审核",
-      "labels": {
-        "challenge": "?? ??",
-        "url": "URL",
-        "slug": "Slug",
-        "name": "??",
-        "email": "??",
-        "submittedWork": "?????? ??",
-        "message": "?? ??"
-      }
     },
     "welcome": {
       "content": {
@@ -675,7 +685,8 @@
         "newsletter": "创意工具包 💌"
       },
       "desc": "你要找的页面不存在……或者已经不存在了 🕳️。但每一次绕路都是一场冒险 🌠。Sic itur ad astra 🌟：每一步，即使迷失，也让我们更接近星辰 🌌✨。",
-      "title": "看<thin>起来</thin>你在<thin>星星</thin>之间<thin>迷路了</thin> ✨"
+      "title": "看<thin>起来</thin>你在<thin>星星</thin>之间<thin>迷路了</thin> ✨",
+      "title_old": "看 <thin>起来</thin> 你 <thin>迷失</thin> 在 <thin>星辰</thin> ✨"
     },
     "title": "404 | 页面未找到🪐"
   },
@@ -734,6 +745,174 @@
     },
     "title": "我的项目 🐼"
   },
+  "quests": {
+    "cards": {
+      "actions": {
+        "participate": "????",
+        "viewResults": "????"
+      },
+      "features": {
+        "registrationEnd": "?? ?????{date}",
+        "resultsAnnouncement": "?? ?????{date}",
+        "submissionDeadline": "?? ?????{date}"
+      },
+      "tags": {
+        "registration": {
+          "closed": "?????",
+          "open": "????"
+        },
+        "results": {
+          "published": "?????",
+          "upcoming": "??????"
+        },
+        "submission": {
+          "closed": "?????",
+          "open": "????"
+        }
+      }
+    },
+    "description": "?????????????????????????????",
+    "inner-page": {
+      "details": {
+        "dates": {
+          "registrationEnd": "?? ????",
+          "resultsAnnouncement": "?? ????",
+          "submissionDeadline": "?? ????"
+        },
+        "rewardsTitle": "?? ??",
+        "status": "???? ??"
+      },
+      "header": {
+        "cta": {
+          "submitWork": "??????"
+        }
+      },
+      "more-preview-section": {
+        "title": "?????"
+      }
+    },
+    "keywords": "????, UX UI ??, ????, SaaS ??, Adriel Zimbril",
+    "page": {
+      "header-section": {
+        "description": "?????????????????????????????????????",
+        "title": "????? ???"
+      }
+    },
+    "participants": {
+      "actions": {
+        "view": "??"
+      },
+      "badges": {
+        "juryFavorite": "?????",
+        "originalIdea": "????",
+        "pixelPerfect": "?????"
+      },
+      "rank": {
+        "first": "???",
+        "other": "?? #{rank}",
+        "second": "???",
+        "third": "???"
+      },
+      "title": "??? ??"
+    },
+    "register": {
+      "closed": {
+        "actionLabel": "???? ??",
+        "badge": "????? ??",
+        "description": "???????????????????????????? ??",
+        "title": "?????????"
+      },
+      "description": "报名参加挑战，直接通过电子邮件接收官方简报、说明和挑战的所有步骤 📨",
+      "form": {
+        "actions": {
+          "submit": "???? ?",
+          "submitting": "???..."
+        },
+        "badge": "???? ??",
+        "description": "??????????????????????? ??",
+        "feedback": {
+          "error": {
+            "description": "????????????? ??",
+            "title": "???? ??"
+          },
+          "success": {
+            "description": "????????????????? ??",
+            "title": "???? ?"
+          }
+        },
+        "fields": {
+          "email": {
+            "label": "??"
+          },
+          "message": {
+            "label": "????????",
+            "placeholder": "???????????????????????..."
+          },
+          "name": {
+            "label": "??"
+          }
+        },
+        "title": "???? ?"
+      },
+      "hero": {
+        "badge": "???? ??",
+        "description": "????????????????????????? ??"
+      },
+      "keywords": "设计挑战, UX/UI 挑战, 创意竞赛, SaaS 挑战, Adriel Zimbril",
+      "title": "挑战报名"
+    },
+    "submit": {
+      "closed": {
+        "actionLabel": "???? ??",
+        "badge": "????? ??",
+        "description": "??????????????????????????? ??",
+        "title": "???????"
+      },
+      "description": "提交你的作品参加挑战并赢取奖励。进入前三名，将你的作品在网站上展示，并争取第一名以获得独家展示。",
+      "form": {
+        "actions": {
+          "submit": "???? ??",
+          "submitting": "???..."
+        },
+        "badge": "???? ??",
+        "closedInline": "?????????? ??",
+        "deadline": "?????{date}??????????? ??",
+        "feedback": {
+          "error": {
+            "description": "????????????? ??",
+            "title": "???? ??"
+          },
+          "success": {
+            "description": "??????????????????? ??",
+            "title": "???? ?"
+          }
+        },
+        "fields": {
+          "email": {
+            "label": "??"
+          },
+          "link": {
+            "label": "??"
+          },
+          "message": {
+            "label": "????????",
+            "placeholder": "?????????????????????..."
+          },
+          "name": {
+            "label": "??"
+          }
+        },
+        "title": "?????? ??"
+      },
+      "hero": {
+        "badge": "???? ??",
+        "description": "????????????????????????????? ??"
+      },
+      "keywords": "设计挑战, UX/UI 挑战, 创意竞赛, SaaS 挑战, Adriel Zimbril",
+      "title": "提交参赛作品"
+    },
+    "title": "???? ??"
+  },
   "submit": {
     "description": "提交你的项目、想法或产品，获取UX分析、Figma重设计或产品反馈。Adriel Zimbril陪你将想法转化为有影响力的体验。",
     "keywords": "SaaS项目提交, Adriel Zimbril, 产品设计师, UX评审, Figma重设计, 网站分析, 产品反馈, ShiroSaaS, 设计系统, 产品设计",
@@ -789,6 +968,36 @@
     },
     "title": "Shirosaas Lab 😮‍💨🧪"
   },
+  "talks": {
+    "badges": {
+      "inPerson": "线下",
+      "online": "线上"
+    },
+    "card": {
+      "actions": {
+        "participate": "????",
+        "viewReplay": "????"
+      },
+      "coverAria": "?? {title} ??",
+      "defaultEventTitle": "???",
+      "participants": "{count} ????",
+      "status": {
+        "completed": "???",
+        "today": "??",
+        "upcoming": "????"
+      }
+    },
+    "description": "探索我受邀参与的活动：线上与线下的会议、网络研讨会和大师课。",
+    "keywords": "Adriel Zimbril 会议, SaaS 设计 大师课, 产品 网络研讨会, UX UI 设计, 活动",
+    "page": {
+      "header-section": {
+        "cta": "查看全部会议",
+        "description": "我在产品设计与 SaaS 领域分享专业经验的活动、会议与网络研讨会。",
+        "title": "会议和大师班🎤"
+      }
+    },
+    "title": "会议与大师课 🎤"
+  },
   "thoughts": {
     "description": "我对产品设计、创新和SaaS创作的原始思考。无滤镜的反思，助你成长、换个角度看问题。",
     "inner-page": {
@@ -805,36 +1014,6 @@
       }
     },
     "title": "航海日志 📒"
-  },
-  "talks": {
-    "title": "会议与大师课 🎤",
-    "description": "探索我受邀参与的活动：线上与线下的会议、网络研讨会和大师课。",
-    "keywords": "Adriel Zimbril 会议, SaaS 设计 大师课, 产品 网络研讨会, UX UI 设计, 活动",
-    "badges": {
-      "online": "线上",
-      "inPerson": "线下"
-    },
-    "page": {
-      "header-section": {
-        "title": "会议和大师班🎤",
-        "description": "我在产品设计与 SaaS 领域分享专业经验的活动、会议与网络研讨会。",
-        "cta": "查看全部会议"
-      }
-    },
-    "card": {
-      "actions": {
-        "viewReplay": "????",
-        "participate": "????"
-      },
-      "status": {
-        "today": "??",
-        "completed": "???",
-        "upcoming": "????"
-      },
-      "participants": "{count} ????",
-      "coverAria": "?? {title} ??",
-      "defaultEventTitle": "???"
-    }
   },
   "zod": {
     "errors": {
@@ -968,168 +1147,6 @@
       "ulid": "ulid",
       "url": "网址",
       "uuid": "uuid"
-    }
-  },
-  "quests": {
-    "title": "???? ??",
-    "description": "?????????????????????????????",
-    "keywords": "????, UX UI ??, ????, SaaS ??, Adriel Zimbril",
-    "page": {
-      "header-section": {
-        "title": "????? ???",
-        "description": "?????????????????????????????????????"
-      }
-    },
-    "cards": {
-      "tags": {
-        "registration": {
-          "open": "????",
-          "closed": "?????"
-        },
-        "submission": {
-          "open": "????",
-          "closed": "?????"
-        },
-        "results": {
-          "published": "?????",
-          "upcoming": "??????"
-        }
-      },
-      "features": {
-        "registrationEnd": "?? ?????{date}",
-        "submissionDeadline": "?? ?????{date}",
-        "resultsAnnouncement": "?? ?????{date}"
-      },
-      "actions": {
-        "viewResults": "????",
-        "participate": "????"
-      }
-    },
-    "inner-page": {
-      "more-preview-section": {
-        "title": "?????"
-      },
-      "details": {
-        "rewardsTitle": "?? ??",
-        "status": "???? ??",
-        "dates": {
-          "registrationEnd": "?? ????",
-          "submissionDeadline": "?? ????",
-          "resultsAnnouncement": "?? ????"
-        }
-      },
-      "header": {
-        "cta": {
-          "submitWork": "??????"
-        }
-      }
-    },
-    "participants": {
-      "title": "??? ??",
-      "rank": {
-        "first": "???",
-        "second": "???",
-        "third": "???",
-        "other": "?? #{rank}"
-      },
-      "badges": {
-        "pixelPerfect": "?????",
-        "juryFavorite": "?????",
-        "originalIdea": "????"
-      },
-      "actions": {
-        "view": "??"
-      }
-    },
-    "register": {
-      "hero": {
-        "badge": "???? ??",
-        "description": "????????????????????????? ??"
-      },
-      "closed": {
-        "badge": "????? ??",
-        "title": "?????????",
-        "description": "???????????????????????????? ??",
-        "actionLabel": "???? ??"
-      },
-      "form": {
-        "badge": "???? ??",
-        "title": "???? ?",
-        "description": "??????????????????????? ??",
-        "fields": {
-          "name": {
-            "label": "??"
-          },
-          "email": {
-            "label": "??"
-          },
-          "message": {
-            "label": "????????",
-            "placeholder": "???????????????????????..."
-          }
-        },
-        "actions": {
-          "submitting": "???...",
-          "submit": "???? ?"
-        },
-        "feedback": {
-          "success": {
-            "title": "???? ?",
-            "description": "????????????????? ??"
-          },
-          "error": {
-            "title": "???? ??",
-            "description": "????????????? ??"
-          }
-        }
-      }
-    },
-    "submit": {
-      "hero": {
-        "badge": "???? ??",
-        "description": "????????????????????????????? ??"
-      },
-      "closed": {
-        "badge": "????? ??",
-        "title": "???????",
-        "description": "??????????????????????????? ??",
-        "actionLabel": "???? ??"
-      },
-      "form": {
-        "badge": "???? ??",
-        "title": "?????? ??",
-        "deadline": "?????{date}??????????? ??",
-        "closedInline": "?????????? ??",
-        "fields": {
-          "name": {
-            "label": "??"
-          },
-          "email": {
-            "label": "??"
-          },
-          "link": {
-            "label": "??"
-          },
-          "message": {
-            "label": "????????",
-            "placeholder": "?????????????????????..."
-          }
-        },
-        "actions": {
-          "submitting": "???...",
-          "submit": "???? ??"
-        },
-        "feedback": {
-          "success": {
-            "title": "???? ?",
-            "description": "??????????????????? ??"
-          },
-          "error": {
-            "title": "???? ??",
-            "description": "????????????? ??"
-          }
-        }
-      }
     }
   }
 }

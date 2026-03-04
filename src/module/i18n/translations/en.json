@@ -82,11 +82,6 @@
     "title": "I am 🧑🏻‍🚀"
   },
   "common": {
-    "rss": {
-      "subscribe": "Subscribe to RSS feed",
-      "rss": "RSS",
-      "copyright": "All rights reserved {date}, {siteName}"
-    },
     "base": {
       "dribbble": "Dribbble",
       "email": "Email",
@@ -160,6 +155,16 @@
         "default": "Projects",
         "desktop": "Projects 🚀",
         "mobile": "My Works 🎨"
+      },
+      "quests": {
+        "default": "Challenges",
+        "desktop": "Challenges",
+        "mobile": "Challenges 🏆"
+      },
+      "talks": {
+        "default": "Talks",
+        "desktop": "Talks",
+        "mobile": "Talks 🎤"
       },
       "thoughts": {
         "default": "Thoughts",
@@ -293,6 +298,11 @@
         "description": "My experiences, reflections, and advice on designing complex products where simplicity becomes a superpower.",
         "title": "Thoughts"
       }
+    },
+    "rss": {
+      "copyright": "All rights reserved {date}, {siteName}",
+      "rss": "RSS",
+      "subscribe": "Subscribe to RSS feed"
     },
     "shared": {
       "base": {
@@ -558,6 +568,52 @@
       "subject": "Hey, your resource is ready !",
       "thankYou": "Thank you for your trust 🙌"
     },
+    "questRegisterAdminNotification": {
+      "labels": {
+        "challenge": "Challenge ??",
+        "email": "Email",
+        "message": "Message ??",
+        "name": "Name",
+        "slug": "Slug",
+        "url": "URL"
+      },
+      "preview": "A new participant registered for the quest",
+      "subject": "🧾 New quest registration"
+    },
+    "questRegisterUserConfirmation": {
+      "content": {
+        "challengeLinkLabel": "View challenge",
+        "intro": "Your registration for \"{questTitle}\" has been recorded.",
+        "wait": "You will receive the next updates by email."
+      },
+      "greeting": "Hello {firstName},",
+      "preview": "Your quest registration is confirmed",
+      "subject": "✅ Registration received"
+    },
+    "questSubmitAdminNotification": {
+      "labels": {
+        "challenge": "Challenge ??",
+        "email": "Email",
+        "message": "Message ??",
+        "name": "Name",
+        "slug": "Slug",
+        "submittedWork": "Submitted work ??",
+        "url": "URL"
+      },
+      "preview": "A new work submission is available",
+      "subject": "🧪 New quest submission"
+    },
+    "questSubmitUserConfirmation": {
+      "content": {
+        "challengeLinkLabel": "Challenge",
+        "intro": "Your submission for \"{questTitle}\" was received.",
+        "link": "Submitted link",
+        "wait": "Please wait until the quest ends for feedback."
+      },
+      "greeting": "Hello {firstName},",
+      "preview": "Your work submission has been recorded",
+      "subject": "🚀 Submission received"
+    },
     "submitAdminNotification": {
       "preview": "Shirosaas Lab | A new form has been submitted!",
       "subject": "🚀 New form submitted — ShiroSaaS Lab"
@@ -571,52 +627,6 @@
       "greeting": "Welcome {firstName}",
       "preview": "Your project will soon be in the spotlight 🔦🐼",
       "subject": "✅ Got it! Your project is in orbit 🪐"
-    },
-    "questRegisterUserConfirmation": {
-      "subject": "✅ Registration received",
-      "preview": "Your quest registration is confirmed",
-      "greeting": "Hello {firstName},",
-      "content": {
-        "intro": "Your registration for \"{questTitle}\" has been recorded.",
-        "wait": "You will receive the next updates by email.",
-        "challengeLinkLabel": "View challenge"
-      }
-    },
-    "questRegisterAdminNotification": {
-      "subject": "🧾 New quest registration",
-      "preview": "A new participant registered for the quest",
-      "labels": {
-        "challenge": "Challenge ??",
-        "url": "URL",
-        "slug": "Slug",
-        "name": "Name",
-        "email": "Email",
-        "message": "Message ??"
-      }
-    },
-    "questSubmitUserConfirmation": {
-      "subject": "🚀 Submission received",
-      "preview": "Your work submission has been recorded",
-      "greeting": "Hello {firstName},",
-      "content": {
-        "intro": "Your submission for \"{questTitle}\" was received.",
-        "link": "Submitted link",
-        "wait": "Please wait until the quest ends for feedback.",
-        "challengeLinkLabel": "Challenge"
-      }
-    },
-    "questSubmitAdminNotification": {
-      "subject": "🧪 New quest submission",
-      "preview": "A new work submission is available",
-      "labels": {
-        "challenge": "Challenge ??",
-        "url": "URL",
-        "slug": "Slug",
-        "name": "Name",
-        "email": "Email",
-        "submittedWork": "Submitted work ??",
-        "message": "Message ??"
-      }
     },
     "welcome": {
       "content": {
@@ -675,7 +685,8 @@
         "newsletter": "Creativity kit 💌"
       },
       "desc": "The page you’re looking for doesn’t exist… or no longer exists 🕳️. But every detour is an adventure 🌠. Sic itur ad astra 🌟: every step, even lost, brings us closer to the stars 🌌✨.",
-      "title": "It <thin>looks</thin> like you’ve <thin>gotten lost</thin> among the <thin>stars</thin> ✨"
+      "title": "It <thin>looks</thin> like you’ve <thin>gotten lost</thin> among the <thin>stars</thin> ✨",
+      "title_old": "It <thin>seems</thin> you've <thin>lost</thin> in the <thin>stars</thin> ✨"
     },
     "title": "404 | Page not found 🪐"
   },
@@ -734,6 +745,174 @@
     },
     "title": "My projects 🐼"
   },
+  "quests": {
+    "cards": {
+      "actions": {
+        "participate": "Participate",
+        "viewResults": "View results"
+      },
+      "features": {
+        "registrationEnd": "?? Registration ends: {date}",
+        "resultsAnnouncement": "?? Results announcement: {date}",
+        "submissionDeadline": "?? Submission deadline: {date}"
+      },
+      "tags": {
+        "registration": {
+          "closed": "Registration closed",
+          "open": "Registration open"
+        },
+        "results": {
+          "published": "Results published",
+          "upcoming": "Results coming soon"
+        },
+        "submission": {
+          "closed": "Submission closed",
+          "open": "Submission open"
+        }
+      }
+    },
+    "description": "Push your limits with practical challenges, win rewards, and showcase your work.",
+    "inner-page": {
+      "details": {
+        "dates": {
+          "registrationEnd": "?? Registration ends",
+          "resultsAnnouncement": "?? Results announcement",
+          "submissionDeadline": "?? Submission deadline"
+        },
+        "rewardsTitle": "Rewards ??",
+        "status": "???? Status"
+      },
+      "header": {
+        "cta": {
+          "submitWork": "Submit my work"
+        }
+      },
+      "more-preview-section": {
+        "title": "Other challenges."
+      }
+    },
+    "keywords": "design challenge, UX UI challenge, creative contest, SaaS challenge, Adriel Zimbril",
+    "page": {
+      "header-section": {
+        "description": "Push your limits and win rewards. Reach the top 3, get featured on the site, and aim for first place for an exclusive spotlight.",
+        "title": "Creative Challenges ???"
+      }
+    },
+    "participants": {
+      "actions": {
+        "view": "View"
+      },
+      "badges": {
+        "juryFavorite": "Jury's favorite",
+        "originalIdea": "Original idea",
+        "pixelPerfect": "Pixel Perfect"
+      },
+      "rank": {
+        "first": "First prize",
+        "other": "Rank #{rank}",
+        "second": "Second prize",
+        "third": "Third prize"
+      },
+      "title": "Winners ??"
+    },
+    "register": {
+      "closed": {
+        "actionLabel": "View challenge ??",
+        "badge": "Registration closed ??",
+        "description": "Unfortunately, registration for this challenge is now closed. Come back soon, new challenges are coming ??",
+        "title": "This challenge is no longer open"
+      },
+      "description": "Sign up for the challenge to receive the official brief, the instructions and all the challenge steps directly by email 📨",
+      "form": {
+        "actions": {
+          "submit": "Confirm my registration ?",
+          "submitting": "Saving..."
+        },
+        "badge": "Challenge registration ??",
+        "description": "Reserve your spot to receive the brief, rules, and practical info before launch ??",
+        "feedback": {
+          "error": {
+            "description": "An error occurred during registration. Please try again ??",
+            "title": "Unable to send ??"
+          },
+          "success": {
+            "description": "Message received. A confirmation email has just been sent to you ??",
+            "title": "Registration saved ?"
+          }
+        },
+        "fields": {
+          "email": {
+            "label": "Email"
+          },
+          "message": {
+            "label": "Message (optional) ??",
+            "placeholder": "Tell us about your background, level, and what you expect from the challenge..."
+          },
+          "name": {
+            "label": "Name"
+          }
+        },
+        "title": "Join the challenge ?"
+      },
+      "hero": {
+        "badge": "Join the challenge ??",
+        "description": "Sign up to receive the official brief, guidelines, and every challenge step directly by email ??"
+      },
+      "keywords": "design challenge, UX UI challenge, creative contest, SaaS challenge, Adriel Zimbril",
+      "title": "Challenge Registration"
+    },
+    "submit": {
+      "closed": {
+        "actionLabel": "View challenge ??",
+        "badge": "Submissions closed ??",
+        "description": "Submissions are closed for this challenge. You can review the details and return for upcoming challenges ??",
+        "title": "The submission period has ended"
+      },
+      "description": "Submit your work for the challenge and win rewards. Make the top 3 to have your work featured on the site, and aim for first place for an exclusive spotlight.",
+      "form": {
+        "actions": {
+          "submit": "Send my submission ??",
+          "submitting": "Sending..."
+        },
+        "badge": "Challenge submission ??",
+        "closedInline": "The submission period has ended for this challenge ??",
+        "deadline": "Deadline: {date}. After this date, submissions will no longer be accepted ??",
+        "feedback": {
+          "error": {
+            "description": "An error occurred during submission. Please try again ??",
+            "title": "Unable to send ??"
+          },
+          "success": {
+            "description": "Message received. You will receive a confirmation email shortly ??",
+            "title": "Submission sent ?"
+          }
+        },
+        "fields": {
+          "email": {
+            "label": "Email"
+          },
+          "link": {
+            "label": "Link"
+          },
+          "message": {
+            "label": "Message (optional) ??",
+            "placeholder": "Add a message to help us better understand your choices..."
+          },
+          "name": {
+            "label": "Name"
+          }
+        },
+        "title": "Submit your work ??"
+      },
+      "hero": {
+        "badge": "Join the challenge ??",
+        "description": "Submit your work here to confirm your participation. You could be part of the next winning trio ??"
+      },
+      "keywords": "design challenge, UX UI challenge, creative contest, SaaS challenge, Adriel Zimbril",
+      "title": "Challenge Submission"
+    },
+    "title": "Creative Challenges ??"
+  },
   "submit": {
     "description": "Share your project, idea, or product for a UX analysis, Figma redesign, or product feedback. Adriel Zimbril helps you turn your ideas into impactful experiences.",
     "keywords": "SaaS project submission, Adriel Zimbril, Product Designer, UX Review, Figma Redesign, Website Analysis, Product Feedback, ShiroSaaS, Design System, Product Design",
@@ -789,6 +968,36 @@
     },
     "title": "Shirosaas Lab 😮‍💨🧪"
   },
+  "talks": {
+    "badges": {
+      "inPerson": "In person",
+      "online": "Online"
+    },
+    "card": {
+      "actions": {
+        "participate": "Participate",
+        "viewReplay": "Watch replay"
+      },
+      "coverAria": "View cover of {title}",
+      "defaultEventTitle": "the event",
+      "participants": "{count} participants",
+      "status": {
+        "completed": "Completed",
+        "today": "Today",
+        "upcoming": "Upcoming"
+      }
+    },
+    "description": "Discover the events where I was invited: conferences, webinars, and masterclasses online and in person.",
+    "keywords": "Adriel Zimbril conferences, SaaS design masterclass, product webinars, UX UI design, events",
+    "page": {
+      "header-section": {
+        "cta": "See all conferences",
+        "description": "Events, conferences, and webinars where I shared my expertise in product design and SaaS.",
+        "title": "Conferences & Masterclasses 🎤"
+      }
+    },
+    "title": "Conferences & Masterclasses 🎤"
+  },
   "thoughts": {
     "description": "My raw thoughts on product design, innovation, and SaaS creation. Unfiltered reflections to grow and see things differently.",
     "inner-page": {
@@ -805,36 +1014,6 @@
       }
     },
     "title": "Logbook 📒"
-  },
-  "talks": {
-    "title": "Conferences & Masterclasses 🎤",
-    "description": "Discover the events where I was invited: conferences, webinars, and masterclasses online and in person.",
-    "keywords": "Adriel Zimbril conferences, SaaS design masterclass, product webinars, UX UI design, events",
-    "badges": {
-      "online": "Online",
-      "inPerson": "In person"
-    },
-    "page": {
-      "header-section": {
-        "title": "Conferences & Masterclasses 🎤",
-        "description": "Events, conferences, and webinars where I shared my expertise in product design and SaaS.",
-        "cta": "See all conferences"
-      }
-    },
-    "card": {
-      "actions": {
-        "viewReplay": "Watch replay",
-        "participate": "Participate"
-      },
-      "status": {
-        "today": "Today",
-        "completed": "Completed",
-        "upcoming": "Upcoming"
-      },
-      "participants": "{count} participants",
-      "coverAria": "View cover of {title}",
-      "defaultEventTitle": "the event"
-    }
   },
   "zod": {
     "errors": {
@@ -968,168 +1147,6 @@
       "ulid": "ulid",
       "url": "url",
       "uuid": "uuid"
-    }
-  },
-  "quests": {
-    "title": "Creative Challenges ??",
-    "description": "Push your limits with practical challenges, win rewards, and showcase your work.",
-    "keywords": "design challenge, UX UI challenge, creative contest, SaaS challenge, Adriel Zimbril",
-    "page": {
-      "header-section": {
-        "title": "Creative Challenges ???",
-        "description": "Push your limits and win rewards. Reach the top 3, get featured on the site, and aim for first place for an exclusive spotlight."
-      }
-    },
-    "cards": {
-      "tags": {
-        "registration": {
-          "open": "Registration open",
-          "closed": "Registration closed"
-        },
-        "submission": {
-          "open": "Submission open",
-          "closed": "Submission closed"
-        },
-        "results": {
-          "published": "Results published",
-          "upcoming": "Results coming soon"
-        }
-      },
-      "features": {
-        "registrationEnd": "?? Registration ends: {date}",
-        "submissionDeadline": "?? Submission deadline: {date}",
-        "resultsAnnouncement": "?? Results announcement: {date}"
-      },
-      "actions": {
-        "viewResults": "View results",
-        "participate": "Participate"
-      }
-    },
-    "inner-page": {
-      "more-preview-section": {
-        "title": "Other challenges."
-      },
-      "details": {
-        "rewardsTitle": "Rewards ??",
-        "status": "???? Status",
-        "dates": {
-          "registrationEnd": "?? Registration ends",
-          "submissionDeadline": "?? Submission deadline",
-          "resultsAnnouncement": "?? Results announcement"
-        }
-      },
-      "header": {
-        "cta": {
-          "submitWork": "Submit my work"
-        }
-      }
-    },
-    "participants": {
-      "title": "Winners ??",
-      "rank": {
-        "first": "First prize",
-        "second": "Second prize",
-        "third": "Third prize",
-        "other": "Rank #{rank}"
-      },
-      "badges": {
-        "pixelPerfect": "Pixel Perfect",
-        "juryFavorite": "Jury's favorite",
-        "originalIdea": "Original idea"
-      },
-      "actions": {
-        "view": "View"
-      }
-    },
-    "register": {
-      "hero": {
-        "badge": "Join the challenge ??",
-        "description": "Sign up to receive the official brief, guidelines, and every challenge step directly by email ??"
-      },
-      "closed": {
-        "badge": "Registration closed ??",
-        "title": "This challenge is no longer open",
-        "description": "Unfortunately, registration for this challenge is now closed. Come back soon, new challenges are coming ??",
-        "actionLabel": "View challenge ??"
-      },
-      "form": {
-        "badge": "Challenge registration ??",
-        "title": "Join the challenge ?",
-        "description": "Reserve your spot to receive the brief, rules, and practical info before launch ??",
-        "fields": {
-          "name": {
-            "label": "Name"
-          },
-          "email": {
-            "label": "Email"
-          },
-          "message": {
-            "label": "Message (optional) ??",
-            "placeholder": "Tell us about your background, level, and what you expect from the challenge..."
-          }
-        },
-        "actions": {
-          "submitting": "Saving...",
-          "submit": "Confirm my registration ?"
-        },
-        "feedback": {
-          "success": {
-            "title": "Registration saved ?",
-            "description": "Message received. A confirmation email has just been sent to you ??"
-          },
-          "error": {
-            "title": "Unable to send ??",
-            "description": "An error occurred during registration. Please try again ??"
-          }
-        }
-      }
-    },
-    "submit": {
-      "hero": {
-        "badge": "Join the challenge ??",
-        "description": "Submit your work here to confirm your participation. You could be part of the next winning trio ??"
-      },
-      "closed": {
-        "badge": "Submissions closed ??",
-        "title": "The submission period has ended",
-        "description": "Submissions are closed for this challenge. You can review the details and return for upcoming challenges ??",
-        "actionLabel": "View challenge ??"
-      },
-      "form": {
-        "badge": "Challenge submission ??",
-        "title": "Submit your work ??",
-        "deadline": "Deadline: {date}. After this date, submissions will no longer be accepted ??",
-        "closedInline": "The submission period has ended for this challenge ??",
-        "fields": {
-          "name": {
-            "label": "Name"
-          },
-          "email": {
-            "label": "Email"
-          },
-          "link": {
-            "label": "Link"
-          },
-          "message": {
-            "label": "Message (optional) ??",
-            "placeholder": "Add a message to help us better understand your choices..."
-          }
-        },
-        "actions": {
-          "submitting": "Sending...",
-          "submit": "Send my submission ??"
-        },
-        "feedback": {
-          "success": {
-            "title": "Submission sent ?",
-            "description": "Message received. You will receive a confirmation email shortly ??"
-          },
-          "error": {
-            "title": "Unable to send ??",
-            "description": "An error occurred during submission. Please try again ??"
-          }
-        }
-      }
     }
   }
 }
