@@ -188,6 +188,20 @@
         "description": "Les événements, conférences et webinaires où j'ai partagé mon expertise en design produit et SaaS.",
         "cta": "Voir toutes les conférences"
       }
+    },
+    "card": {
+      "actions": {
+        "viewReplay": "Voir replay",
+        "participate": "Participer"
+      },
+      "status": {
+        "today": "Aujourd'hui",
+        "completed": "Termin?",
+        "upcoming": "? venir"
+      },
+      "participants": "{count} participants",
+      "coverAria": "Voir la cover de {title}",
+      "defaultEventTitle": "l'?v?nement"
     }
   },
   "submit": {
@@ -650,12 +664,21 @@
       "greeting": "Bonjour {firstName},",
       "content": {
         "intro": "Ton inscription au challenge \"{questTitle}\" a bien ete enregistree 🎉",
-        "wait": "Tu recevras les prochaines informations par email 📨"
+        "wait": "Tu recevras les prochaines informations par email 📨",
+        "challengeLinkLabel": "Voir le challenge"
       }
     },
     "questRegisterAdminNotification": {
       "subject": "🧾 Nouvelle inscription challenge",
-      "preview": "Un nouveau participant vient de s'inscrire au challenge 📝"
+      "preview": "Un nouveau participant vient de s'inscrire au challenge 📝",
+      "labels": {
+        "challenge": "Challenge ??",
+        "url": "URL",
+        "slug": "Slug",
+        "name": "Nom",
+        "email": "Email",
+        "message": "Message ??"
+      }
     },
     "questSubmitUserConfirmation": {
       "subject": "🚀 Soumission bien recue",
@@ -664,12 +687,22 @@
       "content": {
         "intro": "Ta soumission pour \"{questTitle}\" a bien ete recue 🚀",
         "link": "Lien soumis",
-        "wait": "Merci de patienter jusqu'a la fin du challenge pour le retour ⏳"
+        "wait": "Merci de patienter jusqu'a la fin du challenge pour le retour ⏳",
+        "challengeLinkLabel": "Challenge"
       }
     },
     "questSubmitAdminNotification": {
       "subject": "🧪 Nouvelle soumission challenge",
-      "preview": "Une nouvelle soumission de travail est disponible 🚀"
+      "preview": "Une nouvelle soumission de travail est disponible 🚀",
+      "labels": {
+        "challenge": "Challenge ??",
+        "url": "URL",
+        "slug": "Slug",
+        "name": "Nom",
+        "email": "Email",
+        "submittedWork": "Lien rendu ??",
+        "message": "Message ??"
+      }
     },
     "welcome": {
       "subject": "Bienvenue sur ma newsletter !",
@@ -934,6 +967,168 @@
     "components": {
       "button-copy": {
         "failed": "Erreur lors de la copie"
+      }
+    }
+  },
+  "quests": {
+    "title": "Challenges cr?atifs ??",
+    "description": "Repousse tes limites avec des challenges concrets, gagne des r?compenses et mets ton travail en avant.",
+    "keywords": "challenge design, challenge UX UI, concours cr?atif, challenge SaaS, Adriel Zimbril",
+    "page": {
+      "header-section": {
+        "title": "Challenges des cr?atifs ???",
+        "description": "Repousse tes limites et remporte des r?compenses. Int?gre le top 3, mets ton travail en vedette sur le site et vise la premi?re place pour une mise en avant exclusive."
+      }
+    },
+    "cards": {
+      "tags": {
+        "registration": {
+          "open": "Inscriptions ouvertes",
+          "closed": "Inscriptions cl?tur?es"
+        },
+        "submission": {
+          "open": "Soumissions ouvertes",
+          "closed": "Soumissions cl?tur?es"
+        },
+        "results": {
+          "published": "R?sultats publi?s",
+          "upcoming": "R?sultats ? venir"
+        }
+      },
+      "features": {
+        "registrationEnd": "?? Fin des inscriptions : {date}",
+        "submissionDeadline": "?? Date limite de soumission : {date}",
+        "resultsAnnouncement": "?? Annonce des r?sultats : {date}"
+      },
+      "actions": {
+        "viewResults": "Voir les r?sultats",
+        "participate": "Participer"
+      }
+    },
+    "inner-page": {
+      "more-preview-section": {
+        "title": "Autres challenges."
+      },
+      "details": {
+        "rewardsTitle": "R?compenses ??",
+        "status": "???? Statut",
+        "dates": {
+          "registrationEnd": "?? Fin des inscriptions",
+          "submissionDeadline": "?? Date limite de soumission",
+          "resultsAnnouncement": "?? Annonce des r?sultats"
+        }
+      },
+      "header": {
+        "cta": {
+          "submitWork": "Soumettre mon travail"
+        }
+      }
+    },
+    "participants": {
+      "title": "Vainqueurs ??",
+      "rank": {
+        "first": "Premier prix",
+        "second": "Deuxi?me prix",
+        "third": "Troisi?me prix",
+        "other": "Rang #{rank}"
+      },
+      "badges": {
+        "pixelPerfect": "Pixel Perfect",
+        "juryFavorite": "Coup de c?ur du jury",
+        "originalIdea": "Id?e originale"
+      },
+      "actions": {
+        "view": "Voir"
+      }
+    },
+    "register": {
+      "hero": {
+        "badge": "Participe au challenge ??",
+        "description": "Inscris-toi pour recevoir le brief officiel, les consignes et toutes les ?tapes du challenge directement par email ??"
+      },
+      "closed": {
+        "badge": "Inscriptions ferm?es ??",
+        "title": "Ce challenge n'est plus ouvert",
+        "description": "Malheureusement, les inscriptions pour ce challenge sont d?sormais closes. Reviens bient?t, de nouveaux challenges arrivent ??",
+        "actionLabel": "Voir le challenge ??"
+      },
+      "form": {
+        "badge": "Inscription au challenge ??",
+        "title": "Rejoins le challenge ?",
+        "description": "R?serve ta place pour recevoir le brief, les r?gles et toutes les infos pratiques avant le lancement ??",
+        "fields": {
+          "name": {
+            "label": "Nom"
+          },
+          "email": {
+            "label": "Email"
+          },
+          "message": {
+            "label": "Message (optionnel) ??",
+            "placeholder": "Parle-nous de ton profil, ton niveau et ce que tu attends du challenge..."
+          }
+        },
+        "actions": {
+          "submitting": "Enregistrement...",
+          "submit": "Confirmer mon inscription ?"
+        },
+        "feedback": {
+          "success": {
+            "title": "Inscription enregistr?e ?",
+            "description": "Message re?u. Un email de confirmation vient de t'?tre envoy? ??"
+          },
+          "error": {
+            "title": "Envoi impossible ??",
+            "description": "Une erreur est survenue pendant l'inscription. Merci de r?essayer ??"
+          }
+        }
+      }
+    },
+    "submit": {
+      "hero": {
+        "badge": "Participe au challenge ??",
+        "description": "Soumets ton travail ici pour confirmer ta participation. Tu pourrais faire partie du prochain trio gagnant ??"
+      },
+      "closed": {
+        "badge": "Soumissions ferm?es ??",
+        "title": "La p?riode de soumission est termin?e",
+        "description": "Les d?p?ts sont ferm?s pour ce challenge. Tu peux consulter les d?tails et revenir pour les prochains challenges ??",
+        "actionLabel": "Voir le challenge ??"
+      },
+      "form": {
+        "badge": "Soumission du challenge ??",
+        "title": "Soumettre son travail ??",
+        "deadline": "Date limite : {date}. Apr?s cette date, les soumissions ne seront plus accept?es ??",
+        "closedInline": "La p?riode de soumission est termin?e pour ce challenge ??",
+        "fields": {
+          "name": {
+            "label": "Nom"
+          },
+          "email": {
+            "label": "Email"
+          },
+          "link": {
+            "label": "Lien"
+          },
+          "message": {
+            "label": "Message (optionnel) ??",
+            "placeholder": "Ajoute un message pour nous aider ? mieux comprendre tes choix..."
+          }
+        },
+        "actions": {
+          "submitting": "Envoi en cours...",
+          "submit": "Envoyer ma soumission ??"
+        },
+        "feedback": {
+          "success": {
+            "title": "Soumission envoy?e ?",
+            "description": "Message re?u. Tu recevras un email de confirmation dans quelques instants ??"
+          },
+          "error": {
+            "title": "Envoi impossible ??",
+            "description": "Une erreur est survenue pendant la soumission. Merci de r?essayer ??"
+          }
+        }
       }
     }
   }
