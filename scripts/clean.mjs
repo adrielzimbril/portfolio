@@ -95,6 +95,7 @@ async function cleanFolders(directory) {
           ".content-collections",
           ".trigger",
           ".superdesign",
+          ".vercel/output",
         ].some((pattern) =>
           // @ts-ignore
           typeof pattern === "string"
