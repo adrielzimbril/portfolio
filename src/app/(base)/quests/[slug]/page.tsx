@@ -34,13 +34,13 @@ export async function generateMetadata(props: {
       ...baseMetadata.openGraph,
       title: quest?.title,
       description: quest?.excerpt,
-      images: [getImageUrl(quest.cover), getImageUrl("opengraph-image.png")],
+      images: [getImageUrl(quest?.cover), getImageUrl("opengraph-image.png")],
     },
     twitter: {
       ...baseMetadata.twitter,
       title: quest?.title,
       description: quest?.excerpt,
-      images: [getImageUrl(quest.cover), getImageUrl("opengraph-image.png")],
+      images: [getImageUrl(quest?.cover), getImageUrl("opengraph-image.png")],
     },
   };
 
