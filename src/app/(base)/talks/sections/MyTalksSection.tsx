@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { TalksCard } from "@/components/shared/pages/talks/card";
@@ -37,17 +37,16 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
       {list.map((talk) => {
         const eventDate = new Date(talk.event_date);
         const eventTime = eventDate.getTime();
-        const isPastEvent =
-          Number.isFinite(eventTime) && currentTime >= eventTime;
+        const isPastEvent = Number.isFinite(eventTime) && currentTime >= eventTime;
         const replayUrl = getExternalUrl(talk.replay_url);
         const eventUrl = getExternalUrl(talk.event_url);
 
         const action = isPastEvent
           ? replayUrl
-            ? { label: "Voir replay", href: replayUrl }
+            ? { label: t("talks.card.actions.viewReplay"), href: replayUrl }
             : null
           : {
-              label: "Participer",
+              label: t("talks.card.actions.participate"),
               href: eventUrl || `/talks#${talk.slug}`,
             };
 

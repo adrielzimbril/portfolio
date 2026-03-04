@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useLoadMore } from "@/hooks/useLoadMore";
@@ -10,8 +10,10 @@ import {
 } from "@/module/content/utils/lib/quests";
 import { QuestCard } from "@/components/shared/pages/quests/card";
 import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
+import { useTranslations } from "use-intl";
 
 export function MyQuestsSection({ data }: { data: Quest[] }) {
+  const t = useTranslations();
   const {
     data: list,
     loadMore,
@@ -34,12 +36,10 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
       totalItems={totalItems}
     >
       {list.map((quest) => {
-        const registrationClosed = isRegistrationClosed(
-          quest.registration_deadline
-        );
+        const registrationClosed = isRegistrationClosed(quest.registration_deadline);
         const submissionClosed = isSubmissionClosed(
           quest.submission_deadline,
-          quest.quest_end
+          quest.quest_end,
         );
 
         return (
@@ -50,9 +50,11 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
             cover={quest.cover}
             tags={[
               {
-                name: `Inscriptions ${
-                  registrationClosed ? "cloturees" : "ouvertes"
-                }`,
+                name: t(
+                  registrationClosed
+                    ? "quests.cards.tags.registration.closed"
+                    : "quests.cards.tags.registration.open",
+                ),
                 meta: {
                   color: registrationClosed
                     ? DEFAULT_COLOR_CODE_NAME_LIST.RED
@@ -60,9 +62,11 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
                 },
               },
               {
-                name: `Soumissions ${
-                  submissionClosed ? "cloturees" : "ouvertes"
-                }`,
+                name: t(
+                  submissionClosed
+                    ? "quests.cards.tags.submission.closed"
+                    : "quests.cards.tags.submission.open",
+                ),
                 meta: {
                   color: submissionClosed
                     ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
@@ -72,18 +76,22 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
             ]}
             description={quest.excerpt}
             features={[
-              `📅 Fin des inscriptions : ${getHumanDate(
-                quest.registration_deadline,
-                true,
-              )}`,
-              `📤 Date limite de soumission : ${getHumanDate(
-                quest.submission_deadline,
-                true,
-              )}`,
-              `🏆 Annonce des resultats : ${getHumanDate(quest.quest_end, true)}`,
+              t("quests.cards.features.registrationEnd", {
+                date: getHumanDate(quest.registration_deadline, true),
+              }),
+              t("quests.cards.features.submissionDeadline", {
+                date: getHumanDate(quest.submission_deadline, true),
+              }),
+              t("quests.cards.features.resultsAnnouncement", {
+                date: getHumanDate(quest.quest_end, true),
+              }),
             ]}
             action={{
-              label: submissionClosed ? "Voir les resultats" : "Participer",
+              label: t(
+                submissionClosed
+                  ? "quests.cards.actions.viewResults"
+                  : "quests.cards.actions.participate",
+              ),
               href: getResourcesUrl(PageType.QUESTS, quest.slug),
             }}
           />

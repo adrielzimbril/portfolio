@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { createTranslator } from "use-intl/core";
 import {
   Body,
@@ -72,7 +72,7 @@ export function QuestRegisterUserConfirmation({
                 })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                Voir le challenge : <Link href={challengeUrl}>{challengeUrl}</Link>
+                {t("mail.questRegisterUserConfirmation.content.challengeLinkLabel")}: <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
               <Hr className="border-t border-[#e0e0e0] my-8" />
               <Text className="text-[#666666] text-sm leading-relaxed">
@@ -86,7 +86,7 @@ export function QuestRegisterUserConfirmation({
                 {t("mail.common.signature")}
               </Text>
               <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.contact")} :{" "}
+                {t("mail.common.contact")}: {" "}
                 <Link href={`mailto:${siteConfig.links.contact.email}`}>
                   {siteConfig.links.contact.email}
                 </Link>
@@ -108,4 +108,3 @@ QuestRegisterUserConfirmation.PreviewProps = {
 };
 
 export default QuestRegisterUserConfirmation;
-

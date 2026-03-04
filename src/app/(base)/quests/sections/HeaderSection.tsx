@@ -1,14 +1,16 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { useLocale } from "use-intl";
+import { useLocale, useTranslations } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils";
 
 export function HeaderSection() {
+  const t = useTranslations();
   const locale = useLocale();
+
   usePageViews(
     routes.quests.key,
     undefined,
@@ -18,8 +20,8 @@ export function HeaderSection() {
 
   return (
     <PageHero
-      title="Challenges des créatifs 🎖️"
-      description="Repousse tes limites et remporte des récompenses. Intègre le top 3 et sois affiché en vedette sur le site, termine premier et ton travail sera partagé en exclusivité sur mes réseaux."
+      title={t("quests.page.header-section.title")}
+      description={t("quests.page.header-section.description")}
       isMobileShowed
       imagePath={{ emoji: "🏆" }}
       actionButton

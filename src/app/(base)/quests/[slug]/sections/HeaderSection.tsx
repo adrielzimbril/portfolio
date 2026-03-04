@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { HeaderSection as QuestHeaderSection } from "@/components/shared/pages/quests/page/header-section";
 import { PreviewContentType } from "@/types";
@@ -17,7 +17,6 @@ export function HeaderSection({
   description,
   dates,
   tags,
-  //pageViewsData,
 }: {
   title: string;
   slug: string;
@@ -29,19 +28,11 @@ export function HeaderSection({
     results: string;
   };
   tags?: { name: string; color: string }[];
-  //pageViewsData: { slug: string; locale: string };
 }) {
   const t = useTranslations();
 
-  // usePageViews(
-  //   pageViewsData.slug,
-  //   PageType.HUB,
-  //   {
-  //     locale: pageViewsData.locale,
-  //     path: getResourcesUrl(PageType.HUB, pageViewsData.slug),
-  //   },
-  //   false
-  // );
+  const isRegistrationOpen = !isRegistrationClosed(dates.registration_end);
+  const isSubmissionOpen = !isSubmissionClosed(dates.submission_end, dates.results);
 
   return (
     <QuestHeaderSection
@@ -56,7 +47,7 @@ export function HeaderSection({
           : {
               type: PreviewContentType.TEXT,
               emoji: "🏆",
-              title: title,
+              title,
               subtitle: description,
             }
       }
@@ -65,13 +56,20 @@ export function HeaderSection({
       description={description}
       tags={tags}
       ctaButton={
-        !isRegistrationClosed(dates.registration_end)
+        isRegistrationOpen
           ? getQuestAskUrl(slug, QuestAskType.ENROLL)
-          : !isSubmissionClosed(dates.submission_end, dates.results)
+          : isSubmissionOpen
             ? getQuestAskUrl(slug, QuestAskType.SUBMIT)
             : undefined
       }
-      ctaButtonText={`${!isRegistrationClosed(dates.registration_end) ? "Participer" : !isSubmissionClosed(dates.submission_end, dates.results) ? "Soumettre mon travail" : ""} 🦄`}
+      ctaButtonText={`${
+        isRegistrationOpen
+          ? t("quests.cards.actions.participate")
+          : isSubmissionOpen
+            ? t("quests.inner-page.header.cta.submitWork")
+            : ""
+      } 🦄`}
     />
   );
 }
+

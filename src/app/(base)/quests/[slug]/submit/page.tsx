@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
+﻿import { notFound } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   getQuestBySlug,
   isSubmissionClosed,
@@ -15,6 +15,7 @@ export default async function QuestWorkSubmitPage(props: {
 }) {
   const { slug } = await props.params;
   const locale = await getLocale();
+  const t = await getTranslations();
   const quest = await getQuestBySlug(slug, { locale });
 
   if (!quest) {
@@ -28,11 +29,11 @@ export default async function QuestWorkSubmitPage(props: {
       <HeaderSection title={quest.title} />
       {closed ? (
         <ChallengeClosedState
-          badge="Soumissions fermees 🔒"
-          title="La periode de soumission est terminee"
-          description="Les depots sont fermes pour ce challenge. Tu peux consulter les details et revenir pour les prochains challenges 🚀"
+          badge={t("quests.submit.closed.badge")}
+          title={t("quests.submit.closed.title")}
+          description={t("quests.submit.closed.description")}
           href={getResourcesUrl(PageType.QUESTS, slug)}
-          actionLabel="Voir le challenge ↩️"
+          actionLabel={t("quests.submit.closed.actionLabel")}
         />
       ) : (
         <IntentionForm quest={quest} isClosed={closed} />

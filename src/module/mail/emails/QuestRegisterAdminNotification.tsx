@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { createTranslator } from "use-intl/core";
 import {
   Body,
@@ -19,7 +19,6 @@ import {
   defaultLocale,
 } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
-import { siteConfig } from "@/data/config";
 
 export function QuestRegisterAdminNotification({
   locale,
@@ -69,24 +68,23 @@ export function QuestRegisterAdminNotification({
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Challenge 🏆</strong>: {questTitle}
+                <strong>{t("mail.questRegisterAdminNotification.labels.challenge")}</strong>: {questTitle}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>URL</strong>:{" "}
-                <Link href={challengeUrl}>{challengeUrl}</Link>
+                <strong>{t("mail.questRegisterAdminNotification.labels.url")}</strong>: <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Slug</strong>: {questSlug}
+                <strong>{t("mail.questRegisterAdminNotification.labels.slug")}</strong>: {questSlug}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Nom</strong>: {name}
+                <strong>{t("mail.questRegisterAdminNotification.labels.name")}</strong>: {name}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Email</strong>: {email}
+                <strong>{t("mail.questRegisterAdminNotification.labels.email")}</strong>: {email}
               </Text>
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                <strong>Message 💬</strong>: {message || "-"}
+                <strong>{t("mail.questRegisterAdminNotification.labels.message")}</strong>: {message || "-"}
               </Text>
             </Section>
 

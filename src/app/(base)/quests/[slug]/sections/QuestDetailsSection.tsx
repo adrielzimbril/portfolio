@@ -1,21 +1,15 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn, getHumanDate, getQuestAskUrl } from "@/utils";
+import { cn, getHumanDate } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { useTranslations } from "use-intl";
-import { DEFAULT_COLOR_CODE_NAME_LIST, QuestAskType } from "@/types";
-import { Link } from "@/components/ui/link";
-import {
-  isRegistrationClosed,
-  isSubmissionClosed,
-} from "@/module/content/utils/lib";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
 
 export function QuestDetailsSection({
   content,
-  slug,
   tags,
   dates,
   rewards,
@@ -44,7 +38,7 @@ export function QuestDetailsSection({
 
           {rewards.length > 0 && (
             <div className="flex w-full flex-col gap-3 md:gap-4">
-              <h3 className="h3">Récompenses 🎁</h3>
+              <h3 className="h3">{t("quests.inner-page.details.rewardsTitle")}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
                 {rewards.map((reward, index) => (
                   <Card
@@ -57,9 +51,7 @@ export function QuestDetailsSection({
                     <CardContent className="p-2 md:p-3">
                       <div className="flex relative flex-col size-full gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
                         <div className="flex size-full flex-col gap-2">
-                          <p className="text-b-white-foreground leading-[130%]">
-                            {reward}
-                          </p>
+                          <p className="text-b-white-foreground leading-[130%]">{reward}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -75,7 +67,7 @@ export function QuestDetailsSection({
             <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl squircle-sh-white overflow-hidden">
               <div className="flex w-full flex-col gap-2">
                 <span className="font-normal text-b-white-foreground">
-                  📅 Fin des inscriptions
+                  {t("quests.inner-page.details.dates.registrationEnd")}
                 </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
@@ -92,14 +84,12 @@ export function QuestDetailsSection({
 
               <div className="flex w-full flex-col gap-2">
                 <span className="font-normal text-b-white-foreground">
-                  📤 Date limite de soumission
+                  {t("quests.inner-page.details.dates.submissionDeadline")}
                 </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
-                    className={pickRandomColor(
-                      DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
-                    )}
+                    className={pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.BLUE)}
                     variant="colored"
                   >
                     {getHumanDate(dates.submission_end, true)}
@@ -109,14 +99,12 @@ export function QuestDetailsSection({
 
               <div className="flex w-full flex-col gap-2">
                 <span className="font-normal text-b-white-foreground">
-                  🏆 Annonce des résultats
+                  {t("quests.inner-page.details.dates.resultsAnnouncement")}
                 </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
-                    className={pickRandomColor(
-                      DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
-                    )}
+                    className={pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.PURPLE)}
                     variant="colored"
                   >
                     {getHumanDate(dates.results, true)}
@@ -126,7 +114,7 @@ export function QuestDetailsSection({
 
               <div className="flex w-full flex-col gap-2">
                 <span className="font-normal text-b-white-foreground">
-                  🧙🏼 Statut
+                  {t("quests.inner-page.details.status")}
                 </span>
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
@@ -141,33 +129,6 @@ export function QuestDetailsSection({
                   ))}
                 </div>
               </div>
-
-              {/* {(!isRegistrationClosed(dates.registration_end) ||
-                !isSubmissionClosed(dates.submission_end, dates.results)) && (
-                <div className="flex w-full flex-wrap gap-2">
-                  {!isRegistrationClosed(dates.registration_end) && (
-                    <Link
-                      href={getQuestAskUrl(slug, QuestAskType.ENROLL)}
-                      asFull
-                      likeButton
-                      whileTap
-                    >
-                      S&apos;inscrire au challenge 📝
-                    </Link>
-                  )}
-                  {!isSubmissionClosed(dates.submission_end, dates.results) && (
-                    <Link
-                      href={getQuestAskUrl(slug, QuestAskType.SUBMIT)}
-                      asFull
-                      likeButton
-                      whileTap
-                      variant="secondary"
-                    >
-                      Soumettre son travail 🚀
-                    </Link>
-                  )}
-                </div>
-              )} */}
             </div>
           </CardContent>
         </Card>

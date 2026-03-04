@@ -1,8 +1,8 @@
-import React from "react";
+﻿import React from "react";
 import { HeaderSection } from "./sections/HeaderSection";
 import { QuestDetailsSection } from "./sections/QuestDetailsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { PageParams } from "@/types";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/routes";
@@ -56,6 +56,7 @@ export async function generateMetadata(props: {
 export default async function SubShop(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;
   const locale = await getLocale();
+  const t = await getTranslations();
   const quest = await getQuestWithAdjacent(slug, { locale });
 
   if (!quest) {
@@ -78,6 +79,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
   const registrationClosed = isRegistrationClosed(registration_deadline);
   const submissionClosed = isSubmissionClosed(submission_deadline, quest_end);
   const resultsPublished = isResultsPublished(quest_end, results_published);
+
   const tags: {
     name: string;
     meta: {
@@ -85,7 +87,11 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
     };
   }[] = [
     {
-      name: `Inscriptions ${registrationClosed ? "cloturees" : "ouvertes"}`,
+      name: t(
+        registrationClosed
+          ? "quests.cards.tags.registration.closed"
+          : "quests.cards.tags.registration.open",
+      ),
       meta: {
         color: registrationClosed
           ? DEFAULT_COLOR_CODE_NAME_LIST.RED
@@ -93,7 +99,11 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       },
     },
     {
-      name: `Soumissions ${submissionClosed ? "cloturees" : "ouvertes"}`,
+      name: t(
+        submissionClosed
+          ? "quests.cards.tags.submission.closed"
+          : "quests.cards.tags.submission.open",
+      ),
       meta: {
         color: submissionClosed
           ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
@@ -101,7 +111,11 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       },
     },
     {
-      name: `Résultats ${resultsPublished ? "publiés" : "à venir"}`,
+      name: t(
+        resultsPublished
+          ? "quests.cards.tags.results.published"
+          : "quests.cards.tags.results.upcoming",
+      ),
       meta: {
         color: DEFAULT_COLOR_CODE_NAME_LIST.WHITE_GOLD,
       },
@@ -141,8 +155,8 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       {isResultsPublished(quest_end, results_published) && (
         <QuestParticipantsSection winners={winners} />
       )}
-      {quest!.adjacentQuests.length > 0 && (
-        <MorePreviewSection data={quest!.adjacentQuests} />
+      {quest.adjacentQuests.length > 0 && (
+        <MorePreviewSection data={quest.adjacentQuests} />
       )}
       <CallToAction isPage />
     </>

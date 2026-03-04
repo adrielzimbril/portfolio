@@ -19,14 +19,9 @@ import { useMemo } from "react";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
 import type { Quest } from "@/module/content/utils/lib/quests";
+import { useTranslations } from "use-intl";
 
 type Winner = NonNullable<Quest["winners"]>[number];
-
-const RANK_BADGE: Record<number, { emoji: string; label: string }> = {
-  1: { emoji: "🥇", label: "Premier prix" },
-  2: { emoji: "🥈", label: "Deuxième prix" },
-  3: { emoji: "🥉", label: "Troisième prix" },
-};
 
 function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
   if (!tooltip) {
@@ -50,6 +45,7 @@ function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
 }
 
 function WinnerCard({ participant }: { participant: Winner }) {
+  const t = useTranslations();
   const workUrl = getExternalUrl(participant.work_url);
   const profileUrl = getExternalUrl(participant.profile_url);
   const WINNER_NUMBER = 3;
@@ -60,10 +56,19 @@ function WinnerCard({ participant }: { participant: Winner }) {
     );
   }, [WINNER_NUMBER]);
 
-  const rankBadge = RANK_BADGE[participant.rank] ?? {
-    emoji: "🏆",
-    label: `Rang #${participant.rank}`,
-  };
+  const rankBadge =
+    participant.rank === 1
+      ? { emoji: "🥇", label: t("quests.participants.rank.first") }
+      : participant.rank === 2
+        ? { emoji: "🥈", label: t("quests.participants.rank.second") }
+        : participant.rank === 3
+          ? { emoji: "🥉", label: t("quests.participants.rank.third") }
+          : {
+              emoji: "🏆",
+              label: t("quests.participants.rank.other", {
+                rank: participant.rank,
+              }),
+            };
 
   return (
     <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
@@ -89,10 +94,16 @@ function WinnerCard({ participant }: { participant: Winner }) {
             <div className="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
               <OverlayTag label={rankBadge.emoji} tooltip={rankBadge.label} />
               {participant.pixel_perfect && (
-                <OverlayTag label="🎖️" tooltip="Pixel Perfect" />
+                <OverlayTag
+                  label="🎖️"
+                  tooltip={t("quests.participants.badges.pixelPerfect")}
+                />
               )}
               {participant.jury_favorite && (
-                <OverlayTag label="❤️" tooltip="Coup de cœur du jury" />
+                <OverlayTag
+                  label="❤️"
+                  tooltip={t("quests.participants.badges.juryFavorite")}
+                />
               )}
             </div>
           </div>
@@ -102,7 +113,11 @@ function WinnerCard({ participant }: { participant: Winner }) {
           participant.original_idea ||
           (participant.tags?.length ?? 0) > 0) && (
           <Tags
-            primaryTag={participant.original_idea ? "Idée originale" : undefined}
+            primaryTag={
+              participant.original_idea
+                ? t("quests.participants.badges.originalIdea")
+                : undefined
+            }
             primaryTagColor={DEFAULT_COLOR_CODE_NAME_LIST.PURPLE}
             tags={participant.tags ?? []}
           />
@@ -156,7 +171,7 @@ function WinnerCard({ participant }: { participant: Winner }) {
             rel="noopener noreferrer"
           >
             <span className="flex items-center gap-1">
-              Voir
+              {t("quests.participants.actions.view")}
               <LinkDiagonalOne size={16} />
             </span>
           </Link>
@@ -171,6 +186,7 @@ export function QuestParticipantsSection({
 }: {
   winners: Quest["winners"];
 }) {
+  const t = useTranslations();
   const participants = winners ?? [];
 
   if (participants.length === 0) {
@@ -178,7 +194,7 @@ export function QuestParticipantsSection({
   }
 
   return (
-    <CardPreviewSection title="Vainqueurs 🏆">
+    <CardPreviewSection title={t("quests.participants.title")}>
       {participants
         .slice()
         .sort((a, b) => a.rank - b.rank)

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { QuestCard } from "@/components/shared/pages/quests/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
@@ -15,13 +15,9 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
   const t = useTranslations();
 
   return (
-    <CardPreviewSection
-      title={t("quests.inner-page.more-preview-section.title")}
-    >
-      {data.map((quest, index) => {
-        const registrationClosed = isRegistrationClosed(
-          quest.registration_deadline,
-        );
+    <CardPreviewSection title={t("quests.inner-page.more-preview-section.title")}>
+      {data.map((quest) => {
+        const registrationClosed = isRegistrationClosed(quest.registration_deadline);
         const submissionClosed = isSubmissionClosed(
           quest.submission_deadline,
           quest.quest_end,
@@ -35,9 +31,11 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
             cover={quest.cover}
             tags={[
               {
-                name: `Inscriptions ${
-                  registrationClosed ? "cloturees" : "ouvertes"
-                }`,
+                name: t(
+                  registrationClosed
+                    ? "quests.cards.tags.registration.closed"
+                    : "quests.cards.tags.registration.open",
+                ),
                 meta: {
                   color: registrationClosed
                     ? DEFAULT_COLOR_CODE_NAME_LIST.RED
@@ -45,9 +43,11 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
                 },
               },
               {
-                name: `Soumissions ${
-                  submissionClosed ? "cloturees" : "ouvertes"
-                }`,
+                name: t(
+                  submissionClosed
+                    ? "quests.cards.tags.submission.closed"
+                    : "quests.cards.tags.submission.open",
+                ),
                 meta: {
                   color: submissionClosed
                     ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
@@ -57,18 +57,22 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
             ]}
             description={quest.excerpt}
             features={[
-              `📅 Fin des inscriptions : ${getHumanDate(
-                quest.registration_deadline,
-                true,
-              )}`,
-              `📤 Date limite de soumission : ${getHumanDate(
-                quest.submission_deadline,
-                true,
-              )}`,
-              `🏆 Annonce des resultats : ${getHumanDate(quest.quest_end, true)}`,
+              t("quests.cards.features.registrationEnd", {
+                date: getHumanDate(quest.registration_deadline, true),
+              }),
+              t("quests.cards.features.submissionDeadline", {
+                date: getHumanDate(quest.submission_deadline, true),
+              }),
+              t("quests.cards.features.resultsAnnouncement", {
+                date: getHumanDate(quest.quest_end, true),
+              }),
             ]}
             action={{
-              label: submissionClosed ? "Voir les resultats" : "Participer",
+              label: t(
+                submissionClosed
+                  ? "quests.cards.actions.viewResults"
+                  : "quests.cards.actions.participate",
+              ),
               href: getResourcesUrl(PageType.QUESTS, quest.slug),
             }}
           />

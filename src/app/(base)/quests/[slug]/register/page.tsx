@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
+﻿import { notFound } from "next/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   getQuestBySlug,
   isRegistrationClosed,
@@ -15,6 +15,7 @@ export default async function QuestRegisterPage(props: {
 }) {
   const { slug } = await props.params;
   const locale = await getLocale();
+  const t = await getTranslations();
   const quest = await getQuestBySlug(slug, { locale });
 
   if (!quest) {
@@ -28,11 +29,11 @@ export default async function QuestRegisterPage(props: {
       <HeaderSection title={quest.title} />
       {closed ? (
         <ChallengeClosedState
-          badge="Inscriptions fermées 🔒"
-          title="Ce challenge n'est plus ouvert"
-          description="Malheureusement, les inscriptions pour ce challenge sont desormais closes. Reviens bientot, de nouveaux challenges arrivent ! 🚀"
+          badge={t("quests.register.closed.badge")}
+          title={t("quests.register.closed.title")}
+          description={t("quests.register.closed.description")}
           href={getResourcesUrl(PageType.QUESTS, slug)}
-          actionLabel="Voir le challenge ↩️"
+          actionLabel={t("quests.register.closed.actionLabel")}
         />
       ) : (
         <IntentionForm questSlug={slug} />

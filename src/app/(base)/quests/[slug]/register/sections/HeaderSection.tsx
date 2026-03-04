@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { useTranslations, useLocale } from "use-intl";
+import { useLocale, useTranslations } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils";
@@ -9,18 +9,19 @@ import { getPathUrl } from "@/utils";
 export function HeaderSection({ title }: { title: string }) {
   const t = useTranslations();
   const locale = useLocale();
+
   usePageViews(
     routes.submit.key,
     undefined,
-    { locale: locale, path: getPathUrl(routes.submit.link) },
+    { locale, path: getPathUrl(routes.submit.link) },
     false,
   );
 
   return (
     <PageHero
       title={title}
-      description="Inscris-toi pour recevoir le brief officiel, les consignes et toutes les étapes du challenge directement par email 📨"
-      badge="Participe au challenge 🧪"
+      description={t("quests.register.hero.description")}
+      badge={t("quests.register.hero.badge")}
       imagePath={{ emoji: "🏆" }}
       isMobileShowed
       actionButton

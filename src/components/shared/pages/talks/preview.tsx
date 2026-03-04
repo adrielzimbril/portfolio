@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { getImageUrl } from "@/utils/base-url";
@@ -31,7 +31,9 @@ export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
                 <button
                   type="button"
                   className="w-full text-left"
-                  aria-label={`Voir la cover de ${title ?? "l'event"}`}
+                  aria-label={t("talks.card.coverAria", {
+                    title: title ?? t("talks.card.defaultEventTitle"),
+                  })}
                 >
                   <Image
                     width={1200}

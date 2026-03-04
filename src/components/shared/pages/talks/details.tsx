@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
@@ -10,6 +10,7 @@ import { getMachineDate } from "@/utils/format-date";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
 import { pickRandomColorCode } from "@/utils";
 import BoringAvatar from "boring-avatars";
+import { useTranslations } from "use-intl";
 
 export function CardInfo({
   title,
@@ -30,9 +31,11 @@ export function CardInfo({
   } | null;
 }) {
   const [currentTime] = useState(() => Date.now());
+  const t = useTranslations();
   const isDatePast = currentTime >= new Date(getMachineDate(date)).getTime();
   const isToday =
     new Date(getMachineDate(date)).getDate() === new Date().getDate();
+
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
@@ -48,7 +51,11 @@ export function CardInfo({
                   : DEFAULT_COLOR_CODE_NAME_LIST.BLUE
             }
             secondaryTag={
-              isToday ? "Aujourd'hui" : isDatePast ? "Terminé" : "À venir"
+              isToday
+                ? t("talks.card.status.today")
+                : isDatePast
+                  ? t("talks.card.status.completed")
+                  : t("talks.card.status.upcoming")
             }
             secondaryTagColor={
               isDatePast
@@ -73,9 +80,10 @@ export function CardInfo({
 }
 
 function ParticipantsStats({ count }: { count: number }) {
+  const t = useTranslations();
   const visibleCount = Math.min(count, 5);
   const colorSets = Array.from({ length: visibleCount }).map(() =>
-    Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
+    Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
   );
 
   return (
@@ -96,7 +104,7 @@ function ParticipantsStats({ count }: { count: number }) {
         </AvatarGroup>
       </div>
       <span className="relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec">
-        {count} participants
+        {t("talks.card.participants", { count })}
       </span>
     </div>
   );
@@ -105,9 +113,7 @@ function ParticipantsStats({ count }: { count: number }) {
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
     <Link href={getExternalUrl(slug)}>
-      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
-        {title}
-      </h3>
+      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">{title}</h3>
     </Link>
   );
 }

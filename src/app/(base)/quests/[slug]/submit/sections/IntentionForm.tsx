@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
@@ -25,10 +25,10 @@ import { Badge } from "@/components/ui/badge";
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 
 const schema = z.object({
-  name: z.string().min(2, "Nom requis"),
-  email: z.email("Email invalide"),
-  workUrl: z.url("URL invalide"),
-  message: z.string().max(1500, "Message trop long").optional(),
+  name: z.string().min(2, "Name is required"),
+  email: z.email("Invalid email"),
+  workUrl: z.url("Invalid URL"),
+  message: z.string().max(1500, "Message is too long").optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -81,18 +81,16 @@ export function IntentionForm({
       setFeedback({
         open: true,
         status: "success",
-        title: "Soumission envoyee ✅",
-        description:
-          "Message recu. Tu recevras un email de confirmation dans quelques instants 📨",
+        title: t("quests.submit.form.feedback.success.title"),
+        description: t("quests.submit.form.feedback.success.description"),
       });
       form.reset();
     } catch {
       setFeedback({
         open: true,
         status: "error",
-        title: "Envoi impossible ⚠️",
-        description:
-          "Une erreur est survenue pendant la soumission. Merci de reessayer 🙏",
+        title: t("quests.submit.form.feedback.error.title"),
+        description: t("quests.submit.form.feedback.error.description"),
       });
     }
   };
@@ -109,18 +107,19 @@ export function IntentionForm({
         <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
-              <Badge size="lg">Soumission du challenge 🏆</Badge>
-              <h2 className="h3">Soumettre son travail 🚀</h2>
+              <Badge size="lg">{t("quests.submit.form.badge")}</Badge>
+              <h2 className="h3">{t("quests.submit.form.title")}</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
-                Date limite: {getHumanDate(quest.submission_deadline, true)}.
-                Apres cette date, les soumissions ne seront plus acceptées 🔒
+                {t("quests.submit.form.deadline", {
+                  date: getHumanDate(quest.submission_deadline, true),
+                })}
               </p>
             </div>
 
             {isClosed ? (
               <Card className="w-full max-w-xl squircle squircle-b-base squircle-smooth-xl border">
                 <CardContent className="p-4 text-sm text-b-white-invert-sec text-center">
-                  La periode de soumission est terminee pour ce challenge 🔒
+                  {t("quests.submit.form.closedInline")}
                 </CardContent>
               </Card>
             ) : (
@@ -136,16 +135,14 @@ export function IntentionForm({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            Nom <span className="text-red-500">*</span>
+                            {t("quests.submit.form.fields.name.label")} <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
                               {...field}
                               variant="secondary"
                               className="rounded-xl"
-                              placeholder={t(
-                                "submit.page.fields.name.placeholder",
-                              )}
+                              placeholder={t("submit.page.fields.name.placeholder")}
                             />
                           </FormControl>
                           <FormMessage />
@@ -158,7 +155,7 @@ export function IntentionForm({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            Email <span className="text-red-500">*</span>
+                            {t("quests.submit.form.fields.email.label")} <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -166,9 +163,7 @@ export function IntentionForm({
                               type="email"
                               variant="secondary"
                               className="rounded-xl"
-                              placeholder={t(
-                                "submit.page.fields.email.placeholder",
-                              )}
+                              placeholder={t("submit.page.fields.email.placeholder")}
                             />
                           </FormControl>
                           <FormMessage />
@@ -183,16 +178,14 @@ export function IntentionForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          Lien <span className="text-red-500">*</span>
+                          {t("quests.submit.form.fields.link.label")} <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder={t(
-                              "submit.page.fields.url.placeholder",
-                            )}
+                            placeholder={t("submit.page.fields.url.placeholder")}
                           />
                         </FormControl>
                         <FormMessage />
@@ -205,7 +198,7 @@ export function IntentionForm({
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message (optionnel) 💬</FormLabel>
+                        <FormLabel>{t("quests.submit.form.fields.message.label")}</FormLabel>
                         <FormControl>
                           <Textarea
                             value={field.value ?? ""}
@@ -213,7 +206,7 @@ export function IntentionForm({
                             rows={5}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder="Ajoute un message pour nous aider à mieux comprendre tes choix..."
+                            placeholder={t("quests.submit.form.fields.message.placeholder")}
                           />
                         </FormControl>
                         <FormMessage />
@@ -230,8 +223,8 @@ export function IntentionForm({
                     disabled={form.formState.isSubmitting}
                   >
                     {form.formState.isSubmitting
-                      ? "Envoi en cours..."
-                      : "Envoyer ma soumission 🚀"}
+                      ? t("quests.submit.form.actions.submitting")
+                      : t("quests.submit.form.actions.submit")}
                   </Button>
                 </form>
               </Form>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
@@ -23,9 +23,9 @@ import { Badge } from "@/components/ui/badge";
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 
 const schema = z.object({
-  name: z.string().min(2, "Nom requis"),
-  email: z.email("Email invalide"),
-  message: z.string().max(1200, "Message trop long").optional(),
+  name: z.string().min(2, "Name is required"),
+  email: z.email("Invalid email"),
+  message: z.string().max(1200, "Message is too long").optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -74,18 +74,16 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
       setFeedback({
         open: true,
         status: "success",
-        title: "Inscription enregistree ✅",
-        description:
-          "Message recu. Un email de confirmation vient de t'etre envoye 📨",
+        title: t("quests.register.form.feedback.success.title"),
+        description: t("quests.register.form.feedback.success.description"),
       });
       form.reset();
     } catch {
       setFeedback({
         open: true,
         status: "error",
-        title: "Envoi impossible ⚠️",
-        description:
-          "Une erreur est survenue pendant l'inscription. Merci de réessayer 🙏",
+        title: t("quests.register.form.feedback.error.title"),
+        description: t("quests.register.form.feedback.error.description"),
       });
     }
   };
@@ -102,11 +100,10 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
         <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
-              <Badge size="lg">Inscription au challenge 📝</Badge>
-              <h2 className="h3">Rejoins le challenge ✨</h2>
+              <Badge size="lg">{t("quests.register.form.badge")}</Badge>
+              <h2 className="h3">{t("quests.register.form.title")}</h2>
               <p className="text-b-white-invert-sec max-w-2xl">
-                Reserve ta place pour recevoir le brief, les regles et toutes
-                les infos pratiques avant le lancement 🚀
+                {t("quests.register.form.description")}
               </p>
             </div>
 
@@ -122,16 +119,14 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          Nom <span className="text-red-500">*</span>
+                          {t("quests.register.form.fields.name.label")} <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder={t(
-                              "submit.page.fields.name.placeholder",
-                            )}
+                            placeholder={t("submit.page.fields.name.placeholder")}
                           />
                         </FormControl>
                         <FormMessage />
@@ -144,7 +139,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          Email <span className="text-red-500">*</span>
+                          {t("quests.register.form.fields.email.label")} <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -152,9 +147,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                             type="email"
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder={t(
-                              "submit.page.fields.email.placeholder",
-                            )}
+                            placeholder={t("submit.page.fields.email.placeholder")}
                           />
                         </FormControl>
                         <FormMessage />
@@ -168,7 +161,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Message (optionnel) 💬</FormLabel>
+                      <FormLabel>{t("quests.register.form.fields.message.label")}</FormLabel>
                       <FormControl>
                         <Textarea
                           value={field.value ?? ""}
@@ -176,7 +169,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                           rows={5}
                           variant="secondary"
                           className="rounded-xl"
-                          placeholder="Parle-nous de ton profil, ton niveau et ce que tu attends du challenge..."
+                          placeholder={t("quests.register.form.fields.message.placeholder")}
                         />
                       </FormControl>
                       <FormMessage />
@@ -193,8 +186,8 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                   disabled={form.formState.isSubmitting}
                 >
                   {form.formState.isSubmitting
-                    ? "Enregistrement..."
-                    : "Confirmer mon inscription ✨"}
+                    ? t("quests.register.form.actions.submitting")
+                    : t("quests.register.form.actions.submit")}
                 </Button>
               </form>
             </Form>
