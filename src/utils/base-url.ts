@@ -180,3 +180,21 @@ export function getImageUrl(slug: string): string {
 
   return `${base}/${path}`;
 }
+
+/**
+ * Gets the clean page URL without trailing slash, hash, or query params.
+ *
+ * @returns {string} The clean page URL.
+ */
+export function getThisPageUrl(): string {
+  const url = new URL(window.location.href);
+  // Remove hash and query params
+  url.hash = '';
+  url.search = '';
+  // Remove trailing slash
+  let pathname = url.pathname;
+  if (pathname.endsWith('/')) {
+    pathname = pathname.slice(0, -1);
+  }
+  return `${url.origin}${pathname}`;
+}

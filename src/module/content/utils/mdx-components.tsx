@@ -5,7 +5,7 @@ import type { ImageProps } from "next/image";
 import Image from "next/image";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { getImageUrl } from "@/utils/base-url";
+import { getImageUrl, getThisPageUrl } from "@/utils/base-url";
 import { cn } from "@/utils";
 import { Link } from "@/components/ui/link";
 import { siteConfig } from "@/data/config";
@@ -169,6 +169,24 @@ export const mdxComponents = {
     >
       {children}
     </td>
+  ),
+  ChallengeRegisterLink: ({ children, ...rest }) => (
+    <Link
+      href={`${getThisPageUrl()}/register`}
+      className="underline ps-0"
+      {...rest}
+    >
+      {children}
+    </Link>
+  ),
+  ChallengeSubmitLink: ({ children, ...rest }) => (
+    <Link
+      href={`${getThisPageUrl()}/submit`}
+      className=" underline ps-0"
+      {...rest}
+    >
+      {children}
+    </Link>
   ),
 } satisfies MDXComponents;
 

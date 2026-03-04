@@ -30,6 +30,8 @@ export function MarkdownContentRender({ content }: { content: string }) {
           p: mdxComponents.p,
           a: mdxComponents.a,
           img: mdxComponents.img,
+          ChallengeRegisterLink: mdxComponents.ChallengeRegisterLink,
+          ChallengeSubmitLink: mdxComponents.ChallengeSubmitLink,
           ...mdxCustomComponents,
         }}
       />
