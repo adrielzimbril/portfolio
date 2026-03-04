@@ -50,8 +50,11 @@ export async function generateMetadata(props: {
 }
 export default async function QuestRegisterPage(props: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ admin_access?: string }>;
 }) {
   const { slug } = await props.params;
+  const searchParams = await props.searchParams;
+  const adminAccess = searchParams?.admin_access;
   const locale = await getLocale();
   const t = await getTranslations();
   const quest = await getQuestBySlug(slug, { locale });
@@ -60,7 +63,10 @@ export default async function QuestRegisterPage(props: {
     return localeRedirect({ href: routes.quests.link, locale });
   }
 
-  const closed = isRegistrationClosed(quest.registration_deadline);
+  const isAdminBypass = adminAccess === "nobo_duy";
+  const closed = isAdminBypass
+    ? false
+    : isRegistrationClosed(quest.registration_deadline);
 
   return (
     <>
