@@ -74,7 +74,8 @@ export function QuestSubmitAdminNotification({
                 <strong>Challenge 🏆</strong>: {questTitle}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>URL</strong>: <Link href={challengeUrl}>{challengeUrl}</Link>
+                <strong>URL</strong>:{" "}
+                <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
                 <strong>Slug</strong>: {questSlug}
@@ -86,7 +87,8 @@ export function QuestSubmitAdminNotification({
                 <strong>Email</strong>: {email}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>Lien rendu 🔗</strong>: <Link href={workUrl}>{workUrl}</Link>
+                <strong>Lien rendu 🔗</strong>:{" "}
+                <Link href={workUrl}>{workUrl}</Link>
               </Text>
 
               <Hr className="border-t border-[#e0e0e0] my-6" />
@@ -100,11 +102,8 @@ export function QuestSubmitAdminNotification({
               <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
                 {t("mail.common.signature")}
               </Text>
-              <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.contactAdmin")} :{" "}
-                <Link href={`mailto:${siteConfig.links.contact.email}`}>
-                  {siteConfig.links.contact.email}
-                </Link>
+              <Text className="text-[#666666] text-center text-sm leading-relaxed">
+                {t("mail.common.contactAdmin")}
               </Text>
             </Section>
           </Container>

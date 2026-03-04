@@ -99,6 +99,9 @@ export function SubmitAdminNotification({
               <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
                 {t("mail.common.signature")}
               </Text>
+              <Text className="text-[#666666] text-center text-sm leading-relaxed">
+                {t("mail.common.contactAdmin")}
+              </Text>
             </Section>
           </Container>
         </Body>
