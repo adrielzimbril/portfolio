@@ -34,19 +34,13 @@ export async function generateMetadata(props: {
       ...baseMetadata.openGraph,
       title: quest?.title,
       description: quest?.excerpt,
-      images: [
-        getImageUrl(quest?.cover ?? ""),
-        getImageUrl("opengraph-image.png"),
-      ],
+      images: [getImageUrl(quest.cover), getImageUrl("opengraph-image.png")],
     },
     twitter: {
       ...baseMetadata.twitter,
       title: quest?.title,
       description: quest?.excerpt,
-      images: [
-        getImageUrl(quest?.cover ?? ""),
-        getImageUrl("opengraph-image.png"),
-      ],
+      images: [getImageUrl(quest.cover), getImageUrl("opengraph-image.png")],
     },
   };
 
@@ -60,7 +54,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
   const quest = await getQuestWithAdjacent(slug, { locale });
 
   if (!quest) {
-    return localeRedirect({ href: routes.hub.link, locale });
+    return localeRedirect({ href: routes.quests.link, locale });
   }
 
   const {

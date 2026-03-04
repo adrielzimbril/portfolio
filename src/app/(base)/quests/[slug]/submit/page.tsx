@@ -1,19 +1,25 @@
-﻿import { notFound } from "next/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+﻿import { getLocale, getTranslations } from "next-intl/server";
 import {
   getQuestBySlug,
   isSubmissionClosed,
 } from "@/module/content/utils/lib/quests";
 import { IntentionForm } from "./sections/IntentionForm";
 import { HeaderSection } from "./sections/HeaderSection";
-import { getResourcesUrl } from "@/utils";
-import { PageType } from "@/types";
+import { getImageUrl, getResourcesUrl } from "@/utils";
+import { PageParams, PageType } from "@/types";
 import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { Metadata } from "next";
+import { localeRedirect } from "@/module/i18n/routing";
+import { routes } from "@/data/routes";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<PageParams>;
+}): Promise<Metadata> {
+  const { slug } = await props.params;
   const t = await getTranslations();
+  const locale = await getLocale();
+  const quest = await getQuestBySlug(slug, { locale });
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -24,11 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
       ...baseMetadata.openGraph,
       title: t("quests.submit.title"),
       description: t("quests.submit.description"),
+      images: [getImageUrl(quest.cover), getImageUrl("opengraph-image.png")],
     },
     twitter: {
       ...baseMetadata.twitter,
       title: t("quests.submit.title"),
       description: t("quests.submit.description"),
+      images: [getImageUrl(quest.cover), getImageUrl("opengraph-image.png")],
     },
   };
 
@@ -43,7 +51,7 @@ export default async function QuestWorkSubmitPage(props: {
   const quest = await getQuestBySlug(slug, { locale });
 
   if (!quest) {
-    notFound();
+    return localeRedirect({ href: routes.quests.link, locale });
   }
 
   const closed = isSubmissionClosed(quest.submission_deadline, quest.quest_end);
