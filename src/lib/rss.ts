@@ -7,7 +7,12 @@ import {
   getAllTalks,
 } from "@/module/content/utils/lib";
 import { Locale, PageType } from "@/types";
-import { getImageUrl, getPathUrl, getResourcesUrl } from "@/utils";
+import {
+  getAbsolutePathUrl,
+  getImageUrl,
+  getPathUrl,
+  getResourcesUrl,
+} from "@/utils";
 import { siteConfig } from "@/data/config";
 import { routes } from "@/data/routes";
 import { getTranslations } from "next-intl/server";
@@ -51,7 +56,7 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
     link: siteConfig.url,
     language: localeForTranslation,
     image: getImageUrl("opengraph-image.png"),
-    favicon: getImageUrl("/icon/ico"),
+    favicon: getAbsolutePathUrl({ type: "s3", path: "icon.svg" }),
     hub: getPathUrl(routes.hub.link),
     copyright: t("common.rss.copyright", {
       date: new Date().getFullYear(),

@@ -36,19 +36,13 @@ export async function generateMetadata(props: { params: Promise<PageParams> }) {
       ...baseMetadata.openGraph,
       title: project?.title,
       description: project?.excerpt,
-      images: [
-        getImageUrl(project?.image_big ?? ""),
-        getImageUrl("opengraph-image.png"),
-      ],
+      images: [getImageUrl(project?.image_big ?? "opengraph-image.png")],
     },
     twitter: {
       ...baseMetadata.twitter,
       title: project?.title,
       description: project?.excerpt,
-      images: [
-        getImageUrl(project?.image_big ?? ""),
-        getImageUrl("opengraph-image.png"),
-      ],
+      images: [getImageUrl(project?.image_big ?? "opengraph-image.png")],
     },
   };
 }

@@ -60,7 +60,7 @@ Exemple de data.json:
     "details": "🕓 Time: 7-30 Days\\n⚡ Level: from 0 to PRO",
     "avatars": [{"src": "./avatar1.png"}],
     "userCount": "+256 lecteurs",
-    "icon": "/icon.png"
+    "icon": "icon.png"
   }
 ]
   `);

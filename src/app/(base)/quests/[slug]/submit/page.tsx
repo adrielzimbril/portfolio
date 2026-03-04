@@ -30,19 +30,13 @@ export async function generateMetadata(props: {
       ...baseMetadata.openGraph,
       title: t("quests.submit.title"),
       description: t("quests.submit.description"),
-      images: [
-        getImageUrl(quest?.cover ?? ""),
-        getImageUrl("opengraph-image.png"),
-      ],
+      images: [getImageUrl(quest?.cover ?? "opengraph-image.png")],
     },
     twitter: {
       ...baseMetadata.twitter,
       title: t("quests.submit.title"),
       description: t("quests.submit.description"),
-      images: [
-        getImageUrl(quest?.cover ?? ""),
-        getImageUrl("opengraph-image.png"),
-      ],
+      images: [getImageUrl(quest?.cover ?? "opengraph-image.png")],
     },
   };
 

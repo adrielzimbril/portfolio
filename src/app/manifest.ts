@@ -19,7 +19,7 @@ export default function manifest(): MetadataRoute.Manifest {
         url: getBaseUrl(),
         icons: [
           {
-            src: getPathUrl("/icon.svg"),
+            src: getPathUrl("icon.svg"),
             sizes: "any",
             type: "image/svg+xml",
           },
@@ -28,7 +28,7 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     icons: [
       {
-        src: getPathUrl("/icon.svg"),
+        src: getPathUrl("icon.svg"),
         sizes: "any",
         type: "image/svg+xml",
       },
