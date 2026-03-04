@@ -4,17 +4,19 @@
 const { defineConfig } = require("@lobehub/i18n-cli");
 
 const config = {
+  modelName: "gpt-5-mini",
   mode: "default", // "default" or "content"
   isMdx: false, // Set to true if you are using MDX files
 };
 
 module.exports = defineConfig({
-  modelName: "gpt-4.1",
+  modelName: config.modelName,
   entry:
     config.mode === "default"
       ? "src/module/i18n/translations/fr.json"
       : "src/data/personal/translate",
   entryLocale: "fr",
+  temperature: config.modelName === "gpt-5-mini" ? 1 : 0,
   output:
     config.mode === "default"
       ? "src/module/i18n/translations"

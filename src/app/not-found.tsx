@@ -35,7 +35,7 @@ export default async function NotFound() {
       >
         <div
           className={cn(
-            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto"
+            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto",
           )}
         >
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-6">
@@ -44,10 +44,10 @@ export default async function NotFound() {
             </Badge>
 
             <div className="text-7xl md:text-9xl py-2 leading-none select-none">
-              🌒
+              🪐
             </div>
 
-            <h1 className="self-stretch">
+            <h1 className="self-stretch font-medium">
               {t.rich("not-found.page.title", { ...richTextComponent })}
             </h1>
 
@@ -63,7 +63,7 @@ export default async function NotFound() {
               </span>
             </Link>
 
-            <Link
+            {/* <Link
               href={routes.newsletter.link}
               variant="secondary"
               likeButton
@@ -72,7 +72,7 @@ export default async function NotFound() {
               <span className="font-bold text-base">
                 {t("not-found.page.cta.newsletter")}
               </span>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </SectionBase>

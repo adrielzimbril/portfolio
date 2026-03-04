@@ -114,6 +114,23 @@ AWS_BUCKET_NAME=your-bucket-name
 ### Styles
 Le projet utilise Tailwind CSS avec des couleurs personnalisées et des utilitaires. Les styles globaux se trouvent dans `src/app/globals.css`.
 
+## 🌍 Traductions (lobe-i18n)
+
+Utilise `lobe-i18n` selon le type de contenu :
+
+- `npx lobe-i18n`
+  - Pour les fichiers de traduction (`fr/en/zh-CN`) et les données personnalisées (témoignages, contenus métier), selon la config.
+- `npx lobe-i18n md`
+  - Pour les contenus Markdown.
+
+Sélection via config :
+
+- `markdown` pour les contenus éditoriaux :
+  - `.mdx` (blog et contenus de pages)
+  - `.md` (tags et données de base de liaison)
+- `json`/fichiers de langues pour la traduction UI.
+- `json`/données personnelles pour les témoignages et autres datasets.
+
 ## 🌌 Rencontrons-nous dans l'espace (ou sur Terre) 🚀
 
 Je suis toujours ravi de discuter de nouveaux projets, collaborations ou simplement échanger sur des idées créatives. Voici comment me contacter :

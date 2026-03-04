@@ -1,11 +1,13 @@
 import { getResourcesUrl } from "@/utils";
 import {
   getAllPosts,
-  getAllResources,
   getAllProjects,
+  getAllQuests,
+  getAllResources,
+  getAllTalks,
 } from "@/module/content/utils/lib";
 import type { MetadataRoute } from "next";
-import { Post, Resource, Project } from "@/module/content/types/types";
+import { Post, Project, Quest, Resource, Talk } from "@/module/content/types/types";
 import { getAbsolutePathUrl } from "@/utils/base-url";
 import { routes } from "@/data/routes";
 import { PageType } from "@/types";
@@ -48,6 +50,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
   const resources = await getAllResources();
   const projects = await getAllProjects();
+  const talks = await getAllTalks();
+  const quests = await getAllQuests();
 
   return [
     ...staticMarketingPages.flatMap((page: string) => ({
@@ -69,6 +73,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...projects.map((project: Project) => ({
       url: getResourcesUrl(PageType.PROJECT, project.slug),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: getPriority("resources"),
+    })),
+    ...talks.map((talk: Talk) => ({
+      url: getResourcesUrl(PageType.TALKS, talk.slug),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: getPriority("resources"),
+    })),
+    ...quests.map((quest: Quest) => ({
+      url: getResourcesUrl(PageType.QUESTS, quest.slug),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: getPriority("resources"),

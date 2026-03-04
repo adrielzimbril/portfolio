@@ -75,7 +75,7 @@ export const Footer: React.FC = () => {
                     mode="inline"
                     status="available"
                     primaryText={t(
-                      "common.shared.planning-badge.available.title"
+                      "common.shared.planning-badge.available.title",
                     )}
                     className="squircle-sh-white text-b-white-invert"
                     variant="colored"
@@ -87,9 +87,8 @@ export const Footer: React.FC = () => {
                           "common.shared.planning-badge.available.description-simple",
                           {
                             date: t("common.shared.months." + getThisMonth()),
-                          }
-                        )}{" "}
-                        🦄
+                          },
+                        )}
                         <LinkOne variant="bulk" size={20} />
                       </span>
                     </Link>

@@ -2,7 +2,9 @@ import { Feed } from "feed";
 import {
   getAllPosts,
   getAllProjects,
+  getAllQuests,
   getAllResources,
+  getAllTalks,
 } from "@/module/content/utils/lib";
 import { Locale, PageType } from "@/types";
 import { getImageUrl, getPathUrl, getResourcesUrl } from "@/utils";
@@ -12,10 +14,10 @@ import { getTranslations } from "next-intl/server";
 
 /**
  * Normalize locale to be used in getTranslations
- * 
- * @param locale 
- * @returns 
- * 
+ *
+ * @param locale
+ * @returns
+ *
  * @example
  * normalizeLocale("en") -> "en"
  * normalizeLocale("zh-cn") -> "zh-CN"
@@ -34,10 +36,12 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
   const localeForTranslation = normalizeLocale(locale);
 
   const t = await getTranslations({ locale: localeForTranslation });
-  const [posts, projects, resources] = await Promise.all([
+  const [posts, projects, resources, talks, quests] = await Promise.all([
     getAllPosts({ locale: localeForTranslation }),
     getAllProjects({ locale: localeForTranslation }),
     getAllResources({ locale: localeForTranslation }),
+    getAllTalks({ locale: localeForTranslation }),
+    getAllQuests({ locale: localeForTranslation }),
   ]);
 
   const feed = new Feed({
@@ -103,7 +107,7 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
       id: url,
       link: url,
       image: getImageUrl(
-        project.image_thumbnail || routes.openGraphResource.link
+        project.image_thumbnail || routes.openGraphResource.link,
       ),
       description: project.excerpt || "",
       content: project.excerpt || "",
@@ -148,6 +152,62 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
         {
           name: "Resource",
           domain: getPathUrl(routes.hub.link),
+        },
+      ],
+    });
+  });
+
+  // Add talks
+  talks.forEach((talk) => {
+    const url = getResourcesUrl(PageType.TALKS);
+    feed.addItem({
+      title: talk.title,
+      id: url,
+      link: url,
+      image: getImageUrl(talk.cover || routes.openGraphResource.link),
+      description: talk.excerpt || "",
+      content: talk.excerpt || "",
+      date: new Date(talk.event_date),
+      author: [
+        {
+          name: siteConfig.details.name,
+          email: siteConfig.links.contact.email,
+          link: siteConfig.url,
+          avatar: siteConfig.details.avatar,
+        },
+      ],
+      category: [
+        {
+          name: "Talk",
+          domain: getPathUrl(routes.talks.link),
+        },
+      ],
+    });
+  });
+
+  // Add quests
+  quests.forEach((quest) => {
+    const url = getResourcesUrl(PageType.QUESTS, quest.slug);
+    feed.addItem({
+      title: quest.title,
+      id: url,
+      link: url,
+      image: getImageUrl(quest.cover || routes.openGraphResource.link),
+      description: quest.excerpt || "",
+      content: quest.excerpt || "",
+      date: new Date(quest.updated_at || quest.created_at),
+      author: [
+        {
+          name: siteConfig.details.name,
+          email: siteConfig.links.contact.email,
+          link: siteConfig.url,
+          avatar: siteConfig.details.avatar,
+        },
+      ],
+      category: [
+        {
+          name: "Quest",
+          domain: getPathUrl(routes.quests.link),
         },
       ],
     });
