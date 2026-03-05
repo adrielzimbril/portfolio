@@ -35,11 +35,11 @@ export async function POST(
       });
     }
 
-    if (isRegistrationClosed(quest.registration_deadline)) {
-      return new Response(JSON.stringify({ error: "QUEST_REGISTRATION_CLOSED" }), {
-        status: 400,
-      });
-    }
+    //if (isRegistrationClosed(quest.registration_deadline)) {
+    //  return new Response(JSON.stringify({ error: "QUEST_REGISTRATION_CLOSED" }), {
+    //    status: 400,
+    //  });
+    //}
 
     const body = await req.json().catch(() => ({}));
     const parsed = registerSchema.safeParse(body);
