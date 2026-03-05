@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.exemple
 
 # vercel
 .vercel
@@ -50,8 +51,6 @@ package-lock.json
 # trigger
 .trigger/
 
-# env files
-.env.local
 
 # Ignore all lang d.ts files
 /src/module/i18n/translations/*.d.json.ts
