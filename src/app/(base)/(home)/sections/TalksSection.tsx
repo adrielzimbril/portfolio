@@ -12,7 +12,7 @@ import logger from "@/utils/logger";
 import { getExternalUrl, getHumanDate } from "@/utils";
 
 const config = {
-  limit: 3,
+  limit: 2,
 };
 
 export function TalksSection() {

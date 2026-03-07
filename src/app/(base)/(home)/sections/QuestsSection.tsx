@@ -16,7 +16,7 @@ import {
 } from "@/module/content/utils/lib/quests";
 
 const config = {
-  limit: 3,
+  limit: 2,
 };
 
 export function QuestsSection() {

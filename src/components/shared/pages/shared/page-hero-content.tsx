@@ -7,17 +7,17 @@ function ButtonContent({
   variant,
   buttonText,
 }: {
-  variant: "default" | "secondary";
+  variant: "default" | "secondary" | "ghost";
   buttonText: string;
 }) {
   return (
     <span className="flex items-center gap-1">
       {buttonText}
-      {variant === "default" ? (
+      {/* {variant === "default" ? (
         <ArrowDownOne size={18} />
-      ) : (
+      ) : variant === "secondary" ? (
         <ArrowRightOne size={18} />
-      )}
+      ) : variant === "ghost" && null} */}
     </span>
   );
 }
@@ -37,7 +37,7 @@ export function ContentSection({
   badge?: string;
   buttonLink?: string;
   buttonText?: string;
-  buttonVariant: "default" | "secondary";
+  buttonVariant: "default" | "secondary" | "ghost";
   actionButton: boolean;
   onClick: () => void;
 }) {

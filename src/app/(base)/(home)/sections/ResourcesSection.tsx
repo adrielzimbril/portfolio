@@ -10,7 +10,7 @@ import logger from "@/utils/logger";
 import { useLocale, useTranslations } from "use-intl";
 
 const config: PreviewCardContainerSectionProps = {
-  limit: 4,
+  limit: 2,
 };
 
 export function ResourcesSection() {
