@@ -297,6 +297,16 @@
         "badge": "实验室 ✍🏻",
         "description": "我的经验、反思和关于复杂产品设计的建议，在那里简单成为超级力量。",
         "title": "反思"
+      },
+      "talks": {
+        "badge": "活动 🎤",
+        "title": "Talks 与大师课",
+        "description": "我被邀请分享产品设计与 SaaS 经验的演讲、研讨会和大师课。"
+      },
+      "quests": {
+        "badge": "挑战 🏆",
+        "title": "Quests 与挑战",
+        "description": "正在进行与已结束的挑战，让你在实战中学习、提交作品并与社区共同成长。"
       }
     },
     "rss": {

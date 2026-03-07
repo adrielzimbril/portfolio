@@ -6,7 +6,17 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils";
 
-export function HeaderSection({ title }: { title: string }) {
+export function eaderSection({
+  title,
+  actionButton,
+  buttonLink,
+  buttonText,
+}: {
+  title: string;
+  actionButton?: boolean;
+  buttonLink?: string;
+  buttonText?: string;
+}) {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -24,7 +34,9 @@ export function HeaderSection({ title }: { title: string }) {
       badge={t("quests.register.hero.badge")}
       imagePath={{ emoji: "🏆" }}
       isMobileShowed
-      actionButton
+      actionButton={actionButton}
+      buttonLink={buttonLink}
+      buttonText={buttonText}
     />
   );
 }

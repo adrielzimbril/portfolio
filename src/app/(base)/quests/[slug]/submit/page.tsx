@@ -58,7 +58,12 @@ export default async function QuestWorkSubmitPage(props: {
 
   return (
     <>
-      <HeaderSection title={quest.title} />
+      <HeaderSection
+        title={quest.title}
+        actionButton={true}
+        buttonLink={getResourcesUrl(PageType.QUESTS, slug)}
+        buttonText={t("quests.submit.closed.actionLabel")}
+      />
       {closed ? (
         <ChallengeClosedState
           badge={t("quests.submit.closed.badge")}

@@ -1,6 +1,8 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeaderSection } from "./sections/HeaderSection";
+import { TalksSection } from "./sections/TalksSection";
+import { QuestsSection } from "./sections/QuestsSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResourcesSection } from "./sections/ResourcesSection";
 import { ThoughtsSection } from "./sections/ThoughtsSection";
@@ -8,6 +10,7 @@ import { TestimonialsSection } from "./sections/TestimonialsSection";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { siteConfig } from "@/data/config";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -33,13 +36,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Home() {
+  const showed = siteConfig.home.sections.showed;
+
   return (
     <>
       <HeaderSection />
-      <ResourcesSection />
-      <ProjectsSection />
-      <TestimonialsSection />
-      <ThoughtsSection />
+      {showed.talks && <TalksSection />}
+      {showed.quests && <QuestsSection />}
+      {showed.resources && <ResourcesSection />}
+      {showed.projects && <ProjectsSection />}
+      {showed.testimonials && <TestimonialsSection />}
+      {showed.thoughts && <ThoughtsSection />}
       <CallToAction />
     </>
   );

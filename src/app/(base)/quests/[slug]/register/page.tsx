@@ -64,7 +64,12 @@ export default async function QuestRegisterPage(props: {
 
   return (
     <>
-      <HeaderSection title={quest.title} />
+      <HeaderSection
+        title={quest.title}
+        actionButton={true}
+        buttonLink={getResourcesUrl(PageType.QUESTS, slug)}
+        buttonText={t("quests.register.closed.actionLabel")}
+      />
       {closed ? (
         <ChallengeClosedState
           badge={t("quests.register.closed.badge")}

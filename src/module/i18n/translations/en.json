@@ -297,6 +297,16 @@
         "badge": "Laboratory ✍🏻",
         "description": "My experiences, reflections, and advice on designing complex products where simplicity becomes a superpower.",
         "title": "Reflections"
+      },
+      "talks": {
+        "badge": "Events 🎤",
+        "title": "Talks & Masterclasses",
+        "description": "Talks, webinars and masterclasses where I share my product design and SaaS expertise."
+      },
+      "quests": {
+        "badge": "Challenges 🏆",
+        "title": "Quests & Challenges",
+        "description": "Ongoing and past challenges to learn by building, submit your work and grow with the community."
       }
     },
     "rss": {

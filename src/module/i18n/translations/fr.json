@@ -822,6 +822,16 @@
             }
           }
         }
+      },
+      "talks": {
+        "badge": "Événements 🎤",
+        "title": "Talks & Masterclasses",
+        "description": "Les conférences, webinaires et masterclasses où je partage mon expertise en design produit et SaaS."
+      },
+      "quests": {
+        "badge": "Challenges 🏆",
+        "title": "Quests & Challenges",
+        "description": "Les challenges en cours et passés pour apprendre en pratiquant, soumettre ton travail et progresser avec la communauté."
       }
     }
   },

@@ -162,6 +162,18 @@ export const siteConfig = {
       },
     },
   },
+  home: {
+    sections: {
+      showed: {
+        talks: true,
+        quests: true,
+        resources: true,
+        projects: true,
+        testimonials: true,
+        thoughts: true,
+      },
+    },
+  },
 };
 
 export type SiteConfig = typeof siteConfig;
