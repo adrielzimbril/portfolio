@@ -6,7 +6,7 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils";
 
-export function eaderSection({
+export function HeaderSection({
   title,
   actionButton,
   buttonLink,
