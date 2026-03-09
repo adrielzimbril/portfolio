@@ -53,6 +53,22 @@
     "position": "Analyste qualité",
     "testimonial": "Adriel est un excellent designer avec qui j’ai eu l’opportunité de collaborer à plusieurs reprises, notamment lors de la création de ma bannière LinkedIn. Il est également intervenu en tant que panéliste sur le thème de l’UX/UI Design au sein de ma communauté VISION, où il a su démontrer avec clarté son expertise, son sérieux et sa véritable passion pour ce domaine. Au-delà de ses compétences techniques, Adriel se distingue par son professionnalisme, sa pédagogie et sa capacité à apporter une réelle valeur ajoutée à chaque projet. Je le recommande vivement en tant que Product Designer, en tant que formateur et tout simplement en tant que collaborateur de confiance.",
     "linkedinUrl": "https://www.linkedin.com/in/julius-konan-3b527b238",
-    "avatar": "CR"
+    "avatar": "JK"
+  },
+  {
+    "id": 7,
+    "name": "N'Djassi Konan",
+    "position": "SaaS Builder & AI Integrator",
+    "testimonial": "j'ai eu à travailler avec Adriel sur différents projets d'applications web aussi complexes les uns des autres et honnêtement il est d'un sérieux et d'une promptitude remarquable. je le recommande à 200% .",
+    "linkedinUrl": "https://www.linkedin.com/in/ndjassikonan",
+    "avatar": "NK"
+  },
+  {
+    "id": 8,
+    "name": "Guy Mosley Kouadio",
+    "position": "Développeur Web & Mobile",
+    "testimonial": "J’ai eu l’occasion de collaborer avec Adriel sur plusieurs projets, notamment pour transformer ses maquettes en interfaces fonctionnelles, aussi bien sur mobile que sur le web. Adriel est un excellent concepteur de produits et designer UI/UX. Ses visuels sont toujours clairs, cohérents et pensés pour offrir une expérience utilisateur de qualité, ce qui facilite énormément le travail côté développement. C’est toujours un réel plaisir de travailler avec lui, grâce à sa rigueur, sa créativité et sa compréhension des enjeux produit. Je recommande vivement Adriel pour tout projet nécessitant une approche solide en design produit et expérience utilisateur.",
+    "linkedinUrl": "https://www.linkedin.com/in/guy-mosley-kouadio-90a3a31ab",
+    "avatar": "GMK"
   }
 ]

@@ -48,11 +48,27 @@
     "testimonial": "I had the chance to be trained by Adriel in UI design and development, and this experience truly changed the way I work and organize myself. He explains things clearly and directly, which allowed me to progress quickly. Thanks to him, I was able to land my job and secure my permanent contract (CDI)."
   },
   {
-    "avatar": "CR",
+    "avatar": "JK",
     "id": 6,
     "linkedinUrl": "https://www.linkedin.com/in/julius-konan-3b527b238",
     "name": "Julius KONAN",
     "position": "Quality Analyst",
     "testimonial": "Adriel is an excellent designer with whom I had the opportunity to collaborate several times, notably when creating my LinkedIn banner. He also took part as a panelist on the topic of UX/UI Design within my VISION community, where he was able to demonstrate clearly his expertise, seriousness, and genuine passion for the field. Beyond his technical skills, Adriel stands out for his professionalism, pedagogy, and ability to bring real added value to each project. I highly recommend him as a Product Designer, as a trainer, and simply as a trusted collaborator."
+  },
+  {
+    "avatar": "NK",
+    "id": 7,
+    "linkedinUrl": "https://www.linkedin.com/in/ndjassikonan",
+    "name": "N'Djassi Konan",
+    "position": "SaaS Builder & AI Integrator",
+    "testimonial": "I had the opportunity to work with Adriel on various web application projects, each as complex as the others, and honestly, his seriousness and promptitude are remarkable. I recommend him 200%."
+  },
+  {
+    "avatar": "GMK",
+    "id": 8,
+    "linkedinUrl": "https://www.linkedin.com/in/guy-mosley-kouadio-90a3a31ab",
+    "name": "Guy Mosley Kouadio",
+    "position": "Web & Mobile Developer",
+    "testimonial": "I had the opportunity to collaborate with Adriel on several projects, particularly to transform his mockups into functional interfaces, both on mobile and web. Adriel is an excellent product designer and UI/UX designer. His visuals are always clear, consistent, and designed to offer a quality user experience, which greatly facilitates the work on the development side. It's always a real pleasure to work with him, thanks to his rigor, creativity, and understanding of product challenges. I highly recommend Adriel for any project requiring a solid approach to product design and user experience."
   }
 ]

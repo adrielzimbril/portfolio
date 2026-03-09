@@ -48,11 +48,27 @@
     "testimonial": "我有幸接受过 Adriel 的 UI 设计与开发培训，这次经历真正改变了我的工作方式和组织方法。他讲解清晰直接，使我得以快速进步。多亏了他，我找到了工作并成功获得了长期合同（CDI）。"
   },
   {
-    "avatar": "CR",
+    "avatar": "JK",
     "id": 6,
     "linkedinUrl": "https://www.linkedin.com/in/julius-konan-3b527b238",
     "name": "Julius KONAN",
     "position": "质量分析师",
     "testimonial": "Adriel 是一位出色的设计师，我有多次与他合作的机会，尤其是在制作我的 LinkedIn 横幅时。他还作为 UX/UI 设计主题的小组嘉宾参与了我的 VISION 社区，在那里他清晰地展示了自己的专业知识、严谨态度和对该领域的热情。除了技术能力外，Adriel 还以其职业素养、教学能力以及为每个项目带来实质价值的能力而脱颖而出。我强烈推荐他，无论作为产品设计师、培训师，还是值得信赖的合作者。"
+  },
+  {
+    "avatar": "NK",
+    "id": 7,
+    "linkedinUrl": "https://www.linkedin.com/in/ndjassikonan",
+    "name": "N'Djassi Konan",
+    "position": "SaaS 构建者 & AI 集成专家",
+    "testimonial": "我有机会与 Adriel 合作过多个网络应用项目，每个项目都同样复杂，老实说，他的严谨和及时性令人印象深刻。我 200% 推荐他。"
+  },
+  {
+    "avatar": "GMK",
+    "id": 8,
+    "linkedinUrl": "https://www.linkedin.com/in/guy-mosley-kouadio-90a3a31ab",
+    "name": "Guy Mosley Kouadio",
+    "position": "Web & 移动端开发者",
+    "testimonial": "我有机会与 Adriel 在多个项目上合作，特别是将他的原型转换为功能性界面，无论是在移动端还是网页端。Adriel 是一位优秀的产品设计师和 UI/UX 设计师。他的视觉效果总是清晰、一致，并且旨在提供优质的用户体验，这极大地便利了开发端的工作。由于他的严谨、创造力和对产品挑战的理解，与他合作总是一种真正的乐趣。我强烈推荐 Adriel 给任何需要扎实的产品设计和用户体验方法的项目。"
   }
 ]
