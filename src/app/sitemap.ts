@@ -1,4 +1,4 @@
-import { getResourcesUrl } from "@/utils";
+import { getResourcesUrl } from "@/utils/base-url";
 import {
   getAllPosts,
   getAllProjects,

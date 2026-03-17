@@ -17,7 +17,7 @@ import {
 import { defaultTranslations } from "@/module/mail/util/translations";
 import { defaultLocale } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
-import { getResourceAskUrl } from "@/utils";
+import { getResourceAskUrl } from "@/utils/base-url";
 
 export function NewsletterSignup({
   locale,

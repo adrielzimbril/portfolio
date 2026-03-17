@@ -11,9 +11,8 @@ import {
 } from "@/module/content/utils/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/routes";
-import { getImageUrl, getResourcesUrl } from "@/utils";
+import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
-import { PageType } from "@/types";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(props: {

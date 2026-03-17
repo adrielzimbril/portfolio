@@ -1,6 +1,6 @@
 import { routes } from "@/data/routes";
 import * as AurthleIcons from "@aurthle/icons";
-import { getBaseUrl, getImageUrl } from "@/utils";
+import { getBaseUrl, getImageUrl } from "@/utils/base-url";
 
 const BASE_URL = getBaseUrl();
 

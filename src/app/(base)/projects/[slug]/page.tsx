@@ -19,8 +19,8 @@ import {
 } from "@/module/content/utils/lib/projects";
 import { getLocale } from "next-intl/server";
 import { routes } from "@/data/routes";
-import { PageParams, PageType } from "@/types";
-import { getImageUrl, getResourcesUrl } from "@/utils";
+import { PageParams} from "@/types";
+import { getImageUrl } from "@/utils/base-url";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {

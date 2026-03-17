@@ -9,8 +9,7 @@ import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/routes";
 import { GetResource } from "@/components/shared/pages/resources/get-resource";
 import { Metadata } from "next";
-import { PageType } from "@/types";
-import { getImageUrl, getResourcesUrl } from "@/utils";
+import { getImageUrl } from "@/utils/base-url";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(props: {

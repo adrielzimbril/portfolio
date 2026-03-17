@@ -2,7 +2,8 @@
 
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { useLoadMore } from "@/hooks/useLoadMore";
-import { getHumanDate, getResourcesUrl } from "@/utils";
+import { getResourcesUrl } from "@/utils/base-url";
+import { getHumanDate } from "@utils/format-date";
 import type { Quest } from "@/module/content/utils/lib/quests";
 import {
   isRegistrationClosed,

@@ -1,4 +1,4 @@
-import { getPathUrl } from "@/utils";
+import { getPathUrl } from "@/utils/base-url";
 
 enum requestType {
   GET,

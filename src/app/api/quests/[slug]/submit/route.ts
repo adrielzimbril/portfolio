@@ -10,7 +10,7 @@ import { supabase } from "@/module/supabase/client";
 import { addContact, ContactProvider } from "@/module/contact";
 import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
-import { getResourcesUrl } from "@/utils";
+import { getResourcesUrl } from "@/utils/base-url";
 
 const submitSchema = z.object({
   name: z.string().min(2),

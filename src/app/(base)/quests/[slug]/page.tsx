@@ -6,7 +6,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { PageParams } from "@/types";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/routes";
-import { getImageUrl } from "@/utils";
+import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
 import { metadata as baseMetadata } from "@/app/metadata";

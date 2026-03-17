@@ -3,11 +3,11 @@ import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { routes } from "@/data/routes";
 import { useTranslations, useLocale } from "use-intl";
-import { getImageUrl } from "@/utils";
+import { getImageUrl } from "@/utils/base-url";
 import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { usePageViews } from "@/hooks/usePageViews";
-import { getPathUrl } from "@/utils";
+import { getPathUrl } from "@/utils/base-url";
 
 export function HeaderSection() {
   const t = useTranslations();

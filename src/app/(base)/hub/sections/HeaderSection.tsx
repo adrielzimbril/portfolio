@@ -4,7 +4,7 @@ import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
-import { getPathUrl } from "@/utils";
+import { getPathUrl } from "@/utils/base-url";
 
 export function HeaderSection() {
   const t = useTranslations();

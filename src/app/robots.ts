@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getBaseUrl, getPathUrl } from "@/utils";
+import { getBaseUrl, getPathUrl } from "@/utils/base-url";
 import { routes } from "@/data/routes";
 import { Locale } from "@/types";
 

@@ -5,7 +5,7 @@ import {
 } from "@/module/content/utils/lib/quests";
 import { IntentionForm } from "./sections/IntentionForm";
 import { HeaderSection } from "./sections/HeaderSection";
-import { getImageUrl, getResourcesUrl } from "@/utils";
+import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import { PageParams, PageType } from "@/types";
 import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state";
 import { metadata as baseMetadata } from "@/app/metadata";

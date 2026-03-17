@@ -5,7 +5,8 @@ import { QuestCard } from "@/components/shared/pages/quests/card";
 import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 import { getAllQuests } from "@/module/content/utils/lib";
 import type { Quest } from "@/module/content/utils/lib/quests";
-import { getHumanDate, getResourcesUrl } from "@/utils";
+import { getResourcesUrl } from "@/utils/base-url";
+import { getHumanDate } from "@/utils/format-date";
 import {
   isRegistrationClosed,
   isSubmissionClosed,

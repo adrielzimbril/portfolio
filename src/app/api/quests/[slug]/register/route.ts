@@ -10,7 +10,7 @@ import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
 import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
-import { getResourcesUrl } from "@/utils";
+import { getResourcesUrl } from "@/utils/base-url";
 
 const registerSchema = z.object({
   name: z.string().min(2),

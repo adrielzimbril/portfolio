@@ -8,7 +8,7 @@ import Cal, { getCalApi } from "@calcom/embed-react";
 import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
-import { getPathUrl } from "@/utils";
+import { getPathUrl } from "@/utils/base-url";
 
 export default function ContactForm({}) {
   const t = useTranslations();
