@@ -8,6 +8,8 @@ import { cn } from "@/utils/utils";
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof buttonVariants> {
+  variant?: "default" | "secondary" | "destructive" | "outline" | "colored" | "ghost" | "icon" | "link" | "none";
+  size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none";
   linkClassName?: string;
   likeButton?: boolean;
   asFull?: boolean;
@@ -33,8 +35,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   ) => {
     return likeButton ? (
       <Button
-        variant={variant ?? undefined}
-        size={size ?? undefined}
+        variant={variant}
+        size={size}
         asFull={asFull}
         asIcon={asIcon}
         className={cn(className)}

@@ -14,7 +14,7 @@ import { init } from "@squircle/core";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const asLoader = false;
+  const asLoader = true;
   const t = useTranslations();
   const isBadIOS = useCompareIOSVersion();
 
@@ -38,7 +38,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
     const run = async () => {
       await init();
-      await sleep(40);
+      await sleep(4000);
 
       if (!cancelled) {
         setIsLoaded(true);

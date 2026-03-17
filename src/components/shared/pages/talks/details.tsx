@@ -35,6 +35,7 @@ export function CardInfo({
   const isDatePast = currentTime >= new Date(getMachineDate(date)).getTime();
   const isToday =
     new Date(getMachineDate(date)).getDate() === new Date().getDate();
+  const shouldShow = (isDatePast || isToday) || participantsCount > 0;
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -69,7 +70,7 @@ export function CardInfo({
           />
         )}
         <Description description={excerpt} />
-        {(isDatePast || isToday) && participantsCount > 0 ? (
+        {shouldShow ? (
           <ParticipantsStats count={participantsCount} />
         ) : null}
       </div>
