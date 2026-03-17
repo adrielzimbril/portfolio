@@ -1,5 +1,4 @@
 "use client";
-import posthog from "posthog-js";
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -91,9 +90,6 @@ export function NewsletterForm() {
 
             <Button
               onClick={() => {
-                posthog.capture("newsletter_subscribe_clicked", {
-                  has_email_entered: !!email,
-                });
                 if (isEmailValid && token) {
                   setIsModalOpen(true);
                 } else {

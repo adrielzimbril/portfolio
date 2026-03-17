@@ -34,10 +34,22 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const currentKey = currentRoute?.key || routes.home.key;
 
   useEffect(() => {
-    init().then(() => sleep(4000).then(() => setIsLoaded(true)));
-    // logger.info("currentRoute", currentRoute);
-    // logger.info("currentKey", currentKey);
-    // logger.info("pathname", route);
+    let cancelled = false;
+
+    const run = async () => {
+      await init();
+      await sleep(4000);
+
+      if (!cancelled) {
+        setIsLoaded(true);
+      }
+    };
+
+    void run();
+
+    return () => {
+      cancelled = true;
+    };
   }, [route, currentRoute, currentKey]);
 
   const pageLoader = (key: string) => ({
@@ -47,6 +59,8 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   });
 
   const loader = pageLoader(currentKey);
+  const showLoader = asLoader && !isLoaded;
+  const isHomePage = currentRoute?.key === routes.home.key || currentRoute === undefined;
 
   return (
     <>
@@ -54,27 +68,22 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
       <AnalyticsScript />
 
       {isBadIOS ? (
-        asLoader && !isLoaded ? (
+        showLoader ? (
           <GenericLoadingPage
             title={loader.title}
             emoji={loader.emoji}
             subtitle={loader.subtitle}
-            isPage={
-              currentRoute?.key === routes.home.key ||
-              currentRoute === undefined
-            }
+            isPage={isHomePage}
           />
         ) : (
           children
         )
-      ) : asLoader && !isLoaded ? (
+      ) : showLoader ? (
         <GenericLoadingPage
           title={loader.title}
           emoji={loader.emoji}
           subtitle={loader.subtitle}
-          isPage={
-            currentRoute?.key === routes.home.key || currentRoute === undefined
-          }
+          isPage={isHomePage}
         />
       ) : (
         <ReactLenis root>{children}</ReactLenis>

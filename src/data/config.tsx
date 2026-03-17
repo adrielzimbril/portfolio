@@ -89,7 +89,7 @@ export const siteConfig = {
           url: "https://go.adrielzimbril.com/ph",
           icon: "",
           navbar: false,
-          available: false,
+          available: true,
         },
         peerlist: {
           name: "Peerlist",

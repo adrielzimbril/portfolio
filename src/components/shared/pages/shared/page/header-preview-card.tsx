@@ -90,6 +90,8 @@ export function HeaderPreviewCard({
             width={1200}
             height={630}
             className="size-auto min-w-full min-h-full object-cover hover:scale-105 transition-all duration-800 rounded-2xl md:rounded-[2rem]"
+            loading="lazy"
+            sizes="100vw"
           />
           {type && <PreviewIcon resourceType={type} />}
         </div>

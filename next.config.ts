@@ -2,6 +2,7 @@ import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
 import nextIntlPlugin from "next-intl/plugin";
 import { appConfig } from "@data/app-config";
+import bundleAnalyzer from "@next/bundle-analyzer";
 
 const withNextIntl = nextIntlPlugin({
   requestConfig: "./src/module/i18n/request.ts",
@@ -13,11 +14,16 @@ const withNextIntl = nextIntlPlugin({
 });
 
 const IsDEV = process.env.NODE_ENV === "development";
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
     dangerouslyAllowLocalIP: IsDEV,
+    formats: ["image/avif", "image/webp"],
+    qualities: [60, 75],
     remotePatterns: [
       {
         protocol: "https",
@@ -49,22 +55,9 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     mdxRs: true,
+    optimizePackageImports: ["@aurthle/icons"],
   },
   serverExternalPackages: ["@vercel/og"],
-  async rewrites() {
-    return [
-      {
-        source: "/ingest/static/:path*",
-        destination: "https://us-assets.i.posthog.com/static/:path*",
-      },
-      {
-        source: "/ingest/:path*",
-        destination: "https://us.i.posthog.com/:path*",
-      },
-    ];
-  },
-  // This is required to support PostHog trailing slash API requests
-  skipTrailingSlashRedirect: true,
 };
 
-export default withContentCollections(withNextIntl(nextConfig));
+export default withContentCollections(withNextIntl(withBundleAnalyzer(nextConfig)));

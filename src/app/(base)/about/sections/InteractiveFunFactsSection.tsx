@@ -18,7 +18,6 @@ import {
   DialogFooter,
   DialogSeparator,
 } from "@/components/ui/dialog";
-import posthog from "posthog-js";
 import { useLocale, useTranslations } from "use-intl";
 import { getGamesByLocale, type GameItem } from "@/types/personalData";
 
@@ -472,13 +471,6 @@ export function InteractiveFunFacts() {
 
     const isCorrect = currentQuestion.isTrue === isTrue;
 
-    posthog.capture("fun-fact-guess-submitted", {
-      question_id: currentQuestion.id,
-      question_title: currentQuestion.title,
-      user_guess: isTrue ? "true" : "false",
-      is_correct: isCorrect,
-    });
-
     if (isCorrect) {
       setScore((prev) => prev + 1);
     }
@@ -501,10 +493,6 @@ export function InteractiveFunFacts() {
   };
 
   const resetGame = () => {
-    posthog.capture("fun-facts-game-reset", {
-      final_score: score,
-      total_questions: questionsLocale.length,
-    });
     setCurrentQuestionIndex(0);
     setGuessedFacts({});
     setGameStarted(true);
@@ -622,11 +610,6 @@ export function InteractiveFunFacts() {
         <Button
           onClick={() => {
             setShowAllFacts(true);
-            posthog.capture("fun-facts-answers-viewed", {
-              score: score,
-              total_questions: questionsLocale.length,
-              answered_questions_count: answeredQuestionsCount,
-            });
           }}
           asPointer
           whileTap

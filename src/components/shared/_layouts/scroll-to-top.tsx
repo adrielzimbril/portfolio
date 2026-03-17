@@ -72,7 +72,7 @@ export function ScrollToTop() {
       <Button
         onClick={scrollToTop}
         className={cn(
-          "relative p-3 transition-all duration-200 group active:scale-95",
+          "relative p-3 transition-all duration-200 group hover:scale-105 active:scale-95 cursor-pointer",
           isBadIOS ? "squircle-b-base-accent" : "rounded-full"
         )}
         variant={isBadIOS ? "colored" : "outline"}

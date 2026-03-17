@@ -59,6 +59,12 @@ export function CardPreview({
               className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
               alt={title ?? ""}
               src={getImageUrl(cover!)}
+              loading="lazy"
+              sizes={
+                isWide
+                  ? "(max-width: 768px) 100vw, 66vw"
+                  : "(max-width: 768px) 100vw, 33vw"
+              }
             />
           </div>
         ) : (

@@ -28,7 +28,6 @@ import * as RPNInput from "react-phone-number-input";
 import confetti from "canvas-confetti";
 import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo";
 import { cn } from "@/utils";
-import posthog from "posthog-js";
 import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useTranslations, useLocale } from "use-intl";
@@ -235,11 +234,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      posthog.capture("subscription_modal_optional_info_submitted", {
-        email: email,
-        has_name: !!values.name,
-        has_phone: !!values.phone,
-      });
       await apiSubscribe({
         email,
         name: values.name || undefined,
@@ -271,9 +265,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   const handleClose = () => {
     if (!isSubmitting) {
-      posthog.capture("subscription_modal_skipped", {
-        email: email,
-      });
       onClose();
       setIsSuccess(false);
       formSchemaValidate.reset();
