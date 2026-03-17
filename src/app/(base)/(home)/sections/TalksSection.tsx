@@ -1,38 +1,21 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useLocale, useTranslations } from "use-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { TalksCard } from "@/components/shared/pages/talks/card";
 import { AttendanceType } from "@/types";
 import { getAllTalks } from "@/module/content/utils/lib";
 import type { Talk } from "@/module/content/utils/lib/talks";
-import logger from "@/utils/logger";
 import { getExternalUrl, getHumanDate } from "@/utils";
 
 const config = {
   limit: 2,
 };
 
-export function TalksSection() {
-  const t = useTranslations();
-  const locale = useLocale();
-  const [currentTime] = useState(() => Date.now());
-  const [talks, setTalks] = useState<Talk[]>([]);
-
-  useEffect(() => {
-    async function loadTalks() {
-      try {
-        const data = await getAllTalks({ limit: config.limit, locale });
-        setTalks(data);
-      } catch (err) {
-        logger.error(err);
-      }
-    }
-
-    loadTalks();
-  }, [locale]);
+export async function TalksSection() {
+  const t = await getTranslations();
+  const locale = await getLocale();
+  const currentTime = Date.now();
+  const talks = await getAllTalks({ limit: config.limit, locale });
 
   return (
     <SectionLayout

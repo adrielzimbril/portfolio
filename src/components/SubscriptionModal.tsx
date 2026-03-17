@@ -27,7 +27,7 @@ import { PhoneInput } from "@aurthle/react-phone";
 import * as RPNInput from "react-phone-number-input";
 import confetti from "canvas-confetti";
 import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useTranslations, useLocale } from "use-intl";

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { getImageUrl, getThisPageUrl } from "@/utils/base-url";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 import { Link } from "@/components/ui/link";
 import { siteConfig } from "@/data/config";
 import { routes } from "@/data/routes";

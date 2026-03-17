@@ -1,14 +1,10 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useLocale, useTranslations } from "use-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { QuestCard } from "@/components/shared/pages/quests/card";
 import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 import { getAllQuests } from "@/module/content/utils/lib";
 import type { Quest } from "@/module/content/utils/lib/quests";
-import logger from "@/utils/logger";
 import { getHumanDate, getResourcesUrl } from "@/utils";
 import {
   isRegistrationClosed,
@@ -19,23 +15,10 @@ const config = {
   limit: 2,
 };
 
-export function QuestsSection() {
-  const t = useTranslations();
-  const locale = useLocale();
-  const [quests, setQuests] = useState<Quest[]>([]);
-
-  useEffect(() => {
-    async function loadQuests() {
-      try {
-        const data = await getAllQuests({ limit: config.limit, locale });
-        setQuests(data);
-      } catch (err) {
-        logger.error(err);
-      }
-    }
-
-    loadQuests();
-  }, [locale]);
+export async function QuestsSection() {
+  const t = await getTranslations();
+  const locale = await getLocale();
+  const quests = await getAllQuests({ limit: config.limit, locale });
 
   return (
     <SectionLayout

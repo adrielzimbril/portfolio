@@ -3,7 +3,7 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { ProjectPreviewCardContainerSectionProps } from "@/types/type";
 import { getAllProjects } from "@/module/content/utils/lib";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 import { getLocale, getTranslations } from "next-intl/server";
 
 const config: ProjectPreviewCardContainerSectionProps = {

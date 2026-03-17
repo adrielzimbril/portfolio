@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 import { useTranslations } from "use-intl";
 
 // Interface for page details props

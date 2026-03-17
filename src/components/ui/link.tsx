@@ -33,8 +33,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
   ) => {
     return likeButton ? (
       <Button
-        variant={variant}
-        size={size}
+        variant={variant ?? undefined}
+        size={size ?? undefined}
         asFull={asFull}
         asIcon={asIcon}
         className={cn(className)}

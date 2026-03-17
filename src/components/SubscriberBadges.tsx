@@ -9,7 +9,7 @@ import {
 import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
 import { ResourceType } from "@/types";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 import { useTranslations } from "use-intl";
 
 function formatCount(n: number) {

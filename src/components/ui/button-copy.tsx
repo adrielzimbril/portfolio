@@ -8,7 +8,7 @@ import {
   type ButtonProps as ButtonPrimitiveProps,
   buttonVariants,
 } from "@/components/ui/button";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 import { useControlledState } from "@/hooks/useControlledState";
 import logger from "@/utils/logger";
 import { useTranslations } from "use-intl";

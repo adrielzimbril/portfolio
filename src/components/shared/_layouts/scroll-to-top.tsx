@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpOne } from "@aurthle/icons";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);

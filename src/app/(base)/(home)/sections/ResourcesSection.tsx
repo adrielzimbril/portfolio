@@ -1,37 +1,19 @@
-"use client";
 import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { PreviewCardContainerSectionProps } from "@/types/type";
-import { useState, useEffect } from "react";
 import { getAllResources } from "@/module/content/utils/lib/resources";
-import { Resource } from "@/module/content/types";
-import logger from "@/utils/logger";
-import { useLocale, useTranslations } from "use-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const config: PreviewCardContainerSectionProps = {
   limit: 2,
 };
 
-export function ResourcesSection() {
-  const t = useTranslations();
-  const locale = useLocale();
-
+export async function ResourcesSection() {
+  const t = await getTranslations();
+  const locale = await getLocale();
   const { limit } = config;
-  const [resources, setResources] = useState<Resource[]>([]);
-
-  useEffect(() => {
-    async function loadResources() {
-      try {
-        const data = await getAllResources({ limit: limit, locale });
-        setResources(data);
-      } catch (err) {
-        logger.error(err);
-      }
-    }
-
-    loadResources();
-  }, [limit, locale]);
+  const resources = await getAllResources({ limit, locale });
 
   return (
     <SectionLayout

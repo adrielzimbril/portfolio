@@ -2,7 +2,7 @@ import Image from "next/image";
 import { PreviewContentType, ResourceType } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
 import { PreviewIcon } from "@/components/shared/pages/shared/preview";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";;
 
 interface BasePreviewContent {
   type: PreviewContentType;
