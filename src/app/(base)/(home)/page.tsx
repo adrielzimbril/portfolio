@@ -1,4 +1,5 @@
 import React from "react";
+import { Suspense } from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeaderSection } from "./sections/HeaderSection";
 import { TalksSection } from "./sections/TalksSection";
@@ -11,6 +12,10 @@ import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { siteConfig } from "@/data/config";
+import {
+  DefaultSectionSkeleton,
+  ProjectsSectionSkeleton,
+} from "../../../components/shared/pages/skeletons/HomeSectionSkeletons";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -41,12 +46,32 @@ export default function Home() {
   return (
     <>
       <HeaderSection />
-      {showed.talks && <TalksSection />}
-      {showed.quests && <QuestsSection />}
-      {showed.resources && <ResourcesSection />}
-      {showed.projects && <ProjectsSection />}
+      {showed.talks && (
+        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
+          <TalksSection />
+        </Suspense>
+      )}
+      {showed.quests && (
+        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
+          <QuestsSection />
+        </Suspense>
+      )}
+      {showed.resources && (
+        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
+          <ResourcesSection />
+        </Suspense>
+      )}
+      {showed.projects && (
+        <Suspense fallback={<ProjectsSectionSkeleton />}>
+          <ProjectsSection />
+        </Suspense>
+      )}
       {showed.testimonials && <TestimonialsSection />}
-      {showed.thoughts && <ThoughtsSection />}
+      {showed.thoughts && (
+        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
+          <ThoughtsSection />
+        </Suspense>
+      )}
       <CallToAction />
     </>
   );
