@@ -3,8 +3,7 @@ import {
   getAllPosts,
   getAllProjects,
   getAllQuests,
-  getAllResources,
-  getAllTalks,
+  getAllResources
 } from "@/module/content/utils/lib";
 import type { MetadataRoute } from "next";
 import { Post, Project, Quest, Resource, Talk } from "@/module/content/types/types";
@@ -50,7 +49,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
   const resources = await getAllResources();
   const projects = await getAllProjects();
-  const talks = await getAllTalks();
   const quests = await getAllQuests();
 
   return [
@@ -73,12 +71,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...projects.map((project: Project) => ({
       url: getResourcesUrl(PageType.PROJECT, project.slug),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: getPriority("resources"),
-    })),
-    ...talks.map((talk: Talk) => ({
-      url: getResourcesUrl(PageType.TALKS, talk.slug),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: getPriority("resources"),

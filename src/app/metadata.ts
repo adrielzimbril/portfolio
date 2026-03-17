@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: getAbsolutePathUrl({ type: "s3", path: "icon.svg" }),
-    shortcut: getAbsolutePathUrl({ type: "s3", path: "icon.svg" }),
-    apple: getAbsolutePathUrl({ type: "s3", path: "icon.svg" }),
+    icon: getImageUrl("icon.svg"),
+    shortcut: getImageUrl("icon.svg"),
+    apple: getImageUrl("icon.svg"),
   },
   authors: [
     {

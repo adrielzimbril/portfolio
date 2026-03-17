@@ -1,6 +1,6 @@
 import { apiRoutes } from "@/data/api-routes";
 import logger from "@/utils/logger";
-import { getAbsolutePathUrl } from "./base-url";
+import { getPathUrl } from "./base-url";
 
 const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
 
@@ -72,7 +72,7 @@ export async function createHmac(
       .join("");
   } else {
     try {
-      const res = await fetch(getAbsolutePathUrl({ path: `/api/sign` }), {
+      const res = await fetch(getPathUrl("/api/sign"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ algorithm, key, data }),

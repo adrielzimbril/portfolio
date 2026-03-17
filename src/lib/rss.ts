@@ -56,7 +56,7 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
     link: siteConfig.url,
     language: localeForTranslation,
     image: getImageUrl("opengraph-image.png"),
-    favicon: getAbsolutePathUrl({ type: "s3", path: "icon.svg" }),
+    favicon: getImageUrl("icon.svg"),
     hub: getPathUrl(routes.hub.link),
     copyright: t("common.rss.copyright", {
       date: new Date().getFullYear(),
