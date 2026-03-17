@@ -15,6 +15,7 @@ interface LoadMoreUIProps {
   loadedItems: number;
   totalItems: number;
   showCounter?: boolean;
+  loadingFallback?: React.ReactNode;
 }
 
 export function LoadMoreSection({
@@ -25,11 +26,13 @@ export function LoadMoreSection({
   loadedItems,
   totalItems,
   showCounter = false,
+  loadingFallback,
 }: LoadMoreUIProps) {
   const t = useTranslations();
   return (
     <SectionLayout className="p-0">
       {children}
+      {loading && loadingFallback ? loadingFallback : null}
       <div className="col-span-2 mt-6">
         {hasMore ? (
           <Button onClick={onLoadMore} disabled={loading} whileTap asPointer>

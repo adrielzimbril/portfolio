@@ -14,8 +14,9 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { siteConfig } from "@/data/config";
 import {
   DefaultSectionSkeleton,
+  HomePageSkeleton,
   ProjectsSectionSkeleton,
-} from "../../../components/shared/pages/skeletons/HomeSectionSkeletons";
+} from "../../../components/shared/pages/skeletons";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -45,7 +46,9 @@ export default function Home() {
 
   return (
     <>
-      <HeaderSection />
+      <Suspense fallback={<HomePageSkeleton />}>
+        <HeaderSection />
+      </Suspense>
       {showed.talks && (
         <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
           <TalksSection />

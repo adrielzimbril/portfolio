@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
+import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { getResourcesUrl } from "@/utils/base-url";
 import { getHumanDate } from "@utils/format-date";
@@ -35,6 +36,7 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
+      loadingFallback={<LoadMoreCardsSkeleton kind="quests" count={2} />}
     >
       {list.map((quest) => {
         const registrationClosed = isRegistrationClosed(quest.registration_deadline);
