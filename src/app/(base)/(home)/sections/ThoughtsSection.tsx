@@ -1,37 +1,19 @@
-"use client";
-import posthog from "posthog-js";
 import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { PreviewCardContainerSectionProps } from "@/types/type";
-import { useState, useEffect } from "react";
 import { getAllPosts } from "@/module/content/utils/lib/posts";
-import { Post } from "@/module/content/types";
-import logger from "@/utils/logger";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
-import { useTranslations, useLocale } from "use-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const config: PreviewCardContainerSectionProps = {
   limit: 2,
 };
 
-export function ThoughtsSection() {
-  const t = useTranslations();
-  const locale = useLocale();
+export async function ThoughtsSection() {
+  const t = await getTranslations();
+  const locale = await getLocale();
   const { limit } = config;
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        const data = await getAllPosts({ limit: limit, locale });
-        setPosts(data);
-      } catch (err) {
-        logger.error(err);
-      }
-    }
-
-    loadPosts();
-  }, [limit, locale]);
+  const posts = await getAllPosts({ limit, locale });
 
   return (
     <SectionLayout
@@ -42,15 +24,7 @@ export function ThoughtsSection() {
     >
       {posts.map((post, index) => {
         return (
-          <div
-            key={index}
-            onClick={() =>
-              posthog.capture("thought_card_clicked", {
-                post_slug: post.slug,
-                post_title: post.title,
-              })
-            }
-          >
+          <div key={index}>
             <ThoughtCard
               title={post.title}
               cover={post.cover}
