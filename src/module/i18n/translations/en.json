@@ -572,17 +572,23 @@
           "intro": "Your ebook is available !",
           "tip": "📖 Suggestion: read it in small sections and try to apply what you learn directly."
         },
-        "figma-template": {
+        "figma_template": {
           "access": "Open the template",
           "feedback": "When you've had time to check it, I'd like to know what you think. Is it useful for your current projects? What still puzzles you?",
           "intro": "Your Figma template is available !",
           "tip": "🚀 Tip: try to apply what you learn directly."
         },
-        "video": {
+        "masterclass": {
           "access": "Watch the masterclass",
           "feedback": "Once you've watched the masterclass, tell me what you think! Did it answer your questions? What stood out the most?",
-          "intro": "Your masterclass is waiting !",
+          "intro": "Your masterclass is available !",
           "tip": "🎯 Tip: watch it in a quiet place with a notebook nearby. The best ideas often come while listening."
+        },
+        "video": {
+          "access": "Watch the video",
+          "feedback": "Once you've watched the video, tell me what you think! Did it answer your questions? What stood out the most?",
+          "intro": "Your video is ready !",
+          "tip": "🎥 Tip: watch it in a quiet place with a notebook nearby. The best ideas often come while listening."
         }
       },
       "subject": "Hey, your resource is ready !",

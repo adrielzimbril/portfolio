@@ -987,9 +987,9 @@
           "tip": "💡 Petite astuce : prends des notes pendant que tu suis les modules, ça aide vraiment à retenir et appliquer."
         },
         "video": {
-          "intro": "Ta masterclass t'attend !",
-          "access": "Regarder la masterclass",
-          "feedback": "Une fois que tu auras regardé la masterclass, dis-moi ce que tu en penses ! Est-ce que ça répond à tes questions ? Qu'est-ce qui t'a le plus marqué ?",
+          "intro": "Ta vidéo est prête !",
+          "access": "Regarder la vidéo",
+          "feedback": "Une fois que tu auras regardé la vidéo, dis-moi ce que tu en penses ! Est-ce que ça répond à tes questions ? Qu'est-ce qui t'a le plus marqué ?",
           "tip": "🎯 Conseil : regarde-la dans un endroit calme avec un carnet à côté. Les meilleures idées viennent souvent pendant qu'on écoute."
         },
         "ebook": {
@@ -1004,11 +1004,17 @@
           "feedback": "Quand tu auras eu le temps de le parcourir, j'aimerais savoir ce que tu en penses. Est-ce que c'est utile pour tes projets actuels ? Qu'est-ce qui te pose encore question ?",
           "tip": "🚀 Conseil : essaie d'appliquer directement ce que tu apprends."
         },
-        "figma-template": {
+        "figma_template": {
           "intro": "Ton template Figma est disponible !",
           "access": "Ouvrir le template",
           "feedback": "Quand tu auras eu le temps de le parcourir, j'aimerais savoir ce que tu en penses. Est-ce que c'est utile pour tes projets actuels ? Qu'est-ce qui te pose encore question ?",
           "tip": "🚀 Conseil : essaie d'appliquer directement ce que tu apprends."
+        },
+        "masterclass": {
+          "intro": "Ta masterclass est disponible !",
+          "access": "Regarder la masterclass",
+          "feedback": "Une fois que tu auras regardé la masterclass, dis-moi ce que tu en penses ! Est-ce que ça répond à tes questions ? Qu'est-ce qui t'a le plus marqué ?",
+          "tip": "🎥 Conseil : regarde-la dans un endroit calme avec un carnet à côté. Les meilleures idées viennent souvent pendant qu'on écoute."
         }
       }
     }
