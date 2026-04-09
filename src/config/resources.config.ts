@@ -14,6 +14,7 @@ import { getResourceBySlug } from "@/module/content/utils/lib";
  */
 export enum AllUserResourceSlug {
   THE_MISTAKE_THAT_STOPS_YOU_FROM_IMPROVING = "the-mistake-that-stops-you-from-improving",
+  SOCIAL_BANNER_TEMPLATE = "social-banner-template",
   TEST = "test",
 }
 
@@ -29,6 +30,8 @@ const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
   test: "https://shirofolio.com/projects/test",
   "the-mistake-that-stops-you-from-improving":
     "https://docs.google.com/document/d/1oWOfuqpznMF6rKObGimkBsnmShVTEw6LuZjV82Kuy-o/edit?usp=sharing",
+  "social-banner-template":
+    "https://www.figma.com/community/file/1623784451151162978",
 };
 
 /**
@@ -44,7 +47,7 @@ const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
  * ```
  */
 export const getResourceUserUrl = <T = any>(
-  slug: AllUserResourceSlug
+  slug: AllUserResourceSlug,
 ): string | null => {
   return CUSTOM_RESOURCES[slug] || null;
 };
@@ -56,7 +59,7 @@ export const getResourceUserUrl = <T = any>(
  * @returns Promise that resolves to true if the resource exists, false otherwise
  */
 export const resourceUserExists = async (
-  slug: AllUserResourceSlug
+  slug: AllUserResourceSlug,
 ): Promise<boolean> => {
   try {
     const resource = await getResourceBySlug(slug);
