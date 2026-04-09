@@ -114,7 +114,7 @@ export function ProductDeliveryEmail({
               )}
 
               {features && features.length > 0 && (
-                <Section className="my-6">
+                <Section className="text-center my-6">
                   <Text className="text-[#333333] text-base leading-relaxed mb-3">
                     <strong>{t("mail.productDelivery.featuresTitle")}</strong>
                   </Text>

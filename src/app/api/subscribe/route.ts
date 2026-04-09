@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
     } catch (e) {
       logger.error(
         `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-        { error: e }
+        { error: e },
       );
     }
   } else {
@@ -97,7 +97,7 @@ export async function POST(req: NextRequest) {
     } catch (e) {
       logger.error(
         `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-        { error: e }
+        { error: e },
       );
     }
   }
@@ -114,16 +114,9 @@ export async function POST(req: NextRequest) {
     } catch (e) {
       logger.warn(
         `Welcome email send failed for user ${userId} - ${email}:`,
-        e
+        e,
       );
     }
-  } else {
-    await sendEmail({
-      to: [{ email, name }],
-      context: { name },
-      templateId: "newsletterSignup",
-      locale: locale,
-    });
   }
 
   if (productIdToken) {
@@ -157,7 +150,7 @@ export async function POST(req: NextRequest) {
         } catch (e: unknown) {
           logger.error(
             `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
-            (e as Error)?.message || e
+            (e as Error)?.message || e,
           );
         }
       }
@@ -181,7 +174,7 @@ export async function POST(req: NextRequest) {
         } catch (e: unknown) {
           logger.warn(
             `Product delivery email send failed for user ${userId} - ${email}:`,
-            (e as Error)?.message || e
+            (e as Error)?.message || e,
           );
         }
       }
@@ -206,7 +199,7 @@ export async function POST(req: NextRequest) {
   const productTypeId = getListIdByProduct(productType);
 
   const listIds = [generalId, productTypeId].filter(
-    (n): n is number => !!n && !Number.isNaN(n)
+    (n): n is number => !!n && !Number.isNaN(n),
   );
 
   try {
@@ -223,7 +216,7 @@ export async function POST(req: NextRequest) {
     // Do not fail the flow if Brevo fails
     logger.warn(
       `Brevo add contact error for user ${userId} - ${email}:`,
-      (e as Error)?.message || e
+      (e as Error)?.message || e,
     );
   }
 

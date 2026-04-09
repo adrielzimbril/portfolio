@@ -535,7 +535,7 @@
       "greeting": "Hi {firstName}",
       "preview": "Hi ! I wanted to talk to you about something close to my heart...",
       "story": {
-        "intro": "A few weeks ago, a user of one of my apps wrote to tell me that they struggled to cancel an action. I realized it was because of a design choice I liked… but which complicated the experience.",
+        "intro": "A few weeks ago, one of the clients of one of my apps wrote to tell me that they struggled to cancel an action. I realized it was because of a design choice I liked… but which complicated the experience.",
         "philosophy": "What really interests me is understanding how people use what we create. Why they abandon at a certain point, why they come back, and what really helps them in their daily lives.",
         "presentation": "My name is Adriel, and for 5 years I've been creating interfaces for SaaS and I've noticed something: we often complicate things while users are just looking for simplicity."
       },

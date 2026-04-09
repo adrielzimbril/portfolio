@@ -936,7 +936,7 @@
       "greeting": "Salut {firstName}",
       "tagline": "Problem Solver & Your SaaS Product Designer 🦄",
       "story": {
-        "intro": "Il y a quelques semaines, un utilisateur de l'une de mes apps m'a écrit pour me dire qu'il avait mis du temps à annuler une action. Je me suis rendu compte que c'était à cause d'un choix de design que j'aimais bien… mais qui compliquait l'expérience.",
+        "intro": "Il y a quelques semaines, l'un des clients de l'une de mes apps m'a écrit pour me dire qu'il avait mis du temps à annuler une action. Je me suis rendu compte que c'était à cause d'un choix de design que j'aimais bien… mais qui compliquait l'expérience.",
         "presentation": "Je m'appelle Adriel, et depuis 5 ans je crée des interfaces pour des SaaS et j'ai remarqué quelque chose : on complique souvent les choses alors que les utilisateurs cherchent juste de la simplicité.",
         "philosophy": "Ce qui m'intéresse vraiment, c'est comprendre comment les gens utilisent ce qu'on crée. Pourquoi ils abandonnent à tel endroit, pourquoi ils reviennent, ce qui les aide vraiment dans leur quotidien."
       },
