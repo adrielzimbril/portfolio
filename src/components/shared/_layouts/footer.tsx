@@ -129,27 +129,55 @@ export async function Footer() {
   );
 }
 
-function FooterResources({ resources }: { resources: ResourcePreview[] }) {
   return (
-    <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
-      <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
-        {resources.map((resource, index) => (
-          <React.Fragment key={resource.slug ?? index}>
-            <Link
-              href={getResourcesUrl(PageType.HUB, resource.slug)}
-              className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
-            >
-              {resource.title}
-            </Link>
-            {index < resources.length - 1 && (
-              <>
-                <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
-                <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
-              </>
-            )}
-          </React.Fragment>
-        ))}
+    <div className="w-full flex flex-col gap-4">
+      <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
+        <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
+          {resources.map((resource, index) => (
+            <React.Fragment key={resource.slug ?? index}>
+              <Link
+                href={getResourcesUrl(PageType.HUB, resource.slug)}
+                className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
+              >
+                {resource.title}
+              </Link>
+              {index < resources.length - 1 && (
+                <>
+                  <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
+                  <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
+                </>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+      
+      {/* New Pages Navigation */}
+      <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6 overflow-hidden">
+        <div className="w-full flex flex-wrap justify-center items-center gap-4 px-4">
+          {[
+            { label: "Community", href: "/community" },
+            { label: "Stats", href: "/stats" },
+            { label: "Toolbox", href: "/toolbox" },
+            { label: "My Setup", href: "/setup" },
+            { label: "Connections", href: "/connections" },
+            { label: "Changelog", href: "/changelog" },
+          ].map((item, index, array) => (
+            <React.Fragment key={item.href}>
+              <Link
+                href={item.href}
+                className="text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-purple-500 transition-colors"
+              >
+                {item.label}
+              </Link>
+              {index < array.length - 1 && (
+                <div className="size-1 rounded-full bg-zinc-300 hidden md:block" />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
+
