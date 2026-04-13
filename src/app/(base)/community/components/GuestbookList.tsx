@@ -15,17 +15,21 @@ export async function GuestbookList() {
           return cookieStore.getAll();
         },
       },
-    }
+    },
   );
 
   const { data: messages, error } = await supabase
-    .from("guestbook")
+    .from("community_wall")
     .select("*")
     .order("created_at", { ascending: false });
 
   if (error) {
     console.error(error);
-    return <div className="text-muted-foreground italic p-8 text-center border border-dashed rounded-3xl">Failed to load messages.</div>;
+    return (
+      <div className="text-muted-foreground italic p-8 text-center border border-dashed rounded-3xl">
+        Failed to load messages.
+      </div>
+    );
   }
 
   if (!messages || messages.length === 0) {
@@ -39,19 +43,25 @@ export async function GuestbookList() {
   return (
     <div className="space-y-6">
       {messages.map((msg: any) => (
-        <Card key={msg.id} className="border-[#f0f0f0] dark:border-[#1a1a1a] bg-white/30 dark:bg-black/30 backdrop-blur-md hover:bg-white/50 dark:hover:bg-black/50 transition-all group overflow-hidden">
+        <Card
+          key={msg.id}
+          className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group overflow-hidden"
+        >
           <CardContent className="p-6">
             <div className="flex gap-4">
               <div className="shrink-0">
-                <img 
-                  src={msg.avatar_url || `https://ui-avatars.com/api/?name=${msg.name}`} 
-                  alt={msg.name} 
-                  className="size-10 rounded-full border-2 border-background shadow-sm"
+                <img
+                  src={
+                    msg.creator_avatar_url ||
+                    `https://ui-avatars.com/api/?name=${msg.creator_name}`
+                  }
+                  alt={msg.creator_name}
+                  className="size-10 rounded-full border-2 border-border"
                 />
               </div>
               <div className="flex-1 space-y-2">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-base">{msg.name}</h4>
+                  <h4 className="font-bold text-base">{msg.creator_name}</h4>
                   <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
                     {formatDateDiff(msg.created_at)}
                   </span>
@@ -62,7 +72,6 @@ export async function GuestbookList() {
               </div>
             </div>
           </CardContent>
-          <div className="h-1 w-full bg-gradient-to-r from-transparent via-purple-500/10 to-transparent group-hover:via-purple-500/30 transition-all" />
         </Card>
       ))}
     </div>

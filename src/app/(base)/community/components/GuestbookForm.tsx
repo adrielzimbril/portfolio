@@ -19,11 +19,13 @@ export function GuestbookForm({ user }: { user: any }) {
 
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("guestbook").insert({
+      const { error } = await supabase.from("community_wall").insert({
         user_id: user.id,
-        name: user.user_metadata.full_name || user.email,
-        avatar_url: user.user_metadata.avatar_url,
+        creator_name: user.user_metadata.full_name || user.email,
+        creator_avatar_url: user.user_metadata.avatar_url,
         message: message.trim(),
+        patternindex: Math.floor(Math.random() * 10),
+        rotation: Math.floor(Math.random() * 360),
       });
 
       if (error) throw error;
@@ -42,16 +44,18 @@ export function GuestbookForm({ user }: { user: any }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="flex items-center gap-3 mb-4">
-        <img 
-          src={user.user_metadata.avatar_url} 
-          alt={user.user_metadata.full_name} 
-          className="size-8 rounded-full ring-2 ring-purple-500/20"
+        <img
+          src={user.user_metadata.avatar_url}
+          alt={user.user_metadata.full_name}
+          className="size-8 rounded-full border-2 border-border"
         />
-        <span className="text-sm font-medium">{user.user_metadata.full_name}</span>
+        <span className="text-sm font-medium">
+          {user.user_metadata.full_name}
+        </span>
       </div>
       <Textarea
         placeholder="Write something nice..."
-        className="min-h-[120px] bg-foreground/5 border-none focus-visible:ring-1 focus-visible:ring-purple-500/50"
+        className="min-h-[120px] bg-muted border-none focus-visible:ring-1 focus-visible:ring-ring"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         maxLength={500}
@@ -60,11 +64,7 @@ export function GuestbookForm({ user }: { user: any }) {
         <p className="text-[10px] text-muted-foreground uppercase tracking-widest">
           {message.length} / 500
         </p>
-        <Button 
-          type="submit" 
-          disabled={isSubmitting || !message.trim()}
-          className="bg-purple-600 hover:bg-purple-700 text-white border-none shadow-lg shadow-purple-500/20"
-        >
+        <Button type="submit" disabled={isSubmitting || !message.trim()}>
           {isSubmitting ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (

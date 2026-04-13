@@ -1,30 +1,44 @@
 import React from "react";
 import { getTranslations } from "next-intl/server";
-import { toolbox } from "@/data/personal/toolbox";
+import { Metadata } from "next";
+import { metadata as baseMetadata } from "@/app/metadata";
+import { PageHero } from "@/components/shared/pages/shared/page-hero";
+import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { toolbox } from "@/data/personal/toolbox";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
+
   return {
-    title: `Toolbox | ${t("home.title")}`,
-    description: "The tools, libraries, and technologies I use to build software.",
+    ...baseMetadata,
+    title: t("toolbox.title"),
+    description: t("toolbox.description"),
+    openGraph: {
+      ...baseMetadata.openGraph,
+      title: t("toolbox.title"),
+      description: t("toolbox.description"),
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: t("toolbox.title"),
+      description: t("toolbox.description"),
+    },
   };
 }
 
-export default function ToolboxPage() {
+export default async function ToolboxPage() {
+  const t = await getTranslations();
   const categories = ["frontend", "backend", "design", "tools", "other"];
 
   return (
-    <div className="py-20 lg:py-32">
-      <div className="max-w-2xl mb-12 lg:mb-20">
-        <h1 className="text-4xl lg:text-6xl font-bold tracking-tight text-foreground mb-6">
-          Toolbox
-        </h1>
-        <p className="text-xl text-muted-foreground leading-relaxed">
-          The software, libraries, and technologies I use to build high-performance web applications.
-        </p>
-      </div>
+    <>
+      <PageHero
+        title={t("toolbox.page.title")}
+        description={t("toolbox.page.description")}
+        imagePath={{ emoji: "🧰" }}
+        isMobileShowed
+      />
 
       <div className="space-y-16">
         {categories.map((category) => {
@@ -32,41 +46,56 @@ export default function ToolboxPage() {
           if (items.length === 0) return null;
 
           return (
-            <div key={category} className="space-y-8">
-              <h2 className="text-2xl font-bold capitalize flex items-center gap-3">
-                <span className="size-2 rounded-full bg-purple-500" />
-                {category}
-              </h2>
+            <SectionLayout
+              key={category}
+              title={category}
+              description={`${items.length} ${category} tools and technologies`}
+              isFlex
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {items.map((item) => (
-                  <Card key={item.id} className="group border-[#f0f0f0] dark:border-[#1a1a1a] bg-white/50 dark:bg-black/50 backdrop-blur-xl transition-all hover:bg-white dark:hover:bg-zinc-900 overflow-hidden ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                     <CardContent className="p-6">
-                       <div className="flex flex-col gap-2">
-                         <h3 className="font-bold text-lg group-hover:text-purple-500 transition-colors">
-                           {item.name}
-                         </h3>
-                         <p className="text-sm text-muted-foreground leading-relaxed">
-                           {item.description}
-                         </p>
-                         {item.url && (
-                           <a 
-                             href={item.url} 
-                             target="_blank" 
-                             rel="noopener noreferrer"
-                             className="text-xs font-semibold text-purple-400 mt-2 flex items-center gap-1 hover:underline"
-                           >
-                             Visit Website
-                           </a>
-                         )}
-                       </div>
-                     </CardContent>
+                  <Card
+                    key={item.id}
+                    className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group"
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex flex-col gap-2">
+                        <h3 className="font-bold text-lg">{item.name}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {item.description}
+                        </p>
+                        {item.url && (
+                          <a
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold mt-2 flex items-center gap-1 hover:underline"
+                          >
+                            Visit Website
+                            <svg
+                              className="size-3"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </CardContent>
                   </Card>
                 ))}
               </div>
-            </div>
+            </SectionLayout>
           );
         })}
       </div>
-    </div>
+    </>
   );
 }
