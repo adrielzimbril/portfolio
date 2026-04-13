@@ -5,7 +5,7 @@ import {
   getAllQuests,
   getAllResources,
   getAllTalks,
-} from "@/module/content/utils/lib";
+} from "@/module/content/lib";
 import { Locale, PageType } from "@/types";
 import {
   getAbsolutePathUrl,

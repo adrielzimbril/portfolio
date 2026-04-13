@@ -4,7 +4,7 @@ import { appConfig } from "@/data/app-config";
 import {
   getQuestBySlug,
   isSubmissionClosed,
-} from "@/module/content/utils/lib/quests";
+} from "@/module/content/lib/quests";
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";
 import { addContact, ContactProvider } from "@/module/contact";

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { createTranslator } from "use-intl/core";
 import {
   Body,
@@ -21,18 +21,16 @@ import {
 import type { BaseMailProps } from "@/module/mail/types/types";
 import { siteConfig } from "@/data/config";
 
-export function QuestSubmitUserConfirmation({
+export function QuestRegisterUserConfirmation({
   locale,
   translations,
   name,
   questTitle,
   challengeUrl,
-  workUrl,
 }: BaseMailProps & {
   name?: string;
   questTitle: string;
   challengeUrl: string;
-  workUrl: string;
 }) {
   const t = createTranslator({ locale, messages: translations });
   const firstName: string = name?.split(" ")[0] ?? "";
@@ -51,7 +49,7 @@ export function QuestSubmitUserConfirmation({
           fontStyle="medium"
         />
       </Head>
-      <Preview>{t("mail.questSubmitUserConfirmation.preview")}</Preview>
+      <Preview>{t("mail.questRegisterUserConfirmation.preview")}</Preview>
       <Tailwind>
         <Body className="bg-[#fafaf9] my-8 font-sans">
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
@@ -60,30 +58,25 @@ export function QuestSubmitUserConfirmation({
                 as="h1"
                 className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                {t("mail.questSubmitUserConfirmation.subject")} 🚀
+                {t("mail.questRegisterUserConfirmation.subject")} ?
               </Heading>
             </Section>
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questSubmitUserConfirmation.greeting", { firstName })}
+                {t("mail.questRegisterUserConfirmation.greeting", { firstName })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questSubmitUserConfirmation.content.intro", {
+                {t("mail.questRegisterUserConfirmation.content.intro", {
                   questTitle,
                 })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questSubmitUserConfirmation.content.challengeLinkLabel")}: <Link href={challengeUrl}>{challengeUrl}</Link>
+                {t("mail.questRegisterUserConfirmation.content.challengeLinkLabel")}: <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questSubmitUserConfirmation.content.link")}: <Link href={workUrl}>{workUrl}</Link>
-              </Text>
-
               <Hr className="border-t border-[#e0e0e0] my-8" />
-
               <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.questSubmitUserConfirmation.content.wait")}
+                {t("mail.questRegisterUserConfirmation.content.wait")}
               </Text>
             </Section>
 
@@ -106,13 +99,12 @@ export function QuestSubmitUserConfirmation({
   );
 }
 
-QuestSubmitUserConfirmation.PreviewProps = {
+QuestRegisterUserConfirmation.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
   name: "Adriel",
   questTitle: "SaaS Landing Breakdown",
   challengeUrl: "https://example.com/quests/saas-landing-breakdown",
-  workUrl: "https://www.figma.com",
 };
 
-export default QuestSubmitUserConfirmation;
+export default QuestRegisterUserConfirmation;

@@ -1,7 +1,7 @@
 import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { PreviewCardContainerSectionProps } from "@/types/type";
-import { getAllPosts } from "@/module/content/utils/lib/posts";
+import { getAllPosts } from "@/module/content/lib/posts";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
 import { getLocale, getTranslations } from "next-intl/server";
 

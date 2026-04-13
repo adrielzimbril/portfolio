@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { createTranslator } from "use-intl/core";
 import {
   Body,
@@ -20,7 +20,7 @@ import {
 } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
 
-export function QuestRegisterAdminNotification({
+export function QuestSubmitAdminNotification({
   locale,
   translations,
   name,
@@ -28,6 +28,7 @@ export function QuestRegisterAdminNotification({
   questTitle,
   questSlug,
   challengeUrl,
+  workUrl,
   message,
 }: BaseMailProps & {
   name: string;
@@ -35,6 +36,7 @@ export function QuestRegisterAdminNotification({
   questTitle: string;
   questSlug: string;
   challengeUrl: string;
+  workUrl: string;
   message?: string;
 }) {
   const t = createTranslator({ locale, messages: translations });
@@ -53,7 +55,7 @@ export function QuestRegisterAdminNotification({
           fontStyle="medium"
         />
       </Head>
-      <Preview>{t("mail.questRegisterAdminNotification.preview")}</Preview>
+      <Preview>{t("mail.questSubmitAdminNotification.preview")}</Preview>
       <Tailwind>
         <Body className="bg-[#fafaf9] my-8 font-sans">
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
@@ -62,29 +64,33 @@ export function QuestRegisterAdminNotification({
                 as="h1"
                 className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                {t("mail.questRegisterAdminNotification.subject")} 🧾
+                {t("mail.questSubmitAdminNotification.subject")} ??
               </Heading>
             </Section>
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questRegisterAdminNotification.labels.challenge")}</strong>: {questTitle}
+                <strong>{t("mail.questSubmitAdminNotification.labels.challenge")}</strong>: {questTitle}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questRegisterAdminNotification.labels.url")}</strong>: <Link href={challengeUrl}>{challengeUrl}</Link>
+                <strong>{t("mail.questSubmitAdminNotification.labels.url")}</strong>: <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questRegisterAdminNotification.labels.slug")}</strong>: {questSlug}
+                <strong>{t("mail.questSubmitAdminNotification.labels.slug")}</strong>: {questSlug}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questRegisterAdminNotification.labels.name")}</strong>: {name}
+                <strong>{t("mail.questSubmitAdminNotification.labels.name")}</strong>: {name}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questRegisterAdminNotification.labels.email")}</strong>: {email}
+                <strong>{t("mail.questSubmitAdminNotification.labels.email")}</strong>: {email}
               </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-2">
+                <strong>{t("mail.questSubmitAdminNotification.labels.submittedWork")}</strong>: <Link href={workUrl}>{workUrl}</Link>
+              </Text>
+
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                <strong>{t("mail.questRegisterAdminNotification.labels.message")}</strong>: {message || "-"}
+                <strong>{t("mail.questSubmitAdminNotification.labels.message")}</strong>: {message || "-"}
               </Text>
             </Section>
 
@@ -104,15 +110,16 @@ export function QuestRegisterAdminNotification({
   );
 }
 
-QuestRegisterAdminNotification.PreviewProps = {
+QuestSubmitAdminNotification.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
-  name: "Jane",
-  email: "jane@example.com",
+  name: "John",
+  email: "john@example.com",
   questTitle: "SaaS Landing Breakdown",
   questSlug: "saas-landing-breakdown",
   challengeUrl: "https://example.com/quests/saas-landing-breakdown",
-  message: "Je veux progresser sur mes process UX.",
+  workUrl: "https://www.figma.com",
+  message: "Voici mon travail.",
 };
 
-export default QuestRegisterAdminNotification;
+export default QuestSubmitAdminNotification;

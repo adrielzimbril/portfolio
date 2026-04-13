@@ -16,7 +16,7 @@ import { localeRedirect } from "@/module/i18n/routing";
 import {
   getProjectWithAdjacent,
   getProjectBySlug,
-} from "@/module/content/utils/lib/projects";
+} from "@/module/content/lib/projects";
 import { getLocale } from "next-intl/server";
 import { routes } from "@/data/routes";
 import { PageParams} from "@/types";

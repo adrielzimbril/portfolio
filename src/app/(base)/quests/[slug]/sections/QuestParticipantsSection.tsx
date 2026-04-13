@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,7 +18,7 @@ import { cn, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import type { Quest } from "@/module/content/utils/lib/quests";
+import type { Quest } from "@/module/content/lib/quests";
 import { useTranslations } from "use-intl";
 
 type Winner = NonNullable<Quest["winners"]>[number];
@@ -58,13 +58,13 @@ function WinnerCard({ participant }: { participant: Winner }) {
 
   const rankBadge =
     participant.rank === 1
-      ? { emoji: "🥇", label: t("quests.participants.rank.first") }
+      ? { emoji: "??", label: t("quests.participants.rank.first") }
       : participant.rank === 2
-        ? { emoji: "🥈", label: t("quests.participants.rank.second") }
+        ? { emoji: "??", label: t("quests.participants.rank.second") }
         : participant.rank === 3
-          ? { emoji: "🥉", label: t("quests.participants.rank.third") }
+          ? { emoji: "??", label: t("quests.participants.rank.third") }
           : {
-              emoji: "🏆",
+              emoji: "??",
               label: t("quests.participants.rank.other", {
                 rank: participant.rank,
               }),
@@ -95,13 +95,13 @@ function WinnerCard({ participant }: { participant: Winner }) {
               <OverlayTag label={rankBadge.emoji} tooltip={rankBadge.label} />
               {participant.pixel_perfect && (
                 <OverlayTag
-                  label="🎖️"
+                  label="???"
                   tooltip={t("quests.participants.badges.pixelPerfect")}
                 />
               )}
               {participant.jury_favorite && (
                 <OverlayTag
-                  label="❤️"
+                  label="??"
                   tooltip={t("quests.participants.badges.juryFavorite")}
                 />
               )}

@@ -4,7 +4,7 @@ import {
   getAllProjects,
   getAllQuests,
   getAllResources
-} from "@/module/content/utils/lib";
+} from "@/module/content/lib";
 import type { MetadataRoute } from "next";
 import { Post, Project, Quest, Resource, Talk } from "@/module/content/types/types";
 import { getAbsolutePathUrl } from "@/utils/base-url";

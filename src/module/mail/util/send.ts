@@ -1,5 +1,5 @@
 import logger from "@/utils/logger";
-import type { mailTemplates } from "@/module/mail/emails";
+import type { mailTemplates } from "@/module/mail/templates";
 import { send } from "@/module/mail/provider";
 import type { TemplateId } from "@/module/mail/util/templates";
 import { getTemplate } from "@/module/mail/util/templates";

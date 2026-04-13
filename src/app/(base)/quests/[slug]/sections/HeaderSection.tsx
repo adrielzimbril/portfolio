@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { HeaderSection as QuestHeaderSection } from "@/components/shared/pages/quests/page/header-section";
 import { PreviewContentType } from "@/types";
@@ -8,7 +8,7 @@ import { QuestAskType } from "@/types/enum";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/utils/lib";
+} from "@/module/content/lib";
 
 export function HeaderSection({
   title,
@@ -46,7 +46,7 @@ export function HeaderSection({
             }
           : {
               type: PreviewContentType.TEXT,
-              emoji: "🏆",
+              emoji: "??",
               title,
               subtitle: description,
             }
@@ -68,7 +68,7 @@ export function HeaderSection({
           : isSubmissionOpen
             ? t("quests.inner-page.header.cta.submitWork")
             : ""
-      } 🦄`}
+      } ??`}
     />
   );
 }

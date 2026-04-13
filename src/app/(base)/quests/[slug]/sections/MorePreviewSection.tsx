@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { QuestCard } from "@/components/shared/pages/quests/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
@@ -10,7 +10,7 @@ import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/utils/lib";
+} from "@/module/content/lib";
 
 export function MorePreviewSection({ data }: { data: Quest[] }) {
   const t = useTranslations();

@@ -3,7 +3,7 @@ import { localeRedirect } from "@i18n/routing";
 import {
   getPostBySlug,
   getPostWithAdjacent,
-} from "@/module/content/utils/lib/posts";
+} from "@/module/content/lib";
 import { getLocale } from "next-intl/server";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";

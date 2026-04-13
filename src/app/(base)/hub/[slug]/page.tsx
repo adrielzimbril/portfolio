@@ -8,7 +8,7 @@ import { PageParams } from "@/types";
 import {
   getResourceWithAdjacent,
   getResourceBySlug,
-} from "@/module/content/utils/lib/resources";
+} from "@/module/content/lib/resources";
 import { localeRedirect } from "@/module/i18n/routing";
 import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";

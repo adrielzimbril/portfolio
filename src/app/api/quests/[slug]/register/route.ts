@@ -1,10 +1,7 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
 import { appConfig } from "@/data/app-config";
-import {
-  getQuestBySlug,
-  isRegistrationClosed,
-} from "@/module/content/utils/lib/quests";
+import { getQuestBySlug } from "@/module/content/lib";
 import { addContact, ContactProvider } from "@/module/contact";
 import { sendEmail } from "@/module/mail";
 import { supabase } from "@/module/supabase/client";

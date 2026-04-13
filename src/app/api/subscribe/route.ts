@@ -6,7 +6,7 @@ import { sendEmail } from "@/module/mail";
 import { addContact } from "@/module/contact";
 import { ContactProvider } from "@/module/contact/types/types";
 import { getResourcesUrl, validateSimpleClientToken } from "@/utils";
-import { getResourceById } from "@/module/content/utils/lib";
+import { getResourceById } from "@/module/content/lib";
 import { Locale, PageType, ResourceType } from "@/types";
 import {
   AllUserResourceSlug,

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { HeaderSection } from "./sections/HeaderSection";
 import { QuestDetailsSection } from "./sections/QuestDetailsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
@@ -16,7 +16,7 @@ import {
   isRegistrationClosed,
   isSubmissionClosed,
   isResultsPublished,
-} from "@/module/content/utils/lib/quests";
+} from "@/module/content/lib/quests";
 import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
 

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { createTranslator } from "use-intl/core";
 import {
   Body,
@@ -19,21 +19,25 @@ import {
   defaultLocale,
 } from "@/module/mail/util/translations";
 import type { BaseMailProps } from "@/module/mail/types/types";
-import { siteConfig } from "@/data/config";
 
-export function QuestRegisterUserConfirmation({
+export function QuestRegisterAdminNotification({
   locale,
   translations,
   name,
+  email,
   questTitle,
+  questSlug,
   challengeUrl,
+  message,
 }: BaseMailProps & {
-  name?: string;
+  name: string;
+  email: string;
   questTitle: string;
+  questSlug: string;
   challengeUrl: string;
+  message?: string;
 }) {
   const t = createTranslator({ locale, messages: translations });
-  const firstName: string = name?.split(" ")[0] ?? "";
 
   return (
     <Html>
@@ -49,7 +53,7 @@ export function QuestRegisterUserConfirmation({
           fontStyle="medium"
         />
       </Head>
-      <Preview>{t("mail.questRegisterUserConfirmation.preview")}</Preview>
+      <Preview>{t("mail.questRegisterAdminNotification.preview")}</Preview>
       <Tailwind>
         <Body className="bg-[#fafaf9] my-8 font-sans">
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
@@ -58,25 +62,29 @@ export function QuestRegisterUserConfirmation({
                 as="h1"
                 className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                {t("mail.questRegisterUserConfirmation.subject")} ✨
+                {t("mail.questRegisterAdminNotification.subject")} ??
               </Heading>
             </Section>
 
             <Section className="px-10 pb-10 bg-white text-left">
-              <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questRegisterUserConfirmation.greeting", { firstName })}
+              <Text className="text-[#333333] text-base leading-relaxed mb-2">
+                <strong>{t("mail.questRegisterAdminNotification.labels.challenge")}</strong>: {questTitle}
               </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questRegisterUserConfirmation.content.intro", {
-                  questTitle,
-                })}
+              <Text className="text-[#333333] text-base leading-relaxed mb-2">
+                <strong>{t("mail.questRegisterAdminNotification.labels.url")}</strong>: <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
-              <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questRegisterUserConfirmation.content.challengeLinkLabel")}: <Link href={challengeUrl}>{challengeUrl}</Link>
+              <Text className="text-[#333333] text-base leading-relaxed mb-2">
+                <strong>{t("mail.questRegisterAdminNotification.labels.slug")}</strong>: {questSlug}
               </Text>
-              <Hr className="border-t border-[#e0e0e0] my-8" />
-              <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.questRegisterUserConfirmation.content.wait")}
+              <Text className="text-[#333333] text-base leading-relaxed mb-2">
+                <strong>{t("mail.questRegisterAdminNotification.labels.name")}</strong>: {name}
+              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-2">
+                <strong>{t("mail.questRegisterAdminNotification.labels.email")}</strong>: {email}
+              </Text>
+              <Hr className="border-t border-[#e0e0e0] my-6" />
+              <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
+                <strong>{t("mail.questRegisterAdminNotification.labels.message")}</strong>: {message || "-"}
               </Text>
             </Section>
 
@@ -85,11 +93,8 @@ export function QuestRegisterUserConfirmation({
               <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
                 {t("mail.common.signature")}
               </Text>
-              <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.contact")}: {" "}
-                <Link href={`mailto:${siteConfig.links.contact.email}`}>
-                  {siteConfig.links.contact.email}
-                </Link>
+              <Text className="text-[#666666] text-center text-sm leading-relaxed">
+                {t("mail.common.contactAdmin")}
               </Text>
             </Section>
           </Container>
@@ -99,12 +104,15 @@ export function QuestRegisterUserConfirmation({
   );
 }
 
-QuestRegisterUserConfirmation.PreviewProps = {
+QuestRegisterAdminNotification.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
-  name: "Adriel",
+  name: "Jane",
+  email: "jane@example.com",
   questTitle: "SaaS Landing Breakdown",
+  questSlug: "saas-landing-breakdown",
   challengeUrl: "https://example.com/quests/saas-landing-breakdown",
+  message: "Je veux progresser sur mes process UX.",
 };
 
-export default QuestRegisterUserConfirmation;
+export default QuestRegisterAdminNotification;

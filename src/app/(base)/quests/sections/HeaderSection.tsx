@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
@@ -23,7 +23,7 @@ export function HeaderSection() {
       title={t("quests.page.header-section.title")}
       description={t("quests.page.header-section.description")}
       isMobileShowed
-      imagePath={{ emoji: "🏆" }}
+      imagePath={{ emoji: "??" }}
       actionButton
     />
   );

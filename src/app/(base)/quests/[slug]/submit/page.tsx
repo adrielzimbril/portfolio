@@ -1,8 +1,8 @@
-﻿import { getLocale, getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   getQuestBySlug,
   isSubmissionClosed,
-} from "@/module/content/utils/lib/quests";
+} from "@/module/content/lib/quests";
 import { IntentionForm } from "./sections/IntentionForm";
 import { HeaderSection } from "./sections/HeaderSection";
 import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
