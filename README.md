@@ -79,7 +79,7 @@ src/
 ├── config/               # Configuration de l'application
 ├── content/              # Contenu statique (MDX, etc.)
 ├── lib/                  # Utilitaires et helpers
-├── module/               # Logique métier
+├── integrations/               # Logique métier
 ├── services/             # Services externes
 ├── types/                # Définitions TypeScript
 └── utils/                # Utilitaires divers

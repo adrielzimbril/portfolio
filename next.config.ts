@@ -5,10 +5,10 @@ import { appConfig } from "@data/app-config";
 import bundleAnalyzer from "@next/bundle-analyzer";
 
 const withNextIntl = nextIntlPlugin({
-  requestConfig: "./src/module/i18n/request.ts",
+  requestConfig: "./src/integrations/i18n/request.ts",
   experimental: {
     createMessagesDeclaration: Object.keys(appConfig.i18n.locales).map(
-      (locale) => `./src/module/i18n/translations/${locale}.json`
+      (locale) => `./src/integrations/i18n/translations/${locale}.json`
     ),
   },
 });

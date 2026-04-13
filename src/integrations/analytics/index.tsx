@@ -1,3 +1,3 @@
 export * from "@/integrations/analytics/provider/vercel";
-// export * from "@/module/analytics/provider/posthog";
-// export * from "@/module/analytics/provider/google";
+// export * from "@/integrations/analytics/provider/posthog";
+// export * from "@/integrations/analytics/provider/google";
