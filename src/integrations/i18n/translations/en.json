@@ -32,10 +32,10 @@
       "description": "Links, socials and ways to join my ride."
     },
     "sections": {
-      "social": {
-        "title": "Social Platforms",
-        "description": "Where you can find me online.",
-        "badge": "Connect 🔗"
+      "people": {
+        "title": "People",
+        "description": "People I want to meet or have already met.",
+        "badge": "Connections �"
       }
     }
   },

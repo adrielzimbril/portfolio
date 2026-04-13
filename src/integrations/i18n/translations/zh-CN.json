@@ -32,10 +32,10 @@
       "description": "加入我的创意之旅的链接和社交平台。"
     },
     "sections": {
-      "social": {
-        "title": "社交平台",
-        "description": "你可以在哪里找到我。",
-        "badge": "连接 🔗"
+      "people": {
+        "title": "人物",
+        "description": "我想见或已经见过的人。",
+        "badge": "连接 �"
       }
     }
   },

@@ -32,10 +32,10 @@
       "description": "Liens, réseaux et moyens de rejoindre ma ride."
     },
     "sections": {
-      "social": {
-        "title": "Plateformes Sociales",
-        "description": "Où vous pouvez me trouver en ligne.",
-        "badge": "Connect 🔗"
+      "people": {
+        "title": "Personnes",
+        "description": "Personnes que je veux rencontrer ou que j'ai déjà rencontrées.",
+        "badge": "Connexions �"
       }
     }
   },

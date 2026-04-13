@@ -6,7 +6,7 @@ import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 import { connections } from "@/data/personal/connections";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -42,51 +42,37 @@ export default async function ConnectionsPage() {
       />
 
       <SectionLayout
-        title={t("connections.sections.social.title")}
-        description={t("connections.sections.social.description")}
-        badge={t("connections.sections.social.badge")}
+        title={t("connections.sections.people.title")}
+        description={t("connections.sections.people.description")}
+        badge={t("connections.sections.people.badge")}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {connections.map((connection) => (
             <Card
               key={connection.id}
-              className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group"
+              className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group overflow-hidden"
             >
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-4">
-                    <div className="size-12 rounded-xl bg-muted flex items-center justify-center">
-                      <span className="text-xl font-bold">
-                        {connection.platform[0]}
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg">
-                        {connection.platform}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {connection.url.replace("https://", "")}
-                      </p>
-                    </div>
-                  </div>
-                  {connection.active && (
-                    <Badge variant="default" className="shrink-0">
-                      Active
+              <CardContent className="p-0">
+                <div className="relative h-48 bg-muted">
+                  <Image
+                    src={connection.image}
+                    alt={connection.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold text-lg mb-3">{connection.name}</h3>
+                  {connection.met ? (
+                    <Badge variant="secondary" className="text-xs">
+                      Met on {new Date(connection.met).toLocaleDateString()}
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline" className="text-xs">
+                      Not met yet
                     </Badge>
                   )}
                 </div>
-                <p className="text-muted-foreground mb-4">
-                  {connection.description}
-                </p>
-                <a
-                  href={connection.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold hover:underline"
-                >
-                  Connect
-                  <ExternalLink className="size-4" />
-                </a>
               </CardContent>
             </Card>
           ))}
