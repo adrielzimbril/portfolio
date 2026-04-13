@@ -1,4 +1,95 @@
 {
+  "stats": {
+    "title": "Statistics",
+    "description": "Insights and metrics about my work and projects.",
+    "page": {
+      "title": "Behind the scenes in numbers",
+      "description": "Transparency, growth and evolution of my creator universe."
+    },
+    "sections": {
+      "blog": {
+        "title": "Blog Stats",
+        "description": "Content creation metrics and reading time analysis.",
+        "badge": "Content 📝"
+      },
+      "engagement": {
+        "title": "Engagement",
+        "description": "How people interact with my content and community.",
+        "badge": "Community ❤️"
+      },
+      "github": {
+        "title": "GitHub",
+        "description": "Open-source contributions and repository metrics.",
+        "badge": "Code 💻"
+      }
+    }
+  },
+  "connections": {
+    "title": "Connections",
+    "description": "Connect with me across the web.",
+    "page": {
+      "title": "Stay in touch with the creative orbital",
+      "description": "Links, socials and ways to join my ride."
+    },
+    "sections": {
+      "social": {
+        "title": "Social Platforms",
+        "description": "Where you can find me online.",
+        "badge": "Connect 🔗"
+      }
+    }
+  },
+  "community": {
+    "title": "Community Wall",
+    "description": "Leave a message on the wall and join the community.",
+    "page": {
+      "title": "A space for creators and curious minds",
+      "description": "Exchange, learn and build together in a benevolent space."
+    },
+    "sections": {
+      "wall": {
+        "title": "Community Wall",
+        "description": "Messages from the community.",
+        "badge": "Wall 🎨"
+      }
+    },
+    "form": {
+      "title": "Share your message",
+      "signInPrompt": "You need to be signed in with GitHub to post a message.",
+      "signInButton": "Sign in with GitHub"
+    }
+  },
+  "toolbox": {
+    "title": "Toolbox",
+    "description": "The tools, libraries, and technologies I use to build software.",
+    "page": {
+      "title": "The essential workshop for your SaaS",
+      "description": "Oils, frameworks and tools I use to build every day."
+    }
+  },
+  "setup": {
+    "title": "My Setup",
+    "description": "The hardware and peripherals I use for my creative work.",
+    "page": {
+      "title": "My creative and productive workspace",
+      "description": "The gear and config that accompany me in my creative ride."
+    }
+  },
+  "changelog": {
+    "title": "Changelog",
+    "description": "Tracking the evolution, features, and fixes of this project.",
+    "page": {
+      "title": "Evolution and new updates",
+      "description": "Discover what's new in the Shirofolio universe."
+    },
+    "sections": {
+      "timeline": {
+        "title": "Timeline",
+        "description": "History of changes and improvements.",
+        "badge": "Updates ✨"
+      }
+    }
+  },
   "about": {
     "description": "I'm Adriel, product designer and trainer. My mission: simplify creating SaaS, inspire and guide those who want to bring their ideas to life.",
     "keywords": "about Adriel Zimbril, SaaS Product Designer, SaaS trainer, product design journey SaaS, ShiroSaaS method",

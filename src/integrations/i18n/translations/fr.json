@@ -1,4 +1,95 @@
 {
+  "stats": {
+    "title": "Statistiques",
+    "description": "Informations et métriques sur mon travail et mes projets.",
+    "page": {
+      "title": "Les coulisses en chiffres",
+      "description": "Transparence, croissance et évolution de mon univers créatif."
+    },
+    "sections": {
+      "blog": {
+        "title": "Statistiques du Blog",
+        "description": "Métriques de création de contenu et analyse du temps de lecture.",
+        "badge": "Contenu 📝"
+      },
+      "engagement": {
+        "title": "Engagement",
+        "description": "Comment les gens interagissent avec mon contenu et ma communauté.",
+        "badge": "Communauté ❤️"
+      },
+      "github": {
+        "title": "GitHub",
+        "description": "Contributions open-source et métriques de dépôts.",
+        "badge": "Code 💻"
+      }
+    }
+  },
+  "connections": {
+    "title": "Connexions",
+    "description": "Connectez-vous avec moi sur le web.",
+    "page": {
+      "title": "Garde le contact avec l'orbite créative",
+      "description": "Liens, réseaux et moyens de rejoindre ma ride."
+    },
+    "sections": {
+      "social": {
+        "title": "Plateformes Sociales",
+        "description": "Où vous pouvez me trouver en ligne.",
+        "badge": "Connect 🔗"
+      }
+    }
+  },
+  "community": {
+    "title": "Mur Communautaire",
+    "description": "Laissez un message sur le mur et rejoignez la communauté.",
+    "page": {
+      "title": "Un espace pour les créateurs et les curieux",
+      "description": "Échangez, apprenez et construisez ensemble dans un espace bienveillant."
+    },
+    "sections": {
+      "wall": {
+        "title": "Mur Communautaire",
+        "description": "Messages de la communauté.",
+        "badge": "Mur 🎨"
+      }
+    },
+    "form": {
+      "title": "Partagez votre message",
+      "signInPrompt": "Vous devez être connecté avec GitHub pour poster un message.",
+      "signInButton": "Se connecter avec GitHub"
+    }
+  },
+  "toolbox": {
+    "title": "Boîte à Outils",
+    "description": "Les outils, bibliothèques et technologies que j'utilise pour créer des logiciels.",
+    "page": {
+      "title": "L'atelier indispensable pour ton SaaS",
+      "description": "Outils, frameworks et ressources que j'utilise au quotidien."
+    }
+  },
+  "setup": {
+    "title": "Mon Setup",
+    "description": "Le matériel et les périphériques que j'utilise pour mon travail créatif.",
+    "page": {
+      "title": "Mon espace de création et de productivité",
+      "description": "Le matériel et la config qui m'accompagnent dans ma ride créative."
+    }
+  },
+  "changelog": {
+    "title": "Changelog",
+    "description": "Suivi de l'évolution, des fonctionnalités et des corrections de ce projet.",
+    "page": {
+      "title": "Évolutions et nouveautés",
+      "description": "Découvrez ce qui a changé dans l'univers Shirofolio."
+    },
+    "sections": {
+      "timeline": {
+        "title": "Timeline",
+        "description": "Historique des changements et améliorations.",
+        "badge": "Mises à jour ✨"
+      }
+    }
+  },
   "home": {
     "title": "Hey 👋🏻",
     "description": "Designer produit et créateur de la méthode ShiroSaaS, j'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles, beaux et rentables.",

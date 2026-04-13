@@ -29,8 +29,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function ConnectionsPage() {
-  const t = getTranslations();
+export default async function ConnectionsPage() {
+  const t = await getTranslations();
 
   return (
     <>

@@ -1,4 +1,95 @@
 {
+  "stats": {
+    "title": "统计数据",
+    "description": "关于我的工作和项目的见解和指标。",
+    "page": {
+      "title": "幕后数字",
+      "description": "我的创作者世界的透明度、增长和演变。"
+    },
+    "sections": {
+      "blog": {
+        "title": "博客统计",
+        "description": "内容创建指标和阅读时间分析。",
+        "badge": "内容 📝"
+      },
+      "engagement": {
+        "title": "参与度",
+        "description": "人们如何与我的内容和社区互动。",
+        "badge": "社区 ❤️"
+      },
+      "github": {
+        "title": "GitHub",
+        "description": "开源贡献和仓库指标。",
+        "badge": "代码 💻"
+      }
+    }
+  },
+  "connections": {
+    "title": "连接",
+    "description": "在网上与我联系。",
+    "page": {
+      "title": "保持联系",
+      "description": "加入我的创意之旅的链接和社交平台。"
+    },
+    "sections": {
+      "social": {
+        "title": "社交平台",
+        "description": "你可以在哪里找到我。",
+        "badge": "连接 🔗"
+      }
+    }
+  },
+  "community": {
+    "title": "社区墙",
+    "description": "在墙上留言并加入社区。",
+    "page": {
+      "title": "创作者和好奇者的空间",
+      "description": "在友好的氛围中交流、学习并共同构建。"
+    },
+    "sections": {
+      "wall": {
+        "title": "社区墙",
+        "description": "来自社区的消息。",
+        "badge": "墙 🎨"
+      }
+    },
+    "form": {
+      "title": "分享你的消息",
+      "signInPrompt": "你需要使用 GitHub 登录才能发布消息。",
+      "signInButton": "使用 GitHub 登录"
+    }
+  },
+  "toolbox": {
+    "title": "工具箱",
+    "description": "我用于构建软件的工具、库和技术。",
+    "page": {
+      "title": "SaaS 开发的基础工具箱",
+      "description": "我每天使用的框架和工具。"
+    }
+  },
+  "setup": {
+    "title": "我的设置",
+    "description": "我用于创意工作的硬件和外围设备。",
+    "page": {
+      "title": "我的创意和生产力空间",
+      "description": "陪伴我进行创意之旅的硬件和配置。"
+    }
+  },
+  "changelog": {
+    "title": "更新日志",
+    "description": "跟踪此项目的演变、功能和修复。",
+    "page": {
+      "title": "演变与更新",
+      "description": "探索 Shirofolio 世界的新动态。"
+    },
+    "sections": {
+      "timeline": {
+        "title": "时间线",
+        "description": "变更和改进的历史。",
+        "badge": "更新 ✨"
+      }
+    }
+  },
   "about": {
     "description": "我是 Adriel，产品设计师和培训师。我的使命：简化 SaaS 的创建，激发并引导那些想要实现想法的人。",
     "keywords": "关于 Adriel Zimbril, SaaS 产品设计师, SaaS 培训, 产品设计路径, ShiroSaaS 方法",
