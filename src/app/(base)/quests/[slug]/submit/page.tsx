@@ -2,7 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import {
   getQuestBySlug,
   isSubmissionClosed,
-} from "@/module/content/lib/quests";
+} from "@/integrations/content/lib/quests";
 import { IntentionForm } from "./sections/IntentionForm";
 import { HeaderSection } from "./sections/HeaderSection";
 import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
@@ -10,7 +10,7 @@ import { PageParams, PageType } from "@/types";
 import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { Metadata } from "next";
-import { localeRedirect } from "@/module/i18n/routing";
+import { localeRedirect } from "@/integrations/i18n/routing";
 import { routes } from "@/data/routes";
 
 export async function generateMetadata(props: {

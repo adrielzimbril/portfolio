@@ -2,7 +2,7 @@
 import React from "react";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { useTranslations, useLocale } from "use-intl";
-import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils/base-url";

@@ -10,11 +10,11 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations, useLocale } from "use-intl";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "sonner";
-import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { routes } from "@/data/routes";
 import { usePageViews } from "@/hooks/usePageViews";
 import { getPathUrl, sleep } from "@/utils";
-import { useTurnstile } from "@/module/anti-bot/turnstile";
+import { useTurnstile } from "@/integrations/anti-bot/turnstile";
 
 export function NewsletterForm() {
   const t = useTranslations();

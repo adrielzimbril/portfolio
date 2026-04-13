@@ -2,7 +2,7 @@
 import React from "react";
 import { QuestCard } from "@/components/shared/pages/quests/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import { Quest } from "@/module/content/types";
+import { Quest } from "@/integrations/content/types";
 import { useTranslations } from "use-intl";
 import { getResourcesUrl } from "@/utils/base-url";
 import {  getHumanDate } from "@utils/format-date";
@@ -10,7 +10,7 @@ import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/lib";
+} from "@/integrations/content/lib";
 
 export function MorePreviewSection({ data }: { data: Quest[] }) {
   const t = useTranslations();

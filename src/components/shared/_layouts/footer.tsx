@@ -4,7 +4,7 @@ import { Link } from "@/components/ui/link";
 import {
   getBestResourcesLink,
   type ResourcePreview,
-} from "@/module/content/lib";
+} from "@/integrations/content/lib";
 import { getResourcesUrl, getThisMonth } from "@/utils";
 import { SectionBase } from "../pages/shared/section-base";
 import { siteConfig } from "@/data/config";

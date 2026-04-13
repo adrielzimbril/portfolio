@@ -2,7 +2,7 @@ import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { ProjectPreviewCardContainerSectionProps } from "@/types/type";
-import { getAllProjects } from "@/module/content/lib";
+import { getAllProjects } from "@/integrations/content/lib";
 import { cn } from "@/utils/utils";;
 import { getLocale, getTranslations } from "next-intl/server";
 

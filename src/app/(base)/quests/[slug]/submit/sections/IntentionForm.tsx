@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { apiRoutes } from "@/data/api-routes";
-import type { Quest } from "@/module/content/lib/quests";
+import type { Quest } from "@/integrations/content/lib/quests";
 import { getHumanDate } from "@/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { cn } from "@/utils/utils";
-import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { routes } from "@/data/routes";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/components/ui/link";

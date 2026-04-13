@@ -1,5 +1,5 @@
 import logger from "@/utils/logger";
-import { routing } from "@i18n/routing";
+import { routing } from "@/integrations/i18n/routing";
 
 import createMiddleware from "next-intl/middleware";
 import { type NextRequest } from "next/server";

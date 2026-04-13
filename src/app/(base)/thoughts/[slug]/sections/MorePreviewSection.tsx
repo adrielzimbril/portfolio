@@ -1,7 +1,7 @@
 "use client";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import { Post } from "@/module/content/types";
+import { Post } from "@/integrations/content/types";
 import { useTranslations } from "next-intl";
 
 export function MorePreviewSection({ data }: { data: Post[] }) {

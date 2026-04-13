@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { motion } from "motion/react";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { useTranslations } from "use-intl";
 
 interface LoadMoreUIProps {

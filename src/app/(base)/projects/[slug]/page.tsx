@@ -12,11 +12,11 @@ import {
 import { ProjectResultSection } from "./sections/ProjectResultSection";
 import { GoalResearchSection } from "./sections/GoalResearchSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { localeRedirect } from "@/module/i18n/routing";
+import { localeRedirect } from "@/integrations/i18n/routing";
 import {
   getProjectWithAdjacent,
   getProjectBySlug,
-} from "@/module/content/lib/projects";
+} from "@/integrations/content/lib/projects";
 import { getLocale } from "next-intl/server";
 import { routes } from "@/data/routes";
 import { PageParams} from "@/types";

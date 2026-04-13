@@ -1,5 +1,5 @@
 "use client";
-import { Post, Resource, Project } from "@/module/content/types";
+import { Post, Resource, Project } from "@/integrations/content/types";
 import { ResourceSection } from "@/components/shared/pages/shared/resource-content";
 import { PageType } from "@/types";
 

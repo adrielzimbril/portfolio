@@ -7,7 +7,7 @@
  * Resources are managed through content collections and can be accessed by their slugs.
  */
 
-import { getResourceBySlug } from "@/module/content/lib";
+import { getResourceBySlug } from "@/integrations/content/lib";
 
 /**
  * Base URL for all resources

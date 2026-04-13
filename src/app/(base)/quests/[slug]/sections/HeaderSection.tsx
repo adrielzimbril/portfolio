@@ -8,7 +8,7 @@ import { QuestAskType } from "@/types/enum";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/lib";
+} from "@/integrations/content/lib";
 
 export function HeaderSection({
   title,

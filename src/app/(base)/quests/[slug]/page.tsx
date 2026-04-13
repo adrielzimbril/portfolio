@@ -4,7 +4,7 @@ import { QuestDetailsSection } from "./sections/QuestDetailsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { getLocale, getTranslations } from "next-intl/server";
 import { PageParams } from "@/types";
-import { localeRedirect } from "@/module/i18n/routing";
+import { localeRedirect } from "@/integrations/i18n/routing";
 import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
@@ -16,7 +16,7 @@ import {
   isRegistrationClosed,
   isSubmissionClosed,
   isResultsPublished,
-} from "@/module/content/lib/quests";
+} from "@/integrations/content/lib/quests";
 import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
 

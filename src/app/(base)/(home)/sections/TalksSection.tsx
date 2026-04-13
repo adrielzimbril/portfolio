@@ -3,8 +3,8 @@ import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { TalksCard } from "@/components/shared/pages/talks/card";
 import { AttendanceType } from "@/types";
-import { getAllTalks } from "@/module/content/lib";
-import type { Talk } from "@/module/content/lib/talks";
+import { getAllTalks } from "@/integrations/content/lib";
+import type { Talk } from "@/integrations/content/lib/talks";
 import { getExternalUrl, getHumanDate } from "@/utils";
 
 const config = {

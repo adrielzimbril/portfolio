@@ -5,11 +5,11 @@ import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { getResourcesUrl } from "@/utils/base-url";
 import { getHumanDate } from "@utils/format-date";
-import type { Quest } from "@/module/content/lib/quests";
+import type { Quest } from "@/integrations/content/lib/quests";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/lib/quests";
+} from "@/integrations/content/lib/quests";
 import { QuestCard } from "@/components/shared/pages/quests/card";
 import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 import { useTranslations } from "use-intl";

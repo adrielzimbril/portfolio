@@ -3,7 +3,7 @@ import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
 import { useLoadMore } from "@/hooks/useLoadMore";
-import { Resource } from "@/module/content/types";
+import { Resource } from "@/integrations/content/types";
 
 interface MyHubSectionProps {
   data: Resource[];

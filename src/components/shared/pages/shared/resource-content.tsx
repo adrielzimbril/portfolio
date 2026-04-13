@@ -1,7 +1,7 @@
 "use client";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
-import { Project, Post, Resource } from "@/module/content/types";
+import { Project, Post, Resource } from "@/integrations/content/types";
 import { PageType } from "@/types";
 import { getDate } from "@/utils";
 import { useCallback, useMemo, useState } from "react";

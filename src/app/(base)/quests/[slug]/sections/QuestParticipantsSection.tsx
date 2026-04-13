@@ -18,7 +18,7 @@ import { cn, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import type { Quest } from "@/module/content/lib/quests";
+import type { Quest } from "@/integrations/content/lib/quests";
 import { useTranslations } from "use-intl";
 
 type Winner = NonNullable<Quest["winners"]>[number];

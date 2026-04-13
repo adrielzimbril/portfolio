@@ -14,7 +14,7 @@ import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
-import { getUserLocale } from "@/module/i18n/lib/locale-cookie";
+import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
 import { notFound } from "next/navigation";
 
 export const viewport: Viewport = {
