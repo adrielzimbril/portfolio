@@ -129,55 +129,56 @@ export async function Footer() {
   );
 }
 
+async function FooterResources({ resources }: { resources: ResourcePreview[] }) {
+  const t = await getTranslations();
+  
+  const footerLinks = [
+    routes.community,
+    routes.stats,
+    routes.toolbox,
+    routes.setup,
+    routes.connections,
+    routes.changelog,
+  ];
+
   return (
-    <div className="w-full flex flex-col gap-4">
-      <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
-        <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
-          {resources.map((resource, index) => (
-            <React.Fragment key={resource.slug ?? index}>
-              <Link
-                href={getResourcesUrl(PageType.HUB, resource.slug)}
-                className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
-              >
-                {resource.title}
-              </Link>
-              {index < resources.length - 1 && (
-                <>
-                  <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
-                  <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
-                </>
-              )}
-            </React.Fragment>
-          ))}
+    <div className="w-full flex flex-col gap-8 md:gap-10 py-6 md:py-10 border-t border-b-bases/10 border-t-bases/10 mt-4">
+      {/* Primary Navigation */}
+      <nav className="w-full flex flex-wrap justify-center items-center gap-x-6 gap-y-3 px-4" aria-label="Footer navigation">
+        {footerLinks.map((item, index) => (
+          <React.Fragment key={item.key}>
+            <Link
+              href={item.link}
+              className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-b-white-invert-thr hover:text-b-primary transition-all duration-300 hover:tracking-[0.25em]"
+            >
+              {t(`common.menu.${item.key}.default`)}
+            </Link>
+            {index < footerLinks.length - 1 && (
+              <div className="size-1 rounded-full bg-b-white-invert-thr/20 hidden md:block shrink-0" />
+            )}
+          </React.Fragment>
+        ))}
+      </nav>
+
+      {/* Hub Resources */}
+      {resources.length > 0 && (
+        <div className="w-full flex flex-col gap-4">
+          <div className="w-full flex flex-wrap justify-center items-center gap-2 px-4 max-w-4xl mx-auto">
+            {resources.map((resource, index) => (
+              <React.Fragment key={resource.slug ?? index}>
+                <Link
+                  href={getResourcesUrl(PageType.HUB, resource.slug)}
+                  className="text-xs font-medium text-b-white-invert-sec bg-stone-200/50 dark:bg-zinc-800/50 hover:bg-stone-200 dark:hover:bg-zinc-800 rounded-full py-1.5 px-4 transition-colors"
+                >
+                  {resource.title}
+                </Link>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
-      
-      {/* New Pages Navigation */}
-      <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6 overflow-hidden">
-        <div className="w-full flex flex-wrap justify-center items-center gap-4 px-4">
-          {[
-            { label: "Community", href: "/community" },
-            { label: "Stats", href: "/stats" },
-            { label: "Toolbox", href: "/toolbox" },
-            { label: "My Setup", href: "/setup" },
-            { label: "Connections", href: "/connections" },
-            { label: "Changelog", href: "/changelog" },
-          ].map((item, index, array) => (
-            <React.Fragment key={item.href}>
-              <Link
-                href={item.href}
-                className="text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-purple-500 transition-colors"
-              >
-                {item.label}
-              </Link>
-              {index < array.length - 1 && (
-                <div className="size-1 rounded-full bg-zinc-300 hidden md:block" />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 }
+
 

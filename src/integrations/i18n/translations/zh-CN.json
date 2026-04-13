@@ -398,6 +398,36 @@
           "emoji": "🏆",
           "title": "进行中的挑战与 Quest",
           "subtitle": "报名、提交作品并冲击领奖台 🏆"
+        },
+        "community": {
+          "emoji": "🐼",
+          "title": "创作者和好奇者的空间",
+          "subtitle": "在友好的氛围中交流、学习并共同构建 🫶🏻"
+        },
+        "stats": {
+          "emoji": "📈",
+          "title": "幕后数字",
+          "subtitle": "我的创作者世界的透明度、增长和演变 📊"
+        },
+        "toolbox": {
+          "emoji": "🧰",
+          "title": "SaaS 开发的基础工具箱",
+          "subtitle": "我每天使用的框架和工具 🛠️"
+        },
+        "setup": {
+          "emoji": "🖥️",
+          "title": "我的创意和生产力空间",
+          "subtitle": "陪伴我进行创意之旅的硬件和配置 ⌨️"
+        },
+        "connections": {
+          "emoji": "🔗",
+          "title": "保持联系",
+          "subtitle": "加入我的创意之旅的链接和社交平台 🚀"
+        },
+        "changelog": {
+          "emoji": "✨",
+          "title": "演变与更新",
+          "subtitle": "探索 Shirofolio 世界的新动态 🪵"
         }
       },
       "planning-badge": {

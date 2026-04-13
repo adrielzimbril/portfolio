@@ -2,7 +2,7 @@ import React from "react";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { Card, CardContent } from "@/components/ui/card";
-import { formatDistanceToNow } from "date-fns";
+import { formatDateDiff } from "@/utils/format-date";
 
 export async function GuestbookList() {
   const cookieStore = await cookies();
@@ -53,7 +53,7 @@ export async function GuestbookList() {
                 <div className="flex items-center justify-between">
                   <h4 className="font-bold text-base">{msg.name}</h4>
                   <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-                    {formatDistanceToNow(new Date(msg.created_at), { addSuffix: true })}
+                    {formatDateDiff(msg.created_at)}
                   </span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">

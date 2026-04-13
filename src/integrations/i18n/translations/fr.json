@@ -548,6 +548,24 @@
         "default": "Newsletter",
         "desktop": "Cercle Privé 💌",
         "mobile": "Rejoins le Cercle 💌"
+      },
+      "community": {
+        "default": "Communauté"
+      },
+      "stats": {
+        "default": "Stats"
+      },
+      "toolbox": {
+        "default": "Outils"
+      },
+      "setup": {
+        "default": "Mon Setup"
+      },
+      "connections": {
+        "default": "Connexions"
+      },
+      "changelog": {
+        "default": "Changelog"
       }
     },
     "button": {
@@ -666,6 +684,36 @@
           "emoji": "🏆",
           "title": "Challenges & quests en cours",
           "subtitle": "Inscris-toi, soumets ton travail et vise le podium 🏆"
+        },
+        "community": {
+          "emoji": "🐼",
+          "title": "Un espace pour les créateurs et les curieux",
+          "subtitle": "Échange, apprends et construis avec nous dans un espace bienveillant 🫶🏻"
+        },
+        "stats": {
+          "emoji": "📈",
+          "title": "Les coulisses en chiffres",
+          "subtitle": "Transparence, croissance et évolution de mon univers créatif 📊"
+        },
+        "toolbox": {
+          "emoji": "🧰",
+          "title": "L’atelier indispensable pour ton SaaS",
+          "subtitle": "Outils, frameworks et ressources que j'utilise au quotidien 🛠️"
+        },
+        "setup": {
+          "emoji": "🖥️",
+          "title": "Mon espace de création et de productivité",
+          "subtitle": "Le matériel et la config qui m'accompagnent dans ma ride créative ⌨️"
+        },
+        "connections": {
+          "emoji": "🔗",
+          "title": "Garde le contact avec l'orbite créative",
+          "subtitle": "Liens, réseaux et moyens de rejoindre ma ride 🚀"
+        },
+        "changelog": {
+          "emoji": "✨",
+          "title": "Évolutions et nouveautés",
+          "subtitle": "Découvre ce qui a changé dans l'univers Shirofolio 🪵"
         }
       },
       "planning-badge": {

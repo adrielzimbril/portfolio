@@ -170,6 +170,24 @@
         "default": "Thoughts",
         "desktop": "Blog",
         "mobile": "Blog 📝"
+      },
+      "community": {
+        "default": "Community"
+      },
+      "stats": {
+        "default": "Stats"
+      },
+      "toolbox": {
+        "default": "Toolbox"
+      },
+      "setup": {
+        "default": "My Setup"
+      },
+      "connections": {
+        "default": "Connections"
+      },
+      "changelog": {
+        "default": "Changelog"
       }
     },
     "page-sections": {
@@ -398,6 +416,36 @@
           "emoji": "🏆",
           "title": "Active challenges & quests",
           "subtitle": "Register, submit your work and aim for the podium 🏆"
+        },
+        "community": {
+          "emoji": "🐼",
+          "title": "A space for creators and curious minds",
+          "subtitle": "Exchange, learn and build together in a benevolent space 🫶🏻"
+        },
+        "stats": {
+          "emoji": "📈",
+          "title": "Behind the scenes in numbers",
+          "subtitle": "Transparency, growth and evolution of my creator universe 📊"
+        },
+        "toolbox": {
+          "emoji": "🧰",
+          "title": "The essential workshop for your SaaS",
+          "subtitle": "Oils, frameworks and tools I use to build every day 🛠️"
+        },
+        "setup": {
+          "emoji": "🖥️",
+          "title": "My creative and productive workspace",
+          "subtitle": "The gear and config that accompany me in my creative ride ⌨️"
+        },
+        "connections": {
+          "emoji": "🔗",
+          "title": "Stay in touch with the creative orbital",
+          "subtitle": "Links, socials and ways to join my ride 🚀"
+        },
+        "changelog": {
+          "emoji": "✨",
+          "title": "Evolution and new updates",
+          "subtitle": "Discover what's new in the Shirofolio universe 🪵"
         }
       },
       "planning-badge": {
