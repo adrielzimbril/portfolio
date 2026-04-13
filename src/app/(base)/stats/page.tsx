@@ -1,29 +1,26 @@
-import React from "react";
-import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Github, Eye, Star, Users, FileText, Coffee, Zap } from "lucide-react";
-
-async function getGitHubStats() {
-  try {
-    const response = await fetch("https://api.github.com/users/adrielzimbril", {
-      next: { revalidate: 3600 },
-    });
-    const data = await response.json();
-
-    return {
-      followers: data.followers || 0,
-      publicRepos: data.public_repos || 0,
-    };
-  } catch (error) {
-    console.error("Failed to fetch GitHub stats:", error);
-    return { followers: 0, publicRepos: 0 };
-  }
-}
+import { getBuildTimeStats } from "@/lib/stats/build-time-stats";
+import { getServerStats } from "@/lib/stats/server-stats";
+import { getGitHubStats } from "@/lib/stats/github-stats";
+import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
+import { StatsPageHeader } from "@/components/stats/StatsPageHeader";
+import { StatsSectionHeader } from "@/components/stats/StatsSectionHeader";
+import { StatCard } from "@/components/stats/StatCard";
+import { TopArticlesCard } from "@/components/stats/TopArticlesCard";
+import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
+import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
+import { DaysSinceRevamp } from "@/components/stats/DaysSinceRevamp";
+import { CoffeeCupsCard } from "@/components/stats/CoffeeCupsCard";
+import { MostViewedArticleCard } from "@/components/stats/MostViewedArticleCard";
+import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
+import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
+import { SiteViewsCard } from "@/components/stats/SiteViewsCard";
+import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
+import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
+import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
+import { StatsPageWrapper } from "@/components/stats/StatsPageWrapper";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -46,123 +43,220 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function StatsPage() {
-  const githubStats = await getGitHubStats();
-  const t = await getTranslations();
+  // Parallel data fetching
+  const [buildTimeStats, serverStats, githubStats, lighthouseStats] =
+    await Promise.all([
+      getBuildTimeStats(),
+      getServerStats(),
+      getGitHubStats(),
+      getLighthouseStats(),
+    ]);
+
+  // Computed stats
+  const coffeeCups = Math.floor(buildTimeStats.totalWords / 500);
+
+  // Format reading time nicely
+  const hours = Math.floor(buildTimeStats.combinedReadingMinutes / 60);
+  const minutes = buildTimeStats.combinedReadingMinutes % 60;
+  const readingTimeFormatted =
+    hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+
+  // Get the most viewed article for the featured card
+  const mostViewedArticle = serverStats.topViewedArticles[0];
 
   return (
-    <>
-      <PageHero
-        title={t("stats.page.title")}
-        description={t("stats.page.description")}
-        imagePath={{ emoji: "📊" }}
-        isMobileShowed
-      />
+    <StatsPageWrapper>
+      <div className="mt-14 space-y-12 pb-16 md:mt-16 md:space-y-16">
+        <StatsPageHeader />
 
-      {/* Blog Stats Section */}
-      <SectionLayout
-        title={t("stats.sections.blog.title")}
-        description={t("stats.sections.blog.description")}
-        badge={t("stats.sections.blog.badge")}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <FileText className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">12</div>
-              <div className="text-sm text-muted-foreground">Articles</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Coffee className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">45</div>
-              <div className="text-sm text-muted-foreground">Coffee Cups</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Zap className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">24k</div>
-              <div className="text-sm text-muted-foreground">Words Written</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Eye className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">2h</div>
-              <div className="text-sm text-muted-foreground">Reading Time</div>
-            </CardContent>
-          </Card>
-        </div>
-      </SectionLayout>
+        {/* Blog Stats Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <StatsSectionHeader
+            title="Blog Stats"
+            description="Content creation metrics and popular articles"
+            delay={0.2}
+          />
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-12">
+            {/* Row 1: Key metrics + Most Viewed Article */}
+            <div className="md:col-span-2">
+              <StatCard
+                label="Total Articles"
+                value={buildTimeStats.totalArticles}
+                delay={0.25}
+              />
+            </div>
+            {mostViewedArticle && mostViewedArticle.imageName && (
+              <div className="md:col-span-5 md:row-span-2">
+                <MostViewedArticleCard
+                  title={mostViewedArticle.title}
+                  slug={mostViewedArticle.slug}
+                  imageName={mostViewedArticle.imageName}
+                  viewCount={mostViewedArticle.count}
+                  delay={0.3}
+                />
+              </div>
+            )}
+            <div className="md:col-span-5">
+              <CoffeeCupsCard cups={coffeeCups} delay={0.35} />
+            </div>
 
-      {/* Engagement Section */}
-      <SectionLayout
-        title={t("stats.sections.engagement.title")}
-        description={t("stats.sections.engagement.description")}
-        badge={t("stats.sections.engagement.badge")}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Eye className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">12.5k</div>
-              <div className="text-sm text-muted-foreground">Total Views</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Star className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">156</div>
-              <div className="text-sm text-muted-foreground">Reactions</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Users className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">23</div>
-              <div className="text-sm text-muted-foreground">
-                Community Messages
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </SectionLayout>
+            {/* Row 2: Writing stats */}
+            <div className="md:col-span-2">
+              <StatCard
+                label="Words Written"
+                value={buildTimeStats.totalWords}
+                delay={0.4}
+              />
+            </div>
+            <div className="md:col-span-5">
+              <StatCard
+                label="Reading Time"
+                value={readingTimeFormatted}
+                animate={false}
+                delay={0.45}
+              />
+            </div>
 
-      {/* GitHub Section */}
-      <SectionLayout
-        title={t("stats.sections.github.title")}
-        description={t("stats.sections.github.description")}
-        badge={t("stats.sections.github.badge")}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Star className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">150+</div>
-              <div className="text-sm text-muted-foreground">GitHub Stars</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Github className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">
-                {githubStats.followers}
+            {/* Row 3-4: Article lists + Category chart */}
+            <div className="md:col-span-5">
+              <TopArticlesCard
+                title="Top Viewed Articles"
+                articles={serverStats.topViewedArticles.slice(1, 5)}
+                metricLabel="views"
+                delay={0.5}
+              />
+            </div>
+            <div className="md:col-span-7 md:row-span-2">
+              <CategoryBarChart
+                categories={buildTimeStats.categoryBreakdown}
+                delay={0.55}
+              />
+            </div>
+            <div className="md:col-span-5">
+              <TopArticlesCard
+                title="Most Reacted Articles"
+                articles={serverStats.topReactedArticles.slice(0, 4)}
+                metricLabel="reactions"
+                delay={0.6}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Engagement Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <StatsSectionHeader
+            title="Engagement"
+            description="Site activity and community interactions"
+            delay={0.65}
+          />
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-12">
+            {/* Row 1: Views + Reactions + Community */}
+            <div className="md:col-span-3">
+              <SiteViewsCard value={serverStats.totalViews} delay={0.7} />
+            </div>
+            <div className="md:col-span-5 md:row-span-2">
+              <ReactionBreakdown
+                reactions={serverStats.reactionsByType}
+                delay={0.75}
+              />
+            </div>
+            <div className="md:col-span-4">
+              <CommunityMessagesCard
+                count={serverStats.communityWallMessages}
+                delay={0.8}
+              />
+            </div>
+
+            {/* Row 2: Site meta */}
+            <div className="md:col-span-3">
+              <ChangelogUpdatesCard
+                count={buildTimeStats.changelogCount}
+                delay={0.85}
+              />
+            </div>
+            <div className="md:col-span-4">
+              <DaysSinceRevamp revampDate={REVAMP_DATE} delay={0.9} />
+            </div>
+          </div>
+        </section>
+
+        {/* GitHub Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <StatsSectionHeader
+            title="GitHub"
+            description="Open source contributions and repository stats"
+            delay={0.95}
+          />
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-12">
+            {githubStats.contributions && (
+              <div className="h-full md:col-span-9">
+                <ContributionGraphCard
+                  contributions={githubStats.contributions}
+                  delay={1.0}
+                />
               </div>
-              <div className="text-sm text-muted-foreground">Followers</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <FileText className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">
-                {githubStats.publicRepos}
+            )}
+            <div className="flex h-full flex-col gap-2 md:col-span-3">
+              <div className="flex-1">
+                <GitHubStatsCard
+                  type="stars"
+                  label="GitHub Stars"
+                  value={githubStats.stars}
+                  delay={1.05}
+                />
               </div>
-              <div className="text-sm text-muted-foreground">Public Repos</div>
-            </CardContent>
-          </Card>
-        </div>
-      </SectionLayout>
-    </>
+              <div className="flex-1">
+                <GitHubStatsCard
+                  type="forks"
+                  label="Forks"
+                  value={githubStats.forks}
+                  delay={1.1}
+                />
+              </div>
+              <div className="flex-1">
+                <GitHubStatsCard
+                  type="commits"
+                  label="Commits"
+                  value={githubStats.commits}
+                  delay={1.15}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Performance Section */}
+        {(lighthouseStats.mobile || lighthouseStats.desktop) && (
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <StatsSectionHeader
+              title="Performance"
+              description="Lighthouse scores for site speed and accessibility"
+              delay={1.2}
+            />
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-12">
+              {lighthouseStats.mobile && (
+                <div className="md:col-span-6">
+                  <LighthouseScoreCard
+                    scores={lighthouseStats.mobile}
+                    strategy="mobile"
+                    delay={1.25}
+                  />
+                </div>
+              )}
+              {lighthouseStats.desktop && (
+                <div className="md:col-span-6">
+                  <LighthouseScoreCard
+                    scores={lighthouseStats.desktop}
+                    strategy="desktop"
+                    delay={1.3}
+                  />
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+      </div>
+    </StatsPageWrapper>
   );
 }

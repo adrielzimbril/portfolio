@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { connections } from "@/data/personal/connections";
+import { CheckCircle2, Clock } from "lucide-react";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -41,41 +42,83 @@ export default async function ConnectionsPage() {
         isMobileShowed
       />
 
+      {/* Met Section */}
       <SectionLayout
-        title={t("connections.sections.people.title")}
-        description={t("connections.sections.people.description")}
-        badge={t("connections.sections.people.badge")}
+        title="People I've met"
+        description="Connections made and conversations shared."
+        badge="Met ✅"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {connections.map((connection) => (
-            <Card
-              key={connection.id}
-              className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group overflow-hidden"
-            >
-              <CardContent className="p-0">
-                <div className="relative h-48 bg-muted">
-                  <Image
-                    src={connection.image}
-                    alt={connection.name}
-                    fill
-                    className="object-cover"
-                  />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {connections
+            .filter((c) => c.met)
+            .map((connection) => (
+              <div
+                key={connection.id}
+                className="flex flex-col items-center gap-4 group cursor-pointer"
+              >
+                <div className="relative">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-border group-hover:border-primary transition-colors duration-300">
+                    <Image
+                      src={connection.image}
+                      alt={connection.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground rounded-full p-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-bold text-lg mb-3">{connection.name}</h3>
-                  {connection.met ? (
-                    <Badge variant="secondary" className="text-xs">
-                      Met on {new Date(connection.met).toLocaleDateString()}
-                    </Badge>
-                  ) : (
-                    <Badge variant="outline" className="text-xs">
-                      Not met yet
-                    </Badge>
-                  )}
+                <div className="text-center">
+                  <h3 className="font-semibold text-sm md:text-base group-hover:text-primary transition-colors">
+                    {connection.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {new Date(connection.met).toLocaleDateString()}
+                  </p>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            ))}
+        </div>
+      </SectionLayout>
+
+      {/* Not Met Section */}
+      <SectionLayout
+        title="People I want to meet"
+        description="Connections yet to be made and conversations to be had."
+        badge="Wishlist 🎯"
+      >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {connections
+            .filter((c) => !c.met)
+            .map((connection) => (
+              <div
+                key={connection.id}
+                className="flex flex-col items-center gap-4 group cursor-pointer"
+              >
+                <div className="relative">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-border group-hover:border-muted-foreground transition-colors duration-300 grayscale group-hover:grayscale-0">
+                    <Image
+                      src={connection.image}
+                      alt={connection.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 bg-muted-foreground text-muted-foreground rounded-full p-2">
+                    <Clock className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h3 className="font-semibold text-sm md:text-base group-hover:text-muted-foreground transition-colors">
+                    {connection.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Not met yet
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
       </SectionLayout>
     </>

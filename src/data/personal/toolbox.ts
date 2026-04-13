@@ -30,7 +30,7 @@ export const toolbox: ToolItem[] = [
     url: "https://supabase.com",
   },
   {
-    id: "framer-motion",
+    id: "motion/react",
     name: "Framer Motion",
     category: "design",
     description: "Production-ready animations for React.",
