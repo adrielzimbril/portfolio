@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { changelog } from "@/data/personal/changelog";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, Zap, Bug, Wrench } from "lucide-react";
 
 interface ChangelogUpdatesCardProps {
   count: number;
@@ -22,10 +24,26 @@ export function ChangelogUpdatesCard({
   const [isHovered, setIsHovered] = useState(false);
   const [displayCount, setDisplayCount] = useState(0);
 
+  const typeIcons = {
+    milestone: Sparkles,
+    feature: Zap,
+    fix: Bug,
+    improvement: Wrench,
+  };
+
+  const typeColors = {
+    milestone: "text-primary",
+    feature: "text-green-500",
+    fix: "text-red-500",
+    improvement: "text-blue-500",
+  };
+
   // Get recent changelog items - show more for scrolling effect
   const recentItems = changelog
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 8);
+
+  const latestVersion = recentItems[0];
 
   useEffect(() => {
     if (shouldReduceAnimations) return;
@@ -97,9 +115,23 @@ export function ChangelogUpdatesCard({
                   />
                   {/* Entry card */}
                   <div className="z-10 inline-block w-[100px] space-y-px rounded-lg border border-border bg-b-base px-2 py-1.5 text-xs">
-                    <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
-                      {item.version}
-                    </p>
+                    <div className="flex items-center gap-1">
+                      {(() => {
+                        const Icon =
+                          typeIcons[item.type as keyof typeof typeIcons];
+                        return Icon ? (
+                          <Icon
+                            className={cn(
+                              "h-3 w-3",
+                              typeColors[item.type as keyof typeof typeColors],
+                            )}
+                          />
+                        ) : null;
+                      })()}
+                      <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
+                        {item.version}
+                      </p>
+                    </div>
                     <time
                       dateTime={item.date}
                       className="text-[9px] text-muted-foreground"
@@ -121,7 +153,14 @@ export function ChangelogUpdatesCard({
 
           {/* Content at bottom */}
           <div className="relative z-20 mt-auto">
-            <h2 className="mb-1 font-medium text-foreground">Changelog</h2>
+            <div className="flex items-center justify-between mb-1">
+              <h2 className="font-medium text-foreground">Changelog</h2>
+              {latestVersion && (
+                <Badge className="text-[9px] h-5 px-1.5 bg-primary/10 text-primary border-primary/20">
+                  {latestVersion.version}
+                </Badge>
+              )}
+            </div>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-bold tabular-nums tracking-tight text-foreground">
                 {count}
@@ -184,9 +223,23 @@ export function ChangelogUpdatesCard({
                 />
                 {/* Entry card */}
                 <div className="z-10 inline-block w-[100px] space-y-px rounded-lg border border-border bg-b-base px-2 py-1.5 text-xs">
-                  <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
-                    {item.version}
-                  </p>
+                  <div className="flex items-center gap-1">
+                    {(() => {
+                      const Icon =
+                        typeIcons[item.type as keyof typeof typeIcons];
+                      return Icon ? (
+                        <Icon
+                          className={cn(
+                            "h-3 w-3",
+                            typeColors[item.type as keyof typeof typeColors],
+                          )}
+                        />
+                      ) : null;
+                    })()}
+                    <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
+                      {item.version}
+                    </p>
+                  </div>
                   <time
                     dateTime={item.date}
                     className="text-[9px] text-muted-foreground"
@@ -208,7 +261,14 @@ export function ChangelogUpdatesCard({
 
         {/* Content at bottom */}
         <div className="relative z-20 mt-auto">
-          <h2 className="mb-1 font-medium text-foreground">Changelog</h2>
+          <div className="flex items-center justify-between mb-1">
+            <h2 className="font-medium text-foreground">Changelog</h2>
+            {latestVersion && (
+              <Badge className="text-[9px] h-5 px-1.5 bg-primary/10 text-primary border-primary/20">
+                {latestVersion.version}
+              </Badge>
+            )}
+          </div>
           <div className="flex items-baseline gap-2">
             <motion.span
               animate={{ scale: isHovered ? 1.05 : 1 }}

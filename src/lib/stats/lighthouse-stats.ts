@@ -103,8 +103,6 @@ async function fetchLighthouseScores(
   const lighthouseResult = data.lighthouseResult;
   const categories = lighthouseResult?.categories;
 
-  logger.info(`[Lighthouse Stats] Lighthouse result:`, lighthouseResult);
-  logger.info(`[Lighthouse Stats] Categories:`, categories);
   logger.info(
     `[Lighthouse Stats] Performance score:`,
     categories?.performance?.score,
