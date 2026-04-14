@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import type { LighthouseStats, LighthouseScores } from "./types";
+import logger from "@/utils/logger";
 
 // Configuration
 const SITE_URL = process.env.SITE_URL || "https://www.adrielzimbril.com/";
@@ -24,12 +25,12 @@ function getEmptyLighthouseStats(): LighthouseStats {
 export async function getLighthouseStats(): Promise<LighthouseStats> {
   return unstable_cache(
     async () => {
-      console.log("[Lighthouse Stats] Fetching Lighthouse stats...");
-      console.log("[Lighthouse Stats] Site URL:", SITE_URL);
-      console.log("[Lighthouse Stats] API Key set:", !!PAGESPEED_API_KEY);
+      logger.info("[Lighthouse Stats] Fetching Lighthouse stats...");
+      logger.info("[Lighthouse Stats] Site URL:", SITE_URL);
+      logger.info("[Lighthouse Stats] API Key set:", !!PAGESPEED_API_KEY);
 
       if (!SITE_URL) {
-        console.warn(
+        logger.warn(
           "[Lighthouse Stats] SITE_URL not set, returning empty stats",
         );
         return getEmptyLighthouseStats();
@@ -46,7 +47,7 @@ export async function getLighthouseStats(): Promise<LighthouseStats> {
           desktop,
         };
       } catch (error) {
-        console.error(
+        logger.error(
           "[Lighthouse Stats] Error fetching Lighthouse stats:",
           error,
         );
@@ -64,7 +65,7 @@ export async function getLighthouseStats(): Promise<LighthouseStats> {
 async function fetchLighthouseScores(
   strategy: "mobile" | "desktop",
 ): Promise<LighthouseScores> {
-  console.log(`[Lighthouse Stats] Fetching ${strategy} scores...`);
+  logger.info(`[Lighthouse Stats] Fetching ${strategy} scores...`);
 
   const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(SITE_URL)}&strategy=${strategy}`;
 
@@ -77,7 +78,7 @@ async function fetchLighthouseScores(
   });
 
   if (!response.ok) {
-    console.error(
+    logger.error(
       `[Lighthouse Stats] Failed to fetch ${strategy} stats:`,
       response.status,
     );
@@ -89,7 +90,7 @@ async function fetchLighthouseScores(
   const categories = lighthouseResult?.categories;
 
   if (!categories) {
-    console.error(`[Lighthouse Stats] Categories is null for ${strategy}`);
+    logger.error(`[Lighthouse Stats] Categories is null for ${strategy}`);
     return {
       performance: 0,
       accessibility: 0,
@@ -98,8 +99,8 @@ async function fetchLighthouseScores(
       fetchedAt: data.lighthouseResult?.fetchTime ?? new Date().toISOString(),
     };
   } else {
-    console.log(`[Lighthouse Stats] Lighthouse result:`, lighthouseResult);
-    console.log(`[Lighthouse Stats] Categories structure:`, categories);
+    logger.info(`[Lighthouse Stats] Lighthouse result:`, lighthouseResult);
+    logger.info(`[Lighthouse Stats] Categories structure:`, categories);
   }
 
   return {

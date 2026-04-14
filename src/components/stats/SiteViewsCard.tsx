@@ -309,7 +309,7 @@ export function SiteViewsCard({
   }, [value, delay, shouldReduceAnimations]);
 
   const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden border border-border bg-b-base p-6 transition-all duration-300 hover:border-primary hover:bg-sh-white",
+    "group relative flex h-full flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
@@ -317,7 +317,7 @@ export function SiteViewsCard({
   if (shouldReduceAnimations) {
     return (
       <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <RisingWave
           isHovered={isHovered}
           delay={delay}
@@ -350,7 +350,7 @@ export function SiteViewsCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <RisingWave
         isHovered={isHovered}
         delay={delay}

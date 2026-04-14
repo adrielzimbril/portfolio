@@ -24,23 +24,23 @@ interface ScoreBarProps {
 function getScoreColor(score: number) {
   if (score >= 90) {
     return {
-      bar: "squircle-color-primary",
-      barBg: "squircle-color-primary/10",
+      bar: "squircle-primary",
+      barBg: "squircle-primary/10",
       text: "text-primary",
       glow: "shadow-primary/20",
     };
   }
   if (score >= 50) {
     return {
-      bar: "squircle-color-accent",
-      barBg: "squircle-color-accent/10",
+      bar: "squircle-accent",
+      barBg: "squircle-accent/10",
       text: "text-accent",
       glow: "shadow-accent/20",
     };
   }
   return {
-    bar: "squircle-color-destructive",
-    barBg: "squircle-color-destructive/10",
+    bar: "squircle-destructive",
+    barBg: "squircle-destructive/10",
     text: "text-destructive",
     glow: "shadow-destructive/20",
   };
@@ -353,7 +353,7 @@ function PulseRings({
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="absolute rounded-full squircle-border-color-accent/30"
+            className="absolute rounded-full squircle-border-accent/30"
             style={{
               width: 140 + i * 50,
               height: 140 + i * 50,
@@ -421,7 +421,7 @@ export function LighthouseScoreCard({
   ];
 
   const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden squircle-border-color-border squircle-color-b-base p-5 transition-all duration-300 hover:squircle-border-color-primary hover:squircle-color-sh-white",
+    "group relative flex h-full flex-col overflow-hidden squircle-border-border squircle-b-base p-5 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
@@ -429,7 +429,7 @@ export function LighthouseScoreCard({
   if (shouldReduceAnimations) {
     return (
       <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <PulseRings
           isHovered={false}
           shouldReduceAnimations={shouldReduceAnimations}
@@ -505,7 +505,7 @@ export function LighthouseScoreCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <PulseRings
         isHovered={isHovered}
         shouldReduceAnimations={shouldReduceAnimations}

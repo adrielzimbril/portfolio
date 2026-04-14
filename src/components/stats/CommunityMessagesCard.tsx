@@ -58,7 +58,7 @@ export function CommunityMessagesCard({
   }, [count, delay, shouldReduceAnimations]);
 
   const cardClassName = cn(
-    "group relative flex h-full min-h-[340px] flex-col overflow-hidden border border-border bg-b-base p-6 transition-all duration-300 hover:border-primary hover:bg-sh-white",
+    "group relative flex h-full min-h-[340px] flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
@@ -69,7 +69,7 @@ export function CommunityMessagesCard({
         <div className={cardClassName}>
           <div className="absolute inset-0 bg-[radial-gradient(var(--border)_1px,transparent_2px)] bg-size-[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-          <div className="pointer-events-none absolute inset-0 z-30 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-0 z-30 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
           <div className="absolute inset-0 flex items-center justify-center pb-16">
             <div className="relative h-32 w-40">
@@ -163,7 +163,7 @@ export function CommunityMessagesCard({
       >
         <div className="absolute inset-0 bg-[radial-gradient(var(--border)_1px,transparent_2px)] bg-size-[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-        <div className="pointer-events-none absolute inset-0 z-30 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 z-30 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <div className="absolute inset-0 flex items-center justify-center pb-16">
           <div className="relative h-32 w-40">

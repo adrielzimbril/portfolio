@@ -13,19 +13,19 @@ interface ContributionGraphCardProps {
 }
 
 const CONTRIBUTION_LEVEL_COLORS = {
-  NONE: "squircle-color-border",
-  FIRST_QUARTILE: "squircle-color-primary/30",
-  SECOND_QUARTILE: "squircle-color-primary/50",
-  THIRD_QUARTILE: "squircle-color-primary/70",
-  FOURTH_QUARTILE: "squircle-color-primary",
+  NONE: "squircle-border",
+  FIRST_QUARTILE: "squircle-primary/30",
+  SECOND_QUARTILE: "squircle-primary/50",
+  THIRD_QUARTILE: "squircle-primary/70",
+  FOURTH_QUARTILE: "squircle-primary",
 } as const;
 
 const levelColorsHover = {
-  NONE: "group-hover/cell:squircle-color-border/80",
-  FIRST_QUARTILE: "group-hover/cell:squircle-color-primary/40",
-  SECOND_QUARTILE: "group-hover/cell:squircle-color-primary/60",
-  THIRD_QUARTILE: "group-hover/cell:squircle-color-primary/80",
-  FOURTH_QUARTILE: "group-hover/cell:squircle-color-primary/90",
+  NONE: "group-hover/cell:squircle-border/80",
+  FIRST_QUARTILE: "group-hover/cell:squircle-primary/40",
+  SECOND_QUARTILE: "group-hover/cell:squircle-primary/60",
+  THIRD_QUARTILE: "group-hover/cell:squircle-primary/80",
+  FOURTH_QUARTILE: "group-hover/cell:squircle-primary/90",
 };
 
 function formatDate(dateString: string): string {
@@ -119,7 +119,7 @@ export function ContributionGraphCard({
 
   const monthLabels = getMonthLabels();
   const cardClassName = cn(
-    "group relative flex h-full min-h-[220px] flex-col overflow-hidden border border-border bg-b-base p-6 transition-all duration-300 hover:border-primary hover:bg-sh-white",
+    "group relative flex h-full min-h-[220px] flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
@@ -127,7 +127,7 @@ export function ContributionGraphCard({
   if (shouldReduceAnimations) {
     return (
       <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <div className="relative z-20 mb-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -239,7 +239,7 @@ export function ContributionGraphCard({
         setTooltip(null);
       }}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="relative z-20 mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">

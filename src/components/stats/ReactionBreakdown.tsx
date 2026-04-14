@@ -325,26 +325,26 @@ const REACTION_CONFIG: Record<
   like: {
     Icon: LikeSVG,
     label: "Likes",
-    bgColor: "squircle-color-primary/10",
-    hoverBg: "squircle-color-primary/20",
+    bgColor: "squircle-primary/10",
+    hoverBg: "squircle-primary/20",
   },
   heart: {
     Icon: HeartSVG,
     label: "Hearts",
-    bgColor: "squircle-color-destructive/10",
-    hoverBg: "squircle-color-destructive/20",
+    bgColor: "squircle-destructive/10",
+    hoverBg: "squircle-destructive/20",
   },
   celebrate: {
     Icon: CelebrateSVG,
     label: "Celebrates",
-    bgColor: "squircle-color-secondary/10",
-    hoverBg: "squircle-color-secondary/20",
+    bgColor: "squircle-secondary/10",
+    hoverBg: "squircle-secondary/20",
   },
   insightful: {
     Icon: InsightfulSVG,
     label: "Insightful",
-    bgColor: "squircle-color-accent/10",
-    hoverBg: "squircle-color-accent/20",
+    bgColor: "squircle-accent/10",
+    hoverBg: "squircle-accent/20",
   },
 };
 
@@ -361,7 +361,7 @@ export function ReactionBreakdown({
   const total = Object.values(reactions).reduce((sum, count) => sum + count, 0);
 
   const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden squircle-border-color-border squircle-color-b-base p-6 transition-all duration-300 hover:squircle-border-color-primary hover:squircle-color-sh-white",
+    "group relative flex h-full flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
@@ -369,7 +369,7 @@ export function ReactionBreakdown({
   if (shouldReduceAnimations) {
     return (
       <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <div className="relative z-20 flex h-full flex-col">
           <h2 className="mb-2 font-medium text-foreground">Reactions</h2>
@@ -388,7 +388,7 @@ export function ReactionBreakdown({
               return (
                 <div
                   key={type}
-                  className={`flex flex-col items-center justify-center rounded-xl squircle-border-color-border/50 p-3 ${config.bgColor}`}
+                  className={`flex flex-col items-center justify-center rounded-xl squircle-border-border/50 p-3 ${config.bgColor}`}
                 >
                   <div className="mb-2">
                     <config.Icon
@@ -420,7 +420,7 @@ export function ReactionBreakdown({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl bg-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="relative z-20 flex h-full flex-col">
         <h2 className="mb-2 font-medium text-foreground">Reactions</h2>
@@ -450,9 +450,9 @@ export function ReactionBreakdown({
                   transition={{ duration: 0.3, delay: delay + index * 0.1 }}
                   onMouseEnter={() => setHoveredReaction(type)}
                   onMouseLeave={() => setHoveredReaction(null)}
-                  className={`flex flex-col items-center justify-center rounded-xl squircle-border-color-border/50 p-3 transition-all duration-200 ${
+                  className={`flex flex-col items-center justify-center rounded-xl squircle-border-border/50 p-3 transition-all duration-200 ${
                     isReactionHovered
-                      ? `${config.hoverBg} squircle-border-color-transparent`
+                      ? `${config.hoverBg} squircle-border-transparent`
                       : config.bgColor
                   }`}
                 >

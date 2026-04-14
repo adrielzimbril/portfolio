@@ -236,7 +236,7 @@ export function HeaderSection() {
         </motion.div>
 
         <motion.div
-          className="absolute -top-20 -right-20 w-96 h-96 squircle-color-primary/10 rounded-full blur-3xl -z-10"
+          className="absolute -top-20 -right-20 w-96 h-96 squircle-primary/10 rounded-full blur-3xl -z-10"
           animate={{
             scale: isHovered ? [1, 1.2, 1] : 1,
             opacity: isHovered ? [0.5, 0.8, 0.5] : 0.3,
@@ -244,7 +244,7 @@ export function HeaderSection() {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -bottom-20 -left-20 w-80 h-80 squircle-color-accent/10 rounded-full blur-3xl -z-10"
+          className="absolute -bottom-20 -left-20 w-80 h-80 squircle-accent/10 rounded-full blur-3xl -z-10"
           animate={{
             scale: isHovered ? [1, 1.15, 1] : 1,
             opacity: isHovered ? [0.5, 0.7, 0.5] : 0.3,

@@ -5,6 +5,7 @@ import type {
   ContributionDay,
   ContributionWeek,
 } from "./types";
+import logger from "@/utils/logger";
 
 // Configuration GitHub
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "adrielzimbril";
@@ -15,13 +16,13 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 export async function getGitHubStats(): Promise<GitHubStats> {
   return unstable_cache(
     async () => {
-      console.log("[GitHub Stats] Fetching GitHub stats...");
-      console.log("[GitHub Stats] Username:", GITHUB_USERNAME);
-      console.log("[GitHub Stats] Repo:", GITHUB_REPO);
-      console.log("[GitHub Stats] Token set:", !!GITHUB_TOKEN);
+      logger.info("[GitHub Stats] Fetching GitHub stats...");
+      logger.info("[GitHub Stats] Username:", GITHUB_USERNAME);
+      logger.info("[GitHub Stats] Repo:", GITHUB_REPO);
+      logger.info("[GitHub Stats] Token set:", !!GITHUB_TOKEN);
 
       if (!GITHUB_TOKEN) {
-        console.warn(
+        logger.warn(
           "[GitHub Stats] GITHUB_TOKEN not set, returning empty stats",
         );
         return getEmptyGitHubStats();
@@ -33,17 +34,17 @@ export async function getGitHubStats(): Promise<GitHubStats> {
           fetchContributions(),
         ]);
 
-        console.log(
+        logger.info(
           "[GitHub Stats] Repo stats received:",
           JSON.stringify(repoStats, null, 2),
         );
-        console.log(
+        logger.info(
           "[GitHub Stats] Contributions received:",
           contributions.totalContributions,
         );
 
         if (!repoStats) {
-          console.error("[GitHub Stats] Repo stats is null");
+          logger.error("[GitHub Stats] Repo stats is null");
           return getEmptyGitHubStats();
         }
 
@@ -54,7 +55,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
           contributions,
         };
       } catch (error) {
-        console.error("[GitHub Stats] Error fetching GitHub stats:", error);
+        logger.error("[GitHub Stats] Error fetching GitHub stats:", error);
         return getEmptyGitHubStats();
       }
     },
@@ -67,7 +68,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
 }
 
 async function fetchRepoStats() {
-  console.log("[GitHub Stats] Fetching repo stats...");
+  logger.info("[GitHub Stats] Fetching repo stats...");
 
   const query = `
     query($owner: String!, $name: String!) {
@@ -99,10 +100,10 @@ async function fetchRepoStats() {
     }),
   });
 
-  console.log("[GitHub Stats] Response status:", response.status);
+  logger.info("[GitHub Stats] Response status:", response.status);
 
   if (!response.ok) {
-    console.error(
+    logger.error(
       "[GitHub Stats] Failed to fetch GitHub repo stats:",
       response.status,
     );
@@ -110,11 +111,11 @@ async function fetchRepoStats() {
   }
 
   const data = await response.json();
-  console.log("[GitHub Stats] Response data:", data);
+  logger.info("[GitHub Stats] Response data:", data);
 
   if (!data.data) {
-    console.error("[GitHub Stats] No data.data in response");
-    console.error(
+    logger.error("[GitHub Stats] No data.data in response");
+    logger.error(
       "[GitHub Stats] Full response:",
       JSON.stringify(data, null, 2),
     );
@@ -122,8 +123,8 @@ async function fetchRepoStats() {
   }
 
   if (!data.data.repository) {
-    console.error("[GitHub Stats] No data.data.repository in response");
-    console.error(
+    logger.error("[GitHub Stats] No data.data.repository in response");
+    logger.error(
       "[GitHub Stats] Full response:",
       JSON.stringify(data, null, 2),
     );
@@ -134,7 +135,7 @@ async function fetchRepoStats() {
 }
 
 async function fetchContributions(): Promise<ContributionData> {
-  console.log("[GitHub Stats] Fetching contributions...");
+  logger.info("[GitHub Stats] Fetching contributions...");
 
   try {
     // Utiliser l'API REST GitHub pour récupérer les contributions
@@ -149,7 +150,7 @@ async function fetchContributions(): Promise<ContributionData> {
     );
 
     if (!response.ok) {
-      console.error(
+      logger.error(
         "[GitHub Stats] Failed to fetch contributions:",
         response.status,
       );
@@ -159,7 +160,7 @@ async function fetchContributions(): Promise<ContributionData> {
     const contributors = await response.json();
 
     if (!Array.isArray(contributors) || contributors.length === 0) {
-      console.log("[GitHub Stats] No contributors found");
+      logger.info("[GitHub Stats] No contributors found");
       return getEmptyContributions();
     }
 
@@ -169,11 +170,11 @@ async function fetchContributions(): Promise<ContributionData> {
     );
 
     if (!mainContributor) {
-      console.log("[GitHub Stats] Main contributor not found");
+      logger.info("[GitHub Stats] Main contributor not found");
       return getEmptyContributions();
     }
 
-    console.log(
+    logger.info(
       "[GitHub Stats] Main contributor found:",
       mainContributor.author.login,
     );
@@ -212,14 +213,14 @@ async function fetchContributions(): Promise<ContributionData> {
 
     const totalContributions = mainContributor.total || 0;
 
-    console.log("[GitHub Stats] Total contributions:", totalContributions);
+    logger.info("[GitHub Stats] Total contributions:", totalContributions);
 
     return {
       totalContributions,
       weeks,
     };
   } catch (error) {
-    console.error("[GitHub Stats] Error fetching contributions:", error);
+    logger.error("[GitHub Stats] Error fetching contributions:", error);
     return getEmptyContributions();
   }
 }
