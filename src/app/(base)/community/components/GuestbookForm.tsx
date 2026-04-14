@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Send } from "lucide-react";
+import { LoaderOne, SendOne } from "@aurthle/icons";
 import { supabase } from "@/integrations/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -67,9 +67,9 @@ export function GuestbookForm({ user }: { user: any }) {
         </p>
         <Button type="submit" disabled={isSubmitting || !message.trim()}>
           {isSubmitting ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <LoaderOne className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            <Send className="mr-2 h-4 w-4" />
+            <SendOne className="mr-2 h-4 w-4" />
           )}
           Post
         </Button>

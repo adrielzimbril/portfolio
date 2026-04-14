@@ -6,7 +6,7 @@ import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Github } from "@aurthle/icons";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { GuestbookForm } from "./components/GuestbookForm";

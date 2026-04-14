@@ -7,7 +7,7 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { changelog } from "@/data/personal/changelog";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Zap, Bug, Wrench } from "lucide-react";
+import { SparklesOne, LightningOne, BugOne, WrenchOne } from "@aurthle/icons";
 
 interface ChangelogUpdatesCardProps {
   count: number;

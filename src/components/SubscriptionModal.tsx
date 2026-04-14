@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { CheckCircle } from "lucide-react";
+import { CheckCircleOne } from "@aurthle/icons";
 import {
   Dialog,
   DialogContent,

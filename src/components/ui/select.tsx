@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { ChevronDownOne, ChevronUpOne } from "@aurthle/icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/utils";
@@ -52,7 +52,7 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon
+        <ChevronDownOne
           size={16}
           className="text-muted-foreground/80 in-aria-invalid:text-destructive/80 shrink-0"
         />
@@ -130,7 +130,7 @@ function SelectItem({
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
       <span className="pointer-events-none absolute end-4 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <CheckIcon size={20} />
+          <CheckOne size={20} />
         </SelectPrimitive.ItemIndicator>
       </span>
     </SelectPrimitive.Item>
@@ -163,7 +163,7 @@ function SelectScrollUpButton({
       )}
       {...props}
     >
-      <ChevronUpIcon size={16} />
+      <ChevronUpOne size={16} />
     </SelectPrimitive.ScrollUpButton>
   );
 }
@@ -181,7 +181,7 @@ function SelectScrollDownButton({
       )}
       {...props}
     >
-      <ChevronDownIcon size={16} />
+      <ChevronDownOne size={16} />
     </SelectPrimitive.ScrollDownButton>
   );
 }

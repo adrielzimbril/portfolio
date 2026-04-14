@@ -3,7 +3,7 @@ import { NavMenu } from "@/components/shared/_layouts/nav-menu";
 import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/utils/utils";
-import { Menu, X } from "lucide-react";
+import { MenuOne, XOne } from "@aurthle/icons";
 import { useScroll } from "motion/react";
 import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
@@ -158,9 +158,9 @@ export function Navbar() {
                 onClick={toggleDrawer}
               >
                 {isDrawerOpen ? (
-                  <X className="size-5" />
+                  <XOne className="size-5" />
                 ) : (
-                  <Menu className="size-5" />
+                  <MenuOne className="h-6 w-6" />
                 )}
               </Button>
             </div>
@@ -210,7 +210,7 @@ export function Navbar() {
                     onClick={toggleDrawer}
                     className="border border-border rounded-md p-1 cursor-pointer"
                   >
-                    <X className="size-8!" />
+                    <XOne className="size-8!" />
                   </Button>
                 </div>
 

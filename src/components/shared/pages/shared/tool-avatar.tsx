@@ -4,7 +4,7 @@ import { cn } from "@/utils/utils";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { Badge } from "@/components/ui/badge";
-import { Check } from "lucide-react";
+import { CheckOne } from "@aurthle/icons";
 
 export function ToolAvatar({
   name,
@@ -41,9 +41,7 @@ export function ToolAvatar({
         )}
       >
         <div className="flex items-center justify-center size-full">
-          <div className={iconSizeClasses[size]}>
-            {icon}
-          </div>
+          <div className={iconSizeClasses[size]}>{icon}</div>
         </div>
       </div>
       <div className="absolute bottom-0 right-0">
@@ -54,7 +52,7 @@ export function ToolAvatar({
           )}
           variant="secondary"
         >
-          <Check className="text-primary-foreground" size={12} />
+          <CheckOne className="text-primary-foreground" size={12} />
         </Badge>
       </div>
     </div>

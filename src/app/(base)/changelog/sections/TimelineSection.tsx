@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Sparkles, Wrench, Bug, Zap, Calendar } from "lucide-react";
+import * as AurthleIcons from "@aurthle/icons";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import {
   getAllChangelog,
@@ -56,10 +56,10 @@ export function TimelineSection() {
   }, [changelogData, selectedType, searchQuery]);
 
   const typeIcons = {
-    milestone: Sparkles,
-    feature: Zap,
-    fix: Bug,
-    improvement: Wrench,
+    milestone: AurthleIcons.SparklesOne,
+    feature: AurthleIcons.LightningOne,
+    fix: AurthleIcons.BugOne,
+    improvement: AurthleIcons.WrenchOne,
   };
 
   return (
@@ -96,7 +96,7 @@ export function TimelineSection() {
 
           {/* Search Input */}
           <div className="relative w-full max-w-md mx-auto">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <AurthleIcons.SearchOne className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="text"
               placeholder="Search releases..."
@@ -200,7 +200,7 @@ export function TimelineSection() {
                               <CardContent className="p-8">
                                 <div className="flex items-center justify-between mb-4">
                                   <div className="flex items-center gap-3">
-                                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                                    <AurthleIcons.CalendarOne className="h-4 w-4 text-muted-foreground" />
                                     <time className="text-sm font-medium text-muted-foreground">
                                       {new Date(entry.date).toLocaleDateString(
                                         "en-US",

@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { XIcon } from "lucide-react";
+import { XOne } from "@aurthle/icons";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -111,7 +111,7 @@ function DialogContent({
             asChild
           >
             <Button asPointer whileTap size="icon">
-              <XIcon
+              <XOne
                 size={16}
                 className="opacity-70 transition-opacity group-hover:opacity-100"
               />
