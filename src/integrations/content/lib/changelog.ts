@@ -1,5 +1,5 @@
 import type { Changelog } from "@/integrations/content/types/types";
-import { allChangelog } from "content-collections";
+import { allChangelogs } from "content-collections";
 
 type GetAllChangelogOptions = {
   published?: boolean;
@@ -10,7 +10,7 @@ type GetAllChangelogOptions = {
 };
 
 export async function getAllChangelog(
-  options: Partial<GetAllChangelogOptions> = {}
+  options: Partial<GetAllChangelogOptions> = {},
 ): Promise<Changelog[]> {
   const { published, locale, sort, limit, type } = {
     published: true,
@@ -21,19 +21,19 @@ export async function getAllChangelog(
     ...options,
   };
   return Promise.resolve(
-    allChangelog
+    allChangelogs
       .filter(
         (entry) =>
           entry.published === published &&
           (!locale || entry.locale === locale) &&
-          (!type || entry.type === type)
+          (!type || entry.type === type),
       )
       .sort((a, b) =>
         sort === "asc"
           ? a.date.localeCompare(b.date)
-          : b.date.localeCompare(a.date)
+          : b.date.localeCompare(a.date),
       )
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
@@ -41,12 +41,12 @@ export async function getChangelogByVersion(
   version: string,
   options?: {
     locale?: string;
-  }
+  },
 ): Promise<Changelog | null> {
   const { locale } = options ?? {};
 
   return Promise.resolve(
-    allChangelog.find(
+    allChangelogs.find(
       (entry: Changelog) =>
         entry.version === version &&
         (!locale || entry.locale === locale) &&
@@ -63,7 +63,7 @@ type FilterOptions = {
 };
 
 export async function getFilteredChangelog(
-  options: FilterOptions = { published: undefined, locale: undefined }
+  options: FilterOptions = { published: undefined, locale: undefined },
 ): Promise<Changelog[]> {
   const entries = await getAllChangelog({
     published: options.published,
@@ -80,7 +80,8 @@ export async function getFilteredChangelog(
       if (options.search) {
         const searchLower = options.search.toLowerCase();
         const versionMatch = entry.version.toLowerCase().includes(searchLower);
-        const bodyMatch = entry.body?.toLowerCase().includes(searchLower) || false;
+        const bodyMatch =
+          entry.body?.toLowerCase().includes(searchLower) || false;
 
         if (!versionMatch && !bodyMatch) {
           return false;
@@ -88,12 +89,12 @@ export async function getFilteredChangelog(
       }
 
       return true;
-    })
+    }),
   );
 }
 
 export async function getChangelogTypeCounts(
-  options: { published?: boolean; locale?: string } = {}
+  options: { published?: boolean; locale?: string } = {},
 ): Promise<Record<string, number>> {
   const entries = await getAllChangelog(options);
   return Promise.resolve({
