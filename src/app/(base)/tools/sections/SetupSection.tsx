@@ -1,58 +1,63 @@
 "use client";
 import React from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { Card, CardContent } from "@/components/ui/card";
 import { setup } from "@/data/personal/setup";
 import { useTranslations } from "use-intl";
+import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 export function SetupSection() {
   const t = useTranslations();
-  const categories = ["hardware", "accessories", "software", "audio"];
 
   return (
-    <div className="space-y-16">
-      {categories.map((category) => {
-        const items = setup.filter((item) => item.category === category);
-        if (items.length === 0) return null;
-
-        return (
-          <SectionLayout
-            key={category}
-            title={t(`tools.page.setup-section.categories.${category}`)}
-            description={`${items.length} ${t(`tools.page.setup-section.categories.${category}`)} items`}
-            badge={t("tools.page.setup-section.badge")}
-            isFlex
+    <SectionLayout
+      title={t("tools.page.setup-section.title")}
+      description={`${setup.length} items in my daily setup`}
+      badge={t("tools.page.setup-section.badge")}
+      isFlex
+    >
+      <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-3">
+        {setup.map((item) => (
+          <a
+            href={item.purchaseUrl}
+            className="group block h-full"
+            key={item.id}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {items.map((item) => (
-                <Card
-                  key={item.id}
-                  className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group"
-                >
-                  <CardContent className="p-6 flex justify-between items-center">
-                    <div className="space-y-1">
-                      <h3 className="font-semibold">{item.name}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        {item.description}
-                      </p>
-                    </div>
-                    {item.purchaseUrl && (
-                      <a
-                        href={item.purchaseUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs font-bold uppercase tracking-widest px-3 py-1 border border-border rounded-full hover:bg-muted"
-                      >
-                        Link
-                      </a>
+            <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl h-full border-0 overflow-hidden">
+              <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
+                {item.imageUrl && (
+                  <div className="relative h-40 w-full rounded-xl overflow-hidden">
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col space-y-3">
+                  <div className="flex items-center gap-2">
+                    <p className="text-base font-semibold leading-5">
+                      {item.name}
+                    </p>
+                    {item.category && (
+                      <Badge variant="secondary" className="text-xs">
+                        {item.category}
+                      </Badge>
                     )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </SectionLayout>
-        );
-      })}
-    </div>
+                  </div>
+                  <p className="leading-6 text-muted-foreground text-sm">
+                    {item.description}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </SectionLayout>
   );
 }

@@ -2,9 +2,9 @@ import React from "react";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { HeaderSection } from "./sections/HeaderSection";
-import { SetupSection } from "./sections/SetupSection";
-import { ToolsSection } from "./sections/ToolsSection";
+import { HeaderSection } from "@/app/(base)/tools/sections/HeaderSection";
+import { SetupSection } from "@/app/(base)/tools/sections/SetupSection";
+import { ToolsSection } from "@/app/(base)/tools/sections/ToolsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,8 +32,8 @@ export default async function ToolsPage() {
   return (
     <>
       <HeaderSection />
-      <SetupSection />
       <ToolsSection />
+      <SetupSection />
       <CallToAction isPage />
     </>
   );

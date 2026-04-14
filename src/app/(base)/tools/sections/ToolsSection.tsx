@@ -1,114 +1,52 @@
 "use client";
 import React from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { Card, CardContent } from "@/components/ui/card";
 import { toolbox } from "@/data/personal/toolbox";
-import { ToolAvatar } from "@/components/shared/pages/shared/tool-avatar";
 import { useTranslations } from "use-intl";
-import {
-  Code,
-  Layout,
-  Palette,
-  Database,
-  Play,
-  Clock,
-  Globe,
-  BarChart3,
-  Bell,
-} from "lucide-react";
+import Image from "next/image";
 
 export function ToolsSection() {
   const t = useTranslations();
-  const categories = ["frontend", "backend", "design", "tools", "other"];
-
-  const getIcon = (toolId: string) => {
-    const iconMap: Record<string, React.ReactNode> = {
-      nextjs: <Code />,
-      typescript: <Code />,
-      tailwindcss: <Palette />,
-      supabase: <Database />,
-      "motion/react": <Play />,
-      triggerlab: <Clock />,
-    };
-    return iconMap[toolId] || <Layout />;
-  };
-
-  const getColor = (category: string) => {
-    const colorMap: Record<string, string> = {
-      frontend: "VIOLET",
-      backend: "BLUE",
-      design: "PINK",
-      tools: "ORANGE",
-      other: "GRAY",
-    };
-    return colorMap[category] || "VIOLET";
-  };
 
   return (
-    <div className="space-y-16">
-      {categories.map((category) => {
-        const items = toolbox.filter((item) => item.category === category);
-        if (items.length === 0) return null;
-
-        return (
-          <SectionLayout
-            key={category}
-            title={t(`tools.page.tools-section.categories.${category}`)}
-            description={`${items.length} ${t(`tools.page.tools-section.categories.${category}`)} tools`}
-            badge={t("tools.page.tools-section.badge")}
-            isFlex
+    <SectionLayout
+      title={t("tools.page.tools-section.title")}
+      description={`${toolbox.length} tools I use daily`}
+      badge={t("tools.page.tools-section.badge")}
+      isFlex
+    >
+      <div className="grid grid-cols-3 place-items-center gap-6 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-10">
+        {toolbox.map((item) => (
+          <a
+            key={item.id}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group no-underline transition-all duration-500 group-hover:-translate-y-3"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((item) => (
-                <Card
-                  key={item.id}
-                  className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group"
-                >
-                  <CardContent className="p-6">
-                    <div className="flex flex-col gap-4">
-                      <ToolAvatar
-                        name={item.name}
-                        icon={getIcon(item.id)}
-                        color={getColor(category) as any}
-                        size="md"
-                      />
-                      <div className="flex flex-col gap-2">
-                        <h3 className="font-bold text-lg">{item.name}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {item.description}
-                        </p>
-                        {item.url && (
-                          <a
-                            href={item.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-semibold mt-2 flex items-center gap-1 hover:underline"
-                          >
-                            Visit Website
-                            <svg
-                              className="size-3"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                              />
-                            </svg>
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="group inline-block text-center">
+              <div className="h-28 w-28 rounded-[20px] border border-border bg-muted p-2 transition-all duration-300 group-hover:-translate-y-3 group-hover:border-primary">
+                <div className="grid h-full place-items-center rounded-xl border-2 border-border/10 bg-muted/50">
+                  {item.icon && (
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      width={40}
+                      height={40}
+                      className="h-10 w-10"
+                    />
+                  )}
+                </div>
+              </div>
+              {item.name ? (
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {item.name}
+                </p>
+              ) : null}
             </div>
-          </SectionLayout>
-        );
-      })}
-    </div>
+          </a>
+        ))}
+      </div>
+    </SectionLayout>
   );
 }

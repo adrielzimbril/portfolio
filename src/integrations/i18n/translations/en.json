@@ -91,23 +91,12 @@
         "badge": "My Toolkit 🛠️"
       },
       "setup-section": {
-        "badge": "Setup 💻",
-        "categories": {
-          "hardware": "Hardware",
-          "accessories": "Accessories",
-          "software": "Software",
-          "audio": "Audio"
-        }
+        "title": "My Setup",
+        "badge": "Setup 💻"
       },
       "tools-section": {
-        "badge": "Tools 🧰",
-        "categories": {
-          "frontend": "Frontend",
-          "backend": "Backend",
-          "design": "Design",
-          "tools": "Tools",
-          "other": "Other"
-        }
+        "title": "Daily Tools",
+        "badge": "Tools 🧰"
       }
     }
   },

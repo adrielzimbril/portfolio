@@ -91,23 +91,12 @@
         "badge": "我的工具包 🛠️"
       },
       "setup-section": {
-        "badge": "设置 💻",
-        "categories": {
-          "hardware": "硬件",
-          "accessories": "配件",
-          "software": "软件",
-          "audio": "音频"
-        }
+        "title": "我的设置",
+        "badge": "设置 💻"
       },
       "tools-section": {
-        "badge": "工具 🧰",
-        "categories": {
-          "frontend": "前端",
-          "backend": "后端",
-          "design": "设计",
-          "tools": "工具",
-          "other": "其他"
-        }
+        "title": "日常工具",
+        "badge": "工具 🧰"
       }
     }
   },
