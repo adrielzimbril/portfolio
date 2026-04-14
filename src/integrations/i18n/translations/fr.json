@@ -25,17 +25,25 @@
     }
   },
   "connections": {
-    "title": "Connexions",
-    "description": "Connectez-vous avec moi sur le web.",
+    "title": "Personnes que j'ai rencontrées & que je veux rencontrer",
+    "description": "Découvrez les personnes avec qui je me suis connecté et celles que j'espère rencontrer à l'avenir.",
+    "keywords": "connexions, réseau, personnes rencontrées, rencontrer des gens, réseau Adriel Zimbril, communauté design produit, fondateurs SaaS, connexions créatives",
     "page": {
-      "title": "Garde le contact avec l'orbite créative",
-      "description": "Liens, réseaux et moyens de rejoindre ma ride."
+      "header-section": {
+        "title": "Personnes que j'ai rencontrées & que je veux rencontrer",
+        "description": "Un voyage à travers les connexions significatives et les aspirations futures dans la communauté du design produit et SaaS."
+      },
+      "people-section": {
+        "title": "Mon Réseau",
+        "description": "Les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour.",
+        "badge": "Connexions ✨"
+      }
     },
     "sections": {
       "people": {
         "title": "Personnes",
         "description": "Personnes que je veux rencontrer ou que j'ai déjà rencontrées.",
-        "badge": "Connexions �"
+        "badge": "Connexions 🤝"
       }
     }
   },

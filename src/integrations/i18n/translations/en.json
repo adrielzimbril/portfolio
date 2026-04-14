@@ -25,17 +25,25 @@
     }
   },
   "connections": {
-    "title": "Connections",
-    "description": "Connect with me across the web.",
+    "title": "People I've Met & Want to Meet",
+    "description": "Discover the people I've connected with and those I hope to meet in the future.",
+    "keywords": "connections, networking, people I've met, meet people, Adriel Zimbril network, product design community, SaaS founders, creative connections",
     "page": {
-      "title": "Stay in touch with the creative orbital",
-      "description": "Links, socials and ways to join my ride."
+      "header-section": {
+        "title": "People I've Met & Want to Meet",
+        "description": "A journey through meaningful connections and future aspirations in the product design and SaaS community."
+      },
+      "people-section": {
+        "title": "My Network",
+        "description": "People I've had the privilege to connect with and those I hope to meet one day.",
+        "badge": "Connections ✨"
+      }
     },
     "sections": {
       "people": {
         "title": "People",
         "description": "People I want to meet or have already met.",
-        "badge": "Connections �"
+        "badge": "Connections 🤝"
       }
     }
   },

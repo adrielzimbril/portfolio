@@ -25,17 +25,25 @@
     }
   },
   "connections": {
-    "title": "连接",
-    "description": "在网上与我联系。",
+    "title": "我见过的人 & 想见的人",
+    "description": "发现我已经联系过的人以及我希望在未来见面的人。",
+    "keywords": "连接, 社交网络, 见过的人, 见面, Adriel Zimbril 网络, 产品设计社区, SaaS 创始人, 创意连接",
     "page": {
-      "title": "保持联系",
-      "description": "加入我的创意之旅的链接和社交平台。"
+      "header-section": {
+        "title": "我见过的人 & 想见的人",
+        "description": "一段在产品设计和 SaaS 社区中有意义的联系和未来抱负的旅程。"
+      },
+      "people-section": {
+        "title": "我的网络",
+        "description": "我有幸联系过的人以及我希望有一天能见到的人。",
+        "badge": "连接 ✨"
+      }
     },
     "sections": {
       "people": {
         "title": "人物",
         "description": "我想见或已经见过的人。",
-        "badge": "连接 �"
+        "badge": "连接 🤝"
       }
     }
   },
