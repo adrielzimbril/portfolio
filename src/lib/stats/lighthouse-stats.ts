@@ -89,6 +89,22 @@ async function fetchLighthouseScores(
   const lighthouseResult = data.lighthouseResult;
   const categories = lighthouseResult?.categories;
 
+  logger.info(`[Lighthouse Stats] Lighthouse result:`, lighthouseResult);
+  logger.info(`[Lighthouse Stats] Categories:`, categories);
+  logger.info(
+    `[Lighthouse Stats] Performance score:`,
+    categories?.performance?.score,
+  );
+  logger.info(
+    `[Lighthouse Stats] Accessibility score:`,
+    categories?.accessibility?.score,
+  );
+  logger.info(
+    `[Lighthouse Stats] Best Practices score:`,
+    categories?.["best-practices"]?.score,
+  );
+  logger.info(`[Lighthouse Stats] SEO score:`, categories?.seo?.score);
+
   if (!categories) {
     logger.error(`[Lighthouse Stats] Categories is null for ${strategy}`);
     return {
@@ -98,9 +114,6 @@ async function fetchLighthouseScores(
       seo: 0,
       fetchedAt: data.lighthouseResult?.fetchTime ?? new Date().toISOString(),
     };
-  } else {
-    logger.info(`[Lighthouse Stats] Lighthouse result:`, lighthouseResult);
-    logger.info(`[Lighthouse Stats] Categories structure:`, categories);
   }
 
   return {

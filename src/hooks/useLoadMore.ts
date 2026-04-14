@@ -1,6 +1,7 @@
 "use client";
 import { sleep } from "@/utils";
 import { useState, useCallback, useMemo, useEffect } from "react";
+import logger from "@/utils/logger";
 
 interface UseLoadMoreReturn<T> {
   data: T[];
@@ -54,11 +55,11 @@ export function useLoadMore<T>({
     try {
       await sleep(800).then(() => {
         setLoadedItems((prev) =>
-          Math.min(prev + incrementCount, dataSource.length)
+          Math.min(prev + incrementCount, dataSource.length),
         );
       });
     } catch (error) {
-      console.error("Error loading more items:", error);
+      logger.error("Error loading more items:", error);
     } finally {
       setLoading(false);
     }

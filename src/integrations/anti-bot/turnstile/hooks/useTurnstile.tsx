@@ -1,5 +1,5 @@
-
 import { useState, useEffect, useCallback, useRef } from "react";
+import logger from "@/utils/logger";
 
 export interface TurnstileResponse {
   success: boolean;
@@ -16,14 +16,14 @@ export interface TurnstileOptions {
   onError?: (errorCode?: string) => void;
   onExpire?: () => void;
   onTimeout?: () => void;
-  theme?: 'light' | 'dark' | 'auto';
-  size?: 'normal' | 'compact';
+  theme?: "light" | "dark" | "auto";
+  size?: "normal" | "compact";
   language?: string;
-  retry?: 'auto' | 'never';
-  'retry-interval'?: number;
-  'refresh-expired'?: 'auto' | 'manual' | 'never';
-  appearance?: 'always' | 'execute' | 'interaction-only';
-  execution?: 'render' | 'execute';
+  retry?: "auto" | "never";
+  "retry-interval"?: number;
+  "refresh-expired"?: "auto" | "manual" | "never";
+  appearance?: "always" | "execute" | "interaction-only";
+  execution?: "render" | "execute";
 }
 
 interface TurnstileWindow extends Window {
@@ -39,26 +39,23 @@ interface TurnstileWindow extends Window {
 
 declare const window: TurnstileWindow;
 
-const useTurnstile = (
-  siteKey: string,
-  options: TurnstileOptions = {}
-) => {
+const useTurnstile = (siteKey: string, options: TurnstileOptions = {}) => {
   const [token, setToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [widgetId, setWidgetId] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
-  
+
   const {
-    theme = 'auto',
-    size = 'normal',
-    language = 'auto',
-    retry = 'auto',
-    'retry-interval': retryInterval,
-    'refresh-expired': refreshExpired = 'auto',
-    appearance = 'always',
-    execution = 'render',
+    theme = "auto",
+    size = "normal",
+    language = "auto",
+    retry = "auto",
+    "retry-interval": retryInterval,
+    "refresh-expired": refreshExpired = "auto",
+    appearance = "always",
+    execution = "render",
     onSuccess: userOnSuccess,
     onError: userOnError,
     onExpire: userOnExpire,
@@ -66,29 +63,35 @@ const useTurnstile = (
     onLoad: userOnLoad,
   } = options;
 
-  const onSuccess = useCallback((token: string) => {
-    setToken(token);
-    setError(null);
-    setIsLoading(false);
-    userOnSuccess?.(token);
-  }, [userOnSuccess]);
+  const onSuccess = useCallback(
+    (token: string) => {
+      setToken(token);
+      setError(null);
+      setIsLoading(false);
+      userOnSuccess?.(token);
+    },
+    [userOnSuccess],
+  );
 
-  const onError = useCallback((errorCode?: string) => {
-    setError(errorCode || 'Turnstile verification failed');
-    setToken(null);
-    setIsLoading(false);
-    userOnError?.(errorCode);
-  }, [userOnError]);
+  const onError = useCallback(
+    (errorCode?: string) => {
+      setError(errorCode || "Turnstile verification failed");
+      setToken(null);
+      setIsLoading(false);
+      userOnError?.(errorCode);
+    },
+    [userOnError],
+  );
 
   const onExpired = useCallback(() => {
     setToken(null);
-    setError('Turnstile token expired');
+    setError("Turnstile token expired");
     setIsLoading(false);
     userOnExpire?.();
   }, [userOnExpire]);
 
   const onTimeout = useCallback(() => {
-    setError('Turnstile verification timed out');
+    setError("Turnstile verification timed out");
     setToken(null);
     setIsLoading(false);
     userOnTimeout?.();
@@ -109,19 +112,20 @@ const useTurnstile = (
         size,
         language,
         retry,
-        'retry-interval': retryInterval,
-        'refresh-expired': refreshExpired,
+        "retry-interval": retryInterval,
+        "refresh-expired": refreshExpired,
         appearance,
         execution,
         callback: onSuccess,
-        'error-callback': onError,
-        'expired-callback': onExpired,
-        'timeout-callback': onTimeout,
+        "error-callback": onError,
+        "expired-callback": onExpired,
+        "timeout-callback": onTimeout,
       };
 
-      Object.keys(renderOptions).forEach(key => 
-        renderOptions[key as keyof typeof renderOptions] === undefined && 
-        delete renderOptions[key as keyof typeof renderOptions]
+      Object.keys(renderOptions).forEach(
+        (key) =>
+          renderOptions[key as keyof typeof renderOptions] === undefined &&
+          delete renderOptions[key as keyof typeof renderOptions],
       );
 
       const id = window.turnstile.render(containerRef.current, renderOptions);
@@ -129,13 +133,26 @@ const useTurnstile = (
       // Fire the onLoad callback
       userOnLoad?.();
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to render Turnstile';
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to render Turnstile";
       setError(errorMessage);
       setIsLoading(false);
     }
   }, [
-    siteKey, theme, size, language, retry, retryInterval, 
-    refreshExpired, appearance, execution, onSuccess, onError, onExpired, onTimeout, userOnLoad
+    siteKey,
+    theme,
+    size,
+    language,
+    retry,
+    retryInterval,
+    refreshExpired,
+    appearance,
+    execution,
+    onSuccess,
+    onError,
+    onExpired,
+    onTimeout,
+    userOnLoad,
   ]);
 
   useEffect(() => {
@@ -143,8 +160,8 @@ const useTurnstile = (
       return;
     }
 
-    const scriptId = 'cloudflare-turnstile-script';
-    const onloadCallbackName = 'cfTurnstileOnload';
+    const scriptId = "cloudflare-turnstile-script";
+    const onloadCallbackName = "cfTurnstileOnload";
 
     (window as any)[onloadCallbackName] = renderTurnstile;
 
@@ -155,14 +172,14 @@ const useTurnstile = (
       return;
     }
 
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.id = scriptId;
     script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?onload=${onloadCallbackName}`;
     script.async = false;
     script.defer = false;
 
     script.onerror = () => {
-      setError('Failed to load Turnstile script');
+      setError("Failed to load Turnstile script");
       setIsLoading(false);
     };
 
@@ -174,7 +191,7 @@ const useTurnstile = (
         try {
           window.turnstile.remove(widgetId);
         } catch (err) {
-          console.warn('Failed to remove Turnstile widget:', err);
+          logger.warn("Failed to remove Turnstile widget:", err);
         }
       }
       delete (window as any)[onloadCallbackName];
@@ -189,7 +206,7 @@ const useTurnstile = (
         setIsLoading(true);
         window.turnstile.reset(widgetId);
       } catch (err) {
-        setError('Failed to reset Turnstile');
+        setError("Failed to reset Turnstile");
         setIsLoading(false);
       }
     }
@@ -203,7 +220,7 @@ const useTurnstile = (
         setIsLoading(true);
         window.turnstile.execute(containerRef.current);
       } catch (err) {
-        setError('Failed to execute Turnstile');
+        setError("Failed to execute Turnstile");
         setIsLoading(false);
       }
     }
@@ -214,7 +231,7 @@ const useTurnstile = (
       try {
         return window.turnstile.getResponse(widgetId);
       } catch (err) {
-        console.warn('Failed to get Turnstile response:', err);
+        logger.warn("Failed to get Turnstile response:", err);
         return null;
       }
     }
@@ -229,7 +246,7 @@ const useTurnstile = (
     reset,
     execute,
     getResponse,
-    widgetId
+    widgetId,
   };
 };
 

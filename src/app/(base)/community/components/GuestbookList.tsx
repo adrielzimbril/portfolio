@@ -3,6 +3,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatDateDiff } from "@/utils/format-date";
+import logger from "@/utils/logger";
 
 export async function GuestbookList() {
   const cookieStore = await cookies();
@@ -24,7 +25,7 @@ export async function GuestbookList() {
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error(error);
+    logger.error(error);
     return (
       <div className="text-muted-foreground italic p-8 text-center border border-dashed rounded-3xl">
         Failed to load messages.

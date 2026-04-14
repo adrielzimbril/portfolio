@@ -7,6 +7,7 @@ import { Loader2, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import logger from "@/utils/logger";
 
 export function GuestbookForm({ user }: { user: any }) {
   const [message, setMessage] = useState("");
@@ -34,7 +35,7 @@ export function GuestbookForm({ user }: { user: any }) {
       toast.success("Message posted on the wall!");
       router.refresh();
     } catch (error) {
-      console.error(error);
+      logger.error(error);
       toast.error("Failed to post message. Please try again.");
     } finally {
       setIsSubmitting(false);
