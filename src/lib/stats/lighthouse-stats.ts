@@ -6,6 +6,13 @@ import logger from "@/utils/logger";
 const SITE_URL = process.env.SITE_URL || "https://www.adrielzimbril.com/";
 const PAGESPEED_API_KEY = process.env.PAGESPEED_API_KEY;
 
+// Cache duration in seconds (default 10 days = 864000 seconds)
+const LIGHTHOUSE_CACHE_DAYS = parseInt(
+  process.env.LIGHTHOUSE_CACHE_DAYS || "10",
+  10,
+);
+const LIGHTHOUSE_REVALIDATE = LIGHTHOUSE_CACHE_DAYS * 86400;
+
 function getEmptyLighthouseStats(): LighthouseStats {
   const defaultScores: LighthouseScores = {
     performance: 0,
@@ -82,7 +89,7 @@ async function fetchLighthouseScores(
   }
 
   const response = await fetch(apiUrl.toString(), {
-    next: { revalidate: 86400 },
+    next: { revalidate: LIGHTHOUSE_REVALIDATE },
   });
 
   if (!response.ok) {
