@@ -7,7 +7,7 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { changelog } from "@/data/personal/changelog";
 import { Badge } from "@/components/ui/badge";
-import { SparklesOne, LightningOne, BugOne, WrenchOne } from "@aurthle/icons";
+import { Sparkles, Star, Bug, Wrench } from "@aurthle/icons";
 
 interface ChangelogUpdatesCardProps {
   count: number;
@@ -26,7 +26,7 @@ export function ChangelogUpdatesCard({
 
   const typeIcons = {
     milestone: Sparkles,
-    feature: Zap,
+    feature: Star,
     fix: Bug,
     improvement: Wrench,
   };
@@ -121,8 +121,8 @@ export function ChangelogUpdatesCard({
                           typeIcons[item.type as keyof typeof typeIcons];
                         return Icon ? (
                           <Icon
+                            size={12}
                             className={cn(
-                              "h-3 w-3",
                               typeColors[item.type as keyof typeof typeColors],
                             )}
                           />

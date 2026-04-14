@@ -90,7 +90,11 @@ export function HeaderSection({
               size="md"
             >
               <span className="flex items-center gap-2">
-                <Calendar className="size-4 text-indigo-400" variant="bulk" />
+                <Calendar
+                  size={16}
+                  className="text-indigo-400"
+                  variant="bulk"
+                />
                 {getDate({ date: articleDetails.date })}
               </span>
             </Badge>
@@ -103,7 +107,8 @@ export function HeaderSection({
           >
             <span className="flex items-center gap-2">
               <HourglassFill
-                className="size-4 text-indigo-400"
+                size={16}
+                className="text-indigo-400"
                 variant="bulk"
               />
               {articleDetails.readingTime}
@@ -116,7 +121,7 @@ export function HeaderSection({
             size="md"
           >
             <span className="flex items-center gap-2">
-              <Eye className="size-4 text-indigo-400" variant="bulk" />
+              <Eye size={16} className="text-indigo-400" variant="bulk" />
               {formatCount(articleDetails.views ?? 0)} {t("common.stats.views")}
             </span>
           </Badge>

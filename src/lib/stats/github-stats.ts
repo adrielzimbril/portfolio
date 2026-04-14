@@ -16,11 +16,6 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 export async function getGitHubStats(): Promise<GitHubStats> {
   return unstable_cache(
     async () => {
-      logger.info("[GitHub Stats] Fetching GitHub stats...");
-      logger.info("[GitHub Stats] Username:", GITHUB_USERNAME);
-      logger.info("[GitHub Stats] Repo:", GITHUB_REPO);
-      logger.info("[GitHub Stats] Token set:", !!GITHUB_TOKEN);
-
       if (!GITHUB_TOKEN) {
         logger.warn(
           "[GitHub Stats] GITHUB_TOKEN not set, returning empty stats",
@@ -33,15 +28,6 @@ export async function getGitHubStats(): Promise<GitHubStats> {
           fetchRepoStats(),
           fetchContributions(),
         ]);
-
-        logger.info(
-          "[GitHub Stats] Repo stats received:",
-          JSON.stringify(repoStats, null, 2),
-        );
-        logger.info(
-          "[GitHub Stats] Contributions received:",
-          contributions.totalContributions,
-        );
 
         if (!repoStats) {
           logger.error("[GitHub Stats] Repo stats is null");
@@ -68,8 +54,6 @@ export async function getGitHubStats(): Promise<GitHubStats> {
 }
 
 async function fetchRepoStats() {
-  logger.info("[GitHub Stats] Fetching repo stats...");
-
   const query = `
     query($owner: String!, $name: String!) {
       repository(owner: $owner, name: $name) {
@@ -100,8 +84,6 @@ async function fetchRepoStats() {
     }),
   });
 
-  logger.info("[GitHub Stats] Response status:", response.status);
-
   if (!response.ok) {
     logger.error(
       "[GitHub Stats] Failed to fetch GitHub repo stats:",
@@ -111,7 +93,6 @@ async function fetchRepoStats() {
   }
 
   const data = await response.json();
-  logger.info("[GitHub Stats] Response data:", data);
 
   if (!data.data) {
     logger.error("[GitHub Stats] No data.data in response");
@@ -135,8 +116,6 @@ async function fetchRepoStats() {
 }
 
 async function fetchContributions(): Promise<ContributionData> {
-  logger.info("[GitHub Stats] Fetching contributions...");
-
   // Calculate rolling 365-day window ending today
   const today = new Date();
   const oneYearAgo = new Date();
@@ -191,12 +170,6 @@ async function fetchContributions(): Promise<ContributionData> {
       );
       return getEmptyContributions();
     }
-
-    logger.info(
-      "[GitHub Stats] Total contributions:",
-      calendar.totalContributions,
-    );
-    logger.info("[GitHub Stats] Weeks count:", calendar.weeks?.length);
 
     return {
       totalContributions: calendar.totalContributions,
@@ -262,8 +235,6 @@ function getEmptyContributions(): ContributionData {
 }
 
 export async function getGitHubReleases() {
-  logger.info("[GitHub Releases] Fetching GitHub releases...");
-
   if (!GITHUB_TOKEN) {
     logger.warn(
       "[GitHub Releases] GITHUB_TOKEN not set, returning empty releases",
@@ -291,7 +262,6 @@ export async function getGitHubReleases() {
     }
 
     const releases = await response.json();
-    logger.info("[GitHub Releases] Fetched releases:", releases.length);
 
     return releases.map((release: any) => ({
       tag_name: release.tag_name,

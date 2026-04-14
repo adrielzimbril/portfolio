@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronDownOne, ChevronUpOne } from "@aurthle/icons";
+import { ChevronDownOne, ChevronUpOne, CheckCircle } from "@aurthle/icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/utils";
@@ -130,7 +130,7 @@ function SelectItem({
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
       <span className="pointer-events-none absolute end-4 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <Checked size={20} />
+          <CheckCircle size={20} />
         </SelectPrimitive.ItemIndicator>
       </span>
     </SelectPrimitive.Item>

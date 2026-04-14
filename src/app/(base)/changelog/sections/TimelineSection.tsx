@@ -7,12 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  SparklesOne,
-  LightningOne,
-  BugOne,
-  WrenchOne,
-  SearchOne,
-  CalendarOne,
+  SparklesTwo,
+  LightbulbTwoPower,
+  Bug,
+  Wrench,
+  Calendar,
+  Sparkles,
 } from "@aurthle/icons";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import {
@@ -63,10 +63,10 @@ export function TimelineSection() {
   }, [changelogData, selectedType, searchQuery]);
 
   const typeIcons = {
-    milestone: SparklesOne,
-    feature: LightningOne,
-    fix: BugOne,
-    improvement: WrenchOne,
+    milestone: SparklesTwo,
+    feature: LightbulbTwoPower,
+    fix: Bug,
+    improvement: Wrench,
   };
 
   return (
@@ -103,16 +103,12 @@ export function TimelineSection() {
 
           {/* Search Input */}
           <div className="relative w-full max-w-md mx-auto">
-            <SearchOne
-              size={16}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-            />
             <Input
               type="text"
               placeholder="Search releases..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9"
+              className="pl-4"
             />
           </div>
         </div>
@@ -190,7 +186,10 @@ export function TimelineSection() {
                             {/* Timeline Dot */}
                             <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-border bg-b-base shrink-0 z-10 transition-colors duration-300 group-hover:border-primary group-hover:bg-primary/10">
                               {Icon && (
-                                <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                                <Icon
+                                  size={16}
+                                  className="text-muted-foreground group-hover:text-primary transition-colors"
+                                />
                               )}
                             </div>
 
@@ -210,7 +209,7 @@ export function TimelineSection() {
                               <CardContent className="p-8">
                                 <div className="flex items-center justify-between mb-4">
                                   <div className="flex items-center gap-3">
-                                    <CalendarOne
+                                    <Calendar
                                       size={16}
                                       className="text-muted-foreground"
                                     />

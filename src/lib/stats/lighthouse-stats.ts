@@ -25,10 +25,6 @@ function getEmptyLighthouseStats(): LighthouseStats {
 export async function getLighthouseStats(): Promise<LighthouseStats> {
   return unstable_cache(
     async () => {
-      logger.info("[Lighthouse Stats] Fetching Lighthouse stats...");
-      logger.info("[Lighthouse Stats] Site URL:", SITE_URL);
-      logger.info("[Lighthouse Stats] API Key set:", !!PAGESPEED_API_KEY);
-
       if (!SITE_URL) {
         logger.warn(
           "[Lighthouse Stats] SITE_URL not set, returning empty stats",
@@ -65,8 +61,6 @@ export async function getLighthouseStats(): Promise<LighthouseStats> {
 async function fetchLighthouseScores(
   strategy: "mobile" | "desktop",
 ): Promise<LighthouseScores> {
-  logger.info(`[Lighthouse Stats] Fetching ${strategy} scores...`);
-
   const apiUrl = new URL(
     "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
   );
@@ -102,20 +96,6 @@ async function fetchLighthouseScores(
   const data = await response.json();
   const lighthouseResult = data.lighthouseResult;
   const categories = lighthouseResult?.categories;
-
-  logger.info(
-    `[Lighthouse Stats] Performance score:`,
-    categories?.performance?.score,
-  );
-  logger.info(
-    `[Lighthouse Stats] Accessibility score:`,
-    categories?.accessibility?.score,
-  );
-  logger.info(
-    `[Lighthouse Stats] Best Practices score:`,
-    categories?.["best-practices"]?.score,
-  );
-  logger.info(`[Lighthouse Stats] SEO score:`, categories?.seo?.score);
 
   if (!categories) {
     logger.error(`[Lighthouse Stats] Categories is null for ${strategy}`);

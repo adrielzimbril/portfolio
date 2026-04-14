@@ -24,7 +24,6 @@ export function HeaderSection() {
     <PageHero
       title={t("changelog.page.title")}
       description={t("changelog.page.description")}
-      badge={t("changelog.page.badge")}
       imagePath={{ emoji: "📝" }}
       isMobileShowed
     />

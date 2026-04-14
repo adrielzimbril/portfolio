@@ -1,11 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { SunOne } from "@aurthle/icons";
+import {
+  Sun,
+  Moon,
+  MoonSparkle,
+  SunCircle,
+  SolarEclipseTwo,
+} from "@aurthle/icons";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { flushSync } from "react-dom";
-import { MoonIcon } from "@radix-ui/react-icons";
+import { cn } from "@/utils";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -14,13 +20,17 @@ export function ThemeToggle() {
   const changeTheme = async () => {
     if (!buttonRef.current) return;
 
+    // Cycle through light -> dark -> system -> light
+    const newTheme =
+      theme === "light" ? "dark" : theme === "dark" ? "system" : "light";
+
     // Check if the browser supports the View Transition API
     const supportsViewTransition = "startViewTransition" in document;
 
     if (supportsViewTransition) {
       await document.startViewTransition(() => {
         flushSync(() => {
-          setTheme(theme === "light" ? "dark" : "light");
+          setTheme(newTheme);
         });
       }).ready;
 
@@ -48,7 +58,7 @@ export function ThemeToggle() {
       );
     } else {
       // Fallback simple : just change the theme without animation
-      setTheme(theme === "light" ? "dark" : "light");
+      setTheme(newTheme);
     }
   };
 
@@ -60,10 +70,35 @@ export function ThemeToggle() {
       asPointer
       ref={buttonRef}
       onClick={changeTheme}
+      aria-label={theme}
       className="md:size-auto md:p-3 aspect-square"
     >
-      <SunOne className="md:size-5! rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <MoonIcon className="absolute md:size-5! rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <Sun
+        size={24}
+        variant="duotone"
+        className={cn(
+          "rotate-0 scale-100 transition-all",
+          theme === "dark" && "-rotate-90 scale-0",
+          theme === "system" && "-rotate-90 scale-0",
+        )}
+      />
+      <MoonSparkle
+        size={24}
+        variant="duotone"
+        className={cn(
+          "absolute rotate-90 scale-0 transition-all",
+          theme === "dark" && "rotate-0 scale-100",
+          theme === "system" && "-rotate-90 scale-0",
+        )}
+      />
+      <SolarEclipseTwo
+        size={24}
+        variant="duotone"
+        className={cn(
+          "absolute rotate-180 scale-0 transition-all",
+          theme === "system" && "rotate-0 scale-100",
+        )}
+      />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
