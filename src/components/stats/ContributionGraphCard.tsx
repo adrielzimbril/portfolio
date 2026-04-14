@@ -13,19 +13,19 @@ interface ContributionGraphCardProps {
 }
 
 const CONTRIBUTION_LEVEL_COLORS = {
-  NONE: "squircle-border",
-  FIRST_QUARTILE: "squircle-primary/30",
-  SECOND_QUARTILE: "squircle-primary/50",
-  THIRD_QUARTILE: "squircle-primary/70",
-  FOURTH_QUARTILE: "squircle-primary",
+  NONE: "bg-border",
+  FIRST_QUARTILE: "bg-green-200",
+  SECOND_QUARTILE: "bg-green-400",
+  THIRD_QUARTILE: "bg-green-500",
+  FOURTH_QUARTILE: "bg-green-600",
 } as const;
 
 const levelColorsHover = {
-  NONE: "group-hover/cell:squircle-border/80",
-  FIRST_QUARTILE: "group-hover/cell:squircle-primary/40",
-  SECOND_QUARTILE: "group-hover/cell:squircle-primary/60",
-  THIRD_QUARTILE: "group-hover/cell:squircle-primary/80",
-  FOURTH_QUARTILE: "group-hover/cell:squircle-primary/90",
+  NONE: "group-hover/cell:bg-border/80",
+  FIRST_QUARTILE: "group-hover/cell:bg-green-300",
+  SECOND_QUARTILE: "group-hover/cell:bg-green-500",
+  THIRD_QUARTILE: "group-hover/cell:bg-green-600",
+  FOURTH_QUARTILE: "group-hover/cell:bg-green-700",
 };
 
 function formatDate(dateString: string): string {

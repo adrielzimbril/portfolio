@@ -67,13 +67,27 @@ async function fetchLighthouseScores(
 ): Promise<LighthouseScores> {
   logger.info(`[Lighthouse Stats] Fetching ${strategy} scores...`);
 
-  const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(SITE_URL)}&strategy=${strategy}`;
+  const apiUrl = new URL(
+    "https://www.googleapis.com/pagespeedonline/v5/runPagespeed",
+  );
+  apiUrl.searchParams.set("url", SITE_URL);
+  apiUrl.searchParams.set("strategy", strategy);
 
-  const urlWithKey = PAGESPEED_API_KEY
-    ? `${apiUrl}&key=${PAGESPEED_API_KEY}`
-    : apiUrl;
+  // API expects multiple category params, not comma-separated
+  const categoryParams = [
+    "performance",
+    "accessibility",
+    "best-practices",
+    "seo",
+  ];
+  categoryParams.forEach((cat) => apiUrl.searchParams.append("category", cat));
 
-  const response = await fetch(urlWithKey, {
+  // Add API key if available (increases quota from 25/day to 25,000/day)
+  if (PAGESPEED_API_KEY) {
+    apiUrl.searchParams.set("key", PAGESPEED_API_KEY);
+  }
+
+  const response = await fetch(apiUrl.toString(), {
     next: { revalidate: 86400 },
   });
 
