@@ -75,7 +75,14 @@ export interface ConnectionItem {
 export interface ToolItem {
   id: string;
   name: string;
-  category: "frontend" | "backend" | "design" | "tools" | "other";
+  category:
+    | "frontend"
+    | "backend"
+    | "design"
+    | "tools"
+    | "other"
+    | "code"
+    | "productivity";
   description: string;
   url?: string;
   icon?: string;

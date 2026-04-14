@@ -14,7 +14,7 @@ export function ToolsSection() {
       badge={t("tools.page.tools-section.badge")}
       isFlex
     >
-      <div className="relative mb-12 grid auto-rows-auto grid-cols-3 place-items-center justify-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+      <div className="relative mb-12 grid auto-rows-auto grid-cols-3 place-items-center justify-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-9">
         {toolbox.map(
           (item) =>
             item.icon && (

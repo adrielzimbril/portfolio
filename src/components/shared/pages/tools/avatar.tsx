@@ -5,10 +5,10 @@ import { cn } from "@/utils/utils";
 
 export function ToolAvatar({ icon, name }: { icon: string; name: string }) {
   return (
-    <div className="group relative size-fit">
+    <div className="group relative size-max">
       <div
         className={cn(
-          "relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-36 overflow-hidden transition-all duration-300 squircle-border-b-base-accent",
+          "relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-30 overflow-hidden transition-all duration-300 squircle-border-b-base-accent",
           "squircle-border-[#8e8eff] group-hover:squircle-border-[#ffd3ad]",
         )}
       >
