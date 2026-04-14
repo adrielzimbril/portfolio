@@ -13,9 +13,8 @@ import {
   getFilteredChangelog,
   getChangelogTypeCounts,
 } from "@/integrations/content/lib";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { cn } from "@/utils/utils";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 
 export function TimelineSection() {
   const [selectedType, setSelectedType] = useState<string>("all");
@@ -238,12 +237,7 @@ export function TimelineSection() {
                                 <h3 className="text-2xl font-bold mb-6 text-foreground">
                                   {entry.version}
                                 </h3>
-                                <div className="prose prose-sm max-w-none dark:prose-invert">
-                                  <MDXRemote
-                                    source={entry.body}
-                                    components={richTextComponent}
-                                  />
-                                </div>
+                                <MarkdownContentRender content={entry.body} />
                               </CardContent>
                             </Card>
                           </div>

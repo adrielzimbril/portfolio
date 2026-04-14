@@ -260,3 +260,48 @@ function getEmptyContributions(): ContributionData {
     weeks,
   };
 }
+
+export async function getGitHubReleases() {
+  logger.info("[GitHub Releases] Fetching GitHub releases...");
+
+  if (!GITHUB_TOKEN) {
+    logger.warn(
+      "[GitHub Releases] GITHUB_TOKEN not set, returning empty releases",
+    );
+    return [];
+  }
+
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/releases`,
+      {
+        headers: {
+          Authorization: `Bearer ${GITHUB_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      logger.error(
+        "[GitHub Releases] Failed to fetch releases:",
+        response.status,
+      );
+      return [];
+    }
+
+    const releases = await response.json();
+    logger.info("[GitHub Releases] Fetched releases:", releases.length);
+
+    return releases.map((release: any) => ({
+      tag_name: release.tag_name,
+      name: release.name || release.tag_name,
+      body: release.body,
+      published_at: release.published_at,
+      html_url: release.html_url,
+    }));
+  } catch (error) {
+    logger.error("[GitHub Releases] Error fetching releases:", error);
+    return [];
+  }
+}
