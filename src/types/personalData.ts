@@ -85,6 +85,7 @@ export interface SetupItem {
   id: string;
   name: string;
   category: "hardware" | "accessories" | "software" | "audio";
+  tags: string[];
   description: string;
   imageUrl?: string;
   purchaseUrl?: string;
@@ -97,4 +98,3 @@ export interface ChangelogItem {
   changes: string[];
   type: "feature" | "fix" | "improvement" | "milestone";
 }
-

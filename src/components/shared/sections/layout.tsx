@@ -31,10 +31,10 @@ export function SectionLayout({
       className={cn("relative w-full py-14 md:py-[104px]", className)}
       id={id}
     >
-      {title && (
+      {(title || badge) && (
         <SectionHeader
           title={title}
-          description={description!}
+          description={description}
           link={link}
           badge={badge}
           layoutStart={layoutStart}
@@ -46,7 +46,7 @@ export function SectionLayout({
           "flex flex-col items-center justify-center justify-items-center self-center place-self-center w-full gap-6",
           !isFlex &&
             "md:grid grid-cols-1 md:grid-cols-2 md:max-w-[90%] place-items-center place-self-center",
-          contentClassName
+          contentClassName,
         )}
       >
         {children}

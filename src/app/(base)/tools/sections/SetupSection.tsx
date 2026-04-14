@@ -9,11 +9,7 @@ export function SetupSection() {
   const t = useTranslations();
 
   return (
-    <SectionLayout
-      title={t("tools.page.setup-section.title")}
-      badge={t("tools.page.setup-section.badge")}
-      isFlex
-    >
+    <SectionLayout badge={t("tools.page.setup-section.badge")} isFlex>
       <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-3">
         {setup.map((item) => (
           <SetupCard
@@ -22,6 +18,7 @@ export function SetupSection() {
             cover={item.imageUrl}
             description={item.description}
             category={item.category}
+            tags={item.tags}
             purchaseUrl={item.purchaseUrl}
           />
         ))}

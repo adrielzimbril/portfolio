@@ -1,29 +1,37 @@
 "use client";
 import { Link } from "@/components/ui/link";
-import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { getExternalUrl } from "@/utils/base-url";
+import { useTranslations } from "use-intl";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
 
 export function CardInfo({
   title,
   description,
   category,
+  tags,
   purchaseUrl,
 }: {
   title: string;
   description: string;
   category: string;
+  tags: string[];
   purchaseUrl?: string;
 }) {
-  return (
-    <div className="flex flex-col items-start justify-between gap-4 size-full">
-      <div className="flex flex-col items-start justify-center gap-4 w-full">
-        <Header title={title} slug={purchaseUrl ?? ""} />
-        <Tags primaryTag={category} />
-        <Description description={description} />
-      </div>
+  const t = useTranslations("tools.setup");
 
-      {purchaseUrl ? <Action label="Learn more" href={purchaseUrl} /> : null}
+  const translatedCategory = t(`categories.${category}`);
+  const translatedTags = tags.map((tag) => t(`tags.${tag.toLowerCase()}`));
+
+  return (
+    <div className="flex flex-col items-start justify-center gap-4 size-full">
+      <Header title={title} slug={purchaseUrl ?? ""} />
+      <Tags
+        primaryTag={translatedCategory}
+        primaryTagColor={DEFAULT_COLOR_CODE_NAME_LIST.ORANGE}
+        tags={translatedTags}
+      />
+      <Description description={description} />
     </div>
   );
 }
@@ -31,7 +39,9 @@ export function CardInfo({
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
     <Link href={getExternalUrl(slug)}>
-      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">{title}</h3>
+      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
+        {title}
+      </h3>
     </Link>
   );
 }
@@ -41,16 +51,5 @@ function Description({ description }: { description: string }) {
     <p className="w-full relative text-base text-b-white-invert-thr leading-6">
       {description}
     </p>
-  );
-}
-
-function Action({ label, href }: { label: string; href: string }) {
-  return (
-    <Link href={href} likeButton whileTap size="xs" asIcon>
-      <span className="flex items-center gap-1">
-        {label}
-        <LinkDiagonalOne size={16} />
-      </span>
-    </Link>
   );
 }

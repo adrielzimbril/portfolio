@@ -96,16 +96,34 @@
       },
       "tools-section": {
         "title": "日常工具",
-        "badge": "工具 🧰"
+        "badge": "工具 "
       }
     }
   },
   "setup": {
-    "title": "我的设置",
+    "title": "我的设备",
     "description": "我用于创意工作的硬件和外围设备。",
     "page": {
-      "title": "我的创意和生产力空间",
-      "description": "陪伴我进行创意之旅的硬件和配置。"
+      "title": "我的创意和高效工作空间",
+      "description": "陪伴我创意旅程的设备和配置。"
+    },
+    "categories": {
+      "hardware": "硬件",
+      "accessories": "配件",
+      "software": "软件",
+      "audio": "音频"
+    },
+    "tags": {
+      "laptop": "笔记本电脑",
+      "keyboard": "键盘",
+      "mechanical": "机械",
+      "monitor": "显示器",
+      "chair": "椅子",
+      "desk": "桌子",
+      "microphone": "麦克风",
+      "streaming": "直播",
+      "lighting": "灯光",
+      "capture": "采集"
     }
   },
   "changelog": {

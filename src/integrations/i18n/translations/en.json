@@ -106,6 +106,24 @@
     "page": {
       "title": "My creative and productive workspace",
       "description": "The gear and config that accompany me in my creative ride."
+    },
+    "categories": {
+      "hardware": "Hardware",
+      "accessories": "Accessories",
+      "software": "Software",
+      "audio": "Audio"
+    },
+    "tags": {
+      "laptop": "Laptop",
+      "keyboard": "Keyboard",
+      "mechanical": "Mechanical",
+      "monitor": "Monitor",
+      "chair": "Chair",
+      "desk": "Desk",
+      "microphone": "Microphone",
+      "streaming": "Streaming",
+      "lighting": "Lighting",
+      "capture": "Capture"
     }
   },
   "changelog": {

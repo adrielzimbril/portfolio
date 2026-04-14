@@ -13,8 +13,8 @@ export function SectionHeader({
   layoutStart,
   isPage,
 }: {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   link?: string;
   badge?: string;
   layoutStart?: boolean;
@@ -26,28 +26,32 @@ export function SectionHeader({
     <div
       className={cn(
         "max-w-2xl flex flex-col items-start justify-start gap-4 mb-12",
-        !layoutStart && " mx-auto items-center justify-center text-center"
+        !layoutStart && " mx-auto items-center justify-center text-center",
       )}
     >
       {badge && <Badge size="md">{badge}</Badge>}
 
-      <h2
-        className={cn(
-          layoutStart ? "h2 md:h3 font-normals" : "capitalize",
-          isPage && "font-normal"
-        )}
-      >
-        {title}
-      </h2>
+      {title && (
+        <h2
+          className={cn(
+            layoutStart ? "h2 md:h3 font-normals" : "capitalize",
+            isPage && "font-normal",
+          )}
+        >
+          {title}
+        </h2>
+      )}
 
-      <p
-        className={cn(
-          "text-xl md:text-2xl text-b-white-invert-sec whitespace-pre-line",
-          !layoutStart && "font-medium"
-        )}
-      >
-        {description}
-      </p>
+      {description && (
+        <p
+          className={cn(
+            "text-xl md:text-2xl text-b-white-invert-sec whitespace-pre-line",
+            !layoutStart && "font-medium",
+          )}
+        >
+          {description}
+        </p>
+      )}
 
       {link && (
         <Link

@@ -7,12 +7,14 @@ export function SetupCard({
   cover,
   description,
   category,
+  tags,
   purchaseUrl,
 }: {
   title: string;
   cover?: string;
   description: string;
   category: string;
+  tags: string[];
   purchaseUrl?: string;
 }) {
   return (
@@ -26,11 +28,13 @@ export function SetupCard({
             title: title,
             description: description,
           }}
+          purchaseUrl={purchaseUrl}
         />
         <CardInfo
           title={title}
           description={description}
           category={category}
+          tags={tags}
           purchaseUrl={purchaseUrl}
         />
       </CardContent>

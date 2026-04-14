@@ -104,8 +104,26 @@
     "title": "Mon Setup",
     "description": "Le matériel et les périphériques que j'utilise pour mon travail créatif.",
     "page": {
-      "title": "Mon espace de création et de productivité",
-      "description": "Le matériel et la config qui m'accompagnent dans ma ride créative."
+      "title": "Mon espace de travail créatif et productif",
+      "description": "Le matériel et la configuration qui m'accompagnent dans mon parcours créatif."
+    },
+    "categories": {
+      "hardware": "Matériel",
+      "accessories": "Accessoires",
+      "software": "Logiciel",
+      "audio": "Audio"
+    },
+    "tags": {
+      "laptop": "Ordinateur",
+      "keyboard": "Clavier",
+      "mechanical": "Mécanique",
+      "monitor": "Écran",
+      "chair": "Chaise",
+      "desk": "Bureau",
+      "microphone": "Microphone",
+      "streaming": "Streaming",
+      "lighting": "Éclairage",
+      "capture": "Capture"
     }
   },
   "changelog": {

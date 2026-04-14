@@ -5,15 +5,23 @@ import { getImageUrl } from "@/utils/base-url";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useTranslations } from "use-intl";
 import { PreviewContent } from "@/components/shared/pages/shared/preview";
+import { Link } from "@/components/ui/link";
 
 interface PreviewProps {
   title?: string;
   cover?: string;
   coverText?: { emoji: string; title: string; description: string };
   isWide?: boolean;
+  purchaseUrl?: string;
 }
 
-export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
+export function CardPreview({
+  title,
+  cover,
+  coverText,
+  isWide,
+  purchaseUrl,
+}: PreviewProps) {
   const t = useTranslations();
   return (
     <div
@@ -23,9 +31,25 @@ export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
         cover ? "p-2 h-48 md:h-80" : "p-4",
       )}
     >
-      <div className="flex w-full cursor-pointer">
-        {cover ? (
-          <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
+      {cover ? (
+        <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
+          {purchaseUrl ? (
+            <Link href={purchaseUrl} className="w-full">
+              <Image
+                width={1200}
+                height={630}
+                className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
+                alt={title ?? ""}
+                src={getImageUrl(cover)}
+                loading="lazy"
+                sizes={
+                  isWide
+                    ? "(max-width: 768px) 100vw, 66vw"
+                    : "(max-width: 768px) 100vw, 33vw"
+                }
+              />
+            </Link>
+          ) : (
             <Dialog>
               <DialogTrigger asChild>
                 <button
@@ -66,17 +90,17 @@ export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
                 </div>
               </DialogContent>
             </Dialog>
-          </div>
-        ) : (
+          )}
+        </div>
+      ) : (
+        <div className="flex w-full">
           <PreviewContent
             emoji={coverText?.emoji ?? "🛠️"}
             title={coverText?.title ?? title ?? ""}
-            description={
-              coverText?.description ?? ""
-            }
+            description={coverText?.description ?? ""}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
