@@ -137,17 +137,39 @@ async function fetchRepoStats() {
 async function fetchContributions(): Promise<ContributionData> {
   logger.info("[GitHub Stats] Fetching contributions...");
 
+  // Calculate rolling 365-day window ending today
+  const today = new Date();
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+  const query = `
+    query {
+      user(login: "${GITHUB_USERNAME}") {
+        contributionsCollection(from: "${oneYearAgo.toISOString()}", to: "${today.toISOString()}") {
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                date
+                contributionCount
+                contributionLevel
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
   try {
-    // Utiliser l'API REST GitHub pour récupérer les contributions
-    const response = await fetch(
-      `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/stats/contributors`,
-      {
-        headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-          "Content-Type": "application/json",
-        },
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({ query }),
+    });
 
     if (!response.ok) {
       logger.error(
@@ -157,67 +179,28 @@ async function fetchContributions(): Promise<ContributionData> {
       return getEmptyContributions();
     }
 
-    const contributors = await response.json();
+    const data = await response.json();
+    const calendar =
+      data?.data?.user?.contributionsCollection?.contributionCalendar;
 
-    if (!Array.isArray(contributors) || contributors.length === 0) {
-      logger.info("[GitHub Stats] No contributors found");
-      return getEmptyContributions();
-    }
-
-    // Trouver les contributions de l'utilisateur principal
-    const mainContributor = contributors.find(
-      (c: any) => c.author.login === GITHUB_USERNAME,
-    );
-
-    if (!mainContributor) {
-      logger.info("[GitHub Stats] Main contributor not found");
+    if (!calendar) {
+      logger.error("[GitHub Stats] No calendar data in response");
+      logger.error(
+        "[GitHub Stats] Full response:",
+        JSON.stringify(data, null, 2),
+      );
       return getEmptyContributions();
     }
 
     logger.info(
-      "[GitHub Stats] Main contributor found:",
-      mainContributor.author.login,
+      "[GitHub Stats] Total contributions:",
+      calendar.totalContributions,
     );
-
-    // Transformer les données de contributions en ContributionData
-    const weeks: ContributionWeek[] = [];
-    const now = new Date();
-
-    for (let i = 0; i < 52; i++) {
-      const weekStart = new Date(now);
-      weekStart.setDate(weekStart.getDate() - i * 7);
-
-      const days: ContributionDay[] = [];
-      for (let j = 0; j < 7; j++) {
-        const dayDate = new Date(weekStart);
-        dayDate.setDate(dayDate.getDate() + j);
-
-        // Trouver les contributions pour ce jour
-        const dayContributions = mainContributor.weeks.find((w: any) => {
-          const weekDate = new Date(w.w * 1000);
-          return weekDate.toDateString() === dayDate.toDateString();
-        });
-
-        const contributionCount = dayContributions?.days[j]?.c || 0;
-        const contributionLevel = getContributionLevel(contributionCount);
-
-        days.push({
-          date: dayDate.toISOString().split("T")[0] || dayDate.toISOString(),
-          contributionCount,
-          contributionLevel,
-        });
-      }
-
-      weeks.unshift({ contributionDays: days });
-    }
-
-    const totalContributions = mainContributor.total || 0;
-
-    logger.info("[GitHub Stats] Total contributions:", totalContributions);
+    logger.info("[GitHub Stats] Weeks count:", calendar.weeks?.length);
 
     return {
-      totalContributions,
-      weeks,
+      totalContributions: calendar.totalContributions,
+      weeks: calendar.weeks,
     };
   } catch (error) {
     logger.error("[GitHub Stats] Error fetching contributions:", error);

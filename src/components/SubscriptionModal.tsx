@@ -261,6 +261,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         animateConfetti();
       }
 
+      // Show playful toast
+      toast.success("🎉 Super ! Tu vas être redirigé vers la page produit...", {
+        duration: 2000,
+      });
+
       setTimeout(() => {
         onClose();
         setIsSuccess(false);
@@ -268,7 +273,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         if (confettiConfig.afterName) {
           animateConfetti();
         }
-      }, 200000);
+        // Redirect to product page
+        if (typeof window !== "undefined") {
+          window.location.href = "/hub";
+        }
+      }, 2000);
     } catch (error) {
       logger.error(t("logger.newsletter.subscribe.failed"), error);
       toast.error(t("logger.form.submit-update-failed"));
