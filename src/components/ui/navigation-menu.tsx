@@ -52,7 +52,7 @@ const NavigationMenuTrigger = React.forwardRef<
     className={cn(navigationMenuTriggerStyle(), "group", className)}
     {...props}
   >
-    {children} <ChevronDownOne className="mr-2 h-4 w-4" aria-hidden="true" />
+    {children} <ChevronDownOne size={16} className="mr-2" aria-hidden="true" />
   </NavigationMenuPrimitive.Trigger>
 ));
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;

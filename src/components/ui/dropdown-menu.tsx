@@ -148,7 +148,7 @@ function DropdownMenuCheckboxItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CheckOne className="ml-auto h-4 w-4" />
+          <CheckOne size={16} className="ml-auto" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
