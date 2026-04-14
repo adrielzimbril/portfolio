@@ -10,22 +10,14 @@ import {
   pickRandomColorCode,
 } from "@/utils/pick-random-color";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
-import {
-  Checked,
-  LoveTime,
-} from "@aurthle/icons";
+import { Checked, LoveTime } from "@aurthle/icons";
 import { useTranslations } from "use-intl";
 
 export function PeopleSection() {
   const t = useTranslations();
 
   return (
-    <SectionLayout
-      title={t("connections.page.people-section.title")}
-      description={t("connections.page.people-section.description")}
-      badge={t("connections.page.people-section.badge")}
-      isFlex
-    >
+    <SectionLayout isFlex>
       <div className="relative mb-12 grid auto-rows-auto grid-cols-3 place-items-center justify-center gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
         {connections
           .sort(
@@ -51,7 +43,7 @@ export function PeopleSection() {
                     alt={connection.name}
                     fill
                     className={cn(
-                      "squircle squircle-mask squircle-background squircle-7xl max-w-[85%] max-h-[85%] m-auto object-cover transition-all ease-in-out duration-300 group-hover:scale-110",
+                      "pointer-events-none squircle squircle-mask squircle-background squircle-7xl max-w-[85%] max-h-[85%] m-auto object-cover transition-all ease-in-out duration-300 group-hover:scale-110",
                       !connection.met && "grayscale group-hover:grayscale-0",
                     )}
                   />

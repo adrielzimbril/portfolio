@@ -30,13 +30,14 @@
     "keywords": "连接, 社交网络, 见过的人, 见面, Adriel Zimbril 网络, 产品设计社区, SaaS 创始人, 创意连接",
     "page": {
       "header-section": {
-        "title": "我见过的人 & 想见的人",
-        "description": "一段在产品设计和 SaaS 社区中有意义的联系和未来抱负的旅程。"
+        "title": "相遇",
+        "description": "发现我有幸联系过的人以及我希望有一天能见到的人。一次对话一次地建立有意义的联系和共享想法。",
+        "badge": "我的网络 🤝"
       },
       "people-section": {
-        "title": "我的网络",
-        "description": "我有幸联系过的人以及我希望有一天能见到的人。",
-        "badge": "连接 ✨"
+        "title": "我见过的人 & 想见的人",
+        "description": "一段在产品设计和 SaaS 社区中有意义的联系和未来抱负的旅程。",
+        "badge": "我的网络 🤝"
       }
     },
     "sections": {

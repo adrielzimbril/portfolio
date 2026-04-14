@@ -30,13 +30,14 @@
     "keywords": "connexions, réseau, personnes rencontrées, rencontrer des gens, réseau Adriel Zimbril, communauté design produit, fondateurs SaaS, connexions créatives",
     "page": {
       "header-section": {
-        "title": "Personnes que j'ai rencontrées & que je veux rencontrer",
-        "description": "Un voyage à travers les connexions significatives et les aspirations futures dans la communauté du design produit et SaaS."
+        "title": "Rencontres",
+        "description": "Découvrez les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour. Construire des connexions significatives et des idées partagées, une conversation à la fois.",
+        "badge": "Mon Réseau 🤝"
       },
       "people-section": {
-        "title": "Mon Réseau",
-        "description": "Les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour.",
-        "badge": "Connexions ✨"
+        "title": "Personnes que j'ai rencontrées & que je veux rencontrer",
+        "description": "Un voyage à travers les connexions significatives et les aspirations futures dans la communauté du design produit et SaaS.",
+        "badge": "Mon Réseau 🤝"
       }
     },
     "sections": {

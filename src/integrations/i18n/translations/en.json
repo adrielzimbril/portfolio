@@ -30,13 +30,14 @@
     "keywords": "connections, networking, people I've met, meet people, Adriel Zimbril network, product design community, SaaS founders, creative connections",
     "page": {
       "header-section": {
-        "title": "People I've Met & Want to Meet",
-        "description": "A journey through meaningful connections and future aspirations in the product design and SaaS community."
+        "title": "Encounters",
+        "description": "Discover the people I've had the privilege to connect with and those I hope to meet one day. Building meaningful connections and shared ideas one conversation at a time.",
+        "badge": "My Network 🤝"
       },
       "people-section": {
-        "title": "My Network",
-        "description": "People I've had the privilege to connect with and those I hope to meet one day.",
-        "badge": "Connections ✨"
+        "title": "People I've Met & Want to Meet",
+        "description": "A journey through meaningful connections and future aspirations in the product design and SaaS community.",
+        "badge": "My Network 🤝"
       }
     },
     "sections": {
