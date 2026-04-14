@@ -25,9 +25,9 @@
     }
   },
   "connections": {
-    "title": "People I've Met & Want to Meet",
+    "title": "Encounters",
     "description": "Discover the people I've connected with and those I hope to meet in the future.",
-    "keywords": "connections, networking, people I've met, meet people, Adriel Zimbril network, product design community, SaaS founders, creative connections",
+    "keywords": "connections, networking, encounters, people I've met, meet people, Adriel Zimbril network, professional connections, creative community",
     "page": {
       "header-section": {
         "title": "Encounters",
@@ -46,6 +46,10 @@
         "description": "People I want to meet or have already met.",
         "badge": "Connections 🤝"
       }
+    },
+    "badge": {
+      "met-on": "Met on",
+      "not-met-yet": "Not met yet"
     }
   },
   "community": {
@@ -220,6 +224,10 @@
       "loading": "Wait a moment... 🔄",
       "waiting": "Just wait a little longer... ⏳",
       "button": "Loading... 🔄"
+    },
+    "stats": {
+      "read": "read",
+      "views": "views"
     },
     "confirmation": {
       "cancel": "Cancel",

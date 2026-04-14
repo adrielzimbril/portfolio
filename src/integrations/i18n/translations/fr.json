@@ -25,9 +25,9 @@
     }
   },
   "connections": {
-    "title": "Personnes que j'ai rencontrées & que je veux rencontrer",
+    "title": "Rencontres",
     "description": "Découvrez les personnes avec qui je me suis connecté et celles que j'espère rencontrer à l'avenir.",
-    "keywords": "connexions, réseau, personnes rencontrées, rencontrer des gens, réseau Adriel Zimbril, communauté design produit, fondateurs SaaS, connexions créatives",
+    "keywords": "connexions, réseau, rencontres, personnes rencontrées, rencontrer des gens, réseau Adriel Zimbril, connexions professionnelles, communauté créative",
     "page": {
       "header-section": {
         "title": "Rencontres",
@@ -46,6 +46,10 @@
         "description": "Personnes que je veux rencontrer ou que j'ai déjà rencontrées.",
         "badge": "Connexions 🤝"
       }
+    },
+    "badge": {
+      "met-on": "Rencontré le",
+      "not-met-yet": "À venir"
     }
   },
   "community": {
@@ -690,6 +694,10 @@
       "loading": "Attends un instant... 🔄",
       "waiting": "Patiente encore un petit instant... ⏳",
       "button": "Chargement... 🔄"
+    },
+    "stats": {
+      "read": "lecture",
+      "views": "vues"
     },
     "shared": {
       "text": {

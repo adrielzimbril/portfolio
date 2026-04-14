@@ -25,9 +25,9 @@
     }
   },
   "connections": {
-    "title": "我见过的人 & 想见的人",
+    "title": "相遇",
     "description": "发现我已经联系过的人以及我希望在未来见面的人。",
-    "keywords": "连接, 社交网络, 见过的人, 见面, Adriel Zimbril 网络, 产品设计社区, SaaS 创始人, 创意连接",
+    "keywords": "连接, 社交网络, 相遇, 见过的人, 见面, Adriel Zimbril 网络, 专业连接, 创意社区",
     "page": {
       "header-section": {
         "title": "相遇",
@@ -46,6 +46,10 @@
         "description": "我想见或已经见过的人。",
         "badge": "连接 🤝"
       }
+    },
+    "badge": {
+      "met-on": "见面于",
+      "not-met-yet": "尚未见面"
     }
   },
   "community": {
@@ -220,6 +224,10 @@
       "loading": "请稍等... 🔄",
       "waiting": "再等一会儿... ⏳",
       "button": "加载中... 🔄"
+    },
+    "stats": {
+      "read": "阅读",
+      "views": "浏览"
     },
     "confirmation": {
       "cancel": "取消",

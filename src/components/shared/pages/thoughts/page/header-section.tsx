@@ -72,7 +72,7 @@ export function HeaderSection({
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
-              : "p-0"
+              : "p-0",
           )}
         >
           <HeaderPreviewCard content={previewContent} />
@@ -106,7 +106,7 @@ export function HeaderSection({
                 className="size-4 text-indigo-400"
                 variant="bulk"
               />
-              {articleDetails.readingTime} read
+              {articleDetails.readingTime}
             </span>
           </Badge>
 
@@ -117,7 +117,7 @@ export function HeaderSection({
           >
             <span className="flex items-center gap-2">
               <Eye className="size-4 text-indigo-400" variant="bulk" />
-              {formatCount(articleDetails.views ?? 0)} views
+              {formatCount(articleDetails.views ?? 0)} {t("common.stats.views")}
             </span>
           </Badge>
         </div>
