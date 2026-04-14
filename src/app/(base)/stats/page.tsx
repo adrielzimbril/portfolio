@@ -23,6 +23,7 @@ import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard"
 import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
 import { MostViewedArticleCard } from "@/components/stats/MostViewedArticleCard";
 import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
+import { changelog } from "@/data/personal/changelog";
 
 // Revamp date - TODO: Adapter à votre date de revamp
 const REVAMP_DATE = new Date("2025-08-17");
@@ -192,7 +193,7 @@ export default async function StatsPage() {
         isFlex
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ChangelogUpdatesCard count={0} />
+          <ChangelogUpdatesCard count={changelog.length} />
           {serverStats.topViewedArticles.length > 0 &&
             serverStats.topViewedArticles[0] && (
               <MostViewedArticleCard
