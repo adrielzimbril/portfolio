@@ -23,7 +23,7 @@ export function HeaderSection() {
       title={t("quests.page.header-section.title")}
       description={t("quests.page.header-section.description")}
       isMobileShowed
-      imagePath={{ emoji: "??" }}
+      imagePath={{ emoji: "🏆" }}
       actionButton
     />
   );

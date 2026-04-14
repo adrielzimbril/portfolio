@@ -41,7 +41,7 @@ export function EmojiPlaceholder({
         variant === "squircle" &&
           "squircle squircle-sh-white squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-b-base-accent aspect-square size-full md:size-96 p-12 overflow-hidden",
         !isMobileShowed && isMobile && "hidden",
-        className
+        className,
       )}
     >
       <div
@@ -51,7 +51,7 @@ export function EmojiPlaceholder({
             "size-72 md:size-96",
           variant === "squircle" && "size-72 md:size-96",
           typeof src === "string" && "size-48 md:size-64",
-          imgContainerClassName
+          imgContainerClassName,
         )}
       >
         {/* <div
@@ -66,7 +66,7 @@ export function EmojiPlaceholder({
               "relative size-full flex items-center justify-center text-9xl md:text-[10rem] object-cover pointer-events-none",
               variant === "squircle" &&
                 "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
-              imgClassName
+              imgClassName,
             )}
           >
             {src.emoji}
@@ -74,10 +74,10 @@ export function EmojiPlaceholder({
         ) : typeof src === "object" && "mp4" in src && "webm" in src ? (
           <video
             className={cn(
-              "relative size-full object-cover pointer-events-none",
+              "relative m-auto squircle squircle-mask squircle-transparent squircle-7xl size-full object-cover pointer-events-none",
               variant === "squircle" &&
                 "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
-              imgClassName
+              imgClassName,
             )}
             autoPlay
             loop
@@ -102,8 +102,8 @@ export function EmojiPlaceholder({
             className={cn(
               "relative size-full object-cover pointer-events-none",
               variant === "squircle" &&
-                "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
-              imgClassName
+                "squircle squircle-mask squircle-transparent squircle-7xl max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
+              imgClassName,
             )}
             width={600}
             height={600}

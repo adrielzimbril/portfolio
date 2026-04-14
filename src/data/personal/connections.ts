@@ -1,4 +1,9 @@
-export const connections = [
+export const connections: Array<{
+  id: string;
+  name: string;
+  image: string;
+  met: string | null;
+}> = [
   {
     id: "1",
     name: "John Doe",
@@ -20,7 +25,7 @@ export const connections = [
   {
     id: "4",
     name: "Sarah Williams",
-    image: "/img/me/memoji/me-love.png",
+    image: "/img/me/avatar-one.png",
     met: null,
   },
   {
@@ -32,7 +37,7 @@ export const connections = [
   {
     id: "6",
     name: "Emily Chen",
-    image: "/img/me/memoji/me-smile.png",
+    image: "/img/me/avatar.png",
     met: null,
   },
 ];

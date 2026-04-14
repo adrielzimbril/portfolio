@@ -67,12 +67,10 @@ export function GetResource({
   sleep(1000).then(() => execute());
 
   // Auto-open modal when token arrives after waiting
-  useEffect(() => {
-    if (isWaitingForToken && token && isEmailValid) {
-      setIsWaitingForToken(false);
-      setIsModalOpen(true);
-    }
-  }, [token, isWaitingForToken, isEmailValid]);
+  if (isWaitingForToken && token && isEmailValid) {
+    setIsWaitingForToken(false);
+    setIsModalOpen(true);
+  }
 
   const productId = generateSimpleClientToken({
     action: "validate-product-id",
@@ -179,7 +177,11 @@ export function GetResource({
 
                 if (!token) {
                   setIsWaitingForToken(true);
-                  execute();
+                  while (!token) {
+                    execute();
+                    sleep(500);
+                  }
+                  setIsWaitingForToken(false);
                   toast.error(t("common.turnstile.waiting"));
                   return;
                 }

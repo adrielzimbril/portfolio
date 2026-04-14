@@ -32,7 +32,10 @@ export function HeaderSection({
   const t = useTranslations();
 
   const isRegistrationOpen = !isRegistrationClosed(dates.registration_end);
-  const isSubmissionOpen = !isSubmissionClosed(dates.submission_end, dates.results);
+  const isSubmissionOpen = !isSubmissionClosed(
+    dates.submission_end,
+    dates.results,
+  );
 
   return (
     <QuestHeaderSection
@@ -46,7 +49,7 @@ export function HeaderSection({
             }
           : {
               type: PreviewContentType.TEXT,
-              emoji: "??",
+              emoji: "🏆",
               title,
               subtitle: description,
             }
@@ -68,8 +71,7 @@ export function HeaderSection({
           : isSubmissionOpen
             ? t("quests.inner-page.header.cta.submitWork")
             : ""
-      } ??`}
+      } 🦄`}
     />
   );
 }
-
