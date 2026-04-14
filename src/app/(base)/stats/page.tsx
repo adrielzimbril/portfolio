@@ -4,13 +4,28 @@ import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { FileText, Coffee, Eye, Star, Users, Github, Zap } from "lucide-react";
 import { getAllPosts } from "@/integrations/content/lib";
+import { getBuildTimeStats } from "@/lib/stats/build-time-stats";
+import { getServerStats } from "@/lib/stats/server-stats";
+import { getGitHubStats } from "@/lib/stats/github-stats";
+import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
+import { StatsPageHeader } from "@/components/stats/StatsPageHeader";
+import { StatCard } from "@/components/stats/StatCard";
+import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
+import { DaysSinceRevamp } from "@/components/stats/DaysSinceRevamp";
+import { CoffeeCupsCard } from "@/components/stats/CoffeeCupsCard";
+import { SiteViewsCard } from "@/components/stats/SiteViewsCard";
+import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
+import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
+import { TopArticlesCard } from "@/components/stats/TopArticlesCard";
+import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
+import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
+import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
+import { MostViewedArticleCard } from "@/components/stats/MostViewedArticleCard";
+import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
 
-// Revamp date
-const REVAMP_DATE = new Date("2025-01-01");
+// Revamp date - TODO: Adapter à votre date de revamp
+const REVAMP_DATE = new Date("2025-08-17");
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -34,30 +49,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function StatsPage() {
   const t = await getTranslations();
+
+  // Récupérer les données depuis différentes sources
+  const [buildTimeStats, serverStats, githubStats, lighthouseStats] =
+    await Promise.all([
+      getBuildTimeStats(),
+      getServerStats(),
+      getGitHubStats(),
+      getLighthouseStats(),
+    ]);
+
   const posts = await getAllPosts({ published: true });
 
-  // Real data calculations
-  const totalArticles = posts.length;
-  const totalWords = posts.reduce((sum, post) => {
-    const wordCount = post.content
-      .split(/\s+/)
-      .filter((word) => word.length > 0).length;
-    return sum + wordCount;
-  }, 0);
-  const readingMinutes = Math.ceil(totalWords / 200);
-  const coffeeCups = Math.floor(totalWords / 500);
-
-  // Days since revamp
-  const now = new Date();
+  // Calculer les données supplémentaires
+  const coffeeCups = Math.floor(buildTimeStats.totalWords / 500);
   const daysSinceRevamp = Math.floor(
-    (now.getTime() - REVAMP_DATE.getTime()) / (1000 * 60 * 60 * 24),
+    (new Date().getTime() - REVAMP_DATE.getTime()) / (1000 * 60 * 60 * 24),
   );
-
-  // Format reading time
-  const hours = Math.floor(readingMinutes / 60);
-  const minutes = readingMinutes % 60;
-  const readingTimeFormatted =
-    hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
 
   return (
     <>
@@ -68,45 +76,36 @@ export default async function StatsPage() {
         isMobileShowed
       />
 
-      {/* Blog Stats Section */}
+      <StatsPageHeader />
+
+      {/* Content Stats Section */}
       <SectionLayout
         title={t("stats.sections.blog.title")}
         description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <FileText className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">{totalArticles}</div>
-              <div className="text-sm text-muted-foreground">Articles</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Coffee className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">{coffeeCups}</div>
-              <div className="text-sm text-muted-foreground">Coffee Cups</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Zap className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">
-                {totalWords.toLocaleString()}
-              </div>
-              <div className="text-sm text-muted-foreground">Words Written</div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Eye className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">
-                {readingTimeFormatted}
-              </div>
-              <div className="text-sm text-muted-foreground">Reading Time</div>
-            </CardContent>
-          </Card>
+          <StatCard
+            label="Total Articles"
+            value={buildTimeStats.totalPosts}
+            suffix="posts"
+          />
+          <CoffeeCupsCard cups={coffeeCups} />
+          <StatCard
+            label="Total Words"
+            value={buildTimeStats.totalWords}
+            suffix="words"
+          />
+          <StatCard
+            label="Reading Time"
+            value={buildTimeStats.totalReadingTime}
+            suffix="min"
+          />
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <CategoryBarChart categories={buildTimeStats.categories} />
+          <DaysSinceRevamp revampDate={REVAMP_DATE} />
         </div>
       </SectionLayout>
 
@@ -116,39 +115,23 @@ export default async function StatsPage() {
         description={t("stats.sections.engagement.description")}
         badge={t("stats.sections.engagement.badge")}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Eye className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">-</div>
-              <div className="text-sm text-muted-foreground">Total Views</div>
-              <div className="text-xs text-muted-foreground mt-2">
-                Analytics integration needed
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Star className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">-</div>
-              <div className="text-sm text-muted-foreground">Reactions</div>
-              <div className="text-xs text-muted-foreground mt-2">
-                Analytics integration needed
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Users className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">-</div>
-              <div className="text-sm text-muted-foreground">
-                Community Messages
-              </div>
-              <div className="text-xs text-muted-foreground mt-2">
-                Supabase integration needed
-              </div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <SiteViewsCard value={serverStats.totalViews} />
+          <ReactionBreakdown reactions={serverStats.reactions} />
+          <CommunityMessagesCard count={serverStats.communityMessages} />
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TopArticlesCard
+            title="Top Viewed Articles"
+            articles={serverStats.topViewedArticles}
+            metricLabel="views"
+          />
+          <TopArticlesCard
+            title="Top Reacted Articles"
+            articles={serverStats.topReactedArticles}
+            metricLabel="reactions"
+          />
         </div>
       </SectionLayout>
 
@@ -158,71 +141,61 @@ export default async function StatsPage() {
         description={t("stats.sections.github.description")}
         badge={t("stats.sections.github.badge")}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Star className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">-</div>
-              <div className="text-sm text-muted-foreground">GitHub Stars</div>
-              <div className="text-xs text-muted-foreground mt-2">
-                GitHub API integration needed
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Github className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">-</div>
-              <div className="text-sm text-muted-foreground">Followers</div>
-              <div className="text-xs text-muted-foreground mt-2">
-                GitHub API integration needed
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <FileText className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">-</div>
-              <div className="text-sm text-muted-foreground">Public Repos</div>
-              <div className="text-xs text-muted-foreground mt-2">
-                GitHub API integration needed
-              </div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <GitHubStatsCard
+            type="stars"
+            label="GitHub Stars"
+            value={githubStats.stars}
+          />
+          <GitHubStatsCard
+            type="forks"
+            label="Forks"
+            value={githubStats.forks}
+          />
+          <GitHubStatsCard
+            type="commits"
+            label="Commits"
+            value={githubStats.commits}
+          />
+        </div>
+
+        <ContributionGraphCard contributions={githubStats.contributions} />
+      </SectionLayout>
+
+      {/* Performance Section */}
+      <SectionLayout
+        title="Performance"
+        description="Lighthouse performance scores"
+        badge="Performance"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <LighthouseScoreCard
+            scores={lighthouseStats.mobile}
+            strategy="mobile"
+          />
+          <LighthouseScoreCard
+            scores={lighthouseStats.desktop}
+            strategy="desktop"
+          />
         </div>
       </SectionLayout>
 
-      {/* Site Meta Section */}
+      {/* Changelog Section */}
       <SectionLayout
-        title="Site Meta"
-        description="Site information and statistics"
-        badge="Info ℹ️"
+        title="Changelog"
+        description="Recent updates and changes"
+        badge="Updates"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <Zap className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">{daysSinceRevamp}</div>
-              <div className="text-sm text-muted-foreground">
-                Days Since Revamp
-              </div>
-              <div className="text-xs text-muted-foreground mt-2">
-                {REVAMP_DATE.toLocaleDateString()}
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl">
-            <CardContent className="p-8 flex flex-col items-center justify-center text-center">
-              <FileText className="size-8 mb-4" />
-              <div className="text-4xl font-bold mb-2">0</div>
-              <div className="text-sm text-muted-foreground">
-                Changelog Updates
-              </div>
-              <div className="text-xs text-muted-foreground mt-2">
-                Changelog integration needed
-              </div>
-            </CardContent>
-          </Card>
+          <ChangelogUpdatesCard count={0} />
+          {serverStats.topViewedArticles.length > 0 && (
+            <MostViewedArticleCard
+              title={serverStats.topViewedArticles[0].title}
+              slug={serverStats.topViewedArticles[0].slug}
+              imageName=""
+              viewCount={serverStats.topViewedArticles[0].count}
+            />
+          )}
         </div>
       </SectionLayout>
     </>
