@@ -39,7 +39,9 @@ export async function Footer() {
                   <StatusBadge
                     mode="inline"
                     status="available"
-                    primaryText={t("common.shared.planning-badge.available.title")}
+                    primaryText={t(
+                      "common.shared.planning-badge.available.title",
+                    )}
                     className="squircle-sh-white text-b-white-invert"
                     variant="colored"
                     size="md"
@@ -129,22 +131,29 @@ export async function Footer() {
   );
 }
 
-async function FooterResources({ resources }: { resources: ResourcePreview[] }) {
+async function FooterResources({
+  resources,
+}: {
+  resources: ResourcePreview[];
+}) {
   const t = await getTranslations();
-  
+
   const footerLinks = [
     routes.community,
     routes.stats,
     routes.toolbox,
-    routes.setup,
     routes.connections,
     routes.changelog,
   ];
 
   return (
-    <div className="w-full flex flex-col gap-8 md:gap-10 py-6 md:py-10 border-t border-b-bases/10 border-t-bases/10 mt-4">
+    <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
+      {/* <div className="w-full flex flex-col gap-8 md:gap-10 py-6 md:py-10 border-t border-b-bases/10 border-t-bases/10 mt-4"> */}
       {/* Primary Navigation */}
-      <nav className="w-full flex flex-wrap justify-center items-center gap-x-6 gap-y-3 px-4" aria-label="Footer navigation">
+      <nav
+        className="w-full flex flex-wrap justify-center items-center gap-x-6 gap-y-3 px-4"
+        aria-label="Footer navigation"
+      >
         {footerLinks.map((item, index) => (
           <React.Fragment key={item.key}>
             <Link
@@ -160,25 +169,24 @@ async function FooterResources({ resources }: { resources: ResourcePreview[] }) 
         ))}
       </nav>
 
-      {/* Hub Resources */}
-      {resources.length > 0 && (
-        <div className="w-full flex flex-col gap-4">
-          <div className="w-full flex flex-wrap justify-center items-center gap-2 px-4 max-w-4xl mx-auto">
-            {resources.map((resource, index) => (
-              <React.Fragment key={resource.slug ?? index}>
-                <Link
-                  href={getResourcesUrl(PageType.HUB, resource.slug)}
-                  className="text-xs font-medium text-b-white-invert-sec bg-stone-200/50 dark:bg-zinc-800/50 hover:bg-stone-200 dark:hover:bg-zinc-800 rounded-full py-1.5 px-4 transition-colors"
-                >
-                  {resource.title}
-                </Link>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
+        {resources.map((resource, index) => (
+          <React.Fragment key={resource.slug ?? index}>
+            <Link
+              href={getResourcesUrl(PageType.HUB, resource.slug)}
+              className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
+            >
+              {resource.title}
+            </Link>
+            {index < resources.length - 1 && (
+              <>
+                <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
+                <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
+              </>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 }
-
-

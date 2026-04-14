@@ -159,20 +159,6 @@ export const routes = {
     inHeader: false,
     inSitemap: false,
   },
-  setup: {
-    name: "My Setup",
-    key: "setup",
-    link: "/setup",
-    inHeader: false,
-    inSitemap: false,
-  },
-  tools: {
-    name: "Tools & Setup",
-    key: "tools",
-    link: "/tools",
-    inHeader: false,
-    inSitemap: true,
-  },
   connections: {
     name: "Connections",
     key: "connections",
