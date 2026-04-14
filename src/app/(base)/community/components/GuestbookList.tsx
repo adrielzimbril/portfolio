@@ -1,79 +1,113 @@
-import React from "react";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
-import { Card, CardContent } from "@/components/ui/card";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { formatDateDiff } from "@/utils/format-date";
 import logger from "@/utils/logger";
+import { cn } from "@/utils/utils";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
-export async function GuestbookList() {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PRIVATE_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-      },
-    },
-  );
+// Demo data
+const DEMO_MESSAGES = [
+  {
+    id: 1,
+    creator_name: "Alice Johnson",
+    creator_avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice",
+    message: "This community is amazing! Love the design and the people here. ",
+    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 2,
+    creator_name: "Bob Smith",
+    creator_avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob",
+    message:
+      "Just joined and already feeling welcome. Great work on this platform!",
+    created_at: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 3,
+    creator_name: "Carol Williams",
+    creator_avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carol",
+    message:
+      "The attention to detail here is incredible. Keep up the great work! ",
+    created_at: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+];
 
-  const { data: messages, error } = await supabase
-    .from("community_wall")
-    .select("*")
-    .order("created_at", { ascending: false });
+export function GuestbookList() {
+  const [messages, setMessages] = useState(DEMO_MESSAGES);
+  const [isLoading, setIsLoading] = useState(true);
 
-  if (error) {
-    logger.error(error);
-    return (
-      <div className="text-muted-foreground italic p-8 text-center border border-dashed rounded-3xl">
-        Failed to load messages.
-      </div>
-    );
-  }
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const response = await fetch("/api/community/messages");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.messages && data.messages.length > 0) {
+            setMessages(data.messages);
+          }
+        }
+      } catch (error) {
+        logger.error("Failed to fetch messages:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  if (!messages || messages.length === 0) {
-    return (
-      <div className="text-muted-foreground italic p-20 text-center border border-dashed rounded-3xl border-border/50">
-        No messages yet. Be the first to leave a mark on the wall!
-      </div>
-    );
-  }
+    fetchMessages();
+  }, []);
+
+  const displayMessages = messages;
 
   return (
-    <div className="space-y-6">
-      {messages.map((msg: any) => (
-        <Card
+    <div className="space-y-5">
+      {displayMessages.map((msg: any) => (
+        <div
           key={msg.id}
-          className="squircle squircle-b-base squircle-smooth-xl squircle-6xl group overflow-hidden"
+          className={cn(
+            "group relative overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
+            "squircle squircle-smooth-xl squircle-6xl",
+          )}
         >
-          <CardContent className="p-6">
+          <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+          <div className="relative z-20">
             <div className="flex gap-4">
               <div className="shrink-0">
-                <img
-                  src={
-                    msg.creator_avatar_url ||
-                    `https://ui-avatars.com/api/?name=${msg.creator_name}`
-                  }
-                  alt={msg.creator_name}
-                  className="size-10 rounded-full border-2 border-border"
-                />
+                <Avatar className="size-12 rounded-2xl border-2 border-border">
+                  <AvatarImage
+                    src={msg.creator_avatar_url}
+                    alt={msg.creator_name}
+                  />
+                  <AvatarFallback className="rounded-2xl">
+                    {msg.creator_name.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
               </div>
-              <div className="flex-1 space-y-2">
+              <div className="flex-1 space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-base">{msg.creator_name}</h4>
-                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                  <h4 className="font-bold text-base text-foreground">
+                    {msg.creator_name}
+                  </h4>
+                  <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest px-2 py-1 rounded-full bg-muted/50">
                     {formatDateDiff(msg.created_at)}
                   </span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {msg.message}
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       ))}
     </div>
   );
