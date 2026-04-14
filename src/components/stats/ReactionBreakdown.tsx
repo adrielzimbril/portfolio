@@ -325,26 +325,26 @@ const REACTION_CONFIG: Record<
   like: {
     Icon: LikeSVG,
     label: "Likes",
-    bgColor: "bg-primary/10",
-    hoverBg: "bg-primary/20",
+    bgColor: "squircle-color-primary/10",
+    hoverBg: "squircle-color-primary/20",
   },
   heart: {
     Icon: HeartSVG,
     label: "Hearts",
-    bgColor: "bg-destructive/10",
-    hoverBg: "bg-destructive/20",
+    bgColor: "squircle-color-destructive/10",
+    hoverBg: "squircle-color-destructive/20",
   },
   celebrate: {
     Icon: CelebrateSVG,
     label: "Celebrates",
-    bgColor: "bg-secondary/10",
-    hoverBg: "bg-secondary/20",
+    bgColor: "squircle-color-secondary/10",
+    hoverBg: "squircle-color-secondary/20",
   },
   insightful: {
     Icon: InsightfulSVG,
     label: "Insightful",
-    bgColor: "bg-accent/10",
-    hoverBg: "bg-accent/20",
+    bgColor: "squircle-color-accent/10",
+    hoverBg: "squircle-color-accent/20",
   },
 };
 
@@ -361,7 +361,7 @@ export function ReactionBreakdown({
   const total = Object.values(reactions).reduce((sum, count) => sum + count, 0);
 
   const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden border border-border bg-b-base p-6 transition-all duration-300 hover:border-primary hover:bg-sh-white",
+    "group relative flex h-full flex-col overflow-hidden squircle-border-color-border squircle-color-b-base p-6 transition-all duration-300 hover:squircle-border-color-primary hover:squircle-color-sh-white",
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
@@ -388,7 +388,7 @@ export function ReactionBreakdown({
               return (
                 <div
                   key={type}
-                  className={`flex flex-col items-center justify-center rounded-xl border border-border/50 p-3 ${config.bgColor}`}
+                  className={`flex flex-col items-center justify-center rounded-xl squircle-border-color-border/50 p-3 ${config.bgColor}`}
                 >
                   <div className="mb-2">
                     <config.Icon
@@ -450,9 +450,9 @@ export function ReactionBreakdown({
                   transition={{ duration: 0.3, delay: delay + index * 0.1 }}
                   onMouseEnter={() => setHoveredReaction(type)}
                   onMouseLeave={() => setHoveredReaction(null)}
-                  className={`flex flex-col items-center justify-center rounded-xl border border-border/50 p-3 transition-all duration-200 ${
+                  className={`flex flex-col items-center justify-center rounded-xl squircle-border-color-border/50 p-3 transition-all duration-200 ${
                     isReactionHovered
-                      ? `${config.hoverBg} border-transparent`
+                      ? `${config.hoverBg} squircle-border-color-transparent`
                       : config.bgColor
                   }`}
                 >

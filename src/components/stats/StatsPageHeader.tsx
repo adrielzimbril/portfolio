@@ -47,7 +47,7 @@ export function StatsPageHeader() {
       </motion.p>
 
       <motion.div
-        className="absolute top-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl -z-10"
+        className="absolute top-10 left-10 w-32 h-32 squircle-color-primary/10 rounded-full blur-3xl -z-10"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -55,7 +55,7 @@ export function StatsPageHeader() {
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-10 right-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl -z-10"
+        className="absolute top-10 right-10 w-32 h-32 squircle-color-accent/10 rounded-full blur-3xl -z-10"
         animate={{
           scale: [1, 1.15, 1],
           opacity: [0.3, 0.5, 0.3],

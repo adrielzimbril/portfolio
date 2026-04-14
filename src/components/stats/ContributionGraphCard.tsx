@@ -12,20 +12,20 @@ interface ContributionGraphCardProps {
   className?: string;
 }
 
-const levelColors = {
-  NONE: "bg-border",
-  FIRST_QUARTILE: "bg-primary/30",
-  SECOND_QUARTILE: "bg-primary/50",
-  THIRD_QUARTILE: "bg-primary/70",
-  FOURTH_QUARTILE: "bg-primary",
-};
+const CONTRIBUTION_LEVEL_COLORS = {
+  NONE: "squircle-color-border",
+  FIRST_QUARTILE: "squircle-color-primary/30",
+  SECOND_QUARTILE: "squircle-color-primary/50",
+  THIRD_QUARTILE: "squircle-color-primary/70",
+  FOURTH_QUARTILE: "squircle-color-primary",
+} as const;
 
 const levelColorsHover = {
-  NONE: "group-hover/cell:bg-border/80",
-  FIRST_QUARTILE: "group-hover/cell:bg-primary/40",
-  SECOND_QUARTILE: "group-hover/cell:bg-primary/60",
-  THIRD_QUARTILE: "group-hover/cell:bg-primary/80",
-  FOURTH_QUARTILE: "group-hover/cell:bg-primary/90",
+  NONE: "group-hover/cell:squircle-color-border/80",
+  FIRST_QUARTILE: "group-hover/cell:squircle-color-primary/40",
+  SECOND_QUARTILE: "group-hover/cell:squircle-color-primary/60",
+  THIRD_QUARTILE: "group-hover/cell:squircle-color-primary/80",
+  FOURTH_QUARTILE: "group-hover/cell:squircle-color-primary/90",
 };
 
 function formatDate(dateString: string): string {
@@ -168,7 +168,7 @@ export function ContributionGraphCard({
                         <div
                           className={cn(
                             "h-[10px] w-[10px] rounded-[2px] transition-colors duration-150",
-                            levelColors[day.contributionLevel],
+                            CONTRIBUTION_LEVEL_COLORS[day.contributionLevel],
                           )}
                         />
                       </div>
@@ -191,7 +191,7 @@ export function ContributionGraphCard({
                       <div
                         className={cn(
                           "h-full w-full rounded-sm transition-colors duration-150",
-                          levelColors[day.contributionLevel],
+                          CONTRIBUTION_LEVEL_COLORS[day.contributionLevel],
                         )}
                       />
                     </div>
@@ -217,7 +217,7 @@ export function ContributionGraphCard({
               key={level}
               className={cn(
                 "h-[10px] w-[10px] rounded-[2px]",
-                levelColors[level],
+                CONTRIBUTION_LEVEL_COLORS[level],
               )}
             />
           ))}
@@ -341,7 +341,7 @@ export function ContributionGraphCard({
                         onMouseLeave={() => setTooltip(null)}
                       >
                         <div
-                          className={`h-[10px] w-[10px] rounded-[2px] transition-colors duration-150 ${levelColors[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
+                          className={`h-[10px] w-[10px] rounded-[2px] transition-colors duration-150 ${CONTRIBUTION_LEVEL_COLORS[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
                         />
                       </div>
                     ))}
@@ -408,7 +408,7 @@ export function ContributionGraphCard({
                       onMouseLeave={() => setTooltip(null)}
                     >
                       <div
-                        className={`h-full w-full rounded-sm transition-colors duration-150 lg:rounded ${levelColors[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
+                        className={`h-full w-full rounded-sm transition-colors duration-150 lg:rounded ${CONTRIBUTION_LEVEL_COLORS[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
                       />
                     </div>
                   ))}
@@ -432,7 +432,7 @@ export function ContributionGraphCard({
         ).map((level) => (
           <div
             key={level}
-            className={`h-[10px] w-[10px] rounded-[2px] ${levelColors[level]}`}
+            className={`h-[10px] w-[10px] rounded-[2px] ${CONTRIBUTION_LEVEL_COLORS[level]}`}
           />
         ))}
         <span>More</span>

@@ -41,12 +41,11 @@ export function HeaderSection() {
           isMobileShowed
           imagePath={{ emoji: "😮‍💨" }}
           actionButton
-          className="relative z-10"
         />
       </motion.div>
 
       <motion.div
-        className="absolute top-20 right-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10"
+        className="absolute top-20 right-10 w-64 h-64 squircle-color-primary/10 rounded-full blur-3xl -z-10"
         animate={{
           scale: isHovered ? [1, 1.3, 1] : 1,
           opacity: isHovered ? [0.4, 0.7, 0.4] : 0.2,
@@ -54,7 +53,7 @@ export function HeaderSection() {
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-10 left-10 w-48 h-48 bg-accent/10 rounded-full blur-3xl -z-10"
+        className="absolute bottom-10 left-10 w-48 h-48 squircle-color-accent/10 rounded-full blur-3xl -z-10"
         animate={{
           scale: isHovered ? [1, 1.2, 1] : 1,
           opacity: isHovered ? [0.4, 0.6, 0.4] : 0.2,

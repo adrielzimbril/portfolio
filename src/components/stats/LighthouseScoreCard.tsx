@@ -24,23 +24,23 @@ interface ScoreBarProps {
 function getScoreColor(score: number) {
   if (score >= 90) {
     return {
-      bar: "bg-primary",
-      barBg: "bg-primary/10",
+      bar: "squircle-color-primary",
+      barBg: "squircle-color-primary/10",
       text: "text-primary",
       glow: "shadow-primary/20",
     };
   }
   if (score >= 50) {
     return {
-      bar: "bg-accent",
-      barBg: "bg-accent/10",
+      bar: "squircle-color-accent",
+      barBg: "squircle-color-accent/10",
       text: "text-accent",
       glow: "shadow-accent/20",
     };
   }
   return {
-    bar: "bg-destructive",
-    barBg: "bg-destructive/10",
+    bar: "squircle-color-destructive",
+    barBg: "squircle-color-destructive/10",
     text: "text-destructive",
     glow: "shadow-destructive/20",
   };
@@ -353,7 +353,7 @@ function PulseRings({
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="absolute rounded-full border border-accent/30"
+            className="absolute rounded-full squircle-border-color-accent/30"
             style={{
               width: 140 + i * 50,
               height: 140 + i * 50,
@@ -372,7 +372,7 @@ function PulseRings({
       {[0, 1, 2].map((i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full border border-accent/30"
+          className="absolute rounded-full squircle-border-color-accent/30"
           style={{
             width: 140 + i * 50,
             height: 140 + i * 50,
@@ -421,7 +421,7 @@ export function LighthouseScoreCard({
   ];
 
   const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden border border-border bg-b-base p-5 transition-all duration-300 hover:border-primary hover:bg-sh-white",
+    "group relative flex h-full flex-col overflow-hidden squircle-border-color-border squircle-color-b-base p-5 transition-all duration-300 hover:squircle-border-color-primary hover:squircle-color-sh-white",
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
