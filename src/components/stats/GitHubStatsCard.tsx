@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { Star, Github, Git, ThreeOneDaysMonth } from "@aurthle/icons";
+import { Star, Github, Git, Calendar } from "@aurthle/icons";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 
@@ -13,6 +13,8 @@ interface GitHubStatsCardProps {
   label: string;
   value: number;
   delay?: number;
+  change?: number;
+  period?: string;
   className?: string;
 }
 
@@ -21,16 +23,22 @@ const themeConfig = {
     icon: Star,
     iconColor: "text-amber-500",
     bgColor: "bg-amber-500/10",
+    glowColor: "shadow-amber-500/20",
+    gradient: "from-amber-500/20 to-transparent",
   },
   forks: {
     icon: Git,
     iconColor: "text-teal-500",
     bgColor: "bg-teal-500/10",
+    glowColor: "shadow-teal-500/20",
+    gradient: "from-teal-500/20 to-transparent",
   },
   commits: {
     icon: Github,
     iconColor: "text-violet-500",
     bgColor: "bg-violet-500/10",
+    glowColor: "shadow-violet-500/20",
+    gradient: "from-violet-500/20 to-transparent",
   },
 };
 
@@ -39,6 +47,8 @@ export function GitHubStatsCard({
   label,
   value,
   delay = 0,
+  change,
+  period,
   className,
 }: GitHubStatsCardProps) {
   const { shouldReduceAnimations } = usePerformanceMode();
@@ -90,15 +100,40 @@ export function GitHubStatsCard({
       <div className={cardClassName}>
         <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
+        <div
+          className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-20 blur-2xl"
+          style={{ backgroundColor: theme.iconColor.replace("text-", "") }}
+        />
+
         <div className="relative z-20 flex h-full flex-col">
-          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-b-base text-foreground">
-            <Icon size={20} className={theme.iconColor} />
+          <div className="mb-4 flex items-start justify-between">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground shadow-lg">
+              <Icon size={24} className={theme.iconColor} />
+            </div>
+            {change !== undefined && (
+              <div
+                className={cn(
+                  "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold",
+                  change >= 0
+                    ? "bg-green-500/10 text-green-500"
+                    : "bg-red-500/10 text-red-500",
+                )}
+              >
+                {change >= 0 ? "↑" : "↓"} {Math.abs(change)}%
+              </div>
+            )}
           </div>
-          <h3 className="text-sm font-medium text-muted-foreground">{label}</h3>
-          <div className="mt-2">
-            <p className="text-3xl font-semibold tracking-tight text-foreground">
+
+          <div className="mt-auto">
+            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              {label}
+            </h3>
+            <p className="mt-1 text-4xl font-bold tracking-tight text-foreground">
               {displayValue.toLocaleString()}
             </p>
+            {period && (
+              <p className="mt-1 text-xs text-muted-foreground">{period}</p>
+            )}
           </div>
         </div>
       </div>
@@ -116,29 +151,72 @@ export function GitHubStatsCard({
     >
       <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
+      <motion.div
+        className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full opacity-20 blur-2xl"
+        style={{ backgroundColor: theme.iconColor.replace("text-", "") }}
+        animate={{
+          scale: isHovered ? 1.2 : 1,
+          opacity: isHovered ? 0.3 : 0.2,
+        }}
+        transition={{ duration: 0.3 }}
+      />
+
       <div className="relative z-20 flex h-full flex-col">
-        <motion.div
-          animate={{
-            rotate: isHovered ? [0, -5, 5, 0] : 0,
-            y: isHovered ? -4 : 0,
-          }}
-          transition={{
-            rotate: { duration: 0.5 },
-            y: { type: "spring", stiffness: 200, damping: 15 },
-          }}
-          className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-b-base text-foreground"
-        >
-          <Icon size={20} className={theme.iconColor} />
-        </motion.div>
-        <h3 className="text-sm font-medium text-muted-foreground">{label}</h3>
-        <div className="mt-2">
+        <div className="mb-4 flex items-start justify-between">
+          <motion.div
+            animate={{
+              rotate: isHovered ? [0, -5, 5, 0] : 0,
+              y: isHovered ? -4 : 0,
+              scale: isHovered ? 1.05 : 1,
+            }}
+            transition={{
+              rotate: { duration: 0.5 },
+              y: { type: "spring", stiffness: 200, damping: 15 },
+              scale: { type: "spring", stiffness: 200, damping: 15 },
+            }}
+            className="flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground shadow-lg"
+          >
+            <Icon size={24} className={theme.iconColor} />
+          </motion.div>
+
+          {change !== undefined && (
+            <motion.div
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: delay + 0.3, duration: 0.3 }}
+              className={cn(
+                "flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold",
+                change >= 0
+                  ? "bg-green-500/10 text-green-500"
+                  : "bg-red-500/10 text-red-500",
+              )}
+            >
+              {change >= 0 ? "↑" : "↓"} {Math.abs(change)}%
+            </motion.div>
+          )}
+        </div>
+
+        <div className="mt-auto">
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            {label}
+          </h3>
           <motion.p
             animate={{ scale: isHovered ? 1.02 : 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="text-3xl font-semibold tracking-tight text-foreground"
+            className="mt-1 text-4xl font-bold tracking-tight text-foreground"
           >
             {displayValue.toLocaleString()}
           </motion.p>
+          {period && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: delay + 0.4, duration: 0.3 }}
+              className="mt-1 text-xs text-muted-foreground"
+            >
+              {period}
+            </motion.p>
+          )}
         </div>
       </div>
     </motion.div>
