@@ -4,7 +4,7 @@ import { cn } from "@/utils/utils";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { Badge } from "@/components/ui/badge";
-import { CheckOne } from "@aurthle/icons";
+import { CheckCircle } from "@aurthle/icons";
 
 export function ToolAvatar({
   name,
@@ -52,7 +52,7 @@ export function ToolAvatar({
           )}
           variant="secondary"
         >
-          <CheckOne className="text-primary-foreground" size={12} />
+          <CheckCircle className="text-primary-foreground" size={12} />
         </Badge>
       </div>
     </div>

@@ -2,7 +2,7 @@
 import * as React from "react";
 import { type VariantProps } from "class-variance-authority";
 import { AnimatePresence, motion } from "motion/react";
-import { CheckOne, CopyOne } from "@aurthle/icons";
+import { CheckCircle, Copy } from "@aurthle/icons";
 import {
   Button as ButtonPrimitive,
   type ButtonProps as ButtonPrimitiveProps,
@@ -65,7 +65,7 @@ function ButtonCopy({
     [onClick, copied, content, setIsCopied, onCopiedChange, delay],
   );
 
-  const Icon = isCopied ? CheckOne : CopyOne;
+  const Icon = isCopied ? CheckCircle : Copy;
 
   return (
     <ButtonPrimitive

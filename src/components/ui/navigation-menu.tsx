@@ -1,6 +1,6 @@
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";
-import { ChevronDownOne } from "@aurthle/icons";
+import { ChevronDown } from "@aurthle/icons";
 import * as React from "react";
 import { cn } from "@/utils/utils";
 
@@ -52,7 +52,7 @@ const NavigationMenuTrigger = React.forwardRef<
     className={cn(navigationMenuTriggerStyle(), "group", className)}
     {...props}
   >
-    {children} <ChevronDownOne size={16} className="mr-2" aria-hidden="true" />
+    {children} <ChevronDown size={16} className="mr-2" aria-hidden="true" />
   </NavigationMenuPrimitive.Trigger>
 ));
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;

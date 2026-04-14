@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { CheckCircleOne } from "@aurthle/icons";
+import { CheckCircle } from "@aurthle/icons";
 import {
   Dialog,
   DialogContent,
@@ -312,7 +312,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-8 space-y-4">
-            <CheckCircle className="w-16 h-16 text-green-500" />
+            <CheckCircle className="text-green-500" size={48} />
             <h3 className="text-xl font-semibold text-green-600">
               {t("common.page-sections.newsletter.form.success.message.title")}
             </h3>

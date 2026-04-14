@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { CheckCircleOne, AlertCircleOne } from "@aurthle/icons";
+import { CheckCircle, InfoCircle } from "@aurthle/icons";
 
 type Status = "success" | "error";
 
@@ -39,9 +39,9 @@ export function FormFeedbackModal({
         <DialogHeader className="space-y-3">
           <div className="mx-auto">
             {status === "success" ? (
-              <CheckCircleOne className="h-12 w-12 text-green-500" />
+              <CheckCircle size={48} className="text-green-500" />
             ) : (
-              <AlertCircleOne className="h-12 w-12 text-red-500" />
+              <InfoCircle size={48} className="text-red-500" />
             )}
           </div>
           <DialogTitle className="text-center text-xl">{title}</DialogTitle>
