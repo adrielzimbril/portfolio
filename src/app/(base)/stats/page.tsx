@@ -83,6 +83,7 @@ export default async function StatsPage() {
         title={t("stats.sections.blog.title")}
         description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
+        isFlex
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
@@ -114,6 +115,7 @@ export default async function StatsPage() {
         title={t("stats.sections.engagement.title")}
         description={t("stats.sections.engagement.description")}
         badge={t("stats.sections.engagement.badge")}
+        isFlex
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <SiteViewsCard value={serverStats.totalViews} />
@@ -140,6 +142,7 @@ export default async function StatsPage() {
         title={t("stats.sections.github.title")}
         description={t("stats.sections.github.description")}
         badge={t("stats.sections.github.badge")}
+        isFlex
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <GitHubStatsCard
@@ -167,6 +170,7 @@ export default async function StatsPage() {
         title="Performance"
         description="Lighthouse performance scores"
         badge="Performance"
+        isFlex
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <LighthouseScoreCard
@@ -185,15 +189,14 @@ export default async function StatsPage() {
         title="Changelog"
         description="Recent updates and changes"
         badge="Updates"
+        isFlex
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ChangelogUpdatesCard count={0} />
           {serverStats.topViewedArticles.length > 0 && (
             <MostViewedArticleCard
               title={serverStats.topViewedArticles[0].title}
-              slug={serverStats.topViewedArticles[0].slug}
-              imageName=""
-              viewCount={serverStats.topViewedArticles[0].count}
+              views={serverStats.topViewedArticles[0].count}
             />
           )}
         </div>
