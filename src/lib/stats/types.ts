@@ -39,7 +39,12 @@ export interface GitHubStats {
 export interface ContributionDay {
   date: string;
   contributionCount: number;
-  contributionLevel: "NONE" | "FIRST_QUARTILE" | "SECOND_QUARTILE" | "THIRD_QUARTILE" | "FOURTH_QUARTILE";
+  contributionLevel:
+    | "NONE"
+    | "FIRST_QUARTILE"
+    | "SECOND_QUARTILE"
+    | "THIRD_QUARTILE"
+    | "FOURTH_QUARTILE";
 }
 
 export interface ContributionWeek {
@@ -56,6 +61,7 @@ export interface LighthouseScores {
   accessibility: number;
   bestPractices: number;
   seo: number;
+  fetchedAt: string;
 }
 
 export interface LighthouseStats {
