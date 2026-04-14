@@ -80,6 +80,37 @@
       "description": "Oils, frameworks and tools I use to build every day."
     }
   },
+  "tools": {
+    "title": "Tools & Setup",
+    "description": "My daily toolkit and the hardware I use to build software.",
+    "keywords": "tools, setup, hardware, software, development tools, Adriel Zimbril setup, tech stack, development environment",
+    "page": {
+      "header-section": {
+        "title": "Tools & Setup",
+        "description": "The essential hardware and software tools I use every day to build and ship products.",
+        "badge": "My Toolkit 🛠️"
+      },
+      "setup-section": {
+        "badge": "Setup 💻",
+        "categories": {
+          "hardware": "Hardware",
+          "accessories": "Accessories",
+          "software": "Software",
+          "audio": "Audio"
+        }
+      },
+      "tools-section": {
+        "badge": "Tools 🧰",
+        "categories": {
+          "frontend": "Frontend",
+          "backend": "Backend",
+          "design": "Design",
+          "tools": "Tools",
+          "other": "Other"
+        }
+      }
+    }
+  },
   "setup": {
     "title": "My Setup",
     "description": "The hardware and peripherals I use for my creative work.",

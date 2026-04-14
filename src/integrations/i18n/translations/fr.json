@@ -80,6 +80,37 @@
       "description": "Outils, frameworks et ressources que j'utilise au quotidien."
     }
   },
+  "tools": {
+    "title": "Outils & Setup",
+    "description": "Ma trousse à outils quotidienne et le matériel que j'utilise pour créer des logiciels.",
+    "keywords": "outils, setup, matériel, logiciel, outils de développement, setup Adriel Zimbril, stack tech, environnement de développement",
+    "page": {
+      "header-section": {
+        "title": "Outils & Setup",
+        "description": "Le matériel et les outils logiciels essentiels que j'utilise tous les jours pour créer et livrer des produits.",
+        "badge": "Ma Trousse 🛠️"
+      },
+      "setup-section": {
+        "badge": "Setup 💻",
+        "categories": {
+          "hardware": "Matériel",
+          "accessories": "Accessoires",
+          "software": "Logiciel",
+          "audio": "Audio"
+        }
+      },
+      "tools-section": {
+        "badge": "Outils 🧰",
+        "categories": {
+          "frontend": "Frontend",
+          "backend": "Backend",
+          "design": "Design",
+          "tools": "Outils",
+          "other": "Autre"
+        }
+      }
+    }
+  },
   "setup": {
     "title": "Mon Setup",
     "description": "Le matériel et les périphériques que j'utilise pour mon travail créatif.",
