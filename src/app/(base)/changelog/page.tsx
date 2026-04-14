@@ -58,7 +58,7 @@ export default async function ChangelogPage() {
               </div>
 
               {/* Content */}
-              <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl w-[calc(100%-4rem)] md:w-[45%] transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white group-hover:shadow-lg">
+              <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl w-[calc(100%-4rem)] md:w-[45%] transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white">
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <time className="text-sm font-bold text-muted-foreground">

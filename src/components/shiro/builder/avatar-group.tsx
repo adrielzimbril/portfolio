@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { motion, type Transition } from "motion/react";
 
 import { cn } from "@/utils/utils";
 import {
@@ -16,38 +15,19 @@ import {
 type AvatarProps = TooltipProps & {
   children: React.ReactNode;
   zIndex: number;
-  transition: Transition;
-  translate: string | number;
 };
 
-function AvatarContainer({
-  children,
-  zIndex,
-  transition,
-  translate,
-  ...props
-}: AvatarProps) {
+function AvatarContainer({ children, zIndex, ...props }: AvatarProps) {
   return (
     <Tooltip {...props}>
       <TooltipTrigger>
-        <motion.div
+        <div
           data-slot="avatar-container"
-          initial="initial"
-          whileHover="hover"
-          whileTap="hover"
           className="relative"
           style={{ zIndex }}
         >
-          <motion.div
-            variants={{
-              initial: { y: 0 },
-              hover: { y: translate },
-            }}
-            transition={transition}
-          >
-            {children}
-          </motion.div>
-        </motion.div>
+          {children}
+        </div>
       </TooltipTrigger>
     </Tooltip>
   );
@@ -61,9 +41,7 @@ function AvatarGroupTooltip(props: AvatarGroupTooltipProps) {
 
 type AvatarGroupProps = Omit<React.ComponentProps<"div">, "translate"> & {
   children: React.ReactElement[];
-  transition?: Transition;
   invertOverlap?: boolean;
-  translate?: string | number;
   numPeople?: number;
   tooltipProps?: Omit<TooltipProps, "children">;
 };
@@ -72,9 +50,7 @@ function AvatarGroup({
   ref,
   children,
   className,
-  transition = { type: "spring", stiffness: 300, damping: 17 },
   invertOverlap = false,
-  translate = "0%",
   numPeople,
   tooltipProps = { side: "top", sideOffset: 24 },
   ...props
@@ -93,8 +69,6 @@ function AvatarGroup({
             zIndex={
               invertOverlap ? React.Children.count(children) - index : index
             }
-            transition={transition}
-            translate={translate}
             {...tooltipProps}
           >
             {child}

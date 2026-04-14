@@ -28,10 +28,7 @@ export function ChangelogUpdatesCard({
     .slice(0, 8);
 
   useEffect(() => {
-    if (shouldReduceAnimations) {
-      setDisplayCount(count);
-      return;
-    }
+    if (shouldReduceAnimations) return;
 
     const duration = 1500;
     const startTime = performance.now();
@@ -99,7 +96,7 @@ export function ChangelogUpdatesCard({
                     }`}
                   />
                   {/* Entry card */}
-                  <div className="z-10 inline-block w-[100px] space-y-px rounded-lg border border-border bg-b-base px-2 py-1.5 text-xs shadow-sm">
+                  <div className="z-10 inline-block w-[100px] space-y-px rounded-lg border border-border bg-b-base px-2 py-1.5 text-xs">
                     <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
                       {item.version}
                     </p>
@@ -127,7 +124,7 @@ export function ChangelogUpdatesCard({
             <h2 className="mb-1 font-medium text-foreground">Changelog</h2>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-bold tabular-nums tracking-tight text-foreground">
-                {displayCount}
+                {count}
               </span>
               <span className="text-sm text-muted-foreground">updates</span>
             </div>
@@ -186,7 +183,7 @@ export function ChangelogUpdatesCard({
                   }`}
                 />
                 {/* Entry card */}
-                <div className="z-10 inline-block w-[100px] space-y-px rounded-lg border border-border bg-b-base px-2 py-1.5 text-xs shadow-sm">
+                <div className="z-10 inline-block w-[100px] space-y-px rounded-lg border border-border bg-b-base px-2 py-1.5 text-xs">
                   <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
                     {item.version}
                   </p>

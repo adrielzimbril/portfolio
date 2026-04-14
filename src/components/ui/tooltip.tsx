@@ -2,12 +2,6 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
-import {
-  motion,
-  AnimatePresence,
-  LayoutGroup,
-  type Transition,
-} from "motion/react";
 
 import { cn } from "@/utils/utils";
 
@@ -30,7 +24,6 @@ type GlobalTooltipContextType = {
   showTooltip: (data: TooltipData) => void;
   hideTooltip: () => void;
   currentTooltip: TooltipData | null;
-  transition: Transition;
   globalId: string;
 };
 
@@ -170,14 +163,12 @@ type TooltipProviderProps = {
   children: React.ReactNode;
   openDelay?: number;
   closeDelay?: number;
-  transition?: Transition;
 };
 
 function TooltipProvider({
   children,
   openDelay = 700,
   closeDelay = 300,
-  transition = { type: "spring", stiffness: 300, damping: 25 },
 }: TooltipProviderProps) {
   const globalId = React.useId();
   const [currentTooltip, setCurrentTooltip] =
@@ -196,10 +187,10 @@ function TooltipProvider({
       const delay = now - lastCloseTimeRef.current < closeDelay ? 0 : openDelay;
       timeoutRef.current = window.setTimeout(
         () => setCurrentTooltip(data),
-        delay
+        delay,
       );
     },
-    [openDelay, closeDelay, currentTooltip]
+    [openDelay, closeDelay, currentTooltip],
   );
 
   const hideTooltip = React.useCallback(() => {
@@ -227,11 +218,10 @@ function TooltipProvider({
         showTooltip,
         hideTooltip,
         currentTooltip,
-        transition,
         globalId,
       }}
     >
-      <LayoutGroup>{children}</LayoutGroup>
+      {children}
       <TooltipOverlay />
     </GlobalTooltipContext.Provider>
   );
@@ -268,7 +258,7 @@ function TooltipPortal({ children }: TooltipPortalProps) {
 }
 
 function TooltipOverlay() {
-  const { currentTooltip, transition, globalId } = useGlobalTooltip();
+  const { currentTooltip, globalId } = useGlobalTooltip();
 
   const position = React.useMemo(() => {
     if (!currentTooltip) return null;
@@ -282,37 +272,32 @@ function TooltipOverlay() {
   }, [currentTooltip]);
 
   return (
-    <AnimatePresence>
-      {currentTooltip && currentTooltip.content && position && (
-        <TooltipPortal>
-          <motion.div
-            data-slot="tooltip-overlay-container"
-            className="fixed z-50"
-            style={{
-              top: position.y,
-              left: position.x,
-              transform: position.transform,
-            }}
+    currentTooltip &&
+    currentTooltip.content &&
+    position && (
+      <TooltipPortal>
+        <div
+          data-slot="tooltip-overlay-container"
+          className="fixed z-50"
+          style={{
+            top: position.y,
+            left: position.x,
+            transform: position.transform,
+          }}
+        >
+          <div
+            data-slot="tooltip-overlay"
+            className="relative rounded-lg bg-sh-base-white fill-primary px-3 py-1.5 text-sm text-b-white-invert-sec w-fit text-balance"
           >
-            <motion.div
-              data-slot="tooltip-overlay"
-              layoutId={`tooltip-overlay-${globalId}`}
-              initial={{ opacity: 0, scale: 0, ...position.initial }}
-              animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-              exit={{ opacity: 0, scale: 0, ...position.initial }}
-              transition={transition}
-              className="relative rounded-lg bg-sh-base-white fill-primary px-3 py-1.5 text-sm text-b-white-invert-sec shadow-md w-fit text-balance"
-            >
-              {currentTooltip.content}
+            {currentTooltip.content}
 
-              {currentTooltip.arrow && (
-                <TooltipArrow side={currentTooltip.side} />
-              )}
-            </motion.div>
-          </motion.div>
-        </TooltipPortal>
-      )}
-    </AnimatePresence>
+            {currentTooltip.arrow && (
+              <TooltipArrow side={currentTooltip.side} />
+            )}
+          </div>
+        </div>
+      </TooltipPortal>
+    )
   );
 }
 
@@ -329,7 +314,7 @@ type TooltipContextType = {
 };
 
 const TooltipContext = React.createContext<TooltipContextType | undefined>(
-  undefined
+  undefined,
 );
 
 const useTooltip = () => {
@@ -422,7 +407,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onMouseEnter?.(e);
       handleOpen();
     },
-    [handleOpen, children.props]
+    [handleOpen, children.props],
   );
 
   const handleMouseLeave = React.useCallback(
@@ -430,7 +415,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onMouseLeave?.(e);
       hideTooltip();
     },
-    [hideTooltip, children.props]
+    [hideTooltip, children.props],
   );
 
   const handleFocus = React.useCallback(
@@ -438,7 +423,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onFocus?.(e);
       handleOpen();
     },
-    [handleOpen, children.props]
+    [handleOpen, children.props],
   );
 
   const handleBlur = React.useCallback(
@@ -446,7 +431,7 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       (children.props as React.HTMLAttributes<HTMLElement>)?.onBlur?.(e);
       hideTooltip();
     },
-    [hideTooltip, children.props]
+    [hideTooltip, children.props],
   );
 
   React.useEffect(() => {

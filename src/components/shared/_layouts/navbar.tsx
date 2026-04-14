@@ -4,7 +4,7 @@ import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/utils/utils";
 import { Menu, X } from "lucide-react";
-import { AnimatePresence, motion, useScroll, Variants } from "motion/react";
+import { useScroll } from "motion/react";
 import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
@@ -98,10 +98,7 @@ export function Navbar() {
         hasScrolled ? "top-6" : "top-4 mx-0",
       )}
     >
-      <motion.div
-        //initial={{ width: INITIAL_WIDTH }}
-        animate={{ width: hasScrolled ? MAX_WIDTH : INITIAL_WIDTH }}
-        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+      <div
         className={cn(
           "container p-0",
           // "w-full!"
@@ -111,7 +108,7 @@ export function Navbar() {
           className={cn(
             "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white",
             hasScrolled
-              ? "px-2 py-1 shadow-lg backdrop-blur-lg bg-b-white/80"
+              ? "px-2 py-1 backdrop-blur-lg bg-b-white/80"
               : "shadow-none",
           )}
         >
@@ -169,117 +166,98 @@ export function Navbar() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Mobile Drawer */}
-      <AnimatePresence>
-        {isDrawerOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={overlayVariants}
-              transition={{ duration: 0.2 }}
-              onClick={handleOverlayClick}
-            />
+      {isDrawerOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={handleOverlayClick}
+          />
 
-            <motion.div
-              className="fixed inset-x-0 w-[95%] h-[95%] mx-auto top-3 bg-b-white border-4 border-b-base-accent p-4 rounded-xl shadow-lg"
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={drawerVariants}
-            >
-              {/* Mobile menu content */}
-              <div className="flex flex-col h-full justify-between gap-4">
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center justify-between">
-                    <Link
-                      href={routes.home.link}
-                      className="flex items-center gap-3"
-                      onClick={async () => {
-                        setActiveTab(routes.home.key);
-                        sleep(2000).then(() => {
-                          toggleDrawer();
-                        });
-                      }}
-                    >
-                      <Image
-                        className="size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
-                        src={getImageUrl("icon-three.png")}
-                        alt={siteConfig.description}
-                        width={256}
-                        height={256}
-                      />
-                      {/* <LogoIcon
+          <div className="fixed inset-x-0 w-[95%] h-[95%] mx-auto top-3 bg-b-white border-4 border-b-base-accent p-4 rounded-xl">
+            {/* Mobile menu content */}
+            <div className="flex flex-col h-full justify-between gap-4">
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <Link
+                    href={routes.home.link}
+                    className="flex items-center gap-3"
+                    onClick={async () => {
+                      setActiveTab(routes.home.key);
+                      sleep(2000).then(() => {
+                        toggleDrawer();
+                      });
+                    }}
+                  >
+                    <Image
+                      className="size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
+                      src={getImageUrl("icon-three.png")}
+                      alt={siteConfig.description}
+                      width={256}
+                      height={256}
+                    />
+                    {/* <LogoIcon
                         className={cn(
                           "size-12! rounded-2xl overflow-hidden",
                           // hasScrolled && "w-10! h-10!"
                         )}
                       /> */}
-                      {/* <LogoName className={cn("h-8! shrink-0")} /> */}
-                    </Link>
-                    <Button
-                      onClick={toggleDrawer}
-                      className="border border-border rounded-md p-1 cursor-pointer"
-                    >
-                      <X className="size-8!" />
-                    </Button>
-                  </div>
-
-                  <motion.ul
-                    className="w-full flex flex-col gap-2 text-sm mb-4"
-                    variants={drawerMenuContainerVariants}
-                  >
-                    <AnimatePresence>
-                      {menuRoutesFiltered.map((item) => (
-                        <motion.li
-                          key={item.name}
-                          className={cn(
-                            "w-full p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
-                            activeTab === item.key
-                              ? "squircle-b-white-invert-fr"
-                              : "squircle-sh-white",
-                          )}
-                          variants={drawerMenuVariants}
-                        >
-                          <Link
-                            href={item.link}
-                            className={cn(
-                              "w-full underline-offset-4 hover:text-b-white-invert/80 transition-colors",
-                              activeTab === item.key
-                                ? "text-b-white-invert font-medium"
-                                : "text-b-white-invert/80",
-                            )}
-                            onClick={async () => {
-                              setActiveTab(item.key);
-                              sleep(2000).then(() => {
-                                toggleDrawer();
-                              });
-                            }}
-                          >
-                            {/* {t("common.menu." + item.key + ".mobile")} */}
-                            {t("common.menu." + item.key + ".desktop")}
-                          </Link>
-                        </motion.li>
-                      ))}
-                    </AnimatePresence>
-                  </motion.ul>
-                </div>
-
-                {/* Action buttons */}
-                <div className="flex flex-col gap-2">
-                  <Link href={routes.contact.link} likeButton whileTap asFull>
-                    {t("common.page-sections.header.cta")}
+                    {/* <LogoName className={cn("h-8! shrink-0")} /> */}
                   </Link>
+                  <Button
+                    onClick={toggleDrawer}
+                    className="border border-border rounded-md p-1 cursor-pointer"
+                  >
+                    <X className="size-8!" />
+                  </Button>
                 </div>
+
+                <ul className="w-full flex flex-col gap-2 text-sm mb-4">
+                  {menuRoutesFiltered.map((item) => (
+                    <li
+                      key={item.name}
+                      className={cn(
+                        "w-full p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
+                        activeTab === item.key
+                          ? "squircle-b-white-invert-fr"
+                          : "squircle-sh-white",
+                      )}
+                    >
+                      <Link
+                        href={item.link}
+                        className={cn(
+                          "w-full underline-offset-4 hover:text-b-white-invert/80 transition-colors",
+                          activeTab === item.key
+                            ? "text-b-white-invert font-medium"
+                            : "text-b-white-invert/80",
+                        )}
+                        onClick={async () => {
+                          setActiveTab(item.key);
+                          sleep(2000).then(() => {
+                            toggleDrawer();
+                          });
+                        }}
+                      >
+                        {/* {t("common.menu." + item.key + ".mobile")} */}
+                        {t("common.menu." + item.key + ".desktop")}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+
+              {/* Action buttons */}
+              <div className="flex flex-col gap-2">
+                <Link href={routes.contact.link} likeButton whileTap asFull>
+                  {t("common.page-sections.header.cta")}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </header>
   );
 }

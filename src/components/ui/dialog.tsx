@@ -5,7 +5,6 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/utils/utils";
-import { motion } from "motion/react";
 
 function Dialog({
   ...props
@@ -42,7 +41,7 @@ function DialogOverlay({
       data-slot="dialog-overlay"
       className={cn(
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/10 backdrop-blur-sm",
-        className
+        className,
       )}
       {...props}
     />
@@ -92,7 +91,7 @@ function DialogContent({
           "gap-6 overflow-ys-auto p-6 sm:p-8 duration-200",
           sizeClasses[size],
           variantClasses[variant],
-          className
+          className,
         )}
         {...props}
       >
@@ -107,7 +106,7 @@ function DialogContent({
           <DialogPrimitive.Close
             className={cn(
               "group absolute top-2.5 md:top-6 right-4 md:right-6 flex size-8 items-center justify-center disabled:pointer-events-none",
-              "p-0"
+              "p-0",
             )}
             asChild
           >
@@ -141,7 +140,7 @@ function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="dialog-footer"
       className={cn(
         "flex flex-col gap-3 sm:flex-row sm:justify-end sm:gap-4",
-        className
+        className,
       )}
       {...props}
     />
@@ -157,7 +156,7 @@ function DialogTitle({
       data-slot="dialog-title"
       className={cn(
         "text-xl font-bold leading-[120%] text-white-invert-fr",
-        className
+        className,
       )}
       {...props}
     />
@@ -205,7 +204,7 @@ function DialogCard({
       className={cn(
         "squircle squircle-xl md:squircle-3xl squircle-smooth-xl p-4 sm:p-6",
         variantClasses[variant],
-        className
+        className,
       )}
       {...props}
     />
@@ -234,7 +233,7 @@ function DialogBadge({
       className={cn(
         "inline-flex items-center px-3 py-1 text-sm font-medium squircle squircle-lg",
         variantClasses[variant],
-        className
+        className,
       )}
       {...props}
     >
@@ -256,14 +255,7 @@ const AnimatedDialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogContent>
 >(({ children, ...props }, ref) => (
   <DialogContent ref={ref} {...props}>
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.2 }}
-    >
-      {children}
-    </motion.div>
+    <div>{children}</div>
   </DialogContent>
 ));
 AnimatedDialogContent.displayName = "AnimatedDialogContent";
