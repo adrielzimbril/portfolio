@@ -1,0 +1,51 @@
+---
+version: "2.5.0"
+type: "feature"
+date: "2024-03-20"
+published: true
+---
+
+# Trigger.dev Integration & Mobile Improvements
+
+This release focuses on automation and mobile experience, bringing powerful background task capabilities and a fully responsive design.
+
+## Trigger.dev Integration
+
+We've integrated [Trigger.dev](https://trigger.dev) for robust background task processing. This enables:
+
+- **Automated workflows** - Schedule and run tasks in the background
+- **Webhook handling** - Process external events reliably
+- **Email notifications** - Automated email triggers
+- **Data synchronization** - Keep data in sync across services
+
+### Use Cases
+
+```typescript
+// Example: Automated deployment notifications
+await trigger.send({
+  id: "deployment-notification",
+  to: "team@example.com",
+  subject: "New deployment successful",
+  body: "Your project has been deployed to production"
+});
+```
+
+## Mobile Responsiveness Overhaul
+
+Every page has been completely redesigned for mobile devices:
+
+- **Touch-friendly navigation** - Larger tap targets and gesture support
+- **Responsive grids** - Adaptive layouts that work on any screen size
+- **Optimized images** - Automatic image sizing for mobile bandwidth
+- **Readable text** - Proper font scaling and line heights
+
+### Before & After
+
+The mobile experience now feels native, with smooth transitions and proper touch feedback throughout the application.
+
+## Performance Optimizations
+
+- Reduced JavaScript bundle size by 25%
+- Implemented lazy loading for images and components
+- Added service worker for offline support
+- Optimized CSS delivery with critical path extraction

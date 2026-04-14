@@ -1,18 +1,60 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Sparkles, Wrench, Bug, Zap } from "lucide-react";
+import { Search, Sparkles, Wrench, Bug, Zap, Calendar } from "lucide-react";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { changelog } from "@/data/personal/changelog";
+import {
+  getAllChangelog,
+  getFilteredChangelog,
+  getChangelogTypeCounts,
+} from "@/integrations/content/lib";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { cn } from "@/utils/utils";
+import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 
 export function TimelineSection() {
   const [selectedType, setSelectedType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [changelogData, setChangelogData] = React.useState<any[]>([]);
+  const [typeCounts, setTypeCounts] = React.useState<Record<string, number>>({
+    all: 0,
+    milestone: 0,
+    feature: 0,
+    fix: 0,
+    improvement: 0,
+  });
+
+  React.useEffect(() => {
+    const loadData = async () => {
+      const data = await getAllChangelog();
+      setChangelogData(data);
+      const counts = await getChangelogTypeCounts();
+      setTypeCounts(counts);
+    };
+    loadData();
+  }, []);
+
+  const filteredChangelog = useMemo(() => {
+    if (!changelogData.length) return [];
+
+    return changelogData.filter((entry) => {
+      if (selectedType !== "all" && entry.type !== selectedType) {
+        return false;
+      }
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const versionMatch = entry.version.toLowerCase().includes(query);
+        const bodyMatch = entry.body?.toLowerCase().includes(query) || false;
+        return versionMatch || bodyMatch;
+      }
+      return true;
+    });
+  }, [changelogData, selectedType, searchQuery]);
 
   const typeIcons = {
     milestone: Sparkles,
@@ -21,39 +63,6 @@ export function TimelineSection() {
     improvement: Wrench,
   };
 
-  const filteredChangelog = useMemo(() => {
-    return changelog
-      .filter((entry) => {
-        if (selectedType !== "all" && entry.type !== selectedType) {
-          return false;
-        }
-        if (searchQuery) {
-          const query = searchQuery.toLowerCase();
-          return (
-            entry.version.toLowerCase().includes(query) ||
-            entry.changes.some((change) =>
-              change.toLowerCase().includes(query)
-            )
-          );
-        }
-        return true;
-      })
-      .sort(
-        (a, b) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
-      );
-  }, [selectedType, searchQuery]);
-
-  const typeCounts = useMemo(() => {
-    return {
-      all: changelog.length,
-      milestone: changelog.filter((e) => e.type === "milestone").length,
-      feature: changelog.filter((e) => e.type === "feature").length,
-      fix: changelog.filter((e) => e.type === "fix").length,
-      improvement: changelog.filter((e) => e.type === "improvement").length,
-    };
-  }, []);
-
   return (
     <>
       {/* Filters Section */}
@@ -61,29 +70,29 @@ export function TimelineSection() {
         <div className="w-full max-w-4xl space-y-6">
           {/* Filter Buttons */}
           <div className="flex flex-wrap gap-2 justify-center">
-            {(["all", "milestone", "feature", "fix", "improvement"] as const).map(
-              (type) => {
-                const Icon = typeIcons[type as keyof typeof typeIcons];
-                return (
-                  <Button
-                    key={type}
-                    variant={selectedType === type ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedType(type)}
-                    className="capitalize"
+            {(
+              ["all", "milestone", "feature", "fix", "improvement"] as const
+            ).map((type) => {
+              const Icon = typeIcons[type as keyof typeof typeIcons];
+              return (
+                <Button
+                  key={type}
+                  variant={selectedType === type ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedType(type)}
+                  className="capitalize"
+                >
+                  {Icon && <Icon className="mr-2 h-4 w-4" />}
+                  {type}
+                  <Badge
+                    variant="secondary"
+                    className="ml-2 h-5 px-1.5 text-[10px]"
                   >
-                    {Icon && <Icon className="mr-2 h-4 w-4" />}
-                    {type}
-                    <Badge
-                      variant="secondary"
-                      className="ml-2 h-5 px-1.5 text-[10px]"
-                    >
-                      {typeCounts[type]}
-                    </Badge>
-                  </Button>
-                );
-              }
-            )}
+                    {typeCounts[type]}
+                  </Badge>
+                </Button>
+              );
+            })}
           </div>
 
           {/* Search Input */}
@@ -123,15 +132,18 @@ export function TimelineSection() {
             </Button>
           </div>
         ) : (
-          <div className="space-y-20 w-full max-w-4xl">
+          <div className="space-y-20 w-full max-w-5xl">
             {(() => {
               // Group by year
-              const groupedByYear = filteredChangelog.reduce((acc, entry) => {
-                const year = new Date(entry.date).getFullYear();
-                if (!acc[year]) acc[year] = [];
-                acc[year].push(entry);
-                return acc;
-              }, {} as Record<number, typeof filteredChangelog>);
+              const groupedByYear = filteredChangelog.reduce(
+                (acc, entry) => {
+                  const year = new Date(entry.date).getFullYear();
+                  if (!acc[year]) acc[year] = [];
+                  acc[year].push(entry);
+                  return acc;
+                },
+                {} as Record<number, typeof filteredChangelog>,
+              );
 
               return Object.entries(groupedByYear)
                 .sort(([a], [b]) => Number(b) - Number(a))
@@ -139,22 +151,31 @@ export function TimelineSection() {
                   <div key={year} className="w-full">
                     {/* Year Header */}
                     <div className="flex items-center gap-4 mb-12">
-                      <h2 className="text-3xl font-bold text-foreground">{year}</h2>
+                      <h2 className="text-3xl font-bold text-foreground">
+                        {year}
+                      </h2>
                       <div className="flex-1 h-px bg-border/30" />
                       <Badge variant="secondary" className="text-sm">
-                        {entries.length} release{entries.length !== 1 ? "s" : ""}
+                        {entries.length} release
+                        {entries.length !== 1 ? "s" : ""}
                       </Badge>
                     </div>
 
                     {/* Timeline for this year */}
-                    <div className="relative space-y-16 w-full">
+                    <div className="relative space-y-20 w-full">
                       {entries.map((entry, index) => {
-                        const Icon = typeIcons[entry.type as keyof typeof typeIcons];
-                        const isLatest = index === 0 && year === String(new Date(filteredChangelog[0].date).getFullYear());
+                        const Icon =
+                          typeIcons[entry.type as keyof typeof typeIcons];
+                        const isLatest =
+                          index === 0 &&
+                          year ===
+                            String(
+                              new Date(filteredChangelog[0].date).getFullYear(),
+                            );
 
                         return (
                           <div
-                            key={entry.id}
+                            key={entry.version}
                             className="relative flex items-start gap-6 group"
                           >
                             {/* Timeline Dot */}
@@ -165,15 +186,31 @@ export function TimelineSection() {
                             </div>
 
                             {/* Content Card */}
-                            <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white">
-                              <CardContent className="p-6">
+                            <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white overflow-hidden">
+                              {entry.cover && (
+                                <div className="relative h-64 w-full overflow-hidden">
+                                  <Image
+                                    src={entry.cover}
+                                    alt={entry.version}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                  <div className="absolute inset-0 bg-linear-to-t from-b-base to-transparent" />
+                                </div>
+                              )}
+                              <CardContent className="p-8">
                                 <div className="flex items-center justify-between mb-4">
-                                  <div className="flex items-center gap-2">
-                                    <time className="text-sm font-bold text-muted-foreground">
-                                      {new Date(entry.date).toLocaleDateString("en-US", {
-                                        month: "long",
-                                        day: "numeric",
-                                      })}
+                                  <div className="flex items-center gap-3">
+                                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                                    <time className="text-sm font-medium text-muted-foreground">
+                                      {new Date(entry.date).toLocaleDateString(
+                                        "en-US",
+                                        {
+                                          month: "long",
+                                          day: "numeric",
+                                          year: "numeric",
+                                        },
+                                      )}
                                     </time>
                                     {isLatest && (
                                       <Badge className="bg-primary text-primary-foreground">
@@ -184,7 +221,7 @@ export function TimelineSection() {
                                   <Badge
                                     variant="outline"
                                     className={cn(
-                                      "capitalize text-[10px] font-bold tracking-widest px-2 py-0",
+                                      "capitalize text-[10px] font-bold tracking-widest px-3 py-1",
                                       entry.type === "milestone" &&
                                         "bg-primary/10 text-primary border-primary/20",
                                       entry.type === "feature" &&
@@ -192,26 +229,21 @@ export function TimelineSection() {
                                       entry.type === "fix" &&
                                         "bg-red-500/10 text-red-500 border-red-500/20",
                                       entry.type === "improvement" &&
-                                        "bg-blue-500/10 text-blue-500 border-blue-500/20"
+                                        "bg-blue-500/10 text-blue-500 border-blue-500/20",
                                     )}
                                   >
                                     {entry.type}
                                   </Badge>
                                 </div>
-                                <h3 className="text-xl font-bold mb-4 text-foreground">
+                                <h3 className="text-2xl font-bold mb-6 text-foreground">
                                   {entry.version}
                                 </h3>
-                                <ul className="space-y-3">
-                                  {entry.changes.map((change, i) => (
-                                    <li
-                                      key={i}
-                                      className="text-sm text-muted-foreground flex items-start gap-2"
-                                    >
-                                      <span className="mt-1.5 size-1.5 rounded-full bg-primary/50 shrink-0" />
-                                      {change}
-                                    </li>
-                                  ))}
-                                </ul>
+                                <div className="prose prose-sm max-w-none dark:prose-invert">
+                                  <MDXRemote
+                                    source={entry.body}
+                                    components={richTextComponent}
+                                  />
+                                </div>
                               </CardContent>
                             </Card>
                           </div>
