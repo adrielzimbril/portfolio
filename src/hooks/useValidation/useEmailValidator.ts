@@ -1,11 +1,22 @@
-import { useStringValidator } from "@/hooks/useValidation/useStringValidator";
+import { useRequiredValidator } from "@/hooks/useValidation/useRequiredValidator";
 import { RequiredValidatorProps } from "@/hooks/useValidation/useRequiredValidator";
-
-const emailRegex: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+import isEmail from "validator/lib/isEmail";
 
 export const useEmailValidator = ({
   label,
   required = true,
 }: RequiredValidatorProps<string>): ((value: string) => string | null) => {
-  return useStringValidator({ value: "", label, required, regex: emailRegex });
+  const requiredValidator = useRequiredValidator({
+    value: "",
+    label,
+    required,
+  });
+
+  return (value: string) => {
+    if (value && !isEmail(value.trim())) {
+      return `${label} is not a valid email address`;
+    }
+
+    return requiredValidator(value);
+  };
 };
