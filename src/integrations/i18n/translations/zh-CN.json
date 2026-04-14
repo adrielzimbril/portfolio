@@ -78,42 +78,40 @@
     "keywords": "工具, 硬件, 软件, 开发工具, Adriel Zimbril 设置, 技术栈, 开发环境",
     "page": {
       "title": "SaaS 开发的基础工具箱",
-      "description": "我每天使用的框架和工具。",
+      "description": "我每天使用的框架、库和工具。",
       "header-section": {
         "title": "工具箱",
-        "description": "我每天用来构建和交付产品的基本硬件和软件工具。",
+        "description": "我每天使用的硬件和软件工具库，用于以卓越和效率创建、开发和交付产品。",
         "badge": "我的工具包 🛠️"
       },
       "tools-section": {
         "title": "日常工具",
         "badge": "工具 🧰"
+      },
+      "setup-section": {
+        "title": "我的设置",
+        "badge": "设置 💻"
       }
-    }
-  },
-  "setup": {
-    "title": "我的设备",
-    "description": "我用于创意工作的硬件和外围设备。",
-    "page": {
-      "title": "我的创意和高效工作空间",
-      "description": "陪伴我创意旅程的设备和配置。"
     },
-    "categories": {
-      "hardware": "硬件",
-      "accessories": "配件",
-      "software": "软件",
-      "audio": "音频"
-    },
-    "tags": {
-      "laptop": "笔记本电脑",
-      "keyboard": "键盘",
-      "mechanical": "机械",
-      "monitor": "显示器",
-      "chair": "椅子",
-      "desk": "桌子",
-      "microphone": "麦克风",
-      "streaming": "直播",
-      "lighting": "灯光",
-      "capture": "采集"
+    "setup": {
+      "categories": {
+        "hardware": "硬件",
+        "accessories": "配件",
+        "software": "软件",
+        "audio": "音频"
+      },
+      "tags": {
+        "laptop": "笔记本电脑",
+        "keyboard": "键盘",
+        "mechanical": "机械",
+        "monitor": "显示器",
+        "chair": "椅子",
+        "desk": "桌子",
+        "microphone": "麦克风",
+        "streaming": "直播",
+        "lighting": "照明",
+        "capture": "录制"
+      }
     }
   },
   "changelog": {

@@ -12,18 +12,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("tools.title"),
-    description: t("tools.description"),
-    keywords: t("tools.keywords"),
+    title: t("toolbox.title"),
+    description: t("toolbox.description"),
+    keywords: t("toolbox.keywords"),
     openGraph: {
       ...baseMetadata.openGraph,
-      title: t("tools.title"),
-      description: t("tools.description"),
+      title: t("toolbox.title"),
+      description: t("toolbox.description"),
     },
     twitter: {
       ...baseMetadata.twitter,
-      title: t("tools.title"),
-      description: t("tools.description"),
+      title: t("toolbox.title"),
+      description: t("toolbox.description"),
     },
   };
 }

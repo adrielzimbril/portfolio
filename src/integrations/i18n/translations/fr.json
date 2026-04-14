@@ -78,42 +78,40 @@
     "keywords": "outils, matériel, logiciel, outils de développement, setup Adriel Zimbril, stack tech, environnement de développement",
     "page": {
       "title": "L'atelier indispensable pour ton SaaS",
-      "description": "Outils, frameworks et ressources que j'utilise au quotidien.",
+      "description": "Frameworks, bibliothèques et outils que j'utilise au quotidien.",
       "header-section": {
         "title": "Boîte à Outils",
-        "description": "Le matériel et les outils logiciels essentiels que j'utilise tous les jours pour créer et livrer des produits.",
+        "description": "Mon arsenal d'outils matériels et logiciels que j'utilise chaque jour pour créer, développer et livrer des produits avec excellence et efficacité.",
         "badge": "Ma Trousse 🛠️"
       },
       "tools-section": {
         "title": "Outils Quotidiens",
         "badge": "Outils 🧰"
+      },
+      "setup-section": {
+        "title": "Mon Setup",
+        "badge": "Setup 💻"
       }
-    }
-  },
-  "setup": {
-    "title": "Mon Setup",
-    "description": "Le matériel et les périphériques que j'utilise pour mon travail créatif.",
-    "page": {
-      "title": "Mon espace de travail créatif et productif",
-      "description": "Le matériel et la configuration qui m'accompagnent dans mon parcours créatif."
     },
-    "categories": {
-      "hardware": "Matériel",
-      "accessories": "Accessoires",
-      "software": "Logiciel",
-      "audio": "Audio"
-    },
-    "tags": {
-      "laptop": "Ordinateur",
-      "keyboard": "Clavier",
-      "mechanical": "Mécanique",
-      "monitor": "Écran",
-      "chair": "Chaise",
-      "desk": "Bureau",
-      "microphone": "Microphone",
-      "streaming": "Streaming",
-      "lighting": "Éclairage",
-      "capture": "Capture"
+    "setup": {
+      "categories": {
+        "hardware": "Matériel",
+        "accessories": "Accessoires",
+        "software": "Logiciel",
+        "audio": "Audio"
+      },
+      "tags": {
+        "laptop": "Ordinateur",
+        "keyboard": "Clavier",
+        "mechanical": "Mécanique",
+        "monitor": "Écran",
+        "chair": "Chaise",
+        "desk": "Bureau",
+        "microphone": "Microphone",
+        "streaming": "Streaming",
+        "lighting": "Éclairage",
+        "capture": "Capture"
+      }
     }
   },
   "changelog": {

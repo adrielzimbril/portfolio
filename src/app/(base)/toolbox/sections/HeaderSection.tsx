@@ -11,20 +11,20 @@ export function HeaderSection() {
   const locale = useLocale();
 
   usePageViews(
-    routes.tools.key,
+    routes.toolbox.key,
     undefined,
     {
       locale: locale,
-      path: getPathUrl(routes.tools.link),
+      path: getPathUrl(routes.toolbox.link),
     },
     false,
   );
 
   return (
     <PageHero
-      title={t("tools.page.header-section.title")}
-      description={t("tools.page.header-section.description")}
-      badge={t("tools.page.header-section.badge")}
+      title={t("toolbox.page.header-section.title")}
+      description={t("toolbox.page.header-section.description")}
+      badge={t("toolbox.page.header-section.badge")}
       imagePath={{ emoji: "🛠️" }}
       isMobileShowed
     />

@@ -18,7 +18,7 @@ export function CardInfo({
   tags: string[];
   purchaseUrl?: string;
 }) {
-  const t = useTranslations("tools.setup");
+  const t = useTranslations("toolbox.setup");
 
   const translatedCategory = t(`categories.${category}`);
   const translatedTags = tags.map((tag) => t(`tags.${tag.toLowerCase()}`));

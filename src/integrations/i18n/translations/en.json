@@ -78,42 +78,40 @@
     "keywords": "tools, hardware, software, development tools, Adriel Zimbril setup, tech stack, development environment",
     "page": {
       "title": "The essential workshop for your SaaS",
-      "description": "Oils, frameworks and tools I use to build every day.",
+      "description": "Frameworks, libraries and tools I use to build every day.",
       "header-section": {
         "title": "Toolbox",
-        "description": "The essential hardware and software tools I use every day to build and ship products.",
+        "description": "My arsenal of hardware and software tools that I use every day to create, develop and deliver products with excellence and efficiency.",
         "badge": "My Toolkit 🛠️"
       },
       "tools-section": {
         "title": "Daily Tools",
         "badge": "Tools 🧰"
+      },
+      "setup-section": {
+        "title": "My Setup",
+        "badge": "Setup 💻"
       }
-    }
-  },
-  "setup": {
-    "title": "My Setup",
-    "description": "The hardware and peripherals I use for my creative work.",
-    "page": {
-      "title": "My creative and productive workspace",
-      "description": "The gear and config that accompany me in my creative ride."
     },
-    "categories": {
-      "hardware": "Hardware",
-      "accessories": "Accessories",
-      "software": "Software",
-      "audio": "Audio"
-    },
-    "tags": {
-      "laptop": "Laptop",
-      "keyboard": "Keyboard",
-      "mechanical": "Mechanical",
-      "monitor": "Monitor",
-      "chair": "Chair",
-      "desk": "Desk",
-      "microphone": "Microphone",
-      "streaming": "Streaming",
-      "lighting": "Lighting",
-      "capture": "Capture"
+    "setup": {
+      "categories": {
+        "hardware": "Hardware",
+        "accessories": "Accessories",
+        "software": "Software",
+        "audio": "Audio"
+      },
+      "tags": {
+        "laptop": "Laptop",
+        "keyboard": "Keyboard",
+        "mechanical": "Mechanical",
+        "monitor": "Monitor",
+        "chair": "Chair",
+        "desk": "Desk",
+        "microphone": "Microphone",
+        "streaming": "Streaming",
+        "lighting": "Lighting",
+        "capture": "Capture"
+      }
     }
   },
   "changelog": {

@@ -9,7 +9,7 @@ export function SetupSection() {
   const t = useTranslations();
 
   return (
-    <SectionLayout badge={t("tools.page.setup-section.badge")} isFlex>
+    <SectionLayout isFlex>
       <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-3">
         {setup.map((item) => (
           <SetupCard
