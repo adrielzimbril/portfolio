@@ -75,24 +75,14 @@
   "toolbox": {
     "title": "Toolbox",
     "description": "The tools, libraries, and technologies I use to build software.",
+    "keywords": "tools, hardware, software, development tools, Adriel Zimbril setup, tech stack, development environment",
     "page": {
       "title": "The essential workshop for your SaaS",
-      "description": "Oils, frameworks and tools I use to build every day."
-    }
-  },
-  "tools": {
-    "title": "Tools & Setup",
-    "description": "My daily toolkit and the hardware I use to build software.",
-    "keywords": "tools, setup, hardware, software, development tools, Adriel Zimbril setup, tech stack, development environment",
-    "page": {
+      "description": "Oils, frameworks and tools I use to build every day.",
       "header-section": {
-        "title": "Tools & Setup",
+        "title": "Toolbox",
         "description": "The essential hardware and software tools I use every day to build and ship products.",
         "badge": "My Toolkit 🛠️"
-      },
-      "setup-section": {
-        "title": "My Setup",
-        "badge": "Setup 💻"
       },
       "tools-section": {
         "title": "Daily Tools",

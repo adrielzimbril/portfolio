@@ -75,24 +75,14 @@
   "toolbox": {
     "title": "Boîte à Outils",
     "description": "Les outils, bibliothèques et technologies que j'utilise pour créer des logiciels.",
+    "keywords": "outils, matériel, logiciel, outils de développement, setup Adriel Zimbril, stack tech, environnement de développement",
     "page": {
       "title": "L'atelier indispensable pour ton SaaS",
-      "description": "Outils, frameworks et ressources que j'utilise au quotidien."
-    }
-  },
-  "tools": {
-    "title": "Outils & Setup",
-    "description": "Ma trousse à outils quotidienne et le matériel que j'utilise pour créer des logiciels.",
-    "keywords": "outils, setup, matériel, logiciel, outils de développement, setup Adriel Zimbril, stack tech, environnement de développement",
-    "page": {
+      "description": "Outils, frameworks et ressources que j'utilise au quotidien.",
       "header-section": {
-        "title": "Outils & Setup",
+        "title": "Boîte à Outils",
         "description": "Le matériel et les outils logiciels essentiels que j'utilise tous les jours pour créer et livrer des produits.",
         "badge": "Ma Trousse 🛠️"
-      },
-      "setup-section": {
-        "title": "Mon Setup",
-        "badge": "Setup 💻"
       },
       "tools-section": {
         "title": "Outils Quotidiens",

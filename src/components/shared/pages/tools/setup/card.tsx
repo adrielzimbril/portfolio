@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { CardPreview } from "@/components/shared/pages/setup/preview";
-import { CardInfo } from "@/components/shared/pages/setup/details";
+import { CardPreview } from "@/components/shared/pages/tools/setup/preview";
+import { CardInfo } from "@/components/shared/pages/tools/setup/details";
 
 export function SetupCard({
   title,

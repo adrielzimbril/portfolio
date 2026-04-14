@@ -3,7 +3,7 @@ import React from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { setup } from "@/data/personal/setup";
 import { useTranslations } from "use-intl";
-import { SetupCard } from "@/components/shared/pages/setup/card";
+import { SetupCard } from "@/components/shared/pages/tools/setup/card";
 
 export function SetupSection() {
   const t = useTranslations();

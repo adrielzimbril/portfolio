@@ -75,28 +75,18 @@
   "toolbox": {
     "title": "工具箱",
     "description": "我用于构建软件的工具、库和技术。",
+    "keywords": "工具, 硬件, 软件, 开发工具, Adriel Zimbril 设置, 技术栈, 开发环境",
     "page": {
       "title": "SaaS 开发的基础工具箱",
-      "description": "我每天使用的框架和工具。"
-    }
-  },
-  "tools": {
-    "title": "工具 & 设置",
-    "description": "我的日常工具包和用于构建软件的硬件。",
-    "keywords": "工具, 设置, 硬件, 软件, 开发工具, Adriel Zimbril 设置, 技术栈, 开发环境",
-    "page": {
+      "description": "我每天使用的框架和工具。",
       "header-section": {
-        "title": "工具 & 设置",
+        "title": "工具箱",
         "description": "我每天用来构建和交付产品的基本硬件和软件工具。",
         "badge": "我的工具包 🛠️"
       },
-      "setup-section": {
-        "title": "我的设置",
-        "badge": "设置 💻"
-      },
       "tools-section": {
         "title": "日常工具",
-        "badge": "工具 "
+        "badge": "工具 🧰"
       }
     }
   },
