@@ -4,7 +4,7 @@ import type {
   ContributionData,
   ContributionDay,
   ContributionWeek,
-} from "./types";
+} from "@/lib/stats/types";
 import logger from "@/utils/logger";
 
 // Configuration GitHub

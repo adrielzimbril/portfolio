@@ -1,13 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  Sun,
-  Moon,
-  MoonSparkle,
-  SunCircle,
-  SolarEclipseTwo,
-} from "@aurthle/icons";
+import { Sun, Moon, MoonSparkle, SolarEclipseTwo } from "@aurthle/icons";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { flushSync } from "react-dom";

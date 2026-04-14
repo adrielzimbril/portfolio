@@ -1,5 +1,9 @@
 import { unstable_cache } from "next/cache";
-import type { ServerStats, ArticleMetric, ReactionType } from "./types";
+import type {
+  ServerStats,
+  ArticleMetric,
+  ReactionType,
+} from "@/lib/stats/types";
 
 // Fonction pour récupérer les statistiques depuis le serveur (Supabase)
 // TODO: Adapter pour utiliser votre configuration Supabase
@@ -11,7 +15,7 @@ export async function getServerStats(): Promise<ServerStats> {
       // - article_views (slug, view_count)
       // - article_reactions (slug, reaction_type, count)
       // - messages (count)
-      
+
       const totalViews = 0; // À adapter avec votre BDD
       const reactions: Record<ReactionType, number> = {
         like: 0,
@@ -22,7 +26,7 @@ export async function getServerStats(): Promise<ServerStats> {
       const topViewedArticles: ArticleMetric[] = []; // À adapter
       const topReactedArticles: ArticleMetric[] = []; // À adapter
       const communityMessages = 0; // À adapter
-      
+
       return {
         totalViews,
         reactions,
@@ -35,6 +39,6 @@ export async function getServerStats(): Promise<ServerStats> {
     {
       revalidate: 3600, // Revalider toutes les heures
       tags: ["stats"],
-    }
+    },
   )();
 }

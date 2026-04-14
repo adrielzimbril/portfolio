@@ -85,6 +85,7 @@ export default async function StatsPage() {
         description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
         isFlex
+        className="pb-0!"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
@@ -117,6 +118,7 @@ export default async function StatsPage() {
         description={t("stats.sections.engagement.description")}
         badge={t("stats.sections.engagement.badge")}
         isFlex
+        className="pb-0!"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <SiteViewsCard value={serverStats.totalViews} />
@@ -144,6 +146,7 @@ export default async function StatsPage() {
         description={t("stats.sections.github.description")}
         badge={t("stats.sections.github.badge")}
         isFlex
+        className="pb-0!"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <GitHubStatsCard
@@ -172,6 +175,7 @@ export default async function StatsPage() {
         description="Lighthouse performance scores"
         badge="Performance"
         isFlex
+        className="pb-0!"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <LighthouseScoreCard
