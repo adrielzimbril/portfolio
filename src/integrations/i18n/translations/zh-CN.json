@@ -194,7 +194,7 @@
       "continue": "继续",
       "loaded": "已加载",
       "loading": "加载中",
-      "obtain": "获得",
+      "obtain": "获取",
       "read": "阅读",
       "read-more": "阅读更多",
       "receive": "接收",
@@ -206,6 +206,11 @@
       "sent": "已发送",
       "understood": "知道了",
       "view-more": "查看更多"
+    },
+    "turnstile": {
+      "loading": "请稍等... 🔄",
+      "waiting": "再等一会儿... ⏳",
+      "button": "加载中... 🔄"
     },
     "confirmation": {
       "cancel": "取消",

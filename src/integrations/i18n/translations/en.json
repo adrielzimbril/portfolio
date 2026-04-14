@@ -207,6 +207,11 @@
       "understood": "Understood",
       "view-more": "View more"
     },
+    "turnstile": {
+      "loading": "Wait a moment... 🔄",
+      "waiting": "Just wait a little longer... ⏳",
+      "button": "Loading... 🔄"
+    },
     "confirmation": {
       "cancel": "Cancel",
       "confirm": "Confirm"

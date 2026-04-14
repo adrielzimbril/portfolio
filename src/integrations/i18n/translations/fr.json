@@ -660,22 +660,27 @@
       }
     },
     "button": {
-      "read": "Lire",
-      "read-more": "Lire plus",
-      "see": "Voir",
-      "understood": "Compris",
-      "see-more": "Voir plus",
       "back": "Retour",
       "continue": "Continuer",
-      "retry": "Réessayer",
-      "receive": "Recevoir",
-      "obtain": "Obtenir",
-      "select": "Sélectionner",
-      "loading": "Chargement",
       "loaded": "Chargé",
-      "sending": "Envoi",
+      "loading": "Chargement",
+      "obtain": "Obtenir",
+      "read": "Lire",
+      "read-more": "Lire plus",
+      "receive": "Recevoir",
+      "retry": "Réessayer",
+      "see": "Voir",
+      "see-more": "Voir plus",
+      "select": "Sélectionner",
+      "sending": "Envoi en cours",
       "sent": "Envoyé",
+      "understood": "Compris",
       "view-more": "Voir plus"
+    },
+    "turnstile": {
+      "loading": "Attends un instant... 🔄",
+      "waiting": "Patiente encore un petit instant... ⏳",
+      "button": "Chargement... 🔄"
     },
     "shared": {
       "text": {

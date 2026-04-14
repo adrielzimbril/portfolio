@@ -48,6 +48,7 @@ export function GetResource({
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [isWaitingForToken, setIsWaitingForToken] = useState(false);
   const emailValidator = useEmailValidator({
     value: email,
     label: "Email",
@@ -64,6 +65,14 @@ export function GetResource({
     theme: "auto",
   });
   sleep(1000).then(() => execute());
+
+  // Auto-open modal when token arrives after waiting
+  useEffect(() => {
+    if (isWaitingForToken && token && isEmailValid) {
+      setIsWaitingForToken(false);
+      setIsModalOpen(true);
+    }
+  }, [token, isWaitingForToken, isEmailValid]);
 
   const productId = generateSimpleClientToken({
     action: "validate-product-id",
@@ -159,7 +168,7 @@ export function GetResource({
             <Button
               onClick={() => {
                 if (isLoading) {
-                  toast.error("Attends un instant... 🔄");
+                  toast.error(t("common.turnstile.loading"));
                   return;
                 }
 
@@ -169,8 +178,9 @@ export function GetResource({
                 }
 
                 if (!token) {
+                  setIsWaitingForToken(true);
                   execute();
-                  toast.error("Réessaie, ça arrive ! 🚀");
+                  toast.error(t("common.turnstile.waiting"));
                   return;
                 }
 
@@ -179,11 +189,11 @@ export function GetResource({
               asFull
               whileTap
               asPointer
-              disabled={isLoading}
+              disabled={isLoading || isWaitingForToken}
             >
               <span className="font-bold text-base">
-                {isLoading
-                  ? "Chargement... 🔄"
+                {isLoading || isWaitingForToken
+                  ? t("common.turnstile.button")
                   : `${t("common.button.receive")} !🦄`}
               </span>
             </Button>
