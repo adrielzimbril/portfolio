@@ -148,14 +148,14 @@ export function ReactionButton({
       disabled={isLoading}
       className={cn(
         "flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer",
-        "bg-b-base border border-border hover:border-primary/50 hover:scale-105",
-        isReacted && "border-primary/50 bg-primary/10",
+        "bg-sh-white",
+        isReacted && "bg-white",
         className,
       )}
     >
       <span
         className={cn(
-          "text-lg transition-transform duration-200",
+          "text-lg transition-all duration-200",
           "hover:scale-125",
           isReacted && "scale-110",
         )}
