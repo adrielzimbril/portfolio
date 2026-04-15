@@ -174,19 +174,19 @@ export default async function StatsPage() {
         title="Performance"
         description="Lighthouse performance scores"
         badge="Performance"
-        isFlex
+        // isFlex
         className="pb-0!"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <LighthouseScoreCard
-            scores={lighthouseStats.mobile}
-            strategy="mobile"
-          />
-          <LighthouseScoreCard
-            scores={lighthouseStats.desktop}
-            strategy="desktop"
-          />
-        </div>
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
+        <LighthouseScoreCard
+          scores={lighthouseStats.mobile}
+          strategy="mobile"
+        />
+        <LighthouseScoreCard
+          scores={lighthouseStats.desktop}
+          strategy="desktop"
+        />
+        {/* </div> */}
       </SectionLayout>
 
       {/* Changelog Section */}

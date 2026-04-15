@@ -9,10 +9,12 @@ const badgeVariants = cva(
       variant: {
         default: "border-transparent bg-inherit squircle-b-base",
         colored: "border-transparent bg-inherit text-b-white-unchanged",
+        inverted:
+          "border-transparent bg-inherit squircle-b-white text-foreground",
         secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "border-transparent bg-inherit squircle-secondary text-secondary-foreground hover:squircle-secondary/80",
         destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+          "border-transparent bg-inherit squircle-destructive text-destructive-foreground hover:squircle-destructive/80",
         outline: "text-foreground",
       },
       size: {
@@ -22,10 +24,15 @@ const badgeVariants = cva(
         lg: "text-lg",
         xl: "text-xl",
       },
+      circle: {
+        true: "aspect-square",
+        false: "",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      circle: false,
     },
   },
 );
@@ -41,11 +48,15 @@ function Badge({
   className,
   variant,
   size,
+  circle,
   contentClassName,
   ...props
 }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant, size }), className)} {...props}>
+    <div
+      className={cn(badgeVariants({ variant, size, circle }), className)}
+      {...props}
+    >
       <span className={cn("font-medium whitespace-pre-line", contentClassName)}>
         {props.children}
       </span>
