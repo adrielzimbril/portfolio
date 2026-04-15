@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     const cookieStore = await cookies();
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PRIVATE_SUPABASE_ANON_KEY!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
         cookies: {
           getAll() {
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
           setAll(cookiesToSet) {
             try {
               cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options)
+                cookieStore.set(name, value, options),
               );
             } catch {
               // The `setAll` method was called from a Server Component.
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
             }
           },
         },
-      }
+      },
     );
 
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
@@ -56,7 +56,12 @@ export async function GET(request: Request) {
 
         if (data.user.email) {
           await sendEmail({
-            to: [{ email: data.user.email, name: data.user.user_metadata.full_name }],
+            to: [
+              {
+                email: data.user.email,
+                name: data.user.user_metadata.full_name,
+              },
+            ],
             templateId: "welcome",
             locale: Locale.EN, // Default to EN for now, or detect from user metadata
             context: {

@@ -5,6 +5,7 @@ import { ConnectionBadge } from "@/components/shared/pages/connections/badge";
 import { ConnectionName } from "@/components/shared/pages/connections/name";
 import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 import { cn } from "@/utils/utils";
+import { PageType } from "@/types/enum";
 
 export function ConnectionCard({
   id,

@@ -79,7 +79,7 @@ safety:
       - .env.local
     requiredEnv:
       - NEXT_PUBLIC_SUPABASE_URL
-      - NEXT_PRIVATE_SUPABASE_ANON_KEY
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY
       - RESEND_API_KEY
       - BREVO_GENERAL_LIST_ID
   filesProtection:
