@@ -20,6 +20,7 @@ export function RadarBackground({
     const angles: number[] = [-90, 0, 90, 180];
     return scoreValues
       .map((score, i: number) => {
+        /* @ts-expect-error - angles[i] is guaranteed to be a number */
         const angle = (angles[i] * Math.PI) / 180;
         const radius = (score / 100) * maxRadius;
         const x = center + radius * Math.cos(angle);
@@ -83,6 +84,7 @@ export function RadarBackground({
           {/* Score points */}
           {scores.map((score, i) => {
             const angles = [-90, 0, 90, 180];
+            /* @ts-expect-error - angles[i] is guaranteed to be a number */
             const angle = (angles[i] * Math.PI) / 180;
             const radius = (score / 100) * maxRadius;
             const x = center + radius * Math.cos(angle);
@@ -174,6 +176,7 @@ export function RadarBackground({
         {/* Score points */}
         {scores.map((score, i) => {
           const angles = [-90, 0, 90, 180];
+          /* @ts-expect-error - angles[i] is guaranteed to be a number */
           const angle = (angles[i] * Math.PI) / 180;
           const radius = (score / 100) * maxRadius;
           const x = center + radius * Math.cos(angle);

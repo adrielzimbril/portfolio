@@ -164,37 +164,6 @@ export function LighthouseScoreCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Trigonometric background pattern */}
-      <svg
-        className="pointer-events-none absolute inset-0 z-0 opacity-5"
-        width="100%"
-        height="100%"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <pattern
-            id="trigono-pattern"
-            x="0"
-            y="0"
-            width="40"
-            height="40"
-            patternUnits="userSpaceOnUse"
-          >
-            <polygon
-              points="20,0 40,40 0,40"
-              fill="currentColor"
-              className="text-primary"
-            />
-            <polygon
-              points="0,0 20,40 40,0"
-              fill="currentColor"
-              className="text-primary/50"
-            />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#trigono-pattern)" />
-      </svg>
-
       <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* Pulse rings background */}
