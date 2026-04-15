@@ -33,10 +33,6 @@ export async function getGitHubStats(): Promise<GitHubStats> {
         if (!repoStats) {
           logger.error("[GitHub Stats] Repo stats is null");
           return getEmptyGitHubStats();
-        } else {
-          logger.info("[GitHub Stats] Repo stats fetched successfully", {
-            repo: repoStats,
-          });
         }
 
         return {

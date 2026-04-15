@@ -121,7 +121,7 @@ export function ContributionGraphCard({
       <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
         <div
           className={cn(
-            "relative w-ful items-start justify-between px-4 py-6 md:px-6 md:py-8 squircle squircle-smooth-md squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "relative w-full items-start justify-between px-4 py-6 md:px-6 md:py-8 squircle squircle-smooth-md squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
         >
           <div className="relative z-20 mb-4 flex items-center justify-between">
