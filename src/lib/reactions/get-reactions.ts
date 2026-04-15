@@ -4,13 +4,7 @@ import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 
 export async function getReactions(
-  entityType:
-    | PageType.THOUGHT
-    | PageType.PROJECT
-    | PageType.CONNECTIONS
-    | PageType.QUESTS
-    | PageType.HUB
-    | PageType.CHANGELOG,
+  pageType: PageType,
   entityId: string,
 ): Promise<Record<ReactionType, number>> {
   const cookieStore = await cookies();
@@ -26,13 +20,11 @@ export async function getReactions(
     },
   );
 
-  const tableName = getTableName(entityType);
-  const idField = getIdField(entityType);
-
   const { data, error } = await supabase
-    .from(tableName as any)
+    .from("reactions" as any)
     .select("reaction_type")
-    .eq(idField as any, entityId);
+    .eq("page_type", pageType)
+    .eq("entity_id", entityId);
 
   if (error) {
     return {};
@@ -43,6 +35,7 @@ export async function getReactions(
     heart: 0,
     celebrate: 0,
     insightful: 0,
+    sceptic: 0,
   };
 
   data?.forEach((item) => {
@@ -51,54 +44,4 @@ export async function getReactions(
   });
 
   return reactions;
-}
-
-function getTableName(
-  entityType:
-    | PageType.THOUGHT
-    | PageType.PROJECT
-    | PageType.CONNECTIONS
-    | PageType.QUESTS
-    | PageType.HUB
-    | PageType.CHANGELOG,
-): string {
-  switch (entityType) {
-    case PageType.THOUGHT:
-      return "thought_reactions";
-    case PageType.PROJECT:
-      return "project_reactions";
-    case PageType.CONNECTIONS:
-      return "connection_reactions";
-    case PageType.QUESTS:
-      return "quest_reactions";
-    case PageType.HUB:
-      return "hub_reactions";
-    case PageType.CHANGELOG:
-      return "changelog_reactions";
-  }
-}
-
-function getIdField(
-  entityType:
-    | PageType.THOUGHT
-    | PageType.PROJECT
-    | PageType.CONNECTIONS
-    | PageType.QUESTS
-    | PageType.HUB
-    | PageType.CHANGELOG,
-): string {
-  switch (entityType) {
-    case PageType.THOUGHT:
-      return "slug";
-    case PageType.PROJECT:
-      return "project_id";
-    case PageType.CONNECTIONS:
-      return "connection_id";
-    case PageType.QUESTS:
-      return "quest_id";
-    case PageType.HUB:
-      return "slug";
-    case PageType.CHANGELOG:
-      return "version";
-  }
 }

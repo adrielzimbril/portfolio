@@ -74,6 +74,7 @@ export function HeaderSection({
       } 🦄`}
       slug={slug}
       pageType={PageType.QUESTS}
+      <ReactionBar pageType={PageType.QUESTS} entityId={slug} />
     />
   );
 }

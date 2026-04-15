@@ -5,6 +5,7 @@ export enum ReactionType {
   HEART = "heart",
   CELEBRATE = "celebrate",
   INSIGHTFUL = "insightful",
+  SCEPTIC = "sceptic",
 }
 
 export interface BuildTimeStats {

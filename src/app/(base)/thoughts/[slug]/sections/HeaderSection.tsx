@@ -19,13 +19,14 @@ export function HeaderSection({
   title: string;
   readingTime: string;
   pageViewsData: { slug: string; locale: string };
+  pageType: PageType;
 }) {
   const { count } = usePageViews(
     pageViewsData.slug,
-    PageType.THOUGHT,
+    pageType,
     {
       locale: pageViewsData.locale,
-      path: getResourcesUrl(PageType.THOUGHT, pageViewsData.slug),
+      path: getResourcesUrl(pageType, pageViewsData.slug),
     },
     true,
   );

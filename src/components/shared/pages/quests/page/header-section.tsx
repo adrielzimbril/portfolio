@@ -128,7 +128,7 @@ export function HeaderSection({
             ))}
           </div>
 
-          {pageType && <ReactionBar entityType={pageType} entityId={slug} />}
+          {pageType && <ReactionBar pageType={pageType} entityId={slug} />}
         </div>
       )}
 

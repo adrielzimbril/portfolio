@@ -134,9 +134,7 @@ export function HeaderSection({
             </Badge>
           </div>
 
-          {slug && (
-            <ReactionBar entityType={PageType.THOUGHT} entityId={slug} />
-          )}
+          {slug && <ReactionBar pageType={PageType.THOUGHT} entityId={slug} />}
         </div>
       )}
 

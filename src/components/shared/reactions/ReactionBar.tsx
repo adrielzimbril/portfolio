@@ -7,25 +7,20 @@ import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 
 interface ReactionBarProps {
-  entityType:
-    | PageType.THOUGHT
-    | PageType.PROJECT
-    | PageType.CONNECTIONS
-    | PageType.QUESTS
-    | PageType.HUB
-    | PageType.CHANGELOG;
+  pageType: PageType;
   entityId: string;
   reactions?: {
     like?: number;
     heart?: number;
     celebrate?: number;
     insightful?: number;
+    sceptic?: number;
   };
   className?: string;
 }
 
 export function ReactionBar({
-  entityType,
+  pageType,
   entityId,
   reactions = {},
   className,
@@ -35,6 +30,7 @@ export function ReactionBar({
     ReactionType.HEART,
     ReactionType.CELEBRATE,
     ReactionType.INSIGHTFUL,
+    ReactionType.SCEPTIC,
   ];
 
   return (
@@ -42,7 +38,7 @@ export function ReactionBar({
       {reactionTypes.map((type) => (
         <ReactionButton
           key={type}
-          entityType={entityType}
+          pageType={pageType}
           entityId={entityId}
           reactionType={type}
           count={reactions[type] || 0}

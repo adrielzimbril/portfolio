@@ -31,7 +31,7 @@ export function HeaderSection() {
         isMobileShowed
       />
       <div className="flex justify-center mt-4">
-        <ReactionBar entityType={PageType.CHANGELOG} entityId="v3.1.0" />
+        <ReactionBar pageType={PageType.CHANGELOG} entityId="v3.1.0" />
       </div>
     </>
   );

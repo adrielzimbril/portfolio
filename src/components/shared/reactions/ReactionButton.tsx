@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Heart, ThumbUp, Sparkles, Lightbulb } from "@aurthle/icons";
+import { Heart, ThumbsUp, Sparkles, Lightbulb, Frown } from "lucide-react";
 import { cn } from "@/utils/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 
 const REACTION_ICONS: Record<string, any> = {
-  [ReactionType.LIKE]: ThumbUp,
+  [ReactionType.LIKE]: ThumbsUp,
   [ReactionType.HEART]: Heart,
   [ReactionType.CELEBRATE]: Sparkles,
   [ReactionType.INSIGHTFUL]: Lightbulb,
+  [ReactionType.SCEPTIC]: Frown,
 };
 
 const REACTION_COLORS: Record<string, string> = {
@@ -19,15 +20,11 @@ const REACTION_COLORS: Record<string, string> = {
   [ReactionType.HEART]: "text-red-500",
   [ReactionType.CELEBRATE]: "text-yellow-500",
   [ReactionType.INSIGHTFUL]: "text-purple-500",
+  [ReactionType.SCEPTIC]: "text-gray-500",
 };
 
 interface ReactionButtonProps {
-  entityType:
-    | PageType.THOUGHT
-    | PageType.PROJECT
-    | PageType.CONNECTIONS
-    | PageType.QUESTS
-    | PageType.HUB;
+  pageType: PageType;
   entityId: string;
   reactionType: ReactionType;
   count?: number;
@@ -35,7 +32,7 @@ interface ReactionButtonProps {
 }
 
 export function ReactionButton({
-  entityType,
+  pageType,
   entityId,
   reactionType,
   count = 0,
@@ -57,12 +54,11 @@ export function ReactionButton({
       setUser(user);
 
       if (user) {
-        const tableName = getTableName();
-        const idField = getIdField();
         const { data } = await supabase
-          .from(tableName as any)
+          .from("reactions" as any)
           .select("*")
-          .eq(idField as any, entityId)
+          .eq("page_type", pageType)
+          .eq("entity_id", entityId)
           .eq("user_id", user.id)
           .eq("reaction_type", reactionType)
           .single();
@@ -72,62 +68,21 @@ export function ReactionButton({
     };
 
     checkUser();
-  }, [entityId, reactionType, entityType]);
-
-  const getTableName = (): string => {
-    const type = entityType as PageType;
-    switch (type) {
-      case PageType.THOUGHT:
-        return "thought_reactions";
-      case PageType.PROJECT:
-        return "project_reactions";
-      case PageType.CONNECTIONS:
-        return "connection_reactions";
-      case PageType.QUESTS:
-        return "quest_reactions";
-      case PageType.HUB:
-        return "hub_reactions";
-      case PageType.CHANGELOG:
-        return "changelog_reactions";
-      default:
-        return "thought_reactions";
-    }
-  };
-
-  const getIdField = (): string => {
-    const type = entityType as PageType;
-    switch (type) {
-      case PageType.THOUGHT:
-        return "slug";
-      case PageType.PROJECT:
-        return "project_id";
-      case PageType.CONNECTIONS:
-        return "connection_id";
-      case PageType.QUESTS:
-        return "quest_id";
-      case PageType.HUB:
-        return "slug";
-      case PageType.CHANGELOG:
-        return "version";
-      default:
-        return "slug";
-    }
-  };
+  }, [entityId, reactionType, pageType]);
 
   const handleReaction = async () => {
     if (!user || isLoading) return;
 
     setIsLoading(true);
-    const tableName = getTableName();
-    const idField = getIdField();
 
     try {
       if (isReacted) {
         // Remove reaction
         const { error } = await supabase
-          .from(tableName as any)
+          .from("reactions" as any)
           .delete()
-          .eq(idField as any, entityId)
+          .eq("page_type", pageType)
+          .eq("entity_id", entityId)
           .eq("user_id", user.id)
           .eq("reaction_type", reactionType);
 
@@ -136,15 +91,12 @@ export function ReactionButton({
         setReactionCount(Math.max(0, reactionCount - 1));
       } else {
         // Add reaction
-        const insertData: any = {
+        const { error } = await supabase.from("reactions" as any).insert({
+          page_type: pageType,
+          entity_id: entityId,
           user_id: user.id,
           reaction_type: reactionType,
-        };
-        insertData[idField] = entityId;
-
-        const { error } = await supabase
-          .from(tableName as any)
-          .insert(insertData as any);
+        } as any);
 
         if (error) throw error;
         setIsReacted(true);
