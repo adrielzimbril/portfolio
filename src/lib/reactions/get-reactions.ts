@@ -8,7 +8,8 @@ export async function getReactions(
     | PageType.THOUGHT
     | PageType.PROJECT
     | PageType.CONNECTIONS
-    | PageType.QUESTS,
+    | PageType.QUESTS
+    | PageType.HUB,
   entityId: string,
 ) {
   const cookieStore = await cookies();
@@ -56,7 +57,8 @@ function getTableName(
     | PageType.THOUGHT
     | PageType.PROJECT
     | PageType.CONNECTIONS
-    | PageType.QUESTS,
+    | PageType.QUESTS
+    | PageType.HUB,
 ): string {
   switch (entityType) {
     case PageType.THOUGHT:
@@ -67,6 +69,8 @@ function getTableName(
       return "connection_reactions";
     case PageType.QUESTS:
       return "quest_reactions";
+    case PageType.HUB:
+      return "hub_reactions";
   }
 }
 
@@ -75,7 +79,8 @@ function getIdField(
     | PageType.THOUGHT
     | PageType.PROJECT
     | PageType.CONNECTIONS
-    | PageType.QUESTS,
+    | PageType.QUESTS
+    | PageType.HUB,
 ): string {
   switch (entityType) {
     case PageType.THOUGHT:
@@ -86,5 +91,7 @@ function getIdField(
       return "connection_id";
     case PageType.QUESTS:
       return "quest_id";
+    case PageType.HUB:
+      return "slug";
   }
 }

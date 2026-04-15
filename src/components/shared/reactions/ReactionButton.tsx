@@ -26,7 +26,8 @@ interface ReactionButtonProps {
     | PageType.THOUGHT
     | PageType.PROJECT
     | PageType.CONNECTIONS
-    | PageType.QUESTS;
+    | PageType.QUESTS
+    | PageType.HUB;
   entityId: string;
   reactionType: ReactionType;
   count?: number;
@@ -83,6 +84,8 @@ export function ReactionButton({
         return "connection_reactions";
       case PageType.QUESTS:
         return "quest_reactions";
+      case PageType.HUB:
+        return "hub_reactions";
     }
   };
 
@@ -96,6 +99,8 @@ export function ReactionButton({
         return "connection_id";
       case PageType.QUESTS:
         return "quest_id";
+      case PageType.HUB:
+        return "slug";
     }
   };
 
@@ -121,11 +126,15 @@ export function ReactionButton({
         setReactionCount(Math.max(0, reactionCount - 1));
       } else {
         // Add reaction
-        const { error } = await supabase.from(tableName as any).insert({
-          [idField]: entityId,
+        const insertData: any = {
           user_id: user.id,
           reaction_type: reactionType,
-        } as any);
+        };
+        insertData[idField] = entityId;
+
+        const { error } = await supabase
+          .from(tableName as any)
+          .insert(insertData as any);
 
         if (error) throw error;
         setIsReacted(true);

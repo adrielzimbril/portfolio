@@ -11,7 +11,8 @@ interface ReactionBarProps {
     | PageType.THOUGHT
     | PageType.PROJECT
     | PageType.CONNECTIONS
-    | PageType.QUESTS;
+    | PageType.QUESTS
+    | PageType.HUB;
   entityId: string;
   reactions?: {
     like?: number;
