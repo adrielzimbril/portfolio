@@ -114,16 +114,11 @@ export function ContributionGraphCard({
   };
 
   const monthLabels = getMonthLabels();
-  const cardClassName = cn(
-    "group relative flex h-full min-h-[220px] w-full flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-    "squircle squircle-smooth-xl squircle-6xl",
-    className,
-  );
 
   return (
     <Card
       className={cn(
-        "squircle size-full max-w-[95%] squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto",
+        "h-full md:col-span-10 squircle size-full max-w-[95%] squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto",
         className,
       )}
     >
@@ -304,7 +299,11 @@ export function ContributionGraphCard({
                           onMouseLeave={() => setTooltip(null)}
                         >
                           <div
-                            className={`h-full w-full rounded-sm transition-colors duration-150 lg:rounded ${CONTRIBUTION_LEVEL_COLORS[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
+                            className={cn(
+                              "h-full w-full rounded-sm transition-colors duration-150 lg:rounded",
+                              CONTRIBUTION_LEVEL_COLORS[day.contributionLevel],
+                              levelColorsHover[day.contributionLevel],
+                            )}
                           />
                         </div>
                       ))}

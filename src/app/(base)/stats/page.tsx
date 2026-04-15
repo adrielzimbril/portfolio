@@ -51,7 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function StatsPage() {
   const t = await getTranslations();
 
-  // Récupérer les données depuis différentes sources
+  // Fetch data from different sources
   const [buildTimeStats, serverStats, githubStats, lighthouseStats] =
     await Promise.all([
       getBuildTimeStats(),
@@ -60,9 +60,7 @@ export default async function StatsPage() {
       getLighthouseStats(),
     ]);
 
-  const posts = await getAllPosts({ published: true });
-
-  // Calculer les données supplémentaires
+  // Calculate additional data
   const coffeeCups = Math.floor(buildTimeStats.totalWords / 500);
   const daysSinceRevamp = Math.floor(
     (new Date().getTime() - REVAMP_DATE.getTime()) / (1000 * 60 * 60 * 24),
@@ -148,25 +146,26 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <GitHubStatsCard
-            type="stars"
-            label="GitHub Stars"
-            value={githubStats.stars}
-          />
-          <GitHubStatsCard
-            type="forks"
-            label="Forks"
-            value={githubStats.forks}
-          />
-          <GitHubStatsCard
-            type="commits"
-            label="Commits"
-            value={githubStats.commits}
-          />
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-12 w-full">
+          <ContributionGraphCard contributions={githubStats.contributions} />
+          <div className="flex h-full flex-col gap-2 md:col-span-2">
+            <GitHubStatsCard
+              type="stars"
+              label="GitHub Stars"
+              value={githubStats.stars}
+            />
+            <GitHubStatsCard
+              type="forks"
+              label="Forks"
+              value={githubStats.forks}
+            />
+            <GitHubStatsCard
+              type="commits"
+              label="Commits"
+              value={githubStats.commits}
+            />
+          </div>
         </div>
-
-        <ContributionGraphCard contributions={githubStats.contributions} />
       </SectionLayout>
 
       <SectionLayout

@@ -66,43 +66,6 @@ export function DaysSinceRevamp({
     className,
   );
 
-  if (shouldReduceAnimations) {
-    return (
-      <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div
-          className="absolute -bottom-2 -right-2 text-[100px] leading-none opacity-10"
-          style={{ transform: "rotate(-5deg)" }}
-        >
-          📅
-        </div>
-
-        <div className="relative z-20 flex h-full flex-col">
-          <h2 className="mb-2 font-medium text-foreground">Site Age</h2>
-          <p className="text-sm text-muted-foreground">Since last revamp</p>
-
-          <div className="mt-auto">
-            <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-bold tracking-tight text-foreground">
-                {displayDays}
-              </span>
-              <span className="text-lg text-muted-foreground">days</span>
-            </div>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Launched{" "}
-              {revampDate.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

@@ -64,11 +64,11 @@ export function LighthouseScoreCard({
             )}
           >
             <RadarBackground scores={scoreValues} />
-            <div className="flex flex-row z-20 items-center justify-between w-full mx-auto">
+            <div className="relative flex flex-row z-20 items-center justify-between w-full mx-auto">
               <div className="flex flex-row items-center justify-between w-fit">
                 <Badge
                   className={cn(
-                    "capitalize aspect-square",
+                    "capitalize",
                     // overallColors.squircle,
                   )}
                   // variant="colored"
