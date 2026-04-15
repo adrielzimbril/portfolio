@@ -5,6 +5,7 @@ import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
+import { useReactions } from "@/lib/reactions/use-reactions";
 
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
@@ -31,7 +32,6 @@ interface ReactionBarProps {
 export function ReactionBar({
   pageType,
   entityId,
-  reactions = {},
   className,
   variant = "default",
 }: ReactionBarProps) {
@@ -42,6 +42,7 @@ export function ReactionBar({
     ReactionType.INSIGHTFUL,
     ReactionType.SCEPTIC,
   ];
+  const { reactions } = useReactions(pageType, entityId);
 
   if (variant === "dock") {
     // Find most popular reaction to show as primary

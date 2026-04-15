@@ -4,7 +4,7 @@ import { HeaderSection as QuestHeaderSection } from "@/components/shared/pages/q
 import { PreviewContentType } from "@/types";
 import { useTranslations } from "use-intl";
 import { getQuestAskUrl } from "@/utils/base-url";
-import { QuestAskType } from "@/types/enum";
+import { PageType, QuestAskType } from "@/types/enum";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
@@ -72,9 +72,7 @@ export function HeaderSection({
             ? t("quests.inner-page.header.cta.submitWork")
             : ""
       } 🦄`}
-      slug={slug}
       pageType={PageType.QUESTS}
-      <ReactionBar pageType={PageType.QUESTS} entityId={slug} />
     />
   );
 }

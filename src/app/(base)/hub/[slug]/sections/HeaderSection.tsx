@@ -58,8 +58,6 @@ export function HeaderSection({
       ctaButton={pageViewsData.slug}
       ctaButtonText={`${t("common.button.obtain")} 🦄`}
       pageType={PageType.HUB}
-    >
-      <ReactionBar pageType={PageType.HUB} entityId={slug} />
-    </ResourceHeaderSection>
+    />
   );
 }

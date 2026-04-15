@@ -25,11 +25,11 @@ export async function getServerStats(): Promise<ServerStats> {
       };
 
       const { data: allReactions } = await supabase
-        .from("reactions" as any)
+        .from("reactions")
         .select("reaction_type");
 
       allReactions?.forEach((r) => {
-        const type = (r as any).reaction_type as ReactionType;
+        const type = r.reaction_type as ReactionType;
         if (type in reactions) {
           reactions[type]++;
         }
@@ -52,7 +52,7 @@ export async function getServerStats(): Promise<ServerStats> {
 
       // Fetch top reacted thoughts
       const { data: thoughtReactionCounts } = await supabase
-        .from("reactions" as any)
+        .from("reactions")
         .select("entity_id")
         .eq("page_type", PageType.THOUGHT);
 
@@ -66,7 +66,9 @@ export async function getServerStats(): Promise<ServerStats> {
         .slice(0, 10)
         .map(([slug, count]) => ({
           slug,
-          title: slug, // You might need to fetch title from content
+          title: slug
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase()), // Convert slug to title case
           count,
         }));
 
