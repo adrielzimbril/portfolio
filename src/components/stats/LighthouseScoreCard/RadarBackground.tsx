@@ -23,8 +23,18 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
   };
 
   return (
-    <div className="pointer-events-none absolute -bottom-12 -right-12">
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <div className="pointer-events-none absolute -bottom-12 -right-12 text-green-500 dark:text-green-400">
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        style={
+          {
+            "--radar-gradient-start": "rgb(34, 197, 94)",
+            "--radar-gradient-end": "rgb(22, 163, 74)",
+          } as React.CSSProperties
+        }
+      >
         {/* Concentric circles */}
         {[0.25, 0.5, 0.75, 1].map((scale, i) => (
           <circle
@@ -35,7 +45,7 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
             fill="none"
             stroke="currentColor"
             strokeWidth={scale === 1 ? 1.5 : 1}
-            className="text-gray-300"
+            className="text-muted-foreground/50"
             opacity={0.25}
             style={{ transformOrigin: `${center}px ${center}px` }}
           />
@@ -50,7 +60,7 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
             y2={center + maxRadius}
             stroke="currentColor"
             strokeWidth={1}
-            className="text-gray-300"
+            className="text-muted-foreground/50"
           />
           <line
             x1={center - maxRadius}
@@ -59,7 +69,7 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
             y2={center}
             stroke="currentColor"
             strokeWidth={1}
-            className="text-gray-300"
+            className="text-muted-foreground/50"
           />
         </g>
 
@@ -67,7 +77,7 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
         <polygon
           points={getPolygonPoints(scores)}
           fill="url(#radarGradient)"
-          stroke="rgba(130, 255, 119, 0.3)"
+          stroke="currentColor"
           strokeWidth={2}
           opacity={0.25}
           style={{ transformOrigin: `${center}px ${center}px` }}
@@ -87,7 +97,7 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
               cx={x}
               cy={y}
               r={4}
-              fill="rgb(3, 3, 3)"
+              fill="currentColor"
               opacity={0.5}
             />
           );
@@ -96,11 +106,15 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
         {/* Gradient definition */}
         <defs>
           <radialGradient id="radarGradient" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgb(79, 251, 36)" stopOpacity="0.5" />
+            <stop
+              offset="0%"
+              stopColor="var(--radar-gradient-start)"
+              stopOpacity={0.5}
+            />
             <stop
               offset="100%"
-              stopColor="rgb(184, 128, 82)"
-              stopOpacity="0.15"
+              stopColor="var(--radar-gradient-end)"
+              stopOpacity={0.15}
             />
           </radialGradient>
         </defs>
