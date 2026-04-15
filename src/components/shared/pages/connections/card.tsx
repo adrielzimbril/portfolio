@@ -27,7 +27,7 @@ export function ConnectionCard({
       <ConnectionBadge met={met} />
       <ConnectionName name={name} />
       <ReactionBar
-        entityType={PageType.CONNECTIONS}
+        pageType={PageType.CONNECTIONS}
         entityId={id}
         className="mt-2"
       />
