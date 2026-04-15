@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ReactionButton } from "./ReactionButton";
+import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";

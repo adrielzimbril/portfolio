@@ -28,7 +28,7 @@ export function GuestbookForm({ user }: { user: any }) {
         creator_name: user.user_metadata.full_name || user.email,
         creator_avatar_url: user.user_metadata.avatar_url,
         message: message.trim(),
-        patternindex: Math.floor(Math.random() * 10),
+        pattern_index: Math.floor(Math.random() * 10),
         rotation: Math.floor(Math.random() * 360),
       } as any);
 
