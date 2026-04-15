@@ -1,14 +1,10 @@
 import { unstable_cache } from "next/cache";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import type {
-  ServerStats,
-  ArticleMetric,
-  ReactionType,
-} from "@/lib/stats/types";
+import { ServerStats, ThoughtMetric, ReactionType } from "@/lib/stats/types";
 import { PageType } from "@/types";
 
-// Fonction pour récupérer les statistiques depuis le serveur (Supabase)
+// Function to retrieve statistics from the server (Supabase)
 export async function getServerStats(): Promise<ServerStats> {
   return unstable_cache(
     async () => {
@@ -31,10 +27,7 @@ export async function getServerStats(): Promise<ServerStats> {
         .select("total_views");
 
       const totalViews =
-        pageCountCounters?.reduce(
-          (sum, pc) => sum + (pc.total_views || 0),
-          0,
-        ) || 0;
+        pageCounters?.reduce((sum, pc) => sum + (pc.total_views || 0), 0) || 0;
 
       // Fetch reactions from all reaction tables
       const reactionTypes: ReactionType[] = [
@@ -51,12 +44,12 @@ export async function getServerStats(): Promise<ServerStats> {
         [ReactionType.INSIGHTFUL]: 0,
       };
 
-      // Fetch from article_reactions (thoughts)
-      const { data: articleReactions } = await supabase
-        .from("article_reactions" as any)
+      // Fetch from thought_reactions (thoughts)
+      const { data: thoughtReactions } = await supabase
+        .from("thought_reactions" as any)
         .select("reaction_type");
 
-      articleReactions?.forEach((r) => {
+      thoughtReactions?.forEach((r) => {
         const type = r.reaction_type as ReactionType;
         if (type in reactions) {
           reactions[type]++;
@@ -111,7 +104,7 @@ export async function getServerStats(): Promise<ServerStats> {
         }
       });
 
-      // Fetch top viewed articles (thoughts)
+      // Fetch top viewed thoughts
       const { data: topViewedData } = await supabase
         .from("page_counters" as any)
         .select("slug, total_views")
@@ -119,7 +112,7 @@ export async function getServerStats(): Promise<ServerStats> {
         .order("total_views", { ascending: false })
         .limit(10);
 
-      const topViewedThoughts: ArticleMetric[] =
+      const topViewedThoughts: ThoughtMetric[] =
         topViewedData?.map((item) => ({
           slug: item.slug || "",
           title: item.slug || "", // You might need to fetch title from content
@@ -127,16 +120,16 @@ export async function getServerStats(): Promise<ServerStats> {
         })) || [];
 
       // Fetch top reacted thoughts
-      const { data: articleReactionCounts } = await supabase
-        .from("article_reactions" as any)
+      const { data: thoughtReactionCounts } = await supabase
+        .from("thought_reactions" as any)
         .select("slug");
 
       const reactionCounts: Record<string, number> = {};
-      articleReactionCounts?.forEach((r) => {
+      thoughtReactionCounts?.forEach((r) => {
         reactionCounts[r.slug] = (reactionCounts[r.slug] || 0) + 1;
       });
 
-      const topReactedThoughts: ArticleMetric[] = Object.entries(reactionCounts)
+      const topReactedThoughts: ThoughtMetric[] = Object.entries(reactionCounts)
         .sort(([, a], [, b]) => b - a)
         .slice(0, 10)
         .map(([slug, count]) => ({

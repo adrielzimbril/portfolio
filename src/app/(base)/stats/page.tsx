@@ -89,9 +89,9 @@ export default async function StatsPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
-            label="Total Articles"
+            label="Total Thoughts"
             value={buildTimeStats.totalPosts}
-            suffix="posts"
+            suffix="thoughts"
           />
           <CoffeeCupsCard cups={coffeeCups} />
           <StatCard
@@ -128,13 +128,13 @@ export default async function StatsPage() {
 
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
           <TopThoughtsCard
-            title="Top Viewed Articles"
-            articles={serverStats.topViewedThoughts}
+            title="Top Viewed Thoughts"
+            thoughts={serverStats.topViewedThoughts}
             metricLabel="views"
           />
           <TopThoughtsCard
-            title="Top Reacted Articles"
-            articles={serverStats.topReactedThoughts}
+            title="Top Reacted Thoughts"
+            thoughts={serverStats.topReactedThoughts}
             metricLabel="reactions"
           />
         </div>

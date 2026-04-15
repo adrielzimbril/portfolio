@@ -61,7 +61,7 @@ export function ResourceDetailPageSkeleton() {
   return (
     <>
       <DetailHeaderSkeleton withStats />
-      <ArticleBodySkeleton />
+      <ThoughtBodySkeleton />
       <MoreCardsSkeleton kind="resources" count={2} />
     </>
   );
@@ -80,8 +80,8 @@ export function QuestDetailPageSkeleton() {
 export function ThoughtDetailPageSkeleton() {
   return (
     <>
-      <ArticleHeaderSkeleton />
-      <ArticleBodySkeleton />
+      <ThoughtHeaderSkeleton />
+      <ThoughtBodySkeleton />
       <MoreCardsSkeleton kind="thoughts" count={2} />
     </>
   );
@@ -159,11 +159,7 @@ export function LoadMoreCardsSkeleton({
   );
 }
 
-export function DefaultSectionSkeleton({
-  count = 2,
-}: {
-  count?: number;
-}) {
+export function DefaultSectionSkeleton({ count = 2 }: { count?: number }) {
   return <HomeSectionSkeleton kind="resources" count={count} />;
 }
 
@@ -240,7 +236,10 @@ function DetailHeaderSkeleton({ withStats = false }: { withStats?: boolean }) {
 
           <Skeleton className="h-14 w-[min(44rem,95vw)] rounded-3xl" />
           <SkeletonTextBlock lines={["w-[96%]", "w-[86%]"]} />
-          <SkeletonTagRow count={withStats ? 5 : 4} widths={["w-28", "w-24", "w-20", "w-24", "w-32"]} />
+          <SkeletonTagRow
+            count={withStats ? 5 : 4}
+            widths={["w-28", "w-24", "w-20", "w-24", "w-32"]}
+          />
           <SkeletonButton className="h-12 w-full rounded-2xl" />
         </div>
       </div>
@@ -248,7 +247,7 @@ function DetailHeaderSkeleton({ withStats = false }: { withStats?: boolean }) {
   );
 }
 
-function ArticleHeaderSkeleton() {
+function ThoughtHeaderSkeleton() {
   return (
     <section className="relative w-full py-8 md:py-12">
       <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
@@ -274,7 +273,7 @@ function ArticleHeaderSkeleton() {
   );
 }
 
-function ArticleBodySkeleton() {
+function ThoughtBodySkeleton() {
   return (
     <section className="relative w-full py-8 md:py-12">
       <div className="relative w-full max-w-3xl mx-auto px-4 md:px-0">
@@ -313,7 +312,7 @@ function QuestDetailsSkeleton() {
           </div>
         </div>
       </section>
-      <ArticleBodySkeleton />
+      <ThoughtBodySkeleton />
       <section className="relative w-full py-8 md:py-12">
         <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
           <div className="grid gap-4 md:grid-cols-2">
@@ -338,7 +337,7 @@ function ProjectDetailsSkeleton() {
           </div>
         </div>
       </section>
-      <ArticleBodySkeleton />
+      <ThoughtBodySkeleton />
 
       {Array.from({ length: 4 }).map((_, index) => (
         <section key={index} className="relative w-full py-8 md:py-12">
@@ -357,7 +356,10 @@ function ProjectDetailsSkeleton() {
 
       <section className="relative w-full py-8 md:py-12">
         <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
-          <SkeletonPreview className="h-72 md:h-[32rem]" innerClassName="h-72 md:h-[32rem]" />
+          <SkeletonPreview
+            className="h-72 md:h-[32rem]"
+            innerClassName="h-72 md:h-[32rem]"
+          />
         </div>
       </section>
     </>
@@ -409,7 +411,10 @@ function CalendarSkeleton() {
         </div>
         <div className="grid grid-cols-7 gap-2">
           {Array.from({ length: 35 }).map((_, index) => (
-            <Skeleton key={index} className="aspect-square rounded-xl min-h-14" />
+            <Skeleton
+              key={index}
+              className="aspect-square rounded-xl min-h-14"
+            />
           ))}
         </div>
       </div>
@@ -442,7 +447,9 @@ function MoreCardsSkeleton({
   );
 }
 
-function getCardComponent(kind: "resources" | "projects" | "quests" | "talks" | "thoughts") {
+function getCardComponent(
+  kind: "resources" | "projects" | "quests" | "talks" | "thoughts",
+) {
   switch (kind) {
     case "projects":
       return ProjectCardSkeleton;

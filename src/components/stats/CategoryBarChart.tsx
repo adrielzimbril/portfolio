@@ -46,7 +46,7 @@ export function CategoryBarChart({
         <div className="relative z-20 flex h-full flex-col">
           <h2 className="mb-2 font-medium text-foreground">Categories</h2>
           <p className="mb-4 text-sm text-muted-foreground">
-            Articles by topic
+            Thoughts by topic
           </p>
 
           <div className="flex flex-1 flex-col justify-center space-y-3">
@@ -98,7 +98,7 @@ export function CategoryBarChart({
 
       <div className="relative z-20 flex h-full flex-col">
         <h2 className="mb-2 font-medium text-foreground">Categories</h2>
-        <p className="mb-4 text-sm text-muted-foreground">Articles by topic</p>
+        <p className="mb-4 text-sm text-muted-foreground">Thoughts by topic</p>
 
         <div className="flex flex-1 flex-col justify-center space-y-3">
           {displayCategories.map((category, index) => {

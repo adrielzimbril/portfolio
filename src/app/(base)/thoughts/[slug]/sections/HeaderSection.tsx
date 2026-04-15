@@ -27,7 +27,7 @@ export function HeaderSection({
       locale: pageViewsData.locale,
       path: getResourcesUrl(PageType.THOUGHT, pageViewsData.slug),
     },
-    true
+    true,
   );
 
   return (
@@ -43,7 +43,7 @@ export function HeaderSection({
       }
       mainTitle={title}
       tags={tags}
-      articleDetails={{
+      thoughtDetails={{
         date,
         readingTime,
         views: count ?? 0,

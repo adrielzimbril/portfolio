@@ -24,8 +24,8 @@ interface HeaderSectionProps {
   // Tags
   tags?: { name: string }[];
 
-  // Article details : Date  + Min read + Views
-  articleDetails?: {
+  // Talk details : Date  + Min read + Views
+  talkDetails?: {
     date?: string;
     readingTime?: string;
     views?: number;
@@ -44,7 +44,7 @@ export function HeaderSection({
   previewContent: initPreviewContent,
   mainTitle,
   tags,
-  articleDetails,
+  talkDetails,
 }: HeaderSectionProps) {
   const t = useTranslations();
 
@@ -72,7 +72,7 @@ export function HeaderSection({
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
-              : "p-0"
+              : "p-0",
           )}
         >
           <HeaderPreviewCard content={previewContent} />
@@ -81,9 +81,9 @@ export function HeaderSection({
 
       <h1 className="h3 w-full font-normals relative">{mainTitle}</h1>
 
-      {articleDetails && Object.keys(articleDetails).length > 0 && (
+      {talkDetails && Object.keys(talkDetails).length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
-          {articleDetails.date && (
+          {talkDetails.date && (
             <Badge
               className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
               variant="colored"
@@ -91,7 +91,7 @@ export function HeaderSection({
             >
               <span className="flex items-center gap-2">
                 <Calendar className="size-4 text-indigo-400" variant="bulk" />
-                {getDate({ date: articleDetails.date })}
+                {getDate({ date: talkDetails.date })}
               </span>
             </Badge>
           )}
@@ -106,7 +106,7 @@ export function HeaderSection({
                 className="size-4 text-indigo-400"
                 variant="bulk"
               />
-              {articleDetails.readingTime} read
+              {talkDetails.readingTime} read
             </span>
           </Badge>
 
@@ -117,7 +117,7 @@ export function HeaderSection({
           >
             <span className="flex items-center gap-2">
               <Eye className="size-4 text-indigo-400" variant="bulk" />
-              {formatCount(articleDetails.views ?? 0)} views
+              {formatCount(talkDetails.views ?? 0)} views
             </span>
           </Badge>
         </div>

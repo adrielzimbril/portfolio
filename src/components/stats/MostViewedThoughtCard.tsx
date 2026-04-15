@@ -61,7 +61,7 @@ export function MostViewedThoughtCard({
 
         <div className="relative z-20 flex h-full flex-col">
           <h2 className="mb-2 font-medium text-foreground">
-            Most Viewed Article
+            Most Viewed Thought
           </h2>
 
           <div className="mt-auto">
@@ -90,7 +90,7 @@ export function MostViewedThoughtCard({
 
       <div className="relative z-20 flex h-full flex-col">
         <h2 className="mb-2 font-medium text-foreground">
-          Most Viewed Article
+          Most Viewed Thought
         </h2>
 
         <div className="mt-auto">

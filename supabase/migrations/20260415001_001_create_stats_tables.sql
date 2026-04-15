@@ -1,7 +1,7 @@
 -- Migration to create tables for statistics
 -- To be executed manually in Supabase SQL Editor
 
--- Table for storing article views
+-- Table for storing thought views
 CREATE TABLE IF NOT EXISTS thought_views (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   slug TEXT NOT NULL UNIQUE,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS thought_views (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- Table for storing article reactions
+-- Table for storing thought reactions
 CREATE TABLE IF NOT EXISTS thought_reactions (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   slug TEXT NOT NULL,

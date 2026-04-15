@@ -9,7 +9,7 @@ import { cn } from "@/utils/utils";
 
 interface TopThoughtsCardProps {
   title: string;
-  articles: ThoughtMetric[];
+  thoughts: ThoughtMetric[];
   metricLabel: string;
   delay?: number;
   className?: string;
@@ -17,7 +17,7 @@ interface TopThoughtsCardProps {
 
 export function TopThoughtsCard({
   title,
-  articles,
+  thoughts,
   metricLabel,
   delay = 0,
   className,
@@ -40,12 +40,12 @@ export function TopThoughtsCard({
         <div className="relative z-20 flex h-full flex-col">
           <h2 className="mb-4 font-medium text-foreground">{title}</h2>
 
-          {articles.length > 0 ? (
+          {thoughts.length > 0 ? (
             <ul className="flex flex-1 flex-col justify-center space-y-3">
-              {articles.map((article, index) => (
-                <li key={article.slug}>
+              {thoughts.map((thought, index) => (
+                <li key={thought.slug}>
                   <Link
-                    href={`/blog/${article.slug}`}
+                    href={`/blog/${thought.slug}`}
                     className="flex items-start justify-between gap-3"
                   >
                     <div className="flex items-start gap-3">
@@ -53,11 +53,11 @@ export function TopThoughtsCard({
                         {index + 1}
                       </span>
                       <span className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                        {article.title}
+                        {thought.title}
                       </span>
                     </div>
                     <span className="shrink-0 text-xs font-semibold tabular-nums text-muted-foreground">
-                      {article.count.toLocaleString()}
+                      {thought.count.toLocaleString()}
                     </span>
                   </Link>
                 </li>
@@ -87,11 +87,11 @@ export function TopThoughtsCard({
       <div className="relative z-20 flex h-full flex-col">
         <h2 className="mb-4 font-medium text-foreground">{title}</h2>
 
-        {articles.length > 0 ? (
+        {thoughts.length > 0 ? (
           <ul className="flex flex-1 flex-col justify-center space-y-3">
-            {articles.map((article, index) => (
+            {thoughts.map((thought, index) => (
               <motion.li
-                key={article.slug}
+                key={thought.slug}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: delay + index * 0.1 }}
@@ -99,7 +99,7 @@ export function TopThoughtsCard({
                 onMouseLeave={() => setHoveredItem(null)}
               >
                 <Link
-                  href={`/blog/${article.slug}`}
+                  href={`/blog/${thought.slug}`}
                   className="flex items-start justify-between gap-3"
                 >
                   <div className="flex items-start gap-3">
@@ -131,7 +131,7 @@ export function TopThoughtsCard({
                       }}
                       className="line-clamp-2 text-sm leading-relaxed"
                     >
-                      {article.title}
+                      {thought.title}
                     </motion.span>
                   </div>
                   <motion.span
@@ -140,7 +140,7 @@ export function TopThoughtsCard({
                     }}
                     className="shrink-0 text-xs font-semibold tabular-nums text-muted-foreground"
                   >
-                    {article.count.toLocaleString()}
+                    {thought.count.toLocaleString()}
                   </motion.span>
                 </Link>
               </motion.li>
