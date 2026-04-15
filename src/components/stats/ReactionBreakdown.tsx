@@ -366,51 +366,6 @@ export function ReactionBreakdown({
     className,
   );
 
-  if (shouldReduceAnimations) {
-    return (
-      <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div className="relative z-20 flex h-full flex-col">
-          <h2 className="mb-2 font-medium text-foreground">Reactions</h2>
-          <p className="mb-4 text-3xl font-bold tabular-nums tracking-tight text-foreground">
-            {total.toLocaleString()}
-            <span className="ml-2 text-sm font-normal text-muted-foreground">
-              total
-            </span>
-          </p>
-
-          <div className="grid flex-1 grid-cols-2 gap-3">
-            {(Object.keys(REACTION_CONFIG) as ReactionType[]).map((type) => {
-              const count = reactions[type] || 0;
-              const config = REACTION_CONFIG[type];
-
-              return (
-                <div
-                  key={type}
-                  className={`flex flex-col items-center justify-center rounded-xl squircle-border-border/50 p-3 ${config.bgColor}`}
-                >
-                  <div className="mb-2">
-                    <config.Icon
-                      isHovered={false}
-                      shouldReduceAnimations={shouldReduceAnimations}
-                    />
-                  </div>
-                  <span className="text-lg font-semibold tabular-nums text-foreground">
-                    {count.toLocaleString()}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {config.label}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -423,7 +378,7 @@ export function ReactionBreakdown({
       <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="relative z-20 flex h-full flex-col">
-        <h2 className="mb-2 font-medium text-foreground">Reactions</h2>
+        <h3 className="mb-2 font-medium text-foreground">Reactions</h3>
         <motion.p
           animate={{ scale: isHovered ? 1.02 : 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}

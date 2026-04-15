@@ -63,94 +63,6 @@ export function CommunityMessagesCard({
     className,
   );
 
-  if (shouldReduceAnimations) {
-    return (
-      <Link href="/community-wall" className="block h-full">
-        <div className={cardClassName}>
-          <div className="absolute inset-0 bg-[radial-gradient(var(--border)_1px,transparent_2px)] bg-size-[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-          <div className="pointer-events-none absolute inset-0 z-30 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-          <div className="absolute inset-0 flex items-center justify-center pb-16">
-            <div className="relative h-32 w-40">
-              {miniCards.map((card, index) => (
-                <svg
-                  key={index}
-                  className="absolute left-1/2 top-1/2 w-36"
-                  style={{
-                    zIndex: index === 1 ? 3 : index === 2 ? 2 : 1,
-                    transform: `translate(calc(-50% + ${card.x * 0.6}px), calc(-50% + ${card.y * 0.5}px)) rotate(${card.rotate * 0.8}deg) scale(${1 - (2 - index) * 0.02})`,
-                    transformOrigin: "center",
-                  }}
-                  viewBox="-15 -15 160 155"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <linearGradient
-                      id="grad1"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop offset="0%" stopColor="var(--primary)" />
-                      <stop offset="100%" stopColor="var(--accent)" />
-                    </linearGradient>
-                    <linearGradient
-                      id="grad2"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop offset="0%" stopColor="var(--secondary)" />
-                      <stop offset="100%" stopColor="var(--primary)" />
-                    </linearGradient>
-                    <linearGradient
-                      id="grad3"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop offset="0%" stopColor="var(--accent)" />
-                      <stop offset="100%" stopColor="var(--secondary)" />
-                    </linearGradient>
-                  </defs>
-                  <rect
-                    x="0"
-                    y="0"
-                    width="130"
-                    height="125"
-                    rx="12"
-                    fill={card.gradient}
-                    opacity="0.6"
-                  />
-                </svg>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative z-20 flex h-full flex-col">
-            <h2 className="mb-2 font-medium text-foreground">
-              Community Messages
-            </h2>
-            <p className="text-sm text-muted-foreground">Messages received</p>
-
-            <div className="mt-auto">
-              <div className="flex items-baseline gap-1">
-                <span className="text-3xl font-semibold tracking-tight text-foreground">
-                  {displayCount.toLocaleString()}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Link>
-    );
-  }
-
   return (
     <Link href="/community-wall" className="block h-full">
       <motion.div
@@ -240,9 +152,9 @@ export function CommunityMessagesCard({
         </div>
 
         <div className="relative z-20 flex h-full flex-col">
-          <h2 className="mb-2 font-medium text-foreground">
+          <h3 className="mb-2 font-medium text-foreground">
             Community Messages
-          </h2>
+          </h3>
           <p className="text-sm text-muted-foreground">Messages received</p>
 
           <div className="mt-auto">

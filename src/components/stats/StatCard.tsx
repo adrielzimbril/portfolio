@@ -31,11 +31,6 @@ export function StatCard({
       return;
     }
 
-    if (shouldReduceAnimations) {
-      setDisplayValue(value);
-      return;
-    }
-
     const duration = 1500;
     const startTime = performance.now();
     const startDelay = delay * 1000;
@@ -68,33 +63,6 @@ export function StatCard({
     "squircle squircle-smooth-xl squircle-6xl",
     className,
   );
-
-  if (shouldReduceAnimations) {
-    return (
-      <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div className="relative z-20 flex h-full flex-col">
-          {icon && (
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-b-base text-foreground">
-              {icon}
-            </div>
-          )}
-          <h3 className="text-sm font-medium text-muted-foreground">{label}</h3>
-          <div className="mt-2 flex items-baseline gap-1">
-            <p className="text-3xl font-semibold tracking-tight text-foreground">
-              {typeof effectiveValue === "number"
-                ? effectiveValue.toLocaleString()
-                : effectiveValue}
-            </p>
-            {suffix && (
-              <span className="text-sm text-muted-foreground">{suffix}</span>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <motion.div

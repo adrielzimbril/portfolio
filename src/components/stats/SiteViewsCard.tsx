@@ -309,33 +309,6 @@ export function SiteViewsCard({
     className,
   );
 
-  if (shouldReduceAnimations) {
-    return (
-      <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        <RisingWave
-          isHovered={isHovered}
-          delay={delay}
-          shouldReduceAnimations={shouldReduceAnimations}
-        />
-
-        <div className="relative z-20 flex h-full flex-col">
-          <div className="mb-2 flex items-center gap-2">
-            <h2 className="font-medium text-foreground">Total Site Views</h2>
-            <TrendArrow
-              isHovered={isHovered}
-              shouldReduceAnimations={shouldReduceAnimations}
-            />
-          </div>
-
-          <p className="mt-auto text-3xl font-semibold tracking-tight text-foreground">
-            {displayValue.toLocaleString()}
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -354,7 +327,7 @@ export function SiteViewsCard({
 
       <div className="relative z-20 flex h-full flex-col">
         <div className="mb-2 flex items-center gap-2">
-          <h2 className="font-medium text-foreground">Total Site Views</h2>
+          <h3 className="font-medium text-foreground">Total Site Views</h3>
           <TrendArrow
             isHovered={isHovered}
             shouldReduceAnimations={shouldReduceAnimations}

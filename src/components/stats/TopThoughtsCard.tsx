@@ -32,47 +32,6 @@ export function TopThoughtsCard({
     className,
   );
 
-  if (shouldReduceAnimations) {
-    return (
-      <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div className="relative z-20 flex h-full flex-col">
-          <h2 className="mb-4 font-medium text-foreground">{title}</h2>
-
-          {thoughts.length > 0 ? (
-            <ul className="flex flex-1 flex-col justify-center space-y-3">
-              {thoughts.map((thought, index) => (
-                <li key={thought.slug}>
-                  <Link
-                    href={`/blog/${thought.slug}`}
-                    className="flex items-start justify-between gap-3"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
-                        {index + 1}
-                      </span>
-                      <span className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                        {thought.title}
-                      </span>
-                    </div>
-                    <span className="shrink-0 text-xs font-semibold tabular-nums text-muted-foreground">
-                      {thought.count.toLocaleString()}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-muted-foreground">
-              No data available yet
-            </p>
-          )}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
