@@ -88,7 +88,7 @@ export function TimelineSection() {
                   onClick={() => setSelectedType(type)}
                   className="capitalize"
                 >
-                  {Icon && <Icon className="mr-2 h-4 w-4" />}
+                  {Icon && <Icon size={16} className="mr-2" />}
                   {type}
                   <Badge
                     variant="secondary"

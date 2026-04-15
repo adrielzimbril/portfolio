@@ -49,11 +49,13 @@ export function GuestbookForm({ user }: { user: any }) {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="flex items-center gap-3 mb-2">
         <div className="relative">
-          <Avatar className="size-12 rounded-2xl border-2 border-border">
-            <AvatarFallback className="rounded-2xl">
-              {user.user_metadata.full_name?.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+          <div className="relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-12 overflow-hidden transition-all duration-300">
+            <div className="pointer-events-none flex h-full w-full items-center justify-center">
+              <span className="text-lg font-bold text-[#ffd3ad]">
+                {user.user_metadata.full_name?.charAt(0).toUpperCase()}
+              </span>
+            </div>
+          </div>
           <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-green-500 border-2 border-b-base" />
         </div>
         <div>
@@ -94,9 +96,9 @@ export function GuestbookForm({ user }: { user: any }) {
           className="rounded-2xl h-11 px-6 font-semibold"
         >
           {isSubmitting ? (
-            <Loader className="mr-2 h-4 w-4 animate-spin" />
+            <Loader size={16} className="mr-2" />
           ) : (
-            <Send className="mr-2 h-4 w-4" />
+            <Send size={16} className="mr-2" />
           )}
           Post
         </Button>

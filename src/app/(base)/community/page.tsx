@@ -68,39 +68,31 @@ export default async function CommunityPage() {
               icon: ChatBubble,
               label: "Messages",
               value: "1,234",
-              color: "text-primary",
+              color: "#8e8eff",
             },
-            {
-              icon: Users,
-              label: "Members",
-              value: "892",
-              color: "text-accent",
-            },
-            {
-              icon: Heart,
-              label: "Active",
-              value: "156",
-              color: "text-pink-500",
-            },
+            { icon: Users, label: "Members", value: "892", color: "#ffd3ad" },
+            { icon: Heart, label: "Active", value: "156", color: "#ff8e8e" },
           ].map((stat, index) => (
             <div
               key={stat.label}
-              className={cn(
-                "group relative flex flex-col items-center justify-center p-6 overflow-hidden squircle-border-border squircle-b-base transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-                "squircle squircle-smooth-xl squircle-6xl",
-              )}
+              className="relative size-full flex flex-col items-center justify-center gap-3 group cursor-pointer"
             >
-              <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div
-                className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-20 blur-2xl group-hover:opacity-30 transition-opacity duration-300"
-                style={{ backgroundColor: stat.color.replace("text-", "") }}
-              />
-              <div className="relative z-20 flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground mb-3">
-                <stat.icon size={24} className={stat.color} />
+              <div className="relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-32 overflow-hidden transition-all duration-300 group-hover:squircle-border-[#8e8eff]">
+                <div className="pointer-events-none flex h-full w-full items-center justify-center">
+                  <stat.icon
+                    size={32}
+                    className={cn(
+                      "transition-all duration-300",
+                      stat.color === "#8e8eff"
+                        ? "text-[#8e8eff]"
+                        : stat.color === "#ffd3ad"
+                          ? "text-[#ffd3ad]"
+                          : "text-[#ff8e8e]",
+                    )}
+                  />
+                </div>
               </div>
-              <p className="text-3xl font-bold text-foreground mb-1">
-                {stat.value}
-              </p>
+              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                 {stat.label}
               </p>
@@ -113,48 +105,41 @@ export default async function CommunityPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Form Section */}
           <div className="lg:col-span-1">
-            <div
-              className={cn(
-                "group relative overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-                "squircle squircle-smooth-xl squircle-6xl sticky top-32",
-              )}
-            >
-              <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-              <div className="relative z-20">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground">
-                    <ChatBubble size={24} className="text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground">
-                      {t("community.form.title")}
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      Share your thoughts
-                    </p>
+            <div className="sticky top-32 bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 squircle-border-b-base-accent group-hover:squircle-border-[#ffd3ad] overflow-hidden transition-all duration-300 p-6">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-12 overflow-hidden transition-all duration-300">
+                  <div className="pointer-events-none flex h-full w-full items-center justify-center">
+                    <ChatBubble size={20} className="text-[#ffd3ad]" />
                   </div>
                 </div>
-
-                {user ? (
-                  <GuestbookForm user={user} />
-                ) : (
-                  <div className="space-y-4">
-                    <p className="text-sm text-muted-foreground">
-                      {t("community.form.signInPrompt")}
-                    </p>
-                    <Button
-                      asChild
-                      className="w-full rounded-2xl h-11 font-semibold"
-                    >
-                      <a href={`/api/auth/login?provider=github`}>
-                        <Github className="mr-2 h-4 w-4" />
-                        {t("community.form.signInButton")}
-                      </a>
-                    </Button>
-                  </div>
-                )}
+                <div>
+                  <h3 className="font-bold text-lg text-foreground">
+                    {t("community.form.title")}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    Share your thoughts
+                  </p>
+                </div>
               </div>
+
+              {user ? (
+                <GuestbookForm user={user} />
+              ) : (
+                <div className="space-y-4">
+                  <p className="text-sm text-muted-foreground">
+                    {t("community.form.signInPrompt")}
+                  </p>
+                  <Button
+                    asChild
+                    className="w-full rounded-2xl h-11 font-semibold"
+                  >
+                    <a href={`/api/auth/login?provider=github`}>
+                      <Github size={16} className="mr-2" />
+                      {t("community.form.signInButton")}
+                    </a>
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
 

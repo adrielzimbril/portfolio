@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { formatDateDiff } from "@/utils/format-date";
 import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 // Demo data
 const DEMO_MESSAGES = [
@@ -68,39 +67,34 @@ export function GuestbookList() {
   const displayMessages = messages;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       {displayMessages.map((msg: any) => (
         <div
           key={msg.id}
-          className={cn(
-            "group relative overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-            "squircle squircle-smooth-xl squircle-6xl",
-          )}
+          className="relative bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 squircle-border-b-base-accent group-hover:squircle-border-[#ffd3ad] overflow-hidden transition-all duration-300 p-6"
         >
-          <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-          <div className="relative z-20">
-            <div className="flex gap-4">
-              <div className="shrink-0">
-                <Avatar className="size-12 rounded-2xl border-2 border-border">
-                  <AvatarFallback className="rounded-2xl">
+          <div className="flex gap-4">
+            <div className="shrink-0">
+              <div className="relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-12 overflow-hidden transition-all duration-300">
+                <div className="pointer-events-none flex h-full w-full items-center justify-center">
+                  <span className="text-lg font-bold text-[#ffd3ad]">
                     {msg.creator_name.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-              </div>
-              <div className="flex-1 space-y-3">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-base text-foreground">
-                    {msg.creator_name}
-                  </h4>
-                  <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest px-2 py-1 rounded-full bg-muted/50">
-                    {formatDateDiff(msg.created_at)}
                   </span>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {msg.message}
-                </p>
               </div>
+            </div>
+            <div className="flex-1 space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="font-bold text-base text-foreground">
+                  {msg.creator_name}
+                </h4>
+                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest px-2 py-1 rounded-full bg-muted/50">
+                  {formatDateDiff(msg.created_at)}
+                </span>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {msg.message}
+              </p>
             </div>
           </div>
         </div>
