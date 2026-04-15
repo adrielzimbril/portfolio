@@ -11,7 +11,7 @@ import { getGitHubStats } from "@/lib/stats/github-stats";
 import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
 import { StatsPageHeader } from "@/components/stats/StatsPageHeader";
 import { StatCard } from "@/components/stats/StatCard";
-import { BookOne, Text, Timelapse } from "@aurthle/icons";
+import { BookOne, TextFolder, Timelapse } from "@aurthle/icons";
 import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
 import { DaysSinceRevamp } from "@/components/stats/DaysSinceRevamp";
 import { CoffeeCupsCard } from "@/components/stats/CoffeeCupsCard";
@@ -86,7 +86,7 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <StatCard
             label="Total Thoughts"
             value={buildTimeStats.totalPosts}
@@ -98,7 +98,9 @@ export default async function StatsPage() {
             label="Total Words"
             value={buildTimeStats.totalWords}
             suffix="words"
-            icon={<Text size={32} className="text-secondary" variant="bulk" />}
+            icon={
+              <TextFolder size={32} className="text-secondary" variant="bulk" />
+            }
             decoration="📝"
           />
           <StatCard
@@ -110,12 +112,12 @@ export default async function StatsPage() {
             }
             decoration="⏱️"
           />
-          <DaysSinceRevamp revampDate={REVAMP_DATE} />
         </div>
 
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <CoffeeCupsCard cups={coffeeCups} />
           <SiteViewsCard value={serverStats.totalViews} />
+          <DaysSinceRevamp revampDate={REVAMP_DATE} />
         </div>
       </SectionLayout>
 

@@ -70,21 +70,21 @@ export function SiteViewsCard({
         className,
       )}
     >
-      <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
+      <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
           className={cn(
-            "squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
         >
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             {eyeDecorations.map((eye, i) => (
-              <motion.div
+              <motion.span
                 key={i}
                 initial={{ opacity: 0, scale: 0, rotate: eye.rotate - 20 }}
                 animate={{
                   opacity: isHovered ? 0.3 : 0.15,
-                  scale: isHovered ? 1.3 : 1,
-                  rotate: isHovered ? eye.rotate + 15 : eye.rotate,
+                  scale: isHovered ? 1.2 : 1,
+                  rotate: isHovered ? eye.rotate + 10 : eye.rotate,
                   y: isHovered ? -8 : 0,
                 }}
                 transition={{
@@ -93,27 +93,30 @@ export function SiteViewsCard({
                   rotate: { type: "spring", stiffness: 200, damping: 15 },
                   y: { type: "spring", stiffness: 200, damping: 15 },
                 }}
-                className="absolute text-primary/40"
+                className="absolute text-2xl"
                 style={{ left: eye.x, top: eye.y }}
               >
-                <Eye size={20} variant="bold" />
-              </motion.div>
+                👁️
+              </motion.span>
             ))}
           </div>
-          <div
-            className={cn(
-              "relative size-full flex flex-row z-20 items-center gap-2 md:gap-4 px-2 py-2 m-auto",
-            )}
-          >
-            <Badge className="capitalize" size="lg" circle>
-              <Eye size={32} className="text-primary" variant="bulk" />
-            </Badge>
-            <div className="flex flex-col items-start gap-2">
-              <h6 className="tracking-wide">Total Site Views</h6>
-              <p className="text-sm text-b-white-invert-thr leading-[120%]">
-                {displayValue.toLocaleString()}
-              </p>
+          <div className="relative w-full flex flex-col gap-2">
+            <div
+              className={cn(
+                "relative flex flex-row items-center gap-2 md:gap-4",
+              )}
+            >
+              <Badge className="capitalize" size="lg" circle>
+                <Eye size={32} className="text-primary" variant="bulk" />
+              </Badge>
+              <div className="flex flex-col items-start gap-2">
+                <h6 className="tracking-wide">Total Site Views</h6>
+                <p className="text-sm text-b-white-invert-thr leading-[120%]">
+                  {displayValue.toLocaleString()}
+                </p>
+              </div>
             </div>
+            <p className="text-xs text-muted-foreground">Since launch</p>
           </div>
         </div>
       </CardContent>
