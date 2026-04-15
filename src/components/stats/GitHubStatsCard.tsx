@@ -182,7 +182,7 @@ export function GitHubStatsCard({
         onMouseLeave={() => setIsHovered(false)}
         className="flex-1 squircle size-full squircle-b-base squircle-5xl squircle-smooth-lg border-0 overflow-hidden"
       >
-        <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
+        <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
           <div
             className={cn(
               "squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",

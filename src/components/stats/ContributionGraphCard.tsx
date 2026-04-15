@@ -6,6 +6,7 @@ import type { ContributionData, ContributionDay } from "@/lib/stats/types";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "../ui/card";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface ContributionGraphCardProps {
   contributions: ContributionData;
@@ -54,11 +55,6 @@ export function ContributionGraphCard({
   const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
   const [displayCount, setDisplayCount] = useState(0);
-  const [tooltip, setTooltip] = useState<{
-    day: ContributionDay;
-    x: number;
-    y: number;
-  } | null>(null);
 
   useEffect(() => {
     const duration = 1500;
@@ -216,24 +212,22 @@ export function ContributionGraphCard({
                         style={{ gap: "2px" }}
                       >
                         {week.contributionDays.map((day, dayIndex) => (
-                          <div
-                            key={dayIndex}
-                            className="group/cell relative"
-                            onMouseEnter={(e) => {
-                              const rect =
-                                e.currentTarget.getBoundingClientRect();
-                              setTooltip({
-                                day,
-                                x: rect.left + rect.width / 2,
-                                y: rect.top,
-                              });
-                            }}
-                            onMouseLeave={() => setTooltip(null)}
-                          >
-                            <div
-                              className={`h-[10px] w-[10px] rounded-[2px] transition-colors duration-150 ${CONTRIBUTION_LEVEL_COLORS[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
-                            />
-                          </div>
+                          <Tooltip key={dayIndex}>
+                            <TooltipTrigger>
+                              <div
+                                className={`h-[10px] w-[10px] rounded-[2px] transition-colors duration-150 ${CONTRIBUTION_LEVEL_COLORS[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <div className="font-medium">
+                                {day.contributionCount} contribution
+                                {day.contributionCount !== 1 ? "s" : ""}
+                              </div>
+                              <div className="text-muted-foreground">
+                                {formatDate(day.date)}
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
                         ))}
                       </motion.div>
                     ))}
@@ -284,28 +278,34 @@ export function ContributionGraphCard({
                       className="flex flex-col gap-[3px]"
                     >
                       {week.contributionDays.map((day, dayIndex) => (
-                        <div
-                          key={dayIndex}
-                          className="group/cell relative aspect-square"
-                          onMouseEnter={(e) => {
-                            const rect =
-                              e.currentTarget.getBoundingClientRect();
-                            setTooltip({
-                              day,
-                              x: rect.left + rect.width / 2,
-                              y: rect.top,
-                            });
-                          }}
-                          onMouseLeave={() => setTooltip(null)}
-                        >
-                          <div
-                            className={cn(
-                              "h-full w-full rounded-sm transition-colors duration-150 lg:rounded",
-                              CONTRIBUTION_LEVEL_COLORS[day.contributionLevel],
-                              levelColorsHover[day.contributionLevel],
-                            )}
-                          />
-                        </div>
+                        <Tooltip key={dayIndex}>
+                          <TooltipTrigger>
+                            <div
+                              className={cn(
+                                "group/cell relative aspect-square",
+                              )}
+                            >
+                              <div
+                                className={cn(
+                                  "h-full w-full aspect-square rounded-sm transition-colors duration-150 lg:rounded",
+                                  CONTRIBUTION_LEVEL_COLORS[
+                                    day.contributionLevel
+                                  ],
+                                  levelColorsHover[day.contributionLevel],
+                                )}
+                              />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <div className="font-medium">
+                              {day.contributionCount} contribution
+                              {day.contributionCount !== 1 ? "s" : ""}
+                            </div>
+                            <div className="text-muted-foreground">
+                              {formatDate(day.date)}
+                            </div>
+                          </TooltipContent>
+                        </Tooltip>
                       ))}
                     </motion.div>
                   ))}
@@ -332,22 +332,6 @@ export function ContributionGraphCard({
             ))}
             <span>More</span>
           </div>
-
-          {tooltip && (
-            <div
-              className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-full rounded-lg bg-foreground px-3 py-2 text-xs text-background shadow-lg"
-              style={{ left: tooltip.x, top: tooltip.y - 8 }}
-            >
-              <div className="font-medium">
-                {tooltip.day.contributionCount} contribution
-                {tooltip.day.contributionCount !== 1 ? "s" : ""}
-              </div>
-              <div className="text-muted-foreground">
-                {formatDate(tooltip.day.date)}
-              </div>
-              <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-foreground" />
-            </div>
-          )}
         </div>
       </CardContent>
     </Card>
