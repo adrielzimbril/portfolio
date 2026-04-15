@@ -1,8 +1,6 @@
 -- 1) RPC to add hub product request with optional user_id
 -- Drop the old version
-DROP FUNCTION IF EXISTS public.add_hub_product_request(
-  uuid, text, text, text, text, text, text, text[], text, text, text, text
-);
+DROP FUNCTION IF EXISTS public.add_hub_product_request cascade;
 
 -- Create the fixed version
 CREATE OR REPLACE FUNCTION public.add_hub_product_request(
@@ -27,12 +25,12 @@ DECLARE
   result_id bigint;
   result_user_id uuid;
 BEGIN
-  -- Crée ou retrouve l'utilisateur si non fourni
+  -- Create or find user if not provided
   IF final_user_id IS NULL THEN
     final_user_id := public.get_or_create_user(p_name, p_email, p_phone);
   END IF;
 
-  -- UPSERT sur user_id (pas product_id)
+  -- UPSERT on user_id (not product_id)
   INSERT INTO public.hub_product_requests (
     product_title,
     product_type,

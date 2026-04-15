@@ -4,7 +4,7 @@ create extension if not exists pgcrypto;
 -- 1) Newsletter subscribers
 create table if not exists public.newsletter_subscribers (
   id uuid primary key default gen_random_uuid(),
-  email text unique, -- unicité directe ici
+  email text unique, -- direct uniqueness here
   subscribed_from_page text null,
   created_at timestamptz not null default now()
 );

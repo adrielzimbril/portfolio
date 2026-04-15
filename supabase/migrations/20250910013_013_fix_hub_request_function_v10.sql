@@ -9,9 +9,6 @@ DROP VIEW IF EXISTS newsletter_subscribers_with_user;
 -- 1) Correction of the function add_newsletter_subscriber 
 CREATE OR REPLACE FUNCTION public.add_newsletter_subscriber(
   p_user_id UUID DEFAULT NULL,
-  p_email TEXT DEFAULT NULL,
-  p_name TEXT DEFAULT NULL,
-  p_phone TEXT DEFAULT NULL,
   p_subscribed_from_page TEXT DEFAULT NULL
 )
 RETURNS TABLE (id UUID, user_id UUID)
@@ -21,16 +18,6 @@ DECLARE
   v_user_id UUID := p_user_id;
   v_subscription_id UUID;
 BEGIN
-  IF v_user_id IS NULL THEN
-    -- Create/find user if we have contact info
-    v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
-  END IF;
-
-  -- If the upsert didn't return an ID, get the existing one
-  IF v_user_id IS NULL THEN
-      SELECT users.id INTO v_user_id FROM users WHERE users.email = p_email;
-  END IF;
-
   -- Upsert (if duplicate, update the source)
   INSERT INTO public.newsletter_subscribers(id, user_id, subscribed_from_page, created_at)
   VALUES (gen_random_uuid(), v_user_id, p_subscribed_from_page, NOW())
@@ -49,11 +36,9 @@ END;
 $$;
 
 -- 2) Correction of the function add_hub_product_request
+DROP FUNCTION IF EXISTS public.add_hub_product_request cascade;
 CREATE OR REPLACE FUNCTION public.add_hub_product_request(
   p_user_id UUID DEFAULT NULL,
-  p_email TEXT DEFAULT NULL,
-  p_name TEXT DEFAULT NULL,
-  p_phone TEXT DEFAULT NULL,
   p_product_id TEXT DEFAULT NULL,
   p_product_title TEXT DEFAULT NULL,
   p_product_type TEXT DEFAULT NULL,
@@ -70,16 +55,6 @@ DECLARE
   v_user_id UUID := p_user_id;
   v_result_id UUID;
 BEGIN
-  IF v_user_id IS NULL THEN
-    -- Create/find user if we have contact info
-    v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
-  END IF;
-
-  -- If the upsert didn't return an ID, get the existing one
-  IF v_user_id IS NULL THEN
-      SELECT users.id INTO v_user_id FROM users WHERE users.email = p_email;
-  END IF;
-
   -- UPSERT on product_id
   INSERT INTO public.hub_product_requests (
     product_title,

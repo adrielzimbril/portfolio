@@ -41,9 +41,7 @@ $$;
 
 -- 2) RPC to add hub product request with optional user_id
 -- Drop the old version
-DROP FUNCTION IF EXISTS public.add_hub_product_request(
-  uuid, text, text, text, text, text, text, text[], text, text, text, text
-);
+DROP FUNCTION IF EXISTS public.add_hub_product_request cascade;
 
 -- Create the fixed version
 CREATE OR REPLACE FUNCTION public.add_hub_product_request(
@@ -65,15 +63,14 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
   v_user_id uuid := p_user_id;
-  v_result_id bigint;
-  v_result_user_id uuid;
+  v_row public.hub_product_requests;
 BEGIN
-  -- Crée ou retrouve l'utilisateur si non fourni
+  -- Create or find user if not provided
   IF v_user_id IS NULL THEN
     v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
   END IF;
 
-  -- UPSERT sur product_id
+  -- UPSERT on product_id
   INSERT INTO public.hub_product_requests (
     product_title,
     product_type,
@@ -96,18 +93,18 @@ BEGIN
     v_user_id,
     p_product_id
   )
-  ON CONFLICT (user_id, product_id) DO UPDATE
-    SET product_title      = EXCLUDED.product_title,
+  ON CONFLICT (user_id) DO UPDATE
+    SET product_id         = EXCLUDED.product_id,
+        product_title      = EXCLUDED.product_title,
         product_type       = EXCLUDED.product_type,
         features           = EXCLUDED.features,
         cover              = EXCLUDED.cover,
         product_url        = EXCLUDED.product_url,
         custom_text        = EXCLUDED.custom_text,
         subscribed_from_page = EXCLUDED.subscribed_from_page,
-        requested_at       = NOW()
-  RETURNING hub_product_requests.id, hub_product_requests.user_id
-  INTO v_result_id, v_result_user_id;
+        requested_at       = NOW()  -- Update timestamp on conflict
+  RETURNING * INTO v_row;
 
-  RETURN QUERY SELECT v_result_id, v_result_user_id;
+  RETURN QUERY SELECT v_row.id, v_row.user_id;
 END;
 $$;

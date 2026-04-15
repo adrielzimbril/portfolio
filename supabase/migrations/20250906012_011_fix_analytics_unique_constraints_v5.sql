@@ -1,8 +1,8 @@
 -- Migration: 004_fix_ambiguous_column.sql
 -- Date: 2025-09-06
--- Description: Correction de l'ambiguïté de colonne dans upsert_unique_view
+-- Description: Fix column ambiguity in upsert_unique_view
 
--- Recréer la fonction helper pour unique_views avec les références de colonnes clarifiées
+-- Recreate helper function for unique_views with clarified column references
 CREATE OR REPLACE FUNCTION upsert_unique_view(
   p_user_ip TEXT,
   p_path TEXT,
@@ -20,7 +20,7 @@ DECLARE
   v_view_count INTEGER;
   v_is_new_user BOOLEAN := FALSE;
 BEGIN
-  -- Tentative d'update
+  -- Try update
   IF p_slug IS NOT NULL THEN
     UPDATE unique_views 
     SET 
@@ -39,7 +39,7 @@ BEGIN
     RETURNING unique_views.view_count INTO v_view_count;
   END IF;
 
-  -- Si pas trouvé, insérer
+  -- If not found, insert
   IF NOT FOUND THEN
     v_is_new_user := TRUE;
     INSERT INTO unique_views (user_ip, path, type, slug, first_view_at, last_view_at, view_count, details)

@@ -15,7 +15,7 @@ DECLARE
   v_view_count INTEGER;
   v_is_new_user BOOLEAN := FALSE;
 BEGIN
-  -- Tentative d'update
+  -- Try update
   IF p_slug IS NOT NULL THEN
     UPDATE unique_views 
     SET 
@@ -34,7 +34,7 @@ BEGIN
     RETURNING view_count INTO v_view_count;
   END IF;
 
-  -- Si pas trouvé, insérer
+  -- If not found, insert
   IF NOT FOUND THEN
     v_is_new_user := TRUE;
     INSERT INTO unique_views (user_ip, path, type, slug, first_view_at, last_view_at, view_count, details)

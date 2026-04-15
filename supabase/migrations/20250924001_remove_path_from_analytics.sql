@@ -1,12 +1,12 @@
 -- Migration: 20250924001_remove_path_from_analytics
 -- Date: 2025-09-24
--- Description: Suppression du champ path et utilisation de slug comme identifiant principal
+-- Description: Remove path field and use slug as primary identifier
 
--- 1. Créer une fonction pour migrer les données existantes
+-- 1. Create a function to migrate existing data
 CREATE OR REPLACE FUNCTION migrate_analytics_data()
 RETURNS void AS $$
 BEGIN
-  -- Mettre à jour les entrées où slug est NULL pour utiliser le path comme slug
+  -- Update entries where slug is NULL to use path as slug
   UPDATE page_counters 
   SET slug = path 
   WHERE slug IS NULL;
@@ -15,7 +15,7 @@ BEGIN
   SET slug = path 
   WHERE slug IS NULL;
   
-  -- Supprimer les doublons en gardant l'entrée la plus récente
+  -- Remove duplicates keeping the most recent entry
   DELETE FROM page_counters a
   USING (
     SELECT MIN(ctid) as ctid, type, slug
@@ -27,7 +27,7 @@ BEGIN
     AND a.slug = b.slug 
     AND a.ctid <> b.ctid;
   
-  -- Mettre à jour les vues uniques pour correspondre
+  -- Update unique views to match
   DELETE FROM unique_views uv1
   USING (
     SELECT DISTINCT ON (type, slug) id, type, slug
@@ -40,41 +40,41 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- 2. Exécuter la migration des données
+-- 2. Execute data migration
 SELECT migrate_analytics_data();
 
--- 3. Supprimer les contraintes existantes
+-- 3. Remove existing constraints
 ALTER TABLE page_counters DROP CONSTRAINT IF EXISTS page_counters_pkey;
 ALTER TABLE unique_views DROP CONSTRAINT IF EXISTS unique_views_pkey;
 
--- 4. Supprimer les index existants
+-- 4. Remove existing indexes
 DROP INDEX IF EXISTS page_counters_path_type_slug_idx;
 DROP INDEX IF EXISTS unique_views_user_ip_path_type_slug_idx;
 
--- 5. Supprimer les colonnes path redondantes
+-- 5. Remove redundant path columns
 ALTER TABLE page_counters DROP COLUMN IF EXISTS path;
 ALTER TABLE unique_views DROP COLUMN IF EXISTS path;
 
--- 6. Mettre à jour les clés primaires
--- D'abord supprimer les contraintes existantes si elles existent
+-- 6. Update primary keys
+-- First remove existing constraints if they exist
 ALTER TABLE page_counters DROP CONSTRAINT IF EXISTS page_counters_pkey;
 ALTER TABLE unique_views DROP CONSTRAINT IF EXISTS unique_views_pkey;
 
--- Puis ajouter les nouvelles clés primaires
+-- Then add new primary keys
 ALTER TABLE page_counters 
   ADD PRIMARY KEY (type, slug);
   
 ALTER TABLE unique_views 
   ADD PRIMARY KEY (user_ip, type, slug);
 
--- 7. Recréer les index nécessaires
+-- 7. Recreate necessary indexes
 CREATE INDEX IF NOT EXISTS page_counters_type_slug_idx 
   ON page_counters(type, slug);
   
 CREATE INDEX IF NOT EXISTS unique_views_type_slug_idx 
   ON unique_views(type, slug);
 
--- 8. Mettre à jour la fonction get_page_analytics
+-- 8. Update get_page_analytics function
 CREATE OR REPLACE FUNCTION get_page_analytics(
   p_type TEXT,
   p_slug TEXT
@@ -89,7 +89,7 @@ DECLARE
   v_total_views BIGINT := 0;
   v_unique_users BIGINT := 0;
 BEGIN
-  -- Récupérer le compteur total
+  -- Get total counter
   SELECT COALESCE(pc.total_views, 0) INTO v_total_views
   FROM page_counters pc
   WHERE pc.type = p_type AND pc.slug = p_slug;
@@ -102,7 +102,7 @@ BEGIN
 END;
 $$;
 
--- 9. Mettre à jour la fonction increment_page_analytics
+-- 9. Update increment_page_analytics function
 CREATE OR REPLACE FUNCTION increment_page_analytics(
   p_type TEXT,
   p_slug TEXT,
@@ -123,7 +123,7 @@ DECLARE
   v_unique_users BIGINT;
   v_existing_user_count INTEGER;
 BEGIN
-  -- 1. Incrémenter le compteur total de vues
+  -- 1. Increment total view counter
   INSERT INTO page_counters (type, slug, total_views, created_at, updated_at)
   VALUES (p_type, p_slug, 1, p_timestamp, p_timestamp)
   ON CONFLICT (type, slug) 
@@ -131,13 +131,13 @@ BEGIN
     total_views = page_counters.total_views + 1,
     updated_at = p_timestamp;
 
-  -- Récupérer la nouvelle valeur du compteur total
+  -- Get new total counter value
   SELECT pc.total_views INTO v_total_views
   FROM page_counters pc
   WHERE pc.type = p_type 
     AND pc.slug = p_slug;
 
-  -- 2. Vérifier si cet utilisateur a déjà vu cette page
+  -- 2. Check if this user has already seen this page
   SELECT view_count INTO v_existing_user_count
   FROM unique_views
   WHERE user_ip = p_user_ip 
@@ -145,13 +145,13 @@ BEGIN
     AND slug = p_slug;
 
   IF v_existing_user_count IS NULL THEN
-    -- Nouvel utilisateur unique
+    -- New unique user
     v_is_new_unique_user := TRUE;
     
     INSERT INTO unique_views (user_ip, type, slug, first_view_at, last_view_at, view_count, details)
     VALUES (p_user_ip, p_type, p_slug, p_timestamp, p_timestamp, 1, p_details);
   ELSE
-    -- Utilisateur existant - mettre à jour sa dernière vue
+    -- Existing user - update their last view
     UPDATE unique_views 
     SET 
       last_view_at = p_timestamp,
@@ -162,16 +162,16 @@ BEGIN
       AND slug = p_slug;
   END IF;
 
-  -- 3. Compter le nombre total d'utilisateurs uniques pour cette page
+  -- 3. Count total unique users for this page
   SELECT COUNT(*) INTO v_unique_users
   FROM unique_views uv
   WHERE uv.type = p_type 
     AND uv.slug = p_slug;
 
-  -- Retourner les résultats
+  -- Return results
   RETURN QUERY SELECT v_total_views, v_unique_users, v_is_new_unique_user;
 END;
 $$;
 
--- 10. Supprimer la fonction de migration
+-- 10. Remove migration function
 DROP FUNCTION IF EXISTS migrate_analytics_data();

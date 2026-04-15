@@ -1,14 +1,19 @@
--- Delete View hub_product_requests_with_user for hub_product_requests with user data
-DROP VIEW IF EXISTS hub_product_requests_with_user;
+-- Migration: Add product_id and requested_at to hub_product_requests
+-- Date: 2025-09-10
 
--- Delete View newsletter_subscribers_with_user for newsletter_subscribers with user data
-DROP VIEW IF EXISTS newsletter_subscribers_with_user;
+-- Delete product_id and requested_at from hub_product_requests
+ALTER TABLE public.hub_product_requests DROP COLUMN IF EXISTS productid;
 
--- Correction of functions with column ambiguity
+-- 1) RPC to add newsletter subscriber with optional user_id
+-- Drop the old function with the wrong signature
+DROP FUNCTION IF EXISTS public.add_newsletter_subscriber(UUID, TEXT, TEXT, TEXT, TEXT);
 
--- 1) Correction of the function add_newsletter_subscriber 
+-- Create the new function
 CREATE OR REPLACE FUNCTION public.add_newsletter_subscriber(
   p_user_id UUID DEFAULT NULL,
+  p_email TEXT DEFAULT NULL,
+  p_name TEXT DEFAULT NULL,
+  p_phone TEXT DEFAULT NULL,
   p_subscribed_from_page TEXT DEFAULT NULL
 )
 RETURNS TABLE (id UUID, user_id UUID)
@@ -18,6 +23,16 @@ DECLARE
   v_user_id UUID := p_user_id;
   v_subscription_id UUID;
 BEGIN
+  IF v_user_id IS NULL THEN
+    -- Create/find user if we have contact info
+    v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
+  END IF;
+
+  -- If the upsert didn't return an ID, get the existing one
+  IF v_user_id IS NULL THEN
+      SELECT id INTO v_user_id FROM users WHERE email = p_email;
+  END IF;
+
   -- Upsert (if duplicate, update the source)
   INSERT INTO public.newsletter_subscribers(id, user_id, subscribed_from_page, created_at)
   VALUES (gen_random_uuid(), v_user_id, p_subscribed_from_page, NOW())
@@ -35,9 +50,16 @@ BEGIN
 END;
 $$;
 
--- 2) Correction of the function add_hub_product_request
+-- 2) RPC to add hub product request with optional user_id
+-- Drop the old version
+DROP FUNCTION IF EXISTS public.add_hub_product_request cascade;
+
+-- Create the fixed version
 CREATE OR REPLACE FUNCTION public.add_hub_product_request(
   p_user_id UUID DEFAULT NULL,
+  p_email TEXT DEFAULT NULL,
+  p_name TEXT DEFAULT NULL,
+  p_phone TEXT DEFAULT NULL,
   p_product_id TEXT DEFAULT NULL,
   p_product_title TEXT DEFAULT NULL,
   p_product_type TEXT DEFAULT NULL,
@@ -54,6 +76,16 @@ DECLARE
   v_user_id UUID := p_user_id;
   v_result_id UUID;
 BEGIN
+  IF v_user_id IS NULL THEN
+    -- Create/find user if we have contact info
+    v_user_id := public.get_or_create_user(p_name, p_email, p_phone);
+  END IF;
+
+  -- If the upsert didn't return an ID, get the existing one
+  IF v_user_id IS NULL THEN
+      SELECT id INTO v_user_id FROM users WHERE email = p_email;
+  END IF;
+
   -- UPSERT on product_id
   INSERT INTO public.hub_product_requests (
     product_title,
@@ -91,7 +123,7 @@ BEGIN
         subscribed_from_page = EXCLUDED.subscribed_from_page,
         created_at         = NOW(),
         requested_at       = NOW()
-  RETURNING id
+  RETURNING hub_product_requests.id
   INTO v_result_id;
 
   RETURN QUERY SELECT v_result_id, v_user_id;

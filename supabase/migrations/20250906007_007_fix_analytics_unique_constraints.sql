@@ -1,17 +1,44 @@
--- Migration: 003_fix_function_conflicts.sql
+-- Migration: 002_fix_analytics_unique_constraints.sql
 -- Date: 2025-09-06
--- Description: Résolution des conflits de fonctions PostgreSQL
+-- Description: Fix unique constraints to handle NULL values in slug
 
--- 1. Supprimer toutes les versions existantes de la fonction
-DROP FUNCTION IF EXISTS increment_page_analytics(TEXT, TEXT, TEXT, TEXT, JSONB);
-DROP FUNCTION IF EXISTS increment_page_analytics(TEXT, TEXT, TEXT, TEXT, JSONB, TIMESTAMPTZ);
-DROP FUNCTION IF EXISTS get_page_analytics(TEXT, TEXT, TEXT);
+-- 1. Remove old unique constraints if they exist
+ALTER TABLE page_counters DROP CONSTRAINT IF EXISTS page_counters_path_type_slug_key;
+ALTER TABLE unique_views DROP CONSTRAINT IF EXISTS unique_views_user_ip_path_type_slug_key;
 
--- 2. Supprimer les fonctions helper si elles existent déjà
-DROP FUNCTION IF EXISTS upsert_page_counter(TEXT, TEXT, TEXT, INTEGER);
-DROP FUNCTION IF EXISTS upsert_unique_view(TEXT, TEXT, TEXT, TEXT, JSONB);
+-- 2. Remove old indexes if they exist
+DROP INDEX IF EXISTS idx_page_counters_unique;
+DROP INDEX IF EXISTS idx_unique_views_user_page;
 
--- 3. Recréer la fonction helper pour page_counter
+-- 3. Create partial unique indexes to handle NULL correctly
+-- For page_counters: unique constraint when slug IS NOT NULL
+CREATE UNIQUE INDEX idx_page_counters_unique_with_slug 
+ON page_counters (path, type, slug) 
+WHERE slug IS NOT NULL;
+
+-- For page_counters: unique constraint when slug IS NULL
+CREATE UNIQUE INDEX idx_page_counters_unique_without_slug 
+ON page_counters (path, type) 
+WHERE slug IS NULL;
+
+-- For unique_views: unique constraint when slug IS NOT NULL
+CREATE UNIQUE INDEX idx_unique_views_user_page_with_slug 
+ON unique_views (user_ip, path, type, slug) 
+WHERE slug IS NOT NULL;
+
+-- For unique_views: unique constraint when slug IS NULL
+CREATE UNIQUE INDEX idx_unique_views_user_page_without_slug 
+ON unique_views (user_ip, path, type) 
+WHERE slug IS NULL;
+
+-- 4. Add performance indexes for lookups
+CREATE INDEX IF NOT EXISTS idx_unique_views_page_lookup 
+ON unique_views (path, type, slug);
+
+CREATE INDEX IF NOT EXISTS idx_page_counters_lookup 
+ON page_counters (path, type, slug);
+
+-- 5. Helper function to do upserts with NULL handling
 CREATE OR REPLACE FUNCTION upsert_page_counter(
   p_path TEXT,
   p_type TEXT,
@@ -24,7 +51,7 @@ AS $$
 DECLARE
   v_total_views BIGINT;
 BEGIN
-  -- Tentative d'update
+  -- Try update
   IF p_slug IS NOT NULL THEN
     UPDATE page_counters 
     SET total_views = total_views + p_increment, updated_at = NOW()
@@ -37,7 +64,7 @@ BEGIN
     RETURNING total_views INTO v_total_views;
   END IF;
 
-  -- Si pas trouvé, insérer
+  -- If not found, insert
   IF NOT FOUND THEN
     INSERT INTO page_counters (path, type, slug, total_views, created_at, updated_at)
     VALUES (p_path, p_type, p_slug, p_increment, NOW(), NOW())
@@ -48,7 +75,7 @@ BEGIN
 END;
 $$;
 
--- 4. Recréer la fonction helper pour unique_views
+-- 6. Helper function to upsert unique_views
 CREATE OR REPLACE FUNCTION upsert_unique_view(
   p_user_ip TEXT,
   p_path TEXT,
@@ -66,7 +93,7 @@ DECLARE
   v_view_count INTEGER;
   v_is_new_user BOOLEAN := FALSE;
 BEGIN
-  -- Tentative d'update
+  -- Try update
   IF p_slug IS NOT NULL THEN
     UPDATE unique_views 
     SET 
@@ -85,7 +112,7 @@ BEGIN
     RETURNING unique_views.view_count INTO v_view_count;
   END IF;
 
-  -- Si pas trouvé, insérer
+  -- If not found, insert
   IF NOT FOUND THEN
     v_is_new_user := TRUE;
     INSERT INTO unique_views (user_ip, path, type, slug, first_view_at, last_view_at, view_count, details)
@@ -97,7 +124,7 @@ BEGIN
 END;
 $$;
 
--- 5. Créer UNE SEULE version de la fonction principale
+-- 7. Main function to increment analytics
 CREATE OR REPLACE FUNCTION increment_page_analytics(
   p_path TEXT,
   p_type TEXT,
@@ -119,14 +146,14 @@ DECLARE
   v_user_view_count INTEGER;
   v_is_new_user BOOLEAN;
 BEGIN
-  -- 1. Incrémenter le compteur total
+  -- 1. Increment total counter
   SELECT upsert_page_counter(p_path, p_type, p_slug, 1) INTO v_total_views;
 
-  -- 2. Gérer la vue unique
+  -- 2. Handle unique view
   SELECT * INTO v_user_view_count, v_is_new_user 
   FROM upsert_unique_view(p_user_ip, p_path, p_type, p_slug, p_details);
 
-  -- 3. Compter les utilisateurs uniques
+  -- 3. Count unique users
   IF p_slug IS NOT NULL THEN
     SELECT COUNT(*) INTO v_unique_users
     FROM unique_views 
@@ -138,44 +165,5 @@ BEGIN
   END IF;
 
   RETURN QUERY SELECT v_total_views, v_unique_users, v_user_view_count, v_is_new_user;
-END;
-$$;
-
--- 6. Fonction simple pour récupérer les analytics sans incrémenter
-CREATE OR REPLACE FUNCTION get_page_analytics(
-  p_path TEXT,
-  p_type TEXT,
-  p_slug TEXT DEFAULT NULL
-)
-RETURNS TABLE (
-  total_views BIGINT,
-  unique_users BIGINT
-) 
-LANGUAGE plpgsql
-AS $$
-DECLARE
-  v_total_views BIGINT := 0;
-  v_unique_users BIGINT := 0;
-BEGIN
-  -- Récupérer le compteur total
-  IF p_slug IS NOT NULL THEN
-    SELECT COALESCE(pc.total_views, 0) INTO v_total_views
-    FROM page_counters pc
-    WHERE pc.path = p_path AND pc.type = p_type AND pc.slug = p_slug;
-    
-    SELECT COUNT(*) INTO v_unique_users
-    FROM unique_views uv
-    WHERE uv.path = p_path AND uv.type = p_type AND uv.slug = p_slug;
-  ELSE
-    SELECT COALESCE(pc.total_views, 0) INTO v_total_views
-    FROM page_counters pc
-    WHERE pc.path = p_path AND pc.type = p_type AND pc.slug IS NULL;
-    
-    SELECT COUNT(*) INTO v_unique_users
-    FROM unique_views uv
-    WHERE uv.path = p_path AND uv.type = p_type AND uv.slug IS NULL;
-  END IF;
-
-  RETURN QUERY SELECT v_total_views, v_unique_users;
 END;
 $$;

@@ -1,26 +1,26 @@
 -- Migration: 004_normalize_user_references.sql
 -- Date: 2025-09-06
--- Description: Normalisation des références utilisateur pour éviter la duplication de données
+-- Description: Normalize user references to avoid data duplication
 
--- ÉTAPE 1: Sauvegarder les données existantes avant la modification
--- Créer des tables temporaires pour sauvegarder les données
+-- STEP 1: Backup existing data before modification
+-- Create temporary tables to backup data
 CREATE TABLE temp_hub_product_requests AS 
 SELECT * FROM hub_product_requests;
 
 CREATE TABLE temp_newsletter_subscribers AS 
 SELECT * FROM newsletter_subscribers;
 
--- Créer un index pour les performances
+-- Create index for performance
 CREATE INDEX idx_hub_product_requests_user_id ON hub_product_requests(user_id);
 
--- ÉTAPE 3: Migrer les données existantes de hub_product_requests
--- Associer les demandes existantes aux utilisateurs basés sur l'email
+-- STEP 3: Migrate existing data from hub_product_requests
+-- Associate existing requests to users based on email
 UPDATE hub_product_requests 
 SET user_id = users.id 
 FROM users 
 WHERE hub_product_requests.email = users.email;
 
--- Pour les demandes sans utilisateur correspondant, créer des utilisateurs
+-- For requests without matching user, create users
 INSERT INTO users (id, email, name, phone, created_at, updated_at)
 SELECT 
     gen_random_uuid(),
@@ -33,29 +33,29 @@ FROM temp_hub_product_requests hpr
 LEFT JOIN users u ON hpr.email = u.email
 WHERE u.id IS NULL AND hpr.email IS NOT NULL;
 
--- Mettre à jour les user_id pour les nouveaux utilisateurs créés
+-- Update user_id for newly created users
 UPDATE hub_product_requests 
 SET user_id = users.id 
 FROM users 
 WHERE hub_product_requests.email = users.email 
 AND hub_product_requests.user_id IS NULL;
 
--- ÉTAPE 4: Supprimer les colonnes redondantes de hub_product_requests
+-- STEP 4: Remove redundant columns from hub_product_requests
 ALTER TABLE hub_product_requests DROP COLUMN IF EXISTS email;
 ALTER TABLE hub_product_requests DROP COLUMN IF EXISTS name;
 ALTER TABLE hub_product_requests DROP COLUMN IF EXISTS phone;
 
--- Créer un index pour les performances
+-- Create index for performance
 CREATE INDEX idx_newsletter_subscribers_user_id ON newsletter_subscribers(user_id);
 
--- ÉTAPE 6: Migrer les données existantes de newsletter_subscribers
--- Associer les abonnements existants aux utilisateurs basés sur l'email
+-- STEP 6: Migrate existing data from newsletter_subscribers
+-- Associate existing subscriptions to users based on email
 UPDATE newsletter_subscribers 
 SET user_id = users.id 
 FROM users 
 WHERE newsletter_subscribers.email = users.email;
 
--- Pour les abonnements sans utilisateur correspondant, créer des utilisateurs
+-- For subscriptions without matching user, create users
 INSERT INTO users (id, email, name, phone, created_at, updated_at)
 SELECT 
     gen_random_uuid(),
@@ -68,28 +68,28 @@ FROM temp_newsletter_subscribers ns
 LEFT JOIN users u ON ns.email = u.email
 WHERE u.id IS NULL AND ns.email IS NOT NULL;
 
--- Mettre à jour les user_id pour les nouveaux utilisateurs créés
+-- Update user_id for newly created users
 UPDATE newsletter_subscribers 
 SET user_id = users.id 
 FROM users 
 WHERE newsletter_subscribers.email = users.email 
 AND newsletter_subscribers.user_id IS NULL;
 
--- ÉTAPE 7: Supprimer les colonnes redondantes de newsletter_subscribers
+-- STEP 7: Remove redundant columns from newsletter_subscribers
 ALTER TABLE newsletter_subscribers DROP COLUMN IF EXISTS email;
 ALTER TABLE newsletter_subscribers DROP COLUMN IF EXISTS name;
 
--- ÉTAPE 8: Ajouter des contraintes NOT NULL sur les user_id
--- Supprimer les enregistrements orphelins s'il en reste
+-- STEP 8: Add NOT NULL constraints on user_id
+-- Remove orphaned records if any remain
 DELETE FROM hub_product_requests WHERE user_id IS NULL;
 DELETE FROM newsletter_subscribers WHERE user_id IS NULL;
 
--- Rendre user_id obligatoire
+-- Make user_id mandatory
 ALTER TABLE hub_product_requests ALTER COLUMN user_id SET NOT NULL;
 ALTER TABLE newsletter_subscribers ALTER COLUMN user_id SET NOT NULL;
 
--- ÉTAPE 9: Créer des vues pour faciliter les requêtes
--- Vue pour hub_product_requests avec les données utilisateur
+-- STEP 9: Create views to facilitate queries
+-- View for hub_product_requests with user data
 CREATE OR REPLACE VIEW hub_product_requests_with_user AS
 SELECT 
     hpr.id,
@@ -110,7 +110,7 @@ SELECT
 FROM hub_product_requests hpr
 JOIN users u ON hpr.user_id = u.id;
 
--- Vue pour newsletter_subscribers avec les données utilisateur
+-- View for newsletter_subscribers with user data
 CREATE OR REPLACE VIEW newsletter_subscribers_with_user AS
 SELECT 
     ns.id,
@@ -125,20 +125,20 @@ SELECT
 FROM newsletter_subscribers ns
 JOIN users u ON ns.user_id = u.id;
 
--- ÉTAPE 10: Créer des contraintes uniques appropriées
--- Un utilisateur ne peut avoir qu'une seule demande de produit par type
+-- STEP 10: Create appropriate unique constraints
+-- A user can only have one product request per type
 CREATE UNIQUE INDEX idx_hub_product_requests_user_product 
 ON hub_product_requests (user_id, product_type, product_title);
 
--- Un utilisateur ne peut s'abonner qu'une fois à la newsletter
+-- A user can only subscribe to the newsletter once
 CREATE UNIQUE INDEX idx_newsletter_subscribers_unique_user 
 ON newsletter_subscribers (user_id);
 
--- ÉTAPE 11: Nettoyer les tables temporaires
+-- STEP 11: Clean up temporary tables
 DROP TABLE temp_hub_product_requests;
 DROP TABLE temp_newsletter_subscribers;
 
--- ÉTAPE 12: Créer des fonctions helper pour les insertions
+-- STEP 12: Create helper functions for insertions
 CREATE OR REPLACE FUNCTION create_product_request(
     p_email TEXT,
     p_name TEXT DEFAULT NULL,
@@ -146,7 +146,7 @@ CREATE OR REPLACE FUNCTION create_product_request(
     p_product_title TEXT DEFAULT NULL,
     p_product_type TEXT DEFAULT NULL,
     p_features TEXT DEFAULT NULL,
-    p_cover_image TEXT DEFAULT NULL,
+    p_cover TEXT DEFAULT NULL,
     p_product_url TEXT DEFAULT NULL,
     p_custom_text TEXT DEFAULT NULL,
     p_subscribed_from_page TEXT DEFAULT NULL
@@ -158,7 +158,7 @@ DECLARE
     v_user_id UUID;
     v_request_id UUID;
 BEGIN
-    -- Créer ou récupérer l'utilisateur
+    -- Create or get user
     INSERT INTO users (id, email, name, phone, created_at, updated_at)
     VALUES (gen_random_uuid(), p_email, p_name, p_phone, NOW(), NOW())
     ON CONFLICT (email) 
@@ -168,18 +168,18 @@ BEGIN
         updated_at = NOW()
     RETURNING id INTO v_user_id;
 
-    -- Si l'upsert n'a pas retourné d'ID, récupérer l'existant
+    -- If upsert didn't return ID, get existing
     IF v_user_id IS NULL THEN
         SELECT id INTO v_user_id FROM users WHERE email = p_email;
     END IF;
 
-    -- Créer la demande de produit
+    -- Create product request
     INSERT INTO hub_product_requests (
         id, user_id, product_title, product_type, features, 
         cover_image, product_url, custom_text, subscribed_from_page, created_at
     ) VALUES (
         gen_random_uuid(), v_user_id, p_product_title, p_product_type, p_features,
-        p_cover_image, p_product_url, p_custom_text, p_subscribed_from_page, NOW()
+        p_cover, p_product_url, p_custom_text, p_subscribed_from_page, NOW()
     ) RETURNING id INTO v_request_id;
 
     RETURN v_request_id;
@@ -198,7 +198,7 @@ DECLARE
     v_user_id UUID;
     v_subscription_id UUID;
 BEGIN
-    -- Créer ou récupérer l'utilisateur
+    -- Create or get user
     INSERT INTO users (id, email, name, created_at, updated_at)
     VALUES (gen_random_uuid(), p_email, p_name, NOW(), NOW())
     ON CONFLICT (email) 
@@ -207,18 +207,18 @@ BEGIN
         updated_at = NOW()
     RETURNING id INTO v_user_id;
 
-    -- Si l'upsert n'a pas retourné d'ID, récupérer l'existant
+    -- If upsert didn't return ID, get existing
     IF v_user_id IS NULL THEN
         SELECT id INTO v_user_id FROM users WHERE email = p_email;
     END IF;
 
-    -- Créer l'abonnement newsletter
+    -- Create newsletter subscription
     INSERT INTO newsletter_subscribers (id, user_id, subscribed_from_page, created_at)
     VALUES (gen_random_uuid(), v_user_id, p_subscribed_from_page, NOW())
     ON CONFLICT (user_id) DO NOTHING
     RETURNING id INTO v_subscription_id;
 
-    -- Si pas de nouvel ID, récupérer l'existant
+    -- If no new ID, get existing
     IF v_subscription_id IS NULL THEN
         SELECT id INTO v_subscription_id 
         FROM newsletter_subscribers 

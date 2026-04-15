@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS unique_views (
     details JSONB NULL
 );
 
--- On crée un index unique pour éviter les doublons par user/path/type/slug
+-- Create a unique index to avoid duplicates by user/path/type/slug
 CREATE UNIQUE INDEX IF NOT EXISTS uq_unique_views_user_path_type_slug
 ON unique_views(user_ip, path, type, slug);
