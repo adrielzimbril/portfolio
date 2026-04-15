@@ -72,10 +72,10 @@ export function DaysSinceRevamp({
         className,
       )}
     >
-      <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
+      <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
           className={cn(
-            "squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
         >
           <motion.div
@@ -89,30 +89,31 @@ export function DaysSinceRevamp({
           >
             📅
           </motion.div>
-
-          <div
-            className={cn(
-              "relative size-full flex flex-row z-20 items-center gap-2 md:gap-4 px-2 py-2 m-auto",
-            )}
-          >
-            <Badge className="capitalize" size="lg" circle>
-              <Calendar size={32} className="text-primary" variant="bulk" />
-            </Badge>
-            <div className="flex flex-col items-start gap-2">
-              <h6 className="tracking-wide">Site Age</h6>
-              <p className="text-sm text-b-white-invert-thr leading-[120%]">
-                {displayDays} days
-              </p>
+          <div className="relative w-full flex flex-col gap-2">
+            <div
+              className={cn(
+                "relative flex flex-row items-center gap-2 md:gap-4",
+              )}
+            >
+              <Badge className="capitalize" size="lg" circle>
+                <Calendar size={32} className="text-primary" variant="bulk" />
+              </Badge>
+              <div className="flex flex-col items-start gap-2">
+                <h6 className="tracking-wide">Site Age</h6>
+                <p className="text-sm text-b-white-invert-thr leading-[120%]">
+                  {displayDays} days
+                </p>
+              </div>
             </div>
+            <p className="text-xs text-muted-foreground">
+              Launched{" "}
+              {revampDate.toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
           </div>
-          <p className="mt-2 text-xs text-muted-foreground px-2 pb-2">
-            Launched{" "}
-            {revampDate.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
         </div>
       </CardContent>
     </Card>

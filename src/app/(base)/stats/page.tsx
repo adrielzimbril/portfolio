@@ -91,7 +91,6 @@ export default async function StatsPage() {
             value={buildTimeStats.totalPosts}
             suffix="thoughts"
           />
-          <CoffeeCupsCard cups={coffeeCups} />
           <StatCard
             label="Total Words"
             value={buildTimeStats.totalWords}
@@ -102,11 +101,12 @@ export default async function StatsPage() {
             value={buildTimeStats.totalReadingTime}
             suffix="min"
           />
+          <DaysSinceRevamp revampDate={REVAMP_DATE} />
         </div>
 
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
           <CategoryBarChart categories={buildTimeStats.categories} />
-          <DaysSinceRevamp revampDate={REVAMP_DATE} />
+          <CoffeeCupsCard cups={coffeeCups} />
         </div>
       </SectionLayout>
 
