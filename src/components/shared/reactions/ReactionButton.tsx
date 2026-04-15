@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Heart, ThumbsUp, Sparkles, Lightbulb, Frown } from "lucide-react";
 import { cn } from "@/utils/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { PageType } from "@/types";
@@ -9,25 +8,15 @@ import { ReactionType } from "@/lib/stats/types";
 import {
   getAnonymousUserId,
   getCurrentUserId,
-  isAnonymousUser,
   syncAnonymousReactionsOnLogin,
 } from "@/lib/reactions/anonymous-user";
-import { getEmojiHub } from "@aurthle/emoji-hub";
 
-const REACTION_ICONS: Record<string, any> = {
-  [ReactionType.LIKE]: ThumbsUp,
-  [ReactionType.HEART]: Heart,
-  [ReactionType.CELEBRATE]: Sparkles,
-  [ReactionType.INSIGHTFUL]: Lightbulb,
-  [ReactionType.SCEPTIC]: Frown,
-};
-
-const REACTION_COLORS: Record<string, string> = {
-  [ReactionType.LIKE]: "text-blue-500",
-  [ReactionType.HEART]: "text-red-500",
-  [ReactionType.CELEBRATE]: "text-yellow-500",
-  [ReactionType.INSIGHTFUL]: "text-purple-500",
-  [ReactionType.SCEPTIC]: "text-gray-500",
+const REACTION_EMOJIS: Record<ReactionType, string> = {
+  [ReactionType.LIKE]: "👍",
+  [ReactionType.HEART]: "❤️",
+  [ReactionType.CELEBRATE]: "🎉",
+  [ReactionType.INSIGHTFUL]: "💡",
+  [ReactionType.SCEPTIC]: "🤔",
 };
 
 interface ReactionButtonProps {
@@ -51,8 +40,7 @@ export function ReactionButton({
   const [reactionCount, setReactionCount] = useState(count);
   const [isLoading, setIsLoading] = useState(false);
 
-  const Icon = REACTION_ICONS[reactionType];
-  const colorClass = REACTION_COLORS[reactionType];
+  const emoji: string = REACTION_EMOJIS[reactionType];
 
   useEffect(() => {
     const checkUser = async () => {
@@ -76,16 +64,20 @@ export function ReactionButton({
       if (userId || anonymousId) {
         // Check if user has already reacted (check both user_id and anonymous_id)
         // This allows reactions to persist across auth states on the same device
-        const { data } = await supabase
+        let checkQuery = supabase
           .from("reactions" as any)
           .select("*")
           .eq("page_type", pageType)
           .eq("entity_id", entityId)
-          .eq("reaction_type", reactionType)
-          .or(
-            `user_id.eq.${userId},anonymous_id.eq.${userId},anonymous_id.eq.${anonymousId}`,
-          )
-          .single();
+          .eq("reaction_type", reactionType);
+
+        if (user?.id) {
+          checkQuery = checkQuery.eq("user_id", user.id);
+        } else {
+          checkQuery = checkQuery.eq("anonymous_id", anonymousId);
+        }
+
+        const { data } = await checkQuery.maybeSingle();
 
         setIsReacted(!!data);
       }
@@ -156,16 +148,20 @@ export function ReactionButton({
       disabled={isLoading}
       className={cn(
         "flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer",
-        "bg-b-base border border-border hover:border-primary/50",
-        isReacted && cn("border-primary/50 bg-primary/10", colorClass),
+        "bg-b-base border border-border hover:border-primary/50 hover:scale-105",
+        isReacted && "border-primary/50 bg-primary/10",
         className,
       )}
     >
-      <Icon
-        size={16}
-        className={cn(isReacted ? colorClass : "text-muted-foreground")}
-      />
-      {getEmojiHub("❣️", "fluent", "anim")}
+      <span
+        className={cn(
+          "text-lg transition-transform duration-200",
+          "hover:scale-125",
+          isReacted && "scale-110",
+        )}
+      >
+        {emoji}
+      </span>
       <span className="text-xs font-medium text-foreground">
         {reactionCount}
       </span>

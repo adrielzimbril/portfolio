@@ -12,6 +12,9 @@ export const changelog: ChangelogItem[] = [
       "Added ReactionBar component with real-time reaction counts.",
       "Created Supabase migration for reaction tables with RLS policies.",
       "Updated stats page to show top viewed and reacted thoughts.",
+      "Implemented emoji-based reactions with animated emojis for active states.",
+      "Added anonymous reaction support with cookie-based user identification.",
+      "Implemented sync mechanism to merge anonymous reactions on authentication.",
     ],
   },
   {

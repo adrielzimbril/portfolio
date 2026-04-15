@@ -2,7 +2,7 @@
 
 import { supabase } from "@/integrations/supabase/client";
 
-const ANONYMOUS_USER_ID_COOKIE = "anonymous_user_id";
+const ANONYMOUS_USER_ID_COOKIE = "shironymous_reactions_user_id";
 
 export function getAnonymousUserId(): string {
   if (typeof window === "undefined") return "";
