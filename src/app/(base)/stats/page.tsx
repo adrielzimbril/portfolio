@@ -17,7 +17,7 @@ import { CoffeeCupsCard } from "@/components/stats/CoffeeCupsCard";
 import { SiteViewsCard } from "@/components/stats/SiteViewsCard";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
-import { TopArticlesCard } from "@/components/stats/TopArticlesCard";
+import { TopThoughtsCard } from "@/components/stats/TopThoughtsCard";
 import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
@@ -127,14 +127,14 @@ export default async function StatsPage() {
         </div>
 
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <TopArticlesCard
+          <TopThoughtsCard
             title="Top Viewed Articles"
-            articles={serverStats.topViewedArticles}
+            articles={serverStats.topViewedThoughts}
             metricLabel="views"
           />
-          <TopArticlesCard
+          <TopThoughtsCard
             title="Top Reacted Articles"
-            articles={serverStats.topReactedArticles}
+            articles={serverStats.topReactedThoughts}
             metricLabel="reactions"
           />
         </div>
@@ -198,11 +198,11 @@ export default async function StatsPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ChangelogUpdatesCard count={changelog.length} />
-          {serverStats.topViewedArticles.length > 0 &&
-            serverStats.topViewedArticles[0] && (
+          {serverStats.topViewedThoughts.length > 0 &&
+            serverStats.topViewedThoughts[0] && (
               <MostViewedArticleCard
-                title={serverStats.topViewedArticles[0].title}
-                views={serverStats.topViewedArticles[0].count}
+                title={serverStats.topViewedThoughts[0].title}
+                views={serverStats.topViewedThoughts[0].count}
               />
             )}
         </div>

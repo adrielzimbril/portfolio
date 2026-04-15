@@ -22,12 +22,12 @@ export interface CategoryCount {
 export interface ServerStats {
   totalViews: number;
   reactions: Record<ReactionType, number>;
-  topViewedArticles: ArticleMetric[];
-  topReactedArticles: ArticleMetric[];
+  topViewedThoughts: ThoughtMetric[];
+  topReactedThoughts: ThoughtMetric[];
   communityMessages: number;
 }
 
-export interface ArticleMetric {
+export interface ThoughtMetric {
   slug: string;
   title: string;
   count: number;

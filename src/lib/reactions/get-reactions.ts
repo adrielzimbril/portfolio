@@ -62,7 +62,7 @@ function getTableName(
 ): string {
   switch (entityType) {
     case PageType.THOUGHT:
-      return "article_reactions";
+      return "thought_reactions";
     case PageType.PROJECT:
       return "project_reactions";
     case PageType.CONNECTIONS:

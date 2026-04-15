@@ -3,25 +3,25 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import type { ArticleMetric } from "@/lib/stats/types";
+import type { ThoughtMetric } from "@/lib/stats/types";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 
-interface TopArticlesCardProps {
+interface TopThoughtsCardProps {
   title: string;
-  articles: ArticleMetric[];
+  articles: ThoughtMetric[];
   metricLabel: string;
   delay?: number;
   className?: string;
 }
 
-export function TopArticlesCard({
+export function TopThoughtsCard({
   title,
   articles,
   metricLabel,
   delay = 0,
   className,
-}: TopArticlesCardProps) {
+}: TopThoughtsCardProps) {
   const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);

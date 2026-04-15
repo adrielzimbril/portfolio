@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import type {
   ServerStats,
-  ArticleMetric,
+  ThoughtMetric,
   ReactionType,
 } from "@/lib/stats/types";
 
@@ -12,8 +12,8 @@ export async function getServerStats(): Promise<ServerStats> {
     async () => {
       // TODO: Implémenter la logique de récupération depuis Supabase
       // Vous aurez besoin de créer les tables suivantes:
-      // - article_views (slug, view_count)
-      // - article_reactions (slug, reaction_type, count)
+      // - thought_views (slug, view_count)
+      // - thought_reactions (slug, reaction_type, count)
       // - messages (count)
 
       const totalViews = 0; // À adapter avec votre BDD
@@ -23,15 +23,15 @@ export async function getServerStats(): Promise<ServerStats> {
         celebrate: 0,
         insightful: 0,
       };
-      const topViewedArticles: ArticleMetric[] = []; // À adapter
-      const topReactedArticles: ArticleMetric[] = []; // À adapter
+      const topViewedThoughts: ThoughtMetric[] = []; // À adapter
+      const topReactedThoughts: ThoughtMetric[] = []; // À adapter
       const communityMessages = 0; // À adapter
 
       return {
         totalViews,
         reactions,
-        topViewedArticles,
-        topReactedArticles,
+        topViewedThoughts,
+        topReactedThoughts,
         communityMessages,
       };
     },
