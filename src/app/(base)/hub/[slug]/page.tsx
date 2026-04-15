@@ -2,7 +2,7 @@ import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
-import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
+import { ResourceDetailsSection } from "./sections/ResourceDetailsSection";
 import { getLocale } from "next-intl/server";
 import { PageParams } from "@/types";
 import {
@@ -66,7 +66,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         pageViewsData={{ slug, locale }}
         slug={slug}
       />
-      <ProjectDetailsSection content={body || ""} />
+      <ResourceDetailsSection content={body || ""} />
       {resource!.adjacentResources.length > 0 && (
         <MorePreviewSection data={resource!.adjacentResources} />
       )}

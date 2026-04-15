@@ -28,7 +28,6 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
         width={size}
         height={size}
         viewBox={`0 0 ${size} ${size}`}
-        className="drop-shadow-[0_0_8px_rgba(34,197,94,0.25)] dark:drop-shadow-[0_0_8px_rgba(74,222,128,0.25)]"
         style={
           {
             "--radar-gradient-start": "rgb(34, 197, 94)",
@@ -36,25 +35,17 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
           } as React.CSSProperties
         }
       >
-        {/* Glow filter */}
         <defs>
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation={2} result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
           <radialGradient id="radarGradient" cx="50%" cy="50%" r="50%">
             <stop
               offset="0%"
               stopColor="var(--radar-gradient-start)"
-              stopOpacity={0.5}
+              stopOpacity={0.4}
             />
             <stop
               offset="100%"
               stopColor="var(--radar-gradient-end)"
-              stopOpacity={0.15}
+              stopOpacity={0.1}
             />
           </radialGradient>
         </defs>
@@ -70,13 +61,13 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
             stroke="currentColor"
             strokeWidth={scale === 1 ? 1.5 : 1}
             className="text-muted-foreground/30"
-            opacity={0.4}
+            opacity={0.35}
             style={{ transformOrigin: `${center}px ${center}px` }}
           />
         ))}
 
         {/* Cross axes */}
-        <g opacity={0.3}>
+        <g opacity={0.25}>
           <line
             x1={center}
             y1={center - maxRadius}
@@ -97,14 +88,13 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
           />
         </g>
 
-        {/* Score polygon fill with glow */}
+        {/* Score polygon fill */}
         <polygon
           points={getPolygonPoints(scores)}
           fill="url(#radarGradient)"
           stroke="currentColor"
-          strokeWidth={2}
-          opacity={0.7}
-          filter="url(#glow)"
+          strokeWidth={1.5}
+          opacity={0.6}
           style={{ transformOrigin: `${center}px ${center}px` }}
         />
 
@@ -121,10 +111,9 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
               key={i}
               cx={x}
               cy={y}
-              r={3.5}
+              r={3}
               fill="currentColor"
-              opacity={0.8}
-              filter="url(#glow)"
+              opacity={0.7}
             />
           );
         })}

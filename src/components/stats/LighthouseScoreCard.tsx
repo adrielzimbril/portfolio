@@ -19,7 +19,6 @@ interface LighthouseScoreCardProps {
   scores: LighthouseScores;
   strategy: "mobile" | "desktop";
   delay?: number;
-  lastUpdated?: string;
   className?: string;
 }
 
@@ -27,10 +26,8 @@ export function LighthouseScoreCard({
   scores,
   strategy,
   delay = 0,
-  lastUpdated,
   className,
 }: LighthouseScoreCardProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
 
   const scoreItems = [
@@ -117,7 +114,7 @@ export function LighthouseScoreCard({
               </Badge>
             </div>
 
-            <div className="flex flex-col items-start gap-4 md:gap-6 w-full">
+            <div className="flex flex-col z-20 items-start gap-4 md:gap-6 w-full">
               <div className="relative grid flex-1 grid-cols-2 gap-4 w-full">
                 {scoreItems.map((item, i) => (
                   <ScoreBar
