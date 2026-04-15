@@ -180,7 +180,7 @@ export function GitHubStatsCard({
       <Card
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="flex-1 squircle size-full squircle-b-base squircle-5xl squircle-smooth-lg border-0 overflow-hidden"
+        className="flex-1 squircle size-full squircle-b-base squircle-3xl squircle-smooth-md border-0 overflow-hidden"
       >
         <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
           <div
@@ -261,7 +261,7 @@ export function GitHubStatsCard({
             </div>
             <div
               className={cn(
-                "relative flex flex-row z-20 items-center gap-2 md:gap-4 px-2 py-2 md:px-4 md:py-4",
+                "relative size-full flex flex-row z-20 items-center gap-2 md:gap-4 px-2 py-2 m-auto",
               )}
             >
               <Badge
