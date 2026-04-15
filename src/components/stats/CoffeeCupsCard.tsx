@@ -2,8 +2,11 @@
 
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { Coffee } from "@aurthle/icons";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface CoffeeCupsCardProps {
   cups: number;
@@ -59,128 +62,65 @@ export function CoffeeCupsCard({
     { x: "15%", y: "70%", rotate: 12, delay: 0.3 },
   ];
 
-  const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-    "squircle squircle-smooth-xl squircle-6xl",
-    className,
-  );
-
-  if (shouldReduceAnimations) {
-    return (
-      <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {coffeeCups.map((cup, i) => (
-            <span
-              key={i}
-              className="absolute text-2xl"
-              style={{
-                left: cup.x,
-                top: cup.y,
-                opacity: 0.15,
-                transform: `rotate(${cup.rotate}deg)`,
-              }}
-            >
-              ☕
-            </span>
-          ))}
-        </div>
-
-        <div className="relative z-20 flex h-full flex-col">
-          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-xl">
-            ☕
-          </div>
-
-          <h2 className="mb-2 font-medium text-foreground">Coffee Consumed</h2>
-          <p className="text-sm text-muted-foreground">Estimated fuel</p>
-
-          <div className="mt-auto">
-            <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-semibold tracking-tight text-foreground">
-                ~{effectiveDisplayCups.toLocaleString()}
-              </span>
-              <span className="text-sm text-muted-foreground">cups</span>
-            </div>
-            <p className="mt-2 text-xs text-muted-foreground">
-              1 cup per 500 words
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={cardClassName}
+    <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className={cn(
+        "squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden",
+        className,
+      )}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {coffeeCups.map((cup, i) => (
-          <motion.span
-            key={i}
-            initial={{ opacity: 0, scale: 0, rotate: cup.rotate - 20 }}
-            animate={{
-              opacity: 0.15,
-              scale: isHovered ? 1.2 : 1,
-              rotate: isHovered ? cup.rotate + 10 : cup.rotate,
-              y: isHovered ? -8 : 0,
-            }}
-            transition={{
-              opacity: { duration: 0.4, delay: delay + cup.delay },
-              scale: { type: "spring", stiffness: 200, damping: 15 },
-              rotate: { type: "spring", stiffness: 200, damping: 15 },
-              y: { type: "spring", stiffness: 200, damping: 15 },
-            }}
-            className="absolute text-2xl"
-            style={{ left: cup.x, top: cup.y }}
-          >
-            ☕
-          </motion.span>
-        ))}
-      </div>
-
-      <div className="relative z-20 flex h-full flex-col">
-        <motion.div
-          animate={{
-            rotate: isHovered ? [0, -5, 5, 0] : 0,
-            y: isHovered ? -4 : 0,
-          }}
-          transition={{
-            rotate: { duration: 0.5 },
-            y: { type: "spring", stiffness: 200, damping: 15 },
-          }}
-          className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-xl"
+      <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
+        <div
+          className={cn(
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+          )}
         >
-          ☕
-        </motion.div>
-
-        <h2 className="mb-2 font-medium text-foreground">Coffee Consumed</h2>
-        <p className="text-sm text-muted-foreground">Estimated fuel</p>
-
-        <div className="mt-auto">
-          <motion.div
-            animate={{ scale: isHovered ? 1.05 : 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="flex items-baseline gap-1"
-          >
-            <span className="text-3xl font-semibold tracking-tight text-foreground">
-              ~{effectiveDisplayCups.toLocaleString()}
-            </span>
-            <span className="text-sm text-muted-foreground">cups</span>
-          </motion.div>
-          <p className="mt-2 text-xs text-muted-foreground">
-            1 cup per 500 words
-          </p>
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            {coffeeCups.map((cup, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, scale: 0, rotate: cup.rotate - 20 }}
+                animate={{
+                  opacity: isHovered ? 0.3 : 0.15,
+                  scale: isHovered ? 1.2 : 1,
+                  rotate: isHovered ? cup.rotate + 10 : cup.rotate,
+                  y: isHovered ? -8 : 0,
+                }}
+                transition={{
+                  opacity: { duration: 0.4, delay: delay + cup.delay },
+                  scale: { type: "spring", stiffness: 200, damping: 15 },
+                  rotate: { type: "spring", stiffness: 200, damping: 15 },
+                  y: { type: "spring", stiffness: 200, damping: 15 },
+                }}
+                className="absolute text-2xl"
+                style={{ left: cup.x, top: cup.y }}
+              >
+                ☕
+              </motion.span>
+            ))}
+          </div>
+          <div className="relative w-full flex flex-col gap-2">
+            <div
+              className={cn(
+                "relative flex flex-row items-center gap-2 md:gap-4",
+              )}
+            >
+              <Badge className="capitalize" size="lg" circle>
+                <Coffee size={32} className="text-amber-600" variant="bulk" />
+              </Badge>
+              <div className="flex flex-col items-start gap-2">
+                <h6 className="tracking-wide">Coffee Consumed</h6>
+                <p className="text-sm text-b-white-invert-thr leading-[120%]">
+                  ~{effectiveDisplayCups.toLocaleString()} cups
+                </p>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">1 cup per 500 words</p>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </CardContent>
+    </Card>
   );
 }

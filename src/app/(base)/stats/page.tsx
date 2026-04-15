@@ -114,8 +114,8 @@ export default async function StatsPage() {
         </div>
 
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <CategoryBarChart categories={buildTimeStats.categories} />
           <CoffeeCupsCard cups={coffeeCups} />
+          <SiteViewsCard value={serverStats.totalViews} />
         </div>
       </SectionLayout>
 
@@ -128,7 +128,7 @@ export default async function StatsPage() {
         className="pb-0!"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <SiteViewsCard value={serverStats.totalViews} />
+          <CategoryBarChart categories={buildTimeStats.categories} />
           <ReactionBreakdown reactions={serverStats.reactions} />
           <CommunityMessagesCard count={serverStats.communityMessages} />
         </div>

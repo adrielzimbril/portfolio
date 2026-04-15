@@ -2,9 +2,12 @@
 
 import { motion } from "motion/react";
 import { useState } from "react";
+import { ChartBar } from "@aurthle/icons";
 import type { CategoryCount } from "@/lib/stats/types";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface CategoryBarChartProps {
   categories: CategoryCount[];
@@ -32,142 +35,120 @@ export function CategoryBarChart({
   const maxCount = Math.max(...categories.map((c) => c.count), 1);
   const displayCategories = categories.slice(0, 6);
 
-  const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-    "squircle squircle-smooth-xl squircle-6xl",
-    className,
-  );
-
-  if (shouldReduceAnimations) {
-    return (
-      <div className={cardClassName}>
-        <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div className="relative z-20 flex h-full flex-col">
-          <h2 className="mb-2 font-medium text-foreground">Categories</h2>
-          <p className="mb-4 text-sm text-muted-foreground">
-            Thoughts by topic
-          </p>
-
-          <div className="flex flex-1 flex-col justify-center space-y-3">
-            {displayCategories.map((category, index) => {
-              const percentage = (category.count / maxCount) * 100;
-              const color = BAR_COLORS[index % BAR_COLORS.length];
-
-              return (
-                <div key={category.name} className="group/bar">
-                  <div className="mb-1 flex items-center justify-between">
-                    <span className="truncate text-xs font-medium text-muted-foreground">
-                      {category.name}
-                    </span>
-                    <span className="ml-2 shrink-0 text-xs font-semibold tabular-nums text-muted-foreground">
-                      {category.count}
-                    </span>
-                  </div>
-                  <div className="relative h-3 w-full overflow-hidden rounded-full bg-border/30">
-                    <div
-                      style={{ width: `${percentage}%` }}
-                      className={`absolute inset-y-0 left-0 origin-left rounded-full ${color}`}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {categories.length > 6 && (
-            <p className="mt-4 text-xs text-muted-foreground opacity-60">
-              +{categories.length - 6} more categories
-            </p>
-          )}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={cardClassName}
+    <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className={cn(
+        "squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden",
+        className,
+      )}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-      <div className="relative z-20 flex h-full flex-col">
-        <h2 className="mb-2 font-medium text-foreground">Categories</h2>
-        <p className="mb-4 text-sm text-muted-foreground">Thoughts by topic</p>
-
-        <div className="flex flex-1 flex-col justify-center space-y-3">
-          {displayCategories.map((category, index) => {
-            const percentage = (category.count / maxCount) * 100;
-            const color = BAR_COLORS[index % BAR_COLORS.length];
-            const isBarHovered = hoveredBar === index;
-
-            return (
-              <motion.div
-                key={category.name}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: delay + index * 0.08 }}
-                className="group/bar"
-                onMouseEnter={() => setHoveredBar(index)}
-                onMouseLeave={() => setHoveredBar(null)}
-              >
-                <div className="mb-1 flex items-center justify-between">
-                  <span className="truncate text-xs font-medium text-muted-foreground">
-                    {category.name}
-                  </span>
-                  <motion.span
-                    animate={{
-                      scale: isBarHovered ? 1.1 : 1,
-                      color: isBarHovered
-                        ? "var(--primary)"
-                        : "var(--muted-foreground)",
-                    }}
-                    className="ml-2 shrink-0 text-xs font-semibold tabular-nums"
-                  >
-                    {category.count}
-                  </motion.span>
-                </div>
-                <div className="relative h-3 w-full overflow-hidden rounded-full bg-border/30">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{
-                      width: `${percentage}%`,
-                      scaleY: isBarHovered ? 1.15 : 1,
-                    }}
-                    transition={{
-                      width: {
-                        duration: 0.8,
-                        delay: delay + index * 0.08 + 0.2,
-                        ease: "easeOut",
-                      },
-                      scaleY: {
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      },
-                    }}
-                    className={`absolute inset-y-0 left-0 origin-left rounded-full ${color}`}
-                  />
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {categories.length > 6 && (
-          <motion.p
-            animate={{ opacity: isHovered ? 1 : 0.6 }}
-            className="mt-4 text-xs text-muted-foreground"
+      <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
+        <div
+          className={cn(
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+          )}
+        >
+          <motion.div
+            animate={{
+              rotate: isHovered ? 5 : -5,
+              scale: isHovered ? 1.1 : 1,
+              y: isHovered ? -10 : 0,
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="absolute -bottom-2 -right-2 text-[100px] leading-none opacity-10"
           >
-            +{categories.length - 6} more categories
-          </motion.p>
-        )}
-      </div>
-    </motion.div>
+            📊
+          </motion.div>
+
+          <div className="relative w-full flex flex-col gap-2">
+            <div
+              className={cn(
+                "relative flex flex-row items-center gap-2 md:gap-4 mb-4",
+              )}
+            >
+              <Badge className="capitalize" size="lg" circle>
+                <ChartBar size={32} className="text-primary" variant="bulk" />
+              </Badge>
+              <div className="flex flex-col items-start gap-2">
+                <h6 className="tracking-wide">Categories</h6>
+                <p className="text-xs text-muted-foreground">
+                  Thoughts by topic
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-1 flex-col justify-center space-y-3">
+              {displayCategories.map((category, index) => {
+                const percentage = (category.count / maxCount) * 100;
+                const color = BAR_COLORS[index % BAR_COLORS.length];
+                const isBarHovered = hoveredBar === index;
+
+                return (
+                  <motion.div
+                    key={category.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: delay + index * 0.08 }}
+                    className="group/bar"
+                    onMouseEnter={() => setHoveredBar(index)}
+                    onMouseLeave={() => setHoveredBar(null)}
+                  >
+                    <div className="mb-1 flex items-center justify-between">
+                      <span className="truncate text-xs font-medium text-muted-foreground">
+                        {category.name}
+                      </span>
+                      <motion.span
+                        animate={{
+                          scale: isBarHovered ? 1.1 : 1,
+                          color: isBarHovered
+                            ? "var(--primary)"
+                            : "var(--muted-foreground)",
+                        }}
+                        className="ml-2 shrink-0 text-xs font-semibold tabular-nums"
+                      >
+                        {category.count}
+                      </motion.span>
+                    </div>
+                    <div className="relative h-3 w-full overflow-hidden rounded-full bg-border/30">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{
+                          width: `${percentage}%`,
+                          scaleY: isBarHovered ? 1.15 : 1,
+                        }}
+                        transition={{
+                          width: {
+                            duration: 0.8,
+                            delay: delay + index * 0.08 + 0.2,
+                            ease: "easeOut",
+                          },
+                          scaleY: {
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          },
+                        }}
+                        className={`absolute inset-y-0 left-0 origin-left rounded-full ${color}`}
+                      />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {categories.length > 6 && (
+              <motion.p
+                animate={{ opacity: isHovered ? 1 : 0.6 }}
+                className="mt-4 text-xs text-muted-foreground"
+              >
+                +{categories.length - 6} more categories
+              </motion.p>
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
