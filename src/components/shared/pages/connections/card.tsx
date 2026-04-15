@@ -3,6 +3,7 @@ import React from "react";
 import { ConnectionAvatar } from "@/components/shared/pages/connections/avatar";
 import { ConnectionBadge } from "@/components/shared/pages/connections/badge";
 import { ConnectionName } from "@/components/shared/pages/connections/name";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 import { cn } from "@/utils/utils";
 
 export function ConnectionCard({
@@ -24,6 +25,7 @@ export function ConnectionCard({
       <ConnectionAvatar image={image} name={name} met={met} />
       <ConnectionBadge met={met} />
       <ConnectionName name={name} />
+      <ReactionBar entityType="connection" entityId={id} className="mt-2" />
     </div>
   );
 }

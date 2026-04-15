@@ -131,6 +131,9 @@ export default async function CommunityPage() {
                   </p>
                   <Button
                     asChild
+                    variant="secondary"
+                    whileTap
+                    asPointer
                     className="w-full rounded-2xl h-11 font-semibold"
                   >
                     <a href={`/api/auth/login?provider=github`}>

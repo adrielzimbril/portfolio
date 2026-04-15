@@ -10,6 +10,7 @@ import { getResourcesUrl } from "@/utils/base-url";
 import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types";
 import { PageType } from "@/types";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -48,7 +49,10 @@ export function CardInfo({
         <Description description={description} />
       </div>
 
-      <Action slug={slug} />
+      <div className="flex items-center justify-between w-full gap-3">
+        <ReactionBar entityType="project" entityId={slug} />
+        <Action slug={slug} />
+      </div>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
 import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -51,7 +52,10 @@ export function CardInfo({
         />
       </div>
 
-      {action ? <Action label={action.label} href={action.href} /> : null}
+      <div className="flex items-center justify-between w-full gap-3">
+        <ReactionBar entityType="quest" entityId={slug} />
+        {action ? <Action label={action.label} href={action.href} /> : null}
+      </div>
     </div>
   );
 }

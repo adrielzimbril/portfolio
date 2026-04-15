@@ -30,7 +30,7 @@ export function GuestbookForm({ user }: { user: any }) {
         message: message.trim(),
         patternindex: Math.floor(Math.random() * 10),
         rotation: Math.floor(Math.random() * 360),
-      });
+      } as any);
 
       if (error) throw error;
 
