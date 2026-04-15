@@ -6,29 +6,24 @@ import { useState, useEffect } from "react";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 
-interface MostViewedArticleCardProps {
+interface MostViewedThoughtCardProps {
   title: string;
   views: number;
   delay?: number;
   className?: string;
 }
 
-export function MostViewedArticleCard({
+export function MostViewedThoughtCard({
   title,
   views,
   delay = 0,
   className,
-}: MostViewedArticleCardProps) {
+}: MostViewedThoughtCardProps) {
   const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
   const [displayViews, setDisplayViews] = useState(0);
 
   useEffect(() => {
-    if (shouldReduceAnimations) {
-      setDisplayViews(views);
-      return;
-    }
-
     const duration = 1500;
     const startTime = performance.now();
     const startDelay = delay * 1000;

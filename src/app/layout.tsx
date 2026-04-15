@@ -44,9 +44,7 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({
-  children,
-}: PropsWithChildren) {
+export default async function RootLayout({ children }: PropsWithChildren) {
   const locale = await getUserLocale();
 
   setRequestLocale(locale);
@@ -58,7 +56,7 @@ export default async function RootLayout({
   }
 
   const messages = await getMessages();
-  
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <body

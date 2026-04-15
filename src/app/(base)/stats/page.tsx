@@ -21,7 +21,7 @@ import { TopThoughtsCard } from "@/components/stats/TopThoughtsCard";
 import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
-import { MostViewedArticleCard } from "@/components/stats/MostViewedArticleCard";
+import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
 import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
 import { changelog } from "@/data/personal/changelog";
 
@@ -200,7 +200,7 @@ export default async function StatsPage() {
           <ChangelogUpdatesCard count={changelog.length} />
           {serverStats.topViewedThoughts.length > 0 &&
             serverStats.topViewedThoughts[0] && (
-              <MostViewedArticleCard
+              <MostViewedThoughtCard
                 title={serverStats.topViewedThoughts[0].title}
                 views={serverStats.topViewedThoughts[0].count}
               />

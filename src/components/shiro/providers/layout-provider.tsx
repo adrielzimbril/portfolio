@@ -15,8 +15,8 @@ import { init } from "@squircle/core";
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const asLoader = true;
-  const t = useTranslations();
   const isBadIOS = useCompareIOSVersion();
+  const t = useTranslations();
 
   const route = usePathname();
   const menuRoutes = Object.values(routes);
@@ -29,7 +29,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   });
 
   const currentRoute = menuRoutesFiltered.find(
-    (item) => item.link === activePath
+    (item) => item.link === activePath,
   );
   const currentKey = currentRoute?.key || routes.home.key;
 
@@ -60,7 +60,8 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   const loader = pageLoader(currentKey);
   const showLoader = asLoader && !isLoaded;
-  const isHomePage = currentRoute?.key === routes.home.key || currentRoute === undefined;
+  const isHomePage =
+    currentRoute?.key === routes.home.key || currentRoute === undefined;
 
   return (
     <>
