@@ -72,7 +72,7 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar pageType={PageType.HUB} entityId={slug} />
+        <ReactionBar pageType={PageType.HUB} entityId={slug} variant="dock" />
         <Action slug={slug} resourceType={resourceType} />
       </div>
     </div>

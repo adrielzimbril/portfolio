@@ -49,7 +49,11 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar pageType={PageType.PROJECT} entityId={slug} />
+        <ReactionBar
+          pageType={PageType.PROJECT}
+          entityId={slug}
+          variant="dock"
+        />
         <Action slug={slug} />
       </div>
     </div>

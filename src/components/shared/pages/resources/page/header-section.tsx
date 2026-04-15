@@ -169,6 +169,7 @@ export function HeaderSection({
           </Button>
         </div>
       )}
+      <ReactionBar pageType={PageType.PROJECT} entityId={slug} />
     </SectionBase>
   );
 }

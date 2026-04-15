@@ -6,6 +6,7 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 export function HeaderSection({
   title,
@@ -53,8 +54,6 @@ export function HeaderSection({
       ctaButton={projectLink ?? undefined}
       ctaButtonText={`${t("projects.inner-page.header-section.cta")} 🦄`}
       pageType={PageType.PROJECT}
-    >
-      <ReactionBar pageType={PageType.PROJECT} entityId={pageViewsData.slug} />
-    </ResourceHeaderSection>
+    />
   );
 }

@@ -2,8 +2,22 @@ import { ChangelogItem } from "@/types/personalData";
 
 export const changelog: ChangelogItem[] = [
   {
-    id: "v3.1.0",
-    version: "3.1.0",
+    id: "v2.6.1",
+    version: "2.6.1",
+    date: "2026-04-15",
+    type: "feature",
+    changes: [
+      "Implemented emoji-based reactions with animated emojis for active states.",
+      "Added anonymous reaction support with cookie-based user identification.",
+      "Implemented sync mechanism to merge anonymous reactions on authentication.",
+      "Added dock-style reaction bar for cards with hover reveal.",
+      "Integrated reactions into thoughts, projects, hub, and quests inner pages.",
+      "Created Supabase migration for reaction tables with RLS policies.",
+    ],
+  },
+  {
+    id: "v2.5.0",
+    version: "2.5.0",
     date: "2026-04-15",
     type: "feature",
     changes: [
@@ -18,9 +32,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v3.0.0",
-    version: "3.0.0",
-    date: "2024-04-13",
+    id: "v2.4.0",
+    version: "2.4.0",
+    date: "2025-12-08",
     type: "milestone",
     changes: [
       "Major UI refactor for a more premium feel.",
@@ -29,9 +43,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v2.5.0",
-    version: "2.5.0",
-    date: "2024-03-20",
+    id: "v1.9.0",
+    version: "1.9.0",
+    date: "2025-11-04",
     type: "feature",
     changes: [
       "Integrated Trigger.dev for background tasks.",
@@ -39,9 +53,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v2.4.0",
-    version: "2.4.0",
-    date: "2024-02-15",
+    id: "v1.8.0",
+    version: "1.8.0",
+    date: "2025-11-02",
     type: "feature",
     changes: [
       "Added dark mode toggle with system preference detection.",
@@ -50,9 +64,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v2.3.0",
-    version: "2.3.0",
-    date: "2024-01-10",
+    id: "v1.7.0",
+    version: "1.7.0",
+    date: "2025-11-01",
     type: "improvement",
     changes: [
       "Optimized bundle size by 40% with code splitting.",
@@ -61,9 +75,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v2.2.0",
-    version: "2.2.0",
-    date: "2023-12-05",
+    id: "v1.6.0",
+    version: "1.6.0",
+    date: "2025-10-23",
     type: "feature",
     changes: [
       "Added newsletter subscription form.",
@@ -72,9 +86,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v2.1.0",
-    version: "2.1.0",
-    date: "2023-11-01",
+    id: "v1.5.0",
+    version: "1.5.0",
+    date: "2025-10-15",
     type: "improvement",
     changes: [
       "Redesigned navigation with better mobile menu.",
@@ -83,9 +97,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v2.0.0",
-    version: "2.0.0",
-    date: "2023-10-01",
+    id: "v1.0.0",
+    version: "1.0.0",
+    date: "2025-10-02",
     type: "milestone",
     changes: [
       "Complete rewrite using Next.js 14 and React 18.",
@@ -94,9 +108,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v1.5.0",
-    version: "1.5.0",
-    date: "2023-09-01",
+    id: "v0.9.0",
+    version: "0.9.0",
+    date: "2025-10-01",
     type: "feature",
     changes: [
       "Added contact form with email notifications.",
@@ -105,9 +119,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v1.4.0",
-    version: "1.4.0",
-    date: "2023-08-01",
+    id: "v0.8.0",
+    version: "0.8.0",
+    date: "2025-09-16",
     type: "fix",
     changes: [
       "Fixed navigation menu z-index issues.",
@@ -116,9 +130,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v1.3.0",
-    version: "1.3.0",
-    date: "2023-07-01",
+    id: "v0.7.0",
+    version: "0.7.0",
+    date: "2025-09-06",
     type: "improvement",
     changes: [
       "Improved page load times by optimizing images.",
@@ -127,9 +141,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v1.2.0",
-    version: "1.2.0",
-    date: "2023-06-01",
+    id: "v0.6.0",
+    version: "0.6.0",
+    date: "2025-09-01",
     type: "feature",
     changes: [
       "Added projects gallery with filtering.",
@@ -138,9 +152,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v1.1.0",
-    version: "1.1.0",
-    date: "2023-05-01",
+    id: "v0.5.0",
+    version: "0.5.0",
+    date: "2025-08-25",
     type: "improvement",
     changes: [
       "Improved responsive design for tablets.",
@@ -149,9 +163,9 @@ export const changelog: ChangelogItem[] = [
     ],
   },
   {
-    id: "v1.0.0",
-    version: "1.0.0",
-    date: "2023-04-01",
+    id: "v0.4.0",
+    version: "0.4.0",
+    date: "2025-08-17",
     type: "milestone",
     changes: [
       "Initial release of portfolio website.",

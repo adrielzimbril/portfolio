@@ -29,6 +29,7 @@ export function ConnectionCard({
       <ReactionBar
         pageType={PageType.CONNECTIONS}
         entityId={id}
+        variant="dock"
         className="mt-2"
       />
     </div>
