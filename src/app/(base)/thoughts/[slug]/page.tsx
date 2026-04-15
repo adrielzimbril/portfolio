@@ -1,9 +1,6 @@
 import { getBaseUrl, getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import { localeRedirect } from "@/integrations/i18n/routing";
-import {
-  getPostBySlug,
-  getPostWithAdjacent,
-} from "@/integrations/content/lib";
+import { getPostBySlug, getPostWithAdjacent } from "@/integrations/content/lib";
 import { getLocale } from "next-intl/server";
 import { HeaderSection } from "./sections/HeaderSection";
 import { MorePreviewSection } from "./sections/MorePreviewSection";
@@ -73,6 +70,7 @@ export default async function BlogPostPage(props: {
         date={created_at}
         readingTime={formattedReadingTime}
         pageViewsData={{ slug, locale }}
+        slug={slug}
       />
       <ContentsSection content={body} />
       <MorePreviewSection data={post.adjacentPosts} />

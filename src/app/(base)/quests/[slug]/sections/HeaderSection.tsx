@@ -72,6 +72,8 @@ export function HeaderSection({
             ? t("quests.inner-page.header.cta.submitWork")
             : ""
       } 🦄`}
+      slug={slug}
+      pageType={PageType.QUESTS}
     />
   );
 }

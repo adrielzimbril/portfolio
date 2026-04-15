@@ -15,6 +15,7 @@ export function HeaderSection({
   tags,
   type,
   pageViewsData,
+  slug,
 }: {
   title: string;
   cover: string;
@@ -22,6 +23,7 @@ export function HeaderSection({
   tags: { name: string; color: string }[];
   type?: ResourceType;
   pageViewsData: { slug: string; locale: string };
+  slug: string;
 }) {
   const t = useTranslations();
 
@@ -32,7 +34,7 @@ export function HeaderSection({
       locale: pageViewsData.locale,
       path: getResourcesUrl(PageType.HUB, pageViewsData.slug),
     },
-    false
+    false,
   );
 
   return (
@@ -48,12 +50,13 @@ export function HeaderSection({
           : undefined
       }
       mainTitle={title}
-      slug={pageViewsData.slug}
+      slug={slug}
       description={description}
       tags={tags}
       type={type}
       ctaButton={pageViewsData.slug}
       ctaButtonText={`${t("common.button.obtain")} 🦄`}
+      pageType={PageType.HUB}
     />
   );
 }

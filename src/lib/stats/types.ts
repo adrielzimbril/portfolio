@@ -1,5 +1,4 @@
-// Types pour les statistiques du site
-// Adaptés du design de Braydon Coyer mais adaptés au projet actuel
+// Types for site statistics
 
 export enum ReactionType {
   LIKE = "like",

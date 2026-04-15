@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Calendar, Eye, HourglassFill } from "@aurthle/icons";
 import { cn } from "@/utils/utils";
-import { PreviewContentType } from "@/types";
+import { PreviewContentType, PageType } from "@/types";
 import {
   HeaderPreviewCard,
   PreviewContent,
@@ -13,6 +13,7 @@ import {
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { formatCount, getDate } from "@/utils";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -45,6 +46,7 @@ export function HeaderSection({
   mainTitle,
   tags,
   articleDetails,
+  slug,
 }: HeaderSectionProps) {
   const t = useTranslations();
 
@@ -82,49 +84,56 @@ export function HeaderSection({
       <h1 className="h3 w-full font-normals relative">{mainTitle}</h1>
 
       {articleDetails && Object.keys(articleDetails).length > 0 && (
-        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
-          {articleDetails.date && (
+        <div className="flex flex-wrap items-center gap-2 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
+          <div className="flex flex-wrap items-start gap-1.5">
+            {articleDetails.date && (
+              <Badge
+                className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+                variant="colored"
+                size="md"
+              >
+                <span className="flex items-center gap-2">
+                  <Calendar
+                    size={16}
+                    className="text-indigo-400"
+                    variant="bulk"
+                  />
+                  {getDate({ date: articleDetails.date })}
+                </span>
+              </Badge>
+            )}
+
             <Badge
               className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
               variant="colored"
               size="md"
             >
               <span className="flex items-center gap-2">
-                <Calendar
+                <HourglassFill
                   size={16}
                   className="text-indigo-400"
                   variant="bulk"
                 />
-                {getDate({ date: articleDetails.date })}
+                {articleDetails.readingTime}
               </span>
             </Badge>
+
+            <Badge
+              className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+              variant="colored"
+              size="md"
+            >
+              <span className="flex items-center gap-2">
+                <Eye size={16} className="text-indigo-400" variant="bulk" />
+                {formatCount(articleDetails.views ?? 0)}{" "}
+                {t("common.stats.views")}
+              </span>
+            </Badge>
+          </div>
+
+          {slug && (
+            <ReactionBar entityType={PageType.THOUGHT} entityId={slug} />
           )}
-
-          <Badge
-            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
-            variant="colored"
-            size="md"
-          >
-            <span className="flex items-center gap-2">
-              <HourglassFill
-                size={16}
-                className="text-indigo-400"
-                variant="bulk"
-              />
-              {articleDetails.readingTime}
-            </span>
-          </Badge>
-
-          <Badge
-            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
-            variant="colored"
-            size="md"
-          >
-            <span className="flex items-center gap-2">
-              <Eye size={16} className="text-indigo-400" variant="bulk" />
-              {formatCount(articleDetails.views ?? 0)} {t("common.stats.views")}
-            </span>
-          </Badge>
         </div>
       )}
 

@@ -48,6 +48,7 @@ export function HeaderSection({
         readingTime,
         views: count ?? 0,
       }}
+      slug={slug}
     />
   );
 }
