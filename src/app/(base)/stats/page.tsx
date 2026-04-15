@@ -11,11 +11,16 @@ import { getGitHubStats } from "@/lib/stats/github-stats";
 import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
 import { StatsPageHeader } from "@/components/stats/StatsPageHeader";
 import { StatCard } from "@/components/stats/StatCard";
-import { BookOne, TextFolder, Timelapse } from "@aurthle/icons";
+import { StatCardWithDecoration } from "@/components/stats/StatCardWithDecoration";
+import {
+  BookOne,
+  TextFolder,
+  Timelapse,
+  Coffee,
+  Eye,
+  Calendar,
+} from "@aurthle/icons";
 import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
-import { DaysSinceRevamp } from "@/components/stats/DaysSinceRevamp";
-import { CoffeeCupsCard } from "@/components/stats/CoffeeCupsCard";
-import { SiteViewsCard } from "@/components/stats/SiteViewsCard";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
 import { TopThoughtsCard } from "@/components/stats/TopThoughtsCard";
@@ -114,10 +119,41 @@ export default async function StatsPage() {
           />
         </div>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <CoffeeCupsCard cups={coffeeCups} />
-          <SiteViewsCard value={serverStats.totalViews} />
-          <DaysSinceRevamp revampDate={REVAMP_DATE} />
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <StatCardWithDecoration
+            label="Site Age"
+            value={Math.floor(
+              (new Date().getTime() - REVAMP_DATE.getTime()) /
+                (1000 * 60 * 60 * 24),
+            )}
+            suffix="days"
+            icon={
+              <Calendar size={32} className="text-primary" variant="bulk" />
+            }
+            decoration="📅"
+            description={`Launched ${REVAMP_DATE.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}`}
+          />
+          <StatCardWithDecoration
+            label="Coffee Consumed"
+            value={coffeeCups}
+            suffix="cups"
+            icon={
+              <Coffee size={32} className="text-amber-600" variant="bulk" />
+            }
+            decoration="☕"
+            description="1 cup per 500 words"
+          />
+          <StatCardWithDecoration
+            label="Total Site Views"
+            value={serverStats.totalViews}
+            icon={<Eye size={32} className="text-primary" variant="bulk" />}
+            decoration="👁️"
+            description="Since launch"
+          />
         </div>
       </SectionLayout>
 
