@@ -22,6 +22,7 @@ export function StatCard({
   value,
   suffix,
   icon,
+  decoration,
   delay = 0,
   className,
 }: StatCardProps) {
