@@ -99,7 +99,7 @@ export default async function StatsPage() {
             value={buildTimeStats.totalWords}
             suffix="words"
             icon={
-              <TextFolder size={32} className="text-secondary" variant="bulk" />
+              <TextFolder size={32} className="text-primary" variant="bulk" />
             }
             decoration="📝"
           />
@@ -108,7 +108,7 @@ export default async function StatsPage() {
             value={buildTimeStats.totalReadingTime}
             suffix="min"
             icon={
-              <Timelapse size={32} className="text-accent" variant="bulk" />
+              <Timelapse size={32} className="text-primary" variant="bulk" />
             }
             decoration="⏱️"
           />
