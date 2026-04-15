@@ -4,6 +4,7 @@ import React from "react";
 import { ReactionButton } from "./ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
+import { ReactionType } from "@/lib/stats/types";
 
 interface ReactionBarProps {
   entityType:
@@ -27,11 +28,11 @@ export function ReactionBar({
   reactions = {},
   className,
 }: ReactionBarProps) {
-  const reactionTypes: Array<"like" | "heart" | "celebrate" | "insightful"> = [
-    "like",
-    "heart",
-    "celebrate",
-    "insightful",
+  const reactionTypes: Array<ReactionType> = [
+    ReactionType.LIKE,
+    ReactionType.HEART,
+    ReactionType.CELEBRATE,
+    ReactionType.INSIGHTFUL,
   ];
 
   return (

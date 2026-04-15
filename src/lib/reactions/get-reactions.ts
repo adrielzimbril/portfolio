@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { PageType } from "@/types";
+import { ReactionType } from "@/lib/stats/types";
 
 export async function getReactions(
   entityType:

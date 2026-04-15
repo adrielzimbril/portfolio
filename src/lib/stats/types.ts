@@ -1,7 +1,12 @@
 // Types pour les statistiques du site
 // Adaptés du design de Braydon Coyer mais adaptés au projet actuel
 
-export type ReactionType = "like" | "heart" | "celebrate" | "insightful";
+export enum ReactionType {
+  LIKE = "like",
+  HEART = "heart",
+  CELEBRATE = "celebrate",
+  INSIGHTFUL = "insightful",
+}
 
 export interface BuildTimeStats {
   totalWords: number;

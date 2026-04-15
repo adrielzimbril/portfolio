@@ -5,19 +5,20 @@ import { Heart, ThumbUp, Sparkles, Lightbulb } from "@aurthle/icons";
 import { cn } from "@/utils/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { PageType } from "@/types";
+import { ReactionType } from "@/lib/stats/types";
 
-const REACTION_ICONS = {
-  like: ThumbUp,
-  heart: Heart,
-  celebrate: Sparkles,
-  insightful: Lightbulb,
+const REACTION_ICONS: Record<string, any> = {
+  [ReactionType.LIKE]: ThumbUp,
+  [ReactionType.HEART]: Heart,
+  [ReactionType.CELEBRATE]: Sparkles,
+  [ReactionType.INSIGHTFUL]: Lightbulb,
 };
 
-const REACTION_COLORS = {
-  like: "text-blue-500",
-  heart: "text-red-500",
-  celebrate: "text-yellow-500",
-  insightful: "text-purple-500",
+const REACTION_COLORS: Record<string, string> = {
+  [ReactionType.LIKE]: "text-blue-500",
+  [ReactionType.HEART]: "text-red-500",
+  [ReactionType.CELEBRATE]: "text-yellow-500",
+  [ReactionType.INSIGHTFUL]: "text-purple-500",
 };
 
 interface ReactionButtonProps {
@@ -27,7 +28,7 @@ interface ReactionButtonProps {
     | PageType.CONNECTIONS
     | PageType.QUESTS;
   entityId: string;
-  reactionType: "like" | "heart" | "celebrate" | "insightful";
+  reactionType: ReactionType;
   count?: number;
   className?: string;
 }
