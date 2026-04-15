@@ -12,6 +12,7 @@ import {
   isAnonymousUser,
   syncAnonymousReactionsOnLogin,
 } from "@/lib/reactions/anonymous-user";
+import { getEmojiHub } from "@aurthle/emoji-hub";
 
 const REACTION_ICONS: Record<string, any> = {
   [ReactionType.LIKE]: ThumbsUp,
@@ -100,14 +101,21 @@ export function ReactionButton({
 
     try {
       if (isReacted) {
-        // Remove reaction
-        const { error } = await supabase
+        // Remove reaction - handle both authenticated and anonymous users
+        let deleteQuery = supabase
           .from("reactions" as any)
           .delete()
           .eq("page_type", pageType)
           .eq("entity_id", entityId)
-          .eq("reaction_type", reactionType)
-          .or(`user_id.eq.${currentUserId},anonymous_id.eq.${currentUserId}`);
+          .eq("reaction_type", reactionType);
+
+        if (user?.id) {
+          deleteQuery = deleteQuery.eq("user_id", user.id);
+        } else {
+          deleteQuery = deleteQuery.eq("anonymous_id", currentUserId);
+        }
+
+        const { error } = await deleteQuery;
 
         if (error) throw error;
         setIsReacted(false);
@@ -147,7 +155,7 @@ export function ReactionButton({
       onClick={handleReaction}
       disabled={isLoading}
       className={cn(
-        "flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200",
+        "flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer",
         "bg-b-base border border-border hover:border-primary/50",
         isReacted && cn("border-primary/50 bg-primary/10", colorClass),
         className,
@@ -157,6 +165,7 @@ export function ReactionButton({
         size={16}
         className={cn(isReacted ? colorClass : "text-muted-foreground")}
       />
+      {getEmojiHub("❣️", "fluent", "anim")}
       <span className="text-xs font-medium text-foreground">
         {reactionCount}
       </span>
