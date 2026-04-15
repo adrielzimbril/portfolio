@@ -10,6 +10,7 @@ import {
   getAnonymousUserId,
   getCurrentUserId,
   isAnonymousUser,
+  syncAnonymousReactionsOnLogin,
 } from "@/lib/reactions/anonymous-user";
 
 const REACTION_ICONS: Record<string, any> = {
@@ -57,21 +58,32 @@ export function ReactionButton({
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
+      const previousUser = user;
       setUser(user);
 
       // Get current user ID (authenticated or anonymous)
       const userId = getCurrentUserId(user);
+      const anonymousId = getAnonymousUserId();
       setCurrentUserId(userId);
 
-      if (userId) {
-        // Check if user has already reacted
+      // Sync anonymous reactions when user authenticates
+      if (user?.id && !previousUser?.id && anonymousId) {
+        await syncAnonymousReactionsOnLogin(anonymousId);
+      }
+
+      if (userId || anonymousId) {
+        // Check if user has already reacted (check both user_id and anonymous_id)
+        // This allows reactions to persist across auth states on the same device
         const { data } = await supabase
           .from("reactions" as any)
           .select("*")
           .eq("page_type", pageType)
           .eq("entity_id", entityId)
           .eq("reaction_type", reactionType)
-          .or(`user_id.eq.${userId},anonymous_id.eq.${userId}`)
+          .or(
+            `user_id.eq.${userId},anonymous_id.eq.${userId},anonymous_id.eq.${anonymousId}`,
+          )
           .single();
 
         setIsReacted(!!data);
