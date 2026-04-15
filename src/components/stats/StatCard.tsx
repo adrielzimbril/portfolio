@@ -4,12 +4,15 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface StatCardProps {
   label: string;
   value: number | string;
   suffix?: string;
   icon?: React.ReactNode;
+  decoration?: string;
   delay?: number;
   className?: string;
 }
@@ -58,55 +61,58 @@ export function StatCard({
   const effectiveValue =
     typeof value === "number" && !shouldReduceAnimations ? displayValue : value;
 
-  const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-    "squircle squircle-smooth-xl squircle-6xl",
-    className,
-  );
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={cardClassName}
+    <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className={cn(
+        "squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden",
+        className,
+      )}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-      <div className="relative z-20 flex h-full flex-col">
-        {icon && (
-          <motion.div
-            animate={{
-              rotate: isHovered ? [0, -5, 5, 0] : 0,
-              y: isHovered ? -4 : 0,
-            }}
-            transition={{
-              rotate: { duration: 0.5 },
-              y: { type: "spring", stiffness: 200, damping: 15 },
-            }}
-            className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-b-base text-foreground"
-          >
-            {icon}
-          </motion.div>
-        )}
-        <h3 className="text-sm font-medium text-muted-foreground">{label}</h3>
-        <div className="mt-2 flex items-baseline gap-1">
-          <motion.p
-            animate={{ scale: isHovered ? 1.02 : 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="text-3xl font-semibold tracking-tight text-foreground"
-          >
-            {typeof effectiveValue === "number"
-              ? effectiveValue.toLocaleString()
-              : effectiveValue}
-          </motion.p>
-          {suffix && (
-            <span className="text-sm text-muted-foreground">{suffix}</span>
+      <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
+        <div
+          className={cn(
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
+        >
+          {decoration && (
+            <motion.div
+              animate={{
+                rotate: isHovered ? 5 : -5,
+                scale: isHovered ? 1.1 : 1,
+                y: isHovered ? -10 : 0,
+              }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+              className="absolute -bottom-2 -right-2 text-[100px] leading-none opacity-10"
+            >
+              {decoration}
+            </motion.div>
+          )}
+          <div className="relative w-full flex flex-col gap-2">
+            <div
+              className={cn(
+                "relative flex flex-row items-center gap-2 md:gap-4",
+              )}
+            >
+              {icon && (
+                <Badge className="capitalize" size="lg" circle>
+                  {icon}
+                </Badge>
+              )}
+              <div className="flex flex-col items-start gap-2">
+                <h6 className="tracking-wide">{label}</h6>
+                <p className="text-sm text-b-white-invert-thr leading-[120%]">
+                  {typeof effectiveValue === "number"
+                    ? effectiveValue.toLocaleString()
+                    : effectiveValue}{" "}
+                  {suffix}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </CardContent>
+    </Card>
   );
 }

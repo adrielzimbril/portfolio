@@ -33,12 +33,6 @@ export function DaysSinceRevamp({
 
   useEffect(() => {
     if (days === 0) return;
-
-    if (shouldReduceAnimations) {
-      setDisplayDays(days);
-      return;
-    }
-
     const duration = 1500;
     const startTime = performance.now();
     const startDelay = delay * 1000;

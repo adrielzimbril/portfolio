@@ -11,6 +11,7 @@ import { getGitHubStats } from "@/lib/stats/github-stats";
 import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
 import { StatsPageHeader } from "@/components/stats/StatsPageHeader";
 import { StatCard } from "@/components/stats/StatCard";
+import { BookOne, Text, Timelapse } from "@aurthle/icons";
 import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
 import { DaysSinceRevamp } from "@/components/stats/DaysSinceRevamp";
 import { CoffeeCupsCard } from "@/components/stats/CoffeeCupsCard";
@@ -90,16 +91,24 @@ export default async function StatsPage() {
             label="Total Thoughts"
             value={buildTimeStats.totalPosts}
             suffix="thoughts"
+            icon={<BookOne size={32} className="text-primary" variant="bulk" />}
+            decoration="💭"
           />
           <StatCard
             label="Total Words"
             value={buildTimeStats.totalWords}
             suffix="words"
+            icon={<Text size={32} className="text-secondary" variant="bulk" />}
+            decoration="📝"
           />
           <StatCard
             label="Reading Time"
             value={buildTimeStats.totalReadingTime}
             suffix="min"
+            icon={
+              <Timelapse size={32} className="text-accent" variant="bulk" />
+            }
+            decoration="⏱️"
           />
           <DaysSinceRevamp revampDate={REVAMP_DATE} />
         </div>
