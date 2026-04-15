@@ -1,10 +1,9 @@
 import React from "react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { getAllPosts } from "@/integrations/content/lib";
 import { getBuildTimeStats } from "@/lib/stats/build-time-stats";
 import { getServerStats } from "@/lib/stats/server-stats";
 import { getGitHubStats } from "@/lib/stats/github-stats";
@@ -72,6 +71,8 @@ export default async function StatsPage() {
     (new Date().getTime() - REVAMP_DATE.getTime()) / (1000 * 60 * 60 * 24),
   );
 
+  const locale = await getLocale();
+
   return (
     <>
       <PageHero
@@ -121,23 +122,6 @@ export default async function StatsPage() {
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatCardWithDecoration
-            label="Site Age"
-            value={Math.floor(
-              (new Date().getTime() - REVAMP_DATE.getTime()) /
-                (1000 * 60 * 60 * 24),
-            )}
-            suffix="days"
-            icon={
-              <Calendar size={32} className="text-primary" variant="bulk" />
-            }
-            decoration="📅"
-            description={`Launched ${REVAMP_DATE.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}`}
-          />
-          <StatCardWithDecoration
             label="Coffee Consumed"
             value={coffeeCups}
             suffix="cups"
@@ -146,6 +130,20 @@ export default async function StatsPage() {
             }
             decoration="☕"
             description="1 cup per 500 words"
+          />
+          <StatCardWithDecoration
+            label="Site Age"
+            value={daysSinceRevamp}
+            suffix="days"
+            icon={
+              <Calendar size={32} className="text-primary" variant="bulk" />
+            }
+            decoration="📅"
+            description={`Launched ${REVAMP_DATE.toLocaleDateString(locale, {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}`}
           />
           <StatCardWithDecoration
             label="Total Site Views"
@@ -165,23 +163,25 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <TopThoughtsCard
+              title="Top Viewed Thoughts"
+              thoughts={serverStats.topViewedThoughts.slice(0, 5)}
+              metricLabel="views"
+            />
+            <TopThoughtsCard
+              title="Top Reacted Thoughts"
+              thoughts={serverStats.topReactedThoughts.slice(0, 5)}
+              metricLabel="reactions"
+            />
+          </div>
           <CategoryBarChart categories={buildTimeStats.categories} />
-          <ReactionBreakdown reactions={serverStats.reactions} />
-          <CommunityMessagesCard count={serverStats.communityMessages} />
         </div>
 
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <TopThoughtsCard
-            title="Top Viewed Thoughts"
-            thoughts={serverStats.topViewedThoughts}
-            metricLabel="views"
-          />
-          <TopThoughtsCard
-            title="Top Reacted Thoughts"
-            thoughts={serverStats.topReactedThoughts}
-            metricLabel="reactions"
-          />
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <ReactionBreakdown reactions={serverStats.reactions} />
+          <CommunityMessagesCard count={serverStats.communityMessages} />
         </div>
       </SectionLayout>
 
