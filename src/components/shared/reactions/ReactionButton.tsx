@@ -6,6 +6,11 @@ import { cn } from "@/utils/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
+import {
+  getAnonymousUserId,
+  getCurrentUserId,
+  isAnonymousUser,
+} from "@/lib/reactions/anonymous-user";
 
 const REACTION_ICONS: Record<string, any> = {
   [ReactionType.LIKE]: ThumbsUp,
@@ -39,6 +44,7 @@ export function ReactionButton({
   className,
 }: ReactionButtonProps) {
   const [user, setUser] = useState<any>(null);
+  const [currentUserId, setCurrentUserId] = useState<string | undefined>();
   const [isReacted, setIsReacted] = useState(false);
   const [reactionCount, setReactionCount] = useState(count);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,14 +59,19 @@ export function ReactionButton({
       } = await supabase.auth.getUser();
       setUser(user);
 
-      if (user) {
+      // Get current user ID (authenticated or anonymous)
+      const userId = getCurrentUserId(user);
+      setCurrentUserId(userId);
+
+      if (userId) {
+        // Check if user has already reacted
         const { data } = await supabase
           .from("reactions" as any)
           .select("*")
           .eq("page_type", pageType)
           .eq("entity_id", entityId)
-          .eq("user_id", user.id)
           .eq("reaction_type", reactionType)
+          .or(`user_id.eq.${userId},anonymous_id.eq.${userId}`)
           .single();
 
         setIsReacted(!!data);
@@ -71,7 +82,7 @@ export function ReactionButton({
   }, [entityId, reactionType, pageType]);
 
   const handleReaction = async () => {
-    if (!user || isLoading) return;
+    if (!currentUserId || isLoading) return;
 
     setIsLoading(true);
 
@@ -83,20 +94,30 @@ export function ReactionButton({
           .delete()
           .eq("page_type", pageType)
           .eq("entity_id", entityId)
-          .eq("user_id", user.id)
-          .eq("reaction_type", reactionType);
+          .eq("reaction_type", reactionType)
+          .or(`user_id.eq.${currentUserId},anonymous_id.eq.${currentUserId}`);
 
         if (error) throw error;
         setIsReacted(false);
         setReactionCount(Math.max(0, reactionCount - 1));
       } else {
         // Add reaction
-        const { error } = await supabase.from("reactions" as any).insert({
+        const reactionData: any = {
           page_type: pageType,
           entity_id: entityId,
-          user_id: user.id,
           reaction_type: reactionType,
-        } as any);
+        };
+
+        // Add user_id or anonymous_id based on user type
+        if (user?.id) {
+          reactionData.user_id = user.id;
+        } else {
+          reactionData.anonymous_id = currentUserId;
+        }
+
+        const { error } = await supabase
+          .from("reactions" as any)
+          .insert(reactionData);
 
         if (error) throw error;
         setIsReacted(true);
@@ -112,12 +133,11 @@ export function ReactionButton({
   return (
     <button
       onClick={handleReaction}
-      disabled={!user || isLoading}
+      disabled={isLoading}
       className={cn(
         "flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200",
         "bg-b-base border border-border hover:border-primary/50",
         isReacted && cn("border-primary/50 bg-primary/10", colorClass),
-        !user && "opacity-50 cursor-not-allowed",
         className,
       )}
     >
