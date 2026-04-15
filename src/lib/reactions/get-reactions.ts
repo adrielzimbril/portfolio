@@ -9,9 +9,10 @@ export async function getReactions(
     | PageType.PROJECT
     | PageType.CONNECTIONS
     | PageType.QUESTS
-    | PageType.HUB,
+    | PageType.HUB
+    | PageType.CHANGELOG,
   entityId: string,
-) {
+): Promise<Record<ReactionType, number>> {
   const cookieStore = await cookies();
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -58,7 +59,8 @@ function getTableName(
     | PageType.PROJECT
     | PageType.CONNECTIONS
     | PageType.QUESTS
-    | PageType.HUB,
+    | PageType.HUB
+    | PageType.CHANGELOG,
 ): string {
   switch (entityType) {
     case PageType.THOUGHT:
@@ -71,6 +73,8 @@ function getTableName(
       return "quest_reactions";
     case PageType.HUB:
       return "hub_reactions";
+    case PageType.CHANGELOG:
+      return "changelog_reactions";
   }
 }
 
@@ -80,7 +84,8 @@ function getIdField(
     | PageType.PROJECT
     | PageType.CONNECTIONS
     | PageType.QUESTS
-    | PageType.HUB,
+    | PageType.HUB
+    | PageType.CHANGELOG,
 ): string {
   switch (entityType) {
     case PageType.THOUGHT:
@@ -93,5 +98,7 @@ function getIdField(
       return "quest_id";
     case PageType.HUB:
       return "slug";
+    case PageType.CHANGELOG:
+      return "version";
   }
 }

@@ -2,6 +2,19 @@ import { ChangelogItem } from "@/types/personalData";
 
 export const changelog: ChangelogItem[] = [
   {
+    id: "v3.1.0",
+    version: "3.1.0",
+    date: "2026-04-15",
+    type: "feature",
+    changes: [
+      "Added reaction system with like, heart, celebrate, and insightful reactions.",
+      "Integrated reactions into thoughts, projects, hub, and quests inner pages.",
+      "Added ReactionBar component with real-time reaction counts.",
+      "Created Supabase migration for reaction tables with RLS policies.",
+      "Updated stats page to show top viewed and reacted thoughts.",
+    ],
+  },
+  {
     id: "v3.0.0",
     version: "3.0.0",
     date: "2024-04-13",

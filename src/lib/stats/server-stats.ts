@@ -83,6 +83,18 @@ export async function getServerStats(): Promise<ServerStats> {
         }
       });
 
+      // Fetch from changelog_reactions
+      const { data: changelogReactions } = await supabase
+        .from("changelog_reactions")
+        .select("reaction_type");
+
+      changelogReactions?.forEach((r) => {
+        const type = (r as any).reaction_type as ReactionType;
+        if (type in reactions) {
+          reactions[type]++;
+        }
+      });
+
       // Fetch top viewed thoughts
       const { data: topViewedData } = await supabase
         .from("page_counters")

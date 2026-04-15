@@ -74,8 +74,9 @@ export function ReactionButton({
     checkUser();
   }, [entityId, reactionType, entityType]);
 
-  const getTableName = () => {
-    switch (entityType) {
+  const getTableName = (): string => {
+    const type = entityType as PageType;
+    switch (type) {
       case PageType.THOUGHT:
         return "thought_reactions";
       case PageType.PROJECT:
@@ -86,11 +87,16 @@ export function ReactionButton({
         return "quest_reactions";
       case PageType.HUB:
         return "hub_reactions";
+      case PageType.CHANGELOG:
+        return "changelog_reactions";
+      default:
+        return "thought_reactions";
     }
   };
 
-  const getIdField = () => {
-    switch (entityType) {
+  const getIdField = (): string => {
+    const type = entityType as PageType;
+    switch (type) {
       case PageType.THOUGHT:
         return "slug";
       case PageType.PROJECT:
@@ -100,6 +106,10 @@ export function ReactionButton({
       case PageType.QUESTS:
         return "quest_id";
       case PageType.HUB:
+        return "slug";
+      case PageType.CHANGELOG:
+        return "version";
+      default:
         return "slug";
     }
   };
