@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Heart, ThumbUp, Sparkles, Lightbulb } from "@aurthle/icons";
 import { cn } from "@/utils/utils";
 import { supabase } from "@/integrations/supabase/client";
+import { PageType } from "@/types";
 
 const REACTION_ICONS = {
   like: ThumbUp,
@@ -20,7 +21,11 @@ const REACTION_COLORS = {
 };
 
 interface ReactionButtonProps {
-  entityType: "article" | "project" | "connection" | "quest";
+  entityType:
+    | PageType.THOUGHT
+    | PageType.PROJECT
+    | PageType.CONNECTIONS
+    | PageType.QUESTS;
   entityId: string;
   reactionType: "like" | "heart" | "celebrate" | "insightful";
   count?: number;
@@ -53,9 +58,9 @@ export function ReactionButton({
         const tableName = getTableName();
         const idField = getIdField();
         const { data } = await supabase
-          .from(tableName)
+          .from(tableName as any)
           .select("*")
-          .eq(idField, entityId)
+          .eq(idField as any, entityId)
           .eq("user_id", user.id)
           .eq("reaction_type", reactionType)
           .single();
@@ -69,26 +74,26 @@ export function ReactionButton({
 
   const getTableName = () => {
     switch (entityType) {
-      case "article":
+      case PageType.THOUGHT:
         return "article_reactions";
-      case "project":
+      case PageType.PROJECT:
         return "project_reactions";
-      case "connection":
+      case PageType.CONNECTIONS:
         return "connection_reactions";
-      case "quest":
+      case PageType.QUESTS:
         return "quest_reactions";
     }
   };
 
   const getIdField = () => {
     switch (entityType) {
-      case "article":
+      case PageType.THOUGHT:
         return "slug";
-      case "project":
+      case PageType.PROJECT:
         return "project_id";
-      case "connection":
+      case PageType.CONNECTIONS:
         return "connection_id";
-      case "quest":
+      case PageType.QUESTS:
         return "quest_id";
     }
   };
@@ -104,9 +109,9 @@ export function ReactionButton({
       if (isReacted) {
         // Remove reaction
         const { error } = await supabase
-          .from(tableName)
+          .from(tableName as any)
           .delete()
-          .eq(idField, entityId)
+          .eq(idField as any, entityId)
           .eq("user_id", user.id)
           .eq("reaction_type", reactionType);
 
@@ -115,7 +120,7 @@ export function ReactionButton({
         setReactionCount(Math.max(0, reactionCount - 1));
       } else {
         // Add reaction
-        const { error } = await supabase.from(tableName).insert({
+        const { error } = await supabase.from(tableName as any).insert({
           [idField]: entityId,
           user_id: user.id,
           reaction_type: reactionType,

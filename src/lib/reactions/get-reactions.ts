@@ -1,8 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { PageType } from "@/types";
 
 export async function getReactions(
-  entityType: "article" | "project" | "connection" | "quest",
+  entityType:
+    | PageType.THOUGHT
+    | PageType.PROJECT
+    | PageType.CONNECTIONS
+    | PageType.QUESTS,
   entityId: string,
 ) {
   const cookieStore = await cookies();
@@ -22,9 +27,9 @@ export async function getReactions(
   const idField = getIdField(entityType);
 
   const { data, error } = await supabase
-    .from(tableName)
+    .from(tableName as any)
     .select("reaction_type")
-    .eq(idField, entityId);
+    .eq(idField as any, entityId);
 
   if (error) {
     return {};
@@ -46,31 +51,39 @@ export async function getReactions(
 }
 
 function getTableName(
-  entityType: "article" | "project" | "connection" | "quest",
+  entityType:
+    | PageType.THOUGHT
+    | PageType.PROJECT
+    | PageType.CONNECTIONS
+    | PageType.QUESTS,
 ): string {
   switch (entityType) {
-    case "article":
+    case PageType.THOUGHT:
       return "article_reactions";
-    case "project":
+    case PageType.PROJECT:
       return "project_reactions";
-    case "connection":
+    case PageType.CONNECTIONS:
       return "connection_reactions";
-    case "quest":
+    case PageType.QUESTS:
       return "quest_reactions";
   }
 }
 
 function getIdField(
-  entityType: "article" | "project" | "connection" | "quest",
+  entityType:
+    | PageType.THOUGHT
+    | PageType.PROJECT
+    | PageType.CONNECTIONS
+    | PageType.QUESTS,
 ): string {
   switch (entityType) {
-    case "article":
+    case PageType.THOUGHT:
       return "slug";
-    case "project":
+    case PageType.PROJECT:
       return "project_id";
-    case "connection":
+    case PageType.CONNECTIONS:
       return "connection_id";
-    case "quest":
+    case PageType.QUESTS:
       return "quest_id";
   }
 }

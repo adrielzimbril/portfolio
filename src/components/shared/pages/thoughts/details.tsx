@@ -5,6 +5,7 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { getResourcesUrl } from "@/utils/base-url";
 import { PageType } from "@/types";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -37,7 +38,7 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar entityType="article" entityId={slug} />
+        <ReactionBar entityType={PageType.THOUGHT} entityId={slug} />
         <Action slug={slug} />
       </div>
     </div>

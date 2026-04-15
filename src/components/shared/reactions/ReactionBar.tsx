@@ -3,9 +3,14 @@
 import React from "react";
 import { ReactionButton } from "./ReactionButton";
 import { cn } from "@/utils/utils";
+import { PageType } from "@/types";
 
 interface ReactionBarProps {
-  entityType: "article" | "project" | "connection" | "quest";
+  entityType:
+    | PageType.THOUGHT
+    | PageType.PROJECT
+    | PageType.CONNECTIONS
+    | PageType.QUESTS;
   entityId: string;
   reactions?: {
     like?: number;

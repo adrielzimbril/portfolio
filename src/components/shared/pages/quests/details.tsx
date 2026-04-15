@@ -53,7 +53,7 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar entityType="quest" entityId={slug} />
+        <ReactionBar entityType={PageType.QUESTS} entityId={slug} />
         {action ? <Action label={action.label} href={action.href} /> : null}
       </div>
     </div>

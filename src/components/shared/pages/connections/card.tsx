@@ -25,7 +25,11 @@ export function ConnectionCard({
       <ConnectionAvatar image={image} name={name} met={met} />
       <ConnectionBadge met={met} />
       <ConnectionName name={name} />
-      <ReactionBar entityType="connection" entityId={id} className="mt-2" />
+      <ReactionBar
+        entityType={PageType.CONNECTIONS}
+        entityId={id}
+        className="mt-2"
+      />
     </div>
   );
 }
