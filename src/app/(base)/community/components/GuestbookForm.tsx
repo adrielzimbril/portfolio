@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export function GuestbookForm({ user }: { user: any }) {
   const [message, setMessage] = useState("");
@@ -49,11 +49,7 @@ export function GuestbookForm({ user }: { user: any }) {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="flex items-center gap-3 mb-2">
         <div className="relative">
-          <Avatar className="size-12 rounded-2xl border-2 border-border shadow-lg">
-            <AvatarImage
-              src={user.user_metadata.avatar_url}
-              alt={user.user_metadata.full_name}
-            />
+          <Avatar className="size-12 rounded-2xl border-2 border-border">
             <AvatarFallback className="rounded-2xl">
               {user.user_metadata.full_name?.charAt(0).toUpperCase()}
             </AvatarFallback>

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { formatDateDiff } from "@/utils/format-date";
 import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 // Demo data
 const DEMO_MESSAGES = [
@@ -83,10 +83,6 @@ export function GuestbookList() {
             <div className="flex gap-4">
               <div className="shrink-0">
                 <Avatar className="size-12 rounded-2xl border-2 border-border">
-                  <AvatarImage
-                    src={msg.creator_avatar_url}
-                    alt={msg.creator_name}
-                  />
                   <AvatarFallback className="rounded-2xl">
                     {msg.creator_name.charAt(0).toUpperCase()}
                   </AvatarFallback>

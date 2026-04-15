@@ -95,7 +95,7 @@ export default async function CommunityPage() {
                 className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-20 blur-2xl group-hover:opacity-30 transition-opacity duration-300"
                 style={{ backgroundColor: stat.color.replace("text-", "") }}
               />
-              <div className="relative z-20 flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground shadow-lg mb-3">
+              <div className="relative z-20 flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground mb-3">
                 <stat.icon size={24} className={stat.color} />
               </div>
               <p className="text-3xl font-bold text-foreground mb-1">
@@ -109,12 +109,7 @@ export default async function CommunityPage() {
         </div>
       </div>
 
-      <SectionLayout
-        title={t("community.sections.wall.title")}
-        description={t("community.sections.wall.description")}
-        badge={t("community.sections.wall.badge")}
-        isFlex
-      >
+      <SectionLayout isFlex>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Form Section */}
           <div className="lg:col-span-1">
@@ -128,7 +123,7 @@ export default async function CommunityPage() {
 
               <div className="relative z-20">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground shadow-lg">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-b-base text-foreground">
                     <ChatBubble size={24} className="text-primary" />
                   </div>
                   <div>
