@@ -273,11 +273,6 @@ export function SiteViewsCard({
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
-    if (shouldReduceAnimations) {
-      setDisplayValue(value);
-      return;
-    }
-
     const duration = 1500;
     const startTime = performance.now();
     const startDelay = delay * 1000;

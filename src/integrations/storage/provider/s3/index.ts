@@ -7,7 +7,7 @@ import { getSignedUrl as getS3SignedUrl } from "@aws-sdk/s3-request-presigner";
 import logger from "@/utils/logger";
 import {
   GetSignedUploadUrlHandler,
-  GetSignedUrlHander,
+  GetSignedUrlHandler,
 } from "@/integrations/storage/types";
 
 let s3Client: S3Client | null = null;
@@ -49,7 +49,7 @@ const getS3Client = () => {
 
 export const getSignedUploadUrl: GetSignedUploadUrlHandler = async (
   path,
-  { bucket }
+  { bucket },
 ) => {
   const s3Client = getS3Client();
   try {
@@ -62,7 +62,7 @@ export const getSignedUploadUrl: GetSignedUploadUrlHandler = async (
       }),
       {
         expiresIn: 60,
-      }
+      },
     );
   } catch (e) {
     logger.error(e);
@@ -71,16 +71,16 @@ export const getSignedUploadUrl: GetSignedUploadUrlHandler = async (
   }
 };
 
-export const getSignedUrl: GetSignedUrlHander = async (
+export const getSignedUrl: GetSignedUrlHandler = async (
   path,
-  { bucket, expiresIn }
+  { bucket, expiresIn },
 ) => {
   const s3Client = getS3Client();
   try {
     return getS3SignedUrl(
       s3Client,
       new GetObjectCommand({ Bucket: bucket, Key: path }),
-      { expiresIn }
+      { expiresIn },
     );
   } catch (e) {
     logger.error(e);
