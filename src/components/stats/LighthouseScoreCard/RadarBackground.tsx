@@ -23,11 +23,12 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
   };
 
   return (
-    <div className="pointer-events-none absolute -bottom-12 -right-12 text-green-500 dark:text-green-400">
+    <div className="pointer-events-none absolute -bottom-12 -right-12 text-green-600 dark:text-green-400">
       <svg
         width={size}
         height={size}
         viewBox={`0 0 ${size} ${size}`}
+        className="drop-shadow-[0_0_8px_rgba(34,197,94,0.25)] dark:drop-shadow-[0_0_8px_rgba(74,222,128,0.25)]"
         style={
           {
             "--radar-gradient-start": "rgb(34, 197, 94)",
@@ -35,6 +36,29 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
           } as React.CSSProperties
         }
       >
+        {/* Glow filter */}
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation={2} result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <radialGradient id="radarGradient" cx="50%" cy="50%" r="50%">
+            <stop
+              offset="0%"
+              stopColor="var(--radar-gradient-start)"
+              stopOpacity={0.5}
+            />
+            <stop
+              offset="100%"
+              stopColor="var(--radar-gradient-end)"
+              stopOpacity={0.15}
+            />
+          </radialGradient>
+        </defs>
+
         {/* Concentric circles */}
         {[0.25, 0.5, 0.75, 1].map((scale, i) => (
           <circle
@@ -45,14 +69,14 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
             fill="none"
             stroke="currentColor"
             strokeWidth={scale === 1 ? 1.5 : 1}
-            className="text-muted-foreground/50"
-            opacity={0.25}
+            className="text-muted-foreground/30"
+            opacity={0.4}
             style={{ transformOrigin: `${center}px ${center}px` }}
           />
         ))}
 
         {/* Cross axes */}
-        <g opacity={0.2}>
+        <g opacity={0.3}>
           <line
             x1={center}
             y1={center - maxRadius}
@@ -60,7 +84,7 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
             y2={center + maxRadius}
             stroke="currentColor"
             strokeWidth={1}
-            className="text-muted-foreground/50"
+            className="text-muted-foreground/30"
           />
           <line
             x1={center - maxRadius}
@@ -69,17 +93,18 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
             y2={center}
             stroke="currentColor"
             strokeWidth={1}
-            className="text-muted-foreground/50"
+            className="text-muted-foreground/30"
           />
         </g>
 
-        {/* Score polygon fill */}
+        {/* Score polygon fill with glow */}
         <polygon
           points={getPolygonPoints(scores)}
           fill="url(#radarGradient)"
           stroke="currentColor"
           strokeWidth={2}
-          opacity={0.25}
+          opacity={0.7}
+          filter="url(#glow)"
           style={{ transformOrigin: `${center}px ${center}px` }}
         />
 
@@ -96,28 +121,13 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
               key={i}
               cx={x}
               cy={y}
-              r={4}
+              r={3.5}
               fill="currentColor"
-              opacity={0.5}
+              opacity={0.8}
+              filter="url(#glow)"
             />
           );
         })}
-
-        {/* Gradient definition */}
-        <defs>
-          <radialGradient id="radarGradient" cx="50%" cy="50%" r="50%">
-            <stop
-              offset="0%"
-              stopColor="var(--radar-gradient-start)"
-              stopOpacity={0.5}
-            />
-            <stop
-              offset="100%"
-              stopColor="var(--radar-gradient-end)"
-              stopOpacity={0.15}
-            />
-          </radialGradient>
-        </defs>
       </svg>
     </div>
   );

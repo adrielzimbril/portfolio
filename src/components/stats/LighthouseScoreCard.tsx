@@ -69,7 +69,15 @@ export function LighthouseScoreCard({
             <RadarBackground scores={scoreValues} />
             <div className="flex flex-row z-20 items-center justify-between w-full mx-auto">
               <div className="flex flex-row items-center justify-between w-fit">
-                <Badge className="capitalize aspect-square" size="lg">
+                <Badge
+                  className={cn(
+                    "capitalize aspect-square",
+                    // overallColors.squircle,
+                  )}
+                  // variant="colored"
+                  size="lg"
+                  circle
+                >
                   <DeviceIcon
                     className={cn(overallColors.text)}
                     variant="bold"
@@ -94,8 +102,7 @@ export function LighthouseScoreCard({
                   // overallColors.squircle,
                 )}
                 // variant="colored"
-                variant="secondary"
-                size="md"
+                size="lg"
                 circle
               >
                 <span
