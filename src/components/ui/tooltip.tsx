@@ -9,6 +9,8 @@ type Side = "top" | "bottom" | "left" | "right";
 
 type Align = "start" | "center" | "end";
 
+type TooltipVariant = "light" | "dark";
+
 type TooltipData = {
   content: React.ReactNode;
   rect: DOMRect;
@@ -18,6 +20,7 @@ type TooltipData = {
   alignOffset: number;
   id: string;
   arrow: boolean;
+  variant: TooltipVariant;
 };
 
 type GlobalTooltipContextType = {
@@ -229,15 +232,17 @@ function TooltipProvider({
 
 type TooltipArrowProps = {
   side: Side;
+  variant?: TooltipVariant;
 };
 
-function TooltipArrow({ side }: TooltipArrowProps) {
+function TooltipArrow({ side, variant = "light" }: TooltipArrowProps) {
+  const arrowClasses = variant === "dark" ? "bg-primary" : "bg-sh-base-white";
+
   return (
     <div
       className={cn(
         "absolute z-50 size-2.5 rotate-45 rounded-[2px]",
-        "bg-sh-base-white",
-        "bg-primary",
+        arrowClasses,
         (side === "top" || side === "bottom") && "left-1/2 -translate-x-1/2",
         (side === "left" || side === "right") && "top-1/2 -translate-y-1/2",
         side === "top" && "-bottom-[3px]",
@@ -273,6 +278,11 @@ function TooltipOverlay() {
     });
   }, [currentTooltip]);
 
+  const variantClasses =
+    currentTooltip?.variant === "dark"
+      ? "bg-primary b-black-unchanged"
+      : "bg-sh-base-white text-b-white-invert-sec";
+
   return (
     currentTooltip &&
     currentTooltip.content &&
@@ -291,14 +301,16 @@ function TooltipOverlay() {
             data-slot="tooltip-overlay"
             className={cn(
               "relative rounded-lg fill-primary px-3 py-1.5 text-sm w-fit text-balance",
-              "bg-sh-base-white text-b-white-invert-sec",
-              "bg-primary b-black-unchanged",
+              variantClasses,
             )}
           >
             {currentTooltip.content}
 
             {currentTooltip.arrow && (
-              <TooltipArrow side={currentTooltip.side} />
+              <TooltipArrow
+                side={currentTooltip.side}
+                variant={currentTooltip.variant}
+              />
             )}
           </div>
         </div>
@@ -317,6 +329,7 @@ type TooltipContextType = {
   align: Align;
   alignOffset: number;
   id: string;
+  variant: TooltipVariant;
 };
 
 const TooltipContext = React.createContext<TooltipContextType | undefined>(
@@ -337,6 +350,7 @@ type TooltipProps = {
   sideOffset?: number;
   align?: Align;
   alignOffset?: number;
+  variant?: TooltipVariant;
 };
 
 function Tooltip({
@@ -345,6 +359,7 @@ function Tooltip({
   sideOffset = 14,
   align = "center",
   alignOffset = 0,
+  variant = "light",
 }: TooltipProps) {
   const id = React.useId();
   const [content, setContent] = React.useState<React.ReactNode>(null);
@@ -362,6 +377,7 @@ function Tooltip({
         align,
         alignOffset,
         id,
+        variant,
       }}
     >
       {children}
@@ -388,7 +404,7 @@ type TooltipTriggerProps = {
 };
 
 function TooltipTrigger({ children }: TooltipTriggerProps) {
-  const { content, side, sideOffset, align, alignOffset, id, arrow } =
+  const { content, side, sideOffset, align, alignOffset, id, arrow, variant } =
     useTooltip();
   const { showTooltip, hideTooltip, currentTooltip } = useGlobalTooltip();
   const triggerRef = React.useRef<HTMLElement>(null);
@@ -405,8 +421,19 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       alignOffset,
       id,
       arrow,
+      variant,
     });
-  }, [showTooltip, content, side, sideOffset, align, alignOffset, id, arrow]);
+  }, [
+    showTooltip,
+    content,
+    side,
+    sideOffset,
+    align,
+    alignOffset,
+    id,
+    arrow,
+    variant,
+  ]);
 
   const handleMouseEnter = React.useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -457,8 +484,9 @@ function TooltipTrigger({ children }: TooltipTriggerProps) {
       alignOffset,
       id,
       arrow,
+      variant,
     });
-  }, [content, arrow, currentTooltip?.id]);
+  }, [content, arrow, currentTooltip?.id, variant]);
 
   return React.cloneElement(children, {
     ref: triggerRef,

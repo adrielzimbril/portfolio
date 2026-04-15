@@ -212,11 +212,23 @@ export function ContributionGraphCard({
                         style={{ gap: "2px" }}
                       >
                         {week.contributionDays.map((day, dayIndex) => (
-                          <Tooltip key={dayIndex}>
+                          <Tooltip key={dayIndex} variant="dark">
                             <TooltipTrigger>
                               <div
-                                className={`h-[10px] w-[10px] rounded-[2px] transition-colors duration-150 ${CONTRIBUTION_LEVEL_COLORS[day.contributionLevel]} ${levelColorsHover[day.contributionLevel]}`}
-                              />
+                                className={cn(
+                                  "group/cell relative aspect-square",
+                                )}
+                              >
+                                <div
+                                  className={cn(
+                                    "h-[10px] w-[10px] aspect-square rounded-sm transition-colors duration-150",
+                                    CONTRIBUTION_LEVEL_COLORS[
+                                      day.contributionLevel
+                                    ],
+                                    levelColorsHover[day.contributionLevel],
+                                  )}
+                                />
+                              </div>
                             </TooltipTrigger>
                             <TooltipContent>
                               <div className="font-medium">
@@ -287,7 +299,7 @@ export function ContributionGraphCard({
                             >
                               <div
                                 className={cn(
-                                  "h-full w-full aspect-square rounded-sm transition-colors duration-150 lg:rounded",
+                                  "h-full w-full aspect-square rounded-sm transition-colors duration-150 lg:rounded-md",
                                   CONTRIBUTION_LEVEL_COLORS[
                                     day.contributionLevel
                                   ],

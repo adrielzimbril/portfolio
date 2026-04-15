@@ -11,9 +11,10 @@ import logger from "@/utils/logger";
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "adrielzimbril";
 const GITHUB_REPO = process.env.GITHUB_REPO || "portfolio-shiro";
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
 
 // Function to fetch GitHub statistics
-export async function getGitHubStats(branch?: string): Promise<GitHubStats> {
+export async function getGitHubStats(): Promise<GitHubStats> {
   return unstable_cache(
     async () => {
       if (!GITHUB_TOKEN) {
@@ -25,7 +26,7 @@ export async function getGitHubStats(branch?: string): Promise<GitHubStats> {
 
       try {
         const [repoStats, contributions] = await Promise.all([
-          fetchRepoStats(branch),
+          fetchRepoStats(GITHUB_BRANCH),
           fetchContributions(),
         ]);
 
@@ -49,10 +50,10 @@ export async function getGitHubStats(branch?: string): Promise<GitHubStats> {
         return getEmptyGitHubStats();
       }
     },
-    ["github-stats", branch || "default"],
+    ["github-stats", GITHUB_BRANCH],
     {
       revalidate: 3600, // Revalidate every hour
-      tags: ["stats", "github", branch || "default"],
+      tags: ["stats", "github", GITHUB_BRANCH],
     },
   )();
 }
