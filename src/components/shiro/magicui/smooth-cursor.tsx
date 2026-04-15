@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useSpring } from "motion/react";
+import { useSpring } from "motion/react";
 import { FC, JSX, useEffect, useRef, useState } from "react";
 
 interface Position {
@@ -130,7 +130,7 @@ export function SmoothCursor({
       updateVelocity(currentPos);
 
       const speed = Math.sqrt(
-        Math.pow(velocity.current.x, 2) + Math.pow(velocity.current.y, 2)
+        Math.pow(velocity.current.x, 2) + Math.pow(velocity.current.y, 2),
       );
 
       cursorX.set(currentPos.x);
@@ -181,7 +181,7 @@ export function SmoothCursor({
   }, [cursorX, cursorY, rotation, scale]);
 
   return (
-    <motion.div
+    <div
       style={{
         position: "fixed",
         left: cursorX,
@@ -194,15 +194,8 @@ export function SmoothCursor({
         pointerEvents: "none",
         willChange: "transform",
       }}
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{
-        type: "spring",
-        stiffness: 400,
-        damping: 30,
-      }}
     >
       {cursor}
-    </motion.div>
+    </div>
   );
 }

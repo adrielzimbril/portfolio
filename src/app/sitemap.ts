@@ -4,9 +4,9 @@ import {
   getAllProjects,
   getAllQuests,
   getAllResources
-} from "@/module/content/utils/lib";
+} from "@/integrations/content/lib";
 import type { MetadataRoute } from "next";
-import { Post, Project, Quest, Resource, Talk } from "@/module/content/types/types";
+import { Post, Project, Quest, Resource, Talk } from "@/integrations/content/types/types";
 import { getAbsolutePathUrl } from "@/utils/base-url";
 import { routes } from "@/data/routes";
 import { PageType } from "@/types";

@@ -11,7 +11,7 @@ import { useTranslations } from "use-intl";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
 import { toast } from "sonner";
-import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 
 function EmailForm() {
   const t = useTranslations();

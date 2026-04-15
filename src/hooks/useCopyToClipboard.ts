@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
+import logger from "@/utils/logger";
 
 type CopiedValue = string | null;
 
@@ -48,7 +49,7 @@ export function useCopyToClipboard({
       return true;
     } catch (e) {
       setCopiedText(null);
-      console.error(e);
+      logger.error(e);
       return false;
     }
   }, []);

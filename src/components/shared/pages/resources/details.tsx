@@ -8,6 +8,7 @@ import { PageType, ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useProductSlugRequestsCount } from "@/hooks/useSubscriberStats";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -33,22 +34,22 @@ export function CardInfo({
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.title"
+      "common.page-sections.hub.base.resources-type.course.title",
     ),
     [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.title"
+      "common.page-sections.hub.base.resources-type.ebook.title",
     ),
     [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.title"
+      "common.page-sections.hub.base.resources-type.video.title",
     ),
     [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.title"
+      "common.page-sections.hub.base.resources-type.masterclass.title",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.title"
+      "common.page-sections.hub.base.resources-type.figma-template.title",
     ),
     [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.title"
+      "common.page-sections.hub.base.resources-type.code.title",
     ),
   };
 
@@ -70,7 +71,10 @@ export function CardInfo({
         />
       </div>
 
-      <Action slug={slug} resourceType={resourceType} />
+      <div className="flex items-center justify-between w-full gap-3">
+        <ReactionBar entityType={PageType.HUB} entityId={slug} />
+        <Action slug={slug} resourceType={resourceType} />
+      </div>
     </div>
   );
 }
@@ -120,22 +124,22 @@ function Action({
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.button"
+      "common.page-sections.hub.base.resources-type.course.button",
     ),
     [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.button"
+      "common.page-sections.hub.base.resources-type.ebook.button",
     ),
     [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.button"
+      "common.page-sections.hub.base.resources-type.video.button",
     ),
     [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.button"
+      "common.page-sections.hub.base.resources-type.masterclass.button",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.button"
+      "common.page-sections.hub.base.resources-type.figma-template.button",
     ),
     [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.button"
+      "common.page-sections.hub.base.resources-type.code.button",
     ),
   };
 

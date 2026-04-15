@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Image from "next/image";
 import { cn } from "@/utils/utils";
 import { getImageUrl } from "@/utils/base-url";

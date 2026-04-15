@@ -20,7 +20,7 @@ export function HeaderSection() {
       locale: locale,
       path: getPathUrl(routes.about.link),
     },
-    false
+    false,
   );
 
   const isDarkMode = useIsDarkMode();
@@ -39,17 +39,16 @@ export function HeaderSection() {
         //imagePath={getImageUrl("/img/me/memoji/me-love.png")}
         isMobileShowed
         imageVariant="squircle"
-        imgClassName="rounded-full"
         imagePath={{
           mp4: getImageUrl(
             isDarkMode
               ? "/img/me/memoji/me-dark-out.mp4"
-              : "/img/me/memoji/me-out.mp4"
+              : "/img/me/memoji/me-out.mp4",
           ),
           webm: getImageUrl(
             isDarkMode
               ? "/img/me/memoji/me-dark-out.webm"
-              : "/img/me/memoji/me-out.webm"
+              : "/img/me/memoji/me-out.webm",
           ),
           poster: getImageUrl("/img/me/memoji/me.png"),
         }}

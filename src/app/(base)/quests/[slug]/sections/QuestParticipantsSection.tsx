@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,7 +18,7 @@ import { cn, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import type { Quest } from "@/module/content/utils/lib/quests";
+import type { Quest } from "@/integrations/content/lib/quests";
 import { useTranslations } from "use-intl";
 
 type Winner = NonNullable<Quest["winners"]>[number];
@@ -136,7 +136,9 @@ function WinnerCard({ participant }: { participant: Winner }) {
                 <AvatarFallback>
                   <BoringAvatar
                     name={participant.name}
-                    colors={colorSets[(participant.rank - 1) % WINNER_NUMBER] ?? []}
+                    colors={
+                      colorSets[(participant.rank - 1) % WINNER_NUMBER] ?? []
+                    }
                     variant="beam"
                   />
                 </AvatarFallback>

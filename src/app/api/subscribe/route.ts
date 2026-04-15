@@ -1,12 +1,12 @@
 import { getImageUrl } from "@/utils/base-url";
 import { NextRequest } from "next/server";
-import { supabase } from "@/module/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import logger from "@/utils/logger";
-import { sendEmail } from "@/module/mail";
-import { addContact } from "@/module/contact";
-import { ContactProvider } from "@/module/contact/types/types";
+import { sendEmail } from "@/integrations/mail";
+import { addContact } from "@/integrations/contact";
+import { ContactProvider } from "@/integrations/contact/types/types";
 import { getResourcesUrl, validateSimpleClientToken } from "@/utils";
-import { getResourceById } from "@/module/content/utils/lib";
+import { getResourceById } from "@/integrations/content/lib";
 import { Locale, PageType, ResourceType } from "@/types";
 import {
   AllUserResourceSlug,

@@ -4,7 +4,7 @@ import { Link } from "@/components/ui/link";
 import {
   getBestResourcesLink,
   type ResourcePreview,
-} from "@/module/content/utils/lib";
+} from "@/integrations/content/lib";
 import { getResourcesUrl, getThisMonth } from "@/utils";
 import { SectionBase } from "../pages/shared/section-base";
 import { siteConfig } from "@/data/config";
@@ -39,7 +39,9 @@ export async function Footer() {
                   <StatusBadge
                     mode="inline"
                     status="available"
-                    primaryText={t("common.shared.planning-badge.available.title")}
+                    primaryText={t(
+                      "common.shared.planning-badge.available.title",
+                    )}
                     className="squircle-sh-white text-b-white-invert"
                     variant="colored"
                     size="md"
@@ -129,9 +131,44 @@ export async function Footer() {
   );
 }
 
-function FooterResources({ resources }: { resources: ResourcePreview[] }) {
+async function FooterResources({
+  resources,
+}: {
+  resources: ResourcePreview[];
+}) {
+  const t = await getTranslations();
+
+  const footerLinks = [
+    routes.community,
+    routes.stats,
+    routes.toolbox,
+    routes.connections,
+    routes.changelog,
+  ];
+
   return (
     <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
+      {/* <div className="w-full flex flex-col gap-8 md:gap-10 py-6 md:py-10 border-t border-b-bases/10 border-t-bases/10 mt-4"> */}
+      {/* Primary Navigation */}
+      <nav
+        className="w-full flex flex-wrap justify-center items-center gap-x-6 gap-y-3 px-4"
+        aria-label="Footer navigation"
+      >
+        {footerLinks.map((item, index) => (
+          <React.Fragment key={item.key}>
+            <Link
+              href={item.link}
+              className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-b-white-invert-thr hover:text-b-primary transition-all duration-300 hover:tracking-[0.25em]"
+            >
+              {t(`common.menu.${item.key}.default`)}
+            </Link>
+            {index < footerLinks.length - 1 && (
+              <div className="size-1 rounded-full bg-b-white-invert-thr/20 hidden md:block shrink-0" />
+            )}
+          </React.Fragment>
+        ))}
+      </nav>
+
       <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
         {resources.map((resource, index) => (
           <React.Fragment key={resource.slug ?? index}>

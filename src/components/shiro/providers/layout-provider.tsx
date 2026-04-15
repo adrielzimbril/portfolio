@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { routes } from "@/data/routes";
 import { getActivePathInArray, sleep } from "@/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { AnalyticsScript } from "@/module/analytics";
+import { AnalyticsScript } from "@/integrations/analytics";
 import ReactLenis from "lenis/react";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
 import { init } from "@squircle/core";

@@ -1,10 +1,10 @@
 import { NextRequest } from "next/server";
-import { supabase } from "@/module/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import logger from "@/utils/logger";
-import { sendEmail } from "@/module/mail";
+import { sendEmail } from "@/integrations/mail";
 import { appConfig } from "@/data/app-config";
 import { Locale } from "@/types";
-import { addContact, ContactProvider } from "@/module/contact";
+import { addContact, ContactProvider } from "@/integrations/contact";
 
 export async function POST(req: NextRequest) {
   try {

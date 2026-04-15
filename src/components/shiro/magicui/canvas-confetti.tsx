@@ -18,6 +18,7 @@ import type {
 } from "canvas-confetti";
 
 import { Button, ButtonProps } from "@/components/ui/button";
+import logger from "@/utils/logger";
 
 type Api = {
   fire: (options?: ConfettiOptions) => void;
@@ -60,7 +61,7 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
         }
       }
     },
-    [globalOptions]
+    [globalOptions],
   );
 
   const fire = useCallback(
@@ -68,17 +69,17 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
       try {
         await instanceRef.current?.({ ...options, ...opts });
       } catch (error) {
-        console.error("Confetti error:", error);
+        logger.error("Confetti error:", error);
       }
     },
-    [options]
+    [options],
   );
 
   const api = useMemo(
     () => ({
       fire,
     }),
-    [fire]
+    [fire],
   );
 
   useImperativeHandle(ref, () => api, [api]);
@@ -89,7 +90,7 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
         try {
           await fire();
         } catch (error) {
-          console.error("Confetti effect error:", error);
+          logger.error("Confetti effect error:", error);
         }
       })();
     }
@@ -133,7 +134,7 @@ const ConfettiButtonComponent = ({
         },
       });
     } catch (error) {
-      console.error("Confetti button error:", error);
+      logger.error("Confetti button error:", error);
     }
   };
 

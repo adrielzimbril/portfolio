@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/utils/utils";
-import { motion } from "motion/react";
 
 type LoaderProps = {
   variant?: "dots" | "bounce" | "pulse" | "single";
@@ -17,28 +16,17 @@ export function Loader({
   switch (variant) {
     case "dots":
       return (
-        <motion.div
+        <div
           className={cn("flex gap-2 items-center justify-center", className)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
         >
           {[0, 1, 2].map((i) => (
-            <motion.div
+            <div
               key={i}
-              className={cn("w-3 h-3 rounded-full", color)}
-              animate={{
-                scale: [1, 1.2, 0.9],
-                opacity: [0.4, 1, 0.6],
-              }}
-              transition={{
-                duration: 1.6,
-                repeat: Infinity,
-                delay: i * 0.3 + 1.5,
-              }}
+              className={cn("w-3 h-3 rounded-full animate-bounce", color)}
+              style={{ animationDelay: `${i * 0.3}s` }}
             />
           ))}
-        </motion.div>
+        </div>
       );
 
     case "bounce":
@@ -50,13 +38,13 @@ export function Loader({
           <div
             className={cn(
               "w-3 h-3 rounded-full animate-bounce delay-150",
-              color
+              color,
             )}
           />
           <div
             className={cn(
               "w-3 h-3 rounded-full animate-bounce delay-300",
-              color
+              color,
             )}
           />
         </div>
@@ -71,13 +59,13 @@ export function Loader({
           <div
             className={cn(
               "w-3 h-3 rounded-full animate-pulse delay-300",
-              color
+              color,
             )}
           />
           <div
             className={cn(
               "w-3 h-3 rounded-full animate-pulse delay-600",
-              color
+              color,
             )}
           />
         </div>
@@ -85,17 +73,11 @@ export function Loader({
 
     case "single":
       return (
-        <motion.div
-          className={cn("size-4 bg-b-white rounded-full", className)}
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.6, 1, 0.4],
-          }}
-          transition={{
-            duration: 2,
-            ease: "easeInOut",
-            repeat: Infinity,
-          }}
+        <div
+          className={cn(
+            "size-4 bg-b-white rounded-full animate-pulse",
+            className,
+          )}
         />
       );
 

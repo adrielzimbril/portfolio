@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { CheckCircle2, CircleAlert } from "lucide-react";
+import { CheckCircle, InfoCircle } from "@aurthle/icons";
 
 type Status = "success" | "error";
 
@@ -39,9 +39,9 @@ export function FormFeedbackModal({
         <DialogHeader className="space-y-3">
           <div className="mx-auto">
             {status === "success" ? (
-              <CheckCircle2 className="h-12 w-12 text-green-500" />
+              <CheckCircle size={48} className="text-green-500" />
             ) : (
-              <CircleAlert className="h-12 w-12 text-red-500" />
+              <InfoCircle size={48} className="text-red-500" />
             )}
           </div>
           <DialogTitle className="text-center text-xl">{title}</DialogTitle>

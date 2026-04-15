@@ -19,6 +19,8 @@ import { ResourceType } from "@/types/enum";
 import { ProductAvatarsStats } from "@/components/SubscriberBadges";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { PageType } from "@/types";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -46,6 +48,9 @@ interface HeaderSectionProps {
   ctaButton?: string;
   ctaButtonText: string;
 
+  // Page Type for reactions
+  pageType?: PageType.PROJECT | PageType.HUB;
+
   // Optional CSS Classes
   className?: string;
   sectionClassName?: string;
@@ -61,6 +66,7 @@ export function HeaderSection({
   type,
   ctaButton,
   ctaButtonText,
+  pageType,
   sectionClassName,
 }: HeaderSectionProps) {
   const t = useTranslations();
@@ -110,27 +116,31 @@ export function HeaderSection({
       {description && <p className="text-b-white-invert-sec">{description}</p>}
 
       {tags && tags.length > 0 && (
-        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white overflow-hidden">
-          {mainTitle && type && (
-            <ProductAvatarsStats
-              colorName="squircle-indigo-100"
-              slug={slug}
-              type={type}
-              badgeClassName="text-b-white-unchanged"
-            />
-          )}
-          {tags.map((tag, index) => (
-            <Badge
-              key={index}
-              className={pickRandomColor(
-                tag.color as DEFAULT_CATEGORY_COLOR_NAME,
-              )}
-              variant="colored"
-              size="sm"
-            >
-              {tag.name}
-            </Badge>
-          ))}
+        <div className="flex flex-wrap items-center gap-2 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white overflow-hidden">
+          <div className="flex flex-wrap items-start gap-1.5">
+            {mainTitle && type && (
+              <ProductAvatarsStats
+                colorName="squircle-indigo-100"
+                slug={slug}
+                type={type}
+                badgeClassName="text-b-white-unchanged"
+              />
+            )}
+            {tags.map((tag, index) => (
+              <Badge
+                key={index}
+                className={pickRandomColor(
+                  tag.color as DEFAULT_CATEGORY_COLOR_NAME,
+                )}
+                variant="colored"
+                size="sm"
+              >
+                {tag.name}
+              </Badge>
+            ))}
+          </div>
+
+          {pageType && <ReactionBar entityType={pageType} entityId={slug} />}
         </div>
       )}
       {ctaButton && (!type ? ctaButton.startsWith("http") : true) ? (

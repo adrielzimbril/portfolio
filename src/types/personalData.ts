@@ -62,3 +62,46 @@ export function getTestimonialsByLocale(locale: string): TestimonialItem[] {
 export function getGamesByLocale(locale: string): GameItem[] {
   return gamesByLocale[resolveLocale(locale)];
 }
+
+export interface ConnectionItem {
+  id: string;
+  platform: string;
+  url: string;
+  icon: string;
+  description: string;
+  active: boolean;
+}
+
+export interface ToolItem {
+  id: string;
+  name: string;
+  category:
+    | "frontend"
+    | "backend"
+    | "design"
+    | "tools"
+    | "other"
+    | "code"
+    | "productivity";
+  description: string;
+  url?: string;
+  icon?: string;
+}
+
+export interface SetupItem {
+  id: string;
+  name: string;
+  category: "hardware" | "accessories" | "software" | "audio";
+  tags: string[];
+  description: string;
+  imageUrl?: string;
+  purchaseUrl?: string;
+}
+
+export interface ChangelogItem {
+  id: string;
+  version: string;
+  date: string;
+  changes: string[];
+  type: "feature" | "fix" | "improvement" | "milestone";
+}

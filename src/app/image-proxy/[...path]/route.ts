@@ -1,5 +1,5 @@
 import { appConfig } from "@/data/app-config";
-import { getSignedUrl } from "@/module/storage";
+import { getSignedUrl } from "@/integrations/storage";
 import { NextResponse } from "next/server";
 
 export const GET = async (

@@ -1,5 +1,5 @@
 "use client";
-import { useTurnstile } from "@/module/anti-bot/turnstile";
+import { useTurnstile } from "@/integrations/anti-bot/turnstile";
 import { useEffect } from "react";
 
 export function Turnstile({

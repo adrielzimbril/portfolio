@@ -8,8 +8,8 @@ import { PageParams } from "@/types";
 import {
   getResourceWithAdjacent,
   getResourceBySlug,
-} from "@/module/content/utils/lib/resources";
-import { localeRedirect } from "@/module/i18n/routing";
+} from "@/integrations/content/lib/resources";
+import { localeRedirect } from "@/integrations/i18n/routing";
 import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
@@ -64,6 +64,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         type={type}
         tags={tags}
         pageViewsData={{ slug, locale }}
+        slug={slug}
       />
       <ProjectDetailsSection content={body || ""} />
       {resource!.adjacentResources.length > 0 && (

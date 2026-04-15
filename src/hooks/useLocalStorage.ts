@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useEventCallback } from "@/hooks/useEventCallback";
 import { useEventListener } from "@/hooks/useEventListener";
+import logger from "@/utils/logger";
 
 import type { Dispatch, SetStateAction } from "react";
 
@@ -34,7 +35,7 @@ const IS_SERVER = typeof window === "undefined";
 export function useLocalStorage<T>(
   key: string,
   initialValue: T | (() => T),
-  options: UseLocalStorageOptions<T> = {}
+  options: UseLocalStorageOptions<T> = {},
 ): [T, Dispatch<SetStateAction<T>>, () => void] {
   const { initializeWithValue = true } = options;
 
@@ -46,7 +47,7 @@ export function useLocalStorage<T>(
 
       return JSON.stringify(value);
     },
-    [options]
+    [options],
   );
 
   const deserializer = useCallback<(value: string) => T>(
@@ -66,13 +67,13 @@ export function useLocalStorage<T>(
       try {
         parsed = JSON.parse(value);
       } catch (error) {
-        console.error(error);
+        logger.error(error);
         return defaultValue; // Return initialValue if parsing fails
       }
 
       return parsed as T;
     },
-    [options, initialValue]
+    [options, initialValue],
   );
 
   // Get from local storage then
@@ -90,7 +91,7 @@ export function useLocalStorage<T>(
       const raw = window.localStorage.getItem(key);
       return raw ? deserializer(raw) : initialValueToUse;
     } catch (error) {
-      console.error(error);
+      logger.error(error);
       return initialValueToUse;
     }
   }, [initialValue, key, deserializer]);
@@ -124,7 +125,7 @@ export function useLocalStorage<T>(
       // We dispatch a custom event so every similar useLocalStorage hook is notified
       window.dispatchEvent(new StorageEvent("local-storage", { key }));
     } catch (error) {
-      console.error(error);
+      logger.error(error);
       // A more advanced implementation would handle the error case
     }
   });
@@ -161,7 +162,7 @@ export function useLocalStorage<T>(
       }
       setStoredValue(readValue());
     },
-    [key, readValue]
+    [key, readValue],
   );
 
   // this only works for other documents, not the current one

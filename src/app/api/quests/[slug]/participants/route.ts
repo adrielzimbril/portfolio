@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { supabase } from "@/module/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import logger from "@/utils/logger";
 
 export async function GET(

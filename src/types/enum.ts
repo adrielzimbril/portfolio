@@ -1,3 +1,5 @@
+import { ReactionType } from "./../lib/stats/types";
+import { changelog } from "@/data/personal/changelog";
 export enum SortOrder {
   Asc = "asc",
   Desc = "desc",
@@ -28,6 +30,11 @@ export enum PageType {
   THOUGHT = "thoughts",
   QUESTS = "quests",
   TALKS = "talks",
+  COMMUNITY = "community",
+  CONNECTIONS = "connections",
+  CHANGELOG = "changelog",
+  STATS = "stats",
+  TOOLBOX = "toolbox",
 }
 
 export enum QuestAskType {

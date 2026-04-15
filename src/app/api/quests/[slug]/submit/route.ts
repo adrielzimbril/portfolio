@@ -4,10 +4,10 @@ import { appConfig } from "@/data/app-config";
 import {
   getQuestBySlug,
   isSubmissionClosed,
-} from "@/module/content/utils/lib/quests";
-import { sendEmail } from "@/module/mail";
-import { supabase } from "@/module/supabase/client";
-import { addContact, ContactProvider } from "@/module/contact";
+} from "@/integrations/content/lib/quests";
+import { sendEmail } from "@/integrations/mail";
+import { supabase } from "@/integrations/supabase/client";
+import { addContact, ContactProvider } from "@/integrations/contact";
 import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
 import { getResourcesUrl } from "@/utils/base-url";

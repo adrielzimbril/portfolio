@@ -30,14 +30,14 @@
     "paths": {
       "@/*": ["./src/*"],
       "@config/*": ["./src/config/*"],
-      "@module/*": ["./src/module/*"],
+      "@integrations/*": ["./src/integrations/*"],
       "@lib/*": ["./src/lib/*"],
       "@data/*": ["./src/data/*"],
       "@components/*": ["./src/components/*"],
       "@shared/*": ["./src/components/shared/*"],
       "@ui/*": ["./src/components/ui/*"],
       "@shiro/*": ["./src/components/shiro/*"],
-      "@i18n/*": ["./src/module/i18n/*"],
+      "@i18n/*": ["./src/integrations/i18n/*"],
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
       "content-collections": ["./.content-collections/generated"]

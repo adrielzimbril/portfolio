@@ -2,9 +2,8 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { motion } from "motion/react";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { richTextComponent } from "@/module/content/utils/mdx-components";
+import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { useTranslations } from "use-intl";
 
 interface LoadMoreUIProps {
@@ -47,12 +46,7 @@ export function LoadMoreSection({
           </Button>
         ) : (
           <>
-            <motion.div
-              className="content-stretch flex flex-col text-center gap-2 text-b-white-invert-thr items-center justify-center relative shrink-0 max-w-md"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            <div className="content-stretch flex flex-col text-center gap-2 text-b-white-invert-thr items-center justify-center relative shrink-0 max-w-md">
               <p>
                 <span className="text-foreground">
                   {t("common.shared.loadMore.greeting")}
@@ -71,7 +65,7 @@ export function LoadMoreSection({
                   })}
                 </p>
               )}
-            </motion.div>
+            </div>
           </>
         )}
       </div>

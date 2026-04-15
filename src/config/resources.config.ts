@@ -7,7 +7,8 @@
  * Resources are managed through content collections and can be accessed by their slugs.
  */
 
-import { getResourceBySlug } from "@/module/content/utils/lib";
+import { getResourceBySlug } from "@/integrations/content/lib";
+import logger from "@/utils/logger";
 
 /**
  * Base URL for all resources
@@ -65,7 +66,7 @@ export const resourceUserExists = async (
     const resource = await getResourceBySlug(slug);
     return resource !== null;
   } catch (error) {
-    console.error(`Error checking if resource '${slug}' exists:`, error);
+    logger.error(`Error checking if resource '${slug}' exists:`, error);
     return false;
   }
 };

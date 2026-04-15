@@ -2,7 +2,7 @@ import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { PreviewCardContainerSectionProps } from "@/types/type";
-import { getAllResources } from "@/module/content/utils/lib/resources";
+import { getAllResources } from "@/integrations/content/lib/resources";
 import { getLocale, getTranslations } from "next-intl/server";
 
 const config: PreviewCardContainerSectionProps = {

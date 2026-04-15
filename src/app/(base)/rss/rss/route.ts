@@ -1,8 +1,9 @@
-import { NextResponse } from 'next/server';
-import { generateRssFeed } from '@/lib/rss';
+import { NextResponse } from "next/server";
+import { generateRssFeed } from "@/lib/rss";
 import { Locale } from "@/types";
+import logger from "@/utils/logger";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   try {
@@ -18,7 +19,7 @@ export async function GET(request: Request) {
       },
     });
   } catch (error) {
-    console.error("Error generating RSS feed:", error);
+    logger.error("Error generating RSS feed:", error);
     return new NextResponse("Error generating RSS feed", { status: 500 });
   }
 }

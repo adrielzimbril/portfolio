@@ -31,7 +31,7 @@ export function HeaderSection({
       locale: pageViewsData.locale,
       path: getResourcesUrl(PageType.PROJECT, pageViewsData.slug),
     },
-    false
+    false,
   );
 
   return (
@@ -52,6 +52,8 @@ export function HeaderSection({
       tags={tags}
       ctaButton={projectLink ?? undefined}
       ctaButtonText={`${t("projects.inner-page.header-section.cta")} 🦄`}
+      slug={slug}
+      pageType={PageType.PROJECT}
     />
   );
 }

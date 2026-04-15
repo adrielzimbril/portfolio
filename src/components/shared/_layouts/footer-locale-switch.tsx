@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useLocale, useTranslations } from "use-intl";
-import { updateLocale } from "@/module/i18n/lib/update-locale";
-import type { Locale } from "@i18n/types";
+import { updateLocale } from "@/integrations/i18n/lib/update-locale";
+import type { Locale } from "@/integrations/i18n/types";
 import { useRouter } from "next/navigation";
 import {
   DropdownMenu,

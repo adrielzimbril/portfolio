@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle } from "@aurthle/icons";
 import {
   Dialog,
   DialogContent,
@@ -27,7 +27,7 @@ import { PhoneInput } from "@aurthle/react-phone";
 import * as RPNInput from "react-phone-number-input";
 import confetti from "canvas-confetti";
 import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo";
-import { cn } from "@/utils/utils";;
+import { cn } from "@/utils/utils";
 import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useTranslations, useLocale } from "use-intl";
@@ -40,6 +40,14 @@ interface SubscriptionModalProps {
   productType?: ResourceTypeKey;
   onClose: () => void;
 }
+
+const confettiConfig: {
+  beforeName: boolean;
+  afterName: boolean;
+} = {
+  beforeName: false,
+  afterName: true,
+};
 
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
@@ -68,7 +76,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         const country = await getIpInfo();
         setUserCountry(
           (country.data?.country?.iso2 as RPNInput.Country) ??
-            ("FR" as unknown as RPNInput.Country)
+            ("FR" as unknown as RPNInput.Country),
         );
       } catch (error) {
         logger.error(t("logger.ip.fetch.country-failed"), error);
@@ -139,26 +147,28 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
             const frame = () => {
               if (Date.now() > end) return;
-              confetti({
-                particleCount: 2,
-                angle: 60,
-                spread: 55,
-                startVelocity: 60,
-                origin: { x: 0, y: 0.5 },
-                colors: colors,
-                shapes: [triangle, square, coin, tree],
-                scalar,
-              });
-              confetti({
-                particleCount: 2,
-                angle: 120,
-                spread: 55,
-                startVelocity: 60,
-                origin: { x: 1, y: 0.5 },
-                colors: colors,
-                shapes: [triangle, square, coin, tree],
-                scalar,
-              });
+              if (confettiConfig.beforeName) {
+                confetti({
+                  particleCount: 2,
+                  angle: 60,
+                  spread: 55,
+                  startVelocity: 60,
+                  origin: { x: 0, y: 0.5 },
+                  colors: colors,
+                  shapes: [triangle, square, coin, tree],
+                  scalar,
+                });
+                confetti({
+                  particleCount: 2,
+                  angle: 120,
+                  spread: 55,
+                  startVelocity: 60,
+                  origin: { x: 1, y: 0.5 },
+                  colors: colors,
+                  shapes: [triangle, square, coin, tree],
+                  scalar,
+                });
+              }
               requestAnimationFrame(frame);
             };
             frame();
@@ -247,14 +257,27 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       });
 
       setIsSuccess(true);
-      animateConfetti();
+      if (confettiConfig.afterName) {
+        animateConfetti();
+      }
+
+      // Show playful toast
+      toast.success("🎉 Super ! Tu vas être redirigé vers la page produit...", {
+        duration: 2000,
+      });
 
       setTimeout(() => {
         onClose();
         setIsSuccess(false);
         formSchemaValidate.reset();
-        animateConfetti();
-      }, 200000);
+        if (confettiConfig.afterName) {
+          animateConfetti();
+        }
+        // Redirect to product page
+        if (typeof window !== "undefined") {
+          window.location.href = "/hub";
+        }
+      }, 2000);
     } catch (error) {
       logger.error(t("logger.newsletter.subscribe.failed"), error);
       toast.error(t("logger.form.submit-update-failed"));
@@ -289,13 +312,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-8 space-y-4">
-            <CheckCircle className="w-16 h-16 text-green-500" />
+            <CheckCircle className="text-green-500" size={48} />
             <h3 className="text-xl font-semibold text-green-600">
               {t("common.page-sections.newsletter.form.success.message.title")}
             </h3>
             <p className="text-center text-b-white-invert-sec">
               {t(
-                "common.page-sections.newsletter.form.success.message.description"
+                "common.page-sections.newsletter.form.success.message.description",
               )}
             </p>
           </div>
@@ -312,13 +335,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   <FormItem>
                     <FormLabel className="text-sm font-medium">
                       {t(
-                        "common.page-sections.newsletter.form.fields.name.label"
+                        "common.page-sections.newsletter.form.fields.name.label",
                       )}
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder={t(
-                          "common.page-sections.newsletter.form.fields.name.placeholder"
+                          "common.page-sections.newsletter.form.fields.name.placeholder",
                         )}
                         className="h-12 border-2"
                         {...field}
@@ -336,7 +359,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   <FormItem>
                     <FormLabel className="tesxt-sm font-medium">
                       {t(
-                        "common.page-sections.newsletter.form.fields.phone.label"
+                        "common.page-sections.newsletter.form.fields.phone.label",
                       )}
                     </FormLabel>
                     <FormControl>
@@ -350,11 +373,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                           "peer ps-18",
                           "h-auto",
                           "rounded-xl",
-                          "text-base"
+                          "text-base",
                         )}
                         triggerClassName={cn(
                           "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
-                          "h-auto border-2"
+                          "h-auto border-2",
                         )}
                         contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"
                         {...field}

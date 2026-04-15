@@ -1,8 +1,8 @@
 "use client";
 
 import { MDXContent } from "@content-collections/mdx/react";
-import { mdxComponents } from "@/module/content/utils/mdx-components";
-import { mdxCustomComponents } from "@/module/content/utils/mdx-components";
+import { mdxComponents } from "@/integrations/content/utils/mdx-components";
+import { mdxCustomComponents } from "@/integrations/content/utils/mdx-components";
 
 export function MarkdownContentRender({ content }: { content: string }) {
   return (

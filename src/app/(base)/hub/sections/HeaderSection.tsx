@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils/base-url";
+import { cn } from "@/utils/utils";
 
 export function HeaderSection() {
   const t = useTranslations();
@@ -17,19 +18,18 @@ export function HeaderSection() {
       locale: locale,
       path: getPathUrl(routes.hub.link),
     },
-    false
+    false,
   );
 
   return (
-    <PageHero
-      title={t("hub.page.header-section.title")}
-      description={t("hub.page.header-section.description")}
-      //buttonLink={routes.hub.link}
-      //buttonText={t("hub.page.header-section.cta")}
-      //imagePath={getImageUrl(getEmojiHub("🧑🏻‍🎨", "fluent", "anim"))}
-      imagePath={{ emoji: "🧑🏻‍🎨" }}
-      isMobileShowed
-      actionButton
-    />
+    <div className="relative">
+      <PageHero
+        title={t("hub.page.header-section.title")}
+        description={t("hub.page.header-section.description")}
+        imagePath={{ emoji: "🧑🏻‍🎨" }}
+        isMobileShowed
+        actionButton
+      />
+    </div>
   );
 }

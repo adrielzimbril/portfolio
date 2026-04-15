@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/utils/utils";
 import { toast } from "sonner";
 import { SectionLayout } from "@/components/shared/sections/layout";
@@ -40,17 +39,16 @@ function GuessButton({
   // const imgEmojiTrue = getImageUrl(getEmojiHub("😀", "apple"));
 
   return (
-    <motion.div
+    <div
       className={cn(
         "relative bg-b-base border-4 border-b-base-accent content-stretch flex items-center justify-start p-4 md:p-6 rounded-full shrink-0 cursor-pointer transition-all duration-400",
         canAnswer
           ? isFalse
             ? "hover:bg-red-100 hover:border-red-500 dark:hover:border-red-400"
             : "hover:bg-green-100 hover:border-green-500 dark:hover:border-green-400"
-          : "pointer-events-none cursor-default"
+          : "pointer-events-none cursor-default",
       )}
       onClick={onClick}
-      whileTap={{ scale: 0.95 }}
     >
       <div className="relative shrink-0 size-11 md:size-20">
         {/* <Image
@@ -66,31 +64,28 @@ function GuessButton({
         <span
           className={cn(
             "size-full flex items-center justify-center  text-5xl md:text-7xl object-cover pointer-events-none",
-            !canAnswer && "opacity-50"
+            !canAnswer && "opacity-50",
           )}
         >
           {isFalse ? "🤥" : "😀"}
         </span>
         {canAnswer && (
-          <motion.span
+          <span
             className={`absolute -top-2 -right-2 text-xs font-bold px-2 py-1 rounded-full text-white ${
               isFalse ? "bg-red-500" : "bg-green-500"
             }`}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2 }}
           >
             {isFalse
               ? t(
-                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.false"
+                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.false",
                 )
               : t(
-                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.true"
+                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.true",
                 )}
-          </motion.span>
+          </span>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -151,31 +146,20 @@ function QuestionCard({
   const transform = getCardTransform();
 
   return (
-    <motion.div
+    <div
       className={cn("relative max-w-xl", index !== 0 && "absolute")}
       style={{
         zIndex: transform.zIndex,
         transformOrigin: "center center",
-      }}
-      animate={{
-        rotate: transform.rotate,
-        scale: transform.scale,
-        x: transform.x,
-        y: transform.y,
+        transform: `rotate(${transform.rotate}deg) scale(${transform.scale}) translate(${transform.x}px, ${transform.y}px)`,
         opacity: isPast ? 0.8 : 1,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-        duration: 0.8,
       }}
     >
       <Card className="squircle squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
         <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4">
           <div
             className={cn(
-              "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden"
+              "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
             )}
           >
             <div className="flex flex-col items-start gap-4 w-full max-w-[90%] py-12 mx-auto">
@@ -196,7 +180,7 @@ function QuestionCard({
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 }
 
@@ -242,20 +226,20 @@ function CustomAlert({
             >
               {isCorrect
                 ? t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.title"
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.title",
                   )
                 : t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.title"
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.title",
                   )}
             </DialogTitle>
 
             <DialogDescription>
               {isCorrect
                 ? t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.description"
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.description",
                   )
                 : t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.description"
+                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.description",
                   )}
             </DialogDescription>
           </div>
@@ -265,7 +249,7 @@ function CustomAlert({
           <DialogCard variant="default" className="text-center">
             <DialogBadge variant="colored" className="mb-2">
               {t(
-                "about.page.interactive-fun-facts-section.sections.fact-alert.response"
+                "about.page.interactive-fun-facts-section.sections.fact-alert.response",
               )}{" "}
               🥸
             </DialogBadge>
@@ -301,7 +285,7 @@ function AllFactsModal({
   const totalGuessed = Object.keys(guessedFacts).length;
   const totalQuestions = questions.length;
   const correctGuesses = questions.filter(
-    (fact) => guessedFacts[fact.id] !== undefined && guessedFacts[fact.id]
+    (fact) => guessedFacts[fact.id] !== undefined && guessedFacts[fact.id],
   ).length;
 
   return (
@@ -314,7 +298,7 @@ function AllFactsModal({
         <DialogHeader>
           <DialogTitle className="text-base font-normal md:font-medium md:text-xl text-b-white-invert-sec">
             {t(
-              "about.page.interactive-fun-facts-section.sections.facts-modal.title"
+              "about.page.interactive-fun-facts-section.sections.facts-modal.title",
             )}
           </DialogTitle>
         </DialogHeader>
@@ -324,34 +308,30 @@ function AllFactsModal({
         <div className="flex flex-col gap-4 px-2 overflow-y-auto max-h-[calc(100vh-200px)] scroll-smooth">
           {/* Score Section */}
           {totalGuessed > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
+            <div>
               <DialogCard variant="default">
                 <h5 className="font-bold mb-2">
                   🎯{" "}
                   {t(
                     "about.page.interactive-fun-facts-section.sections.facts-modal.score.title",
-                    { score: correctGuesses, total: totalQuestions }
+                    { score: correctGuesses, total: totalQuestions },
                   )}
                 </h5>
                 <p className="text-white-invert-fr">
                   {correctGuesses === totalQuestions
                     ? t(
-                        "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.good"
+                        "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.good",
                       )
                     : correctGuesses > totalQuestions / 2
                       ? t(
-                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.medium"
+                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.medium",
                         )
                       : t(
-                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.bad"
+                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.bad",
                         )}
                 </p>
               </DialogCard>
-            </motion.div>
+            </div>
           )}
 
           {/* Facts Grid */}
@@ -360,12 +340,7 @@ function AllFactsModal({
             const userGuessedCorrect = userGuessed && guessedFacts[question.id];
 
             return (
-              <motion.div
-                key={question.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.2 }}
-              >
+              <div key={question.id}>
                 <DialogCard variant="default">
                   <div className="flex items-start gap-3 sm:gap-4">
                     <h4 className="bg-b-white center leading-[140%] rounded-full p-2 aspect-square shrink-0">
@@ -385,15 +360,15 @@ function AllFactsModal({
                           className={cn(
                             question.isTrue
                               ? "text-green-800 dark:text-green-400"
-                              : "text-red-800 dark:text-red-500"
+                              : "text-red-800 dark:text-red-500",
                           )}
                         >
                           {question.isTrue
                             ? t(
-                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-true"
+                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-true",
                               )
                             : t(
-                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-false"
+                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-false",
                               )}
                         </DialogBadge>
 
@@ -402,16 +377,16 @@ function AllFactsModal({
                             className={cn(
                               userGuessedCorrect
                                 ? "squircle-blue-100 text-blue-900"
-                                : "squircle-orange-100 text-orange-900"
+                                : "squircle-orange-100 text-orange-900",
                             )}
                             variant="colored"
                           >
                             {userGuessedCorrect
                               ? t(
-                                  "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.correct"
+                                  "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.correct",
                                 )
                               : t(
-                                  "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.incorrect"
+                                  "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.incorrect",
                                 )}
                           </DialogBadge>
                         )}
@@ -419,7 +394,7 @@ function AllFactsModal({
                     </div>
                   </div>
                 </DialogCard>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -442,7 +417,7 @@ export function InteractiveFunFacts() {
   const locale = useLocale();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>(
-    {}
+    {},
   );
   const [showAlert, setShowAlert] = useState(false);
   const [alertData, setAlertData] = useState<{
@@ -560,16 +535,14 @@ export function InteractiveFunFacts() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {showAllFacts && (
-          <AllFactsModal
-            isOpen={showAllFacts}
-            onClose={() => setShowAllFacts(false)}
-            questions={questionsLocale}
-            guessedFacts={guessedFacts}
-          />
-        )}
-      </AnimatePresence>
+      {showAllFacts && (
+        <AllFactsModal
+          isOpen={showAllFacts}
+          onClose={() => setShowAllFacts(false)}
+          questions={questionsLocale}
+          guessedFacts={guessedFacts}
+        />
+      )}
 
       <div className="relative">
         {/* Responsive progression indicators */}
@@ -579,7 +552,7 @@ export function InteractiveFunFacts() {
             const isCorrect = isGuessed && guessedFacts[question.id];
 
             return (
-              <motion.div
+              <div
                 key={index}
                 className={cn(
                   "size-3 sm:size-4 rounded-full border-2 flex items-center justify-center",
@@ -591,7 +564,7 @@ export function InteractiveFunFacts() {
                       : "bg-red-500 border-red-500"
                     : index === currentQuestionIndex
                       ? "bg-[#2a2a2a] border-[#2a2a2a]"
-                      : "bg-b-base border-b-base-accent"
+                      : "bg-b-base border-b-base-accent",
                 )}
               >
                 {isGuessed && (
@@ -599,7 +572,7 @@ export function InteractiveFunFacts() {
                     {isCorrect ? "✓" : "✗"}
                   </span>
                 )}
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -619,26 +592,22 @@ export function InteractiveFunFacts() {
           {allQuestionsAnswered
             ? hasGuessedFalse
               ? t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-false"
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-false",
                 )
               : t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true"
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true",
                 )
             : showAllFacts
               ? t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-retry"
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-retry",
                 )
               : t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true"
+                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true",
                 )}
         </Button>
 
         {allQuestionsAnswered && (
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
+          <div className="text-center">
             <Button
               onClick={resetGame}
               asPointer
@@ -649,7 +618,7 @@ export function InteractiveFunFacts() {
             >
               {t("about.page.interactive-fun-facts-section.buttons.retry")}
             </Button>
-          </motion.div>
+          </div>
         )}
       </div>
 

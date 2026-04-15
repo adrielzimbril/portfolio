@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { HeaderSection as QuestHeaderSection } from "@/components/shared/pages/quests/page/header-section";
 import { PreviewContentType } from "@/types";
@@ -8,7 +8,7 @@ import { QuestAskType } from "@/types/enum";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/utils/lib";
+} from "@/integrations/content/lib";
 
 export function HeaderSection({
   title,
@@ -32,7 +32,10 @@ export function HeaderSection({
   const t = useTranslations();
 
   const isRegistrationOpen = !isRegistrationClosed(dates.registration_end);
-  const isSubmissionOpen = !isSubmissionClosed(dates.submission_end, dates.results);
+  const isSubmissionOpen = !isSubmissionClosed(
+    dates.submission_end,
+    dates.results,
+  );
 
   return (
     <QuestHeaderSection
@@ -69,7 +72,8 @@ export function HeaderSection({
             ? t("quests.inner-page.header.cta.submitWork")
             : ""
       } 🦄`}
+      slug={slug}
+      pageType={PageType.QUESTS}
     />
   );
 }
-

@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { supabase } from "@/module/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { getIpInfo } from "@/hooks/useIpInfo";
 import logger from "@/utils/logger";
 

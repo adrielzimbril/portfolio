@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
 import { TalksCard } from "@/components/shared/pages/talks/card";
 import { useLoadMore } from "@/hooks/useLoadMore";
-import type { Talk } from "@/module/content/utils/lib/talks";
+import type { Talk } from "@/integrations/content/lib/talks";
 import { getExternalUrl, getHumanDate } from "@/utils";
 import { useState } from "react";
 import { useTranslations } from "use-intl";

@@ -18,7 +18,7 @@ export default defineConfig({
       randomize: true,
     },
   },
-  dirs: ["./src/module/tasks/trigger"],
+  dirs: ["./src/integrations/tasks/trigger"],
   build: {
     extensions: [],
     external: [

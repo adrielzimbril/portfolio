@@ -2,13 +2,13 @@
 import * as React from "react";
 import { type VariantProps } from "class-variance-authority";
 import { AnimatePresence, motion } from "motion/react";
-import { CheckIcon, CopyIcon } from "lucide-react";
+import { CheckCircle, Copy } from "@aurthle/icons";
 import {
   Button as ButtonPrimitive,
   type ButtonProps as ButtonPrimitiveProps,
   buttonVariants,
 } from "@/components/ui/button";
-import { cn } from "@/utils/utils";;
+import { cn } from "@/utils/utils";
 import { useControlledState } from "@/hooks/useControlledState";
 import logger from "@/utils/logger";
 import { useTranslations } from "use-intl";
@@ -62,10 +62,10 @@ function ButtonCopy({
           });
       }
     },
-    [onClick, copied, content, setIsCopied, onCopiedChange, delay]
+    [onClick, copied, content, setIsCopied, onCopiedChange, delay],
   );
 
-  const Icon = isCopied ? CheckIcon : CopyIcon;
+  const Icon = isCopied ? CheckCircle : Copy;
 
   return (
     <ButtonPrimitive

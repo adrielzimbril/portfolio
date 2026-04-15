@@ -13,13 +13,13 @@ module.exports = defineConfig({
   modelName: config.modelName,
   entry:
     config.mode === "default"
-      ? "src/module/i18n/translations/fr.json"
+      ? "src/integrations/i18n/translations/fr.json"
       : "src/data/personal/translate",
   entryLocale: "fr",
   temperature: config.modelName === "gpt-5-mini" ? 1 : 0,
   output:
     config.mode === "default"
-      ? "src/module/i18n/translations"
+      ? "src/integrations/i18n/translations"
       : "src/data/personal/translate",
   outputLocales: ["en", "zh-CN"],
   saveImmediately: true,

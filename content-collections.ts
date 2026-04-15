@@ -34,7 +34,7 @@ export function getLocaleFromFilePath(filePath: string): string {
       l
         .split("-")
         .map((p, i) => (i ? p.toUpperCase() : p.toLowerCase()))
-        .join("-")
+        .join("-"),
     );
   }
 
@@ -67,7 +67,6 @@ export function sanitizePath(filePath: string): string {
     .replace(/^\/|\/$/g, "")
     .replace(/index$/, "");
 }
-
 
 async function compileBodyMDX(context: any, document: any) {
   const remarkPluginsList: any = [
@@ -281,7 +280,7 @@ const posts = defineCollection({
       .filter(
         (c) =>
           document.categories_id.includes(c.id) &&
-          getLocaleFromFilePath(c._meta.filePath) === locale
+          getLocaleFromFilePath(c._meta.filePath) === locale,
       );
 
     const tags = context
@@ -289,7 +288,7 @@ const posts = defineCollection({
       .filter(
         (t) =>
           document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale
+          getLocaleFromFilePath(t._meta.filePath) === locale,
       );
 
     return {
@@ -337,7 +336,7 @@ const projects = defineCollection({
           emoji: z.string(),
           description: z.string(),
           methodology: z.string(),
-        })
+        }),
       )
       .optional(),
     goalSectionDescription: z.string().optional(),
@@ -353,7 +352,7 @@ const projects = defineCollection({
           icon: z.string(),
           number: z.string(),
           description: z.string(),
-        })
+        }),
       )
       .optional(),
     previewSectionDescription: z.string().optional(),
@@ -364,7 +363,7 @@ const projects = defineCollection({
           badge: z.string(),
           icon: z.string(),
           content: z.string(),
-        })
+        }),
       )
       .optional(),
   }),
@@ -378,7 +377,7 @@ const projects = defineCollection({
       .filter(
         (c) =>
           document.categories_id.includes(c.id) &&
-          getLocaleFromFilePath(c._meta.filePath) === locale
+          getLocaleFromFilePath(c._meta.filePath) === locale,
       );
 
     // Use projectTags or postTags according to your preference
@@ -387,7 +386,7 @@ const projects = defineCollection({
       .filter(
         (t) =>
           document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale
+          getLocaleFromFilePath(t._meta.filePath) === locale,
       );
 
     return {
@@ -432,7 +431,7 @@ const resources = defineCollection({
       .filter(
         (t) =>
           document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale
+          getLocaleFromFilePath(t._meta.filePath) === locale,
       );
 
     return {
@@ -529,6 +528,30 @@ const quests = defineCollection({
   },
 });
 
+const changelog = defineCollection({
+  name: "changelog",
+  directory: `${BASE_COLLECTION_PATH}/changelog`,
+  include: "*.{mdx,md}",
+  schema: z.object({
+    version: z.string(),
+    type: z.enum(["milestone", "feature", "fix", "improvement"]),
+    date: z.string(),
+    cover: z.string().optional(),
+    published: z.boolean().default(true),
+  }),
+  transform: async (document, context) => {
+    const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
+    return {
+      ...document,
+      body,
+      locale,
+      path: sanitizePath(document._meta.path),
+      id: document.version,
+    };
+  },
+});
+
 export default defineConfig({
   collections: [
     // Metadata collections
@@ -544,5 +567,6 @@ export default defineConfig({
     resources,
     talks,
     quests,
+    changelog,
   ],
 });

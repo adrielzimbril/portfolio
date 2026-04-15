@@ -3,14 +3,14 @@ import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { QuestCard } from "@/components/shared/pages/quests/card";
 import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
-import { getAllQuests } from "@/module/content/utils/lib";
-import type { Quest } from "@/module/content/utils/lib/quests";
+import { getAllQuests } from "@/integrations/content/lib";
+import type { Quest } from "@/integrations/content/lib/quests";
 import { getResourcesUrl } from "@/utils/base-url";
 import { getHumanDate } from "@/utils/format-date";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
-} from "@/module/content/utils/lib/quests";
+} from "@/integrations/content/lib/quests";
 
 const config = {
   limit: 2,

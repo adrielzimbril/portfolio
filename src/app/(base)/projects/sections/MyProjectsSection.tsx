@@ -3,7 +3,7 @@ import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
 import { useLoadMore } from "@/hooks/useLoadMore";
-import { Project } from "@/module/content/types";
+import { Project } from "@/integrations/content/types";
 interface MyProjectsSectionProps {
   data: Project[];
 }

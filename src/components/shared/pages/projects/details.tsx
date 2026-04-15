@@ -7,9 +7,9 @@ import {
 } from "@/components/shared/pages/projects/tags";
 import { cn } from "@/utils/utils";
 import { getResourcesUrl } from "@/utils/base-url";
-import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types";
-import { PageType } from "@/types";
+import { DEFAULT_CATEGORY_COLOR_NAME, PageType } from "@/types";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -48,7 +48,10 @@ export function CardInfo({
         <Description description={description} />
       </div>
 
-      <Action slug={slug} />
+      <div className="flex items-center justify-between w-full gap-3">
+        <ReactionBar entityType={PageType.PROJECT} entityId={slug} />
+        <Action slug={slug} />
+      </div>
     </div>
   );
 }

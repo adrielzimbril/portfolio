@@ -28,17 +28,17 @@ directories:
   hooks: src/hooks/
   utils: src/utils/
   supabase:
-    client: src/module/supabase/client.ts
-    server: src/module/supabase/server.ts
-    types: src/module/supabase/types.ts
+    client: src/integrations/supabase/client.ts
+    server: src/integrations/supabase/server.ts
+    types: src/integrations/supabase/types.ts
     migrations: supabase/migrations/
   mail:
-    root: src/module/mail/
-    providers: src/module/mail/provider/
-    templates: src/module/mail/emails/
-    sendUtil: src/module/mail/util/send.ts
+    root: src/integrations/mail/
+    providers: src/integrations/mail/provider/
+    templates: src/integrations/mail/emails/
+    sendUtil: src/integrations/mail/util/send.ts
   content:
-    root: src/module/content/
+    root: src/integrations/content/
   pages:
     thoughts: src/app/(base)/thoughts/
     projects: src/app/(base)/projects/
@@ -84,7 +84,7 @@ safety:
       - BREVO_GENERAL_LIST_ID
   filesProtection:
     writeProtected:
-      - src/module/supabase/types.ts # généré par DB; éditer avec prudence
+      - src/integrations/supabase/types.ts # généré par DB; éditer avec prudence
     reviewOnChange:
       - supabase/migrations/**
       - src/app/api/**
@@ -121,12 +121,12 @@ mail:
   provider:
     default: resend
     files:
-      - src/module/mail/provider/resend.ts
-      - src/module/mail/provider/console.ts
+      - src/integrations/mail/provider/resend.ts
+      - src/integrations/mail/provider/console.ts
   templates:
-    index: src/module/mail/emails/index.ts
+    index: src/integrations/mail/emails/index.ts
     rules:
-      - use sendEmail util (src/module/mail/util/send.ts)
+      - use sendEmail util (src/integrations/mail/util/send.ts)
       - prefer templateId unless ad-hoc mail is required
 
 routing:

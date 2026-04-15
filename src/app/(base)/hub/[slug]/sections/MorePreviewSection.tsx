@@ -1,7 +1,7 @@
 "use client";
 import { ResourceCard } from "@/components/shared/pages/resources/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import { Resource } from "@/module/content/types";
+import { Resource } from "@/integrations/content/types";
 import { useTranslations } from "use-intl";
 
 export function MorePreviewSection({ data }: { data: Resource[] }) {

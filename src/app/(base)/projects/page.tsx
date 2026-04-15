@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
-import { getAllProjects } from "@/module/content/utils/lib";
+import { getAllProjects } from "@/integrations/content/lib";
 import { MyProjectsSection } from "./sections/MyProjectsSection";
 
 export async function generateMetadata(): Promise<Metadata> {

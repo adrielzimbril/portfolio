@@ -2,7 +2,7 @@
 import React from "react";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import { Project } from "@/module/content/types";
+import { Project } from "@/integrations/content/types";
 import { useTranslations } from "use-intl";
 
 export function MorePreviewSection({ data }: { data: Project[] }) {

@@ -16,7 +16,7 @@ import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils/base-url";
-import { useTurnstile } from "@/module/anti-bot/turnstile";
+import { useTurnstile } from "@/integrations/anti-bot/turnstile";
 
 export function GetResource({
   id,
