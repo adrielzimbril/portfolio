@@ -2,8 +2,11 @@
 
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { Calendar } from "@aurthle/icons";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface DaysSinceRevampProps {
   revampDate: Date;
@@ -60,51 +63,49 @@ export function DaysSinceRevamp({
     requestAnimationFrame(animateCount);
   }, [days, delay, shouldReduceAnimations]);
 
-  const cardClassName = cn(
-    "group relative flex h-full flex-col overflow-hidden squircle-border-border squircle-b-base p-6 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white",
-    "squircle squircle-smooth-xl squircle-6xl",
-    className,
-  );
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={cardClassName}
+    <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className={cn(
+        "squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden",
+        className,
+      )}
     >
-      <div className="pointer-events-none absolute inset-0 z-10 squircle-2xl squircle-linear-to-tl from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-      <motion.div
-        animate={{
-          rotate: isHovered ? 5 : -5,
-          scale: isHovered ? 1.1 : 1,
-          y: isHovered ? -10 : 0,
-        }}
-        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        className="absolute -bottom-2 -right-2 text-[100px] leading-none opacity-10"
-      >
-        📅
-      </motion.div>
-
-      <div className="relative z-20 flex h-full flex-col">
-        <h2 className="mb-2 font-medium text-foreground">Site Age</h2>
-        <p className="text-sm text-muted-foreground">Since last revamp</p>
-
-        <div className="mt-auto">
+      <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
+        <div
+          className={cn(
+            "squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
+          )}
+        >
           <motion.div
-            animate={{ scale: isHovered ? 1.05 : 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="flex items-baseline gap-2"
+            animate={{
+              rotate: isHovered ? 5 : -5,
+              scale: isHovered ? 1.1 : 1,
+              y: isHovered ? -10 : 0,
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="absolute -bottom-2 -right-2 text-[100px] leading-none opacity-10"
           >
-            <span className="text-5xl font-bold tracking-tight text-foreground">
-              {displayDays}
-            </span>
-            <span className="text-lg text-muted-foreground">days</span>
+            📅
           </motion.div>
-          <p className="mt-2 text-xs text-muted-foreground">
+
+          <div
+            className={cn(
+              "relative size-full flex flex-row z-20 items-center gap-2 md:gap-4 px-2 py-2 m-auto",
+            )}
+          >
+            <Badge className="capitalize" size="lg" circle>
+              <Calendar size={32} className="text-primary" variant="bulk" />
+            </Badge>
+            <div className="flex flex-col items-start gap-2">
+              <h6 className="tracking-wide">Site Age</h6>
+              <p className="text-sm text-b-white-invert-thr leading-[120%]">
+                {displayDays} days
+              </p>
+            </div>
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground px-2 pb-2">
             Launched{" "}
             {revampDate.toLocaleDateString("en-US", {
               month: "short",
@@ -113,7 +114,7 @@ export function DaysSinceRevamp({
             })}
           </p>
         </div>
-      </div>
-    </motion.div>
+      </CardContent>
+    </Card>
   );
 }
