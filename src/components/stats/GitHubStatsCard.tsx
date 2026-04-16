@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Star, Github, Git, Calendar } from "@aurthle/icons";
+import { useState } from "react";
+import { Star, Github, Git } from "@aurthle/icons";
 import { motion } from "motion/react";
-import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "../ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { pickRandomColor } from "@/utils";
 
@@ -145,121 +144,116 @@ export function GitHubStatsCard({
   const Icon = theme.icon;
 
   return (
-    <>
-      <Card
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="flex-1 squircle size-full squircle-b-base squircle-3xl squircle-smooth-md border-0 overflow-hidden"
-      >
-        <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
+    <Card
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="flex-1 squircle size-full squircle-b-base squircle-3xl squircle-smooth-md border-0 overflow-hidden"
+    >
+      <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
+        <div
+          className={cn(
+            "squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
+          )}
+        >
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            {type === "stars" &&
+              starDecorations.map((star, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0, rotate: star.rotate - 30 }}
+                  animate={{
+                    opacity: isHovered ? 0.55 : 0.3,
+                    scale: isHovered ? 1.4 : 1,
+                    rotate: isHovered ? star.rotate + 15 : star.rotate,
+                    y: isHovered ? -8 : 0,
+                  }}
+                  transition={{
+                    opacity: { duration: 0.2 },
+                    scale: { type: "spring", stiffness: 200, damping: 15 },
+                    rotate: { type: "spring", stiffness: 200, damping: 15 },
+                    y: { type: "spring", stiffness: 200, damping: 15 },
+                  }}
+                  className={`absolute ${theme.decorColor}`}
+                  style={{ left: star.x, top: star.y }}
+                >
+                  <StarShape size={star.size} />
+                </motion.div>
+              ))}
+
+            {type === "forks" &&
+              forkDecorations.map((fork, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0, rotate: fork.rotate }}
+                  animate={{
+                    opacity: isHovered ? 0.5 : 0.28,
+                    scale: isHovered ? 1.3 : 1,
+                    rotate: isHovered ? fork.rotate * 1.3 : fork.rotate,
+                    y: isHovered ? -8 : 0,
+                  }}
+                  transition={{
+                    opacity: { duration: 0.2 },
+                    scale: { type: "spring", stiffness: 200, damping: 15 },
+                    rotate: { type: "spring", stiffness: 200, damping: 15 },
+                    y: { type: "spring", stiffness: 200, damping: 15 },
+                  }}
+                  className={`absolute ${theme.decorColor}`}
+                  style={{ left: fork.x, top: fork.y }}
+                >
+                  <BranchShape />
+                </motion.div>
+              ))}
+
+            {type === "commits" &&
+              commitDecorations.map((commit, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{
+                    opacity: isHovered ? 0.55 : 0.32,
+                    scale: isHovered ? 1.5 : 1,
+                    y: isHovered ? -6 : 0,
+                  }}
+                  transition={{
+                    opacity: { duration: 0.2 },
+                    scale: { type: "spring", stiffness: 250, damping: 15 },
+                    y: { type: "spring", stiffness: 200, damping: 15 },
+                  }}
+                  className={`absolute ${theme.decorColor}`}
+                  style={{ left: commit.x, top: commit.y }}
+                >
+                  <CommitDot />
+                </motion.div>
+              ))}
+          </div>
           <div
             className={cn(
-              "squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
+              "relative size-full flex flex-row z-20 overflow-hidden items-center gap-2 md:gap-4 px-2 py-2 m-auto",
             )}
           >
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              {type === "stars" &&
-                starDecorations.map((star, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0, rotate: star.rotate - 30 }}
-                    animate={{
-                      opacity: isHovered ? 0.55 : 0.3,
-                      scale: isHovered ? 1.4 : 1,
-                      rotate: isHovered ? star.rotate + 15 : star.rotate,
-                      y: isHovered ? -8 : 0,
-                    }}
-                    transition={{
-                      opacity: { duration: 0.2 },
-                      scale: { type: "spring", stiffness: 200, damping: 15 },
-                      rotate: { type: "spring", stiffness: 200, damping: 15 },
-                      y: { type: "spring", stiffness: 200, damping: 15 },
-                    }}
-                    className={`absolute ${theme.decorColor}`}
-                    style={{ left: star.x, top: star.y }}
-                  >
-                    <StarShape size={star.size} />
-                  </motion.div>
-                ))}
-
-              {type === "forks" &&
-                forkDecorations.map((fork, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0, rotate: fork.rotate }}
-                    animate={{
-                      opacity: isHovered ? 0.5 : 0.28,
-                      scale: isHovered ? 1.3 : 1,
-                      rotate: isHovered ? fork.rotate * 1.3 : fork.rotate,
-                      y: isHovered ? -8 : 0,
-                    }}
-                    transition={{
-                      opacity: { duration: 0.2 },
-                      scale: { type: "spring", stiffness: 200, damping: 15 },
-                      rotate: { type: "spring", stiffness: 200, damping: 15 },
-                      y: { type: "spring", stiffness: 200, damping: 15 },
-                    }}
-                    className={`absolute ${theme.decorColor}`}
-                    style={{ left: fork.x, top: fork.y }}
-                  >
-                    <BranchShape />
-                  </motion.div>
-                ))}
-
-              {type === "commits" &&
-                commitDecorations.map((commit, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{
-                      opacity: isHovered ? 0.55 : 0.32,
-                      scale: isHovered ? 1.5 : 1,
-                      y: isHovered ? -6 : 0,
-                    }}
-                    transition={{
-                      opacity: { duration: 0.2 },
-                      scale: { type: "spring", stiffness: 250, damping: 15 },
-                      y: { type: "spring", stiffness: 200, damping: 15 },
-                    }}
-                    className={`absolute ${theme.decorColor}`}
-                    style={{ left: commit.x, top: commit.y }}
-                  >
-                    <CommitDot />
-                  </motion.div>
-                ))}
-            </div>
-            <div
+            <Badge
               className={cn(
-                "relative size-full flex flex-row z-20 overflow-hidden items-center gap-2 md:gap-4 px-2 py-2 m-auto",
+                "capitalize whitespace-pre-line",
+                pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
               )}
+              variant="colored"
+              size="lg"
+              circle
             >
-              <Badge
-                className={cn(
-                  "capitalize whitespace-pre-line",
-                  // theme.squircleColor,
-                  // theme.iconColor,
-                  // "size-max text-primary-foreground",
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
-                )}
-                variant="colored"
-                size="lg"
-                circle
-              >
-                <Icon size={32} variant="bulk" />
-              </Badge>
-              <div className="flex flex-col items-start gap-2">
-                <h6 className="tracking-wide whitespace-pre-line">{label}</h6>
-                <p className="text-sm text-b-white-invert-thr leading-[120%]">
-                  {value}
-                </p>
-                {period && (
-                  <p className="mt-1 text-xs text-muted-foreground">{period}</p>
-                )}
-              </div>
+              <Icon size={32} variant="bulk" />
+            </Badge>
+            <div className="flex flex-col items-start gap-2">
+              <h6 className="tracking-wide whitespace-pre-line">{label}</h6>
+              <p className="text-sm text-b-white-invert-thr leading-[120%]">
+                {value}
+              </p>
+              {period && (
+                <p className="mt-1 text-xs text-muted-foreground">{period}</p>
+              )}
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

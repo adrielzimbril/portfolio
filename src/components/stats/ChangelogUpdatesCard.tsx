@@ -3,7 +3,6 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { changelog } from "@/data/personal/changelog";
 import { Badge } from "@/components/ui/badge";
@@ -34,12 +33,9 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
     improvement: "text-blue-500",
   };
 
-  // Get recent changelog items - show more for scrolling effect
   const recentItems = changelog
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 8);
-
-  const latestVersion = recentItems[0];
 
   const getTopPosition = (index: number) => {
     const basePosition = -5;
@@ -51,12 +47,12 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="squircle size-full squircle-b-base squircle-4xl squircle-smooth-xl border-0 overflow-hidden"
+      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
     >
       <CardContent className="size-full grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full overflow-hidden">
         <div
           className={cn(
-            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-mask squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
         >
           <motion.div
@@ -66,7 +62,7 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
               y: isHovered ? -10 : 0,
             }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
+            className="pointer-events-none absolute -bottom-6 -right-6 text-[100px] leading-none opacity-20"
           >
             ✨
           </motion.div>
@@ -105,19 +101,24 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
                       index % 2 === 1 ? "left-[-6px]" : "right-[-6px]",
                     )}
                   />
-                  <div className="z-10 inline-block w-[100px] space-y-px rounded-lg border border-border bg-b-base px-2 py-1.5 text-xs">
+                  <div className="z-10 inline-block w-[100px] space-y-px squircle squircle-smooth-xl squircle-2xl squircle-sh-white squircle-border squircle-border-2 squircle-border-b-base px-2 py-1.5 text-xs overflow-hidden">
                     <div className="flex items-center gap-1">
                       {(() => {
                         const Icon =
                           typeIcons[item.type as keyof typeof typeIcons];
                         return Icon ? (
-                          <Icon
-                            className={cn(
-                              "h-3 w-3",
-                              typeColors[item.type as keyof typeof typeColors],
-                            )}
-                            variant="bulk"
-                          />
+                          <Badge className={cn("relative")} size="xs" circle>
+                            <Icon
+                              className={cn(
+                                "p-1",
+                                typeColors[
+                                  item.type as keyof typeof typeColors
+                                ],
+                              )}
+                              size={12}
+                              variant="bulk"
+                            />
+                          </Badge>
                         ) : null;
                       })()}
                       <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
@@ -169,8 +170,8 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
 
           <Link
             href={getResourcesUrl(PageType.CHANGELOG)}
-            className="absolute size-full left-1/2 top-0 "
-          ></Link>
+            className="absolute size-full left-1/2 top-0"
+          />
         </div>
       </CardContent>
     </Card>
