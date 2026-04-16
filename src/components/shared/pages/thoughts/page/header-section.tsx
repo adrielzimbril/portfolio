@@ -13,7 +13,6 @@ import {
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { formatCount, getDate } from "@/utils";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -127,14 +126,37 @@ export function HeaderSection({
               size="md"
             >
               <span className="flex items-center gap-2">
-                <Eye size={16} className="text-indigo-400" variant="bulk" />
-                {formatCount(thoughtDetails.views ?? 0)}{" "}
-                {t("common.stats.views")}
+                {getDate({ date: thoughtDetails.date })}
               </span>
             </Badge>
-          </div>
+          )}
 
-          {slug && <ReactionBar pageType={PageType.THOUGHT} entityId={slug} />}
+          <Badge
+            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+            variant="colored"
+            size="md"
+          >
+            <span className="flex items-center gap-2">
+              <HourglassFill
+                size={16}
+                className="text-indigo-400"
+                variant="bulk"
+              />
+              {thoughtDetails.readingTime}
+            </span>
+          </Badge>
+
+          <Badge
+            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+            variant="colored"
+            size="md"
+          >
+            <span className="flex items-center gap-2">
+              <Eye size={16} className="text-indigo-400" variant="bulk" />
+              {formatCount(thoughtDetails.views ?? 0)}{" "}
+              {t("common.stats.views")}
+            </span>
+          </Badge>
         </div>
       )}
 

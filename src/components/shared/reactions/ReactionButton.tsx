@@ -25,6 +25,7 @@ interface ReactionButtonProps {
   reactionType: ReactionType;
   count?: number;
   className?: string;
+  minimal?: boolean;
 }
 
 export function ReactionButton({
@@ -33,6 +34,7 @@ export function ReactionButton({
   reactionType,
   count = 0,
   className,
+  minimal = false,
 }: ReactionButtonProps) {
   const [user, setUser] = useState<any>(null);
   const [currentUserId, setCurrentUserId] = useState<string | undefined>();
@@ -146,25 +148,31 @@ export function ReactionButton({
     <button
       onClick={handleReaction}
       disabled={isLoading}
+      title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
       className={cn(
-        "flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer",
-        "bg-sh-white",
-        isReacted && "bg-white",
+        "flex items-center justify-center transition-all duration-200 cursor-pointer group/btn disabled:opacity-50",
+        minimal 
+          ? "size-10 rounded-full hover:bg-white/10" 
+          : "gap-1.5 px-3 py-1.5 rounded-full bg-sh-white hover:bg-white",
+        isReacted && !minimal && "bg-white",
+        isReacted && minimal && "bg-slate-200/20",
         className,
       )}
     >
       <span
         className={cn(
-          "text-lg transition-all duration-200",
-          "hover:scale-125",
-          isReacted && "scale-110",
+          "text-lg transition-transform duration-200",
+          "group-hover/btn:scale-125",
+          isReacted && !minimal && "scale-110",
         )}
       >
         {emoji}
       </span>
-      <span className="text-xs font-medium text-foreground">
-        {reactionCount}
-      </span>
+      {!minimal && (
+        <span className="text-xs font-medium text-foreground">
+          {reactionCount}
+        </span>
+      )}
     </button>
   );
 }

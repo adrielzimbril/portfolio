@@ -6,6 +6,7 @@ import { HeaderSection } from "@/app/(base)/thoughts/[slug]/sections/HeaderSecti
 import { MorePreviewSection } from "@/app/(base)/thoughts/[slug]/sections/MorePreviewSection";
 import { ContentsSection } from "@/app/(base)/thoughts/[slug]/sections/ContentSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 import { routes } from "@/data/routes";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { PageParams, PageType } from "@/types";
@@ -84,6 +85,7 @@ export default async function BlogPostPage(props: {
       <Skeleton name="thought-detail-cta" loading={false}>
         <CallToAction isPage />
       </Skeleton>
+      <ReactionBar pageType={PageType.THOUGHT} entityId={slug} variant="dock" isFloating={true} />
     </>
   );
 }

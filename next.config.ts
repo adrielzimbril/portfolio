@@ -1,9 +1,9 @@
 import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
 import nextIntlPlugin from "next-intl/plugin";
-import { appConfig } from "@data/app-config";
 import bundleAnalyzer from "@next/bundle-analyzer";
-import { ConfigValue } from "@/config";
+import { ConfigValue } from "@/config/config";
+import { appConfig } from "@data/app-config";
 
 const withNextIntl = nextIntlPlugin({
   requestConfig: "./src/integrations/i18n/request.ts",

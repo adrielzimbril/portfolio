@@ -2,8 +2,9 @@ import React from "react";
 import { HeaderSection } from "@/app/(base)/quests/[slug]/sections/HeaderSection";
 import { QuestDetailsSection } from "@/app/(base)/quests/[slug]/sections/QuestDetailsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { PageType, PageParams } from "@/types";
 import { getLocale, getTranslations } from "next-intl/server";
-import { PageParams } from "@/types";
 import { localeRedirect } from "@/integrations/i18n/routing";
 import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
@@ -164,6 +165,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       <Skeleton name="quest-detail-cta" loading={false}>
         <CallToAction isPage />
       </Skeleton>
+      <ReactionBar pageType={PageType.QUESTS} entityId={slug} variant="dock" isFloating />
     </>
   );
 }

@@ -21,7 +21,6 @@ import { useScrollTo } from "@/hooks/useScrollTo";
 import { ProductAvatarsStats } from "@/components/SubscriberBadges";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -140,8 +139,6 @@ export function HeaderSection({
               </Badge>
             ))}
           </div>
-
-          {pageType && <ReactionBar pageType={pageType} entityId={slug} />}
         </div>
       )}
       {ctaButton && (!type ? ctaButton.startsWith("http") : true) ? (
@@ -170,7 +167,6 @@ export function HeaderSection({
           </Button>
         </div>
       )}
-      <ReactionBar pageType={PageType.PROJECT} entityId={slug} />
     </SectionBase>
   );
 }

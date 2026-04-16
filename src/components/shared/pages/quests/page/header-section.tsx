@@ -19,7 +19,6 @@ import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
 import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -128,8 +127,6 @@ export function HeaderSection({
               </Badge>
             ))}
           </div>
-
-          {pageType && <ReactionBar pageType={pageType} entityId={slug} />}
         </div>
       )}
 

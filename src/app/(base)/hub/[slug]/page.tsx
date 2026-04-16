@@ -1,5 +1,6 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 import { HeaderSection } from "@/app/(base)/hub/[slug]/sections/HeaderSection";
 import { MorePreviewSection } from "@/app/(base)/hub/[slug]/sections/MorePreviewSection";
 import { ResourceDetailsSection } from "@/app/(base)/hub/[slug]/sections/ResourceDetailsSection";
@@ -80,6 +81,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       <Skeleton name="resource-detail-cta" loading={false}>
         <CallToAction isPage />
       </Skeleton>
+      <ReactionBar pageType={PageType.HUB} entityId={slug} variant="dock" isFloating />
     </>
   );
 }
