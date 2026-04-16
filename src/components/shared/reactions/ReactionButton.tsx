@@ -169,17 +169,17 @@ export function ReactionButton({
         "flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
         "squircle squircle-7xl squircle-smooth-xl",
         minimal 
-          ? "size-10 hover:squircle-zinc-100 dark:hover:squircle-zinc-800" 
-          : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent hover:squircle-border-border",
+          ? "size-10" 
+          : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent",
         isReacted && !minimal && "squircle-background-background squircle-border-2 squircle-border-indigo-500",
-        isReacted && minimal && "squircle-zinc-100 dark:squircle-zinc-800 squircle-border-2 squircle-border-indigo-500",
+        isReacted && minimal && "squircle-sh-white squircle-border-2 squircle-border-indigo-500",
         className,
       )}
     >
       <span
         className={cn(
           "text-lg transition-transform duration-300",
-          "group-hover/btn:scale-125",
+          !minimal && "group-hover/btn:scale-125",
           isReacted && "scale-110",
         )}
       >
