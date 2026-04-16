@@ -2,9 +2,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { routes } from "@/data/routes";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { QuestCard } from "@/components/shared/pages/quests/card";
-import { DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { getAllQuests } from "@/integrations/content/lib";
-import type { Quest } from "@/integrations/content/lib/quests";
 import { getResourcesUrl } from "@/utils/base-url";
 import { getHumanDate } from "@/utils/format-date";
 import {
@@ -52,8 +51,8 @@ export async function QuestsSection() {
                 ),
                 meta: {
                   color: registrationClosed
-                    ? DEFAULT_COLOR_CODE_NAME_TYPE.RED
-                    : DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE,
+                    ? DEFAULT_COLOR_CODE_NAME.RED
+                    : DEFAULT_COLOR_CODE_NAME.PURPLE,
                 },
               },
               {
@@ -64,8 +63,8 @@ export async function QuestsSection() {
                 ),
                 meta: {
                   color: submissionClosed
-                    ? DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE
-                    : DEFAULT_COLOR_CODE_NAME_TYPE.BLUE,
+                    ? DEFAULT_COLOR_CODE_NAME.ORANGE
+                    : DEFAULT_COLOR_CODE_NAME.BLUE,
                 },
               },
             ]}

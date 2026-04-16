@@ -3,7 +3,7 @@ import { Link } from "@/components/ui/link";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { getExternalUrl } from "@/utils/base-url";
 import { useTranslations } from "use-intl";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
 
 export function CardInfo({
   title,
@@ -28,7 +28,7 @@ export function CardInfo({
       <Header title={title} slug={purchaseUrl ?? ""} />
       <Tags
         primaryTag={translatedCategory}
-        primaryTagColor={DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE}
+        primaryTagColor={DEFAULT_COLOR_CODE_NAME.ORANGE}
         tags={translatedTags}
       />
       <Description description={description} />

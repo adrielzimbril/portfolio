@@ -8,7 +8,7 @@ import { ScoreBar } from "@/components/stats/LighthouseScoreCard/ScoreBar";
 import { getScoreColor, getOverallScore } from "@/lib/stats/lighthouse-utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { pickRandomColor } from "@/utils";
 
 interface LighthouseScoreCardProps {
@@ -63,7 +63,7 @@ export function LighthouseScoreCard({
                 <Badge
                   className={cn(
                     "capitalize text-xs font-medium",
-                    pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET),
+                    pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
                     // overallColors.squircle,
                     "size-max text-primary-foreground!",
                   )}
@@ -90,7 +90,7 @@ export function LighthouseScoreCard({
                 className={cn(
                   "capitalize",
                   // overallColors.squircle,
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.GREEN),
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.GREEN),
                 )}
                 variant="colored"
                 size="lg"

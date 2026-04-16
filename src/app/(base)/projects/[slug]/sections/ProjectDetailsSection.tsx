@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getDateDifference } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { useTranslations } from "use-intl";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 
 export function ProjectDetailsSection({
   content,
@@ -47,10 +47,8 @@ export function ProjectDetailsSection({
                         key={index}
                         className={
                           index % 2 === 0
-                            ? pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.PINK)
-                            : pickRandomColor(
-                                DEFAULT_COLOR_CODE_NAME_TYPE.YELLOW,
-                              )
+                            ? pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINK)
+                            : pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW)
                         }
                         variant="colored"
                       >
@@ -73,7 +71,7 @@ export function ProjectDetailsSection({
                         <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                           <Badge
                             className={pickRandomColor(
-                              DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE,
+                              DEFAULT_COLOR_CODE_NAME.PURPLE,
                             )}
                             variant="colored"
                           >
@@ -89,7 +87,7 @@ export function ProjectDetailsSection({
                         <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                           <Badge
                             className={pickRandomColor(
-                              DEFAULT_COLOR_CODE_NAME_TYPE.GREENISH_YELLOW,
+                              DEFAULT_COLOR_CODE_NAME.GREENISH_YELLOW,
                             )}
                             variant="colored"
                           >

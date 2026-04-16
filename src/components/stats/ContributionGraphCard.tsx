@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Github } from "@aurthle/icons";
 import { pickRandomColor } from "@/utils/pick-random-color";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
 
 interface ContributionGraphCardProps {
   contributions: ContributionData;
@@ -101,7 +101,7 @@ export function ContributionGraphCard({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET),
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
                   "size-max text-primary-foreground!",
                 )}
                 size="sm"

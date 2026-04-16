@@ -9,7 +9,7 @@ import { changelog } from "@/data/personal/changelog";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Star, Bug, Wrench } from "@aurthle/icons";
-import { DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { getResourcesUrl } from "@/utils";
 
@@ -147,7 +147,7 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET),
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
                   "size-max text-primary-foreground!",
                 )}
                 size="lg"

@@ -7,7 +7,7 @@ import { pickRandomColor } from "@/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColorCode } from "@/utils/pick-random-color";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import {
   ChartPresentationOne,
   Heart,
@@ -141,7 +141,7 @@ export function BarChartCard({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET),
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
                   "size-max text-primary-foreground!",
                 )}
                 size="lg"

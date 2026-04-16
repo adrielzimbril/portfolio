@@ -6,7 +6,7 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { pickRandomColor } from "@/utils/pick-random-color";
 
 interface StatCardProps {
@@ -107,8 +107,8 @@ export function StatCard({
                     "capitalize text-xs font-medium",
                     pickRandomColor(
                       decorationPattern
-                        ? DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET
-                        : DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE,
+                        ? DEFAULT_COLOR_CODE_NAME.VIOLET
+                        : DEFAULT_COLOR_CODE_NAME.ORANGE,
                     ),
                     decorationPattern && "size-max text-primary-foreground",
                   )}

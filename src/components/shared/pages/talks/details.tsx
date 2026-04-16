@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
 import { getExternalUrl } from "@/utils/base-url";
 import { getMachineDate } from "@/utils/format-date";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
 import { pickRandomColorCode } from "@/utils";
 import BoringAvatar from "boring-avatars";
 import { useTranslations } from "use-intl";
@@ -46,10 +46,10 @@ export function CardInfo({
             primaryTag={date ?? tags[0]?.name}
             primaryTagColor={
               isDatePast
-                ? DEFAULT_COLOR_CODE_NAME_TYPE.RED
+                ? DEFAULT_COLOR_CODE_NAME.RED
                 : isToday
-                  ? DEFAULT_COLOR_CODE_NAME_TYPE.YELLOW
-                  : DEFAULT_COLOR_CODE_NAME_TYPE.BLUE
+                  ? DEFAULT_COLOR_CODE_NAME.YELLOW
+                  : DEFAULT_COLOR_CODE_NAME.BLUE
             }
             secondaryTag={
               isToday
@@ -60,10 +60,10 @@ export function CardInfo({
             }
             secondaryTagColor={
               isDatePast
-                ? DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE
+                ? DEFAULT_COLOR_CODE_NAME.ORANGE
                 : isToday
-                  ? DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE
-                  : DEFAULT_COLOR_CODE_NAME_TYPE.GREEN
+                  ? DEFAULT_COLOR_CODE_NAME.PURPLE
+                  : DEFAULT_COLOR_CODE_NAME.GREEN
             }
             className="capitalize"
             tags={tags.map((tag) => tag.name)}

@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getResourcesUrl, pickRandomColor } from "@/utils";
 import {
-  DEFAULT_COLOR_CODE_NAME_TYPE,
+  DEFAULT_COLOR_CODE_NAME,
   PageType,
   TopThoughtsListType,
 } from "@/types";
@@ -77,7 +77,7 @@ export function TopThoughtsList({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET),
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
                   "size-max text-primary-foreground!",
                 )}
                 size="lg"
@@ -118,8 +118,8 @@ export function TopThoughtsList({
                           "capitalize text-xs font-medium",
                           pickRandomColor(
                             type === TopThoughtsListType.VIEWED
-                              ? DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET
-                              : DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE,
+                              ? DEFAULT_COLOR_CODE_NAME.VIOLET
+                              : DEFAULT_COLOR_CODE_NAME.ORANGE,
                           ),
                           type === TopThoughtsListType.VIEWED &&
                             "size-max text-primary-foreground",
