@@ -1,11 +1,5 @@
 import { unstable_cache } from "next/cache";
-import { useState } from "react";
-import { Star, Github, Git } from "@aurthle/icons";
-import { motion } from "motion/react";
-import { cn, logger, pickRandomColor } from "@/utils";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
+import { logger } from "@/utils";
 import type {
   GitHubStats,
   ContributionData,
@@ -14,10 +8,11 @@ import type {
 } from "@/lib/stats/types";
 
 // GitHub configuration
-const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "adrielzimbril";
-const GITHUB_REPO = process.env.GITHUB_REPO || "portfolio-shiro";
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const GITHUB_BRANCH = process.env.GITHUB_BRANCH || "main";
+const GITHUB_TOKEN = process.env.NEXT_PRIVATE_GITHUB_TOKEN;
+const GITHUB_USERNAME =
+  process.env.NEXT_PUBLIC_GITHUB_USERNAME || "adrielzimbril";
+const GITHUB_REPO = process.env.NEXT_PUBLIC_GITHUB_REPO || "portfolio-shiro";
+const GITHUB_BRANCH = process.env.NEXT_PUBLIC_GITHUB_BRANCH || "main";
 
 // Function to fetch GitHub statistics
 export async function getGitHubStats(): Promise<GitHubStats> {
