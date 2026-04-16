@@ -77,7 +77,7 @@ export const ConfigValue = {
   // Tasks
   TRIGGER_ACCESS_TOKEN: process.env.TRIGGER_ACCESS_TOKEN,
   NEXT_SHIROFOLIO_PUBLIC_APP_URL: process.env.NEXT_SHIROFOLIO_PUBLIC_APP_URL,
-  ANALYZE: process.env.ANALYZE,
+  ANALYZE_BUNDLE: process.env.ANALYZE_BUNDLE,
 
   // Analytics
   NEXT_PRIVATE_POSTHOG_CODE: process.env.NEXT_PRIVATE_POSTHOG_CODE,

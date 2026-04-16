@@ -16,7 +16,7 @@ const withNextIntl = nextIntlPlugin({
 
 const IsDEV = ConfigValue.NODE_ENV === "development";
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: ConfigValue.ANALYZE === "true",
+  enabled: ConfigValue.ANALYZE_BUNDLE === "true",
 });
 
 const nextConfig: NextConfig = {

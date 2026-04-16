@@ -15,6 +15,15 @@
  * and other background tasks. These tasks run outside the Next.js context.
  */
 
+// Auto-validate environment variables on import (server-side only)
+if (typeof window === "undefined") {
+  import("./validate-environment-variables").then(
+    ({ validateEnvironmentVariables }) => {
+      validateEnvironmentVariables();
+    },
+  );
+}
+
 // Export configuration values
 export * from "@/config/config";
 

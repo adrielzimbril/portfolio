@@ -3,15 +3,16 @@
   "version": "1.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm validate:env && next dev",
     "dev:trigger": "pnpm dlx trigger.dev dev",
     "dev:all": "npx concurrently --kill-others --names \"next,trigger\" --prefix-colors \"yellow,blue\" \"pnpm run dev\" \"pnpm run dev:trigger\"",
-    "build": "next build",
-    "analyze": "cross-env ANALYZE=true next build --webpack",
+    "build": "pnpm validate:env && next build",
+    "analyze": "cross-env ANALYZE_BUNDLE=true next build --webpack",
     "build:all": "pnpm run build && pnpm run trigger:deploy",
     "start": "next start",
     "lint": "next lint",
-    "trigger:deploy": "pnpm dlx trigger.dev deploy"
+    "trigger:deploy": "pnpm dlx trigger.dev deploy",
+    "validate:env": "tsx scripts/validate-env.ts"
   },
   "dependencies": {
     "@aurthle/emoji-hub": "^1.0.5",

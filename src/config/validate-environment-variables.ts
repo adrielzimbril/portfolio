@@ -13,7 +13,7 @@ const environmentVariablesSchema = z.object({
   PORT: z.string().default("3000"),
 
   // Site Configuration
-  NEXT_PUBLIC_SITE_URL: z.string().url().default("http://localhost:3000"),
+  NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
   NEXT_PUBLIC_DOMAIN_SITE_URL: z.string().optional(),
   NEXT_PUBLIC_S3_DOMAIN_SITE_URL: z.string().optional(),
   NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
@@ -79,16 +79,14 @@ const environmentVariablesSchema = z.object({
   // Tasks
   TRIGGER_ACCESS_TOKEN: z.string().optional(),
   NEXT_SHIROFOLIO_PUBLIC_APP_URL: z.string().optional(),
+  ANALYZE_BUNDLE: z.string().optional(),
 
   // Analytics
   NEXT_PRIVATE_POSTHOG_CODE: z.string().optional(),
   NEXT_PRIVATE_POSTHOG_KEY: z.string().optional(),
   NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
   NEXT_PRIVATE_POSTHOG_PERSONAL_KEY: z.string().optional(),
-  NEXT_PUBLIC_POSTHOG_HOST: z
-    .string()
-    .url()
-    .default("https://us.i.posthog.com"),
+  NEXT_PUBLIC_POSTHOG_HOST: z.url().default("https://us.i.posthog.com"),
   NEXT_PUBLIC_PLAUSIBLE_URL: z.string().optional(),
   NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional(),
 
