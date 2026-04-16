@@ -2,7 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/quests/details";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PageType } from "@/types";
+import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+import { PageType } from "@/types/enum";
 
 export function QuestCard({
   title,
@@ -50,20 +51,11 @@ export function QuestCard({
           hideReactions={true}
         />
 
-        {reactionsPosition && (
-          <div className={cn(
-            "absolute z-20 pointer-events-auto",
-            reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-8"
-          )}>
-            <ReactionBar 
-              pageType={PageType.QUESTS} 
-              entityId={slug} 
-              variant="dock" 
-              dockPosition={reactionsPosition} 
-              orientation="vertical"
-            />
-          </div>
-        )}
+        <AbsoluteReactionBar 
+          pageType={PageType.QUESTS} 
+          entityId={slug} 
+          reactionsPosition={reactionsPosition} 
+        />
       </CardContent>
     </Card>
   );

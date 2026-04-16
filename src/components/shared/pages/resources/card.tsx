@@ -2,9 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/resources/details";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PageType, ResourceType } from "@/types";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
-import { cn } from "@/utils/utils";
+import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+import { PageType, ResourceType } from "@/types/enum";
 
 export function ResourceCard({
   title,
@@ -56,20 +55,11 @@ export function ResourceCard({
           hideReactions={true}
         />
 
-        {reactionsPosition && (
-          <div className={cn(
-            "absolute z-20 pointer-events-auto",
-            reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-8"
-          )}>
-            <ReactionBar 
-              pageType={PageType.HUB} 
-              entityId={slug} 
-              variant="dock" 
-              dockPosition={reactionsPosition} 
-              orientation="vertical"
-            />
-          </div>
-        )}
+        <AbsoluteReactionBar 
+          pageType={PageType.HUB} 
+          entityId={slug} 
+          reactionsPosition={reactionsPosition} 
+        />
       </CardContent>
     </Card>
   );

@@ -2,7 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/talks/preview";
 import { CardInfo } from "@/components/shared/pages/talks/details";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PageType } from "@/types";
+import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+import { PageType } from "@/types/enum";
 
 export function TalksCard({
   title,
@@ -10,7 +11,6 @@ export function TalksCard({
   excerpt,
   date,
   tags = [],
-  participantsCount,
   participantsCount,
   action,
   reactionsPosition,
@@ -49,20 +49,11 @@ export function TalksCard({
           hideReactions={true}
         />
 
-        {reactionsPosition && (
-          <div className={cn(
-            "absolute z-20 pointer-events-auto",
-            reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-8"
-          )}>
-            <ReactionBar 
-              pageType={PageType.TALKS} 
-              entityId={title} 
-              variant="dock" 
-              dockPosition={reactionsPosition} 
-              orientation="vertical"
-            />
-          </div>
-        )}
+        <AbsoluteReactionBar 
+          pageType={PageType.TALKS} 
+          entityId={title} 
+          reactionsPosition={reactionsPosition} 
+        />
       </CardContent>
     </Card>
   );

@@ -3,8 +3,8 @@ import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/utils/utils";
-import { PageType } from "@/types";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+import { PageType } from "@/types/enum";
 
 export function ProjectCard({
   title,
@@ -60,20 +60,11 @@ export function ProjectCard({
           hideReactions={true}
         />
 
-        {reactionsPosition && (
-          <div className={cn(
-            "absolute z-20 pointer-events-auto",
-            reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-8"
-          )}>
-            <ReactionBar 
-              pageType={PageType.PROJECT} 
-              entityId={slug} 
-              variant="dock" 
-              dockPosition={reactionsPosition} 
-              orientation="vertical"
-            />
-          </div>
-        )}
+        <AbsoluteReactionBar 
+          pageType={PageType.PROJECT} 
+          entityId={slug} 
+          reactionsPosition={reactionsPosition} 
+        />
       </CardContent>
     </Card>
   );
