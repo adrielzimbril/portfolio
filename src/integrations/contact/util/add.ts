@@ -1,4 +1,4 @@
-import logger from "@/utils";
+import { logger } from "@/utils";
 import {
   ContactInput,
   ContactProvider,

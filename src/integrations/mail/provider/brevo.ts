@@ -1,5 +1,5 @@
 import { appConfig } from "@/data/app-config";
-import logger from "@/utils";
+import { logger } from "@/utils";
 import type { SendEmailHandler } from "@/integrations/mail/types/types";
 import {
   TransactionalEmailsApi,

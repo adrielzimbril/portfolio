@@ -1,4 +1,4 @@
-import logger from "@/utils";
+import { logger } from "@/utils";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

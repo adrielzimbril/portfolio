@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import type { LighthouseStats, LighthouseScores } from "@/lib/stats/types";
-import logger from "@/utils";
+import { logger } from "@/utils";
 
 // Configuration
 const SITE_URL = process.env.SITE_URL || "https://www.adrielzimbril.com/";

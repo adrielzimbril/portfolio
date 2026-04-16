@@ -1,4 +1,4 @@
-import logger from "@/utils";
+import { logger } from "@/utils";
 import type { mailTemplates } from "@/integrations/mail/templates";
 import { send } from "@/integrations/mail/provider";
 import type { TemplateId } from "@/integrations/mail/util/templates";
