@@ -9,6 +9,8 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { getResourcesUrl, pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 
 interface TopThoughtsListProps {
   title: string;
@@ -31,11 +33,9 @@ export function TopThoughtsList({
   delay = 0,
   className,
 }: TopThoughtsListProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   const displayThoughts = thoughts.slice(0, 5);
-  const maxCount = Math.max(...displayThoughts.map((t) => t.count), 1);
 
   return (
     <Card
@@ -49,7 +49,7 @@ export function TopThoughtsList({
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
           className={cn(
-            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-start gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
         >
           <motion.div
@@ -79,9 +79,8 @@ export function TopThoughtsList({
               </div>
             </div>
 
-            <div className="flex flex-1 flex-col justify-center space-y-3">
+            <div className="flex flex-1 flex-col justify-center space-y-2">
               {displayThoughts.map((thought, index) => {
-                const percentage = (thought.count / maxCount) * 100;
                 const isItemHovered = hoveredItem === index;
 
                 return (
@@ -94,46 +93,46 @@ export function TopThoughtsList({
                     onMouseEnter={() => setHoveredItem(index)}
                     onMouseLeave={() => setHoveredItem(null)}
                   >
-                    <div className="mb-1 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Badge
+                        className={cn(
+                          "capitalize text-xs font-medium",
+                          // pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                          // "size-max text-primary-foreground",
+                        )}
+                        // variant="colored"
+                        size="sm"
+                        variant="primary"
+                        circle
+                      >
+                        {index + 1}
+                      </Badge>
                       <Link
-                        href={`/blog/${thought.slug}`}
-                        className="truncate text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                        href={getResourcesUrl(PageType.THOUGHT, thought.slug)}
+                        className="flex flex-row w-full items-center justify-between gap-3"
                       >
-                        {thought.title}
+                        <motion.span
+                          animate={{
+                            color: isItemHovered
+                              ? "var(--foreground)"
+                              : "var(--muted-foreground)",
+                          }}
+                          className="flex-1 truncate text-sm leading-relaxed"
+                        >
+                          {thought.title}
+                        </motion.span>
+                        <motion.span
+                          animate={{
+                            scale: isItemHovered ? 1.05 : 1,
+                            color: isItemHovered
+                              ? "var(--primary)"
+                              : "var(--muted-foreground)",
+                          }}
+                          className="shrink-0 text-xs font-semibold tabular-nums"
+                        >
+                          {thought.count}
+                        </motion.span>
                       </Link>
-                      <motion.span
-                        animate={{
-                          scale: isItemHovered ? 1.1 : 1,
-                          color: isItemHovered
-                            ? "var(--primary)"
-                            : "var(--muted-foreground)",
-                        }}
-                        className="ml-2 shrink-0 text-xs font-semibold tabular-nums"
-                      >
-                        {thought.count}
-                      </motion.span>
-                    </div>
-                    <div className="relative h-3 w-full overflow-hidden rounded-full bg-border/30">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{
-                          width: `${percentage}%`,
-                          scaleY: isItemHovered ? 1.15 : 1,
-                        }}
-                        transition={{
-                          width: {
-                            duration: 0.8,
-                            delay: delay + index * 0.08 + 0.2,
-                            ease: "easeOut",
-                          },
-                          scaleY: {
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 20,
-                          },
-                        }}
-                        className="absolute inset-y-0 left-0 origin-left rounded-full bg-primary"
-                      />
                     </div>
                   </motion.div>
                 );

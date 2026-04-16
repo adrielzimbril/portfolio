@@ -45,6 +45,7 @@ export async function getServerStats(): Promise<ServerStats> {
 
       const topViewedThoughts: ThoughtMetric[] =
         topViewedData?.map((item) => ({
+          name: item.slug || "",
           slug: item.slug || "",
           title: item.slug || "", // You might need to fetch title from content
           count: item.total_views || 0,

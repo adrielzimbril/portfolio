@@ -23,7 +23,7 @@ import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
 import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
 import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
-import { TrendUp, Heart } from "@aurthle/icons";
+import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
@@ -83,7 +83,6 @@ export default async function StatsPage() {
       />
 
       <SectionLayout
-        title={t("stats.sections.blog.title")}
         description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
         isFlex
@@ -125,7 +124,6 @@ export default async function StatsPage() {
       </SectionLayout>
 
       <SectionLayout
-        title={t("stats.sections.engagement.title")}
         description={t("stats.sections.engagement.description")}
         badge={t("stats.sections.engagement.badge")}
         isFlex
@@ -149,7 +147,7 @@ export default async function StatsPage() {
               thoughts={serverStats.topReactedThoughts.slice(0, 5)}
               metricLabel="reactions"
               icon={
-                <Heart size={32} className="text-rose-500" variant="bulk" />
+                <HeartOne size={32} className="text-rose-500" variant="bulk" />
               }
               decoration="❤️"
             />
@@ -164,7 +162,6 @@ export default async function StatsPage() {
       </SectionLayout>
 
       <SectionLayout
-        title={t("stats.sections.blog.title")}
         description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
         isFlex
