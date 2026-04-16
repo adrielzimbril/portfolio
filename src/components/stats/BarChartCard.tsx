@@ -55,7 +55,7 @@ export function BarChartCard({
               y: isHovered ? -10 : 0,
             }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
+            className="absolute -bottom-6 -right-6 text-[6rem] leading-none opacity-10"
           >
             {decorationEmoji}
           </motion.div>
@@ -112,7 +112,7 @@ export function BarChartCard({
               })}
             </div>
 
-            {data.length > 6 && (
+            {data.length > config.maxItems && (
               <div className="relative flex mt-2">
                 <Link
                   href={getResourcesUrl(PageType.THOUGHT)}

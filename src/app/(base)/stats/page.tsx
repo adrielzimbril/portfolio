@@ -118,7 +118,6 @@ export default async function StatsPage() {
       </SectionLayout>
 
       <SectionLayout
-        description={t("stats.sections.engagement.description")}
         badge={t("stats.sections.engagement.badge")}
         isFlex
         className="pb-0!"
@@ -174,7 +173,6 @@ export default async function StatsPage() {
               }))}
               title="Categories"
               description="Thoughts by topic"
-              iconName="ChartPresentationOne"
               decorationEmoji="📊"
             />
             <ChangelogUpdatesCard count={changelog.length} />
@@ -220,7 +218,6 @@ export default async function StatsPage() {
       </SectionLayout>
 
       <SectionLayout
-        description={t("stats.sections.github.description")}
         badge={t("stats.sections.github.badge")}
         isFlex
         className="pb-0!"
@@ -245,8 +242,7 @@ export default async function StatsPage() {
         <ContributionGraphCard contributions={githubStats.contributions} />
       </SectionLayout>
 
-      <SectionLayout
-        description={t("stats.sections.github.description")}
+      {/* <SectionLayout
         badge={t("stats.sections.github.badge")}
         isFlex
         className="pb-0!"
@@ -271,7 +267,7 @@ export default async function StatsPage() {
             />
           </div>
         </div>
-      </SectionLayout>
+      </SectionLayout> */}
 
       <SectionLayout badge="Performance">
         <LighthouseScoreCard

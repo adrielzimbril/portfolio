@@ -64,7 +64,7 @@ export function StatCard({
                 y: isHovered ? -10 : 0,
               }}
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="pointer-events-none absolute -bottom-6 -right-6 text-[100px] leading-none opacity-20"
+              className="pointer-events-none absolute -bottom-6 -right-6 text-[6rem] leading-none opacity-20"
             >
               {decoration}
             </motion.div>

@@ -63,7 +63,7 @@ export function TopThoughtsList({
               y: isHovered ? -10 : 0,
             }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
+            className="absolute -bottom-6 -right-6 text-[6rem] leading-none opacity-10"
           >
             {decoration}
           </motion.div>
@@ -135,7 +135,7 @@ export function TopThoughtsList({
               })}
             </div>
 
-            {thoughts.length > 5 && (
+            {thoughts.length > config.maxItems && (
               <div className="relative flex mt-2">
                 <Link
                   href={getResourcesUrl(PageType.THOUGHT)}

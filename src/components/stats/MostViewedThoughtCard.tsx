@@ -50,6 +50,18 @@ export function MostViewedThoughtCard({
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
+          <motion.div
+            animate={{
+              rotate: isHovered ? -8 : -18,
+              scale: isHovered ? 1.1 : 1,
+              y: isHovered ? -10 : 0,
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="absolute -bottom-4 -right-14 text-[12rem] leading-none opacity-10"
+          >
+            📋
+          </motion.div>
+
           <Link
             href={getResourcesUrl(PageType.THOUGHT, slug)}
             className="block w-full"
@@ -71,7 +83,7 @@ export function MostViewedThoughtCard({
                   y: isHovered ? -4 : 0,
                 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="absolute inset-4 flex flex-col overflow-hidden rounded-lg border border-2 border-b-base bg-sh-white"
+                className="absolute inset-4 flex flex-col overflow-hidden rounded-lg border-2 border-b-base bg-sh-white"
               >
                 <div className="flex shrink-0 items-center gap-1.5 border-b border-b-base bg-sh-white px-3 py-2">
                   <div className="h-2 w-2 rounded-full bg-red-300" />
@@ -124,7 +136,7 @@ export function MostViewedThoughtCard({
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-32 bg-linear-to-t from-sh-white via-sh-white/80 to-transparent transition-colors group-hover:from-white group-hover:via-white/80" />
             </div>
           </Link>
-          <div className="flex flex-col items-start justify-between gap-4 md:gap-6 size-full">
+          <div className="relative flex flex-col items-start justify-between gap-4 md:gap-6 size-full">
             <div className="flex flex-col items-start justify-center gap-4">
               <Badge className={cn("relative font-medium")} size="xl">
                 Most Viewed Thought

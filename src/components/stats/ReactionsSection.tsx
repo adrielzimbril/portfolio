@@ -66,7 +66,7 @@ function ReactionCard({ type, count, delay = 0 }: ReactionCardProps) {
               y: isHovered ? -10 : 0,
             }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="pointer-events-none absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
+            className="pointer-events-none absolute -bottom-6 -right-6 text-[6rem] leading-none opacity-10"
           >
             {config.Icon}
           </motion.div>
