@@ -65,7 +65,7 @@ export function ReactionBar({
     return (
       <div 
         className={cn(
-          "flex flex-col items-center gap-3",
+          "relative flex items-center justify-center", // Relative container for the absolute dock
           isFloating && "fixed bottom-10 left-1/2 -translate-x-1/2 z-50",
           className
         )}
@@ -75,17 +75,17 @@ export function ReactionBar({
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.8, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: 20, scale: 0.8, filter: "blur(10px)" }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20, mass: 1 }}
               className={cn(
-                "flex items-center gap-2 p-2 px-3",
+                "absolute bottom-full mb-3 left-1/2 -translate-x-1/2",
+                "flex items-center gap-2 p-1.5 px-2.5",
                 "squircle squircle-7xl squircle-smooth-xl",
-                "bg-sh-white/70 dark:bg-zinc-900/70 backdrop-blur-xl",
+                "bg-sh-white dark:bg-zinc-950",
                 "squircle-border-2 squircle-border-b-base-accent",
-                "shadow-elevation-02",
-                "mb-2"
+                "z-50 whitespace-nowrap"
               )}
             >
               <motion.div 
@@ -95,7 +95,7 @@ export function ReactionBar({
                 variants={{
                   visible: {
                     transition: {
-                      staggerChildren: 0.05
+                      staggerChildren: 0.04
                     }
                   }
                 }}
@@ -104,13 +104,13 @@ export function ReactionBar({
                   <motion.div
                     key={type}
                     variants={{
-                      hidden: { opacity: 0, scale: 0.5 },
-                      visible: { opacity: 1, scale: 1 }
+                      hidden: { opacity: 0, y: 5 },
+                      visible: { opacity: 1, y: 0 }
                     }}
                     whileHover={{ 
                       scale: 1.4, 
-                      y: -8, 
-                      transition: { type: "spring", stiffness: 400, damping: 10 } 
+                      y: -6, 
+                      transition: { type: "spring", stiffness: 400, damping: 15 } 
                     }}
                   >
                     <ReactionButton
@@ -131,32 +131,27 @@ export function ReactionBar({
           layout
           initial={false}
           animate={{
-            scale: isHovered ? 1.05 : 1,
-            rotate: isHovered ? [0, -5, 5, 0] : 0
+            scale: isHovered ? 1.05 : 1
           }}
-          transition={{ duration: 0.4 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
           className={cn(
             "group relative flex items-center justify-center size-12 md:size-14",
             "squircle squircle-full squircle-smooth-xl",
-            "bg-sh-white dark:bg-zinc-900",
-            "squircle-border-2 squircle-border-b-base-accent",
-            "shadow-elevation-02 hover:shadow-2xl transition-shadow",
-            "cursor-pointer overflow-hidden z-[10]"
+            "bg-sh-white dark:bg-zinc-950",
+            "squircle-border-2 squircle-border-b-base-accent hover:squircle-border-border",
+            "cursor-pointer overflow-hidden z-[10] transition-colors"
           )}
         >
           <div className="flex flex-col items-center justify-center relative pointer-events-none">
-            <span className="text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+            <span className="text-xl md:text-2xl">
               {REACTION_EMOJIS[primaryReaction]}
             </span>
             {totalCount > 0 && (
-              <span className="absolute -bottom-2 text-[10px] md:text-[11px] font-bold text-indigo-500 bg-background/80 backdrop-blur-sm px-1.5 rounded-full border border-indigo-500/20">
+              <span className="absolute -bottom-2 text-[10px] md:text-[11px] font-bold text-indigo-500 bg-background px-1.5 rounded-full border border-indigo-500/30">
                 {totalCount}
               </span>
             )}
           </div>
-          
-          {/* Subtle glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         </motion.button>
       </div>
     );
@@ -164,9 +159,10 @@ export function ReactionBar({
 
   return (
     <div className={cn(
-      "flex flex-wrap items-center gap-2 p-2 px-3",
+      "flex flex-wrap items-center gap-2 p-1.5 px-2.5",
       "squircle squircle-4xl squircle-smooth-xl",
-      "squircle-background-sh-white/30 dark:squircle-background-zinc-900/30 backdrop-blur-sm",
+      "bg-sh-white dark:bg-zinc-950",
+      "squircle-border-2 squircle-border-b-base-accent",
       className
     )}>
       {reactionTypes.map((type) => (
