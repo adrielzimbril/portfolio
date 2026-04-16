@@ -7,7 +7,7 @@ import {
 } from "@/components/shared/pages/projects/tags";
 import { cn } from "@/utils/utils";
 import { getResourcesUrl } from "@/utils/base-url";
-import { DEFAULT_SQUIRCLE_COLOR_NAME_TYPE, PageType } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types";
 import { useTranslations } from "use-intl";
 import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
@@ -41,7 +41,7 @@ export function CardInfo({
         <ProjectCategories
           categories={categories.map((category) => ({
             name: category.name,
-            color: category.color as DEFAULT_SQUIRCLE_COLOR_NAME_TYPE,
+            color: category.color as DEFAULT_COLOR_CODE_NAME_TYPE,
           }))}
         />
 

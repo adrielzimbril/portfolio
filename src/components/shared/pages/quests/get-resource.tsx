@@ -140,7 +140,7 @@ export function GetResource({
           {/* <ProjectCategories
             categories={tags.map((tag) => ({
               name: tag.name,
-              color: tag.color as DEFAULT_SQUIRCLE_COLOR_NAME_TYPE,
+              color: tag.color as DEFAULT_COLOR_CODE_NAME_TYPE,
             }))}
           /> */}
           <Tags

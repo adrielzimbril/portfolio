@@ -1,6 +1,6 @@
 import {
   DEFAULT_SQUIRCLE_COLOR,
-  DEFAULT_SQUIRCLE_COLOR_NAME_TYPE,
+  DEFAULT_COLOR_CODE_NAME_TYPE,
   DEFAULT_COLOR_CODE,
   DEFAULT_COLOR_CODE_NAME,
   DEFAULT_COLOR_CODE_NAME_TYPE,
@@ -101,7 +101,7 @@ function pickRandomColor(
 /**
  * Returns a random color name
  *
- * @returns A random color name from the enum DEFAULT_SQUIRCLE_COLOR_NAME_TYPE
+ * @returns A random color name from the enum DEFAULT_COLOR_CODE_NAME_TYPE
  *
  * @example
  * const colorName = pickRandomColorName();

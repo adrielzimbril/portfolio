@@ -12,7 +12,7 @@ import {
   PreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { pickRandomColor } from "@/utils";
-import { DEFAULT_SQUIRCLE_COLOR_NAME_TYPE } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
@@ -118,7 +118,7 @@ export function HeaderSection({
               <Badge
                 key={index}
                 className={pickRandomColor(
-                  tag.color as DEFAULT_SQUIRCLE_COLOR_NAME_TYPE,
+                  tag.color as DEFAULT_COLOR_CODE_NAME_TYPE,
                 )}
                 variant="colored"
                 size="sm"
