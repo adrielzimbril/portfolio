@@ -69,7 +69,7 @@ export function BarChartCard({
   delay = 0,
   showDecorations = false,
 }: BarChartCardProps) {
-  const Icon = ICON_MAP[iconName] || ChartBar;
+  const Icon = ICON_MAP[iconName] || ChartPresentationOne;
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
   const maxCount = Math.max(...data.map((d) => d.count), 1);

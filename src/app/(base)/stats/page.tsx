@@ -155,26 +155,31 @@ export default async function StatsPage() {
               decoration="❤️"
             />
           </div>
-          <BarChartCard
-            data={buildTimeStats.categories.map((cat) => ({
-              name: cat.name,
-              count: cat.count,
-            }))}
-            title="Categories"
-            description="Thoughts by topic"
-            iconName="ChartPresentationOne"
-            decorationEmoji="📊"
-          />
-          <ReactionMiniCards reactions={serverStats.reactions} />
-          {serverStats.topViewedThoughts.length > 0 &&
-            serverStats.topViewedThoughts[0] && (
-              <MostViewedThoughtCard
-                title={serverStats.topViewedThoughts[0].title}
-                slug={serverStats.topViewedThoughts[0].slug}
-                coverImage={serverStats.topViewedThoughts[0].coverImage}
-                views={serverStats.topViewedThoughts[0].count}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 col-span-2">
+            {serverStats.topViewedThoughts.length > 0 &&
+              serverStats.topViewedThoughts[0] && (
+                <MostViewedThoughtCard
+                  title={serverStats.topViewedThoughts[0].title}
+                  slug={serverStats.topViewedThoughts[0].slug}
+                  coverImage={serverStats.topViewedThoughts[0].coverImage}
+                  views={serverStats.topViewedThoughts[0].count}
+                />
+              )}
+            <div className="grid grid-cols-1 md:grid-cols-4 md:h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
+              <BarChartCard
+                data={buildTimeStats.categories.map((cat) => ({
+                  name: cat.name,
+                  count: cat.count,
+                }))}
+                title="Categories"
+                description="Thoughts by topic"
+                iconName="ChartPresentationOne"
+                decorationEmoji="📊"
               />
-            )}
+              <ChangelogUpdatesCard count={changelog.length} />
+            </div>
+          </div>
+          <ReactionMiniCards reactions={serverStats.reactions} />
         </div>
       </SectionLayout>
 
@@ -275,17 +280,6 @@ export default async function StatsPage() {
           scores={lighthouseStats.desktop}
           strategy="desktop"
         />
-      </SectionLayout>
-
-      {/* Changelog Section */}
-      <SectionLayout
-        description="Recent updates and changes"
-        badge="Updates"
-        isFlex
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ChangelogUpdatesCard count={changelog.length} />
-        </div>
       </SectionLayout>
     </>
   );

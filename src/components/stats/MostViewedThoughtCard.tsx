@@ -35,17 +35,13 @@ export function MostViewedThoughtCard({
   delay = 0,
 }: MostViewedThoughtCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [displayCount, setDisplayCount] = useState(0);
   const t = useTranslations();
-
-  const cardClassName =
-    "group relative flex h-full min-h-[420px] flex-col overflow-hidden transition-all duration-300";
 
   return (
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
+      className="squircle size-full md:col-span-8 squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
     >
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
