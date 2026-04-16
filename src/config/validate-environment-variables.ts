@@ -36,9 +36,9 @@ const environmentVariablesSchema = z.object({
   BETTER_AUTH_SECRET: z.string().min(1, "BETTER_AUTH_SECRET is required"),
 
   // Database (Supabase)
-  NEXT_PUBLIC_SUPABASE_URL: z
-    .string()
-    .url("NEXT_PUBLIC_SUPABASE_URL must be a valid URL"),
+  NEXT_PUBLIC_SUPABASE_URL: z.url(
+    "NEXT_PUBLIC_SUPABASE_URL must be a valid URL",
+  ),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z
     .string()
     .min(1, "NEXT_PUBLIC_SUPABASE_ANON_KEY is required"),
@@ -46,7 +46,7 @@ const environmentVariablesSchema = z.object({
   // Email & Contact
   CONTACTS_PROVIDER: z.string().optional(),
   MAIL_PROVIDER: z.string().optional(),
-  SENDER_EMAIL: z.string().email().optional(),
+  SENDER_EMAIL: z.email().optional(),
   SENDER_NAME: z.string().optional(),
 
   // Brevo

@@ -1,12 +1,13 @@
 #!/usr/bin/env tsx
 /**
  * Environment Variables Validation Script
- * 
+ *
  * This script validates all environment variables before starting the application.
  * Run it manually with: pnpm validate:env
  * It's also automatically run before `pnpm dev` and `pnpm build`.
  */
 
+import "dotenv/config";
 import { validateEnvironmentVariables } from "../src/config/validate-environment-variables";
 
 console.log("🔍 Validating environment variables...\n");
