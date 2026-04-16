@@ -8,7 +8,6 @@ import { getBuildTimeStats } from "@/lib/stats/build-time-stats";
 import { getServerStats } from "@/lib/stats/server-stats";
 import { getGitHubStats } from "@/lib/stats/github-stats";
 import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
-import { StatsPageHeader } from "@/components/stats/StatsPageHeader";
 import { StatCard } from "@/components/stats/StatCard";
 import {
   BookOne,
@@ -17,7 +16,7 @@ import {
   Coffee,
   Eye,
   Calendar,
-  ChatBubble,
+  ChatBubbleCircle,
 } from "@aurthle/icons";
 import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
@@ -83,9 +82,6 @@ export default async function StatsPage() {
         isMobileShowed
       />
 
-      <StatsPageHeader />
-
-      {/* Content Stats Section */}
       <SectionLayout
         title={t("stats.sections.blog.title")}
         description={t("stats.sections.blog.description")}
@@ -93,43 +89,6 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid md:w-[80%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard
-            label="Total Thoughts"
-            value={buildTimeStats.totalPosts}
-            suffix="thoughts"
-            icon={<BookOne size={32} className="text-primary" variant="bulk" />}
-            decorationPattern="💭"
-          />
-          <StatCard
-            label="Total Words"
-            value={buildTimeStats.totalWords}
-            suffix="words"
-            icon={
-              <TextFolder size={32} className="text-primary" variant="bulk" />
-            }
-            decorationPattern="📝"
-          />
-          <StatCard
-            label="Community Messages"
-            value={serverStats.communityMessages}
-            suffix="messages"
-            icon={
-              <ChatBubble size={32} className="text-primary" variant="bulk" />
-            }
-            decorationPattern="💬"
-          />
-          <StatCard
-            label="Reading Time"
-            value={buildTimeStats.totalReadingTime}
-            suffix="min"
-            icon={
-              <Timelapse size={32} className="text-primary" variant="bulk" />
-            }
-            decorationPattern="⏱️"
-          />
-        </div>
-
         <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatCard
             label="Coffee Consumed"
@@ -165,7 +124,6 @@ export default async function StatsPage() {
         </div>
       </SectionLayout>
 
-      {/* Engagement Section */}
       <SectionLayout
         title={t("stats.sections.engagement.title")}
         description={t("stats.sections.engagement.description")}
@@ -202,6 +160,55 @@ export default async function StatsPage() {
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <CommunityMessagesCard count={serverStats.communityMessages} />
+        </div>
+      </SectionLayout>
+
+      <SectionLayout
+        title={t("stats.sections.blog.title")}
+        description={t("stats.sections.blog.description")}
+        badge={t("stats.sections.blog.badge")}
+        isFlex
+        className="pb-0!"
+      >
+        <div className="grid md:w-[80%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StatCard
+            label="Total Thoughts"
+            value={buildTimeStats.totalPosts}
+            suffix="thoughts"
+            icon={<BookOne size={32} className="text-primary" variant="bulk" />}
+            decorationPattern="💭"
+          />
+          <StatCard
+            label="Total Words"
+            value={buildTimeStats.totalWords}
+            suffix="words"
+            icon={
+              <TextFolder size={32} className="text-primary" variant="bulk" />
+            }
+            decorationPattern="📝"
+          />
+          <StatCard
+            label="Community Messages"
+            value={serverStats.communityMessages}
+            suffix="messages"
+            icon={
+              <ChatBubbleCircle
+                size={32}
+                className="text-primary"
+                variant="bulk"
+              />
+            }
+            decorationPattern="💬"
+          />
+          <StatCard
+            label="Reading Time"
+            value={buildTimeStats.totalReadingTime}
+            suffix="min"
+            icon={
+              <Timelapse size={32} className="text-primary" variant="bulk" />
+            }
+            decorationPattern="⏱️"
+          />
         </div>
       </SectionLayout>
 
