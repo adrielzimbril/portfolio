@@ -38,6 +38,7 @@ export function MyProjectsSection({
           tags={project.tags}
           categories={project.categories}
           description={project.excerpt || ""}
+          reactionsPosition="top"
         />
       ))}
     </LoadMoreSection>

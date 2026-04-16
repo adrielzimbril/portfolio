@@ -38,6 +38,7 @@ export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
           features={item.features ?? []}
           avatars={item.studentsProfileImage}
           userCount={item.studentsNumber}
+          reactionsPosition="top"
         />
       ))}
     </LoadMoreSection>

@@ -16,6 +16,7 @@ import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/utils/utils";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -75,13 +76,13 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       </Skeleton>
       {resource!.adjacentResources.length > 0 && (
         <Skeleton name="resource-detail-more" loading={false}>
+          <ReactionBar pageType="hub" entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
           <MorePreviewSection data={resource!.adjacentResources} />
         </Skeleton>
       )}
       <Skeleton name="resource-detail-cta" loading={false}>
         <CallToAction isPage />
       </Skeleton>
-      <ReactionBar pageType={PageType.HUB} entityId={slug} variant="dock" isFloating />
     </>
   );
 }

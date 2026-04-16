@@ -159,13 +159,13 @@ export default async function SubProject(props: {
       )}
       {project!.adjacentProjects.length > 0 && (
         <Skeleton name="project-detail-more" loading={false}>
+          <ReactionBar pageType="project" entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
           <MorePreviewSection data={project!.adjacentProjects} />
         </Skeleton>
       )}
       <Skeleton name="project-detail-cta" loading={false}>
         <CallToAction isPage />
       </Skeleton>
-      <ReactionBar pageType={PageType.PROJECT} entityId={slug} variant="dock" isFloating />
     </>
   );
 }

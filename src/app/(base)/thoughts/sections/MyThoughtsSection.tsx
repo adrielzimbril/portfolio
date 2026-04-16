@@ -39,6 +39,7 @@ export function MyThoughtsSection({
           excerpt={post.excerpt || ""}
           primaryTag={getDate({ date: post.created_at })}
           tags={post.tags}
+          reactionsPosition="top"
         />
       ))}
     </LoadMoreSection>

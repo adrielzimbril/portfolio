@@ -4,6 +4,7 @@ import { CardInfo } from "@/components/shared/pages/projects/details";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 export function ProjectCard({
   title,
@@ -13,6 +14,7 @@ export function ProjectCard({
   tags,
   categories,
   isWide,
+  reactionsPosition,
 }: {
   title: string;
   cover?: string;
@@ -21,17 +23,18 @@ export function ProjectCard({
   tags: { name: string }[];
   categories: { name: string; color: string }[];
   isWide: boolean;
+  reactionsPosition?: "top" | "bottom";
 }) {
   return (
     <Card
       className={cn(
-        "flex flex-col items-center justify-center squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden size-full",
+        "group relative flex flex-col items-center justify-center squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 size-full",
         isWide && "md:flex-row md:col-span-2",
       )}
     >
       <CardContent
         className={cn(
-          `flex flex-col px-6 md:px-8 py-8 md:py-10 gap-4 size-full`,
+          "relative flex flex-col px-6 md:px-8 py-8 md:py-10 gap-4 size-full",
           isWide ? "md:flex-row" : "grid-rows-[auto_1fr]",
         )}
       >
@@ -55,6 +58,20 @@ export function ProjectCard({
           categories={categories}
           isWide={isWide}
         />
+
+        {reactionsPosition && (
+          <div className={cn(
+            "absolute z-20 pointer-events-auto",
+            reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-8"
+          )}>
+            <ReactionBar 
+              pageType={PageType.PROJECT} 
+              entityId={slug} 
+              variant="dock" 
+              dockPosition={reactionsPosition} 
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

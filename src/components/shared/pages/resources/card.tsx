@@ -3,6 +3,8 @@ import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/resources/details";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageType, ResourceType } from "@/types";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { cn } from "@/utils/utils";
 
 export function ResourceCard({
   title,
@@ -14,6 +16,7 @@ export function ResourceCard({
   features,
   avatars,
   userCount,
+  reactionsPosition,
 }: {
   title: string;
   cover?: string;
@@ -24,10 +27,11 @@ export function ResourceCard({
   features: string[];
   avatars: string[];
   userCount?: number;
+  reactionsPosition?: "top" | "bottom";
 }) {
   return (
-    <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
-      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
+    <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0">
+      <CardContent className="relative grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
         <CardPreview
           title={title}
           type={PageType.HUB}
@@ -50,6 +54,20 @@ export function ResourceCard({
           avatars={avatars}
           userCount={userCount}
         />
+
+        {reactionsPosition && (
+          <div className={cn(
+            "absolute z-20 pointer-events-auto",
+            reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-8"
+          )}>
+            <ReactionBar 
+              pageType={PageType.HUB} 
+              entityId={slug} 
+              variant="dock" 
+              dockPosition={reactionsPosition} 
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );
