@@ -90,8 +90,9 @@ export function LighthouseScoreCard({
                 className={cn(
                   "capitalize",
                   // overallColors.squircle,
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.ORANGE),
                 )}
-                // variant="colored"
+                variant="colored"
                 size="lg"
                 circle
               >
@@ -99,7 +100,7 @@ export function LighthouseScoreCard({
                   className={cn(
                     "text-xl font-bold tabular-nums",
                     "text-primary-foreground",
-                    overallColors.text,
+                    // overallColors.text,
                   )}
                 >
                   {overallScore}

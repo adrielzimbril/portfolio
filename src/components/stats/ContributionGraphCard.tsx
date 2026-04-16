@@ -104,11 +104,11 @@ export function ContributionGraphCard({
                   pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
                   "size-max text-primary-foreground!",
                 )}
-                size="md"
+                size="sm"
                 variant="colored"
                 circle
               >
-                <Github size={16} variant="bulk" />
+                <Github size={20} variant="bulk" />
               </Badge>
               {/* <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
                 <svg
