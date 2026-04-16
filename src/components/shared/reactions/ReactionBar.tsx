@@ -6,7 +6,7 @@ import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { useReactions } from "@/lib/reactions/use-reactions";
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, MotionValue } from "motion/react";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, MotionValue, type Variants } from "motion/react";
 
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
@@ -14,6 +14,39 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.CELEBRATE]: "🎉",
   [ReactionType.INSIGHTFUL]: "💡",
   [ReactionType.SCEPTIC]: "🤔",
+};
+
+const contentVariants: Variants = {
+  hidden: {
+    clipPath: "inset(90% 0% 0% 0% round 40px)", // Grow from bottom
+    opacity: 0,
+    y: 10,
+  },
+  show: {
+    clipPath: "inset(0% 0% 0% 0% round 40px)",
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.5,
+      delayChildren: 0.1,
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+    filter: "blur(8px)",
+  },
+  show: {
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+  },
 };
 
 function MagneticItem({ 
@@ -36,14 +69,15 @@ function MagneticItem({
     return val - bounds.x - bounds.width / 2;
   });
 
-  // Calculate size based on proximity (40px base, 80px max)
-  const sizeSync = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  const size = useSpring(sizeSync, { stiffness: 260, damping: 20, mass: 0.1 });
+  // Calculate size based on proximity (40px base, 64px max for subtlety)
+  const sizeSync = useTransform(distance, [-120, 0, 120], [40, 64, 40]);
+  const size = useSpring(sizeSync, { stiffness: 200, damping: 25, mass: 0.1 });
 
   return (
     <motion.div
       ref={ref}
       style={{ width: size, height: size }}
+      variants={itemVariants}
       className="flex items-center justify-center origin-bottom"
     >
       <ReactionButton
@@ -91,7 +125,7 @@ export function ReactionBar({
     return (
       <div 
         className={cn(
-          "relative flex items-center justify-center", 
+          "relative flex flex-col items-center", // Combined flex container for better hover area
           isFloating && "fixed bottom-10 left-1/2 -translate-x-1/2 z-50",
           className
         )}
@@ -105,20 +139,20 @@ export function ReactionBar({
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              initial={{ opacity: 0, y: 15, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 15, scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+              variants={contentVariants}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
               className={cn(
-                "absolute bottom-full mb-4 left-1/2 -translate-x-1/2",
-                "flex items-end gap-2 p-2 h-20",
+                "absolute bottom-[calc(100%-8px)] mb-3 left-1/2 -translate-x-1/2", // Closer to trigger
+                "flex items-end gap-1.5 p-1.5 h-16", // More compact
                 "squircle squircle-7xl squircle-smooth-xl",
                 "squircle-sh-white dark:squircle-b-base",
                 "squircle-border-2 squircle-border-b-base-accent",
                 "z-50"
               )}
             >
-              <div className="flex items-end h-full gap-1 px-1">
+              <div className="flex items-end h-full gap-0.5 px-0.5">
                 {reactionTypes.map((type) => (
                   <MagneticItem
                     key={type}
@@ -137,20 +171,21 @@ export function ReactionBar({
         <motion.button
           layout
           className={cn(
-            "group relative flex items-center justify-center size-12 md:size-14",
+            "group relative flex items-center justify-center size-11 md:size-12", // Slightly smaller/subtle
             "squircle squircle-full squircle-smooth-xl",
             "squircle-sh-white dark:squircle-b-base",
-            "squircle-border-2 squircle-border-b-base-accent hover:squircle-border-border",
+            "squircle-border-2 squircle-border-b-base-accent",
             "cursor-pointer z-[10] transition-colors"
           )}
-          whileTap={{ scale: 0.9 }}
+          style={{ scale: isHovered ? 1.02 : 1 }}
+          whileTap={{ scale: 0.95 }}
         >
           <div className="flex flex-col items-center justify-center relative pointer-events-none">
-            <span className="text-xl md:text-2xl">
+            <span className="text-xl">
               {REACTION_EMOJIS[primaryReaction]}
             </span>
             {totalCount > 0 && (
-              <span className="absolute -bottom-2 text-[10px] md:text-[11px] font-bold text-indigo-500 squircle squircle-full squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5">
+              <span className="absolute -bottom-2.5 text-[10px] md:text-[11px] font-bold text-indigo-500 squircle squircle-full squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5">
                 {totalCount}
               </span>
             )}
