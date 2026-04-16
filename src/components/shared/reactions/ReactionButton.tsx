@@ -167,11 +167,12 @@ export function ReactionButton({
       title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
       className={cn(
         "flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
+        "squircle squircle-7xl squircle-smooth-xl",
         minimal 
-          ? "size-10 rounded-full hover:bg-white/10" 
-          : "gap-1.5 px-3 py-1.5 rounded-full bg-sh-white hover:bg-white border border-transparent",
-        isReacted && !minimal && "bg-background border-border shadow-sm ring-2 ring-indigo-500/20",
-        isReacted && minimal && "bg-indigo-500/10 ring-1 ring-indigo-500/30",
+          ? "size-10 hover:squircle-sh-white/10" 
+          : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent hover:squircle-border-border",
+        isReacted && !minimal && "squircle-background-background squircle-border-border shadow-sm ring-2 ring-indigo-500/20",
+        isReacted && minimal && "squircle-indigo-500/10 ring-1 ring-indigo-500/30",
         className,
       )}
     >
@@ -179,7 +180,7 @@ export function ReactionButton({
         className={cn(
           "text-lg transition-transform duration-300",
           "group-hover/btn:scale-125",
-          isReacted && "scale-110 drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]",
+          isReacted && "scale-110 drop-shadow-[0_0_8px_rgba(99,102,241,0.4)]",
         )}
       >
         {emoji}

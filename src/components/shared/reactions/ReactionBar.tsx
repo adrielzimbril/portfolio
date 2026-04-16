@@ -65,8 +65,8 @@ export function ReactionBar({
     return (
       <div 
         className={cn(
-          "flex flex-col items-center gap-2",
-          isFloating && "fixed bottom-8 left-1/2 -translate-x-1/2 z-50",
+          "flex flex-col items-center gap-3",
+          isFloating && "fixed bottom-10 left-1/2 -translate-x-1/2 z-50",
           className
         )}
         onMouseEnter={() => setIsHovered(true)}
@@ -75,52 +75,100 @@ export function ReactionBar({
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.9 }}
-              className="flex items-center gap-1.5 p-1.5 px-2 rounded-full bg-background/80 backdrop-blur-md border border-border shadow-2xl mb-1"
+              initial={{ opacity: 0, y: 20, scale: 0.8, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: 20, scale: 0.8, filter: "blur(10px)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className={cn(
+                "flex items-center gap-2 p-2 px-3",
+                "squircle squircle-7xl squircle-smooth-xl",
+                "bg-sh-white/70 dark:bg-zinc-900/70 backdrop-blur-xl",
+                "squircle-border-2 squircle-border-b-base-accent",
+                "shadow-elevation-02",
+                "mb-2"
+              )}
             >
-              {reactionTypes.map((type) => (
-                <motion.div
-                  key={type}
-                  whileHover={{ scale: 1.3, y: -5 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <ReactionButton
-                    pageType={pageType}
-                    entityId={entityId}
-                    reactionType={type}
-                    count={reactions[type] || 0}
-                    minimal
-                  />
-                </motion.div>
-              ))}
+              <motion.div 
+                className="flex items-center gap-1.5"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.05
+                    }
+                  }
+                }}
+              >
+                {reactionTypes.map((type) => (
+                  <motion.div
+                    key={type}
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.5 },
+                      visible: { opacity: 1, scale: 1 }
+                    }}
+                    whileHover={{ 
+                      scale: 1.4, 
+                      y: -8, 
+                      transition: { type: "spring", stiffness: 400, damping: 10 } 
+                    }}
+                  >
+                    <ReactionButton
+                      pageType={pageType}
+                      entityId={entityId}
+                      reactionType={type}
+                      count={reactions[type] || 0}
+                      minimal
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
 
         <motion.button
           layout
-          className="group relative flex items-center justify-center size-10 md:size-12 rounded-full bg-background border border-border shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
-          whileTap={{ scale: 0.95 }}
+          initial={false}
+          animate={{
+            scale: isHovered ? 1.05 : 1,
+            rotate: isHovered ? [0, -5, 5, 0] : 0
+          }}
+          transition={{ duration: 0.4 }}
+          className={cn(
+            "group relative flex items-center justify-center size-12 md:size-14",
+            "squircle squircle-full squircle-smooth-xl",
+            "bg-sh-white dark:bg-zinc-900",
+            "squircle-border-2 squircle-border-b-base-accent",
+            "shadow-elevation-02 hover:shadow-2xl transition-shadow",
+            "cursor-pointer overflow-hidden z-[10]"
+          )}
         >
-          <div className="flex flex-col items-center justify-center">
-            <span className="text-lg md:text-xl">
+          <div className="flex flex-col items-center justify-center relative pointer-events-none">
+            <span className="text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
               {REACTION_EMOJIS[primaryReaction]}
             </span>
             {totalCount > 0 && (
-              <span className="text-[9px] md:text-[10px] font-bold text-muted-foreground -mt-1">
+              <span className="absolute -bottom-2 text-[10px] md:text-[11px] font-bold text-indigo-500 bg-background/80 backdrop-blur-sm px-1.5 rounded-full border border-indigo-500/20">
                 {totalCount}
               </span>
             )}
           </div>
+          
+          {/* Subtle glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         </motion.button>
       </div>
     );
   }
 
   return (
-    <div className={cn("flex flex-wrap items-center gap-2", className)}>
+    <div className={cn(
+      "flex flex-wrap items-center gap-2 p-2 px-3",
+      "squircle squircle-4xl squircle-smooth-xl",
+      "squircle-background-sh-white/30 dark:squircle-background-zinc-900/30 backdrop-blur-sm",
+      className
+    )}>
       {reactionTypes.map((type) => (
         <ReactionButton
           key={type}
