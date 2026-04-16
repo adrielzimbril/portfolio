@@ -7,6 +7,8 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "../ui/badge";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
+import { pickRandomColor } from "@/utils";
 
 type GitHubStatType = "stars" | "forks" | "commits";
 
@@ -231,19 +233,13 @@ export function GitHubStatsCard({
                 "relative size-full flex flex-row z-20 overflow-hidden items-center gap-2 md:gap-4 px-2 py-2 m-auto",
               )}
             >
-              {/* <Badge
-                className={cn("capitalize whitespace-pre-line")}
-                size="lg"
-                circle
-              >
-                <Icon size={32} className={theme.iconColor} variant="bulk" />
-              </Badge> */}
               <Badge
                 className={cn(
                   "capitalize whitespace-pre-line",
-                  theme.squircleColor,
-                  theme.iconColor,
-                  "size-max text-primary-foreground",
+                  // theme.squircleColor,
+                  // theme.iconColor,
+                  // "size-max text-primary-foreground",
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
                 )}
                 variant="colored"
                 size="lg"

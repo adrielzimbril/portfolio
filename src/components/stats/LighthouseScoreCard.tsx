@@ -90,21 +90,14 @@ export function LighthouseScoreCard({
                 className={cn(
                   "capitalize",
                   // overallColors.squircle,
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.GREEN),
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
                 )}
+                contentClassName={cn("font-bold tabular-nums")}
                 variant="colored"
-                size="lg"
+                size="md"
                 circle
               >
-                <span
-                  className={cn(
-                    "text-xl font-bold tabular-nums",
-                    "text-primary-foreground",
-                    // overallColors.text,
-                  )}
-                >
-                  {overallScore}
-                </span>
+                {overallScore}
               </Badge>
             </div>
 
