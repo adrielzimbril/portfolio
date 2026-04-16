@@ -25,7 +25,6 @@ import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
 import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
 import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
-import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
 import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
 import { changelog } from "@/data/personal/changelog";
@@ -93,9 +92,7 @@ export default async function StatsPage() {
             label="Coffee Consumed"
             value={coffeeCups}
             suffix="cups"
-            icon={
-              <Coffee size={32} className="text-amber-600" variant="bulk" />
-            }
+            icon={<Coffee size={32} variant="bulk" />}
             decoration="☕"
             description="1 cup per 500 words"
           />
@@ -103,9 +100,7 @@ export default async function StatsPage() {
             label="Site Age"
             value={daysSinceRevamp}
             suffix="days"
-            icon={
-              <Calendar size={32} className="text-amber-600" variant="bulk" />
-            }
+            icon={<Calendar size={32} variant="bulk" />}
             decoration="📅"
             description={`Launched ${REVAMP_DATE.toLocaleDateString(locale, {
               month: "short",
@@ -116,7 +111,7 @@ export default async function StatsPage() {
           <StatCard
             label="Total Site Views"
             value={serverStats.totalViews}
-            icon={<Eye size={32} className="text-amber-600" variant="bulk" />}
+            icon={<Eye size={32} variant="bulk" />}
             decoration="👁️"
             description="Since launch"
           />
@@ -165,10 +160,6 @@ export default async function StatsPage() {
           <CategoryBarChart categories={buildTimeStats.categories} />
           <ReactionBreakdown reactions={serverStats.reactions} />
         </div>
-
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <CommunityMessagesCard count={serverStats.communityMessages} />
-        </div>
       </SectionLayout>
 
       <SectionLayout
@@ -182,44 +173,28 @@ export default async function StatsPage() {
             label="Total Thoughts"
             value={buildTimeStats.totalPosts}
             suffix="thoughts"
-            icon={
-              <BookOne size={32} className="text-indigo-500" variant="bulk" />
-            }
+            icon={<BookOne size={32} variant="bulk" />}
             decorationPattern="💭"
           />
           <StatCard
             label="Total Words"
             value={buildTimeStats.totalWords}
             suffix="words"
-            icon={
-              <TextFolder
-                size={32}
-                className="text-indigo-500"
-                variant="bulk"
-              />
-            }
+            icon={<TextFolder size={32} variant="bulk" />}
             decorationPattern="📝"
           />
           <StatCard
             label="Community Messages"
             value={serverStats.communityMessages}
             suffix="messages"
-            icon={
-              <ChatBubbleCircle
-                size={32}
-                className="text-indigo-500"
-                variant="bulk"
-              />
-            }
+            icon={<ChatBubbleCircle size={32} variant="bulk" />}
             decorationPattern="💬"
           />
           <StatCard
             label="Reading Time"
             value={buildTimeStats.totalReadingTime}
             suffix="min"
-            icon={
-              <Timelapse size={32} className="text-indigo-500" variant="bulk" />
-            }
+            icon={<Timelapse size={32} variant="bulk" />}
             decorationPattern="⏱️"
           />
         </div>

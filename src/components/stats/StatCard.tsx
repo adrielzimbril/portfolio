@@ -6,6 +6,8 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { pickRandomColor } from "@/utils/pick-random-color";
 
 interface StatCardProps {
   label: string;
@@ -134,7 +136,20 @@ export function StatCard({
               )}
             >
               {icon && (
-                <Badge className="capitalize" size="lg" circle>
+                <Badge
+                  className={cn(
+                    "capitalize text-xs font-medium",
+                    pickRandomColor(
+                      decorationPattern
+                        ? DEFAULT_COLOR_CODE_NAME_LIST.VIOLET
+                        : DEFAULT_COLOR_CODE_NAME_LIST.ORANGE,
+                    ),
+                    decorationPattern && "size-max text-primary-foreground",
+                  )}
+                  variant="colored"
+                  size="lg"
+                  circle
+                >
                   {icon}
                 </Badge>
               )}
