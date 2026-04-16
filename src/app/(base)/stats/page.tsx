@@ -22,6 +22,7 @@ import { BarChartCard } from "@/components/stats/BarChartCard";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
 import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
+import { ReactionMiniCards } from "@/components/stats/ReactionMiniCards";
 import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
@@ -165,32 +166,7 @@ export default async function StatsPage() {
             badgeColor="squircle-violet-500"
             decorationEmoji="📊"
           />
-          <BarChartCard
-            data={Object.entries(serverStats.reactions).map(
-              ([type, count]) => ({
-                name: type.charAt(0).toUpperCase() + type.slice(1),
-                count,
-                icon:
-                  type === "like"
-                    ? "👍"
-                    : type === "heart"
-                      ? "❤️"
-                      : type === "celebrate"
-                        ? "🎉"
-                        : type === "insightful"
-                          ? "💡"
-                          : "🤔",
-              }),
-            )}
-            title="Reactions"
-            description={`${Object.values(serverStats.reactions)
-              .reduce((sum, count) => sum + count, 0)
-              .toLocaleString()} total`}
-            iconName="Heart"
-            badgeColor="squircle-violet-500"
-            decorationEmoji="❤️"
-            showDecorations
-          />
+          <ReactionMiniCards reactions={serverStats.reactions} />
           {serverStats.topViewedThoughts.length > 0 &&
             serverStats.topViewedThoughts[0] && (
               <MostViewedThoughtCard
