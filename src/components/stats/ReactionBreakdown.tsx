@@ -17,7 +17,6 @@ import {
 interface ReactionBreakdownProps {
   reactions: Record<ReactionType, number>;
   delay?: number;
-  className?: string;
 }
 
 const REACTION_CONFIG: Record<
@@ -96,9 +95,7 @@ const reactionDecorations = [
 export function ReactionBreakdown({
   reactions,
   delay = 0,
-  className,
 }: ReactionBreakdownProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
   const total = Object.values(reactions).reduce((sum, count) => sum + count, 0);
@@ -108,10 +105,7 @@ export function ReactionBreakdown({
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={cn(
-        "squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden",
-        className,
-      )}
+      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
     >
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
@@ -165,11 +159,11 @@ export function ReactionBreakdown({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
-                  "size-max text-primary-foreground!",
+                  "squircle-violet-500",
+                  "size-max text-primary-foreground",
                 )}
-                size="lg"
                 variant="colored"
+                size="lg"
                 circle
               >
                 <Heart size={32} variant="bulk" />

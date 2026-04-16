@@ -17,7 +17,6 @@ import {
 interface CategoryBarChartProps {
   categories: CategoryCount[];
   delay?: number;
-  className?: string;
 }
 
 const BAR_COLORS = [
@@ -32,9 +31,7 @@ const BAR_COLORS = [
 export function CategoryBarChart({
   categories,
   delay = 0,
-  className,
 }: CategoryBarChartProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
   const maxCount = Math.max(...categories.map((c) => c.count), 1);
@@ -44,10 +41,7 @@ export function CategoryBarChart({
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={cn(
-        "squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden",
-        className,
-      )}
+      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
     >
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
@@ -76,11 +70,11 @@ export function CategoryBarChart({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
-                  "size-max text-primary-foreground!",
+                  "squircle-violet-500",
+                  "size-max text-primary-foreground",
                 )}
-                size="lg"
                 variant="colored"
+                size="lg"
                 circle
               >
                 <ChartBar size={32} variant="bulk" />

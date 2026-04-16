@@ -20,7 +20,6 @@ interface TopThoughtsListProps {
   description: string;
   type: TopThoughtsListType;
   thoughts: ThoughtMetric[];
-  metricLabel: string;
   icon: React.ReactNode;
   decoration: string;
   delay?: number;
@@ -32,7 +31,6 @@ export function TopThoughtsList({
   description,
   type,
   thoughts,
-  metricLabel,
   icon,
   decoration,
 }: TopThoughtsListProps) {
@@ -147,7 +145,7 @@ export function TopThoughtsList({
                   variant="base"
                 >
                   <span className="capitalize text-xs">
-                    +{thoughts.length - 5} more {metricLabel}
+                    +{thoughts.length - 5} more
                   </span>
                 </Link>
               </div>
