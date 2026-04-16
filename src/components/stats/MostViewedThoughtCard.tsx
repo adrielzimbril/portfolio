@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
-import { cn, getImageUrl, getResourcesUrl } from "@/utils";
-import { PageType } from "@/types";
+import { cn, getImageUrl, getResourcesUrl, pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 import { Card, CardContent } from "../ui/card";
+import { Badge } from "../ui/badge";
 
 interface MostViewedThoughtCardProps {
   title: string;
@@ -70,17 +71,17 @@ export function MostViewedThoughtCard({
             "flex relative flex-col size-full items-center justify-start gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
         >
-          <Link
-            href={getResourcesUrl(PageType.THOUGHT, slug)}
-            className="block h-full"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay, ease: "easeOut" }}
+            className={cardClassName}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay, ease: "easeOut" }}
-              className={cardClassName}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+            <Link
+              href={getResourcesUrl(PageType.THOUGHT, slug)}
+              className="block h-full"
             >
               <div className="relative h-[280px] shrink-0">
                 <motion.div
@@ -99,9 +100,9 @@ export function MostViewedThoughtCard({
                     y: isHovered ? -4 : 0,
                   }}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="absolute inset-4 flex flex-col overflow-hidden rounded-lg border border-border-primary bg-white"
+                  className="absolute inset-4 flex flex-col overflow-hidden rounded-lg border border-b-base bg-sh-white"
                 >
-                  <div className="flex shrink-0 items-center gap-1.5 border-b border-border/50 bg-slate-50 px-3 py-2">
+                  <div className="flex shrink-0 items-center gap-1.5 border-b border-b-base bg-sh-white px-3 py-2">
                     <div className="h-2 w-2 rounded-full bg-red-300" />
                     <div className="h-2 w-2 rounded-full bg-yellow-300" />
                     <div className="h-2 w-2 rounded-full bg-green-300" />
@@ -125,10 +126,10 @@ export function MostViewedThoughtCard({
 
                   <div className="flex-1 space-y-2 overflow-hidden bg-sh-white p-2.5">
                     <div className="space-y-1">
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/75" />
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/75" />
-                      <div className="h-[5px] w-[92%] rounded-sm bg-b-base/75" />
-                      <div className="h-[5px] w-[85%] rounded-sm bg-b-base/75" />
+                      <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
+                      <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
+                      <div className="h-[5px] w-[92%] rounded-sm bg-b-base/90" />
+                      <div className="h-[5px] w-[85%] rounded-sm bg-b-base/90" />
                     </div>
                     <div className="space-y-1">
                       <div className="h-[5px] w-full rounded-sm bg-b-base/70" />
@@ -143,60 +144,70 @@ export function MostViewedThoughtCard({
                       </div>
                     </div>
                     <div className="space-y-1">
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/65" />
-                      <div className="h-[5px] w-[88%] rounded-sm bg-b-base/65" />
+                      <div className="h-[5px] w-full rounded-sm bg-b-base/80" />
+                      <div className="h-[5px] w-[88%] rounded-sm bg-b-base/80" />
                     </div>
                   </div>
                 </motion.div>
 
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-32 bg-linear-to-t from-sh-white via-sh-white/80 to-transparent transition-colors group-hover:from-white group-hover:via-white/80" />
               </div>
+            </Link>
+            <div className="relative z-20 px-6 pb-6">
+              <h5 className=" mb-1">Most Viewed Thought</h5>
+              <h6 className="mb-3 line-clamp-2 text-sm leading-snug">
+                {title}
+              </h6>
 
-              <div className="relative z-20 px-6 pb-6">
-                <h4 className="mb-1 font-medium text-text-primary">
-                  Most Viewed Thought
-                </h4>
-                <h5 className="mb-3 line-clamp-2 text-sm leading-snug text-text-secondary transition-colors group-hover:text-text-primary">
-                  {title}
-                </h5>
-
-                <div className="flex items-baseline gap-2">
-                  <motion.span
-                    animate={{ scale: isHovered ? 1.05 : 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="text-3xl font-bold tabular-nums tracking-tight text-purple-primary"
+              <div className="flex items-baseline gap-2">
+                <div className="flex items-center gap-3">
+                  <Badge
+                    className={cn(
+                      "capitalize",
+                      pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.ORANGE),
+                      // "size-max text-primary-foreground",
+                    )}
+                    contentClassName={cn(
+                      "text-lg font-bold tabular-nums tracking-tight",
+                    )}
+                    variant="colored"
+                    size="xl"
                   >
-                    {effectiveDisplayCount.toLocaleString()}
-                  </motion.span>
-                  <span className="text-sm text-text-tertiary">views</span>
+                    <span className="flex items-baseline gap-1">
+                      {effectiveDisplayCount.toLocaleString()}
+                      <span className="text-sm font-medium text-text-tertiary">
+                        views
+                      </span>
+                    </span>
+                  </Badge>
                 </div>
               </div>
+            </div>
 
-              <motion.div
-                animate={{
-                  x: isHovered ? 0 : 8,
-                  y: isHovered ? 0 : 8,
-                  opacity: isHovered ? 1 : 0,
-                }}
-                transition={{ duration: 0.2 }}
-                className="absolute bottom-4 right-4 z-40 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100"
+            <motion.div
+              animate={{
+                x: isHovered ? 0 : 8,
+                y: isHovered ? 0 : 8,
+                opacity: isHovered ? 1 : 0,
+              }}
+              transition={{ duration: 0.2 }}
+              className="absolute bottom-4 right-4 z-40 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100"
+            >
+              <svg
+                className="h-4 w-4 text-indigo-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
               >
-                <svg
-                  className="h-4 w-4 text-indigo-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M7 17L17 7M17 7H7M17 7V17"
-                  />
-                </svg>
-              </motion.div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M7 17L17 7M17 7H7M17 7V17"
+                />
+              </svg>
             </motion.div>
-          </Link>
+          </motion.div>
         </div>
       </CardContent>
     </Card>
