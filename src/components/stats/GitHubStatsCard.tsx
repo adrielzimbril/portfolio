@@ -107,6 +107,7 @@ const themeConfig = {
     decorColor: "text-amber-400",
     iconColor: "text-amber-500",
     bgColor: "bg-amber-500/10",
+    squircleColor: "squircle-amber-500",
     glowColor: "shadow-amber-500/20",
     gradient: "from-amber-500/20 to-transparent",
   },
@@ -115,6 +116,7 @@ const themeConfig = {
     decorColor: "text-teal-400",
     iconColor: "text-teal-500",
     bgColor: "bg-teal-500/10",
+    squircleColor: "squircle-teal-500",
     glowColor: "shadow-teal-500/20",
     gradient: "from-teal-500/20 to-transparent",
   },
@@ -123,6 +125,7 @@ const themeConfig = {
     decorColor: "text-violet-400",
     iconColor: "text-violet-500",
     bgColor: "bg-violet-500/10",
+    squircleColor: "squircle-violet-500",
     glowColor: "shadow-violet-500/20",
     gradient: "from-violet-500/20 to-transparent",
   },
@@ -133,9 +136,7 @@ export function GitHubStatsCard({
   label,
   value,
   delay = 0,
-  change,
   period,
-  className,
 }: GitHubStatsCardProps) {
   const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
@@ -264,12 +265,25 @@ export function GitHubStatsCard({
                 "relative size-full flex flex-row z-20 items-center gap-2 md:gap-4 px-2 py-2 m-auto",
               )}
             >
-              <Badge
+              {/* <Badge
                 className={cn("capitalize whitespace-pre-line")}
                 size="lg"
                 circle
               >
                 <Icon size={32} className={theme.iconColor} variant="bulk" />
+              </Badge> */}
+              <Badge
+                className={cn(
+                  "capitalize whitespace-pre-line",
+                  theme.squircleColor,
+                  theme.iconColor,
+                  "size-max text-primary-foreground",
+                )}
+                variant="colored"
+                size="lg"
+                circle
+              >
+                <Icon size={32} variant="bulk" />
               </Badge>
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide whitespace-pre-line">{label}</h6>

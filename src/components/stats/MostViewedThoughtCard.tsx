@@ -1,14 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
-import { cn, getImageUrl, getResourcesUrl, pickRandomColor } from "@/utils";
+import {
+  cn,
+  formatCount,
+  getImageUrl,
+  getResourcesUrl,
+  pickRandomColor,
+} from "@/utils";
 import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
+import { Eye, HourglassFill, LinkDiagonalOne } from "@aurthle/icons";
+import { Link } from "../ui/link";
+import { useTranslations } from "use-intl";
+import { truncateText } from "@/utils/format-text";
 
 interface MostViewedThoughtCardProps {
   title: string;
@@ -25,36 +34,9 @@ export function MostViewedThoughtCard({
   views,
   delay = 0,
 }: MostViewedThoughtCardProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
   const [displayCount, setDisplayCount] = useState(0);
-
-  useEffect(() => {
-    const duration = 1500;
-    const startTime = performance.now();
-    const startDelay = delay * 1000;
-
-    const animateCount = (currentTime: number) => {
-      const elapsed = currentTime - startTime - startDelay;
-
-      if (elapsed < 0) {
-        requestAnimationFrame(animateCount);
-        return;
-      }
-
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayCount(Math.floor(eased * views));
-
-      if (progress < 1) {
-        requestAnimationFrame(animateCount);
-      }
-    };
-
-    requestAnimationFrame(animateCount);
-  }, [views, delay, shouldReduceAnimations]);
-
-  const effectiveDisplayCount = shouldReduceAnimations ? views : displayCount;
+  const t = useTranslations();
 
   const cardClassName =
     "group relative flex h-full min-h-[420px] flex-col overflow-hidden transition-all duration-300";
@@ -68,146 +50,128 @@ export function MostViewedThoughtCard({
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
           className={cn(
-            "flex relative flex-col size-full items-center justify-start gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-start p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
           )}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay, ease: "easeOut" }}
-            className={cardClassName}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+          <Link
+            href={getResourcesUrl(PageType.THOUGHT, slug)}
+            className="block w-full"
           >
+            <div className="relative h-[280px] shrink-0">
+              <motion.div
+                animate={{
+                  rotate: isHovered ? -1 : -5,
+                  x: isHovered ? -3 : -8,
+                  y: isHovered ? 3 : 5,
+                }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                className="absolute inset-4 rounded-lg bg-b-base"
+              />
+
+              <motion.div
+                animate={{
+                  rotate: isHovered ? 0.5 : 1.5,
+                  y: isHovered ? -4 : 0,
+                }}
+                transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                className="absolute inset-4 flex flex-col overflow-hidden rounded-lg border border-2 border-b-base bg-sh-white"
+              >
+                <div className="flex shrink-0 items-center gap-1.5 border-b border-b-base bg-sh-white px-3 py-2">
+                  <div className="h-2 w-2 rounded-full bg-red-300" />
+                  <div className="h-2 w-2 rounded-full bg-yellow-300" />
+                  <div className="h-2 w-2 rounded-full bg-green-300" />
+                  <div className="ml-2 h-2 flex-1 rounded bg-border-primary/30" />
+                </div>
+
+                <div className="relative h-[100px] w-full shrink-0 overflow-hidden">
+                  <Image
+                    src={getImageUrl(coverImage)}
+                    alt={title}
+                    fill
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-2">
+                    <p className="line-clamp-2 text-[8px] font-bold leading-tight text-white">
+                      {title}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex-1 space-y-2 overflow-hidden bg-sh-white p-2.5">
+                  <div className="space-y-1">
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
+                    <div className="h-[5px] w-[92%] rounded-sm bg-b-base/90" />
+                    <div className="h-[5px] w-[85%] rounded-sm bg-b-base/90" />
+                  </div>
+                  <div className="space-y-1">
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/70" />
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/70" />
+                    <div className="h-[5px] w-[78%] rounded-sm bg-b-base/70" />
+                  </div>
+                  <div className="rounded bg-b-base p-1.5">
+                    <div className="space-y-1">
+                      <div className="h-[4px] w-[60%] rounded-sm bg-sh-white" />
+                      <div className="h-[4px] w-[75%] rounded-sm bg-sh-white" />
+                      <div className="h-[4px] w-[45%] rounded-sm bg-sh-white" />
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/80" />
+                    <div className="h-[5px] w-[88%] rounded-sm bg-b-base/80" />
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-32 bg-linear-to-t from-sh-white via-sh-white/80 to-transparent transition-colors group-hover:from-white group-hover:via-white/80" />
+            </div>
+          </Link>
+          <div className="flex flex-col items-start justify-between gap-4 md:gap-6 size-full">
             <Link
               href={getResourcesUrl(PageType.THOUGHT, slug)}
-              className="block h-full"
+              className="flex flex-col items-start justify-center gap-4"
             >
-              <div className="relative h-[280px] shrink-0">
-                <motion.div
-                  animate={{
-                    rotate: isHovered ? -1 : -3,
-                    x: isHovered ? -3 : -5,
-                    y: isHovered ? 3 : 5,
-                  }}
-                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="absolute inset-4 rounded-lg bg-b-base/90"
-                />
-
-                <motion.div
-                  animate={{
-                    rotate: isHovered ? 0.5 : 1.5,
-                    y: isHovered ? -4 : 0,
-                  }}
-                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="absolute inset-4 flex flex-col overflow-hidden rounded-lg border border-b-base bg-sh-white"
-                >
-                  <div className="flex shrink-0 items-center gap-1.5 border-b border-b-base bg-sh-white px-3 py-2">
-                    <div className="h-2 w-2 rounded-full bg-red-300" />
-                    <div className="h-2 w-2 rounded-full bg-yellow-300" />
-                    <div className="h-2 w-2 rounded-full bg-green-300" />
-                    <div className="ml-2 h-2 flex-1 rounded bg-border-primary/30" />
-                  </div>
-
-                  <div className="relative h-[100px] w-full shrink-0 overflow-hidden">
-                    <Image
-                      src={getImageUrl(coverImage)}
-                      alt={title}
-                      fill
-                      className="object-cover object-top"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 p-2">
-                      <p className="line-clamp-2 text-[8px] font-bold leading-tight text-white">
-                        {title}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex-1 space-y-2 overflow-hidden bg-sh-white p-2.5">
-                    <div className="space-y-1">
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
-                      <div className="h-[5px] w-[92%] rounded-sm bg-b-base/90" />
-                      <div className="h-[5px] w-[85%] rounded-sm bg-b-base/90" />
-                    </div>
-                    <div className="space-y-1">
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/70" />
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/70" />
-                      <div className="h-[5px] w-[78%] rounded-sm bg-b-base/70" />
-                    </div>
-                    <div className="rounded bg-b-base p-1.5">
-                      <div className="space-y-1">
-                        <div className="h-[4px] w-[60%] rounded-sm bg-sh-white" />
-                        <div className="h-[4px] w-[75%] rounded-sm bg-sh-white" />
-                        <div className="h-[4px] w-[45%] rounded-sm bg-sh-white" />
-                      </div>
-                    </div>
-                    <div className="space-y-1">
-                      <div className="h-[5px] w-full rounded-sm bg-b-base/80" />
-                      <div className="h-[5px] w-[88%] rounded-sm bg-b-base/80" />
-                    </div>
-                  </div>
-                </motion.div>
-
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-32 bg-linear-to-t from-sh-white via-sh-white/80 to-transparent transition-colors group-hover:from-white group-hover:via-white/80" />
-              </div>
-            </Link>
-            <div className="relative z-20 px-6 pb-6">
-              <h5 className=" mb-1">Most Viewed Thought</h5>
-              <h6 className="mb-3 line-clamp-2 text-sm leading-snug">
+              <h6 className="h4 font-medium">Most Viewed Thought</h6>
+              <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
                 {title}
-              </h6>
+              </p>
+            </Link>
 
-              <div className="flex items-baseline gap-2">
-                <div className="flex items-center gap-3">
-                  <Badge
-                    className={cn(
-                      "capitalize",
-                      pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.ORANGE),
-                      // "size-max text-primary-foreground",
-                    )}
-                    contentClassName={cn(
-                      "text-lg font-bold tabular-nums tracking-tight",
-                    )}
-                    variant="colored"
-                    size="xl"
-                  >
-                    <span className="flex items-baseline gap-1">
-                      {effectiveDisplayCount.toLocaleString()}
-                      <span className="text-sm font-medium text-text-tertiary">
-                        views
-                      </span>
-                    </span>
-                  </Badge>
-                </div>
+            <div className="flex w-full items-center justify-between gap-2">
+              <div className="flex items-center justify-between gap-3">
+                <Badge
+                  className={cn(
+                    pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                    "size-max text-primary-foreground",
+                  )}
+                  contentClassName={cn("font-bold tabular-nums tracking-tight")}
+                  variant="colored"
+                  size="md"
+                >
+                  <span className="flex items-center gap-1">
+                    <Eye size={16} variant="bulk" />
+                    {/* {views} */}
+                    {formatCount(views)} {t("common.stats.views")}
+                  </span>
+                </Badge>
               </div>
-            </div>
-
-            <motion.div
-              animate={{
-                x: isHovered ? 0 : 8,
-                y: isHovered ? 0 : 8,
-                opacity: isHovered ? 1 : 0,
-              }}
-              transition={{ duration: 0.2 }}
-              className="absolute bottom-4 right-4 z-40 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100"
-            >
-              <svg
-                className="h-4 w-4 text-indigo-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+              <Link
+                href={getResourcesUrl(PageType.HUB, slug)}
+                likeButton
+                whileTap
+                size="xs"
+                asIcon
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7 17L17 7M17 7H7M17 7V17"
-                />
-              </svg>
-            </motion.div>
-          </motion.div>
+                <span className="flex items-center gap-1">
+                  {t("common.button.read")}
+                  <LinkDiagonalOne size={16} />
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
       </CardContent>
     </Card>

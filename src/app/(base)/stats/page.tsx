@@ -172,7 +172,6 @@ export default async function StatsPage() {
       </SectionLayout>
 
       <SectionLayout
-        description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
         isFlex
         className="pb-0!"

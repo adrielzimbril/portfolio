@@ -12,6 +12,7 @@ export function HeaderSection({
   date,
   readingTime,
   pageViewsData,
+  pageType,
 }: {
   date: string;
   tags: { name: string }[];
@@ -49,7 +50,7 @@ export function HeaderSection({
         readingTime,
         views: count ?? 0,
       }}
-      slug={slug}
+      slug={pageViewsData.slug}
     />
   );
 }
