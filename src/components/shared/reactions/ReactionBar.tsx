@@ -1,12 +1,37 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, createContext, useContext } from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { useReactions } from "@/lib/reactions/use-reactions";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, MotionValue, type Variants } from "motion/react";
+
+// --- Context & Types ---
+
+interface ReactionContextValue {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  pageType: PageType;
+  entityId: string;
+  activeOrientation: "horizontal" | "vertical";
+  dockPosition: "top" | "bottom";
+  mouseX: MotionValue;
+  mouseY: MotionValue;
+  reactions: Record<ReactionType, number>;
+}
+
+const ReactionContext = createContext<ReactionContextValue | null>(null);
+
+const useReaction = () => {
+  const context = useContext(ReactionContext);
+  if (!context) throw new Error("Reaction components must be used within ReactionRoot");
+  return context;
+};
+
+// --- CONSTANTS ---
 
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
@@ -16,41 +41,31 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.SCEPTIC]: "🤔",
 };
 
-const getDockVariants = (position: "top" | "bottom", orientation: "horizontal" | "vertical"): Variants => {
-  const isVertical = orientation === "vertical";
-  
-  return {
-    hidden: {
-      clipPath: isVertical
-        ? (position === "bottom" ? "inset(50% 10% 50% 90% round 40px)" : "inset(50% 10% 50% 90% round 40px)")
-        : (position === "bottom" ? "inset(90% 50% 10% 50% round 40px)" : "inset(10% 50% 90% 50% round 40px)"),
-      opacity: 0,
-      y: position === "bottom" ? 10 : -10,
-      scale: 0.95,
-      x: "-50%",
+const DOCK_REVEAL_VARIANTS: Variants = {
+  hidden: {
+    clipPath: "inset(10% 50% 90% 50% round 40px)",
+    opacity: 0,
+    scale: 0.95,
+  },
+  show: {
+    clipPath: "inset(0% 0% 0% 0% round 40px)",
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.5,
+      delayChildren: 0.15,
+      staggerChildren: 0.1,
     },
-    show: {
-      clipPath: "inset(0% 0% 0% 0% round 40px)",
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      x: "-50%",
-      transition: {
-        type: "spring",
-        bounce: 0,
-        duration: 0.5,
-        delayChildren: 0.1,
-        staggerChildren: 0.05,
-      },
-    },
-  };
+  },
 };
 
-const itemVariants: Variants = {
+const ITEM_VARIANTS: Variants = {
   hidden: {
     opacity: 0,
-    scale: 0.8,
-    filter: "blur(8px)",
+    scale: 0.3,
+    filter: "blur(20px)",
   },
   show: {
     opacity: 1,
@@ -59,29 +74,158 @@ const itemVariants: Variants = {
   },
 };
 
-function MagneticItem({ 
-  mouseX,
-  mouseY,
-  orientation,
+// --- Compound Components ---
+
+export function ReactionRoot({
+  children,
   pageType,
   entityId,
-  reactionType,
-  count
-}: { 
-  mouseX: MotionValue,
-  mouseY: MotionValue,
-  orientation: "horizontal" | "vertical",
-  pageType: PageType,
-  entityId: string,
-  reactionType: ReactionType,
-  count: number
+  orientation = "horizontal",
+  dockPosition = "bottom",
+}: {
+  children: React.ReactNode;
+  pageType: PageType;
+  entityId: string;
+  orientation?: "horizontal" | "vertical";
+  dockPosition?: "top" | "bottom";
 }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const mouseX = useMotionValue(Infinity);
+  const mouseY = useMotionValue(Infinity);
+  const { reactions } = useReactions(pageType, entityId);
+
+  return (
+    <ReactionContext.Provider value={{
+      isOpen,
+      setIsOpen,
+      pageType,
+      entityId,
+      activeOrientation: orientation,
+      dockPosition,
+      mouseX,
+      mouseY,
+      reactions,
+    }}>
+      <div 
+        className="relative flex flex-col items-center group/reaction-area"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => {
+          setTimeout(() => {
+            setIsOpen(false);
+            mouseX.set(Infinity);
+            mouseY.set(Infinity);
+          }, 100);
+        }}
+        onMouseMove={(e) => {
+          mouseX.set(e.clientX);
+          mouseY.set(e.clientY);
+        }}
+      >
+        {children}
+      </div>
+    </ReactionContext.Provider>
+  );
+}
+
+export function ReactionTrigger({
+  asChild = false,
+  children,
+  className,
+  ...props
+}: {
+  asChild?: boolean;
+  children: React.ReactNode;
+  className?: string;
+} & React.ComponentProps<typeof motion.button>) {
+  const { isOpen, setIsOpen } = useReaction();
+  const Comp = asChild ? Slot : motion.button;
+
+  return (
+    <Comp
+      layout
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsOpen(!isOpen);
+      }}
+      className={cn(
+        "group relative flex items-center justify-center size-11 md:size-12",
+        "squircle squircle-full squircle-smooth-xl",
+        "squircle-sh-white dark:squircle-b-base",
+        "squircle-border-2 squircle-border-b-base-accent",
+        "cursor-pointer z-[10] transition-colors",
+        className
+      )}
+      style={{ scale: isOpen ? 1.02 : 1 }}
+      whileTap={{ scale: 0.95 }}
+      {...props}
+    >
+      {children}
+    </Comp>
+  );
+}
+
+export function ReactionDock({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { isOpen, dockPosition, activeOrientation } = useReaction();
+  const isVertical = activeOrientation === "vertical";
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          variants={DOCK_REVEAL_VARIANTS}
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+          className={cn(
+            "absolute left-1/2 z-50 p-3",
+            dockPosition === "bottom" ? "top-[calc(100%+8px)] mt-3" : "bottom-[calc(100%+8px)] mb-3",
+            isVertical 
+              ? "flex flex-col w-[72px] h-auto items-center justify-center py-5"
+              : "flex flex-row h-16 w-max items-center justify-center px-5",
+            "gap-3",
+            "squircle squircle-7xl squircle-smooth-xl",
+            "squircle-sh-white dark:squircle-b-base",
+            "squircle-border-2 squircle-border-b-base-accent",
+            "whitespace-nowrap shadow-2xl",
+            className
+          )}
+          style={{ x: "-50%" }}
+        >
+          <div 
+            className={cn(
+              "flex gap-2",
+              isVertical ? "flex-col w-full items-center" : "flex-row h-full items-center"
+            )}
+          >
+            {children}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export function ReactionItem({
+  type,
+  className,
+}: {
+  type: ReactionType;
+  className?: string;
+}) {
+  const { mouseX, mouseY, activeOrientation, pageType, entityId, reactions, setIsOpen } = useReaction();
   const ref = useRef<HTMLDivElement>(null);
 
-  const distance = useTransform(orientation === "horizontal" ? mouseX : mouseY, (val) => {
+  const distance = useTransform(activeOrientation === "horizontal" ? mouseX : mouseY, (val) => {
     if (val === Infinity) return 1000;
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, y: 0, width: 0, height: 0 };
-    const center = orientation === "horizontal" 
+    const center = activeOrientation === "horizontal" 
       ? bounds.x + bounds.width / 2 
       : bounds.y + bounds.height / 2;
     return val - center;
@@ -94,14 +238,15 @@ function MagneticItem({
     <motion.div
       ref={ref}
       style={{ width: size, height: size }}
-      variants={itemVariants}
-      className="flex items-center justify-center origin-center"
+      variants={ITEM_VARIANTS}
+      className={cn("flex items-center justify-center origin-center", className)}
+      onClick={() => setIsOpen(false)}
     >
       <ReactionButton
         pageType={pageType}
         entityId={entityId}
-        reactionType={reactionType}
-        count={count}
+        reactionType={type}
+        count={reactions[type] || 0}
         minimal
         className="w-full h-full"
       />
@@ -109,15 +254,7 @@ function MagneticItem({
   );
 }
 
-interface ReactionBarProps {
-  pageType: PageType;
-  entityId: string;
-  className?: string;
-  variant?: "inline" | "dock";
-  dockPosition?: "top" | "bottom";
-  orientation?: "horizontal" | "vertical";
-  isFloating?: boolean;
-}
+// --- Convenience Wrapper ---
 
 export function ReactionBar({
   pageType,
@@ -126,42 +263,19 @@ export function ReactionBar({
   variant = "inline",
   dockPosition = "bottom",
   orientation,
-  isFloating = false,
-}: ReactionBarProps) {
-  // CRITICAL: Default to vertical for docks (on cards) and horizontal for inline (pages)
+}: {
+  pageType: PageType;
+  entityId: string;
+  className?: string;
+  variant?: "inline" | "dock";
+  dockPosition?: "top" | "bottom";
+  orientation?: "horizontal" | "vertical";
+}) {
   const activeOrientation = orientation || (variant === "dock" ? "vertical" : "horizontal");
-  const [isExpanded, setIsExpanded] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(Infinity);
-  const mouseY = useMotionValue(Infinity);
-  
-  const reactionTypes: Array<ReactionType> = [
-    ReactionType.LIKE,
-    ReactionType.HEART,
-    ReactionType.CELEBRATE,
-    ReactionType.INSIGHTFUL,
-    ReactionType.SCEPTIC,
-  ];
+  const reactionTypes = Object.values(ReactionType);
   const { reactions } = useReactions(pageType, entityId);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsExpanded(false);
-      }
-    };
-
-    if (isExpanded) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("touchstart", handleClickOutside);
-    }
-    
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
-  }, [isExpanded]);
-
+  const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
+  
   const sortedReactions = reactionTypes
     .map((type) => ({ type, count: reactions[type] || 0 }))
     .sort((a, b) => b.count - a.count);
@@ -170,97 +284,16 @@ export function ReactionBar({
   const primaryReaction = firstReaction && firstReaction.count > 0 
     ? firstReaction.type 
     : ReactionType.LIKE;
-    
-  const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
 
   if (variant === "dock") {
-    const dockVariants = getDockVariants(dockPosition, activeOrientation);
-    const isVertical = activeOrientation === "vertical";
-    
     return (
-      <div 
-        ref={containerRef}
-        className={cn(
-          "relative flex flex-col items-center group/reaction-area",
-          isFloating && "fixed bottom-10 left-1/2 -translate-x-1/2 z-50",
-          className
-        )}
-        onMouseEnter={() => setIsExpanded(true)}
-        onMouseLeave={() => {
-          setTimeout(() => {
-            if (containerRef.current && !containerRef.current.matches(':hover')) {
-              setIsExpanded(false);
-              mouseX.set(Infinity);
-              mouseY.set(Infinity);
-            }
-          }, 100);
-        }}
-        onMouseMove={(e) => {
-          mouseX.set(e.clientX);
-          mouseY.set(e.clientY);
-        }}
+      <ReactionRoot 
+        pageType={pageType} 
+        entityId={entityId} 
+        orientation={activeOrientation}
+        dockPosition={dockPosition}
       >
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div
-              variants={dockVariants}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-              className={cn(
-                "absolute left-1/2 z-50 p-3",
-                dockPosition === "bottom" ? "top-[calc(100%+8px)] mt-3" : "bottom-[calc(100%+8px)] mb-3",
-                isVertical 
-                  ? "flex flex-col w-[72px] h-auto items-center justify-center py-5"
-                  : "flex flex-row h-16 w-max items-center justify-center px-5",
-                "gap-3",
-                "squircle squircle-7xl squircle-smooth-xl",
-                "squircle-sh-white dark:squircle-b-base",
-                "squircle-border-2 squircle-border-b-base-accent",
-                "whitespace-nowrap shadow-2xl"
-              )}
-            >
-              <div 
-                className={cn(
-                  "flex gap-2",
-                  isVertical ? "flex-col w-full items-center" : "flex-row h-full items-center"
-                )} 
-                onClick={() => setIsExpanded(false)}
-              >
-                {reactionTypes.map((type) => (
-                  <MagneticItem
-                    key={type}
-                    mouseX={mouseX}
-                    mouseY={mouseY}
-                    orientation={activeOrientation}
-                    pageType={pageType}
-                    entityId={entityId}
-                    reactionType={type}
-                    count={reactions[type] || 0}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <motion.button
-          layout
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setIsExpanded(!isExpanded);
-          }}
-          className={cn(
-            "group relative flex items-center justify-center size-11 md:size-12",
-            "squircle squircle-full squircle-smooth-xl",
-            "squircle-sh-white dark:squircle-b-base",
-            "squircle-border-2 squircle-border-b-base-accent",
-            "cursor-pointer z-[10] transition-colors"
-          )}
-          style={{ scale: isExpanded ? 1.02 : 1 }}
-          whileTap={{ scale: 0.95 }}
-        >
+        <ReactionTrigger className={className}>
           <div className="flex flex-col items-center justify-center relative pointer-events-none">
             <span className="text-xl">
               {REACTION_EMOJIS[primaryReaction]}
@@ -275,8 +308,13 @@ export function ReactionBar({
               </span>
             )}
           </div>
-        </motion.button>
-      </div>
+        </ReactionTrigger>
+        <ReactionDock>
+          {reactionTypes.map((type) => (
+            <ReactionItem key={type} type={type} />
+          ))}
+        </ReactionDock>
+      </ReactionRoot>
     );
   }
 
