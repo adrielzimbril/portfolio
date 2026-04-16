@@ -1,9 +1,9 @@
 /**
  * Configuration Values
- * 
+ *
  * This file contains all environment variable values with defaults.
  * Import ConfigValue directly from here or use the helper functions.
- * 
+ *
  * Usage:
  * import { ConfigValue } from "@/config/config";
  * const siteUrl = ConfigValue.NEXT_PUBLIC_SITE_URL;
@@ -15,7 +15,8 @@ export const ConfigValue = {
   NODE_ENV: process.env.NODE_ENV || "production",
 
   // Site Configuration
-  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  NEXT_PUBLIC_SITE_URL:
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   NEXT_PUBLIC_DOMAIN_SITE_URL: process.env.NEXT_PUBLIC_DOMAIN_SITE_URL,
   NEXT_PUBLIC_S3_DOMAIN_SITE_URL: process.env.NEXT_PUBLIC_S3_DOMAIN_SITE_URL,
   NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
@@ -76,13 +77,16 @@ export const ConfigValue = {
   // Tasks
   TRIGGER_ACCESS_TOKEN: process.env.TRIGGER_ACCESS_TOKEN,
   NEXT_SHIROFOLIO_PUBLIC_APP_URL: process.env.NEXT_SHIROFOLIO_PUBLIC_APP_URL,
+  ANALYZE: process.env.ANALYZE,
 
   // Analytics
   NEXT_PRIVATE_POSTHOG_CODE: process.env.NEXT_PRIVATE_POSTHOG_CODE,
   NEXT_PRIVATE_POSTHOG_KEY: process.env.NEXT_PRIVATE_POSTHOG_KEY,
   NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-  NEXT_PRIVATE_POSTHOG_PERSONAL_KEY: process.env.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
-  NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+  NEXT_PRIVATE_POSTHOG_PERSONAL_KEY:
+    process.env.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
+  NEXT_PUBLIC_POSTHOG_HOST:
+    process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
   NEXT_PUBLIC_PLAUSIBLE_URL: process.env.NEXT_PUBLIC_PLAUSIBLE_URL,
   NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
 
@@ -91,16 +95,19 @@ export const ConfigValue = {
   S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
   S3_ENDPOINT: process.env.S3_ENDPOINT,
   S3_REGION: process.env.S3_REGION,
-  NEXT_PUBLIC_AVATARS_BUCKET_NAME: process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME || "avatars",
+  NEXT_PUBLIC_AVATARS_BUCKET_NAME:
+    process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME || "avatars",
 
   // AI (Optional - used for markdown file translations and i18n nextintl translations)
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
 
   // Bot Protection
   NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-  NEXT_PRIVATE_RECAPTCHA_SECRET_KEY: process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
+  NEXT_PRIVATE_RECAPTCHA_SECRET_KEY:
+    process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-  NEXT_PRIVATE_TURNSTILE_SECRET_KEY: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
+  NEXT_PRIVATE_TURNSTILE_SECRET_KEY:
+    process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
   TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
 
   // Performance

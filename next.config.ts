@@ -28,10 +28,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "designmodo.com",
-      },
-      {
-        protocol: "https",
         hostname: "www.adrielzimbril.com",
       },
       {

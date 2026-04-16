@@ -108,6 +108,7 @@ export function getEnvVars(): Record<string, string | undefined> {
     // Tasks
     TRIGGER_ACCESS_TOKEN: ConfigValue.TRIGGER_ACCESS_TOKEN,
     NEXT_SHIROFOLIO_PUBLIC_APP_URL: ConfigValue.NEXT_SHIROFOLIO_PUBLIC_APP_URL,
+    ANALYZE: ConfigValue.ANALYZE,
 
     // Analytics
     NEXT_PRIVATE_POSTHOG_CODE: ConfigValue.NEXT_PRIVATE_POSTHOG_CODE,
