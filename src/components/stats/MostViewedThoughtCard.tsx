@@ -126,15 +126,20 @@ export function MostViewedThoughtCard({
             </div>
           </Link>
           <div className="flex flex-col items-start justify-between gap-4 md:gap-6 size-full">
-            <Link
-              href={getResourcesUrl(PageType.THOUGHT, slug)}
-              className="flex flex-col items-start justify-center gap-4"
-            >
-              <h6 className="h4 font-medium">Most Viewed Thought</h6>
-              <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
-                {title}
-              </p>
-            </Link>
+            <div className="flex flex-col items-start justify-center gap-4">
+              <Badge className={cn("relative font-medium")} size="xl">
+                Most Viewed Thought
+              </Badge>
+              <Link
+                href={getResourcesUrl(PageType.THOUGHT, slug)}
+                className="flex flex-col items-start justify-center gap-4"
+              >
+                <h6 className="hidden h4 font-medium">Most Viewed Thought</h6>
+                <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
+                  {title}
+                </p>
+              </Link>
+            </div>
 
             <div className="flex w-full items-center justify-between gap-2">
               <div className="flex items-center justify-between gap-3">

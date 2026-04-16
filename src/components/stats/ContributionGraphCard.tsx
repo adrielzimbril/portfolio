@@ -104,7 +104,7 @@ export function ContributionGraphCard({
                   pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
                   "size-max text-primary-foreground!",
                 )}
-                size="lg"
+                size="md"
                 variant="colored"
                 circle
               >

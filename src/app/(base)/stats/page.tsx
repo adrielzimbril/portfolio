@@ -82,7 +82,6 @@ export default async function StatsPage() {
       />
 
       <SectionLayout
-        description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
         isFlex
         className="py-0!"
@@ -124,70 +123,63 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <TopThoughtsList
-              title="Top Viewed Thoughts"
-              description="Most read articles"
-              type={TopThoughtsListType.REACTED}
-              thoughts={serverStats.topViewedThoughts}
-              icon={
-                <TrendUp
-                  size={32}
-                  // className="text-rose-500"
-                  variant="bulk"
-                />
-              }
-              decoration="📈"
-            />
-            <TopThoughtsList
-              title="Top Reacted Thoughts"
-              description="Most loved articles"
-              type={TopThoughtsListType.REACTED}
-              thoughts={serverStats.topReactedThoughts}
-              icon={
-                <HeartOne
-                  size={32}
-                  // className="text-rose-500"
-                  variant="bulk"
-                />
-              }
-              decoration="❤️"
-            />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 col-span-2">
-            {serverStats.topViewedThoughts.length > 0 &&
-              serverStats.topViewedThoughts[0] && (
-                <MostViewedThoughtCard
-                  title={serverStats.topViewedThoughts[0].title}
-                  slug={serverStats.topViewedThoughts[0].slug}
-                  coverImage={serverStats.topViewedThoughts[0].coverImage}
-                  views={serverStats.topViewedThoughts[0].count}
-                />
-              )}
-            <div className="grid grid-cols-1 md:grid-cols-4 md:h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
-              <BarChartCard
-                data={buildTimeStats.categories.map((cat) => ({
-                  name: cat.name,
-                  count: cat.count,
-                }))}
-                title="Categories"
-                description="Thoughts by topic"
-                iconName="ChartPresentationOne"
-                decorationEmoji="📊"
+        <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <TopThoughtsList
+            title="Top Viewed Thoughts"
+            description="Most read articles"
+            type={TopThoughtsListType.REACTED}
+            thoughts={serverStats.topViewedThoughts}
+            icon={
+              <TrendUp
+                size={32}
+                // className="text-rose-500"
+                variant="bulk"
               />
-              <ChangelogUpdatesCard count={changelog.length} />
-            </div>
+            }
+            decoration="📈"
+          />
+          <TopThoughtsList
+            title="Top Reacted Thoughts"
+            description="Most loved articles"
+            type={TopThoughtsListType.REACTED}
+            thoughts={serverStats.topReactedThoughts}
+            icon={
+              <HeartOne
+                size={32}
+                // className="text-rose-500"
+                variant="bulk"
+              />
+            }
+            decoration="❤️"
+          />
+        </div>
+        <div className="w-full">
+          <ReactionsSection reactions={serverStats.reactions} />
+        </div>
+        <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 col-span-2">
+          {serverStats.topViewedThoughts.length > 0 &&
+            serverStats.topViewedThoughts[0] && (
+              <MostViewedThoughtCard
+                title={serverStats.topViewedThoughts[0].title}
+                slug={serverStats.topViewedThoughts[0].slug}
+                coverImage={serverStats.topViewedThoughts[0].coverImage}
+                views={serverStats.topViewedThoughts[0].count}
+              />
+            )}
+          <div className="grid grid-cols-1 md:grid-cols-4 md:h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
+            <BarChartCard
+              data={buildTimeStats.categories.map((cat) => ({
+                name: cat.name,
+                count: cat.count,
+              }))}
+              title="Categories"
+              description="Thoughts by topic"
+              iconName="ChartPresentationOne"
+              decorationEmoji="📊"
+            />
+            <ChangelogUpdatesCard count={changelog.length} />
           </div>
         </div>
-      </SectionLayout>
-
-      <SectionLayout
-        description="Engagement breakdown by reaction type"
-        badge="Reactions"
-        isFlex
-      >
-        <ReactionsSection reactions={serverStats.reactions} />
       </SectionLayout>
 
       <SectionLayout
@@ -227,7 +219,6 @@ export default async function StatsPage() {
         </div>
       </SectionLayout>
 
-      {/* GitHub Section */}
       <SectionLayout
         description={t("stats.sections.github.description")}
         badge={t("stats.sections.github.badge")}
@@ -251,8 +242,15 @@ export default async function StatsPage() {
             value={githubStats.commits}
           />
         </div>
-        <ContributionGraphCard contributions={githubStats.contributions} />
-        {/* <div className="hidden! grid grid-cols-1 gap-2 lg:grid-cols-12 w-full">
+      </SectionLayout>
+
+      <SectionLayout
+        description={t("stats.sections.github.description")}
+        badge={t("stats.sections.github.badge")}
+        isFlex
+        className="pb-0!"
+      >
+        <div className="hidden! grid grid-cols-1 gap-2 lg:grid-cols-12 w-full">
           <ContributionGraphCard contributions={githubStats.contributions} />
           <div className="hidden! grid grid-cols-1 md:grid-cols-3 md:h-full w-full lg:flex flex-col gap-2 lg:col-span-2">
             <GitHubStatsCard
@@ -271,13 +269,10 @@ export default async function StatsPage() {
               value={githubStats.commits}
             />
           </div>
-        </div> */}
+        </div>
       </SectionLayout>
 
-      <SectionLayout
-        description="Lighthouse performance scores"
-        badge="Performance"
-      >
+      <SectionLayout badge="Performance">
         <LighthouseScoreCard
           scores={lighthouseStats.mobile}
           strategy="mobile"
