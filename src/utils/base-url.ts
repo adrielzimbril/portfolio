@@ -1,4 +1,5 @@
 import { PageType, QuestAskType } from "@/types";
+import { ConfigValue } from "@/config";
 
 /**
  * Gets the base URL of the application.
@@ -7,13 +8,13 @@ import { PageType, QuestAskType } from "@/types";
  * @returns {string} The base URL of the application.
  */
 export function getBaseUrl(): string {
-  if (process.env.NEXT_PUBLIC_SITE_URL) {
-    return process.env.NEXT_PUBLIC_SITE_URL;
+  if (ConfigValue.NEXT_PUBLIC_SITE_URL) {
+    return ConfigValue.NEXT_PUBLIC_SITE_URL;
   }
-  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+  if (ConfigValue.NEXT_PUBLIC_VERCEL_URL) {
+    return `https://${ConfigValue.NEXT_PUBLIC_VERCEL_URL}`;
   }
-  return `http://localhost:${process.env.PORT ?? 3000}`;
+  return `http://localhost:${ConfigValue.PORT}`;
 }
 
 /**
@@ -58,10 +59,10 @@ export function getPathUrl(path: string): string {
  */
 export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
   if (type === "s3") {
-    return `${process.env.NEXT_PUBLIC_S3_DOMAIN_SITE_URL}/`;
+    return `${ConfigValue.NEXT_PUBLIC_S3_DOMAIN_SITE_URL}/`;
   }
-  return process.env.NEXT_PUBLIC_DOMAIN_SITE_URL
-    ? `${process.env.NEXT_PUBLIC_DOMAIN_SITE_URL}/`
+  return ConfigValue.NEXT_PUBLIC_DOMAIN_SITE_URL
+    ? `${ConfigValue.NEXT_PUBLIC_DOMAIN_SITE_URL}/`
     : "https://www.adrielzimbril.com/";
 }
 
@@ -189,11 +190,11 @@ export function getImageUrl(slug: string): string {
 export function getThisPageUrl(): string {
   const url = new URL(window.location.href);
   // Remove hash and query params
-  url.hash = '';
-  url.search = '';
+  url.hash = "";
+  url.search = "";
   // Remove trailing slash
   let pathname = url.pathname;
-  if (pathname.endsWith('/')) {
+  if (pathname.endsWith("/")) {
     pathname = pathname.slice(0, -1);
   }
   return `${url.origin}${pathname}`;

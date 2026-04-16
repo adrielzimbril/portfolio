@@ -1,9 +1,10 @@
 import { createBrowserClient } from "@supabase/ssr";
 import { Database } from "@/integrations/supabase/types";
+import { ConfigValue } from "@/config";
 
 export const supabaseKey = {
-  url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-  anonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
+  url: ConfigValue.NEXT_PUBLIC_SUPABASE_URL ?? "",
+  anonKey: ConfigValue.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
 };
 
 if (!supabaseKey.url) {

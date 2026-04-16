@@ -29,10 +29,9 @@ import { ThoughtMostViewedCard } from "@/components/shared/pages/stats/ThoughtMo
 import { ChangelogUpdatesCard } from "@/components/shared/pages/stats/ChangelogUpdatesCard";
 import { changelog } from "@/data/personal/changelog";
 import { TopThoughtsListType } from "@/types/enum";
+import { ConfigValue } from "@/config";
 
-const REVAMP_DATE = new Date(
-  process.env.NEXT_PUBLIC_REVAMP_DATE || "2025-08-17",
-);
+const REVAMP_DATE = new Date(ConfigValue.NEXT_PUBLIC_REVAMP_DATE);
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
