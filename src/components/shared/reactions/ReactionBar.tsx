@@ -16,11 +16,13 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.SCEPTIC]: "🤔",
 };
 
-const contentVariants: Variants = {
+const getDockVariants = (position: "top" | "bottom"): Variants => ({
   hidden: {
-    clipPath: "inset(90% 0% 0% 0% round 40px)", // Grow from bottom
+    clipPath: position === "bottom" 
+      ? "inset(90% 0% 0% 0% round 40px)" 
+      : "inset(0% 0% 90% 0% round 40px)",
     opacity: 0,
-    y: 10,
+    y: position === "bottom" ? 10 : -10,
   },
   show: {
     clipPath: "inset(0% 0% 0% 0% round 40px)",
@@ -34,7 +36,7 @@ const contentVariants: Variants = {
       staggerChildren: 0.05,
     },
   },
-};
+});
 
 const itemVariants: Variants = {
   hidden: {
@@ -69,7 +71,7 @@ function MagneticItem({
     return val - bounds.x - bounds.width / 2;
   });
 
-  // Calculate size based on proximity (40px base, 64px max for subtlety)
+  // Calculate size based on proximity
   const sizeSync = useTransform(distance, [-120, 0, 120], [40, 64, 40]);
   const size = useSpring(sizeSync, { stiffness: 200, damping: 25, mass: 0.1 });
 
@@ -78,7 +80,7 @@ function MagneticItem({
       ref={ref}
       style={{ width: size, height: size }}
       variants={itemVariants}
-      className="flex items-center justify-center origin-bottom"
+      className="flex items-center justify-center origin-center"
     >
       <ReactionButton
         pageType={pageType}
@@ -92,11 +94,21 @@ function MagneticItem({
   );
 }
 
+interface ReactionBarProps {
+  pageType: PageType;
+  entityId: string;
+  className?: string;
+  variant?: "inline" | "dock";
+  dockPosition?: "top" | "bottom";
+  isFloating?: boolean;
+}
+
 export function ReactionBar({
   pageType,
   entityId,
   className,
   variant = "inline",
+  dockPosition = "bottom",
   isFloating = false,
 }: ReactionBarProps) {
   const [isHovered, setIsHovered] = useState(false);
@@ -122,10 +134,12 @@ export function ReactionBar({
   const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
 
   if (variant === "dock") {
+    const dockVariants = getDockVariants(dockPosition);
+    
     return (
       <div 
         className={cn(
-          "relative flex flex-col items-center", // Combined flex container for better hover area
+          "relative flex flex-col items-center group/reaction-area",
           isFloating && "fixed bottom-10 left-1/2 -translate-x-1/2 z-50",
           className
         )}
@@ -139,20 +153,21 @@ export function ReactionBar({
         <AnimatePresence>
           {isHovered && (
             <motion.div
-              variants={contentVariants}
+              variants={dockVariants}
               initial="hidden"
               animate="show"
               exit="hidden"
               className={cn(
-                "absolute bottom-[calc(100%-8px)] mb-3 left-1/2 -translate-x-1/2", // Closer to trigger
-                "flex items-end gap-1.5 p-1.5 h-16", // More compact
+                "absolute left-1/2 -translate-x-1/2 z-50",
+                dockPosition === "bottom" ? "bottom-[calc(100%-8px)] mb-3" : "top-[calc(100%-8px)] mt-3",
+                "flex items-center gap-1.5 p-1.5 h-16",
                 "squircle squircle-7xl squircle-smooth-xl",
                 "squircle-sh-white dark:squircle-b-base",
                 "squircle-border-2 squircle-border-b-base-accent",
-                "z-50"
+                "whitespace-nowrap"
               )}
             >
-              <div className="flex items-end h-full gap-0.5 px-0.5">
+              <div className="flex items-center h-full gap-0.5 px-0.5">
                 {reactionTypes.map((type) => (
                   <MagneticItem
                     key={type}
@@ -171,7 +186,7 @@ export function ReactionBar({
         <motion.button
           layout
           className={cn(
-            "group relative flex items-center justify-center size-11 md:size-12", // Slightly smaller/subtle
+            "group relative flex items-center justify-center size-11 md:size-12",
             "squircle squircle-full squircle-smooth-xl",
             "squircle-sh-white dark:squircle-b-base",
             "squircle-border-2 squircle-border-b-base-accent",
@@ -185,7 +200,11 @@ export function ReactionBar({
               {REACTION_EMOJIS[primaryReaction]}
             </span>
             {totalCount > 0 && (
-              <span className="absolute -bottom-2.5 text-[10px] md:text-[11px] font-bold text-indigo-500 squircle squircle-full squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5">
+              <span className={cn(
+                "absolute font-bold text-indigo-500 squircle squircle-full squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
+                dockPosition === "bottom" ? "-bottom-2.5" : "-top-2.5",
+                "text-[10px] md:text-[11px]"
+              )}>
                 {totalCount}
               </span>
             )}
@@ -195,23 +214,30 @@ export function ReactionBar({
     );
   }
 
+  // Inline "Section" Mode for Blogs
   return (
     <div className={cn(
-      "flex flex-wrap items-center gap-2 p-1.5 px-2.5",
-      "squircle squircle-4xl squircle-smooth-xl",
+      "w-full flex flex-col items-center gap-4 py-8 px-4",
+      "squircle squircle-7xl squircle-smooth-xl",
       "squircle-sh-white dark:squircle-b-base",
       "squircle-border-2 squircle-border-b-base-accent",
       className
     )}>
-      {reactionTypes.map((type) => (
-        <ReactionButton
-          key={type}
-          pageType={pageType}
-          entityId={entityId}
-          reactionType={type}
-          count={reactions[type] || 0}
-        />
-      ))}
+      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
+        Reactions
+      </h4>
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        {reactionTypes.map((type) => (
+          <ReactionButton
+            key={type}
+            pageType={pageType}
+            entityId={entityId}
+            reactionType={type}
+            count={reactions[type] || 0}
+            className="scale-110" // Slightly larger for section mode
+          />
+        ))}
+      </div>
     </div>
   );
 }
