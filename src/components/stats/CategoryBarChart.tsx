@@ -8,6 +8,11 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import {
+  pickRandomColor,
+  pickRandomColorCode,
+} from "@/utils/pick-random-color";
 
 interface CategoryBarChartProps {
   categories: CategoryCount[];
@@ -16,12 +21,12 @@ interface CategoryBarChartProps {
 }
 
 const BAR_COLORS = [
-  "bg-primary",
-  "bg-secondary",
-  "bg-accent",
-  "bg-muted",
-  "bg-destructive",
-  "bg-blue-500",
+  DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+  DEFAULT_COLOR_CODE_NAME_LIST.GREEN,
+  DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+  DEFAULT_COLOR_CODE_NAME_LIST.ORANGE,
+  DEFAULT_COLOR_CODE_NAME_LIST.PINK,
+  DEFAULT_COLOR_CODE_NAME_LIST.INDIGO,
 ];
 
 export function CategoryBarChart({
@@ -68,8 +73,17 @@ export function CategoryBarChart({
                 "relative flex flex-row items-center gap-2 md:gap-4 mb-4",
               )}
             >
-              <Badge className="capitalize" size="lg" circle>
-                <ChartBar size={32} className="text-primary" variant="bulk" />
+              <Badge
+                className={cn(
+                  "capitalize text-xs font-medium",
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                  "size-max text-primary-foreground!",
+                )}
+                size="lg"
+                variant="colored"
+                circle
+              >
+                <ChartBar size={32} variant="bulk" />
               </Badge>
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">Categories</h6>
@@ -130,7 +144,8 @@ export function CategoryBarChart({
                             damping: 20,
                           },
                         }}
-                        className={`absolute inset-y-0 left-0 origin-left rounded-full ${color}`}
+                        className="absolute inset-y-0 left-0 origin-left rounded-full"
+                        style={{ backgroundColor: pickRandomColorCode(color) }}
                       />
                     </div>
                   </motion.div>

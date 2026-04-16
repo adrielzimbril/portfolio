@@ -8,6 +8,11 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import {
+  pickRandomColor,
+  pickRandomColorCode,
+} from "@/utils/pick-random-color";
 
 interface ReactionBreakdownProps {
   reactions: Record<ReactionType, number>;
@@ -20,33 +25,33 @@ const REACTION_CONFIG: Record<
   {
     Icon: string;
     label: string;
-    color: string;
+    color: DEFAULT_COLOR_CODE_NAME_LIST;
   }
 > = {
   like: {
     Icon: "👍",
     label: "Likes",
-    color: "bg-primary",
+    color: DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
   },
   heart: {
     Icon: "❤️",
     label: "Hearts",
-    color: "bg-rose-500",
+    color: DEFAULT_COLOR_CODE_NAME_LIST.RED,
   },
   celebrate: {
     Icon: "🎉",
     label: "Celebrates",
-    color: "bg-secondary",
+    color: DEFAULT_COLOR_CODE_NAME_LIST.YELLOW,
   },
   insightful: {
     Icon: "💡",
     label: "Insightful",
-    color: "bg-amber-500",
+    color: DEFAULT_COLOR_CODE_NAME_LIST.AMBER,
   },
   sceptic: {
     Icon: "🤔",
     label: "Sceptical",
-    color: "bg-slate-500",
+    color: DEFAULT_COLOR_CODE_NAME_LIST.INDIGO,
   },
 };
 
@@ -157,8 +162,17 @@ export function ReactionBreakdown({
                 "relative flex flex-row items-center gap-2 md:gap-4 mb-4",
               )}
             >
-              <Badge className="capitalize" size="lg" circle>
-                <Heart size={32} className="text-rose-500" variant="bulk" />
+              <Badge
+                className={cn(
+                  "capitalize text-xs font-medium",
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                  "size-max text-primary-foreground!",
+                )}
+                size="lg"
+                variant="colored"
+                circle
+              >
+                <Heart size={32} variant="bulk" />
               </Badge>
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">Reactions</h6>
@@ -227,7 +241,10 @@ export function ReactionBreakdown({
                               damping: 20,
                             },
                           }}
-                          className={`absolute inset-y-0 left-0 origin-left rounded-full ${config.color}`}
+                          className="absolute inset-y-0 left-0 origin-left rounded-full"
+                          style={{
+                            backgroundColor: pickRandomColorCode(config.color),
+                          }}
                         />
                       </div>
                     </motion.div>
