@@ -1,5 +1,6 @@
 import React from "react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
@@ -74,182 +75,164 @@ export default async function StatsPage() {
 
   return (
     <>
-      <PageHero
-        title={t("stats.page.title")}
-        description={t("stats.page.description")}
-        imagePath={{ emoji: "📊" }}
-        isMobileShowed
-      />
+      <Skeleton name="stats-hero" loading={false}>
+        <PageHero
+          title={t("stats.page.title")}
+          description={t("stats.page.description")}
+          imagePath={{ emoji: "📊" }}
+          isMobileShowed
+        />
+      </Skeleton>
 
-      <SectionLayout
-        badge={t("stats.sections.blog.badge")}
-        isFlex
-        className="py-0!"
-      >
-        <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
-          <StatCard
-            label="Total Site Views"
-            value={serverStats.totalViews}
-            icon={<Eye size={32} variant="bulk" />}
-            decoration="👁️"
-            description="Since launch"
-          />
-          <StatCard
-            label="Coffee Consumed"
-            value={coffeeCups}
-            suffix="cups"
-            icon={<Coffee size={32} variant="bulk" />}
-            decoration="☕"
-            description="1 cup per 500 words"
-          />
-          <StatCard
-            label="Site Age"
-            value={daysSinceRevamp}
-            suffix="days"
-            icon={<Calendar size={32} variant="bulk" />}
-            decoration="📅"
-            description={`Launched ${REVAMP_DATE.toLocaleDateString(locale, {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}`}
-          />
-        </div>
-      </SectionLayout>
-
-      <SectionLayout
-        badge={t("stats.sections.engagement.badge")}
-        isFlex
-        className="pb-0!"
-      >
-        <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ThoughtsTopList
-            title="Top Viewed Thoughts"
-            description="Most read articles"
-            type={TopThoughtsListType.REACTED}
-            thoughts={serverStats.topViewedThoughts}
-            icon={
-              <TrendUp
-                size={32}
-                // className="text-rose-500"
-                variant="bulk"
-              />
-            }
-            decoration="📈"
-          />
-          <ThoughtsTopList
-            title="Top Reacted Thoughts"
-            description="Most loved articles"
-            type={TopThoughtsListType.REACTED}
-            thoughts={serverStats.topReactedThoughts}
-            icon={
-              <HeartOne
-                size={32}
-                // className="text-rose-500"
-                variant="bulk"
-              />
-            }
-            decoration="❤️"
-          />
-        </div>
-        <div className="w-full">
-          <ReactionsSection reactions={serverStats.reactions} />
-        </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 col-span-2">
-          {serverStats.topViewedThoughts.length > 0 &&
-            serverStats.topViewedThoughts[0] && (
-              <ThoughtMostViewedCard
-                title={serverStats.topViewedThoughts[0].title}
-                slug={serverStats.topViewedThoughts[0].slug}
-                coverImage={serverStats.topViewedThoughts[0].coverImage}
-                views={serverStats.topViewedThoughts[0].count}
-              />
-            )}
-          <div className="grid grid-cols-1 md:grid-cols-4 h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
-            <ThoughtsCategoriesCard
-              data={buildTimeStats.categories.map((cat) => ({
-                name: cat.name,
-                count: cat.count,
-              }))}
-              title="Categories"
-              description="Thoughts by topic"
-              decorationEmoji="📊"
+      <Skeleton name="stats-general" loading={false}>
+        <SectionLayout
+          badge={t("stats.sections.blog.badge")}
+          isFlex
+          className="py-0!"
+        >
+          <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
+            <StatCard
+              label="Total Site Views"
+              value={serverStats.totalViews}
+              icon={<Eye size={32} variant="bulk" />}
+              decoration="👁️"
+              description="Since launch"
             />
-            <ChangelogUpdatesCard count={changelog.length} />
+            <StatCard
+              label="Coffee Consumed"
+              value={coffeeCups}
+              suffix="cups"
+              icon={<Coffee size={32} variant="bulk" />}
+              decoration="☕"
+              description="1 cup per 500 words"
+            />
+            <StatCard
+              label="Site Age"
+              value={daysSinceRevamp}
+              suffix="days"
+              icon={<Calendar size={32} variant="bulk" />}
+              decoration="📅"
+              description={`Launched ${REVAMP_DATE.toLocaleDateString(locale, {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}`}
+            />
           </div>
-        </div>
-      </SectionLayout>
+        </SectionLayout>
+      </Skeleton>
 
-      <SectionLayout
-        badge={t("stats.sections.blog.badge")}
-        isFlex
-        className="pb-0!"
-      >
-        <div className="grid md:w-[90%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard
-            label="Total Thoughts"
-            value={buildTimeStats.totalPosts}
-            suffix="thoughts"
-            icon={<BookOne size={32} variant="bulk" />}
-            decorationPattern="💭"
-          />
-          <StatCard
-            label="Total Words"
-            value={buildTimeStats.totalWords}
-            suffix="words"
-            icon={<TextFolder size={32} variant="bulk" />}
-            decorationPattern="📝"
-          />
-          <StatCard
-            label="Community Messages"
-            value={serverStats.communityMessages}
-            suffix="messages"
-            icon={<ChatBubbleCircle size={32} variant="bulk" />}
-            decorationPattern="💬"
-          />
-          <StatCard
-            label="Reading Time"
-            value={buildTimeStats.totalReadingTime}
-            suffix="min"
-            icon={<Timelapse size={32} variant="bulk" />}
-            decorationPattern="⏱️"
-          />
-        </div>
-      </SectionLayout>
+      <Skeleton name="stats-engagement" loading={false}>
+        <SectionLayout
+          badge={t("stats.sections.engagement.badge")}
+          isFlex
+          className="pb-0!"
+        >
+          <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ThoughtsTopList
+              title="Top Viewed Thoughts"
+              description="Most read articles"
+              type={TopThoughtsListType.REACTED}
+              thoughts={serverStats.topViewedThoughts}
+              icon={
+                <TrendUp
+                  size={32}
+                  // className="text-rose-500"
+                  variant="bulk"
+                />
+              }
+              decoration="📈"
+            />
+            <ThoughtsTopList
+              title="Top Reacted Thoughts"
+              description="Most loved articles"
+              type={TopThoughtsListType.REACTED}
+              thoughts={serverStats.topReactedThoughts}
+              icon={
+                <HeartOne
+                  size={32}
+                  // className="text-rose-500"
+                  variant="bulk"
+                />
+              }
+              decoration="❤️"
+            />
+          </div>
+          <div className="w-full">
+            <ReactionsSection reactions={serverStats.reactions} />
+          </div>
+          <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 col-span-2">
+            {serverStats.topViewedThoughts.length > 0 &&
+              serverStats.topViewedThoughts[0] && (
+                <ThoughtMostViewedCard
+                  title={serverStats.topViewedThoughts[0].title}
+                  slug={serverStats.topViewedThoughts[0].slug}
+                  coverImage={serverStats.topViewedThoughts[0].coverImage}
+                  views={serverStats.topViewedThoughts[0].count}
+                />
+              )}
+            <div className="grid grid-cols-1 md:grid-cols-4 h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
+              <ThoughtsCategoriesCard
+                data={buildTimeStats.categories.map((cat) => ({
+                  name: cat.name,
+                  count: cat.count,
+                }))}
+                title="Categories"
+                description="Thoughts by topic"
+                decorationEmoji="📊"
+              />
+              <ChangelogUpdatesCard count={changelog.length} />
+            </div>
+          </div>
+        </SectionLayout>
+      </Skeleton>
 
-      <SectionLayout
-        badge={t("stats.sections.github.badge")}
-        isFlex
-        className="pb-0!"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 w-fit">
-          <GitHubStatsCard
-            type="stars"
-            label="GitHub Stars"
-            value={githubStats.stars}
-          />
-          <GitHubStatsCard
-            type="forks"
-            label="Forks"
-            value={githubStats.forks}
-          />
-          <GitHubStatsCard
-            type="commits"
-            label="Commits"
-            value={githubStats.commits}
-          />
-        </div>
-        <ContributionGraphCard contributions={githubStats.contributions} />
-      </SectionLayout>
+      <Skeleton name="stats-blog" loading={false}>
+        <SectionLayout
+          badge={t("stats.sections.blog.badge")}
+          isFlex
+          className="pb-0!"
+        >
+          <div className="grid md:w-[90%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StatCard
+              label="Total Thoughts"
+              value={buildTimeStats.totalPosts}
+              suffix="thoughts"
+              icon={<BookOne size={32} variant="bulk" />}
+              decorationPattern="💭"
+            />
+            <StatCard
+              label="Total Words"
+              value={buildTimeStats.totalWords}
+              suffix="words"
+              icon={<TextFolder size={32} variant="bulk" />}
+              decorationPattern="📝"
+            />
+            <StatCard
+              label="Community Messages"
+              value={serverStats.communityMessages}
+              suffix="messages"
+              icon={<ChatBubbleCircle size={32} variant="bulk" />}
+              decorationPattern="💬"
+            />
+            <StatCard
+              label="Reading Time"
+              value={buildTimeStats.totalReadingTime}
+              suffix="min"
+              icon={<Timelapse size={32} variant="bulk" />}
+              decorationPattern="⏱️"
+            />
+          </div>
+        </SectionLayout>
+      </Skeleton>
 
-      {/* <SectionLayout
-        badge={t("stats.sections.github.badge")}
-        isFlex
-        className="pb-0!"
-      >
-        <div className="grid grid-cols-1 gap-2 lg:grid-cols-12 w-full">
-          <ContributionGraphCard contributions={githubStats.contributions} />
-          <div className="grid grid-cols-1 md:grid-cols-3 md:h-full w-full lg:flex flex-col gap-2 lg:col-span-2">
+      <Skeleton name="stats-github" loading={false}>
+        <SectionLayout
+          badge={t("stats.sections.github.badge")}
+          isFlex
+          className="pb-0!"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 w-fit">
             <GitHubStatsCard
               type="stars"
               label="GitHub Stars"
@@ -266,19 +249,22 @@ export default async function StatsPage() {
               value={githubStats.commits}
             />
           </div>
-        </div>
-      </SectionLayout> */}
+          <ContributionGraphCard contributions={githubStats.contributions} />
+        </SectionLayout>
+      </Skeleton>
 
-      <SectionLayout badge="Site Performance">
-        <LighthouseScoreCard
-          scores={lighthouseStats.mobile}
-          strategy="mobile"
-        />
-        <LighthouseScoreCard
-          scores={lighthouseStats.desktop}
-          strategy="desktop"
-        />
-      </SectionLayout>
+      <Skeleton name="stats-performance" loading={false}>
+        <SectionLayout badge="Site Performance">
+          <LighthouseScoreCard
+            scores={lighthouseStats.mobile}
+            strategy="mobile"
+          />
+          <LighthouseScoreCard
+            scores={lighthouseStats.desktop}
+            strategy="desktop"
+          />
+        </SectionLayout>
+      </Skeleton>
     </>
   );
 }

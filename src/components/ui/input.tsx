@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";
 import { cva } from "class-variance-authority";
 import { VariantProps } from "class-variance-authority";
 

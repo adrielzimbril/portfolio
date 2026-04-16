@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { HeaderSection } from "@/app/(base)/submit/sections/HeaderSection";
 import { IntentionForm } from "@/app/(base)/submit/sections/IntentionForm";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -30,8 +31,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ThoughtsSubmitPage() {
   return (
     <>
-      <HeaderSection />
-      <IntentionForm />
+      <Skeleton name="submit-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="form-default" loading={false}>
+        <IntentionForm />
+      </Skeleton>
     </>
   );
 }

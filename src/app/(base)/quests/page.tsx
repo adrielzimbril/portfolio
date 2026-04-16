@@ -7,6 +7,7 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllQuests } from "@/integrations/content/lib/quests";
 import { MyQuestsSection } from "@/app/(base)/quests/sections/MyQuestsSection";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -40,9 +41,15 @@ export default async function MyQuests() {
 
   return (
     <>
-      <HeaderSection />
-      <MyQuestsSection data={data} />
-      <CallToAction isPage />
+      <Skeleton name="quests-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="quests-listing" loading={false}>
+        <MyQuestsSection data={data} />
+      </Skeleton>
+      <Skeleton name="quests-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

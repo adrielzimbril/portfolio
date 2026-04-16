@@ -11,6 +11,7 @@ import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { PageParams, PageType } from "@/types";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -63,18 +64,26 @@ export default async function BlogPostPage(props: {
 
   return (
     <>
-      <HeaderSection
-        title={title}
-        cover={cover || ""}
-        tags={tags}
-        date={created_at}
-        readingTime={formattedReadingTime}
-        pageViewsData={{ slug, locale }}
-        slug={slug}
-      />
-      <ContentsSection content={body} />
-      <MorePreviewSection data={post.adjacentPosts} />
-      <CallToAction isPage />
+      <Skeleton name="thought-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          cover={cover || ""}
+          tags={tags}
+          date={created_at}
+          readingTime={formattedReadingTime}
+          pageViewsData={{ slug, locale }}
+          slug={slug}
+        />
+      </Skeleton>
+      <Skeleton name="thought-detail-content" loading={false}>
+        <ContentsSection content={body} />
+      </Skeleton>
+      <Skeleton name="thought-detail-more" loading={false}>
+        <MorePreviewSection data={post.adjacentPosts} />
+      </Skeleton>
+      <Skeleton name="thought-detail-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

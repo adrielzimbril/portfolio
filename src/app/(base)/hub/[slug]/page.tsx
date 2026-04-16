@@ -14,6 +14,7 @@ import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -57,20 +58,28 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
 
   return (
     <>
-      <HeaderSection
-        title={title}
-        cover={cover ?? ""}
-        description={excerpt}
-        type={type}
-        tags={tags}
-        pageViewsData={{ slug, locale }}
-        slug={slug}
-      />
-      <ResourceDetailsSection content={body || ""} />
+      <Skeleton name="resource-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          cover={cover ?? ""}
+          description={excerpt}
+          type={type}
+          tags={tags}
+          pageViewsData={{ slug, locale }}
+          slug={slug}
+        />
+      </Skeleton>
+      <Skeleton name="resource-detail-content" loading={false}>
+        <ResourceDetailsSection content={body || ""} />
+      </Skeleton>
       {resource!.adjacentResources.length > 0 && (
-        <MorePreviewSection data={resource!.adjacentResources} />
+        <Skeleton name="resource-detail-more" loading={false}>
+          <MorePreviewSection data={resource!.adjacentResources} />
+        </Skeleton>
       )}
-      <CallToAction isPage />
+      <Skeleton name="resource-detail-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

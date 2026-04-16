@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";
 import { Badge, badgeVariants } from "@/components/ui/badge";
 
 const statusIndicatorVariants = cva("rounded-full", {

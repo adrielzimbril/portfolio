@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";
 import { X } from "@aurthle/icons";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";

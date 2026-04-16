@@ -7,6 +7,7 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllTalks } from "@/integrations/content/lib";
 import { MyTalksSection } from "@/app/(base)/talks/sections/MyTalksSection";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -40,9 +41,15 @@ export default async function MyTalks() {
 
   return (
     <>
-      <HeaderSection />
-      <MyTalksSection data={data} />
-      <CallToAction isPage />
+      <Skeleton name="talks-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="talks-listing" loading={false}>
+        <MyTalksSection data={data} />
+      </Skeleton>
+      <Skeleton name="talks-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

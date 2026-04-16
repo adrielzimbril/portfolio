@@ -10,6 +10,7 @@ import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   getQuestWithAdjacent,
   getQuestBySlug,
@@ -128,31 +129,41 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
 
   return (
     <>
-      <HeaderSection
-        title={title}
-        slug={slug}
-        cover={cover ?? ""}
-        description={excerpt}
-        dates={dates}
-        tags={tags.map((tag) => ({
-          name: tag.name,
-          color: tag.meta.color as any,
-        }))}
-      />
-      <QuestDetailsSection
-        content={body || ""}
-        slug={slug}
-        dates={dates}
-        tags={tags}
-        rewards={rewards}
-      />
+      <Skeleton name="quest-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          slug={slug}
+          cover={cover ?? ""}
+          description={excerpt}
+          dates={dates}
+          tags={tags.map((tag) => ({
+            name: tag.name,
+            color: tag.meta.color as any,
+          }))}
+        />
+      </Skeleton>
+      <Skeleton name="quest-detail-content" loading={false}>
+        <QuestDetailsSection
+          content={body || ""}
+          slug={slug}
+          dates={dates}
+          tags={tags}
+          rewards={rewards}
+        />
+      </Skeleton>
       {isResultsPublished(quest_end, results_published) && (
-        <QuestParticipantsSection winners={winners} />
+        <Skeleton name="quest-detail-participants" loading={false}>
+          <QuestParticipantsSection winners={winners} />
+        </Skeleton>
       )}
       {quest.adjacentQuests.length > 0 && (
-        <MorePreviewSection data={quest.adjacentQuests} />
+        <Skeleton name="quest-detail-more" loading={false}>
+          <MorePreviewSection data={quest.adjacentQuests} />
+        </Skeleton>
       )}
-      <CallToAction isPage />
+      <Skeleton name="quest-detail-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

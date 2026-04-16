@@ -1,4 +1,4 @@
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";
 import type React from "react";
 
 export function Skeleton({

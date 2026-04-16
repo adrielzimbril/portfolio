@@ -22,6 +22,7 @@ import { routes } from "@/data/routes";
 import { PageParams } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;
@@ -86,63 +87,83 @@ export default async function SubProject(props: {
   } = project!.currentProject;
   return (
     <>
-      <HeaderSection
-        title={title}
-        cover={image_big || ""}
-        description={excerpt || ""}
-        tags={categories}
-        projectLink={project_link}
-        pageViewsData={{ slug, locale }}
-        slug={slug}
-      />
-      <ProjectDetailsSection
-        content={body || ""}
-        duration={date_project?.map((date) => date || null) || []}
-        tags={tags}
-        role={role}
-      />
+      <Skeleton name="project-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          cover={image_big || ""}
+          description={excerpt || ""}
+          tags={categories}
+          projectLink={project_link}
+          pageViewsData={{ slug, locale }}
+          slug={slug}
+        />
+      </Skeleton>
+      <Skeleton name="project-detail-content" loading={false}>
+        <ProjectDetailsSection
+          content={body || ""}
+          duration={date_project?.map((date) => date || null) || []}
+          tags={tags}
+          role={role}
+        />
+      </Skeleton>
       {cardSectionDescription ||
         (cards && (
-          <ProjectResearchSection
-            cards={cards as CardData[]}
-            cardSectionDescription={cardSectionDescription}
-          />
+          <Skeleton name="project-detail-research" loading={false}>
+            <ProjectResearchSection
+              cards={cards as CardData[]}
+              cardSectionDescription={cardSectionDescription}
+            />
+          </Skeleton>
         ))}
       {goalSectionDescription && (
-        <GoalResearchSection
-          description={goalSectionDescription}
-          subDescription={goalSectionSubDescription}
-        />
+        <Skeleton name="project-detail-goal" loading={false}>
+          <GoalResearchSection
+            description={goalSectionDescription}
+            subDescription={goalSectionSubDescription}
+          />
+        </Skeleton>
       )}
       {statementSectionDescription && statements && (
-        <ProjectStatementSection
-          description={statementSectionDescription}
-          statements={statements}
-        />
+        <Skeleton name="project-detail-statement" loading={false}>
+          <ProjectStatementSection
+            description={statementSectionDescription}
+            statements={statements}
+          />
+        </Skeleton>
       )}
       {pointSectionDescription && points && (
-        <ProjectPointsResearchSection
-          pointSectionDescription={pointSectionDescription}
-          points={points}
-        />
+        <Skeleton name="project-detail-points" loading={false}>
+          <ProjectPointsResearchSection
+            pointSectionDescription={pointSectionDescription}
+            points={points}
+          />
+        </Skeleton>
       )}
       {gallery && (
-        <ProjectPreviewSection
-          title={title}
-          description={previewSectionDescription}
-          gallery={gallery}
-        />
+        <Skeleton name="project-detail-preview" loading={false}>
+          <ProjectPreviewSection
+            title={title}
+            description={previewSectionDescription}
+            gallery={gallery}
+          />
+        </Skeleton>
       )}
       {resultSectionDescription && results && (
-        <ProjectResultSection
-          description={resultSectionDescription}
-          results={results}
-        />
+        <Skeleton name="project-detail-result" loading={false}>
+          <ProjectResultSection
+            description={resultSectionDescription}
+            results={results}
+          />
+        </Skeleton>
       )}
       {project!.adjacentProjects.length > 0 && (
-        <MorePreviewSection data={project!.adjacentProjects} />
+        <Skeleton name="project-detail-more" loading={false}>
+          <MorePreviewSection data={project!.adjacentProjects} />
+        </Skeleton>
       )}
-      <CallToAction isPage />
+      <Skeleton name="project-detail-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }
