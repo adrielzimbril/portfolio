@@ -20,7 +20,7 @@ import { useTranslations } from "use-intl";
 interface ThoughtMostViewedCardProps {
   title: string;
   slug: string;
-  coverImage: string;
+  coverImage?: string;
   views: number;
   delay?: number;
 }
@@ -92,12 +92,18 @@ export function ThoughtMostViewedCard({
                 </div>
 
                 <div className="relative h-[100px] w-full shrink-0 overflow-hidden">
-                  <Image
-                    src={getImageUrl(coverImage)}
-                    alt={title}
-                    fill
-                    className="object-cover object-top"
-                  />
+                  {coverImage ? (
+                    <Image
+                      src={getImageUrl(coverImage)}
+                      alt={title}
+                      fill
+                      className="object-cover object-top"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-b-base">
+                      <span className="text-sm">No image</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-2">
                     <p className="line-clamp-2 text-[8px] font-bold leading-tight text-white">
