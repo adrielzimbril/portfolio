@@ -18,12 +18,11 @@ import {
   Calendar,
   ChatBubbleCircle,
 } from "@aurthle/icons";
-import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
+import { BarChartCard } from "@/components/stats/BarChartCard";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
 import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
-import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
-import { TrendUp, HeartOne } from "@aurthle/icons";
+import { TrendUp, HeartOne, ChartBar, Heart } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
 import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
@@ -131,7 +130,6 @@ export default async function StatsPage() {
               description="Most read articles"
               type={TopThoughtsListType.REACTED}
               thoughts={serverStats.topViewedThoughts}
-              metricLabel="views"
               icon={
                 <TrendUp
                   size={32}
@@ -146,7 +144,6 @@ export default async function StatsPage() {
               description="Most loved articles"
               type={TopThoughtsListType.REACTED}
               thoughts={serverStats.topReactedThoughts}
-              metricLabel="reactions"
               icon={
                 <HeartOne
                   size={32}
@@ -157,8 +154,43 @@ export default async function StatsPage() {
               decoration="❤️"
             />
           </div>
-          <CategoryBarChart categories={buildTimeStats.categories} />
-          <ReactionBreakdown reactions={serverStats.reactions} />
+          <BarChartCard
+            data={buildTimeStats.categories.map((cat) => ({
+              name: cat.name,
+              count: cat.count,
+              color: cat.color,
+            }))}
+            title="Categories"
+            description="Thoughts by topic"
+            icon={ChartBar}
+            badgeColor="squircle-violet-500"
+            decorationEmoji="📊"
+          />
+          <BarChartCard
+            data={Object.entries(serverStats.reactions).map(
+              ([type, count]) => ({
+                name: type.charAt(0).toUpperCase() + type.slice(1),
+                count,
+                icon:
+                  type === "like"
+                    ? "👍"
+                    : type === "heart"
+                      ? "❤️"
+                      : type === "celebrate"
+                        ? "🎉"
+                        : type === "insightful"
+                          ? "💡"
+                          : "🤔",
+              }),
+            )}
+            title="Reactions"
+            description={`${Object.values(serverStats.reactions)
+              .reduce((sum, count) => sum + count, 0)
+              .toLocaleString()} total`}
+            icon={Heart}
+            badgeColor="squircle-violet-500"
+            decorationEmoji="❤️"
+          />
           {serverStats.topViewedThoughts.length > 0 &&
             serverStats.topViewedThoughts[0] && (
               <MostViewedThoughtCard
