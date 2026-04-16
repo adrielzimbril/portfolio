@@ -18,11 +18,6 @@ export type Config = {
     from: string;
     replyTo: string;
   };
-  storage: {
-    bucketNames: {
-      avatars: string;
-    };
-  };
   contactForm: {
     enabled: boolean;
     to: string;
@@ -74,13 +69,6 @@ export const appConfig = {
     // the from address for mails
     from: "hello@adrielzimbril.com",
     replyTo: "hello@adrielzimbril.com",
-  },
-  // Storage
-  storage: {
-    // define the name of the buckets for the different types of files
-    bucketNames: {
-      avatars: process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME ?? "avatars",
-    },
   },
   contactForm: {
     // whether the contact form should be enabled

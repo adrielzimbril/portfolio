@@ -13,13 +13,9 @@ import type { PropsWithChildren } from "react";
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
-import { notFound } from "next/navigation";
+import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
 
-// Boneyard-js skeleton registry
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import "./bones/registry";
+import { notFound } from "next/navigation";
 
 export const viewport: Viewport = {
   width: "device-width",

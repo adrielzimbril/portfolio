@@ -4,7 +4,7 @@ import { logger } from "@/utils";
 import { ConfigValue } from "@/config";
 
 // Configuration
-const SITE_URL = ConfigValue.SITE_URL || "https://www.adrielzimbril.com/";
+const SITE_URL = ConfigValue.SITE_URL || "https://www.adrielzimbril.com";
 const PAGESPEED_API_KEY = ConfigValue.PAGESPEED_API_KEY;
 
 // Cache duration in seconds (default 10 days = 864000 seconds)
@@ -95,8 +95,8 @@ async function fetchLighthouseScores(
 
   if (!response.ok) {
     logger.error(
-      `[Lighthouse Stats] Failed to fetch ${strategy} stats:`,
-      response.status,
+      `[Lighthouse Stats] Failed to fetch ${strategy} stats: ${response.status} ${response.statusText}`,
+      response,
     );
     throw new Error(`Failed to fetch Lighthouse ${strategy} stats`);
   }

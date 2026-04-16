@@ -1,4 +1,5 @@
-import { Skeleton as BoneyardSkeleton } from "boneyard-js";
+"use client"
+import { Skeleton as BoneyardSkeleton } from "boneyard-js/react";
 import { cn } from "@/utils/utils";
 import type React from "react";
 

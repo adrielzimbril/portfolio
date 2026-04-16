@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";

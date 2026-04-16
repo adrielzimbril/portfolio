@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Calendar, Eye, HourglassFill } from "@aurthle/icons";
 import { cn } from "@/utils/utils";
-import { PreviewContentType, PageType } from "@/types";
+import { PreviewContentType } from "@/types";
 import {
   HeaderPreviewCard,
   PreviewContent,
@@ -21,14 +21,15 @@ interface HeaderSectionProps {
   // Main Title
   mainTitle?: string;
 
-  // Tags
-  tags?: { name: string }[];
 
   // Slug
   slug?: string;
 
-  // Thought details : Date  + Min read + Views
-  thoughtDetails?: {
+  // Tags
+  tags?: { name: string }[];
+
+  // Article details : Date  + Min read + Views
+  articleDetails?: {
     date?: string;
     readingTime?: string;
     views?: number;
@@ -47,8 +48,7 @@ export function HeaderSection({
   previewContent: initPreviewContent,
   mainTitle,
   tags,
-  thoughtDetails,
-  slug,
+  articleDetails,
 }: HeaderSectionProps) {
   const t = useTranslations();
 
@@ -85,48 +85,21 @@ export function HeaderSection({
 
       <h1 className="h3 w-full font-normals relative">{mainTitle}</h1>
 
-      {thoughtDetails && Object.keys(thoughtDetails).length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
-          <div className="flex flex-wrap items-start gap-1.5">
-            {thoughtDetails.date && (
-              <Badge
-                className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
-                variant="colored"
-                size="md"
-              >
-                <span className="flex items-center gap-2">
-                  <Calendar
-                    size={16}
-                    className="text-indigo-400"
-                    variant="bulk"
-                  />
-                  {getDate({ date: thoughtDetails.date })}
-                </span>
-              </Badge>
-            )}
-
+      {articleDetails && Object.keys(articleDetails).length > 0 && (
+        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
+          {articleDetails.date && (
             <Badge
               className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
               variant="colored"
               size="md"
             >
               <span className="flex items-center gap-2">
-                <HourglassFill
+                <Calendar
                   size={16}
                   className="text-indigo-400"
                   variant="bulk"
                 />
-                {thoughtDetails.readingTime}
-              </span>
-            </Badge>
-
-            <Badge
-              className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
-              variant="colored"
-              size="md"
-            >
-              <span className="flex items-center gap-2">
-                {getDate({ date: thoughtDetails.date })}
+                {getDate({ date: articleDetails.date })}
               </span>
             </Badge>
           )}
@@ -142,7 +115,7 @@ export function HeaderSection({
                 className="text-indigo-400"
                 variant="bulk"
               />
-              {thoughtDetails.readingTime}
+              {articleDetails.readingTime}
             </span>
           </Badge>
 
@@ -153,8 +126,7 @@ export function HeaderSection({
           >
             <span className="flex items-center gap-2">
               <Eye size={16} className="text-indigo-400" variant="bulk" />
-              {formatCount(thoughtDetails.views ?? 0)}{" "}
-              {t("common.stats.views")}
+              {formatCount(articleDetails.views ?? 0)} {t("common.stats.views")}
             </span>
           </Badge>
         </div>
