@@ -16,29 +16,35 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.SCEPTIC]: "🤔",
 };
 
-const getDockVariants = (position: "top" | "bottom", orientation: "horizontal" | "vertical"): Variants => ({
-  hidden: {
-    clipPath: orientation === "horizontal"
-      ? (position === "bottom" ? "inset(90% 0% 0% 0% round 40px)" : "inset(0% 0% 90% 0% round 40px)")
-      : (position === "bottom" ? "inset(90% 0% 0% 0% round 40px)" : "inset(0% 0% 90% 0% round 40px)"),
-    opacity: 0,
-    y: position === "bottom" ? 10 : -10,
-    x: "-50%",
-  },
-  show: {
-    clipPath: "inset(0% 0% 0% 0% round 40px)",
-    opacity: 1,
-    y: 0,
-    x: "-50%",
-    transition: {
-      type: "spring",
-      bounce: 0,
-      duration: 0.5,
-      delayChildren: 0.1,
-      staggerChildren: 0.05,
+const getDockVariants = (position: "top" | "bottom", orientation: "horizontal" | "vertical"): Variants => {
+  const isVertical = orientation === "vertical";
+  
+  return {
+    hidden: {
+      clipPath: isVertical
+        ? (position === "bottom" ? "inset(50% 10% 50% 90% round 40px)" : "inset(50% 10% 50% 90% round 40px)")
+        : (position === "bottom" ? "inset(90% 50% 10% 50% round 40px)" : "inset(10% 50% 90% 50% round 40px)"),
+      opacity: 0,
+      y: position === "bottom" ? 10 : -10,
+      scale: 0.95,
+      x: "-50%",
     },
-  },
-});
+    show: {
+      clipPath: "inset(0% 0% 0% 0% round 40px)",
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      x: "-50%",
+      transition: {
+        type: "spring",
+        bounce: 0,
+        duration: 0.5,
+        delayChildren: 0.1,
+        staggerChildren: 0.05,
+      },
+    },
+  };
+};
 
 const itemVariants: Variants = {
   hidden: {
@@ -160,14 +166,16 @@ export function ReactionBar({
     .map((type) => ({ type, count: reactions[type] || 0 }))
     .sort((a, b) => b.count - a.count);
 
-  const primaryReaction = sortedReactions[0]?.count > 0 
-    ? sortedReactions[0].type 
+  const firstReaction = sortedReactions[0];
+  const primaryReaction = firstReaction && firstReaction.count > 0 
+    ? firstReaction.type 
     : ReactionType.LIKE;
     
   const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
 
   if (variant === "dock") {
     const dockVariants = getDockVariants(dockPosition, activeOrientation);
+    const isVertical = activeOrientation === "vertical";
     
     return (
       <div 
@@ -202,20 +210,20 @@ export function ReactionBar({
               className={cn(
                 "absolute left-1/2 z-50 p-3",
                 dockPosition === "bottom" ? "top-[calc(100%+8px)] mt-3" : "bottom-[calc(100%+8px)] mb-3",
-                activeOrientation === "vertical" 
-                  ? "flex flex-col w-20 h-auto items-center justify-center py-4"
-                  : "flex flex-row h-16 w-max items-center justify-center px-4",
-                "gap-2",
+                isVertical 
+                  ? "flex flex-col w-[72px] h-auto items-center justify-center py-5"
+                  : "flex flex-row h-16 w-max items-center justify-center px-5",
+                "gap-3",
                 "squircle squircle-7xl squircle-smooth-xl",
                 "squircle-sh-white dark:squircle-b-base",
                 "squircle-border-2 squircle-border-b-base-accent",
-                "whitespace-nowrap"
+                "whitespace-nowrap shadow-2xl"
               )}
             >
               <div 
                 className={cn(
-                  "flex gap-1.5",
-                  activeOrientation === "vertical" ? "flex-col w-full items-center" : "flex-row h-full items-center"
+                  "flex gap-2",
+                  isVertical ? "flex-col w-full items-center" : "flex-row h-full items-center"
                 )} 
                 onClick={() => setIsExpanded(false)}
               >
