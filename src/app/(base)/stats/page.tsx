@@ -21,7 +21,10 @@ import {
 import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
-import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
+import {
+  TopThoughtsList,
+  TopThoughtsListType,
+} from "@/components/stats/TopThoughtsList";
 import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
 import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
@@ -103,7 +106,7 @@ export default async function StatsPage() {
             value={daysSinceRevamp}
             suffix="days"
             icon={
-              <Calendar size={32} className="text-primary" variant="bulk" />
+              <Calendar size={32} className="text-amber-600" variant="bulk" />
             }
             decoration="📅"
             description={`Launched ${REVAMP_DATE.toLocaleDateString(locale, {
@@ -115,7 +118,7 @@ export default async function StatsPage() {
           <StatCard
             label="Total Site Views"
             value={serverStats.totalViews}
-            icon={<Eye size={32} className="text-primary" variant="bulk" />}
+            icon={<Eye size={32} className="text-amber-600" variant="bulk" />}
             decoration="👁️"
             description="Since launch"
           />
@@ -128,21 +131,23 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             <TopThoughtsList
               title="Top Viewed Thoughts"
               description="Most read articles"
+              type={TopThoughtsListType.VIEWED}
               thoughts={serverStats.topViewedThoughts.slice(0, 5)}
               metricLabel="views"
               icon={
-                <TrendUp size={32} className="text-primary" variant="bulk" />
+                <TrendUp size={32} className="text-rose-500" variant="bulk" />
               }
               decoration="📈"
             />
             <TopThoughtsList
               title="Top Reacted Thoughts"
               description="Most loved articles"
+              type={TopThoughtsListType.REACTED}
               thoughts={serverStats.topReactedThoughts.slice(0, 5)}
               metricLabel="reactions"
               icon={
@@ -166,12 +171,14 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid md:w-[80%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:w-[90%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             label="Total Thoughts"
             value={buildTimeStats.totalPosts}
             suffix="thoughts"
-            icon={<BookOne size={32} className="text-primary" variant="bulk" />}
+            icon={
+              <BookOne size={32} className="text-indigo-500" variant="bulk" />
+            }
             decorationPattern="💭"
           />
           <StatCard
@@ -179,7 +186,11 @@ export default async function StatsPage() {
             value={buildTimeStats.totalWords}
             suffix="words"
             icon={
-              <TextFolder size={32} className="text-primary" variant="bulk" />
+              <TextFolder
+                size={32}
+                className="text-indigo-500"
+                variant="bulk"
+              />
             }
             decorationPattern="📝"
           />
@@ -190,7 +201,7 @@ export default async function StatsPage() {
             icon={
               <ChatBubbleCircle
                 size={32}
-                className="text-primary"
+                className="text-indigo-500"
                 variant="bulk"
               />
             }
@@ -201,7 +212,7 @@ export default async function StatsPage() {
             value={buildTimeStats.totalReadingTime}
             suffix="min"
             icon={
-              <Timelapse size={32} className="text-primary" variant="bulk" />
+              <Timelapse size={32} className="text-indigo-500" variant="bulk" />
             }
             decorationPattern="⏱️"
           />
@@ -210,7 +221,6 @@ export default async function StatsPage() {
 
       {/* GitHub Section */}
       <SectionLayout
-        title={t("stats.sections.github.title")}
         description={t("stats.sections.github.description")}
         badge={t("stats.sections.github.badge")}
         isFlex
@@ -257,7 +267,6 @@ export default async function StatsPage() {
       </SectionLayout>
 
       <SectionLayout
-        title="Performance"
         description="Lighthouse performance scores"
         badge="Performance"
         className="pb-0!"
@@ -274,7 +283,6 @@ export default async function StatsPage() {
 
       {/* Changelog Section */}
       <SectionLayout
-        title="Changelog"
         description="Recent updates and changes"
         badge="Updates"
         isFlex

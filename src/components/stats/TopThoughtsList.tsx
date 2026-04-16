@@ -7,34 +7,42 @@ import { TrendUp, Heart } from "@aurthle/icons";
 import type { ThoughtMetric } from "@/lib/stats/types";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
+import { truncateText } from "@/utils/format-text";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getResourcesUrl, pickRandomColor } from "@/utils";
 import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
 
+export enum TopThoughtsListType {
+  VIEWED = "viewed",
+  REACTED = "reacted",
+}
+
 interface TopThoughtsListProps {
   title: string;
   description: string;
+  type: TopThoughtsListType;
   thoughts: ThoughtMetric[];
   metricLabel: string;
   icon: React.ReactNode;
   decoration: string;
   delay?: number;
   className?: string;
+  maxTitleLength?: number;
 }
 
 export function TopThoughtsList({
   title,
   description,
+  type,
   thoughts,
   metricLabel,
   icon,
   decoration,
-  delay = 0,
   className,
 }: TopThoughtsListProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const maxTitleLength = 40;
   const displayThoughts = thoughts.slice(0, 5);
 
   return (
@@ -54,12 +62,12 @@ export function TopThoughtsList({
         >
           <motion.div
             animate={{
-              rotate: isHovered ? 5 : -5,
+              rotate: isHovered ? -20 : -32,
               scale: isHovered ? 1.1 : 1,
               y: isHovered ? -10 : 0,
             }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="absolute -bottom-2 -right-2 text-[100px] leading-none opacity-10"
+            className="absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
           >
             {decoration}
           </motion.div>
@@ -81,26 +89,11 @@ export function TopThoughtsList({
 
             <div className="flex flex-1 flex-col justify-center space-y-2">
               {displayThoughts.map((thought, index) => {
-                const isItemHovered = hoveredItem === index;
-
                 return (
-                  <motion.div
-                    key={thought.slug}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: delay + index * 0.08 }}
-                    className="group/item"
-                    onMouseEnter={() => setHoveredItem(index)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                  >
+                  <div key={thought.slug} className="group/item">
                     <div className="flex items-center gap-3">
                       <Badge
-                        className={cn(
-                          "capitalize text-xs font-medium",
-                          // pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
-                          // "size-max text-primary-foreground",
-                        )}
-                        // variant="colored"
+                        className={cn("capitalize text-xs font-medium")}
                         size="sm"
                         variant="primary"
                         circle
@@ -111,41 +104,37 @@ export function TopThoughtsList({
                         href={getResourcesUrl(PageType.THOUGHT, thought.slug)}
                         className="flex flex-row w-full items-center justify-between gap-3"
                       >
-                        <motion.span
-                          animate={{
-                            color: isItemHovered
-                              ? "var(--foreground)"
-                              : "var(--muted-foreground)",
-                          }}
-                          className="flex-1 truncate text-sm leading-relaxed"
-                        >
-                          {thought.title}
-                        </motion.span>
-                        <motion.span
-                          animate={{
-                            scale: isItemHovered ? 1.05 : 1,
-                            color: isItemHovered
-                              ? "var(--primary)"
-                              : "var(--muted-foreground)",
-                          }}
-                          className="shrink-0 text-xs font-semibold tabular-nums"
-                        >
-                          {thought.count}
-                        </motion.span>
+                        <span className="flex-1 truncate text-sm leading-relaxed">
+                          {truncateText(thought.title, maxTitleLength)}
+                        </span>
                       </Link>
+                      <Badge
+                        className={cn(
+                          "capitalize text-xs font-medium",
+                          pickRandomColor(
+                            type === TopThoughtsListType.VIEWED
+                              ? DEFAULT_COLOR_CODE_NAME_LIST.VIOLET
+                              : DEFAULT_COLOR_CODE_NAME_LIST.ORANGE,
+                          ),
+                          type === TopThoughtsListType.VIEWED &&
+                            "size-max text-primary-foreground",
+                        )}
+                        variant="colored"
+                        size="sm"
+                      >
+                        {thought.count}
+                        {type}
+                      </Badge>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
 
             {thoughts.length > 5 && (
-              <motion.p
-                animate={{ opacity: isHovered ? 1 : 0.6 }}
-                className="mt-4 text-xs text-muted-foreground"
-              >
+              <p className="mt-4 text-xs text-muted-foreground">
                 +{thoughts.length - 5} more {metricLabel}
-              </motion.p>
+              </p>
             )}
           </div>
         </div>

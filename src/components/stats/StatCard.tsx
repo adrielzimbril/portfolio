@@ -91,7 +91,7 @@ export function StatCard({
           {decoration && (
             <motion.div
               animate={{
-                rotate: isHovered ? -25 : -32,
+                rotate: isHovered ? -20 : -32,
                 scale: isHovered ? 1.1 : 1,
                 y: isHovered ? -10 : 0,
               }}
