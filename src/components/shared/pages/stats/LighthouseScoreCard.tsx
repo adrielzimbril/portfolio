@@ -3,8 +3,8 @@
 import { Display, Mobile } from "@aurthle/icons";
 import type { LighthouseScores } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";
-import { RadarBackground } from "@/components/stats/LighthouseScoreCard/RadarBackground";
-import { ScoreBar } from "@/components/stats/LighthouseScoreCard/ScoreBar";
+import { RadarBackground } from "@/components/shared/pages/stats/LighthouseScoreCard/RadarBackground";
+import { ScoreBar } from "@/components/shared/pages/stats/LighthouseScoreCard/ScoreBar";
 import { getScoreColor, getOverallScore } from "@/lib/stats/lighthouse-utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";

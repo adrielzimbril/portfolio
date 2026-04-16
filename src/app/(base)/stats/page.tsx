@@ -8,7 +8,7 @@ import { getBuildTimeStats } from "@/lib/stats/build-time-stats";
 import { getServerStats } from "@/lib/stats/server-stats";
 import { getGitHubStats } from "@/lib/stats/github-stats";
 import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
-import { StatCard } from "@/components/stats/StatCard";
+import { StatCard } from "@/components/shared/pages/stats/StatCard";
 import {
   BookOne,
   TextFolder,
@@ -18,15 +18,15 @@ import {
   Calendar,
   ChatBubbleCircle,
 } from "@aurthle/icons";
-import { ThoughtsCategoriesCard } from "@/components/stats/ThoughtsCategoriesCard";
-import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
-import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
-import { ThoughtsTopList } from "@/components/stats/ThoughtsTopList";
-import { ReactionsSection } from "@/components/stats/ReactionsSection";
+import { ThoughtsCategoriesCard } from "@/components/shared/pages/stats/ThoughtsCategoriesCard";
+import { GitHubStatsCard } from "@/components/shared/pages/stats/GitHubStatsCard";
+import { LighthouseScoreCard } from "@/components/shared/pages/stats/LighthouseScoreCard";
+import { ThoughtsTopList } from "@/components/shared/pages/stats/ThoughtsTopList";
+import { ReactionsSection } from "@/components/shared/pages/stats/ReactionsSection";
 import { TrendUp, HeartOne } from "@aurthle/icons";
-import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
-import { ThoughtMostViewedCard } from "@/components/stats/ThoughtMostViewedCard";
-import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
+import { ContributionGraphCard } from "@/components/shared/pages/stats/ContributionGraphCard";
+import { ThoughtMostViewedCard } from "@/components/shared/pages/stats/ThoughtMostViewedCard";
+import { ChangelogUpdatesCard } from "@/components/shared/pages/stats/ChangelogUpdatesCard";
 import { changelog } from "@/data/personal/changelog";
 import { TopThoughtsListType } from "@/types/enum";
 
