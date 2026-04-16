@@ -10,26 +10,26 @@ import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { ChartPresentationOne } from "@aurthle/icons";
 import { Link } from "@/components/ui/link";
 
-export interface BarChartData {
+export interface ThoughtsCategoriesData {
   name: string;
   count: number;
   color?: string;
   icon?: string;
 }
 
-interface BarChartCardProps {
-  data: BarChartData[];
+interface ThoughtsCategoriesCardProps {
+  data: ThoughtsCategoriesData[];
   title: string;
   description: string;
   decorationEmoji: string;
 }
 
-export function BarChartCard({
+export function ThoughtsCategoriesCard({
   data,
   title,
   description,
   decorationEmoji,
-}: BarChartCardProps) {
+}: ThoughtsCategoriesCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const config = {
     maxItems: 2,

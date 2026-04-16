@@ -18,19 +18,18 @@ import {
   Calendar,
   ChatBubbleCircle,
 } from "@aurthle/icons";
-import { BarChartCard } from "@/components/stats/BarChartCard";
+import { ThoughtsCategoriesCard } from "@/components/stats/ThoughtsCategoriesCard";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
-import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
+import { ThoughtsTopList } from "@/components/stats/ThoughtsTopList";
 import { ReactionsSection } from "@/components/stats/ReactionsSection";
 import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
-import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
+import { ThoughtMostViewedCard } from "@/components/stats/ThoughtMostViewedCard";
 import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
 import { changelog } from "@/data/personal/changelog";
 import { TopThoughtsListType } from "@/types/enum";
 
-// Revamp date - TODO: Adapter à votre date de revamp
 const REVAMP_DATE = new Date("2025-08-17");
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -123,7 +122,7 @@ export default async function StatsPage() {
         className="pb-0!"
       >
         <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <TopThoughtsList
+          <ThoughtsTopList
             title="Top Viewed Thoughts"
             description="Most read articles"
             type={TopThoughtsListType.REACTED}
@@ -137,7 +136,7 @@ export default async function StatsPage() {
             }
             decoration="📈"
           />
-          <TopThoughtsList
+          <ThoughtsTopList
             title="Top Reacted Thoughts"
             description="Most loved articles"
             type={TopThoughtsListType.REACTED}
@@ -158,7 +157,7 @@ export default async function StatsPage() {
         <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-6 col-span-2">
           {serverStats.topViewedThoughts.length > 0 &&
             serverStats.topViewedThoughts[0] && (
-              <MostViewedThoughtCard
+              <ThoughtMostViewedCard
                 title={serverStats.topViewedThoughts[0].title}
                 slug={serverStats.topViewedThoughts[0].slug}
                 coverImage={serverStats.topViewedThoughts[0].coverImage}
@@ -166,7 +165,7 @@ export default async function StatsPage() {
               />
             )}
           <div className="grid grid-cols-1 md:grid-cols-4 h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
-            <BarChartCard
+            <ThoughtsCategoriesCard
               data={buildTimeStats.categories.map((cat) => ({
                 name: cat.name,
                 count: cat.count,

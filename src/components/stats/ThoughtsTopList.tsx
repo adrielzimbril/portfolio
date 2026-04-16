@@ -15,7 +15,7 @@ import {
 } from "@/types";
 import { Link } from "@/components/ui/link";
 
-interface TopThoughtsListProps {
+interface ThoughtsTopListProps {
   title: string;
   description: string;
   type: TopThoughtsListType;
@@ -26,14 +26,14 @@ interface TopThoughtsListProps {
   className?: string;
 }
 
-export function TopThoughtsList({
+export function ThoughtsTopList({
   title,
   description,
   type,
   thoughts,
   icon,
   decoration,
-}: TopThoughtsListProps) {
+}: ThoughtsTopListProps) {
   const [isHovered, setIsHovered] = useState(false);
   const config = {
     truncate: {

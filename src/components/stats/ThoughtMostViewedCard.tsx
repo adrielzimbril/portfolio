@@ -18,7 +18,7 @@ import { Link } from "../ui/link";
 import { useTranslations } from "use-intl";
 import { truncateText } from "@/utils/format-text";
 
-interface MostViewedThoughtCardProps {
+interface ThoughtMostViewedCardProps {
   title: string;
   slug: string;
   coverImage: string;
@@ -26,13 +26,13 @@ interface MostViewedThoughtCardProps {
   delay?: number;
 }
 
-export function MostViewedThoughtCard({
+export function ThoughtMostViewedCard({
   title,
   slug,
   coverImage,
   views,
   delay = 0,
-}: MostViewedThoughtCardProps) {
+}: ThoughtMostViewedCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const t = useTranslations();
 
