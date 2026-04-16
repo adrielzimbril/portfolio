@@ -279,15 +279,6 @@ export default async function StatsPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <ChangelogUpdatesCard count={changelog.length} />
-          {serverStats.topViewedThoughts.length > 0 &&
-            serverStats.topViewedThoughts[0] && (
-              <MostViewedThoughtCard
-                title={serverStats.topViewedThoughts[0].title}
-                slug={serverStats.topViewedThoughts[0].slug}
-                imageName={serverStats.topViewedThoughts[0].coverImage}
-                views={serverStats.topViewedThoughts[0].count}
-              />
-            )}
         </div>
       </SectionLayout>
     </>
