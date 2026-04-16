@@ -17,12 +17,14 @@ import {
   Coffee,
   Eye,
   Calendar,
+  ChatBubble,
 } from "@aurthle/icons";
 import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
-import { TopThoughtsCard } from "@/components/stats/TopThoughtsCard";
+import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
 import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
+import { TrendUp, Heart } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard";
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
@@ -91,7 +93,7 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid md:w-[80%] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:w-[80%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
             label="Total Thoughts"
             value={buildTimeStats.totalPosts}
@@ -107,6 +109,15 @@ export default async function StatsPage() {
               <TextFolder size={32} className="text-primary" variant="bulk" />
             }
             decorationPattern="📝"
+          />
+          <StatCard
+            label="Community Messages"
+            value={serverStats.communityMessages}
+            suffix="messages"
+            icon={
+              <ChatBubble size={32} className="text-primary" variant="bulk" />
+            }
+            decorationPattern="💬"
           />
           <StatCard
             label="Reading Time"
@@ -162,24 +173,34 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <TopThoughtsCard
+            <TopThoughtsList
               title="Top Viewed Thoughts"
+              description="Most read articles"
               thoughts={serverStats.topViewedThoughts.slice(0, 5)}
               metricLabel="views"
+              icon={
+                <TrendUp size={32} className="text-primary" variant="bulk" />
+              }
+              decoration="📈"
             />
-            <TopThoughtsCard
+            <TopThoughtsList
               title="Top Reacted Thoughts"
+              description="Most loved articles"
               thoughts={serverStats.topReactedThoughts.slice(0, 5)}
               metricLabel="reactions"
+              icon={
+                <Heart size={32} className="text-rose-500" variant="bulk" />
+              }
+              decoration="❤️"
             />
           </div>
           <CategoryBarChart categories={buildTimeStats.categories} />
+          <ReactionBreakdown reactions={serverStats.reactions} />
         </div>
 
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <ReactionBreakdown reactions={serverStats.reactions} />
           <CommunityMessagesCard count={serverStats.communityMessages} />
         </div>
       </SectionLayout>
