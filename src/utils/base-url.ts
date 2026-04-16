@@ -1,5 +1,5 @@
 import { PageType, QuestAskType } from "@/types";
-import { ConfigValue } from "@/config";
+import { ConfigValue, getSiteUrl } from "@/config";
 
 /**
  * Gets the base URL of the application.
@@ -8,11 +8,12 @@ import { ConfigValue } from "@/config";
  * @returns {string} The base URL of the application.
  */
 export function getBaseUrl(): string {
-  if (ConfigValue.NEXT_PUBLIC_SITE_URL) {
-    return ConfigValue.NEXT_PUBLIC_SITE_URL;
+  const siteConfig = getSiteUrl();
+  if (siteConfig.url) {
+    return siteConfig.url;
   }
-  if (ConfigValue.NEXT_PUBLIC_VERCEL_URL) {
-    return `https://${ConfigValue.NEXT_PUBLIC_VERCEL_URL}`;
+  if (siteConfig.vercelUrl) {
+    return `https://${siteConfig.vercelUrl}`;
   }
   return `http://localhost:${ConfigValue.PORT}`;
 }
@@ -58,11 +59,12 @@ export function getPathUrl(path: string): string {
  * @returns {string} The base URL of the application.
  */
 export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
+  const siteConfig = getSiteUrl();
   if (type === "s3") {
-    return `${ConfigValue.NEXT_PUBLIC_S3_DOMAIN_SITE_URL}/`;
+    return `${siteConfig.s3DomainUrl}/`;
   }
-  return ConfigValue.NEXT_PUBLIC_DOMAIN_SITE_URL
-    ? `${ConfigValue.NEXT_PUBLIC_DOMAIN_SITE_URL}/`
+  return siteConfig.domainUrl
+    ? `${siteConfig.domainUrl}/`
     : "https://www.adrielzimbril.com/";
 }
 

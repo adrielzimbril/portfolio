@@ -1,125 +1,20 @@
 /**
  * Centralized Configuration
  *
- * This file provides access to all environment variables.
+ * This file serves as the entry point for all configuration exports.
  * Import from here instead of using process.env directly.
  *
  * Usage:
- * import { ConfigValue } from "@/config";
+ * import { ConfigValue, getSiteUrl, getSupabaseConfig, getGitHubConfig } from "@/config";
  * const siteUrl = ConfigValue.NEXT_PUBLIC_SITE_URL;
+ * const supabaseConfig = getSupabaseConfig();
  */
 
-export const ConfigValue = {
-  // Node Environment
-  PORT: process.env.PORT || "3000",
-  NODE_ENV: process.env.NODE_ENV || "production",
+// Export configuration values
+export * from "@/config/config";
 
-  // Site Configuration
-  NEXT_PUBLIC_SITE_URL:
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  NEXT_PUBLIC_DOMAIN_SITE_URL: process.env.NEXT_PUBLIC_DOMAIN_SITE_URL,
-  NEXT_PUBLIC_S3_DOMAIN_SITE_URL: process.env.NEXT_PUBLIC_S3_DOMAIN_SITE_URL,
-  NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
-  NEXT_PUBLIC_REVAMP_DATE: process.env.NEXT_PUBLIC_REVAMP_DATE || "2025-08-17",
+// Export utility functions
+export * from "@/config/utils";
 
-  // API Security
-  API_SECRET_KEY: process.env.API_SECRET_KEY,
-  HEALTH_CHECK_SECRET_KEY: process.env.HEALTH_CHECK_SECRET_KEY,
-  NEXT_REVALIDATION_SECRET: process.env.NEXT_REVALIDATION_SECRET,
-
-  // GitHub
-  NEXT_PRIVATE_GITHUB_TOKEN: process.env.NEXT_PRIVATE_GITHUB_TOKEN,
-  NEXT_PUBLIC_GITHUB_USERNAME: process.env.NEXT_PUBLIC_GITHUB_USERNAME,
-  NEXT_PUBLIC_GITHUB_REPO: process.env.NEXT_PUBLIC_GITHUB_REPO,
-  NEXT_PUBLIC_GITHUB_BRANCH: process.env.NEXT_PUBLIC_GITHUB_BRANCH || "main",
-
-  // Authentication
-  BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
-  AUTH_TOKEN_KEY: "shiro-auth-token",
-
-  // Database (Supabase)
-  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-
-  // Email & Contact
-  CONTACTS_PROVIDER: process.env.CONTACTS_PROVIDER,
-  MAIL_PROVIDER: process.env.MAIL_PROVIDER,
-  SENDER_EMAIL: process.env.SENDER_EMAIL,
-  SENDER_NAME: process.env.SENDER_NAME,
-
-  // Brevo
-  BREVO_API_KEY: process.env.BREVO_API_KEY,
-  BREVO_GENERAL_LIST_ID: process.env.BREVO_GENERAL_LIST_ID,
-  BREVO_COURSE_LIST_ID: process.env.BREVO_COURSE_LIST_ID,
-  BREVO_VIDEO_LIST_ID: process.env.BREVO_VIDEO_LIST_ID,
-  BREVO_EBOOKS_LIST_ID: process.env.BREVO_EBOOKS_LIST_ID,
-  BREVO_MASTERCLASS_LIST_ID: process.env.BREVO_MASTERCLASS_LIST_ID,
-  BREVO_FIGMA_TEMPLATE_LIST_ID: process.env.BREVO_FIGMA_TEMPLATE_LIST_ID,
-  BREVO_CODE_LIST_ID: process.env.BREVO_CODE_LIST_ID,
-  BREVO_QUESTS_REGISTER_ID: process.env.BREVO_QUESTS_REGISTER_ID,
-  BREVO_QUESTS_SUBMISSIONS_ID: process.env.BREVO_QUESTS_SUBMISSIONS_ID,
-
-  // Resend
-  RESEND_API_KEY: process.env.RESEND_API_KEY,
-  RESEND_GENERAL_LIST_ID: process.env.RESEND_GENERAL_LIST_ID,
-  RESEND_COURSE_LIST_ID: process.env.RESEND_COURSE_LIST_ID,
-  RESEND_VIDEO_LIST_ID: process.env.RESEND_VIDEO_LIST_ID,
-  RESEND_EBOOKS_LIST_ID: process.env.RESEND_EBOOKS_LIST_ID,
-  RESEND_AUDIENCE_ID: process.env.RESEND_AUDIENCE_ID,
-
-  // Payments
-  LEMONSQUEEZY_API_KEY: process.env.LEMONSQUEEZY_API_KEY,
-  LEMONSQUEEZY_WEBHOOK_SECRET: process.env.LEMONSQUEEZY_WEBHOOK_SECRET,
-  LEMONSQUEEZY_STORE_ID: process.env.LEMONSQUEEZY_STORE_ID,
-  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-
-  // Tasks
-  TRIGGER_ACCESS_TOKEN: process.env.TRIGGER_ACCESS_TOKEN,
-  NEXT_SHIROFOLIO_PUBLIC_APP_URL: process.env.NEXT_SHIROFOLIO_PUBLIC_APP_URL,
-
-  // Analytics
-  NEXT_PRIVATE_POSTHOG_CODE: process.env.NEXT_PRIVATE_POSTHOG_CODE,
-  NEXT_PRIVATE_POSTHOG_KEY: process.env.NEXT_PRIVATE_POSTHOG_KEY,
-  NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-  NEXT_PRIVATE_POSTHOG_PERSONAL_KEY:
-    process.env.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
-  NEXT_PUBLIC_POSTHOG_HOST:
-    process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
-  NEXT_PUBLIC_PLAUSIBLE_URL: process.env.NEXT_PUBLIC_PLAUSIBLE_URL,
-  NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
-
-  // Storage
-  S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
-  S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
-  S3_ENDPOINT: process.env.S3_ENDPOINT,
-  S3_REGION: process.env.S3_REGION,
-  NEXT_PUBLIC_AVATARS_BUCKET_NAME:
-    process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME || "avatars",
-
-  // AI (Optional - used for markdown file translations and i18n nextintl translations)
-  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-
-  // Bot Protection
-  NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-  NEXT_PRIVATE_RECAPTCHA_SECRET_KEY:
-    process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
-  NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-  NEXT_PRIVATE_TURNSTILE_SECRET_KEY:
-    process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
-  TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
-
-  // Performance
-  SITE_URL: process.env.SITE_URL,
-  PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
-  LIGHTHOUSE_CACHE_DAYS: process.env.LIGHTHOUSE_CACHE_DAYS || "10",
-
-  // Legacy / Other
-  NEXT_PUBLIC_REST_API_ENDPOINT: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
-  NEXT_PUBLIC_WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
-} as const;
-
-/**
- * Type definition for ConfigValue
- */
-export type ConfigValue = typeof ConfigValue;
+// Export validation functions
+export * from "@/config/validate-environment-variables";

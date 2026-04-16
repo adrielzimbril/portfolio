@@ -16,7 +16,6 @@ import logger from "@/utils/logger";
 export enum AllUserResourceSlug {
   THE_MISTAKE_THAT_STOPS_YOU_FROM_IMPROVING = "the-mistake-that-stops-you-from-improving",
   SOCIAL_BANNER_TEMPLATE = "social-banner-template",
-  TEST = "test",
 }
 
 /**
@@ -28,7 +27,6 @@ export enum AllUserResourceSlug {
 const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
   // Example:
   // 'custom-resource': "url string"
-  test: "https://shirofolio.com/projects/test",
   "the-mistake-that-stops-you-from-improving":
     "https://docs.google.com/document/d/1oWOfuqpznMF6rKObGimkBsnmShVTEw6LuZjV82Kuy-o/edit?usp=sharing",
   "social-banner-template":

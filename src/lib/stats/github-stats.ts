@@ -6,14 +6,15 @@ import type {
   ContributionDay,
   ContributionWeek,
 } from "@/lib/stats/types";
-import { ConfigValue } from "@/config";
+import { getGitHubConfig } from "@/config";
 
 // GitHub configuration
-const GITHUB_TOKEN = ConfigValue.NEXT_PRIVATE_GITHUB_TOKEN;
-const GITHUB_USERNAME =
-  ConfigValue.NEXT_PUBLIC_GITHUB_USERNAME || "adrielzimbril";
-const GITHUB_REPO = ConfigValue.NEXT_PUBLIC_GITHUB_REPO || "portfolio-shiro";
-const GITHUB_BRANCH = ConfigValue.NEXT_PUBLIC_GITHUB_BRANCH || "main";
+const {
+  token: GITHUB_TOKEN,
+  username: GITHUB_USERNAME,
+  repo: GITHUB_REPO,
+  branch: GITHUB_BRANCH,
+} = getGitHubConfig();
 
 // Function to fetch GitHub statistics
 export async function getGitHubStats(): Promise<GitHubStats> {
