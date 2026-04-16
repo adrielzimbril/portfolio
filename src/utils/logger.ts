@@ -18,7 +18,7 @@
  * logger.success("Operation completed successfully!");
  * // ✅ [SUCCESS] Operation completed successfully!
  */
-const logger = {
+export const logger = {
   info: (...args: unknown[]) => console.log("ℹ️ [INFO]", ...args),
   warn: (...args: unknown[]) => console.warn("⚠️ [WARN]", ...args),
   error: (...args: unknown[]) => console.error("❌ [ERROR]", ...args),

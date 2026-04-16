@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import logger from "@/utils/logger";
+import logger from "@/utils";
 import {
   GetSignedUploadUrlHandler,
   GetSignedUrlHandler,

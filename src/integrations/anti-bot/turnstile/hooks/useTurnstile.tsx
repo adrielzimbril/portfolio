@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import logger from "@/utils/logger";
+import logger from "@/utils";
 
 export interface TurnstileResponse {
   success: boolean;

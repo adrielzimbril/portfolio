@@ -1,6 +1,6 @@
 import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
-import { cn } from "@/utils/utils";
+import { cn } from "@/utils";
 import { Badge, badgeVariants } from "@/components/ui/badge";
 
 const statusIndicatorVariants = cva("rounded-full", {
@@ -35,7 +35,8 @@ const statusIndicatorVariants = cva("rounded-full", {
 });
 
 export interface StatusBadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
   status?:
     | "online"
@@ -82,14 +83,14 @@ function StatusBadge({
             "bg-gray-300": status === "offline",
             "bg-yellow-300": status === "away",
             "bg-orange-300": status === "warning",
-          }
+          },
         )}
       />
       <span
         className={cn(
           "relative inline-flex h-3 w-3 rounded-full",
           statusIndicatorVariants({ status, size, animated: false }),
-          indicatorClassName
+          indicatorClassName,
         )}
       />
     </span>
@@ -101,7 +102,7 @@ function StatusBadge({
         className={cn(
           "flex items-center gap-2",
           badgeVariants({ variant, size }),
-          className
+          className,
         )}
         {...props}
       >
@@ -116,7 +117,7 @@ function StatusBadge({
             <span
               className={cn(
                 "text-[0.7em] opacity-70 leading-none",
-                secondaryTextClassName
+                secondaryTextClassName,
               )}
             >
               {props.children}
@@ -132,7 +133,7 @@ function StatusBadge({
       className={cn(
         "flex flex-wrap items-center gap-2",
         badgeVariants({ variant, size }),
-        className
+        className,
       )}
       {...props}
     >

@@ -1,9 +1,9 @@
 "use client";
+import * as React from "react";
+import { cn } from "@/utils";
 import { type VariantProps } from "class-variance-authority";
-import React from "react";
 import NextLink from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/utils/utils";
 
 export interface LinkProps
   extends

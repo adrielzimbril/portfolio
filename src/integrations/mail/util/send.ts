@@ -1,4 +1,4 @@
-import logger from "@/utils/logger";
+import logger from "@/utils";
 import type { mailTemplates } from "@/integrations/mail/templates";
 import { send } from "@/integrations/mail/provider";
 import type { TemplateId } from "@/integrations/mail/util/templates";
@@ -23,7 +23,7 @@ export async function sendEmail<T extends TemplateId>(
         html?: string;
         react?: string;
       }
-  )
+  ),
 ) {
   const { to, locale = Locale.FR } = params;
 

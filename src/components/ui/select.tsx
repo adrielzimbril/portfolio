@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { ChevronDownOne, ChevronUpOne, CheckCircle } from "@aurthle/icons";
+import { cn } from "@/utils";
 import * as SelectPrimitive from "@radix-ui/react-select";
+import { ChevronDownOne, ChevronUpOne, CheckCircle } from "@aurthle/icons";
 import { VariantProps } from "class-variance-authority";
-import { cn } from "@/utils/utils";
 import { inputVariants } from "@/components/ui/input";
 
 function Select({

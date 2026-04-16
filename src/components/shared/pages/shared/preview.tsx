@@ -1,8 +1,14 @@
 "use client";
 import Image from "next/image";
-import { cn, pickRandomColor, pickRandomColorCode } from "@/utils";
-import { PageType, ResourceType } from "@/types/enum";
-import { getExternalUrl, getImageUrl, getResourcesUrl } from "@/utils/base-url";
+import {
+  cn,
+  getExternalUrl,
+  getImageUrl,
+  getResourcesUrl,
+  pickRandomColor,
+  pickRandomColorCode,
+} from "@/utils";
+import { PageType, ResourceType } from "@/types";
 import {
   DeveloperFile,
   Figma,

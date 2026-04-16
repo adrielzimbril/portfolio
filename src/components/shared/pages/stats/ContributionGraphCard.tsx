@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import type { ContributionData, ContributionDay } from "@/lib/stats/types";
-import { cn } from "@/utils/utils";
+import { cn, pickRandomColor } from "@/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -11,8 +11,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Github } from "@aurthle/icons";
-import { pickRandomColor } from "@/utils/pick-random-color";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 
 interface ContributionGraphCardProps {
   contributions: ContributionData;

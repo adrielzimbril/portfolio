@@ -4,23 +4,24 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Link } from "@/components/ui/link";
-import { cn } from "@/utils/utils";
-import { PreviewContentType } from "@/types/enum";
+import { cn, getResourceAskUrl, pickRandomColor } from "@/utils";
+import {
+  PreviewContentType,
+  DEFAULT_COLOR_CODE_NAME_TYPE,
+  ResourceType,
+  PageType,
+} from "@/types";
 import {
   HeaderPreviewCard,
   TextPreviewContent,
   PreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
-import { getResourceAskUrl, pickRandomColor } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
 import { Button } from "@/components/ui/button";
 import { useScrollTo } from "@/hooks/useScrollTo";
-import { ResourceType } from "@/types/enum";
 import { ProductAvatarsStats } from "@/components/SubscriberBadges";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
-import { PageType } from "@/types";
 
 interface HeaderSectionProps {
   // Preview Content

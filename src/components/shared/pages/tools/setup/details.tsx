@@ -1,9 +1,9 @@
 "use client";
 import { Link } from "@/components/ui/link";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { getExternalUrl } from "@/utils/base-url";
+import { getExternalUrl } from "@/utils";
 import { useTranslations } from "use-intl";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 
 export function CardInfo({
   title,

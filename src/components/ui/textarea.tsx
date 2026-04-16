@@ -1,6 +1,5 @@
 import * as React from "react";
-import { useId } from "react";
-import { cn } from "@/utils/utils";
+import { cn, useId } from "@/utils";
 import { VariantProps } from "class-variance-authority";
 import { inputVariants } from "@/components/ui/input";
 import { useCharacterLimit } from "@/hooks/useCharacterLimit";
@@ -42,7 +41,7 @@ function Textarea({
           autoGrow &&
             "field-sizing-content max-h-29.5 min-h-0 resize-none py-1.75",
           "text-b-white-foreground",
-          inputVariants({ variant, inputSize, className })
+          inputVariants({ variant, inputSize, className }),
         )}
         value={value}
         maxLength={maxLength}

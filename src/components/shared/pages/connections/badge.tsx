@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/utils/utils";
-import { pickRandomColor } from "@/utils/pick-random-color";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
+import { cn, pickRandomColor } from "@/utils";
+import { PageType, DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { useTranslations } from "use-intl";
 
 export function ConnectionBadge({ met }: { met: string | null }) {

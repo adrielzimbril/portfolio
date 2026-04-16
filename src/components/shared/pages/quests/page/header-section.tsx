@@ -4,21 +4,22 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Link } from "@/components/ui/link";
-import { cn } from "@/utils/utils";
-import { PreviewContentType } from "@/types/enum";
+import { cn, pickRandomColor } from "@/utils";
 import {
   HeaderPreviewCard,
   TextPreviewContent,
   PreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
-import { pickRandomColor } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
+import {
+  PreviewContentType,
+  DEFAULT_COLOR_CODE_NAME_TYPE,
+  PageType,
+} from "@/types";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
 import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
 import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
-import { PageType } from "@/types";
 
 interface HeaderSectionProps {
   // Preview Content

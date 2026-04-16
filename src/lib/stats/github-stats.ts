@@ -1,11 +1,17 @@
 import { unstable_cache } from "next/cache";
+import { useState } from "react";
+import { Star, Github, Git } from "@aurthle/icons";
+import { motion } from "motion/react";
+import { cn, logger, pickRandomColor } from "@/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import type {
   GitHubStats,
   ContributionData,
   ContributionDay,
   ContributionWeek,
 } from "@/lib/stats/types";
-import logger from "@/utils/logger";
 
 // GitHub configuration
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "adrielzimbril";

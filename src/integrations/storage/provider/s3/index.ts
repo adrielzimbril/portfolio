@@ -4,7 +4,7 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl as getS3SignedUrl } from "@aws-sdk/s3-request-presigner";
-import logger from "@/utils/logger";
+import logger from "@/utils";
 import {
   GetSignedUploadUrlHandler,
   GetSignedUrlHandler,

@@ -1,4 +1,5 @@
 import { routes } from "@/data/routes";
+import { getBaseUrl, getImageUrl } from "@/utils";
 import {
   User,
   House,
@@ -13,7 +14,6 @@ import {
   Figma,
   Tiktok,
 } from "@aurthle/icons";
-import { getBaseUrl, getImageUrl } from "@/utils/base-url";
 
 const BASE_URL = getBaseUrl();
 

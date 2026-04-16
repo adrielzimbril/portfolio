@@ -14,10 +14,12 @@ import {
   Tailwind,
   Font,
 } from "@react-email/components";
-import { defaultTranslations } from "@/integrations/mail/util/translations";
-import { defaultLocale } from "@/integrations/mail/util/translations";
+import { getResourceAskUrl } from "@/utils";
+import {
+  defaultTranslations,
+  defaultLocale,
+} from "@/integrations/mail/util/translations";
 import type { BaseMailProps } from "@/integrations/mail/types/types";
-import { getResourceAskUrl } from "@/utils/base-url";
 
 export function NewsletterSignup({
   locale,
@@ -122,7 +124,7 @@ export function NewsletterSignup({
 
                 <Link
                   href={getResourceAskUrl(
-                    "the-mistake-that-stops-you-from-improving"
+                    "the-mistake-that-stops-you-from-improving",
                   )}
                   className="bg-[#1a1a1a] text-white font-medium py-3 px-8 rounded-2xl text-base no-underline inline-block"
                 >

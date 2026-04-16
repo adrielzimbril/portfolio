@@ -1,6 +1,5 @@
 import { apiRoutes } from "@/data/api-routes";
-import logger from "@/utils/logger";
-import { getPathUrl } from "@/utils/base-url";
+import { getPathUrl, logger } from "@/utils";
 
 const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
 

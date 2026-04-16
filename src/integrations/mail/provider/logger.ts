@@ -1,5 +1,5 @@
 import type { SendEmailHandler } from "@/integrations/mail/types/types";
-import logger from "@/utils/logger";
+import logger from "@/utils";
 
 export const send: SendEmailHandler = async ({ to, subject, text }) => {
   try {

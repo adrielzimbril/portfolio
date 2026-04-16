@@ -1,4 +1,4 @@
-import { SetupItem } from "@/types/personalData";
+import { SetupItem } from "@/types";
 
 export const setup: SetupItem[] = [
   {

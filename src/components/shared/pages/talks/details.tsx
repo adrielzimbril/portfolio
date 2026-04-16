@@ -5,10 +5,8 @@ import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
-import { getExternalUrl } from "@/utils/base-url";
-import { getMachineDate } from "@/utils/format-date";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
-import { pickRandomColorCode } from "@/utils";
+import { getExternalUrl, getMachineDate, pickRandomColorCode } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import BoringAvatar from "boring-avatars";
 import { useTranslations } from "use-intl";
 

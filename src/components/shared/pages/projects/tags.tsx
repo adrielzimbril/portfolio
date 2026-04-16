@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { pickRandomColor } from "@/utils/pick-random-color";
-import { cn } from "@/utils/utils";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
+import { cn, pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 
 function ProjectTags({ tags }: { tags: string[] }) {
   return (

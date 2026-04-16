@@ -1,4 +1,4 @@
-import { ToolItem } from "@/types/personalData";
+import { ToolItem } from "@/types";
 
 export const toolbox: ToolItem[] = [
   {

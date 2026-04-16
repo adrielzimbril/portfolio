@@ -1,5 +1,5 @@
 import { appConfig } from "@/data/app-config";
-import logger from "@/utils/logger";
+import logger from "@/utils";
 import type { SendEmailHandler } from "@/integrations/mail/types/types";
 import {
   TransactionalEmailsApi,
@@ -41,7 +41,9 @@ export const send: SendEmailHandler = async ({ to, subject, body }) => {
       });
   } catch (err: unknown) {
     const message =
-      (err as { body?: { message: string } })?.body?.message || (err as { message: string })?.message || "Unknown Brevo error";
+      (err as { body?: { message: string } })?.body?.message ||
+      (err as { message: string })?.message ||
+      "Unknown Brevo error";
     // Treat "exists" as success for idempotency
     if (
       typeof message === "string" &&

@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
-import { cn } from "@/utils/utils";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
-import { pickRandomColor } from "@/utils/pick-random-color";
+import { cn, pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "@aurthle/icons";
 

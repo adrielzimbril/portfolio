@@ -1,4 +1,4 @@
-import logger from "@/utils/logger";
+import logger from "@/utils";
 import {
   ContactInput,
   ContactProvider,
@@ -16,7 +16,7 @@ function resolveProvider(input?: ContactProviderType): ContactProvider {
 }
 
 export async function addContact(
-  input: ContactInput & { provider?: ContactProvider }
+  input: ContactInput & { provider?: ContactProvider },
 ) {
   const provider = resolveProvider(input.provider);
   try {

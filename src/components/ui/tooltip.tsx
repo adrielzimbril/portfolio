@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
+import { cn } from "@/utils";
 
-import { cn } from "@/utils/utils";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
 type Side = "top" | "bottom" | "left" | "right";
 
