@@ -9,8 +9,8 @@
  * const siteUrl = ConfigValue.NEXT_PUBLIC_SITE_URL;
  * const supabaseConfig = getSupabaseConfig();
  *
- * EXCEPTION: NEXT_SHIROFOLIO_PUBLIC_APP_URL
- * This variable should be accessed via process.env.NEXT_SHIROFOLIO_PUBLIC_APP_URL
+ * EXCEPTION: NEXT_TRIGGER_PUBLIC_APP_URL
+ * This variable should be accessed via process.env.NEXT_TRIGGER_PUBLIC_APP_URL
  * It is used by Trigger.dev background tasks that maintain the Laravel database
  * and other background tasks. These tasks run outside the Next.js context.
  */

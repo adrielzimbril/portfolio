@@ -107,7 +107,7 @@ export function getEnvVars(): Record<string, string | undefined> {
 
     // Tasks
     TRIGGER_ACCESS_TOKEN: ConfigValue.TRIGGER_ACCESS_TOKEN,
-    NEXT_SHIROFOLIO_PUBLIC_APP_URL: ConfigValue.NEXT_SHIROFOLIO_PUBLIC_APP_URL,
+    NEXT_TRIGGER_PUBLIC_APP_URL: ConfigValue.NEXT_TRIGGER_PUBLIC_APP_URL,
     ANALYZE_BUNDLE: ConfigValue.ANALYZE_BUNDLE,
 
     // Analytics

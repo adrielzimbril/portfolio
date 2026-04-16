@@ -78,7 +78,7 @@ const environmentVariablesSchema = z.object({
 
   // Tasks
   TRIGGER_ACCESS_TOKEN: z.string().optional(),
-  NEXT_SHIROFOLIO_PUBLIC_APP_URL: z.string().optional(),
+  NEXT_TRIGGER_PUBLIC_APP_URL: z.string().optional(),
   ANALYZE_BUNDLE: z.string().optional(),
 
   // Analytics
@@ -170,7 +170,7 @@ export function validateEnvironmentVariables(): EnvVars {
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     TRIGGER_ACCESS_TOKEN: process.env.TRIGGER_ACCESS_TOKEN,
-    NEXT_SHIROFOLIO_PUBLIC_APP_URL: process.env.NEXT_SHIROFOLIO_PUBLIC_APP_URL,
+    NEXT_TRIGGER_PUBLIC_APP_URL: process.env.NEXT_TRIGGER_PUBLIC_APP_URL,
     ANALYZE: process.env.ANALYZE,
     NEXT_PRIVATE_POSTHOG_CODE: process.env.NEXT_PRIVATE_POSTHOG_CODE,
     NEXT_PRIVATE_POSTHOG_KEY: process.env.NEXT_PRIVATE_POSTHOG_KEY,

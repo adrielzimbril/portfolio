@@ -12,7 +12,7 @@
     "start": "next start",
     "lint": "next lint",
     "trigger:deploy": "pnpm dlx trigger.dev deploy",
-    "validate:env": "tsx scripts/validate-env.ts"
+    "validate:env": "pnpm dlx tsx scripts/validate-env.ts"
   },
   "dependencies": {
     "@aurthle/emoji-hub": "^1.0.5",
