@@ -69,6 +69,7 @@ export function ProjectCard({
               entityId={slug} 
               variant="dock" 
               dockPosition={reactionsPosition} 
+              orientation="vertical"
             />
           </div>
         )}

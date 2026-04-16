@@ -57,6 +57,7 @@ export function CardInfo({
           pageType={PageType.QUESTS}
           entityId={slug}
           variant="dock"
+          orientation="vertical"
         />
         {action ? <Action label={action.label} href={action.href} /> : null}
       </div>

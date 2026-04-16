@@ -31,6 +31,7 @@ export function ConnectionCard({
         entityId={id}
         variant="dock"
         className="mt-2"
+        orientation="vertical"
       />
     </div>
   );

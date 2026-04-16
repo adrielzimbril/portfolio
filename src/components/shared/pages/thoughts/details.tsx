@@ -42,6 +42,7 @@ export function CardInfo({
           pageType={PageType.THOUGHT}
           entityId={slug}
           variant="dock"
+          orientation="vertical"
         />
         <Action slug={slug} />
       </div>

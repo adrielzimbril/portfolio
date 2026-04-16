@@ -65,6 +65,7 @@ export function ResourceCard({
               entityId={slug} 
               variant="dock" 
               dockPosition={reactionsPosition} 
+              orientation="vertical"
             />
           </div>
         )}

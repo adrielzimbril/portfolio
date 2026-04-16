@@ -16,18 +16,20 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.SCEPTIC]: "🤔",
 };
 
-const getDockVariants = (position: "top" | "bottom"): Variants => ({
+const getDockVariants = (position: "top" | "bottom", orientation: "horizontal" | "vertical"): Variants => ({
   hidden: {
-    clipPath: position === "bottom" 
-      ? "inset(90% 0% 0% 0% round 40px)" 
-      : "inset(0% 0% 90% 0% round 40px)",
+    clipPath: orientation === "horizontal"
+      ? (position === "bottom" ? "inset(90% 0% 0% 0% round 40px)" : "inset(0% 0% 90% 0% round 40px)")
+      : (position === "bottom" ? "inset(90% 0% 0% 0% round 40px)" : "inset(0% 0% 90% 0% round 40px)"),
     opacity: 0,
     y: position === "bottom" ? 10 : -10,
+    x: "-50%",
   },
   show: {
     clipPath: "inset(0% 0% 0% 0% round 40px)",
     opacity: 1,
     y: 0,
+    x: "-50%",
     transition: {
       type: "spring",
       bounce: 0,
@@ -53,12 +55,16 @@ const itemVariants: Variants = {
 
 function MagneticItem({ 
   mouseX,
+  mouseY,
+  orientation,
   pageType,
   entityId,
   reactionType,
   count
 }: { 
   mouseX: MotionValue,
+  mouseY: MotionValue,
+  orientation: "horizontal" | "vertical",
   pageType: PageType,
   entityId: string,
   reactionType: ReactionType,
@@ -66,12 +72,15 @@ function MagneticItem({
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const distance = useTransform(mouseX, (val) => {
-    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-    return val - bounds.x - bounds.width / 2;
+  const distance = useTransform(orientation === "horizontal" ? mouseX : mouseY, (val) => {
+    if (val === Infinity) return 1000;
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, y: 0, width: 0, height: 0 };
+    const center = orientation === "horizontal" 
+      ? bounds.x + bounds.width / 2 
+      : bounds.y + bounds.height / 2;
+    return val - center;
   });
 
-  // Calculate size based on proximity
   const sizeSync = useTransform(distance, [-120, 0, 120], [40, 64, 40]);
   const size = useSpring(sizeSync, { stiffness: 200, damping: 25, mass: 0.1 });
 
@@ -100,6 +109,7 @@ interface ReactionBarProps {
   className?: string;
   variant?: "inline" | "dock";
   dockPosition?: "top" | "bottom";
+  orientation?: "horizontal" | "vertical";
   isFloating?: boolean;
 }
 
@@ -109,11 +119,13 @@ export function ReactionBar({
   className,
   variant = "inline",
   dockPosition = "bottom",
+  orientation = "horizontal",
   isFloating = false,
 }: ReactionBarProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(Infinity);
+  const mouseY = useMotionValue(Infinity);
   
   const reactionTypes: Array<ReactionType> = [
     ReactionType.LIKE,
@@ -124,7 +136,6 @@ export function ReactionBar({
   ];
   const { reactions } = useReactions(pageType, entityId);
 
-  // Close on outside click (essential for mobile)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -143,7 +154,6 @@ export function ReactionBar({
     };
   }, [isExpanded]);
 
-  // Find most popular reaction to show as primary
   const sortedReactions = reactionTypes
     .map((type) => ({ type, count: reactions[type] || 0 }))
     .sort((a, b) => b.count - a.count);
@@ -155,7 +165,7 @@ export function ReactionBar({
   const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
 
   if (variant === "dock") {
-    const dockVariants = getDockVariants(dockPosition);
+    const dockVariants = getDockVariants(dockPosition, orientation);
     
     return (
       <div 
@@ -167,15 +177,18 @@ export function ReactionBar({
         )}
         onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => {
-          // Slight delay for desktop to make it feel less "fragile"
           setTimeout(() => {
             if (containerRef.current && !containerRef.current.matches(':hover')) {
               setIsExpanded(false);
               mouseX.set(Infinity);
+              mouseY.set(Infinity);
             }
           }, 100);
         }}
-        onMouseMove={(e) => mouseX.set(e.clientX)}
+        onMouseMove={(e) => {
+          mouseX.set(e.clientX);
+          mouseY.set(e.clientY);
+        }}
       >
         <AnimatePresence>
           {isExpanded && (
@@ -185,20 +198,29 @@ export function ReactionBar({
               animate="show"
               exit="hidden"
               className={cn(
-                "absolute left-1/2 -translate-x-1/2 z-50",
-                dockPosition === "bottom" ? "bottom-[calc(100%-8px)] mb-3" : "top-[calc(100%-8px)] mt-3",
-                "flex items-center gap-1.5 p-1.5 h-16",
+                "absolute left-1/2 z-50",
+                dockPosition === "bottom" ? "top-[calc(100%+8px)] mt-3" : "bottom-[calc(100%+8px)] mb-3",
+                orientation === "horizontal" ? "flex-row h-16" : "flex-col w-16 h-auto py-2",
+                "flex items-center gap-1.5 p-1.5",
                 "squircle squircle-7xl squircle-smooth-xl",
                 "squircle-sh-white dark:squircle-b-base",
                 "squircle-border-2 squircle-border-b-base-accent",
                 "whitespace-nowrap"
               )}
             >
-              <div className="flex items-center h-full gap-0.5 px-0.5" onClick={() => setIsExpanded(false)}>
+              <div 
+                className={cn(
+                  "flex items-center gap-0.5 px-0.5",
+                  orientation === "horizontal" ? "flex-row h-full" : "flex-col w-full h-auto"
+                )} 
+                onClick={() => setIsExpanded(false)}
+              >
                 {reactionTypes.map((type) => (
                   <MagneticItem
                     key={type}
                     mouseX={mouseX}
+                    mouseY={mouseY}
+                    orientation={orientation}
                     pageType={pageType}
                     entityId={entityId}
                     reactionType={type}
@@ -246,7 +268,6 @@ export function ReactionBar({
     );
   }
 
-  // Inline "Section" Mode for Blogs
   return (
     <div className={cn(
       "w-full flex flex-col items-center gap-4 py-8 px-4",
@@ -266,7 +287,7 @@ export function ReactionBar({
             entityId={entityId}
             reactionType={type}
             count={reactions[type] || 0}
-            className="scale-110" // Slightly larger for section mode
+            className="scale-110"
           />
         ))}
       </div>
