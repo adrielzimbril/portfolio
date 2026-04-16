@@ -13,12 +13,14 @@ export function CardInfo({
   primaryTag,
   tags,
   slug,
+  hideReactions = false,
 }: {
   title: string;
   excerpt: string;
   primaryTag?: string;
   tags: { name: string }[];
   slug: string;
+  hideReactions?: boolean;
 }) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -38,12 +40,14 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar
-          pageType={PageType.THOUGHT}
-          entityId={slug}
-          variant="dock"
-          orientation="vertical"
-        />
+        {!hideReactions && (
+          <ReactionBar
+            pageType={PageType.THOUGHT}
+            entityId={slug}
+            variant="dock"
+            orientation="vertical"
+          />
+        )}
         <Action slug={slug} />
       </div>
     </div>

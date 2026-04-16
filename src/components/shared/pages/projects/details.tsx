@@ -18,6 +18,7 @@ export function CardInfo({
   tags,
   categories,
   isWide,
+  hideReactions = false,
 }: {
   title: string;
   description: string;
@@ -25,6 +26,7 @@ export function CardInfo({
   tags: { name: string }[];
   categories: { name: string; color: string }[];
   isWide: boolean;
+  hideReactions?: boolean;
 }) {
   return (
     <div
@@ -49,12 +51,14 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar
-          pageType={PageType.PROJECT}
-          entityId={slug}
-          variant="dock"
-          orientation="vertical"
-        />
+        {!hideReactions && (
+          <ReactionBar
+            pageType={PageType.PROJECT}
+            entityId={slug}
+            variant="dock"
+            orientation="vertical"
+          />
+        )}
         <Action slug={slug} />
       </div>
     </div>

@@ -19,6 +19,7 @@ export function CardInfo({
   features,
   avatars,
   userCount,
+  hideReactions = false,
 }: {
   title: string;
   slug: string;
@@ -28,6 +29,7 @@ export function CardInfo({
   features: string[];
   avatars: string[];
   userCount?: number;
+  hideReactions?: boolean;
 }) {
   const t = useTranslations();
   const { count: avatarCount } = useProductSlugRequestsCount(slug);
@@ -72,7 +74,9 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar pageType={PageType.HUB} entityId={slug} variant="dock" orientation="vertical" />
+        {!hideReactions && (
+          <ReactionBar pageType={PageType.HUB} entityId={slug} variant="dock" orientation="vertical" />
+        )}
         <Action slug={slug} resourceType={resourceType} />
       </div>
     </div>

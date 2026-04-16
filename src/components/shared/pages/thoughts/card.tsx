@@ -43,6 +43,7 @@ export function ThoughtCard({
           primaryTag={primaryTag}
           tags={tags}
           slug={slug}
+          hideReactions={true}
         />
         
         {reactionsPosition && (

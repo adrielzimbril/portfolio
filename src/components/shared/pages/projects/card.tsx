@@ -57,6 +57,7 @@ export function ProjectCard({
           tags={tags}
           categories={categories}
           isWide={isWide}
+          hideReactions={true}
         />
 
         {reactionsPosition && (

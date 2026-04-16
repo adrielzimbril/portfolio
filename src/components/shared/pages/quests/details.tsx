@@ -16,6 +16,7 @@ export function CardInfo({
   description,
   features,
   action,
+  hideReactions = false,
 }: {
   title: string;
   slug: string;
@@ -26,6 +27,7 @@ export function CardInfo({
     label: string;
     href: string;
   } | null;
+  hideReactions?: boolean;
 }) {
   const { stats } = useQuestParticipantsStats(slug);
 
@@ -53,12 +55,14 @@ export function CardInfo({
       </div>
 
       <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar
-          pageType={PageType.QUESTS}
-          entityId={slug}
-          variant="dock"
-          orientation="vertical"
-        />
+        {!hideReactions && (
+          <ReactionBar
+            pageType={PageType.QUESTS}
+            entityId={slug}
+            variant="dock"
+            orientation="vertical"
+          />
+        )}
         {action ? <Action label={action.label} href={action.href} /> : null}
       </div>
     </div>

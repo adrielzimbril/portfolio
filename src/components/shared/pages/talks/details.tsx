@@ -9,6 +9,8 @@ import { getExternalUrl, getMachineDate, pickRandomColorCode } from "@/utils";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import BoringAvatar from "boring-avatars";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { PageType } from "@/types";
 
 export function CardInfo({
   title,
@@ -17,6 +19,7 @@ export function CardInfo({
   tags,
   participantsCount,
   action,
+  hideReactions = false,
 }: {
   title: string;
   excerpt: string;
@@ -27,6 +30,7 @@ export function CardInfo({
     label: string;
     href: string;
   } | null;
+  hideReactions?: boolean;
 }) {
   const [currentTime] = useState(() => Date.now());
   const t = useTranslations();
@@ -71,7 +75,17 @@ export function CardInfo({
         {shouldShow ? <ParticipantsStats count={participantsCount} /> : null}
       </div>
 
-      {action ? <Action label={action.label} href={action.href} /> : null}
+      <div className="flex items-center justify-between w-full gap-3">
+        {!hideReactions && (
+          <ReactionBar
+            pageType={PageType.TALKS}
+            entityId={title} // Use title as ID for talks if slug is not available
+            variant="dock"
+            orientation="vertical"
+          />
+        )}
+        {action ? <Action label={action.label} href={action.href} /> : null}
+      </div>
     </div>
   );
 }

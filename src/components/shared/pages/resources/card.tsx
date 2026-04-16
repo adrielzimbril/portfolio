@@ -53,6 +53,7 @@ export function ResourceCard({
           features={features}
           avatars={avatars}
           userCount={userCount}
+          hideReactions={true}
         />
 
         {reactionsPosition && (
