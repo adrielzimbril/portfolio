@@ -22,7 +22,7 @@ import { BarChartCard } from "@/components/stats/BarChartCard";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
 import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
-import { ReactionMiniCards } from "@/components/stats/ReactionMiniCards";
+import { ReactionsSection } from "@/components/stats/ReactionsSection";
 import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
@@ -179,8 +179,15 @@ export default async function StatsPage() {
               <ChangelogUpdatesCard count={changelog.length} />
             </div>
           </div>
-          <ReactionMiniCards reactions={serverStats.reactions} />
         </div>
+      </SectionLayout>
+
+      <SectionLayout
+        description="Engagement breakdown by reaction type"
+        badge="Reactions"
+        isFlex
+      >
+        <ReactionsSection reactions={serverStats.reactions} />
       </SectionLayout>
 
       <SectionLayout
