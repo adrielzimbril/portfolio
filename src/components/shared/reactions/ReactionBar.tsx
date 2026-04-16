@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
@@ -111,8 +111,10 @@ export function ReactionBar({
   dockPosition = "bottom",
   isFloating = false,
 }: ReactionBarProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(Infinity);
+  
   const reactionTypes: Array<ReactionType> = [
     ReactionType.LIKE,
     ReactionType.HEART,
@@ -121,6 +123,25 @@ export function ReactionBar({
     ReactionType.SCEPTIC,
   ];
   const { reactions } = useReactions(pageType, entityId);
+
+  // Close on outside click (essential for mobile)
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsExpanded(false);
+      }
+    };
+
+    if (isExpanded) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isExpanded]);
 
   // Find most popular reaction to show as primary
   const sortedReactions = reactionTypes
@@ -138,20 +159,26 @@ export function ReactionBar({
     
     return (
       <div 
+        ref={containerRef}
         className={cn(
           "relative flex flex-col items-center group/reaction-area",
           isFloating && "fixed bottom-10 left-1/2 -translate-x-1/2 z-50",
           className
         )}
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => {
-          setIsHovered(false);
-          mouseX.set(Infinity);
+          // Slight delay for desktop to make it feel less "fragile"
+          setTimeout(() => {
+            if (containerRef.current && !containerRef.current.matches(':hover')) {
+              setIsExpanded(false);
+              mouseX.set(Infinity);
+            }
+          }, 100);
         }}
         onMouseMove={(e) => mouseX.set(e.clientX)}
       >
         <AnimatePresence>
-          {isHovered && (
+          {isExpanded && (
             <motion.div
               variants={dockVariants}
               initial="hidden"
@@ -167,7 +194,7 @@ export function ReactionBar({
                 "whitespace-nowrap"
               )}
             >
-              <div className="flex items-center h-full gap-0.5 px-0.5">
+              <div className="flex items-center h-full gap-0.5 px-0.5" onClick={() => setIsExpanded(false)}>
                 {reactionTypes.map((type) => (
                   <MagneticItem
                     key={type}
@@ -185,6 +212,11 @@ export function ReactionBar({
 
         <motion.button
           layout
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsExpanded(!isExpanded);
+          }}
           className={cn(
             "group relative flex items-center justify-center size-11 md:size-12",
             "squircle squircle-full squircle-smooth-xl",
@@ -192,7 +224,7 @@ export function ReactionBar({
             "squircle-border-2 squircle-border-b-base-accent",
             "cursor-pointer z-[10] transition-colors"
           )}
-          style={{ scale: isHovered ? 1.02 : 1 }}
+          style={{ scale: isExpanded ? 1.02 : 1 }}
           whileTap={{ scale: 0.95 }}
         >
           <div className="flex flex-col items-center justify-center relative pointer-events-none">
