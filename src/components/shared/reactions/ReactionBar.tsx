@@ -119,9 +119,11 @@ export function ReactionBar({
   className,
   variant = "inline",
   dockPosition = "bottom",
-  orientation = "horizontal",
+  orientation,
   isFloating = false,
 }: ReactionBarProps) {
+  // CRITICAL: Default to vertical for docks (on cards) and horizontal for inline (pages)
+  const activeOrientation = orientation || (variant === "dock" ? "vertical" : "horizontal");
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(Infinity);
@@ -165,7 +167,7 @@ export function ReactionBar({
   const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
 
   if (variant === "dock") {
-    const dockVariants = getDockVariants(dockPosition, orientation);
+    const dockVariants = getDockVariants(dockPosition, activeOrientation);
     
     return (
       <div 
@@ -198,10 +200,12 @@ export function ReactionBar({
               animate="show"
               exit="hidden"
               className={cn(
-                "absolute left-1/2 z-50",
+                "absolute left-1/2 z-50 p-3",
                 dockPosition === "bottom" ? "top-[calc(100%+8px)] mt-3" : "bottom-[calc(100%+8px)] mb-3",
-                orientation === "horizontal" ? "flex-row h-16" : "flex-col w-16 h-auto py-2",
-                "flex items-center gap-1.5 p-1.5",
+                activeOrientation === "vertical" 
+                  ? "flex flex-col w-20 h-auto items-center justify-center py-4"
+                  : "flex flex-row h-16 w-max items-center justify-center px-4",
+                "gap-2",
                 "squircle squircle-7xl squircle-smooth-xl",
                 "squircle-sh-white dark:squircle-b-base",
                 "squircle-border-2 squircle-border-b-base-accent",
@@ -210,8 +214,8 @@ export function ReactionBar({
             >
               <div 
                 className={cn(
-                  "flex items-center gap-0.5 px-0.5",
-                  orientation === "horizontal" ? "flex-row h-full" : "flex-col w-full h-auto"
+                  "flex gap-1.5",
+                  activeOrientation === "vertical" ? "flex-col w-full items-center" : "flex-row h-full items-center"
                 )} 
                 onClick={() => setIsExpanded(false)}
               >
@@ -220,7 +224,7 @@ export function ReactionBar({
                     key={type}
                     mouseX={mouseX}
                     mouseY={mouseY}
-                    orientation={orientation}
+                    orientation={activeOrientation}
                     pageType={pageType}
                     entityId={entityId}
                     reactionType={type}
