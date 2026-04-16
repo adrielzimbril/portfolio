@@ -37,6 +37,11 @@ export enum PageType {
   TOOLBOX = "toolbox",
 }
 
+export enum TopThoughtsListType {
+  VIEWED = "viewed",
+  REACTED = "reacted",
+}
+
 export enum QuestAskType {
   ENROLL = "register",
   SUBMIT = "submit",

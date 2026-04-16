@@ -6,9 +6,20 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/utils/utils";
 
 export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  extends
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof buttonVariants> {
-  variant?: "default" | "secondary" | "destructive" | "outline" | "colored" | "ghost" | "icon" | "link" | "none";
+  variant?:
+    | "default"
+    | "base"
+    | "secondary"
+    | "destructive"
+    | "outline"
+    | "colored"
+    | "ghost"
+    | "icon"
+    | "link"
+    | "none";
   size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none";
   linkClassName?: string;
   likeButton?: boolean;
@@ -31,7 +42,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       whileTap,
       ...props
     },
-    ref
+    ref,
   ) => {
     return likeButton ? (
       <Button
@@ -61,7 +72,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Link.displayName = "Link";
 

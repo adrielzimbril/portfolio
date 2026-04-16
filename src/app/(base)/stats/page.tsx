@@ -21,10 +21,7 @@ import {
 import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
-import {
-  TopThoughtsList,
-  TopThoughtsListType,
-} from "@/components/stats/TopThoughtsList";
+import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
 import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
 import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
@@ -32,6 +29,7 @@ import { CommunityMessagesCard } from "@/components/stats/CommunityMessagesCard"
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
 import { ChangelogUpdatesCard } from "@/components/stats/ChangelogUpdatesCard";
 import { changelog } from "@/data/personal/changelog";
+import { TopThoughtsListType } from "@/types/enum";
 
 // Revamp date - TODO: Adapter à votre date de revamp
 const REVAMP_DATE = new Date("2025-08-17");
@@ -136,11 +134,15 @@ export default async function StatsPage() {
             <TopThoughtsList
               title="Top Viewed Thoughts"
               description="Most read articles"
-              type={TopThoughtsListType.VIEWED}
-              thoughts={serverStats.topViewedThoughts.slice(0, 5)}
+              type={TopThoughtsListType.REACTED}
+              thoughts={serverStats.topViewedThoughts}
               metricLabel="views"
               icon={
-                <TrendUp size={32} className="text-rose-500" variant="bulk" />
+                <TrendUp
+                  size={32}
+                  // className="text-rose-500"
+                  variant="bulk"
+                />
               }
               decoration="📈"
             />
@@ -148,10 +150,14 @@ export default async function StatsPage() {
               title="Top Reacted Thoughts"
               description="Most loved articles"
               type={TopThoughtsListType.REACTED}
-              thoughts={serverStats.topReactedThoughts.slice(0, 5)}
+              thoughts={serverStats.topReactedThoughts}
               metricLabel="reactions"
               icon={
-                <HeartOne size={32} className="text-rose-500" variant="bulk" />
+                <HeartOne
+                  size={32}
+                  // className="text-rose-500"
+                  variant="bulk"
+                />
               }
               decoration="❤️"
             />

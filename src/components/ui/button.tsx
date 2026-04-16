@@ -10,6 +10,7 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-inherit squircle-primary squircle-border-2 squircle-border-primary text-b-black-unchanged hover:squircle-primary/90",
+        base: "bg-inherit squircle-b-base squircle-border-0 squircle-border-transparent hover:squircle-b-base/90",
         secondary:
           "bg-inherit squircle-sh-white squircle-border-2 squircle-border-b-base-accent text-b-white-invert",
         destructive:
@@ -37,14 +38,25 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-      variant?: "default" | "secondary" | "destructive" | "outline" | "colored" | "ghost" | "icon" | "link" | "none";
-      size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none";
+  variant?:
+    | "default"
+    | "base"
+    | "secondary"
+    | "destructive"
+    | "outline"
+    | "colored"
+    | "ghost"
+    | "icon"
+    | "link"
+    | "none";
+  size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none";
   asChild?: boolean;
   asFull?: boolean;
   asIcon?: boolean;
@@ -65,7 +77,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       whileTap = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : "button";
     return (
@@ -75,13 +87,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           asFull && "w-full flex text-center items-center justify-center",
           asIcon && "[&_svg]:size-auto",
           asPointer && "cursor-pointer",
-          whileTap && "hover:scale-105"
+          whileTap && "hover:scale-105",
         )}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

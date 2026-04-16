@@ -1,22 +1,19 @@
 "use client";
 
 import { motion } from "motion/react";
-import Link from "next/link";
 import { useState } from "react";
-import { TrendUp, Heart } from "@aurthle/icons";
 import type { ThoughtMetric } from "@/lib/stats/types";
-import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { truncateText } from "@/utils/format-text";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getResourcesUrl, pickRandomColor } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
-
-export enum TopThoughtsListType {
-  VIEWED = "viewed",
-  REACTED = "reacted",
-}
+import {
+  DEFAULT_COLOR_CODE_NAME_LIST,
+  PageType,
+  TopThoughtsListType,
+} from "@/types";
+import { Link } from "@/components/ui/link";
 
 interface TopThoughtsListProps {
   title: string;
@@ -28,7 +25,6 @@ interface TopThoughtsListProps {
   decoration: string;
   delay?: number;
   className?: string;
-  maxTitleLength?: number;
 }
 
 export function TopThoughtsList({
@@ -42,8 +38,14 @@ export function TopThoughtsList({
   className,
 }: TopThoughtsListProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const maxTitleLength = 40;
-  const displayThoughts = thoughts.slice(0, 5);
+  const config = {
+    truncate: {
+      type: "char" as const,
+      maxLength: 40,
+    },
+    maxThoughts: 4,
+  };
+  const displayThoughts = thoughts.slice(0, config.maxThoughts);
 
   return (
     <Card
@@ -78,7 +80,16 @@ export function TopThoughtsList({
                 "relative flex flex-row items-center gap-2 md:gap-4 mb-4",
               )}
             >
-              <Badge className="capitalize" size="lg" circle>
+              <Badge
+                className={cn(
+                  "capitalize text-xs font-medium",
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                  "size-max text-primary-foreground!",
+                )}
+                size="lg"
+                variant="colored"
+                circle
+              >
                 {icon}
               </Badge>
               <div className="flex flex-col items-start gap-2">
@@ -105,7 +116,7 @@ export function TopThoughtsList({
                         className="flex flex-row w-full items-center justify-between gap-3"
                       >
                         <span className="flex-1 truncate text-sm leading-relaxed">
-                          {truncateText(thought.title, maxTitleLength)}
+                          {truncateText(thought.title, config.truncate)}
                         </span>
                       </Link>
                       <Badge
@@ -123,7 +134,6 @@ export function TopThoughtsList({
                         size="sm"
                       >
                         {thought.count}
-                        {type}
                       </Badge>
                     </div>
                   </div>
@@ -132,9 +142,19 @@ export function TopThoughtsList({
             </div>
 
             {thoughts.length > 5 && (
-              <p className="mt-4 text-xs text-muted-foreground">
-                +{thoughts.length - 5} more {metricLabel}
-              </p>
+              <div className="relative flex mt-2">
+                <Link
+                  href={getResourcesUrl(PageType.THOUGHT)}
+                  className="py-1.5"
+                  likeButton
+                  size="xs"
+                  variant="base"
+                >
+                  <span className="capitalize text-xs">
+                    +{thoughts.length - 5} more {metricLabel}
+                  </span>
+                </Link>
+              </div>
             )}
           </div>
         </div>
