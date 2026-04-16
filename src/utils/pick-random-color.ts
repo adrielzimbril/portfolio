@@ -1,6 +1,6 @@
 import {
   DEFAULT_TAG_COLOR,
-  DEFAULT_CATEGORY_COLOR_NAME,
+  DEFAULT_SQUIRCLE_COLOR_NAME_TYPE,
   DEFAULT_COLOR_CODE,
   DEFAULT_COLOR_CODE_NAME_TYPE,
 } from "@/types/default";
@@ -73,7 +73,7 @@ function pickRandomColorCode(
  * logger.info(color); // Output: squircle-[#f9f9f9]
  */
 function pickRandomColor(
-  id?: DEFAULT_CATEGORY_COLOR_NAME | number,
+  id?: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE | number,
 ): DEFAULT_TAG_COLOR | undefined {
   const colors = Object.values(DEFAULT_TAG_COLOR);
 
@@ -106,10 +106,10 @@ function pickRandomColor(
  * const colorName = pickRandomColorName();
  * logger.info(colorName); // Output: random color name (e.g. BLUE)
  */
-function pickRandomColorName(): DEFAULT_CATEGORY_COLOR_NAME {
+function pickRandomColorName(): DEFAULT_SQUIRCLE_COLOR_NAME_TYPE {
   const colors = Object.keys(DEFAULT_TAG_COLOR);
   const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex] as DEFAULT_CATEGORY_COLOR_NAME;
+  return colors[randomIndex] as DEFAULT_SQUIRCLE_COLOR_NAME_TYPE;
 }
 
 /**
@@ -122,7 +122,7 @@ function pickRandomColorName(): DEFAULT_CATEGORY_COLOR_NAME {
  * const colorIndex = getColorIndex("BLUE");
  * logger.info(colorIndex); // Output: 0
  */
-function getColorIndex(colorName: DEFAULT_CATEGORY_COLOR_NAME): number {
+function getColorIndex(colorName: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE): number {
   return Object.keys(DEFAULT_TAG_COLOR).indexOf(colorName);
 }
 
@@ -148,7 +148,9 @@ function getColorIndex(colorName: DEFAULT_CATEGORY_COLOR_NAME): number {
  * const isValid = isValidColorName(100);
  * logger.info(isValid); // Output: false
  */
-function isValidColorName(id: DEFAULT_CATEGORY_COLOR_NAME | number): boolean {
+function isValidColorName(
+  id: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE | number,
+): boolean {
   return (
     Object.keys(DEFAULT_TAG_COLOR).includes(String(id)) ||
     (!isNaN(Number(id)) &&

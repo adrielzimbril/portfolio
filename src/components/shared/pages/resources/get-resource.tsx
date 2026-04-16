@@ -44,7 +44,7 @@ export function GetResource({
       locale: locale,
       path: getPathUrl(routes.hubGet.link),
     },
-    false
+    false,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -72,22 +72,22 @@ export function GetResource({
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.title"
+      "common.page-sections.hub.base.resources-type.course.title",
     ),
     [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.title"
+      "common.page-sections.hub.base.resources-type.ebook.title",
     ),
     [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.title"
+      "common.page-sections.hub.base.resources-type.video.title",
     ),
     [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.title"
+      "common.page-sections.hub.base.resources-type.masterclass.title",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.title"
+      "common.page-sections.hub.base.resources-type.figma-template.title",
     ),
     [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.title"
+      "common.page-sections.hub.base.resources-type.code.title",
     ),
   };
 
@@ -105,7 +105,7 @@ export function GetResource({
       >
         <div
           className={cn(
-            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto"
+            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto",
             // isWide && "md:min-h-96"
           )}
         >
@@ -133,7 +133,7 @@ export function GetResource({
           {/* <ProjectCategories
             categories={tags.map((tag) => ({
               name: tag.name,
-              color: tag.color as DEFAULT_CATEGORY_COLOR_NAME,
+              color: tag.color as DEFAULT_SQUIRCLE_COLOR_NAME_TYPE,
             }))}
           /> */}
           <Tags
@@ -148,7 +148,7 @@ export function GetResource({
             <div ref={ref} className="hidden" />
             <Input
               placeholder={t(
-                "common.page-sections.newsletter.form.fields.email-page.placeholder"
+                "common.page-sections.newsletter.form.fields.email-page.placeholder",
               )}
               type="email"
               //className="ml-auto rounded-s-md"

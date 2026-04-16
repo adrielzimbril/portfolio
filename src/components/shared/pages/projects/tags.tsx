@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { cn } from "@/utils/utils";
-import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
+import { DEFAULT_SQUIRCLE_COLOR_NAME_TYPE } from "@/types/default";
 
 function ProjectTags({ tags }: { tags: string[] }) {
   return (
@@ -24,7 +24,7 @@ function ProjectCategories({
 }: {
   categories: {
     name: string;
-    color: DEFAULT_CATEGORY_COLOR_NAME;
+    color: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE;
   }[];
 }) {
   return (
