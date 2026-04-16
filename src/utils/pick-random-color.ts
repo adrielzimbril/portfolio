@@ -1,14 +1,15 @@
 import {
-  DEFAULT_TAG_COLOR,
+  DEFAULT_SQUIRCLE_COLOR,
   DEFAULT_SQUIRCLE_COLOR_NAME_TYPE,
   DEFAULT_COLOR_CODE,
+  DEFAULT_COLOR_CODE_NAME,
   DEFAULT_COLOR_CODE_NAME_TYPE,
 } from "@/types/default";
 
 /**
- *  Returns a color from the enum DEFAULT_TAG_COLOR
- * @param id - Optional: valid color name or numeric index (0-${Object.values(DEFAULT_TAG_COLOR).length - 1})
- * @returns A color from the enum DEFAULT_TAG_COLOR
+ *  Returns a color from the enum DEFAULT_COLOR_CODE
+ * @param id - Optional: valid color name or numeric index (0-${Object.values(DEFAULT_COLOR_CODE).length - 1})
+ * @returns A color from the enum DEFAULT_COLOR_CODE
  *
  * @example
  * const color = pickRandomColor();
@@ -16,15 +17,15 @@ import {
  *
  * @example
  * const color = pickRandomColor("BLUE");
- * logger.info(color); // Output: squircle-[#ade9ff]
+ * logger.info(color); // Output: #ade9ff
  *
  * @example
  * const color = pickRandomColor(0);
- * logger.info(color); // Output: squircle-[#ade9ff]
+ * logger.info(color); // Output: #ade9ff
  *
  * @example
  * const color = pickRandomColor("WHITE_GOLD");
- * logger.info(color); // Output: squircle-[#f9f9f9]
+ * logger.info(color); // Output: #f9f9f9
  */
 function pickRandomColorCode(
   id?: DEFAULT_COLOR_CODE_NAME_TYPE | number,
@@ -52,9 +53,9 @@ function pickRandomColorCode(
 }
 
 /**
- *  Returns a color from the enum DEFAULT_TAG_COLOR
- * @param id - Optional: valid color name or numeric index (0-${Object.values(DEFAULT_TAG_COLOR).length - 1})
- * @returns A color from the enum DEFAULT_TAG_COLOR
+ *  Returns a color from the enum DEFAULT_SQUIRCLE_COLOR
+ * @param id - Optional: valid color name or numeric index (0-${Object.values(DEFAULT_COLOR_CODE_NAME_TYPE).length - 1})
+ * @returns A color from the enum DEFAULT_SQUIRCLE_COLOR
  *
  * @example
  * const color = pickRandomColor();
@@ -73,9 +74,9 @@ function pickRandomColorCode(
  * logger.info(color); // Output: squircle-[#f9f9f9]
  */
 function pickRandomColor(
-  id?: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE | number,
-): DEFAULT_TAG_COLOR | undefined {
-  const colors = Object.values(DEFAULT_TAG_COLOR);
+  id?: DEFAULT_COLOR_CODE_NAME_TYPE | number,
+): DEFAULT_SQUIRCLE_COLOR | undefined {
+  const colors = Object.values(DEFAULT_SQUIRCLE_COLOR);
 
   if (id !== undefined) {
     // If it's a number
@@ -87,8 +88,8 @@ function pickRandomColor(
     }
 
     // If it's a valid color name
-    if (typeof id === "string" && id in DEFAULT_TAG_COLOR) {
-      return DEFAULT_TAG_COLOR[id];
+    if (typeof id === "string" && id in DEFAULT_SQUIRCLE_COLOR) {
+      return DEFAULT_SQUIRCLE_COLOR[id];
     }
   }
 
@@ -100,16 +101,16 @@ function pickRandomColor(
 /**
  * Returns a random color name
  *
- * @returns A random color name from the enum DEFAULT_TAG_COLOR
+ * @returns A random color name from the enum DEFAULT_SQUIRCLE_COLOR_NAME_TYPE
  *
  * @example
  * const colorName = pickRandomColorName();
  * logger.info(colorName); // Output: random color name (e.g. BLUE)
  */
-function pickRandomColorName(): DEFAULT_SQUIRCLE_COLOR_NAME_TYPE {
-  const colors = Object.keys(DEFAULT_TAG_COLOR);
+function pickRandomColorName(): DEFAULT_COLOR_CODE_NAME_TYPE {
+  const colors = Object.keys(DEFAULT_COLOR_CODE);
   const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex] as DEFAULT_SQUIRCLE_COLOR_NAME_TYPE;
+  return colors[randomIndex] as DEFAULT_COLOR_CODE_NAME_TYPE;
 }
 
 /**
@@ -122,8 +123,8 @@ function pickRandomColorName(): DEFAULT_SQUIRCLE_COLOR_NAME_TYPE {
  * const colorIndex = getColorIndex("BLUE");
  * logger.info(colorIndex); // Output: 0
  */
-function getColorIndex(colorName: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE): number {
-  return Object.keys(DEFAULT_TAG_COLOR).indexOf(colorName);
+function getColorIndex(colorName: DEFAULT_COLOR_CODE_NAME_TYPE): number {
+  return Object.keys(DEFAULT_COLOR_CODE).indexOf(colorName);
 }
 
 /**
@@ -148,14 +149,12 @@ function getColorIndex(colorName: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE): number {
  * const isValid = isValidColorName(100);
  * logger.info(isValid); // Output: false
  */
-function isValidColorName(
-  id: DEFAULT_SQUIRCLE_COLOR_NAME_TYPE | number,
-): boolean {
+function isValidColorName(id: DEFAULT_COLOR_CODE_NAME_TYPE | number): boolean {
   return (
-    Object.keys(DEFAULT_TAG_COLOR).includes(String(id)) ||
+    Object.keys(DEFAULT_COLOR_CODE).includes(String(id)) ||
     (!isNaN(Number(id)) &&
       Number(id) >= 0 &&
-      Number(id) < Object.values(DEFAULT_TAG_COLOR).length)
+      Number(id) < Object.values(DEFAULT_COLOR_CODE).length)
   );
 }
 
@@ -169,7 +168,7 @@ function isValidColorName(
  * logger.info(colorCount); // Output: number of available colors
  */
 function getColorCount(): number {
-  return Object.values(DEFAULT_TAG_COLOR).length;
+  return Object.values(DEFAULT_COLOR_CODE).length;
 }
 
 export {
