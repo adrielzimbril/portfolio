@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn, getHumanDate } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { useTranslations } from "use-intl";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 
 export function QuestDetailsSection({
   content,
@@ -77,7 +77,7 @@ export function QuestDetailsSection({
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
                     className={pickRandomColor(
-                      DEFAULT_COLOR_CODE_NAME_LIST.GREENISH_YELLOW,
+                      DEFAULT_COLOR_CODE_NAME_TYPE.GREENISH_YELLOW,
                     )}
                     variant="colored"
                   >
@@ -94,7 +94,7 @@ export function QuestDetailsSection({
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
                     className={pickRandomColor(
-                      DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+                      DEFAULT_COLOR_CODE_NAME_TYPE.BLUE,
                     )}
                     variant="colored"
                   >
@@ -111,7 +111,7 @@ export function QuestDetailsSection({
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   <Badge
                     className={pickRandomColor(
-                      DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+                      DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE,
                     )}
                     variant="colored"
                   >

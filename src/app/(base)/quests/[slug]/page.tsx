@@ -8,7 +8,7 @@ import { localeRedirect } from "@/integrations/i18n/routing";
 import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 import { metadata as baseMetadata } from "@/app/metadata";
 import {
   getQuestWithAdjacent,
@@ -88,8 +88,8 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       ),
       meta: {
         color: registrationClosed
-          ? DEFAULT_COLOR_CODE_NAME_LIST.RED
-          : DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+          ? DEFAULT_COLOR_CODE_NAME_TYPE.RED
+          : DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE,
       },
     },
     {
@@ -100,8 +100,8 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       ),
       meta: {
         color: submissionClosed
-          ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
-          : DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+          ? DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE
+          : DEFAULT_COLOR_CODE_NAME_TYPE.BLUE,
       },
     },
     {
@@ -111,7 +111,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           : "quests.cards.tags.results.upcoming",
       ),
       meta: {
-        color: DEFAULT_COLOR_CODE_NAME_LIST.WHITE_GOLD,
+        color: DEFAULT_COLOR_CODE_NAME_TYPE.WHITE_GOLD,
       },
     },
   ];

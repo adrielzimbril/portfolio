@@ -15,7 +15,7 @@ import {
 import { Link } from "@/components/ui/link";
 import { useTranslations } from "use-intl";
 import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 
 interface PreviewProps {
   title?: string;

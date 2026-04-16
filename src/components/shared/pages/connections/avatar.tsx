@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/utils/utils";
 import { pickRandomColor } from "@/utils/pick-random-color";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
 import { Checked, LoveTime } from "@aurthle/icons";
 
 export function ConnectionAvatar({
@@ -41,8 +41,8 @@ export function ConnectionAvatar({
           className={cn(
             pickRandomColor(
               met
-                ? DEFAULT_COLOR_CODE_NAME_LIST.VIOLET
-                : DEFAULT_COLOR_CODE_NAME_LIST.ORANGE,
+                ? DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET
+                : DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE,
             ),
             " p-1.5 rounded-full",
           )}

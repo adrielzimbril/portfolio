@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
 import { getExternalUrl } from "@/utils/base-url";
 import { getMachineDate } from "@/utils/format-date";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
 import { pickRandomColorCode } from "@/utils";
 import BoringAvatar from "boring-avatars";
 import { useTranslations } from "use-intl";
@@ -35,7 +35,7 @@ export function CardInfo({
   const isDatePast = currentTime >= new Date(getMachineDate(date)).getTime();
   const isToday =
     new Date(getMachineDate(date)).getDate() === new Date().getDate();
-  const shouldShow = (isDatePast || isToday) || participantsCount > 0;
+  const shouldShow = isDatePast || isToday || participantsCount > 0;
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -46,10 +46,10 @@ export function CardInfo({
             primaryTag={date ?? tags[0]?.name}
             primaryTagColor={
               isDatePast
-                ? DEFAULT_COLOR_CODE_NAME_LIST.RED
+                ? DEFAULT_COLOR_CODE_NAME_TYPE.RED
                 : isToday
-                  ? DEFAULT_COLOR_CODE_NAME_LIST.YELLOW
-                  : DEFAULT_COLOR_CODE_NAME_LIST.BLUE
+                  ? DEFAULT_COLOR_CODE_NAME_TYPE.YELLOW
+                  : DEFAULT_COLOR_CODE_NAME_TYPE.BLUE
             }
             secondaryTag={
               isToday
@@ -60,19 +60,17 @@ export function CardInfo({
             }
             secondaryTagColor={
               isDatePast
-                ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
+                ? DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE
                 : isToday
-                  ? DEFAULT_COLOR_CODE_NAME_LIST.PURPLE
-                  : DEFAULT_COLOR_CODE_NAME_LIST.GREEN
+                  ? DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE
+                  : DEFAULT_COLOR_CODE_NAME_TYPE.GREEN
             }
             className="capitalize"
             tags={tags.map((tag) => tag.name)}
           />
         )}
         <Description description={excerpt} />
-        {shouldShow ? (
-          <ParticipantsStats count={participantsCount} />
-        ) : null}
+        {shouldShow ? <ParticipantsStats count={participantsCount} /> : null}
       </div>
 
       {action ? <Action label={action.label} href={action.href} /> : null}
@@ -114,7 +112,9 @@ function ParticipantsStats({ count }: { count: number }) {
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
     <Link href={getExternalUrl(slug)}>
-      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">{title}</h3>
+      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
+        {title}
+      </h3>
     </Link>
   );
 }

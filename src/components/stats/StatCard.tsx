@@ -6,7 +6,7 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 import { pickRandomColor } from "@/utils/pick-random-color";
 
 interface StatCardProps {
@@ -39,7 +39,7 @@ export function StatCard({
     { x: "15%", y: "70%", rotate: 12, delay: 0.3 },
   ],
 }: StatCardProps) {
-  const [isHovered, setIsHovered] = useState(false);;
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Card
@@ -107,8 +107,8 @@ export function StatCard({
                     "capitalize text-xs font-medium",
                     pickRandomColor(
                       decorationPattern
-                        ? DEFAULT_COLOR_CODE_NAME_LIST.VIOLET
-                        : DEFAULT_COLOR_CODE_NAME_LIST.ORANGE,
+                        ? DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET
+                        : DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE,
                     ),
                     decorationPattern && "size-max text-primary-foreground",
                   )}
@@ -122,8 +122,7 @@ export function StatCard({
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">{label}</h6>
                 <p className="text-sm text-b-white-invert-thr leading-[120%]">
-                  {value}{" "}
-                  {suffix}
+                  {value} {suffix}
                 </p>
               </div>
             </div>

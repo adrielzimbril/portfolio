@@ -13,7 +13,7 @@ import {
 import BoringAvatar from "boring-avatars";
 import { getExternalUrl, getImageUrl } from "@/utils/base-url";
 import { Tags } from "@/components/shared/pages/quests/tags";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
 import { cn, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { LinkDiagonalOne } from "@aurthle/icons";
@@ -118,7 +118,7 @@ function WinnerCard({ participant }: { participant: Winner }) {
                 ? t("quests.participants.badges.originalIdea")
                 : undefined
             }
-            primaryTagColor={DEFAULT_COLOR_CODE_NAME_LIST.PURPLE}
+            primaryTagColor={DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE}
             tags={participant.tags ?? []}
           />
         )}

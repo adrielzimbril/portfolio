@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/utils/utils";
 import { pickRandomColor } from "@/utils/pick-random-color";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types/default";
 import { useTranslations } from "use-intl";
 
 export function ConnectionBadge({ met }: { met: string | null }) {
@@ -14,7 +14,7 @@ export function ConnectionBadge({ met }: { met: string | null }) {
       {met ? (
         <Badge
           className={cn(
-            pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+            pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET),
             "size-max text-primary-foreground",
           )}
           variant="colored"
@@ -24,7 +24,7 @@ export function ConnectionBadge({ met }: { met: string | null }) {
       ) : (
         <Badge
           className={cn(
-            pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.ORANGE),
+            pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE),
             "size-max",
           )}
           variant="colored"

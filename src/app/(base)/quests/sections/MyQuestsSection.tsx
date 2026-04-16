@@ -11,7 +11,7 @@ import {
   isSubmissionClosed,
 } from "@/integrations/content/lib/quests";
 import { QuestCard } from "@/components/shared/pages/quests/card";
-import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types";
 import { useTranslations } from "use-intl";
 
 export function MyQuestsSection({ data }: { data: Quest[] }) {
@@ -39,7 +39,9 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
       loadingFallback={<LoadMoreCardsSkeleton kind="quests" count={2} />}
     >
       {list.map((quest) => {
-        const registrationClosed = isRegistrationClosed(quest.registration_deadline);
+        const registrationClosed = isRegistrationClosed(
+          quest.registration_deadline,
+        );
         const submissionClosed = isSubmissionClosed(
           quest.submission_deadline,
           quest.quest_end,
@@ -60,8 +62,8 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
                 ),
                 meta: {
                   color: registrationClosed
-                    ? DEFAULT_COLOR_CODE_NAME_LIST.RED
-                    : DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+                    ? DEFAULT_COLOR_CODE_NAME_TYPE.RED
+                    : DEFAULT_COLOR_CODE_NAME_TYPE.PURPLE,
                 },
               },
               {
@@ -72,8 +74,8 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
                 ),
                 meta: {
                   color: submissionClosed
-                    ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
-                    : DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+                    ? DEFAULT_COLOR_CODE_NAME_TYPE.ORANGE
+                    : DEFAULT_COLOR_CODE_NAME_TYPE.BLUE,
                 },
               },
             ]}

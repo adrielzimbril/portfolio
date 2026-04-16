@@ -11,7 +11,7 @@ import {
   getResourcesUrl,
   pickRandomColor,
 } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Eye, HourglassFill, LinkDiagonalOne } from "@aurthle/icons";
@@ -145,7 +145,7 @@ export function MostViewedThoughtCard({
               <div className="flex items-center justify-between gap-3">
                 <Badge
                   className={cn(
-                    pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                    pickRandomColor(DEFAULT_COLOR_CODE_NAME_TYPE.VIOLET),
                     "size-max text-primary-foreground",
                   )}
                   contentClassName={cn("font-bold tabular-nums tracking-tight")}

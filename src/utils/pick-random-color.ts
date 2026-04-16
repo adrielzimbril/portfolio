@@ -2,7 +2,7 @@ import {
   DEFAULT_TAG_COLOR,
   DEFAULT_CATEGORY_COLOR_NAME,
   DEFAULT_COLOR_CODE,
-  DEFAULT_COLOR_CODE_NAME,
+  DEFAULT_COLOR_CODE_NAME_TYPE,
 } from "@/types/default";
 
 /**
@@ -27,7 +27,7 @@ import {
  * logger.info(color); // Output: squircle-[#f9f9f9]
  */
 function pickRandomColorCode(
-  id?: DEFAULT_COLOR_CODE_NAME | number
+  id?: DEFAULT_COLOR_CODE_NAME_TYPE | number,
 ): DEFAULT_COLOR_CODE | undefined {
   const colors = Object.values(DEFAULT_COLOR_CODE);
 
@@ -73,7 +73,7 @@ function pickRandomColorCode(
  * logger.info(color); // Output: squircle-[#f9f9f9]
  */
 function pickRandomColor(
-  id?: DEFAULT_CATEGORY_COLOR_NAME | number
+  id?: DEFAULT_CATEGORY_COLOR_NAME | number,
 ): DEFAULT_TAG_COLOR | undefined {
   const colors = Object.values(DEFAULT_TAG_COLOR);
 
