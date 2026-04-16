@@ -31,6 +31,7 @@ export interface ServerStats {
 export interface ThoughtMetric {
   slug: string;
   title: string;
+  coverImage: string;
   count: number;
 }
 

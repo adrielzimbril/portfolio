@@ -164,6 +164,7 @@ export default async function StatsPage() {
               <MostViewedThoughtCard
                 title={serverStats.topViewedThoughts[0].title}
                 slug={serverStats.topViewedThoughts[0].slug}
+                coverImage={serverStats.topViewedThoughts[0].coverImage}
                 views={serverStats.topViewedThoughts[0].count}
               />
             )}
@@ -283,6 +284,7 @@ export default async function StatsPage() {
               <MostViewedThoughtCard
                 title={serverStats.topViewedThoughts[0].title}
                 slug={serverStats.topViewedThoughts[0].slug}
+                imageName={serverStats.topViewedThoughts[0].coverImage}
                 views={serverStats.topViewedThoughts[0].count}
               />
             )}

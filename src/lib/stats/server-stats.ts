@@ -8,10 +8,13 @@ import { getAllPosts } from "@/integrations/content/lib/posts";
 export async function getServerStats(locale?: string): Promise<ServerStats> {
   return unstable_cache(
     async () => {
-      // Fetch all posts to get titles (filtered by locale if provided)
+      // Fetch all posts to get titles and cover images (filtered by locale if provided)
       const allPosts = await getAllPosts({ locale });
       const postTitleMap = new Map(
         allPosts.map((post) => [post.slug, post.title]),
+      );
+      const postCoverMap = new Map(
+        allPosts.map((post) => [post.slug, post.cover || ""]),
       );
 
       // Fetch total views from page_counters
@@ -53,6 +56,7 @@ export async function getServerStats(locale?: string): Promise<ServerStats> {
       const topViewedThoughts: ThoughtMetric[] =
         topViewedData?.map((item) => ({
           slug: item.slug || "",
+          coverImage: postCoverMap.get(item.slug || "") || "",
           title: postTitleMap.get(item.slug || "") || item.slug || "",
           count: item.total_views || 0,
         })) || [];
