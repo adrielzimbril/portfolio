@@ -262,7 +262,7 @@ export function GitHubStatsCard({
             </div>
             <div
               className={cn(
-                "relative size-full flex flex-row z-20 items-center gap-2 md:gap-4 px-2 py-2 m-auto",
+                "relative size-full flex flex-row z-20 overflow-hidden items-center gap-2 md:gap-4 px-2 py-2 m-auto",
               )}
             >
               {/* <Badge

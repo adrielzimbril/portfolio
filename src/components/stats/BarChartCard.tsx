@@ -3,13 +3,32 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { cn } from "@/utils/utils";
+import { pickRandomColor } from "@/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColorCode } from "@/utils/pick-random-color";
-import { ChartBar, Heart, TrendUp, Eye, Calendar, Coffee, BookOne, TextFolder, ChatBubbleCircle, Sparkles, Star, Bug, Wrench } from "@aurthle/icons";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import {
+  ChartPresentationOne,
+  Heart,
+  TrendUp,
+  Eye,
+  Calendar,
+  Coffee,
+  BookOne,
+  TextFolder,
+  ChatBubbleCircle,
+  Sparkles,
+  Star,
+  Bug,
+  Wrench,
+} from "@aurthle/icons";
 
-const ICON_MAP: Record<string, React.ComponentType<{ size?: number; variant?: string }>> = {
-  ChartBar,
+const ICON_MAP: Record<
+  string,
+  React.ComponentType<{ size?: number; variant?: string }>
+> = {
+  ChartPresentationOne,
   Heart,
   TrendUp,
   Eye,
@@ -36,7 +55,6 @@ interface BarChartCardProps {
   title: string;
   description: string;
   iconName: string;
-  badgeColor: string;
   decorationEmoji: string;
   delay?: number;
   showDecorations?: boolean;
@@ -47,7 +65,6 @@ export function BarChartCard({
   title,
   description,
   iconName,
-  badgeColor,
   decorationEmoji,
   delay = 0,
   showDecorations = false,
@@ -84,33 +101,34 @@ export function BarChartCard({
 
           {showDecorations && (
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              {data.slice(0, 5).map((item, i) => (
-                item.icon && (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, scale: 0, rotate: -20 }}
-                    animate={{
-                      opacity: isHovered ? 0.2 : 0.1,
-                      scale: isHovered ? 1.2 : 1,
-                      rotate: isHovered ? 10 : 0,
-                      y: isHovered ? -8 : 0,
-                    }}
-                    transition={{
-                      opacity: { duration: 0.4, delay: delay + i * 0.1 },
-                      scale: { type: "spring", stiffness: 200, damping: 15 },
-                      rotate: { type: "spring", stiffness: 200, damping: 15 },
-                      y: { type: "spring", stiffness: 200, damping: 15 },
-                    }}
-                    className="absolute text-2xl"
-                    style={{ 
-                      left: `${10 + i * 20}%`, 
-                      top: `${20 + i * 15}%` 
-                    }}
-                  >
-                    {item.icon}
-                  </motion.span>
-                )
-              ))}
+              {data.slice(0, 5).map(
+                (item, i) =>
+                  item.icon && (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, scale: 0, rotate: -20 }}
+                      animate={{
+                        opacity: isHovered ? 0.2 : 0.1,
+                        scale: isHovered ? 1.2 : 1,
+                        rotate: isHovered ? 10 : 0,
+                        y: isHovered ? -8 : 0,
+                      }}
+                      transition={{
+                        opacity: { duration: 0.4, delay: delay + i * 0.1 },
+                        scale: { type: "spring", stiffness: 200, damping: 15 },
+                        rotate: { type: "spring", stiffness: 200, damping: 15 },
+                        y: { type: "spring", stiffness: 200, damping: 15 },
+                      }}
+                      className="absolute text-2xl"
+                      style={{
+                        left: `${10 + i * 20}%`,
+                        top: `${20 + i * 15}%`,
+                      }}
+                    >
+                      {item.icon}
+                    </motion.span>
+                  ),
+              )}
             </div>
           )}
 
@@ -123,20 +141,18 @@ export function BarChartCard({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  badgeColor,
-                  "size-max text-primary-foreground",
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                  "size-max text-primary-foreground!",
                 )}
-                variant="colored"
                 size="lg"
+                variant="colored"
                 circle
               >
                 <Icon size={32} variant="bulk" />
               </Badge>
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">{title}</h6>
-                <p className="text-xs text-muted-foreground">
-                  {description}
-                </p>
+                <p className="text-xs text-muted-foreground">{description}</p>
               </div>
             </div>
 

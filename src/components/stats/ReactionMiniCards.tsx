@@ -2,15 +2,14 @@
 
 import { motion } from "motion/react";
 import { useState } from "react";
-import { Heart } from "@aurthle/icons";
+import { HeartOne } from "@aurthle/icons";
 import type { ReactionType } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";
+import { pickRandomColor } from "@/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
-import {
-  pickRandomColorCode,
-} from "@/utils/pick-random-color";
+import { pickRandomColorCode } from "@/utils/pick-random-color";
 
 interface ReactionMiniCardsProps {
   reactions: Record<ReactionType, number>;
@@ -92,14 +91,14 @@ export function ReactionMiniCards({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  "squircle-violet-500",
-                  "size-max text-primary-foreground",
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                  "size-max text-primary-foreground!",
                 )}
-                variant="colored"
                 size="lg"
+                variant="colored"
                 circle
               >
-                <Heart size={32} variant="bulk" />
+                <HeartOne size={32} variant="bulk" />
               </Badge>
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">Reactions</h6>
@@ -132,7 +131,11 @@ export function ReactionMiniCards({
                         animate={{
                           scale: isHovered ? 1.2 : 1,
                         }}
-                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 200,
+                          damping: 15,
+                        }}
                       >
                         {config.Icon}
                       </motion.span>

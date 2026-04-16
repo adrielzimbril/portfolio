@@ -162,8 +162,7 @@ export default async function StatsPage() {
             }))}
             title="Categories"
             description="Thoughts by topic"
-            iconName="ChartBar"
-            badgeColor="squircle-violet-500"
+            iconName="ChartPresentationOne"
             decorationEmoji="📊"
           />
           <ReactionMiniCards reactions={serverStats.reactions} />
