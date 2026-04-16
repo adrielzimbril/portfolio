@@ -9,6 +9,7 @@ import {
   GetSignedUploadUrlHandler,
   GetSignedUrlHandler,
 } from "@/integrations/storage/types";
+import { getS3Config } from "@/config";
 
 let s3Client: S3Client | null = null;
 
@@ -17,30 +18,27 @@ const getS3Client = () => {
     return s3Client;
   }
 
-  const s3Endpoint = process.env.S3_ENDPOINT as string;
-  if (!s3Endpoint) {
+  const { endpoint, region, accessKeyId, secretAccessKey } = getS3Config();
+
+  if (!endpoint) {
     throw new Error("Missing env variable S3_ENDPOINT");
   }
 
-  const s3Region = (process.env.S3_REGION as string) || "auto";
-
-  const s3AccessKeyId = process.env.S3_ACCESS_KEY_ID as string;
-  if (!s3AccessKeyId) {
+  if (!accessKeyId) {
     throw new Error("Missing env variable S3_ACCESS_KEY_ID");
   }
 
-  const s3SecretAccessKey = process.env.S3_SECRET_ACCESS_KEY as string;
-  if (!s3SecretAccessKey) {
+  if (!secretAccessKey) {
     throw new Error("Missing env variable S3_SECRET_ACCESS_KEY");
   }
 
   s3Client = new S3Client({
-    region: s3Region,
-    endpoint: s3Endpoint,
+    region: region || "auto",
+    endpoint,
     forcePathStyle: true,
     credentials: {
-      accessKeyId: s3AccessKeyId,
-      secretAccessKey: s3SecretAccessKey,
+      accessKeyId,
+      secretAccessKey,
     },
   });
 

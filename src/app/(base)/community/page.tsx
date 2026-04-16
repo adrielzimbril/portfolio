@@ -34,17 +34,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function CommunityPage() {
   const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
+  const { url, anonKey } = getSupabaseConfig();
+  const supabase = createServerClient(url!, anonKey!, {
+    cookies: {
+      getAll() {
+        return cookieStore.getAll();
       },
     },
-  );
+  });
 
   const {
     data: { user },

@@ -182,16 +182,17 @@ export async function POST(req: NextRequest) {
   }
 
   // 2) Add to Brevo lists (general + product-specific)
-  const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
+  const brevoConfig = getBrevoConfig();
+  const generalId = Number(brevoConfig.generalListId);
 
   function getListIdByProduct(product?: ResourceType) {
     const map: Record<ResourceType, number | undefined> = {
-      course: Number(process.env.BREVO_COURSE_LIST_ID),
-      ebook: Number(process.env.BREVO_EBOOKS_LIST_ID),
-      video: Number(process.env.BREVO_VIDEO_LIST_ID),
-      masterclass: Number(process.env.BREVO_MASTERCLASS_LIST_ID),
-      figma_template: Number(process.env.BREVO_FIGMA_TEMPLATE_LIST_ID),
-      code: Number(process.env.BREVO_CODE_LIST_ID),
+      course: Number(brevoConfig.courseListId),
+      ebook: Number(brevoConfig.ebooksListId),
+      video: Number(brevoConfig.videoListId),
+      masterclass: Number(brevoConfig.masterclassListId),
+      figma_template: Number(brevoConfig.figmaTemplateListId),
+      code: Number(brevoConfig.codeListId),
     };
     return product ? map[product] : undefined;
   }

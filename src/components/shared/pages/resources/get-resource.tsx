@@ -17,6 +17,7 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils/base-url";
 import { useTurnstile } from "@/integrations/anti-bot/turnstile";
+import { getTurnstileConfig } from "@/config";
 
 export function GetResource({
   id,
@@ -55,7 +56,7 @@ export function GetResource({
   });
   const isEmailValid = !Boolean(emailValidator(email));
 
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
+  const { siteKey } = getTurnstileConfig();
 
   const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
     appearance: "execute",

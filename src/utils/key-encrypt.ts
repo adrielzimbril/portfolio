@@ -1,7 +1,8 @@
 import { apiRoutes } from "@/data/api-routes";
 import { getPathUrl, logger } from "@/utils";
+import { ConfigValue } from "@/config";
 
-const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
+const SECRET_KEY = ConfigValue.API_SECRET_KEY || "default-secret-key";
 
 // Check if we are on the server or client
 const isServer = typeof window === "undefined";

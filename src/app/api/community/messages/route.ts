@@ -1,21 +1,19 @@
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { getSupabaseConfig } from "@/config";
 
 export async function GET() {
   try {
     const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
+    const { url, anonKey } = getSupabaseConfig();
+    const supabase = createServerClient(url!, anonKey!, {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
         },
       },
-    );
+    });
 
     const { data: messages, error } = await supabase
       .from("community_wall")

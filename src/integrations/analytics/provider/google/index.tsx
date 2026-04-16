@@ -1,17 +1,18 @@
 "use client";
 
 import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
+import { ConfigValue } from "@/config";
 
-const googleTagId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string;
+const googleTagId = ConfigValue.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string;
 
 export function AnalyticsScript() {
-	return <GoogleAnalytics gaId={googleTagId} />;
+  return <GoogleAnalytics gaId={googleTagId} />;
 }
 
 export function useAnalytics() {
-	const trackEvent = sendGAEvent;
+  const trackEvent = sendGAEvent;
 
-	return {
-		trackEvent,
-	};
+  return {
+    trackEvent,
+  };
 }

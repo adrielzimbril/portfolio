@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { sendEmail } from "@/integrations/mail";
 import { Locale } from "@/types";
 import logger from "@/utils/logger";
+import { getSupabaseConfig, isDevelopment } from "@/config";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -13,28 +14,25 @@ export async function GET(request: Request) {
 
   if (code) {
     const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          setAll(cookiesToSet) {
-            try {
-              cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options),
-              );
-            } catch {
-              // The `setAll` method was called from a Server Component.
-              // This can be ignored if you have middleware refreshing
-              // user sessions.
-            }
-          },
+    const { url, anonKey } = getSupabaseConfig();
+    const supabase = createServerClient(url!, anonKey!, {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
+          } catch {
+            // The `setAll` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
+          }
         },
       },
-    );
+    });
 
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
@@ -72,7 +70,7 @@ export async function GET(request: Request) {
       }
 
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
-      const isLocalEnv = process.env.NODE_ENV === "development";
+      const isLocalEnv = isDevelopment();
       if (isLocalEnv) {
         // we can be sure that there is no proxy
         return NextResponse.redirect(`${origin}${next}`);

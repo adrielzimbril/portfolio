@@ -2,23 +2,21 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
+import { getSupabaseConfig } from "@/config";
 
 export async function getReactions(
   pageType: PageType,
   entityId: string,
 ): Promise<Record<ReactionType, number>> {
   const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
+  const { url, anonKey } = getSupabaseConfig();
+  const supabase = createServerClient(url!, anonKey!, {
+    cookies: {
+      getAll() {
+        return cookieStore.getAll();
       },
     },
-  );
+  });
 
   const { data, error } = await supabase
     .from("reactions" as any)

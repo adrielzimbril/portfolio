@@ -7,14 +7,18 @@ import {
   SendSmtpEmail,
 } from "@getbrevo/brevo";
 import { siteConfig } from "@/data/config";
+import { getBrevoConfig } from "@/config";
 
 const { from, replyTo } = appConfig.mails;
 const { details } = siteConfig;
 
-const MAIL_PROVIDER_API_KEY = process.env.BREVO_API_KEY || "";
+const { apiKey: MAIL_PROVIDER_API_KEY } = getBrevoConfig();
 
 const provider = new TransactionalEmailsApi();
-provider.setApiKey(TransactionalEmailsApiApiKeys.apiKey, MAIL_PROVIDER_API_KEY);
+provider.setApiKey(
+  TransactionalEmailsApiApiKeys.apiKey,
+  MAIL_PROVIDER_API_KEY || "",
+);
 
 export const send: SendEmailHandler = async ({ to, subject, body }) => {
   if (!MAIL_PROVIDER_API_KEY) {

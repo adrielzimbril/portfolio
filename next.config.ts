@@ -3,19 +3,20 @@ import type { NextConfig } from "next";
 import nextIntlPlugin from "next-intl/plugin";
 import { appConfig } from "@data/app-config";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { ConfigValue } from "@/config";
 
 const withNextIntl = nextIntlPlugin({
   requestConfig: "./src/integrations/i18n/request.ts",
   experimental: {
     createMessagesDeclaration: Object.keys(appConfig.i18n.locales).map(
-      (locale) => `./src/integrations/i18n/translations/${locale}.json`
+      (locale) => `./src/integrations/i18n/translations/${locale}.json`,
     ),
   },
 });
 
-const IsDEV = process.env.NODE_ENV === "development";
+const IsDEV = ConfigValue.NODE_ENV === "development";
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
+  enabled: ConfigValue.ANALYZE === "true",
 });
 
 const nextConfig: NextConfig = {
@@ -60,4 +61,6 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@vercel/og"],
 };
 
-export default withContentCollections(withNextIntl(withBundleAnalyzer(nextConfig)));
+export default withContentCollections(
+  withNextIntl(withBundleAnalyzer(nextConfig)),
+);

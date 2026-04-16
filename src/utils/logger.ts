@@ -18,6 +18,8 @@
  * logger.success("Operation completed successfully!");
  * // ✅ [SUCCESS] Operation completed successfully!
  */
+import { isDevelopment } from "@/config";
+
 export const logger = {
   info: (...args: unknown[]) => console.log("ℹ️ [INFO]", ...args),
   warn: (...args: unknown[]) => console.warn("⚠️ [WARN]", ...args),
@@ -25,12 +27,10 @@ export const logger = {
   success: (...args: unknown[]) => console.log("✅ [SUCCESS]", ...args),
 
   debug: (...args: unknown[]) =>
-    process.env.NODE_ENV === "development" &&
-    console.debug("🐛 [DEBUG]", ...args),
+    isDevelopment() && console.debug("🐛 [DEBUG]", ...args),
 
   trace: (...args: unknown[]) =>
-    process.env.NODE_ENV === "development" &&
-    console.trace("[🗺️ TRACE]", ...args),
+    isDevelopment() && console.trace("[🗺️ TRACE]", ...args),
 
   /**
    * Environment variable logging

@@ -1,3 +1,5 @@
+import { ConfigValue } from "@/config";
+
 export type Config = {
   i18n: {
     enabled: boolean;
@@ -79,7 +81,7 @@ export const appConfig = {
   storage: {
     // define the name of the buckets for the different types of files
     bucketNames: {
-      avatars: process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME ?? "avatars",
+      avatars: ConfigValue.NEXT_PUBLIC_AVATARS_BUCKET_NAME ?? "avatars",
     },
   },
   contactForm: {

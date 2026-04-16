@@ -1,10 +1,12 @@
 import { NextRequest } from "next/server";
 import { supabase } from "@/integrations/supabase/client";
-import logger from "@/utils/logger";
+import { getImageUrl } from "@/utils/base-url";
+import { getBrevoConfig } from "@/config";
 import { sendEmail } from "@/integrations/mail";
 import { appConfig } from "@/data/app-config";
 import { Locale } from "@/types";
 import { addContact, ContactProvider } from "@/integrations/contact";
+import logger from "@/utils/logger";
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,7 +33,7 @@ export async function POST(req: NextRequest) {
     if (!intention || !name || !email || !url) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -90,7 +92,7 @@ export async function POST(req: NextRequest) {
       } catch (e) {
         logger.error(
           `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-          { error: e }
+          { error: e },
         );
       }
     } else {
@@ -101,12 +103,13 @@ export async function POST(req: NextRequest) {
       } catch (e) {
         logger.error(
           `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-          { error: e }
+          { error: e },
         );
       }
     }
 
-    const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
+    const { generalListId } = getBrevoConfig();
+    const generalId = Number(generalListId);
 
     try {
       if (generalId) {
@@ -122,7 +125,7 @@ export async function POST(req: NextRequest) {
       // Do not fail the flow if Brevo fails
       logger.warn(
         `Brevo add contact error for user ${userId} - ${email}:`,
-        (e as Error)?.message || e
+        (e as Error)?.message || e,
       );
     }
 
@@ -147,7 +150,7 @@ export async function POST(req: NextRequest) {
         JSON.stringify({ error: "DB_ERROR", details: dbError.message }),
         {
           status: 500,
-        }
+        },
       );
     }
 
