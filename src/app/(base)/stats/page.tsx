@@ -18,11 +18,10 @@ import {
   Calendar,
   ChatBubbleCircle,
 } from "@aurthle/icons";
-import { CategoryBarChart } from "@/components/stats/CategoryBarChart";
+import { BarChartCard } from "@/components/stats/BarChartCard";
 import { GitHubStatsCard } from "@/components/stats/GitHubStatsCard";
 import { LighthouseScoreCard } from "@/components/stats/LighthouseScoreCard";
 import { TopThoughtsList } from "@/components/stats/TopThoughtsList";
-import { ReactionBreakdown } from "@/components/stats/ReactionBreakdown";
 import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/stats/ContributionGraphCard";
 import { MostViewedThoughtCard } from "@/components/stats/MostViewedThoughtCard";
@@ -155,8 +154,43 @@ export default async function StatsPage() {
               decoration="❤️"
             />
           </div>
-          <CategoryBarChart categories={buildTimeStats.categories} />
-          <ReactionBreakdown reactions={serverStats.reactions} />
+          <BarChartCard
+            data={buildTimeStats.categories.map((cat) => ({
+              name: cat.name,
+              count: cat.count,
+            }))}
+            title="Categories"
+            description="Thoughts by topic"
+            iconName="ChartBar"
+            badgeColor="squircle-violet-500"
+            decorationEmoji="📊"
+          />
+          <BarChartCard
+            data={Object.entries(serverStats.reactions).map(
+              ([type, count]) => ({
+                name: type.charAt(0).toUpperCase() + type.slice(1),
+                count,
+                icon:
+                  type === "like"
+                    ? "👍"
+                    : type === "heart"
+                      ? "❤️"
+                      : type === "celebrate"
+                        ? "🎉"
+                        : type === "insightful"
+                          ? "💡"
+                          : "🤔",
+              }),
+            )}
+            title="Reactions"
+            description={`${Object.values(serverStats.reactions)
+              .reduce((sum, count) => sum + count, 0)
+              .toLocaleString()} total`}
+            iconName="Heart"
+            badgeColor="squircle-violet-500"
+            decorationEmoji="❤️"
+            showDecorations
+          />
           {serverStats.topViewedThoughts.length > 0 &&
             serverStats.topViewedThoughts[0] && (
               <MostViewedThoughtCard

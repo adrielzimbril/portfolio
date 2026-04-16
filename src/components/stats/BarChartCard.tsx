@@ -2,38 +2,61 @@
 
 import { motion } from "motion/react";
 import { useState } from "react";
-import { ChartBar } from "@aurthle/icons";
-import type { CategoryCount } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
-import {
-  pickRandomColorCode,
-} from "@/utils/pick-random-color";
+import { pickRandomColorCode } from "@/utils/pick-random-color";
+import { ChartBar, Heart, TrendUp, Eye, Calendar, Coffee, BookOne, TextFolder, ChatBubbleCircle, Sparkles, Star, Bug, Wrench } from "@aurthle/icons";
 
-interface CategoryBarChartProps {
-  categories: CategoryCount[];
-  delay?: number;
+const ICON_MAP: Record<string, React.ComponentType<{ size?: number; variant?: string }>> = {
+  ChartBar,
+  Heart,
+  TrendUp,
+  Eye,
+  Calendar,
+  Coffee,
+  BookOne,
+  TextFolder,
+  ChatBubbleCircle,
+  Sparkles,
+  Star,
+  Bug,
+  Wrench,
+};
+
+export interface BarChartData {
+  name: string;
+  count: number;
+  color?: string;
+  icon?: string;
 }
 
-const BAR_COLORS = [
-  DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
-  DEFAULT_COLOR_CODE_NAME_LIST.GREEN,
-  DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
-  DEFAULT_COLOR_CODE_NAME_LIST.ORANGE,
-  DEFAULT_COLOR_CODE_NAME_LIST.PINK,
-  DEFAULT_COLOR_CODE_NAME_LIST.INDIGO,
-];
+interface BarChartCardProps {
+  data: BarChartData[];
+  title: string;
+  description: string;
+  iconName: string;
+  badgeColor: string;
+  decorationEmoji: string;
+  delay?: number;
+  showDecorations?: boolean;
+}
 
-export function CategoryBarChart({
-  categories,
+export function BarChartCard({
+  data,
+  title,
+  description,
+  iconName,
+  badgeColor,
+  decorationEmoji,
   delay = 0,
-}: CategoryBarChartProps) {
+  showDecorations = false,
+}: BarChartCardProps) {
+  const Icon = ICON_MAP[iconName] || ChartBar;
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
-  const maxCount = Math.max(...categories.map((c) => c.count), 1);
-  const displayCategories = categories.slice(0, 6);
+  const maxCount = Math.max(...data.map((d) => d.count), 1);
+  const displayData = data.slice(0, 6);
 
   return (
     <Card
@@ -56,8 +79,40 @@ export function CategoryBarChart({
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
             className="absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
           >
-            📊
+            {decorationEmoji}
           </motion.div>
+
+          {showDecorations && (
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+              {data.slice(0, 5).map((item, i) => (
+                item.icon && (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, scale: 0, rotate: -20 }}
+                    animate={{
+                      opacity: isHovered ? 0.2 : 0.1,
+                      scale: isHovered ? 1.2 : 1,
+                      rotate: isHovered ? 10 : 0,
+                      y: isHovered ? -8 : 0,
+                    }}
+                    transition={{
+                      opacity: { duration: 0.4, delay: delay + i * 0.1 },
+                      scale: { type: "spring", stiffness: 200, damping: 15 },
+                      rotate: { type: "spring", stiffness: 200, damping: 15 },
+                      y: { type: "spring", stiffness: 200, damping: 15 },
+                    }}
+                    className="absolute text-2xl"
+                    style={{ 
+                      left: `${10 + i * 20}%`, 
+                      top: `${20 + i * 15}%` 
+                    }}
+                  >
+                    {item.icon}
+                  </motion.span>
+                )
+              ))}
+            </div>
+          )}
 
           <div className="relative w-full flex flex-col gap-2">
             <div
@@ -68,32 +123,31 @@ export function CategoryBarChart({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  "squircle-violet-500",
+                  badgeColor,
                   "size-max text-primary-foreground",
                 )}
                 variant="colored"
                 size="lg"
                 circle
               >
-                <ChartBar size={32} variant="bulk" />
+                <Icon size={32} variant="bulk" />
               </Badge>
               <div className="flex flex-col items-start gap-2">
-                <h6 className="tracking-wide">Categories</h6>
+                <h6 className="tracking-wide">{title}</h6>
                 <p className="text-xs text-muted-foreground">
-                  Thoughts by topic
+                  {description}
                 </p>
               </div>
             </div>
 
             <div className="flex flex-1 flex-col justify-center space-y-3">
-              {displayCategories.map((category, index) => {
-                const percentage = (category.count / maxCount) * 100;
-                const color = BAR_COLORS[index % BAR_COLORS.length];
+              {displayData.map((item, index) => {
+                const percentage = (item.count / maxCount) * 100;
                 const isBarHovered = hoveredBar === index;
 
                 return (
                   <motion.div
-                    key={category.name}
+                    key={item.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: delay + index * 0.08 }}
@@ -102,9 +156,14 @@ export function CategoryBarChart({
                     onMouseLeave={() => setHoveredBar(null)}
                   >
                     <div className="mb-1 flex items-center justify-between">
-                      <span className="truncate text-xs font-medium text-muted-foreground">
-                        {category.name}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        {item.icon && (
+                          <span className="text-lg">{item.icon}</span>
+                        )}
+                        <span className="truncate text-xs font-medium text-muted-foreground">
+                          {item.name}
+                        </span>
+                      </div>
                       <motion.span
                         animate={{
                           scale: isBarHovered ? 1.1 : 1,
@@ -114,7 +173,7 @@ export function CategoryBarChart({
                         }}
                         className="ml-2 shrink-0 text-xs font-semibold tabular-nums"
                       >
-                        {category.count}
+                        {item.count.toLocaleString()}
                       </motion.span>
                     </div>
                     <div className="relative h-3 w-full overflow-hidden rounded-full bg-border/30">
@@ -137,7 +196,11 @@ export function CategoryBarChart({
                           },
                         }}
                         className="absolute inset-y-0 left-0 origin-left rounded-full"
-                        style={{ backgroundColor: pickRandomColorCode(color) }}
+                        style={{
+                          backgroundColor: item.color
+                            ? pickRandomColorCode(item.color as any)
+                            : pickRandomColorCode("blue" as any),
+                        }}
                       />
                     </div>
                   </motion.div>
@@ -145,12 +208,12 @@ export function CategoryBarChart({
               })}
             </div>
 
-            {categories.length > 6 && (
+            {data.length > 6 && (
               <motion.p
                 animate={{ opacity: isHovered ? 1 : 0.6 }}
                 className="mt-4 text-xs text-muted-foreground"
               >
-                +{categories.length - 6} more categories
+                +{data.length - 6} more items
               </motion.p>
             )}
           </div>
