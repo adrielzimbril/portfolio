@@ -28,6 +28,8 @@ interface ReactionButtonProps {
   minimal?: boolean;
 }
 
+import useSWR, { useSWRConfig } from "swr";
+
 export function ReactionButton({
   pageType,
   entityId,
@@ -36,66 +38,78 @@ export function ReactionButton({
   className,
   minimal = false,
 }: ReactionButtonProps) {
+  const { mutate: globalMutate } = useSWRConfig();
   const [user, setUser] = useState<any>(null);
   const [currentUserId, setCurrentUserId] = useState<string | undefined>();
-  const [isReacted, setIsReacted] = useState(false);
-  const [reactionCount, setReactionCount] = useState(count);
   const [isLoading, setIsLoading] = useState(false);
 
   const emoji: string = REACTION_EMOJIS[reactionType];
 
   useEffect(() => {
-    const checkUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const previousUser = user;
+    const initUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
-
-      // Get current user ID (authenticated or anonymous)
       const userId = getCurrentUserId(user);
-      const anonymousId = getAnonymousUserId();
       setCurrentUserId(userId);
-
-      // Sync anonymous reactions when user authenticates
-      if (user?.id && !previousUser?.id && anonymousId) {
+      
+      const anonymousId = getAnonymousUserId();
+      if (user?.id && anonymousId) {
         await syncAnonymousReactionsOnLogin(anonymousId);
       }
-
-      if (userId || anonymousId) {
-        // Check if user has already reacted (check both user_id and anonymous_id)
-        // This allows reactions to persist across auth states on the same device
-        let checkQuery = supabase
-          .from("reactions" as any)
-          .select("*")
-          .eq("page_type", pageType)
-          .eq("entity_id", entityId)
-          .eq("reaction_type", reactionType);
-
-        if (user?.id) {
-          checkQuery = checkQuery.eq("user_id", user.id);
-        } else {
-          checkQuery = checkQuery.eq("anonymous_id", anonymousId);
-        }
-
-        const { data } = await checkQuery.maybeSingle();
-
-        setIsReacted(!!data);
-      }
     };
+    initUser();
+  }, []);
 
-    checkUser();
-  }, [entityId, reactionType, pageType]);
+  const statusKey = currentUserId 
+    ? `reaction_status_${pageType}_${entityId}_${reactionType}_${currentUserId}` 
+    : null;
+
+  const { data: isReacted, mutate: mutateStatus } = useSWR(
+    statusKey,
+    async () => {
+      if (!currentUserId) return false;
+      let query = supabase
+        .from("reactions" as any)
+        .select("*")
+        .eq("page_type", pageType)
+        .eq("entity_id", entityId)
+        .eq("reaction_type", reactionType);
+
+      if (user?.id) {
+        query = query.eq("user_id", user.id);
+      } else {
+        query = query.eq("anonymous_id", currentUserId);
+      }
+
+      const { data } = await query.maybeSingle();
+      return !!data;
+    },
+    { revalidateOnFocus: true }
+  );
 
   const handleReaction = async () => {
     if (!currentUserId || isLoading) return;
 
     setIsLoading(true);
 
+    const countsKey = `reactions_${pageType}_${entityId}`;
+    
+    // Optimistic Update
+    const nextIsReacted = !isReacted;
+    
+    // Update both status and global counts optimistically
+    mutateStatus(nextIsReacted, false);
+    globalMutate(countsKey, (current: any) => {
+      if (!current) return current;
+      return {
+        ...current,
+        [reactionType]: Math.max(0, current[reactionType] + (nextIsReacted ? 1 : -1))
+      };
+    }, false);
+
     try {
       if (isReacted) {
-        // Remove reaction - handle both authenticated and anonymous users
+        // Remove reaction
         let deleteQuery = supabase
           .from("reactions" as any)
           .delete()
@@ -110,10 +124,7 @@ export function ReactionButton({
         }
 
         const { error } = await deleteQuery;
-
         if (error) throw error;
-        setIsReacted(false);
-        setReactionCount(Math.max(0, reactionCount - 1));
       } else {
         // Add reaction
         const reactionData: any = {
@@ -122,7 +133,6 @@ export function ReactionButton({
           reaction_type: reactionType,
         };
 
-        // Add user_id or anonymous_id based on user type
         if (user?.id) {
           reactionData.user_id = user.id;
         } else {
@@ -133,16 +143,22 @@ export function ReactionButton({
           .from("reactions" as any)
           .insert(reactionData);
 
-        if (error) throw error;
-        setIsReacted(true);
-        setReactionCount(reactionCount + 1);
+        if (error && error.code !== "23505") throw error;
       }
     } catch (error) {
       console.error("Reaction error:", error);
+      // Rollback
+      mutateStatus(isReacted, true);
+      globalMutate(countsKey); 
     } finally {
       setIsLoading(false);
+      // Final revalidation to ensure sync
+      mutateStatus();
+      globalMutate(countsKey);
     }
   };
+
+  const reactionCount = count; // We use the prop directly as it's now managed by global useReactions SWR hook
 
   return (
     <button
@@ -150,26 +166,29 @@ export function ReactionButton({
       disabled={isLoading}
       title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
       className={cn(
-        "flex items-center justify-center transition-all duration-200 cursor-pointer group/btn disabled:opacity-50",
+        "flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
         minimal 
           ? "size-10 rounded-full hover:bg-white/10" 
-          : "gap-1.5 px-3 py-1.5 rounded-full bg-sh-white hover:bg-white",
-        isReacted && !minimal && "bg-white",
-        isReacted && minimal && "bg-slate-200/20",
+          : "gap-1.5 px-3 py-1.5 rounded-full bg-sh-white hover:bg-white border border-transparent",
+        isReacted && !minimal && "bg-background border-border shadow-sm ring-2 ring-indigo-500/20",
+        isReacted && minimal && "bg-indigo-500/10 ring-1 ring-indigo-500/30",
         className,
       )}
     >
       <span
         className={cn(
-          "text-lg transition-transform duration-200",
+          "text-lg transition-transform duration-300",
           "group-hover/btn:scale-125",
-          isReacted && !minimal && "scale-110",
+          isReacted && "scale-110 drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]",
         )}
       >
         {emoji}
       </span>
       {!minimal && (
-        <span className="text-xs font-medium text-foreground">
+        <span className={cn(
+          "text-xs font-bold transition-colors",
+          isReacted ? "text-indigo-600" : "text-foreground"
+        )}>
           {reactionCount}
         </span>
       )}
