@@ -14,6 +14,8 @@ import {
 } from "./LighthouseScoreCard/lighthouse-utils";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { pickRandomColor } from "@/utils";
 
 interface LighthouseScoreCardProps {
   scores: LighthouseScores;
@@ -68,15 +70,22 @@ export function LighthouseScoreCard({
               <div className="flex flex-row items-center justify-between w-fit">
                 <Badge
                   className={cn(
-                    "capitalize",
+                    "capitalize text-xs font-medium",
+                    pickRandomColor(
+                      DEFAULT_COLOR_CODE_NAME_LIST.PINKISH_ORANGE,
+                    ),
                     // overallColors.squircle,
+                    "size-max text-primary-foreground!",
                   )}
-                  // variant="colored"
+                  variant="colored"
                   size="lg"
                   circle
                 >
                   <DeviceIcon
-                    className={cn(overallColors.text)}
+                    className={cn(
+                      overallColors.text,
+                      "text-primary-foreground!",
+                    )}
                     variant="bold"
                   />
                 </Badge>

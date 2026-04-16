@@ -159,6 +159,14 @@ export default async function StatsPage() {
           </div>
           <CategoryBarChart categories={buildTimeStats.categories} />
           <ReactionBreakdown reactions={serverStats.reactions} />
+          {serverStats.topViewedThoughts.length > 0 &&
+            serverStats.topViewedThoughts[0] && (
+              <MostViewedThoughtCard
+                title={serverStats.topViewedThoughts[0].title}
+                slug={serverStats.topViewedThoughts[0].slug}
+                views={serverStats.topViewedThoughts[0].count}
+              />
+            )}
         </div>
       </SectionLayout>
 
@@ -274,6 +282,7 @@ export default async function StatsPage() {
             serverStats.topViewedThoughts[0] && (
               <MostViewedThoughtCard
                 title={serverStats.topViewedThoughts[0].title}
+                slug={serverStats.topViewedThoughts[0].slug}
                 views={serverStats.topViewedThoughts[0].count}
               />
             )}
