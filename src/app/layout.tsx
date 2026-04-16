@@ -14,8 +14,12 @@ import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
-import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
 import { notFound } from "next/navigation";
+
+// Boneyard-js skeleton registry
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import "./bones/registry";
 
 export const viewport: Viewport = {
   width: "device-width",

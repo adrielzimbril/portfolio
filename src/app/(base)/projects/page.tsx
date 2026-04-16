@@ -7,6 +7,7 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllProjects } from "@/integrations/content/lib";
 import { MyProjectsSection } from "@/app/(base)/projects/sections/MyProjectsSection";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -39,10 +40,18 @@ export default async function MyProject() {
 
   return (
     <>
-      <HeaderSection />
-      {data.length > 0 && <MyProjectsSection data={data} />}
+      <Skeleton name="projects-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      {data.length > 0 && (
+        <Skeleton name="projects-listing" loading={false}>
+          <MyProjectsSection data={data} />
+        </Skeleton>
+      )}
       {/* <ResourceWrapper initialData={data} type={PageType.PROJECT} /> */}
-      <CallToAction isPage />
+      <Skeleton name="projects-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

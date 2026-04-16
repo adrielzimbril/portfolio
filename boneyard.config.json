@@ -1,0 +1,11 @@
+{
+  "animate": "shimmer",
+  "speed": "2s",
+  "borderRadius": "0.5rem",
+  "color": "hsl(210 40% 96.1%)",
+  "darkColor": "hsl(223 47% 11%)",
+  "shimmerColor": "rgba(255, 255, 255, 0.4)",
+  "darkShimmerColor": "rgba(255, 255, 255, 0.05)",
+  "shimmerAngle": 110,
+  "transition": 300
+}

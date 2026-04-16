@@ -165,7 +165,17 @@
   --animate-collapsible-down: collapsible-down 0.2s ease-out;
   --animate-collapsible-up: collapsible-up 0.2s ease-out;
   --animate-caret-blink: caret-blink 1.25s ease-out infinite;
+  --animate-skeleton-shimmer: skeleton-shimmer 2s ease-in-out infinite;
   --animate-ping-slow: ping-slow 2.25s ease infinite;
+
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
  
   @keyframes loading-progress {
     0% { width: 0%; }

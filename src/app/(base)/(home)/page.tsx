@@ -16,6 +16,7 @@ import {
   DefaultSectionSkeleton,
   ProjectsSectionSkeleton,
 } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -45,34 +46,52 @@ export default function Home() {
 
   return (
     <>
-      <HeaderSection />
+      <Skeleton name="home-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
       {showed.talks && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <TalksSection />
+        <Suspense fallback={<Skeleton name="home-talks" className="w-full h-80" />}>
+          <Skeleton name="home-talks" loading={false}>
+            <TalksSection />
+          </Skeleton>
         </Suspense>
       )}
       {showed.quests && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <QuestsSection />
+        <Suspense fallback={<Skeleton name="home-quests" className="w-full h-80" />}>
+          <Skeleton name="home-quests" loading={false}>
+            <QuestsSection />
+          </Skeleton>
         </Suspense>
       )}
       {showed.resources && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <ResourcesSection />
+        <Suspense fallback={<Skeleton name="home-resources" className="w-full h-80" />}>
+          <Skeleton name="home-resources" loading={false}>
+            <ResourcesSection />
+          </Skeleton>
         </Suspense>
       )}
       {showed.projects && (
-        <Suspense fallback={<ProjectsSectionSkeleton />}>
-          <ProjectsSection />
+        <Suspense fallback={<Skeleton name="home-projects" className="w-full h-[500px]" />}>
+          <Skeleton name="home-projects" loading={false}>
+            <ProjectsSection />
+          </Skeleton>
         </Suspense>
       )}
-      {showed.testimonials && <TestimonialsSection />}
+      {showed.testimonials && (
+        <Skeleton name="home-testimonials" loading={false}>
+          <TestimonialsSection />
+        </Skeleton>
+      )}
       {showed.thoughts && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <ThoughtsSection />
+        <Suspense fallback={<Skeleton name="home-thoughts" className="w-full h-80" />}>
+          <Skeleton name="home-thoughts" loading={false}>
+            <ThoughtsSection />
+          </Skeleton>
         </Suspense>
       )}
-      <CallToAction />
+      <Skeleton name="home-cta" loading={false}>
+        <CallToAction />
+      </Skeleton>
     </>
   );
 }
