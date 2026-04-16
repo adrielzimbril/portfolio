@@ -135,46 +135,12 @@ export function GitHubStatsCard({
   type,
   label,
   value,
-  delay = 0,
   period,
 }: GitHubStatsCardProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
   const [isHovered, setIsHovered] = useState(false);
-  const [displayValue, setDisplayValue] = useState(
-    shouldReduceAnimations ? value : 0,
-  );
 
   const theme = themeConfig[type];
   const Icon = theme.icon;
-
-  useEffect(() => {
-    if (shouldReduceAnimations) {
-      return;
-    }
-
-    const duration = 1500;
-    const startTime = performance.now();
-    const startDelay = delay * 1000;
-
-    const animateCount = (currentTime: number) => {
-      const elapsed = currentTime - startTime - startDelay;
-
-      if (elapsed < 0) {
-        requestAnimationFrame(animateCount);
-        return;
-      }
-
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(Math.floor(eased * value));
-
-      if (progress < 1) {
-        requestAnimationFrame(animateCount);
-      }
-    };
-
-    requestAnimationFrame(animateCount);
-  }, [value, delay, shouldReduceAnimations]);
 
   return (
     <>
@@ -288,7 +254,7 @@ export function GitHubStatsCard({
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide whitespace-pre-line">{label}</h6>
                 <p className="text-sm text-b-white-invert-thr leading-[120%]">
-                  {displayValue.toLocaleString()}
+                  {value}
                 </p>
                 {period && (
                   <p className="mt-1 text-xs text-muted-foreground">{period}</p>

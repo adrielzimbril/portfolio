@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
 import { changelog } from "@/data/personal/changelog";
@@ -15,18 +15,10 @@ import { getResourcesUrl } from "@/utils";
 
 interface ChangelogUpdatesCardProps {
   count: number;
-  delay?: number;
-  className?: string;
 }
 
-export function ChangelogUpdatesCard({
-  count,
-  delay = 0,
-  className,
-}: ChangelogUpdatesCardProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
+export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [displayCount, setDisplayCount] = useState(0);
 
   const typeIcons = {
     milestone: Sparkles,
@@ -48,31 +40,6 @@ export function ChangelogUpdatesCard({
     .slice(0, 8);
 
   const latestVersion = recentItems[0];
-
-  useEffect(() => {
-    const duration = 1500;
-    const startTime = performance.now();
-    const startDelay = delay * 1000;
-
-    const animateCount = (currentTime: number) => {
-      const elapsed = currentTime - startTime - startDelay;
-
-      if (elapsed < 0) {
-        requestAnimationFrame(animateCount);
-        return;
-      }
-
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayCount(Math.floor(eased * count));
-
-      if (progress < 1) {
-        requestAnimationFrame(animateCount);
-      }
-    };
-
-    requestAnimationFrame(animateCount);
-  }, [count, delay, shouldReduceAnimations]);
 
   const getTopPosition = (index: number) => {
     const basePosition = -5;
@@ -123,7 +90,7 @@ export function ChangelogUpdatesCard({
                   key={item.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: delay + index * 0.05 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
                   className="absolute"
                   style={{
                     top: getTopPosition(index),
@@ -149,6 +116,7 @@ export function ChangelogUpdatesCard({
                               "h-3 w-3",
                               typeColors[item.type as keyof typeof typeColors],
                             )}
+                            variant="bulk"
                           />
                         ) : null;
                       })()}
@@ -191,19 +159,11 @@ export function ChangelogUpdatesCard({
               <div className="flex flex-col items-start gap-1">
                 <h6 className="tracking-wide">Changelog</h6>
                 <p className="flex gap-1 text-xs text-muted-foreground">
-                  <span className="text-xs text-muted-foreground">{displayCount} updates</span>
+                  <span className="text-xs text-muted-foreground">
+                    {count} updates
+                  </span>
                 </p>
               </div>
-            </div>
-            <div className="hidden! flex items-baseline gap-2">
-              <motion.span
-                animate={{ scale: isHovered ? 1.05 : 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="text-2xl font-bold tabular-nums tracking-tight text-foreground"
-              >
-                {displayCount}
-              </motion.span>
-              <span className="text-sm text-muted-foreground">updates</span>
             </div>
           </div>
 

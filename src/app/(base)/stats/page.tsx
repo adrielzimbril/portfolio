@@ -85,7 +85,7 @@ export default async function StatsPage() {
         description={t("stats.sections.blog.description")}
         badge={t("stats.sections.blog.badge")}
         isFlex
-        className="pb-0!"
+        className="py-0!"
       >
         <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatCard
@@ -270,7 +270,6 @@ export default async function StatsPage() {
       <SectionLayout
         description="Lighthouse performance scores"
         badge="Performance"
-        className="pb-0!"
       >
         <LighthouseScoreCard
           scores={lighthouseStats.mobile}

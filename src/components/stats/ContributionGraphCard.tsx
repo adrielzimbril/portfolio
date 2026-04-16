@@ -1,12 +1,19 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
 import type { ContributionData, ContributionDay } from "@/lib/stats/types";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
-import { Card, CardContent } from "../ui/card";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Github } from "@aurthle/icons";
+import { pickRandomColor } from "@/utils/pick-random-color";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
 
 interface ContributionGraphCardProps {
   contributions: ContributionData;
@@ -52,41 +59,6 @@ export function ContributionGraphCard({
   delay = 0,
   className,
 }: ContributionGraphCardProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
-  const [isHovered, setIsHovered] = useState(false);
-  const [displayCount, setDisplayCount] = useState(0);
-
-  useEffect(() => {
-    const duration = 1500;
-    const startTime = performance.now();
-    const startDelay = delay * 1000;
-
-    let rafId: number;
-
-    const animateCount = (currentTime: number) => {
-      const elapsed = currentTime - startTime - startDelay;
-
-      if (elapsed < 0) {
-        rafId = requestAnimationFrame(animateCount);
-        return;
-      }
-
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayCount(Math.floor(eased * contributions.totalContributions));
-
-      if (progress < 1) {
-        rafId = requestAnimationFrame(animateCount);
-      }
-    };
-
-    rafId = requestAnimationFrame(animateCount);
-
-    return () => {
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [contributions.totalContributions, delay, shouldReduceAnimations]);
-
   const getMonthLabels = () => {
     const months: { label: string; index: number }[] = [];
     let currentMonth = -1;
@@ -126,11 +98,19 @@ export function ContributionGraphCard({
         >
           <div className="relative z-20 mb-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <motion.div
-                animate={{ y: isHovered ? -2 : 0 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10"
+              <Badge
+                className={cn(
+                  "capitalize text-xs font-medium",
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+                  "size-max text-primary-foreground!",
+                )}
+                size="lg"
+                variant="colored"
+                circle
               >
+                <Github size={16} variant="bulk" />
+              </Badge>
+              {/* <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
                 <svg
                   className="h-5 w-5 text-primary"
                   fill="currentColor"
@@ -138,22 +118,18 @@ export function ContributionGraphCard({
                 >
                   <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
                 </svg>
-              </motion.div>
+              </div> */}
               <div>
                 <h6 className="font-medium text-foreground">Contributions</h6>
                 <p className="text-sm text-muted-foreground">This year</p>
               </div>
             </div>
-            <motion.div
-              animate={{ scale: isHovered ? 1.05 : 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="text-right"
-            >
+            <div className="text-right">
               <span className="text-2xl font-semibold tracking-tight text-foreground">
-                {displayCount.toLocaleString()}
+                {contributions.totalContributions}
               </span>
               <p className="text-xs text-muted-foreground">contributions</p>
-            </motion.div>
+            </div>
           </div>
 
           <div className="relative z-20 mt-2 flex-1">

@@ -39,41 +39,7 @@ export function StatCard({
     { x: "15%", y: "70%", rotate: 12, delay: 0.3 },
   ],
 }: StatCardProps) {
-  const { shouldReduceAnimations } = usePerformanceMode();
-  const [isHovered, setIsHovered] = useState(false);
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    if (typeof value !== "number") {
-      return;
-    }
-
-    const duration = 1500;
-    const startTime = performance.now();
-    const startDelay = delay * 1000;
-
-    const animateCount = (currentTime: number) => {
-      const elapsed = currentTime - startTime - startDelay;
-
-      if (elapsed < 0) {
-        requestAnimationFrame(animateCount);
-        return;
-      }
-
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(Math.floor(eased * value));
-
-      if (progress < 1) {
-        requestAnimationFrame(animateCount);
-      }
-    };
-
-    requestAnimationFrame(animateCount);
-  }, [value, delay, shouldReduceAnimations]);
-
-  const effectiveValue =
-    typeof value === "number" && !shouldReduceAnimations ? displayValue : value;
+  const [isHovered, setIsHovered] = useState(false);;
 
   return (
     <Card
@@ -156,9 +122,7 @@ export function StatCard({
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">{label}</h6>
                 <p className="text-sm text-b-white-invert-thr leading-[120%]">
-                  {typeof effectiveValue === "number"
-                    ? effectiveValue.toLocaleString()
-                    : effectiveValue}{" "}
+                  {value}{" "}
                   {suffix}
                 </p>
               </div>
