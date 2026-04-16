@@ -35,7 +35,6 @@ export function TopThoughtsList({
   metricLabel,
   icon,
   decoration,
-  className,
 }: TopThoughtsListProps) {
   const [isHovered, setIsHovered] = useState(false);
   const config = {
@@ -51,10 +50,7 @@ export function TopThoughtsList({
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={cn(
-        "squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden",
-        className,
-      )}
+      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
     >
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
