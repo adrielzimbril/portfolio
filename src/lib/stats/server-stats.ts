@@ -2,11 +2,18 @@ import { unstable_cache } from "next/cache";
 import { ServerStats, ThoughtMetric, ReactionType } from "@/lib/stats/types";
 import { PageType } from "@/types";
 import { supabase } from "@/integrations/supabase/client";
+import { getAllPosts } from "@/integrations/content/lib/posts";
 
 // Function to retrieve statistics from the server (Supabase)
-export async function getServerStats(): Promise<ServerStats> {
+export async function getServerStats(locale?: string): Promise<ServerStats> {
   return unstable_cache(
     async () => {
+      // Fetch all posts to get titles (filtered by locale if provided)
+      const allPosts = await getAllPosts({ locale });
+      const postTitleMap = new Map(
+        allPosts.map((post) => [post.slug, post.title]),
+      );
+
       // Fetch total views from page_counters
       const { data: pageCounters } = await supabase
         .from("page_counters")
@@ -45,9 +52,8 @@ export async function getServerStats(): Promise<ServerStats> {
 
       const topViewedThoughts: ThoughtMetric[] =
         topViewedData?.map((item) => ({
-          name: item.slug || "",
           slug: item.slug || "",
-          title: item.slug || "", // You might need to fetch title from content
+          title: postTitleMap.get(item.slug || "") || item.slug || "",
           count: item.total_views || 0,
         })) || [];
 
@@ -67,9 +73,9 @@ export async function getServerStats(): Promise<ServerStats> {
         .slice(0, 10)
         .map(([slug, count]) => ({
           slug,
-          title: slug
-            .replace(/-/g, " ")
-            .replace(/\b\w/g, (l) => l.toUpperCase()), // Convert slug to title case
+          title:
+            postTitleMap.get(slug) ||
+            slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()), // Convert slug to title case if title not found
           count,
         }));
 
@@ -86,7 +92,7 @@ export async function getServerStats(): Promise<ServerStats> {
         communityMessages: communityMessages || 0,
       };
     },
-    ["server-stats"],
+    ["server-stats", locale || "default"],
     {
       revalidate: 3600, // Revalidate every hour
       tags: ["stats"],

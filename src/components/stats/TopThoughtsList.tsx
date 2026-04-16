@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import { TrendingUp, Heart } from "@aurthle/icons";
+import { TrendUp, Heart } from "@aurthle/icons";
 import type { ThoughtMetric } from "@/lib/stats/types";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";

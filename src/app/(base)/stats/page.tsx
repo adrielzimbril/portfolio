@@ -55,12 +55,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function StatsPage() {
   const t = await getTranslations();
+  const locale = await getLocale();
 
   // Fetch data from different sources
   const [buildTimeStats, serverStats, githubStats, lighthouseStats] =
     await Promise.all([
       getBuildTimeStats(),
-      getServerStats(),
+      getServerStats(locale),
       getGitHubStats(),
       getLighthouseStats(),
     ]);
@@ -70,8 +71,6 @@ export default async function StatsPage() {
   const daysSinceRevamp = Math.floor(
     (new Date().getTime() - REVAMP_DATE.getTime()) / (1000 * 60 * 60 * 24),
   );
-
-  const locale = await getLocale();
 
   return (
     <>
