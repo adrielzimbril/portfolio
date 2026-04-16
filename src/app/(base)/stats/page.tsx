@@ -30,7 +30,9 @@ import { ChangelogUpdatesCard } from "@/components/shared/pages/stats/ChangelogU
 import { changelog } from "@/data/personal/changelog";
 import { TopThoughtsListType } from "@/types/enum";
 
-const REVAMP_DATE = new Date("2025-08-17");
+const REVAMP_DATE = new Date(
+  process.env.NEXT_PUBLIC_REVAMP_DATE || "2025-08-17",
+);
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

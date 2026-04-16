@@ -13,10 +13,9 @@ import {
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Eye, HourglassFill, LinkDiagonalOne } from "@aurthle/icons";
+import { Eye, LinkDiagonalOne } from "@aurthle/icons";
 import { Link } from "@/components/ui/link";
 import { useTranslations } from "use-intl";
-import { truncateText } from "@/utils/format-text";
 
 interface ThoughtMostViewedCardProps {
   title: string;
@@ -109,15 +108,15 @@ export function ThoughtMostViewedCard({
 
                 <div className="flex-1 space-y-2 overflow-hidden bg-sh-white p-2.5">
                   <div className="space-y-1">
-                    <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
-                    <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
-                    <div className="h-[5px] w-[92%] rounded-sm bg-b-base/90" />
-                    <div className="h-[5px] w-[85%] rounded-sm bg-b-base/90" />
+                    <div className="h-[5px] w-full rounded-sm bg-b-base" />
+                    <div className="h-[5px] w-full rounded-sm bg-b-base" />
+                    <div className="h-[5px] w-[92%] rounded-sm bg-b-base" />
+                    <div className="h-[5px] w-[85%] rounded-sm bg-b-base" />
                   </div>
                   <div className="space-y-1">
-                    <div className="h-[5px] w-full rounded-sm bg-b-base/70" />
-                    <div className="h-[5px] w-full rounded-sm bg-b-base/70" />
-                    <div className="h-[5px] w-[78%] rounded-sm bg-b-base/70" />
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
+                    <div className="h-[5px] w-[78%] rounded-sm bg-b-base/90" />
                   </div>
                   <div className="rounded bg-b-base p-1.5">
                     <div className="space-y-1">
@@ -127,8 +126,8 @@ export function ThoughtMostViewedCard({
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <div className="h-[5px] w-full rounded-sm bg-b-base/80" />
-                    <div className="h-[5px] w-[88%] rounded-sm bg-b-base/80" />
+                    <div className="h-[5px] w-full rounded-sm bg-b-base/90" />
+                    <div className="h-[5px] w-[88%] rounded-sm bg-b-base/90" />
                   </div>
                 </div>
               </motion.div>
