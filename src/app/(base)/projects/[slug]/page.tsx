@@ -1,16 +1,16 @@
 import React from "react";
-import { MorePreviewSection } from "./sections/MorePreviewSection";
-import { HeaderSection } from "./sections/HeaderSection";
-import { ProjectPreviewSection } from "./sections/ProjectPreviewSection";
-import { ProjectPointsResearchSection } from "./sections/ProjectPointsResearchSection";
-import { ProjectStatementSection } from "./sections/ProjectStatementSection";
-import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
+import { MorePreviewSection } from "@/app/(base)/projects/[slug]/sections/MorePreviewSection";
+import { HeaderSection } from "@/app/(base)/projects/[slug]/sections/HeaderSection";
+import { ProjectPreviewSection } from "@/app/(base)/projects/[slug]/sections/ProjectPreviewSection";
+import { ProjectPointsResearchSection } from "@/app/(base)/projects/[slug]/sections/ProjectPointsResearchSection";
+import { ProjectStatementSection } from "@/app/(base)/projects/[slug]/sections/ProjectStatementSection";
+import { ProjectDetailsSection } from "@/app/(base)/projects/[slug]/sections/ProjectDetailsSection";
 import {
   CardData,
   ProjectResearchSection,
-} from "./sections/ProjectResearchSection";
-import { ProjectResultSection } from "./sections/ProjectResultSection";
-import { GoalResearchSection } from "./sections/GoalResearchSection";
+} from "@/app/(base)/projects/[slug]/sections/ProjectResearchSection";
+import { ProjectResultSection } from "@/app/(base)/projects/[slug]/sections/ProjectResultSection";
+import { GoalResearchSection } from "@/app/(base)/projects/[slug]/sections/GoalResearchSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { localeRedirect } from "@/integrations/i18n/routing";
 import {

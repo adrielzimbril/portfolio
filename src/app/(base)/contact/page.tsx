@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import ContactForm from "./sections/ContactForm";
+import ContactForm from "@/app/(base)/contact/sections/ContactForm";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -1,16 +1,16 @@
 import {
-	Container,
-	Font,
-	Head,
-	Html,
-	Section,
-	Tailwind,
+  Container,
+  Font,
+  Head,
+  Html,
+  Section,
+  Tailwind,
 } from "@react-email/components";
 import React, { type PropsWithChildren } from "react";
-import { Logo } from "./Logo";
+import { Logo } from "@/integrations/mail/components/Logo";
 
 export default function Wrapper({ children }: PropsWithChildren) {
-	return (
+  return (
     <Html lang="fr">
       <Head>
         <Font

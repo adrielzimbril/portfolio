@@ -1,4 +1,4 @@
-import type { BuildTimeStats, CategoryCount } from "./types";
+import type { BuildTimeStats, CategoryCount } from "@/lib/stats/types";
 import { getAllPosts } from "@/integrations/content/lib";
 import { Locale } from "@/types";
 import { allPostCategories } from "content-collections";

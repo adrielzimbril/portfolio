@@ -11,10 +11,10 @@ import {
   pickRandomColor,
 } from "@/utils";
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import { Card, CardContent } from "../ui/card";
-import { Badge } from "../ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Eye, HourglassFill, LinkDiagonalOne } from "@aurthle/icons";
-import { Link } from "../ui/link";
+import { Link } from "@/components/ui/link";
 import { useTranslations } from "use-intl";
 import { truncateText } from "@/utils/format-text";
 

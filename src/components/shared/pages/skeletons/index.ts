@@ -5,7 +5,7 @@ export {
   TalkCardSkeleton,
   ThoughtCardSkeleton,
   InnerStatementCardSkeleton,
-} from "./card-skeletons";
+} from "@/components/shared/pages/skeletons/card-skeletons";
 export {
   DefaultSectionSkeleton,
   FormPageSkeleton,
@@ -17,4 +17,4 @@ export {
   QuestDetailPageSkeleton,
   ResourceDetailPageSkeleton,
   ThoughtDetailPageSkeleton,
-} from "./page-skeletons";
+} from "@/components/shared/pages/skeletons/page-skeletons";

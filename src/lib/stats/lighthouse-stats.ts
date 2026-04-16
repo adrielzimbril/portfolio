@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import type { LighthouseStats, LighthouseScores } from "./types";
+import type { LighthouseStats, LighthouseScores } from "@/lib/stats/types";
 import logger from "@/utils/logger";
 
 // Configuration

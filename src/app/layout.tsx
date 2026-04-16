@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { metadata as metadataBase } from "./metadata";
+import { metadata as metadataBase } from "@/app/metadata";
 import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
 import { Toaster } from "@/components/shiro/providers/toast-provider";
 import { Navbar } from "@/components/shared/_layouts/navbar";

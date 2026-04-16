@@ -1,6 +1,6 @@
 import { apiRoutes } from "@/data/api-routes";
 import logger from "@/utils/logger";
-import { getPathUrl } from "./base-url";
+import { getPathUrl } from "@/utils/base-url";
 
 const SECRET_KEY = process.env.API_SECRET_KEY || "default-secret-key";
 
@@ -46,7 +46,7 @@ function fromBase64Url(input: string) {
 export async function createHmac(
   algorithm: string,
   key: string,
-  data: string
+  data: string,
 ): Promise<string> {
   if (typeof window !== "undefined" && window.crypto && window.crypto.subtle) {
     // Version browser with Web Crypto API
@@ -59,13 +59,13 @@ export async function createHmac(
       keyData,
       { name: "HMAC", hash: "SHA-256" },
       false,
-      ["sign"]
+      ["sign"],
     );
 
     const signature = await window.crypto.subtle.sign(
       "HMAC",
       cryptoKey,
-      dataBuffer
+      dataBuffer,
     );
     return Array.from(new Uint8Array(signature))
       .map((b) => b.toString(16).padStart(2, "0"))
@@ -80,7 +80,7 @@ export async function createHmac(
 
       if (!res.ok)
         throw new Error(
-          `Server HMAC failed: ${res.status} \n\ With Data: ${data} | Algorithm: ${algorithm} | Key: ${key}`
+          `Server HMAC failed: ${res.status} \n\ With Data: ${data} | Algorithm: ${algorithm} | Key: ${key}`,
         );
 
       const { signature } = await res.json();
@@ -124,7 +124,7 @@ export async function generateToken(input?: string | object): Promise<string> {
  */
 export async function validateToken(
   token: string,
-  maxAgeMinutes: number = 5
+  maxAgeMinutes: number = 5,
 ): Promise<boolean> {
   try {
     const [timestampStr, receivedHash, input] = token.split(":");
@@ -170,7 +170,7 @@ export async function validateToken(
  */
 export async function generateJwtToken(
   payload: any,
-  expiresInMinutes: number = 5
+  expiresInMinutes: number = 5,
 ): Promise<{ token: string; expiresAt: string; debug: any }> {
   const header = {
     alg: "HS256",
@@ -199,7 +199,7 @@ export async function generateJwtToken(
     isServer && Buffer
       ? Buffer.from(signatureHex, "hex")
       : new Uint8Array(
-          signatureHex.match(/.{2}/g)!.map((byte) => parseInt(byte, 16))
+          signatureHex.match(/.{2}/g)!.map((byte) => parseInt(byte, 16)),
         );
 
   const signature =
@@ -279,7 +279,7 @@ export async function validateJwtToken(token: string): Promise<{
       isServer && Buffer
         ? Buffer.from(signatureHex, "hex")
         : new Uint8Array(
-            signatureHex.match(/.{2}/g)!.map((byte) => parseInt(byte, 16))
+            signatureHex.match(/.{2}/g)!.map((byte) => parseInt(byte, 16)),
           );
 
     const expectedSignature =
@@ -290,7 +290,7 @@ export async function validateJwtToken(token: string): Promise<{
             .replace(/\//g, "_")
             .replace(/=+$/, "")
         : btoa(
-            String.fromCharCode(...Array.from(signatureBuffer as Uint8Array))
+            String.fromCharCode(...Array.from(signatureBuffer as Uint8Array)),
           )
             .replace(/\+/g, "-")
             .replace(/\//g, "_")
@@ -439,7 +439,7 @@ export function generateApiKey(): string {
   const prefix = "api_";
   const array = getRandomBytes(16);
   const randomPart = Array.from(array, (b) =>
-    b.toString(16).padStart(2, "0")
+    b.toString(16).padStart(2, "0"),
   ).join("");
   return `${prefix}${randomPart}`;
 }

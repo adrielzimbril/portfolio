@@ -1,6 +1,6 @@
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { ContentSection } from "./page-hero-content";
+import { ContentSection } from "@/components/shared/pages/shared/page-hero-content";
 
 export function PageHero({
   title,

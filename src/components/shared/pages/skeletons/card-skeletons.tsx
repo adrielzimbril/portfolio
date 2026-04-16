@@ -6,7 +6,7 @@ import {
   SkeletonStats,
   SkeletonTagRow,
   SkeletonTextBlock,
-} from "./shared";
+} from "@/components/shared/pages/skeletons/shared";
 
 export function ResourceCardSkeleton() {
   return (
@@ -116,7 +116,9 @@ function CardInfoSkeleton({
 
         <SkeletonTextBlock lines={["w-[82%]", "w-[58%]"]} />
 
-        {withCategories && <SkeletonTagRow count={4} widths={["w-24", "w-32", "w-28", "w-20"]} />}
+        {withCategories && (
+          <SkeletonTagRow count={4} widths={["w-24", "w-32", "w-28", "w-20"]} />
+        )}
 
         <SkeletonTextBlock
           lines={

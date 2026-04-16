@@ -2,7 +2,7 @@ import {
   TurnstileValidateOptions,
   TurnstileValidateResponse,
   TURNSTILE_CONSTANTS,
-} from "../types";
+} from "@/integrations/anti-bot/turnstile-second/types";
 
 export async function validateTurnstileToken({
   token,

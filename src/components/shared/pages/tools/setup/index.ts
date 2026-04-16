@@ -1,3 +1,3 @@
-export { SetupCard } from "./card";
-export { CardPreview } from "./preview";
-export { CardInfo } from "./details";
+export { SetupCard } from "@/components/shared/pages/tools/setup/card";
+export { CardPreview } from "@/components/shared/pages/tools/setup/preview";
+export { CardInfo } from "@/components/shared/pages/tools/setup/details";

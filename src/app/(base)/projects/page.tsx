@@ -1,12 +1,12 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { HeaderSection } from "./sections/HeaderSection";
+import { HeaderSection } from "@/app/(base)/projects/sections/HeaderSection";
 import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllProjects } from "@/integrations/content/lib";
-import { MyProjectsSection } from "./sections/MyProjectsSection";
+import { MyProjectsSection } from "@/app/(base)/projects/sections/MyProjectsSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

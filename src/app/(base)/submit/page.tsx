@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { HeaderSection } from "./sections/HeaderSection";
-import { IntentionForm } from "./sections/IntentionForm";
+import { HeaderSection } from "@/app/(base)/submit/sections/HeaderSection";
+import { IntentionForm } from "@/app/(base)/submit/sections/IntentionForm";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

@@ -1,6 +1,6 @@
 import React from "react";
-import { HeaderSection } from "./sections/HeaderSection";
-import { QuestDetailsSection } from "./sections/QuestDetailsSection";
+import { HeaderSection } from "@/app/(base)/quests/[slug]/sections/HeaderSection";
+import { QuestDetailsSection } from "@/app/(base)/quests/[slug]/sections/QuestDetailsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { getLocale, getTranslations } from "next-intl/server";
 import { PageParams } from "@/types";
@@ -17,8 +17,8 @@ import {
   isSubmissionClosed,
   isResultsPublished,
 } from "@/integrations/content/lib/quests";
-import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
-import { MorePreviewSection } from "./sections/MorePreviewSection";
+import { QuestParticipantsSection } from "@/app/(base)/quests/[slug]/sections/QuestParticipantsSection";
+import { MorePreviewSection } from "@/app/(base)/quests/[slug]/sections/MorePreviewSection";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;

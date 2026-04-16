@@ -268,7 +268,7 @@ export default async function StatsPage() {
         </div>
       </SectionLayout> */}
 
-      <SectionLayout badge="Performance">
+      <SectionLayout badge="Site Performance">
         <LighthouseScoreCard
           scores={lighthouseStats.mobile}
           strategy="mobile"

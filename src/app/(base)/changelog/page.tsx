@@ -2,8 +2,8 @@ import React from "react";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { HeaderSection } from "./sections/HeaderSection";
-import { TimelineSection } from "./sections/TimelineSection";
+import { HeaderSection } from "@/app/(base)/changelog/sections/HeaderSection";
+import { TimelineSection } from "@/app/(base)/changelog/sections/TimelineSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 
 export async function generateMetadata(): Promise<Metadata> {

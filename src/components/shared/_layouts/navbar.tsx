@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
 import { getActivePathInArray, getImageUrl, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
-import { LogoIcon } from "../icons/logo/logo-icon";
+import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
 import Image from "next/image";
 

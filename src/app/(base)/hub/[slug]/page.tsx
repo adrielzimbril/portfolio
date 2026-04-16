@@ -1,8 +1,8 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { HeaderSection } from "./sections/HeaderSection";
-import { MorePreviewSection } from "./sections/MorePreviewSection";
-import { ResourceDetailsSection } from "./sections/ResourceDetailsSection";
+import { HeaderSection } from "@/app/(base)/hub/[slug]/sections/HeaderSection";
+import { MorePreviewSection } from "@/app/(base)/hub/[slug]/sections/MorePreviewSection";
+import { ResourceDetailsSection } from "@/app/(base)/hub/[slug]/sections/ResourceDetailsSection";
 import { getLocale } from "next-intl/server";
 import { PageParams } from "@/types";
 import {

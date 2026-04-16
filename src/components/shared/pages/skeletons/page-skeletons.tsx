@@ -7,7 +7,7 @@ import {
   ResourceCardSkeleton,
   TalkCardSkeleton,
   ThoughtCardSkeleton,
-} from "./card-skeletons";
+} from "@/components/shared/pages/skeletons/card-skeletons";
 import {
   SkeletonButton,
   SkeletonMetaCard,
@@ -16,7 +16,7 @@ import {
   SkeletonStats,
   SkeletonTagRow,
   SkeletonTextBlock,
-} from "./shared";
+} from "@/components/shared/pages/skeletons/shared";
 
 export function HomePageSkeleton() {
   return (

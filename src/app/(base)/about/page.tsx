@@ -1,9 +1,9 @@
 import React from "react";
-import { PhilosophySection } from "./sections/PhilosophySection";
+import { PhilosophySection } from "@/app/(base)/about/sections/PhilosophySection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { HeaderSection } from "./sections/HeaderSection";
-import { CraftSection } from "./sections/CraftSection";
-import { InteractiveFunFacts } from "./sections/InteractiveFunFactsSection";
+import { HeaderSection } from "@/app/(base)/about/sections/HeaderSection";
+import { CraftSection } from "@/app/(base)/about/sections/CraftSection";
+import { InteractiveFunFacts } from "@/app/(base)/about/sections/InteractiveFunFactsSection";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
@@ -41,4 +41,4 @@ export default function About() {
       <CallToAction />
     </>
   );
-};
+}

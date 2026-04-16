@@ -1,1 +1,4 @@
-export { DefaultSectionSkeleton, ProjectsSectionSkeleton } from "./page-skeletons";
+export {
+  DefaultSectionSkeleton,
+  ProjectsSectionSkeleton,
+} from "@/components/shared/pages/skeletons/page-skeletons";

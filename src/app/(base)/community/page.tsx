@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Github, ChatBubble, Users, Heart } from "@aurthle/icons";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { GuestbookForm } from "./components/GuestbookForm";
-import { GuestbookList } from "./components/GuestbookList";
+import { GuestbookForm } from "@/app/(base)/community/components/GuestbookForm";
+import { GuestbookList } from "@/app/(base)/community/components/GuestbookList";
 import { cn } from "@/utils/utils";
 
 export async function generateMetadata(): Promise<Metadata> {

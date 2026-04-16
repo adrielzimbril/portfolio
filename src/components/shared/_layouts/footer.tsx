@@ -6,13 +6,13 @@ import {
   type ResourcePreview,
 } from "@/integrations/content/lib";
 import { getResourcesUrl, getThisMonth } from "@/utils";
-import { SectionBase } from "../pages/shared/section-base";
+import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { siteConfig } from "@/data/config";
 import { routes } from "@/data/routes";
 import { PageType } from "@/types";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { LinkOne } from "@aurthle/icons";
-import { FooterLocaleSwitch } from "./footer-locale-switch";
+import { FooterLocaleSwitch } from "@/components/shared/_layouts/footer-locale-switch";
 
 export async function Footer() {
   const t = await getTranslations();

@@ -3,8 +3,8 @@ import {
   getQuestBySlug,
   isSubmissionClosed,
 } from "@/integrations/content/lib/quests";
-import { IntentionForm } from "./sections/IntentionForm";
-import { HeaderSection } from "./sections/HeaderSection";
+import { IntentionForm } from "@/app/(base)/quests/[slug]/submit/sections/IntentionForm";
+import { HeaderSection } from "@/app/(base)/quests/[slug]/submit/sections/HeaderSection";
 import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import { PageParams, PageType } from "@/types";
 import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state";
