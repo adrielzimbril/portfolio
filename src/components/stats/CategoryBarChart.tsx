@@ -2,41 +2,38 @@
 
 import { motion } from "motion/react";
 import { useState } from "react";
+import { ChartBar } from "@aurthle/icons";
+import type { CategoryCount } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { pickRandomColorCode } from "@/utils/pick-random-color";
+import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import {
+  pickRandomColorCode,
+} from "@/utils/pick-random-color";
 
-export interface BarChartData {
-  name: string;
-  count: number;
-  color?: string;
-  icon?: string;
-}
-
-interface BarChartCardProps {
-  data: BarChartData[];
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ size?: number; variant?: string }>;
-  badgeColor: string;
-  decorationEmoji: string;
+interface CategoryBarChartProps {
+  categories: CategoryCount[];
   delay?: number;
 }
 
-export function BarChartCard({
-  data,
-  title,
-  description,
-  icon: Icon,
-  badgeColor,
-  decorationEmoji,
+const BAR_COLORS = [
+  DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+  DEFAULT_COLOR_CODE_NAME_LIST.GREEN,
+  DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+  DEFAULT_COLOR_CODE_NAME_LIST.ORANGE,
+  DEFAULT_COLOR_CODE_NAME_LIST.PINK,
+  DEFAULT_COLOR_CODE_NAME_LIST.INDIGO,
+];
+
+export function CategoryBarChart({
+  categories,
   delay = 0,
-}: BarChartCardProps) {
+}: CategoryBarChartProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
-  const maxCount = Math.max(...data.map((d) => d.count), 1);
-  const displayData = data.slice(0, 6);
+  const maxCount = Math.max(...categories.map((c) => c.count), 1);
+  const displayCategories = categories.slice(0, 6);
 
   return (
     <Card
@@ -59,7 +56,7 @@ export function BarChartCard({
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
             className="absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
           >
-            {decorationEmoji}
+            📊
           </motion.div>
 
           <div className="relative w-full flex flex-col gap-2">
@@ -71,31 +68,32 @@ export function BarChartCard({
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
-                  badgeColor,
+                  "squircle-violet-500",
                   "size-max text-primary-foreground",
                 )}
                 variant="colored"
                 size="lg"
                 circle
               >
-                <Icon size={32} variant="bulk" />
+                <ChartBar size={32} variant="bulk" />
               </Badge>
               <div className="flex flex-col items-start gap-2">
-                <h6 className="tracking-wide">{title}</h6>
+                <h6 className="tracking-wide">Categories</h6>
                 <p className="text-xs text-muted-foreground">
-                  {description}
+                  Thoughts by topic
                 </p>
               </div>
             </div>
 
             <div className="flex flex-1 flex-col justify-center space-y-3">
-              {displayData.map((item, index) => {
-                const percentage = (item.count / maxCount) * 100;
+              {displayCategories.map((category, index) => {
+                const percentage = (category.count / maxCount) * 100;
+                const color = BAR_COLORS[index % BAR_COLORS.length];
                 const isBarHovered = hoveredBar === index;
 
                 return (
                   <motion.div
-                    key={item.name}
+                    key={category.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: delay + index * 0.08 }}
@@ -104,14 +102,9 @@ export function BarChartCard({
                     onMouseLeave={() => setHoveredBar(null)}
                   >
                     <div className="mb-1 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        {item.icon && (
-                          <span className="text-lg">{item.icon}</span>
-                        )}
-                        <span className="truncate text-xs font-medium text-muted-foreground">
-                          {item.name}
-                        </span>
-                      </div>
+                      <span className="truncate text-xs font-medium text-muted-foreground">
+                        {category.name}
+                      </span>
                       <motion.span
                         animate={{
                           scale: isBarHovered ? 1.1 : 1,
@@ -121,7 +114,7 @@ export function BarChartCard({
                         }}
                         className="ml-2 shrink-0 text-xs font-semibold tabular-nums"
                       >
-                        {item.count.toLocaleString()}
+                        {category.count}
                       </motion.span>
                     </div>
                     <div className="relative h-3 w-full overflow-hidden rounded-full bg-border/30">
@@ -144,11 +137,7 @@ export function BarChartCard({
                           },
                         }}
                         className="absolute inset-y-0 left-0 origin-left rounded-full"
-                        style={{
-                          backgroundColor: item.color
-                            ? pickRandomColorCode(item.color as any)
-                            : pickRandomColorCode("blue" as any),
-                        }}
+                        style={{ backgroundColor: pickRandomColorCode(color) }}
                       />
                     </div>
                   </motion.div>
@@ -156,12 +145,12 @@ export function BarChartCard({
               })}
             </div>
 
-            {data.length > 6 && (
+            {categories.length > 6 && (
               <motion.p
                 animate={{ opacity: isHovered ? 1 : 0.6 }}
                 className="mt-4 text-xs text-muted-foreground"
               >
-                +{data.length - 6} more items
+                +{categories.length - 6} more categories
               </motion.p>
             )}
           </div>
