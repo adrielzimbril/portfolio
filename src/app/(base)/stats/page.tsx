@@ -10,7 +10,6 @@ import { getGitHubStats } from "@/lib/stats/github-stats";
 import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
 import { StatsPageHeader } from "@/components/stats/StatsPageHeader";
 import { StatCard } from "@/components/stats/StatCard";
-import { StatCardWithDecoration } from "@/components/stats/StatCardWithDecoration";
 import {
   BookOne,
   TextFolder,
@@ -92,13 +91,13 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:w-[80%] grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <StatCard
             label="Total Thoughts"
             value={buildTimeStats.totalPosts}
             suffix="thoughts"
             icon={<BookOne size={32} className="text-primary" variant="bulk" />}
-            decoration="💭"
+            decorationPattern="💭"
           />
           <StatCard
             label="Total Words"
@@ -107,7 +106,7 @@ export default async function StatsPage() {
             icon={
               <TextFolder size={32} className="text-primary" variant="bulk" />
             }
-            decoration="📝"
+            decorationPattern="📝"
           />
           <StatCard
             label="Reading Time"
@@ -116,12 +115,12 @@ export default async function StatsPage() {
             icon={
               <Timelapse size={32} className="text-primary" variant="bulk" />
             }
-            decoration="⏱️"
+            decorationPattern="⏱️"
           />
         </div>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <StatCardWithDecoration
+        <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
+          <StatCard
             label="Coffee Consumed"
             value={coffeeCups}
             suffix="cups"
@@ -131,7 +130,7 @@ export default async function StatsPage() {
             decoration="☕"
             description="1 cup per 500 words"
           />
-          <StatCardWithDecoration
+          <StatCard
             label="Site Age"
             value={daysSinceRevamp}
             suffix="days"
@@ -145,7 +144,7 @@ export default async function StatsPage() {
               year: "numeric",
             })}`}
           />
-          <StatCardWithDecoration
+          <StatCard
             label="Total Site Views"
             value={serverStats.totalViews}
             icon={<Eye size={32} className="text-primary" variant="bulk" />}
