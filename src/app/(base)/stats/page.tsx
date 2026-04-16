@@ -88,6 +88,13 @@ export default async function StatsPage() {
       >
         <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatCard
+            label="Total Site Views"
+            value={serverStats.totalViews}
+            icon={<Eye size={32} variant="bulk" />}
+            decoration="👁️"
+            description="Since launch"
+          />
+          <StatCard
             label="Coffee Consumed"
             value={coffeeCups}
             suffix="cups"
@@ -106,13 +113,6 @@ export default async function StatsPage() {
               day: "numeric",
               year: "numeric",
             })}`}
-          />
-          <StatCard
-            label="Total Site Views"
-            value={serverStats.totalViews}
-            icon={<Eye size={32} variant="bulk" />}
-            decoration="👁️"
-            description="Since launch"
           />
         </div>
       </SectionLayout>
@@ -166,7 +166,7 @@ export default async function StatsPage() {
                 views={serverStats.topViewedThoughts[0].count}
               />
             )}
-          <div className="grid grid-cols-1 md:grid-cols-4 md:h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 h-full w-full lg:flex lg:flex-col gap-2 lg:col-span-4">
             <BarChartCard
               data={buildTimeStats.categories.map((cat) => ({
                 name: cat.name,

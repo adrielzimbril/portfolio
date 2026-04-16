@@ -27,8 +27,8 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
   };
 
   const typeColors = {
-    milestone: "text-primary",
-    feature: "text-green-500",
+    milestone: "text-green-500",
+    feature: "text-amber-500",
     fix: "text-red-500",
     improvement: "text-blue-500",
   };
@@ -47,12 +47,12 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
+      className="squircle size-full min-h-54 squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
     >
       <CardContent className="size-full grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full overflow-hidden">
         <div
           className={cn(
-            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
           )}
         >
           <motion.div
@@ -67,7 +67,7 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
             ✨
           </motion.div>
 
-          <div className="border-px absolute left-1/2 top-0 h-full w-2 -translate-x-1/2 transform border-x border-border/10 bg-border/35" />
+          <div className="border-px absolute z-20 left-1/2 top-0 h-full w-2 -translate-x-1/2 transform border-x border-border/10 bg-border/35" />
 
           <div className="relative flex-1 items-start w-full">
             <motion.div
@@ -97,20 +97,23 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
                 >
                   <span
                     className={cn(
-                      "absolute top-[14px] h-px w-[6px] bg-border",
+                      "absolute top-[14px] h-px w-[8px] bg-border",
                       index % 2 === 1 ? "left-[-6px]" : "right-[-6px]",
                     )}
                   />
-                  <div className="z-10 inline-block w-[100px] space-y-px squircle squircle-smooth-xl squircle-2xl squircle-sh-white squircle-border squircle-border-2 squircle-border-b-base px-2 py-1.5 text-xs overflow-hidden">
+                  <div className="z-20 inline-block w-[100px] space-y-px squircle squircle-smooth-xl squircle-2xl squircle-sh-white squircle-border squircle-border-2 squircle-border-b-base px-2 py-1.5 text-xs overflow-hidden">
                     <div className="flex items-center gap-1">
                       {(() => {
                         const Icon =
                           typeIcons[item.type as keyof typeof typeIcons];
                         return Icon ? (
-                          <Badge className={cn("relative")} size="xs" circle>
+                          <Badge
+                            className={cn("p-[.075rem] relative")}
+                            size="xs"
+                            circle
+                          >
                             <Icon
                               className={cn(
-                                "p-1",
                                 typeColors[
                                   item.type as keyof typeof typeColors
                                 ],
@@ -121,30 +124,32 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
                           </Badge>
                         ) : null;
                       })()}
-                      <p className="overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground">
-                        {item.version}
-                      </p>
+                      <div className="flex flex-col items-start">
+                        <p className="text-sm overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground leading-none">
+                          {item.version}
+                        </p>
+                        <time
+                          dateTime={item.date}
+                          className="text-[.5rem] text-muted-foreground leading-none"
+                        >
+                          {new Date(item.date).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </time>
+                      </div>
                     </div>
-                    <time
-                      dateTime={item.date}
-                      className="text-[9px] text-muted-foreground"
-                    >
-                      {new Date(item.date).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </time>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
           </div>
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-linear-to-b from-b-base/85 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-38 bg-linear-to-t from-b-base via-b-white to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-20 h-16 bg-linear-to-b from-b-base/85 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-38 bg-linear-to-t from-b-base via-b-white to-transparent" />
 
-          <div className="relative flex flex-col items-start w-full z-20 mt-auto">
-            <div className="relative flex flex-row items-center gap-2 md:gap-4">
+          <div className="relative flex flex-col items-start w-full z-30 mt-auto">
+            <div className="relative flex flex-row items-center gap-2">
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
@@ -170,7 +175,7 @@ export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
 
           <Link
             href={getResourcesUrl(PageType.CHANGELOG)}
-            className="absolute size-full left-1/2 top-0"
+            className="absolute size-full top-0 left-0 z-30"
           />
         </div>
       </CardContent>

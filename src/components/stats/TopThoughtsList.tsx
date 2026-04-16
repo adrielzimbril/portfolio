@@ -40,9 +40,9 @@ export function TopThoughtsList({
       type: "char" as const,
       maxLength: 40,
     },
-    maxThoughts: 4,
+    maxItems: 4,
   };
-  const displayThoughts = thoughts.slice(0, config.maxThoughts);
+  const displayThoughts = thoughts.slice(0, config.maxItems);
 
   return (
     <Card
@@ -145,7 +145,7 @@ export function TopThoughtsList({
                   variant="base"
                 >
                   <span className="capitalize text-xs">
-                    +{thoughts.length - 5} more
+                    +{thoughts.length - config.maxItems} more
                   </span>
                 </Link>
               </div>
