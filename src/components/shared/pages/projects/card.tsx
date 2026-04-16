@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 
@@ -57,4 +58,17 @@ export function ProjectCard({
       </CardContent>
     </Card>
   );
+}
+
+export function ProjectCardSkeleton({ isWide = false }: { isWide?: boolean }) {
+  return (
+    <Skeleton
+      name={isWide ? "project-card-wide" : "project-card"}
+      className={isWide ? "w-full h-64 md:col-span-2" : "w-full h-96"}
+    />
+  );
+}
+
+export function InnerStatementCardSkeleton() {
+  return <Skeleton name="inner-statement-card" className="w-full h-32" />;
 }

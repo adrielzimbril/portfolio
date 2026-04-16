@@ -1,7 +1,7 @@
 "use client";
 import { ProjectCard } from "@/components/shared/pages/projects/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Project } from "@/integrations/content/types";
 interface MyProjectsSectionProps {
@@ -26,7 +26,7 @@ export function MyProjectsSection({
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<LoadMoreCardsSkeleton kind="projects" count={2} />}
+      loadingFallback={<Skeleton name="projects-load-more" className="w-full h-40" />}
     >
       {data.map((project, index) => (
         <ProjectCard

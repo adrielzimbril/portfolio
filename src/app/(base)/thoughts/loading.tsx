@@ -1,5 +1,5 @@
-import { ListingPageSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  return <ListingPageSkeleton kind="thoughts" />;
+  return <Skeleton name="thoughts-listing" className="w-full min-h-screen" />;
 }

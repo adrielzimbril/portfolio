@@ -1,7 +1,7 @@
 "use client";
 
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 import { TalksCard } from "@/components/shared/pages/talks/card";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import type { Talk } from "@/integrations/content/lib/talks";
@@ -34,7 +34,7 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<LoadMoreCardsSkeleton kind="talks" count={2} />}
+      loadingFallback={<Skeleton name="talks-load-more" className="w-full h-40" />}
     >
       {list.map((talk) => {
         const eventDate = new Date(talk.event_date);

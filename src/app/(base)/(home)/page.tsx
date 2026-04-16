@@ -12,10 +12,6 @@ import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { siteConfig } from "@/data/config";
-import {
-  DefaultSectionSkeleton,
-  ProjectsSectionSkeleton,
-} from "@/components/shared/pages/skeletons";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {

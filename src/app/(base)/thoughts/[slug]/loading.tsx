@@ -1,5 +1,5 @@
-import { ThoughtDetailPageSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  return <ThoughtDetailPageSkeleton />;
+  return <Skeleton name="thought-detail" className="w-full min-h-screen" />;
 }

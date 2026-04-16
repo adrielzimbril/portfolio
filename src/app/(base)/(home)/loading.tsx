@@ -1,5 +1,5 @@
-import { HomePageSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  return <HomePageSkeleton />;
+  return <Skeleton name="home-page" className="w-full min-h-screen" />;
 }

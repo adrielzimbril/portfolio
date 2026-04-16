@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/talks/preview";
 import { CardInfo } from "@/components/shared/pages/talks/details";
+import { Skeleton } from "@/components/ui/skeleton";
 import { PageType } from "@/types";
 
 export function TalksCard({
@@ -46,4 +47,8 @@ export function TalksCard({
       </CardContent>
     </Card>
   );
+}
+
+export function TalkCardSkeleton() {
+  return <Skeleton name="talk-card" className="w-full h-80" />;
 }

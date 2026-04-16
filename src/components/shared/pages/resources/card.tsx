@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
-import { CardInfo } from "@/components/shared/pages/resources/details";
+import { CardInfo } from "@/components/shared/pages/hub/details";
+import { Skeleton } from "@/components/ui/skeleton";
 import { PageType, ResourceType } from "@/types";
 
 export function ResourceCard({
@@ -52,4 +53,8 @@ export function ResourceCard({
       </CardContent>
     </Card>
   );
+}
+
+export function ResourceCardSkeleton() {
+  return <Skeleton name="resource-card" className="w-full h-80" />;
 }

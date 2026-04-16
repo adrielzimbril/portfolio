@@ -1,5 +1,5 @@
-import { ProjectDetailPageSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  return <ProjectDetailPageSkeleton />;
+  return <Skeleton name="project-detail" className="w-full min-h-screen" />;
 }

@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/quests/details";
+import { Skeleton } from "@/components/ui/skeleton";
 import { PageType } from "@/types";
 
 export function QuestCard({
@@ -48,4 +49,8 @@ export function QuestCard({
       </CardContent>
     </Card>
   );
+}
+
+export function QuestCardSkeleton() {
+  return <Skeleton name="quest-card" className="w-full h-80" />;
 }

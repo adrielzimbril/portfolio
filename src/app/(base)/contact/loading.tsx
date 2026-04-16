@@ -1,5 +1,5 @@
-import { FormPageSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  return <FormPageSkeleton variant="contact" />;
+  return <Skeleton name="form-contact" className="w-full min-h-screen" />;
 }

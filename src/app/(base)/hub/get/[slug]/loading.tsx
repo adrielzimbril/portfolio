@@ -1,5 +1,5 @@
-import { ResourceDetailPageSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  return <ResourceDetailPageSkeleton />;
+  return <Skeleton name="resource-detail" className="w-full min-h-screen" />;
 }

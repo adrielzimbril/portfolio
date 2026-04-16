@@ -1,5 +1,5 @@
-import { QuestDetailPageSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
-  return <QuestDetailPageSkeleton />;
+  return <Skeleton name="quest-detail" className="w-full min-h-screen" />;
 }
