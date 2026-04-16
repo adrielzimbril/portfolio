@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useRef, createContext, useContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { useReactions } from "@/lib/reactions/use-reactions";
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring, MotionValue, type Variants } from "motion/react";
+import { motion, AnimatePresence, type Variants } from "motion/react";
 
 // --- Context & Types ---
 
@@ -18,8 +18,6 @@ interface ReactionContextValue {
   entityId: string;
   activeOrientation: "horizontal" | "vertical";
   dockPosition: "top" | "bottom";
-  mouseX: MotionValue;
-  mouseY: MotionValue;
   reactions: Record<ReactionType, number>;
 }
 
@@ -43,20 +41,20 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
 
 const DOCK_REVEAL_VARIANTS: Variants = {
   hidden: {
-    clipPath: "inset(10% 50% 90% 50% round 40px)",
+    clipPath: "inset(10% 50% 90% 50% round 24px)",
     opacity: 0,
     scale: 0.95,
   },
   show: {
-    clipPath: "inset(0% 0% 0% 0% round 40px)",
+    clipPath: "inset(0% 0% 0% 0% round 24px)",
     opacity: 1,
     scale: 1,
     transition: {
       type: "spring",
       bounce: 0,
-      duration: 0.5,
-      delayChildren: 0.15,
-      staggerChildren: 0.1,
+      duration: 0.4,
+      delayChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
@@ -64,13 +62,11 @@ const DOCK_REVEAL_VARIANTS: Variants = {
 const ITEM_VARIANTS: Variants = {
   hidden: {
     opacity: 0,
-    scale: 0.3,
-    filter: "blur(20px)",
+    scale: 0.8,
   },
   show: {
     opacity: 1,
     scale: 1,
-    filter: "blur(0px)",
   },
 };
 
@@ -80,18 +76,18 @@ export function ReactionRoot({
   children,
   pageType,
   entityId,
+  className,
   orientation = "horizontal",
   dockPosition = "bottom",
 }: {
   children: React.ReactNode;
   pageType: PageType;
   entityId: string;
+  className?: string;
   orientation?: "horizontal" | "vertical";
   dockPosition?: "top" | "bottom";
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const mouseX = useMotionValue(Infinity);
-  const mouseY = useMotionValue(Infinity);
   const { reactions } = useReactions(pageType, entityId);
 
   return (
@@ -102,24 +98,12 @@ export function ReactionRoot({
       entityId,
       activeOrientation: orientation,
       dockPosition,
-      mouseX,
-      mouseY,
       reactions,
     }}>
       <div 
-        className="relative flex flex-col items-center group/reaction-area"
+        className={cn("relative flex flex-col items-center group/reaction-area", className)}
         onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => {
-          setTimeout(() => {
-            setIsOpen(false);
-            mouseX.set(Infinity);
-            mouseY.set(Infinity);
-          }, 100);
-        }}
-        onMouseMove={(e) => {
-          mouseX.set(e.clientX);
-          mouseY.set(e.clientY);
-        }}
+        onMouseLeave={() => setIsOpen(false)}
       >
         {children}
       </div>
@@ -143,20 +127,20 @@ export function ReactionTrigger({
   return (
     <Comp
       layout
-      onClick={(e) => {
+      onClick={(e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
         setIsOpen(!isOpen);
       }}
       className={cn(
-        "group relative flex items-center justify-center size-11 md:size-12",
+        "group relative flex items-center justify-center size-10 md:size-11",
         "squircle squircle-full squircle-smooth-xl",
         "squircle-sh-white dark:squircle-b-base",
         "squircle-border-2 squircle-border-b-base-accent",
         "cursor-pointer z-[10] transition-colors",
         className
       )}
-      style={{ scale: isOpen ? 1.02 : 1 }}
+      style={{ scale: isOpen ? 1.05 : 1 }}
       whileTap={{ scale: 0.95 }}
       {...props}
     >
@@ -184,23 +168,23 @@ export function ReactionDock({
           animate="show"
           exit="hidden"
           className={cn(
-            "absolute left-1/2 z-50 p-3",
-            dockPosition === "bottom" ? "top-[calc(100%+8px)] mt-3" : "bottom-[calc(100%+8px)] mb-3",
+            "absolute left-1/2 z-50 p-2",
+            dockPosition === "bottom" ? "top-[calc(100%+2px)]" : "bottom-[calc(100%+2px)]",
             isVertical 
-              ? "flex flex-col w-[72px] h-auto items-center justify-center py-5"
-              : "flex flex-row h-16 w-max items-center justify-center px-5",
-            "gap-3",
-            "squircle squircle-7xl squircle-smooth-xl",
+              ? "flex flex-col w-[56px] h-auto items-center justify-center py-4"
+              : "flex flex-row h-14 w-max items-center justify-center px-4",
+            "gap-2",
+            "squircle squircle-5xl squircle-smooth-xl",
             "squircle-sh-white dark:squircle-b-base",
             "squircle-border-2 squircle-border-b-base-accent",
-            "whitespace-nowrap shadow-2xl",
+            "whitespace-nowrap shadow-xl bg-white dark:bg-zinc-950",
             className
           )}
           style={{ x: "-50%" }}
         >
           <div 
             className={cn(
-              "flex gap-2",
+              "flex gap-1.5",
               isVertical ? "flex-col w-full items-center" : "flex-row h-full items-center"
             )}
           >
@@ -219,27 +203,14 @@ export function ReactionItem({
   type: ReactionType;
   className?: string;
 }) {
-  const { mouseX, mouseY, activeOrientation, pageType, entityId, reactions, setIsOpen } = useReaction();
-  const ref = useRef<HTMLDivElement>(null);
-
-  const distance = useTransform(activeOrientation === "horizontal" ? mouseX : mouseY, (val) => {
-    if (val === Infinity) return 1000;
-    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, y: 0, width: 0, height: 0 };
-    const center = activeOrientation === "horizontal" 
-      ? bounds.x + bounds.width / 2 
-      : bounds.y + bounds.height / 2;
-    return val - center;
-  });
-
-  const sizeSync = useTransform(distance, [-120, 0, 120], [40, 64, 40]);
-  const size = useSpring(sizeSync, { stiffness: 200, damping: 25, mass: 0.1 });
+  const { pageType, entityId, reactions, setIsOpen } = useReaction();
 
   return (
     <motion.div
-      ref={ref}
-      style={{ width: size, height: size }}
       variants={ITEM_VARIANTS}
-      className={cn("flex items-center justify-center origin-center", className)}
+      whileHover={{ scale: 1.15 }}
+      whileTap={{ scale: 0.9 }}
+      className={cn("flex items-center justify-center size-10 origin-center cursor-pointer", className)}
       onClick={() => setIsOpen(false)}
     >
       <ReactionButton

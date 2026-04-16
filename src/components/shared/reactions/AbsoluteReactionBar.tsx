@@ -50,14 +50,13 @@ export function AbsoluteReactionBar({
       entityId={entityId}
       orientation="vertical"
       dockPosition={reactionsPosition}
+      className={cn(
+        "absolute z-20 pointer-events-auto",
+        reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-6",
+        className
+      )}
     >
-      <ReactionTrigger
-        className={cn(
-          "absolute z-20 pointer-events-auto",
-          reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-6",
-          className
-        )}
-      >
+      <ReactionTrigger>
         <div className="flex flex-col items-center justify-center relative pointer-events-none">
           <span className="text-xl">
             {REACTION_EMOJIS[primaryReaction]}
