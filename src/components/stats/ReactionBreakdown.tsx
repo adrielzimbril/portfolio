@@ -121,12 +121,12 @@ export function ReactionBreakdown({
         >
           <motion.div
             animate={{
-              rotate: isHovered ? 5 : -5,
+              rotate: isHovered ? -20 : -32,
               scale: isHovered ? 1.1 : 1,
               y: isHovered ? -10 : 0,
             }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="absolute -bottom-2 -right-2 text-[100px] leading-none opacity-10"
+            className="absolute -bottom-6 -right-6 text-[100px] leading-none opacity-10"
           >
             ❤️
           </motion.div>
