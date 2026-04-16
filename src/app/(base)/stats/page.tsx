@@ -242,6 +242,7 @@ export default async function StatsPage() {
             value={githubStats.commits}
           />
         </div>
+        <ContributionGraphCard contributions={githubStats.contributions} />
       </SectionLayout>
 
       <SectionLayout
@@ -250,9 +251,9 @@ export default async function StatsPage() {
         isFlex
         className="pb-0!"
       >
-        <div className="hidden! grid grid-cols-1 gap-2 lg:grid-cols-12 w-full">
+        <div className="grid grid-cols-1 gap-2 lg:grid-cols-12 w-full">
           <ContributionGraphCard contributions={githubStats.contributions} />
-          <div className="hidden! grid grid-cols-1 md:grid-cols-3 md:h-full w-full lg:flex flex-col gap-2 lg:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:h-full w-full lg:flex flex-col gap-2 lg:col-span-2">
             <GitHubStatsCard
               type="stars"
               label="GitHub Stars"

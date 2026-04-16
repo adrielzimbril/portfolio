@@ -1,19 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import { Display, Mobile } from "@aurthle/icons";
 import type { LighthouseScores } from "@/lib/stats/types";
-import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 import { cn } from "@/utils/utils";
-import { RadarBackground } from "./LighthouseScoreCard/RadarBackground";
-import { PulseRings } from "./LighthouseScoreCard/PulseRings";
-import { ScoreBar } from "./LighthouseScoreCard/ScoreBar";
-import {
-  getScoreColor,
-  getOverallScore,
-} from "./LighthouseScoreCard/lighthouse-utils";
-import { Card, CardContent } from "../ui/card";
-import { Badge } from "../ui/badge";
+import { RadarBackground } from "@/components/stats/LighthouseScoreCard/RadarBackground";
+import { ScoreBar } from "@/components/stats/LighthouseScoreCard/ScoreBar";
+import { getScoreColor, getOverallScore } from "@/lib/stats/lighthouse-utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
 import { pickRandomColor } from "@/utils";
 
@@ -30,8 +24,6 @@ export function LighthouseScoreCard({
   delay = 0,
   className,
 }: LighthouseScoreCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   const scoreItems = [
     { score: scores.performance, label: "Performance" },
     { score: scores.accessibility, label: "Accessibility" },
@@ -71,9 +63,7 @@ export function LighthouseScoreCard({
                 <Badge
                   className={cn(
                     "capitalize text-xs font-medium",
-                    pickRandomColor(
-                      DEFAULT_COLOR_CODE_NAME_LIST.PINKISH_ORANGE,
-                    ),
+                    pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
                     // overallColors.squircle,
                     "size-max text-primary-foreground!",
                   )}
@@ -81,13 +71,7 @@ export function LighthouseScoreCard({
                   size="lg"
                   circle
                 >
-                  <DeviceIcon
-                    className={cn(
-                      overallColors.text,
-                      "text-primary-foreground!",
-                    )}
-                    variant="bold"
-                  />
+                  <DeviceIcon variant="bulk" />
                 </Badge>
                 <Badge className="capitalize" variant="inverted" size="md">
                   <div className="flex items-center gap-3">
@@ -131,7 +115,6 @@ export function LighthouseScoreCard({
                     score={item.score}
                     label={item.label}
                     delay={delay + 0.15 + i * 0.08}
-                    isHovered={isHovered}
                   />
                 ))}
               </div>
