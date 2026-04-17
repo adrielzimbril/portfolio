@@ -35,6 +35,7 @@ export const ConfigValue = {
 
   // Authentication
   BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+  AUTH_PROVIDER: process.env.AUTH_PROVIDER || "supabase",
   AUTH_TOKEN_KEY: "shiro-auth-token",
 
   // Database (Supabase)

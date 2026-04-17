@@ -1,15 +1,5 @@
-import { supabaseProvider } from "./supabase";
-// import { betterAuthProvider } from "./better-auth";
+// Authentication Provider Selector
+// To switch providers, comment/uncomment the appropriate line.
 
-/**
- * The active authentication provider.
- * Currently using Supabase as the default provider.
- */
-const activeProvider = supabaseProvider; // To switch, use betterAuthProvider
-
-export const {
-  signInWithGithub,
-  signInWithGoogle,
-  signOut,
-  useUser,
-} = activeProvider;
+export * from "./supabase";
+// export * from "./better-auth";
