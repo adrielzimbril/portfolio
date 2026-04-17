@@ -39,7 +39,7 @@ export function StatCard({
       <div className="absolute bottom-6 right-1/2 translate-x-1/2">
         <Badge
           className={cn(
-            pickRandomColor(DEFAULT_COLOR_CODE_NAME.PURPLE),
+            pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
             "size-max text-primary-foreground!",
           )}
           variant="colored"
