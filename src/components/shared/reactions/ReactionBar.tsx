@@ -42,22 +42,21 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
 
 const DOCK_REVEAL_VARIANTS: Variants = {
   hidden: {
-    clipPath: "inset(10% 50% 90% 50% round 24px)",
+    clipPath: "inset(20% 50% 80% 50% round 24px)",
     opacity: 0,
-    scale: 0.9,
-    filter: "blur(4px)",
+    scale: 0.95,
   },
   show: {
     clipPath: "inset(0% 0% 0% 0% round 24px)",
     opacity: 1,
     scale: 1,
-    filter: "blur(0px)",
     transition: {
       type: "spring",
-      bounce: 0,
-      duration: 0.5,
-      delayChildren: 0.15,
-      staggerChildren: 0.1,
+      stiffness: 260,
+      damping: 25,
+      mass: 1,
+      delayChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };
@@ -65,11 +64,18 @@ const DOCK_REVEAL_VARIANTS: Variants = {
 const ITEM_VARIANTS: Variants = {
   hidden: {
     opacity: 0,
-    scale: 0.8,
+    scale: 0.5,
+    y: 10,
   },
   show: {
     opacity: 1,
     scale: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 20,
+    },
   },
 };
 
