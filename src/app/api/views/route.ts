@@ -23,7 +23,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Page not found" }, { status: 400 });
   }
 
-  const supabase = createClient(cookies());
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
 
   try {
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
@@ -65,8 +66,10 @@ export async function POST(req: NextRequest) {
     req.headers.get("x-real-ip") ||
     "unknown";
 
+  const blockedIp: string[] = ["::1", "127.0.0.1"];
   const ipInfo = blockedIp.includes(ip) ? null : await getIpInfo(ip);
-  const supabase = createClient(cookies());
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
 
   try {
     const body = await req.json().catch(() => ({}));

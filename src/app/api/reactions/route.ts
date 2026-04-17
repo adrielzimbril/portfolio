@@ -13,7 +13,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
   }
 
-  const supabase = createClient(cookies());
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
 
   try {
     const { data, error } = await supabase
@@ -56,7 +57,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
     }
 
-    const supabase = createClient(cookies());
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
     const { data: { user } } = await supabase.auth.getUser();
 
     // Check existing reaction
