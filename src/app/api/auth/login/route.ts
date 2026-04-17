@@ -1,39 +1,41 @@
-import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { getSupabaseConfig } from "@/config";
+import { createClient } from "@/integrations/supabase/server";
+import { authRoutes } from "@/integrations/auth/routes";
+import { Provider } from "@supabase/supabase-js";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
-  const provider = searchParams.get("provider");
+  const provider = searchParams.get("provider") as Provider;
+  const next = searchParams.get("next") ?? authRoutes.defaultRedirect;
 
-  if (provider === "github") {
-    const cookieStore = await cookies();
-    const { url, anonKey } = getSupabaseConfig();
-    const supabase = createServerClient(url!, anonKey!, {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
-          );
-        },
-      },
-    });
-
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: `${origin}/api/auth/callback`,
-      },
-    });
-
-    if (data.url) {
-      return NextResponse.redirect(data.url);
-    }
+  if (!provider || !["github", "google"].includes(provider)) {
+    return NextResponse.redirect(`${origin}${authRoutes.defaultRedirect}?error=invalid_provider`);
   }
 
-  return NextResponse.redirect(`${origin}/community?error=login_failed`);
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${origin}${authRoutes.callback}?next=${encodeURIComponent(next)}`,
+      ...(provider === "google" ? {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      } : {}),
+    },
+  });
+
+  if (error) {
+    return NextResponse.redirect(`${origin}${authRoutes.defaultRedirect}?error=login_failed`);
+  }
+
+  if (data.url) {
+    return NextResponse.redirect(data.url);
+  }
+
+  return NextResponse.redirect(`${origin}${authRoutes.defaultRedirect}?error=unknown_error`);
 }

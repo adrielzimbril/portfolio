@@ -3,35 +3,19 @@
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { getBaseUrl } from "@/utils/base-url";
 import { AuthProvider } from "../types";
+import { authRoutes } from "../routes";
 
 /**
  * Supabase Authentication Provider Implementation
  */
 export const supabaseProvider: AuthProvider = {
   signInWithGithub: async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: {
-        redirectTo: `${getBaseUrl()}/auth/callback`,
-      },
-    });
-    if (error) throw error;
+    window.location.href = `${authRoutes.login}?provider=github`;
   },
 
   signInWithGoogle: async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${getBaseUrl()}/auth/callback`,
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
-    });
-    if (error) throw error;
+    window.location.href = `${authRoutes.login}?provider=google`;
   },
 
   signOut: async () => {
