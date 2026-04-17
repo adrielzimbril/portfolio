@@ -143,46 +143,6 @@ export function ReactionRoot({
   );
 }
 
-export function ReactionTrigger({
-  asChild = false,
-  children,
-  className,
-  ...props
-}: {
-  asChild?: boolean;
-  children: React.ReactNode;
-  className?: string;
-} & React.ComponentProps<typeof motion.button>) {
-  const { isOpen, setIsOpen } = useReaction();
-  const Comp = asChild ? Slot : motion.button;
-
-  return (
-    <DropdownMenu.Trigger asChild>
-      <Comp
-        layout
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setIsOpen(!isOpen);
-        }}
-        className={cn(
-          "group relative flex items-center justify-center size-10 md:size-11",
-          "squircle squircle-xl squircle-smooth-xl",
-          "squircle-sh-white dark:squircle-b-base",
-          "squircle-border-2 squircle-border-b-base-accent",
-          "cursor-pointer z-20 transition-colors",
-          className,
-        )}
-        style={{ scale: isOpen ? 1.05 : 1 }}
-        whileTap={{ scale: 0.95 }}
-        {...props}
-      >
-        {children}
-      </Comp>
-    </DropdownMenu.Trigger>
-  );
-}
-
 export function ReactionDock({
   children,
   className,
@@ -309,21 +269,13 @@ export function ReactionBar({
   pageType,
   entityId,
   className,
-  variant = "inline",
-  dockPosition = "bottom",
-  orientation,
   compact = false,
 }: {
   pageType: PageType;
   entityId: string;
   className?: string;
-  variant?: "inline" | "dock";
-  dockPosition?: "top" | "bottom";
-  orientation?: "horizontal" | "vertical";
   compact?: boolean;
 }) {
-  const activeOrientation =
-    orientation || (variant === "dock" ? "vertical" : "horizontal");
   const reactionTypes = Object.values(ReactionType);
   const { reactions } = useReactions(pageType, entityId);
   const totalCount = Object.values(reactions).reduce(
@@ -340,39 +292,6 @@ export function ReactionBar({
     firstReaction && firstReaction.count > 0
       ? firstReaction.type
       : ReactionType.LIKE;
-
-  if (variant === "dock") {
-    return (
-      <ReactionRoot
-        pageType={pageType}
-        entityId={entityId}
-        orientation={activeOrientation}
-        dockPosition={dockPosition}
-      >
-        <ReactionTrigger className={className}>
-          <div className="flex flex-col items-center justify-center relative pointer-events-none">
-            <span className="text-xl">{REACTION_EMOJIS[primaryReaction]}</span>
-            {totalCount > 0 && (
-              <span
-                className={cn(
-                  "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
-                  dockPosition === "bottom" ? "-bottom-2.5" : "-top-2.5",
-                  "text-[10px] md:text-[11px]",
-                )}
-              >
-                {totalCount}
-              </span>
-            )}
-          </div>
-        </ReactionTrigger>
-        <ReactionDock>
-          {reactionTypes.map((type) => (
-            <ReactionItem key={type} type={type} compact={compact} />
-          ))}
-        </ReactionDock>
-      </ReactionRoot>
-    );
-  }
 
   return (
     <div

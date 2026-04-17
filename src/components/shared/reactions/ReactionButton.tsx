@@ -148,23 +148,28 @@ export function ReactionButton({
         onClick={handleReaction}
         title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
         className={cn(
-          "group relative flex items-center justify-center",
+          "group/reaction relative flex items-center justify-center cursor-pointer",
           "capitalize text-xs font-medium",
-          "squircle-border-2 squircle-border-[#8e8eff]",
+          "squircle-border-2",
           pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
           "size-max text-primary-foreground!",
+          // isReacted
+          //   ? "squircle-border-[#8e8eff]"
+          //   : "squircle-border-b-base-accent",
+          "squircle-border-[#8e8eff]",
+          compact && "px-1 py-0.5",
           isLoading && "opacity-50 cursor-not-allowed",
         )}
-        size="sm"
+        size={minimal ? "xs" : "sm"}
         variant={isReacted ? "colored" : "white"}
-        circle
-        contentClassName="flex flex-col items-center justify-center relative pointer-events-none"
+        circle={minimal ? false : true}
+        contentClassName="relative size-full flex flex-col items-center justify-center"
       >
         <span
           className={cn(
             "text-lg transition-transform duration-300",
             compact && "text-base",
-            !minimal && "group-hover/div:scale-125",
+            !minimal && "group-hover/reaction:scale-125",
             isReacted && "scale-110",
           )}
         >
@@ -173,12 +178,13 @@ export function ReactionButton({
         {reactionCount > 0 && !minimal && (
           <span
             className={cn(
-              "absolute font-bold squircle squircle-xl squircle-border px-1.5",
+              "absolute font-bold squircle squircle-xl squircle-border-1",
               isReacted
                 ? "squircle-sh-white text-indigo-500 squircle-border-[#8e8eff]"
                 : "squircle-[#8e8eff] text-primary-foreground! squircle-border-sh-white",
-              "-bottom-2.5",
-              "text-[10px] md:text-[11px]",
+              compact
+                ? "-bottom-1.5 text-[.5rem] px-1"
+                : "-bottom-1 text-[.625rem] px-1.5",
             )}
           >
             {reactionCount}
@@ -190,7 +196,7 @@ export function ReactionButton({
         disabled={isLoading}
         title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
         className={cn(
-          "flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
+          "hidden! flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
           "squircle squircle-7xl squircle-smooth-xl",
           minimal
             ? "size-10"
