@@ -13,6 +13,7 @@ import {
   Wrench,
   Calendar,
   Sparkles,
+  FilterOne,
 } from "@aurthle/icons";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import {
@@ -26,10 +27,19 @@ import { ChangelogItemType, DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { cn } from "@/utils/utils";
 import { Changelog } from "@/integrations/content/types";
 import { pickRandomColor } from "@/utils";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogHeader,
+  DialogFooter,
+  DialogSeparator,
+} from "@/components/ui/dialog";
 
 export function TimelineSection() {
   const [selectedType, setSelectedType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [changelogData, setChangelogData] = React.useState<Changelog[]>([]);
   const [typeCounts, setTypeCounts] = React.useState<Record<string, number>>({
     all: 0,
@@ -73,11 +83,26 @@ export function TimelineSection() {
     improvement: Wrench,
   };
 
+  const clearFilters = () => {
+    setSelectedType("all");
+    setSearchQuery("");
+  };
+
   return (
     <>
-      {/* Filters Section */}
-      <SectionLayout isFlex className="pb-0!">
-        <div className="w-full max-w-4xl space-y-6">
+      {/* Filter Modal */}
+      <Dialog open={isFilterModalOpen} onOpenChange={setIsFilterModalOpen}>
+        <DialogContent
+          size="lg"
+          variant="modern"
+          className="flex flex-col gap-6"
+        >
+          <DialogHeader>
+            <DialogTitle>Filter Changelog</DialogTitle>
+          </DialogHeader>
+
+          <DialogSeparator />
+
           {/* Filter Buttons */}
           <div className="flex flex-wrap gap-2 justify-center">
             {(
@@ -127,7 +152,7 @@ export function TimelineSection() {
           </div>
 
           {/* Search Input */}
-          <div className="relative w-full max-w-md mx-auto">
+          <div className="relative w-full">
             <Input
               type="text"
               placeholder="Search releases..."
@@ -136,6 +161,46 @@ export function TimelineSection() {
               className="pl-4"
             />
           </div>
+
+          <DialogSeparator />
+
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={clearFilters} asPointer whileTap>
+              Clear Filters
+            </Button>
+            <Button
+              onClick={() => setIsFilterModalOpen(false)}
+              asPointer
+              whileTap
+            >
+              Apply Filters
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Filter Button */}
+      <SectionLayout isFlex className="pb-0!">
+        <div className="flex justify-center w-full">
+          <Button
+            onClick={() => setIsFilterModalOpen(true)}
+            variant={
+              selectedType !== "all" || searchQuery ? "default" : "outline"
+            }
+            size="lg"
+            asIcon
+            asPointer
+            whileTap
+            className="gap-2"
+          >
+            <FilterOne size={20} variant="bulk" />
+            Filters
+            {(selectedType !== "all" || searchQuery) && (
+              <Badge variant="white" size="xs" circle className="ml-1">
+                {Object.keys(filteredChangelog).length}
+              </Badge>
+            )}
+          </Button>
         </div>
       </SectionLayout>
 
