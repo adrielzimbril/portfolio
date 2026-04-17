@@ -40,7 +40,7 @@ const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.SCEPTIC]: "🤔",
 };
 
-const DOCK_REVEAL_VARIANTS: Variants = {
+export const DOCK_REVEAL_VARIANTS: Variants = {
   hidden: {
     clipPath: "inset(20% 50% 80% 50% round 24px)",
     opacity: 0,
@@ -61,7 +61,7 @@ const DOCK_REVEAL_VARIANTS: Variants = {
   },
 };
 
-const ITEM_VARIANTS: Variants = {
+export const ITEM_VARIANTS: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.5,

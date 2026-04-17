@@ -1,13 +1,20 @@
-"use client";
-
-import React from "react";
-import { ReactionRoot, ReactionTrigger, ReactionDock, ReactionItem } from "@/components/shared/reactions/ReactionBar";
+import { 
+  ReactionRoot, 
+  ReactionTrigger, 
+  ReactionDock,
+  ReactionItem,
+  DOCK_REVEAL_VARIANTS,
+  ITEM_VARIANTS 
+} from "@/components/shared/reactions/ReactionBar";
+import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { useReactions } from "@/lib/reactions/use-reactions";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { motion, AnimatePresence } from "motion/react";
 
-// Constants from ReactionBar for the trigger display
+// Constants for the reactions
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
   [ReactionType.HEART]: "❤️",
@@ -29,6 +36,7 @@ export function AbsoluteReactionBar({
   reactionsPosition,
   className,
 }: AbsoluteReactionBarProps) {
+  const isMobile = useIsMobile(1024);
   const { reactions } = useReactions(pageType, entityId);
   const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
   
@@ -44,6 +52,41 @@ export function AbsoluteReactionBar({
 
   if (!reactionsPosition) return null;
 
+  // Mobile "Button Mode": Display reactions directly in a compact horizontal bar
+  if (isMobile) {
+    return (
+      <div className={cn(
+        "absolute z-20 pointer-events-auto",
+        reactionsPosition === "top" ? "top-4 right-4" : "bottom-6 right-6",
+        className
+      )}>
+        <motion.div 
+          initial="hidden"
+          animate="show"
+          variants={DOCK_REVEAL_VARIANTS}
+          className={cn(
+            "flex items-center gap-1.5 p-1.5 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md",
+            "squircle squircle-7xl squircle-smooth-xl shadow-xl border-2 border-b-base-accent"
+          )}
+        >
+          {reactionTypes.map((type) => (
+            <motion.div key={type} variants={ITEM_VARIANTS}>
+              <ReactionButton 
+                pageType={pageType}
+                entityId={entityId}
+                reactionType={type}
+                count={reactions[type] || 0}
+                minimal
+                className="size-8" // Slightly smaller for mobile cards
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    );
+  }
+
+  // Desktop "Dock Mode": Maintain floating popover
   return (
     <ReactionRoot
       pageType={pageType}
