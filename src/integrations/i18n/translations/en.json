@@ -399,6 +399,15 @@
       },
       "changelog": {
         "default": "Changelog"
+      },
+      "policy": {
+        "default": "Privacy Policy"
+      },
+      "terms": {
+        "default": "Terms of Service"
+      },
+      "routes": {
+        "default": "Routes"
       }
     },
     "page-sections": {

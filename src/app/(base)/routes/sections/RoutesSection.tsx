@@ -26,14 +26,12 @@ export function RoutesSection() {
   };
 
   return (
-    <SectionLayout>
+    <SectionLayout
+      className="pt-0!"
+      isFlex
+      title={t("routes.page.description")}
+    >
       <div className="max-w-4xl mx-auto space-y-12">
-        <div className="prose dark:prose-invert max-w-none">
-          <p className="text-lg text-b-white-invert-sec">
-            {t("routes.page.description")}
-          </p>
-        </div>
-
         <div className="space-y-8">
           <RouteGroup
             title={t("routes.groups.main")}

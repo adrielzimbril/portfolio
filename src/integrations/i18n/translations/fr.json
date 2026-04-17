@@ -735,6 +735,15 @@
       },
       "changelog": {
         "default": "Changelog"
+      },
+      "policy": {
+        "default": "Politique de Confidentialité"
+      },
+      "terms": {
+        "default": "Conditions d'Utilisation"
+      },
+      "routes": {
+        "default": "Routes"
       }
     },
     "button": {
