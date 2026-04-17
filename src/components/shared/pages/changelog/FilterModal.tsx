@@ -85,7 +85,7 @@ export function FilterModal({
                       <Icon size={16} variant="bulk" />
                     </Badge>
                   )}
-                  {type}
+                  {t(`types.${type}`)}
                   <Badge
                     className={cn(
                       pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),

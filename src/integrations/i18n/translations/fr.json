@@ -132,7 +132,13 @@
           "button": "Filtres",
           "searchPlaceholder": "Rechercher des releases...",
           "clearFilters": "Effacer les filtres",
-          "applyFilters": "Appliquer les filtres"
+          "applyFilters": "Appliquer les filtres",
+          "types": {
+            "milestone": "Jalon",
+            "feature": "Fonctionnalité",
+            "fix": "Correction",
+            "improvement": "Amélioration"
+          }
         },
         "entry": {
           "latest": "Dernière"

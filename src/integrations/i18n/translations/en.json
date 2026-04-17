@@ -132,7 +132,13 @@
           "button": "Filters",
           "searchPlaceholder": "Search releases...",
           "clearFilters": "Clear filters",
-          "applyFilters": "Apply filters"
+          "applyFilters": "Apply filters",
+          "types": {
+            "milestone": "Milestone",
+            "feature": "Feature",
+            "fix": "Fix",
+            "improvement": "Improvement"
+          }
         },
         "entry": {
           "latest": "Latest"

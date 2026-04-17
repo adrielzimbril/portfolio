@@ -132,7 +132,13 @@
           "button": "筛选",
           "searchPlaceholder": "搜索版本...",
           "clearFilters": "清除筛选",
-          "applyFilters": "应用筛选"
+          "applyFilters": "应用筛选",
+          "types": {
+            "milestone": "里程碑",
+            "feature": "功能",
+            "fix": "修复",
+            "improvement": "改进"
+          }
         },
         "entry": {
           "latest": "最新"

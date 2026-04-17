@@ -123,7 +123,7 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
               )}
               variant="colored"
             >
-              {entry.type}
+              {t(`types.${entry.type}`)}
             </Badge>
           </div>
           <h3 className="text-2xl font-bold mb-6 text-foreground">
