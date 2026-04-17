@@ -4,8 +4,10 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
 import { Link } from "@/components/ui/link";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { cn, pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 
 export function RoutesSection() {
   const t = useTranslations();
@@ -29,7 +31,7 @@ export function RoutesSection() {
     <SectionLayout
       className="pt-0!"
       isFlex
-      title={t("routes.page.description")}
+      description={t("routes.page.description")}
     >
       <div className="max-w-4xl mx-auto space-y-12">
         <div className="space-y-8">
@@ -65,16 +67,27 @@ function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
         {routes.map((route) => (
           <Card
             key={route.key}
-            className="p-4 hover:bg-b-base transition-colors"
+            className="group relative squircle squircle-b-base squircle-2xl squircle-smooth-lg border-0"
           >
-            <Link href={route.link} className="block">
-              <div className="flex flex-col gap-2">
+            <Link href={route.link} className="absolute inset-0 z-10" />
+            <CardContent className="p-4 relative size-full z-0">
+              <div
+                className={cn(
+                  "flex relative flex-col size-full gap-4 p-4 squircle squircle-smooth-md squircle-xl md:squircle-2xl squircle-sh-white overflow-hidden",
+                )}
+              >
                 <div className="flex items-center justify-between">
                   <h4 className="text-lg font-semibold text-b-white-foreground">
                     {t(`common.menu.${route.key}.default`)}
                   </h4>
                   {route.inHeader && (
-                    <Badge variant="secondary" className="text-xs">
+                    <Badge
+                      className={cn(
+                        "capitalize squircle-border-2 squircle-border-sh-white",
+                        pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
+                      )}
+                      variant="colored"
+                    >
                       {t("routes.badges.header")}
                     </Badge>
                   )}
@@ -83,7 +96,7 @@ function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
                   {t(`${route.key}.description`)}
                 </p>
               </div>
-            </Link>
+            </CardContent>
           </Card>
         ))}
       </div>
