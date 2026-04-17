@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { patterns } from "@/lib/communityWall/types";
 import { cn } from "@/utils/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import BoringAvatar from "boring-avatars";
 import { getImageUrl, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
+import { patterns } from "@/components/shared/pages/community/pattern";
 
 type CommunityWallCardProps = {
   patternIndex: number;
@@ -38,7 +38,7 @@ export function CommunityWallCard({
   return (
     <Card
       className={cn(
-        "squircle squircle-sh-white squircle-3xl squircle-smooth-lg squircle-border-2 squircle-border-b-base-accent",
+        "squircle squircle-b-base squircle-3xl squircle-smooth-lg squircle-border-2 squircle-border-b-base-accent",
         "transition-all duration-300 group cursor-pointer",
         className,
       )}
@@ -47,30 +47,36 @@ export function CommunityWallCard({
       <CardContent className="flex flex-col items-start justify-between gap-3 p-4 h-full">
         <div
           className={cn(
-            "w-full rounded-md bg-linear-to-b relative flex items-center justify-center text-balance p-4 text-center min-h-[220px]",
-            pattern.gradient,
+            "relative size-full flex flex-col items-center gap-2 squircle squircle-smooth-lg squircle-2xl squircle-sh-white p-2 overflow-hidden",
           )}
         >
-          {pattern.svg}
-          <p className="z-10 line-clamp-6 text-center text-xl font-bold text-b-white-invert">
-            {message}
-          </p>
-        </div>
-        <div className="flex w-full items-center gap-2">
-          <Avatar className="h-8 w-8 shrink-0">
-            <AvatarImage src={getImageUrl(profilePicture ?? "")} />
-            <AvatarFallback className="relative pointer-events-none">
-              <BoringAvatar
-                name={
-                  author ||
-                  (profilePicture?.slice(8)?.replace(".png", "") ?? "")
-                }
-                colors={avatarColors}
-                variant="beam"
-              />
-            </AvatarFallback>
-          </Avatar>
-          <p className="truncate text-b-white-invert-sec text-sm">{author}</p>
+          <div
+            className={cn(
+              "relative size-full flex flex-row items-center justify-center p-4 min-h-[200px]",
+              "squircle squircle-smooth-lg squircle-2xl squircle-b-base overflow-hidden",
+            )}
+          >
+            {pattern?.content}
+            <p className="z-10 line-clamp-6 text-center text-xl font-bold text-b-white-invert">
+              {message}
+            </p>
+          </div>
+          <div className="flex w-full items-center gap-2">
+            <Avatar className="h-8 w-8 shrink-0">
+              <AvatarImage src={getImageUrl(profilePicture ?? "")} />
+              <AvatarFallback className="relative pointer-events-none">
+                <BoringAvatar
+                  name={
+                    author ||
+                    (profilePicture?.slice(8)?.replace(".png", "") ?? "")
+                  }
+                  colors={avatarColors}
+                  variant="beam"
+                />
+              </AvatarFallback>
+            </Avatar>
+            <p className="truncate text-b-white-invert-sec text-sm">{author}</p>
+          </div>
         </div>
       </CardContent>
     </Card>
