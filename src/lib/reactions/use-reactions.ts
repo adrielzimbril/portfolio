@@ -7,7 +7,7 @@ import { apiRoutes } from "@/data/api-routes";
 export function useReactions(pageType: PageType, entityId: string) {
   const fetcher = async () => {
     const res = await fetch(
-      `${apiRoutes.reactions.link}?pageType=${pageType}&entityId=${entityId}`,
+      `${apiRoutes.reactions.main.link}?pageType=${pageType}&entityId=${entityId}`,
     );
     if (!res.ok) {
       throw new Error("Failed to fetch reactions");

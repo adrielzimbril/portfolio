@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/form";
 import logger from "@/utils/logger";
 import { apiRoutes } from "@/data/api-routes";
+import { toast } from "sonner";
 
 interface CommentFormProps {
   user: any;
@@ -59,13 +60,16 @@ export function CommentForm({ user }: CommentFormProps) {
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
+        toast.error(data?.error || "Failed to submit comment");
         throw new Error(data?.error || "Failed to submit comment");
       }
 
       logger.info("Comment submitted successfully", data);
+      toast.success("Comment submitted successfully!");
       form.reset();
     } catch (error) {
       logger.error("Failed to submit comment", error);
+      toast.error("Failed to submit comment");
       throw error;
     }
   };

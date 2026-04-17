@@ -51,7 +51,7 @@ export async function syncAnonymousReactionsOnLogin(
   anonymousId: string,
 ): Promise<number> {
   try {
-    const res = await fetch(apiRoutes.reactionsSync.link, {
+    const res = await fetch(apiRoutes.reactions.sync.link, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ anonymousId }),

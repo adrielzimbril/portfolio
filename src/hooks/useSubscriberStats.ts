@@ -12,7 +12,7 @@ async function fetchJSON(url: string) {
 
 export function useNewsletterSubscribersCount() {
   const { data, error, isLoading, mutate } = useSWR(
-    `${apiRoutes.statsSubscribers.link}?scope=newsletter`,
+    `${apiRoutes.stats.subscribers.link}?scope=newsletter`,
     fetchJSON,
     {
       revalidateOnFocus: true, // 👈 re-fetch when we come back to the page
@@ -30,7 +30,7 @@ export function useNewsletterSubscribersCount() {
 export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
   const { data, error, isLoading, mutate } = useSWR(
     type
-      ? `${apiRoutes.statsSubscribers.link}?scope=productType&type=${encodeURIComponent(type)}`
+      ? `${apiRoutes.stats.subscribers.link}?scope=productType&type=${encodeURIComponent(type)}`
       : null, // null = skip fetch if no type
     fetchJSON,
   );
@@ -46,7 +46,7 @@ export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
 export function useProductSlugRequestsCount(slug: string) {
   const { data, error, isLoading, mutate } = useSWR(
     slug
-      ? `${apiRoutes.statsSubscribers.link}?scope=productUrl&url=${encodeURIComponent(
+      ? `${apiRoutes.stats.subscribers.link}?scope=productUrl&url=${encodeURIComponent(
           slug,
         )}`
       : null, // null = skip fetch if no title
@@ -69,7 +69,7 @@ type QuestParticipantsStats = {
 
 export function useQuestParticipantsStats(slug: string) {
   const { data, error, isLoading, mutate } = useSWR(
-    slug ? apiRoutes.questsParticipants(slug).link : null,
+    slug ? apiRoutes.quests.participants(slug).link : null,
     fetchJSON,
   );
 

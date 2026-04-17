@@ -74,7 +74,7 @@ export function ReactionButton({
     async () => {
       if (!currentUserId) return false;
       const res = await fetch(
-        `${apiRoutes.reactionsStatus.link}?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`,
+        `${apiRoutes.reactions.status.link}?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`,
       );
       if (!res.ok) return false;
       const { isReacted } = await res.json();
@@ -111,7 +111,7 @@ export function ReactionButton({
     );
 
     try {
-      const res = await fetch(apiRoutes.reactions.link, {
+      const res = await fetch(apiRoutes.reactions.main.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

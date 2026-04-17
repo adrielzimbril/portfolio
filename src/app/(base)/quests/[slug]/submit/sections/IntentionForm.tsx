@@ -68,7 +68,7 @@ export function IntentionForm({
 
   const onSubmit = async (values: FormValues) => {
     try {
-      const res = await fetch(apiRoutes.questsSubmit(quest.slug).link, {
+      const res = await fetch(apiRoutes.quests.submit(quest.slug).link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...values, locale }),
