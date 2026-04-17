@@ -72,8 +72,8 @@ export default async function BlogPostPage(props: {
           tags={tags}
           date={created_at}
           readingTime={formattedReadingTime}
+          pageType={PageType.THOUGHT}           
           pageViewsData={{ slug, locale }}
-          slug={slug}
         />
       </Skeleton>
       <Skeleton name="thought-detail-content" loading={false}>

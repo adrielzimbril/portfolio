@@ -23,16 +23,11 @@ export function HeaderSection() {
   );
 
   return (
-    <>
       <PageHero
         title={t("changelog.page.title")}
         description={t("changelog.page.description")}
         imagePath={{ emoji: "📝" }}
         isMobileShowed
       />
-      <div className="flex justify-center mt-4">
-        <ReactionBar pageType={PageType.CHANGELOG} entityId="v3.1.0" />
-      </div>
-    </>
   );
 }

@@ -29,7 +29,7 @@ interface HeaderSectionProps {
   tags?: { name: string }[];
 
   // Article details : Date  + Min read + Views
-  articleDetails?: {
+  thoughtDetails?: {
     date?: string;
     readingTime?: string;
     views?: number;
@@ -48,7 +48,7 @@ export function HeaderSection({
   previewContent: initPreviewContent,
   mainTitle,
   tags,
-  articleDetails,
+  thoughtDetails,
 }: HeaderSectionProps) {
   const t = useTranslations();
 
@@ -85,9 +85,9 @@ export function HeaderSection({
 
       <h1 className="h3 w-full font-normals relative">{mainTitle}</h1>
 
-      {articleDetails && Object.keys(articleDetails).length > 0 && (
+      {thoughtDetails && Object.keys(thoughtDetails).length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
-          {articleDetails.date && (
+          {thoughtDetails.date && (
             <Badge
               className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
               variant="colored"
@@ -99,7 +99,7 @@ export function HeaderSection({
                   className="text-indigo-400"
                   variant="bulk"
                 />
-                {getDate({ date: articleDetails.date })}
+                {getDate({ date: thoughtDetails.date })}
               </span>
             </Badge>
           )}
@@ -115,7 +115,7 @@ export function HeaderSection({
                 className="text-indigo-400"
                 variant="bulk"
               />
-              {articleDetails.readingTime}
+              {thoughtDetails.readingTime}
             </span>
           </Badge>
 
@@ -126,7 +126,7 @@ export function HeaderSection({
           >
             <span className="flex items-center gap-2">
               <Eye size={16} className="text-indigo-400" variant="bulk" />
-              {formatCount(articleDetails.views ?? 0)} {t("common.stats.views")}
+              {formatCount(thoughtDetails.views ?? 0)} {t("common.stats.views")}
             </span>
           </Badge>
         </div>

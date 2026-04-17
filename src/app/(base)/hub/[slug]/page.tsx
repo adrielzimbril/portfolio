@@ -5,7 +5,7 @@ import { HeaderSection } from "@/app/(base)/hub/[slug]/sections/HeaderSection";
 import { MorePreviewSection } from "@/app/(base)/hub/[slug]/sections/MorePreviewSection";
 import { ResourceDetailsSection } from "@/app/(base)/hub/[slug]/sections/ResourceDetailsSection";
 import { getLocale } from "next-intl/server";
-import { PageParams } from "@/types";
+import { PageParams, PageType } from "@/types";
 import {
   getResourceWithAdjacent,
   getResourceBySlug,
@@ -68,15 +68,14 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           type={type}
           tags={tags}
           pageViewsData={{ slug, locale }}
-          slug={slug}
         />
       </Skeleton>
       <Skeleton name="resource-detail-content" loading={false}>
         <ResourceDetailsSection content={body || ""} />
+        <ReactionBar pageType={PageType.HUB} entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
       </Skeleton>
       {resource!.adjacentResources.length > 0 && (
         <Skeleton name="resource-detail-more" loading={false}>
-          <ReactionBar pageType="hub" entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
           <MorePreviewSection data={resource!.adjacentResources} />
         </Skeleton>
       )}

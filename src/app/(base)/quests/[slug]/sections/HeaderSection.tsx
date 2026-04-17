@@ -13,14 +13,13 @@ import {
 
 export function HeaderSection({
   title,
-  slug,
   cover,
   description,
   dates,
   tags,
+  pageViewsData,
 }: {
   title: string;
-  slug: string;
   cover: string;
   description: string;
   dates: {
@@ -29,9 +28,9 @@ export function HeaderSection({
     results: string;
   };
   tags?: { name: string; color: string }[];
+  pageViewsData: { slug: string; locale: string };
 }) {
   const t = useTranslations();
-  const locale = useLocale();
   const isRegistrationOpen = !isRegistrationClosed(dates.registration_end);
   const isSubmissionOpen = !isSubmissionClosed(
     dates.submission_end,
@@ -39,11 +38,11 @@ export function HeaderSection({
   );
 
   usePageViews(
-    slug,
+    pageViewsData.slug,
     PageType.QUESTS,
     {
-      locale,
-      path: getResourcesUrl(PageType.QUESTS, slug),
+      locale: pageViewsData.locale,
+      path: getResourcesUrl(PageType.QUESTS, pageViewsData.slug),
     },
     false,
   );
@@ -66,14 +65,14 @@ export function HeaderSection({
             }
       }
       mainTitle={title}
-      slug={slug}
+      slug={pageViewsData.slug}
       description={description}
       tags={tags}
       ctaButton={
         isRegistrationOpen
-          ? getQuestAskUrl(slug, QuestAskType.ENROLL)
+          ? getQuestAskUrl(pageViewsData.slug, QuestAskType.ENROLL)
           : isSubmissionOpen
-            ? getQuestAskUrl(slug, QuestAskType.SUBMIT)
+            ? getQuestAskUrl(pageViewsData.slug, QuestAskType.SUBMIT)
             : undefined
       }
       ctaButtonText={`${

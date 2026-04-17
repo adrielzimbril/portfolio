@@ -133,10 +133,10 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       <Skeleton name="quest-detail-header" loading={false}>
         <HeaderSection
           title={title}
-          slug={slug}
           cover={cover ?? ""}
           description={excerpt}
           dates={dates}
+          pageViewsData={{ slug, locale }}
           tags={tags.map((tag) => ({
             name: tag.name,
             color: tag.meta.color as any,
@@ -151,6 +151,12 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           tags={tags}
           rewards={rewards}
         />
+          <ReactionBar 
+            pageType={PageType.QUESTS} 
+            entityId={slug} 
+            variant="inline" 
+            className="max-w-4xl mx-auto my-12" 
+          />
       </Skeleton>
       {isResultsPublished(quest_end, results_published) && (
         <Skeleton name="quest-detail-participants" loading={false}>
@@ -158,12 +164,6 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         </Skeleton>
       )}
       <Skeleton name="quest-detail-more" loading={false}>
-          <ReactionBar 
-            pageType={PageType.QUESTS} 
-            entityId={slug} 
-            variant="inline" 
-            className="max-w-4xl mx-auto my-12" 
-          />
           <MorePreviewSection data={quest.adjacentQuests} />
       </Skeleton>
     </>

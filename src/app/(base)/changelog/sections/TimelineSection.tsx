@@ -24,11 +24,12 @@ import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown
 import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 import { PageType } from "@/types";
 import { cn } from "@/utils/utils";
+import { Changelog } from "@/integrations/content/types";
 
 export function TimelineSection() {
   const [selectedType, setSelectedType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [changelogData, setChangelogData] = React.useState<any[]>([]);
+  const [changelogData, setChangelogData] = React.useState<Changelog[]>([]);
   const [typeCounts, setTypeCounts] = React.useState<Record<string, number>>({
     all: 0,
     milestone: 0,
@@ -39,7 +40,7 @@ export function TimelineSection() {
 
   React.useEffect(() => {
     const loadData = async () => {
-      const data = await getAllChangelog();
+      const data: Changelog[] = await getAllChangelog();
       setChangelogData(data);
       const counts = await getChangelogTypeCounts();
       setTypeCounts(counts);
@@ -177,7 +178,9 @@ export function TimelineSection() {
                           index === 0 &&
                           year ===
                             String(
-                              new Date(filteredChangelog[0].date).getFullYear(),
+                              new Date(
+                                filteredChangelog[0]?.date || Date.now(),
+                              ).getFullYear(),
                             );
 
                         return (

@@ -20,7 +20,7 @@ import {
 } from "@/integrations/content/lib/projects";
 import { getLocale } from "next-intl/server";
 import { routes } from "@/data/routes";
-import { PageParams } from "@/types";
+import { PageParams, PageType } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -96,7 +96,6 @@ export default async function SubProject(props: {
           tags={categories}
           projectLink={project_link}
           pageViewsData={{ slug, locale }}
-          slug={slug}
         />
       </Skeleton>
       <Skeleton name="project-detail-content" loading={false}>
@@ -106,6 +105,7 @@ export default async function SubProject(props: {
           tags={tags}
           role={role}
         />
+        <ReactionBar pageType={PageType.PROJECT} entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
       </Skeleton>
       {cardSectionDescription ||
         (cards && (
@@ -159,7 +159,6 @@ export default async function SubProject(props: {
       )}
       {project!.adjacentProjects.length > 0 && (
         <Skeleton name="project-detail-more" loading={false}>
-          <ReactionBar pageType="project" entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
           <MorePreviewSection data={project!.adjacentProjects} />
         </Skeleton>
       )}
