@@ -144,6 +144,8 @@ async function FooterResources({
     routes.toolbox,
     routes.connections,
     routes.changelog,
+    routes.terms,
+    routes.policy,
   ];
 
   return (
