@@ -8,5 +8,4 @@ export const authRoutes = {
   callback: "/api/auth/callback",
   // redirect destinations
   defaultRedirect: ConfigValue.AUTH_DEFAULT_REDIRECT,
-  error: "/auth/auth-code-error",
 } as const;

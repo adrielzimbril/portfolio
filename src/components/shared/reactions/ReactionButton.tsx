@@ -150,12 +150,13 @@ export function ReactionButton({
         className={cn(
           "group relative flex items-center justify-center",
           "capitalize text-xs font-medium",
+          "squircle-border-2 squircle-border-[#8e8eff]",
           pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
           "size-max text-primary-foreground!",
           isLoading && "opacity-50 cursor-not-allowed",
         )}
         size="sm"
-        variant="colored"
+        variant={isReacted ? "colored" : "white"}
         circle
         contentClassName="flex flex-col items-center justify-center relative pointer-events-none"
       >
@@ -163,7 +164,7 @@ export function ReactionButton({
           className={cn(
             "text-lg transition-transform duration-300",
             compact && "text-base",
-            !minimal && "group-hover/btn:scale-125",
+            !minimal && "group-hover/div:scale-125",
             isReacted && "scale-110",
           )}
         >
@@ -172,7 +173,10 @@ export function ReactionButton({
         {reactionCount > 0 && !minimal && (
           <span
             className={cn(
-              "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
+              "absolute font-bold squircle squircle-xl squircle-border px-1.5",
+              isReacted
+                ? "squircle-sh-white text-indigo-500 squircle-border-[#8e8eff]"
+                : "squircle-[#8e8eff] text-primary-foreground! squircle-border-sh-white",
               "-bottom-2.5",
               "text-[10px] md:text-[11px]",
             )}

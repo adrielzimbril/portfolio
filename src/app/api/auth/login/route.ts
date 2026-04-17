@@ -14,7 +14,7 @@ export async function GET(request: Request) {
 
   if (!provider || !providerList.includes(provider as any)) {
     return NextResponse.redirect(
-      `${origin}${ConfigValue.AUTH_CALLBACK_URL_DEFAULT}?error=invalid_provider`,
+      `${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=invalid_provider`,
     );
   }
 
@@ -38,7 +38,7 @@ export async function GET(request: Request) {
 
   if (error) {
     return NextResponse.redirect(
-      `${origin}${ConfigValue.AUTH_CALLBACK_URL_DEFAULT}?error=login_failed`,
+      `${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=login_failed`,
     );
   }
 
@@ -47,6 +47,6 @@ export async function GET(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${origin}${ConfigValue.AUTH_CALLBACK_URL_DEFAULT}?error=unknown_error`,
+    `${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=unknown_error`,
   );
 }

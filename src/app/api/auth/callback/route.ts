@@ -31,15 +31,17 @@ export async function GET(request: Request) {
       if (isNewSignup && data.user.email) {
         logger.info("New user connected, sending welcome email", {
           email: data.user.email,
-          provider: data.user.app_metadata.provider
+          provider: data.user.app_metadata.provider,
         });
 
         try {
           await sendEmail({
-            to: [{
-              email: data.user.email,
-              name: data.user.user_metadata.full_name || data.user.email,
-            }],
+            to: [
+              {
+                email: data.user.email,
+                name: data.user.user_metadata.full_name || data.user.email,
+              },
+            ],
             templateId: "welcome",
             locale: Locale.EN,
             context: {
@@ -53,7 +55,7 @@ export async function GET(request: Request) {
 
       const forwardedHost = request.headers.get("x-forwarded-host");
       const isLocalEnv = isDevelopment();
-      
+
       if (isLocalEnv) {
         return NextResponse.redirect(`${origin}${next}`);
       } else if (forwardedHost) {
@@ -64,6 +66,6 @@ export async function GET(request: Request) {
     }
   }
 
-  // Handle errors
-  return NextResponse.redirect(`${origin}${authRoutes.error}`);
+  // Handle errors - redirect to default (toast will show error message)
+  return NextResponse.redirect(`${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}`);
 }
