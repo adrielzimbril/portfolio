@@ -12,7 +12,7 @@ import { Card, CardContent } from "@/components/ui/card";
 type Message = {
   id: string;
   message: string;
-  patternindex: number;
+  patternIndex: number;
   rotation: number;
   creator_name: string;
   creator_avatar_url: string;
@@ -230,7 +230,7 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
             onMouseLeave={handleMouseLeave}
           >
             {/* Background grid pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] bg-size-[1rem_1rem]" />
+            <div className="absolute inset-0 bg-[radial-gradient(var(--b-white-invert-fr)_0.0625rem,transparent_0.125rem)] bg-size-[1rem_1rem]" />
 
             {/* Canvas container that gets transformed */}
             <div
@@ -257,11 +257,11 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
                 >
                   <CommunityWallCard
                     message={message.message}
-                    patternIndex={message.patternindex}
+                    patternIndex={message.patternIndex}
                     author={message.creator_name}
                     profilePicture={message.creator_avatar_url}
                     rotation={message.rotation}
-                    className="h-[300px] w-[250px] shadow-[12px_12px_0px_0px_rgba(214,218,222,0.3)]"
+                    className="h-75 w-63"
                   />
                 </div>
               ))}
@@ -276,7 +276,6 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
                   ? "opacity-100 pointer-cursor pointer-events-auto"
                   : "opacity-0 pointer-none pointer-events-none",
                 pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
-                // "size-max text-primary-foreground!",
               )}
               variant="colored"
               size="lg"
@@ -285,53 +284,6 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
             >
               <SynchronizationTwo size={24} variant="bulk" />
             </Badge>
-            <button
-              onClick={handleRecenter}
-              className="hidden! absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-lg bg-dark-primary shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
-              style={{
-                opacity: hasMoved ? 1 : 0,
-                pointerEvents: hasMoved ? "auto" : "none",
-              }}
-              aria-label="Recenter canvas"
-              title="Return to center"
-            >
-              <svg
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="text-gray-400"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M11.25 4.75L8.75 7L11.25 9.25"
-                />
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M12.75 19.25L15.25 17L12.75 14.75"
-                />
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M9.75 7H13.25C16.5637 7 19.25 9.68629 19.25 13V13.25"
-                />
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M14.25 17H10.75C7.43629 17 4.75 14.3137 4.75 11V10.75"
-                />
-              </svg>
-            </button>
           </div>
           {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}
           {children && children}
