@@ -70,27 +70,7 @@ export function ReactionButton({
     setLocalIsReacted(isReactedProp);
   }, [isReactedProp]);
 
-  const statusKey = currentUserId
-    ? `reaction_status_${pageType}_${entityId}_${reactionType}_${currentUserId}`
-    : null;
-
-  const { data: isReacted, mutate: mutateStatus } = useSWR(
-    statusKey,
-    async () => {
-      if (!currentUserId) return false;
-      const res = await fetch(
-        `${apiRoutes.reactions.status.link}?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`,
-      );
-      if (!res.ok) return false;
-      const { isReacted } = await res.json();
-      return isReacted;
-    },
-    {
-      revalidateOnFocus: false,
-      refreshInterval: 30000,
-      fallbackData: localIsReacted,
-    },
-  );
+  const isReacted = localIsReacted;
 
   const handleReaction = async () => {
     if (!currentUserId || isLoading) return;
@@ -98,12 +78,12 @@ export function ReactionButton({
     setIsLoading(true);
 
     const countsKey = `reactions_${pageType}_${entityId}`;
+    const statusKey = `reaction_status_${pageType}_${entityId}`;
 
     // Optimistic Update
     const nextIsReacted = !isReacted;
+    setLocalIsReacted(nextIsReacted);
 
-    // Update both status and global counts optimistically
-    mutateStatus(nextIsReacted, false);
     globalMutate(
       countsKey,
       (current: any) => {
@@ -135,16 +115,20 @@ export function ReactionButton({
         const error = await res.json();
         throw new Error(error.error || "Failed to toggle reaction");
       }
+
+      const { action, counts, userStatus } = await res.json();
+
+      // Sync with API response
+      setLocalIsReacted(userStatus[reactionType]);
+      globalMutate(countsKey, counts);
+      globalMutate(statusKey, userStatus);
     } catch (error) {
       console.error("Reaction error:", error);
       // Rollback
-      mutateStatus(isReacted, true);
+      setLocalIsReacted(isReacted);
       globalMutate(countsKey);
     } finally {
       setIsLoading(false);
-      // Final revalidation to ensure sync
-      mutateStatus();
-      globalMutate(countsKey);
     }
   };
 
