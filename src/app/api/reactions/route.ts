@@ -54,12 +54,17 @@ export async function POST(request: Request) {
     const { pageType, entityId, reactionType, anonymousId } = body;
 
     if (!pageType || !entityId || !reactionType) {
-      return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing parameters" },
+        { status: 400 },
+      );
     }
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
     // Check existing reaction
     let query = supabase
@@ -74,20 +79,27 @@ export async function POST(request: Request) {
     } else if (anonymousId) {
       query = query.eq("anonymous_id", anonymousId);
     } else {
-      return NextResponse.json({ error: "Missing user identification" }, { status: 401 });
+      return NextResponse.json(
+        { error: "Missing user identification" },
+        { status: 401 },
+      );
     }
 
     const { data: existingReaction } = await query.maybeSingle();
 
+    let action: "added" | "removed" | "already_reacted" = "added";
+
     if (existingReaction) {
-      // Remove reaction
+      // Check if this was done elsewhere (race condition / sync issue)
+      // For now, we'll treat it as remove (toggle behavior)
+      // But in the future, we could detect if it was done elsewhere
       const { error } = await supabase
         .from("reactions")
         .delete()
         .eq("id", existingReaction.id);
 
       if (error) throw error;
-      return NextResponse.json({ action: "removed" });
+      action = "removed";
     } else {
       // Add reaction
       const reactionData: any = {
@@ -102,13 +114,72 @@ export async function POST(request: Request) {
         reactionData.anonymous_id = anonymousId;
       }
 
-      const { error } = await supabase
-        .from("reactions")
-        .insert(reactionData);
+      const { error } = await supabase.from("reactions").insert(reactionData);
 
-      if (error && error.code !== "23505") throw error; // Ignore if duplicate from race condition
-      return NextResponse.json({ action: "added" });
+      if (error) {
+        if (error.code === "23505") {
+          // Duplicate - reaction was added elsewhere
+          action = "already_reacted";
+        } else {
+          throw error;
+        }
+      }
     }
+
+    // Fetch updated counts and user status
+    const [countsData, userReactionsData] = await Promise.all([
+      supabase
+        .from("reactions")
+        .select("reaction_type")
+        .eq("page_type", pageType)
+        .eq("entity_id", entityId),
+      supabase
+        .from("reactions")
+        .select("reaction_type")
+        .eq("page_type", pageType)
+        .eq("entity_id", entityId)
+        .eq(user?.id ? "user_id" : "anonymous_id", user?.id || anonymousId),
+    ]);
+
+    const reactionCounts: Record<ReactionType, number> = {
+      like: 0,
+      heart: 0,
+      celebrate: 0,
+      insightful: 0,
+      sceptic: 0,
+    };
+
+    if (countsData.data) {
+      countsData.data.forEach((item) => {
+        const type = item.reaction_type as ReactionType;
+        if (reactionCounts[type] !== undefined) {
+          reactionCounts[type]++;
+        }
+      });
+    }
+
+    const userStatus: Record<ReactionType, boolean> = {
+      like: false,
+      heart: false,
+      celebrate: false,
+      insightful: false,
+      sceptic: false,
+    };
+
+    if (userReactionsData.data) {
+      userReactionsData.data.forEach((item) => {
+        const type = item.reaction_type as ReactionType;
+        if (userStatus[type] !== undefined) {
+          userStatus[type] = true;
+        }
+      });
+    }
+
+    return NextResponse.json({
+      action,
+      counts: reactionCounts,
+      userStatus,
+    });
   } catch (error: any) {
     console.error("API Reaction error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });

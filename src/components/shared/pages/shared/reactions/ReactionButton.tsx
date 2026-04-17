@@ -29,6 +29,7 @@ interface ReactionButtonProps {
   className?: string;
   minimal?: boolean;
   compact?: boolean;
+  isReacted?: boolean;
 }
 
 export function ReactionButton({
@@ -39,11 +40,13 @@ export function ReactionButton({
   className,
   minimal = false,
   compact = false,
+  isReacted: isReactedProp = false,
 }: ReactionButtonProps) {
   const { mutate: globalMutate } = useSWRConfig();
   const [user, setUser] = useState<any>(null);
   const [currentUserId, setCurrentUserId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(false);
+  const [localIsReacted, setLocalIsReacted] = useState(isReactedProp);
 
   const emoji: string = REACTION_EMOJIS[reactionType];
 
@@ -63,6 +66,10 @@ export function ReactionButton({
     initUser();
   }, []);
 
+  useEffect(() => {
+    setLocalIsReacted(isReactedProp);
+  }, [isReactedProp]);
+
   const statusKey = currentUserId
     ? `reaction_status_${pageType}_${entityId}_${reactionType}_${currentUserId}`
     : null;
@@ -78,7 +85,11 @@ export function ReactionButton({
       const { isReacted } = await res.json();
       return isReacted;
     },
-    { revalidateOnFocus: true },
+    {
+      revalidateOnFocus: false,
+      refreshInterval: 30000,
+      fallbackData: localIsReacted,
+    },
   );
 
   const handleReaction = async () => {

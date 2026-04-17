@@ -6,6 +6,7 @@ import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { useReactions } from "@/lib/reactions/use-reactions";
+import { useReactionStatus } from "@/lib/reactions/use-reaction-status";
 
 // --- Convenience Wrapper ---
 export function ReactionBar({
@@ -19,6 +20,7 @@ export function ReactionBar({
 }) {
   const reactionTypes = Object.values(ReactionType);
   const { reactions } = useReactions(pageType, entityId);
+  const { userStatus } = useReactionStatus(pageType, entityId);
   const totalCount = Object.values(reactions).reduce(
     (acc, curr) => acc + curr,
     0,
@@ -55,6 +57,7 @@ export function ReactionBar({
             entityId={entityId}
             reactionType={type}
             count={reactions[type] || 0}
+            isReacted={userStatus?.[type] || false}
             className={compact ? "scale-100" : "scale-110"}
             compact={compact}
           />

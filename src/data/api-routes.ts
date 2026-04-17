@@ -105,6 +105,11 @@ export const apiRoutes = {
       link: getApiUrl("reactions/sync"),
       accept: [requestType.POST],
     },
+    batch: {
+      key: "reactions-batch",
+      link: getApiUrl("reactions/batch"),
+      accept: [requestType.GET],
+    },
   },
   community: {
     guestbook: {

@@ -29,7 +29,8 @@ export function useReactions(pageType: PageType, entityId: string) {
       insightful: 0,
       sceptic: 0,
     },
-    revalidateOnFocus: true,
+    revalidateOnFocus: false,
+    refreshInterval: 30000,
   });
 
   return {
