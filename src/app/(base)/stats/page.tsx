@@ -86,7 +86,7 @@ export default async function StatsPage() {
 
       <Skeleton name="stats-general" loading={false}>
         <SectionLayout
-          badge={t("stats.sections.blog.badge")}
+          badge="Statistique 👨‍💻"
           isFlex
           className="py-0!"
         >
@@ -254,7 +254,7 @@ export default async function StatsPage() {
       </Skeleton>
 
       <Skeleton name="stats-performance" loading={false}>
-        <SectionLayout badge="Site Performance">
+        <SectionLayout badge="Site Performance ⚡">
           <LighthouseScoreCard
             scores={lighthouseStats.mobile}
             strategy="mobile"

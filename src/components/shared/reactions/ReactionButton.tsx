@@ -70,21 +70,10 @@ export function ReactionButton({
     statusKey,
     async () => {
       if (!currentUserId) return false;
-      let query = supabase
-        .from("reactions" as any)
-        .select("*")
-        .eq("page_type", pageType)
-        .eq("entity_id", entityId)
-        .eq("reaction_type", reactionType);
-
-      if (user?.id) {
-        query = query.eq("user_id", user.id);
-      } else {
-        query = query.eq("anonymous_id", currentUserId);
-      }
-
-      const { data } = await query.maybeSingle();
-      return !!data;
+      const res = await fetch(`/api/reactions/status?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`);
+      if (!res.ok) return false;
+      const { isReacted } = await res.json();
+      return isReacted;
     },
     { revalidateOnFocus: true }
   );
@@ -110,42 +99,20 @@ export function ReactionButton({
     }, false);
 
     try {
-      if (isReacted) {
-        // Remove reaction
-        let deleteQuery = supabase
-          .from("reactions" as any)
-          .delete()
-          .eq("page_type", pageType)
-          .eq("entity_id", entityId)
-          .eq("reaction_type", reactionType);
+      const res = await fetch("/api/reactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pageType,
+          entityId,
+          reactionType,
+          anonymousId: currentUserId,
+        }),
+      });
 
-        if (user?.id) {
-          deleteQuery = deleteQuery.eq("user_id", user.id);
-        } else {
-          deleteQuery = deleteQuery.eq("anonymous_id", currentUserId);
-        }
-
-        const { error } = await deleteQuery;
-        if (error) throw error;
-      } else {
-        // Add reaction
-        const reactionData: any = {
-          page_type: pageType,
-          entity_id: entityId,
-          reaction_type: reactionType,
-        };
-
-        if (user?.id) {
-          reactionData.user_id = user.id;
-        } else {
-          reactionData.anonymous_id = currentUserId;
-        }
-
-        const { error } = await supabase
-          .from("reactions" as any)
-          .insert(reactionData);
-
-        if (error && error.code !== "23505") throw error;
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || "Failed to toggle reaction");
       }
     } catch (error) {
       console.error("Reaction error:", error);

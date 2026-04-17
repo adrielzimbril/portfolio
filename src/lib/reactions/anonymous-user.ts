@@ -1,7 +1,5 @@
 // Utility for managing anonymous user IDs using cookies for cross-device sync
 
-import { supabase } from "@/integrations/supabase/client";
-
 const ANONYMOUS_USER_ID_COOKIE = "shironymous_reactions_user_id";
 
 export function getAnonymousUserId(): string {
@@ -51,13 +49,18 @@ export async function syncAnonymousReactionsOnLogin(
   anonymousId: string,
 ): Promise<number> {
   try {
-    const { data, error } = await supabase.rpc("sync_anonymous_reactions_rpc", {
-      p_anonymous_id: anonymousId,
+    const res = await fetch("/api/reactions/sync", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ anonymousId }),
     });
 
-    if (error) throw error;
+    if (!res.ok) {
+      throw new Error("Failed to sync reactions");
+    }
 
-    return data || 0;
+    const { syncedCount } = await res.json();
+    return syncedCount || 0;
   } catch (error) {
     console.error("Error syncing anonymous reactions:", error);
     return 0;

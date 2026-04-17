@@ -46,7 +46,7 @@ export function ConnectionAvatar({
             ),
             "p-1.5 rounded-full",
           )}
-          variant="coolored"
+          variant="colored"
         >
           {met ? (
             <Checked

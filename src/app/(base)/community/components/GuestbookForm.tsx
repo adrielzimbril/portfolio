@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader, Send } from "@aurthle/icons";
-import { supabase } from "@/integrations/supabase/client";
+
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import logger from "@/utils/logger";
@@ -23,16 +23,20 @@ export function GuestbookForm({ user }: { user: any }) {
 
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("community_wall").insert({
-        user_id: user.id,
-        creator_name: user.user_metadata.full_name || user.email,
-        creator_avatar_url: user.user_metadata.avatar_url,
-        message: message.trim(),
-        pattern_index: Math.floor(Math.random() * 10),
-        rotation: Math.floor(Math.random() * 360),
-      } as any);
+      const res = await fetch("/api/community/guestbook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: message.trim(),
+          pattern_index: Math.floor(Math.random() * 10),
+          rotation: Math.floor(Math.random() * 360),
+        }),
+      });
 
-      if (error) throw error;
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || "Failed to post message");
+      }
 
       setMessage("");
       toast.success("Message posted on the wall!");

@@ -7,32 +7,12 @@ import { ReactionType } from "@/lib/stats/types";
 
 export function useReactions(pageType: PageType, entityId: string) {
   const fetcher = async () => {
-    const { data, error } = await supabase
-      .from("reactions")
-      .select("reaction_type")
-      .eq("page_type", pageType)
-      .eq("entity_id", entityId);
-
-    if (error) throw error;
-
-    const reactionCounts: Record<ReactionType, number> = {
-      like: 0,
-      heart: 0,
-      celebrate: 0,
-      insightful: 0,
-      sceptic: 0,
-    };
-
-    if (data) {
-      data.forEach((item) => {
-        const type = item.reaction_type as ReactionType;
-        if (reactionCounts[type] !== undefined) {
-          reactionCounts[type]++;
-        }
-      });
+    const res = await fetch(`/api/reactions?pageType=${pageType}&entityId=${entityId}`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch reactions");
     }
-
-    return reactionCounts;
+    const { counts } = await res.json();
+    return counts as Record<ReactionType, number>;
   };
 
   const { data: reactions, error, isLoading, mutate } = useSWR(
