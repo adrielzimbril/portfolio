@@ -744,6 +744,9 @@
       },
       "routes": {
         "default": "Routes"
+      },
+      "rss": {
+        "default": "RSS"
       }
     },
     "button": {
@@ -1416,6 +1419,14 @@
     "page": {
       "title": "Politique de Confidentialité",
       "description": "Votre vie privée est importante pour moi. Cette politique explique comment je gère vos données."
+    }
+  },
+  "rss": {
+    "title": "RSS",
+    "description": "Abonne-toi pour recevoir mes articles directement dans ton lecteur RSS préféré.",
+    "page": {
+      "title": "Flux RSS",
+      "description": "Abonne-toi pour ne rien manquer de mes nouveaux articles."
     }
   },
   "terms": {

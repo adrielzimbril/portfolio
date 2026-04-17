@@ -98,6 +98,14 @@
       "description": "Your privacy is important to us. This policy explains how we handle your data."
     }
   },
+  "rss": {
+    "title": "RSS",
+    "description": "Subscribe to receive my articles directly in your favorite RSS reader.",
+    "page": {
+      "title": "RSS Feed",
+      "description": "Subscribe to never miss my new articles."
+    }
+  },
   "terms": {
     "title": "Terms of Service",
     "description": "The rules of the game. Simple and honest, like the spirit of this portfolio.",
@@ -409,6 +417,9 @@
       },
       "routes": {
         "default": "Routes"
+      },
+      "rss": {
+        "default": "RSS"
       }
     },
     "page-sections": {
