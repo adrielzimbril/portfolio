@@ -21,6 +21,8 @@ import {
   getChangelogTypeCounts,
 } from "@/integrations/content/lib";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
+import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { PageType } from "@/types";
 import { cn } from "@/utils/utils";
 
 export function TimelineSection() {
@@ -250,6 +252,14 @@ export function TimelineSection() {
                                   {entry.version}
                                 </h3>
                                 <MarkdownContentRender content={entry.body} />
+                                <div className="mt-8 pt-6 border-t border-border/30">
+                                  <ReactionBar 
+                                    pageType={PageType.CHANGELOG} 
+                                    entityId={entry.version} 
+                                    variant="inline" 
+                                    compact
+                                  />
+                                </div>
                               </CardContent>
                             </Card>
                           </div>

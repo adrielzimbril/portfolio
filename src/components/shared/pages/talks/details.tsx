@@ -75,14 +75,16 @@ export function CardInfo({
         {shouldShow ? <ParticipantsStats count={participantsCount} /> : null}
       </div>
 
-      <div className="flex items-center justify-between w-full gap-3">
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
         {!hideReactions && (
-          <ReactionBar
-            pageType={PageType.TALKS}
-            entityId={title} // Use title as ID for talks if slug is not available
-            variant="dock"
-            orientation="vertical"
-          />
+          <div className="flex-1">
+            <ReactionBar
+              pageType={PageType.TALKS}
+              entityId={title}
+              variant="inline"
+              compact
+            />
+          </div>
         )}
         {action ? <Action label={action.label} href={action.href} /> : null}
       </div>

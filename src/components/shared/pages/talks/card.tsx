@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/talks/preview";
 import { CardInfo } from "@/components/shared/pages/talks/details";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+
 import { PageType } from "@/types/enum";
 
 export function TalksCard({
@@ -46,14 +46,10 @@ export function TalksCard({
           tags={tags ?? []}
           participantsCount={participantsCount}
           action={action}
-          hideReactions={true}
+          hideReactions={false}
         />
 
-        <AbsoluteReactionBar 
-          pageType={PageType.TALKS} 
-          entityId={title} 
-          reactionsPosition={reactionsPosition} 
-        />
+
       </CardContent>
     </Card>
   );

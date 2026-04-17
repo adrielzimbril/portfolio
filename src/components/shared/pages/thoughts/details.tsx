@@ -39,14 +39,16 @@ export function CardInfo({
         <Description description={excerpt} />
       </div>
 
-      <div className="flex items-center justify-between w-full gap-3">
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
         {!hideReactions && (
-          <ReactionBar
-            pageType={PageType.THOUGHT}
-            entityId={slug}
-            variant="dock"
-            orientation="vertical"
-          />
+          <div className="flex-1">
+            <ReactionBar
+              pageType={PageType.THOUGHT}
+              entityId={slug}
+              variant="inline"
+              compact
+            />
+          </div>
         )}
         <Action slug={slug} />
       </div>

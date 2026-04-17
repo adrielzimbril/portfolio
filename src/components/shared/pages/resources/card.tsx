@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/resources/details";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+
 import { PageType, ResourceType } from "@/types/enum";
 
 export function ResourceCard({
@@ -52,14 +52,10 @@ export function ResourceCard({
           features={features}
           avatars={avatars}
           userCount={userCount}
-          hideReactions={true}
+          hideReactions={false}
         />
 
-        <AbsoluteReactionBar 
-          pageType={PageType.HUB} 
-          entityId={slug} 
-          reactionsPosition={reactionsPosition} 
-        />
+
       </CardContent>
     </Card>
   );

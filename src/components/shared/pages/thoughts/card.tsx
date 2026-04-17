@@ -3,7 +3,7 @@ import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/thoughts/details";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageType } from "@/types/enum";
-import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+
 
 export function ThoughtCard({
   title,
@@ -42,13 +42,7 @@ export function ThoughtCard({
           primaryTag={primaryTag}
           tags={tags}
           slug={slug}
-          hideReactions={true}
-        />
-        
-        <AbsoluteReactionBar 
-          pageType={PageType.THOUGHT} 
-          entityId={slug} 
-          reactionsPosition={reactionsPosition} 
+          hideReactions={false}
         />
       </CardContent>
     </Card>

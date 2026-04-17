@@ -3,7 +3,7 @@ import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/utils/utils";
-import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+
 import { PageType } from "@/types/enum";
 
 export function ProjectCard({
@@ -57,14 +57,10 @@ export function ProjectCard({
           tags={tags}
           categories={categories}
           isWide={isWide}
-          hideReactions={true}
+          hideReactions={false}
         />
 
-        <AbsoluteReactionBar 
-          pageType={PageType.PROJECT} 
-          entityId={slug} 
-          reactionsPosition={reactionsPosition} 
-        />
+
       </CardContent>
     </Card>
   );

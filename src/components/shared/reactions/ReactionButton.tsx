@@ -26,6 +26,7 @@ interface ReactionButtonProps {
   count?: number;
   className?: string;
   minimal?: boolean;
+  compact?: boolean;
 }
 
 import useSWR, { useSWRConfig } from "swr";
@@ -37,6 +38,7 @@ export function ReactionButton({
   count = 0,
   className,
   minimal = false,
+  compact = false,
 }: ReactionButtonProps) {
   const { mutate: globalMutate } = useSWRConfig();
   const [user, setUser] = useState<any>(null);
@@ -170,7 +172,9 @@ export function ReactionButton({
         "squircle squircle-7xl squircle-smooth-xl",
         minimal 
           ? "size-10" 
-          : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent",
+          : compact 
+            ? "gap-1 px-2 py-1 squircle-sh-white squircle-border squircle-border-b-base-accent"
+            : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent",
         isReacted && !minimal && "squircle-background-background squircle-border-2 squircle-border-indigo-500",
         isReacted && minimal && "squircle-sh-white squircle-border-2 squircle-border-indigo-500",
         className,
@@ -179,6 +183,7 @@ export function ReactionButton({
       <span
         className={cn(
           "text-lg transition-transform duration-300",
+          compact && "text-base",
           !minimal && "group-hover/btn:scale-125",
           isReacted && "scale-110",
         )}
@@ -187,7 +192,8 @@ export function ReactionButton({
       </span>
       {!minimal && (
         <span className={cn(
-          "text-xs font-bold transition-colors",
+          "font-bold transition-colors",
+          compact ? "text-[10px]" : "text-xs",
           isReacted ? "text-indigo-600" : "text-foreground"
         )}>
           {reactionCount}

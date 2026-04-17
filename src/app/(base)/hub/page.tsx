@@ -47,6 +47,12 @@ export default async function MyHub() {
       <Skeleton name="hub-listing" loading={false}>
         <MyHubSection data={data} />
       </Skeleton>
+      <ReactionBar 
+        pageType={PageType.HUB} 
+        entityId="my-hub" 
+        variant="inline" 
+        className="max-w-4xl mx-auto my-12" 
+      />
       {/* <ResourceWrapper initialData={data} type={PageType.HUB} /> */}
       <Skeleton name="hub-cta" loading={false}>
         <CallToAction isPage />

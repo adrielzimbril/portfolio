@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/quests/details";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AbsoluteReactionBar } from "@/components/shared/reactions/AbsoluteReactionBar";
+
 import { PageType } from "@/types/enum";
 
 export function QuestCard({
@@ -48,14 +48,10 @@ export function QuestCard({
           description={description}
           features={features}
           action={action}
-          hideReactions={true}
+          hideReactions={false}
         />
 
-        <AbsoluteReactionBar 
-          pageType={PageType.QUESTS} 
-          entityId={slug} 
-          reactionsPosition={reactionsPosition} 
-        />
+
       </CardContent>
     </Card>
   );

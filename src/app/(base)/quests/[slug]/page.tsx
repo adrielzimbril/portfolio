@@ -157,15 +157,15 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           <QuestParticipantsSection winners={winners} />
         </Skeleton>
       )}
-      {quest.adjacentQuests.length > 0 && (
-        <Skeleton name="quest-detail-more" loading={false}>
+      <Skeleton name="quest-detail-more" loading={false}>
+          <ReactionBar 
+            pageType={PageType.QUESTS} 
+            entityId={slug} 
+            variant="inline" 
+            className="max-w-4xl mx-auto my-12" 
+          />
           <MorePreviewSection data={quest.adjacentQuests} />
-        </Skeleton>
-      )}
-      <Skeleton name="quest-detail-cta" loading={false}>
-        <CallToAction isPage />
       </Skeleton>
-      <ReactionBar pageType={PageType.QUESTS} entityId={slug} variant="dock" isFloating />
     </>
   );
 }

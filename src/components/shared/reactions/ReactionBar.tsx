@@ -262,9 +262,11 @@ export function ReactionDock({
 export function ReactionItem({
   type,
   className,
+  compact = false,
 }: {
   type: ReactionType;
   className?: string;
+  compact?: boolean;
 }) {
   const { pageType, entityId, reactions, setIsOpen } = useReaction();
 
@@ -273,7 +275,11 @@ export function ReactionItem({
       variants={ITEM_VARIANTS}
       whileHover={{ scale: 1.15 }}
       whileTap={{ scale: 0.9 }}
-      className={cn("flex items-center justify-center size-10 origin-center cursor-pointer", className)}
+      className={cn(
+        "flex items-center justify-center origin-center cursor-pointer", 
+        compact ? "size-8" : "size-10",
+        className
+      )}
       onClick={() => setIsOpen(false)}
     >
       <ReactionButton
@@ -282,7 +288,8 @@ export function ReactionItem({
         reactionType={type}
         count={reactions[type] || 0}
         minimal
-        className="w-full h-full"
+        compact={compact}
+        className="size-full"
       />
     </motion.div>
   );
@@ -297,6 +304,7 @@ export function ReactionBar({
   variant = "inline",
   dockPosition = "bottom",
   orientation,
+  compact = false,
 }: {
   pageType: PageType;
   entityId: string;
@@ -304,6 +312,7 @@ export function ReactionBar({
   variant?: "inline" | "dock";
   dockPosition?: "top" | "bottom";
   orientation?: "horizontal" | "vertical";
+  compact?: boolean;
 }) {
   const activeOrientation = orientation || (variant === "dock" ? "vertical" : "horizontal");
   const reactionTypes = Object.values(ReactionType);
@@ -345,7 +354,7 @@ export function ReactionBar({
         </ReactionTrigger>
         <ReactionDock>
           {reactionTypes.map((type) => (
-            <ReactionItem key={type} type={type} />
+            <ReactionItem key={type} type={type} compact={compact} />
           ))}
         </ReactionDock>
       </ReactionRoot>
@@ -354,16 +363,22 @@ export function ReactionBar({
 
   return (
     <div className={cn(
-      "w-full flex flex-col items-center gap-4 py-8 px-4",
+      "w-full flex flex-col items-center",
+      compact ? "gap-2 py-2 px-2" : "gap-4 py-8 px-4",
       "squircle squircle-7xl squircle-smooth-xl",
       "squircle-sh-white dark:squircle-b-base",
       "squircle-border-2 squircle-border-b-base-accent",
       className
     )}>
-      <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
-        Reactions
-      </h4>
-      <div className="flex flex-wrap items-center justify-center gap-3">
+      {!compact && (
+        <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
+          Reactions
+        </h4>
+      )}
+      <div className={cn(
+        "flex flex-wrap items-center justify-center",
+        compact ? "gap-1.5" : "gap-3"
+      )}>
         {reactionTypes.map((type) => (
           <ReactionButton
             key={type}
@@ -371,7 +386,8 @@ export function ReactionBar({
             entityId={entityId}
             reactionType={type}
             count={reactions[type] || 0}
-            className="scale-110"
+            className={compact ? "scale-100" : "scale-110"}
+            compact={compact}
           />
         ))}
       </div>
