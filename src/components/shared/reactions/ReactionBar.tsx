@@ -8,6 +8,7 @@ import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { useReactions } from "@/lib/reactions/use-reactions";
 import { motion, AnimatePresence, type Variants } from "motion/react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 // --- Context & Types ---
 
@@ -43,18 +44,20 @@ const DOCK_REVEAL_VARIANTS: Variants = {
   hidden: {
     clipPath: "inset(10% 50% 90% 50% round 24px)",
     opacity: 0,
-    scale: 0.95,
+    scale: 0.9,
+    filter: "blur(4px)",
   },
   show: {
     clipPath: "inset(0% 0% 0% 0% round 24px)",
     opacity: 1,
     scale: 1,
+    filter: "blur(0px)",
     transition: {
       type: "spring",
       bounce: 0,
-      duration: 0.4,
-      delayChildren: 0.1,
-      staggerChildren: 0.05,
+      duration: 0.5,
+      delayChildren: 0.15,
+      staggerChildren: 0.1,
     },
   },
 };
@@ -89,6 +92,18 @@ export function ReactionRoot({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const { reactions } = useReactions(pageType, entityId);
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 400); // Increased delay to 400ms for better "bridge" crossing
+  };
 
   return (
     <ReactionContext.Provider value={{
@@ -100,13 +115,15 @@ export function ReactionRoot({
       dockPosition,
       reactions,
     }}>
-      <div 
-        className={cn("relative flex flex-col items-center group/reaction-area", className)}
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-      >
-        {children}
-      </div>
+      <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
+        <div 
+          className={cn("relative flex flex-col items-center group/reaction-area", className)}
+          onPointerEnter={handleMouseEnter}
+          onPointerLeave={handleMouseLeave}
+        >
+          {children}
+        </div>
+      </DropdownMenu.Root>
     </ReactionContext.Provider>
   );
 }
@@ -124,28 +141,29 @@ export function ReactionTrigger({
   const { isOpen, setIsOpen } = useReaction();
   const Comp = asChild ? Slot : motion.button;
 
+  // We use our own handlers to support hover
+  const handlePointerEnter = () => setIsOpen(true);
+
   return (
-    <Comp
-      layout
-      onClick={(e: React.MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setIsOpen(!isOpen);
-      }}
-      className={cn(
-        "group relative flex items-center justify-center size-10 md:size-11",
-        "squircle squircle-full squircle-smooth-xl",
-        "squircle-sh-white dark:squircle-b-base",
-        "squircle-border-2 squircle-border-b-base-accent",
-        "cursor-pointer z-[10] transition-colors",
-        className
-      )}
-      style={{ scale: isOpen ? 1.05 : 1 }}
-      whileTap={{ scale: 0.95 }}
-      {...props}
-    >
-      {children}
-    </Comp>
+    <DropdownMenu.Trigger asChild>
+      <Comp
+        layout
+        onPointerEnter={handlePointerEnter}
+        className={cn(
+          "group relative flex items-center justify-center size-10 md:size-11",
+          "squircle squircle-full squircle-smooth-xl",
+          "squircle-sh-white dark:squircle-b-base",
+          "squircle-border-2 squircle-border-b-base-accent",
+          "cursor-pointer z-[10] transition-colors",
+          className
+        )}
+        style={{ scale: isOpen ? 1.05 : 1 }}
+        whileTap={{ scale: 0.95 }}
+        {...props}
+      >
+        {children}
+      </Comp>
+    </DropdownMenu.Trigger>
   );
 }
 
@@ -156,41 +174,76 @@ export function ReactionDock({
   children: React.ReactNode;
   className?: string;
 }) {
-  const { isOpen, dockPosition, activeOrientation } = useReaction();
+  const { isOpen, setIsOpen, dockPosition, activeOrientation } = useReaction();
   const isVertical = activeOrientation === "vertical";
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 400); // 400ms delay
+  };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          variants={DOCK_REVEAL_VARIANTS}
-          initial="hidden"
-          animate="show"
-          exit="hidden"
-          className={cn(
-            "absolute left-1/2 z-50 p-2",
-            dockPosition === "bottom" ? "top-[calc(100%+2px)]" : "bottom-[calc(100%+2px)]",
-            isVertical 
-              ? "flex flex-col w-[56px] h-auto items-center justify-center py-4"
-              : "flex flex-row h-14 w-max items-center justify-center px-4",
-            "gap-2",
-            "squircle squircle-5xl squircle-smooth-xl",
-            "squircle-sh-white dark:squircle-b-base",
-            "squircle-border-2 squircle-border-b-base-accent",
-            "whitespace-nowrap shadow-xl bg-white dark:bg-zinc-950",
-            className
-          )}
-          style={{ x: "-50%" }}
-        >
-          <div 
-            className={cn(
-              "flex gap-1.5",
-              isVertical ? "flex-col w-full items-center" : "flex-row h-full items-center"
-            )}
+        <DropdownMenu.Portal forceMount>
+          <DropdownMenu.Content
+            forceMount
+            asChild
+            side={dockPosition === "bottom" ? "bottom" : "top"}
+            align="center"
+            sideOffset={4}
+            collisionPadding={16}
+            onPointerEnter={handleMouseEnter}
+            onPointerLeave={handleMouseLeave}
           >
-            {children}
-          </div>
-        </motion.div>
+            <motion.div
+              variants={DOCK_REVEAL_VARIANTS}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+              className={cn(
+                "z-50 p-2",
+                "relative",
+                isVertical 
+                  ? "flex flex-col w-[64px] h-auto items-center justify-center py-4"
+                  : "flex flex-row h-14 w-max items-center justify-center px-4",
+                "gap-2",
+                "squircle squircle-4xl squircle-smooth-xl",
+                "squircle-sh-white dark:squircle-b-base",
+                "squircle-border-2 squircle-border-b-base-accent",
+                "whitespace-nowrap shadow-xl bg-white dark:bg-zinc-950",
+                "focus:outline-none",
+                className
+              )}
+            >
+              {/* Invisible Bridge to prevent closing when moving mouse from trigger to dock */}
+              <div 
+                className={cn(
+                  "absolute pointer-events-auto z-[-1]",
+                  dockPosition === "bottom" ? "-top-8 h-8" : "-bottom-8 h-8",
+                  "left-[-20px] right-[-20px]" // Wider bridge
+                )}
+              />
+              
+              <div 
+                className={cn(
+                  "flex gap-1.5",
+                  isVertical ? "flex-col w-full items-center" : "flex-row h-full items-center"
+                )}
+              >
+                {children}
+              </div>
+              <DropdownMenu.Arrow className="fill-white dark:fill-zinc-950" />
+            </motion.div>
+          </DropdownMenu.Content>
+        </DropdownMenu.Portal>
       )}
     </AnimatePresence>
   );
