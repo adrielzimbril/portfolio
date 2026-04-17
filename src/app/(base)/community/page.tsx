@@ -11,6 +11,7 @@ import { cookies } from "next/headers";
 import { GuestbookForm } from "@/app/(base)/community/components/GuestbookForm";
 import { GuestbookList } from "@/app/(base)/community/components/GuestbookList";
 import { cn } from "@/utils/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -33,16 +34,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CommunityPage() {
-  const cookieStore = await cookies();
-  const { url, anonKey } = getSupabaseConfig();
-  const supabase = createServerClient(url!, anonKey!, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-    },
-  });
-
   const {
     data: { user },
   } = await supabase.auth.getUser();

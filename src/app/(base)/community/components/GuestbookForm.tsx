@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Send } from "@aurthle/icons";
+import { Loader, Send } from "@aurthle/icons";
 import { apiRoutes } from "@/data/api-routes";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -99,9 +99,9 @@ export function GuestbookForm({ user }: { user: any }) {
           className="rounded-2xl h-11 px-6 font-semibold"
         >
           {isSubmitting ? (
-            <Loader size={16} className="mr-2" />
+            <Loader size={16} className="mr-2" variant="bulk" />
           ) : (
-            <Send size={16} className="mr-2" />
+            <Send size={16} className="mr-2" variant="bulk" />
           )}
           Post
         </Button>
