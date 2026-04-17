@@ -1,11 +1,11 @@
-import { ChangelogItem } from "@/types";
+import { ChangelogItem, ChangelogItemType } from "@/types";
 
 export const changelog: ChangelogItem[] = [
   {
     id: "v2.6.1",
     version: "2.6.1",
     date: "2026-04-15",
-    type: "feature",
+    type: ChangelogItemType.FEATURE,
     changes: [
       "Implemented emoji-based reactions with animated emojis for active states.",
       "Added anonymous reaction support with cookie-based user identification.",
@@ -19,7 +19,7 @@ export const changelog: ChangelogItem[] = [
     id: "v2.5.0",
     version: "2.5.0",
     date: "2026-04-15",
-    type: "feature",
+    type: ChangelogItemType.FEATURE,
     changes: [
       "Added reaction system with like, heart, celebrate, and insightful reactions.",
       "Integrated reactions into thoughts, projects, hub, and quests inner pages.",
@@ -35,7 +35,7 @@ export const changelog: ChangelogItem[] = [
     id: "v2.4.0",
     version: "2.4.0",
     date: "2025-12-08",
-    type: "milestone",
+    type: ChangelogItemType.MILESTONE,
     changes: [
       "Major UI refactor for a more premium feel.",
       "Added Community Wall with Supabase & GitHub Auth.",
@@ -46,7 +46,7 @@ export const changelog: ChangelogItem[] = [
     id: "v1.9.0",
     version: "1.9.0",
     date: "2025-11-04",
-    type: "feature",
+    type: ChangelogItemType.FEATURE,
     changes: [
       "Integrated Trigger.dev for background tasks.",
       "Improved mobile responsiveness across all pages.",
@@ -56,7 +56,7 @@ export const changelog: ChangelogItem[] = [
     id: "v1.8.0",
     version: "1.8.0",
     date: "2025-11-02",
-    type: "feature",
+    type: ChangelogItemType.FEATURE,
     changes: [
       "Added dark mode toggle with system preference detection.",
       "Implemented lazy loading for images and components.",
@@ -67,7 +67,7 @@ export const changelog: ChangelogItem[] = [
     id: "v1.7.0",
     version: "1.7.0",
     date: "2025-11-01",
-    type: "improvement",
+    type: ChangelogItemType.IMPROVEMENT,
     changes: [
       "Optimized bundle size by 40% with code splitting.",
       "Improved SEO metadata and structured data.",
@@ -78,7 +78,7 @@ export const changelog: ChangelogItem[] = [
     id: "v1.6.0",
     version: "1.6.0",
     date: "2025-10-23",
-    type: "feature",
+    type: ChangelogItemType.FEATURE,
     changes: [
       "Added newsletter subscription form.",
       "Integrated social sharing buttons.",
@@ -89,7 +89,7 @@ export const changelog: ChangelogItem[] = [
     id: "v1.5.0",
     version: "1.5.0",
     date: "2025-10-15",
-    type: "improvement",
+    type: ChangelogItemType.IMPROVEMENT,
     changes: [
       "Redesigned navigation with better mobile menu.",
       "Improved color contrast for accessibility.",
@@ -100,7 +100,7 @@ export const changelog: ChangelogItem[] = [
     id: "v1.0.0",
     version: "1.0.0",
     date: "2025-10-02",
-    type: "milestone",
+    type: ChangelogItemType.MILESTONE,
     changes: [
       "Complete rewrite using Next.js 14 and React 18.",
       "Migrated to TypeScript for better type safety.",
@@ -111,7 +111,7 @@ export const changelog: ChangelogItem[] = [
     id: "v0.9.0",
     version: "0.9.0",
     date: "2025-10-01",
-    type: "feature",
+    type: ChangelogItemType.FEATURE,
     changes: [
       "Added contact form with email notifications.",
       "Implemented analytics tracking.",
@@ -122,7 +122,7 @@ export const changelog: ChangelogItem[] = [
     id: "v0.8.0",
     version: "0.8.0",
     date: "2025-09-16",
-    type: "fix",
+    type: ChangelogItemType.FIX,
     changes: [
       "Fixed navigation menu z-index issues.",
       "Resolved image loading errors on slow connections.",
@@ -133,7 +133,7 @@ export const changelog: ChangelogItem[] = [
     id: "v0.7.0",
     version: "0.7.0",
     date: "2025-09-06",
-    type: "improvement",
+    type: ChangelogItemType.IMPROVEMENT,
     changes: [
       "Improved page load times by optimizing images.",
       "Added meta tags for better social sharing.",
@@ -144,7 +144,7 @@ export const changelog: ChangelogItem[] = [
     id: "v0.6.0",
     version: "0.6.0",
     date: "2025-09-01",
-    type: "feature",
+    type: ChangelogItemType.FEATURE,
     changes: [
       "Added projects gallery with filtering.",
       "Implemented theme switcher.",
@@ -155,7 +155,7 @@ export const changelog: ChangelogItem[] = [
     id: "v0.5.0",
     version: "0.5.0",
     date: "2025-08-25",
-    type: "improvement",
+    type: ChangelogItemType.IMPROVEMENT,
     changes: [
       "Improved responsive design for tablets.",
       "Added smooth transitions and animations.",
@@ -166,7 +166,7 @@ export const changelog: ChangelogItem[] = [
     id: "v0.4.0",
     version: "0.4.0",
     date: "2025-08-17",
-    type: "milestone",
+    type: ChangelogItemType.MILESTONE,
     changes: [
       "Initial release of portfolio website.",
       "Basic project showcase.",

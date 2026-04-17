@@ -1,21 +1,23 @@
 import { allTalks } from "content-collections";
-
+import { SortOrder } from "@/types/enum";
 export type Talk = (typeof allTalks)[number];
 
 type Options = {
   published?: boolean;
   locale?: string;
   pageSlug?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 
-export async function getAllTalks(options: Partial<Options> = {}): Promise<Talk[]> {
+export async function getAllTalks(
+  options: Partial<Options> = {},
+): Promise<Talk[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };

@@ -15,6 +15,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import {
   AttendanceType,
+  ChangelogItemType,
   PortfolioProjectResearchScope,
   ResourceType,
 } from "@/types";
@@ -534,7 +535,7 @@ const changelog = defineCollection({
   include: "*.{mdx,md}",
   schema: z.object({
     version: z.string(),
-    type: z.enum(["milestone", "feature", "fix", "improvement"]),
+    type: z.enum(Object.values(ChangelogItemType)),
     date: z.string(),
     cover: z.string().optional(),
     published: z.boolean().default(true),

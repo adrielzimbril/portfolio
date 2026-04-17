@@ -53,7 +53,7 @@ export function HeaderSection() {
           poster: getImageUrl("/img/me/memoji/me.png"),
         }}
       />
-      <SectionBase sectionClassName="" isWide>
+      <SectionBase isWide>
         <h3 className="w-full relative h1">
           {t("about.page.header-section.title-secondary")}
         </h3>

@@ -2,28 +2,30 @@ import { allQuests } from "content-collections";
 
 export type Quest = (typeof allQuests)[number];
 
+import { SortOrder } from "@/types";
+
 type Options = {
   published?: boolean;
   locale?: string;
   pageSlug?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 
 export async function getAllQuests(
-  options: Partial<Options> = {}
+  options: Partial<Options> = {},
 ): Promise<Quest[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
 
   const now = new Date();
-  
+
   return Promise.resolve(
     allQuests
       .filter((item) => item.published === published)
@@ -67,7 +69,7 @@ export async function getAllQuests(
 
 export async function getQuestBySlug(
   slug: string,
-  options?: { locale?: string }
+  options?: { locale?: string },
 ): Promise<Quest | null> {
   const { locale } = options ?? {};
   return Promise.resolve(
@@ -209,7 +211,7 @@ export function isRegistrationClosed(registrationDeadline: string): boolean {
 
 export function isSubmissionClosed(
   submissionDeadline: string,
-  questEnd: string
+  questEnd: string,
 ): boolean {
   const now = Date.now();
   return (

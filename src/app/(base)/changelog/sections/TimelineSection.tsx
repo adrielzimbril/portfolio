@@ -22,9 +22,10 @@ import {
 } from "@/integrations/content/lib";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
-import { PageType } from "@/types";
+import { ChangelogItemType, DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { cn } from "@/utils/utils";
 import { Changelog } from "@/integrations/content/types";
+import { pickRandomColor } from "@/utils";
 
 export function TimelineSection() {
   const [selectedType, setSelectedType] = useState<string>("all");
@@ -80,7 +81,7 @@ export function TimelineSection() {
           {/* Filter Buttons */}
           <div className="flex flex-wrap gap-2 justify-center">
             {(
-              ["all", "milestone", "feature", "fix", "improvement"] as const
+              Object.values(ChangelogItemType) as (keyof typeof typeIcons)[]
             ).map((type) => {
               const Icon = typeIcons[type as keyof typeof typeIcons];
               return (
@@ -189,19 +190,27 @@ export function TimelineSection() {
                             className="relative flex items-start gap-6 group"
                           >
                             {/* Timeline Dot */}
-                            <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-border bg-b-base shrink-0 z-10 transition-colors duration-300 group-hover:border-primary group-hover:bg-primary/10">
-                              {Icon && (
-                                <Icon
-                                  size={16}
-                                  className="text-muted-foreground group-hover:text-primary transition-colors"
-                                />
-                              )}
+                            <div className="flex items-center justify-center shrink-0 z-10">
+                              <Badge
+                                className={cn(
+                                  "capitalize text-xs font-medium",
+                                  pickRandomColor(
+                                    DEFAULT_COLOR_CODE_NAME.VIOLET,
+                                  ),
+                                  "size-max text-primary-foreground!",
+                                )}
+                                size="lg"
+                                variant="colored"
+                                circle
+                              >
+                                {Icon && <Icon size={24} variant="bulk" />}
+                              </Badge>
                             </div>
 
                             {/* Content Card */}
-                            <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 hover:squircle-border-primary hover:squircle-sh-white overflow-hidden">
+                            <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 overflow-hidden">
                               {entry.cover && (
-                                <div className="relative h-64 w-full overflow-hidden">
+                                <div className="relative h-64 w-full [corner-shape:squircle] rounded-t-xl md:rounded-t-3xl overflow-hidden">
                                   <Image
                                     src={entry.cover}
                                     alt={entry.version}
@@ -213,40 +222,62 @@ export function TimelineSection() {
                               )}
                               <CardContent className="p-8">
                                 <div className="flex items-center justify-between mb-4">
-                                  <div className="flex items-center gap-3">
-                                    <Calendar
-                                      size={16}
-                                      className="text-muted-foreground"
-                                    />
-                                    <time className="text-sm font-medium text-muted-foreground">
-                                      {new Date(entry.date).toLocaleDateString(
-                                        "en-US",
-                                        {
+                                  <div className="flex items-center gap-4">
+                                    <div className="flex items-center gap-2">
+                                      <Badge
+                                        className={cn(
+                                          pickRandomColor(
+                                            DEFAULT_COLOR_CODE_NAME.INDIGO,
+                                          ),
+                                          "px-1 py-0.5",
+                                          "size-max text-primary-foreground!",
+                                        )}
+                                        variant="colored"
+                                        size="xs"
+                                        circle
+                                      >
+                                        <Calendar size={16} variant="bulk" />
+                                      </Badge>
+
+                                      <time className="text-sm font-medium text-muted-foreground">
+                                        {new Date(
+                                          entry.date,
+                                        ).toLocaleDateString("en-US", {
                                           month: "long",
                                           day: "numeric",
                                           year: "numeric",
-                                        },
-                                      )}
-                                    </time>
+                                        })}
+                                      </time>
+                                    </div>
                                     {isLatest && (
-                                      <Badge className="bg-primary text-primary-foreground">
+                                      <Badge
+                                        className={cn(
+                                          pickRandomColor(
+                                            DEFAULT_COLOR_CODE_NAME.ORANGE,
+                                          ),
+                                        )}
+                                        variant="colored"
+                                      >
                                         Latest
                                       </Badge>
                                     )}
                                   </div>
                                   <Badge
-                                    variant="outline"
                                     className={cn(
-                                      "capitalize text-[10px] font-bold tracking-widest px-3 py-1",
-                                      entry.type === "milestone" &&
-                                        "bg-primary/10 text-primary border-primary/20",
-                                      entry.type === "feature" &&
-                                        "bg-green-500/10 text-green-500 border-green-500/20",
-                                      entry.type === "fix" &&
-                                        "bg-red-500/10 text-red-500 border-red-500/20",
-                                      entry.type === "improvement" &&
-                                        "bg-blue-500/10 text-blue-500 border-blue-500/20",
+                                      "capitalize text-[.625rem] font-bold tracking-widest px-3 py-1",
+                                      entry.type ===
+                                        ChangelogItemType.MILESTONE &&
+                                        "squircle-primary/10 text-primary squircle-border-primary/20",
+                                      entry.type ===
+                                        ChangelogItemType.FEATURE &&
+                                        "squircle-green-500/10 text-green-500 squircle-border-green-500/20",
+                                      entry.type === ChangelogItemType.FIX &&
+                                        "squircle-red-500/10 text-red-500 squircle-border-red-500/20",
+                                      entry.type ===
+                                        ChangelogItemType.IMPROVEMENT &&
+                                        "squircle-blue-500/10 text-blue-500 squircle-border-blue-500/20",
                                     )}
+                                    variant="colored"
                                   >
                                     {entry.type}
                                   </Badge>

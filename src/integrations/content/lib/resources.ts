@@ -1,23 +1,24 @@
 import type { Resource } from "@/integrations/content/types/types";
 import { allResources } from "content-collections";
+import { SortOrder } from "@/types/enum";
 
 type GetAllResourcesOptions = {
   published?: boolean;
   locale?: string;
   pageSlug?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 export type ResourcePreview = Pick<Resource, "id" | "slug" | "title">;
 
 export async function getAllResources(
-  options: Partial<GetAllResourcesOptions> = {}
+  options: Partial<GetAllResourcesOptions> = {},
 ): Promise<Resource[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
@@ -26,22 +27,22 @@ export async function getAllResources(
     allResources
       .filter(
         (resource) =>
-          resource.published === published && resource.locale === locale
+          resource.published === published && resource.locale === locale,
       )
       .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
       .filter((resource) => resource.slug !== pageSlug)
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
 export async function getBestResourcesLink(
-  options: Partial<GetAllResourcesOptions> = {}
+  options: Partial<GetAllResourcesOptions> = {},
 ): Promise<ResourcePreview[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
@@ -50,35 +51,34 @@ export async function getBestResourcesLink(
     allResources
       .filter(
         (resource) =>
-          resource.published === published && resource.locale === locale
+          resource.published === published && resource.locale === locale,
       )
-      .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
+      .sort((a, b) => (sort === SortOrder.ASC ? a.id - b.id : b.id - a.id))
       .filter((resource) => resource.slug !== pageSlug)
       .slice(0, limit)
-      .map(({ id, slug, title }) => ({ id, slug, title }))
+      .map(({ id, slug, title }) => ({ id, slug, title })),
   );
 }
-
 
 export async function getResourceBySlug(
   slug: string,
   options?: {
     locale?: string;
-  }
+  },
 ): Promise<Resource | null> {
   const { locale } = options ?? {};
 
   return Promise.resolve(
     allResources.find(
       (resource: Resource) =>
-        resource.slug === slug && (!locale || resource.locale === locale)
-    ) ?? null
+        resource.slug === slug && (!locale || resource.locale === locale),
+    ) ?? null,
   );
 }
 
 export async function getResourceById(
   id: number,
-  options?: { locale?: string }
+  options?: { locale?: string },
 ): Promise<Resource | null> {
   const { locale } = options ?? {};
   return Promise.resolve(
@@ -116,7 +116,7 @@ export async function getResourceWithAdjacent(
   slug: string,
   options?: {
     locale?: string;
-  }
+  },
 ): Promise<ResourcesResult | null> {
   const { locale } = options ?? {};
   // Filter by locale if specified
@@ -130,7 +130,7 @@ export async function getResourceWithAdjacent(
 
   // Find the current resource
   const currentIndex = sortedResources.findIndex(
-    (resource: Resource) => resource.slug === slug
+    (resource: Resource) => resource.slug === slug,
   );
 
   if (currentIndex === -1) {
@@ -190,17 +190,17 @@ export async function getResourceWithAdjacent(
 type GetAllResourceSlugsOptions = {
   published?: boolean;
   locale?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 
 export async function getAllResourceSlugs(
-  options: Partial<GetAllResourceSlugsOptions> = {}
+  options: Partial<GetAllResourceSlugsOptions> = {},
 ): Promise<string[]> {
   const { published, locale, sort, limit } = {
     published: true,
     locale: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
@@ -209,11 +209,11 @@ export async function getAllResourceSlugs(
       .filter(
         (resource) =>
           resource.published === published &&
-          (!locale || resource.locale === locale)
+          (!locale || resource.locale === locale),
       )
       .sort((a, b) => (sort === "asc" ? a.id - b.id : b.id - a.id))
       .map((resource) => resource.slug)
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
@@ -239,7 +239,7 @@ type FilterOptions = {
  * // Returns all resources filtered by category "technology"
  */
 export async function getFilteredResources(
-  options: FilterOptions = { published: undefined, locale: undefined }
+  options: FilterOptions = { published: undefined, locale: undefined },
 ): Promise<Resource[]> {
   const resources = await getAllResources({
     published: options.published,
@@ -268,7 +268,7 @@ export async function getFilteredResources(
       }
 
       return true;
-    })
+    }),
   );
 }
 
@@ -285,7 +285,7 @@ export async function getFilteredResources(
  */
 export async function getAllResourceTags(): Promise<string[]> {
   const allTags = allResources.flatMap((resource) =>
-    resource.tags.map((tag) => tag.slug)
+    resource.tags.map((tag) => tag.slug),
   );
   return Promise.resolve([...new Set(allTags)]);
 }
