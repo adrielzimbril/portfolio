@@ -1,5 +1,7 @@
+"use client";
+
 import * as React from "react";
-import { cn, useId } from "@/utils";
+import { cn } from "@/utils";
 import { VariantProps } from "class-variance-authority";
 import { inputVariants } from "@/components/ui/input";
 import { useCharacterLimit } from "@/hooks/useCharacterLimit";
@@ -21,7 +23,7 @@ function Textarea({
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
 }) {
   const t = useTranslations();
-  const id = useId();
+  const id = React.useId();
   const maxLength = limit;
   const {
     value,

@@ -71,7 +71,7 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
       {/* Content Card */}
       <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 overflow-hidden">
         {entry.cover && (
-          <div className="relative h-64 w-full [corner-shape:squircle] rounded-t-xl md:rounded-t-3xl overflow-hidden">
+          <div className="relative h-72 w-full [corner-shape:squircle] rounded-t-xl md:rounded-t-3xl overflow-hidden">
             <Image
               src={entry.cover}
               alt={entry.version}
