@@ -22,7 +22,13 @@ export async function Footer() {
     locale,
   });
 
-  const footerLinks = [
+  const footerLinks: {
+    name: string;
+    key: string;
+    link: string;
+    inHeader: boolean;
+    inSitemap: boolean;
+  }[] = [
     routes.community,
     routes.stats,
     routes.toolbox,
@@ -119,6 +125,7 @@ export async function Footer() {
             </div>
           </div>
 
+          <FooterLinks links={footerLinks} />
           <FooterResources resources={resources} />
 
           <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-b-base dark:bg-zinc-900">
@@ -142,6 +149,49 @@ export async function Footer() {
   );
 }
 
+function FooterLinksContainer({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
+      <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+async function FooterLinks({
+  links,
+}: {
+  links: {
+    name: string;
+    key: string;
+    link: string;
+    inHeader: boolean;
+    inSitemap: boolean;
+  }[];
+}) {
+  return (
+    <FooterLinksContainer>
+      {links.map((link, index) => (
+        <React.Fragment key={link.key}>
+          <Link
+            href={link.link}
+            className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
+          >
+            {link.name}
+          </Link>
+          {index < links.length - 1 && (
+            <>
+              <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
+              <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
+            </>
+          )}
+        </React.Fragment>
+      ))}
+    </FooterLinksContainer>
+  );
+}
+
 async function FooterResources({
   resources,
 }: {
@@ -150,26 +200,23 @@ async function FooterResources({
   const t = await getTranslations();
 
   return (
-    <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
-      {/* <div className="w-full flex flex-col gap-8 md:gap-10 py-6 md:py-10 border-t border-b-bases/10 border-t-bases/10 mt-4"> */}
-      <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
-        {resources.map((resource, index) => (
-          <React.Fragment key={resource.slug ?? index}>
-            <Link
-              href={getResourcesUrl(PageType.HUB, resource.slug)}
-              className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
-            >
-              {resource.title}
-            </Link>
-            {index < resources.length - 1 && (
-              <>
-                <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
-                <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
-              </>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
+    <FooterLinksContainer>
+      {resources.map((resource, index) => (
+        <React.Fragment key={resource.slug ?? index}>
+          <Link
+            href={getResourcesUrl(PageType.HUB, resource.slug)}
+            className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
+          >
+            {resource.title}
+          </Link>
+          {index < resources.length - 1 && (
+            <>
+              <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
+              <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
+            </>
+          )}
+        </React.Fragment>
+      ))}
+    </FooterLinksContainer>
   );
 }
