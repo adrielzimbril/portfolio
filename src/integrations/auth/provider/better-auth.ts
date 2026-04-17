@@ -27,7 +27,7 @@ export const signOut: AuthHandler["signOut"] = async () => {
       headers: { "Content-Type": "application/json" },
     });
     if (!response.ok) throw new Error("BetterAuth | Sign out failed");
-    
+
     // Refresh page or redirect
     window.location.href = "/";
   } catch (error) {

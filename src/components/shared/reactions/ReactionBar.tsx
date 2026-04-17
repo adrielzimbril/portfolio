@@ -26,7 +26,8 @@ const ReactionContext = createContext<ReactionContextValue | null>(null);
 
 const useReaction = () => {
   const context = useContext(ReactionContext);
-  if (!context) throw new Error("Reaction components must be used within ReactionRoot");
+  if (!context)
+    throw new Error("Reaction components must be used within ReactionRoot");
   return context;
 };
 
@@ -109,22 +110,27 @@ export function ReactionRoot({
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
-    }, 400); 
+    }, 400);
   }, []);
 
   return (
-    <ReactionContext.Provider value={{
-      isOpen,
-      setIsOpen,
-      pageType,
-      entityId,
-      activeOrientation: orientation,
-      dockPosition,
-      reactions,
-    }}>
+    <ReactionContext.Provider
+      value={{
+        isOpen,
+        setIsOpen,
+        pageType,
+        entityId,
+        activeOrientation: orientation,
+        dockPosition,
+        reactions,
+      }}
+    >
       <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen} modal={false}>
-        <div 
-          className={cn("relative inline-flex flex-col items-center", className)}
+        <div
+          className={cn(
+            "relative inline-flex flex-col items-center",
+            className,
+          )}
           onMouseEnter={handleOpen}
           onMouseLeave={handleClose}
           onPointerEnter={handleOpen}
@@ -165,7 +171,7 @@ export function ReactionTrigger({
           "squircle-sh-white dark:squircle-b-base",
           "squircle-border-2 squircle-border-b-base-accent",
           "cursor-pointer z-20 transition-colors",
-          className
+          className,
         )}
         style={{ scale: isOpen ? 1.05 : 1 }}
         whileTap={{ scale: 0.95 }}
@@ -223,7 +229,7 @@ export function ReactionDock({
               exit="hidden"
               className={cn(
                 "z-50 p-2 relative outline-none",
-                isVertical 
+                isVertical
                   ? "flex flex-col w-[64px] h-auto items-center justify-center py-4"
                   : "flex flex-row h-14 w-max items-center justify-center px-4",
                 "gap-2",
@@ -231,21 +237,23 @@ export function ReactionDock({
                 "squircle-sh-white dark:squircle-b-base",
                 "squircle-border-2 squircle-border-b-base-accent",
                 "whitespace-nowrap shadow-xl bg-white dark:bg-zinc-950",
-                className
+                className,
               )}
             >
-              <div 
+              <div
                 className={cn(
                   "absolute pointer-events-auto z-[-1]",
                   dockPosition === "bottom" ? "-top-8 h-8" : "-bottom-8 h-8",
-                  "left-[-24px] right-[-24px]" 
+                  "left-[-24px] right-[-24px]",
                 )}
               />
-              
-              <div 
+
+              <div
                 className={cn(
                   "flex gap-1.5",
-                  isVertical ? "flex-col w-full items-center" : "flex-row h-full items-center"
+                  isVertical
+                    ? "flex-col w-full items-center"
+                    : "flex-row h-full items-center",
                 )}
               >
                 {children}
@@ -276,9 +284,9 @@ export function ReactionItem({
       whileHover={{ scale: 1.15 }}
       whileTap={{ scale: 0.9 }}
       className={cn(
-        "flex items-center justify-center origin-center cursor-pointer", 
+        "flex items-center justify-center origin-center cursor-pointer",
         compact ? "size-8" : "size-10",
-        className
+        className,
       )}
       onClick={() => setIsOpen(false)}
     >
@@ -314,39 +322,44 @@ export function ReactionBar({
   orientation?: "horizontal" | "vertical";
   compact?: boolean;
 }) {
-  const activeOrientation = orientation || (variant === "dock" ? "vertical" : "horizontal");
+  const activeOrientation =
+    orientation || (variant === "dock" ? "vertical" : "horizontal");
   const reactionTypes = Object.values(ReactionType);
   const { reactions } = useReactions(pageType, entityId);
-  const totalCount = Object.values(reactions).reduce((acc, curr) => acc + curr, 0);
-  
+  const totalCount = Object.values(reactions).reduce(
+    (acc, curr) => acc + curr,
+    0,
+  );
+
   const sortedReactions = reactionTypes
     .map((type) => ({ type, count: reactions[type] || 0 }))
     .sort((a, b) => b.count - a.count);
 
   const firstReaction = sortedReactions[0];
-  const primaryReaction = firstReaction && firstReaction.count > 0 
-    ? firstReaction.type 
-    : ReactionType.LIKE;
+  const primaryReaction =
+    firstReaction && firstReaction.count > 0
+      ? firstReaction.type
+      : ReactionType.LIKE;
 
   if (variant === "dock") {
     return (
-      <ReactionRoot 
-        pageType={pageType} 
-        entityId={entityId} 
+      <ReactionRoot
+        pageType={pageType}
+        entityId={entityId}
         orientation={activeOrientation}
         dockPosition={dockPosition}
       >
         <ReactionTrigger className={className}>
           <div className="flex flex-col items-center justify-center relative pointer-events-none">
-            <span className="text-xl">
-              {REACTION_EMOJIS[primaryReaction]}
-            </span>
+            <span className="text-xl">{REACTION_EMOJIS[primaryReaction]}</span>
             {totalCount > 0 && (
-              <span className={cn(
-                "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
-                dockPosition === "bottom" ? "-bottom-2.5" : "-top-2.5",
-                "text-[10px] md:text-[11px]"
-              )}>
+              <span
+                className={cn(
+                  "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
+                  dockPosition === "bottom" ? "-bottom-2.5" : "-top-2.5",
+                  "text-[10px] md:text-[11px]",
+                )}
+              >
                 {totalCount}
               </span>
             )}
@@ -362,23 +375,19 @@ export function ReactionBar({
   }
 
   return (
-    <div className={cn(
-      "w-full flex flex-col items-center",
-      compact ? "gap-2 py-2 px-2" : "gap-4 py-8 px-4",
-      "squircle squircle-7xl squircle-smooth-xl",
-      "squircle-sh-white dark:squircle-b-base",
-      "squircle-border-2 squircle-border-b-base-accent",
-      className
-    )}>
-      {!compact && (
-        <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
-          Reactions
-        </h4>
+    <div
+      className={cn(
+        "w-fit flex flex-col items-center",
+        compact ? "gap-2" : "gap-4",
+        className,
       )}
-      <div className={cn(
-        "flex flex-wrap items-center justify-center",
-        compact ? "gap-1.5" : "gap-3"
-      )}>
+    >
+      <div
+        className={cn(
+          "flex flex-wrap items-center justify-center",
+          compact ? "gap-1.5" : "gap-3",
+        )}
+      >
         {reactionTypes.map((type) => (
           <ReactionButton
             key={type}
@@ -394,4 +403,3 @@ export function ReactionBar({
     </div>
   );
 }
-

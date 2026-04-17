@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import useSWR, { useSWRConfig } from "swr";
 import { cn } from "@/utils/utils";
 import { supabase } from "@/integrations/supabase/client";
-import { PageType } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
+import { Badge } from "@/components/ui/badge";
 import {
   getAnonymousUserId,
   getCurrentUserId,
   syncAnonymousReactionsOnLogin,
 } from "@/lib/reactions/anonymous-user";
 import { apiRoutes } from "@/data/api-routes";
+import { pickRandomColor } from "@/utils";
 
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
@@ -30,8 +33,6 @@ interface ReactionButtonProps {
   compact?: boolean;
 }
 
-import useSWR, { useSWRConfig } from "swr";
-
 export function ReactionButton({
   pageType,
   entityId,
@@ -50,11 +51,13 @@ export function ReactionButton({
 
   useEffect(() => {
     const initUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       setUser(user);
       const userId = getCurrentUserId(user);
       setCurrentUserId(userId);
-      
+
       const anonymousId = getAnonymousUserId();
       if (user?.id && anonymousId) {
         await syncAnonymousReactionsOnLogin(anonymousId);
@@ -63,20 +66,22 @@ export function ReactionButton({
     initUser();
   }, []);
 
-  const statusKey = currentUserId 
-    ? `reaction_status_${pageType}_${entityId}_${reactionType}_${currentUserId}` 
+  const statusKey = currentUserId
+    ? `reaction_status_${pageType}_${entityId}_${reactionType}_${currentUserId}`
     : null;
 
   const { data: isReacted, mutate: mutateStatus } = useSWR(
     statusKey,
     async () => {
       if (!currentUserId) return false;
-      const res = await fetch(`${apiRoutes.reactionsStatus.link}?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`);
+      const res = await fetch(
+        `${apiRoutes.reactionsStatus.link}?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`,
+      );
       if (!res.ok) return false;
       const { isReacted } = await res.json();
       return isReacted;
     },
-    { revalidateOnFocus: true }
+    { revalidateOnFocus: true },
   );
 
   const handleReaction = async () => {
@@ -85,19 +90,26 @@ export function ReactionButton({
     setIsLoading(true);
 
     const countsKey = `reactions_${pageType}_${entityId}`;
-    
+
     // Optimistic Update
     const nextIsReacted = !isReacted;
-    
+
     // Update both status and global counts optimistically
     mutateStatus(nextIsReacted, false);
-    globalMutate(countsKey, (current: any) => {
-      if (!current) return current;
-      return {
-        ...current,
-        [reactionType]: Math.max(0, current[reactionType] + (nextIsReacted ? 1 : -1))
-      };
-    }, false);
+    globalMutate(
+      countsKey,
+      (current: any) => {
+        if (!current) return current;
+        return {
+          ...current,
+          [reactionType]: Math.max(
+            0,
+            current[reactionType] + (nextIsReacted ? 1 : -1),
+          ),
+        };
+      },
+      false,
+    );
 
     try {
       const res = await fetch(apiRoutes.reactions.link, {
@@ -119,7 +131,7 @@ export function ReactionButton({
       console.error("Reaction error:", error);
       // Rollback
       mutateStatus(isReacted, true);
-      globalMutate(countsKey); 
+      globalMutate(countsKey);
     } finally {
       setIsLoading(false);
       // Final revalidation to ensure sync
@@ -131,42 +143,93 @@ export function ReactionButton({
   const reactionCount = count; // We use the prop directly as it's now managed by global useReactions SWR hook
 
   return (
-    <button
-      onClick={handleReaction}
-      disabled={isLoading}
-      title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
-      className={cn(
-        "flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
-        "squircle squircle-7xl squircle-smooth-xl",
-        minimal 
-          ? "size-10" 
-          : compact 
-            ? "gap-1 px-2 py-1 squircle-sh-white squircle-border squircle-border-b-base-accent"
-            : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent",
-        isReacted && !minimal && "squircle-background-background squircle-border-2 squircle-border-indigo-500",
-        isReacted && minimal && "squircle-sh-white squircle-border-2 squircle-border-indigo-500",
-        className,
-      )}
-    >
-      <span
+    <>
+      <Badge
         className={cn(
-          "text-lg transition-transform duration-300",
-          compact && "text-base",
-          !minimal && "group-hover/btn:scale-125",
-          isReacted && "scale-110",
+          "capitalize text-xs font-medium",
+          pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
+          "size-max text-primary-foreground!",
+        )}
+        size="sm"
+        variant="colored"
+        circle
+      >
+        <span
+          className={cn(
+            "text-lg transition-transform duration-300",
+            compact && "text-base",
+            !minimal && "group-hover/btn:scale-125",
+            isReacted && "scale-110",
+          )}
+        >
+          {emoji}
+        </span>
+        {reactionCount > 0 && !minimal && (
+          <span
+            className={cn(
+              "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
+              "-bottom-2.5",
+              "text-[10px] md:text-[11px]",
+            )}
+          >
+            {reactionCount}
+          </span>
+        )}
+        {!minimal && (
+          <span
+            className={cn(
+              "font-bold transition-colors",
+              compact ? "text-[10px]" : "text-xs",
+              isReacted ? "text-indigo-600" : "text-foreground",
+            )}
+          >
+            {reactionCount}
+          </span>
+        )}
+      </Badge>
+      <button
+        onClick={handleReaction}
+        disabled={isLoading}
+        title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
+        className={cn(
+          "flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
+          "squircle squircle-7xl squircle-smooth-xl",
+          minimal
+            ? "size-10"
+            : compact
+              ? "gap-1 px-2 py-1 squircle-sh-white squircle-border squircle-border-b-base-accent"
+              : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent",
+          isReacted &&
+            !minimal &&
+            "squircle-background-background squircle-border-2 squircle-border-indigo-500",
+          isReacted &&
+            minimal &&
+            "squircle-sh-white squircle-border-2 squircle-border-indigo-500",
+          className,
         )}
       >
-        {emoji}
-      </span>
-      {!minimal && (
-        <span className={cn(
-          "font-bold transition-colors",
-          compact ? "text-[10px]" : "text-xs",
-          isReacted ? "text-indigo-600" : "text-foreground"
-        )}>
-          {reactionCount}
+        <span
+          className={cn(
+            "text-lg transition-transform duration-300",
+            compact && "text-base",
+            !minimal && "group-hover/btn:scale-125",
+            isReacted && "scale-110",
+          )}
+        >
+          {emoji}
         </span>
-      )}
-    </button>
+        {!minimal && (
+          <span
+            className={cn(
+              "font-bold transition-colors",
+              compact ? "text-[10px]" : "text-xs",
+              isReacted ? "text-indigo-600" : "text-foreground",
+            )}
+          >
+            {reactionCount}
+          </span>
+        )}
+      </button>
+    </>
   );
 }
