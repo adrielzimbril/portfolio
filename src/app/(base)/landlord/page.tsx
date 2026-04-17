@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { supabase } from "@/integrations/supabase/client";
+import { apiRoutes } from "@/data/api-routes";
 import { AdminAuthGuard } from "@/components/shared/pages/landlord/AdminAuthGuard";
 import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
 
@@ -37,9 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AdminPage() {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const res = await fetch(apiRoutes.auth.user.link);
+  const { user } = await res.json();
   const t = await getTranslations();
 
   return (

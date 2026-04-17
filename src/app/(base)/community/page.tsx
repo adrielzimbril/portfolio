@@ -7,7 +7,7 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { StatsSection } from "@/app/(base)/community/sections/StatsSection";
 import { FormSection } from "@/app/(base)/community/sections/FormSection";
 import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection";
-import { supabase } from "@/integrations/supabase/client";
+import { apiRoutes } from "@/data/api-routes";
 import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,9 +31,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CommunityPage() {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const res = await fetch(apiRoutes.auth.user.link);
+  const { user } = await res.json();
   const t = await getTranslations();
 
   return (

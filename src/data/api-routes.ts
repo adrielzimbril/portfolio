@@ -31,7 +31,7 @@ export const apiRoutes = {
     },
     logout: {
       key: "auth-logout",
-      link: getApiUrl("logout"),
+      link: getApiUrl("auth/logout"),
       accept: [requestType.GET],
     },
   },
