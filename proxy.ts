@@ -3,6 +3,7 @@ import { routing } from "@/integrations/i18n/routing";
 import { createClient } from "@/integrations/supabase/middleware";
 import { ConfigValue } from "@/config";
 import { NextResponse } from "next/server";
+import { apiRoutes } from "@/data/api-routes";
 
 import createMiddleware from "next-intl/middleware";
 import { type NextRequest } from "next/server";
@@ -51,7 +52,7 @@ export default async function proxy(req: NextRequest) {
 
     if (sessionAge > timeoutMs) {
       // Session expired, redirect to logout
-      const logoutUrl = new URL("/logout", req.url);
+      const logoutUrl = new URL(apiRoutes.auth.logout.link, req.url);
       return NextResponse.redirect(logoutUrl);
     }
   }

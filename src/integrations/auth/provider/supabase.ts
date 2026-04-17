@@ -4,6 +4,7 @@ import { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { authRoutes } from "@/integrations/auth/routes";
 import { AuthHandler } from "@/integrations/auth/types/types";
+import { apiRoutes } from "@/data/api-routes";
 
 export const signInWithGithub: AuthHandler["signInWithGithub"] = async (
   callbackURL?,
@@ -39,9 +40,8 @@ export const useUser: AuthHandler["useUser"] = () => {
   useEffect(() => {
     const getInitialUser = async () => {
       try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
+        const res = await fetch(apiRoutes.auth.user.link);
+        const { user } = await res.json();
         setUser(user);
       } catch (error) {
         console.error("Supabase Auth | Error fetching user:", error);

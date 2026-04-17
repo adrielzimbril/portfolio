@@ -1,12 +1,10 @@
-import { createClient } from "@/integrations/supabase/server";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { apiRoutes } from "@/data/api-routes";
 
 export default async function LogoutPage() {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
+  const res = await fetch(apiRoutes.auth.logout.link, { method: "POST" });
 
-  await supabase.auth.signOut();
-
-  redirect("/");
+  if (res.ok) {
+    redirect("/");
+  }
 }

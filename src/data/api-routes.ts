@@ -29,6 +29,11 @@ export const apiRoutes = {
       link: getApiUrl("auth/user"),
       accept: [requestType.GET],
     },
+    logout: {
+      key: "auth-logout",
+      link: getApiUrl("logout"),
+      accept: [requestType.GET],
+    },
   },
   submit: {
     key: "submit",
