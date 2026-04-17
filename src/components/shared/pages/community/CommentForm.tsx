@@ -18,6 +18,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import logger from "@/utils/logger";
+import { apiRoutes } from "@/data/api-routes";
 
 interface CommentFormProps {
   user: any;
@@ -41,10 +43,31 @@ export function CommentForm({ user }: CommentFormProps) {
   });
 
   const onSubmit: SubmitHandler<CommentFormValues> = async (values) => {
-    console.log("Submitting comment:", values.comment);
-    // TODO: Implement comment submission logic
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    form.reset();
+    try {
+      logger.info("Submitting comment", { comment: values.comment });
+
+      const res = await fetch(apiRoutes.guestbook.link, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: values.comment,
+          author: user?.user_metadata?.name || user?.email,
+          profilePicture: user?.user_metadata?.avatar_url,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to submit comment");
+      }
+
+      logger.info("Comment submitted successfully", data);
+      form.reset();
+    } catch (error) {
+      logger.error("Failed to submit comment", error);
+      throw error;
+    }
   };
 
   return (

@@ -16,7 +16,7 @@ export function StatCard({
   value: string;
 }) {
   return (
-    <div className="relative flex flex-col items-center gap-4 group cursor-pointer">
+    <div className="relative flex flex-col items-center gap-4 group">
       <div className="relative size-fit">
         <div
           className={cn(

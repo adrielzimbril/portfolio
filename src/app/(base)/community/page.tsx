@@ -45,7 +45,9 @@ export default async function CommunityPage() {
         isMobileShowed
       />
 
-      <StatsSection user={user} />
+      <SectionLayout className="p-0!" isFlex>
+        <StatsSection user={user} />
+      </SectionLayout>
 
       <SectionLayout isFlex>
         {/* <LeaveNoteButton user={user} /> */}
