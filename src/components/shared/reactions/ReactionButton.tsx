@@ -146,6 +146,7 @@ export function ReactionButton({
     <>
       <Badge
         className={cn(
+          "group relative flex items-center justify-center",
           "capitalize text-xs font-medium",
           pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
           "size-max text-primary-foreground!",
@@ -153,6 +154,7 @@ export function ReactionButton({
         size="sm"
         variant="colored"
         circle
+        contentClassName="flex flex-col items-center justify-center relative pointer-events-none"
       >
         <span
           className={cn(
