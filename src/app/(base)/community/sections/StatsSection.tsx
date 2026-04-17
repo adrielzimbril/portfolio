@@ -12,7 +12,7 @@ export function StatsSection({ user }: { user: User }) {
         <StatCard icon={ChatBubbleCircle} label="Messages" value="1,234" />
         <StatCard icon={Users} label="Members" value="892" />
         <StatCard icon={HeartOne} label="Active" value="156" />
-      </div>{" "}
+      </div>
       <LeaveNoteButton user={user} />
     </div>
   );

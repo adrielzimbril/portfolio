@@ -70,6 +70,24 @@
       "title": "Partagez votre message",
       "signInPrompt": "Vous devez être connecté avec GitHub pour poster un message.",
       "signInButton": "Se connecter avec GitHub"
+    },
+    "leave-note": {
+      "button": "Laisser une note",
+      "online": "Vous êtes en ligne - Laissez une note"
+    },
+    "login-modal": {
+      "title": "Connectez-vous pour laisser une note",
+      "description": "Choisissez votre méthode préférée pour vous connecter et rejoindre la conversation.",
+      "github": "Continuer avec GitHub",
+      "google": "Continuer avec Google"
+    },
+    "comment-form": {
+      "title": "Partagez vos pensées",
+      "description": "Laissez un message pour la communauté.",
+      "label": "Votre message",
+      "placeholder": "Écrivez quelque chose de sympa...",
+      "submit": "Envoyer le message",
+      "submitting": "Envoi..."
     }
   },
   "toolbox": {
