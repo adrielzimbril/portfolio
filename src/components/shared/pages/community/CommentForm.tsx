@@ -1,5 +1,8 @@
 "use client";
 import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
 import { cn } from "@/utils/utils";
@@ -7,30 +10,41 @@ import { Send } from "@aurthle/icons";
 import { Textarea } from "@/components/ui/textarea";
 import { DialogHeader, DialogSeparator } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { Form } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 interface CommentFormProps {
   user: any;
 }
 
+const schema = z.object({
+  comment: z
+    .string()
+    .min(1, { message: "Comment cannot be empty" })
+    .max(500, { message: "Comment must be less than 500 characters" }),
+});
+
+type CommentFormValues = z.infer<typeof schema>;
+
 export function CommentForm({ user }: CommentFormProps) {
   const t = useTranslations();
-  const [comment, setComment] = React.useState("");
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!comment.trim()) return;
+  const form = useForm<CommentFormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: { comment: "" },
+  });
 
-    setIsSubmitting(true);
+  const onSubmit: SubmitHandler<CommentFormValues> = async (values) => {
+    console.log("Submitting comment:", values.comment);
     // TODO: Implement comment submission logic
-    console.log("Submitting comment:", comment);
-
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setComment("");
-    setIsSubmitting(false);
+    form.reset();
   };
 
   return (
@@ -49,49 +63,53 @@ export function CommentForm({ user }: CommentFormProps) {
           </p>
         </div>
 
-        <Form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <label
-              htmlFor="comment"
-              className="text-sm font-medium text-foreground"
-            >
-              {t("community.comment-form.label")}
-            </label>
-            <Textarea
-              id="comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              placeholder={t("community.comment-form.placeholder")}
-              className={cn(
-                "w-full min-h-[120px] p-4",
-                "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                "bg-b-base text-foreground placeholder:text-muted-foreground",
-                "focus:outline-none focus:squircle-border-b-base-accent",
-                "resize-none transition-all",
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="comment"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("community.comment-form.label")}</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder={t("community.comment-form.placeholder")}
+                      className={cn(
+                        "w-full min-h-[120px] p-4",
+                        "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                        "bg-b-base text-foreground placeholder:text-muted-foreground",
+                        "focus:outline-none focus:squircle-border-b-base-accent",
+                        "resize-none transition-all",
+                      )}
+                      disabled={form.formState.isSubmitting}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
               )}
-              disabled={isSubmitting}
             />
-          </div>
 
-          <Button
-            type="submit"
-            variant="default"
-            whileTap
-            disabled={!comment.trim() || isSubmitting}
-            className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
-          >
-            <span className="flex items-center justify-center gap-2">
-              {isSubmitting ? (
-                t("community.comment-form.submitting")
-              ) : (
-                <>
-                  <Send size={16} variant="bulk" />
-                  {t("community.comment-form.submit")}
-                </>
-              )}
-            </span>
-          </Button>
-        </form>
+            <Button
+              type="submit"
+              variant="default"
+              whileTap
+              disabled={form.formState.isSubmitting}
+              className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
+            >
+              <span className="flex items-center justify-center gap-2">
+                {form.formState.isSubmitting ? (
+                  t("community.comment-form.submitting")
+                ) : (
+                  <>
+                    <Send size={16} variant="bulk" />
+                    {t("community.comment-form.submit")}
+                  </>
+                )}
+              </span>
+            </Button>
+          </form>
+        </Form>
       </div>
     </>
   );
