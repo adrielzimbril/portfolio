@@ -7,6 +7,7 @@ import { pickRandomColor } from "@/utils/pick-random-color";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
 import { SynchronizationTwo } from "@aurthle/icons";
 import { cn } from "@/utils/utils";
+import { Card, CardContent } from "@/components/ui/card";
 
 type Message = {
   id: string;
@@ -210,122 +211,130 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
   const hasMoved = offset.x !== 0 || offset.y !== 0;
 
   return (
-    <div
-      className="relative w-full"
-      style={{ height: "600px", minHeight: "600px" }}
-    >
-      {/* Interactive canvas area */}
-      <div
-        ref={containerRef}
-        className="absolute inset-0 overflow-hidden"
-        style={{
-          cursor: isDragging ? "grabbing" : "grab",
-        }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-      >
-        {/* Background grid pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] [background-size:16px_16px]" />
+    <div className="relative w-full h-150 min-h-150">
+      <Card className="size-full squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 overflow-hidden">
+        <CardContent className="size-full p-8">
+          {/* Interactive canvas area */}
+          <div
+            ref={containerRef}
+            className="absolute inset-0 overflow-hidden"
+            style={{
+              cursor: isDragging ? "grabbing" : "grab",
+            }}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Background grid pattern */}
+            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] [background-size:16px_16px]" />
 
-        {/* Canvas container that gets transformed */}
-        <div
-          className="absolute inset-0"
-          style={{
-            transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,
-            willChange: isDragging ? "transform" : "auto",
-            transition: isTransitioning ? "transform 0.5s ease-in-out" : "none",
-          }}
-        >
-          {/* Render all cards at their random positions */}
-          {messagePositions.map((message) => (
+            {/* Canvas container that gets transformed */}
             <div
-              key={message.id}
-              className="absolute"
+              className="absolute inset-0"
               style={{
-                left: "50%",
-                top: "50%",
-                transform: `translate(calc(-50% + ${message.position.x}px), calc(-50% + ${message.position.y}px))`,
-                pointerEvents: "auto",
+                transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,
+                willChange: isDragging ? "transform" : "auto",
+                transition: isTransitioning
+                  ? "transform 0.5s ease-in-out"
+                  : "none",
               }}
             >
-              <CommunityWallCard
-                message={message.message}
-                patternIndex={message.patternindex}
-                author={message.creator_name}
-                profilePicture={message.creator_avatar_url}
-                rotation={message.rotation}
-                className="h-[300px] w-[250px] shadow-[12px_12px_0px_0px_rgba(214,218,222,0.3)]"
-              />
+              {/* Render all cards at their random positions */}
+              {messagePositions.map((message) => (
+                <div
+                  key={message.id}
+                  className="absolute"
+                  style={{
+                    left: "50%",
+                    top: "50%",
+                    transform: `translate(calc(-50% + ${message.position.x}px), calc(-50% + ${message.position.y}px))`,
+                    pointerEvents: "auto",
+                  }}
+                >
+                  <CommunityWallCard
+                    message={message.message}
+                    patternIndex={message.patternindex}
+                    author={message.creator_name}
+                    profilePicture={message.creator_avatar_url}
+                    rotation={message.rotation}
+                    className="h-[300px] w-[250px] shadow-[12px_12px_0px_0px_rgba(214,218,222,0.3)]"
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Recenter button - floating in top right, fades in when canvas moves */}
-        <Badge
-          className={cn(
-            "absolute right-4 top-4 z-10 flex items-center justify-center",
+            {/* Recenter button - floating in top right, fades in when canvas moves */}
+            <Badge
+              onClick={handleRecenter}
+              className={cn(
+                "absolute right-4 top-4 z-10 flex items-center justify-center",
+                hasMoved
+                  ? "opacity-100 pointer-cursor pointer-events-auto"
+                  : "opacity-0 pointer-none pointer-events-none",
+                pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
+                // "size-max text-primary-foreground!",
+              )}
+              variant="colored"
+              size="lg"
+              aria-label="Recenter canvas"
+              title="Return to center"
+            >
+              <SynchronizationTwo size={24} variant="bulk" />
+            </Badge>
+            <button
+              onClick={handleRecenter}
+              className="hidden! absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-lg bg-dark-primary shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
+              style={{
+                opacity: hasMoved ? 1 : 0,
+                pointerEvents: hasMoved ? "auto" : "none",
+              }}
+              aria-label="Recenter canvas"
+              title="Return to center"
+            >
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="text-gray-400"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M11.25 4.75L8.75 7L11.25 9.25"
+                />
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M12.75 19.25L15.25 17L12.75 14.75"
+                />
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M9.75 7H13.25C16.5637 7 19.25 9.68629 19.25 13V13.25"
+                />
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M14.25 17H10.75C7.43629 17 4.75 14.3137 4.75 11V10.75"
+                />
+              </svg>
+            </button>
+          </div>
 
-            pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
-            "size-max text-primary-foreground!",
-          )}
-          variant="colored"
-          size="lg"
-        >
-          <SynchronizationTwo size={24} variant="bulk" />
-        </Badge>
-        <button
-          onClick={handleRecenter}
-          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-lg bg-dark-primary shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"
-          style={{
-            opacity: hasMoved ? 1 : 0,
-            pointerEvents: hasMoved ? "auto" : "none",
-          }}
-          aria-label="Recenter canvas"
-          title="Return to center"
-        >
-          <svg
-            width="24"
-            height="24"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="text-gray-400"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M11.25 4.75L8.75 7L11.25 9.25"
-            />
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M12.75 19.25L15.25 17L12.75 14.75"
-            />
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M9.75 7H13.25C16.5637 7 19.25 9.68629 19.25 13V13.25"
-            />
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M14.25 17H10.75C7.43629 17 4.75 14.3137 4.75 11V10.75"
-            />
-          </svg>
-        </button>
-      </div>
-
-      {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}
-      {children && children}
+          {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}
+          {children && children}
+        </CardContent>
+      </Card>
     </div>
   );
 }

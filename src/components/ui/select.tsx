@@ -2,7 +2,7 @@
 import * as React from "react";
 import { cn } from "@/utils/utils";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { ChevronDownOne, ChevronUpOne, CheckCircle } from "@aurthle/icons";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import { VariantProps } from "class-variance-authority";
 import { inputVariants } from "@/components/ui/input";
 
