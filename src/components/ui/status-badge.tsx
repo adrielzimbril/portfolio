@@ -136,6 +136,7 @@ function StatusBadge({
       className={cn(
         "flex flex-wrap items-center gap-2",
         badgeVariants({ variant, size }),
+        "inline-flex",
         className,
       )}
       {...props}

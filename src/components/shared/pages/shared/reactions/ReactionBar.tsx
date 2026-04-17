@@ -39,7 +39,7 @@ export function ReactionBar({
       className={cn(
         "w-full md:w-fit flex flex-col items-center",
         compact ? "gap-2" : "gap-4",
-        "max-w-4xl mx-auto my-6 md:my-12",
+        !compact && "max-w-4xl mx-auto my-6 md:my-12",
       )}
     >
       <div

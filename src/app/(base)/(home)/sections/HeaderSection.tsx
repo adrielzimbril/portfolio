@@ -8,7 +8,6 @@ import { StatusBadge } from "@/components/ui/status-badge";
 import { LinkOne } from "@aurthle/icons";
 import { getDate, getPathUrl, getThisMonth } from "@/utils";
 import { usePageViews } from "@/hooks/usePageViews";
-import { cn } from "@/utils/utils";
 
 const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
   const t = useTranslations();
@@ -125,73 +124,48 @@ export function HeaderSection() {
 
   return (
     <SectionBase sectionClassName="p-0 mt-16" isWide>
-      <div>
-        <div>
-          <StatusBadge
-            mode="inline"
-            status="available"
-            primaryText={t("common.shared.planning-badge.available.title")}
-            className="squircle-sh-white text-b-white-invert"
-            variant="colored"
-            size="md"
-          >
-            <Link href={routes.contact.link}>
-              <span className="flex items-center gap-2 lowercase">
-                {t(
-                  "common.shared.planning-badge.available.description-simple",
-                  {
-                    date: t("common.shared.months." + getThisMonth()),
-                  },
-                )}{" "}
-                👋🏻
-                <div>
-                  <LinkOne variant="bulk" size={20} />
-                </div>
-              </span>
-            </Link>
-          </StatusBadge>
-        </div>
-
-        <h1 className="w-full relative text-6xl md:text-8xl font-bold tracking-tight text-foreground">
-          {t("home.page.header-section.title")}
-        </h1>
-
-        <p
-          className={cn(
-            "relative text-2xl md:text-3xl text-muted-foreground",
-            "max-w-3xl leading-relaxed",
-          )}
+      <StatusBadge
+        mode="inline"
+        status="available"
+        primaryText={t("common.shared.planning-badge.available.title")}
+        className="squircle-sh-white text-b-white-invert"
+        variant="colored"
+        size="md"
+      >
+        <Link href={routes.contact.link}>
+          <span className="flex items-center gap-2">
+            {t("common.shared.planning-badge.available.description-simple", {
+              date: t("common.shared.months." + getThisMonth()),
+            })}{" "}
+            👋🏻
+            <LinkOne variant="bulk" size={20} />
+          </span>
+        </Link>
+      </StatusBadge>
+      <h1 className="w-full relative">{t("home.page.header-section.title")}</h1>
+      <p className="relative text-2xl">
+        {t("home.page.header-section.description")}
+      </p>
+      <div className="grid w-full md:flex md:w-auto items-start gap-3">
+        <Link
+          href={routes.contact.link}
+          variant="default"
+          likeButton
+          asFull
+          whileTap
         >
-          {t("home.page.header-section.description")}
-        </p>
+          <span>{t("home.page.header-section.cta")}</span>
+        </Link>
 
-        <div className="grid w-full md:flex md:w-auto items-start gap-4 mt-8">
-          <div>
-            <Link
-              href={routes.contact.link}
-              variant="default"
-              likeButton
-              asFull
-              whileTap
-              className={cn("squircle squircle-smooth-lg squircle-2xl")}
-            >
-              <span>{t("home.page.header-section.cta")}</span>
-            </Link>
-          </div>
-
-          <div>
-            <Link
-              href={routes.projects.link}
-              variant="secondary"
-              likeButton
-              asFull
-              whileTap
-              className={cn("squircle squircle-smooth-lg squircle-2xl")}
-            >
-              <span>{t("home.page.header-section.cta-2")}</span>
-            </Link>
-          </div>
-        </div>
+        <Link
+          href={routes.projects.link}
+          variant="secondary"
+          likeButton
+          asFull
+          whileTap
+        >
+          <span>{t("home.page.header-section.cta-2")}</span>
+        </Link>
       </div>
     </SectionBase>
   );
