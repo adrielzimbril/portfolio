@@ -39,6 +39,11 @@ export const ConfigValue = {
   BETTER_AUTH_URL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   AUTH_TOKEN_KEY: "shiro-auth-token",
 
+  // Callback URLs for different pages
+  AUTH_CALLBACK_URL_COMMUNITY:
+    process.env.AUTH_CALLBACK_URL_COMMUNITY || "/community",
+  AUTH_CALLBACK_URL_DEFAULT: process.env.AUTH_CALLBACK_URL_DEFAULT || "/",
+
   // Database (Supabase)
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,

@@ -20,13 +20,15 @@ export type AuthProviderType = AuthProvider | string;
 export interface AuthHandler {
   /**
    * Action to sign in with GitHub
+   * @param callbackURL - Optional custom callback URL (e.g., "/community")
    */
-  signInWithGithub: () => Promise<void>;
+  signInWithGithub: (callbackURL?: string) => Promise<void>;
 
   /**
    * Action to sign in with Google
+   * @param callbackURL - Optional custom callback URL (e.g., "/community")
    */
-  signInWithGoogle: () => Promise<void>;
+  signInWithGoogle: (callbackURL?: string) => Promise<void>;
 
   /**
    * Action to sign out

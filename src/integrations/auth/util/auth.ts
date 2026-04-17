@@ -1,5 +1,8 @@
 import { ConfigValue } from "@/config";
-import { AuthProvider, AuthProviderType } from "@/integrations/auth/types/types";
+import {
+  AuthProvider,
+  AuthProviderType,
+} from "@/integrations/auth/types/types";
 import * as provider from "@/integrations/auth/provider";
 
 /**
@@ -7,11 +10,11 @@ import * as provider from "@/integrations/auth/provider";
  */
 function resolveProvider(input?: AuthProviderType): AuthProvider {
   const fromEnv = (ConfigValue.AUTH_PROVIDER || "").toLowerCase();
-  
+
   if (fromEnv === "betterauth") {
     return AuthProvider.BETTERAUTH;
   }
-  
+
   return AuthProvider.SUPABASE;
 }
 
@@ -20,12 +23,12 @@ function resolveProvider(input?: AuthProviderType): AuthProvider {
  * These functions abstract the underlying provider implementation.
  */
 
-export async function signInWithGithub() {
-  return provider.signInWithGithub();
+export async function signInWithGithub(callbackURL?: string) {
+  return provider.signInWithGithub(callbackURL);
 }
 
-export async function signInWithGoogle() {
-  return provider.signInWithGoogle();
+export async function signInWithGoogle(callbackURL?: string) {
+  return provider.signInWithGoogle(callbackURL);
 }
 
 export async function signOut() {

@@ -8,17 +8,26 @@ const authClient = createAuthClient({
   baseURL: ConfigValue.BETTER_AUTH_URL,
 });
 
-export const signInWithGithub: AuthHandler["signInWithGithub"] = async () => {
+const getCallbackURL = (customCallback?: string) => {
+  if (customCallback) return `${window.location.origin}${customCallback}`;
+  return `${window.location.origin}${ConfigValue.AUTH_CALLBACK_URL_DEFAULT}`;
+};
+
+export const signInWithGithub: AuthHandler["signInWithGithub"] = async (
+  callbackURL?,
+) => {
   await authClient.signIn.social({
     provider: "github",
-    callbackURL: `${window.location.origin}/community`,
+    callbackURL: getCallbackURL(callbackURL),
   });
 };
 
-export const signInWithGoogle: AuthHandler["signInWithGoogle"] = async () => {
+export const signInWithGoogle: AuthHandler["signInWithGoogle"] = async (
+  callbackURL?,
+) => {
   await authClient.signIn.social({
     provider: "google",
-    callbackURL: `${window.location.origin}/community`,
+    callbackURL: getCallbackURL(callbackURL),
   });
 };
 
