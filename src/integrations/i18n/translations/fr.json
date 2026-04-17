@@ -1480,5 +1480,22 @@
         "content": "Ces conditions d'utilisation seront régies et interprétées conformément aux lois de la juridiction dans laquelle mon entreprise est basée."
       }
     }
+  },
+  "sitemap": {
+    "title": "Plan du Site",
+    "description": "Découvrez toutes les pages et sections de ce site.",
+    "page": {
+      "title": "Plan du Site",
+      "description": "Navigation complète de toutes les pages disponibles sur ce portfolio."
+    },
+    "groups": {
+      "main": "Pages Principales",
+      "community": "Communauté",
+      "tools": "Outils",
+      "legal": "Légal"
+    },
+    "badges": {
+      "header": "Menu"
+    }
   }
 }

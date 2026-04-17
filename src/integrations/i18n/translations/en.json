@@ -170,6 +170,23 @@
       }
     }
   },
+  "sitemap": {
+    "title": "Sitemap",
+    "description": "Discover all pages and sections of this website.",
+    "page": {
+      "title": "Sitemap",
+      "description": "Complete navigation of all available pages on this portfolio."
+    },
+    "groups": {
+      "main": "Main Pages",
+      "community": "Community",
+      "tools": "Tools",
+      "legal": "Legal"
+    },
+    "badges": {
+      "header": "Menu"
+    }
+  },
   "toolbox": {
     "title": "Toolbox",
     "description": "The tools, libraries, and technologies I use to build software.",

@@ -187,4 +187,11 @@ export const routes = {
     inHeader: false,
     inSitemap: true,
   },
+  sitemap: {
+    name: "Sitemap",
+    key: "sitemap",
+    link: "/sitemap",
+    inHeader: false,
+    inSitemap: false,
+  },
 };
