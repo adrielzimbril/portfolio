@@ -1,29 +1,46 @@
 "use client";
-import React from "react";
-import { PageHero } from "@/components/shared/pages/shared/page-hero";
+import React, { useEffect, useState } from "react";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { useTranslations } from "use-intl";
-import { legal } from "content-collections";
+import { getLegalByPath } from "@/integrations/content/lib";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function TermsContent() {
-  const t = useTranslations();
-  const terms = legal.find((doc) => doc.path === "terms");
+  const [terms, setTerms] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  return (
-    <>
-      <PageHero
-        title={terms?.title || t("terms.page.title")}
-        description={terms?.description || t("terms.page.description")}
-        imagePath={{ emoji: "⚖️" }}
-        isMobileShowed
-      />
+  useEffect(() => {
+    const loadTerms = async () => {
+      try {
+        const data = await getLegalByPath("terms");
+        setTerms(data);
+      } catch (error) {
+        console.error("Failed to load terms:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadTerms();
+  }, []);
 
+  if (isLoading) {
+    return (
       <SectionLayout>
-        <div className="max-w-3xl mx-auto">
-          <MarkdownContentRender content={terms?.body} />
+        <div className="max-w-3xl mx-auto space-y-4">
+          <Skeleton className="h-8 w-3/4" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-5/6" />
+          <Skeleton className="h-4 w-4/6" />
         </div>
       </SectionLayout>
-    </>
+    );
+  }
+
+  return (
+    <SectionLayout>
+      <div className="max-w-3xl mx-auto">
+        {terms?.body && <MarkdownContentRender content={terms.body} />}
+      </div>
+    </SectionLayout>
   );
 }

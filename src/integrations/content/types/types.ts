@@ -5,6 +5,7 @@ import type {
   Talk as ContentCollectionsTalks,
   Quest as ContentCollectionsQuest,
   Changelog as ContentCollectionsChangelog,
+  Legal as ContentCollectionsLegal,
   PostTag as ContentCollectionsPostTag,
   ProjectTag as ContentCollectionsProjectTag,
   ResourceTag as ContentCollectionsResourceTag,
@@ -21,6 +22,7 @@ export type Resource = Omit<ContentCollectionsResource, "_meta">;
 export type Talk = Omit<ContentCollectionsTalks, "_meta">;
 export type Quest = Omit<ContentCollectionsQuest, "_meta">;
 export type Changelog = Omit<ContentCollectionsChangelog, "_meta">;
+export type Legal = Omit<ContentCollectionsLegal, "_meta">;
 
 /**
  * Types for tags, categories, and types

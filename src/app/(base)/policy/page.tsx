@@ -1,8 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { HeaderSection } from "./sections/HeaderSection";
 import { PolicyContent } from "./sections/PolicyContent";
-import { Skeleton } from "@/components/ui/skeleton";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -29,8 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function Policy() {
   return (
-    <Skeleton name="policy-content" loading={false}>
+    <>
+      <HeaderSection />
       <PolicyContent />
-    </Skeleton>
+    </>
   );
 }
