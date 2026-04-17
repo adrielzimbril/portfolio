@@ -19,7 +19,7 @@ export function AdminAuthGuard({ user, children }: AdminAuthGuardProps) {
     }
 
     const userEmail = user.email;
-    const adminEmails = process.env.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
+    const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
 
     if (!userEmail || !adminEmails.includes(userEmail)) {
       router.push("/");
@@ -31,7 +31,7 @@ export function AdminAuthGuard({ user, children }: AdminAuthGuardProps) {
   }
 
   const userEmail = user.email;
-  const adminEmails = process.env.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
+  const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
 
   if (!userEmail || !adminEmails.includes(userEmail)) {
     return null;

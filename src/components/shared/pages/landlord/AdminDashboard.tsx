@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { QuestsManagementSection } from "./sections/QuestsManagementSection";
-import { CommunityWallManagementSection } from "./sections/CommunityWallManagementSection";
+import { QuestsManagementSection } from "@/app/(base)/landlord/sections/QuestsManagementSection";
+import { CommunityWallManagementSection } from "@/app/(base)/landlord/sections/CommunityWallManagementSection";
 
 export function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("quests");
