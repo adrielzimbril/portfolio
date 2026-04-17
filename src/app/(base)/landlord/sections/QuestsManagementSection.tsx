@@ -49,7 +49,7 @@ export function QuestsManagementSection() {
   const fetchParticipants = async () => {
     try {
       const response = await fetch(
-        `/api/landlord/quests/participants${selectedQuest ? `?slug=${selectedQuest}` : ""}`,
+        `/api/admin/quests/participants${selectedQuest ? `?slug=${selectedQuest}` : ""}`,
       );
       if (response.ok) {
         const data = await response.json();
@@ -93,7 +93,7 @@ export function QuestsManagementSection() {
 
   const handleUpdateLanguage = async (id: string, language: string) => {
     try {
-      const response = await fetch(`/api/landlord/quests/participants/${id}`, {
+      const response = await fetch(`/api/admin/quests/participants/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ language }),

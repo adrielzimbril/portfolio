@@ -5,8 +5,8 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { supabase } from "@/integrations/supabase/client";
-import { AdminAuthGuard } from "./components/AdminAuthGuard";
-import { AdminDashboard } from "./components/AdminDashboard";
+import { AdminAuthGuard } from "@/components/shared/pages/landlord/AdminAuthGuard";
+import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

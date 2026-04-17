@@ -54,7 +54,7 @@ export function CommunityWallManagementSection() {
   const handleAddMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/landlord/community/messages", {
+      const response = await fetch("/api/admin/community/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newMessage),
@@ -206,9 +206,7 @@ export function CommunityWallManagementSection() {
                         <SelectContent>
                           <SelectItem value="en">EN</SelectItem>
                           <SelectItem value="fr">FR</SelectItem>
-                          <SelectItem value="es">ES</SelectItem>
-                          <SelectItem value="de">DE</SelectItem>
-                          <SelectItem value="pt">PT</SelectItem>
+                          <SelectItem value="zh-CN">ZH</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
