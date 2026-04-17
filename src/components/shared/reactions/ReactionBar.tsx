@@ -94,16 +94,17 @@ export function ReactionRoot({
   const { reactions } = useReactions(pageType, entityId);
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  const handleMouseEnter = () => {
+  const handleOpen = React.useCallback(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setIsOpen(true);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleClose = React.useCallback(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
-    }, 400); // Increased delay to 400ms for better "bridge" crossing
-  };
+    }, 400); 
+  }, []);
 
   return (
     <ReactionContext.Provider value={{
@@ -115,11 +116,13 @@ export function ReactionRoot({
       dockPosition,
       reactions,
     }}>
-      <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen} modal={false}>
         <div 
-          className={cn("relative flex flex-col items-center group/reaction-area", className)}
-          onPointerEnter={handleMouseEnter}
-          onPointerLeave={handleMouseLeave}
+          className={cn("relative inline-flex flex-col items-center", className)}
+          onMouseEnter={handleOpen}
+          onMouseLeave={handleClose}
+          onPointerEnter={handleOpen}
+          onPointerLeave={handleClose}
         >
           {children}
         </div>
@@ -141,20 +144,21 @@ export function ReactionTrigger({
   const { isOpen, setIsOpen } = useReaction();
   const Comp = asChild ? Slot : motion.button;
 
-  // We use our own handlers to support hover
-  const handlePointerEnter = () => setIsOpen(true);
-
   return (
     <DropdownMenu.Trigger asChild>
       <Comp
         layout
-        onPointerEnter={handlePointerEnter}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
         className={cn(
           "group relative flex items-center justify-center size-10 md:size-11",
           "squircle squircle-xl squircle-smooth-xl",
           "squircle-sh-white dark:squircle-b-base",
           "squircle-border-2 squircle-border-b-base-accent",
-          "cursor-pointer z-[10] transition-colors",
+          "cursor-pointer z-20 transition-colors",
           className
         )}
         style={{ scale: isOpen ? 1.05 : 1 }}
@@ -178,16 +182,17 @@ export function ReactionDock({
   const isVertical = activeOrientation === "vertical";
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  const handleMouseEnter = () => {
+  const handleOpen = React.useCallback(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setIsOpen(true);
-  };
+  }, [setIsOpen]);
 
-  const handleMouseLeave = () => {
+  const handleClose = React.useCallback(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
-    }, 400); // 400ms delay
-  };
+    }, 400);
+  }, [setIsOpen]);
 
   return (
     <AnimatePresence>
@@ -200,8 +205,10 @@ export function ReactionDock({
             align="center"
             sideOffset={4}
             collisionPadding={16}
-            onPointerEnter={handleMouseEnter}
-            onPointerLeave={handleMouseLeave}
+            onMouseEnter={handleOpen}
+            onMouseLeave={handleClose}
+            onPointerEnter={handleOpen}
+            onPointerLeave={handleClose}
           >
             <motion.div
               variants={DOCK_REVEAL_VARIANTS}
@@ -209,8 +216,7 @@ export function ReactionDock({
               animate="show"
               exit="hidden"
               className={cn(
-                "z-50 p-2",
-                "relative",
+                "z-50 p-2 relative outline-none",
                 isVertical 
                   ? "flex flex-col w-[64px] h-auto items-center justify-center py-4"
                   : "flex flex-row h-14 w-max items-center justify-center px-4",
@@ -219,16 +225,14 @@ export function ReactionDock({
                 "squircle-sh-white dark:squircle-b-base",
                 "squircle-border-2 squircle-border-b-base-accent",
                 "whitespace-nowrap shadow-xl bg-white dark:bg-zinc-950",
-                "focus:outline-none",
                 className
               )}
             >
-              {/* Invisible Bridge to prevent closing when moving mouse from trigger to dock */}
               <div 
                 className={cn(
                   "absolute pointer-events-auto z-[-1]",
                   dockPosition === "bottom" ? "-top-8 h-8" : "-bottom-8 h-8",
-                  "left-[-20px] right-[-20px]" // Wider bridge
+                  "left-[-24px] right-[-24px]" 
                 )}
               />
               
@@ -368,3 +372,4 @@ export function ReactionBar({
     </div>
   );
 }
+
