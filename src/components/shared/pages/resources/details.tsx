@@ -1,5 +1,4 @@
 "use client";
-
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";

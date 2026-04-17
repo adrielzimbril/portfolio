@@ -1,5 +1,4 @@
 "use client";
-
 import { cn } from "@/utils/utils";
 
 type LoaderProps = {

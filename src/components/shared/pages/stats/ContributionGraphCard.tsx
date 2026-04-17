@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "motion/react";
 import type { ContributionData, ContributionDay } from "@/lib/stats/types";
 import { cn, pickRandomColor } from "@/utils";

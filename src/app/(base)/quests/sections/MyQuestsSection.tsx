@@ -1,5 +1,4 @@
 "use client";
-
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLoadMore } from "@/hooks/useLoadMore";
@@ -36,7 +35,9 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<Skeleton name="quests-load-more" className="w-full h-40" />}
+      loadingFallback={
+        <Skeleton name="quests-load-more" className="w-full h-40" />
+      }
     >
       {list.map((quest) => {
         const registrationClosed = isRegistrationClosed(

@@ -1,5 +1,4 @@
 "use client";
-
 import { ResourceTypeKey } from "@/types";
 import useSWR from "swr";
 import { apiRoutes } from "@/data/api-routes";
@@ -17,7 +16,7 @@ export function useNewsletterSubscribersCount() {
     fetchJSON,
     {
       revalidateOnFocus: true, // 👈 re-fetch when we come back to the page
-    }
+    },
   );
 
   return {
@@ -33,7 +32,7 @@ export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
     type
       ? `${apiRoutes.statsSubscribers.link}?scope=productType&type=${encodeURIComponent(type)}`
       : null, // null = skip fetch if no type
-    fetchJSON
+    fetchJSON,
   );
 
   return {
@@ -48,10 +47,10 @@ export function useProductSlugRequestsCount(slug: string) {
   const { data, error, isLoading, mutate } = useSWR(
     slug
       ? `${apiRoutes.statsSubscribers.link}?scope=productUrl&url=${encodeURIComponent(
-          slug
+          slug,
         )}`
       : null, // null = skip fetch if no title
-    fetchJSON
+    fetchJSON,
   );
 
   return {

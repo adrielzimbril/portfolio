@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader";
 import { useTranslations } from "use-intl";

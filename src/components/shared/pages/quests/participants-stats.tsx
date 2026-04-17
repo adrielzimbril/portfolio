@@ -1,5 +1,4 @@
 "use client";
-
 import { useMemo } from "react";
 import BoringAvatar from "boring-avatars";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";

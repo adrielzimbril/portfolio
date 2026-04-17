@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "motion/react";
 import { useState } from "react";
 import type { ReactionType } from "@/lib/stats/types";

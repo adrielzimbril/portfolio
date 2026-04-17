@@ -1,5 +1,4 @@
 "use client";
-
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/quests/tags";

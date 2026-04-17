@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";

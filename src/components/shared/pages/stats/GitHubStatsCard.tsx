@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Star, Github, Git } from "@aurthle/icons";
 import { motion } from "motion/react";

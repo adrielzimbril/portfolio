@@ -1,5 +1,4 @@
 "use client";
-
 import { Display, Mobile } from "@aurthle/icons";
 import type { LighthouseScores } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";

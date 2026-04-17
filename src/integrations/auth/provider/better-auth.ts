@@ -1,5 +1,4 @@
 "use client";
-
 import { createAuthClient } from "better-auth/react";
 import { AuthHandler } from "@/integrations/auth/types/types";
 import { ConfigValue } from "@/config";

@@ -1,5 +1,4 @@
 "use client";
-
 import type React from "react";
 import {
   useCallback,
@@ -52,14 +51,14 @@ export type FileUploadActions = {
   handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   openFileDialog: () => void;
   getInputProps: (
-    props?: InputHTMLAttributes<HTMLInputElement>
+    props?: InputHTMLAttributes<HTMLInputElement>,
   ) => InputHTMLAttributes<HTMLInputElement> & {
     ref: React.Ref<HTMLInputElement>;
   };
 };
 
 export const useFileUpload = (
-  options: FileUploadOptions = {}
+  options: FileUploadOptions = {},
 ): [FileUploadState, FileUploadActions] => {
   const {
     maxFiles = Infinity,
@@ -118,7 +117,7 @@ export const useFileUpload = (
 
       return null;
     },
-    [accept, maxSize]
+    [accept, maxSize],
   );
 
   const createPreview = useCallback(
@@ -128,7 +127,7 @@ export const useFileUpload = (
       }
       return file.url;
     },
-    []
+    [],
   );
 
   const generateUniqueId = useCallback((file: File | FileMetadata): string => {
@@ -200,7 +199,7 @@ export const useFileUpload = (
           const isDuplicate = state.files.some(
             (existingFile) =>
               existingFile.file.name === file.name &&
-              existingFile.file.size === file.size
+              existingFile.file.size === file.size,
           );
 
           // Skip duplicate files silently
@@ -214,7 +213,7 @@ export const useFileUpload = (
           errors.push(
             multiple
               ? `Some files exceed the maximum size of ${formatBytes(maxSize)}.`
-              : `File exceeds the maximum size of ${formatBytes(maxSize)}.`
+              : `File exceeds the maximum size of ${formatBytes(maxSize)}.`,
           );
           return;
         }
@@ -270,7 +269,7 @@ export const useFileUpload = (
       clearFiles,
       onFilesChange,
       onFilesAdded,
-    ]
+    ],
   );
 
   const removeFile = useCallback(
@@ -296,7 +295,7 @@ export const useFileUpload = (
         };
       });
     },
-    [onFilesChange]
+    [onFilesChange],
   );
 
   const clearErrors = useCallback(() => {
@@ -349,7 +348,7 @@ export const useFileUpload = (
         }
       }
     },
-    [addFiles, multiple]
+    [addFiles, multiple],
   );
 
   const handleFileChange = useCallback(
@@ -358,7 +357,7 @@ export const useFileUpload = (
         addFiles(e.target.files);
       }
     },
-    [addFiles]
+    [addFiles],
   );
 
   const openFileDialog = useCallback(() => {
@@ -378,7 +377,7 @@ export const useFileUpload = (
         ref: inputRef,
       };
     },
-    [accept, multiple, handleFileChange]
+    [accept, multiple, handleFileChange],
   );
 
   return [

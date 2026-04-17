@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { useTranslations } from "use-intl";
@@ -17,7 +16,8 @@ export function TimelineYearHeader({ year, count }: TimelineYearHeaderProps) {
       <h2 className="text-3xl font-bold text-foreground">{year}</h2>
       <div className="flex-1 h-px bg-b-base" />
       <Badge className="text-sm">
-        {count} {t("release")}{count !== 1 ? "s" : ""}
+        {count} {t("release")}
+        {count !== 1 ? "s" : ""}
       </Badge>
     </div>
   );

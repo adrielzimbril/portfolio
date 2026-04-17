@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
@@ -40,7 +39,7 @@ export function ModeToggle() {
         duration: 700,
         easing: "ease-in-out",
         pseudoElement: "::view-transition-new(root)",
-      }
+      },
     );
   };
 

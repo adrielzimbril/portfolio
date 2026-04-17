@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -135,14 +134,17 @@ export function IntentionForm({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            {t("quests.submit.form.fields.name.label")} <span className="text-red-500">*</span>
+                            {t("quests.submit.form.fields.name.label")}{" "}
+                            <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
                               {...field}
                               variant="secondary"
                               className="rounded-xl"
-                              placeholder={t("submit.page.fields.name.placeholder")}
+                              placeholder={t(
+                                "submit.page.fields.name.placeholder",
+                              )}
                             />
                           </FormControl>
                           <FormMessage />
@@ -155,7 +157,8 @@ export function IntentionForm({
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>
-                            {t("quests.submit.form.fields.email.label")} <span className="text-red-500">*</span>
+                            {t("quests.submit.form.fields.email.label")}{" "}
+                            <span className="text-red-500">*</span>
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -163,7 +166,9 @@ export function IntentionForm({
                               type="email"
                               variant="secondary"
                               className="rounded-xl"
-                              placeholder={t("submit.page.fields.email.placeholder")}
+                              placeholder={t(
+                                "submit.page.fields.email.placeholder",
+                              )}
                             />
                           </FormControl>
                           <FormMessage />
@@ -178,14 +183,17 @@ export function IntentionForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
-                          {t("quests.submit.form.fields.link.label")} <span className="text-red-500">*</span>
+                          {t("quests.submit.form.fields.link.label")}{" "}
+                          <span className="text-red-500">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
                             {...field}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder={t("submit.page.fields.url.placeholder")}
+                            placeholder={t(
+                              "submit.page.fields.url.placeholder",
+                            )}
                           />
                         </FormControl>
                         <FormMessage />
@@ -198,7 +206,9 @@ export function IntentionForm({
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t("quests.submit.form.fields.message.label")}</FormLabel>
+                        <FormLabel>
+                          {t("quests.submit.form.fields.message.label")}
+                        </FormLabel>
                         <FormControl>
                           <Textarea
                             value={field.value ?? ""}
@@ -206,7 +216,9 @@ export function IntentionForm({
                             rows={5}
                             variant="secondary"
                             className="rounded-xl"
-                            placeholder={t("quests.submit.form.fields.message.placeholder")}
+                            placeholder={t(
+                              "quests.submit.form.fields.message.placeholder",
+                            )}
                           />
                         </FormControl>
                         <FormMessage />

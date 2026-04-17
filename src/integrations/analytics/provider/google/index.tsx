@@ -1,5 +1,4 @@
 "use client";
-
 import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
 import { ConfigValue } from "@/config";
 

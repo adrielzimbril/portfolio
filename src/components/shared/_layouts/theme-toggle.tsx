@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import { Sun, Moon, MoonSparkle, SolarEclipseTwo } from "@aurthle/icons";
 import { useTheme } from "next-themes";
