@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { createClient } from "@/integrations/supabase/server";
 import { authRoutes } from "@/integrations/auth/routes";
+import { providerList } from "@/integrations/auth/types/types";
 import { Provider } from "@supabase/supabase-js";
 
 export async function GET(request: Request) {
@@ -9,7 +10,7 @@ export async function GET(request: Request) {
   const provider = searchParams.get("provider") as Provider;
   const next = searchParams.get("next") ?? authRoutes.defaultRedirect;
 
-  if (!provider || !["github", "google"].includes(provider)) {
+  if (!provider || !providerList.includes(provider as any)) {
     return NextResponse.redirect(`${origin}${authRoutes.defaultRedirect}?error=invalid_provider`);
   }
 

@@ -1,6 +1,6 @@
 import { ConfigValue } from "@/config";
-import { AuthProvider, AuthProviderType } from "../types/types";
-import * as provider from "../provider";
+import { AuthProvider, AuthProviderType } from "@/integrations/auth/types/types";
+import * as provider from "@/integrations/auth/provider";
 
 /**
  * Resolves the authentication provider from environment config or manual override

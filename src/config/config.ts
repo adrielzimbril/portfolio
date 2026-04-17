@@ -34,8 +34,9 @@ export const ConfigValue = {
   NEXT_PUBLIC_GITHUB_BRANCH: process.env.NEXT_PUBLIC_GITHUB_BRANCH || "main",
 
   // Authentication
-  BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
   AUTH_PROVIDER: process.env.AUTH_PROVIDER || "supabase",
+  BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+  BETTER_AUTH_URL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   AUTH_TOKEN_KEY: "shiro-auth-token",
 
   // Database (Supabase)

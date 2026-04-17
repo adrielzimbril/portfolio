@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { authRoutes } from "../routes";
-import { AuthHandler } from "../types/types";
+import { authRoutes } from "@/integrations/auth/routes";
+import { AuthHandler } from "@/integrations/auth/types/types";
 
 export const signInWithGithub: AuthHandler["signInWithGithub"] = async () => {
   window.location.href = `${authRoutes.login}?provider=github`;

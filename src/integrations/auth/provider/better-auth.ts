@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AuthHandler } from "../types/types";
+import { AuthHandler } from "@/integrations/auth/types/types";
+import { ConfigValue } from "@/config";
 
 // Note: BetterAuth usually requires a client from 'better-auth/react'
 // Since the dependency is not yet in package.json, we implement the logic
 // following their standard API structure.
 
-const BETTER_AUTH_API_BASE = "/api/auth";
+const BETTER_AUTH_API_BASE = `${ConfigValue.BETTER_AUTH_URL}/api/auth`;
 
 export const signInWithGithub: AuthHandler["signInWithGithub"] = async () => {
   // BetterAuth standard redirect flow

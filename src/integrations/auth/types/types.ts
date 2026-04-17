@@ -1,4 +1,10 @@
 /**
+ * List of supported OAuth providers
+ */
+export const providerList = ["github", "google"] as const;
+export type OAuthProvider = (typeof providerList)[number];
+
+/**
  * Authentication Providers available in the system
  */
 export enum AuthProvider {
