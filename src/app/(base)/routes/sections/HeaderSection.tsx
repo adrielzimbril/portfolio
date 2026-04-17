@@ -11,19 +11,19 @@ export function HeaderSection() {
   const locale = useLocale();
 
   usePageViews(
-    "sitemap",
+    routes.routes.key,
     undefined,
     {
       locale: locale,
-      path: getPathUrl("/sitemap"),
+      path: getPathUrl(routes.routes.link),
     },
     false,
   );
 
   return (
     <PageHero
-      title={t("sitemap.page.title")}
-      description={t("sitemap.page.description")}
+      title={t("routes.page.title")}
+      description={t("routes.page.description")}
       imagePath={{ emoji: "🗺️" }}
       isMobileShowed
     />

@@ -1407,36 +1407,6 @@
     "page": {
       "title": "Politique de Confidentialité",
       "description": "Votre vie privée est importante pour moi. Cette politique explique comment je gère vos données."
-    },
-    "sections": {
-      "intro": {
-        "title": "Introduction",
-        "content": "Cette politique de confidentialité décrit comment je collecte, utilise et protège vos informations personnelles lorsque vous utilisez mon site web et mes services."
-      },
-      "data-collection": {
-        "title": "Collecte de Données",
-        "content": "Je collecte les informations que vous fournissez directement, comme lorsque vous créez un compte, vous inscrivez à ma newsletter, ou me contactez. Je collecte également des données automatiquement via des cookies et des technologies similaires."
-      },
-      "data-usage": {
-        "title": "Utilisation des Données",
-        "content": "J'utilise vos informations pour fournir, maintenir et améliorer mes services, communiquer avec vous, et respecter les obligations légales."
-      },
-      "cookies": {
-        "title": "Cookies",
-        "content": "J'utilise des cookies et des technologies de suivi similaires pour collecter et suivre des informations sur vos activités sur mon site web. Vous pouvez gérer vos préférences de cookies via les paramètres de votre navigateur."
-      },
-      "third-party": {
-        "title": "Services Tiers",
-        "content": "Je peux partager vos informations avec des fournisseurs de services tiers qui effectuent des services en mon nom, comme l'analyse, l'hébergement et la livraison d'emails."
-      },
-      "user-rights": {
-        "title": "Vos Droits",
-        "content": "Vous avez le droit d'accéder, corriger ou supprimer vos informations personnelles. Vous pouvez également refuser certaines activités de collecte et de suivi de données."
-      },
-      "contact": {
-        "title": "Contact",
-        "content": "Si vous avez des questions sur cette politique de confidentialité ou mes pratiques de données, veuillez me contacter via les informations de contact fournies sur mon site web."
-      }
     }
   },
   "terms": {
@@ -1445,47 +1415,13 @@
     "page": {
       "title": "Conditions d'Utilisation",
       "description": "Veuillez lire attentivement ces conditions avant d'utiliser mon site web et mes services."
-    },
-    "sections": {
-      "intro": {
-        "title": "Introduction",
-        "content": "Ces conditions d'utilisation régissent votre utilisation de mon site web et de mes services. En accédant ou en utilisant mes services, vous acceptez d'être lié par ces conditions."
-      },
-      "acceptance": {
-        "title": "Acceptation des Conditions",
-        "content": "En utilisant mon site web et mes services, vous reconnaissez avoir lu, compris et accepté d'être lié par ces conditions d'utilisation."
-      },
-      "account": {
-        "title": "Responsabilités du Compte",
-        "content": "Vous êtes responsable de maintenir la confidentialité de vos identifiants de compte et de toutes les activités qui se produisent sous votre compte. Vous acceptez de me notifier immédiatement toute utilisation non autorisée."
-      },
-      "content": {
-        "title": "Directives de Contenu",
-        "content": "Vous acceptez de ne pas publier ou transmettre de contenu illicite, nuisible, menaçant, abusif ou autrement objectionnable. Je me réserve le droit de supprimer tout contenu qui viole ces directives."
-      },
-      "intellectual": {
-        "title": "Propriété Intellectuelle",
-        "content": "Tout le contenu de mon site web, y compris le texte, les graphiques, les logos et les logiciels, est ma propriété ou celle de mes fournisseurs de contenu et est protégé par les lois sur la propriété intellectuelle."
-      },
-      "termination": {
-        "title": "Résiliation",
-        "content": "Je me réserve le droit de résilier ou suspendre votre accès à mes services à tout moment, avec ou sans cause, avec ou sans préavis."
-      },
-      "limitation": {
-        "title": "Limitation de Responsabilité",
-        "content": "Dans la mesure maximale permise par la loi, je ne serai pas responsable des dommages indirects, accessoires, spéciaux ou consécutifs découlant de votre utilisation de mes services."
-      },
-      "governing": {
-        "title": "Loi Applicable",
-        "content": "Ces conditions d'utilisation seront régies et interprétées conformément aux lois de la juridiction dans laquelle mon entreprise est basée."
-      }
     }
   },
-  "sitemap": {
-    "title": "Plan du Site",
+  "routes": {
+    "title": "Routes",
     "description": "Découvrez toutes les pages et sections de ce site.",
     "page": {
-      "title": "Plan du Site",
+      "title": "Routes",
       "description": "Navigation complète de toutes les pages disponibles sur ce portfolio."
     },
     "groups": {

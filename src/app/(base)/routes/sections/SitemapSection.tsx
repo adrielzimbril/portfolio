@@ -7,7 +7,7 @@ import { Link } from "@/components/ui/link";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-export function SitemapSection() {
+export function RoutesSection() {
   const t = useTranslations();
 
   const routeGroups = {
@@ -20,21 +20,9 @@ export function SitemapSection() {
       routes.quests,
       routes.thoughts,
     ],
-    community: [
-      routes.community,
-      routes.connections,
-      routes.changelog,
-    ],
-    tools: [
-      routes.toolbox,
-      routes.stats,
-      routes.newsletter,
-      routes.rss,
-    ],
-    legal: [
-      routes.terms,
-      routes.policy,
-    ],
+    community: [routes.community, routes.connections, routes.changelog],
+    tools: [routes.toolbox, routes.stats, routes.newsletter, routes.rss],
+    legal: [routes.terms, routes.policy],
   };
 
   return (
@@ -42,25 +30,25 @@ export function SitemapSection() {
       <div className="max-w-4xl mx-auto space-y-12">
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-lg text-b-white-invert-sec">
-            {t("sitemap.page.description")}
+            {t("routes.page.description")}
           </p>
         </div>
 
         <div className="space-y-8">
           <RouteGroup
-            title={t("sitemap.groups.main")}
+            title={t("routes.groups.main")}
             routes={routeGroups.main}
           />
           <RouteGroup
-            title={t("sitemap.groups.community")}
+            title={t("routes.groups.community")}
             routes={routeGroups.community}
           />
           <RouteGroup
-            title={t("sitemap.groups.tools")}
+            title={t("routes.groups.tools")}
             routes={routeGroups.tools}
           />
           <RouteGroup
-            title={t("sitemap.groups.legal")}
+            title={t("routes.groups.legal")}
             routes={routeGroups.legal}
           />
         </div>
@@ -77,7 +65,10 @@ function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
       <h3 className="text-2xl font-bold text-b-white-foreground">{title}</h3>
       <div className="grid gap-4 md:grid-cols-2">
         {routes.map((route) => (
-          <Card key={route.key} className="p-4 hover:bg-b-base transition-colors">
+          <Card
+            key={route.key}
+            className="p-4 hover:bg-b-base transition-colors"
+          >
             <Link href={route.link} className="block">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
@@ -86,7 +77,7 @@ function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
                   </h4>
                   {route.inHeader && (
                     <Badge variant="secondary" className="text-xs">
-                      {t("sitemap.badges.header")}
+                      {t("routes.badges.header")}
                     </Badge>
                   )}
                 </div>

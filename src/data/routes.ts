@@ -187,10 +187,10 @@ export const routes = {
     inHeader: false,
     inSitemap: true,
   },
-  sitemap: {
-    name: "Sitemap",
-    key: "sitemap",
-    link: "/sitemap",
+  routes: {
+    name: "Routes",
+    key: "routes",
+    link: "/routes",
     inHeader: false,
     inSitemap: false,
   },
