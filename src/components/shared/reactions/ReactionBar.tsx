@@ -151,7 +151,7 @@ export function ReactionTrigger({
         onPointerEnter={handlePointerEnter}
         className={cn(
           "group relative flex items-center justify-center size-10 md:size-11",
-          "squircle squircle-full squircle-smooth-xl",
+          "squircle squircle-xl squircle-smooth-xl",
           "squircle-sh-white dark:squircle-b-base",
           "squircle-border-2 squircle-border-b-base-accent",
           "cursor-pointer z-[10] transition-colors",
@@ -324,7 +324,7 @@ export function ReactionBar({
             </span>
             {totalCount > 0 && (
               <span className={cn(
-                "absolute font-bold text-indigo-500 squircle squircle-full squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
+                "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
                 dockPosition === "bottom" ? "-bottom-2.5" : "-top-2.5",
                 "text-[10px] md:text-[11px]"
               )}>

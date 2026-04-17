@@ -63,7 +63,7 @@ export function AbsoluteReactionBar({
           </span>
           {totalCount > 0 && (
             <span className={cn(
-              "absolute font-bold text-indigo-500 squircle squircle-full squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
+              "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
               reactionsPosition === "bottom" ? "-bottom-2.5" : "-top-2.5",
               "text-[10px] md:text-[11px]"
             )}>
