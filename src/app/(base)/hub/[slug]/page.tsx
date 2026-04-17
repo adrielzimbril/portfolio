@@ -72,7 +72,11 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       </Skeleton>
       <Skeleton name="resource-detail-content" loading={false}>
         <ResourceDetailsSection content={body || ""} />
-        <ReactionBar pageType={PageType.HUB} entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
+        <ReactionBar
+          pageType={PageType.HUB}
+          entityId={slug}
+          className="max-w-4xl mx-auto my-12"
+        />
       </Skeleton>
       {resource!.adjacentResources.length > 0 && (
         <Skeleton name="resource-detail-more" loading={false}>

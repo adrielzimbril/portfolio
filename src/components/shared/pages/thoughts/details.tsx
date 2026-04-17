@@ -45,12 +45,7 @@ export function CardInfo({
         </div>
         {!hideReactions && (
           <div className="">
-            <ReactionBar
-              pageType={PageType.THOUGHT}
-              entityId={slug}
-              variant="inline"
-              compact
-            />
+            <ReactionBar pageType={PageType.THOUGHT} entityId={slug} compact />
           </div>
         )}
       </div>

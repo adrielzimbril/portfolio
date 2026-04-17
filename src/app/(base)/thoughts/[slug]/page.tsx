@@ -72,7 +72,7 @@ export default async function BlogPostPage(props: {
           tags={tags}
           date={created_at}
           readingTime={formattedReadingTime}
-          pageType={PageType.THOUGHT}           
+          pageType={PageType.THOUGHT}
           pageViewsData={{ slug, locale }}
         />
       </Skeleton>
@@ -80,11 +80,10 @@ export default async function BlogPostPage(props: {
         <ContentsSection content={body} />
       </Skeleton>
       <Skeleton name="thought-detail-more" loading={false}>
-        <ReactionBar 
-          pageType={PageType.THOUGHT} 
-          entityId={slug} 
-          variant="inline" 
-          className="max-w-4xl mx-auto my-12" 
+        <ReactionBar
+          pageType={PageType.THOUGHT}
+          entityId={slug}
+          className="max-w-4xl mx-auto my-12"
         />
         <MorePreviewSection data={post.adjacentPosts} />
       </Skeleton>

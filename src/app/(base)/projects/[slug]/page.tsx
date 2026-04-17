@@ -105,7 +105,11 @@ export default async function SubProject(props: {
           tags={tags}
           role={role}
         />
-        <ReactionBar pageType={PageType.PROJECT} entityId={slug} variant="inline" className="max-w-4xl mx-auto my-12" />
+        <ReactionBar
+          pageType={PageType.PROJECT}
+          entityId={slug}
+          className="max-w-4xl mx-auto my-12"
+        />
       </Skeleton>
       {cardSectionDescription ||
         (cards && (

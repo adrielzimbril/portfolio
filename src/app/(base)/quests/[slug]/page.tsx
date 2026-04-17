@@ -151,12 +151,11 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           tags={tags}
           rewards={rewards}
         />
-          <ReactionBar 
-            pageType={PageType.QUESTS} 
-            entityId={slug} 
-            variant="inline" 
-            className="max-w-4xl mx-auto my-12" 
-          />
+        <ReactionBar
+          pageType={PageType.QUESTS}
+          entityId={slug}
+          className="max-w-4xl mx-auto my-12"
+        />
       </Skeleton>
       {isResultsPublished(quest_end, results_published) && (
         <Skeleton name="quest-detail-participants" loading={false}>
@@ -164,7 +163,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         </Skeleton>
       )}
       <Skeleton name="quest-detail-more" loading={false}>
-          <MorePreviewSection data={quest.adjacentQuests} />
+        <MorePreviewSection data={quest.adjacentQuests} />
       </Skeleton>
     </>
   );

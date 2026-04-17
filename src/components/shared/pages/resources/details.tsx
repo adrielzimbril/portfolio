@@ -76,12 +76,7 @@ export function CardInfo({
       <div className="flex items-center justify-between w-full gap-3 mt-auto">
         {!hideReactions && (
           <div className="flex-1">
-            <ReactionBar
-              pageType={PageType.HUB}
-              entityId={slug}
-              variant="inline"
-              compact
-            />
+            <ReactionBar pageType={PageType.HUB} entityId={slug} compact />
           </div>
         )}
         <Action slug={slug} resourceType={resourceType} />
