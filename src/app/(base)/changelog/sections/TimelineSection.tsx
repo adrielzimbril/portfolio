@@ -88,15 +88,36 @@ export function TimelineSection() {
                 <Button
                   key={type}
                   variant={selectedType === type ? "default" : "outline"}
-                  size="sm"
+                  size="xs"
                   onClick={() => setSelectedType(type)}
                   className="capitalize"
+                  asIcon
+                  asPointer
                 >
-                  {Icon && <Icon size={16} className="mr-2" />}
+                  {Icon && (
+                    <Badge
+                      className={cn(
+                        pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
+                        "size-max text-primary-foreground!",
+                        "px-0.5 py-1 text-[.625rem]",
+                      )}
+                      variant="colored"
+                      size="xs"
+                      circle
+                    >
+                      <Icon size={16} variant="bulk" />
+                    </Badge>
+                  )}
                   {type}
                   <Badge
-                    variant="secondary"
-                    className="ml-2 h-5 px-1.5 text-[10px]"
+                    className={cn(
+                      pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),
+                      "px-1 py-0.5 text-[.625rem]",
+                      "size-max",
+                    )}
+                    variant="colored"
+                    size="xs"
+                    circle
                   >
                     {typeCounts[type]}
                   </Badge>
@@ -164,7 +185,7 @@ export function TimelineSection() {
                         {year}
                       </h2>
                       <div className="flex-1 h-px bg-border/30" />
-                      <Badge variant="secondary" className="text-sm">
+                      <Badge className="text-sm">
                         {entries.length} release
                         {entries.length !== 1 ? "s" : ""}
                       </Badge>
@@ -227,7 +248,7 @@ export function TimelineSection() {
                                       <Badge
                                         className={cn(
                                           pickRandomColor(
-                                            DEFAULT_COLOR_CODE_NAME.INDIGO,
+                                            DEFAULT_COLOR_CODE_NAME.VIOLET,
                                           ),
                                           "px-1 py-0.5",
                                           "size-max text-primary-foreground!",
@@ -264,18 +285,27 @@ export function TimelineSection() {
                                   </div>
                                   <Badge
                                     className={cn(
-                                      "capitalize text-[.625rem] font-bold tracking-widest px-3 py-1",
+                                      "capitalize squircle-border-2 squircle-border-sh-white",
                                       entry.type ===
                                         ChangelogItemType.MILESTONE &&
-                                        "squircle-primary/10 text-primary squircle-border-primary/20",
+                                        pickRandomColor(
+                                          DEFAULT_COLOR_CODE_NAME.PINKISH_ORANGE,
+                                        ),
                                       entry.type ===
                                         ChangelogItemType.FEATURE &&
-                                        "squircle-green-500/10 text-green-500 squircle-border-green-500/20",
+                                        pickRandomColor(
+                                          DEFAULT_COLOR_CODE_NAME.PINKISH_PURPLE,
+                                        ),
                                       entry.type === ChangelogItemType.FIX &&
-                                        "squircle-red-500/10 text-red-500 squircle-border-red-500/20",
+                                        pickRandomColor(
+                                          DEFAULT_COLOR_CODE_NAME.PINKISH_PINK,
+                                        ),
                                       entry.type ===
                                         ChangelogItemType.IMPROVEMENT &&
-                                        "squircle-blue-500/10 text-blue-500 squircle-border-blue-500/20",
+                                        pickRandomColor(
+                                          DEFAULT_COLOR_CODE_NAME.PINKISH_BLUE,
+                                        ),
+                                      // "size-max text-primary-foreground!",
                                     )}
                                     variant="colored"
                                   >
@@ -286,13 +316,10 @@ export function TimelineSection() {
                                   {entry.version}
                                 </h3>
                                 <MarkdownContentRender content={entry.body} />
-                                <div className="mt-8 pt-6 border-t border-border/30">
-                                  <ReactionBar
-                                    pageType={PageType.CHANGELOG}
-                                    entityId={entry.version}
-                                    compact
-                                  />
-                                </div>
+                                <ReactionBar
+                                  pageType={PageType.CHANGELOG}
+                                  entityId={entry.version}
+                                />
                               </CardContent>
                             </Card>
                           </div>
