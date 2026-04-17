@@ -10,7 +10,7 @@ const authClient = createAuthClient({
 
 const getCallbackURL = (customCallback?: string) => {
   if (customCallback) return `${window.location.origin}${customCallback}`;
-  return `${window.location.origin}${ConfigValue.AUTH_CALLBACK_URL_DEFAULT}`;
+  return `${window.location.origin}${ConfigValue.AUTH_CALLBACK_URL_COMMUNITY}`;
 };
 
 export const signInWithGithub: AuthHandler["signInWithGithub"] = async (

@@ -38,6 +38,7 @@ const environmentVariablesSchema = z.object({
   BETTER_AUTH_SECRET: z.string().min(1, "BETTER_AUTH_SECRET is required"),
   AUTH_CALLBACK_URL_COMMUNITY: z.string().default("/community"),
   AUTH_CALLBACK_URL_DEFAULT: z.string().default("/"),
+  AUTH_DEFAULT_REDIRECT: z.string().default("/"),
 
   // Database (Supabase)
   NEXT_PUBLIC_SUPABASE_URL: z.url(
@@ -150,6 +151,7 @@ export function validateEnvironmentVariables(): EnvVars {
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     AUTH_CALLBACK_URL_COMMUNITY: process.env.AUTH_CALLBACK_URL_COMMUNITY,
     AUTH_CALLBACK_URL_DEFAULT: process.env.AUTH_CALLBACK_URL_DEFAULT,
+    AUTH_DEFAULT_REDIRECT: process.env.AUTH_DEFAULT_REDIRECT,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     CONTACTS_PROVIDER: process.env.CONTACTS_PROVIDER,

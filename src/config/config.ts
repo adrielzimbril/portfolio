@@ -43,6 +43,7 @@ export const ConfigValue = {
   AUTH_CALLBACK_URL_COMMUNITY:
     process.env.AUTH_CALLBACK_URL_COMMUNITY || "/community",
   AUTH_CALLBACK_URL_DEFAULT: process.env.AUTH_CALLBACK_URL_DEFAULT || "/",
+  AUTH_DEFAULT_REDIRECT: process.env.AUTH_DEFAULT_REDIRECT || "/",
 
   // Database (Supabase)
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,

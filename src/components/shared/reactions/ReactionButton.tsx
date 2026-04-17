@@ -145,11 +145,14 @@ export function ReactionButton({
   return (
     <>
       <Badge
+        onClick={handleReaction}
+        title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
         className={cn(
           "group relative flex items-center justify-center",
           "capitalize text-xs font-medium",
           pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
           "size-max text-primary-foreground!",
+          isLoading && "opacity-50 cursor-not-allowed",
         )}
         size="sm"
         variant="colored"
@@ -172,17 +175,6 @@ export function ReactionButton({
               "absolute font-bold text-indigo-500 squircle squircle-xl squircle-sh-white squircle-border squircle-border-indigo-500 px-1.5",
               "-bottom-2.5",
               "text-[10px] md:text-[11px]",
-            )}
-          >
-            {reactionCount}
-          </span>
-        )}
-        {!minimal && (
-          <span
-            className={cn(
-              "font-bold transition-colors",
-              compact ? "text-[10px]" : "text-xs",
-              isReacted ? "text-indigo-600" : "text-foreground",
             )}
           >
             {reactionCount}
