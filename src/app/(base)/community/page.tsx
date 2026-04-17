@@ -45,10 +45,10 @@ export default async function CommunityPage() {
         isMobileShowed
       />
 
-      <StatsSection />
+      <StatsSection user={user} />
 
       <SectionLayout isFlex>
-        <LeaveNoteButton user={user} />
+        {/* <LeaveNoteButton user={user} /> */}
         <div className="flex justify-center size-full">
           {/* <FormSection user={user} /> */}
           <MessagesSection />

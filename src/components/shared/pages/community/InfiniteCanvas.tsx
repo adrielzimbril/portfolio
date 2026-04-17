@@ -212,12 +212,15 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
 
   return (
     <div className="relative w-full h-150 min-h-150">
-      <Card className="size-full squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 overflow-hidden">
-        <CardContent className="size-full p-8">
+      <Card className="size-full squircle squircle-b-base squircle-smooth-xl squircle-4xl flex-1 transition-all duration-300 overflow-hidden">
+        <CardContent className="size-full p-6">
           {/* Interactive canvas area */}
           <div
             ref={containerRef}
-            className="absolute inset-0 overflow-hidden"
+            className={cn(
+              "absolute inset-0 overflow-hidden",
+              "squircle squircle-mask squircle-smooth-lg squircle-2xl squircle-b-base p-2",
+            )}
             style={{
               cursor: isDragging ? "grabbing" : "grab",
             }}
@@ -227,7 +230,7 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
             onMouseLeave={handleMouseLeave}
           >
             {/* Background grid pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] [background-size:16px_16px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_2px)] bg-size-[1rem_1rem]" />
 
             {/* Canvas container that gets transformed */}
             <div
@@ -330,7 +333,6 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
               </svg>
             </button>
           </div>
-
           {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}
           {children && children}
         </CardContent>
