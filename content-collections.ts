@@ -553,6 +553,27 @@ const changelog = defineCollection({
   },
 });
 
+const legal = defineCollection({
+  name: "legal",
+  directory: `${BASE_COLLECTION_PATH}/legal`,
+  include: "*.{mdx,md}",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    updated_at: z.string().optional(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
+    return {
+      ...document,
+      body,
+      locale,
+      path: sanitizePath(document._meta.path),
+    };
+  },
+});
+
 export default defineConfig({
   collections: [
     // Metadata collections
@@ -569,5 +590,6 @@ export default defineConfig({
     talks,
     quests,
     changelog,
+    legal,
   ],
 });

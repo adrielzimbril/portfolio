@@ -1,0 +1,33 @@
+# Terms of Service
+
+## Introduction
+
+These Terms of Service govern your use of our website and services. By accessing or using our services, you agree to be bound by these terms.
+
+## Acceptance of Terms
+
+By using our website and services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
+
+## Account Responsibilities
+
+You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use.
+
+## Content Guidelines
+
+You agree not to post or transmit any content that is unlawful, harmful, threatening, abusive, or otherwise objectionable. We reserve the right to remove any content that violates these guidelines.
+
+## Intellectual Property
+
+All content on our website, including text, graphics, logos, and software, is the property of our company or its content suppliers and is protected by intellectual property laws.
+
+## Termination
+
+We reserve the right to terminate or suspend your access to our services at any time, with or without cause, with or without notice.
+
+## Limitation of Liability
+
+To the fullest extent permitted by law, we shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of our services.
+
+## Governing Law
+
+These Terms of Service shall be governed by and construed in accordance with the laws of the jurisdiction in which our company is headquartered.
