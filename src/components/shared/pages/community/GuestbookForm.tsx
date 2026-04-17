@@ -9,12 +9,14 @@ import { toast } from "sonner";
 import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useLocale } from "next-intl";
 
 export function GuestbookForm({ user }: { user: any }) {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
+  const locale = useLocale();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ export function GuestbookForm({ user }: { user: any }) {
           message: message.trim(),
           pattern_index: Math.floor(Math.random() * 10),
           rotation: Math.floor(Math.random() * 360),
+          language: locale,
         }),
       });
 

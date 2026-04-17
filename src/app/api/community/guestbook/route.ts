@@ -5,18 +5,23 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { message, pattern_index, rotation } = body;
+    const { message, pattern_index, rotation, language } = body;
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     if (!message || message.trim().length === 0) {
-      return NextResponse.json({ error: "Message is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Message is required" },
+        { status: 400 },
+      );
     }
 
     const { error } = await supabase.from("community_wall").insert({
@@ -26,6 +31,7 @@ export async function POST(request: Request) {
       message: message.trim(),
       pattern_index: pattern_index ?? Math.floor(Math.random() * 10),
       rotation: rotation ?? Math.floor(Math.random() * 360),
+      language: language || "en",
     });
 
     if (error) throw error;
