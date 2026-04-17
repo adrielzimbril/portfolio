@@ -44,9 +44,9 @@ export function ConnectionAvatar({
                 ? DEFAULT_COLOR_CODE_NAME.VIOLET
                 : DEFAULT_COLOR_CODE_NAME.ORANGE,
             ),
-            " p-1.5 rounded-full",
+            "p-1.5 rounded-full",
           )}
-          variant="secondary"
+          variant="coolored"
         >
           {met ? (
             <Checked
