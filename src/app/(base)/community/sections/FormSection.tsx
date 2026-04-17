@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/components/ui/link";
 import { Github, Google, ChatBubbleCircle } from "@aurthle/icons";
 import { GuestbookForm } from "../components/GuestbookForm";
 import { useTranslations } from "use-intl";
+import { cn } from "@/utils/utils";
 
 interface FormSectionProps {
   user: any;
@@ -41,30 +43,32 @@ export function FormSection({ user }: FormSectionProps) {
                   {t("community.form.signInPrompt")}
                 </p>
                 <div className="space-y-3">
-                  <Button
-                    asChild
-                    variant="secondary"
+                  <Link
+                    href={`/api/auth/login?provider=github`}
+                    variant="default"
+                    likeButton
+                    asIcon
                     whileTap
-                    asPointer
-                    className="w-full rounded-2xl h-11 font-semibold"
+                    className={cn("squircle squircle-smooth-lg squircle-2xl")}
                   >
-                    <a href={`/api/auth/login?provider=github`}>
-                      <Github size={16} className="mr-2" />
+                    <span className="flex items-center gap-2">
+                      <Github size={16} variant="bulk" />
                       Continue with GitHub
-                    </a>
-                  </Button>
-                  <Button
-                    asChild
+                    </span>
+                  </Link>
+                  <Link
+                    href={`/api/auth/login?provider=google`}
                     variant="secondary"
+                    asIcon
+                    likeButton
                     whileTap
-                    asPointer
-                    className="w-full rounded-2xl h-11 font-semibold"
+                    className={cn("squircle squircle-smooth-lg squircle-2xl")}
                   >
-                    <a href={`/api/auth/login?provider=google`}>
-                      <Google size={16} className="mr-2" />
+                    <span className="flex items-center gap-2">
+                      <Google size={16} variant="bulk" />
                       Continue with Google
-                    </a>
-                  </Button>
+                    </span>
+                  </Link>
                 </div>
               </div>
             )}
