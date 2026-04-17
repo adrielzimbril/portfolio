@@ -25,7 +25,7 @@ export function PolicyContent() {
 
   if (isLoading) {
     return (
-      <SectionLayout>
+      <SectionLayout isFlex>
         <div className="max-w-3xl mx-auto space-y-4">
           <Skeleton className="h-8 w-3/4" />
           <Skeleton className="h-4 w-full" />
@@ -37,7 +37,7 @@ export function PolicyContent() {
   }
 
   return (
-    <SectionLayout>
+    <SectionLayout isFlex>
       <div className="max-w-3xl mx-auto">
         {policy?.body && <MarkdownContentRender content={policy.body} />}
       </div>

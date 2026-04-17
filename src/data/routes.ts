@@ -176,14 +176,14 @@ export const routes = {
   policy: {
     name: "Privacy Policy",
     key: "policy",
-    link: "/policy",
+    link: "/legal/policy",
     inHeader: false,
     inSitemap: true,
   },
   terms: {
     name: "Terms of Service",
     key: "terms",
-    link: "/terms",
+    link: "/legal/terms",
     inHeader: false,
     inSitemap: true,
   },
