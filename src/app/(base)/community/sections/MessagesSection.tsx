@@ -40,160 +40,160 @@ const DEMO_MESSAGES = [
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 5,
+    creator_name: "David Chen Five",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 6,
+    creator_name: "David Chen Six",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 7,
+    creator_name: "David Chen Seven",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 8,
+    creator_name: "David Chen Eight",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 9,
+    creator_name: "David Chen Nine",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 10,
+    creator_name: "David Chen Ten",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 11,
+    creator_name: "David Chen Eleven",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 12,
+    creator_name: "David Chen Twelve",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 13,
+    creator_name: "David Chen Thirteen",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 14,
+    creator_name: "David Chen Fourteen",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 15,
+    creator_name: "David Chen Fifteen",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 16,
+    creator_name: "David Chen Sixteen",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 17,
+    creator_name: "David Chen Seventeen",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 18,
+    creator_name: "David Chen Eighteen",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 19,
+    creator_name: "David Chen Nineteen",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 20,
+    creator_name: "David Chen Twenty",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 21,
+    creator_name: "David Chen Twenty-One",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 22,
+    creator_name: "David Chen Twenty-Two",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 23,
+    creator_name: "David Chen Twenty-Three",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: 4,
-    creator_name: "David Chen",
+    id: 24,
+    creator_name: "David Chen Twenty-Four",
     creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
