@@ -24,6 +24,11 @@ export const apiRoutes = {
       link: getApiUrl("auth/[...all]"),
       accept: [requestType.GET],
     },
+    user: {
+      key: "auth-user",
+      link: getApiUrl("auth/user"),
+      accept: [requestType.GET],
+    },
   },
   submit: {
     key: "submit",

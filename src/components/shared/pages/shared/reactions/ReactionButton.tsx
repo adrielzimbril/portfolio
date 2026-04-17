@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { cn } from "@/utils/utils";
-import { supabase } from "@/integrations/supabase/client";
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { Badge } from "@/components/ui/badge";
@@ -50,9 +49,8 @@ export function ReactionButton({
 
   useEffect(() => {
     const initUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const res = await fetch(apiRoutes.auth.user.link);
+      const { user } = await res.json();
       setUser(user);
       const userId = getCurrentUserId(user);
       setCurrentUserId(userId);
