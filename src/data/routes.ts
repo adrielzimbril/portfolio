@@ -173,4 +173,18 @@ export const routes = {
     inHeader: false,
     inSitemap: true,
   },
+  policy: {
+    name: "Privacy Policy",
+    key: "policy",
+    link: "/policy",
+    inHeader: false,
+    inSitemap: true,
+  },
+  terms: {
+    name: "Terms of Service",
+    key: "terms",
+    link: "/terms",
+    inHeader: false,
+    inSitemap: true,
+  },
 };
