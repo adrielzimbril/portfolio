@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
 import { cn } from "@/utils/utils";
 import { Send } from "@aurthle/icons";
+import { Textarea } from "@/components/ui/textarea";
 
 interface CommentFormProps {
   user: any;
@@ -21,10 +22,10 @@ export function CommentForm({ user }: CommentFormProps) {
     setIsSubmitting(true);
     // TODO: Implement comment submission logic
     console.log("Submitting comment:", comment);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     setComment("");
     setIsSubmitting(false);
   };
@@ -42,10 +43,13 @@ export function CommentForm({ user }: CommentFormProps) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <label htmlFor="comment" className="text-sm font-medium text-foreground">
+          <label
+            htmlFor="comment"
+            className="text-sm font-medium text-foreground"
+          >
             {t("community.comment-form.label")}
           </label>
-          <textarea
+          <Textarea
             id="comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
@@ -55,7 +59,7 @@ export function CommentForm({ user }: CommentFormProps) {
               "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
               "bg-b-base text-foreground placeholder:text-muted-foreground",
               "focus:outline-none focus:squircle-border-b-base-accent",
-              "resize-none transition-all"
+              "resize-none transition-all",
             )}
             disabled={isSubmitting}
           />
@@ -64,7 +68,6 @@ export function CommentForm({ user }: CommentFormProps) {
         <Button
           type="submit"
           variant="default"
-          likeButton
           whileTap
           disabled={!comment.trim() || isSubmitting}
           className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}

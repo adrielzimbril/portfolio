@@ -8,7 +8,7 @@ import { StatsSection } from "@/app/(base)/community/sections/StatsSection";
 import { FormSection } from "@/app/(base)/community/sections/FormSection";
 import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection";
 import { supabase } from "@/integrations/supabase/client";
-import { LeaveNoteButton } from "@/app/(base)/community/components/LeaveNoteButton";
+import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -49,8 +49,8 @@ export default async function CommunityPage() {
 
       <SectionLayout isFlex>
         <LeaveNoteButton user={user} />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <FormSection user={user} />
+        <div className="flex justify-center size-full">
+          {/* <FormSection user={user} /> */}
           <MessagesSection />
         </div>
       </SectionLayout>

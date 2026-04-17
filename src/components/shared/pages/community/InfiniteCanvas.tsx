@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useRef, MouseEvent, useMemo } from "react";
-import { CommunityWallCard } from "./CommunityWallCard";
+import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
+import { Badge } from "@/components/ui/badge";
+import { pickRandomColor } from "@/utils/pick-random-color";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
+import { SynchronizationTwo } from "@aurthle/icons";
+import { cn } from "@/utils/utils";
 
 type Message = {
   id: string;
@@ -258,6 +263,18 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
         </div>
 
         {/* Recenter button - floating in top right, fades in when canvas moves */}
+        <Badge
+          className={cn(
+            "absolute right-4 top-4 z-10 flex items-center justify-center",
+
+            pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
+            "size-max text-primary-foreground!",
+          )}
+          variant="colored"
+          size="lg"
+        >
+          <SynchronizationTwo size={24} variant="bulk" />
+        </Badge>
         <button
           onClick={handleRecenter}
           className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-lg bg-dark-primary shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl"

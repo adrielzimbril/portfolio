@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { formatDateDiff } from "@/utils/format-date";
 import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
-import { CommunityWallCard } from "./CommunityWallCard";
-import { InfiniteCanvas } from "./InfiniteCanvas";
+import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
+import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
 
 // Demo data
 const DEMO_MESSAGES = [
