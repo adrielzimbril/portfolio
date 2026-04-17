@@ -58,4 +58,24 @@ export const apiRoutes = {
     link: getApiUrl(`quests/${slug}/participants`),
     accept: [requestType.GET],
   }),
+  reactions: {
+    key: "reactions",
+    link: getApiUrl("reactions"),
+    accept: [requestType.GET, requestType.POST],
+  },
+  reactionsStatus: {
+    key: "reactions-status",
+    link: getApiUrl("reactions/status"),
+    accept: [requestType.GET],
+  },
+  reactionsSync: {
+    key: "reactions-sync",
+    link: getApiUrl("reactions/sync"),
+    accept: [requestType.POST],
+  },
+  guestbook: {
+    key: "guestbook",
+    link: getApiUrl("community/guestbook"),
+    accept: [requestType.POST],
+  },
 };

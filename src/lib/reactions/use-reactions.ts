@@ -1,13 +1,13 @@
 "use client";
 
 import useSWR from "swr";
-import { supabase } from "@/integrations/supabase/client";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
+import { apiRoutes } from "@/data/api-routes";
 
 export function useReactions(pageType: PageType, entityId: string) {
   const fetcher = async () => {
-    const res = await fetch(`/api/reactions?pageType=${pageType}&entityId=${entityId}`);
+    const res = await fetch(`${apiRoutes.reactions.link}?pageType=${pageType}&entityId=${entityId}`);
     if (!res.ok) {
       throw new Error("Failed to fetch reactions");
     }

@@ -10,6 +10,7 @@ import {
   getCurrentUserId,
   syncAnonymousReactionsOnLogin,
 } from "@/lib/reactions/anonymous-user";
+import { apiRoutes } from "@/data/api-routes";
 
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
@@ -70,7 +71,7 @@ export function ReactionButton({
     statusKey,
     async () => {
       if (!currentUserId) return false;
-      const res = await fetch(`/api/reactions/status?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`);
+      const res = await fetch(`${apiRoutes.reactionsStatus.link}?pageType=${pageType}&entityId=${entityId}&reactionType=${reactionType}&anonymousId=${currentUserId}`);
       if (!res.ok) return false;
       const { isReacted } = await res.json();
       return isReacted;
@@ -99,7 +100,7 @@ export function ReactionButton({
     }, false);
 
     try {
-      const res = await fetch("/api/reactions", {
+      const res = await fetch(apiRoutes.reactions.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

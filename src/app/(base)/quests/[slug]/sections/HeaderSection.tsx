@@ -30,6 +30,7 @@ export function HeaderSection({
   };
   tags?: { name: string; color: string }[];
 }) {
+  const t = useTranslations();
   const locale = useLocale();
   const isRegistrationOpen = !isRegistrationClosed(dates.registration_end);
   const isSubmissionOpen = !isSubmissionClosed(

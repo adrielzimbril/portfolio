@@ -1,5 +1,7 @@
 // Utility for managing anonymous user IDs using cookies for cross-device sync
 
+import { apiRoutes } from "@/data/api-routes";
+
 const ANONYMOUS_USER_ID_COOKIE = "shironymous_reactions_user_id";
 
 export function getAnonymousUserId(): string {
@@ -49,7 +51,7 @@ export async function syncAnonymousReactionsOnLogin(
   anonymousId: string,
 ): Promise<number> {
   try {
-    const res = await fetch("/api/reactions/sync", {
+    const res = await fetch(apiRoutes.reactionsSync.link, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ anonymousId }),

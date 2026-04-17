@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader, Send } from "@aurthle/icons";
-
+import { Send } from "@aurthle/icons";
+import { apiRoutes } from "@/data/api-routes";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import logger from "@/utils/logger";
@@ -23,7 +23,7 @@ export function GuestbookForm({ user }: { user: any }) {
 
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/community/guestbook", {
+      const res = await fetch(apiRoutes.guestbook.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { PageType } from "@/types";
-import { getApiUrl } from "@/utils/base-url";
+import { apiRoutes } from "@/data/api-routes";
 
 export function usePageViews(
   slug: string,
@@ -24,7 +24,7 @@ export function usePageViews(
     async function run() {
       try {
         // Increment view count
-        const incRes = await fetch(getApiUrl("/views"), {
+        const incRes = await fetch(apiRoutes.views.link, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -42,13 +42,11 @@ export function usePageViews(
         try {
           // Fallback: just read
           const res = await fetch(
-            getApiUrl(
-              `/views?slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
-                type ?? "page"
-              )}&details=${encodeURIComponent(
-                memoizedDetails ?? ""
-              )}&wantResponse=${wantResponse}`
-            )
+            `${apiRoutes.views.link}?slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
+              type ?? "page"
+            )}&details=${encodeURIComponent(
+              memoizedDetails ?? ""
+            )}&wantResponse=${wantResponse}`
           );
           const json = await res.json();
           if (!res.ok) throw new Error(json?.error || "Failed to fetch");
