@@ -165,7 +165,15 @@ export function TimelineSection() {
           <DialogSeparator />
 
           <DialogFooter className="gap-2">
-            <Button variant="outline" onClick={clearFilters} asPointer whileTap>
+            <Button
+              variant="outline"
+              onClick={() => {
+                clearFilters();
+                setIsFilterModalOpen(false);
+              }}
+              asPointer
+              whileTap
+            >
               Clear Filters
             </Button>
             <Button
@@ -180,7 +188,7 @@ export function TimelineSection() {
       </Dialog>
 
       {/* Filter Button */}
-      <SectionLayout isFlex className="pb-0!">
+      <SectionLayout isFlex className="p-0!">
         <div className="flex justify-center w-full">
           <Button
             onClick={() => setIsFilterModalOpen(true)}
@@ -205,11 +213,7 @@ export function TimelineSection() {
       </SectionLayout>
 
       {/* Timeline Section */}
-      <SectionLayout
-        title="Timeline"
-        description="Track the evolution of this portfolio"
-        isFlex
-      >
+      <SectionLayout isFlex>
         {filteredChangelog.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <p className="text-lg text-muted-foreground">
@@ -249,7 +253,7 @@ export function TimelineSection() {
                       <h2 className="text-3xl font-bold text-foreground">
                         {year}
                       </h2>
-                      <div className="flex-1 h-px bg-border/30" />
+                      <div className="flex-1 h-px bg-b-base" />
                       <Badge className="text-sm">
                         {entries.length} release
                         {entries.length !== 1 ? "s" : ""}
@@ -276,7 +280,7 @@ export function TimelineSection() {
                             className="relative flex items-start gap-6 group"
                           >
                             {/* Timeline Dot */}
-                            <div className="flex items-center justify-center shrink-0 z-10">
+                            <div className="hidden md:flex items-center justify-center shrink-0 z-10">
                               <Badge
                                 className={cn(
                                   "capitalize text-xs font-medium",

@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/utils/utils";
 
 const badgeVariants = cva(
-  "squircle squircle-2xl md:squircle-7xl squircle-smooth-lg md:squircle-smooth-xl inline-flex items-center border-none px-3 py-1.5 font-semibold transition-colors",
+  "squircle squircle-2xl md:squircle-7xl squircle-smooth-lg md:squircle-smooth-xl items-center border-none px-3 py-1.5 font-semibold transition-colors",
   {
     variants: {
       variant: {
@@ -62,7 +62,12 @@ function Badge({
       className={cn(badgeVariants({ variant, size, circle }), className)}
       {...props}
     >
-      <span className={cn("font-medium whitespace-pre-line", contentClassName)}>
+      <span
+        className={cn(
+          "font-medium whitespace-pre-line leading-none",
+          contentClassName,
+        )}
+      >
         {props.children}
       </span>
     </div>
