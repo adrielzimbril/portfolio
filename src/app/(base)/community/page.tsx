@@ -4,10 +4,11 @@ import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { StatsSection } from "./sections/StatsSection";
-import { FormSection } from "./sections/FormSection";
-import { MessagesSection } from "./sections/MessagesSection";
+import { StatsSection } from "@/app/(base)/community/sections/StatsSection";
+import { FormSection } from "@/app/(base)/community/sections/FormSection";
+import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection";
 import { supabase } from "@/integrations/supabase/client";
+import { LeaveNoteButton } from "@/app/(base)/community/components/LeaveNoteButton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -47,6 +48,7 @@ export default async function CommunityPage() {
       <StatsSection />
 
       <SectionLayout isFlex>
+        <LeaveNoteButton user={user} />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <FormSection user={user} />
           <MessagesSection />

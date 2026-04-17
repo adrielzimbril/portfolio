@@ -70,6 +70,24 @@
       "title": "Share your message",
       "signInPrompt": "You need to be signed in with GitHub to post a message.",
       "signInButton": "Sign in with GitHub"
+    },
+    "leave-note": {
+      "button": "Leave a note",
+      "online": "You're online - Leave a note"
+    },
+    "login-modal": {
+      "title": "Sign in to leave a note",
+      "description": "Choose your preferred method to sign in and join the conversation.",
+      "github": "Continue with GitHub",
+      "google": "Continue with Google"
+    },
+    "comment-form": {
+      "title": "Share your thoughts",
+      "description": "Leave a message for the community.",
+      "label": "Your message",
+      "placeholder": "Write something nice...",
+      "submit": "Send message",
+      "submitting": "Sending..."
     }
   },
   "toolbox": {

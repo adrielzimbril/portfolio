@@ -17,6 +17,7 @@ const statusIndicatorVariants = cva("rounded-full", {
     },
     size: {
       default: "h-2 w-2",
+      xs: "h-1.5 w-1.5",
       sm: "h-2.5 w-2.5",
       md: "h-3 w-3",
       lg: "h-3.5 w-3.5",
@@ -47,7 +48,7 @@ export interface StatusBadgeProps
     | "error"
     | "warning"
     | "info";
-  primaryText: string;
+  primaryText?: string;
   showIndicator?: boolean;
   animated?: boolean;
   mode?: "stack" | "inline";
@@ -108,11 +109,13 @@ function StatusBadge({
       >
         {IndicatorComponent}
         <div className="flex flex-col items-start gap-0.5">
-          <span
-            className={cn("font-semibold leading-none", primaryTextClassName)}
-          >
-            {primaryText}
-          </span>
+          {primaryText && (
+            <span
+              className={cn("font-semibold leading-none", primaryTextClassName)}
+            >
+              {primaryText}
+            </span>
+          )}
           {props.children && (
             <span
               className={cn(
