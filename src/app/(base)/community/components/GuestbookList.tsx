@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { formatDateDiff } from "@/utils/format-date";
 import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
+import { CommunityWallCard } from "./CommunityWallCard";
+import { InfiniteCanvas } from "./InfiniteCanvas";
 
 // Demo data
 const DEMO_MESSAGES = [
@@ -63,41 +65,44 @@ export function GuestbookList() {
     fetchMessages();
   }, []);
 
-  const displayMessages = messages;
+  // Transform messages to include patternindex and rotation
+  const displayMessages = messages.map((msg: any) => ({
+    ...msg,
+    patternindex: Math.floor(Math.random() * 5), // Random pattern index 0-4
+    rotation: Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
+  }));
+
+  if (isLoading) {
+    return (
+      <div className="text-center text-muted-foreground">
+        Loading messages...
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      {displayMessages.map((msg: any) => (
-        <div
-          key={msg.id}
-          className="relative bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 squircle-border-b-base-accent group-hover:squircle-border-[#ffd3ad] overflow-hidden transition-all duration-300 p-6"
-        >
-          <div className="flex gap-4">
-            <div className="shrink-0">
-              <div className="relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-12 overflow-hidden transition-all duration-300">
-                <div className="pointer-events-none flex h-full w-full items-center justify-center">
-                  <span className="text-lg font-bold text-[#ffd3ad]">
-                    {msg.creator_name.charAt(0).toUpperCase()}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="flex-1 space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="font-bold text-base text-foreground">
-                  {msg.creator_name}
-                </h4>
-                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest px-2 py-1 rounded-full bg-muted/50">
-                  {formatDateDiff(msg.created_at)}
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {msg.message}
-              </p>
-            </div>
-          </div>
+    <>
+      {/* Mobile: Grid layout */}
+      <div className="block md:hidden">
+        <div className="flex flex-wrap justify-center gap-12 p-6 pb-40">
+          {displayMessages.map((msg: any) => (
+            <CommunityWallCard
+              key={msg.id}
+              message={msg.message}
+              patternIndex={msg.patternindex}
+              author={msg.creator_name}
+              profilePicture={msg.creator_avatar_url}
+              rotation={msg.rotation}
+              className="h-[300px] w-[250px] shadow-[12px_12px_0px_0px_rgba(214,218,222,0.3)]"
+            />
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+
+      {/* Desktop: Infinite canvas */}
+      <div className="hidden md:block">
+        <InfiniteCanvas messages={displayMessages} />
+      </div>
+    </>
   );
 }

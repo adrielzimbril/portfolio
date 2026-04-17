@@ -5,7 +5,7 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Button } from "@/components/ui/button";
-import { Github, ChatBubble, Users, Heart } from "@aurthle/icons";
+import { Github, ChatBubbleCircle, Users, HeartOne } from "@aurthle/icons";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { GuestbookForm } from "@/app/(base)/community/components/GuestbookForm";
@@ -53,13 +53,13 @@ export default async function CommunityPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
           {[
             {
-              icon: ChatBubble,
+              icon: ChatBubbleCircle,
               label: "Messages",
               value: "1,234",
               color: "#8e8eff",
             },
             { icon: Users, label: "Members", value: "892", color: "#ffd3ad" },
-            { icon: Heart, label: "Active", value: "156", color: "#ff8e8e" },
+            { icon: HeartOne, label: "Active", value: "156", color: "#ff8e8e" },
           ].map((stat, index) => (
             <div
               key={stat.label}
@@ -77,6 +77,7 @@ export default async function CommunityPage() {
                           ? "text-[#ffd3ad]"
                           : "text-[#ff8e8e]",
                     )}
+                    variant="bulk"
                   />
                 </div>
               </div>
@@ -97,7 +98,7 @@ export default async function CommunityPage() {
               <div className="flex items-center gap-3 mb-6">
                 <div className="relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-12 overflow-hidden transition-all duration-300">
                   <div className="pointer-events-none flex h-full w-full items-center justify-center">
-                    <ChatBubble size={20} className="text-[#ffd3ad]" />
+                    <ChatBubbleCircle size={20} className="text-[#ffd3ad]" />
                   </div>
                 </div>
                 <div>
