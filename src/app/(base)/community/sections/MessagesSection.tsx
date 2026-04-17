@@ -34,7 +34,7 @@ const DEMO_MESSAGES = [
   {
     id: 4,
     creator_name: "David Chen",
-    creator_avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+    creator_avatar_url: "",
     message:
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),

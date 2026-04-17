@@ -1,6 +1,12 @@
 "use client";
 
+import React from "react";
 import { patterns } from "@/lib/communityWall/types";
+import { cn } from "@/utils/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import BoringAvatar from "boring-avatars";
+import { getImageUrl, pickRandomColorCode } from "@/utils";
+import { useMemo } from "react";
 
 type CommunityWallCardProps = {
   patternIndex: number;
@@ -21,6 +27,13 @@ export function CommunityWallCard({
 }: CommunityWallCardProps) {
   const pattern = patterns[patternIndex % patterns.length];
 
+  // Generate random colors for BoringAvatar
+  const avatarColors = useMemo(() => {
+    return Array.from({ length: 8 }).map(
+      () => pickRandomColorCode() ?? "#ffffff",
+    );
+  }, []);
+
   return (
     <div
       className={`flex flex-col items-start justify-between gap-2 rounded-xl border-2 border-[#A5AEB8/12] bg-[#F7F7F8] p-2.5 ${className}`}
@@ -35,11 +48,18 @@ export function CommunityWallCard({
         </p>
       </div>
       <div className="flex w-full items-center space-x-2">
-        <img
-          src={profilePicture}
-          className="p2 h-8 w-8 shrink-0 rounded-full border-2 border-transparent ring-1 ring-slate-300"
-          alt={`${author}'s avatar`}
-        />
+        <Avatar className="h-8 w-8 shrink-0">
+          <AvatarImage src={getImageUrl(profilePicture ?? "")} />
+          <AvatarFallback className="relative pointer-events-none">
+            <BoringAvatar
+              name={
+                author || (profilePicture?.slice(8)?.replace(".png", "") ?? "")
+              }
+              colors={avatarColors}
+              variant="beam"
+            />
+          </AvatarFallback>
+        </Avatar>
         <p className="truncate text-text-secondary">{author}</p>
       </div>
     </div>
