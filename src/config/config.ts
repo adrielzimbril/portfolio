@@ -39,6 +39,8 @@ export const ConfigValue = {
   BETTER_AUTH_URL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   AUTH_TOKEN_KEY: "shiro-auth-token",
   NEXT_PRIVATE_ADMIN_EMAILS: process.env.NEXT_PRIVATE_ADMIN_EMAILS,
+  NEXT_PRIVATE_SESSION_TIMEOUT_HOURS:
+    process.env.NEXT_PRIVATE_SESSION_TIMEOUT_HOURS || "1",
 
   // Callback URLs for different pages
   AUTH_CALLBACK_URL_COMMUNITY:

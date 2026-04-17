@@ -39,6 +39,8 @@ const environmentVariablesSchema = z.object({
   AUTH_CALLBACK_URL_COMMUNITY: z.string().default("/community"),
   AUTH_CALLBACK_URL_DEFAULT: z.string().default("/"),
   AUTH_DEFAULT_REDIRECT: z.string().default("/"),
+  NEXT_PRIVATE_ADMIN_EMAILS: z.string().optional(),
+  NEXT_PRIVATE_SESSION_TIMEOUT_HOURS: z.string().default("1"),
 
   // Database (Supabase)
   NEXT_PUBLIC_SUPABASE_URL: z.url(
@@ -153,6 +155,8 @@ export function validateEnvironmentVariables(): EnvVars {
     AUTH_CALLBACK_URL_DEFAULT: process.env.AUTH_CALLBACK_URL_DEFAULT,
     AUTH_DEFAULT_REDIRECT: process.env.AUTH_DEFAULT_REDIRECT,
     NEXT_PRIVATE_ADMIN_EMAILS: process.env.NEXT_PRIVATE_ADMIN_EMAILS,
+    NEXT_PRIVATE_SESSION_TIMEOUT_HOURS:
+      process.env.NEXT_PRIVATE_SESSION_TIMEOUT_HOURS,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     CONTACTS_PROVIDER: process.env.CONTACTS_PROVIDER,
