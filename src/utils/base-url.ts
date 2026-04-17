@@ -103,7 +103,24 @@ export function getAbsolutePathUrl({
  * @returns {string} The API base URL.
  */
 export function getApiBaseUrl(): string {
-  return `${getBaseUrl()}/api`;
+  const base = getBaseUrl().replace(/\/+$/, "");
+  return `${base}/api`;
+}
+
+/**
+ * Gets the URL of an API path.
+ * @param {string} path - The API path.
+ *
+ * Returns the URL of an API path.
+ * @returns {string} The URL of the API path.
+ *
+ * @example
+ * getApiUrl("/views"); // returns "https://base-url/api/views"
+ */
+export function getApiUrl(path: string): string {
+  const base = getApiBaseUrl();
+  const safePath = path.replace(/^\//, "");
+  return `${base}/${safePath}`;
 }
 
 /**

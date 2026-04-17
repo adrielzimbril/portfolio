@@ -2,8 +2,9 @@
 import React from "react";
 import { HeaderSection as QuestHeaderSection } from "@/components/shared/pages/quests/page/header-section";
 import { PreviewContentType } from "@/types";
-import { useTranslations } from "use-intl";
-import { getQuestAskUrl } from "@/utils/base-url";
+import { useTranslations, useLocale } from "use-intl";
+import { getQuestAskUrl, getResourcesUrl } from "@/utils/base-url";
+import { usePageViews } from "@/hooks/usePageViews";
 import { PageType, QuestAskType } from "@/types/enum";
 import {
   isRegistrationClosed,
@@ -29,12 +30,21 @@ export function HeaderSection({
   };
   tags?: { name: string; color: string }[];
 }) {
-  const t = useTranslations();
-
+  const locale = useLocale();
   const isRegistrationOpen = !isRegistrationClosed(dates.registration_end);
   const isSubmissionOpen = !isSubmissionClosed(
     dates.submission_end,
     dates.results,
+  );
+
+  usePageViews(
+    slug,
+    PageType.QUESTS,
+    {
+      locale,
+      path: getResourcesUrl(PageType.QUESTS, slug),
+    },
+    false,
   );
 
   return (
