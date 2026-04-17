@@ -159,7 +159,7 @@ export function ReactionButton({
           "squircle-border-[#8e8eff]",
           compact && "px-1 py-0.5",
           isLoading && "opacity-50 cursor-not-allowed",
-          isReacted ? "grayscale-0" : "grayscale",
+          isReacted ? "grayscale-0" : "grayscale-80",
           className,
         )}
         size={minimal ? "xs" : "sm"}

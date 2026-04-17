@@ -12,12 +12,10 @@ import { useReactions } from "@/lib/reactions/use-reactions";
 export function ReactionBar({
   pageType,
   entityId,
-  className,
   compact = false,
 }: {
   pageType: PageType;
   entityId: string;
-  className?: string;
   compact?: boolean;
 }) {
   const reactionTypes = Object.values(ReactionType);
@@ -40,9 +38,9 @@ export function ReactionBar({
   return (
     <div
       className={cn(
-        "w-fit flex flex-col items-center",
+        "w-full md:w-fit flex flex-col items-center",
         compact ? "gap-2" : "gap-4",
-        className,
+        "max-w-4xl mx-auto my-6 md:my-12",
       )}
     >
       <div
