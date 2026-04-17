@@ -39,6 +39,166 @@ const DEMO_MESSAGES = [
       "Found this place through a friend and I'm so glad I did. Best community ever!",
     created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
   },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: 4,
+    creator_name: "David Chen",
+    creator_avatar_url: "",
+    message:
+      "Found this place through a friend and I'm so glad I did. Best community ever!",
+    created_at: new Date(Date.now() - 72 * 60 * 60 * 1000).toISOString(),
+  },
 ];
 
 export function MessagesSection() {
