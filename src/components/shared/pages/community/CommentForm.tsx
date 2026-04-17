@@ -46,7 +46,7 @@ export function CommentForm({ user }: CommentFormProps) {
     try {
       logger.info("Submitting comment", { comment: values.comment });
 
-      const res = await fetch(apiRoutes.guestbook.link, {
+      const res = await fetch(apiRoutes.community.guestbook.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

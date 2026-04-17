@@ -8,6 +8,23 @@ enum requestType {
 }
 
 export const apiRoutes = {
+  auth: {
+    login: {
+      key: "auth-login",
+      link: getApiUrl("auth/login"),
+      accept: [requestType.POST],
+    },
+    callback: {
+      key: "auth-callback",
+      link: getApiUrl("auth/callback"),
+      accept: [requestType.GET],
+    },
+    all: {
+      key: "auth-all",
+      link: getApiUrl("auth/[...all]"),
+      accept: [requestType.GET],
+    },
+  },
   submit: {
     key: "submit",
     link: getApiUrl("submit"),
@@ -38,44 +55,57 @@ export const apiRoutes = {
     link: getApiUrl("views"),
     accept: [requestType.GET],
   },
-  statsSubscribers: {
-    key: "stats-subscribers",
-    link: getApiUrl("stats/subscribers"),
-    accept: [requestType.GET],
+  stats: {
+    subscribers: {
+      key: "stats-subscribers",
+      link: getApiUrl("stats/subscribers"),
+      accept: [requestType.GET],
+    },
   },
-  questsRegister: (slug: string) => ({
-    key: "quests-register",
-    link: getApiUrl(`quests/${slug}/register`),
-    accept: [requestType.POST],
-  }),
-  questsSubmit: (slug: string) => ({
-    key: "quests-submit",
-    link: getApiUrl(`quests/${slug}/submit`),
-    accept: [requestType.POST],
-  }),
-  questsParticipants: (slug: string) => ({
-    key: "quests-participants",
-    link: getApiUrl(`quests/${slug}/participants`),
-    accept: [requestType.GET],
-  }),
+  quests: {
+    register: (slug: string) => ({
+      key: "quests-register",
+      link: getApiUrl(`quests/${slug}/register`),
+      accept: [requestType.POST],
+    }),
+    submit: (slug: string) => ({
+      key: "quests-submit",
+      link: getApiUrl(`quests/${slug}/submit`),
+      accept: [requestType.POST],
+    }),
+    participants: (slug: string) => ({
+      key: "quests-participants",
+      link: getApiUrl(`quests/${slug}/participants`),
+      accept: [requestType.GET],
+    }),
+  },
   reactions: {
-    key: "reactions",
-    link: getApiUrl("reactions"),
-    accept: [requestType.GET, requestType.POST],
+    main: {
+      key: "reactions",
+      link: getApiUrl("reactions"),
+      accept: [requestType.GET, requestType.POST],
+    },
+    status: {
+      key: "reactions-status",
+      link: getApiUrl("reactions/status"),
+      accept: [requestType.GET],
+    },
+    sync: {
+      key: "reactions-sync",
+      link: getApiUrl("reactions/sync"),
+      accept: [requestType.POST],
+    },
   },
-  reactionsStatus: {
-    key: "reactions-status",
-    link: getApiUrl("reactions/status"),
-    accept: [requestType.GET],
-  },
-  reactionsSync: {
-    key: "reactions-sync",
-    link: getApiUrl("reactions/sync"),
-    accept: [requestType.POST],
-  },
-  guestbook: {
-    key: "guestbook",
-    link: getApiUrl("community/guestbook"),
-    accept: [requestType.POST],
+  community: {
+    guestbook: {
+      key: "guestbook",
+      link: getApiUrl("community/guestbook"),
+      accept: [requestType.POST],
+    },
+    messages: {
+      key: "community-messages",
+      link: getApiUrl("community/messages"),
+      accept: [requestType.GET],
+    },
   },
 };
