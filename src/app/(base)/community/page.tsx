@@ -12,8 +12,6 @@ import {
   HeartOne,
   Google,
 } from "@aurthle/icons";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 import { GuestbookForm } from "@/app/(base)/community/components/GuestbookForm";
 import { GuestbookList } from "@/app/(base)/community/components/GuestbookList";
 import { StatCard } from "@/components/shared/pages/community/StatCard";
