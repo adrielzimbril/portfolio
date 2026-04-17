@@ -8,7 +8,7 @@ import { PageType, ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useProductSlugRequestsCount } from "@/hooks/useSubscriberStats";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,

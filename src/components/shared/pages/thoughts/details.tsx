@@ -5,7 +5,7 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { getResourcesUrl } from "@/utils/base-url";
 import { PageType } from "@/types";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,

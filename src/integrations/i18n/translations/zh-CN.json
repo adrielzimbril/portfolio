@@ -125,7 +125,22 @@
       "timeline": {
         "title": "时间线",
         "description": "变更和改进的历史。",
-        "badge": "更新 ✨"
+        "badge": "更新 ✨",
+        "release": "release",
+        "filter": {
+          "title": "筛选更新日志",
+          "button": "筛选",
+          "searchPlaceholder": "搜索版本...",
+          "clearFilters": "清除筛选",
+          "applyFilters": "应用筛选"
+        },
+        "entry": {
+          "latest": "最新"
+        },
+        "emptyState": {
+          "message": "未找到符合条件的版本。",
+          "clearFilters": "清除筛选"
+        }
       }
     }
   },

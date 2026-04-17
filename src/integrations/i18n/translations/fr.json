@@ -125,7 +125,22 @@
       "timeline": {
         "title": "Timeline",
         "description": "Historique des changements et améliorations.",
-        "badge": "Mises à jour ✨"
+        "badge": "Mises à jour ✨",
+        "release": "release",
+        "filter": {
+          "title": "Filtrer le Changelog",
+          "button": "Filtres",
+          "searchPlaceholder": "Rechercher des releases...",
+          "clearFilters": "Effacer les filtres",
+          "applyFilters": "Appliquer les filtres"
+        },
+        "entry": {
+          "latest": "Dernière"
+        },
+        "emptyState": {
+          "message": "Aucune release trouvée correspondant à vos critères.",
+          "clearFilters": "Effacer les filtres"
+        }
       }
     }
   },

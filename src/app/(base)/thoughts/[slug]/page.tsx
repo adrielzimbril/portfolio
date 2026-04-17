@@ -6,7 +6,7 @@ import { HeaderSection } from "@/app/(base)/thoughts/[slug]/sections/HeaderSecti
 import { MorePreviewSection } from "@/app/(base)/thoughts/[slug]/sections/MorePreviewSection";
 import { ContentsSection } from "@/app/(base)/thoughts/[slug]/sections/ContentSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 import { routes } from "@/data/routes";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { PageParams, PageType } from "@/types";

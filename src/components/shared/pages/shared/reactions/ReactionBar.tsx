@@ -2,7 +2,7 @@
 
 import React, { useState, createContext, useContext } from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { ReactionButton } from "@/components/shared/reactions/ReactionButton";
+import { ReactionButton } from "@/components/shared/pages/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";

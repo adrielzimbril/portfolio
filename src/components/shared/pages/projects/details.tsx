@@ -9,7 +9,7 @@ import { cn } from "@/utils/utils";
 import { getResourcesUrl } from "@/utils/base-url";
 import { DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,

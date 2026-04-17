@@ -11,7 +11,7 @@ import {
 } from "@/app/(base)/projects/[slug]/sections/ProjectResearchSection";
 import { ProjectResultSection } from "@/app/(base)/projects/[slug]/sections/ProjectResultSection";
 import { GoalResearchSection } from "@/app/(base)/projects/[slug]/sections/GoalResearchSection";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { localeRedirect } from "@/integrations/i18n/routing";
 import {

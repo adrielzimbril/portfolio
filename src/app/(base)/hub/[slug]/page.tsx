@@ -1,6 +1,6 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 import { HeaderSection } from "@/app/(base)/hub/[slug]/sections/HeaderSection";
 import { MorePreviewSection } from "@/app/(base)/hub/[slug]/sections/MorePreviewSection";
 import { ResourceDetailsSection } from "@/app/(base)/hub/[slug]/sections/ResourceDetailsSection";

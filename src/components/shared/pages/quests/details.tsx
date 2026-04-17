@@ -7,7 +7,7 @@ import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
 import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,

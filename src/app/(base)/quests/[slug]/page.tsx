@@ -2,7 +2,7 @@ import React from "react";
 import { HeaderSection } from "@/app/(base)/quests/[slug]/sections/HeaderSection";
 import { QuestDetailsSection } from "@/app/(base)/quests/[slug]/sections/QuestDetailsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 import { PageType, PageParams } from "@/types";
 import { getLocale, getTranslations } from "next-intl/server";
 import { localeRedirect } from "@/integrations/i18n/routing";

@@ -125,7 +125,22 @@
       "timeline": {
         "title": "Timeline",
         "description": "History of changes and improvements.",
-        "badge": "Updates ✨"
+        "badge": "Updates ✨",
+        "release": "release",
+        "filter": {
+          "title": "Filter Changelog",
+          "button": "Filters",
+          "searchPlaceholder": "Search releases...",
+          "clearFilters": "Clear filters",
+          "applyFilters": "Apply filters"
+        },
+        "entry": {
+          "latest": "Latest"
+        },
+        "emptyState": {
+          "message": "No releases found matching your criteria.",
+          "clearFilters": "Clear filters"
+        }
       }
     }
   },
