@@ -36,10 +36,6 @@ export function CommunityWallManagementSection() {
     messages: {} as Record<string, string>,
   });
 
-  useEffect(() => {
-    fetchMessages();
-  }, []);
-
   const fetchMessages = async () => {
     try {
       const response = await fetch(landlordApiRoutes.community.messages);
@@ -53,6 +49,10 @@ export function CommunityWallManagementSection() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
   const handleAddMessage = async (e: React.FormEvent) => {
     e.preventDefault();

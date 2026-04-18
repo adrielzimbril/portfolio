@@ -47,11 +47,6 @@ export function QuestsManagementSection() {
     language: Locale.EN,
   });
 
-  useEffect(() => {
-    fetchQuests();
-    fetchParticipants();
-  }, [selectedQuest]);
-
   const fetchQuests = async () => {
     try {
       const allQuests = await getAllQuests();
@@ -76,6 +71,11 @@ export function QuestsManagementSection() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchQuests();
+    fetchParticipants();
+  }, [selectedQuest]);
 
   const handleAddParticipant = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -209,7 +209,7 @@ export function QuestsManagementSection() {
               <Label htmlFor="language">Language</Label>
               <Select
                 value={newParticipant.language}
-                onValueChange={(value : Locale) =>
+                onValueChange={(value: Locale) =>
                   setNewParticipant({ ...newParticipant, language: value })
                 }
               >
@@ -218,8 +218,10 @@ export function QuestsManagementSection() {
                 </SelectTrigger>
                 <SelectContent>
                   {Object.values(Locale).map((locale) => (
-                            <SelectItem key={locale} value={locale}>{locale.toLocaleUpperCase()}</SelectItem>
-                          ))}
+                    <SelectItem key={locale} value={locale}>
+                      {locale.toLocaleUpperCase()}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -278,7 +280,9 @@ export function QuestsManagementSection() {
                         </SelectTrigger>
                         <SelectContent>
                           {Object.values(Locale).map((locale) => (
-                            <SelectItem key={locale} value={locale}>{locale.toLocaleUpperCase()}</SelectItem>
+                            <SelectItem key={locale} value={locale}>
+                              {locale.toLocaleUpperCase()}
+                            </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>

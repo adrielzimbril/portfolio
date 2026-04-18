@@ -58,3 +58,6 @@ package-lock.json
 # ignore vercel files
 .vercel
 sources/
+
+# Supabase temp files
+supabase/.temp/
