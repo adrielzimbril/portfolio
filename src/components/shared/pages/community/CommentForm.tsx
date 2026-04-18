@@ -21,6 +21,7 @@ import {
 import logger from "@/utils/logger";
 import { apiRoutes } from "@/data/api-routes";
 import { toast } from "sonner";
+import { useLocale } from "next-intl";
 
 interface CommentFormProps {
   user: any;
@@ -37,6 +38,7 @@ type CommentFormValues = z.infer<typeof schema>;
 
 export function CommentForm({ user }: CommentFormProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   const form = useForm<CommentFormValues>({
     resolver: zodResolver(schema),
@@ -54,6 +56,7 @@ export function CommentForm({ user }: CommentFormProps) {
           message: values.comment,
           author: user?.user_metadata?.name || user?.email,
           profilePicture: user?.user_metadata?.avatar_url,
+          language: locale,
         }),
       });
 
