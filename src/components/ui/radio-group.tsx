@@ -14,9 +14,9 @@ const radioVariants = cva(
         default:
           "rounded-full border border-input bg-background not-dark:bg-clip-padding shadow-xs/5 before:rounded-full not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/48 dark:not-data-checked:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [[data-disabled],[data-checked],[aria-invalid]]:shadow-none",
         squircle:
-          "squircle squircle-mask squircle-3xl squircle-smooth-xl squircle-border-2 squircle-border-b-base-accent squircle-b-base data-[state=checked]:squircle-primary data-[state=checked]:squircle-border-primary",
+          "squircle squircle-mask squircle-4xl squircle-smooth-3xl squircle-border-2 squircle-border-b-base-accent squircle-b-base data-[state=checked]:squircle-primary data-[state=checked]:squircle-border-primary",
         glass:
-          "rounded-full border border-white/20 bg-white/10 backdrop-blur-md before:rounded-full data-[state=checked]:bg-primary/80 data-[state=checked]:border-primary",
+          "rounded-full border border-b-base/20 bg-b-base backdrop-blur-md before:rounded-full data-[state=checked]:bg-primary/80 data-[state=checked]:border-primary",
       },
       size: {
         xs: "size-2.5",
@@ -36,6 +36,48 @@ const radioVariants = cva(
         warning: "data-checked:bg-yellow-500",
       },
     },
+    compoundVariants: [
+      {
+        variant: "squircle",
+        color: "default",
+        class: "data-[state=checked]:squircle-primary",
+      },
+      {
+        variant: "squircle",
+        color: "primary",
+        class: "data-[state=checked]:squircle-primary",
+      },
+      {
+        variant: "squircle",
+        color: "secondary",
+        class: "data-[state=checked]:squircle-secondary",
+      },
+      {
+        variant: "squircle",
+        color: "destructive",
+        class: "data-[state=checked]:squircle-destructive",
+      },
+      {
+        variant: "squircle",
+        color: "accent",
+        class: "data-[state=checked]:squircle-accent",
+      },
+      {
+        variant: "squircle",
+        color: "muted",
+        class: "data-[state=checked]:squircle-muted",
+      },
+      {
+        variant: "squircle",
+        color: "success",
+        class: "data-[state=checked]:squircle-success",
+      },
+      {
+        variant: "squircle",
+        color: "warning",
+        class: "data-[state=checked]:squircle-warning",
+      },
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",

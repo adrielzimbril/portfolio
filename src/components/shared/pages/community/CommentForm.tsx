@@ -193,8 +193,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         <Radio
                           key={index}
                           value={index.toString()}
-                          variant="squircle"
-                          size="lg"
+                          variant="glass"
+                          size="xl"
                           className={cn(
                             "transition-all",
                             "data-[state=checked]:scale-110",
