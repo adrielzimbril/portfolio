@@ -38,6 +38,7 @@ export function LoginModal() {
             onClick={() => signInWithGithub()}
             variant="default"
             asIcon
+            asPointer
             whileTap
             className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
           >
@@ -50,6 +51,7 @@ export function LoginModal() {
             onClick={() => signInWithGoogle()}
             variant="secondary"
             asIcon
+            asPointer
             whileTap
             className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
           >

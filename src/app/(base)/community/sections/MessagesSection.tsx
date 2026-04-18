@@ -33,8 +33,8 @@ export function MessagesSection() {
   // Transform messages to include patternIndex and rotation
   const displayMessages = messages.map((msg: any) => ({
     ...msg,
-    patternIndex: Math.floor(Math.random() * 5), // Random pattern index 0-4
-    rotation: Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
+    patternIndex: msg.pattern_index ?? Math.floor(Math.random() * 5), // Random pattern index 0-4
+    rotation: msg.rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
   }));
 
   if (isLoading) {

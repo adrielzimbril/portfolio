@@ -125,16 +125,18 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
             <Button
               type="submit"
               variant="default"
+              asIcon
               whileTap
+              asPointer
               disabled={form.formState.isSubmitting}
               className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
             >
-              <span className="flex items-center justify-center gap-2">
+              <span className="flex items-center justify-center gap-1">
                 {form.formState.isSubmitting ? (
                   t("community.comment-form.submitting")
                 ) : (
                   <>
-                    <Send size={16} variant="bulk" />
+                    <Send size={20} variant="bulk" />
                     {t("community.comment-form.submit")}
                   </>
                 )}

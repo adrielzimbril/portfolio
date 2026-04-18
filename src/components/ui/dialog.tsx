@@ -113,7 +113,7 @@ function DialogContent({
             <Button asPointer whileTap asIcon size="icon">
               <X
                 size={16}
-                className="opacity-70 transition-opacity group-hover:opacity-100"
+                className="opacity-80 transition-opacity duration-200 group-hover:opacity-100"
               />
               <span className="sr-only">Close</span>
             </Button>
