@@ -35,14 +35,21 @@ interface CommentFormProps {
   onSuccess?: () => void;
 }
 
-const MAX_COMMENT_LENGTH = 110;
+const config = {
+  maxCommentLength: 110,
+  rotation: {
+    startAt: -10,
+    endAt: 10,
+    step: 1,
+  },
+};
 
 const schema = z.object({
   comment: z
     .string()
     .min(1, { message: "Comment cannot be empty" })
-    .max(MAX_COMMENT_LENGTH, {
-      message: `Comment must be less than ${MAX_COMMENT_LENGTH} characters`,
+    .max(config.maxCommentLength, {
+      message: `Comment must be less than ${config.maxCommentLength} characters`,
     }),
 });
 
@@ -55,7 +62,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
   const [patternIndex, setPatternIndex] = useState(() =>
     Math.floor(Math.random() * patterns.length),
   );
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(config.rotation.startAt);
 
   const form = useForm<CommentFormValues>({
     resolver: zodResolver(schema),
@@ -99,7 +106,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       form.reset();
       setScreen("input");
       setPatternIndex(Math.floor(Math.random() * patterns.length));
-      setRotation(0);
+      setRotation(config.rotation.startAt);
       onSuccess?.();
     } catch (error) {
       logger.error("Failed to submit comment", error);
@@ -148,7 +155,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         <Textarea
                           placeholder={t("community.comment-form.placeholder")}
                           rows={3}
-                          limit={MAX_COMMENT_LENGTH}
+                          limit={config.maxCommentLength}
                           showLimit
                           disabled={form.formState.isSubmitting}
                           {...field}
@@ -164,9 +171,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     <label className="text-sm font-medium">Rotation:</label>
                     <input
                       type="range"
-                      min="-10"
-                      max="10"
-                      step="1"
+                      min={config.rotation.startAt}
+                      max={config.rotation.endAt}
+                      step={config.rotation.step}
                       value={rotation}
                       onChange={(e) => setRotation(parseInt(e.target.value))}
                       className="flex-1 accent-primary"
@@ -284,7 +291,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         <Textarea
                           placeholder={t("community.comment-form.placeholder")}
                           rows={5}
-                          limit={MAX_COMMENT_LENGTH}
+                          limit={config.maxCommentLength}
                           showLimit
                           disabled={form.formState.isSubmitting}
                           {...field}
@@ -361,9 +368,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   <label className="text-sm font-medium">Rotation:</label>
                   <input
                     type="range"
-                    min="-10"
-                    max="10"
-                    step="1"
+                    min={config.rotation.startAt}
+                    max={config.rotation.endAt}
+                    step={config.rotation.step}
                     value={rotation}
                     onChange={(e) => setRotation(parseInt(e.target.value))}
                     className="flex-1 accent-primary"
