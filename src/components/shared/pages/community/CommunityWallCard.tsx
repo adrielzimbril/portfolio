@@ -38,7 +38,7 @@ export function CommunityWallCard({
   return (
     <Card
       className={cn(
-        "squircle squircle-b-base squircle-3xl squircle-smooth-lg squircle-border-2 squircle-border-b-base-accent",
+        "squircle squircle-b-base squircle-3xl squircle-smooth-lg squircle-border-2 squircle-border-b-base-accent cursor-pointer pointer-event-none",
         "transition-all duration-300 group cursor-pointer",
         className,
       )}
