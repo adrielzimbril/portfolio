@@ -8,6 +8,8 @@ import { apiRoutes } from "@/data/api-routes";
 import { AdminAuthGuard } from "@/components/shared/pages/landlord/AdminAuthGuard";
 import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
+import { Link } from "@/components/ui/link";
+import { Github, Google } from "@aurthle/icons";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -42,8 +44,44 @@ export default async function AdminPage() {
   const t = await getTranslations();
 
   if (!isAuthenticated) {
-    // Redirect to home if not authenticated
-    return null;
+    return (
+      <>
+        <PageHero
+          title={t("admin.page.title")}
+          description="Connectez-vous pour accéder au tableau de bord administratif"
+          imagePath={{ emoji: "🔐" }}
+          isMobileShowed
+        />
+
+        <SectionLayout isFlex>
+          <div className="flex flex-col items-center justify-center gap-4 py-12">
+            <p className="text-center text-b-white-invert-sec">
+              Vous devez être connecté pour accéder à cette page
+            </p>
+            <div className="flex gap-4">
+              <Link
+                href={`/api/auth/login?provider=github`}
+                variant="default"
+                likeButton
+                className="flex items-center gap-2"
+              >
+                <Github size={20} variant="bulk" />
+                Connexion GitHub
+              </Link>
+              <Link
+                href={`/api/auth/login?provider=google`}
+                variant="secondary"
+                likeButton
+                className="flex items-center gap-2"
+              >
+                <Google size={20} variant="bulk" />
+                Connexion Google
+              </Link>
+            </div>
+          </div>
+        </SectionLayout>
+      </>
+    );
   }
 
   // Fetch user data to check admin status
