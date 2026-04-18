@@ -172,7 +172,7 @@ export function IntentionForm() {
                 {t("submit.page.header-section.subDescription")}
               </p>
             </div>
-            <form
+            <Form
               onSubmit={(e) => {
                 e.preventDefault();
                 form.handleSubmit(onSubmit)(e);
@@ -328,7 +328,7 @@ export function IntentionForm() {
                     : t("submit.page.actions.submit")}
                 </Button>
               </div>
-            </form>
+            </Form>
           </CardContent>
         </Card>
       </SectionBase>

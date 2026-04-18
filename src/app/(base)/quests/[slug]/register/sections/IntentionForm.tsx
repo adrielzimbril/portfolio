@@ -106,7 +106,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
               </p>
             </div>
 
-            <form
+            <Form
               onSubmit={(e) => {
                 e.preventDefault();
                 form.handleSubmit(onSubmit)(e);
@@ -186,7 +186,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                   ? t("quests.register.form.actions.submitting")
                   : t("quests.register.form.actions.submit")}
               </Button>
-            </form>
+            </Form>
           </CardContent>
         </Card>
       </SectionBase>

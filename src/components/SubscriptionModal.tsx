@@ -323,7 +323,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </p>
           </div>
         ) : (
-          <form
+          <Form
             onSubmit={(e) => {
               e.preventDefault();
               formSchemaValidate.handleSubmit(onSubmit)(e);
@@ -410,7 +410,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 )}
               </Button>
             </div>
-          </form>
+          </Form>
         )}
       </DialogContent>
     </Dialog>

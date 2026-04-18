@@ -122,7 +122,7 @@ export function IntentionForm({
                 </CardContent>
               </Card>
             ) : (
-              <form
+              <Form
                 onSubmit={(e) => {
                   e.preventDefault();
                   form.handleSubmit(onSubmit)(e);
@@ -231,7 +231,7 @@ export function IntentionForm({
                     ? t("quests.submit.form.actions.submitting")
                     : t("quests.submit.form.actions.submit")}
                 </Button>
-              </form>
+              </Form>
             )}
           </CardContent>
         </Card>

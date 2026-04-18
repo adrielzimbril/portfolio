@@ -23,7 +23,13 @@ export function RoutesSection() {
       routes.thoughts,
     ],
     community: [routes.community, routes.connections, routes.changelog],
-    tools: [routes.toolbox, routes.stats, routes.newsletter, routes.rss],
+    tools: [
+      routes.toolbox,
+      routes.stats,
+      routes.submit,
+      routes.newsletter,
+      routes.rss,
+    ],
     legal: [routes.terms, routes.privacy],
   };
 
