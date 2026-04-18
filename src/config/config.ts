@@ -51,6 +51,9 @@ export const ConfigValue = {
   // Database (Supabase)
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  DATABASE_URL: process.env.DATABASE_URL,
+  POSTGRES_URL: process.env.POSTGRES_URL,
+  SUPABASE_DB_URL: process.env.SUPABASE_DB_URL,
 
   // Email & Contact
   CONTACTS_PROVIDER: process.env.CONTACTS_PROVIDER,
@@ -108,6 +111,7 @@ export const ConfigValue = {
   S3_REGION: process.env.S3_REGION,
   NEXT_PUBLIC_AVATARS_BUCKET_NAME:
     process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME || "avatars",
+  S3_BACKUP_BUCKET: process.env.S3_BACKUP_BUCKET || "database-backups",
 
   // AI (Optional - used for markdown file translations and i18n nextintl translations)
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
