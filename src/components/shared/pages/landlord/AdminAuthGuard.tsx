@@ -52,16 +52,18 @@ export function AdminAuthGuard({ user, children }: AdminAuthGuardProps) {
   const userEmail = user.email;
   const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
 
-  console.log("[AdminAuthGuard] Render: Checking authorization", {
+  logger.debug("[AdminAuthGuard] Render: Checking authorization", {
     userEmail,
     adminEmails,
   });
 
   if (!userEmail || !adminEmails.includes(userEmail)) {
-    console.log("[AdminAuthGuard] Render: User not authorized, returning null");
+    logger.warn("[AdminAuthGuard] Render: User not authorized, returning null");
     return null;
   }
 
-  console.log("[AdminAuthGuard] Render: User authorized, rendering children");
+  logger.success(
+    "[AdminAuthGuard] Render: User authorized, rendering children",
+  );
   return <>{children}</>;
 }
