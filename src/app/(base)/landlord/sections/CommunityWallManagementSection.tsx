@@ -12,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { adminApiRoutes } from "@/data/adminApiRoutes";
+import logger from "@/utils/logger";
 
 interface CommunityMessage {
   id: string;
@@ -40,13 +42,13 @@ export function CommunityWallManagementSection() {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch("/api/admin/community/messages");
+      const response = await fetch(adminApiRoutes.community.messages);
       if (response.ok) {
         const data = await response.json();
         setMessages(data.messages || []);
       }
     } catch (error) {
-      console.error("Failed to fetch messages:", error);
+      logger.error("Failed to fetch messages:", error);
     } finally {
       setLoading(false);
     }
@@ -55,7 +57,7 @@ export function CommunityWallManagementSection() {
   const handleAddMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/admin/community/messages", {
+      const response = await fetch(adminApiRoutes.community.messages, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newMessage),
@@ -72,13 +74,13 @@ export function CommunityWallManagementSection() {
         fetchMessages();
       }
     } catch (error) {
-      console.error("Failed to add message:", error);
+      logger.error("Failed to add message:", error);
     }
   };
 
   const handleDeleteMessage = async (id: string) => {
     try {
-      const response = await fetch(`/api/landlord/community/messages/${id}`, {
+      const response = await fetch(adminApiRoutes.community.messageById(id), {
         method: "DELETE",
       });
 
@@ -86,13 +88,13 @@ export function CommunityWallManagementSection() {
         fetchMessages();
       }
     } catch (error) {
-      console.error("Failed to delete message:", error);
+      logger.error("Failed to delete message:", error);
     }
   };
 
   const handleUpdateLanguage = async (id: string, language: string) => {
     try {
-      const response = await fetch(`/api/admin/community/messages/${id}`, {
+      const response = await fetch(adminApiRoutes.community.messageById(id), {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ language }),
@@ -102,7 +104,7 @@ export function CommunityWallManagementSection() {
         fetchMessages();
       }
     } catch (error) {
-      console.error("Failed to update language:", error);
+      logger.error("Failed to update language:", error);
     }
   };
 

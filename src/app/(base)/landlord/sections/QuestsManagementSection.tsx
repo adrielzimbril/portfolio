@@ -13,6 +13,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { adminApiRoutes } from "@/data/adminApiRoutes";
+import logger from "@/utils/logger";
 
 interface Participant {
   id: string;
@@ -49,14 +51,14 @@ export function QuestsManagementSection() {
   const fetchParticipants = async () => {
     try {
       const response = await fetch(
-        `/api/admin/quests/participants${selectedQuest ? `?slug=${selectedQuest}` : ""}`,
+        `${adminApiRoutes.quests.participants}${selectedQuest ? `?slug=${selectedQuest}` : ""}`,
       );
       if (response.ok) {
         const data = await response.json();
         setParticipants(data.participants || []);
       }
     } catch (error) {
-      console.error("Failed to fetch participants:", error);
+      logger.error("Failed to fetch participants:", error);
     } finally {
       setLoading(false);
     }
@@ -65,7 +67,7 @@ export function QuestsManagementSection() {
   const handleAddParticipant = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/admin/quests/participants", {
+      const response = await fetch(adminApiRoutes.quests.participants, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -87,13 +89,13 @@ export function QuestsManagementSection() {
         fetchParticipants();
       }
     } catch (error) {
-      console.error("Failed to add participant:", error);
+      logger.error("Failed to add participant:", error);
     }
   };
 
   const handleUpdateLanguage = async (id: string, language: string) => {
     try {
-      const response = await fetch(`/api/admin/quests/participants/${id}`, {
+      const response = await fetch(adminApiRoutes.quests.participantById(id), {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ language }),
@@ -103,7 +105,7 @@ export function QuestsManagementSection() {
         fetchParticipants();
       }
     } catch (error) {
-      console.error("Failed to update language:", error);
+      logger.error("Failed to update language:", error);
     }
   };
 

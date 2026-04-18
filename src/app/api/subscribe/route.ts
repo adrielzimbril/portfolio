@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
             product_type: type,
             requested_at: new Date().toISOString(),
             features: features,
-            cover: getImageUrl(cover || ""),
+            cover_image: getImageUrl(cover || ""),
             product_url: slug,
             custom_text: customText,
             subscribed_from_page: JSON.stringify({
@@ -147,7 +147,7 @@ export async function POST(req: NextRequest) {
               referer: req.headers.get("referer"),
               url: req.url,
             }),
-          } as any);
+          });
         } catch (e: unknown) {
           logger.error(
             `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
