@@ -11,7 +11,6 @@ const toast = {
       title: "Success",
       description: message,
       type: "success",
-      duration: options?.duration || 5000,
     });
   },
   error: (message: string, options?: { duration?: number }) => {
@@ -21,7 +20,6 @@ const toast = {
       title: "Error",
       description: message,
       type: "error",
-      duration: options?.duration || 5000,
     });
   },
   info: (message: string, options?: { duration?: number }) => {
@@ -31,7 +29,6 @@ const toast = {
       title: "Info",
       description: message,
       type: "info",
-      duration: options?.duration || 5000,
     });
   },
   warning: (message: string, options?: { duration?: number }) => {
@@ -41,16 +38,15 @@ const toast = {
       title: "Warning",
       description: message,
       type: "warning",
-      duration: options?.duration || 5000,
     });
   },
-  promise: <T,>(
+  promise: <T>(
     promise: Promise<T>,
     options: {
       loading: string;
       success: string | ((data: T) => string);
       error: string | ((error: Error) => string);
-    }
+    },
   ) => {
     const id = Math.random().toString(36).substring(7);
     toastManager.add({
@@ -58,28 +54,31 @@ const toast = {
       title: "Loading",
       description: options.loading,
       type: "loading",
-      duration: Infinity,
     });
 
     promise
       .then((data) => {
-        const message = typeof options.success === "function" ? options.success(data) : options.success;
+        const message =
+          typeof options.success === "function"
+            ? options.success(data)
+            : options.success;
         toastManager.add({
           id,
           title: "Success",
           description: message,
           type: "success",
-          duration: 5000,
         });
       })
       .catch((error) => {
-        const message = typeof options.error === "function" ? options.error(error) : options.error;
+        const message =
+          typeof options.error === "function"
+            ? options.error(error)
+            : options.error;
         toastManager.add({
           id,
           title: "Error",
           description: message,
           type: "error",
-          duration: 5000,
         });
       });
   },

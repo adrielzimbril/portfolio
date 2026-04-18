@@ -9,14 +9,20 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { language, message } = body;
+    const { messages, creator_name, creator_avatar_url } = body;
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
+    const updateData: any = {};
+    if (messages !== undefined) updateData.message = messages;
+    if (creator_name !== undefined) updateData.creator_name = creator_name;
+    if (creator_avatar_url !== undefined)
+      updateData.creator_avatar_url = creator_avatar_url;
+
     const { error } = await supabase
       .from("community_wall")
-      .update({ message })
+      .update(updateData)
       .eq("id", id);
 
     if (error) {
@@ -26,7 +32,7 @@ export async function PATCH(
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to update language" },
+      { error: "Failed to update message" },
       { status: 500 },
     );
   }

@@ -26,7 +26,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { creator_name, creator_avatar_url, message, language } = body;
+    const { creator_name, creator_avatar_url, messages } = body;
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
@@ -36,9 +36,7 @@ export async function POST(request: Request) {
       .insert({
         creator_name,
         creator_avatar_url: creator_avatar_url || null,
-        message: {
-          [language || Locale.EN]: message,
-        },
+        message: messages || {},
         user_id: null, // Admin messages don't have a user_id
       })
       .select()
