@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  useState,
-  createContext,
-  useContext,
-  useRef,
-  useEffect,
-} from "react";
+import React, { useState, createContext, useContext } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { ReactionButton } from "@/components/shared/pages/shared/reactions/ReactionButton";
 import { cn } from "@/utils/utils";
@@ -13,11 +7,6 @@ import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { useReactions } from "@/lib/reactions/use-reactions";
 import { useReactionStatus } from "@/lib/reactions/use-reaction-status";
-import { useUser } from "@/integrations/auth/provider/supabase";
-import {
-  getAnonymousUserId,
-  syncAnonymousReactionsOnLogin,
-} from "@/lib/reactions/anonymous-user";
 
 // --- Convenience Wrapper ---
 export function ReactionBar({
@@ -32,20 +21,6 @@ export function ReactionBar({
   const reactionTypes = Object.values(ReactionType);
   const { reactions } = useReactions(pageType, entityId);
   const { userStatus } = useReactionStatus(pageType, entityId);
-  const { user } = useUser();
-  const hasSyncedRef = useRef(false);
-
-  // Sync anonymous reactions once when user logs in
-  useEffect(() => {
-    const syncAnonymous = async () => {
-      const anonymousId = getAnonymousUserId();
-      if (user?.id && anonymousId && !hasSyncedRef.current) {
-        hasSyncedRef.current = true;
-        await syncAnonymousReactionsOnLogin(anonymousId);
-      }
-    };
-    syncAnonymous();
-  }, [user]);
 
   const totalCount = Object.values(reactions).reduce(
     (acc, curr) => acc + curr,

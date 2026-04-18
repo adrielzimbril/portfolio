@@ -13,7 +13,9 @@ import type { PropsWithChildren } from "react";
 import { appConfig } from "@/data/app-config";
 import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
+import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
+import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
+import { SyncProvider } from "@/lib/reactions/sync-provider";
 
 import { notFound } from "next/navigation";
 
@@ -70,22 +72,24 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <LayoutProvider>
-              <TooltipProvider openDelay={0} closeDelay={0}>
-                <main>
-                  <div className="container mx-auto relative">
-                    <Navbar />
-                    {/* <Dockbar asFade={false} /> */}
-                    {/* <SmoothCursor /> */}
-                    {children}
-                    <ScrollToTop />
-                    <Toaster position="bottom-right" />
-                    {/* <SplashCursor /> */}
-                    <Footer />
-                  </div>
-                </main>
-              </TooltipProvider>
-            </LayoutProvider>
+            <SyncProvider>
+              <LayoutProvider>
+                <TooltipProvider openDelay={0} closeDelay={0}>
+                  <main>
+                    <div className="container mx-auto relative">
+                      <Navbar />
+                      {/* <Dockbar asFade={false} /> */}
+                      {/* <SmoothCursor /> */}
+                      {children}
+                      <ScrollToTop />
+                      <Toaster position="bottom-right" />
+                      {/* <SplashCursor /> */}
+                      <Footer />
+                    </div>
+                  </main>
+                </TooltipProvider>
+              </LayoutProvider>
+            </SyncProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
         {/* <AnalyticsScript /> */}

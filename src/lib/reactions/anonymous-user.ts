@@ -5,30 +5,37 @@ import { apiRoutes } from "@/data/api-routes";
 const ANONYMOUS_USER_ID_COOKIE = "shironymous_reactions_user_id";
 const ANONYMOUS_SYNC_COOKIE = "shironymous_reactions_synced";
 
+// Helper function to get cookie value
+function getCookie(name: string): string | null {
+  if (typeof window === "undefined") return null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
+  return null;
+}
+
+// Helper function to set cookie
+function setCookie(name: string, value: string, days: number) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
+// Check if user is authenticated via Supabase auth cookies
+export function isUserAuthenticated(): boolean {
+  // Check for Supabase auth token cookies
+  const authToken = getCookie("sb-puvwpzzntsvoihxbuxbz-auth-token.0");
+  return !!authToken;
+}
+
 export function getAnonymousUserId(): string {
   if (typeof window === "undefined") return "";
-
-  // Try to get from cookie first
-  const getCookie = (name: string): string | null => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
-    return null;
-  };
 
   let anonymousId = getCookie(ANONYMOUS_USER_ID_COOKIE);
 
   if (!anonymousId) {
     // Generate a new anonymous ID
     anonymousId = `anon_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
-
-    // Set cookie with 1 year expiration
-    const setCookie = (name: string, value: string, days: number) => {
-      const expires = new Date();
-      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-      document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-    };
-
     setCookie(ANONYMOUS_USER_ID_COOKIE, anonymousId, 365);
   }
 
