@@ -17,14 +17,14 @@ export async function PATCH(
     // Try to update in challenge_registrations first
     const { error: regError } = await supabase
       .from("challenge_registrations")
-      .update({ language })
+      .update({})
       .eq("id", id);
 
     // If not found in registrations, try submissions
     if (regError) {
       const { error: subError } = await supabase
         .from("challenge_submissions")
-        .update({ language })
+        .update({})
         .eq("id", id);
 
       if (subError) {

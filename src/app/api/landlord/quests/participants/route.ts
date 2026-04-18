@@ -77,7 +77,6 @@ export async function POST(request: Request) {
         email,
         message,
         challenge_slug,
-        language: language || "en",
         meta,
       })
       .select()
