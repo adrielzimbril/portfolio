@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
+import { logger } from "@/utils";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

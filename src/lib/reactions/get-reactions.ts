@@ -11,7 +11,7 @@ export async function getReactions(
   const supabase = createClient(cookieStore);
 
   const { data, error } = await supabase
-    .from("reactions" as any)
+    .from("reactions")
     .select("reaction_type")
     .eq("page_type", pageType)
     .eq("entity_id", entityId);
