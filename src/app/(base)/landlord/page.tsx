@@ -85,8 +85,16 @@ export default async function AdminPage() {
   }
 
   // Fetch user data to check admin status
-  const res = await fetch(apiRoutes.auth.user.link);
-  const { user } = await res.json();
+  let user = null;
+  try {
+    const res = await fetch(apiRoutes.auth.user.link);
+    if (res.ok) {
+      const data = await res.json();
+      user = data.user;
+    }
+  } catch (error) {
+    // User fetch failed, continue without user
+  }
 
   return (
     <AdminAuthGuard user={user}>

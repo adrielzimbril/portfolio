@@ -31,8 +31,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function CommunityPage() {
-  const res = await fetch(apiRoutes.auth.user.link);
-  const { user } = await res.json();
+  let user = null;
+  try {
+    const res = await fetch(apiRoutes.auth.user.link);
+    if (res.ok) {
+      const data = await res.json();
+      user = data.user;
+    }
+  } catch (error) {
+    // User fetch failed, continue without user
+  }
   const t = await getTranslations();
 
   return (
