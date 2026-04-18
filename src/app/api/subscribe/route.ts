@@ -1,6 +1,7 @@
 import { getImageUrl } from "@/utils/base-url";
 import { NextRequest } from "next/server";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import logger from "@/utils/logger";
 import { sendEmail } from "@/integrations/mail";
 import { addContact } from "@/integrations/contact";
@@ -15,6 +16,9 @@ import {
 import { getBrevoConfig } from "@/config";
 
 export async function POST(req: NextRequest) {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+
   const body = await req.json().catch(() => ({}));
   const {
     email,

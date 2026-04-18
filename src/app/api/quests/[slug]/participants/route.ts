@@ -1,12 +1,15 @@
 import { NextRequest } from "next/server";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import logger from "@/utils/logger";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
     const db = supabase as any;
     const { slug } = await params;
 
@@ -15,7 +18,10 @@ export async function GET(
         .from("challenge_registrations")
         .select("email")
         .eq("challenge_slug", slug),
-      db.from("challenge_submissions").select("email").eq("challenge_slug", slug),
+      db
+        .from("challenge_submissions")
+        .select("email")
+        .eq("challenge_slug", slug),
     ]);
 
     if (registrationsRes.error || submissionsRes.error) {
@@ -57,8 +63,8 @@ export async function GET(
         },
       }),
       {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
+        status: 200,
+        headers: { "Content-Type": "application/json" },
       },
     );
   } catch (error) {

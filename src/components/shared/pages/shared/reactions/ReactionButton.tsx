@@ -9,6 +9,7 @@ import { getCurrentUserId } from "@/lib/reactions/anonymous-user";
 import { apiRoutes } from "@/data/api-routes";
 import { pickRandomColor } from "@/utils";
 import { useUser } from "@/integrations/auth/provider/supabase";
+import { logger } from "@/utils/logger";
 
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
@@ -105,7 +106,7 @@ export function ReactionButton({
       globalMutate(countsKey, counts);
       globalMutate(statusKey, userStatus);
     } catch (error) {
-      console.error("Reaction error:", error);
+      logger.error("Reaction error:", error);
       // Rollback
       setLocalIsReacted(isReacted);
       globalMutate(countsKey);

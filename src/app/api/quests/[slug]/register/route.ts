@@ -4,7 +4,8 @@ import { appConfig } from "@/data/app-config";
 import { getQuestBySlug } from "@/integrations/content/lib";
 import { addContact, ContactProvider } from "@/integrations/contact";
 import { sendEmail } from "@/integrations/mail";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
 import { getResourcesUrl } from "@/utils/base-url";
@@ -22,6 +23,8 @@ export async function POST(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
     const db = supabase as any;
     const { slug } = await params;
     const quest = await getQuestBySlug(slug);

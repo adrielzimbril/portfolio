@@ -133,7 +133,7 @@ export async function syncAnonymousReactionsOnLogin(
 
     return syncedCount || 0;
   } catch (error) {
-    console.error("Error syncing anonymous reactions:", error);
+    logger.error("Error syncing anonymous reactions:", error);
     return 0;
   }
 }

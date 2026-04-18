@@ -1,19 +1,11 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
-import { getSupabaseConfig } from "@/config";
 
 export async function GET() {
   try {
     const cookieStore = await cookies();
-    const { url, anonKey } = getSupabaseConfig();
-    const supabase = createServerClient(url!, anonKey!, {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-      },
-    });
+    const supabase = createClient(cookieStore);
 
     const { data: messages, error } = await supabase
       .from("community_wall")
@@ -36,14 +28,7 @@ export async function POST(request: Request) {
     const { creator_name, creator_avatar_url, message, language } = body;
 
     const cookieStore = await cookies();
-    const { url, anonKey } = getSupabaseConfig();
-    const supabase = createServerClient(url!, anonKey!, {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-      },
-    });
+    const supabase = createClient(cookieStore);
 
     const { data, error } = await supabase
       .from("community_wall")

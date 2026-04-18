@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
-import { getSupabaseConfig } from "@/config";
 
 export async function GET(request: Request) {
   try {
@@ -9,14 +8,7 @@ export async function GET(request: Request) {
     const slug = searchParams.get("slug");
 
     const cookieStore = await cookies();
-    const { url, anonKey } = getSupabaseConfig();
-    const supabase = createServerClient(url!, anonKey!, {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-      },
-    });
+    const supabase = createClient(cookieStore);
 
     let query = supabase
       .from("challenge_registrations")
@@ -71,14 +63,7 @@ export async function POST(request: Request) {
     } = body;
 
     const cookieStore = await cookies();
-    const { url, anonKey } = getSupabaseConfig();
-    const supabase = createServerClient(url!, anonKey!, {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll();
-        },
-      },
-    });
+    const supabase = createClient(cookieStore);
 
     const meta = {
       source: source || "admin",

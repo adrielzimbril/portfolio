@@ -6,7 +6,8 @@ import {
   isSubmissionClosed,
 } from "@/integrations/content/lib/quests";
 import { sendEmail } from "@/integrations/mail";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import { addContact, ContactProvider } from "@/integrations/contact";
 import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
@@ -26,6 +27,8 @@ export async function POST(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
     const db = supabase as any;
     const { slug } = await params;
     const quest = await getQuestBySlug(slug);

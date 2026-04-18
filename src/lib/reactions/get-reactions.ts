@@ -1,22 +1,14 @@
-import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
 import { PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
-import { getSupabaseConfig } from "@/config";
 
 export async function getReactions(
   pageType: PageType,
   entityId: string,
 ): Promise<Record<ReactionType, number>> {
   const cookieStore = await cookies();
-  const { url, anonKey } = getSupabaseConfig();
-  const supabase = createServerClient(url!, anonKey!, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-    },
-  });
+  const supabase = createClient(cookieStore);
 
   const { data, error } = await supabase
     .from("reactions" as any)

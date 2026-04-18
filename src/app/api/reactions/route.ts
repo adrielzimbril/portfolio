@@ -181,7 +181,7 @@ export async function POST(request: Request) {
       userStatus,
     });
   } catch (error: any) {
-    console.error("API Reaction error:", error);
+    logger.error("API Reaction error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

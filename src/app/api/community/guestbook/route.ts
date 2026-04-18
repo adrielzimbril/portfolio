@@ -1,10 +1,15 @@
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { logger } from "@/utils/logger";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { message, pattern_index, rotation, language } = body;
+
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
 
     const {
       data: { user },
@@ -35,7 +40,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error("Guestbook API error:", error);
+    logger.error("Guestbook API error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
