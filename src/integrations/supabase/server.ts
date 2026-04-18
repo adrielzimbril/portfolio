@@ -1,5 +1,4 @@
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 import { Database } from "@/integrations/supabase/types";
 import { supabaseKey } from "@/integrations/supabase/client";
 
@@ -12,7 +11,7 @@ export const createClient = (cookieStore: any) => {
       setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
+            cookieStore.set(name, value, options),
           );
         } catch {
           // The `setAll` method was called from a Server Component.

@@ -36,8 +36,9 @@ export async function POST(request: Request) {
       .insert({
         creator_name,
         creator_avatar_url: creator_avatar_url || null,
-        message,
-        language: language || Locale.EN,
+        message: {
+          [language || Locale.EN]: message,
+        },
         user_id: null, // Admin messages don't have a user_id
       })
       .select()
