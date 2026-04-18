@@ -9,7 +9,6 @@ type Pattern = string | RegExp;
 
 const FOLDER_PATTERNS: Pattern[] = [
   "_source",
-  "node_modules",
   ".turbo",
   ".next",
   ".content-collections",
@@ -17,6 +16,9 @@ const FOLDER_PATTERNS: Pattern[] = [
   ".superdesign",
   ".vercel/output",
 ];
+
+// node_modules is deleted separately at the end to avoid circular dependency with tsx
+const NODE_MODULES = "node_modules";
 
 const FILE_PATTERNS: Pattern[] = [
   /^.+.lock$/,
@@ -147,6 +149,12 @@ async function startClean(): Promise<void> {
 
     await cleanFolders(rootDir);
     console.info("End of cleaning old install caches");
+
+    // Delete node_modules at the very end to avoid circular dependency with tsx
+    if (existsSync(NODE_MODULES)) {
+      deleteFolder(NODE_MODULES);
+      console.info("Deleted node_modules");
+    }
   } catch (error) {
     console.error("An error occurred:", error);
   }
