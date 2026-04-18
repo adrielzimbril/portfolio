@@ -2,32 +2,34 @@
 id: "v0.9.0"
 version: "v0.9.0-alpha"
 type: "feature"
-date: "2025-10-15"
+date: "2025-10-16"
 published: true
 ---
 
-# Contact & Analytics Integration
+# Subscription System & Thoughts Integration
 
-This release adds essential communication and analytics features to the portfolio.
+This release introduces a subscription modal with Brevo integration and integrates a Thoughts section into the homepage.
 
 ## New Features
 
-### Contact Form
+### Subscription Modal
 
-- **Email Notifications**: Automatic email delivery on form submission
-- **Form Validation**: Client-side and server-side validation
-- **Success States**: Clear feedback for successful submissions
+- **Multi-Step Flow**: Revamped SubscriptionModal with multi-step flow
+- **Brevo Integration**: Brevo API integration for email management
+- **Auto-Subscribe**: Auto-subscribe on mount when email prop is provided
+- **Product Validation**: Email API with product validation
 
-### Analytics
+### Thoughts Section
 
-- **Page Tracking**: Track visitor interactions across the site
-- **Event Tracking**: Monitor button clicks and user actions
-- **Performance Metrics**: Monitor page load times and user engagement
+- **Homepage Integration**: Thoughts section integrated into Home page
+- **New Component**: New Thoughts section component
+- **Testimonials**: Enhanced testimonials with auto-rotating card design
 
-### About Section
+### Technical Improvements
 
-- **Skills Visualization**: Interactive display of technical skills
-- **Experience Timeline**: Professional history presentation
-- **Personal Bio**: Enhanced personal introduction section
+- **RPC Calls**: Improved RPC calls for user and subscriber handling
+- **User Linking**: User linking and merging support in backend
+- **Database Triggers**: Trigger inspection SQL for newsletter subscribers
+- **Unique Constraints**: Prevent duplicate emails and user IDs
 
-These improvements provide better communication channels and insights into user behavior.
+This release enhances user engagement with subscription capabilities and improved content presentation.

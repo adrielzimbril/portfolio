@@ -2,67 +2,59 @@
 id: "v2.4.0"
 version: "v2.4.0-prism"
 type: "milestone"
-date: "2026-03-24"
+date: "2026-04-13"
 published: true
 ---
 
-# Premium UI Refactor
+# Community Wall & Data-Driven UI
 
-This release represents a major UI overhaul, bringing a more premium feel and introducing new community-focused features.
-
-## Major UI Refactor
-
-### Design System
-
-- **Premium Aesthetics**: Complete visual refresh with modern design principles
-- **Improved Typography**: Enhanced font hierarchy and spacing
-- **Color Palette**: Refined color scheme for better visual harmony
-- **Component Library**: Updated component library with consistent styling
-
-### User Experience
-
-- **Smoother Transitions**: Enhanced animations and transitions
-- **Better Feedback**: Improved loading states and user feedback
-- **Intuitive Navigation**: Streamlined navigation patterns
-- **Accessibility**: Enhanced accessibility throughout the interface
+This release introduces a community wall with card-based design, data-driven dashboard components, and a new changelog page.
 
 ## Community Wall
 
-### Features
+### Card-Based Design
 
-- **Real-time Updates**: Live community messages and interactions
-- **User Profiles**: Display user avatars and information
-- **Message Filtering**: Filter messages by type or user
-- **Moderation Tools**: Content moderation and management
+- **SVG Pattern Cards**: Beautiful card-based community wall with SVG patterns
+- **Avatar Rendering**: Improved avatar rendering with fallback colors
+- **Leave Note**: Users can leave notes and messages
+- **Filter Modal**: Timeline filter modal for message filtering
 
 ### Authentication
 
-- **Supabase Integration**: Seamless authentication with Supabase
-- **GitHub OAuth**: Login with GitHub for quick access
+- **Supabase Integration**: Real-time database for instant updates
+- **GitHub OAuth**: Sign in with your GitHub account
 - **User Management**: Complete user profile management
-- **Session Handling**: Secure session management
 
-## New Pages
+## Data-Driven UI
 
-### Stats Page
+### Stats Dashboard
 
-- **Analytics Dashboard**: Comprehensive site analytics
-- **Performance Metrics**: Real-time performance monitoring
-- **User Insights**: Visitor behavior and engagement data
-- **Visual Reports**: Interactive charts and graphs
+- **Data-Driven Components**: Migrated stats to data-driven components
+- **GitHub Stats**: GitHub contribution graphs and metrics
+- **Lighthouse Scores**: Performance monitoring with cache duration
+- **Page Views**: Analytics tracking with atomic updates
 
-### Toolbox Page
+### Tools & Setup
 
-- **Tool Collection**: Curated collection of useful tools
-- **Categories**: Organized by category for easy browsing
-- **Ratings**: Community ratings and reviews
-- **External Links**: Quick access to external resources
+- **Data-Driven Cards**: Migrated tools and setup to data-driven cards
+- **Icon Migration**: Migrated icons to SVGs for better performance
+- **Resource Management**: Centralized resource management
 
-### Setup Page
+## Changelog Page
 
-- **Development Setup**: Complete development environment guide
-- **Configuration**: Step-by-step configuration instructions
-- **Best Practices**: Recommended practices and workflows
-- **Troubleshooting**: Common issues and solutions
+### New Features
 
-This release significantly improves the user experience and adds powerful new features for community engagement and analytics.
+- **Changelog UI**: New changelog page with header and timeline
+- **Updates Widget**: Animated changelog updates widget
+- **Data Layer**: Changelog data layer and releases fetch
+- **Reactions Support**: Reactions on changelog entries
+
+## Technical Improvements
+
+- **Icon Library**: Migrated to new icon library (aurthle/icons)
+- **Motion UI**: Adopted motion UI for smoother animations
+- **Color Tokens**: Migrated UI colors to squircle color tokens
+- **I18n**: Enhanced internationalization support
+- **Logger**: Added logger to replace console errors
+
+This release significantly improves the user experience with a beautiful community wall and modern data-driven components.

@@ -6,9 +6,9 @@ date: "2026-04-18"
 published: true
 ---
 
-# Reactions System
+# Reactions System & Admin Panel
 
-This release introduces a comprehensive emoji-based reaction system with anonymous user support and synchronization capabilities.
+This release introduces a comprehensive emoji-based reaction system with anonymous user support, synchronization capabilities, and a new admin panel for content management.
 
 ## New Features
 
@@ -18,7 +18,7 @@ We've added a complete reaction system that allows users to express themselves w
 
 - **Multiple Reaction Types**: Like, heart, celebrate, insightful, and sceptic reactions
 - **Animated States**: Emojis animate when active for engaging user feedback
-- **Dock-Style Bar**: Reaction bar appears on hover for clean UI
+- **Inline UI**: Compact mobile-friendly inline reaction interface
 - **Real-Time Counts**: Instant updates showing reaction counts
 
 ### Anonymous User Support
@@ -27,12 +27,19 @@ We've added a complete reaction system that allows users to express themselves w
 - **Cross-Device Sync**: Reactions sync when users authenticate
 - **Seamless Migration**: Anonymous reactions merge with authenticated user account
 
+### Admin Panel
+
+- **Language Support**: Admin panel with multi-language support
+- **Auth Guard**: Protected admin routes with authentication
+- **Centralized Config**: Unified admin configuration and UI
+- **Session Management**: Configurable session timeout
+
 ### Integration
 
 - **Thoughts**: Reactions on blog posts and articles
 - **Projects**: Reactions on case studies and project pages
 - **Hub**: Reactions on resources and tools
-- **Quests**: Reactions on challenge submissions
+- **Changelog**: Reactions on changelog entries
 
 ## Technical Details
 
@@ -40,5 +47,7 @@ We've added a complete reaction system that allows users to express themselves w
 - **Cookie Management**: Anonymous user ID tracking with 365-day expiration
 - **Sync Provider**: Automatic sync mechanism on authentication
 - **TypeScript Types**: Full type safety for reaction data structures
+- **Batch API**: Optimized batch endpoint for reaction status
+- **Pluggable Auth**: Flexible authentication provider system
 
-This feature enhances user engagement and provides valuable feedback across the platform.
+This feature enhances user engagement and provides valuable feedback across the platform with powerful admin tools for content management.
