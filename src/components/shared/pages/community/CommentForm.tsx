@@ -6,9 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
 import { cn } from "@/utils/utils";
-import { Send, ArrowLeftOne, ArrowRightOne, XCircle } from "@aurthle/icons";
-import { DialogHeader, DialogSeparator } from "@/components/ui/dialog";
-import { DialogTitle } from "@radix-ui/react-dialog";
+import { ArrowLeftOne, ArrowRightOne } from "@aurthle/icons";
+import {
+  DialogHeader,
+  DialogSeparator,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -32,11 +35,15 @@ interface CommentFormProps {
   onSuccess?: () => void;
 }
 
+const MAX_COMMENT_LENGTH = 110;
+
 const schema = z.object({
   comment: z
     .string()
     .min(1, { message: "Comment cannot be empty" })
-    .max(500, { message: "Comment must be less than 500 characters" }),
+    .max(MAX_COMMENT_LENGTH, {
+      message: `Comment must be less than ${MAX_COMMENT_LENGTH} characters`,
+    }),
 });
 
 type CommentFormValues = z.infer<typeof schema>;
@@ -122,20 +129,14 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       <DialogSeparator />
 
       <div className="space-y-6">
-        {/* <div className="text-center space-y-2">
-          <p className="text-b-white-invert-sec">
-            {t("community.comment-form.description")}
-          </p>
-        </div> */}
-
         {/* Desktop: 2-column layout, Mobile: step-by-step */}
         <div className="hidden md:grid md:grid-cols-2 gap-6">
           {/* Left column: Controls */}
-          <div className="space-y-4">
+          <div className="size-full space-y-4">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
+                className="flex flex-col size-full space-y-4"
               >
                 <FormField
                   control={form.control}
@@ -146,15 +147,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                       <FormControl>
                         <Textarea
                           placeholder={t("community.comment-form.placeholder")}
-                          // className={cn(
-                          //   "w-full min-h-[120px]",
-                          //   "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                          //   "bg-b-base text-foreground placeholder:text-muted-foreground",
-                          //   "focus:outline-none focus:squircle-border-b-base-accent",
-                          //   "resize-none transition-all",
-                          // )}
                           rows={3}
-                          limit={110}
+                          limit={MAX_COMMENT_LENGTH}
                           showLimit
                           disabled={form.formState.isSubmitting}
                           {...field}
@@ -201,7 +195,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   </div>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 mt-auto">
                   <Button
                     type="button"
                     variant="outline"
@@ -209,7 +203,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     asIcon
                     onClick={() => form.reset()}
                   >
-                    <XCircle size={16} className="mr-2" variant="bulk" />
                     Cancel
                   </Button>
                   <Button
@@ -225,10 +218,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                       {form.formState.isSubmitting ? (
                         t("community.comment-form.submitting")
                       ) : (
-                        <>
-                          <Send size={20} variant="bulk" />
-                          {t("community.comment-form.submit")}
-                        </>
+                        <>{t("community.comment-form.submit")}</>
                       )}
                     </span>
                   </Button>
@@ -293,15 +283,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                       <FormControl>
                         <Textarea
                           placeholder={t("community.comment-form.placeholder")}
-                          className={cn(
-                            "w-full min-h-[120px]",
-                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                            "bg-b-base text-foreground placeholder:text-muted-foreground",
-                            "focus:outline-none focus:squircle-border-b-base-accent",
-                            "resize-none transition-all",
-                          )}
                           rows={5}
-                          limit={115}
+                          limit={MAX_COMMENT_LENGTH}
                           showLimit
                           disabled={form.formState.isSubmitting}
                           {...field}
@@ -320,7 +303,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     asIcon
                     onClick={() => form.reset()}
                   >
-                    <XCircle size={16} className="mr-2" variant="bulk" />
                     Cancel
                   </Button>
                   <Button
@@ -340,7 +322,18 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
             </Form>
           ) : (
             <div className="flex flex-col items-center gap-6">
-              <div className="flex items-center gap-2">
+              <div className="relative">
+                <CommunityWallCard
+                  patternIndex={patternIndex}
+                  author={user?.user_metadata?.name || user?.email}
+                  profilePicture={user?.user_metadata?.avatar_url}
+                  rotation={rotation}
+                  message={form.watch("comment")}
+                  className="h-[350px] w-[280px]"
+                />
+              </div>
+
+              <div className="flex gap-2">
                 <Button
                   type="button"
                   variant="outline"
@@ -351,18 +344,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 >
                   <ArrowLeftOne size={20} />
                 </Button>
-
-                <div className="relative">
-                  <CommunityWallCard
-                    patternIndex={patternIndex}
-                    author={user?.user_metadata?.name || user?.email}
-                    profilePicture={user?.user_metadata?.avatar_url}
-                    rotation={rotation}
-                    message={form.watch("comment")}
-                    className="h-[350px] w-[280px]"
-                  />
-                </div>
-
                 <Button
                   type="button"
                   variant="outline"
@@ -390,21 +371,22 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   <span className="text-sm w-12 text-right">{rotation}°</span>
                 </div>
 
-                <div className="flex justify-center gap-2">
-                  {patterns.map((_, index) => (
-                    <Button
-                      key={index}
-                      type="button"
-                      onClick={() => setPatternIndex(index)}
-                      className={cn(
-                        "h-3 w-3 rounded-full transition-all",
-                        patternIndex === index
-                          ? "bg-primary scale-125"
-                          : "bg-muted",
-                      )}
-                      aria-label={`Pattern ${index + 1}`}
-                    />
-                  ))}
+                <div className="flex items-center gap-2">
+                  <Label className="text-sm font-medium">Pattern:</Label>
+                  <RadioGroup
+                    value={patternIndex.toString()}
+                    onValueChange={(value) => setPatternIndex(parseInt(value))}
+                    className="flex gap-1 flex-1 flex-row"
+                  >
+                    {patterns.map((_, index) => (
+                      <Radio
+                        key={index}
+                        value={index.toString()}
+                        size="xl"
+                        aria-label={`Pattern ${index + 1}`}
+                      />
+                    ))}
+                  </RadioGroup>
                 </div>
               </div>
 
@@ -415,7 +397,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   className="flex-1"
                   onClick={handleBack}
                 >
-                  <ArrowLeftOne size={16} className="mr-2" />
                   Back
                 </Button>
                 <Button
@@ -432,10 +413,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     {form.formState.isSubmitting ? (
                       t("community.comment-form.submitting")
                     ) : (
-                      <>
-                        <Send size={20} variant="bulk" />
-                        {t("community.comment-form.submit")}
-                      </>
+                      <>{t("community.comment-form.submit")}</>
                     )}
                   </span>
                 </Button>
