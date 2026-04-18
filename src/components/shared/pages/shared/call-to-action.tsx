@@ -8,7 +8,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
-import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
 import { toast } from "@/lib/toast";
 import { richTextComponent } from "@/integrations/content/utils/mdx-components";

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";

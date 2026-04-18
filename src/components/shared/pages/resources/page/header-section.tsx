@@ -18,7 +18,7 @@ import {
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { Button } from "@/components/ui/button";
 import { useScrollTo } from "@/hooks/useScrollTo";
-import { ProductAvatarsStats } from "@/components/SubscriberBadges";
+import { ProductAvatarsStats } from "@/components/shared/pages/newsletter/SubscriberBadges";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
