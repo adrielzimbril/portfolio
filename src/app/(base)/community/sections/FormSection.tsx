@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { Github, Google, ChatBubbleCircle } from "@aurthle/icons";
-import { GuestbookForm } from "../../../../components/shared/pages/community/GuestbookForm";
+import { GuestbookForm } from "@/components/shared/pages/community/GuestbookForm";
 import { useTranslations } from "use-intl";
 import { cn } from "@/utils/utils";
 

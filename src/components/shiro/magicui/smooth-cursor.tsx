@@ -1,5 +1,5 @@
 "use client";
-import { useSpring } from "motion/react";
+import { useSpring, motion } from "motion/react";
 import { FC, JSX, useEffect, useRef, useState } from "react";
 
 interface Position {
@@ -180,7 +180,7 @@ export function SmoothCursor({
   }, [cursorX, cursorY, rotation, scale]);
 
   return (
-    <div
+    <motion.div
       style={{
         position: "fixed",
         left: cursorX,
@@ -195,6 +195,6 @@ export function SmoothCursor({
       }}
     >
       {cursor}
-    </div>
+    </motion.div>
   );
 }

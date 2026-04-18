@@ -58,12 +58,15 @@ export function GetResource({
 
   const { siteKey } = getTurnstileConfig();
 
-  const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
-    appearance: "execute",
-    execution: "execute",
-    "retry-interval": 1000,
-    theme: "auto",
-  });
+  const { ref, token, error, isLoading, execute } = useTurnstile(
+    siteKey || "",
+    {
+      appearance: "execute",
+      execution: "execute",
+      "retry-interval": 1000,
+      theme: "auto",
+    },
+  );
   sleep(1000).then(() => execute());
 
   const productId = generateSimpleClientToken({

@@ -31,6 +31,7 @@ export function CommunityWallManagementSection() {
     creator_name: "",
     creator_avatar_url: "",
     message: "",
+    language: "en",
   });
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export function CommunityWallManagementSection() {
           creator_name: "",
           creator_avatar_url: "",
           message: "",
+          language: "en",
         });
         setShowAddForm(false);
         fetchMessages();

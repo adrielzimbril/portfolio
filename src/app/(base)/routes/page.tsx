@@ -1,8 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { HeaderSection } from "./sections/HeaderSection";
-import { RoutesSection } from "./sections/RoutesSection";
+import { HeaderSection } from "@/app/(base)/routes/sections/HeaderSection";
+import { RoutesSection } from "@/app/(base)/routes/sections/RoutesSection";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {

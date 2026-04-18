@@ -5,7 +5,7 @@ import { authRoutes } from "@/integrations/auth/routes";
 import { sendEmail } from "@/integrations/mail";
 import { Locale } from "@/types";
 import logger from "@/utils/logger";
-import { isDevelopment } from "@/config";
+import { isDevelopment, ConfigValue } from "@/config";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);

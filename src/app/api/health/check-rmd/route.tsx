@@ -14,7 +14,10 @@ export async function POST(request: Request) {
     //   );
     // }
 
-    const supabase = createClient(supabaseKey.url, supabaseKey.anonKey);
+    const supabase = createClient(
+      supabaseKey.url || "",
+      supabaseKey.anonKey || "",
+    );
 
     const { data, error } = await supabase.functions.invoke(
       "check_tables_rls",

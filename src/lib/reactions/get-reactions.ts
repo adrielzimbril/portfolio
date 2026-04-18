@@ -24,10 +24,6 @@ export async function getReactions(
     .eq("page_type", pageType)
     .eq("entity_id", entityId);
 
-  if (error) {
-    return {};
-  }
-
   const reactions: Record<string, number> = {
     like: 0,
     heart: 0,
@@ -35,6 +31,10 @@ export async function getReactions(
     insightful: 0,
     sceptic: 0,
   };
+
+  if (error) {
+    return reactions;
+  }
 
   data?.forEach((item) => {
     const type = item.reaction_type as keyof typeof reactions;

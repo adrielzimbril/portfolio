@@ -19,7 +19,7 @@ export function Turnstile({
     error,
     isLoading,
     execute: executeTurnstile,
-  } = useTurnstile(siteKey, {
+  } = useTurnstile(siteKey || "", {
     appearance: "execute",
     execution: "execute",
     "retry-interval": 1000,

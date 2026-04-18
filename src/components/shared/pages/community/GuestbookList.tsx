@@ -5,6 +5,7 @@ import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
+import { apiRoutes } from "@/data/api-routes";
 
 // Demo data
 const DEMO_MESSAGES = [
@@ -48,7 +49,7 @@ export function GuestbookList() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch("/api/community/messages");
+        const response = await fetch(apiRoutes.community.messages.link);
         if (response.ok) {
           const data = await response.json();
           if (data.messages && data.messages.length > 0) {

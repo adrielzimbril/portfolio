@@ -12,8 +12,8 @@ export const createClient = (request: NextRequest) => {
   });
 
   const supabase = createServerClient<Database>(
-    supabaseKey.url,
-    supabaseKey.anonKey,
+    supabaseKey.url || "",
+    supabaseKey.anonKey || "",
     {
       cookies: {
         getAll() {

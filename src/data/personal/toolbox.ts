@@ -1,10 +1,11 @@
 import { ToolItem } from "@/types";
+import { ToolboxToolCategory } from "@/types/enum";
 
 export const toolbox: ToolItem[] = [
   {
     id: "figma",
     name: "Figma",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Design tool for teams.",
     url: "https://www.figma.com",
     icon: "/img/tools/figma.png",
@@ -12,7 +13,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "framer",
     name: "Framer",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Design and publish your site in minutes.",
     url: "https://www.framer.com",
     icon: "/img/tools/framer.png",
@@ -20,7 +21,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "jitter",
     name: "Jitter",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Video editor for motion designers.",
     url: "https://jitter.video",
     icon: "/img/tools/jitter.png",
@@ -28,7 +29,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "aftereffects",
     name: "After Effects",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Motion graphics and visual effects software.",
     url: "https://www.adobe.com/products/aftereffects",
     icon: "/img/tools/aftereffects.svg",
@@ -36,7 +37,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "pixelsnap2",
     name: "PixelSnap 2",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Measure anything on your screen.",
     url: "https://getpixelsnap.com",
     icon: "/img/tools/pixelsnap2.png",
@@ -44,7 +45,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "blender",
     name: "Blender",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Free and open-source 3D creation suite.",
     url: "https://blender.org",
     icon: "/img/tools/blender.svg",
@@ -52,7 +53,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "spline",
     name: "Spline",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "3D design tool for the web.",
     url: "https://spline.design",
     icon: "/img/tools/spline.png",
@@ -60,7 +61,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "rive",
     name: "Rive",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Interactive animation runtime.",
     url: "https://rive.app",
     icon: "/img/tools/rive.webp",
@@ -68,7 +69,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "nextjs",
     name: "Next.js",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "The React Framework for the Web.",
     url: "https://nextjs.org",
     icon: "/img/tools/nextjs.svg",
@@ -76,7 +77,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "motion",
     name: "Motion",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "A production-ready motion library for React.",
     url: "https://motion.dev",
     icon: "/img/tools/motion.png",
@@ -84,7 +85,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "vercel",
     name: "Vercel",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "Develop. Preview. Ship.",
     url: "https://vercel.com",
     icon: "/img/tools/vercel.webp",
@@ -92,7 +93,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "supabase",
     name: "Supabase",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "The Open Source Firebase alternative.",
     url: "https://supabase.com",
     icon: "/img/tools/supabase.svg",
@@ -100,7 +101,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "windsurf",
     name: "Windsurf",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "AI-powered IDE for the modern web.",
     url: "https://windsurf.ai",
     icon: "/img/tools/windsurf.png",
@@ -108,7 +109,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "googleantigravity",
     name: "Google Antigravity",
-    category: "design",
+    category: ToolboxToolCategory.DESIGN,
     description: "Google's design system for building beautiful products.",
     url: "https://antigravity.design",
     icon: "/img/tools/googleantigravity.svg",
@@ -116,7 +117,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "atoms",
     name: "Atoms.dev",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "AI-powered code editor for the modern web.",
     url: "https://atoms.dev",
     icon: "/img/tools/atoms.png",
@@ -124,7 +125,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "codex",
     name: "Codex",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "AI code generation and development assistant.",
     url: "https://openai.com/codex",
     icon: "/img/tools/codex.png",
@@ -132,7 +133,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "claudecode",
     name: "Claude Code",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "AI-powered coding assistant for modern development.",
     url: "https://claude.ai/code",
     icon: "/img/tools/claude-code.png",
@@ -140,7 +141,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "resend",
     name: "Resend",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "Email API for developers.",
     url: "https://resend.com",
     icon: "/img/tools/resend.png",
@@ -148,7 +149,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "arc",
     name: "Arc",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "The browser for the future.",
     url: "https://arc.net",
     icon: "/img/tools/arc.svg",
@@ -156,7 +157,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "mymind",
     name: "mymind",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "Visual thinking tool.",
     url: "https://mymind.com",
     icon: "/img/tools/mymind.png",
@@ -164,7 +165,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "notion",
     name: "Notion",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "All-in-one workspace.",
     url: "https://www.notion.so",
     icon: "/img/tools/notion.svg",
@@ -172,7 +173,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "chatgpt",
     name: "ChatGPT",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "AI assistant for coding and writing.",
     url: "https://chat.openai.com",
     icon: "/img/tools/chatgpt.png",
@@ -180,7 +181,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "claude",
     name: "Claude",
-    category: "code",
+    category: ToolboxToolCategory.TOOLS,
     description: "AI assistant for coding and writing.",
     url: "https://claude.ai",
     icon: "/img/tools/claude.svg",
@@ -188,7 +189,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "fantastical",
     name: "Fantastical",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "Calendar app for macOS.",
     url: "https://flexibits.com/fantastical",
     icon: "/img/tools/fantastical.png",
@@ -196,7 +197,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "linear",
     name: "Linear",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "Issue tracking tool.",
     url: "https://linear.app",
     icon: "/img/tools/linear.png",
@@ -204,7 +205,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "cleanshotx",
     name: "CleanShot X",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "Screenshot and screen recording tool.",
     url: "https://getcleanshot.com",
     icon: "/img/tools/cleanshotx.png",
@@ -212,7 +213,7 @@ export const toolbox: ToolItem[] = [
   {
     id: "applemusic",
     name: "Apple Music",
-    category: "productivity",
+    category: ToolboxToolCategory.OTHER,
     description: "Music streaming service by Apple.",
     url: "https://music.apple.com",
     icon: "/img/tools/applemusic.svg",

@@ -12,6 +12,7 @@ import {
   AllUserResourceSlug,
   getResourceUserUrl,
 } from "@/config/resources.config";
+import { getBrevoConfig } from "@/config";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
@@ -146,7 +147,7 @@ export async function POST(req: NextRequest) {
               referer: req.headers.get("referer"),
               url: req.url,
             }),
-          });
+          } as any);
         } catch (e: unknown) {
           logger.error(
             `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,

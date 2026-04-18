@@ -1,5 +1,4 @@
-import { createClient } from "@/integrations/supabase/server";
-import { cookies } from "next/headers";
+import { supabase } from "@/integrations/supabase/client";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -7,8 +6,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { message, pattern_index, rotation, language } = body;
 
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -32,7 +29,7 @@ export async function POST(request: Request) {
       pattern_index: pattern_index ?? Math.floor(Math.random() * 10),
       rotation: rotation ?? Math.floor(Math.random() * 360),
       language: language || "en",
-    });
+    } as any);
 
     if (error) throw error;
 

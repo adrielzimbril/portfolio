@@ -1,10 +1,11 @@
 import { SetupItem } from "@/types";
+import { ToolboxSetupItemCategory } from "@/types/enum";
 
 export const setup: SetupItem[] = [
   {
     id: "macbook-pro-16",
     name: "MacBook Pro (16 inch), 2021",
-    category: "hardware",
+    category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Laptop"],
     description:
       "10-core CPU, 16-core GPU, 16-core Neural Engine, 32GB unified memory, 2TB SSD storage",
@@ -14,7 +15,7 @@ export const setup: SetupItem[] = [
   {
     id: "zoom65-keyboard",
     name: "Zoom65 Mechanical Keyboard",
-    category: "accessories",
+    category: ToolboxSetupItemCategory.ACCESSORIES,
     tags: ["Keyboard", "Mechanical"],
     description:
       "With a navy blue finish, this 65% custom mechanical keyboard has Oil King linear switches topped with GMK Hennessey keycaps",
@@ -24,7 +25,7 @@ export const setup: SetupItem[] = [
   {
     id: "gigabyte-monitor",
     name: "GIGABYTE M27Q-X 27 Monitor",
-    category: "hardware",
+    category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Monitor"],
     description: "A 240Hz 1440P KVM monitor that I use for work and gaming",
     imageUrl: "/img/setup/gigabyte-m27q-x.jpg",
@@ -33,7 +34,7 @@ export const setup: SetupItem[] = [
   {
     id: "ergochair-2",
     name: "Autonomous ErgoChair 2",
-    category: "hardware",
+    category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Chair"],
     description:
       "A fully adjustable, completely supportive, and super breathable desk chair in a black and white finish",
@@ -43,7 +44,7 @@ export const setup: SetupItem[] = [
   {
     id: "smartdesk-diy",
     name: "Autonomous SmartDesk DIY Standing Desk",
-    category: "hardware",
+    category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Desk"],
     description:
       "A standing desk frame in a white finish. Topped with the IKEA Karlby tabletop, the desk measures almost 9' wide",
@@ -53,7 +54,7 @@ export const setup: SetupItem[] = [
   {
     id: "wave-dx",
     name: "Wave DX Dynamic Microphone",
-    category: "audio",
+    category: ToolboxSetupItemCategory.AUDIO,
     tags: ["Microphone"],
     description:
       "A dynamic mic that captures detail like a condenser without the noise, Wave DX is a remarkable feat of audio engineering",
@@ -63,7 +64,7 @@ export const setup: SetupItem[] = [
   {
     id: "stream-deck-plus",
     name: "Stream Deck +",
-    category: "accessories",
+    category: ToolboxSetupItemCategory.ACCESSORIES,
     tags: ["Streaming"],
     description:
       "Iconic Stream Deck tech with customizable LCD keys, dials, and touch strip",
@@ -73,7 +74,7 @@ export const setup: SetupItem[] = [
   {
     id: "key-light",
     name: "Key Light MK.2",
-    category: "accessories",
+    category: ToolboxSetupItemCategory.ACCESSORIES,
     tags: ["Lighting"],
     description:
       "Ultra-bright and dimmable. Space-saving and built to last. App-controlled and destined to evolve with you",
@@ -83,7 +84,7 @@ export const setup: SetupItem[] = [
   {
     id: "hd60-x",
     name: "HD60 X Capture Card",
-    category: "accessories",
+    category: ToolboxSetupItemCategory.ACCESSORIES,
     tags: ["Streaming", "Capture"],
     description:
       "HD60 X lets you capture PS5 or Xbox gameplay like a pro. Stream or record high resolution content for audiences on any platform",

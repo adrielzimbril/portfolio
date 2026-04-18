@@ -4,7 +4,7 @@ import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/utils/utils";
 import { Menu, X } from "@aurthle/icons";
-import { useScroll } from "motion/react";
+import { useScroll, type Variants } from "motion/react";
 import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
@@ -18,43 +18,6 @@ import Image from "next/image";
 
 const INITIAL_WIDTH = "68rem";
 const MAX_WIDTH = "65rem";
-
-// Animation variants
-const overlayVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
-};
-
-const drawerVariants: Variants = {
-  hidden: { opacity: 0, y: 100 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    transition: {
-      type: "spring",
-      damping: 15,
-      stiffness: 200,
-      staggerChildren: 0.03,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 100,
-    transition: { duration: 0.1 },
-  },
-};
-
-const drawerMenuContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
-
-const drawerMenuVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
 
 export function Navbar() {
   const t = useTranslations();

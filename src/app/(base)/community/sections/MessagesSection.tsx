@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import logger from "@/utils/logger";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
-import { DEMO_MESSAGES } from "./demo-message";
+import { DEMO_MESSAGES } from "@/app/(base)/community/sections/demo-message";
+import { apiRoutes } from "@/data/api-routes";
 
 export function MessagesSection() {
   const [messages, setMessages] = useState(DEMO_MESSAGES);
@@ -12,7 +13,7 @@ export function MessagesSection() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetch("/api/community/messages");
+        const response = await fetch(apiRoutes.community.messages.link);
         if (response.ok) {
           const data = await response.json();
           if (data.messages && data.messages.length > 0) {

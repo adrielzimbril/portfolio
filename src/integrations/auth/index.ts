@@ -1,4 +1,3 @@
-export * from "./util/auth";
-export * from "./types/types";
-export * from "./provider";
-export * from "./routes";
+export * from "@/integrations/auth/util/auth";
+export * from "@/integrations/auth/types/types";
+export * from "@/integrations/auth/routes";
