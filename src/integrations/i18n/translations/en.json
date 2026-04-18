@@ -90,7 +90,7 @@
       "submitting": "Sending..."
     }
   },
-  "policy": {
+  "privacy": {
     "title": "Privacy Policy",
     "description": "How I handle your data. Simple, transparent and respectful of your privacy.",
     "page": {
@@ -417,7 +417,7 @@
       "changelog": {
         "default": "Changelog"
       },
-      "policy": {
+      "privacy": {
         "default": "Privacy Policy"
       },
       "terms": {

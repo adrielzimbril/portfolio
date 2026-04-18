@@ -6,23 +6,23 @@ import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLocale } from "use-intl";
 
-export function PolicyContent() {
-  const [policy, setPolicy] = useState<any>(null);
+export function PageContent() {
+  const [privacy, setPrivacy] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const locale = useLocale();
 
   useEffect(() => {
-    const loadPolicy = async () => {
+    const loadPrivacy = async () => {
       try {
-        const data = await getLegalByPath("policy", { locale });
-        setPolicy(data);
+        const data = await getLegalByPath("privacy", { locale });
+        setPrivacy(data);
       } catch (error) {
-        console.error("Failed to load policy:", error);
+        console.error("Failed to load privacy:", error);
       } finally {
         setIsLoading(false);
       }
     };
-    loadPolicy();
+    loadPrivacy();
   }, [locale]);
 
   if (isLoading) {
@@ -41,7 +41,7 @@ export function PolicyContent() {
   return (
     <SectionLayout isFlex>
       <div className="max-w-3xl mx-auto">
-        {policy?.body && <MarkdownContentRender content={policy.body} />}
+        {privacy?.body && <MarkdownContentRender content={privacy.body} />}
       </div>
     </SectionLayout>
   );

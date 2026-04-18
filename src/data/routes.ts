@@ -173,10 +173,10 @@ export const routes = {
     inHeader: false,
     inSitemap: true,
   },
-  policy: {
+  privacy: {
     name: "Privacy Policy",
-    key: "policy",
-    link: "/legal/policy",
+    key: "privacy",
+    link: "/legal/privacy",
     inHeader: false,
     inSitemap: true,
   },

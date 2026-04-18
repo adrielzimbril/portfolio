@@ -36,7 +36,7 @@ export async function Footer() {
     routes.changelog,
     routes.routes,
     routes.terms,
-    routes.policy,
+    routes.privacy,
   ];
 
   return (

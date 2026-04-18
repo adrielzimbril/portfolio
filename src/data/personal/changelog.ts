@@ -2,8 +2,8 @@ import { ChangelogItem, ChangelogItemType } from "@/types";
 
 export const changelog: ChangelogItem[] = [
   {
-    id: "v2.6.1",
-    version: "2.6.1",
+    id: "v2.61",
+    version: "v2.61-kaleidoscope",
     date: "2026-04-15",
     type: ChangelogItemType.FEATURE,
     changes: [

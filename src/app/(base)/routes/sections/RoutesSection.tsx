@@ -24,7 +24,7 @@ export function RoutesSection() {
     ],
     community: [routes.community, routes.connections, routes.changelog],
     tools: [routes.toolbox, routes.stats, routes.newsletter, routes.rss],
-    legal: [routes.terms, routes.policy],
+    legal: [routes.terms, routes.privacy],
   };
 
   return (

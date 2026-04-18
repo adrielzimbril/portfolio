@@ -11,19 +11,19 @@ export function HeaderSection() {
   const locale = useLocale();
 
   usePageViews(
-    routes.policy.key,
+    routes.privacy.key,
     undefined,
     {
       locale: locale,
-      path: getPathUrl(routes.policy.link),
+      path: getPathUrl(routes.privacy.link),
     },
     false,
   );
 
   return (
     <PageHero
-      title={t("policy.page.title")}
-      description={t("policy.page.description")}
+      title={t("privacy.page.title")}
+      description={t("privacy.page.description")}
       imagePath={{ emoji: "📜" }}
       isMobileShowed
     />

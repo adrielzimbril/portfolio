@@ -736,7 +736,7 @@
       "changelog": {
         "default": "Changelog"
       },
-      "policy": {
+      "privacy": {
         "default": "Politique de Confidentialité"
       },
       "terms": {
@@ -1413,7 +1413,7 @@
       }
     }
   },
-  "policy": {
+  "privacy": {
     "title": "Politique de Confidentialité",
     "description": "Comment je gère vos données. Simple, transparent et respectueux de votre vie privée.",
     "page": {

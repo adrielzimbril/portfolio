@@ -6,7 +6,7 @@ import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLocale } from "use-intl";
 
-export function TermsContent() {
+export function PageContent() {
   const [terms, setTerms] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const locale = useLocale();
