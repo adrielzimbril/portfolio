@@ -1,8 +1,5 @@
 "use client";
-import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
 import { cn } from "@/utils/utils";
@@ -13,14 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import {
-  Field,
-  FieldControl,
-  FieldDescription,
-  FieldError,
-  FieldItem,
-  FieldLabel,
-} from "@/components/ui/field";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import logger from "@/utils/logger";
 import { apiRoutes } from "@/data/api-routes";
 import { toast } from "sonner";
@@ -40,21 +30,11 @@ const config = {
   maxCommentLength: 110,
   rotation: {
     startAt: -10,
+    default: 0,
     endAt: 10,
     step: 1,
   },
 };
-
-const schema = z.object({
-  comment: z
-    .string()
-    .min(1, { message: "Comment cannot be empty" })
-    .max(config.maxCommentLength, {
-      message: `Comment must be less than ${config.maxCommentLength} characters`,
-    }),
-});
-
-type CommentFormValues = z.infer<typeof schema>;
 
 export function CommentForm({ user, onSuccess }: CommentFormProps) {
   const t = useTranslations();
@@ -63,12 +43,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
   const [patternIndex, setPatternIndex] = useState(() =>
     Math.floor(Math.random() * patterns.length),
   );
-  const [rotation, setRotation] = useState(config.rotation.startAt);
-
-  const form = useForm<CommentFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { comment: "" },
-  });
+  const [rotation, setRotation] = useState(config.rotation.default);
+  const [comment, setComment] = useState("");
 
   const handlePrevPattern = () => {
     setPatternIndex((prev) => (prev - 1 + patterns.length) % patterns.length);
@@ -78,15 +54,29 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
     setPatternIndex((prev) => (prev + 1) % patterns.length);
   };
 
-  const onSubmit: SubmitHandler<CommentFormValues> = async (values) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!comment.trim()) {
+      toast.error("Comment cannot be empty");
+      return;
+    }
+
+    if (comment.length > config.maxCommentLength) {
+      toast.error(
+        `Comment must be less than ${config.maxCommentLength} characters`,
+      );
+      return;
+    }
+
     try {
-      logger.info("Submitting comment", { comment: values.comment });
+      logger.info("Submitting comment", { comment });
 
       const res = await fetch(apiRoutes.community.guestbook.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: values.comment,
+          message: comment,
           author: user?.user_metadata?.name || user?.email,
           profilePicture: user?.user_metadata?.avatar_url,
           language: locale,
@@ -104,7 +94,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
 
       logger.info("Comment submitted successfully", data);
       toast.success("Comment submitted successfully!");
-      form.reset();
+      setComment("");
       setScreen("input");
       setPatternIndex(Math.floor(Math.random() * patterns.length));
       setRotation(config.rotation.startAt);
@@ -117,7 +107,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
   };
 
   const handleNext = () => {
-    if (form.formState.isValid) {
+    if (comment.trim()) {
       setScreen("preview");
     }
   };
@@ -142,31 +132,23 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
           {/* Left column: Controls */}
           <div className="size-full space-y-4">
             <Form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const comment = form.getValues("comment");
-                if (comment) {
-                  onSubmit({ comment });
-                }
-              }}
+              onSubmit={onSubmit}
               className="flex flex-col size-full space-y-4"
             >
-              <Field name="comment">
+              <Field>
                 <FieldLabel>{t("community.comment-form.label")}</FieldLabel>
-                <FieldItem>
-                  <FieldControl>
-                    <Textarea
-                      placeholder={t("community.comment-form.placeholder")}
-                      rows={3}
-                      limit={config.maxCommentLength}
-                      showLimit
-                      disabled={form.formState.isSubmitting}
-                      value={form.watch("comment")}
-                      onChange={(e) => form.setValue("comment", e.target.value)}
-                    />
-                  </FieldControl>
-                  <FieldError />
-                </FieldItem>
+                <Textarea
+                  name="comment"
+                  placeholder={t("community.comment-form.placeholder")}
+                  rows={3}
+                  limit={config.maxCommentLength}
+                  showLimit
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  required
+                  maxLength={config.maxCommentLength}
+                />
+                <FieldError>Comment cannot be empty</FieldError>
               </Field>
 
               <div className="space-y-4">
@@ -209,7 +191,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   variant="outline"
                   className="flex-1"
                   asIcon
-                  onClick={() => form.reset()}
+                  onClick={() => setComment("")}
                 >
                   Cancel
                 </Button>
@@ -220,14 +202,10 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   whileTap
                   asPointer
                   className="flex-1"
-                  disabled={form.formState.isSubmitting}
+                  disabled={!comment.trim()}
                 >
                   <span className="flex items-center justify-center gap-1">
-                    {form.formState.isSubmitting ? (
-                      t("community.comment-form.submitting")
-                    ) : (
-                      <>{t("community.comment-form.submit")}</>
-                    )}
+                    {t("community.comment-form.submit")}
                   </span>
                 </Button>
               </div>
@@ -254,7 +232,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   author={user?.user_metadata?.name || user?.email}
                   profilePicture={user?.user_metadata?.avatar_url}
                   rotation={rotation}
-                  message={form.watch("comment")}
+                  message={comment}
                   className="h-[400px] w-[300px]"
                 />
               </div>
@@ -276,32 +254,21 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         {/* Mobile: Step-by-step */}
         <div className="md:hidden">
           {screen === "input" ? (
-            <Form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const comment = form.getValues("comment");
-                if (comment) {
-                  onSubmit({ comment });
-                }
-              }}
-              className="space-y-4"
-            >
-              <Field name="comment">
+            <Form onSubmit={onSubmit} className="space-y-4">
+              <Field>
                 <FieldLabel>{t("community.comment-form.label")}</FieldLabel>
-                <FieldItem>
-                  <FieldControl>
-                    <Textarea
-                      placeholder={t("community.comment-form.placeholder")}
-                      rows={5}
-                      limit={config.maxCommentLength}
-                      showLimit
-                      disabled={form.formState.isSubmitting}
-                      value={form.watch("comment")}
-                      onChange={(e) => form.setValue("comment", e.target.value)}
-                    />
-                  </FieldControl>
-                  <FieldError />
-                </FieldItem>
+                <Textarea
+                  name="comment"
+                  placeholder={t("community.comment-form.placeholder")}
+                  rows={5}
+                  limit={config.maxCommentLength}
+                  showLimit
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  required
+                  maxLength={config.maxCommentLength}
+                />
+                <FieldError>Comment cannot be empty</FieldError>
               </Field>
 
               <div className="flex gap-2">
@@ -310,7 +277,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   variant="outline"
                   className="flex-1"
                   asIcon
-                  onClick={() => form.reset()}
+                  onClick={() => setComment("")}
                 >
                   Cancel
                 </Button>
@@ -322,7 +289,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   asPointer
                   className="flex-1"
                   onClick={handleNext}
-                  disabled={!form.formState.isValid}
+                  disabled={!comment.trim()}
                 >
                   Next
                 </Button>
@@ -336,7 +303,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   author={user?.user_metadata?.name || user?.email}
                   profilePicture={user?.user_metadata?.avatar_url}
                   rotation={rotation}
-                  message={form.watch("comment")}
+                  message={comment}
                   className="h-[350px] w-[280px]"
                 />
               </div>
@@ -398,7 +365,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 </div>
               </div>
 
-              <div className="flex gap-2 w-full max-w-md">
+              <Form onSubmit={onSubmit} className="flex gap-2 w-full max-w-md">
                 <Button
                   type="button"
                   variant="outline"
@@ -408,24 +375,19 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   Back
                 </Button>
                 <Button
-                  type="button"
+                  type="submit"
                   variant="default"
                   asIcon
                   whileTap
                   asPointer
                   className="flex-1"
-                  onClick={form.handleSubmit(onSubmit)}
-                  disabled={form.formState.isSubmitting}
+                  disabled={!comment.trim()}
                 >
                   <span className="flex items-center justify-center gap-1">
-                    {form.formState.isSubmitting ? (
-                      t("community.comment-form.submitting")
-                    ) : (
-                      <>{t("community.comment-form.submit")}</>
-                    )}
+                    {t("community.comment-form.submit")}
                   </span>
                 </Button>
-              </div>
+              </Form>
             </div>
           )}
         </div>

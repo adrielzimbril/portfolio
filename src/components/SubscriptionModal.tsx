@@ -1,8 +1,5 @@
 "use client";
 import React, { useEffect, useState, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { CheckCircle } from "@aurthle/icons";
 import {
   Dialog,
@@ -12,13 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import {
-  Field,
-  FieldControl,
-  FieldError,
-  FieldItem,
-  FieldLabel,
-} from "@/components/ui/field";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logger from "@/utils/logger";
@@ -62,6 +53,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   const [isSuccess, setIsSuccess] = useState(false);
   const [userCountry, setUserCountry] = useState<RPNInput.Country>("FR");
   const [hasInitialSubscription, setHasInitialSubscription] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   // Use of useRef to ensure we only fetch the IP once
   const ipInfoFetched = useRef(false);
@@ -188,24 +181,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     ipInfoFetched.current = true;
   }, [isOpen, email, hasInitialSubscription]);
 
-  // Form Info Schema for ensuring name and phone
-  const FormInfoSchema = z.object({
-    name: z
-      .string({ error: t("zod.errors.customized.name.invalid") })
-      .min(4, { message: t("zod.errors.customized.name.required") }),
-    phone: z
-      .string({ error: t("zod.errors.customized.phone.invalid") })
-      .min(10, {
-        message: t("zod.errors.customized.phone.required"),
-      }),
-  });
-
-  type FormInfoForm = z.infer<typeof FormInfoSchema>;
-
-  const formSchemaValidate = useForm<FormInfoForm>({
-    resolver: zodResolver(FormInfoSchema),
-  });
-
   const animateConfetti = () => {
     const duration = 8 * 1000;
     const animationEnd = Date.now() + duration;
@@ -235,9 +210,21 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     }, 250);
   };
 
-  const onSubmit = async (values: FormInfoForm) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!email) {
       toast.error(t("zod.errors.customized.email.update-required"));
+      return;
+    }
+
+    if (name.length < 4) {
+      toast.error(t("zod.errors.customized.name.required"));
+      return;
+    }
+
+    if (phone.length < 10) {
+      toast.error(t("zod.errors.customized.phone.required"));
       return;
     }
 
@@ -246,8 +233,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     try {
       await apiSubscribe({
         email,
-        name: values.name || undefined,
-        phone: values.phone || undefined,
+        name: name || undefined,
+        phone: phone || undefined,
         productId,
         productType,
         subscribedFromPage:
@@ -269,7 +256,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       setTimeout(() => {
         onClose();
         setIsSuccess(false);
-        formSchemaValidate.reset();
+        setName("");
+        setPhone("");
         if (confettiConfig.afterName) {
           animateConfetti();
         }
@@ -290,7 +278,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     if (!isSubmitting) {
       onClose();
       setIsSuccess(false);
-      formSchemaValidate.reset();
+      setName("");
+      setPhone("");
     }
   };
 
@@ -323,65 +312,50 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </p>
           </div>
         ) : (
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              formSchemaValidate.handleSubmit(onSubmit)(e);
-            }}
-            className="space-y-6"
-          >
-            <Field name="name">
+          <Form onSubmit={onSubmit} className="space-y-6">
+            <Field>
               <FieldLabel className="text-sm font-medium">
                 {t("common.page-sections.newsletter.form.fields.name.label")}
               </FieldLabel>
-              <FieldItem>
-                <FieldControl>
-                  <Input
-                    placeholder={t(
-                      "common.page-sections.newsletter.form.fields.name.placeholder",
-                    )}
-                    className="h-12 border-2"
-                    value={formSchemaValidate.watch("name")}
-                    onChange={(e) =>
-                      formSchemaValidate.setValue("name", e.target.value)
-                    }
-                  />
-                </FieldControl>
-                <FieldError />
-              </FieldItem>
+              <Input
+                name="name"
+                placeholder={t(
+                  "common.page-sections.newsletter.form.fields.name.placeholder",
+                )}
+                className="h-12 border-2"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                minLength={4}
+              />
+              <FieldError>Name must be at least 4 characters</FieldError>
             </Field>
 
-            <Field name="phone">
+            <Field>
               <FieldLabel className="tesxt-sm font-medium">
                 {t("common.page-sections.newsletter.form.fields.phone.label")}
               </FieldLabel>
-              <FieldItem>
-                <FieldControl>
-                  <PhoneInput
-                    defaultCountry={userCountry}
-                    wrapperClassName="rounded-xl w-full h-12"
-                    className="rounded-xl w-full h-12"
-                    inputComponent={Input}
-                    inputClassName={cn(
-                      "-ms-px shadow-none",
-                      "peer ps-18",
-                      "h-auto",
-                      "rounded-xl",
-                      "text-base",
-                    )}
-                    triggerClassName={cn(
-                      "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
-                      "h-auto border-2",
-                    )}
-                    contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"
-                    value={formSchemaValidate.watch("phone") || ""}
-                    onChange={(value) =>
-                      formSchemaValidate.setValue("phone", value || "")
-                    }
-                  />
-                </FieldControl>
-                <FieldError />
-              </FieldItem>
+              <PhoneInput
+                defaultCountry={userCountry}
+                wrapperClassName="rounded-xl w-full h-12"
+                className="rounded-xl w-full h-12"
+                inputComponent={Input}
+                inputClassName={cn(
+                  "-ms-px shadow-none",
+                  "peer ps-18",
+                  "h-auto",
+                  "rounded-xl",
+                  "text-base",
+                )}
+                triggerClassName={cn(
+                  "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
+                  "h-auto border-2",
+                )}
+                contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"
+                value={phone || ""}
+                onChange={(value) => setPhone(value || "")}
+              />
+              <FieldError>Phone must be at least 10 digits</FieldError>
             </Field>
 
             <div className="flex gap-3">

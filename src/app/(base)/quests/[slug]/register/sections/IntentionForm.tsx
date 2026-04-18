@@ -1,17 +1,8 @@
 ﻿"use client";
-import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { useLocale, useTranslations } from "use-intl";
 import { Form } from "@/components/ui/form";
-import {
-  Field,
-  FieldControl,
-  FieldError,
-  FieldItem,
-  FieldLabel,
-} from "@/components/ui/field";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -20,14 +11,6 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
-
-const schema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.email("Invalid email"),
-  message: z.string().max(1200, "Message is too long").optional(),
-});
-
-type FormValues = z.infer<typeof schema>;
 
 export function IntentionForm({ questSlug }: { questSlug: string }) {
   const t = useTranslations();
@@ -48,21 +31,41 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
     setFeedback((prev) => ({ ...prev, open: false }));
   }, []);
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (name.length < 2) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("quests.register.form.feedback.error.title"),
+        description: "Name is required",
+      });
+      return;
+    }
+
+    if (!email || !email.includes("@")) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("quests.register.form.feedback.error.title"),
+        description: "Invalid email",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
       const res = await fetch(apiRoutes.quests.register(questSlug).link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, locale }),
+        body: JSON.stringify({ name, email, message, locale }),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -76,7 +79,9 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
         title: t("quests.register.form.feedback.success.title"),
         description: t("quests.register.form.feedback.success.description"),
       });
-      form.reset();
+      setName("");
+      setEmail("");
+      setMessage("");
     } catch {
       setFeedback({
         open: true,
@@ -84,6 +89,8 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
         title: t("quests.register.form.feedback.error.title"),
         description: t("quests.register.form.feedback.error.description"),
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -107,71 +114,62 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
             </div>
 
             <Form
-              onSubmit={(e) => {
-                e.preventDefault();
-                form.handleSubmit(onSubmit)(e);
-              }}
+              onSubmit={onSubmit}
               className="space-y-6 w-full max-w-xl self-center place-self-center"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Field name="name">
+                <Field>
                   <FieldLabel>
                     {t("quests.register.form.fields.name.label")}{" "}
                     <span className="text-red-500">*</span>
                   </FieldLabel>
-                  <FieldItem>
-                    <FieldControl>
-                      <Input
-                        value={form.watch("name")}
-                        onChange={(e) => form.setValue("name", e.target.value)}
-                        variant="secondary"
-                        className="rounded-xl"
-                        placeholder={t("submit.page.fields.name.placeholder")}
-                      />
-                    </FieldControl>
-                    <FieldError />
-                  </FieldItem>
+                  <Input
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    variant="secondary"
+                    className="rounded-xl"
+                    placeholder={t("submit.page.fields.name.placeholder")}
+                    required
+                    minLength={2}
+                  />
+                  <FieldError>Name is required</FieldError>
                 </Field>
-                <Field name="email">
+                <Field>
                   <FieldLabel>
                     {t("quests.register.form.fields.email.label")}{" "}
                     <span className="text-red-500">*</span>
                   </FieldLabel>
-                  <FieldItem>
-                    <FieldControl>
-                      <Input
-                        value={form.watch("email")}
-                        onChange={(e) => form.setValue("email", e.target.value)}
-                        type="email"
-                        variant="secondary"
-                        className="rounded-xl"
-                        placeholder={t("submit.page.fields.email.placeholder")}
-                      />
-                    </FieldControl>
-                    <FieldError />
-                  </FieldItem>
+                  <Input
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    variant="secondary"
+                    className="rounded-xl"
+                    placeholder={t("submit.page.fields.email.placeholder")}
+                    required
+                  />
+                  <FieldError>Invalid email</FieldError>
                 </Field>
               </div>
 
-              <Field name="message">
+              <Field>
                 <FieldLabel>
                   {t("quests.register.form.fields.message.label")}
                 </FieldLabel>
-                <FieldItem>
-                  <FieldControl>
-                    <Textarea
-                      value={form.watch("message") ?? ""}
-                      onChange={(e) => form.setValue("message", e.target.value)}
-                      rows={5}
-                      variant="secondary"
-                      className="rounded-xl"
-                      placeholder={t(
-                        "quests.register.form.fields.message.placeholder",
-                      )}
-                    />
-                  </FieldControl>
-                  <FieldError />
-                </FieldItem>
+                <Textarea
+                  name="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  rows={5}
+                  variant="secondary"
+                  className="rounded-xl"
+                  placeholder={t(
+                    "quests.register.form.fields.message.placeholder",
+                  )}
+                  maxLength={1200}
+                />
               </Field>
 
               <Button
@@ -180,9 +178,9 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                 asPointer
                 asFull
                 size="lg"
-                disabled={form.formState.isSubmitting}
+                disabled={isSubmitting}
               >
-                {form.formState.isSubmitting
+                {isSubmitting
                   ? t("quests.register.form.actions.submitting")
                   : t("quests.register.form.actions.submit")}
               </Button>

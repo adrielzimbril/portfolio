@@ -1,16 +1,7 @@
 "use client";
 import React, { useCallback, useId, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
-import {
-  Field,
-  FieldControl,
-  FieldError,
-  FieldItem,
-  FieldLabel,
-} from "@/components/ui/field";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations, useLocale } from "next-intl";
@@ -55,97 +46,125 @@ export function IntentionForm() {
     setFeedback((prev) => ({ ...prev, open: false }));
   }, []);
 
-  const schema = z.object({
-    intention: z.enum(intentions),
-    name: z
-      .string({ error: t("zod.errors.customized.name.invalid") })
-      .min(4, { error: t("zod.errors.customized.name.required") }),
-    email: z.email({ error: t("zod.errors.customized.email.invalid") }),
-    url: z.url({ error: t("zod.errors.customized.url.invalid") }),
-    description: z.string().optional(),
-    // A/C
-    target: z.string().optional(),
-  });
+  const [intention, setIntention] = useState(Intention.UX_REVIEW);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [url, setUrl] = useState("");
+  const [description, setDescription] = useState("");
+  const [target, setTarget] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  type IntentionFormValues = z.infer<typeof schema>;
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const form = useForm<IntentionFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { intention: Intention.UX_REVIEW },
-  });
+    if (name.length < 4) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("submit.page.feedback.error.title"),
+        description: t("zod.errors.customized.name.required"),
+      });
+      return;
+    }
 
-  const intention = form.watch("intention");
+    if (!email || !email.includes("@")) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("submit.page.feedback.error.title"),
+        description: t("zod.errors.customized.email.invalid"),
+      });
+      return;
+    }
 
-  const onSubmit: SubmitHandler<IntentionFormValues> = async (values) => {
+    if (!url) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("submit.page.feedback.error.title"),
+        description: t("zod.errors.customized.url.invalid"),
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
       const res = await fetch(apiRoutes.submit.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, locale }),
+        body: JSON.stringify({
+          intention,
+          name,
+          email,
+          url,
+          description,
+          target,
+          locale,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        throw new Error(data?.error || "REQUEST_FAILED");
+        throw new Error(data?.error || "Failed to submit");
       }
       setFeedback({
         open: true,
         status: "success",
-        title: t("submit.page.toast.success"),
-        description:
-          "Ton projet a ete recu. On revient vers toi tres vite par email.",
+        title: t("submit.page.feedback.success.title"),
+        description: t("submit.page.feedback.success.description"),
       });
-      form.reset({ intention: Intention.UX_REVIEW });
-    } catch {
+      setName("");
+      setEmail("");
+      setUrl("");
+      setDescription("");
+      setTarget("");
+      setIntention(Intention.UX_REVIEW);
+    } catch (error) {
       setFeedback({
         open: true,
         status: "error",
-        title: t("submit.page.toast.error"),
-        description:
-          "Une erreur est survenue pendant l'envoi. Merci de reessayer.",
+        title: t("submit.page.feedback.error.title"),
+        description: t("submit.page.feedback.error.description"),
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const Select = ({
     label,
-    name,
+    value,
+    onChange,
     options,
     placeholder,
   }: {
     label: string;
-    name: keyof IntentionFormValues;
+    value: string;
+    onChange: (value: string) => void;
     options: Array<{ value: string; label: string }>;
     placeholder?: string;
   }) => {
     const id = useId();
     return (
-      <Field name={name}>
+      <Field>
         <Label htmlFor={id}>{label}</Label>
-        <FieldItem>
-          <FieldControl>
-            <SelectComponent
-              value={form.watch(name) ?? ""}
-              onValueChange={(value) => form.setValue(name, value)}
-            >
-              <SelectTrigger id={id} variant="secondary" className="rounded-xl">
-                <SelectValue
-                  placeholder={placeholder ?? t("common.button.select")}
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>{label}</SelectLabel>
-                  {options.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </SelectComponent>
-          </FieldControl>
-          <FieldError />
-        </FieldItem>
+        <SelectComponent value={value} onValueChange={onChange}>
+          <SelectTrigger id={id} variant="secondary" className="rounded-xl">
+            <SelectValue
+              placeholder={placeholder ?? t("common.button.select")}
+            />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>{label}</SelectLabel>
+              {options.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </SelectComponent>
       </Field>
     );
   };
@@ -173,88 +192,75 @@ export function IntentionForm() {
               </p>
             </div>
             <Form
-              onSubmit={(e) => {
-                e.preventDefault();
-                form.handleSubmit(onSubmit)(e);
-              }}
+              onSubmit={onSubmit}
               className="space-y-6 w-full max-w-xl self-center place-self-center"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Field name="name">
+                  <Field>
                     <FieldLabel>
                       {t("submit.page.fields.name.label")}{" "}
                       <span className="text-red-500">*</span>
                     </FieldLabel>
-                    <FieldItem>
-                      <FieldControl>
-                        <Input
-                          placeholder={t("submit.page.fields.name.placeholder")}
-                          className="rounded-xl"
-                          variant="secondary"
-                          type="text"
-                          value={form.watch("name")}
-                          onChange={(e) =>
-                            form.setValue("name", e.target.value)
-                          }
-                        />
-                      </FieldControl>
-                      <FieldError />
-                    </FieldItem>
+                    <Input
+                      name="name"
+                      placeholder={t("submit.page.fields.name.placeholder")}
+                      className="rounded-xl"
+                      variant="secondary"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      minLength={4}
+                    />
+                    <FieldError>Name must be at least 4 characters</FieldError>
                   </Field>
                 </div>
                 <div className="space-y-2">
-                  <Field name="email">
+                  <Field>
                     <FieldLabel>
                       {t("submit.page.fields.email.label")}{" "}
                       <span className="text-red-500">*</span>
                     </FieldLabel>
-                    <FieldItem>
-                      <FieldControl>
-                        <Input
-                          placeholder={t(
-                            "submit.page.fields.email.placeholder",
-                          )}
-                          className="rounded-xl"
-                          variant="secondary"
-                          type="email"
-                          value={form.watch("email")}
-                          onChange={(e) =>
-                            form.setValue("email", e.target.value)
-                          }
-                        />
-                      </FieldControl>
-                      <FieldError />
-                    </FieldItem>
+                    <Input
+                      name="email"
+                      placeholder={t("submit.page.fields.email.placeholder")}
+                      className="rounded-xl"
+                      variant="secondary"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <FieldError>Please enter a valid email</FieldError>
                   </Field>
                 </div>
               </div>
 
-              <Field name="url">
+              <Field>
                 <FieldLabel>
                   {t("submit.page.fields.url.label")}{" "}
                   <span className="text-red-500">*</span>
                 </FieldLabel>
-                <FieldItem>
-                  <FieldControl>
-                    <Input
-                      placeholder={t("submit.page.fields.url.placeholder")}
-                      className="rounded-xl"
-                      variant="secondary"
-                      type="url"
-                      value={form.watch("url")}
-                      onChange={(e) => form.setValue("url", e.target.value)}
-                    />
-                  </FieldControl>
-                  <FieldError />
-                </FieldItem>
+                <Input
+                  name="url"
+                  placeholder={t("submit.page.fields.url.placeholder")}
+                  className="rounded-xl"
+                  variant="secondary"
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  required
+                />
+                <FieldError>Please enter a valid URL</FieldError>
               </Field>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Select
                     label={t("submit.page.fields.intention.label")}
-                    name="intention"
+                    value={intention}
+                    onChange={setIntention}
                     options={[
                       {
                         value: "ux_review",
@@ -268,7 +274,8 @@ export function IntentionForm() {
                   <div className="space-y-2">
                     <Select
                       label={t("submit.page.fields.target.label")}
-                      name="target"
+                      value={target}
+                      onChange={setTarget}
                       options={[
                         {
                           value: "website",
@@ -292,27 +299,19 @@ export function IntentionForm() {
                 )}
               </div>
 
-              <Field name="description">
+              <Field>
                 <FieldLabel>
                   {t("submit.page.fields.description.label")}
                 </FieldLabel>
-                <FieldItem>
-                  <FieldControl>
-                    <Textarea
-                      rows={5}
-                      placeholder={t(
-                        "submit.page.fields.description.placeholder",
-                      )}
-                      className="rounded-xl"
-                      variant="secondary"
-                      value={form.watch("description") ?? ""}
-                      onChange={(e) =>
-                        form.setValue("description", e.target.value)
-                      }
-                    />
-                  </FieldControl>
-                  <FieldError />
-                </FieldItem>
+                <Textarea
+                  name="description"
+                  rows={5}
+                  placeholder={t("submit.page.fields.description.placeholder")}
+                  className="rounded-xl"
+                  variant="secondary"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
               </Field>
               <div className="pt-2">
                 <Button
@@ -321,9 +320,9 @@ export function IntentionForm() {
                   asPointer
                   asFull
                   size="lg"
-                  disabled={form.formState.isSubmitting}
+                  disabled={isSubmitting}
                 >
-                  {form.formState.isSubmitting
+                  {isSubmitting
                     ? t("common.button.sending")
                     : t("submit.page.actions.submit")}
                 </Button>
