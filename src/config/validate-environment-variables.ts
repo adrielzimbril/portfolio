@@ -20,10 +20,8 @@ const environmentVariablesSchema = z.object({
   NEXT_PUBLIC_REVAMP_DATE: z.string().default("2025-08-17"),
 
   // API Security
-  API_SECRET_KEY: z.string().min(1, "API_SECRET_KEY is required"),
-  HEALTH_CHECK_SECRET_KEY: z
-    .string()
-    .min(1, "HEALTH_CHECK_SECRET_KEY is required"),
+  API_SECRET_KEY: z.string().optional(),
+  HEALTH_CHECK_SECRET_KEY: z.string().optional(),
   NEXT_REVALIDATION_SECRET: z.string().optional(),
 
   // GitHub
@@ -35,7 +33,7 @@ const environmentVariablesSchema = z.object({
   // Authentication
   AUTH_PROVIDER: z.enum(["supabase", "betterauth"]).default("supabase"),
   BETTER_AUTH_URL: z.string().url().default("http://localhost:3000"),
-  BETTER_AUTH_SECRET: z.string().min(1, "BETTER_AUTH_SECRET is required"),
+  BETTER_AUTH_SECRET: z.string().optional(),
   AUTH_CALLBACK_URL_COMMUNITY: z.string().default("/community"),
   AUTH_CALLBACK_URL_DEFAULT: z.string().default("/"),
   AUTH_DEFAULT_REDIRECT: z.string().default("/"),
@@ -43,12 +41,8 @@ const environmentVariablesSchema = z.object({
   NEXT_PRIVATE_SESSION_TIMEOUT_HOURS: z.string().default("1"),
 
   // Database (Supabase)
-  NEXT_PUBLIC_SUPABASE_URL: z.url(
-    "NEXT_PUBLIC_SUPABASE_URL must be a valid URL",
-  ),
-  NEXT_PUBLIC_SUPABASE_ANON_KEY: z
-    .string()
-    .min(1, "NEXT_PUBLIC_SUPABASE_ANON_KEY is required"),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().optional(),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().optional(),
 
   // Email & Contact
   CONTACTS_PROVIDER: z.string().optional(),
