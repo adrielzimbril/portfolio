@@ -31,8 +31,8 @@ export async function POST(request: Request) {
       creator_name: user.user_metadata.full_name || user.email,
       creator_avatar_url: user.user_metadata.avatar_url,
       message: message.trim(),
-      pattern_index: pattern_index ?? Math.floor(Math.random() * 10),
-      rotation: rotation ?? Math.floor(Math.random() * 360),
+      pattern_index: pattern_index ?? Math.floor(Math.random() * 5), // Random pattern index 0-4
+      rotation: rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
       language: language || "en",
     } as any);
 
