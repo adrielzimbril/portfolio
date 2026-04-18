@@ -3,6 +3,7 @@
 import { apiRoutes } from "@/data/api-routes";
 
 const ANONYMOUS_USER_ID_COOKIE = "shironymous_reactions_user_id";
+const ANONYMOUS_SYNC_COOKIE = "shironymous_reactions_synced";
 
 export function getAnonymousUserId(): string {
   if (typeof window === "undefined") return "";
@@ -50,6 +51,21 @@ export function isAnonymousUser(userId: string): boolean {
 export async function syncAnonymousReactionsOnLogin(
   anonymousId: string,
 ): Promise<number> {
+  // Check if already synced
+  const getCookie = (name: string): string | null => {
+    if (typeof window === "undefined") return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
+    return null;
+  };
+
+  const hasSynced = getCookie(ANONYMOUS_SYNC_COOKIE);
+
+  if (hasSynced) {
+    return 0; // Already synced, skip
+  }
+
   try {
     const res = await fetch(apiRoutes.reactions.sync.link, {
       method: "POST",
@@ -62,9 +78,25 @@ export async function syncAnonymousReactionsOnLogin(
     }
 
     const { syncedCount } = await res.json();
+
+    // Set sync cookie after successful sync
+    const setCookie = (name: string, value: string, days: number) => {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    };
+
+    setCookie(ANONYMOUS_SYNC_COOKIE, "true", 365);
+
     return syncedCount || 0;
   } catch (error) {
     console.error("Error syncing anonymous reactions:", error);
     return 0;
   }
+}
+
+// Clear sync cookie when user logs out
+export function clearSyncCookie(): void {
+  if (typeof window === "undefined") return;
+  document.cookie = `${ANONYMOUS_SYNC_COOKIE}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
 }
