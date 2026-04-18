@@ -30,7 +30,7 @@ export function useReactions(pageType: PageType, entityId: string) {
       sceptic: 0,
     },
     revalidateOnFocus: false,
-    refreshInterval: 30000,
+    refreshInterval: 60000,
   });
 
   return {

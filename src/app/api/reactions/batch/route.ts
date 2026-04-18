@@ -16,7 +16,9 @@ export async function GET(request: Request) {
 
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   try {
     const [countsData, userReactionsData] = await Promise.all([
@@ -31,7 +33,10 @@ export async function GET(request: Request) {
             .select("reaction_type")
             .eq("page_type", pageType)
             .eq("entity_id", entityId)
-            .eq(user?.id ? "user_id" : "anonymous_id", user?.id || anonymousId)
+            .eq(
+              user?.id ? "user_id" : "anonymous_id",
+              (user?.id || anonymousId)!,
+            )
         : Promise.resolve({ data: null }),
     ]);
 

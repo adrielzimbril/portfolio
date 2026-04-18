@@ -26,17 +26,21 @@ export function useReactionStatus(pageType: PageType, entityId: string) {
     error,
     isLoading,
     mutate,
-  } = useSWR(entityId ? `reaction_status_${pageType}_${entityId}` : null, fetcher, {
-    fallbackData: {
-      like: false,
-      heart: false,
-      celebrate: false,
-      insightful: false,
-      sceptic: false,
+  } = useSWR(
+    entityId ? `reaction_status_${pageType}_${entityId}` : null,
+    fetcher,
+    {
+      fallbackData: {
+        like: false,
+        heart: false,
+        celebrate: false,
+        insightful: false,
+        sceptic: false,
+      },
+      revalidateOnFocus: false,
+      refreshInterval: 60000,
     },
-    revalidateOnFocus: false,
-    refreshInterval: 30000,
-  });
+  );
 
   return {
     userStatus: userStatus!,
