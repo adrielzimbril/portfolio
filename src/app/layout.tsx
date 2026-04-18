@@ -72,9 +72,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           disableTransitionOnChange
         >
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <SyncProvider>
-              <LayoutProvider>
-                <TooltipProvider openDelay={0} closeDelay={0}>
+            <LayoutProvider>
+              <TooltipProvider openDelay={0} closeDelay={0}>
+                <SyncProvider>
                   <main>
                     <div className="container mx-auto relative">
                       <Navbar />
@@ -87,9 +87,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                       <Footer />
                     </div>
                   </main>
-                </TooltipProvider>
-              </LayoutProvider>
-            </SyncProvider>
+                </SyncProvider>
+              </TooltipProvider>
+            </LayoutProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
         {/* <AnalyticsScript /> */}

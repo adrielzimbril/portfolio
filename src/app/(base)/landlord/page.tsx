@@ -7,6 +7,7 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { apiRoutes } from "@/data/api-routes";
 import { AdminAuthGuard } from "@/components/shared/pages/landlord/AdminAuthGuard";
 import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
+import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -37,9 +38,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AdminPage() {
+  const isAuthenticated = await isUserAuthenticatedServer();
+  const t = await getTranslations();
+
+  if (!isAuthenticated) {
+    // Redirect to home if not authenticated
+    return null;
+  }
+
+  // Fetch user data to check admin status
   const res = await fetch(apiRoutes.auth.user.link);
   const { user } = await res.json();
-  const t = await getTranslations();
 
   return (
     <AdminAuthGuard user={user}>

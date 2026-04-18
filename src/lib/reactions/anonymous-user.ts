@@ -1,9 +1,24 @@
 // Utility for managing anonymous user IDs using cookies for cross-device sync
 
 import { apiRoutes } from "@/data/api-routes";
+import { ConfigValue } from "@/config";
 
 const ANONYMOUS_USER_ID_COOKIE = "shironymous_reactions_user_id";
 const ANONYMOUS_SYNC_COOKIE = "shironymous_reactions_synced";
+
+// Extract Supabase cookie prefix from URL
+function getSupabaseCookiePrefix(): string {
+  const supabaseUrl = ConfigValue.NEXT_PUBLIC_SUPABASE_URL;
+  if (supabaseUrl) {
+    // Extract project ID from URL: https://{project_id}.supabase.co or https://sb-{project_id}.supabase.co
+    const match = supabaseUrl.match(/(?:sb-)?([a-z0-9]+)\.supabase/);
+    if (match) {
+      return `sb-${match[1]}`;
+    }
+  }
+
+  return ""; // Return empty string if URL not found
+}
 
 // Helper function to get cookie value
 function getCookie(name: string): string | null {
@@ -21,11 +36,24 @@ function setCookie(name: string, value: string, days: number) {
   document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
 }
 
-// Check if user is authenticated via Supabase auth cookies
+// Check if user is authenticated via Supabase auth cookies (client-side)
 export function isUserAuthenticated(): boolean {
-  // Check for Supabase auth token cookies
-  const authToken = getCookie("sb-puvwpzzntsvoihxbuxbz-auth-token.0");
-  return !!authToken;
+  const prefix = getSupabaseCookiePrefix();
+  // Check both .0 and .1 cookies
+  const authToken0 = getCookie(`${prefix}-auth-token.0`);
+  const authToken1 = getCookie(`${prefix}-auth-token.1`);
+  return !!(authToken0 || authToken1);
+}
+
+// Check if user is authenticated via Supabase auth cookies (server-side)
+export async function isUserAuthenticatedServer(): Promise<boolean> {
+  const { cookies } = await import("next/headers");
+  const cookieStore = await cookies();
+  const prefix = getSupabaseCookiePrefix();
+  // Check both .0 and .1 cookies
+  const authToken0 = cookieStore.get(`${prefix}-auth-token.0`);
+  const authToken1 = cookieStore.get(`${prefix}-auth-token.1`);
+  return !!(authToken0 || authToken1);
 }
 
 export function getAnonymousUserId(): string {
@@ -58,14 +86,10 @@ export function isAnonymousUser(userId: string): boolean {
 export async function syncAnonymousReactionsOnLogin(
   anonymousId: string,
 ): Promise<number> {
-  // Check if already synced
-  const getCookie = (name: string): string | null => {
-    if (typeof window === "undefined") return null;
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
-    return null;
-  };
+  // Check if user is authenticated and if already synced
+  if (!isUserAuthenticated()) {
+    return 0; // User not authenticated, skip
+  }
 
   const hasSynced = getCookie(ANONYMOUS_SYNC_COOKIE);
 
@@ -87,12 +111,6 @@ export async function syncAnonymousReactionsOnLogin(
     const { syncedCount } = await res.json();
 
     // Set sync cookie after successful sync
-    const setCookie = (name: string, value: string, days: number) => {
-      const expires = new Date();
-      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-      document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-    };
-
     setCookie(ANONYMOUS_SYNC_COOKIE, "true", 365);
 
     return syncedCount || 0;
