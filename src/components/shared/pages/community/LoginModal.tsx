@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Link } from "@/components/ui/link";
 import { Github, Google } from "@aurthle/icons";
 import { useTranslations } from "use-intl";
 import { cn } from "@/utils/utils";
@@ -8,8 +7,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogSeparator,
-  DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  signInWithGithub,
+  signInWithGoogle,
+} from "@/integrations/auth/provider/supabase";
+import { Button } from "@/components/ui/button";
 
 export function LoginModal() {
   const t = useTranslations();
@@ -31,10 +34,9 @@ export function LoginModal() {
         </div>
 
         <div className="space-y-3">
-          <Link
-            href={`/api/auth/login?provider=github`}
+          <Button
+            onClick={() => signInWithGithub()}
             variant="default"
-            likeButton
             asIcon
             whileTap
             className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
@@ -43,12 +45,11 @@ export function LoginModal() {
               <Github size={16} variant="bulk" />
               {t("community.login-modal.github")}
             </span>
-          </Link>
-          <Link
-            href={`/api/auth/login?provider=google`}
+          </Button>
+          <Button
+            onClick={() => signInWithGoogle()}
             variant="secondary"
             asIcon
-            likeButton
             whileTap
             className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
           >
@@ -56,7 +57,7 @@ export function LoginModal() {
               <Google size={16} variant="bulk" />
               {t("community.login-modal.google")}
             </span>
-          </Link>
+          </Button>
         </div>
       </div>
     </>

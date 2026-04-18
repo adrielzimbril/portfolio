@@ -4,8 +4,6 @@ import { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { authRoutes } from "@/integrations/auth/routes";
 import { AuthHandler } from "@/integrations/auth/types/types";
-import { apiRoutes } from "@/data/api-routes";
-import logger from "@/utils/logger";
 
 export const signInWithGithub: AuthHandler["signInWithGithub"] = async (
   callbackURL?,

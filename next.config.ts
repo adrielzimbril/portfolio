@@ -30,10 +30,12 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "www.adrielzimbril.com",
+        pathname: "/img/**",
       },
       {
         protocol: "https",
         hostname: "preview.adrielzimbril.com",
+        pathname: "/img/**",
       },
       {
         protocol: "https",
