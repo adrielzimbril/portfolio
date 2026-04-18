@@ -16,6 +16,7 @@ import { Switch } from "@/components/ui/switch";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import logger from "@/utils/logger";
 import { getAllQuests } from "@/integrations/content/lib/quests";
+import { Locale } from "@/types";
 
 interface Participant {
   id: string;
@@ -43,7 +44,7 @@ export function QuestsManagementSection() {
     message: "",
     source: "admin",
     sendEmail: false,
-    language: "en",
+    language: Locale.EN,
   });
 
   useEffect(() => {
@@ -95,7 +96,7 @@ export function QuestsManagementSection() {
           message: "",
           source: "admin",
           sendEmail: false,
-          language: "en",
+          language: Locale.EN,
         });
         setShowAddForm(false);
         fetchParticipants();
@@ -208,7 +209,7 @@ export function QuestsManagementSection() {
               <Label htmlFor="language">Language</Label>
               <Select
                 value={newParticipant.language}
-                onValueChange={(value) =>
+                onValueChange={(value : Locale) =>
                   setNewParticipant({ ...newParticipant, language: value })
                 }
               >
@@ -216,11 +217,9 @@ export function QuestsManagementSection() {
                   <SelectValue placeholder="Select language" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="fr">Français</SelectItem>
-                  <SelectItem value="es">Español</SelectItem>
-                  <SelectItem value="de">Deutsch</SelectItem>
-                  <SelectItem value="pt">Português</SelectItem>
+                  {Object.values(Locale).map((locale) => (
+                            <SelectItem key={locale} value={locale}>{locale.toLocaleUpperCase()}</SelectItem>
+                          ))}
                 </SelectContent>
               </Select>
             </div>
@@ -278,11 +277,9 @@ export function QuestsManagementSection() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="en">EN</SelectItem>
-                          <SelectItem value="fr">FR</SelectItem>
-                          <SelectItem value="es">ES</SelectItem>
-                          <SelectItem value="de">DE</SelectItem>
-                          <SelectItem value="pt">PT</SelectItem>
+                          {Object.values(Locale).map((locale) => (
+                            <SelectItem key={locale} value={locale}>{locale.toLocaleUpperCase()}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>

@@ -193,7 +193,7 @@ export function CommunityWallManagementSection() {
             </div>
             <div className="space-y-4">
               <Label>Messages by Language</Label>
-              {Object.Locale.map((locale) => (
+              {Object.values(Locale).map((locale) => (
                 <div key={locale}>
                   <Label htmlFor={`message-${locale}`}>
                     Message ({locale.toUpperCase()})
