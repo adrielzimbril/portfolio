@@ -134,7 +134,7 @@
   },
   "changelog": {
     "title": "Changelog",
-    "description": "Ce qui change ici. Pas de marketing, juste les évolutions réelles du portfolio.",
+    "description": "Ce qui change ici. Pas de marketing, juste les évolutions réelles que je passe en revue.",
     "page": {
       "title": "Évolutions et nouveautés",
       "description": "Découvrez ce qui a changé dans l'univers Shirofolio."
@@ -549,8 +549,8 @@
   },
   "submit": {
     "title": "Shirosaas Lab 😮‍💨🧪",
-    "description": "Partage ton projet, idée ou produit pour une analyse UX, un redesign Figma ou un feedback produit. Adriel Zimbril t'accompagne pour transformer tes idées en expériences impactantes.",
-    "keywords": "Soumission projet SaaS, Adriel Zimbril, Product Designer, UX Review, Redesign Figma, Analyse site web, Feedback produit, ShiroSaaS, Design System, Product Design",
+    "description": "Partage ton projet, idée ou produit pour une analyse UX, un redesign Figma ou un feedback produit. Je passe en revue tes idées pour les transformer en expériences impactantes.",
+    "keywords": "Soumission projet SaaS, Product Designer, UX Review, Redesign Figma, Analyse site web, Feedback produit, ShiroSaaS, Design System, Product Design",
     "page": {
       "header-section": {
         "badge": "Participe a la Shirosaas Lab 😮‍💨🧪",
@@ -614,14 +614,15 @@
     }
   },
   "contact": {
-    "title": "Construisons ensemble 🤝",
-    "description": "Je réponds à vos messages personnellement. Que ce soit pour un projet, une collaboration ou simplement pour échanger sur le design produit et l’innovation, ma boîte mail est ouverte.",
-    "keywords": "Contact SaaS, Adriel Zimbril, Product Designer, discuter idée SaaS, collaboration produit, design SaaS, contact freelance SaaS, expert SaaS, accompagnement produit, mentor SaaS, formateur design",
+    "title": "Construisons ensemble ",
+    "description": "Je passe en revue vos messages personnellement. Que ce soit pour un projet, une collaboration ou simplement pour échanger sur le design produit et l'innovation, ma boîte mail est ouverte.",
+    "keywords": "Contact SaaS, Product Designer, discuter idée SaaS, collaboration produit, design SaaS, contact freelance SaaS, expert SaaS, accompagnement produit, mentor SaaS, formateur design",
     "page": {
-      "badge": "Problem Solver & Your SaaS Product designer ❣️",
-      "title": "Transforme tes idées en produits que tes utilisateurs adorent 🦄",
+      "badge": "Problem Solver & Your SaaS Product designer ",
+      "title": "Transforme tes idées en produits que tes utilisateurs adorent ",
       "form": {
         "notifications": {
+          "error": "Nous sommes désolés, mais nous n'avons pas pu envoyer votre message. Veuillez réessayer plus tard.",
           "error": "Désolé, mais nous n'avons pas pu envoyer votre message. Veuillez réessayer plus tard.",
           "success": "Votre message a été envoyé avec succès. Nous vous recontacterons au plus vite."
         },
@@ -753,6 +754,9 @@
       },
       "rss": {
         "default": "RSS"
+      },
+      "submit": {
+        "default": "Soumettre"
       }
     },
     "button": {
@@ -1449,10 +1453,10 @@
   },
   "rss": {
     "title": "RSS",
-    "description": "Abonne-toi pour recevoir mes articles directement dans ton lecteur RSS préféré.",
+    "description": "Abonne-toi pour recevoir les articles directement dans ton lecteur RSS préféré.",
     "page": {
       "title": "Flux RSS",
-      "description": "Abonne-toi pour ne rien manquer de mes nouveaux articles."
+      "description": "Abonne-toi pour ne rien manquer des nouveaux articles."
     }
   },
   "terms": {
@@ -1474,6 +1478,7 @@
       "main": "Pages Principales",
       "community": "Communauté",
       "tools": "Outils",
+      "rss": "RSS",
       "legal": "Légal"
     },
     "badges": {

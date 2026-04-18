@@ -149,12 +149,6 @@ export function useLocalStorage<T>(
     window.dispatchEvent(new StorageEvent("local-storage", { key }));
   });
 
-  //!! To improve to not ignore the exhaustive-deps
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    setStoredValue(readValue());
-  }, [key]);
-
   const handleStorageChange = useCallback(
     (event: StorageEvent | CustomEvent) => {
       if ((event as StorageEvent).key && (event as StorageEvent).key !== key) {

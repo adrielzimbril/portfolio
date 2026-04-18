@@ -100,10 +100,10 @@
   },
   "rss": {
     "title": "RSS",
-    "description": "Subscribe to receive my articles directly in your favorite RSS reader.",
+    "description": "Subscribe to receive the articles directly in your favorite RSS reader.",
     "page": {
       "title": "RSS Feed",
-      "description": "Subscribe to never miss my new articles."
+      "description": "Subscribe to never miss new articles."
     }
   },
   "terms": {
@@ -125,6 +125,7 @@
       "main": "Main Pages",
       "community": "Community",
       "tools": "Tools",
+      "rss": "RSS",
       "legal": "Legal"
     },
     "badges": {
@@ -183,7 +184,7 @@
   },
   "changelog": {
     "title": "Changelog",
-    "description": "What changes here. No marketing, just real portfolio evolutions.",
+    "description": "What changes here. No marketing, just real evolutions I review.",
     "page": {
       "title": "Evolution and new updates",
       "description": "Discover what's new in the Shirofolio universe."
@@ -434,6 +435,9 @@
       },
       "rss": {
         "default": "RSS"
+      },
+      "submit": {
+        "default": "Submit"
       }
     },
     "page-sections": {
@@ -724,8 +728,8 @@
   },
   "contact": {
     "title": "Let's build together ",
-    "description": "I reply to your messages personally. Whether it's for a project, a collaboration or just to chat about product design and innovation, my inbox is open.",
-    "keywords": "SaaS contact, Adriel Zimbril, Product Designer, discuss SaaS idea, product collaboration, SaaS design, freelance SaaS contact, SaaS expert, product support, SaaS mentor, design trainer",
+    "description": "I review your messages personally. Whether it's for a project, a collaboration or just to chat about product design and innovation, my inbox is open.",
+    "keywords": "SaaS contact, Product Designer, discuss SaaS idea, product collaboration, SaaS design, freelance SaaS contact, SaaS expert, product support, SaaS mentor, design trainer",
     "page": {
       "badge": "Problem Solver & Your SaaS Product designer ",
       "form": {
