@@ -7,8 +7,18 @@ import { DEMO_MESSAGES } from "@/app/(base)/community/sections/demo-message";
 import { apiRoutes } from "@/data/api-routes";
 import { useWindowEvent } from "@/hooks/useWindowEvent";
 
+// Helper function to add random pattern and rotation to messages
+const transformMessages = (msgs: any[]) =>
+  msgs.map((msg: any) => ({
+    ...msg,
+    patternIndex: msg.pattern_index ?? Math.floor(Math.random() * 5), // Random pattern index 0-4
+    rotation: msg.rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
+  }));
+
 export function MessagesSection() {
-  const [messages, setMessages] = useState(DEMO_MESSAGES);
+  const [messages, setMessages] = useState(() =>
+    transformMessages(DEMO_MESSAGES),
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchMessages = useCallback(async () => {
@@ -17,7 +27,7 @@ export function MessagesSection() {
       if (response.ok) {
         const data = await response.json();
         if (data.messages && data.messages.length > 0) {
-          setMessages(data.messages);
+          setMessages(transformMessages(data.messages));
         }
       }
     } catch (error) {
@@ -37,12 +47,7 @@ export function MessagesSection() {
     fetchMessages();
   });
 
-  // Transform messages to include patternIndex and rotation
-  const displayMessages = messages.map((msg: any) => ({
-    ...msg,
-    patternIndex: msg.pattern_index ?? Math.floor(Math.random() * 5), // Random pattern index 0-4
-    rotation: msg.rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
-  }));
+  const displayMessages = messages;
 
   if (isLoading) {
     return (

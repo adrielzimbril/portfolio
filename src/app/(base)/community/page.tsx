@@ -5,9 +5,7 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { StatsSection } from "@/app/(base)/community/sections/StatsSection";
-import { FormSection } from "@/app/(base)/community/sections/FormSection";
 import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection";
-import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
 

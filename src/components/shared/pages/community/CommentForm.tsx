@@ -102,7 +102,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       setComment("");
       setScreen("input");
       setPatternIndex(Math.floor(Math.random() * patterns.length));
-      setRotation(config.rotation.startAt);
+      setRotation(config.rotation.default);
       onSuccess?.();
       // Dispatch custom event to refresh messages
       dispatchWindowEvent("community-message-added");
