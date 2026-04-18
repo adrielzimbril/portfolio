@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useUser } from "@/integrations/auth/provider/supabase";
 import {
   getAnonymousUserId,
@@ -11,21 +11,21 @@ const SyncContext = createContext<{ hasSynced: boolean }>({ hasSynced: false });
 
 export function SyncProvider({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
-  const hasSyncedRef = useRef(false);
+  const [hasSynced, setHasSynced] = useState(false);
 
   useEffect(() => {
     const syncAnonymous = async () => {
       const anonymousId = getAnonymousUserId();
-      if (user?.id && anonymousId && !hasSyncedRef.current) {
-        hasSyncedRef.current = true;
+      if (user?.id && anonymousId && !hasSynced) {
+        setHasSynced(true);
         await syncAnonymousReactionsOnLogin(anonymousId);
       }
     };
     syncAnonymous();
-  }, [user]);
+  }, [user, hasSynced]);
 
   return (
-    <SyncContext.Provider value={{ hasSynced: hasSyncedRef.current }}>
+    <SyncContext.Provider value={{ hasSynced }}>
       {children}
     </SyncContext.Provider>
   );
