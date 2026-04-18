@@ -12,8 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { adminApiRoutes } from "@/data/adminApiRoutes";
+import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import logger from "@/utils/logger";
+import { locales } from "@/utils/locale";
 
 interface CommunityMessage {
   id: string;
@@ -42,7 +43,7 @@ export function CommunityWallManagementSection() {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(adminApiRoutes.community.messages);
+      const response = await fetch(landlordApiRoutes.community.messages);
       if (response.ok) {
         const data = await response.json();
         setMessages(data.messages || []);
@@ -57,7 +58,7 @@ export function CommunityWallManagementSection() {
   const handleAddMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(adminApiRoutes.community.messages, {
+      const response = await fetch(landlordApiRoutes.community.messages, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newMessage),
@@ -80,9 +81,12 @@ export function CommunityWallManagementSection() {
 
   const handleDeleteMessage = async (id: string) => {
     try {
-      const response = await fetch(adminApiRoutes.community.messageById(id), {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        landlordApiRoutes.community.messageById(id),
+        {
+          method: "DELETE",
+        },
+      );
 
       if (response.ok) {
         fetchMessages();
@@ -94,11 +98,14 @@ export function CommunityWallManagementSection() {
 
   const handleUpdateLanguage = async (id: string, language: string) => {
     try {
-      const response = await fetch(adminApiRoutes.community.messageById(id), {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ language }),
-      });
+      const response = await fetch(
+        landlordApiRoutes.community.messageById(id),
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ language }),
+        },
+      );
 
       if (response.ok) {
         fetchMessages();
@@ -167,11 +174,11 @@ export function CommunityWallManagementSection() {
                   <SelectValue placeholder="Select language" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="fr">Français</SelectItem>
-                  <SelectItem value="es">Español</SelectItem>
-                  <SelectItem value="de">Deutsch</SelectItem>
-                  <SelectItem value="pt">Português</SelectItem>
+                  {locales.map((locale) => (
+                    <SelectItem key={locale} value={locale}>
+                      {locale.toUpperCase()}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>

@@ -8,7 +8,7 @@ import {
   signInWithGithub,
   signInWithGoogle,
 } from "@/integrations/auth/provider/supabase";
-import { adminRoutes } from "@/data/adminRoutes";
+import { landlordRoutes } from "@/data/landlordRoutes";
 
 export function LoginButtons() {
   const t = useTranslations();
@@ -17,7 +17,7 @@ export function LoginButtons() {
     signInFn: (callbackURL?: string) => Promise<void>,
   ) => {
     const callbackURL = getPathUrl(
-      adminRoutes.landlord.link + window.location.search,
+      landlordRoutes.landlord.link + window.location.search,
     );
     await signInFn(callbackURL);
   };

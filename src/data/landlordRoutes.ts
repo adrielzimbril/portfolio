@@ -1,4 +1,4 @@
-export const adminRoutes = {
+export const landlordRoutes = {
   landlord: {
     name: "Landlord Dashboard",
     key: "landlord",

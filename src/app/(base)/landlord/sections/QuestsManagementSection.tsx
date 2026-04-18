@@ -13,8 +13,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { adminApiRoutes } from "@/data/adminApiRoutes";
+import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import logger from "@/utils/logger";
+import { getAllQuests } from "@/integrations/content/lib/quests";
 
 interface Participant {
   id: string;
@@ -32,6 +33,7 @@ interface Participant {
 
 export function QuestsManagementSection() {
   const [participants, setParticipants] = useState<Participant[]>([]);
+  const [quests, setQuests] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedQuest, setSelectedQuest] = useState<string>("all");
@@ -45,13 +47,23 @@ export function QuestsManagementSection() {
   });
 
   useEffect(() => {
+    fetchQuests();
     fetchParticipants();
   }, [selectedQuest]);
+
+  const fetchQuests = async () => {
+    try {
+      const allQuests = await getAllQuests();
+      setQuests(allQuests);
+    } catch (error) {
+      logger.error("Failed to fetch quests:", error);
+    }
+  };
 
   const fetchParticipants = async () => {
     try {
       const response = await fetch(
-        `${adminApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
+        `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
       );
       if (response.ok) {
         const data = await response.json();
@@ -67,7 +79,7 @@ export function QuestsManagementSection() {
   const handleAddParticipant = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(adminApiRoutes.quests.participants, {
+      const response = await fetch(landlordApiRoutes.quests.participants, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -95,11 +107,14 @@ export function QuestsManagementSection() {
 
   const handleUpdateLanguage = async (id: string, language: string) => {
     try {
-      const response = await fetch(adminApiRoutes.quests.participantById(id), {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ language }),
-      });
+      const response = await fetch(
+        landlordApiRoutes.quests.participantById(id),
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ language }),
+        },
+      );
 
       if (response.ok) {
         fetchParticipants();
@@ -132,9 +147,11 @@ export function QuestsManagementSection() {
                   <SelectValue placeholder="Select a quest" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="quest-1">Quest 1</SelectItem>
-                  <SelectItem value="quest-2">Quest 2</SelectItem>
-                  <SelectItem value="quest-3">Quest 3</SelectItem>
+                  {quests.map((quest) => (
+                    <SelectItem key={quest.slug} value={quest.slug}>
+                      {quest.title}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -224,9 +241,11 @@ export function QuestsManagementSection() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All quests</SelectItem>
-                <SelectItem value="quest-1">Quest 1</SelectItem>
-                <SelectItem value="quest-2">Quest 2</SelectItem>
-                <SelectItem value="quest-3">Quest 3</SelectItem>
+                {quests.map((quest) => (
+                  <SelectItem key={quest.slug} value={quest.slug}>
+                    {quest.title}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
