@@ -48,12 +48,12 @@ function Textarea({
         data-slot="textarea"
         className={cn(
           "border-b-base-accent text-inherit focus-visible:ring-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex min-h-19.5 w-full rounded-md border bg-transparent px-3 py-2 text-lg shadow-none outline-none disabled:cursor-not-allowed disabled:opacity-50",
-          "overflow-y-auto resize-none",
           className,
           autoGrow &&
             "field-sizing-content max-h-29.5 min-h-0 resize-none py-1.75",
           "text-b-white-foreground",
           inputVariants({ variant, inputSize, className }),
+          "overflow-y-auto resize-none",
         )}
         value={value}
         maxLength={maxLength}

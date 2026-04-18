@@ -301,6 +301,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                           disabled={form.formState.isSubmitting}
                           // {...field}
                           value={field.value ?? ""}
+                          onChange={field.onChange}
+                          // value={field.value ?? ""}
                         />
                       </FormControl>
                       <FormMessage />
