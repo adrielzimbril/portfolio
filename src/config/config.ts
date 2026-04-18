@@ -128,7 +128,6 @@ export const ConfigValue = {
 
   // Legacy / Other
   NEXT_PUBLIC_REST_API_ENDPOINT: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
-  NEXT_PUBLIC_WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
 } as const;
 
 /**

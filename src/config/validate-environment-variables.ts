@@ -121,7 +121,6 @@ const environmentVariablesSchema = z.object({
 
   // Legacy / Other
   NEXT_PUBLIC_REST_API_ENDPOINT: z.string().optional(),
-  NEXT_PUBLIC_WEBSITE_URL: z.string().optional(),
 });
 
 export type EnvVars = z.infer<typeof environmentVariablesSchema>;
@@ -214,7 +213,6 @@ export function validateEnvironmentVariables(): EnvVars {
     PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
     LIGHTHOUSE_CACHE_DAYS: process.env.LIGHTHOUSE_CACHE_DAYS,
     NEXT_PUBLIC_REST_API_ENDPOINT: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
-    NEXT_PUBLIC_WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
   };
 
   const result = environmentVariablesSchema.safeParse(envVars);

@@ -148,7 +148,6 @@ export function getEnvVars(): Record<string, string | undefined> {
 
     // Legacy / Other
     NEXT_PUBLIC_REST_API_ENDPOINT: ConfigValue.NEXT_PUBLIC_REST_API_ENDPOINT,
-    NEXT_PUBLIC_WEBSITE_URL: ConfigValue.NEXT_PUBLIC_WEBSITE_URL,
   };
 }
 
