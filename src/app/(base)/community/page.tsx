@@ -8,6 +8,7 @@ import { StatsSection } from "@/app/(base)/community/sections/StatsSection";
 import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
+import { apiRoutes } from "@/data/api-routes";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -41,6 +42,23 @@ export default async function CommunityPage() {
   } catch (error) {
     // User fetch failed, continue without user
   }
+
+  // Fetch messages and stats
+  let initialMessages = [];
+  let initialStats = null;
+  try {
+    const response = await fetch(apiRoutes.community.messages.link, {
+      cache: "no-store",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      initialMessages = data.messages || [];
+      initialStats = data.stats || null;
+    }
+  } catch (error) {
+    // Fetch failed, components will handle it
+  }
+
   const t = await getTranslations();
 
   return (
@@ -53,14 +71,14 @@ export default async function CommunityPage() {
       />
 
       <SectionLayout className="p-0!" isFlex>
-        <StatsSection user={user} />
+        <StatsSection user={user} initialStats={initialStats} />
       </SectionLayout>
 
       <SectionLayout isFlex>
         {/* <LeaveNoteButton user={user} /> */}
         <div className="flex justify-center size-full">
           {/* <FormSection user={user} /> */}
-          <MessagesSection />
+          <MessagesSection initialMessages={initialMessages} />
         </div>
       </SectionLayout>
     </>

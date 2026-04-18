@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import logger from "@/utils/logger";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
@@ -15,11 +15,17 @@ const transformMessages = (msgs: any[]) =>
     rotation: msg.rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
   }));
 
-export function MessagesSection() {
+interface MessagesSectionProps {
+  initialMessages?: any[];
+}
+
+export function MessagesSection({ initialMessages }: MessagesSectionProps) {
   const [messages, setMessages] = useState(() =>
-    transformMessages(DEMO_MESSAGES),
+    initialMessages
+      ? transformMessages(initialMessages)
+      : transformMessages(DEMO_MESSAGES),
   );
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!initialMessages);
 
   const fetchMessages = useCallback(async () => {
     try {
@@ -36,12 +42,6 @@ export function MessagesSection() {
       setIsLoading(false);
     }
   }, []);
-
-  useEffect(() => {
-    (async () => {
-      await fetchMessages();
-    })();
-  }, [fetchMessages]);
 
   useWindowEvent("community-message-added", () => {
     fetchMessages();
