@@ -5,16 +5,18 @@ import { authRoutes } from "@/integrations/auth/routes";
 import { providerList } from "@/integrations/auth/types/types";
 import { ConfigValue } from "@/config";
 import { Provider } from "@supabase/supabase-js";
+import { getPathUrl } from "@/utils/base-url";
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
   const provider = searchParams.get("provider") as Provider;
   const next =
-    searchParams.get("next") ?? ConfigValue.AUTH_CALLBACK_URL_COMMUNITY;
+    searchParams.get("next") ??
+    getPathUrl(ConfigValue.AUTH_CALLBACK_URL_COMMUNITY);
 
   if (!provider || !providerList.includes(provider as any)) {
     return NextResponse.redirect(
-      `${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=invalid_provider`,
+      getPathUrl(`${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=invalid_provider`),
     );
   }
 
@@ -24,7 +26,9 @@ export async function GET(request: Request) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: `${origin}${authRoutes.callback}?next=${encodeURIComponent(next)}`,
+      redirectTo: getPathUrl(
+        `${authRoutes.callback}?next=${encodeURIComponent(next)}`,
+      ),
       ...(provider === "google"
         ? {
             queryParams: {
@@ -38,7 +42,7 @@ export async function GET(request: Request) {
 
   if (error) {
     return NextResponse.redirect(
-      `${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=login_failed`,
+      getPathUrl(`${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=login_failed`),
     );
   }
 
@@ -47,6 +51,6 @@ export async function GET(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=unknown_error`,
+    getPathUrl(`${ConfigValue.AUTH_DEFAULT_REDIRECT}?error=unknown_error`),
   );
 }

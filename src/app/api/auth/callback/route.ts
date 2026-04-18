@@ -5,7 +5,8 @@ import { authRoutes } from "@/integrations/auth/routes";
 import { sendEmail } from "@/integrations/mail";
 import { Locale } from "@/types";
 import logger from "@/utils/logger";
-import { isDevelopment, ConfigValue } from "@/config";
+import { ConfigValue } from "@/config";
+import { getPathUrl } from "@/utils/base-url";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -53,19 +54,10 @@ export async function GET(request: Request) {
         }
       }
 
-      const forwardedHost = request.headers.get("x-forwarded-host");
-      const isLocalEnv = isDevelopment();
-
-      if (isLocalEnv) {
-        return NextResponse.redirect(`${origin}${next}`);
-      } else if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`);
-      } else {
-        return NextResponse.redirect(`${origin}${next}`);
-      }
+      return NextResponse.redirect(getPathUrl(next));
     }
   }
 
   // Handle errors - redirect to default (toast will show error message)
-  return NextResponse.redirect(`${origin}${ConfigValue.AUTH_DEFAULT_REDIRECT}`);
+  return NextResponse.redirect(getPathUrl(ConfigValue.AUTH_DEFAULT_REDIRECT));
 }
