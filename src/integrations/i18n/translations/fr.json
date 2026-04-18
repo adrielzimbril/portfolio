@@ -1453,5 +1453,13 @@
     "badges": {
       "header": "Menu"
     }
+  },
+  "admin": {
+    "title": "Tableau de bord Admin",
+    "description": "Tableau de bord administratif pour gérer le site",
+    "page": {
+      "title": "Tableau de bord Admin",
+      "description": "Gérez le contenu et les paramètres de votre site"
+    }
   }
 }

@@ -131,6 +131,14 @@
       "header": "Menu"
     }
   },
+  "admin": {
+    "title": "Admin Dashboard",
+    "description": "Admin dashboard for managing the site",
+    "page": {
+      "title": "Admin Dashboard",
+      "description": "Manage your site content and settings"
+    }
+  },
   "toolbox": {
     "title": "Toolbox",
     "description": "My setup and tools I actually use. No sponsored recommendations.",
