@@ -24,6 +24,8 @@ import { useLocale } from "next-intl";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { patterns } from "@/components/shared/pages/community/pattern";
 import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, Radio } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface CommentFormProps {
   user: any;
@@ -179,23 +181,29 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <label className="text-sm font-medium">Pattern:</label>
-                    <div className="flex gap-1 flex-1">
+                    <Label className="text-sm font-medium">Pattern:</Label>
+                    <RadioGroup
+                      value={patternIndex.toString()}
+                      onValueChange={(value) =>
+                        setPatternIndex(parseInt(value))
+                      }
+                      className="flex gap-1 flex-1 flex-row"
+                    >
                       {patterns.map((_, index) => (
-                        <button
+                        <Radio
                           key={index}
-                          type="button"
-                          onClick={() => setPatternIndex(index)}
+                          value={index.toString()}
+                          variant="squircle"
+                          size="lg"
+                          color="default"
                           className={cn(
-                            "h-6 w-6 rounded-full transition-all flex-1 max-w-[40px]",
-                            patternIndex === index
-                              ? "bg-primary scale-110 ring-2 ring-primary ring-offset-2"
-                              : "bg-b-base hover:bg-b-base/80",
+                            "transition-all",
+                            "data-[state=checked]:scale-110",
                           )}
                           aria-label={`Pattern ${index + 1}`}
                         />
                       ))}
-                    </div>
+                    </RadioGroup>
                   </div>
                 </div>
 
