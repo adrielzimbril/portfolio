@@ -1,4 +1,3 @@
-// @ts-ignore
 import {
   rmSync,
   readdirSync,
@@ -6,10 +5,8 @@ import {
   statSync,
   promises as fsPromises,
 } from "node:fs";
-// @ts-ignore
 import path, { join } from "node:path";
 import { exec } from "node:child_process";
-
 import util from "node:util";
 
 const rootDir = "./";
@@ -17,7 +14,7 @@ const rootDir = "./";
 /**
  * Function to run 'pnpm store prune' using exec.
  */
-async function prunePnpmStore() {
+async function prunePnpmStore(): Promise<void> {
   console.info(`Start executing 'pnpm store prune'`);
 
   exec("pnpm store prune", (error, stdout, stderr) => {
@@ -36,9 +33,9 @@ async function prunePnpmStore() {
 }
 
 /**
- * @param {import("fs").PathLike} folderPath
+ * @param {string} folderPath
  */
-function deleteFolder(folderPath) {
+function deleteFolder(folderPath: string): void {
   try {
     rmSync(folderPath, { recursive: true, force: true });
     console.log(`Deleted: ${folderPath}`);
@@ -48,18 +45,16 @@ function deleteFolder(folderPath) {
 }
 
 /**
- * @param {import("fs").PathLike} targetPath
+ * @param {string} targetPath
  */
-async function deleteFile(targetPath) {
+async function deleteFile(targetPath: string): Promise<void> {
   try {
     const stats = await fsPromises.lstat(targetPath);
 
     if (stats.isDirectory()) {
       // Read all entries in the directory
       const entries = await fsPromises.readdir(targetPath);
-      // @ts-ignore
       const deletePromises = entries.map((entry) =>
-        // @ts-ignore
         deleteFile(join(targetPath, entry)),
       );
       await Promise.all(deletePromises);
@@ -78,11 +73,10 @@ async function deleteFile(targetPath) {
 }
 
 /**
- * @param {import("fs").PathLike} directory
+ * @param {string} directory
  */
-async function cleanFolders(directory) {
+async function cleanFolders(directory: string): Promise<void> {
   readdirSync(directory, { withFileTypes: true }).forEach((entry) => {
-    // @ts-ignore
     const fullPath = join(directory, entry.name);
 
     if (entry.isDirectory()) {
@@ -97,11 +91,9 @@ async function cleanFolders(directory) {
           ".superdesign",
           ".vercel/output",
         ].some((pattern) =>
-          // @ts-ignore
           typeof pattern === "string"
             ? entry.name === pattern
-            : // @ts-ignore
-              pattern.test(entry.name)
+            : pattern.test(entry.name)
         )
       ) {
         deleteFolder(fullPath);
@@ -112,7 +104,6 @@ async function cleanFolders(directory) {
       const match = entry.name.match(/^(.*)\s*\(1\)$/);
       if (match) {
         const originalName = match[1].trim();
-        // @ts-ignore
         const originalPath = join(directory, originalName);
 
         if (existsSync(originalPath) && statSync(originalPath).isDirectory()) {
@@ -144,8 +135,7 @@ async function cleanFolders(directory) {
 
 const execPromise = util.promisify(exec);
 
-// @ts-ignore
-async function runBuildSharedPackages() {
+async function runBuildSharedPackages(): Promise<void> {
   try {
     const { stdout, stderr } = await execPromise("pnpm run build");
     console.log("Output:", stdout);
@@ -157,7 +147,7 @@ async function runBuildSharedPackages() {
   }
 }
 
-async function startClean() {
+async function startClean(): Promise<void> {
   try {
     await prunePnpmStore();
     console.info("Start cleaning old install caches");

@@ -36,7 +36,6 @@
       "@components/*": ["./src/components/*"],
       "@shared/*": ["./src/components/shared/*"],
       "@ui/*": ["./src/components/ui/*"],
-      "@shiro/*": ["src/components/aurthle/*"],
       "@i18n/*": ["./src/integrations/i18n/*"],
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
