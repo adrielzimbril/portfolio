@@ -120,11 +120,11 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       <DialogSeparator />
 
       <div className="space-y-6">
-        <div className="text-center space-y-2">
+        {/* <div className="text-center space-y-2">
           <p className="text-b-white-invert-sec">
             {t("community.comment-form.description")}
           </p>
-        </div>
+        </div> */}
 
         {/* Desktop: 2-column layout, Mobile: step-by-step */}
         <div className="hidden md:grid md:grid-cols-2 gap-6">
@@ -144,15 +144,15 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                       <FormControl>
                         <Textarea
                           placeholder={t("community.comment-form.placeholder")}
-                          className={cn(
-                            "w-full min-h-[120px]",
-                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                            "bg-b-base text-foreground placeholder:text-muted-foreground",
-                            "focus:outline-none focus:squircle-border-b-base-accent",
-                            "resize-none transition-all",
-                          )}
-                          rows={5}
-                          limit={500}
+                          // className={cn(
+                          //   "w-full min-h-[120px]",
+                          //   "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                          //   "bg-b-base text-foreground placeholder:text-muted-foreground",
+                          //   "focus:outline-none focus:squircle-border-b-base-accent",
+                          //   "resize-none transition-all",
+                          // )}
+                          rows={3}
+                          limit={110}
                           showLimit
                           disabled={form.formState.isSubmitting}
                           {...field}
@@ -299,7 +299,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                             "resize-none transition-all",
                           )}
                           rows={5}
-                          limit={500}
+                          limit={115}
                           showLimit
                           disabled={form.formState.isSubmitting}
                           {...field}
