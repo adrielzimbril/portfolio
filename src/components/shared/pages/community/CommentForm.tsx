@@ -20,6 +20,7 @@ import { patterns } from "@/components/shared/pages/community/pattern";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, Radio } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Locale } from "@/types";
 
 interface CommentFormProps {
   user: any;
@@ -38,7 +39,7 @@ const config = {
 
 export function CommentForm({ user, onSuccess }: CommentFormProps) {
   const t = useTranslations();
-  const locale = useLocale();
+  const locale: Locale = useLocale() as Locale;
   const [screen, setScreen] = useState<"input" | "preview">("input");
   const [patternIndex, setPatternIndex] = useState(() =>
     Math.floor(Math.random() * patterns.length),
@@ -76,7 +77,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: comment,
+          message: { [locale]: comment },
           author: user?.user_metadata?.name || user?.email,
           profilePicture: user?.user_metadata?.avatar_url,
           language: locale,

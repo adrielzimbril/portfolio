@@ -8,14 +8,17 @@ import BoringAvatar from "boring-avatars";
 import { getImageUrl, pickRandomColorCode } from "@/utils";
 import { useMemo } from "react";
 import { patterns } from "@/components/shared/pages/community/pattern";
+import { useLocale } from "next-intl";
+import { Locale } from "@/types";
 
 type CommunityWallCardProps = {
   patternIndex: number;
-  message?: string;
+  message?: string | Record<Locale, string>;
   rotation?: number;
   author?: string;
   profilePicture?: string;
   className?: string;
+  language?: Locale;
 };
 
 export function CommunityWallCard({
@@ -25,8 +28,10 @@ export function CommunityWallCard({
   author = "",
   profilePicture = "",
   className = "",
+  language,
 }: CommunityWallCardProps) {
   const pattern = patterns[patternIndex % patterns.length];
+  const locale: Locale = useLocale() as Locale;
 
   // Generate random colors for BoringAvatar
   const avatarColors = useMemo(() => {
@@ -34,6 +39,19 @@ export function CommunityWallCard({
       () => pickRandomColorCode() ?? "#ffffff",
     );
   }, []);
+
+  // Extract message based on format (string or JSON)
+  const displayMessage = useMemo(() => {
+    if (typeof message === "string") {
+      return message;
+    }
+    if (typeof message === "object" && message !== null) {
+      // Use provided language, current locale, or fallback language
+      const lang = language || locale || Locale.EN;
+      return message[lang] || message[Locale.EN] || Object.values(message)[0] || "";
+    }
+    return "";
+  }, [message, language, locale]);
 
   return (
     <Card
@@ -58,7 +76,7 @@ export function CommunityWallCard({
           >
             {pattern?.content}
             <p className="w-full z-10 line-clamp-6 text-center text-xl font-bold text-b-white-invert whitespace-pre-line wrap-break-word">
-              {message}
+              {displayMessage}
             </p>
           </div>
           <div className="flex w-full items-center gap-2">

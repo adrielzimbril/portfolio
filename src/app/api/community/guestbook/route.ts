@@ -20,9 +20,26 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    if (!message || message.trim().length === 0) {
+    // Check if message is a string (old format) or object (new format)
+    let messageJson: Record<string, string>;
+
+    if (typeof message === "string") {
+      // Legacy format: convert string to JSON with language key
+      const lang = language || "en";
+      messageJson = { [lang]: message.trim() };
+    } else if (typeof message === "object" && message !== null) {
+      // New format: validate it's a proper JSON object
+      messageJson = message;
+      const messageValue = messageJson[language || "en"];
+      if (!messageValue || messageValue.trim().length === 0) {
+        return NextResponse.json(
+          { error: "Message is required" },
+          { status: 400 },
+        );
+      }
+    } else {
       return NextResponse.json(
-        { error: "Message is required" },
+        { error: "Invalid message format" },
         { status: 400 },
       );
     }
@@ -31,11 +48,10 @@ export async function POST(request: Request) {
       user_id: user.id,
       creator_name: user.user_metadata.full_name || user.email,
       creator_avatar_url: user.user_metadata.avatar_url,
-      message: message.trim(),
+      message: messageJson,
       pattern_index:
         pattern_index ?? Math.floor(Math.random() * patterns.length), // Random pattern index 0-7
       rotation: rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
-      language: language,
     } as any);
 
     if (error) throw error;
