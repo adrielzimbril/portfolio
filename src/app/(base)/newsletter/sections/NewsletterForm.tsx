@@ -9,7 +9,7 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations, useLocale } from "use-intl";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
-import { toast } from "@/components/shiro/providers/toast-provider";
+import { toast } from "@/lib/toast";
 import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { routes } from "@/data/routes";
 import { usePageViews } from "@/hooks/usePageViews";

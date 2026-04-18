@@ -10,7 +10,7 @@ import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
-import { toast } from "@/components/shiro/providers/toast-provider";
+import { toast } from "@/lib/toast";
 import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 
 function EmailForm() {

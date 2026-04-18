@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader, Send } from "@aurthle/icons";
 import { apiRoutes } from "@/data/api-routes";
 import { useRouter } from "next/navigation";
-import { toast } from "@/components/shiro/providers/toast-provider";
+import { toast } from "@/lib/toast";
 import logger from "@/utils/logger";
 import { cn } from "@/utils/utils";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";

@@ -13,7 +13,7 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logger from "@/utils/logger";
-import { toast } from "@/components/shiro/providers/toast-provider";
+import { toast } from "@/lib/toast";
 import { PhoneInput } from "@aurthle/react-phone";
 import * as RPNInput from "react-phone-number-input";
 import confetti from "canvas-confetti";

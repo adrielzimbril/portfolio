@@ -13,7 +13,7 @@ import { Form } from "@/components/ui/form";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import logger from "@/utils/logger";
 import { apiRoutes } from "@/data/api-routes";
-import { toast } from "@/components/shiro/providers/toast-provider";
+import { toast } from "@/lib/toast";
 import { useLocale } from "next-intl";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { patterns } from "@/components/shared/pages/community/pattern";
