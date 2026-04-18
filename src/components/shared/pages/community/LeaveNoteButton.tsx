@@ -24,7 +24,7 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
           <Button
             variant="default"
             asIcon
-            whileTap
+            asPointer
             className={cn(
               "squircle squircle-smooth-lg squircle-2xl",
               "flex items-center gap-3 px-6 py-4",
