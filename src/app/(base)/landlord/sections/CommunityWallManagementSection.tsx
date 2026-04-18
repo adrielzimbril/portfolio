@@ -67,8 +67,7 @@ export function CommunityWallManagementSection() {
         setNewMessage({
           creator_name: "",
           creator_avatar_url: "",
-          message: "",
-          language: "en",
+          messages: {},
         });
         setShowAddForm(false);
         fetchMessages();
@@ -114,6 +113,45 @@ export function CommunityWallManagementSection() {
     }
   };
 
+  const handleEditMessage = (msg: CommunityMessage) => {
+    setEditingMessage(msg.id);
+    setNewMessage({
+      creator_name: msg.creator_name,
+      creator_avatar_url: msg.creator_avatar_url || "",
+      messages: { ...msg.messages },
+    });
+    setShowAddForm(true);
+  };
+
+  const handleUpdateMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingMessage) return;
+
+    try {
+      const response = await fetch(
+        landlordApiRoutes.community.messageById(editingMessage),
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newMessage),
+        },
+      );
+
+      if (response.ok) {
+        setEditingMessage(null);
+        setNewMessage({
+          creator_name: "",
+          creator_avatar_url: "",
+          messages: {},
+        });
+        setShowAddForm(false);
+        fetchMessages();
+      }
+    } catch (error) {
+      logger.error("Failed to update message:", error);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -125,7 +163,10 @@ export function CommunityWallManagementSection() {
 
       {showAddForm && (
         <Card className="p-6">
-          <form onSubmit={handleAddMessage} className="space-y-4">
+          <form
+            onSubmit={editingMessage ? handleUpdateMessage : handleAddMessage}
+            className="space-y-4"
+          >
             <div>
               <Label htmlFor="creatorName">Creator Name</Label>
               <Input
@@ -150,38 +191,33 @@ export function CommunityWallManagementSection() {
                 }
               />
             </div>
-            <div>
-              <Label htmlFor="message">Message</Label>
-              <Textarea
-                id="message"
-                value={newMessage.message}
-                onChange={(e) =>
-                  setNewMessage({ ...newMessage, message: e.target.value })
-                }
-                required
-              />
+            <div className="space-y-4">
+              <Label>Messages by Language</Label>
+              {locales.map((locale) => (
+                <div key={locale}>
+                  <Label htmlFor={`message-${locale}`}>
+                    Message ({locale.toUpperCase()})
+                  </Label>
+                  <Textarea
+                    id={`message-${locale}`}
+                    placeholder={`Message in ${locale.toUpperCase()}`}
+                    value={newMessage.messages[locale] || ""}
+                    onChange={(e) =>
+                      setNewMessage({
+                        ...newMessage,
+                        messages: {
+                          ...newMessage.messages,
+                          [locale]: e.target.value,
+                        },
+                      })
+                    }
+                  />
+                </div>
+              ))}
             </div>
-            <div>
-              <Label htmlFor="language">Language</Label>
-              <Select
-                value={newMessage.language}
-                onValueChange={(value) =>
-                  setNewMessage({ ...newMessage, language: value })
-                }
-              >
-                <SelectTrigger id="language">
-                  <SelectValue placeholder="Select language" />
-                </SelectTrigger>
-                <SelectContent>
-                  {locales.map((locale) => (
-                    <SelectItem key={locale} value={locale}>
-                      {locale.toUpperCase()}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <Button type="submit">Add Message</Button>
+            <Button type="submit">
+              {editingMessage ? "Update Message" : "Add Message"}
+            </Button>
           </form>
         </Card>
       )}
@@ -201,26 +237,26 @@ export function CommunityWallManagementSection() {
                       className="w-12 h-12 rounded-full"
                     />
                   )}
-                  <div className="space-y-2">
+                  <div className="space-y-2 flex-1">
                     <div className="flex items-center space-x-2">
                       <h3 className="font-semibold">{msg.creator_name}</h3>
-                      <Select
-                        value={msg.language || "en"}
-                        onValueChange={(value) =>
-                          handleUpdateLanguage(msg.id, value)
-                        }
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleEditMessage(msg)}
                       >
-                        <SelectTrigger className="w-24 h-6 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="en">EN</SelectItem>
-                          <SelectItem value="fr">FR</SelectItem>
-                          <SelectItem value="zh-CN">ZH</SelectItem>
-                        </SelectContent>
-                      </Select>
+                        Edit
+                      </Button>
                     </div>
-                    <p className="text-sm">{msg.message}</p>
+                    {msg.messages &&
+                      Object.entries(msg.messages).map(([lang, message]) => (
+                        <div key={lang} className="space-y-1">
+                          <span className="text-xs text-muted-foreground font-medium">
+                            {lang.toUpperCase()}
+                          </span>
+                          <p className="text-sm">{message}</p>
+                        </div>
+                      ))}
                     <p className="text-xs text-muted-foreground">
                       {new Date(msg.created_at).toLocaleString()}
                     </p>
