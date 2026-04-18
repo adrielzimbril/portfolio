@@ -193,12 +193,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         <Radio
                           key={index}
                           value={index.toString()}
-                          variant="glass"
                           size="xl"
-                          className={cn(
-                            "transition-all",
-                            "data-[state=checked]:scale-110",
-                          )}
                           aria-label={`Pattern ${index + 1}`}
                         />
                       ))}

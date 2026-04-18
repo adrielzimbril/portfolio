@@ -7,16 +7,16 @@ import { cn } from "@/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const radioVariants = cva(
-  "relative aspect-square inline-flex shrink-0 items-center justify-center outline-none transition-shadow before:pointer-events-none before:absolute before:inset-0 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background data-disabled:cursor-not-allowed data-disabled:opacity-64",
+  "relative aspect-square inline-flex shrink-0 items-center justify-center outline-none before:pointer-events-none before:absolute before:inset-0 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background data-disabled:cursor-not-allowed data-disabled:opacity-64",
   {
     variants: {
       variant: {
         default:
-          "rounded-full border border-input bg-background not-dark:bg-clip-padding shadow-xs/5 before:rounded-full not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/48 dark:not-data-checked:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [[data-disabled],[data-checked],[aria-invalid]]:shadow-none",
+          "rounded-full border border-input bg-background not-dark:bg-clip-padding before:rounded-full not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-none aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/48 dark:not-data-checked:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [[data-disabled],[data-checked],[aria-invalid]]:shadow-none",
         squircle:
           "squircle squircle-mask squircle-4xl squircle-smooth-3xl squircle-border-2 squircle-border-b-base-accent squircle-b-base data-[state=checked]:squircle-primary data-[state=checked]:squircle-border-primary",
         glass:
-          "rounded-full border border-b-base/20 bg-b-base backdrop-blur-md before:rounded-full data-[state=checked]:bg-primary/80 data-[state=checked]:border-primary",
+          "rounded-full border-0 bg-b-base backdrop-blur-2xl before:rounded-full shadow-[0_0_0_0.1em_hsla(0,0%,100%,0.3)_inset] data-[state=checked]:bg-b-base/25 data-[state=checked]:shadow-[0_0_0_0.15em_hsla(0,0%,100%,0.4)_inset]",
       },
       size: {
         xs: "size-2.5",
@@ -118,7 +118,8 @@ export function Radio({
       <RadioPrimitive.Indicator
         className={cn(
           "absolute flex items-center justify-center before:rounded-full before:bg-primary-foreground data-unchecked:hidden data-checked:bg-primary",
-          variant !== "squircle" ? "-inset-px rounded-full " : "before:",
+          variant === "default" && "-inset-px",
+          variant !== "squircle" && "rounded-full",
           size === "xs" && "size-2.5 before:size-1",
           size === "sm" && "size-3.5 before:size-1.5",
           (size === "default" || !size) &&
