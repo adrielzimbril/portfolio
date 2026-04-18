@@ -57,7 +57,7 @@ export function CommunityWallCard({
             )}
           >
             {pattern?.content}
-            <p className="w-full z-10 line-clamp-6 text-center text-xl font-bold text-b-white-invert whitespace-pre-line break-words">
+            <p className="w-full z-10 line-clamp-6 text-center text-xl font-bold text-b-white-invert whitespace-pre-line wrap-break-word">
               {message}
             </p>
           </div>

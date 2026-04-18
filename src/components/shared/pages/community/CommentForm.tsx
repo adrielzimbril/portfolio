@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
 import { cn } from "@/utils/utils";
-import { Send, ArrowLeftOne, ArrowRightOne, X } from "@aurthle/icons";
+import { Send, ArrowLeftOne, ArrowRightOne, XCircle } from "@aurthle/icons";
 import { DialogHeader, DialogSeparator } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import {
@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import { useLocale } from "next-intl";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { patterns } from "@/components/shared/pages/community/pattern";
+import { Textarea } from "@/components/ui/textarea";
 
 interface CommentFormProps {
   user: any;
@@ -141,15 +142,18 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     <FormItem>
                       <FormLabel>{t("community.comment-form.label")}</FormLabel>
                       <FormControl>
-                        <textarea
+                        <Textarea
                           placeholder={t("community.comment-form.placeholder")}
                           className={cn(
-                            "w-full min-h-[120px] p-4",
-                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                            "bg-b-base text-foreground placeholder:text-muted-foreground",
-                            "focus:outline-none focus:squircle-border-b-base-accent",
-                            "resize-none transition-all",
+                            // "w-full h-full min-h-29.5 p-4",
+                            // "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                            // "bg-b-base text-foreground placeholder:text-muted-foreground",
+                            // "focus:outline-none focus:squircle-border-b-base-accent",
+                            "resize-y transition-all",
                           )}
+                          rows={5}
+                          limit={500}
+                          showLimit
                           disabled={form.formState.isSubmitting}
                           {...field}
                         />
@@ -203,8 +207,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     asIcon
                     onClick={() => form.reset()}
                   >
-                    <X size={16} className="mr-2" />
-                    {t("common.cancel")}
+                    <XCircle size={16} className="mr-2" variant="bulk" />
+                    Cancel
                   </Button>
                   <Button
                     type="submit"
@@ -285,17 +289,18 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     <FormItem>
                       <FormLabel>{t("community.comment-form.label")}</FormLabel>
                       <FormControl>
-                        <textarea
+                        <Textarea
                           placeholder={t("community.comment-form.placeholder")}
-                          className={cn(
-                            "w-full min-h-[120px] p-4",
-                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                            "bg-b-base text-foreground placeholder:text-muted-foreground",
-                            "focus:outline-none focus:squircle-border-b-base-accent",
-                            "resize-none transition-all",
-                          )}
+                          // className={cn(
+                          //   "w-full min-h-[120px] p-4",
+                          //   "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                          //   "bg-b-base text-foreground placeholder:text-muted-foreground",
+                          //   "focus:outline-none focus:squircle-border-b-base-accent",
+                          //   "resize-none transition-all",
+                          // )}
                           disabled={form.formState.isSubmitting}
-                          {...field}
+                          // {...field}
+                          value={field.value ?? ""}
                         />
                       </FormControl>
                       <FormMessage />
@@ -311,8 +316,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     asIcon
                     onClick={() => form.reset()}
                   >
-                    <X size={16} className="mr-2" />
-                    {t("common.cancel")}
+                    <XCircle size={16} className="mr-2" variant="bulk" />
+                    Cancel
                   </Button>
                   <Button
                     type="button"
@@ -324,7 +329,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     onClick={handleNext}
                     disabled={!form.formState.isValid}
                   >
-                    {t("common.next")}
+                    Next
                   </Button>
                 </div>
               </form>
@@ -407,7 +412,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   onClick={handleBack}
                 >
                   <ArrowLeftOne size={16} className="mr-2" />
-                  {t("common.back")}
+                  Back
                 </Button>
                 <Button
                   type="button"

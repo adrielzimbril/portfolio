@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { cn } from "@/utils";
+import { cn, logger } from "@/utils";
 import { VariantProps } from "class-variance-authority";
 import { inputVariants } from "@/components/ui/input";
 import { useCharacterLimit } from "@/hooks/useCharacterLimit";
@@ -30,6 +30,16 @@ function Textarea({
     handleChange,
     maxLength: maxLengthLimit,
   } = useCharacterLimit({ maxLength });
+  logger.info(
+    "value",
+    value,
+    "characterCount",
+    characterCount,
+    "maxLength",
+    maxLength,
+    "maxLengthLimit",
+    maxLengthLimit,
+  );
 
   return (
     <>
@@ -37,7 +47,8 @@ function Textarea({
         id={id}
         data-slot="textarea"
         className={cn(
-          "border-b-base-accent text-inherit focus-visible:ring-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex min-h-19.5 w-full rounded-md border bg-transparent px-3 py-2 text-lg shadow-none outline-none disabled:cursor-not-allowed disabled:opacity-50 [resize:none]",
+          "border-b-base-accent text-inherit focus-visible:ring-none aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex min-h-19.5 w-full rounded-md border bg-transparent px-3 py-2 text-lg shadow-none outline-none disabled:cursor-not-allowed disabled:opacity-50",
+          "overflow-y-auto resize-none",
           className,
           autoGrow &&
             "field-sizing-content max-h-29.5 min-h-0 resize-none py-1.75",
