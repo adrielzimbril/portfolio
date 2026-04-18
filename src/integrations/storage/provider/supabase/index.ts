@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import { logger } from "@/utils";
 import {
   GetSignedUploadUrlHandler,
@@ -6,7 +5,7 @@ import {
   UploadHandler,
 } from "@/integrations/storage/types/types";
 import { supabase } from "@/integrations/supabase/client";
-import { fileToBuffer } from "../../util";
+import { fileToBuffer } from "@/integrations/storage/util";
 
 export const getSignedUploadUrl: GetSignedUploadUrlHandler = async (
   path,

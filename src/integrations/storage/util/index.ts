@@ -1,1 +1,1 @@
-export * from "./file-conversion";
+export * from "@/integrations/storage/util/file-conversion";

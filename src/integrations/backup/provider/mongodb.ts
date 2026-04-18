@@ -2,7 +2,8 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import { logger } from "@/utils";
 import { ConfigValue, getS3Config } from "@/config";
-import { uploadToS3, generateBackupTimestamp } from "../util";
+import { uploadFile } from "@/integrations/storage";
+import { generateBackupTimestamp } from "@/integrations/backup/util";
 
 const execAsync = promisify(exec);
 
@@ -38,12 +39,15 @@ export async function backupDatabase(): Promise<{
     // Execute mongodump
     logger.info("Starting MongoDB database backup");
     const { stdout: backupData } = await execAsync(
-      `mongodump --uri="${databaseUrl}" --archive`
+      `mongodump --uri="${databaseUrl}" --archive`,
     );
 
-    // Upload backup to S3
+    // Upload backup to S3 using storage integration
     logger.info(`Uploading backup to S3 bucket: ${backupBucket}`);
-    await uploadToS3(backupData, backupFilename, backupBucket);
+    await uploadFile(backupData, backupFilename, {
+      bucket: backupBucket,
+      contentType: "application/octet-stream",
+    });
 
     logger.info(`Backup completed successfully: ${backupFilename}`);
     return { success: true };

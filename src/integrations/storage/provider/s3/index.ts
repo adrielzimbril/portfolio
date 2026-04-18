@@ -11,7 +11,7 @@ import {
   UploadHandler,
 } from "@/integrations/storage/types/types";
 import { getS3Config } from "@/config";
-import { fileToUint8Array } from "../../util";
+import { fileToUint8Array } from "@/integrations/storage/util";
 
 let s3Client: S3Client | null = null;
 
