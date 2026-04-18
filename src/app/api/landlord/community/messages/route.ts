@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
+import { Locale } from "@/types";
 
 export async function GET() {
   try {
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
         creator_name,
         creator_avatar_url: creator_avatar_url || null,
         message,
-        language: language || "en",
+        language: language || Locale.EN,
         user_id: null, // Admin messages don't have a user_id
       })
       .select()

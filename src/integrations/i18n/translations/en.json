@@ -937,6 +937,26 @@
       "preview": "Your submission has been recorded ",
       "subject": " Submission received"
     },
+    "communityWallAdminNotification": {
+      "labels": {
+        "email": "Email",
+        "language": "Language",
+        "message": "Message",
+        "name": "Name"
+      },
+      "preview": "New message posted on the community wall",
+      "subject": " New community wall message"
+    },
+    "communityWallUserConfirmation": {
+      "content": {
+        "intro": "Thank you for posting a message on the community wall! Your message is now visible to everyone.",
+        "messageLabel": "Your message:",
+        "thanks": "Thanks for being part of our community!"
+      },
+      "greeting": "Hello {firstName},",
+      "preview": "Your community wall message has been posted",
+      "subject": " Message posted on community wall"
+    },
     "submitAdminNotification": {
       "preview": "Shirosaas Lab | A new form has been submitted !",
       "subject": " New form submitted — ShiroSaaS Lab"

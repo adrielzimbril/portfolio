@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import logger from "@/utils/logger";
-import { locales } from "@/utils/locale";
+import { Locale } from "@/types";
 
 interface CommunityMessage {
   id: string;
@@ -193,7 +193,7 @@ export function CommunityWallManagementSection() {
             </div>
             <div className="space-y-4">
               <Label>Messages by Language</Label>
-              {locales.map((locale) => (
+              {Object.Locale.map((locale) => (
                 <div key={locale}>
                   <Label htmlFor={`message-${locale}`}>
                     Message ({locale.toUpperCase()})

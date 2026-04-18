@@ -11,8 +11,6 @@ import {
 } from "@/types/enum";
 import { Locale } from "@/integrations/i18n";
 
-// type Locale = "fr" | "en" | "zh-CN";
-
 export interface TestimonialItem {
   id: number;
   name: string;

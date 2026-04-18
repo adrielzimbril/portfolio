@@ -3,6 +3,9 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { logger } from "@/utils/logger";
 import { patterns } from "@/components/shared/pages/community/pattern";
+import { sendEmail } from "@/integrations/mail";
+import { appConfig } from "@/data/app-config";
+import { Locale } from "@/types";
 
 export async function POST(request: Request) {
   try {
@@ -25,12 +28,12 @@ export async function POST(request: Request) {
 
     if (typeof message === "string") {
       // Legacy format: convert string to JSON with language key
-      const lang = language || "en";
+      const lang = language || Locale.EN;
       messageJson = { [lang]: message.trim() };
     } else if (typeof message === "object" && message !== null) {
       // New format: validate it's a proper JSON object
       messageJson = message;
-      const messageValue = messageJson[language || "en"];
+      const messageValue = messageJson[language || Locale.EN];
       if (!messageValue || messageValue.trim().length === 0) {
         return NextResponse.json(
           { error: "Message is required" },
@@ -55,6 +58,39 @@ export async function POST(request: Request) {
     } as any);
 
     if (error) throw error;
+
+    // Send email notifications
+    const userEmail = user.email || "";
+    const userName = user.user_metadata.full_name || user.email || "";
+    const messageText = typeof message === "string" ? message : message[language || Locale.EN] || Object.values(message)[0] || "";
+
+    // Send thank you email to user
+    const userMailSent = await sendEmail({
+      to: [{ email: userEmail, name: userName }],
+      locale: language || Locale.EN,
+      templateId: "communityWallUserConfirmation",
+      context: {
+        name: userName,
+        message: messageText,
+      },
+    });
+
+    // Send notification email to admin
+    const adminMailSent = await sendEmail({
+      to: [{ email: appConfig.contactForm.to }],
+      locale: language || Locale.EN,
+      templateId: "communityWallAdminNotification",
+      context: {
+        name: userName,
+        email: userEmail,
+        message: messageText,
+        language: language || Locale.EN,
+      },
+    });
+
+    if (!userMailSent || !adminMailSent) {
+      logger.warn("Failed to send email notifications for community wall message");
+    }
 
     return NextResponse.json({ success: true });
   } catch (error: any) {

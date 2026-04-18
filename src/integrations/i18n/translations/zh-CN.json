@@ -836,6 +836,26 @@
       "preview": "你的提交已记录 🧪",
       "subject": "🚀 提交已收到"
     },
+    "communityWallAdminNotification": {
+      "labels": {
+        "email": "电子邮件",
+        "language": "语言",
+        "message": "留言",
+        "name": "姓名"
+      },
+      "preview": "社区墙上有新消息发布",
+      "subject": "🧾 新的社区墙消息"
+    },
+    "communityWallUserConfirmation": {
+      "content": {
+        "intro": "感谢你在社区墙上发布消息！你的消息现在对所有人可见。",
+        "messageLabel": "你的消息：",
+        "thanks": "感谢成为我们社区的一员！"
+      },
+      "greeting": "你好 {firstName},",
+      "preview": "你的社区墙消息已发布",
+      "subject": "✅ 社区墙消息已发布"
+    },
     "submitAdminNotification": {
       "preview": "Shirosaas Lab | 收到一份新表单！",
       "subject": "🚀 新表单提交 — ShiroSaaS Lab"

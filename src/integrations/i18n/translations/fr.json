@@ -1147,6 +1147,26 @@
         "message": "Message 💬"
       }
     },
+    "communityWallAdminNotification": {
+      "labels": {
+        "email": "Email",
+        "language": "Langue",
+        "message": "Message",
+        "name": "Nom"
+      },
+      "preview": "Nouveau message posté sur le mur de la communauté",
+      "subject": " Nouveau message sur le mur de la communauté"
+    },
+    "communityWallUserConfirmation": {
+      "content": {
+        "intro": "Merci d'avoir posté un message sur le mur de la communauté ! Votre message est maintenant visible par tous.",
+        "messageLabel": "Votre message :",
+        "thanks": "Merci de faire partie de notre communauté !"
+      },
+      "greeting": "Bonjour {firstName},",
+      "preview": "Votre message sur le mur de la communauté a été posté",
+      "subject": " Message posté sur le mur de la communauté"
+    },
     "welcome": {
       "subject": "Bienvenue sur ma newsletter !",
       "preview": "Bienvenue ! Quelques mots sur ce qui t'attend...",
