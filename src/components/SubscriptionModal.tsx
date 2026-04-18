@@ -11,14 +11,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Form } from "@/components/ui/form";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+  Field,
+  FieldControl,
+  FieldError,
+  FieldItem,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logger from "@/utils/logger";
@@ -323,99 +323,94 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
             </p>
           </div>
         ) : (
-          <Form {...formSchemaValidate}>
-            <form
-              onSubmit={formSchemaValidate.handleSubmit(onSubmit)}
-              className="space-y-6"
-            >
-              <FormField
-                control={formSchemaValidate.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium">
-                      {t(
-                        "common.page-sections.newsletter.form.fields.name.label",
-                      )}
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={t(
-                          "common.page-sections.newsletter.form.fields.name.placeholder",
-                        )}
-                        className="h-12 border-2"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              formSchemaValidate.handleSubmit(onSubmit)(e);
+            }}
+            className="space-y-6"
+          >
+            <Field name="name">
+              <FieldLabel className="text-sm font-medium">
+                {t("common.page-sections.newsletter.form.fields.name.label")}
+              </FieldLabel>
+              <FieldItem>
+                <FieldControl>
+                  <Input
+                    placeholder={t(
+                      "common.page-sections.newsletter.form.fields.name.placeholder",
+                    )}
+                    className="h-12 border-2"
+                    value={formSchemaValidate.watch("name")}
+                    onChange={(e) =>
+                      formSchemaValidate.setValue("name", e.target.value)
+                    }
+                  />
+                </FieldControl>
+                <FieldError />
+              </FieldItem>
+            </Field>
 
-              <FormField
-                control={formSchemaValidate.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="tesxt-sm font-medium">
-                      {t(
-                        "common.page-sections.newsletter.form.fields.phone.label",
-                      )}
-                    </FormLabel>
-                    <FormControl>
-                      <PhoneInput
-                        defaultCountry={userCountry}
-                        wrapperClassName="rounded-xl w-full h-12"
-                        className="rounded-xl w-full h-12"
-                        inputComponent={Input}
-                        inputClassName={cn(
-                          "-ms-px shadow-none",
-                          "peer ps-18",
-                          "h-auto",
-                          "rounded-xl",
-                          "text-base",
-                        )}
-                        triggerClassName={cn(
-                          "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
-                          "h-auto border-2",
-                        )}
-                        contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <Field name="phone">
+              <FieldLabel className="tesxt-sm font-medium">
+                {t("common.page-sections.newsletter.form.fields.phone.label")}
+              </FieldLabel>
+              <FieldItem>
+                <FieldControl>
+                  <PhoneInput
+                    defaultCountry={userCountry}
+                    wrapperClassName="rounded-xl w-full h-12"
+                    className="rounded-xl w-full h-12"
+                    inputComponent={Input}
+                    inputClassName={cn(
+                      "-ms-px shadow-none",
+                      "peer ps-18",
+                      "h-auto",
+                      "rounded-xl",
+                      "text-base",
+                    )}
+                    triggerClassName={cn(
+                      "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
+                      "h-auto border-2",
+                    )}
+                    contentClassName="data-[selected=true]:bg-b-base data-[selected=true]:text-inherit"
+                    value={formSchemaValidate.watch("phone") || ""}
+                    onChange={(value) =>
+                      formSchemaValidate.setValue("phone", value || "")
+                    }
+                  />
+                </FieldControl>
+                <FieldError />
+              </FieldItem>
+            </Field>
 
-              <div className="flex gap-3">
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={isSubmitting}
-                  className="flex-1"
-                  asFull
-                  asPointer
-                  whileTap
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader
-                        color="bg-b-base"
-                        variant="bounce"
-                        className="py-2"
-                      />
-                      {/* <span>{t("common.button.sending")}</span> */}
-                    </>
-                  ) : (
-                    <>
-                      <span>{t("common.button.receive")} 🦄</span>
-                    </>
-                  )}
-                </Button>
-              </div>
-            </form>
-          </Form>
+            <div className="flex gap-3">
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+                className="flex-1"
+                asFull
+                asPointer
+                whileTap
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader
+                      color="bg-b-base"
+                      variant="bounce"
+                      className="py-2"
+                    />
+                    {/* <span>{t("common.button.sending")}</span> */}
+                  </>
+                ) : (
+                  <>
+                    <span>{t("common.button.receive")} 🦄</span>
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
         )}
       </DialogContent>
     </Dialog>

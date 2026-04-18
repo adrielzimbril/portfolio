@@ -4,14 +4,14 @@ import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useLocale, useTranslations } from "use-intl";
+import { Form } from "@/components/ui/form";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+  Field,
+  FieldControl,
+  FieldError,
+  FieldItem,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -122,124 +122,116 @@ export function IntentionForm({
                 </CardContent>
               </Card>
             ) : (
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6 w-full max-w-xl self-center place-self-center"
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  form.handleSubmit(onSubmit)(e);
+                }}
+                className="space-y-6 w-full max-w-xl self-center place-self-center"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Field name="name">
+                    <FieldLabel>
+                      {t("quests.submit.form.fields.name.label")}{" "}
+                      <span className="text-red-500">*</span>
+                    </FieldLabel>
+                    <FieldItem>
+                      <FieldControl>
+                        <Input
+                          value={form.watch("name")}
+                          onChange={(e) =>
+                            form.setValue("name", e.target.value)
+                          }
+                          variant="secondary"
+                          className="rounded-xl"
+                          placeholder={t("submit.page.fields.name.placeholder")}
+                        />
+                      </FieldControl>
+                      <FieldError />
+                    </FieldItem>
+                  </Field>
+                  <Field name="email">
+                    <FieldLabel>
+                      {t("quests.submit.form.fields.email.label")}{" "}
+                      <span className="text-red-500">*</span>
+                    </FieldLabel>
+                    <FieldItem>
+                      <FieldControl>
+                        <Input
+                          value={form.watch("email")}
+                          onChange={(e) =>
+                            form.setValue("email", e.target.value)
+                          }
+                          type="email"
+                          variant="secondary"
+                          className="rounded-xl"
+                          placeholder={t(
+                            "submit.page.fields.email.placeholder",
+                          )}
+                        />
+                      </FieldControl>
+                      <FieldError />
+                    </FieldItem>
+                  </Field>
+                </div>
+
+                <Field name="workUrl">
+                  <FieldLabel>
+                    {t("quests.submit.form.fields.link.label")}{" "}
+                    <span className="text-red-500">*</span>
+                  </FieldLabel>
+                  <FieldItem>
+                    <FieldControl>
+                      <Input
+                        value={form.watch("workUrl")}
+                        onChange={(e) =>
+                          form.setValue("workUrl", e.target.value)
+                        }
+                        variant="secondary"
+                        className="rounded-xl"
+                        placeholder={t("submit.page.fields.url.placeholder")}
+                      />
+                    </FieldControl>
+                    <FieldError />
+                  </FieldItem>
+                </Field>
+
+                <Field name="message">
+                  <FieldLabel>
+                    {t("quests.submit.form.fields.message.label")}
+                  </FieldLabel>
+                  <FieldItem>
+                    <FieldControl>
+                      <Textarea
+                        value={form.watch("message") ?? ""}
+                        onChange={(e) =>
+                          form.setValue("message", e.target.value)
+                        }
+                        rows={5}
+                        variant="secondary"
+                        className="rounded-xl"
+                        placeholder={t(
+                          "quests.submit.form.fields.message.placeholder",
+                        )}
+                      />
+                    </FieldControl>
+                    <FieldError />
+                  </FieldItem>
+                </Field>
+
+                <Button
+                  type="submit"
+                  whileTap
+                  asPointer
+                  asFull
+                  size="lg"
+                  disabled={form.formState.isSubmitting}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>
-                            {t("quests.submit.form.fields.name.label")}{" "}
-                            <span className="text-red-500">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              variant="secondary"
-                              className="rounded-xl"
-                              placeholder={t(
-                                "submit.page.fields.name.placeholder",
-                              )}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>
-                            {t("quests.submit.form.fields.email.label")}{" "}
-                            <span className="text-red-500">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              type="email"
-                              variant="secondary"
-                              className="rounded-xl"
-                              placeholder={t(
-                                "submit.page.fields.email.placeholder",
-                              )}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name="workUrl"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          {t("quests.submit.form.fields.link.label")}{" "}
-                          <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            variant="secondary"
-                            className="rounded-xl"
-                            placeholder={t(
-                              "submit.page.fields.url.placeholder",
-                            )}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          {t("quests.submit.form.fields.message.label")}
-                        </FormLabel>
-                        <FormControl>
-                          <Textarea
-                            value={field.value ?? ""}
-                            onChange={field.onChange}
-                            rows={5}
-                            variant="secondary"
-                            className="rounded-xl"
-                            placeholder={t(
-                              "quests.submit.form.fields.message.placeholder",
-                            )}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button
-                    type="submit"
-                    whileTap
-                    asPointer
-                    asFull
-                    size="lg"
-                    disabled={form.formState.isSubmitting}
-                  >
-                    {form.formState.isSubmitting
-                      ? t("quests.submit.form.actions.submitting")
-                      : t("quests.submit.form.actions.submit")}
-                  </Button>
-                </form>
-              </Form>
+                  {form.formState.isSubmitting
+                    ? t("quests.submit.form.actions.submitting")
+                    : t("quests.submit.form.actions.submit")}
+                </Button>
+              </form>
             )}
           </CardContent>
         </Card>

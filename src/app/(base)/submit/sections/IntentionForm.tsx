@@ -3,14 +3,14 @@ import React, { useCallback, useId, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "@/components/ui/form";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+  Field,
+  FieldControl,
+  FieldError,
+  FieldItem,
+  FieldLabel,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations, useLocale } from "next-intl";
@@ -119,42 +119,34 @@ export function IntentionForm() {
   }) => {
     const id = useId();
     return (
-      <FormField
-        control={form.control}
-        name={name}
-        render={({ field }) => (
-          <FormItem>
-            <Label htmlFor={id}>{label}</Label>
-            <FormControl>
-              <SelectComponent
-                value={field.value ?? ""}
-                onValueChange={field.onChange}
-              >
-                <SelectTrigger
-                  id={id}
-                  variant="secondary"
-                  className="rounded-xl"
-                >
-                  <SelectValue
-                    placeholder={placeholder ?? t("common.button.select")}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>{label}</SelectLabel>
-                    {options.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </SelectComponent>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <Field name={name}>
+        <Label htmlFor={id}>{label}</Label>
+        <FieldItem>
+          <FieldControl>
+            <SelectComponent
+              value={form.watch(name) ?? ""}
+              onValueChange={(value) => form.setValue(name, value)}
+            >
+              <SelectTrigger id={id} variant="secondary" className="rounded-xl">
+                <SelectValue
+                  placeholder={placeholder ?? t("common.button.select")}
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>{label}</SelectLabel>
+                  {options.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </SelectComponent>
+          </FieldControl>
+          <FieldError />
+        </FieldItem>
+      </Field>
     );
   };
 
@@ -180,171 +172,163 @@ export function IntentionForm() {
                 {t("submit.page.header-section.subDescription")}
               </p>
             </div>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6 w-full max-w-xl self-center place-self-center"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>
-                            {t("submit.page.fields.name.label")}{" "}
-                            <span className="text-red-500">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder={t(
-                                "submit.page.fields.name.placeholder",
-                              )}
-                              className="rounded-xl"
-                              variant="secondary"
-                              type="text"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>
-                            {t("submit.page.fields.email.label")}{" "}
-                            <span className="text-red-500">*</span>
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder={t(
-                                "submit.page.fields.email.placeholder",
-                              )}
-                              className="rounded-xl"
-                              variant="secondary"
-                              type="email"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="url"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        {t("submit.page.fields.url.label")}{" "}
-                        <span className="text-red-500">*</span>
-                      </FormLabel>
-                      <FormControl>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                form.handleSubmit(onSubmit)(e);
+              }}
+              className="space-y-6 w-full max-w-xl self-center place-self-center"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Field name="name">
+                    <FieldLabel>
+                      {t("submit.page.fields.name.label")}{" "}
+                      <span className="text-red-500">*</span>
+                    </FieldLabel>
+                    <FieldItem>
+                      <FieldControl>
                         <Input
-                          placeholder={t("submit.page.fields.url.placeholder")}
+                          placeholder={t("submit.page.fields.name.placeholder")}
                           className="rounded-xl"
                           variant="secondary"
-                          type="url"
-                          {...field}
+                          type="text"
+                          value={form.watch("name")}
+                          onChange={(e) =>
+                            form.setValue("name", e.target.value)
+                          }
                         />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                      </FieldControl>
+                      <FieldError />
+                    </FieldItem>
+                  </Field>
+                </div>
+                <div className="space-y-2">
+                  <Field name="email">
+                    <FieldLabel>
+                      {t("submit.page.fields.email.label")}{" "}
+                      <span className="text-red-500">*</span>
+                    </FieldLabel>
+                    <FieldItem>
+                      <FieldControl>
+                        <Input
+                          placeholder={t(
+                            "submit.page.fields.email.placeholder",
+                          )}
+                          className="rounded-xl"
+                          variant="secondary"
+                          type="email"
+                          value={form.watch("email")}
+                          onChange={(e) =>
+                            form.setValue("email", e.target.value)
+                          }
+                        />
+                      </FieldControl>
+                      <FieldError />
+                    </FieldItem>
+                  </Field>
+                </div>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Field name="url">
+                <FieldLabel>
+                  {t("submit.page.fields.url.label")}{" "}
+                  <span className="text-red-500">*</span>
+                </FieldLabel>
+                <FieldItem>
+                  <FieldControl>
+                    <Input
+                      placeholder={t("submit.page.fields.url.placeholder")}
+                      className="rounded-xl"
+                      variant="secondary"
+                      type="url"
+                      value={form.watch("url")}
+                      onChange={(e) => form.setValue("url", e.target.value)}
+                    />
+                  </FieldControl>
+                  <FieldError />
+                </FieldItem>
+              </Field>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Select
+                    label={t("submit.page.fields.intention.label")}
+                    name="intention"
+                    options={[
+                      {
+                        value: "ux_review",
+                        label: `🕵️ ${t("submit.page.options.ux_review")}`,
+                      },
+                    ]}
+                  />
+                </div>
+                {/* Conditional sections */}
+                {intention === "ux_review" && (
                   <div className="space-y-2">
                     <Select
-                      label={t("submit.page.fields.intention.label")}
-                      name="intention"
+                      label={t("submit.page.fields.target.label")}
+                      name="target"
                       options={[
                         {
-                          value: "ux_review",
-                          label: `🕵️ ${t("submit.page.options.ux_review")}`,
+                          value: "website",
+                          label: `🌐 ${t("submit.page.options.support.website")}`,
+                        },
+                        {
+                          value: "mobile",
+                          label: `📱 ${t("submit.page.options.support.mobile")}`,
+                        },
+                        {
+                          value: "saas",
+                          label: `🧩 ${t("submit.page.options.support.saas")}`,
+                        },
+                        {
+                          value: "prototype",
+                          label: `🧪 ${t("submit.page.options.support.prototype")}`,
                         },
                       ]}
                     />
                   </div>
-                  {/* Conditional sections */}
-                  {intention === "ux_review" && (
-                    <div className="space-y-2">
-                      <Select
-                        label={t("submit.page.fields.target.label")}
-                        name="target"
-                        options={[
-                          {
-                            value: "website",
-                            label: `🌐 ${t("submit.page.options.support.website")}`,
-                          },
-                          {
-                            value: "mobile",
-                            label: `📱 ${t("submit.page.options.support.mobile")}`,
-                          },
-                          {
-                            value: "saas",
-                            label: `🧩 ${t("submit.page.options.support.saas")}`,
-                          },
-                          {
-                            value: "prototype",
-                            label: `🧪 ${t("submit.page.options.support.prototype")}`,
-                          },
-                        ]}
-                      />
-                    </div>
-                  )}
-                </div>
+                )}
+              </div>
 
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        {t("submit.page.fields.description.label")}
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          rows={5}
-                          placeholder={t(
-                            "submit.page.fields.description.placeholder",
-                          )}
-                          className="rounded-xl"
-                          variant="secondary"
-                          value={field.value ?? ""}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <div className="pt-2">
-                  <Button
-                    type="submit"
-                    whileTap
-                    asPointer
-                    asFull
-                    size="lg"
-                    disabled={form.formState.isSubmitting}
-                  >
-                    {form.formState.isSubmitting
-                      ? t("common.button.sending")
-                      : t("submit.page.actions.submit")}
-                  </Button>
-                </div>
-              </form>
-            </Form>
+              <Field name="description">
+                <FieldLabel>
+                  {t("submit.page.fields.description.label")}
+                </FieldLabel>
+                <FieldItem>
+                  <FieldControl>
+                    <Textarea
+                      rows={5}
+                      placeholder={t(
+                        "submit.page.fields.description.placeholder",
+                      )}
+                      className="rounded-xl"
+                      variant="secondary"
+                      value={form.watch("description") ?? ""}
+                      onChange={(e) =>
+                        form.setValue("description", e.target.value)
+                      }
+                    />
+                  </FieldControl>
+                  <FieldError />
+                </FieldItem>
+              </Field>
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  whileTap
+                  asPointer
+                  asFull
+                  size="lg"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting
+                    ? t("common.button.sending")
+                    : t("submit.page.actions.submit")}
+                </Button>
+              </div>
+            </form>
           </CardContent>
         </Card>
       </SectionBase>

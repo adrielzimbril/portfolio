@@ -12,14 +12,15 @@ import {
   DialogSeparator,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Form } from "@/components/ui/form";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+  Field,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+  FieldItem,
+  FieldLabel,
+} from "@/components/ui/field";
 import logger from "@/utils/logger";
 import { apiRoutes } from "@/data/api-routes";
 import { toast } from "sonner";
@@ -140,97 +141,96 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         <div className="hidden md:grid md:grid-cols-2 gap-6">
           {/* Left column: Controls */}
           <div className="size-full space-y-4">
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="flex flex-col size-full space-y-4"
-              >
-                <FormField
-                  control={form.control}
-                  name="comment"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("community.comment-form.label")}</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder={t("community.comment-form.placeholder")}
-                          rows={3}
-                          limit={config.maxCommentLength}
-                          showLimit
-                          disabled={form.formState.isSubmitting}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <label className="text-sm font-medium">Rotation:</label>
-                    <input
-                      type="range"
-                      min={config.rotation.startAt}
-                      max={config.rotation.endAt}
-                      step={config.rotation.step}
-                      value={rotation}
-                      onChange={(e) => setRotation(parseInt(e.target.value))}
-                      className="flex-1 accent-primary"
+            <Form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const comment = form.getValues("comment");
+                if (comment) {
+                  onSubmit({ comment });
+                }
+              }}
+              className="flex flex-col size-full space-y-4"
+            >
+              <Field name="comment">
+                <FieldLabel>{t("community.comment-form.label")}</FieldLabel>
+                <FieldItem>
+                  <FieldControl>
+                    <Textarea
+                      placeholder={t("community.comment-form.placeholder")}
+                      rows={3}
+                      limit={config.maxCommentLength}
+                      showLimit
+                      disabled={form.formState.isSubmitting}
+                      value={form.watch("comment")}
+                      onChange={(e) => form.setValue("comment", e.target.value)}
                     />
-                    <span className="text-sm w-12 text-right">{rotation}°</span>
-                  </div>
+                  </FieldControl>
+                  <FieldError />
+                </FieldItem>
+              </Field>
 
-                  <div className="flex items-center gap-2">
-                    <Label className="text-sm font-medium">Pattern:</Label>
-                    <RadioGroup
-                      value={patternIndex.toString()}
-                      onValueChange={(value) =>
-                        setPatternIndex(parseInt(value))
-                      }
-                      className="flex gap-1 flex-1 flex-row"
-                    >
-                      {patterns.map((_, index) => (
-                        <Radio
-                          key={index}
-                          value={index.toString()}
-                          size="xl"
-                          aria-label={`Pattern ${index + 1}`}
-                        />
-                      ))}
-                    </RadioGroup>
-                  </div>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <label className="text-sm font-medium">Rotation:</label>
+                  <input
+                    type="range"
+                    min={config.rotation.startAt}
+                    max={config.rotation.endAt}
+                    step={config.rotation.step}
+                    value={rotation}
+                    onChange={(e) => setRotation(parseInt(e.target.value))}
+                    className="flex-1 accent-primary"
+                  />
+                  <span className="text-sm w-12 text-right">{rotation}°</span>
                 </div>
 
-                <div className="flex gap-2 mt-auto">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="flex-1"
-                    asIcon
-                    onClick={() => form.reset()}
+                <div className="flex items-center gap-2">
+                  <Label className="text-sm font-medium">Pattern:</Label>
+                  <RadioGroup
+                    value={patternIndex.toString()}
+                    onValueChange={(value) => setPatternIndex(parseInt(value))}
+                    className="flex gap-1 flex-1 flex-row"
                   >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="default"
-                    asIcon
-                    whileTap
-                    asPointer
-                    className="flex-1"
-                    disabled={form.formState.isSubmitting}
-                  >
-                    <span className="flex items-center justify-center gap-1">
-                      {form.formState.isSubmitting ? (
-                        t("community.comment-form.submitting")
-                      ) : (
-                        <>{t("community.comment-form.submit")}</>
-                      )}
-                    </span>
-                  </Button>
+                    {patterns.map((_, index) => (
+                      <Radio
+                        key={index}
+                        value={index.toString()}
+                        size="xl"
+                        aria-label={`Pattern ${index + 1}`}
+                      />
+                    ))}
+                  </RadioGroup>
                 </div>
-              </form>
+              </div>
+
+              <div className="flex gap-2 mt-auto">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1"
+                  asIcon
+                  onClick={() => form.reset()}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  variant="default"
+                  asIcon
+                  whileTap
+                  asPointer
+                  className="flex-1"
+                  disabled={form.formState.isSubmitting}
+                >
+                  <span className="flex items-center justify-center gap-1">
+                    {form.formState.isSubmitting ? (
+                      t("community.comment-form.submitting")
+                    ) : (
+                      <>{t("community.comment-form.submit")}</>
+                    )}
+                  </span>
+                </Button>
+              </div>
             </Form>
           </div>
 
@@ -276,56 +276,57 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         {/* Mobile: Step-by-step */}
         <div className="md:hidden">
           {screen === "input" ? (
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
-                <FormField
-                  control={form.control}
-                  name="comment"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("community.comment-form.label")}</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder={t("community.comment-form.placeholder")}
-                          rows={5}
-                          limit={config.maxCommentLength}
-                          showLimit
-                          disabled={form.formState.isSubmitting}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <Form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const comment = form.getValues("comment");
+                if (comment) {
+                  onSubmit({ comment });
+                }
+              }}
+              className="space-y-4"
+            >
+              <Field name="comment">
+                <FieldLabel>{t("community.comment-form.label")}</FieldLabel>
+                <FieldItem>
+                  <FieldControl>
+                    <Textarea
+                      placeholder={t("community.comment-form.placeholder")}
+                      rows={5}
+                      limit={config.maxCommentLength}
+                      showLimit
+                      disabled={form.formState.isSubmitting}
+                      value={form.watch("comment")}
+                      onChange={(e) => form.setValue("comment", e.target.value)}
+                    />
+                  </FieldControl>
+                  <FieldError />
+                </FieldItem>
+              </Field>
 
-                <div className="flex gap-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="flex-1"
-                    asIcon
-                    onClick={() => form.reset()}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="default"
-                    asIcon
-                    whileTap
-                    asPointer
-                    className="flex-1"
-                    onClick={handleNext}
-                    disabled={!form.formState.isValid}
-                  >
-                    Next
-                  </Button>
-                </div>
-              </form>
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1"
+                  asIcon
+                  onClick={() => form.reset()}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="button"
+                  variant="default"
+                  asIcon
+                  whileTap
+                  asPointer
+                  className="flex-1"
+                  onClick={handleNext}
+                  disabled={!form.formState.isValid}
+                >
+                  Next
+                </Button>
+              </div>
             </Form>
           ) : (
             <div className="flex flex-col items-center gap-6">
