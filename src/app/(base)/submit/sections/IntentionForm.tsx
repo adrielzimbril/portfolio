@@ -28,6 +28,42 @@ enum Intention {
 
 const intentions = Object.values(Intention);
 
+const Select = ({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: Array<{ value: string; label: string }>;
+  placeholder: string;
+}) => {
+  const id = useId();
+  return (
+    <Field>
+      <Label htmlFor={id}>{label}</Label>
+      <SelectComponent value={value} onValueChange={onChange}>
+        <SelectTrigger id={id} variant="secondary" className="rounded-xl">
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>{label}</SelectLabel>
+            {options.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </SelectComponent>
+    </Field>
+  );
+};
+
 export function IntentionForm() {
   const t = useTranslations();
   const locale = useLocale();
@@ -131,44 +167,6 @@ export function IntentionForm() {
     }
   };
 
-  const Select = ({
-    label,
-    value,
-    onChange,
-    options,
-    placeholder,
-  }: {
-    label: string;
-    value: string;
-    onChange: (value: string) => void;
-    options: Array<{ value: string; label: string }>;
-    placeholder?: string;
-  }) => {
-    const id = useId();
-    return (
-      <Field>
-        <Label htmlFor={id}>{label}</Label>
-        <SelectComponent value={value} onValueChange={onChange}>
-          <SelectTrigger id={id} variant="secondary" className="rounded-xl">
-            <SelectValue
-              placeholder={placeholder ?? t("common.button.select")}
-            />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>{label}</SelectLabel>
-              {options.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </SelectComponent>
-      </Field>
-    );
-  };
-
   return (
     <>
       <SectionBase
@@ -260,13 +258,14 @@ export function IntentionForm() {
                   <Select
                     label={t("submit.page.fields.intention.label")}
                     value={intention}
-                    onChange={setIntention}
+                    onChange={(value) => setIntention(value as Intention)}
                     options={[
                       {
                         value: "ux_review",
                         label: `🕵️ ${t("submit.page.options.ux_review")}`,
                       },
                     ]}
+                    placeholder={t("common.button.select")}
                   />
                 </div>
                 {/* Conditional sections */}
@@ -294,6 +293,7 @@ export function IntentionForm() {
                           label: `🧪 ${t("submit.page.options.support.prototype")}`,
                         },
                       ]}
+                      placeholder={t("common.button.select")}
                     />
                   </div>
                 )}

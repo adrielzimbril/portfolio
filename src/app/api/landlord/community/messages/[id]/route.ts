@@ -9,14 +9,14 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { language } = body;
+    const { language, message } = body;
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
     const { error } = await supabase
       .from("community_wall")
-      .update({ language })
+      .update({ message })
       .eq("id", id);
 
     if (error) {

@@ -474,13 +474,6 @@ export function InteractiveFunFacts() {
     setScore(0);
     toast.success("C'est reparti pour un tour! 🚀", {
       duration: 2000,
-      style: {
-        background: "#6366F1",
-        color: "white",
-        border: "none",
-        fontSize: "16px",
-        borderRadius: "12px",
-      },
     });
   };
 
