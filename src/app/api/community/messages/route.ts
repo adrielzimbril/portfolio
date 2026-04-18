@@ -20,15 +20,15 @@ export async function GET() {
     const totalMessages = messages?.length || 0;
     const uniqueMembers = new Set(messages?.map((m) => m.user_id)).size;
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayMessages =
-      messages?.filter((m) => new Date(m.created_at) >= today).length || 0;
+    const weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    const weekMessages =
+      messages?.filter((m) => new Date(m.created_at) >= weekAgo).length || 0;
 
     const stats = {
       totalMessages,
       uniqueMembers,
-      todayMessages,
+      weekMessages,
     };
 
     return NextResponse.json({ messages: messages || [], stats });

@@ -11,7 +11,7 @@ import { useWindowEvent } from "@/hooks/useWindowEvent";
 interface Stats {
   totalMessages: number;
   uniqueMembers: number;
-  todayMessages: number;
+  weekMessages: number;
 }
 
 interface StatsSectionProps {
@@ -24,7 +24,7 @@ export function StatsSection({ user, initialStats }: StatsSectionProps) {
     initialStats || {
       totalMessages: 0,
       uniqueMembers: 0,
-      todayMessages: 0,
+      weekMessages: 0,
     },
   );
   const [isLoading, setIsLoading] = useState(!initialStats);
@@ -64,8 +64,8 @@ export function StatsSection({ user, initialStats }: StatsSectionProps) {
         />
         <StatCard
           icon={TrendUp}
-          label="Today"
-          value={isLoading ? "..." : stats.todayMessages.toLocaleString()}
+          label="Weekly"
+          value={isLoading ? "..." : stats.weekMessages.toLocaleString()}
         />
       </div>
       <LeaveNoteButton user={user} />

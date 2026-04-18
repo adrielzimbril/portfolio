@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { metadata as metadataBase } from "@/app/metadata";
 import { LayoutProvider } from "@/components/aurthle/providers/layout-provider";
+import { SyncProvider } from "@/components/aurthle/providers/sync-provider";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import { Navbar } from "@/components/shared/_layouts/navbar";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
@@ -15,7 +16,6 @@ import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
-import { SyncProvider } from "@/lib/reactions/sync-provider";
 
 import { notFound } from "next/navigation";
 
@@ -81,11 +81,8 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                         <div className="container mx-auto relative">
                           <Navbar />
                           {/* <Dockbar asFade={false} /> */}
-                          {/* <SmoothCursor /> */}
                           {children}
                           <ScrollToTop />
-                          {/* <Toaster position="bottom-right" /> */}
-                          {/* <SplashCursor /> */}
                           <Footer />
                         </div>
                       </main>

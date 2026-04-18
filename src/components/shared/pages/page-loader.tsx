@@ -120,12 +120,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         ))}
 
       {/* Principal content with sequential animations */}
-      <motion.div
-        className="flex flex-col items-center justify-center self-center gap-8 px-4 md:px-8 max-w-xl"
-        //initial={{ opacity: 0, y: 30 }}
-        //animate={{ opacity: 1, y: 0 }}
-        //transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-      >
+      <motion.div className="flex flex-col items-center justify-center self-center gap-8 px-4 md:px-8 max-w-xl">
         {/* Header with animation */}
         <motion.header
           className="absolute top-0 left-0 right-0 h-28 bg-greys-00"
@@ -144,9 +139,9 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
                 ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <LogoIcon className={cn("flex-shrink-0 size-14")} />
+              <LogoIcon className={cn("shrink-0 size-14")} />
               <LogoName
-                className={cn("h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0")}
+                className={cn("h-5! qmd:h-6! w-48! qmd:w-60! shrink-0")}
               />
             </motion.div>
           </nav>
@@ -254,12 +249,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
       </motion.div>
 
       {/* Stats preview with animation */}
-      <motion.div
-        className="content-stretch flex gap-8 items-center justify-center mt-12"
-        //initial={{ opacity: 0 }}
-        //animate={{ opacity: 1 }}
-        //transition={{ delay: 2, duration: 0.6 }}
-      >
+      <motion.div className="content-stretch flex gap-8 items-center justify-center mt-12">
         {statsData.map((stat, index) => (
           <React.Fragment key={stat.label}>
             <motion.div
