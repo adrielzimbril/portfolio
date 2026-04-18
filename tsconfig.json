@@ -53,5 +53,5 @@
     ".next/types/**/*.ts",
     "node_modules/@aurthle/**/*"
   ],
-  "exclude": ["node_modules", "scripts/**/*"]
+  "exclude": ["node_modules", "scripts/**/*", "sources/**/*"]
 }
