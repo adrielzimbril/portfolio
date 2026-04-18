@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { metadata as metadataBase } from "@/app/metadata";
-import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
+import { LayoutProvider } from "@/components/aurthle/providers/layout-provider";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import { Navbar } from "@/components/shared/_layouts/navbar";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";

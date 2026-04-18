@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
+import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
 import { cn } from "@/utils/utils";
 import { ResourceType } from "@/types";
 import BoringAvatar from "boring-avatars";
@@ -29,7 +29,7 @@ export function AvatarsStats({
       className={cn(
         "inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl",
         colorName ?? "squircle-sh-white/99",
-        className
+        className,
       )}
     >
       <UserAvatars avatars={avatars} userCount={userCount} />
@@ -54,7 +54,7 @@ function UserAvatars({
   // ✅ Generate all colors in one time, outside of .map()
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: numPeople }).map(() =>
-      Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
+      Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
     );
   }, [numPeople]);
 
@@ -97,22 +97,22 @@ function UserCount({
   const t = useTranslations();
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.badge"
+      "common.page-sections.hub.base.resources-type.course.badge",
     ),
     [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.badge"
+      "common.page-sections.hub.base.resources-type.ebook.badge",
     ),
     [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.badge"
+      "common.page-sections.hub.base.resources-type.video.badge",
     ),
     [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.badge"
+      "common.page-sections.hub.base.resources-type.masterclass.badge",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.badge"
+      "common.page-sections.hub.base.resources-type.figma-template.badge",
     ),
     [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.badge"
+      "common.page-sections.hub.base.resources-type.code.badge",
     ),
   };
 
@@ -122,7 +122,7 @@ function UserCount({
     <span
       className={cn(
         "relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec",
-        className
+        className,
       )}
     >
       {count > 2 ? `${count}` : count} {productType}

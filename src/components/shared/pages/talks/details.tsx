@@ -4,7 +4,7 @@ import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
+import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
 import { getExternalUrl, getMachineDate, pickRandomColorCode } from "@/utils";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import BoringAvatar from "boring-avatars";
