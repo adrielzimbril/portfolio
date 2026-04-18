@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { cn } from "@/utils/utils";
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
@@ -12,6 +12,7 @@ import {
 } from "@/lib/reactions/anonymous-user";
 import { apiRoutes } from "@/data/api-routes";
 import { pickRandomColor } from "@/utils";
+import { useUser } from "@/integrations/auth/provider/supabase";
 
 const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.LIKE]: "👍",
@@ -43,28 +44,25 @@ export function ReactionButton({
   isReacted: isReactedProp = false,
 }: ReactionButtonProps) {
   const { mutate: globalMutate } = useSWRConfig();
-  const [user, setUser] = useState<any>(null);
-  const [currentUserId, setCurrentUserId] = useState<string | undefined>();
+  const { user, loading: userLoading } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [localIsReacted, setLocalIsReacted] = useState(isReactedProp);
+  const hasSyncedRef = useRef(false);
 
   const emoji: string = REACTION_EMOJIS[reactionType];
 
-  useEffect(() => {
-    const initUser = async () => {
-      const res = await fetch(apiRoutes.auth.user.link);
-      const { user } = await res.json();
-      setUser(user);
-      const userId = getCurrentUserId(user);
-      setCurrentUserId(userId);
+  const currentUserId = getCurrentUserId(user);
 
+  useEffect(() => {
+    const syncAnonymous = async () => {
       const anonymousId = getAnonymousUserId();
-      if (user?.id && anonymousId) {
+      if (user?.id && anonymousId && !hasSyncedRef.current) {
+        hasSyncedRef.current = true;
         await syncAnonymousReactionsOnLogin(anonymousId);
       }
     };
-    initUser();
-  }, []);
+    syncAnonymous();
+  }, [user]);
 
   useEffect(() => {
     setLocalIsReacted(isReactedProp);
