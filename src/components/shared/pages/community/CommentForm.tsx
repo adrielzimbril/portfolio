@@ -195,7 +195,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                           value={index.toString()}
                           variant="squircle"
                           size="lg"
-                          color="default"
                           className={cn(
                             "transition-all",
                             "data-[state=checked]:scale-110",
