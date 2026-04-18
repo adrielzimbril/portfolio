@@ -48,12 +48,12 @@ export const ConfigValue = {
   AUTH_CALLBACK_URL_DEFAULT: process.env.AUTH_CALLBACK_URL_DEFAULT || "/",
   AUTH_DEFAULT_REDIRECT: process.env.AUTH_DEFAULT_REDIRECT || "/",
 
-  // Database (Supabase)
+  // Database
+  DATABASE_URL: process.env.DATABASE_URL,
+
+  // Supabase
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  DATABASE_URL: process.env.DATABASE_URL,
-  POSTGRES_URL: process.env.POSTGRES_URL,
-  SUPABASE_DB_URL: process.env.SUPABASE_DB_URL,
 
   // Email & Contact
   CONTACTS_PROVIDER: process.env.CONTACTS_PROVIDER,

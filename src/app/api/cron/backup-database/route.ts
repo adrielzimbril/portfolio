@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { backupSupabaseToS3 } from "@/integrations/backup";
+import { backupDatabase } from "@/integrations/backup";
 
 /**
  * Cron endpoint for daily database backup
@@ -23,7 +23,7 @@ export async function GET(request: Request) {
   }
 
   // Perform backup
-  const result = await backupSupabaseToS3();
+  const result = await backupDatabase();
 
   if (result.success) {
     return NextResponse.json({ success: true, message: "Backup completed" });
