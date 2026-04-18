@@ -8,8 +8,10 @@ import { logger } from "@/utils";
 import {
   GetSignedUploadUrlHandler,
   GetSignedUrlHandler,
-} from "@/integrations/storage/types";
+  UploadHandler,
+} from "@/integrations/storage/types/types";
 import { getS3Config } from "@/config";
+import { fileToUint8Array } from "../../util";
 
 let s3Client: S3Client | null = null;
 
@@ -83,5 +85,33 @@ export const getSignedUrl: GetSignedUrlHandler = async (
   } catch (e) {
     logger.error(e);
     throw new Error("Could not get signed url");
+  }
+};
+
+export const uploadFile: UploadHandler = async (
+  file,
+  path,
+  { bucket, contentType },
+) => {
+  const s3Client = getS3Client();
+  try {
+    const body = await fileToUint8Array(file);
+
+    await s3Client.send(
+      new PutObjectCommand({
+        Bucket: bucket,
+        Key: path,
+        Body: body,
+        ContentType: contentType || "application/octet-stream",
+      }),
+    );
+
+    // Get public URL
+    const url = await getSignedUrl(path, { bucket, expiresIn: 3600 });
+
+    return { url, path };
+  } catch (e) {
+    logger.error(e);
+    throw new Error("Could not upload file");
   }
 };
