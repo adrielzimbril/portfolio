@@ -30,7 +30,6 @@
 
   /* Text colors */
 
-
   /* Design system colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -133,7 +132,6 @@
   --b-white-invert-qr: hsl(0 0% 6.67%);
   --b-base-accent: var(--color-zinc-500);
 
-
 	/* Design system colors - Dark mode */
 	--background: var(--color-neutrals-900);
 	--foreground: hsl(213 31% 91%);
@@ -176,7 +174,7 @@
       background-position: 200% 0;
     }
   }
- 
+
   @keyframes loading-progress {
     0% { width: 0%; }
     50% { width: 70%; }
@@ -266,7 +264,7 @@
   .border-0:not(input):not(textarea):not(select):not(button)::file-selector-button {
     @apply border-none outline-none;
   }
-  
+
   @supports not (background: paint(squircle)) {
     [class*="squircle-5xl"], [class*="squircle-6xl"]:not(.text-card-foreground), [class*="squircle-7xl"] {
       border-radius: var(--squircle-border-radius-2xl)!important;
@@ -289,7 +287,7 @@
   html {
     scroll-behavior: smooth;
   }
- 
+
   body {
     @apply bg-background text-foreground font-sf-pro-text;
   }
@@ -368,7 +366,7 @@
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
-  
+
   pre::-webkit-scrollbar {
     @apply w-1.5 scroll-smooth;
   }
@@ -401,7 +399,6 @@
   }
 }
 
-
 @utility container {
 	margin-inline: auto;
 	padding-inline: 1.5rem;
@@ -425,4 +422,12 @@ select {
 
 a {
   cursor: pointer !important;
+}
+
+:root {
+  --destructive-foreground: var(--color-red-700);
+}
+
+.dark {
+  --destructive-foreground: var(--color-red-400);
 }
