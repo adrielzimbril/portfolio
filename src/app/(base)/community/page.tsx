@@ -7,8 +7,9 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { StatsSection } from "@/app/(base)/community/sections/StatsSection";
 import { FormSection } from "@/app/(base)/community/sections/FormSection";
 import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection";
-import { apiRoutes } from "@/data/api-routes";
 import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -33,11 +34,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function CommunityPage() {
   let user = null;
   try {
-    const res = await fetch(apiRoutes.auth.user.link);
-    if (res.ok) {
-      const data = await res.json();
-      user = data.user;
-    }
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
+    const {
+      data: { user: supabaseUser },
+    } = await supabase.auth.getUser();
+    user = supabaseUser;
   } catch (error) {
     // User fetch failed, continue without user
   }

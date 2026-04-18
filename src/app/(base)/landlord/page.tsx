@@ -4,12 +4,18 @@ import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { PageHero } from "@/components/shared/pages/shared/page-hero";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { apiRoutes } from "@/data/api-routes";
 import { AdminAuthGuard } from "@/components/shared/pages/landlord/AdminAuthGuard";
 import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
-import { Link } from "@/components/ui/link";
 import { Github, Google } from "@aurthle/icons";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
+import {
+  signInWithGithub,
+  signInWithGoogle,
+} from "@/integrations/auth/provider/supabase";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -59,24 +65,34 @@ export default async function AdminPage() {
               Vous devez être connecté pour accéder à cette page
             </p>
             <div className="flex gap-4">
-              <Link
-                href={`/api/auth/login?provider=github`}
+              <Button
+                onClick={() => signInWithGithub()}
                 variant="default"
-                likeButton
-                className="flex items-center gap-2"
+                asIcon
+                whileTap
+                className={cn(
+                  "squircle squircle-smooth-lg squircle-2xl w-full",
+                )}
               >
-                <Github size={20} variant="bulk" />
-                Connexion GitHub
-              </Link>
-              <Link
-                href={`/api/auth/login?provider=google`}
+                <span className="flex items-center justify-center gap-2">
+                  <Github size={16} variant="bulk" />
+                  {t("community.login-modal.github")}
+                </span>
+              </Button>
+              <Button
+                onClick={() => signInWithGoogle()}
                 variant="secondary"
-                likeButton
-                className="flex items-center gap-2"
+                asIcon
+                whileTap
+                className={cn(
+                  "squircle squircle-smooth-lg squircle-2xl w-full",
+                )}
               >
-                <Google size={20} variant="bulk" />
-                Connexion Google
-              </Link>
+                <span className="flex items-center justify-center gap-2">
+                  <Google size={16} variant="bulk" />
+                  {t("community.login-modal.google")}
+                </span>
+              </Button>
             </div>
           </div>
         </SectionLayout>
@@ -87,11 +103,12 @@ export default async function AdminPage() {
   // Fetch user data to check admin status
   let user = null;
   try {
-    const res = await fetch(apiRoutes.auth.user.link);
-    if (res.ok) {
-      const data = await res.json();
-      user = data.user;
-    }
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
+    const {
+      data: { user: supabaseUser },
+    } = await supabase.auth.getUser();
+    user = supabaseUser;
   } catch (error) {
     // User fetch failed, continue without user
   }
