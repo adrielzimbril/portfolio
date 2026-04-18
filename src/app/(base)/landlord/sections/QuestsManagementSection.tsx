@@ -34,7 +34,7 @@ export function QuestsManagementSection() {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [selectedQuest, setSelectedQuest] = useState<string>("");
+  const [selectedQuest, setSelectedQuest] = useState<string>("all");
   const [newParticipant, setNewParticipant] = useState({
     name: "",
     email: "",
@@ -51,7 +51,7 @@ export function QuestsManagementSection() {
   const fetchParticipants = async () => {
     try {
       const response = await fetch(
-        `${adminApiRoutes.quests.participants}${selectedQuest ? `?slug=${selectedQuest}` : ""}`,
+        `${adminApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
       );
       if (response.ok) {
         const data = await response.json();
@@ -223,7 +223,7 @@ export function QuestsManagementSection() {
                 <SelectValue placeholder="All quests" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All quests</SelectItem>
+                <SelectItem value="all">All quests</SelectItem>
                 <SelectItem value="quest-1">Quest 1</SelectItem>
                 <SelectItem value="quest-2">Quest 2</SelectItem>
                 <SelectItem value="quest-3">Quest 3</SelectItem>

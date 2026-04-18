@@ -11,6 +11,7 @@ import { LoginButtons } from "@/components/shared/pages/landlord/LoginButtons";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
 import { logger } from "@/utils";
+import { ConfigValue } from "@/config";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -41,10 +42,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AdminPage() {
+  logger.info("[AdminPage] Starting landlord page render");
   const isAuthenticated = await isUserAuthenticatedServer();
   const t = await getTranslations();
 
+  logger.info("[AdminPage] Authentication check result", { isAuthenticated });
+
   if (!isAuthenticated) {
+    logger.info("[AdminPage] User not authenticated, showing login screen");
     return (
       <>
         <PageHero
@@ -66,6 +71,7 @@ export default async function AdminPage() {
     );
   }
 
+  logger.info("[AdminPage] User authenticated, fetching user data");
   // Fetch user data to check admin status
   let user = null;
   try {
@@ -75,12 +81,25 @@ export default async function AdminPage() {
       data: { user: supabaseUser },
     } = await supabase.auth.getUser();
     user = supabaseUser;
+    logger.info("[AdminPage] User data fetched", {
+      userId: user?.id,
+      userEmail: user?.email,
+    });
   } catch (error) {
+    logger.error("[AdminPage] Failed to fetch user data", error);
     // User fetch failed, continue without user
   }
 
+  const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
+  logger.info("[AdminPage] Admin emails configuration", { adminEmails });
+
+  logger.info("[AdminPage] Rendering AdminAuthGuard", {
+    hasUser: !!user,
+    userEmail: user?.email,
+  });
+
   return (
-    <AdminAuthGuard user={user}>
+    <AdminAuthGuard user={user} adminEmails={adminEmails}>
       <PageHero
         title={t("admin.page.title")}
         description={t("admin.page.description")}

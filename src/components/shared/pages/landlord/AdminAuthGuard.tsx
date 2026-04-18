@@ -8,9 +8,14 @@ import { logger } from "@/utils/logger";
 interface AdminAuthGuardProps {
   user: User | null;
   children: React.ReactNode;
+  adminEmails: string[];
 }
 
-export function AdminAuthGuard({ user, children }: AdminAuthGuardProps) {
+export function AdminAuthGuard({
+  user,
+  children,
+  adminEmails,
+}: AdminAuthGuardProps) {
   const router = useRouter();
 
   React.useEffect(() => {
@@ -26,7 +31,6 @@ export function AdminAuthGuard({ user, children }: AdminAuthGuardProps) {
     }
 
     const userEmail = user.email;
-    const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
 
     logger.debug("[AdminAuthGuard] Checking admin authorization", {
       userEmail,
@@ -37,6 +41,7 @@ export function AdminAuthGuard({ user, children }: AdminAuthGuardProps) {
       logger.warn("[AdminAuthGuard] User not authorized, redirecting to home", {
         userEmail,
         isAdmin: adminEmails.includes(userEmail || ""),
+        adminEmails,
       });
       router.push("/");
     } else {
@@ -50,7 +55,6 @@ export function AdminAuthGuard({ user, children }: AdminAuthGuardProps) {
   }
 
   const userEmail = user.email;
-  const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
 
   logger.debug("[AdminAuthGuard] Render: Checking authorization", {
     userEmail,
