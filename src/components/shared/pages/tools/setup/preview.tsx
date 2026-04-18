@@ -73,7 +73,7 @@ export function CardPreview({
                 </button>
               </DialogTrigger>
               <DialogContent
-                size="full"
+                size="2xl"
                 className="max-w-6xl p-2 sm:p-3"
                 variant="glass"
               >

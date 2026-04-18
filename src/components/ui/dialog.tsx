@@ -57,7 +57,7 @@ function DialogContent({
   closeButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  size?: "sm" | "md" | "lg" | "xl" | "full";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   variant?: "default" | "modern" | "glass";
   scrollArea?: boolean;
   closeButton?: boolean;
@@ -67,7 +67,8 @@ function DialogContent({
     md: "sm:max-w-md",
     lg: "sm:max-w-lg",
     xl: "sm:max-w-2xl",
-    full: "sm:max-w-4xl",
+    "2xl": "sm:max-w-4xl",
+    full: "sm:max-w-6xl",
   };
 
   const variantClasses = {

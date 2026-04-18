@@ -118,81 +118,127 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
 
       <DialogSeparator />
 
-      {screen === "input" ? (
-        <div className="space-y-6">
-          <div className="text-center space-y-2">
-            <p className="text-b-white-invert-sec">
-              {t("community.comment-form.description")}
-            </p>
-          </div>
-
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="comment"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("community.comment-form.label")}</FormLabel>
-                    <FormControl>
-                      <textarea
-                        placeholder={t("community.comment-form.placeholder")}
-                        className={cn(
-                          "w-full min-h-[120px] p-4",
-                          "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                          "bg-b-base text-foreground placeholder:text-muted-foreground",
-                          "focus:outline-none focus:squircle-border-b-base-accent",
-                          "resize-none transition-all",
-                        )}
-                        disabled={form.formState.isSubmitting}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="flex gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="flex-1"
-                  onClick={() => form.reset()}
-                >
-                  <X size={16} className="mr-2" />
-                  {t("common.cancel")}
-                </Button>
-                <Button
-                  type="button"
-                  variant="default"
-                  asIcon
-                  whileTap
-                  asPointer
-                  className="flex-1"
-                  onClick={handleNext}
-                  disabled={!form.formState.isValid}
-                >
-                  {t("common.next")}
-                </Button>
-              </div>
-            </form>
-          </Form>
+      <div className="space-y-6">
+        <div className="text-center space-y-2">
+          <p className="text-b-white-invert-sec">
+            {t("community.comment-form.description")}
+          </p>
         </div>
-      ) : (
-        <div className="space-y-6">
-          <div className="text-center space-y-2">
-            <p className="text-b-white-invert-sec">
-              Preview and customize your message
-            </p>
+
+        {/* Desktop: 2-column layout, Mobile: step-by-step */}
+        <div className="hidden md:grid md:grid-cols-2 gap-6">
+          {/* Left column: Controls */}
+          <div className="space-y-4">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="comment"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("community.comment-form.label")}</FormLabel>
+                      <FormControl>
+                        <textarea
+                          placeholder={t("community.comment-form.placeholder")}
+                          className={cn(
+                            "w-full min-h-[120px] p-4",
+                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                            "bg-b-base text-foreground placeholder:text-muted-foreground",
+                            "focus:outline-none focus:squircle-border-b-base-accent",
+                            "resize-none transition-all",
+                          )}
+                          disabled={form.formState.isSubmitting}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <label className="text-sm font-medium">Rotation:</label>
+                    <input
+                      type="range"
+                      min="-10"
+                      max="10"
+                      step="1"
+                      value={rotation}
+                      onChange={(e) => setRotation(parseInt(e.target.value))}
+                      className="flex-1 accent-primary"
+                    />
+                    <span className="text-sm w-12 text-right">{rotation}°</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <label className="text-sm font-medium">Pattern:</label>
+                    <div className="flex gap-1 flex-1">
+                      {patterns.map((_, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => setPatternIndex(index)}
+                          className={cn(
+                            "h-6 w-6 rounded-full transition-all flex-1 max-w-[40px]",
+                            patternIndex === index
+                              ? "bg-primary scale-110 ring-2 ring-primary ring-offset-2"
+                              : "bg-b-base hover:bg-b-base/80",
+                          )}
+                          aria-label={`Pattern ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="flex-1"
+                    asIcon
+                    onClick={() => form.reset()}
+                  >
+                    <X size={16} className="mr-2" />
+                    {t("common.cancel")}
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="default"
+                    asIcon
+                    whileTap
+                    asPointer
+                    className="flex-1"
+                    disabled={form.formState.isSubmitting}
+                  >
+                    <span className="flex items-center justify-center gap-1">
+                      {form.formState.isSubmitting ? (
+                        t("community.comment-form.submitting")
+                      ) : (
+                        <>
+                          <Send size={20} variant="bulk" />
+                          {t("community.comment-form.submit")}
+                        </>
+                      )}
+                    </span>
+                  </Button>
+                </div>
+              </form>
+            </Form>
           </div>
 
-          <div className="flex flex-col items-center gap-6">
-            <div className="flex items-center gap-4">
+          {/* Right column: Preview */}
+          <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex items-center gap-4 md:gap-8">
               <Button
                 type="button"
                 variant="outline"
                 size="icon"
+                asIcon
                 onClick={handlePrevPattern}
                 aria-label="Previous pattern"
               >
@@ -214,81 +260,181 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 type="button"
                 variant="outline"
                 size="icon"
+                asIcon
                 onClick={handleNextPattern}
                 aria-label="Next pattern"
               >
                 <ArrowRightOne size={20} />
               </Button>
             </div>
-
-            <div className="flex flex-col gap-4 w-full max-w-md">
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium">Rotation:</label>
-                <input
-                  type="range"
-                  min="-10"
-                  max="10"
-                  step="1"
-                  value={rotation}
-                  onChange={(e) => setRotation(parseInt(e.target.value))}
-                  className="flex-1 accent-primary"
-                />
-                <span className="text-sm w-12 text-right">{rotation}°</span>
-              </div>
-
-              <div className="flex justify-center gap-2">
-                {patterns.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setPatternIndex(index)}
-                    className={cn(
-                      "h-3 w-3 rounded-full transition-all",
-                      patternIndex === index
-                        ? "bg-primary scale-125"
-                        : "bg-muted",
-                    )}
-                    aria-label={`Pattern ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="flex gap-2 w-full max-w-md">
-              <Button
-                type="button"
-                variant="outline"
-                className="flex-1"
-                onClick={handleBack}
-              >
-                <ArrowLeftOne size={16} className="mr-2" />
-                {t("common.back")}
-              </Button>
-              <Button
-                type="button"
-                variant="default"
-                asIcon
-                whileTap
-                asPointer
-                className="flex-1"
-                onClick={form.handleSubmit(onSubmit)}
-                disabled={form.formState.isSubmitting}
-              >
-                <span className="flex items-center justify-center gap-1">
-                  {form.formState.isSubmitting ? (
-                    t("community.comment-form.submitting")
-                  ) : (
-                    <>
-                      <Send size={20} variant="bulk" />
-                      {t("community.comment-form.submit")}
-                    </>
-                  )}
-                </span>
-              </Button>
-            </div>
           </div>
         </div>
-      )}
+
+        {/* Mobile: Step-by-step */}
+        <div className="md:hidden">
+          {screen === "input" ? (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="comment"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t("community.comment-form.label")}</FormLabel>
+                      <FormControl>
+                        <textarea
+                          placeholder={t("community.comment-form.placeholder")}
+                          className={cn(
+                            "w-full min-h-[120px] p-4",
+                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                            "bg-b-base text-foreground placeholder:text-muted-foreground",
+                            "focus:outline-none focus:squircle-border-b-base-accent",
+                            "resize-none transition-all",
+                          )}
+                          disabled={form.formState.isSubmitting}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="flex-1"
+                    asIcon
+                    onClick={() => form.reset()}
+                  >
+                    <X size={16} className="mr-2" />
+                    {t("common.cancel")}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="default"
+                    asIcon
+                    whileTap
+                    asPointer
+                    className="flex-1"
+                    onClick={handleNext}
+                    disabled={!form.formState.isValid}
+                  >
+                    {t("common.next")}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          ) : (
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  asIcon
+                  onClick={handlePrevPattern}
+                  aria-label="Previous pattern"
+                >
+                  <ArrowLeftOne size={20} />
+                </Button>
+
+                <div className="relative">
+                  <CommunityWallCard
+                    patternIndex={patternIndex}
+                    author={user?.user_metadata?.name || user?.email}
+                    profilePicture={user?.user_metadata?.avatar_url}
+                    rotation={rotation}
+                    message={form.watch("comment")}
+                    className="h-[350px] w-[280px]"
+                  />
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  asIcon
+                  onClick={handleNextPattern}
+                  aria-label="Next pattern"
+                >
+                  <ArrowRightOne size={20} />
+                </Button>
+              </div>
+
+              <div className="flex flex-col gap-4 w-full max-w-md">
+                <div className="flex items-center gap-2">
+                  <label className="text-sm font-medium">Rotation:</label>
+                  <input
+                    type="range"
+                    min="-10"
+                    max="10"
+                    step="1"
+                    value={rotation}
+                    onChange={(e) => setRotation(parseInt(e.target.value))}
+                    className="flex-1 accent-primary"
+                  />
+                  <span className="text-sm w-12 text-right">{rotation}°</span>
+                </div>
+
+                <div className="flex justify-center gap-2">
+                  {patterns.map((_, index) => (
+                    <Button
+                      key={index}
+                      type="button"
+                      onClick={() => setPatternIndex(index)}
+                      className={cn(
+                        "h-3 w-3 rounded-full transition-all",
+                        patternIndex === index
+                          ? "bg-primary scale-125"
+                          : "bg-muted",
+                      )}
+                      aria-label={`Pattern ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-2 w-full max-w-md">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1"
+                  onClick={handleBack}
+                >
+                  <ArrowLeftOne size={16} className="mr-2" />
+                  {t("common.back")}
+                </Button>
+                <Button
+                  type="button"
+                  variant="default"
+                  asIcon
+                  whileTap
+                  asPointer
+                  className="flex-1"
+                  onClick={form.handleSubmit(onSubmit)}
+                  disabled={form.formState.isSubmitting}
+                >
+                  <span className="flex items-center justify-center gap-1">
+                    {form.formState.isSubmitting ? (
+                      t("community.comment-form.submitting")
+                    ) : (
+                      <>
+                        <Send size={20} variant="bulk" />
+                        {t("community.comment-form.submit")}
+                      </>
+                    )}
+                  </span>
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </>
   );
 }
