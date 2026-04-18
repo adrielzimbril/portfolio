@@ -1,34 +1,41 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import logger from "@/utils/logger";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
 import { DEMO_MESSAGES } from "@/app/(base)/community/sections/demo-message";
 import { apiRoutes } from "@/data/api-routes";
+import { useWindowEvent } from "@/hooks/useWindowEvent";
 
 export function MessagesSection() {
   const [messages, setMessages] = useState(DEMO_MESSAGES);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await fetch(apiRoutes.community.messages.link);
-        if (response.ok) {
-          const data = await response.json();
-          if (data.messages && data.messages.length > 0) {
-            setMessages(data.messages);
-          }
+  const fetchMessages = useCallback(async () => {
+    try {
+      const response = await fetch(apiRoutes.community.messages.link);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.messages && data.messages.length > 0) {
+          setMessages(data.messages);
         }
-      } catch (error) {
-        logger.error("Failed to fetch messages:", error);
-      } finally {
-        setIsLoading(false);
       }
-    };
-
-    fetchMessages();
+    } catch (error) {
+      logger.error("Failed to fetch messages:", error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      await fetchMessages();
+    })();
+  }, [fetchMessages]);
+
+  useWindowEvent("community-message-added", () => {
+    fetchMessages();
+  });
 
   // Transform messages to include patternIndex and rotation
   const displayMessages = messages.map((msg: any) => ({

@@ -21,6 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, Radio } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Locale } from "@/types";
+import { dispatchWindowEvent } from "@/hooks/useWindowEvent";
 
 interface CommentFormProps {
   user: any;
@@ -46,6 +47,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
   );
   const [rotation, setRotation] = useState(config.rotation.default);
   const [comment, setComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handlePrevPattern = () => {
     setPatternIndex((prev) => (prev - 1 + patterns.length) % patterns.length);
@@ -69,6 +71,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       );
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       logger.info("Submitting comment", { comment });
@@ -100,10 +104,14 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       setPatternIndex(Math.floor(Math.random() * patterns.length));
       setRotation(config.rotation.startAt);
       onSuccess?.();
+      // Dispatch custom event to refresh messages
+      dispatchWindowEvent("community-message-added");
     } catch (error) {
       logger.error("Failed to submit comment", error);
       toast.error("Failed to submit comment");
       throw error;
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -203,10 +211,12 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   whileTap
                   asPointer
                   className="flex-1"
-                  disabled={!comment.trim()}
+                  disabled={!comment.trim() || isSubmitting}
                 >
                   <span className="flex items-center justify-center gap-1">
-                    {t("community.comment-form.submit")}
+                    {isSubmitting
+                      ? "Sending..."
+                      : t("community.comment-form.submit")}
                   </span>
                 </Button>
               </div>
@@ -382,10 +392,12 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   whileTap
                   asPointer
                   className="flex-1"
-                  disabled={!comment.trim()}
+                  disabled={!comment.trim() || isSubmitting}
                 >
                   <span className="flex items-center justify-center gap-1">
-                    {t("community.comment-form.submit")}
+                    {isSubmitting
+                      ? "Sending..."
+                      : t("community.comment-form.submit")}
                   </span>
                 </Button>
               </Form>
