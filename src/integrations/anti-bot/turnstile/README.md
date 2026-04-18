@@ -64,18 +64,11 @@ const AdvancedComponent = () => {
     language: "en",
     retry: "auto",
     "refresh-expired": "auto",
-    appearance: "always"
+    appearance: "always",
   };
-  
-  const { 
-    ref,
-    token, 
-    error, 
-    isLoading, 
-    reset,
-    execute,
-    getResponse
-  } = useTurnstile(siteKey, options);
+
+  const { ref, token, error, isLoading, reset, execute, getResponse } =
+    useTurnstile(siteKey, options);
 
   const handleSubmit = async () => {
     try {
@@ -83,14 +76,14 @@ const AdvancedComponent = () => {
       if (currentToken) {
         // Send request to API with token
         console.log("Current token:", currentToken);
-        
+
         // Example API call
-        const response = await fetch('/api/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: currentToken })
+        const response = await fetch("/api/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: currentToken }),
         });
-        
+
         const result = await response.json();
         console.log("Verification result:", result);
       } else {
@@ -130,7 +123,10 @@ export default AdvancedComponent;
 
 ```tsx
 import React, { useRef } from "react";
-import { TurnstileComponent, TurnstileComponentRef } from "@thind9xdev/react-turnstile";
+import {
+  TurnstileComponent,
+  TurnstileComponentRef,
+} from "@thind9xdev/react-turnstile";
 
 const ComponentExample = () => {
   const turnstileRef = useRef<TurnstileComponentRef>(null);
@@ -154,7 +150,7 @@ const ComponentExample = () => {
   return (
     <div>
       <h3>Using TurnstileComponent</h3>
-      
+
       <TurnstileComponent
         ref={turnstileRef}
         siteKey={siteKey}
@@ -163,14 +159,10 @@ const ComponentExample = () => {
         className="my-turnstile"
         style={{ margin: "20px 0" }}
       />
-      
+
       <div>
-        <button onClick={handleSubmit}>
-          Submit Form
-        </button>
-        <button onClick={handleReset}>
-          Reset
-        </button>
+        <button onClick={handleSubmit}>Submit Form</button>
+        <button onClick={handleReset}>Reset</button>
       </div>
     </div>
   );
@@ -183,7 +175,10 @@ export default ComponentExample;
 
 ```tsx
 import React, { useRef, useState } from "react";
-import { TurnstileComponent, TurnstileComponentRef } from "@thind9xdev/react-turnstile";
+import {
+  TurnstileComponent,
+  TurnstileComponentRef,
+} from "@thind9xdev/react-turnstile";
 
 const AdvancedComponentExample = () => {
   const turnstileRef = useRef<TurnstileComponentRef>(null);
@@ -205,7 +200,7 @@ const AdvancedComponentExample = () => {
   return (
     <div>
       <h3>Component with callback handlers</h3>
-      
+
       <TurnstileComponent
         ref={turnstileRef}
         siteKey={siteKey}
@@ -216,20 +211,22 @@ const AdvancedComponentExample = () => {
         onError={handleError}
         onLoad={handleLoad}
         className="custom-turnstile"
-        style={{ 
-          border: "1px solid #ddd", 
+        style={{
+          border: "1px solid #ddd",
           borderRadius: "8px",
-          padding: "10px"
+          padding: "10px",
         }}
       />
-      
+
       {status && (
-        <div style={{ 
-          marginTop: "10px", 
-          padding: "10px",
-          backgroundColor: "#f5f5f5",
-          borderRadius: "4px"
-        }}>
+        <div
+          style={{
+            marginTop: "10px",
+            padding: "10px",
+            backgroundColor: "#f5f5f5",
+            borderRadius: "4px",
+          }}
+        >
           {status}
         </div>
       )}
@@ -251,11 +248,11 @@ import { useTurnstile } from "@thind9xdev/react-turnstile";
 const InvisibleTurnstile = () => {
   const [email, setEmail] = useState("");
   const siteKey = "YOUR_SITE_KEY";
-  
+
   const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
-    appearance: "execute",  // Invisible mode
+    appearance: "execute", // Invisible mode
     execution: "execute",
-    theme: "light"
+    theme: "light",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -273,9 +270,9 @@ const InvisibleTurnstile = () => {
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, token })
+        body: JSON.stringify({ email, token }),
       });
-      
+
       if (response.ok) {
         console.log("Form submitted successfully!");
         setEmail("");
@@ -289,7 +286,7 @@ const InvisibleTurnstile = () => {
     <form onSubmit={handleSubmit}>
       {/* Hidden container for Turnstile */}
       <div ref={ref} style={{ display: "none" }}></div>
-      
+
       <div>
         <label htmlFor="email">Email:</label>
         <input
@@ -301,11 +298,11 @@ const InvisibleTurnstile = () => {
           disabled={isLoading}
         />
       </div>
-      
+
       <button type="submit" disabled={isLoading || !email}>
         {isLoading ? "Verifying..." : "Register"}
       </button>
-      
+
       {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
   );
@@ -319,10 +316,12 @@ export default InvisibleTurnstile;
 ### `useTurnstile(siteKey, options?)`
 
 #### Parameters:
+
 - `siteKey` (string): Your Cloudflare Turnstile site key
 - `options` (TurnstileOptions, optional): Configuration options
 
 #### Options (TurnstileOptions):
+
 - `theme` ('light' | 'dark' | 'auto'): Widget theme (default: 'auto')
 - `size` ('normal' | 'compact'): Widget size (default: 'normal')
 - `language` (string): Language code (default: 'auto')
@@ -338,6 +337,7 @@ export default InvisibleTurnstile;
 - `onTimeout` (function): Callback on timeout
 
 #### Returns:
+
 - `ref` (React.RefObject): Ref to attach to the container div
 - `token` (string | null): Turnstile token
 - `error` (string | null): Error message if any
@@ -350,12 +350,14 @@ export default InvisibleTurnstile;
 ### `TurnstileComponent`
 
 #### Props:
+
 - `siteKey` (string): Your Cloudflare Turnstile site key
 - `className` (string, optional): CSS class for the container
 - `style` (React.CSSProperties, optional): Inline styles for the container
 - All options from `TurnstileOptions`
 
 #### Ref Methods:
+
 - `reset()`: Reset the widget to its initial state
 - `execute()`: Manually execute verification
 - `getResponse()`: Get the current token
@@ -365,28 +367,31 @@ export default InvisibleTurnstile;
 This library includes full TypeScript support with exported interfaces:
 
 ```tsx
-import { 
-  useTurnstile, 
+import {
+  useTurnstile,
   TurnstileComponent,
-  TurnstileResponse, 
+  TurnstileResponse,
   TurnstileOptions,
   TurnstileComponentProps,
-  TurnstileComponentRef 
+  TurnstileComponentRef,
 } from "@thind9xdev/react-turnstile";
 ```
 
 ## 🎭 Appearance and Display Modes
 
 ### Themes
+
 - `light`: Light theme
 - `dark`: Dark theme
 - `auto`: Follows user's system settings
 
 ### Sizes
+
 - `normal`: Standard widget size
 - `compact`: Compact widget size
 
 ### Appearance Modes
+
 - `always`: Widget always visible (default)
 - `execute`: Invisible mode - widget appears only when executed
 - `interaction-only`: Widget appears only when user interaction is required
@@ -413,6 +418,7 @@ import {
 4. Copy your **Site Key** and **Secret Key**
 
 ### Test Site Key
+
 For testing, you can use: `1x00000000000000000000AA`
 
 ## 🔧 Backend Integration
@@ -420,124 +426,135 @@ For testing, you can use: `1x00000000000000000000AA`
 ### Verify Turnstile token with Node.js/Express:
 
 ```javascript
-const express = require('express');
-const axios = require('axios');
+const express = require("express");
+const axios = require("axios");
 const app = express();
 
 app.use(express.json());
 
-const TURNSTILE_SECRET_KEY = 'YOUR_SECRET_KEY'; // Replace with your actual secret key
+const TURNSTILE_SECRET_KEY = "YOUR_SECRET_KEY"; // Replace with your actual secret key
 
-app.post('/verify-turnstile', async (req, res) => {
+app.post("/verify-turnstile", async (req, res) => {
   const { token, remoteip } = req.body;
 
   if (!token) {
-    return res.status(400).json({ 
-      success: false, 
-      message: 'Missing token' 
+    return res.status(400).json({
+      success: false,
+      message: "Missing token",
     });
   }
 
   try {
-    const response = await axios.post('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      secret: TURNSTILE_SECRET_KEY,
-      response: token,
-      remoteip: remoteip // optional
-    });
+    const response = await axios.post(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        secret: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
+        response: token,
+        remoteip: remoteip, // optional
+      },
+    );
 
     const { success, error_codes } = response.data;
 
     if (success) {
-      res.json({ 
-        success: true, 
-        message: 'Verification successful' 
+      res.json({
+        success: true,
+        message: "Verification successful",
       });
     } else {
-      res.status(400).json({ 
-        success: false, 
-        message: 'Verification failed',
-        error_codes 
+      res.status(400).json({
+        success: false,
+        message: "Verification failed",
+        error_codes,
       });
     }
   } catch (error) {
-    console.error('Turnstile verification error:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Internal server error' 
+    console.error("Turnstile verification error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
     });
   }
 });
 
 app.listen(3000, () => {
-  console.log('Server running on port 3000');
+  console.log("Server running on port 3000");
 });
 ```
 
 ### Verify Turnstile token with NestJS:
 
 #### Create TurnstileGuard:
+
 ```bash
 nest generate guard turnstile
 ```
 
 #### Add code for the guard:
+
 ```typescript
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { Request } from 'express';
-import axios from 'axios';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  UnauthorizedException,
+} from "@nestjs/common";
+import { Request } from "express";
+import axios from "axios";
 
 @Injectable()
 export class TurnstileGuard implements CanActivate {
-  private readonly secretKey = 'YOUR_SECRET_KEY'; // Replace with your actual secret key
+  private readonly secretKey = "YOUR_SECRET_KEY"; // Replace with your actual secret key
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
     const turnstileToken = request.body.token;
-    
+
     if (!turnstileToken) {
-      throw new UnauthorizedException('Missing Turnstile token');
+      throw new UnauthorizedException("Missing Turnstile token");
     }
 
     try {
       const response = await axios.post(
-        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
         {
           secret: this.secretKey,
           response: turnstileToken,
-          remoteip: request.ip
-        }
+          remoteip: request.ip,
+        },
       );
 
       const { success, error_codes } = response.data;
 
       if (!success) {
         throw new UnauthorizedException({
-          message: 'Invalid Turnstile token',
-          error_codes 
+          message: "Invalid Turnstile token",
+          error_codes,
         });
       }
 
       return true;
     } catch (error) {
-      console.error('Turnstile verification error:', error);
-      throw new UnauthorizedException('Turnstile verification failed');
+      console.error("Turnstile verification error:", error);
+      throw new UnauthorizedException("Turnstile verification failed");
     }
   }
 }
 ```
 
 #### Use the Guard in Controller:
-```typescript
-import { Controller, Post, UseGuards, Body } from '@nestjs/common';
-import { TurnstileGuard } from './turnstile.guard';
 
-@Controller('api')
+```typescript
+import { Controller, Post, UseGuards, Body } from "@nestjs/common";
+import { TurnstileGuard } from "./turnstile.guard";
+
+@Controller("api")
 export class AppController {
-  @Post('submit')
+  @Post("submit")
   @UseGuards(TurnstileGuard)
   submitForm(@Body() body: any) {
     // Handle form logic after Turnstile verification
-    return { message: 'Form submitted successfully!' };
+    return { message: "Form submitted successfully!" };
   }
 }
 ```
@@ -617,10 +634,10 @@ const ErrorHandlingExample = () => {
 
   const getErrorMessage = (error: string) => {
     switch (error) {
-      case 'timeout-or-duplicate':
-        return 'Token has been used or timed out. Please try again.';
-      case 'invalid-input-response':
-        return 'Invalid response. Please refresh the page.';
+      case "timeout-or-duplicate":
+        return "Token has been used or timed out. Please try again.";
+      case "invalid-input-response":
+        return "Invalid response. Please refresh the page.";
       default:
         return `Verification error: ${error}`;
     }
@@ -630,12 +647,12 @@ const ErrorHandlingExample = () => {
     <div>
       <div ref={ref}></div>
       {error && (
-        <div style={{ color: 'red', marginTop: '10px' }}>
+        <div style={{ color: "red", marginTop: "10px" }}>
           <p>{getErrorMessage(error)}</p>
           <button onClick={reset}>Try Again</button>
         </div>
       )}
-      {token && <p style={{ color: 'green' }}>✅ Verification successful!</p>}
+      {token && <p style={{ color: "green" }}>✅ Verification successful!</p>}
     </div>
   );
 };
@@ -644,6 +661,7 @@ const ErrorHandlingExample = () => {
 ## 🌐 Browser Support
 
 Cloudflare Turnstile works on all modern browsers supporting:
+
 - ES6 Promises
 - Fetch API or XMLHttpRequest
 - Modern JavaScript features
@@ -660,13 +678,13 @@ If you are migrating from Google reCAPTCHA, the main differences are:
 
 ### Comparison Table:
 
-| reCAPTCHA | Turnstile |
-|-----------|-----------|
-| `grecaptcha.render()` | `turnstile.render()` |
-| `grecaptcha.reset()` | `turnstile.reset()` |
+| reCAPTCHA                  | Turnstile                 |
+| -------------------------- | ------------------------- |
+| `grecaptcha.render()`      | `turnstile.render()`      |
+| `grecaptcha.reset()`       | `turnstile.reset()`       |
 | `grecaptcha.getResponse()` | `turnstile.getResponse()` |
-| Google CDN | Cloudflare CDN |
-| Tracks users | Privacy-focused |
+| Google CDN                 | Cloudflare CDN            |
+| Tracks users               | Privacy-focused           |
 
 ## 🤝 Contributing
 

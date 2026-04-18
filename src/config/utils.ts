@@ -139,7 +139,6 @@ export function getEnvVars(): Record<string, string | undefined> {
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: ConfigValue.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
     NEXT_PRIVATE_TURNSTILE_SECRET_KEY:
       ConfigValue.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
-    TURNSTILE_SECRET_KEY: ConfigValue.TURNSTILE_SECRET_KEY,
 
     // Performance
     SITE_URL: ConfigValue.SITE_URL,
@@ -328,8 +327,6 @@ export function getResendConfig() {
 export function getTurnstileConfig() {
   return {
     siteKey: ConfigValue.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-    secretKey:
-      ConfigValue.NEXT_PRIVATE_TURNSTILE_SECRET_KEY ||
-      ConfigValue.TURNSTILE_SECRET_KEY,
+    secretKey: ConfigValue.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
   };
 }

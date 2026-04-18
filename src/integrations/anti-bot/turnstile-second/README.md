@@ -60,7 +60,7 @@ async function validateToken(token: string) {
   try {
     const result = await validateTurnstileToken({
       token,
-      secretKey: process.env.TURNSTILE_SECRET_KEY,
+      secretKey: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
     });
 
     if (result.success) {
