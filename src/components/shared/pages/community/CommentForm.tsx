@@ -25,6 +25,7 @@ import { useLocale } from "next-intl";
 
 interface CommentFormProps {
   user: any;
+  onSuccess?: () => void;
 }
 
 const schema = z.object({
@@ -36,7 +37,7 @@ const schema = z.object({
 
 type CommentFormValues = z.infer<typeof schema>;
 
-export function CommentForm({ user }: CommentFormProps) {
+export function CommentForm({ user, onSuccess }: CommentFormProps) {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -70,6 +71,7 @@ export function CommentForm({ user }: CommentFormProps) {
       logger.info("Comment submitted successfully", data);
       toast.success("Comment submitted successfully!");
       form.reset();
+      onSuccess?.();
     } catch (error) {
       logger.error("Failed to submit comment", error);
       toast.error("Failed to submit comment");

@@ -7,15 +7,10 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { AdminAuthGuard } from "@/components/shared/pages/landlord/AdminAuthGuard";
 import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
-import { Github, Google } from "@aurthle/icons";
+import { LoginButtons } from "@/components/shared/pages/landlord/LoginButtons";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
-import {
-  signInWithGithub,
-  signInWithGoogle,
-} from "@/integrations/auth/provider/supabase";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/utils";
+import { logger } from "@/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -64,36 +59,7 @@ export default async function AdminPage() {
             <p className="text-center text-b-white-invert-sec">
               Vous devez être connecté pour accéder à cette page
             </p>
-            <div className="flex gap-4">
-              <Button
-                onClick={() => signInWithGithub()}
-                variant="default"
-                asIcon
-                whileTap
-                className={cn(
-                  "squircle squircle-smooth-lg squircle-2xl w-full",
-                )}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <Github size={16} variant="bulk" />
-                  {t("community.login-modal.github")}
-                </span>
-              </Button>
-              <Button
-                onClick={() => signInWithGoogle()}
-                variant="secondary"
-                asIcon
-                whileTap
-                className={cn(
-                  "squircle squircle-smooth-lg squircle-2xl w-full",
-                )}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <Google size={16} variant="bulk" />
-                  {t("community.login-modal.google")}
-                </span>
-              </Button>
-            </div>
+            <LoginButtons />
           </div>
         </SectionLayout>
       </>

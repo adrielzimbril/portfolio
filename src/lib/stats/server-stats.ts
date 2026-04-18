@@ -7,9 +7,10 @@ import { getAllPosts } from "@/integrations/content/lib/posts";
 
 // Function to retrieve statistics from the server (Supabase)
 export async function getServerStats(locale?: string): Promise<ServerStats> {
+  const cookieStore = await cookies();
+
   return unstable_cache(
     async () => {
-      const cookieStore = await cookies();
       const supabase = createClient(cookieStore);
 
       // Fetch all posts to get titles and cover images (filtered by locale if provided)

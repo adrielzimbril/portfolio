@@ -15,10 +15,11 @@ interface LeaveNoteButtonProps {
 
 export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
   const t = useTranslations();
+  const [open, setOpen] = React.useState(false);
 
   return (
     <div className="flex justify-center mt-8">
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
             variant="default"
@@ -54,7 +55,11 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
           </Button>
         </DialogTrigger>
         <DialogContent size="md" variant="modern">
-          {user ? <CommentForm user={user} /> : <LoginModal />}
+          {user ? (
+            <CommentForm user={user} onSuccess={() => setOpen(false)} />
+          ) : (
+            <LoginModal />
+          )}
         </DialogContent>
       </Dialog>
     </div>
