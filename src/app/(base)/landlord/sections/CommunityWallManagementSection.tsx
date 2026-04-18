@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import useSWR, { mutate } from "swr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,8 +27,6 @@ interface CommunityMessage {
 }
 
 export function CommunityWallManagementSection() {
-  const [messages, setMessages] = useState<CommunityMessage[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingMessage, setEditingMessage] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState({
@@ -36,23 +35,21 @@ export function CommunityWallManagementSection() {
     messages: {} as Record<string, string>,
   });
 
-  const fetchMessages = async () => {
-    try {
-      const response = await fetch(landlordApiRoutes.community.messages);
-      if (response.ok) {
-        const data = await response.json();
-        setMessages(data.messages || []);
-      }
-    } catch (error) {
-      logger.error("Failed to fetch messages:", error);
-    } finally {
-      setLoading(false);
+  const fetcher = async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      logger.error("Failed to fetch messages");
+      return [];
     }
+    const data = await response.json();
+    return data.messages || [];
   };
 
-  useEffect(() => {
-    fetchMessages();
-  }, []);
+  const {
+    data: messages,
+    error,
+    isLoading,
+  } = useSWR(landlordApiRoutes.community.messages, fetcher);
 
   const handleAddMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +67,7 @@ export function CommunityWallManagementSection() {
           messages: {},
         });
         setShowAddForm(false);
-        fetchMessages();
+        mutate(landlordApiRoutes.community.messages);
       }
     } catch (error) {
       logger.error("Failed to add message:", error);
@@ -87,7 +84,7 @@ export function CommunityWallManagementSection() {
       );
 
       if (response.ok) {
-        fetchMessages();
+        mutate(landlordApiRoutes.community.messages);
       }
     } catch (error) {
       logger.error("Failed to delete message:", error);
@@ -106,7 +103,7 @@ export function CommunityWallManagementSection() {
       );
 
       if (response.ok) {
-        fetchMessages();
+        mutate(landlordApiRoutes.community.messages);
       }
     } catch (error) {
       logger.error("Failed to update language:", error);
@@ -145,7 +142,7 @@ export function CommunityWallManagementSection() {
           messages: {},
         });
         setShowAddForm(false);
-        fetchMessages();
+        mutate(landlordApiRoutes.community.messages);
       }
     } catch (error) {
       logger.error("Failed to update message:", error);
@@ -222,11 +219,11 @@ export function CommunityWallManagementSection() {
         </Card>
       )}
 
-      {loading ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <div className="grid gap-4">
-          {messages.map((msg) => (
+          {messages?.map((msg: CommunityMessage) => (
             <Card key={msg.id} className="p-4">
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">
@@ -249,14 +246,16 @@ export function CommunityWallManagementSection() {
                       </Button>
                     </div>
                     {msg.messages &&
-                      Object.entries(msg.messages).map(([lang, message]) => (
-                        <div key={lang} className="space-y-1">
-                          <span className="text-xs text-muted-foreground font-medium">
-                            {lang.toUpperCase()}
-                          </span>
-                          <p className="text-sm">{message}</p>
-                        </div>
-                      ))}
+                      Object.entries(msg.messages).map(
+                        ([lang, message]: [string, string]) => (
+                          <div key={lang} className="space-y-1">
+                            <span className="text-xs text-muted-foreground font-medium">
+                              {lang.toUpperCase()}
+                            </span>
+                            <p className="text-sm">{message}</p>
+                          </div>
+                        ),
+                      )}
                     <p className="text-xs text-muted-foreground">
                       {new Date(msg.created_at).toLocaleString()}
                     </p>

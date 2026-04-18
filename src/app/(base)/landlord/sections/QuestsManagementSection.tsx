@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import useSWR, { mutate } from "swr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,9 +34,6 @@ interface Participant {
 }
 
 export function QuestsManagementSection() {
-  const [participants, setParticipants] = useState<Participant[]>([]);
-  const [quests, setQuests] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedQuest, setSelectedQuest] = useState<string>("all");
   const [newParticipant, setNewParticipant] = useState({
@@ -49,33 +47,29 @@ export function QuestsManagementSection() {
 
   const fetchQuests = async () => {
     try {
-      const allQuests = await getAllQuests();
-      setQuests(allQuests);
+      return await getAllQuests();
     } catch (error) {
       logger.error("Failed to fetch quests:", error);
+      return [];
     }
   };
 
-  const fetchParticipants = async () => {
-    try {
-      const response = await fetch(
-        `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setParticipants(data.participants || []);
-      }
-    } catch (error) {
-      logger.error("Failed to fetch participants:", error);
-    } finally {
-      setLoading(false);
+  const fetchParticipants = async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      logger.error("Failed to fetch participants");
+      return [];
     }
+    const data = await response.json();
+    return data.participants || [];
   };
 
-  useEffect(() => {
-    fetchQuests();
-    fetchParticipants();
-  }, [selectedQuest]);
+  const { data: quests } = useSWR("quests", fetchQuests);
+  const { data: participants, isLoading } = useSWR(
+    () =>
+      `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
+    fetchParticipants,
+  );
 
   const handleAddParticipant = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,7 +93,10 @@ export function QuestsManagementSection() {
           language: Locale.EN,
         });
         setShowAddForm(false);
-        fetchParticipants();
+        mutate(
+          () =>
+            `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
+        );
       }
     } catch (error) {
       logger.error("Failed to add participant:", error);
@@ -118,7 +115,10 @@ export function QuestsManagementSection() {
       );
 
       if (response.ok) {
-        fetchParticipants();
+        mutate(
+          () =>
+            `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
+        );
       }
     } catch (error) {
       logger.error("Failed to update language:", error);
@@ -148,7 +148,7 @@ export function QuestsManagementSection() {
                   <SelectValue placeholder="Select a quest" />
                 </SelectTrigger>
                 <SelectContent>
-                  {quests.map((quest) => (
+                  {quests?.map((quest) => (
                     <SelectItem key={quest.slug} value={quest.slug}>
                       {quest.title}
                     </SelectItem>
@@ -230,7 +230,7 @@ export function QuestsManagementSection() {
         </Card>
       )}
 
-      {loading ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <div className="space-y-4">
@@ -242,7 +242,7 @@ export function QuestsManagementSection() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All quests</SelectItem>
-                {quests.map((quest) => (
+                {quests?.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
                   </SelectItem>
@@ -252,7 +252,7 @@ export function QuestsManagementSection() {
           </div>
 
           <div className="grid gap-4">
-            {participants.map((participant) => (
+            {participants?.map((participant: Participant) => (
               <Card key={participant.id} className="p-4">
                 <div className="flex items-start justify-between">
                   <div className="space-y-2">
