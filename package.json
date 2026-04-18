@@ -6,14 +6,14 @@
     "dev": "pnpm validate:env && next dev",
     "dev:trigger": "pnpm dlx trigger.dev dev",
     "dev:all": "npx concurrently --kill-others --names \"next,trigger\" --prefix-colors \"yellow,blue\" \"pnpm run dev\" \"pnpm run dev:trigger\"",
-    "build": "npm run build:validate",
+    "build": "pnpm build:validate",
     "build:validate": "pnpm validate:env && next build",
-    "build:simple": "npm run validate:env && next build",
+    "build:simple": "pnpm validate:env && next build",
     "analyze": "cross-env ANALYZE_BUNDLE=true next build --webpack",
     "build:all": "pnpm run build && pnpm run trigger:deploy",
     "start": "next start",
     "trigger:deploy": "pnpm dlx trigger.dev deploy",
-    "validate:env": "pnpm dlx tsx scripts/validate-env.ts"
+    "validate:env": "pnpm tsx scripts/validate-env.ts"
   },
   "dependencies": {
     "@aurthle/emoji-hub": "^1.0.5",
@@ -129,6 +129,7 @@
     "react-phone-number-input": "^3.4.16",
     "supabase": "^2.76.15",
     "tailwindcss": "^4.2.1",
+    "tsx": "^4.19.2",
     "typescript": "^5.9.3",
     "zod": "^4.3.6"
   },

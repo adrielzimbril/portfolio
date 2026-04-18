@@ -208,7 +208,13 @@
           }
         },
         "entry": {
-          "latest": "Latest"
+          "latest": "Latest",
+          "types": {
+            "milestone": "Milestone",
+            "feature": "Feature",
+            "fix": "Fix",
+            "improvement": "Improvement"
+          }
         },
         "emptyState": {
           "message": "No releases found matching your criteria.",

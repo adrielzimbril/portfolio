@@ -26,31 +26,38 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75],
     remotePatterns: [
+      // production
       {
         protocol: "https",
         hostname: "www.adrielzimbril.com",
       },
       {
-        protocol: "http",
-        hostname: "localhost",
-      },
-      {
-        // google profile images
         protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-      },
-      {
-        // github profile images
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
-      },
-      {
-        protocol: "https",
-        hostname: "api.dicebear.com",
+        hostname: "preview.adrielzimbril.com",
       },
       {
         protocol: "https",
         hostname: "cdn.aurthle.one",
+      },
+      // local development
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      // google profile images
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      // github profile images
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      // dicebear avatars
+      {
+        protocol: "https",
+        hostname: "api.dicebear.com",
       },
     ],
   },
