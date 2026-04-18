@@ -1,6 +1,4 @@
 import { logger, schedules } from "@trigger.dev/sdk";
-import { apiRoutes } from "@/data/api-routes";
-import { ConfigValue } from "@/config";
 
 export const supabaseLiveCheckTask = schedules.task({
   //unique id for the schedule

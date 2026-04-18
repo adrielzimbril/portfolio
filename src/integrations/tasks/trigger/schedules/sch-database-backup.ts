@@ -1,6 +1,4 @@
 import { logger, schedules } from "@trigger.dev/sdk";
-import { ConfigValue } from "@/config";
-import { backupDatabase } from "@/integrations/backup";
 
 export const databaseBackupTask = schedules.task({
   id: "database-backup",
@@ -14,20 +12,45 @@ export const databaseBackupTask = schedules.task({
     concurrencyLimit: 1,
   },
   run: async () => {
-    try {
-      logger.info("Starting database backup task");
+    const url = `${process.env.NEXT_TRIGGER_PUBLIC_APP_URL}/api/cron/backup-database`;
+    const cronSecret = process.env.VERCEL_CRON_SECRET;
 
-      const result = await backupDatabase();
+    if (!cronSecret) {
+      logger.error("VERCEL_CRON_SECRET not configured");
+      throw new Error("VERCEL_CRON_SECRET not configured");
+    }
+
+    try {
+      logger.info("Starting database backup via API...");
+
+      logger.info("Fetching backup API", { url });
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cronSecret}`,
+        },
+      });
+
+      const result = await response.json();
+
+      logger.info("Backup API response", { result });
 
       if (result.success) {
         logger.info("Database backup completed successfully");
-        return { status: "success" };
+        return result;
       } else {
         logger.error("Database backup failed", { error: result.error });
         throw new Error(result.error || "Backup failed");
       }
     } catch (error) {
-      logger.error("Database backup task execution failed", { error });
+      logger.error("Fetching backup API", { url, error });
+
+      logger.error("Task execution failed", {
+        status: "error",
+        error,
+      });
       throw error;
     }
   },

@@ -1,8 +1,8 @@
 import { exec } from "child_process";
 import { promisify } from "util";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { logger } from "@/utils";
 import { ConfigValue, getS3Config } from "@/config";
+import { uploadToS3, generateBackupTimestamp } from "../util";
 
 const execAsync = promisify(exec);
 
@@ -31,37 +31,19 @@ export async function backupDatabase(): Promise<{
 
   try {
     // Generate timestamp for backup filename
-    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const timestamp = generateBackupTimestamp();
     const backupFilename = `mysql-backup-${timestamp}.sql`;
     const backupBucket = ConfigValue.S3_BACKUP_BUCKET || "database-backups";
 
     // Execute mysqldump
     logger.info("Starting MySQL database backup");
     const { stdout: backupData } = await execAsync(
-      `mysqldump "${databaseUrl}"`
+      `mysqldump "${databaseUrl}"`,
     );
-
-    // Initialize S3 client
-    const s3Client = new S3Client({
-      region: region || "auto",
-      endpoint,
-      forcePathStyle: true,
-      credentials: {
-        accessKeyId,
-        secretAccessKey,
-      },
-    });
 
     // Upload backup to S3
     logger.info(`Uploading backup to S3 bucket: ${backupBucket}`);
-    await s3Client.send(
-      new PutObjectCommand({
-        Bucket: backupBucket,
-        Key: backupFilename,
-        Body: backupData,
-        ContentType: "application/sql",
-      })
-    );
+    await uploadToS3(backupData, backupFilename, backupBucket);
 
     logger.info(`Backup completed successfully: ${backupFilename}`);
     return { success: true };

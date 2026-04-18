@@ -7,8 +7,8 @@ import { uploadToS3, generateBackupTimestamp } from "../util";
 const execAsync = promisify(exec);
 
 /**
- * Backup PostgreSQL database to S3
- * Uses pg_dump to create a SQL dump and uploads it to S3
+ * Backup MongoDB database to S3
+ * Uses mongodump to create a BSON dump and uploads it to S3
  */
 export async function backupDatabase(): Promise<{
   success: boolean;
@@ -32,13 +32,13 @@ export async function backupDatabase(): Promise<{
   try {
     // Generate timestamp for backup filename
     const timestamp = generateBackupTimestamp();
-    const backupFilename = `postgres-backup-${timestamp}.sql`;
+    const backupFilename = `mongodb-backup-${timestamp}.archive`;
     const backupBucket = ConfigValue.S3_BACKUP_BUCKET || "database-backups";
 
-    // Execute pg_dump
-    logger.info("Starting PostgreSQL database backup");
+    // Execute mongodump
+    logger.info("Starting MongoDB database backup");
     const { stdout: backupData } = await execAsync(
-      `pg_dump "${databaseUrl}" --no-owner --no-acl --format=plain`,
+      `mongodump --uri="${databaseUrl}" --archive`
     );
 
     // Upload backup to S3
@@ -48,7 +48,7 @@ export async function backupDatabase(): Promise<{
     logger.info(`Backup completed successfully: ${backupFilename}`);
     return { success: true };
   } catch (error) {
-    logger.error("PostgreSQL backup failed:", error);
+    logger.error("MongoDB backup failed:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",
