@@ -1,34 +1,42 @@
 ---
 id: "v0.7.0"
 version: "v0.7.0-gamma"
-type: "improvement"
+type: "feature"
 date: "2025-09-25"
 published: true
 ---
 
-# Performance & Social Sharing
+# Open Graph Images & Resources
 
-This release brings performance improvements and enhanced social sharing capabilities.
+This release adds comprehensive Open Graph image support and enhances the resource management system.
 
-## Performance Improvements
+## Open Graph Images
 
-### Page Load Times
+- **Dynamic OG Generation**: Dynamic icon generation endpoint with customizable options
+- **OG Image Layout**: Adjusted OpenGraph image layout and styling
+- **Page OG Images**: Added Open Graph images for various pages
+- **Metadata Standardization**: Standardized generateMetadata functions with explicit return types
 
-- **Image Optimization**: Compressed and optimized all images
-- **Code Splitting**: Improved code splitting for faster initial load
-- **Caching Strategy**: Better caching for static assets
+## Resource Management
 
-### Social Sharing
+- **Resource URL Utilities**: Added resource URL utility functions and improved URL handling
+- **External Config**: Added external resource configuration module
+- **Header Sections**: Updated resource URL mapping and header section rendering
+- **Empty State**: Hide sections when resource data is empty
+- **Bilingual Support**: Removed bilingual versions for cleaner resource management
 
-- **Meta Tags**: Comprehensive meta tags for social media
-- **Open Graph**: Optimized for Facebook and LinkedIn sharing
-- **Twitter Cards**: Custom Twitter card implementation
-- **Share Buttons**: Easy sharing across social platforms
+## Project Updates
 
-### Accessibility
+- **New Projects**: Added new project page for Buddy Sensei and ONG website
+- **Project Metadata**: Updated project metadata and added new SaaS category
+- **Tags & Roles**: Updated project tags and roles for clarity
+- **Cleanup**: Removed outdated project pages and files
 
-- **ARIA Labels**: Better ARIA labels for screen readers
-- **Keyboard Navigation**: Full keyboard accessibility
-- **Color Contrast**: Improved color contrast ratios
+## Technical Improvements
 
-These improvements make the portfolio faster, more shareable, and more accessible.
+- **Slug Parameters**: Added slug parameter to multiple components and hooks
+- **Locale Fallback**: Fixed locale fallback and improved image layout
+- **Bot Protection**: Enhanced bot protection with reusable Turnstile component
+- **Effect Dependencies**: Updated effect dependencies to include locale
+
+This release significantly improves the portfolio's social media presence and resource management capabilities.
