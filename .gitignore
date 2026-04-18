@@ -52,7 +52,6 @@ package-lock.json
 # trigger
 .trigger/
 
-
 # Ignore all lang d.ts files
 /src/integrations/i18n/translations/*.d.json.ts
 

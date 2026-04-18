@@ -1,15 +1,28 @@
-import {
-  rmSync,
-  readdirSync,
-  existsSync,
-  statSync,
-  promises as fsPromises,
-} from "node:fs";
-import path, { join } from "node:path";
+import { existsSync, statSync, promises as fsPromises } from "node:fs";
+import { join } from "node:path";
 import { exec } from "node:child_process";
 import util from "node:util";
 
 const rootDir = "./";
+
+type Pattern = string | RegExp;
+
+const FOLDER_PATTERNS: Pattern[] = [
+  "_source",
+  "node_modules",
+  ".turbo",
+  ".next",
+  ".content-collections",
+  ".trigger",
+  ".superdesign",
+  ".vercel/output",
+];
+
+const FILE_PATTERNS: Pattern[] = [
+  /^.+.lock$/,
+  /^.+-lock.yaml$/,
+  "tsconfig.tsbuildinfo",
+];
 
 /**
  * Function to run 'pnpm store prune' using exec.
@@ -17,27 +30,24 @@ const rootDir = "./";
 async function prunePnpmStore(): Promise<void> {
   console.info(`Start executing 'pnpm store prune'`);
 
-  exec("pnpm store prune", (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error executing 'pnpm store prune': ${error.message}`);
-      return;
-    }
-
+  const execPromise = util.promisify(exec);
+  try {
+    const { stdout, stderr } = await execPromise("pnpm store prune");
+    console.log(`pnpm store prune output: ${stdout}`);
     if (stderr) {
       console.error(`Error output: ${stderr}`);
-      return;
     }
-
-    console.log(`pnpm store prune output: ${stdout}`);
-  });
+  } catch (error) {
+    console.error(`Error executing 'pnpm store prune':`, error);
+  }
 }
 
 /**
- * @param {string} folderPath
+ * Delete a folder synchronously
  */
 function deleteFolder(folderPath: string): void {
   try {
-    rmSync(folderPath, { recursive: true, force: true });
+    fsPromises.rm(folderPath, { recursive: true, force: true });
     console.log(`Deleted: ${folderPath}`);
   } catch (error) {
     console.error(`Error deleting ${folderPath}:`, error);
@@ -45,24 +55,20 @@ function deleteFolder(folderPath: string): void {
 }
 
 /**
- * @param {string} targetPath
+ * Delete a file or directory recursively
  */
 async function deleteFile(targetPath: string): Promise<void> {
   try {
     const stats = await fsPromises.lstat(targetPath);
 
     if (stats.isDirectory()) {
-      // Read all entries in the directory
       const entries = await fsPromises.readdir(targetPath);
       const deletePromises = entries.map((entry) =>
         deleteFile(join(targetPath, entry)),
       );
       await Promise.all(deletePromises);
-
-      // After all entries have been deleted, remove the directory itself
       await fsPromises.rmdir(targetPath);
     } else {
-      // If it's a file, simply unlink it
       await fsPromises.unlink(targetPath);
     }
 
@@ -73,34 +79,30 @@ async function deleteFile(targetPath: string): Promise<void> {
 }
 
 /**
- * @param {string} directory
+ * Check if a path matches any of the given patterns
+ */
+function matchesPattern(name: string, patterns: Pattern[]): boolean {
+  return patterns.some((pattern) =>
+    typeof pattern === "string" ? name === pattern : pattern.test(name),
+  );
+}
+
+/**
+ * Clean folders recursively
  */
 async function cleanFolders(directory: string): Promise<void> {
-  readdirSync(directory, { withFileTypes: true }).forEach((entry) => {
+  const entries = await fsPromises.readdir(directory, { withFileTypes: true });
+
+  for (const entry of entries) {
     const fullPath = join(directory, entry.name);
 
     if (entry.isDirectory()) {
-      if (
-        [
-          "_source",
-          "node_modules",
-          ".turbo",
-          ".next",
-          ".content-collections",
-          ".trigger",
-          ".superdesign",
-          ".vercel/output",
-        ].some((pattern) =>
-          typeof pattern === "string"
-            ? entry.name === pattern
-            : pattern.test(entry.name)
-        )
-      ) {
+      if (matchesPattern(entry.name, FOLDER_PATTERNS)) {
         deleteFolder(fullPath);
-        return;
+        continue;
       }
 
-      // Vérifier et supprimer les doublons avec "(1)"
+      // Verify and remove duplicates with "(1)"
       const match = entry.name.match(/^(.*)\s*\(1\)$/);
       if (match) {
         const originalName = match[1].trim();
@@ -108,35 +110,26 @@ async function cleanFolders(directory: string): Promise<void> {
 
         if (existsSync(originalPath) && statSync(originalPath).isDirectory()) {
           console.log(
-            `Doublon détecté : ${fullPath} correspond à ${originalPath}`,
+            `Duplicate detected: ${fullPath} matches ${originalPath}`,
           );
           deleteFolder(fullPath);
-          return;
+          continue;
         }
-        console.log(`Pas de doublon pour : ${fullPath}`);
+        console.log(`No duplicate for: ${fullPath}`);
       }
 
-      cleanFolders(fullPath);
+      await cleanFolders(fullPath);
     } else if (entry.isFile()) {
-      if (
-        [/^.+\.lock$/, /^.+\-lock.yaml$/, "tsconfig.tsbuildinfo"].some(
-          (pattern) =>
-            typeof pattern === "string"
-              ? entry.name === pattern
-              : pattern.test(entry.name),
-        )
-      ) {
-        deleteFile(fullPath);
-        return;
+      if (matchesPattern(entry.name, FILE_PATTERNS)) {
+        await deleteFile(fullPath);
       }
     }
-  });
+  }
 }
-
-const execPromise = util.promisify(exec);
 
 async function runBuildSharedPackages(): Promise<void> {
   try {
+    const execPromise = util.promisify(exec);
     const { stdout, stderr } = await execPromise("pnpm run build");
     console.log("Output:", stdout);
     if (stderr) {
@@ -154,7 +147,6 @@ async function startClean(): Promise<void> {
 
     await cleanFolders(rootDir);
     console.info("End of cleaning old install caches");
-
   } catch (error) {
     console.error("An error occurred:", error);
   }
