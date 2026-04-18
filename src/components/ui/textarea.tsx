@@ -3,7 +3,6 @@ import * as React from "react";
 import { cn, logger } from "@/utils";
 import { VariantProps } from "class-variance-authority";
 import { inputVariants } from "@/components/ui/input";
-import { useCharacterLimit } from "@/hooks/useCharacterLimit";
 import { useTranslations } from "use-intl";
 
 function Textarea({
@@ -13,6 +12,8 @@ function Textarea({
   showLimit = false,
   variant,
   inputSize,
+  value: externalValue,
+  onChange: externalOnChange,
   ...props
 }: React.ComponentProps<"textarea"> & {
   autoGrow?: boolean;
@@ -24,12 +25,25 @@ function Textarea({
   const t = useTranslations();
   const id = React.useId();
   const maxLength = limit;
-  const {
-    value,
-    characterCount,
-    handleChange,
-    maxLength: maxLengthLimit,
-  } = useCharacterLimit({ maxLength });
+
+  // Use external value if provided (from react-hook-form), otherwise use internal state
+  const isControlled = externalValue !== undefined;
+  const [internalValue, setInternalValue] = React.useState("");
+  const value = isControlled ? externalValue : internalValue;
+
+  const characterCount = String(value ?? "").length;
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    if (newValue.length <= maxLength) {
+      if (externalOnChange) {
+        externalOnChange(e);
+      } else {
+        setInternalValue(newValue);
+      }
+    }
+  };
+
   logger.info(
     "value",
     value,
@@ -37,8 +51,8 @@ function Textarea({
     characterCount,
     "maxLength",
     maxLength,
-    "maxLengthLimit",
-    maxLengthLimit,
+    "isControlled",
+    isControlled,
   );
 
   return (
@@ -68,9 +82,7 @@ function Textarea({
           role="status"
           aria-live="polite"
         >
-          <span className="tabular-nums">
-            {maxLengthLimit - characterCount}
-          </span>{" "}
+          <span className="tabular-nums">{maxLength - characterCount}</span>{" "}
           {t("common.shared.text.characters-left")}
         </p>
       )}

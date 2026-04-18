@@ -145,11 +145,11 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         <Textarea
                           placeholder={t("community.comment-form.placeholder")}
                           className={cn(
-                            // "w-full h-full min-h-29.5 p-4",
-                            // "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                            // "bg-b-base text-foreground placeholder:text-muted-foreground",
-                            // "focus:outline-none focus:squircle-border-b-base-accent",
-                            "resize-y transition-all",
+                            "w-full min-h-[120px]",
+                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                            "bg-b-base text-foreground placeholder:text-muted-foreground",
+                            "focus:outline-none focus:squircle-border-b-base-accent",
+                            "resize-none transition-all",
                           )}
                           rows={5}
                           limit={500}
@@ -291,18 +291,18 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                       <FormControl>
                         <Textarea
                           placeholder={t("community.comment-form.placeholder")}
-                          // className={cn(
-                          //   "w-full min-h-[120px] p-4",
-                          //   "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
-                          //   "bg-b-base text-foreground placeholder:text-muted-foreground",
-                          //   "focus:outline-none focus:squircle-border-b-base-accent",
-                          //   "resize-none transition-all",
-                          // )}
+                          className={cn(
+                            "w-full min-h-[120px]",
+                            "squircle squircle-background squircle-2xl squircle-border-2 squircle-border-b-base-accent",
+                            "bg-b-base text-foreground placeholder:text-muted-foreground",
+                            "focus:outline-none focus:squircle-border-b-base-accent",
+                            "resize-none transition-all",
+                          )}
+                          rows={5}
+                          limit={500}
+                          showLimit
                           disabled={form.formState.isSubmitting}
-                          // {...field}
-                          value={field.value ?? ""}
-                          onChange={field.onChange}
-                          // value={field.value ?? ""}
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
