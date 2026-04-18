@@ -1,0 +1,44 @@
+---
+id: "v2.61"
+version: "v2.61-kaleidoscope"
+type: "feature"
+date: "2026-04-15"
+published: true
+---
+
+# Reactions System
+
+This release introduces a comprehensive emoji-based reaction system with anonymous user support and synchronization capabilities.
+
+## New Features
+
+### Emoji-Based Reactions
+
+We've added a complete reaction system that allows users to express themselves with animated emojis:
+
+- **Multiple Reaction Types**: Like, heart, celebrate, insightful, and sceptic reactions
+- **Animated States**: Emojis animate when active for engaging user feedback
+- **Dock-Style Bar**: Reaction bar appears on hover for clean UI
+- **Real-Time Counts**: Instant updates showing reaction counts
+
+### Anonymous User Support
+
+- **Cookie-Based Identification**: Anonymous users identified via persistent cookies
+- **Cross-Device Sync**: Reactions sync when users authenticate
+- **Seamless Migration**: Anonymous reactions merge with authenticated user account
+
+### Integration
+
+- **Thoughts**: Reactions on blog posts and articles
+- **Projects**: Reactions on case studies and project pages
+- **Hub**: Reactions on resources and tools
+- **Quests**: Reactions on challenge submissions
+
+## Technical Details
+
+- **Supabase Migration**: Complete database schema with RLS policies
+- **Cookie Management**: Anonymous user ID tracking with 365-day expiration
+- **Sync Provider**: Automatic sync mechanism on authentication
+- **TypeScript Types**: Full type safety for reaction data structures
+
+This feature enhances user engagement and provides valuable feedback across the platform.

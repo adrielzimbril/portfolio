@@ -28,7 +28,7 @@ import { TrendUp, HeartOne } from "@aurthle/icons";
 import { ContributionGraphCard } from "@/components/shared/pages/stats/ContributionGraphCard";
 import { ThoughtMostViewedCard } from "@/components/shared/pages/stats/ThoughtMostViewedCard";
 import { ChangelogUpdatesCard } from "@/components/shared/pages/stats/ChangelogUpdatesCard";
-import { changelog } from "@/data/personal/changelog";
+import { getAllChangelog } from "@/integrations/content/lib/changelog";
 import { TopThoughtsListType } from "@/types/enum";
 import { ConfigValue } from "@/config";
 
@@ -59,12 +59,13 @@ export default async function StatsPage() {
   const locale = await getLocale();
 
   // Fetch data from different sources
-  const [buildTimeStats, serverStats, githubStats, lighthouseStats] =
+  const [buildTimeStats, serverStats, githubStats, lighthouseStats, changelog] =
     await Promise.all([
       getBuildTimeStats(),
       getServerStats(locale),
       getGitHubStats(),
       getLighthouseStats(),
+      getAllChangelog(),
     ]);
 
   // Calculate additional data
@@ -85,11 +86,7 @@ export default async function StatsPage() {
       </Skeleton>
 
       <Skeleton name="stats-general" loading={false}>
-        <SectionLayout
-          badge="Statistique 👨‍💻"
-          isFlex
-          className="py-0!"
-        >
+        <SectionLayout badge="Statistique 👨‍💻" isFlex className="py-0!">
           <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
             <StatCard
               label="Total Site Views"
@@ -181,7 +178,10 @@ export default async function StatsPage() {
                 description="Thoughts by topic"
                 decorationEmoji="📊"
               />
-              <ChangelogUpdatesCard count={changelog.length} />
+              <ChangelogUpdatesCard
+                count={changelog.length}
+                changelog={changelog}
+              />
             </div>
           </div>
         </SectionLayout>

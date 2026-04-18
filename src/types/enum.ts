@@ -1,5 +1,4 @@
 import { ReactionType } from "@/lib/stats/types";
-import { changelog } from "@/data/personal/changelog";
 
 export enum SortOrder {
   ASC = "asc",

@@ -3,19 +3,23 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/utils/utils";
-import { changelog } from "@/data/personal/changelog";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Star, Bug, Wrench } from "@aurthle/icons";
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { getResourcesUrl } from "@/utils";
+import type { Changelog } from "@/integrations/content/types/types";
 
 interface ChangelogUpdatesCardProps {
   count: number;
+  changelog: Changelog[];
 }
 
-export function ChangelogUpdatesCard({ count }: ChangelogUpdatesCardProps) {
+export function ChangelogUpdatesCard({
+  count,
+  changelog,
+}: ChangelogUpdatesCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const typeIcons = {
