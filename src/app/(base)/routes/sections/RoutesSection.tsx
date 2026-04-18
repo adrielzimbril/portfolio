@@ -22,13 +22,9 @@ export function RoutesSection() {
       routes.quests,
       routes.thoughts,
     ],
-    community: [
-      routes.community,
-      routes.connections,
-      routes.changelog,
-      routes.contact,
-    ],
-    tools: [routes.toolbox, routes.stats, routes.submit, routes.newsletter],
+    contact: [routes.submit, routes.contact, routes.newsletter],
+    community: [routes.community, routes.connections, routes.changelog],
+    tools: [routes.toolbox, routes.stats],
     rss: [routes.rss, routes.rssAtom, routes.rssJson],
     legal: [routes.terms, routes.privacy],
   };
@@ -48,6 +44,10 @@ export function RoutesSection() {
           <RouteGroup
             title={t("routes.groups.community")}
             routes={routeGroups.community}
+          />
+          <RouteGroup
+            title={t("routes.groups.contact")}
+            routes={routeGroups.contact}
           />
           <RouteGroup
             title={t("routes.groups.tools")}
