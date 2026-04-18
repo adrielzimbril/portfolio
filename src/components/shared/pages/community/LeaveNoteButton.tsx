@@ -54,7 +54,7 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
             )}
           </Button>
         </DialogTrigger>
-        <DialogContent size={user ? "full" : "md"} variant="modern">
+        <DialogContent size={user ? "2xl" : "md"}>
           {user ? (
             <CommentForm user={user} onSuccess={() => setOpen(false)} />
           ) : (
