@@ -20,21 +20,20 @@ interface CommunityMessage {
   id: string;
   creator_name: string;
   creator_avatar_url?: string;
-  message: string;
+  messages: Record<string, string>;
   created_at: string;
   user_id?: string;
-  language?: string;
 }
 
 export function CommunityWallManagementSection() {
   const [messages, setMessages] = useState<CommunityMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingMessage, setEditingMessage] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState({
     creator_name: "",
     creator_avatar_url: "",
-    message: "",
-    language: "en",
+    messages: {} as Record<string, string>,
   });
 
   useEffect(() => {
