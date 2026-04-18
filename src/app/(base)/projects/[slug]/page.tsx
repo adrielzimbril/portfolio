@@ -107,15 +107,14 @@ export default async function SubProject(props: {
         />
         <ReactionBar pageType={PageType.PROJECT} entityId={slug} />
       </Skeleton>
-      {cardSectionDescription ||
-        (cards && (
-          <Skeleton name="project-detail-research" loading={false}>
-            <ProjectResearchSection
-              cards={cards as CardData[]}
-              cardSectionDescription={cardSectionDescription}
-            />
-          </Skeleton>
-        ))}
+      {cardSectionDescription && cards && (
+        <Skeleton name="project-detail-research" loading={false}>
+          <ProjectResearchSection
+            cards={cards as CardData[]}
+            cardSectionDescription={cardSectionDescription}
+          />
+        </Skeleton>
+      )}
       {goalSectionDescription && (
         <Skeleton name="project-detail-goal" loading={false}>
           <GoalResearchSection
