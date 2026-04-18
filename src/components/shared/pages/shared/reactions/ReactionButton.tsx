@@ -1,15 +1,11 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { cn } from "@/utils/utils";
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import { ReactionType } from "@/lib/stats/types";
 import { Badge } from "@/components/ui/badge";
-import {
-  getAnonymousUserId,
-  getCurrentUserId,
-  syncAnonymousReactionsOnLogin,
-} from "@/lib/reactions/anonymous-user";
+import { getCurrentUserId } from "@/lib/reactions/anonymous-user";
 import { apiRoutes } from "@/data/api-routes";
 import { pickRandomColor } from "@/utils";
 import { useUser } from "@/integrations/auth/provider/supabase";
@@ -47,22 +43,10 @@ export function ReactionButton({
   const { user, loading: userLoading } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [localIsReacted, setLocalIsReacted] = useState(isReactedProp);
-  const hasSyncedRef = useRef(false);
 
   const emoji: string = REACTION_EMOJIS[reactionType];
 
   const currentUserId = getCurrentUserId(user);
-
-  useEffect(() => {
-    const syncAnonymous = async () => {
-      const anonymousId = getAnonymousUserId();
-      if (user?.id && anonymousId && !hasSyncedRef.current) {
-        hasSyncedRef.current = true;
-        await syncAnonymousReactionsOnLogin(anonymousId);
-      }
-    };
-    syncAnonymous();
-  }, [user]);
 
   useEffect(() => {
     setLocalIsReacted(isReactedProp);
