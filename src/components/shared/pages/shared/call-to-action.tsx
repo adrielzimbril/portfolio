@@ -10,7 +10,7 @@ import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
-import { toast } from "sonner";
+import { toast } from "@/components/shiro/providers/toast-provider";
 import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 
 function EmailForm() {
@@ -36,7 +36,7 @@ function EmailForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t(
-            "common.page-sections.cta.variant-two.form.placeholder"
+            "common.page-sections.cta.variant-two.form.placeholder",
           )}
           type="email"
         />

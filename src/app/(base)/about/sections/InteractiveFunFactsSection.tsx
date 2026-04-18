@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import { cn } from "@/utils/utils";
-import { toast } from "sonner";
+import { toast } from "@/components/shiro/providers/toast-provider";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

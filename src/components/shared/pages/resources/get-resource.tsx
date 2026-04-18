@@ -11,7 +11,7 @@ import { ProductAvatarsStats } from "@/components/SubscriberBadges";
 import { generateSimpleClientToken, getDate, sleep } from "@/utils";
 import { ResourceType } from "@/types";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
-import { toast } from "sonner";
+import { toast } from "@/components/shiro/providers/toast-provider";
 import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";

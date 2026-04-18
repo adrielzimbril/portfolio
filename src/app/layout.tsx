@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { metadata as metadataBase } from "@/app/metadata";
 import { LayoutProvider } from "@/components/shiro/providers/layout-provider";
-import { Toaster } from "@/components/shiro/providers/toast-provider";
+import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import { Navbar } from "@/components/shared/_layouts/navbar";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
 import { Footer } from "@/components/shared/_layouts/footer";
@@ -75,18 +75,22 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             <LayoutProvider>
               <TooltipProvider openDelay={0} closeDelay={0}>
                 <SyncProvider>
-                  <main>
-                    <div className="container mx-auto relative">
-                      <Navbar />
-                      {/* <Dockbar asFade={false} /> */}
-                      {/* <SmoothCursor /> */}
-                      {children}
-                      <ScrollToTop />
-                      <Toaster position="bottom-right" />
-                      {/* <SplashCursor /> */}
-                      <Footer />
-                    </div>
-                  </main>
+                  <ToastProvider>
+                    <AnchoredToastProvider>
+                      <main>
+                        <div className="container mx-auto relative">
+                          <Navbar />
+                          {/* <Dockbar asFade={false} /> */}
+                          {/* <SmoothCursor /> */}
+                          {children}
+                          <ScrollToTop />
+                          {/* <Toaster position="bottom-right" /> */}
+                          {/* <SplashCursor /> */}
+                          <Footer />
+                        </div>
+                      </main>
+                    </AnchoredToastProvider>
+                  </ToastProvider>
                 </SyncProvider>
               </TooltipProvider>
             </LayoutProvider>
