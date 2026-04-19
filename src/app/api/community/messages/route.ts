@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/integrations/supabase/server";
-import { createPublicClient } from "@/integrations/supabase/public";
-import { cookies } from "next/headers";
 import logger from "@/utils/logger";
+import { supabase } from "@/integrations/supabase/client";
 
 export async function GET() {
   try {
     logger.info("API: Fetching messages from community_wall");
-    // Use public client for public access to community messages
-    const supabase = createPublicClient();
 
     const { data: messages, error } = await supabase
       .from("community_wall")
