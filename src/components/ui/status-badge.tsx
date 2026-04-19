@@ -72,7 +72,7 @@ function StatusBadge({
   ...props
 }: StatusBadgeProps) {
   const IndicatorComponent = showIndicator && (
-    <span className="relative flex justify-center items-center h-3 w-3">
+    <span className="relative flex justify-center items-center size-fit">
       <span
         className={cn(
           "absolute inline-flex h-full w-full rounded-full opacity-75",

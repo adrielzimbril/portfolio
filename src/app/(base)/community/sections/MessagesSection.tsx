@@ -20,22 +20,19 @@ interface MessagesSectionProps {
 }
 
 export function MessagesSection({ initialMessages }: MessagesSectionProps) {
-  console.log(
-    "MessagesSection received initialMessages:",
-    initialMessages?.length,
-  );
+  logger.info("MessagesSection received initialMessages", {
+    count: initialMessages?.length,
+  });
   const [messages, setMessages] = useState(() =>
     initialMessages
       ? transformMessages(initialMessages)
       : transformMessages(DEMO_MESSAGES),
   );
   const [isLoading, setIsLoading] = useState(!initialMessages);
-  console.log(
-    "MessagesSection isLoading:",
+  logger.info("MessagesSection state", {
     isLoading,
-    "messages count:",
-    messages.length,
-  );
+    messagesCount: messages.length,
+  });
 
   const fetchMessages = useCallback(async () => {
     try {

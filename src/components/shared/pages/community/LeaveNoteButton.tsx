@@ -30,30 +30,21 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
               "flex items-center gap-3 px-6 py-4",
             )}
           >
-            {user ? (
-              <>
-                <span className="flex items-center gap-2">
-                  <ChatBubbleCircle size={24} variant="bulk" />
-                  {t("community.leave-note.online")}
-                </span>
-                <div className="relative">
-                  <StatusBadge
-                    status="online"
-                    showIndicator
-                    animated
-                    size="xl"
-                    indicatorClassName="h-2 w-2"
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <span className="flex items-center gap-2">
-                  <ChatBubbleCircle size={24} variant="bulk" />
-                  {t("community.leave-note.button")}
-                </span>
-              </>
-            )}
+            <div className="relative">
+              <StatusBadge
+                status={user ? "online" : "busy"}
+                showIndicator
+                animated
+                size="sm"
+              />
+            </div>
+            <span className="flex items-center gap-2">
+              {/* <ChatBubbleCircle size={24} variant="bulk" /> */}
+              {/* {user
+                ? t("community.leave-note.online")
+                : t("community.leave-note.button")} */}
+              {t("community.leave-note.button")}
+            </span>
           </Button>
         </DialogTrigger>
         <DialogContent size={user ? "2xl" : "md"}>

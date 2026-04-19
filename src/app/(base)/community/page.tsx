@@ -9,6 +9,7 @@ import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
 import { apiRoutes } from "@/data/api-routes";
+import logger from "@/utils/logger";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -47,24 +48,29 @@ export default async function CommunityPage() {
   let initialMessages = [];
   let initialStats = null;
   try {
-    console.log(
-      "Fetching messages from API",
-      apiRoutes.community.messages.link,
-    );
+    logger.info("Fetching messages from API", {
+      url: apiRoutes.community.messages.link,
+    });
     const response = await fetch(apiRoutes.community.messages.link, {
       cache: "no-store",
     });
-    console.log("API response status", response.status, response.ok);
+    logger.info("API response status", {
+      status: response.status,
+      ok: response.ok,
+    });
     if (response.ok) {
       const data = await response.json();
-      console.log("API response data", data.messages?.length, !!data.stats);
+      logger.info("API response data", {
+        messagesCount: data.messages?.length,
+        hasStats: !!data.stats,
+      });
       initialMessages = data.messages || [];
       initialStats = data.stats || null;
     } else {
-      console.error("API response not ok", response.status);
+      logger.error("API response not ok", { status: response.status });
     }
   } catch (error) {
-    console.error("Failed to fetch messages", error);
+    logger.error("Failed to fetch messages", error);
     // Fetch failed, components will handle it
   }
 
