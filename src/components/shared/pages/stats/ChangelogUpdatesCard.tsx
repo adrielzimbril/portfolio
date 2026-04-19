@@ -2,6 +2,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/utils/utils";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,6 +22,7 @@ export function ChangelogUpdatesCard({
   changelog,
 }: ChangelogUpdatesCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
 
   const typeIcons = {
     milestone: Sparkles,
@@ -169,7 +171,7 @@ export function ChangelogUpdatesCard({
                 <h6 className="tracking-wide">Changelog</h6>
                 <p className="flex gap-1 text-xs text-muted-foreground">
                   <span className="text-xs text-muted-foreground">
-                    {count} mises à jour
+                    {t("stats.cards.changelog.updates", { count })}
                   </span>
                 </p>
               </div>

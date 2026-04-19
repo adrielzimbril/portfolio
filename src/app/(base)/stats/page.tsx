@@ -86,34 +86,36 @@ export default async function StatsPage() {
       </Skeleton>
 
       <Skeleton name="stats-general" loading={false}>
-        <SectionLayout badge="Statistique 👨‍💻" isFlex className="py-0!">
+        <SectionLayout badge={t("stats.sections.general.badge")} isFlex className="py-0!">
           <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
             <StatCard
-              label="Vues totales du site"
+              label={t("stats.cards.totalViews.label")}
               value={serverStats.totalViews}
               icon={<Eye size={32} variant="bulk" />}
               decoration="👁️"
-              description="Depuis le lancement"
+              description={t("stats.cards.totalViews.description")}
             />
             <StatCard
-              label="Cafés consommés"
+              label={t("stats.cards.coffee.label")}
               value={coffeeCups}
-              suffix="tasses"
+              suffix={t("stats.cards.coffee.suffix")}
               icon={<Coffee size={32} variant="bulk" />}
               decoration="☕"
-              description="1 tasse pour 500 mots"
+              description={t("stats.cards.coffee.description")}
             />
             <StatCard
-              label="Âge du site"
+              label={t("stats.cards.siteAge.label")}
               value={daysSinceRevamp}
-              suffix="jours"
+              suffix={t("stats.cards.siteAge.suffix")}
               icon={<Calendar size={32} variant="bulk" />}
               decoration="📅"
-              description={`Lancé le ${REVAMP_DATE.toLocaleDateString(locale, {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}`}
+              description={t("stats.cards.siteAge.description", {
+                date: REVAMP_DATE.toLocaleDateString(locale, {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                }),
+              })}
             />
           </div>
         </SectionLayout>
@@ -127,8 +129,8 @@ export default async function StatsPage() {
         >
           <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             <ThoughtsTopList
-              title="Articles les plus vus"
-              description="Articles les plus lus"
+              title={t("stats.cards.topViewed.title")}
+              description={t("stats.cards.topViewed.description")}
               type={TopThoughtsListType.REACTED}
               thoughts={serverStats.topViewedThoughts}
               icon={
@@ -141,8 +143,8 @@ export default async function StatsPage() {
               decoration="📈"
             />
             <ThoughtsTopList
-              title="Articles les plus aimés"
-              description="Articles avec le plus de réactions"
+              title={t("stats.cards.topReacted.title")}
+              description={t("stats.cards.topReacted.description")}
               type={TopThoughtsListType.REACTED}
               thoughts={serverStats.topReactedThoughts}
               icon={
@@ -174,8 +176,8 @@ export default async function StatsPage() {
                   name: cat.name,
                   count: cat.count,
                 }))}
-                title="Catégories"
-                description="Articles par sujet"
+                title={t("stats.cards.categories.title")}
+                description={t("stats.cards.categories.description")}
                 decorationEmoji="📊"
               />
               <ChangelogUpdatesCard
@@ -195,30 +197,30 @@ export default async function StatsPage() {
         >
           <div className="grid md:w-[90%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <StatCard
-              label="Total des articles"
+              label={t("stats.cards.totalThoughts.label")}
               value={buildTimeStats.totalPosts}
-              suffix="articles"
+              suffix={t("stats.cards.totalThoughts.suffix")}
               icon={<BookOne size={32} variant="bulk" />}
               decorationPattern="💭"
             />
             <StatCard
-              label="Total des mots"
+              label={t("stats.cards.totalWords.label")}
               value={buildTimeStats.totalWords}
-              suffix="mots"
+              suffix={t("stats.cards.totalWords.suffix")}
               icon={<TextFolder size={32} variant="bulk" />}
               decorationPattern="📝"
             />
             <StatCard
-              label="Messages de la communauté"
+              label={t("stats.cards.communityMessages.label")}
               value={serverStats.communityMessages}
-              suffix="messages"
+              suffix={t("stats.cards.communityMessages.suffix")}
               icon={<ChatBubbleCircle size={32} variant="bulk" />}
               decorationPattern="💬"
             />
             <StatCard
-              label="Temps de lecture"
+              label={t("stats.cards.readingTime.label")}
               value={buildTimeStats.totalReadingTime}
-              suffix="min"
+              suffix={t("stats.cards.readingTime.suffix")}
               icon={<Timelapse size={32} variant="bulk" />}
               decorationPattern="⏱️"
             />
@@ -235,17 +237,17 @@ export default async function StatsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 w-fit">
             <GitHubStatsCard
               type="stars"
-              label="Étoiles GitHub"
+              label={t("stats.cards.github.stars")}
               value={githubStats.stars}
             />
             <GitHubStatsCard
               type="forks"
-              label="Forks"
+              label={t("stats.cards.github.forks")}
               value={githubStats.forks}
             />
             <GitHubStatsCard
               type="commits"
-              label="Commits"
+              label={t("stats.cards.github.commits")}
               value={githubStats.commits}
             />
           </div>
@@ -254,7 +256,7 @@ export default async function StatsPage() {
       </Skeleton>
 
       <Skeleton name="stats-performance" loading={false}>
-        <SectionLayout badge="Performance du site ⚡">
+        <SectionLayout badge={t("stats.sections.performance.badge")}>
           <LighthouseScoreCard
             scores={lighthouseStats.mobile}
             strategy="mobile"

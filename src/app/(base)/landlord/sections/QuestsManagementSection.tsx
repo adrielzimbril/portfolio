@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import useSWR, { mutate } from "swr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,6 +35,7 @@ interface Participant {
 }
 
 export function QuestsManagementSection() {
+  const t = useTranslations();
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedQuest, setSelectedQuest] = useState<string>("all");
   const [newParticipant, setNewParticipant] = useState({
@@ -128,9 +130,9 @@ export function QuestsManagementSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Gestion des participants aux challenges</h2>
+        <h2 className="text-2xl font-bold">{t("admin.landlord.quests.title")}</h2>
         <Button onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? "Annuler" : "Ajouter un participant"}
+          {showAddForm ? t("common.confirmation.cancel") : t("admin.landlord.quests.actions.add")}
         </Button>
       </div>
 
@@ -138,7 +140,7 @@ export function QuestsManagementSection() {
         <Card className="p-6">
           <form onSubmit={handleAddParticipant} className="space-y-4">
             <div>
-              <Label htmlFor="quest">Challenge</Label>
+              <Label htmlFor="quest">{t("admin.landlord.quests.fields.quest")}</Label>
               <Select
                 value={selectedQuest}
                 onValueChange={setSelectedQuest}
@@ -157,7 +159,7 @@ export function QuestsManagementSection() {
               </Select>
             </div>
             <div>
-              <Label htmlFor="name">Nom</Label>
+              <Label htmlFor="name">{t("admin.landlord.quests.fields.name")}</Label>
               <Input
                 id="name"
                 value={newParticipant.name}
@@ -183,7 +185,7 @@ export function QuestsManagementSection() {
               />
             </div>
             <div>
-              <Label htmlFor="message">Message</Label>
+              <Label htmlFor="message">{t("admin.landlord.quests.fields.message")}</Label>
               <Textarea
                 id="message"
                 value={newParticipant.message}
@@ -203,10 +205,10 @@ export function QuestsManagementSection() {
                   setNewParticipant({ ...newParticipant, sendEmail: checked })
                 }
               />
-              <Label htmlFor="sendEmail">Envoyer une notification par email</Label>
+              <Label htmlFor="sendEmail">{t("admin.landlord.quests.fields.sendEmail")}</Label>
             </div>
             <div>
-              <Label htmlFor="language">Langue</Label>
+              <Label htmlFor="language">{t("admin.landlord.quests.fields.language")}</Label>
               <Select
                 value={newParticipant.language}
                 onValueChange={(value: Locale) =>
@@ -225,23 +227,23 @@ export function QuestsManagementSection() {
                 </SelectContent>
               </Select>
             </div>
-            <Button type="submit">Ajouter le participant</Button>
+            <Button type="submit">{t("admin.landlord.quests.actions.addSubmit")}</Button>
           </form>
         </Card>
       )}
 
       {isLoading ? (
-        <div>Chargement...</div>
+        <div>{t("common.button.loading")}</div>
       ) : (
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
-            <Label htmlFor="filterQuest">Filtrer par challenge</Label>
+            <Label htmlFor="filterQuest">{t("admin.landlord.quests.filters.byQuest")}</Label>
             <Select value={selectedQuest} onValueChange={setSelectedQuest}>
               <SelectTrigger id="filterQuest" className="w-64">
-                <SelectValue placeholder="Tous les challenges" />
+                <SelectValue placeholder={t("admin.landlord.quests.filters.allQuests")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Tous les challenges</SelectItem>
+                <SelectItem value="all">{t("admin.landlord.quests.filters.allQuests")}</SelectItem>
                 {quests?.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
@@ -266,7 +268,7 @@ export function QuestsManagementSection() {
                       </span>
                       {participant.source && (
                         <span className="text-xs px-2 py-1 bg-muted rounded">
-                          depuis {participant.source}
+                          {t("admin.landlord.quests.source", { source: participant.source })}
                         </span>
                       )}
                       <Select
@@ -299,7 +301,7 @@ export function QuestsManagementSection() {
                         rel="noopener noreferrer"
                         className="text-sm text-blue-500 hover:underline"
                       >
-                        Voir le travail
+                        {t("admin.landlord.quests.actions.viewWork")}
                       </a>
                     )}
                     <p className="text-xs text-muted-foreground">

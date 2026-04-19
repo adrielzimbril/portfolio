@@ -60,7 +60,7 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de supprimer le message" },
+      { error: "Failed to delete message" },
       { status: 500 },
     );
   }

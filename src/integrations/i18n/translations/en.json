@@ -21,7 +21,91 @@
         "title": "GitHub",
         "description": "Open-source contributions and repository metrics.",
         "badge": "Code 💻"
+      },
+      "general": {
+        "badge": "Statistics ?????"
+      },
+      "performance": {
+        "badge": "Site Performance ?"
       }
+    },
+    "cards": {
+      "totalViews": {
+        "label": "Total Site Views",
+        "description": "Since launch"
+      },
+      "coffee": {
+        "label": "Coffee Consumed",
+        "suffix": "cups",
+        "description": "1 cup per 500 words"
+      },
+      "siteAge": {
+        "label": "Site Age",
+        "suffix": "days",
+        "description": "Launched {date}"
+      },
+      "topViewed": {
+        "title": "Top Viewed Thoughts",
+        "description": "Most read articles"
+      },
+      "topReacted": {
+        "title": "Top Reacted Thoughts",
+        "description": "Most loved articles"
+      },
+      "categories": {
+        "title": "Categories",
+        "description": "Thoughts by topic"
+      },
+      "totalThoughts": {
+        "label": "Total Thoughts",
+        "suffix": "thoughts"
+      },
+      "totalWords": {
+        "label": "Total Words",
+        "suffix": "words"
+      },
+      "communityMessages": {
+        "label": "Community Messages",
+        "suffix": "messages"
+      },
+      "readingTime": {
+        "label": "Reading Time",
+        "suffix": "min"
+      },
+      "githubStars": {
+        "label": "GitHub Stars"
+      },
+      "mostViewed": {
+        "noImage": "No image",
+        "badge": "Most Viewed Thought"
+      },
+      "changelogUpdates": {
+        "count": "{count} updates"
+      },
+      "github": {
+        "stars": "GitHub stars",
+        "forks": "Forks",
+        "commits": "Commits"
+      },
+      "changelog": {
+        "updates": "{count} updates"
+      }
+    },
+    "lighthouse": {
+      "performance": "Performance",
+      "accessibility": "Accessibility",
+      "bestPractices": "Best Practices",
+      "seo": "SEO",
+      "mobile": "Mobile",
+      "desktop": "Desktop",
+      "score": "Lighthouse Score"
+    },
+    "reactions": {
+      "like": "Likes",
+      "heart": "Hearts",
+      "celebrate": "Celebrates",
+      "insightful": "Insightful",
+      "sceptic": "Sceptic"
     }
   },
   "connections": {
@@ -87,7 +171,22 @@
       "label": "Your message",
       "placeholder": "Write something nice...",
       "submit": "Send message",
-      "submitting": "Sending..."
+      "submitting": "Sending...",
+      "validation": {
+        "empty": "Comment cannot be empty",
+        "max": "Comment must be less than {max} characters"
+      },
+      "toast": {
+        "success": "Comment submitted successfully!",
+        "error": "Failed to submit comment"
+      },
+      "controls": {
+        "rotation": "Rotation:",
+        "pattern": "Pattern:",
+        "patternAria": "Pattern {index}",
+        "previousPattern": "Previous pattern",
+        "nextPattern": "Next pattern"
+      }
     }
   },
   "privacy": {
@@ -139,6 +238,50 @@
     "page": {
       "title": "Admin Dashboard",
       "description": "Manage your site content and settings"
+    },
+    "landlord": {
+      "tabs": {
+        "quests": "Quests",
+        "community": "Community Wall"
+      },
+      "community": {
+        "title": "Community Wall Management",
+        "actions": {
+          "add": "Add Message",
+          "update": "Update Message"
+        },
+        "fields": {
+          "creatorName": "Creator Name",
+          "avatarUrl": "Avatar URL (optional)",
+          "messagesByLanguage": "Messages by Language",
+          "messagePlaceholder": "Message in {locale}",
+          "messageLanguage": "Message ({locale})"
+        }
+      },
+      "quests": {
+        "title": "Quest Participants Management",
+        "actions": {
+          "add": "Add Participant",
+          "addSubmit": "Add Participant",
+          "viewWork": "View Work"
+        },
+        "fields": {
+          "quest": "Quest",
+          "name": "Name",
+          "message": "Message",
+          "sendEmail": "Send email notification",
+          "language": "Language"
+        },
+        "placeholders": {
+          "selectQuest": "Select a quest",
+          "selectLanguage": "Select language"
+        },
+        "filters": {
+          "byQuest": "Filter by Quest",
+          "allQuests": "All quests"
+        },
+        "source": "from {source}"
+      }
     }
   },
   "toolbox": {
@@ -305,8 +448,7 @@
         "description": "Designing products by putting the user at the center, while valuing teams and shared ideas to build together.",
         "title": "My approach to design & product"
       }
-    },
-    "title": "I am 🧑🏻‍🚀"
+    }
   },
   "common": {
     "base": {
@@ -341,7 +483,9 @@
       "sending": "Sending",
       "sent": "Sent",
       "understood": "Understood",
-      "view-more": "View more"
+      "view-more": "View more",
+      "edit": "Edit",
+      "delete": "Delete"
     },
     "turnstile": {
       "loading": "Wait a moment... 🔄",
@@ -762,7 +906,7 @@
     "description": "I review your messages personally. Whether it's for a project, a collaboration or just to chat about product design and innovation, my inbox is open.",
     "keywords": "SaaS contact, Product Designer, discuss SaaS idea, product collaboration, SaaS design, freelance SaaS contact, SaaS expert, product support, SaaS mentor, design trainer",
     "page": {
-      "badge": "Problem Solver & Your SaaS Product designer ",
+      "badge": "Problem Solver & Your SaaS Product designer",
       "form": {
         "notifications": {
           "error": "Sorry, but we couldn't send your message. Please try again later.",
@@ -771,8 +915,7 @@
         "submit": "Receive !"
       },
       "title": "Turn your ideas into products your users love "
-    },
-    "title": "Let's build together "
+    }
   },
   "home": {
     "title": "Hey ",
@@ -787,8 +930,7 @@
         "description-3": "Product designer specialized in simplifying SaaS experiences & design trainer, I help founders and project owners structure, test and validate their ideas to turn them into solutions with real impact .",
         "title": "Turn your ideas into products your users love "
       }
-    },
-    "title": "Hey "
+    }
   },
   "hub": {
     "title": "The Hub ",
@@ -805,8 +947,7 @@
         "description": "A space where I gather everything I wished I had when I started: clear guides, templates, ideas and tools to save you time.",
         "title": "Your creativity hub "
       }
-    },
-    "title": "The Hub "
+    }
   },
   "logger": {
     "components": {
@@ -836,7 +977,7 @@
       "contactAdmin": "Adriel Zimbril, you've received a new message. Someone recognizes your impact and wants to chat with you. You're the king of this world, now show them why. Just do it ",
       "copyright": "Crafted with  by Adriel Zimbril",
       "defaultName": "designer friend",
-      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product Designer "
+      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product designer 🦄"
     },
     "freeProductDelivery": {
       "ctaButton": "Access the resource",
@@ -872,7 +1013,7 @@
         "presentation": "My name is Adriel, and for 5 years I've been creating interfaces for SaaS and I've noticed something: we often complicate things while users are just looking for simplicity."
       },
       "subject": "Hello, it's Adriel !",
-      "tagline": "Problem Solver & Your SaaS Product Designer ",
+      "tagline": "Problem Solver & Your SaaS Product designer 🦄",
       "why": {
         "motivation": "I want to share these small discoveries, those moments when you say \"oh, I wouldn't have thought of that\". Without pretension, just shared curiosity .",
         "reason": "Because I like to understand how things work. And in design, there is often a gap between what we think will work and what actually works.",
@@ -1051,8 +1192,7 @@
       "badge": "For founders and creators who want to take action ",
       "desc": "Each week <highlight>discover</highlight> <strong>tips</strong>, <strong>templates</strong>, <strong>guides</strong> and <strong>videos</strong> to test, structure and launch your <highlight>SaaS</highlight> that your users will love .",
       "title": "Turn the idea into a <thin>product</thin> thanks to the <thin>Method</thin> ShiroSaaS "
-    },
-    "title": "Your creative kit awaits "
+    }
   },
   "not-found": {
     "title": "404 | Page not found ",
@@ -1067,8 +1207,7 @@
       "desc": "The page you're looking for doesn't exist… or no longer does.",
       "title": "It looks like you've lost your way in the stars",
       "title_old": "It <thin>looks</thin> like you've <thin>gotten</thin> <thin>lost</thin> in the <thin>stars</thin> "
-    },
-    "title": "404 | Page not found "
+    }
   },
   "playground": {
     "title": "Experimentations ",
@@ -1079,8 +1218,7 @@
         "description": "A playground where I experiment with concepts, explore interfaces and share ideas still in progress. Here, not everything is finished — but everything is authentic.",
         "title": "Experimentation lab "
       }
-    },
-    "title": "Experimentations "
+    }
   },
   "projects": {
     "title": "My Projects ",
@@ -1124,8 +1262,7 @@
         "description": "Each project is an adventure. Here I share the behind the scenes: challenges, solutions and results.",
         "title": "Case studies "
       }
-    },
-    "title": "My Projects "
+    }
   },
   "quests": {
     "title": "Creative Challenges ",
@@ -1268,8 +1405,7 @@
       },
       "keywords": "design challenge, UX UI challenge, creative contest, SaaS challenge, Adriel Zimbril",
       "title": "Challenge submission"
-    },
-    "title": "Creative Challenges "
+    }
   },
   "submit": {
     "title": "Shirosaas Lab ",
@@ -1324,8 +1460,7 @@
         "error": "Oops ! An error occurred, please try again ",
         "success": "Thanks ! Your design is in orbit ! "
       }
-    },
-    "title": "Shirosaas Lab "
+    }
   },
   "talks": {
     "badges": {
@@ -1355,11 +1490,10 @@
         "description": "The events, talks and webinars I participated in where I shared my expertise in product design and SaaS.",
         "title": "Talks & Masterclasses "
       }
-    },
-    "title": "Talks & Masterclasses "
+    }
   },
   "thoughts": {
-    "title": "Thoughts ",
+    "title": "Logbook 📒",
     "description": "What I learn while building. No tutorials, just my discoveries and mistakes shared honestly.",
     "inner-page": {
       "more-preview-section": {
@@ -1373,8 +1507,7 @@
         "description": "Here I share my discoveries, mistakes and lessons that helped me move forward. This is the slightly more intimate corner, where I speak without jargon or glitter.",
         "title": "Reflections & Insights ✍️"
       }
-    },
-    "title": "Logbook 📒"
+    }
   },
   "zod": {
     "errors": {

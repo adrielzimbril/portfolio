@@ -21,7 +21,91 @@
         "title": "GitHub",
         "description": "Contributions open-source et métriques de dépôts.",
         "badge": "Code "
+      },
+      "general": {
+        "badge": "Statistique 👨‍💻"
+      },
+      "performance": {
+        "badge": "Performance du site ⚡"
       }
+    },
+    "cards": {
+      "totalViews": {
+        "label": "Vues totales du site",
+        "description": "Depuis le lancement"
+      },
+      "coffee": {
+        "label": "Cafés consommés",
+        "suffix": "tasses",
+        "description": "1 tasse pour 500 mots"
+      },
+      "siteAge": {
+        "label": "?ge du site",
+        "suffix": "jours",
+        "description": "Lanc? le {date}"
+      },
+      "topViewed": {
+        "title": "Articles les plus vus",
+        "description": "Articles les plus lus"
+      },
+      "topReacted": {
+        "title": "Articles les plus aimés",
+        "description": "Articles avec le plus de réactions"
+      },
+      "categories": {
+        "title": "Catégories",
+        "description": "Articles par sujet"
+      },
+      "totalThoughts": {
+        "label": "Total des articles",
+        "suffix": "articles"
+      },
+      "totalWords": {
+        "label": "Total des mots",
+        "suffix": "mots"
+      },
+      "communityMessages": {
+        "label": "Messages de la communaut?",
+        "suffix": "messages"
+      },
+      "readingTime": {
+        "label": "Temps de lecture",
+        "suffix": "min"
+      },
+      "githubStars": {
+        "label": "?toiles GitHub"
+      },
+      "mostViewed": {
+        "noImage": "Aucune image",
+        "badge": "Article le plus vu"
+      },
+      "changelogUpdates": {
+        "count": "{count} mises ? jour"
+      },
+      "github": {
+        "stars": "?toiles GitHub",
+        "forks": "Forks",
+        "commits": "Commits"
+      },
+      "changelog": {
+        "updates": "{count} mises ? jour"
+      }
+    },
+    "lighthouse": {
+      "performance": "Performance",
+      "accessibility": "Accessibilit?",
+      "bestPractices": "Bonnes pratiques",
+      "seo": "SEO",
+      "mobile": "Mobile",
+      "desktop": "Bureau",
+      "score": "Score Lighthouse"
+    },
+    "reactions": {
+      "like": "J'aime",
+      "heart": "Coups de coeur",
+      "celebrate": "Célébrations",
+      "insightful": "Inspirant",
+      "sceptic": "Sceptique"
     }
   },
   "connections": {
@@ -87,7 +171,22 @@
       "label": "Votre message",
       "placeholder": "Écrivez quelque chose de sympa...",
       "submit": "Envoyer le message",
-      "submitting": "Envoi..."
+      "submitting": "Envoi...",
+      "validation": {
+        "empty": "Le commentaire ne peut pas être vide",
+        "max": "Le commentaire doit contenir moins de {max} caractères"
+      },
+      "toast": {
+        "success": "Commentaire envoyé avec succès !",
+        "error": "Impossible d'envoyer le commentaire"
+      },
+      "controls": {
+        "rotation": "Rotation :",
+        "pattern": "Motif :",
+        "patternAria": "Motif {index}",
+        "previousPattern": "Motif précédent",
+        "nextPattern": "Motif suivant"
+      }
     }
   },
   "toolbox": {
@@ -618,7 +717,7 @@
     "description": "Je passe en revue vos messages personnellement. Que ce soit pour un projet, une collaboration ou simplement pour échanger sur le design produit et l'innovation, ma boîte mail est ouverte.",
     "keywords": "Contact SaaS, Product Designer, discuter idée SaaS, collaboration produit, design SaaS, contact freelance SaaS, expert SaaS, accompagnement produit, mentor SaaS, formateur design",
     "page": {
-      "badge": "Problem Solver & ton Product Designer SaaS",
+      "badge": "Problem Solver & Your SaaS Product designer",
       "title": "Transforme tes idées en produits que tes utilisateurs adorent ",
       "form": {
         "notifications": {
@@ -804,7 +903,9 @@
       "sending": "Envoi en cours",
       "sent": "Envoyé",
       "understood": "Compris",
-      "view-more": "Voir plus"
+      "view-more": "Voir plus",
+      "edit": "Modifier",
+      "delete": "Supprimer"
     },
     "turnstile": {
       "loading": "Attends un instant... 🔄",
@@ -852,7 +953,7 @@
         "december": "Décembre"
       },
       "base": {
-        "badge": "Problem Solver & Product Designer SaaS 🦄❣️",
+        "badge": "Problem Solver & Your SaaS Product designer",
         "title": "Vos idées en produits que vos utilisateurs adorent",
         "subtitle-simple": "Problem Solver innovant & ton Product Designer SaaS de référence ❣️",
         "subtitle": "Problem Solver innovant & Product Designer SaaS ❣️",
@@ -1115,7 +1216,7 @@
   "mail": {
     "common": {
       "defaultName": "ami designer",
-      "signature": "Adriel Zimbril | Problem Solver & ton Product Designer SaaS 🦄",
+      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product designer 🦄",
       "contact": "Si tu veux échanger ou juste dire bonjour, réponds simplement à cet email. Je lis tout personnellement.",
       "contactAdmin": "Adriel Zimbril, tu as reçu un nouveau message. Quelqu'un reconnaît ton impact et veut échanger avec toi. Tu es le roi de ce monde, maintenant montre-lui pourquoi. Just do it 🚀",
       "copyright": "Crafted with ❤️ by Adriel Zimbril"
@@ -1231,7 +1332,7 @@
       "subject": "Hello, c'est Adriel !",
       "preview": "Salut ! Je voulais te parler de quelque chose qui me tient à cœur...",
       "greeting": "Salut {firstName}",
-      "tagline": "Problem Solver & ton Product Designer SaaS 🦄",
+      "tagline": "Problem Solver & Your SaaS Product designer 🦄",
       "story": {
         "intro": "Il y a quelques semaines, l'un des clients de l'une de mes apps m'a écrit pour me dire qu'il avait mis du temps à annuler une action. Je me suis rendu compte que c'était à cause d'un choix de design que j'aimais bien… mais qui compliquait l'expérience.",
         "presentation": "Je m'appelle Adriel, et depuis 5 ans je crée des interfaces pour des SaaS et j'ai remarqué quelque chose : on complique souvent les choses alors que les utilisateurs cherchent juste de la simplicité.",
@@ -1521,6 +1622,50 @@
     "page": {
       "title": "Tableau de bord Admin",
       "description": "Gérez le contenu et les paramètres de votre site"
+    },
+    "landlord": {
+      "tabs": {
+        "quests": "Challenges",
+        "community": "Mur communautaire"
+      },
+      "community": {
+        "title": "Gestion du mur communautaire",
+        "actions": {
+          "add": "Ajouter un message",
+          "update": "Mettre ? jour le message"
+        },
+        "fields": {
+          "creatorName": "Nom du créateur",
+          "avatarUrl": "URL de l'avatar (optionnel)",
+          "messagesByLanguage": "Messages par langue",
+          "messagePlaceholder": "Message en {locale}",
+          "messageLanguage": "Message ({locale})"
+        }
+      },
+      "quests": {
+        "title": "Gestion des participants aux challenges",
+        "actions": {
+          "add": "Ajouter un participant",
+          "addSubmit": "Ajouter le participant",
+          "viewWork": "Voir le travail"
+        },
+        "fields": {
+          "quest": "Challenge",
+          "name": "Nom",
+          "message": "Message",
+          "sendEmail": "Envoyer une notification par email",
+          "language": "Langue"
+        },
+        "placeholders": {
+          "selectQuest": "Sélectionner un challenge",
+          "selectLanguage": "Sélectionner une langue"
+        },
+        "filters": {
+          "byQuest": "Filtrer par challenge",
+          "allQuests": "Tous les challenges"
+        },
+        "source": "depuis {source}"
+      }
     }
   }
 }

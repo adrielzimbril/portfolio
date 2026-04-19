@@ -21,7 +21,91 @@
         "title": "GitHub",
         "description": "开源贡献和仓库指标。",
         "badge": "代码 💻"
+      },
+      "general": {
+        "badge": "Statistics ?????"
+      },
+      "performance": {
+        "badge": "Site Performance ?"
       }
+    },
+    "cards": {
+      "totalViews": {
+        "label": "Total Site Views",
+        "description": "Since launch"
+      },
+      "coffee": {
+        "label": "Coffee Consumed",
+        "suffix": "cups",
+        "description": "1 cup per 500 words"
+      },
+      "siteAge": {
+        "label": "Site Age",
+        "suffix": "days",
+        "description": "Launched {date}"
+      },
+      "topViewed": {
+        "title": "Top Viewed Thoughts",
+        "description": "Most read articles"
+      },
+      "topReacted": {
+        "title": "Top Reacted Thoughts",
+        "description": "Most loved articles"
+      },
+      "categories": {
+        "title": "Categories",
+        "description": "Thoughts by topic"
+      },
+      "totalThoughts": {
+        "label": "Total Thoughts",
+        "suffix": "thoughts"
+      },
+      "totalWords": {
+        "label": "Total Words",
+        "suffix": "words"
+      },
+      "communityMessages": {
+        "label": "Community Messages",
+        "suffix": "messages"
+      },
+      "readingTime": {
+        "label": "Reading Time",
+        "suffix": "min"
+      },
+      "githubStars": {
+        "label": "GitHub Stars"
+      },
+      "mostViewed": {
+        "noImage": "No image",
+        "badge": "Most Viewed Thought"
+      },
+      "changelogUpdates": {
+        "count": "{count} updates"
+      },
+      "github": {
+        "stars": "GitHub stars",
+        "forks": "Forks",
+        "commits": "Commits"
+      },
+      "changelog": {
+        "updates": "{count} updates"
+      }
+    },
+    "lighthouse": {
+      "performance": "Performance",
+      "accessibility": "Accessibility",
+      "bestPractices": "Best Practices",
+      "seo": "SEO",
+      "mobile": "Mobile",
+      "desktop": "Desktop",
+      "score": "Lighthouse Score"
+    },
+    "reactions": {
+      "like": "Likes",
+      "heart": "Hearts",
+      "celebrate": "Celebrates",
+      "insightful": "Insightful",
+      "sceptic": "Sceptic"
     }
   },
   "connections": {
@@ -70,6 +154,24 @@
       "title": "分享你的消息",
       "signInPrompt": "你需要使用 GitHub 登录才能发布消息。",
       "signInButton": "使用 GitHub 登录"
+    },
+    "comment-form": {
+      "submitting": "Sending...",
+      "validation": {
+        "empty": "Comment cannot be empty",
+        "max": "Comment must be less than {max} characters"
+      },
+      "toast": {
+        "success": "Comment submitted successfully!",
+        "error": "Failed to submit comment"
+      },
+      "controls": {
+        "rotation": "Rotation:",
+        "pattern": "Pattern:",
+        "patternAria": "Pattern {index}",
+        "previousPattern": "Previous pattern",
+        "nextPattern": "Next pattern"
+      }
     }
   },
   "toolbox": {
@@ -271,7 +373,9 @@
       "sending": "发送中",
       "sent": "已发送",
       "understood": "知道了",
-      "view-more": "查看更多"
+      "view-more": "查看更多",
+      "edit": "Edit",
+      "delete": "Delete"
     },
     "turnstile": {
       "loading": "请稍等... 🔄",
@@ -545,7 +649,7 @@
     },
     "shared": {
       "base": {
-        "badge": "问题解决者 & 你的 SaaS 产品设计师 🦄❣️",
+        "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
         "subtitle": "创新的问题解决者 & SaaS 产品设计师 ❣️",
         "subtitle-secondary": "把想法转化为影响 | SaaS 产品设计师 & 问题解决者 ❣️",
         "subtitle-simple": "创新的问题解决者 & 你的首选 SaaS 产品设计师 ❣️",
@@ -691,7 +795,7 @@
     "description": "我会亲自审阅你的消息。无论是项目、合作还是单纯讨论产品设计与创新，我的邮箱是开放的。",
     "keywords": "联系 SaaS, 产品设计师, 讨论 SaaS 想法, 产品合作, SaaS 设计, 自由职业联系, SaaS 专家, 产品陪伴, SaaS 导师, 设计培训师",
     "page": {
-      "badge": "问题解决者 & 你的 SaaS 产品设计师 ❣️",
+      "badge": "Problem Solver & Your SaaS Product designer",
       "form": {
         "notifications": {
           "error": "抱歉，我们无法发送您的消息。请稍后再试。",
@@ -763,7 +867,7 @@
       "contactAdmin": "Adriel Zimbril，你收到了一条新消息。有人认可你的影响并想与你交流。现在你是这个世界的王，展示给他看吧。就去做吧 🚀",
       "copyright": "由 Adriel Zimbril 用 ❤️ 制作",
       "defaultName": "设计师朋友",
-      "signature": "Adriel Zimbril | 问题解决者 & 你的 SaaS 产品设计师 🦄"
+      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product designer 🦄"
     },
     "freeProductDelivery": {
       "ctaButton": "访问资源",
@@ -799,7 +903,7 @@
         "presentation": "我叫 Adriel，过去五年我为 SaaS 设计界面，我注意到一件事：我们经常把事情复杂化，而用户真正想要的是简单。"
       },
       "subject": "你好，我是 Adriel ！",
-      "tagline": "问题解决者 & 你的 SaaS 产品设计师 🦄",
+      "tagline": "Problem Solver & Your SaaS Product designer 🦄",
       "why": {
         "motivation": "我想分享这些小发现，那些让人会心一笑的瞬间。无意张扬，只是出于共同的好奇 ❤️.",
         "reason": "因为我喜欢了解事物如何运作。在设计中，我们常常预期会奏效的东西，与实际有效的存在差距。",
@@ -1472,5 +1576,55 @@
       "url": "url",
       "uuid": "uuid"
     }
+  },
+  "admin": {
+    "landlord": {
+      "tabs": {
+        "quests": "Quests",
+        "community": "Community Wall"
+      },
+      "community": {
+        "title": "Community Wall Management",
+        "actions": {
+          "add": "Add Message",
+          "update": "Update Message"
+        },
+        "fields": {
+          "creatorName": "Creator Name",
+          "avatarUrl": "Avatar URL (optional)",
+          "messagesByLanguage": "Messages by Language",
+          "messagePlaceholder": "Message in {locale}",
+          "messageLanguage": "Message ({locale})"
+        }
+      },
+      "quests": {
+        "title": "Quest Participants Management",
+        "actions": {
+          "add": "Add Participant",
+          "addSubmit": "Add Participant",
+          "viewWork": "View Work"
+        },
+        "fields": {
+          "quest": "Quest",
+          "name": "Name",
+          "message": "Message",
+          "sendEmail": "Send email notification",
+          "language": "Language"
+        },
+        "placeholders": {
+          "selectQuest": "Select a quest",
+          "selectLanguage": "Select language"
+        },
+        "filters": {
+          "byQuest": "Filter by Quest",
+          "allQuests": "All quests"
+        },
+        "source": "from {source}"
+      }
+    }
+  },
+  "rss": {
+    "title": "RSS",
+    "description": "Subscribe to get articles directly in your favorite RSS reader."
   }
 }

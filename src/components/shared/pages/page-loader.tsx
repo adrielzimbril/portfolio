@@ -79,7 +79,7 @@ function FloatingCard({
 }
 
 const statsData = [
-  { number: "18+", label: "Projets" },
+  { number: "18+", label: "Projects" },
   { number: "5+", label: "Années" },
   { number: "100%", label: "Passionné" },
 ];

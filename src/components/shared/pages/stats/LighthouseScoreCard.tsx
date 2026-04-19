@@ -1,5 +1,6 @@
 "use client";
 import { Display, Mobile } from "@aurthle/icons";
+import { useTranslations } from "next-intl";
 import type { LighthouseScores } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";
 import { RadarBackground } from "@/components/shared/pages/stats/LighthouseScoreCard/RadarBackground";
@@ -23,11 +24,12 @@ export function LighthouseScoreCard({
   delay = 0,
   className,
 }: LighthouseScoreCardProps) {
+  const t = useTranslations();
   const scoreItems = [
-    { score: scores.performance, label: "Performance" },
-    { score: scores.accessibility, label: "Accessibilité" },
-    { score: scores.bestPractices, label: "Bonnes pratiques" },
-    { score: scores.seo, label: "SEO" },
+    { score: scores.performance, label: t("stats.lighthouse.performance") },
+    { score: scores.accessibility, label: t("stats.lighthouse.accessibility") },
+    { score: scores.bestPractices, label: t("stats.lighthouse.bestPractices") },
+    { score: scores.seo, label: t("stats.lighthouse.seo") },
   ];
 
   const scoreValues = [
@@ -74,10 +76,10 @@ export function LighthouseScoreCard({
                 <div className="flex items-center gap-3">
                   <div>
                     <h6 className="text-sm font-semibold text-foreground">
-                      {strategy === "mobile" ? "Mobile" : "Bureau"}
+                      {strategy === "mobile" ? t("stats.lighthouse.mobile") : t("stats.lighthouse.desktop")}
                     </h6>
                     <p className="text-xs text-muted-foreground">
-                      Score Lighthouse
+                      {t("stats.lighthouse.score")}
                     </p>
                   </div>
                 </div>

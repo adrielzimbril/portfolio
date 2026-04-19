@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import useSWR, { mutate } from "swr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,6 +28,7 @@ interface CommunityMessage {
 }
 
 export function CommunityWallManagementSection() {
+  const t = useTranslations();
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingMessage, setEditingMessage] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState({
@@ -152,9 +154,9 @@ export function CommunityWallManagementSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Gestion du mur communautaire</h2>
+        <h2 className="text-2xl font-bold">{t("admin.landlord.community.title")}</h2>
         <Button onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? "Annuler" : "Ajouter un message"}
+          {showAddForm ? t("common.confirmation.cancel") : t("admin.landlord.community.actions.add")}
         </Button>
       </div>
 
@@ -165,7 +167,7 @@ export function CommunityWallManagementSection() {
             className="space-y-4"
           >
             <div>
-              <Label htmlFor="creatorName">Nom du créateur</Label>
+              <Label htmlFor="creatorName">{t("admin.landlord.community.fields.creatorName")}</Label>
               <Input
                 id="creatorName"
                 value={newMessage.creator_name}
@@ -176,7 +178,7 @@ export function CommunityWallManagementSection() {
               />
             </div>
             <div>
-              <Label htmlFor="avatarUrl">URL de l'avatar (optionnel)</Label>
+              <Label htmlFor="avatarUrl">{t("admin.landlord.community.fields.avatarUrl")}</Label>
               <Input
                 id="avatarUrl"
                 value={newMessage.creator_avatar_url}
@@ -189,15 +191,17 @@ export function CommunityWallManagementSection() {
               />
             </div>
             <div className="space-y-4">
-              <Label>Messages par langue</Label>
+              <Label>{t("admin.landlord.community.fields.messagesByLanguage")}</Label>
               {Object.values(Locale).map((locale) => (
                 <div key={locale}>
                   <Label htmlFor={`message-${locale}`}>
-                    Message ({locale.toUpperCase()})
+                    {t("admin.landlord.community.fields.messageLanguage", {
+                      locale: locale.toUpperCase(),
+                    })}
                   </Label>
                   <Textarea
                     id={`message-${locale}`}
-                    placeholder={`Message en ${locale.toUpperCase()}`}
+                    placeholder={t("admin.landlord.community.fields.messagePlaceholder", { locale: locale.toUpperCase() })}
                     value={newMessage.messages[locale] || ""}
                     onChange={(e) =>
                       setNewMessage({
@@ -213,14 +217,16 @@ export function CommunityWallManagementSection() {
               ))}
             </div>
             <Button type="submit">
-              {editingMessage ? "Mettre à jour le message" : "Ajouter le message"}
+              {editingMessage
+                ? t("admin.landlord.community.actions.update")
+                : t("admin.landlord.community.actions.add")}
             </Button>
           </form>
         </Card>
       )}
 
       {isLoading ? (
-        <div>Chargement...</div>
+        <div>{t("common.button.loading")}</div>
       ) : (
         <div className="grid gap-4">
           {messages?.map((msg: CommunityMessage) => (
@@ -242,7 +248,7 @@ export function CommunityWallManagementSection() {
                         size="sm"
                         onClick={() => handleEditMessage(msg)}
                       >
-                        Modifier
+                        {t("common.button.edit")}
                       </Button>
                     </div>
                     {msg.messages &&
@@ -266,7 +272,7 @@ export function CommunityWallManagementSection() {
                   size="sm"
                   onClick={() => handleDeleteMessage(msg.id)}
                 >
-                  Supprimer
+                  {t("common.button.delete")}
                 </Button>
               </div>
             </Card>

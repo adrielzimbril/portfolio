@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { ReactionType } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";
 import { pickRandomColor } from "@/utils";
@@ -11,28 +12,28 @@ const REACTION_CONFIG: Record<
   ReactionType,
   {
     Icon: string;
-    label: string;
+    labelKey: string;
   }
 > = {
   like: {
     Icon: "👍",
-    label: "J'aime",
+    labelKey: "stats.reactions.like",
   },
   heart: {
     Icon: "❤️",
-    label: "Coups de coeur",
+    labelKey: "stats.reactions.heart",
   },
   celebrate: {
     Icon: "🎉",
-    label: "Célébrations",
+    labelKey: "stats.reactions.celebrate",
   },
   insightful: {
     Icon: "💡",
-    label: "Inspirant",
+    labelKey: "stats.reactions.insightful",
   },
   sceptic: {
     Icon: "🤔",
-    label: "Sceptique",
+    labelKey: "stats.reactions.sceptic",
   },
 };
 
@@ -44,6 +45,7 @@ interface ReactionCardProps {
 
 function ReactionCard({ type, count, delay = 0 }: ReactionCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
   const config = REACTION_CONFIG[type];
 
   return (
@@ -87,7 +89,7 @@ function ReactionCard({ type, count, delay = 0 }: ReactionCardProps) {
                 <span className="text-2xl">{config.Icon}</span>
               </Badge>
               <div className="flex flex-col items-start gap-2">
-                <h6 className="tracking-wide">{config.label}</h6>
+                <h6 className="tracking-wide">{t(config.labelKey)}</h6>
                 <p className="text-sm text-b-white-invert-thr leading-[120%]">
                   {count.toLocaleString()}
                 </p>
