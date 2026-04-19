@@ -44,6 +44,16 @@ export function formatTime(value?: string) {
   return timeFormatter.format(date);
 }
 
+export function formatCell(value: unknown) {
+  if (value === null || value === undefined || value === "") return "N/A";
+  if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)) {
+    return formatDate(value);
+  }
+  if (Array.isArray(value)) return value.join(", ");
+  if (typeof value === "object") return JSON.stringify(value);
+  return String(value);
+}
+
 export function normalizeMessage(message: CommunityMessage) {
   return message.messages || message.message || {};
 }
