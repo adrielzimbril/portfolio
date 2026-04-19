@@ -12,7 +12,11 @@ import type {
 export const participantsKey = (selectedQuest: string) =>
   `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`;
 
-export const dataTableKey = (table: DataTableKey, page: number, pageSize = 10) =>
+export const dataTableKey = (
+  table: DataTableKey,
+  page: number,
+  pageSize = 10,
+) =>
   `${landlordApiRoutes.data.table}?table=${table}&page=${page}&pageSize=${pageSize}`;
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
