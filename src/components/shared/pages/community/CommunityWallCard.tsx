@@ -48,7 +48,9 @@ export function CommunityWallCard({
     if (typeof message === "object" && message !== null) {
       // Use provided language, current locale, or fallback language
       const lang = language || locale || Locale.EN;
-      return message[lang] || message[Locale.EN] || Object.values(message)[0] || "";
+      return (
+        message[lang] || message[Locale.EN] || Object.values(message)[0] || ""
+      );
     }
     return "";
   }, [message, language, locale]);
@@ -56,7 +58,7 @@ export function CommunityWallCard({
   return (
     <Card
       className={cn(
-        "squircle squircle-b-base squircle-3xl squircle-smooth-lg squircle-border-2 squircle-border-b-base-accent cursor-pointer pointer-event-none",
+        "squircle squircle-b-base squircle-3xl squircle-smooth-lg squircle-border-2 squircle-border-b-base-accent cursor-pointer pointer-events-none",
         "transition-all duration-300 group cursor-pointer",
         className,
       )}

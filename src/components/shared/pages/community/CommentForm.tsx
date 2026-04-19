@@ -162,8 +162,11 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
               </Field>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium">Rotation:</label>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium">Rotation:</label>
+                    <span className="text-sm">{rotation}°</span>
+                  </div>
                   <Slider
                     value={[rotation]}
                     min={config.rotation.startAt}
@@ -174,9 +177,8 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                       setRotation(newValue as number);
                       logger.info("value rotation", value);
                     }}
-                    className="flex-1"
+                    className="w-full"
                   />
-                  <span className="text-sm w-12 text-right">{rotation}°</span>
                 </div>
 
                 <div className="flex items-center gap-2">

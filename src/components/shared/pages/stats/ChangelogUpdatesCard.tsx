@@ -151,7 +151,7 @@ export function ChangelogUpdatesCard({
           <div className="pointer-events-none absolute inset-x-0 top-0 z-20 h-16 bg-linear-to-b from-b-base/85 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-38 bg-linear-to-t from-b-base via-b-white to-transparent" />
 
-          <div className="relative flex flex-col items-start w-full z-30 mt-auto pointer-event-none">
+          <div className="relative flex flex-col items-start w-full z-30 mt-auto pointer-events-none">
             <div className="relative flex flex-row items-center gap-2">
               <Badge
                 className={cn(
