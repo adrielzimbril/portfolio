@@ -726,31 +726,44 @@
         "mobile": "Rejoins le Cercle 💌"
       },
       "community": {
-        "default": "Communauté"
+        "default": "Communauté",
+        "desktop": "Communauté",
+        "mobile": "Communauté 👥"
       },
       "stats": {
-        "default": "Stats"
+        "default": "Stats",
+        "desktop": "Stats",
+        "mobile": "Stats 📊"
       },
       "toolbox": {
-        "default": "Outils"
-      },
-      "setup": {
-        "default": "Mon Setup"
+        "default": "Outils",
+        "desktop": "Outils",
+        "mobile": "Outils 🧰"
       },
       "connections": {
-        "default": "Connexions"
+        "default": "Connexions",
+        "desktop": "Connexions",
+        "mobile": "Connexions 🔗"
       },
       "changelog": {
-        "default": "Changelog"
+        "default": "Changelog",
+        "desktop": "Changelog",
+        "mobile": "Changelog 📝"
       },
       "privacy": {
-        "default": "Politique de Confidentialité"
+        "default": "Politique de Confidentialité",
+        "desktop": "Confidentialité",
+        "mobile": "Confidentialité 🔒"
       },
       "terms": {
-        "default": "Conditions d'Utilisation"
+        "default": "Conditions d'Utilisation",
+        "desktop": "CGU",
+        "mobile": "CGU 📜"
       },
       "routes": {
-        "default": "Routes"
+        "default": "Routes",
+        "desktop": "Routes",
+        "mobile": "Routes 🗺️"
       },
       "rss": {
         "default": "RSS"

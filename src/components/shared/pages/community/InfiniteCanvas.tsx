@@ -5,7 +5,7 @@ import { CommunityWallCard } from "@/components/shared/pages/community/Community
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
-import { SynchronizationTwo } from "@aurthle/icons";
+import { MoveObjectOne } from "@aurthle/icons";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -271,7 +271,7 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
             <Badge
               onClick={handleRecenter}
               className={cn(
-                "absolute right-4 top-4 z-10 flex items-center justify-center",
+                "absolute right-4 top-4 z-10 flex items-center justify-center cursor-pointer",
                 hasMoved
                   ? "opacity-100 pointer-cursor pointer-events-auto"
                   : "opacity-0 pointer-none pointer-events-none",
@@ -280,9 +280,10 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
               variant="colored"
               size="lg"
               aria-label="Recenter canvas"
-              title="Return to center"
+              title="Recenter canvas"
+              circle
             >
-              <SynchronizationTwo size={24} variant="bulk" />
+              <MoveObjectOne size={24} variant="bulk" />
             </Badge>
           </div>
           {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}

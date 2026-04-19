@@ -18,7 +18,13 @@ import { useLocale } from "next-intl";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { patterns } from "@/components/shared/pages/community/pattern";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, Radio } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Locale } from "@/types";
 import { dispatchWindowEvent } from "@/hooks/useWindowEvent";
@@ -177,20 +183,21 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
 
                 <div className="flex items-center gap-2">
                   <Label className="text-sm font-medium">Pattern:</Label>
-                  <RadioGroup
+                  <Select
                     value={patternIndex.toString()}
                     onValueChange={(value) => setPatternIndex(parseInt(value))}
-                    className="flex gap-1 flex-1 flex-row"
                   >
-                    {patterns.map((_, index) => (
-                      <Radio
-                        key={index}
-                        value={index.toString()}
-                        size="xl"
-                        aria-label={`Pattern ${index + 1}`}
-                      />
-                    ))}
-                  </RadioGroup>
+                    <SelectTrigger className="flex-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {patterns.map((_, index) => (
+                        <SelectItem key={index} value={index.toString()}>
+                          Pattern {index + 1}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -359,20 +366,21 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
 
                 <div className="flex items-center gap-2">
                   <Label className="text-sm font-medium">Pattern:</Label>
-                  <RadioGroup
+                  <Select
                     value={patternIndex.toString()}
                     onValueChange={(value) => setPatternIndex(parseInt(value))}
-                    className="flex gap-1 flex-1 flex-row"
                   >
-                    {patterns.map((_, index) => (
-                      <Radio
-                        key={index}
-                        value={index.toString()}
-                        size="xl"
-                        aria-label={`Pattern ${index + 1}`}
-                      />
-                    ))}
-                  </RadioGroup>
+                    <SelectTrigger className="flex-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {patterns.map((_, index) => (
+                        <SelectItem key={index} value={index.toString()}>
+                          Pattern {index + 1}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 

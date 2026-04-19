@@ -339,6 +339,51 @@
       },
       "submit": {
         "default": "提交"
+      },
+      "community": {
+        "default": "社区",
+        "desktop": "社区",
+        "mobile": "社区 👥"
+      },
+      "stats": {
+        "default": "统计",
+        "desktop": "统计",
+        "mobile": "统计 📊"
+      },
+      "toolbox": {
+        "default": "工具箱",
+        "desktop": "工具箱",
+        "mobile": "工具箱 🧰"
+      },
+      "connections": {
+        "default": "连接",
+        "desktop": "连接",
+        "mobile": "连接 🔗"
+      },
+      "routes": {
+        "default": "路线",
+        "desktop": "路线",
+        "mobile": "路线 🗺️"
+      },
+      "changelog": {
+        "default": "更新日志",
+        "desktop": "更新日志",
+        "mobile": "更新日志 📝"
+      },
+      "privacy": {
+        "default": "隐私政策",
+        "desktop": "隐私",
+        "mobile": "隐私 🔒"
+      },
+      "terms": {
+        "default": "服务条款",
+        "desktop": "条款",
+        "mobile": "条款 📜"
+      },
+      "setup": {
+        "default": "我的设置",
+        "desktop": "设置",
+        "mobile": "设置 ⚙️"
       }
     },
     "page-sections": {

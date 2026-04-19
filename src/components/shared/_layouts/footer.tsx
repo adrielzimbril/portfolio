@@ -33,10 +33,10 @@ export async function Footer() {
     routes.stats,
     routes.toolbox,
     routes.connections,
-    routes.changelog,
+    // routes.changelog,
     routes.routes,
-    routes.terms,
-    routes.privacy,
+    // routes.terms,
+    // routes.privacy,
   ];
 
   return (
@@ -94,7 +94,7 @@ export async function Footer() {
                       aria-label={name}
                     >
                       <span className="flex items-center size-full justify-center m-auto">
-                        <span className="capsitalize">
+                        <span className="capitalize">
                           {social.key !== "email"
                             ? t("common.base." + social.key)
                             : social.name}
@@ -126,7 +126,7 @@ export async function Footer() {
           </div>
 
           <FooterLinks links={footerLinks} />
-          <FooterResources resources={resources} />
+          {/* <FooterResources resources={resources} /> */}
 
           <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-b-base dark:bg-zinc-900">
             <div className="flex items-center md:items-start gap-2 text-b-white-foreground dark:text-zinc-200">
@@ -170,6 +170,8 @@ async function FooterLinks({
     inSitemap: boolean;
   }[];
 }) {
+  const t = await getTranslations();
+
   return (
     <FooterLinksContainer>
       {links.map((link, index) => (
@@ -178,7 +180,7 @@ async function FooterLinks({
             href={link.link}
             className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
           >
-            {link.name}
+            {t("common.menu." + link.key + ".desktop")}
           </Link>
           {index < links.length - 1 && (
             <>

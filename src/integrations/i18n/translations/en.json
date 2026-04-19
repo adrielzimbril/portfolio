@@ -407,31 +407,49 @@
         "mobile": "Blog 📝"
       },
       "community": {
-        "default": "Community"
+        "default": "Community",
+        "desktop": "Community",
+        "mobile": "Community 👥"
       },
       "stats": {
-        "default": "Stats"
+        "default": "Stats",
+        "desktop": "Stats",
+        "mobile": "Stats 📊"
       },
       "toolbox": {
-        "default": "Toolbox"
+        "default": "Toolbox",
+        "desktop": "Toolbox",
+        "mobile": "Toolbox 🧰"
       },
       "setup": {
-        "default": "My Setup"
+        "default": "My Setup",
+        "desktop": "Setup",
+        "mobile": "Setup ⚙️"
       },
       "connections": {
-        "default": "Connections"
+        "default": "Connections",
+        "desktop": "Connections",
+        "mobile": "Connections 🔗"
       },
       "changelog": {
-        "default": "Changelog"
+        "default": "Changelog",
+        "desktop": "Changelog",
+        "mobile": "Changelog 📝"
       },
       "privacy": {
-        "default": "Privacy Policy"
+        "default": "Privacy Policy",
+        "desktop": "Privacy",
+        "mobile": "Privacy 🔒"
       },
       "terms": {
-        "default": "Terms of Service"
+        "default": "Terms of Service",
+        "desktop": "Terms",
+        "mobile": "Terms 📜"
       },
       "routes": {
-        "default": "Routes"
+        "default": "Routes",
+        "desktop": "Routes",
+        "mobile": "Routes 🗺️"
       },
       "rss": {
         "default": "RSS"
