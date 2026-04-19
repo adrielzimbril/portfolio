@@ -135,18 +135,21 @@ function StatusBadge({
     <div
       className={cn(
         "flex flex-wrap items-center gap-2",
-        badgeVariants({ variant, size }),
+        primaryText && badgeVariants({ variant, size }),
+        "squircle-sh-white text-b-white-invert",
         "inline-flex",
         className,
       )}
       {...props}
     >
-      <Badge size={size}>
+      <Badge size={size} circle={!primaryText}>
         <div className="flex items-center gap-2">
           {IndicatorComponent}
-          <span className={cn("font-semibold", primaryTextClassName)}>
-            {primaryText}
-          </span>
+          {primaryText && (
+            <span className={cn("font-semibold", primaryTextClassName)}>
+              {primaryText}
+            </span>
+          )}
         </div>
       </Badge>
       {props.children && (

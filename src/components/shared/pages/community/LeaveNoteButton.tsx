@@ -32,25 +32,27 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
           >
             {user ? (
               <>
+                <span className="flex items-center gap-2">
+                  <ChatBubbleCircle size={24} variant="bulk" />
+                  {t("community.leave-note.online")}
+                </span>
                 <div className="relative">
                   <StatusBadge
                     status="online"
                     showIndicator
                     animated
-                    size="sm"
+                    size="xl"
                     indicatorClassName="h-2 w-2"
                   />
                 </div>
-                <span className="flex items-center gap-2">
-                  <ChatBubbleCircle size={18} variant="bulk" />
-                  {t("community.leave-note.online")}
-                </span>
               </>
             ) : (
-              <span className="flex items-center gap-2">
-                <ChatBubbleCircle size={18} variant="bulk" />
-                {t("community.leave-note.button")}
-              </span>
+              <>
+                <span className="flex items-center gap-2">
+                  <ChatBubbleCircle size={24} variant="bulk" />
+                  {t("community.leave-note.button")}
+                </span>
+              </>
             )}
           </Button>
         </DialogTrigger>

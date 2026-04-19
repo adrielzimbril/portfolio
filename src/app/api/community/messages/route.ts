@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 
 export async function GET() {
   try {
+    console.log("API: Fetching messages from community_wall");
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
@@ -12,7 +13,13 @@ export async function GET() {
       .select("*")
       .order("created_at", { ascending: false });
 
+    console.log("API: Supabase response", {
+      error,
+      messagesCount: messages?.length,
+    });
+
     if (error) {
+      console.error("API: Supabase error", error);
       return NextResponse.json({ messages: [], stats: null }, { status: 200 });
     }
 
@@ -31,8 +38,14 @@ export async function GET() {
       weekMessages,
     };
 
+    console.log("API: Returning data", {
+      totalMessages,
+      uniqueMembers,
+      weekMessages,
+    });
     return NextResponse.json({ messages: messages || [], stats });
   } catch (error) {
+    console.error("API: Catch error", error);
     return NextResponse.json({ messages: [], stats: null }, { status: 200 });
   }
 }

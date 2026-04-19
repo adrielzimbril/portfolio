@@ -47,15 +47,24 @@ export default async function CommunityPage() {
   let initialMessages = [];
   let initialStats = null;
   try {
+    console.log(
+      "Fetching messages from API",
+      apiRoutes.community.messages.link,
+    );
     const response = await fetch(apiRoutes.community.messages.link, {
       cache: "no-store",
     });
+    console.log("API response status", response.status, response.ok);
     if (response.ok) {
       const data = await response.json();
+      console.log("API response data", data.messages?.length, !!data.stats);
       initialMessages = data.messages || [];
       initialStats = data.stats || null;
+    } else {
+      console.error("API response not ok", response.status);
     }
   } catch (error) {
+    console.error("Failed to fetch messages", error);
     // Fetch failed, components will handle it
   }
 
