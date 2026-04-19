@@ -1,15 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import useSWR from "swr";
-import { RefreshCw, Loader2 } from "lucide-react";
+import { RefreshCw, Loader2, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AdminCard, TablePager } from "./AdminPrimitives";
-import { dataTableKey, fetchLandlordTable, formatCell, formatDate } from "./admin-utils";
-import type { LandlordTableResponse } from "./admin-types";
+import { AdminCard, TablePager } from "@/components/shared/pages/landlord/AdminPrimitives";
+import { dataTableKey, fetchLandlordTable, formatCell } from "@/components/shared/pages/landlord/admin-utils";
+import type { LandlordTableResponse } from "@/components/shared/pages/landlord/admin-types";
 
 const pageSize = 10;
 
-export function ReactionsTablePage() {
+export function ReactionsSection() {
   const [page, setPage] = useState(1);
   const { data: tableData, isLoading, mutate } = useSWR(
     dataTableKey("reactions", page, pageSize),
@@ -78,8 +78,12 @@ export function ReactionsTablePage() {
           </>
         ) : (
           <div className="p-6">
-            <div className="text-center text-sm text-black/50">
-              Aucune donnée dans cette table
+            <div className="flex flex-col items-center gap-3 text-center text-sm text-black/50">
+              <Heart size={32} />
+              <div>
+                <p className="font-medium">Aucune donnée</p>
+                <p className="text-xs">Cette table ne contient aucune entrée pour le moment.</p>
+              </div>
             </div>
           </div>
         )}

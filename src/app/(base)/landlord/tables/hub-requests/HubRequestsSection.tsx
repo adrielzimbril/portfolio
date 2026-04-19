@@ -1,18 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import useSWR from "swr";
-import { RefreshCw, Loader2 } from "lucide-react";
+import { RefreshCw, Loader2, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AdminCard, TablePager } from "./AdminPrimitives";
-import { dataTableKey, fetchLandlordTable, formatCell, formatDate } from "./admin-utils";
-import type { LandlordTableResponse } from "./admin-types";
+import { AdminCard, TablePager } from "@/components/shared/pages/landlord/AdminPrimitives";
+import { dataTableKey, fetchLandlordTable, formatCell } from "@/components/shared/pages/landlord/admin-utils";
+import type { LandlordTableResponse } from "@/components/shared/pages/landlord/admin-types";
 
 const pageSize = 10;
 
-export function UsersTablePage() {
+export function HubRequestsSection() {
   const [page, setPage] = useState(1);
   const { data: tableData, isLoading, mutate } = useSWR(
-    dataTableKey("users", page, pageSize),
+    dataTableKey("hubRequests", page, pageSize),
     fetchLandlordTable,
   );
 
@@ -23,10 +23,8 @@ export function UsersTablePage() {
     <div className="grid gap-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.02em]">Users</h2>
-          <p className="mt-1 text-sm text-black/45">
-            Contacts connus par le site, centralisés depuis les formulaires et inscriptions.
-          </p>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]">Hub Requests</h2>
+          <p className="mt-1 text-sm text-black/45">Demandes produits</p>
         </div>
         <Button
           variant="outline"
@@ -43,7 +41,7 @@ export function UsersTablePage() {
         {isLoading ? (
           <div className="flex min-h-72 items-center justify-center gap-2 text-sm text-black/50">
             <Loader2 size={18} className="animate-spin" />
-            Chargement des users...
+            Chargement de la table...
           </div>
         ) : rows.length ? (
           <>
@@ -80,8 +78,12 @@ export function UsersTablePage() {
           </>
         ) : (
           <div className="p-6">
-            <div className="text-center text-sm text-black/50">
-              Aucune donnée dans cette table
+            <div className="flex flex-col items-center gap-3 text-center text-sm text-black/50">
+              <Package size={32} />
+              <div>
+                <p className="font-medium">Aucune donnée</p>
+                <p className="text-xs">Cette table ne contient aucune entrée pour le moment.</p>
+              </div>
             </div>
           </div>
         )}

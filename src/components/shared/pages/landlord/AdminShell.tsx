@@ -134,11 +134,7 @@ export function AdminShell({
                 "hubRequests",
                 "reactions",
               ].includes(item.key);
-              const route = isTablePage
-                ? landlordRoutes.tables[
-                    item.key as keyof typeof landlordRoutes.tables
-                  ]?.link
-                : null;
+              const route = isTablePage ? `/landlord/tables/${item.key}` : null;
 
               if (isTablePage && route) {
                 return (
