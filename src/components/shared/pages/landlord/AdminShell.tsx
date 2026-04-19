@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import {
-  Bell,
   Database,
   Home,
   LayoutDashboard,
@@ -28,9 +27,15 @@ export const adminNavItems: NavItem[] = [
     icon: LayoutDashboard,
   },
   {
-    key: "quests",
-    label: "Quests",
-    description: "Inscriptions et rendus",
+    key: "quests-registrations",
+    label: "Inscriptions",
+    description: "Inscriptions aux quests",
+    icon: Trophy,
+  },
+  {
+    key: "quests-submissions",
+    label: "Soumissions",
+    description: "Rendus de quests",
     icon: Trophy,
   },
   {
@@ -134,9 +139,17 @@ export function AdminShell({
                 "hubRequests",
                 "reactions",
               ].includes(item.key);
-              const route = isTablePage ? `/landlord/tables/${item.key}` : null;
+              const isQuestPage = item.key.startsWith("quests-");
+              let route = null;
 
-              if (isTablePage && route) {
+              if (isTablePage) {
+                route = `/landlord/tables/${item.key}`;
+              } else if (isQuestPage) {
+                const questType = item.key.replace("quests-", "");
+                route = `/landlord/quests/${questType}`;
+              }
+
+              if (route) {
                 return (
                   <a
                     key={item.key}
@@ -258,14 +271,6 @@ export function AdminShell({
             aria-label="Rafraîchir"
           >
             <RefreshCw size={17} />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            asPointer
-            aria-label="Notifications"
-          >
-            <Bell size={17} />
           </Button>
           <div className="hidden items-center gap-3 rounded-2xl bg-[#f7f6f1] px-3 py-2 md:flex">
             {user.avatarUrl ? (

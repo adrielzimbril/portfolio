@@ -8,7 +8,8 @@ export type AdminUser = {
 
 export type AdminView =
   | "overview"
-  | "quests"
+  | "quests-registrations"
+  | "quests-submissions"
   | "community"
   | "newsletter"
   | "users"

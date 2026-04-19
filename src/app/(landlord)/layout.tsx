@@ -1,45 +1,17 @@
 import React from "react";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
 import { createClient } from "@/integrations/supabase/server";
 import { ConfigValue } from "@/config";
 import { landlordRoutes } from "@/data/landlordRoutes";
-import { metadata as baseMetadata } from "@/app/metadata";
 import { logger } from "@/utils";
-import { ReactionsSection } from "./ReactionsSection";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
-
-  return {
-    ...baseMetadata,
-    title: `Reactions - ${t("admin.title")}`,
-    description: "Engagement contenu",
-    robots: {
-      index: false,
-      follow: false,
-      googleBot: {
-        index: false,
-        follow: false,
-      },
-    },
-    openGraph: {
-      ...baseMetadata.openGraph,
-      title: `Reactions - ${t("admin.title")}`,
-      description: "Engagement contenu",
-    },
-    twitter: {
-      ...baseMetadata.twitter,
-      title: `Reactions - ${t("admin.title")}`,
-      description: "Engagement contenu",
-    },
-  };
-}
-
-export default async function ReactionsPage() {
+export default async function LandlordLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const isAuthenticated = await isUserAuthenticatedServer();
 
   if (!isAuthenticated) {
@@ -55,7 +27,7 @@ export default async function ReactionsPage() {
     } = await supabase.auth.getUser();
     user = supabaseUser;
   } catch (error) {
-    logger.error("[ReactionsPage] Failed to fetch user data", error);
+    logger.error("[LandlordLayout] Failed to fetch user data", error);
   }
 
   const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
@@ -65,5 +37,9 @@ export default async function ReactionsPage() {
     redirect(`${landlordRoutes.login.link}?reason=unauthorized`);
   }
 
-  return <ReactionsSection />;
+  return (
+    <div className="fixed inset-0 z-50 min-h-dvh overflow-hidden bg-[#f4f3ec] text-[#11191f]">
+      {children}
+    </div>
+  );
 }

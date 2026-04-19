@@ -16,9 +16,12 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import logger from "@/utils/logger";
+import { landlordRoutes } from "@/data/landlordRoutes";
 import { getAllQuests } from "@/integrations/content/lib/quests";
-import { Locale } from "@/types";
+import { Locale } from "@/integrations/i18n/config";
+import { logger } from "@/utils";
+import { AdminCard } from "@/components/shared/pages/landlord/AdminPrimitives";
+import { useTranslations } from "@/integrations/i18n/hooks";
 
 interface Participant {
   id: string;
