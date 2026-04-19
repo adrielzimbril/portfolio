@@ -7,7 +7,7 @@ import { signOut } from "@/integrations/auth/provider/supabase";
 import { toast } from "@/lib/toast";
 import logger from "@/utils/logger";
 import { AdminShell } from "./AdminShell";
-import { AdminPrimitives, ConfirmDialog } from "./AdminPrimitives";
+import { ConfirmDialog } from "./AdminPrimitives";
 import { MessageModal, ParticipantModal } from "./AdminModals";
 import {
   CommunityPanel,
@@ -134,19 +134,6 @@ export function AdminDashboard({ user }: { user: AdminUser }) {
         />
       )}
 
-      {activeView === "quests" && (
-        <QuestsPanel
-          quests={quests}
-          participants={participants}
-          loading={participantsLoading}
-          selectedQuest={selectedQuest}
-          search={participantSearch}
-          onSearchChange={setParticipantSearch}
-          onSelectedQuestChange={setSelectedQuest}
-          onOpenParticipantModal={() => setParticipantModalOpen(true)}
-        />
-      )}
-
       {activeView === "community" && (
         <CommunityPanel
           messages={messages}
@@ -172,18 +159,6 @@ export function AdminDashboard({ user }: { user: AdminUser }) {
           page={usersPage}
           pageSize={pageSize}
           onPageChange={setUsersPage}
-        />
-      )}
-
-      {activeView === "tables" && (
-        <TablesPanel
-          activeTable={activeTable}
-          response={tableData}
-          loading={tableLoading}
-          page={tablePage}
-          pageSize={pageSize}
-          onTableChange={changeActiveTable}
-          onPageChange={setTablePage}
         />
       )}
 

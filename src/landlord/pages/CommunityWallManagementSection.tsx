@@ -14,15 +14,6 @@ import { landlordRoutes } from "@/data/landlordRoutes";
 import logger from "@/utils/logger";
 import { Locale } from "@/types";
 
-interface CommunityMessage {
-  id: string;
-  creator_name: string;
-  creator_avatar_url?: string;
-  messages: Record<string, string>;
-  created_at: string;
-  user_id?: string;
-}
-
 export function CommunityWallManagementSection() {
   const t = useTranslations();
   const [showAddForm, setShowAddForm] = useState(false);
@@ -161,7 +152,7 @@ export function CommunityWallManagementSection() {
       </div>
 
       {showAddForm && (
-        <Card className="p-6">
+        <AdminCard className="p-6">
           <form
             onSubmit={editingMessage ? handleUpdateMessage : handleAddMessage}
             className="space-y-4"
@@ -231,7 +222,7 @@ export function CommunityWallManagementSection() {
                 : t("admin.landlord.community.actions.add")}
             </Button>
           </form>
-        </Card>
+        </AdminCard>
       )}
 
       {isLoading ? (
@@ -239,7 +230,7 @@ export function CommunityWallManagementSection() {
       ) : (
         <div className="grid gap-4">
           {messages?.map((msg: CommunityMessage) => (
-            <Card key={msg.id} className="p-4">
+            <AdminCard key={msg.id} className="p-4">
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">
                   {msg.creator_avatar_url && (
@@ -284,7 +275,7 @@ export function CommunityWallManagementSection() {
                   {t("common.button.delete")}
                 </Button>
               </div>
-            </Card>
+            </AdminCard>
           ))}
         </div>
       )}

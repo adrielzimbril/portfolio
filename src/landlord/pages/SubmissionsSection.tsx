@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { AdminCard } from "../components/AdminPrimitives";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import { Locale } from "@/integrations/i18n/config";
+import { Locale } from "@/types/enum";
 import { logger } from "@/utils";
 import { getAllQuests } from "@/integrations/content/lib/quests";
 
@@ -36,18 +36,14 @@ export function SubmissionsSection() {
     work_url: "",
   });
 
-  const { data: quests, isLoading: isLoadingQuests } = useSWR("quests", () =>
+  const { data: quests } = useSWR("quests", () =>
     getAllQuests().catch((err) => {
       logger.error("Failed to fetch quests:", err);
       return [];
     }),
   );
 
-  const {
-    data: participants,
-    isLoading,
-    mutate,
-  } = useSWR(
+  const { data: participants } = useSWR(
     () =>
       `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
     async (url) => {
@@ -97,7 +93,6 @@ export function SubmissionsSection() {
           work_url: "",
         });
         setShowAddForm(false);
-        mutate();
       }
     } catch (error) {
       logger.error("Failed to add participant:", error);
@@ -119,11 +114,7 @@ export function SubmissionsSection() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Select
-            value={selectedQuest}
-            onValueChange={setSelectedQuest}
-            disabled={isLoadingQuests}
-          >
+          <Select value={selectedQuest} onValueChange={setSelectedQuest}>
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="Toutes les quests" />
             </SelectTrigger>
@@ -255,12 +246,7 @@ export function SubmissionsSection() {
       )}
 
       <AdminCard>
-        {isLoading ? (
-          <div className="flex min-h-72 items-center justify-center gap-2 text-sm text-black/50">
-            <Loader2 size={18} className="animate-spin" />
-            Chargement...
-          </div>
-        ) : filteredParticipants.length ? (
+        {filteredParticipants.length ? (
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
               <thead className="border-b border-black/8 text-xs text-black/45">

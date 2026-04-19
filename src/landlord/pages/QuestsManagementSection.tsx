@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useTranslations } from "next-intl";
 import useSWR, { mutate } from "swr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,10 +17,10 @@ import { Switch } from "@/components/ui/switch";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import { getAllQuests } from "@/integrations/content/lib/quests";
-import { Locale } from "@/integrations/i18n/config";
+import { Locale } from "@/types/enum";
 import { logger } from "@/utils";
 import { AdminCard } from "../components/AdminPrimitives";
-import { useTranslations } from "@/integrations/i18n/hooks";
+import { useTranslations } from "next-intl";
 
 interface Participant {
   id: string;
@@ -72,7 +71,7 @@ export function QuestsManagementSection() {
   };
 
   const { data: quests } = useSWR("quests", fetchQuests);
-  const { data: participants, isLoading } = useSWR(
+  const { data: participants } = useSWR(
     () =>
       `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
     fetchParticipants,
@@ -289,9 +288,7 @@ export function QuestsManagementSection() {
         </Card>
       )}
 
-      {isLoading ? (
-        <div>{t("common.button.loading")}</div>
-      ) : (
+      {participants && (
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
             <Label htmlFor="filterQuest">

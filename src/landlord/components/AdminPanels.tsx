@@ -36,8 +36,9 @@ import {
 } from "@/components/ui/select";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { landlordRoutes } from "@/data/landlordRoutes";
-import { Locale } from "@/integrations/i18n/config";
+import { Locale } from "@/types/enum";
 import logger from "@/utils/logger";
+import { toast } from "@/lib/toast";
 import {
   AdminCard,
   EmptyState,

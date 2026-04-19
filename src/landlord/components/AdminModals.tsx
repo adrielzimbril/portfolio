@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,8 +24,8 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { landlordRoutes } from "@/data/landlordRoutes";
+import { Locale } from "@/types/enum";
 import logger from "@/utils/logger";
-import { AdminPrimitives } from "./AdminPrimitives";
 import type { CommunityMessage, QuestSummary } from "./admin-types";
 import { normalizeMessage } from "./admin-utils";
 import { toast } from "@/lib/toast";
@@ -50,17 +50,27 @@ export function ParticipantModal({
     message: "",
     source: "admin",
     sendEmail: false,
+    language: Locale.EN,
+    type: "register",
+    work_url: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const selectedQuestValue = useMemo(() => {
+    if (selectedQuest !== "all") {
+      return selectedQuest;
+    }
+    return "";
+  }, [selectedQuest]);
 
   React.useEffect(() => {
     if (open) {
       setForm((current) => ({
         ...current,
-        challenge_slug: selectedQuest !== "all" ? selectedQuest : "",
+        challenge_slug: selectedQuestValue,
       }));
     }
-  }, [open, selectedQuest]);
+  }, [open, selectedQuestValue]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -90,6 +100,9 @@ export function ParticipantModal({
         message: "",
         source: "admin",
         sendEmail: false,
+        language: Locale.EN,
+        type: "register",
+        work_url: "",
       });
       onCreated();
       onOpenChange(false);
