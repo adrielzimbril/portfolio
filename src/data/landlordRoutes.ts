@@ -6,4 +6,11 @@ export const landlordRoutes = {
     inHeader: false,
     inSitemap: false,
   },
+  login: {
+    name: "Landlord Login",
+    key: "landlord-login",
+    link: "/landlord/login",
+    inHeader: false,
+    inSitemap: false,
+  },
 };

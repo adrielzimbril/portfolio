@@ -1,17 +1,15 @@
 import React from "react";
-import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { AdminAuthGuard } from "@/components/shared/pages/landlord/AdminAuthGuard";
 import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
-import { LoginButtons } from "@/components/shared/pages/landlord/LoginButtons";
 import { createClient } from "@/integrations/supabase/server";
-import { cookies } from "next/headers";
-import { logger } from "@/utils";
 import { ConfigValue } from "@/config";
+import { landlordRoutes } from "@/data/landlordRoutes";
+import { logger } from "@/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -42,37 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AdminPage() {
-  logger.info("[AdminPage] Starting landlord page render");
   const isAuthenticated = await isUserAuthenticatedServer();
-  const t = await getTranslations();
-
-  logger.info("[AdminPage] Authentication check result", { isAuthenticated });
 
   if (!isAuthenticated) {
-    logger.info("[AdminPage] User not authenticated, showing login screen");
-    return (
-      <>
-        <PageHero
-          title={t("admin.page.title")}
-          description="Connectez-vous pour accéder au tableau de bord administratif"
-          imagePath={{ emoji: "🔐" }}
-          isMobileShowed
-        />
-
-        <SectionLayout isFlex>
-          <div className="flex flex-col items-center justify-center gap-4 py-12">
-            <p className="text-center text-b-white-invert-sec">
-              Vous devez être connecté pour accéder à cette page
-            </p>
-            <LoginButtons />
-          </div>
-        </SectionLayout>
-      </>
-    );
+    redirect(landlordRoutes.login.link);
   }
 
-  logger.info("[AdminPage] User authenticated, fetching user data");
-  // Fetch user data to check admin status
   let user = null;
   try {
     const cookieStore = await cookies();
@@ -81,35 +54,27 @@ export default async function AdminPage() {
       data: { user: supabaseUser },
     } = await supabase.auth.getUser();
     user = supabaseUser;
-    logger.info("[AdminPage] User data fetched", {
-      userId: user?.id,
-      userEmail: user?.email,
-    });
   } catch (error) {
     logger.error("[AdminPage] Failed to fetch user data", error);
-    // User fetch failed, continue without user
   }
 
   const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
-  logger.info("[AdminPage] Admin emails configuration", { adminEmails });
+  const userEmail = user?.email;
 
-  logger.info("[AdminPage] Rendering AdminAuthGuard", {
-    hasUser: !!user,
-    userEmail: user?.email,
-  });
+  if (!user || !userEmail || !adminEmails.includes(userEmail)) {
+    redirect(`${landlordRoutes.login.link}?reason=unauthorized`);
+  }
 
   return (
-    <AdminAuthGuard user={user} adminEmails={adminEmails}>
-      <PageHero
-        title={t("admin.page.title")}
-        description={t("admin.page.description")}
-        imagePath={{ emoji: "🔐" }}
-        isMobileShowed
-      />
-
-      <SectionLayout isFlex>
-        <AdminDashboard />
-      </SectionLayout>
-    </AdminAuthGuard>
+    <AdminDashboard
+      user={{
+        email: userEmail,
+        name:
+          user.user_metadata?.name ||
+          user.user_metadata?.full_name ||
+          userEmail.split("@")[0],
+        avatarUrl: user.user_metadata?.avatar_url,
+      }}
+    />
   );
 }

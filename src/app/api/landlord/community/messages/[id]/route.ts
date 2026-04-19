@@ -32,7 +32,7 @@ export async function PATCH(
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { error: "Impossible de mettre à jour le message" },
+      { error: "Failed to update message" },
       { status: 500 },
     );
   }
