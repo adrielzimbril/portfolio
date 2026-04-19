@@ -961,6 +961,25 @@
       "tagline": "开始我们的小冒险吧"
     }
   },
+  "routes": {
+    "title": "路线",
+    "description": "发现本网站的所有页面和部分。",
+    "page": {
+      "title": "路线",
+      "description": "此作品集上所有可用页面的完整导航。"
+    },
+    "groups": {
+      "main": "主要页面",
+      "community": "社区",
+      "contact": "联系",
+      "tools": "工具",
+      "rss": "RSS",
+      "legal": "法律"
+    },
+    "badges": {
+      "header": "菜单"
+    }
+  },
   "newsletter": {
     "description": "每周收到想法、技巧和资源，帮助你把想法变成用户喜爱的 SaaS 产品。",
     "hints": {
