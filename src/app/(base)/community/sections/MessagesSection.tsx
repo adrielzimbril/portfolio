@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import logger from "@/utils/logger";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
@@ -15,39 +15,36 @@ const transformMessages = (msgs: any[]) =>
     rotation: msg.rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
   }));
 
-interface MessagesSectionProps {
-  initialMessages?: any[];
-}
-
-export function MessagesSection({ initialMessages }: MessagesSectionProps) {
-  logger.info("MessagesSection received initialMessages", {
-    count: initialMessages?.length,
-  });
+export function MessagesSection() {
   const [messages, setMessages] = useState(() =>
-    initialMessages
-      ? transformMessages(initialMessages)
-      : transformMessages(DEMO_MESSAGES),
+    transformMessages(DEMO_MESSAGES),
   );
-  const [isLoading, setIsLoading] = useState(!initialMessages);
-  logger.info("MessagesSection state", {
-    isLoading,
-    messagesCount: messages.length,
-  });
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchMessages = useCallback(async () => {
     try {
+      logger.info("MessagesSection: Fetching messages");
       const response = await fetch(apiRoutes.community.messages.link);
       if (response.ok) {
         const data = await response.json();
+        logger.info("MessagesSection: Received messages", {
+          count: data.messages?.length,
+        });
         if (data.messages && data.messages.length > 0) {
           setMessages(transformMessages(data.messages));
         }
       }
     } catch (error) {
-      logger.error("Failed to fetch messages:", error);
+      logger.error("MessagesSection: Failed to fetch messages", error);
     } finally {
       setIsLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await fetchMessages();
+    })();
   }, []);
 
   useWindowEvent("community-message-added", () => {

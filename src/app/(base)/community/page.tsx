@@ -8,7 +8,6 @@ import { StatsSection } from "@/app/(base)/community/sections/StatsSection";
 import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
-import { apiRoutes } from "@/data/api-routes";
 import logger from "@/utils/logger";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -44,36 +43,6 @@ export default async function CommunityPage() {
     // User fetch failed, continue without user
   }
 
-  // Fetch messages and stats
-  let initialMessages = [];
-  let initialStats = null;
-  try {
-    logger.info("Fetching messages from API", {
-      url: apiRoutes.community.messages.link,
-    });
-    const response = await fetch(apiRoutes.community.messages.link, {
-      cache: "no-store",
-    });
-    logger.info("API response status", {
-      status: response.status,
-      ok: response.ok,
-    });
-    if (response.ok) {
-      const data = await response.json();
-      logger.info("API response data", {
-        messagesCount: data.messages?.length,
-        hasStats: !!data.stats,
-      });
-      initialMessages = data.messages || [];
-      initialStats = data.stats || null;
-    } else {
-      logger.error("API response not ok", { status: response.status });
-    }
-  } catch (error) {
-    logger.error("Failed to fetch messages", error);
-    // Fetch failed, components will handle it
-  }
-
   const t = await getTranslations();
 
   return (
@@ -86,14 +55,14 @@ export default async function CommunityPage() {
       />
 
       <SectionLayout className="p-0!" isFlex>
-        <StatsSection user={user} initialStats={initialStats} />
+        <StatsSection user={user} />
       </SectionLayout>
 
       <SectionLayout isFlex>
         {/* <LeaveNoteButton user={user} /> */}
         <div className="flex justify-center size-full">
           {/* <FormSection user={user} /> */}
-          <MessagesSection initialMessages={initialMessages} />
+          <MessagesSection />
         </div>
       </SectionLayout>
     </>

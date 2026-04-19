@@ -16,34 +16,39 @@ interface Stats {
 
 interface StatsSectionProps {
   user: User | null;
-  initialStats: Stats | null;
 }
 
-export function StatsSection({ user, initialStats }: StatsSectionProps) {
-  const [stats, setStats] = useState<Stats>(
-    initialStats || {
-      totalMessages: 0,
-      uniqueMembers: 0,
-      weekMessages: 0,
-    },
-  );
-  const [isLoading, setIsLoading] = useState(!initialStats);
+export function StatsSection({ user }: StatsSectionProps) {
+  const [stats, setStats] = useState<Stats>({
+    totalMessages: 0,
+    uniqueMembers: 0,
+    weekMessages: 0,
+  });
+  const [isLoading, setIsLoading] = useState(true);
 
   const refreshStats = async () => {
     try {
+      logger.info("StatsSection: Fetching stats");
       const response = await fetch(apiRoutes.community.messages.link);
       if (response.ok) {
         const data = await response.json();
+        logger.info("StatsSection: Received stats", { hasStats: !!data.stats });
         if (data.stats) {
           setStats(data.stats);
         }
       }
     } catch (error) {
-      logger.error("Failed to refresh community stats:", error);
+      logger.error("StatsSection: Failed to refresh community stats", error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      await refreshStats();
+    })();
+  }, []);
 
   useWindowEvent("community-message-added", () => {
     refreshStats();
