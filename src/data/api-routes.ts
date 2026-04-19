@@ -122,5 +122,10 @@ export const apiRoutes = {
       link: getApiUrl("community/messages"),
       accept: [requestType.GET],
     },
+    stats: {
+      key: "community-stats",
+      link: getApiUrl("community/stats"),
+      accept: [requestType.GET],
+    },
   },
 };

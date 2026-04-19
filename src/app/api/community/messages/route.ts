@@ -26,32 +26,15 @@ export async function GET() {
 
     if (error) {
       logger.error("API: Supabase error", error);
-      return NextResponse.json({ messages: [], stats: null }, { status: 200 });
+      return NextResponse.json({ messages: [] }, { status: 200 });
     }
 
-    // Calculate stats
-    const totalMessages = messages?.length || 0;
-    const uniqueMembers = new Set(messages?.map((m) => m.user_id)).size;
-
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    const weekMessages =
-      messages?.filter((m) => new Date(m.created_at) >= weekAgo).length || 0;
-
-    const stats = {
-      totalMessages,
-      uniqueMembers,
-      weekMessages,
-    };
-
-    logger.info("API: Returning data", {
-      totalMessages,
-      uniqueMembers,
-      weekMessages,
+    logger.info("API: Returning messages", {
+      count: messages?.length,
     });
-    return NextResponse.json({ messages: messages || [], stats });
+    return NextResponse.json({ messages: messages || [] });
   } catch (error) {
     logger.error("API: Catch error", error);
-    return NextResponse.json({ messages: [], stats: null }, { status: 200 });
+    return NextResponse.json({ messages: [] }, { status: 200 });
   }
 }
