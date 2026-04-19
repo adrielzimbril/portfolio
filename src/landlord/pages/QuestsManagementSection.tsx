@@ -20,7 +20,7 @@ import { landlordRoutes } from "@/data/landlordRoutes";
 import { getAllQuests } from "@/integrations/content/lib/quests";
 import { Locale } from "@/integrations/i18n/config";
 import { logger } from "@/utils";
-import { AdminCard } from "@/landlord/components/AdminPrimitives";
+import { AdminCard } from "../components/AdminPrimitives";
 import { useTranslations } from "@/integrations/i18n/hooks";
 
 interface Participant {

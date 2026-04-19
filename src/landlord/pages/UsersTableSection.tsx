@@ -3,18 +3,23 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { RefreshCw, Loader2, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AdminCard, TablePager } from "@/landlord/components/AdminPrimitives";
-import { dataTableKey, fetchLandlordTable, formatCell } from "@/landlord/components/admin-utils";
-import type { LandlordTableResponse } from "@/landlord/components/admin-types";
+import { AdminCard, TablePager } from "../components/AdminPrimitives";
+import {
+  dataTableKey,
+  fetchLandlordTable,
+  formatCell,
+} from "../components/admin-utils";
+import type { LandlordTableResponse } from "../components/admin-types";
 
 const pageSize = 10;
 
 export function UsersTableSection() {
   const [page, setPage] = useState(1);
-  const { data: tableData, isLoading, mutate } = useSWR(
-    dataTableKey("users", page, pageSize),
-    fetchLandlordTable,
-  );
+  const {
+    data: tableData,
+    isLoading,
+    mutate,
+  } = useSWR(dataTableKey("users", page, pageSize), fetchLandlordTable);
 
   const rows = tableData?.rows || [];
   const columns = rows[0] ? Object.keys(rows[0]).slice(0, 8) : [];
@@ -26,12 +31,7 @@ export function UsersTableSection() {
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">Users</h2>
           <p className="mt-1 text-sm text-black/45">Contacts et comptes</p>
         </div>
-        <Button
-          variant="outline"
-          asIcon
-          asPointer
-          onClick={() => mutate()}
-        >
+        <Button variant="outline" asIcon asPointer onClick={() => mutate()}>
           <RefreshCw size={16} />
           Rafraîchir
         </Button>
@@ -58,9 +58,15 @@ export function UsersTableSection() {
                 </thead>
                 <tbody className="divide-y divide-black/6">
                   {rows.map((row, index) => (
-                    <tr key={String(row.id || index)} className="hover:bg-black/[0.02]">
+                    <tr
+                      key={String(row.id || index)}
+                      className="hover:bg-black/[0.02]"
+                    >
                       {columns.map((column) => (
-                        <td key={column} className="max-w-64 truncate px-5 py-4">
+                        <td
+                          key={column}
+                          className="max-w-64 truncate px-5 py-4"
+                        >
                           {formatCell(row[column])}
                         </td>
                       ))}
@@ -82,7 +88,9 @@ export function UsersTableSection() {
               <Users size={32} />
               <div>
                 <p className="font-medium">Aucune donnée</p>
-                <p className="text-xs">Cette table ne contient aucune entrée pour le moment.</p>
+                <p className="text-xs">
+                  Cette table ne contient aucune entrée pour le moment.
+                </p>
               </div>
             </div>
           </div>

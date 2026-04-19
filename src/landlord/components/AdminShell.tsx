@@ -18,11 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import { cn } from "@/utils/utils";
-import type {
-  AdminUser,
-  AdminView,
-  NavItem,
-} from "@/landlord/components/admin-types";
+import type { AdminUser, AdminView, NavItem } from "./admin-types";
 
 export const adminNavItems: NavItem[] = [
   {

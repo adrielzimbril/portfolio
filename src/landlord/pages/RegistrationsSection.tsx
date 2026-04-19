@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AdminCard } from "@/landlord/components/AdminPrimitives";
+import { AdminCard } from "../components/AdminPrimitives";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { Locale } from "@/integrations/i18n/config";
 import { logger } from "@/utils";

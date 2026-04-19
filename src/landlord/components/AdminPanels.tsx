@@ -45,7 +45,7 @@ import {
   SearchBox,
   StatusPill,
   TablePager,
-} from "@/landlord/components/AdminPrimitives";
+} from "./AdminPrimitives";
 import type {
   AdminUser,
   AdminView,
@@ -54,7 +54,7 @@ import type {
   LandlordTableResponse,
   Participant,
   QuestSummary,
-} from "@/landlord/components/admin-types";
+} from "./admin-types";
 import {
   dataTableKey,
   fetchLandlordTable,
@@ -65,7 +65,7 @@ import {
   formatTime,
   normalizeMessage,
   participantsKey,
-} from "@/landlord/components/admin-utils";
+} from "./admin-utils";
 
 export function OverviewPanel({
   participants,

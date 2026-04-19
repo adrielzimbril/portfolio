@@ -6,28 +6,22 @@ import { landlordRoutes } from "@/data/landlordRoutes";
 import { signOut } from "@/integrations/auth/provider/supabase";
 import { toast } from "@/lib/toast";
 import logger from "@/utils/logger";
-import { AdminShell } from "@/landlord/components/AdminShell";
-import {
-  AdminPrimitives,
-  ConfirmDialog,
-} from "@/landlord/components/AdminPrimitives";
-import {
-  MessageModal,
-  ParticipantModal,
-} from "@/landlord/components/AdminModals";
+import { AdminShell } from "./AdminShell";
+import { AdminPrimitives, ConfirmDialog } from "./AdminPrimitives";
+import { MessageModal, ParticipantModal } from "./AdminModals";
 import {
   CommunityPanel,
   OverviewPanel,
   QuestsPanel,
   TablesPanel,
   UsersPanel,
-} from "@/landlord/components/AdminPanels";
+} from "./AdminPanels";
 import type {
   AdminUser,
   AdminView,
   CommunityMessage,
   DataTableKey,
-} from "@/landlord/components/admin-types";
+} from "./admin-types";
 import {
   dataTableKey,
   fetchLandlordTable,
@@ -35,7 +29,7 @@ import {
   fetchParticipants,
   fetchQuests,
   participantsKey,
-} from "@/landlord/components/admin-utils";
+} from "./admin-utils";
 
 const pageSize = 10;
 

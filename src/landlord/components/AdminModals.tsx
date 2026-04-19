@@ -25,12 +25,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import logger from "@/utils/logger";
-import { AdminPrimitives } from "@/landlord/components/AdminPrimitives";
-import type {
-  CommunityMessage,
-  QuestSummary,
-} from "@/landlord/components/admin-types";
-import { normalizeMessage } from "@/landlord/components/admin-utils";
+import { AdminPrimitives } from "./AdminPrimitives";
+import type { CommunityMessage, QuestSummary } from "./admin-types";
+import { normalizeMessage } from "./admin-utils";
 import { toast } from "@/lib/toast";
 
 export function ParticipantModal({
