@@ -5,6 +5,9 @@ export const landlordApiRoutes = {
     messages: getApiUrl("landlord/community/messages"),
     messageById: (id: string) => getApiUrl(`landlord/community/messages/${id}`),
   },
+  data: {
+    table: getApiUrl("landlord/data"),
+  },
   quests: {
     participants: getApiUrl("landlord/quests/participants"),
     participantById: (id: string) =>

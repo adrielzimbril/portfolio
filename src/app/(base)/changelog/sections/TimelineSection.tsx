@@ -11,11 +11,13 @@ import { FilterButton } from "@/components/shared/pages/changelog/FilterButton";
 import { TimelineEntry } from "@/components/shared/pages/changelog/TimelineEntry";
 import { TimelineYearHeader } from "@/components/shared/pages/changelog/TimelineYearHeader";
 import { EmptyState } from "@/components/shared/pages/changelog/EmptyState";
+import { Button } from "@/components/ui/button";
 
 export function TimelineSection() {
   const [selectedType, setSelectedType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
   const [changelogData, setChangelogData] = React.useState<Changelog[]>([]);
   const [typeCounts, setTypeCounts] = React.useState<Record<string, number>>({
     all: 0,
@@ -55,9 +57,16 @@ export function TimelineSection() {
   const clearFilters = () => {
     setSelectedType("all");
     setSearchQuery("");
+    setVisibleCount(3);
   };
 
   const hasActiveFilters = selectedType !== "all" || searchQuery;
+  const visibleChangelog = filteredChangelog.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredChangelog.length;
+
+  React.useEffect(() => {
+    setVisibleCount(3);
+  }, [selectedType, searchQuery]);
 
   return (
     <>
@@ -92,14 +101,14 @@ export function TimelineSection() {
           <div className="space-y-20 w-full max-w-5xl">
             {(() => {
               // Group by year
-              const groupedByYear = filteredChangelog.reduce(
+              const groupedByYear = visibleChangelog.reduce(
                 (acc, entry) => {
                   const year = new Date(entry.date).getFullYear();
                   if (!acc[year]) acc[year] = [];
                   acc[year].push(entry);
                   return acc;
                 },
-                {} as Record<number, typeof filteredChangelog>,
+                {} as Record<number, typeof visibleChangelog>,
               );
 
               return Object.entries(groupedByYear)
@@ -135,6 +144,17 @@ export function TimelineSection() {
                   </div>
                 ));
             })()}
+            {hasMore && (
+              <div className="flex justify-center">
+                <Button
+                  variant="outline"
+                  asPointer
+                  onClick={() => setVisibleCount((count) => count + 3)}
+                >
+                  Charger plus
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </SectionLayout>

@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { Github, Google } from "@aurthle/icons";
-import { LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { LockKeyhole, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, getPathUrl } from "@/utils";
 import {
@@ -68,13 +69,9 @@ export function LandlordLoginPanel({ reason }: { reason?: string }) {
   const isUnauthorized = reason === "unauthorized";
 
   return (
-    <div className="flex min-h-dvh items-center justify-center overflow-auto bg-[#ece8d8] p-4 md:p-8">
-      <div className="grid w-full max-w-6xl overflow-hidden rounded-[32px] border border-black/10 bg-[#f8f7f1] shadow-[0_24px_80px_rgba(17,25,31,0.18)] lg:grid-cols-[1.05fr_.95fr]">
+    <div className="flex min-h-dvh items-center justify-center overflow-auto bg-[#f5f3ea] p-4 md:p-8">
+      <div className="grid w-full max-w-6xl overflow-hidden rounded-[32px] border border-black/10 bg-white shadow-[0_24px_80px_rgba(17,25,31,0.14)] lg:grid-cols-[1.05fr_.95fr]">
         <aside className="relative hidden min-h-[680px] flex-col justify-between overflow-hidden bg-[#11191f] p-10 text-white lg:flex">
-          <div className="absolute inset-0 opacity-70">
-            <div className="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[#ffed90]/20 blur-3xl" />
-            <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
-          </div>
           <div className="relative z-10 flex items-center gap-3">
             <div className="flex size-11 items-center justify-center rounded-2xl bg-white text-[#11191f]">
               <Sparkles size={20} />
@@ -85,27 +82,46 @@ export function LandlordLoginPanel({ reason }: { reason?: string }) {
             </div>
           </div>
 
-          <div className="relative z-10 max-w-md">
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs text-white/70">
-              <ShieldCheck size={14} />
-              Admin private access
-            </p>
-            <h1 className="text-5xl font-semibold leading-[105%] tracking-[-0.02em]">
-              Pilote ton contenu sans casser le site public.
-            </h1>
-            <p className="mt-6 max-w-sm text-sm leading-6 text-white/68">
-              Un espace sobre pour gérer les participations aux quests, les
-              messages de communauté et les actions sensibles avec confirmation.
-            </p>
+          <div className="relative z-10 overflow-hidden rounded-[28px] border border-white/10 bg-white/8 p-6">
+            <div className="mb-6 flex items-center justify-between text-xs text-white/55">
+              <span>Admin workspace</span>
+              <span>Shirofolio</span>
+            </div>
+            <div className="grid gap-3">
+              <div className="rounded-2xl bg-white p-4 text-[#11191f]">
+                <p className="text-xs text-black/45">Aujourd'hui</p>
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  {["Quests", "Users", "Messages"].map((item) => (
+                    <div key={item} className="rounded-xl bg-[#f5f3ea] p-3">
+                      <p className="text-[11px] text-black/45">{item}</p>
+                      <p className="mt-2 text-xl font-semibold">12</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center gap-4 rounded-2xl bg-white/10 p-4">
+                <Image
+                  src="/img/me/memoji/me-code.png"
+                  width={88}
+                  height={88}
+                  alt="Admin profile"
+                  className="rounded-2xl object-cover"
+                />
+                <div>
+                  <p className="text-sm font-medium">Gestion rapide</p>
+                  <p className="mt-1 text-xs leading-5 text-white/55">
+                    Les entrées importantes du site restent lisibles et faciles à
+                    contrôler.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="relative z-10 grid grid-cols-3 gap-3 text-xs text-white/70">
-            {["Secure", "Focused", "Operational"].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/8 p-3">
-                {item}
-              </div>
-            ))}
-          </div>
+          <p className="relative z-10 max-w-md text-sm leading-6 text-white/55">
+            Un accès privé pour gérer les contenus, les inscriptions et les
+            messages du site.
+          </p>
         </aside>
 
         <main className="flex min-h-[640px] items-center justify-center p-6 md:p-12">
@@ -128,8 +144,7 @@ export function LandlordLoginPanel({ reason }: { reason?: string }) {
                 Connexion admin
               </h2>
               <p className="mt-3 text-sm leading-6 text-black/55">
-                Connecte-toi avec un compte autorisé pour accéder au landlord
-                panel.
+                Connecte-toi avec ton compte autorisé pour ouvrir le panel.
               </p>
             </div>
 
@@ -143,8 +158,7 @@ export function LandlordLoginPanel({ reason }: { reason?: string }) {
             <LoginButtons />
 
             <p className="mt-8 text-xs leading-5 text-black/45">
-              L'accès est limité aux emails configurés côté serveur. Les logs et
-              erreurs serveur restent en anglais pour faciliter le debug.
+              Accès réservé aux emails configurés côté serveur.
             </p>
           </div>
         </main>

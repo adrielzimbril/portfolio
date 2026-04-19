@@ -1613,15 +1613,7 @@
   "admin": {
     "title": "Tableau de bord Admin",
     "description": "Tableau de bord administratif pour gérer le site",
-    "page": {
-      "title": "Tableau de bord Admin",
-      "description": "Gérez le contenu et les paramètres de votre site"
-    },
     "landlord": {
-      "tabs": {
-        "quests": "Challenges",
-        "community": "Mur communautaire"
-      },
       "community": {
         "title": "Gestion du mur communautaire",
         "actions": {
@@ -1649,10 +1641,6 @@
           "message": "Message",
           "sendEmail": "Envoyer une notification par email",
           "language": "Langue"
-        },
-        "placeholders": {
-          "selectQuest": "Sélectionner un challenge",
-          "selectLanguage": "Sélectionner une langue"
         },
         "filters": {
           "byQuest": "Filtrer par challenge",
