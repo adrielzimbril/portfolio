@@ -165,13 +165,15 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 <div className="flex items-center gap-2">
                   <label className="text-sm font-medium">Rotation:</label>
                   <Slider
+                    value={[rotation]}
                     min={config.rotation.startAt}
                     max={config.rotation.endAt}
                     step={config.rotation.step}
-                    value={rotation}
-                    onValueChange={(value) =>
-                      setRotation(Array.isArray(value) ? value[0] : value)
-                    }
+                    onValueChange={(value) => {
+                      const newValue = Array.isArray(value) ? value[0] : value;
+                      setRotation(newValue as number);
+                      logger.info("value rotation", value);
+                    }}
                     className="flex-1"
                   />
                   <span className="text-sm w-12 text-right">{rotation}°</span>
@@ -348,13 +350,14 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 <div className="flex items-center gap-2">
                   <label className="text-sm font-medium">Rotation:</label>
                   <Slider
+                    value={[rotation]}
                     min={config.rotation.startAt}
                     max={config.rotation.endAt}
                     step={config.rotation.step}
-                    value={rotation}
-                    onValueChange={(value) =>
-                      setRotation(Array.isArray(value) ? value[0] : value)
-                    }
+                    onValueChange={(value) => {
+                      const newValue = Array.isArray(value) ? value[0] : value;
+                      setRotation(newValue as number);
+                    }}
                     className="flex-1"
                   />
                   <span className="text-sm w-12 text-right">{rotation}°</span>
