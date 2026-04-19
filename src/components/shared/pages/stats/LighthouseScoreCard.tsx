@@ -25,8 +25,8 @@ export function LighthouseScoreCard({
 }: LighthouseScoreCardProps) {
   const scoreItems = [
     { score: scores.performance, label: "Performance" },
-    { score: scores.accessibility, label: "Accessibility" },
-    { score: scores.bestPractices, label: "Best Practices" },
+    { score: scores.accessibility, label: "Accessibilité" },
+    { score: scores.bestPractices, label: "Bonnes pratiques" },
     { score: scores.seo, label: "SEO" },
   ];
 
@@ -74,10 +74,10 @@ export function LighthouseScoreCard({
                 <div className="flex items-center gap-3">
                   <div>
                     <h6 className="text-sm font-semibold text-foreground">
-                      {strategy === "mobile" ? "Mobile" : "Desktop"}
+                      {strategy === "mobile" ? "Mobile" : "Bureau"}
                     </h6>
                     <p className="text-xs text-muted-foreground">
-                      Lighthouse Score
+                      Score Lighthouse
                     </p>
                   </div>
                 </div>

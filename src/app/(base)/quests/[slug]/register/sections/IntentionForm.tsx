@@ -44,7 +44,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
         open: true,
         status: "error",
         title: t("quests.register.form.feedback.error.title"),
-        description: "Name is required",
+        description: "Le nom est requis",
       });
       return;
     }
@@ -54,7 +54,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
         open: true,
         status: "error",
         title: t("quests.register.form.feedback.error.title"),
-        description: "Invalid email",
+        description: "Email invalide",
       });
       return;
     }
@@ -133,7 +133,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                     required
                     minLength={2}
                   />
-                  <FieldError>Name is required</FieldError>
+                  <FieldError>Le nom est requis</FieldError>
                 </Field>
                 <Field>
                   <FieldLabel>
@@ -150,7 +150,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
                     placeholder={t("submit.page.fields.email.placeholder")}
                     required
                   />
-                  <FieldError>Invalid email</FieldError>
+                  <FieldError>Email invalide</FieldError>
                 </Field>
               </div>
 

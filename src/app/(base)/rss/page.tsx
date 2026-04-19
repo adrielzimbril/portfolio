@@ -11,8 +11,8 @@ enum RssFormat {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `RSS Feed - ${siteConfig.name}`;
-  const description = `Subscribe to the RSS feed to follow the latest news, projects and resources of ${siteConfig.name}`;
+  const title = `Flux RSS - ${siteConfig.name}`;
+  const description = `Abonne-toi au flux RSS pour suivre les dernières actualités, projets et ressources de ${siteConfig.name}`;
 
   return {
     title,

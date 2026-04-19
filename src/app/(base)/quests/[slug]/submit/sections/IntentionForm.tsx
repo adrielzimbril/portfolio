@@ -52,7 +52,7 @@ export function IntentionForm({
         open: true,
         status: "error",
         title: t("quests.submit.form.feedback.error.title"),
-        description: "Name is required",
+        description: "Le nom est requis",
       });
       return;
     }
@@ -62,7 +62,7 @@ export function IntentionForm({
         open: true,
         status: "error",
         title: t("quests.submit.form.feedback.error.title"),
-        description: "Invalid email",
+        description: "Email invalide",
       });
       return;
     }
@@ -72,7 +72,7 @@ export function IntentionForm({
         open: true,
         status: "error",
         title: t("quests.submit.form.feedback.error.title"),
-        description: "Invalid URL",
+        description: "URL invalide",
       });
       return;
     }
@@ -159,7 +159,7 @@ export function IntentionForm({
                       required
                       minLength={2}
                     />
-                    <FieldError>Name is required</FieldError>
+                    <FieldError>Le nom est requis</FieldError>
                   </Field>
                   <Field>
                     <FieldLabel>
@@ -176,7 +176,7 @@ export function IntentionForm({
                       placeholder={t("submit.page.fields.email.placeholder")}
                       required
                     />
-                    <FieldError>Invalid email</FieldError>
+                    <FieldError>Email invalide</FieldError>
                   </Field>
                 </div>
 
@@ -194,7 +194,7 @@ export function IntentionForm({
                     placeholder={t("submit.page.fields.url.placeholder")}
                     required
                   />
-                  <FieldError>Invalid URL</FieldError>
+                  <FieldError>URL invalide</FieldError>
                 </Field>
 
                 <Field>

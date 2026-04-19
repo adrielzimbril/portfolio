@@ -11,8 +11,8 @@ export function AdminDashboard() {
     <div className="w-full">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="quests">Quests</TabsTrigger>
-          <TabsTrigger value="community">Community Wall</TabsTrigger>
+          <TabsTrigger value="quests">Challenges</TabsTrigger>
+          <TabsTrigger value="community">Mur communautaire</TabsTrigger>
         </TabsList>
         <TabsContent value="quests" className="mt-6">
           <QuestsManagementSection />

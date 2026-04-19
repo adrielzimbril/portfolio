@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
   const wantResponse = searchParams.get("wantResponse") === "true";
 
   if (!slug) {
-    return NextResponse.json({ error: "Page not found" }, { status: 400 });
+    return NextResponse.json({ error: "Page introuvable" }, { status: 400 });
   }
 
   const cookieStore = await cookies();

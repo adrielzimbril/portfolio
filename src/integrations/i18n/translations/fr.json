@@ -618,11 +618,10 @@
     "description": "Je passe en revue vos messages personnellement. Que ce soit pour un projet, une collaboration ou simplement pour échanger sur le design produit et l'innovation, ma boîte mail est ouverte.",
     "keywords": "Contact SaaS, Product Designer, discuter idée SaaS, collaboration produit, design SaaS, contact freelance SaaS, expert SaaS, accompagnement produit, mentor SaaS, formateur design",
     "page": {
-      "badge": "Problem Solver & Your SaaS Product designer ",
+      "badge": "Problem Solver & ton Product Designer SaaS",
       "title": "Transforme tes idées en produits que tes utilisateurs adorent ",
       "form": {
         "notifications": {
-          "error": "Nous sommes désolés, mais nous n'avons pas pu envoyer votre message. Veuillez réessayer plus tard.",
           "error": "Désolé, mais nous n'avons pas pu envoyer votre message. Veuillez réessayer plus tard.",
           "success": "Votre message a été envoyé avec succès. Nous vous recontacterons au plus vite."
         },
@@ -782,6 +781,11 @@
       },
       "submit": {
         "default": "Soumettre"
+      },
+      "setup": {
+        "default": "Mon setup",
+        "desktop": "Setup",
+        "mobile": "Setup ⚙️"
       }
     },
     "button": {
@@ -815,7 +819,7 @@
       "text": {
         "presentation": "Présentation",
         "results": "Résultats",
-        "role": "Role",
+        "role": "Rôle",
         "stack": "Stack",
         "duration": "Durée",
         "language": "Langue",
@@ -848,11 +852,11 @@
         "december": "Décembre"
       },
       "base": {
-        "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
-        "title": "Your ideas into products that your users adore",
-        "subtitle-simple": "Innovative Problem Solver & Your Go-To SaaS Product Designer ❣️",
-        "subtitle": "Innovative Problem Solver & SaaS Product Designer ❣️",
-        "subtitle-secondary": "Turning Ideas into Impact | SaaS Product Designer & Problem Solver ❣️"
+        "badge": "Problem Solver & Product Designer SaaS 🦄❣️",
+        "title": "Vos idées en produits que vos utilisateurs adorent",
+        "subtitle-simple": "Problem Solver innovant & ton Product Designer SaaS de référence ❣️",
+        "subtitle": "Problem Solver innovant & Product Designer SaaS ❣️",
+        "subtitle-secondary": "Transformer les idées en impact | Product Designer SaaS & Problem Solver ❣️"
       },
       "page-loader": {
         "home": {
@@ -902,12 +906,12 @@
         },
         "talks": {
           "emoji": "🎤",
-          "title": "Talks, conférences & masterclasses",
+          "title": "Conférences & masterclasses",
           "subtitle": "Sessions en ligne et en présentiel pour apprendre plus vite 🎤"
         },
         "quests": {
           "emoji": "🏆",
-          "title": "Challenges & quests en cours",
+          "title": "Challenges en cours",
           "subtitle": "Inscris-toi, soumets ton travail et vise le podium 🏆"
         },
         "community": {
@@ -976,8 +980,8 @@
       },
       "preview": {
         "emoji": "😎",
-        "title": "I made you looked.",
-        "description": "You can have the rest of the empty space here."
+        "title": "Je t’ai eu.",
+        "description": "Tu peux garder le reste de l’espace vide ici."
       },
       "hub": {
         "badge": "Hub 🫶🏻",
@@ -1098,12 +1102,12 @@
       },
       "talks": {
         "badge": "Événements 🎤",
-        "title": "Talks & Masterclasses",
+        "title": "Conférences & masterclasses",
         "description": "Les conférences, webinaires et masterclasses où je partage mon expertise en design produit et SaaS."
       },
       "quests": {
         "badge": "Challenges 🏆",
-        "title": "Quests & Challenges",
+        "title": "Challenges en cours",
         "description": "Les challenges en cours et passés pour apprendre en pratiquant, soumettre ton travail et progresser avec la communauté."
       }
     }
@@ -1111,7 +1115,7 @@
   "mail": {
     "common": {
       "defaultName": "ami designer",
-      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product Designer 🦄",
+      "signature": "Adriel Zimbril | Problem Solver & ton Product Designer SaaS 🦄",
       "contact": "Si tu veux échanger ou juste dire bonjour, réponds simplement à cet email. Je lis tout personnellement.",
       "contactAdmin": "Adriel Zimbril, tu as reçu un nouveau message. Quelqu'un reconnaît ton impact et veut échanger avec toi. Tu es le roi de ce monde, maintenant montre-lui pourquoi. Just do it 🚀",
       "copyright": "Crafted with ❤️ by Adriel Zimbril"
@@ -1227,7 +1231,7 @@
       "subject": "Hello, c'est Adriel !",
       "preview": "Salut ! Je voulais te parler de quelque chose qui me tient à cœur...",
       "greeting": "Salut {firstName}",
-      "tagline": "Problem Solver & Your SaaS Product Designer 🦄",
+      "tagline": "Problem Solver & ton Product Designer SaaS 🦄",
       "story": {
         "intro": "Il y a quelques semaines, l'un des clients de l'une de mes apps m'a écrit pour me dire qu'il avait mis du temps à annuler une action. Je me suis rendu compte que c'était à cause d'un choix de design que j'aimais bien… mais qui compliquait l'expérience.",
         "presentation": "Je m'appelle Adriel, et depuis 5 ans je crée des interfaces pour des SaaS et j'ai remarqué quelque chose : on complique souvent les choses alors que les utilisateurs cherchent juste de la simplicité.",
@@ -1333,105 +1337,105 @@
           "required": "Oups, l'URL est requise 😅"
         }
       },
-      "invalid_arguments": "Invalid function arguments",
-      "invalid_date": "Invalid date",
-      "invalid_enum_value": "Invalid enum value. Expected {- options}, received '{received}'",
-      "invalid_intersection_types": "Intersection results could not be merged",
-      "invalid_literal": "Invalid literal value, expected {expected}",
-      "invalid_return_type": "Invalid function return type",
+      "invalid_arguments": "Arguments de fonction invalides",
+      "invalid_date": "Date invalide",
+      "invalid_enum_value": "Valeur d’énumération invalide. Attendu {- options}, reçu {received}",
+      "invalid_intersection_types": "Les résultats de l’intersection n’ont pas pu être fusionnés",
+      "invalid_literal": "Valeur littérale invalide, attendu {expected}",
+      "invalid_return_type": "Type de retour de fonction invalide",
       "invalid_string": {
-        "cuid": "Invalid {validation}",
-        "datetime": "Invalid {validation}",
-        "email": "Invalid {validation}",
-        "endsWith": "Invalid input: must end with \"{endsWith}\"",
-        "regex": "Invalid",
-        "startsWith": "Invalid input: must start with \"{startsWith}\"",
-        "url": "Invalid {validation}",
-        "uuid": "Invalid {validation}"
+        "cuid": "{validation} invalide",
+        "datetime": "{validation} invalide",
+        "email": "{validation} invalide",
+        "endsWith": "Entrée invalide : doit se terminer par \"{endsWith}\"",
+        "regex": "Invalide",
+        "startsWith": "Entrée invalide : doit commencer par \"{startsWith}\"",
+        "url": "{validation} invalide",
+        "uuid": "{validation} invalide"
       },
-      "invalid_type": "Expected {expected}, received {received}",
-      "invalid_type_received_undefined": "Required",
-      "invalid_union": "Invalid input",
-      "invalid_union_discriminator": "Invalid discriminator value. Expected {- options}",
-      "not_finite": "Number must be finite",
-      "not_multiple_of": "Number must be a multiple of {multipleOf}",
+      "invalid_type": "Attendu {expected}, reçu {received}",
+      "invalid_type_received_undefined": "Requis",
+      "invalid_union": "Entrée invalide",
+      "invalid_union_discriminator": "Valeur de discriminateur invalide. Attendu {- options}",
+      "not_finite": "Le nombre doit être fini",
+      "not_multiple_of": "Le nombre doit être un multiple de {multipleOf}",
       "too_big": {
         "array": {
-          "exact": "Array must contain exactly {maximum} element(s)",
-          "inclusive": "Array must contain at most {maximum} element(s)",
-          "not_inclusive": "Array must contain less than {maximum} element(s)"
+          "exact": "Le tableau doit contenir exactement {maximum} élément(s)",
+          "inclusive": "Le tableau doit contenir au maximum {maximum} élément(s)",
+          "not_inclusive": "Le tableau doit contenir moins de {maximum} élément(s)"
         },
         "date": {
-          "exact": "Date must be exactly {- maximum, datetime}",
-          "inclusive": "Date must be smaller than or equal to {- maximum, datetime}",
-          "not_inclusive": "Date must be smaller than {- maximum, datetime}"
+          "exact": "La date doit être exactement {- maximum, datetime}",
+          "inclusive": "La date doit être inférieure ou égale à {- maximum, datetime}",
+          "not_inclusive": "La date doit être inférieure à {- maximum, datetime}"
         },
         "number": {
-          "exact": "Number must be exactly {maximum}",
-          "inclusive": "Number must be less than or equal to {maximum}",
-          "not_inclusive": "Number must be less than {maximum}"
+          "exact": "Le nombre doit être exactement {maximum}",
+          "inclusive": "Le nombre doit être inférieur ou égal à {maximum}",
+          "not_inclusive": "Le nombre doit être inférieur à {maximum}"
         },
         "set": {
-          "exact": "Invalid input",
-          "inclusive": "Invalid input",
-          "not_inclusive": "Invalid input"
+          "exact": "Entrée invalide",
+          "inclusive": "Entrée invalide",
+          "not_inclusive": "Entrée invalide"
         },
         "string": {
-          "exact": "String must contain exactly {maximum} character(s)",
-          "inclusive": "String must contain at most {maximum} character(s)",
-          "not_inclusive": "String must contain under {maximum} character(s)"
+          "exact": "La chaîne doit contenir exactement {maximum} caractère(s)",
+          "inclusive": "La chaîne doit contenir au maximum {maximum} caractère(s)",
+          "not_inclusive": "La chaîne doit contenir moins de {maximum} caractère(s)"
         }
       },
       "too_small": {
         "array": {
-          "exact": "Array must contain exactly {minimum} element(s)",
-          "inclusive": "Array must contain at least {minimum} element(s)",
-          "not_inclusive": "Array must contain more than {minimum} element(s)"
+          "exact": "Le tableau doit contenir exactement {minimum} élément(s)",
+          "inclusive": "Le tableau doit contenir au moins {minimum} élément(s)",
+          "not_inclusive": "Le tableau doit contenir plus de {minimum} élément(s)"
         },
         "date": {
-          "exact": "Date must be exactly {- minimum, datetime}",
-          "inclusive": "Date must be greater than or equal to {- minimum, datetime}",
-          "not_inclusive": "Date must be greater than {- minimum, datetime}"
+          "exact": "La date doit être exactement {- minimum, datetime}",
+          "inclusive": "La date doit être supérieure ou égale à {- minimum, datetime}",
+          "not_inclusive": "La date doit être supérieure à {- minimum, datetime}"
         },
         "number": {
-          "exact": "Number must be exactly {minimum}",
-          "inclusive": "Number must be greater than or equal to {minimum}",
-          "not_inclusive": "Number must be greater than {minimum}"
+          "exact": "Le nombre doit être exactement {minimum}",
+          "inclusive": "Le nombre doit être supérieur ou égal à {minimum}",
+          "not_inclusive": "Le nombre doit être supérieur à {minimum}"
         },
         "set": {
-          "exact": "Invalid input",
-          "inclusive": "Invalid input",
-          "not_inclusive": "Invalid input"
+          "exact": "Entrée invalide",
+          "inclusive": "Entrée invalide",
+          "not_inclusive": "Entrée invalide"
         },
         "string": {
-          "exact": "String must contain exactly {minimum} character(s)",
-          "inclusive": "String must contain at least {minimum} character(s)",
-          "not_inclusive": "String must contain over {minimum} character(s)"
+          "exact": "La chaîne doit contenir exactement {minimum} caractère(s)",
+          "inclusive": "La chaîne doit contenir au moins {minimum} caractère(s)",
+          "not_inclusive": "La chaîne doit contenir plus de {minimum} caractère(s)"
         }
       },
-      "unrecognized_keys": "Unrecognized key(s) in object: {- keys}"
+      "unrecognized_keys": "Clé(s) non reconnue(s) dans l’objet : {- keys}"
     },
     "types": {
-      "array": "array",
-      "bigint": "bigint",
-      "boolean": "boolean",
+      "array": "tableau",
+      "bigint": "grand entier",
+      "boolean": "booléen",
       "date": "date",
-      "float": "float",
-      "function": "function",
-      "integer": "integer",
+      "float": "nombre décimal",
+      "function": "fonction",
+      "integer": "entier",
       "map": "map",
-      "nan": "nan",
+      "nan": "NaN",
       "never": "never",
       "null": "null",
-      "number": "number",
-      "object": "object",
-      "promise": "promise",
+      "number": "nombre",
+      "object": "objet",
+      "promise": "promesse",
       "set": "set",
-      "string": "string",
-      "symbol": "symbol",
-      "undefined": "undefined",
-      "unknown": "unknown",
-      "void": "void"
+      "string": "chaîne",
+      "symbol": "symbole",
+      "undefined": "indéfini",
+      "unknown": "inconnu",
+      "void": "vide"
     },
     "validations": {
       "cuid": "cuid",

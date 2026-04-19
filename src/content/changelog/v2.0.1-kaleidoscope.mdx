@@ -6,49 +6,49 @@ date: "2026-04-18"
 published: true
 ---
 
-# Reactions System & Admin Panel
+# Système de réactions & panneau d'administration
 
-This release introduces a comprehensive emoji-based reaction system with anonymous user support, synchronization capabilities, and a new admin panel for content management.
+Cette version introduit un système complet de réactions par emoji, avec prise en charge des utilisateurs anonymes, synchronisation et nouveau panneau d'administration pour gérer le contenu.
 
-## New Features
+## Nouvelles fonctionnalités
 
-### Emoji-Based Reactions
+### Réactions par emoji
 
-We've added a complete reaction system that allows users to express themselves with animated emojis:
+Nous avons ajouté un système de réactions complet qui permet aux utilisateurs de s'exprimer avec des emojis animés :
 
-- **Multiple Reaction Types**: 👍 Like, ❤️ Heart, 🎉 Celebrate, 💡 Insightful, and 🤔 Sceptic reactions
-- **Animated States**: Emojis animate when active for engaging user feedback
-- **Inline UI**: Compact mobile-friendly inline reaction interface
-- **Real-Time Counts**: Instant updates showing reaction counts
-- **Emoji Library**: Comprehensive emoji library for diverse reactions
+- **Plusieurs types de réactions** : j'aime, coeur, célébration, inspirant et sceptique
+- **États animés** : les emojis s'animent lorsqu'ils sont actifs pour rendre le retour plus vivant
+- **Interface inline** : interface compacte et adaptée au mobile
+- **Compteurs en temps réel** : mises à jour instantanées du nombre de réactions
+- **Bibliothèque d'emojis** : bibliothèque complète pour diversifier les réactions
 
-### Anonymous User Support
+### Support des utilisateurs anonymes
 
-- **Cookie-Based Identification**: Anonymous users identified via persistent cookies
-- **Cross-Device Sync**: Reactions sync when users authenticate
-- **Seamless Migration**: Anonymous reactions merge with authenticated user account
+- **Identification par cookie** : les utilisateurs anonymes sont identifiés via des cookies persistants
+- **Synchronisation multi-appareils** : les réactions se synchronisent quand l'utilisateur se connecte
+- **Migration fluide** : les réactions anonymes fusionnent avec le compte authentifié
 
-### Admin Panel
+### Panneau d'administration
 
-- **Language Support**: Admin panel with multi-language support
-- **Auth Guard**: Protected admin routes with authentication
-- **Centralized Config**: Unified admin configuration and UI
-- **Session Management**: Configurable session timeout
+- **Support multilingue** : panneau d'administration compatible avec plusieurs langues
+- **Protection d'accès** : routes admin protégées par authentification
+- **Configuration centralisée** : configuration et interface admin unifiées
+- **Gestion de session** : durée de session configurable
 
-### Integration
+### Intégration
 
-- **Thoughts**: Reactions on blog posts and articles
-- **Projects**: Reactions on case studies and project pages
-- **Hub**: Reactions on resources and tools
-- **Changelog**: Reactions on changelog entries
+- **Articles** : réactions sur les articles et billets du blog
+- **Projets** : réactions sur les études de cas et pages projet
+- **Hub** : réactions sur les ressources et outils
+- **Changelog** : réactions sur les entrées du changelog
 
-## Technical Details
+## Détails techniques
 
-- **Supabase Migration**: Complete database schema with RLS policies
-- **Cookie Management**: Anonymous user ID tracking with 365-day expiration
-- **Sync Provider**: Automatic sync mechanism on authentication
-- **TypeScript Types**: Full type safety for reaction data structures
-- **Batch API**: Optimized batch endpoint for reaction status
-- **Pluggable Auth**: Flexible authentication provider system
+- **Migration Supabase** : schéma de base de données complet avec politiques RLS
+- **Gestion des cookies** : suivi de l'identifiant anonyme avec expiration à 365 jours
+- **Provider de synchronisation** : synchronisation automatique à l'authentification
+- **Types TypeScript** : typage complet des structures de données des réactions
+- **API batch** : endpoint optimisé pour récupérer l'état des réactions
+- **Auth modulaire** : système flexible de fournisseurs d'authentification
 
-This feature enhances user engagement and provides valuable feedback across the platform with powerful admin tools for content management.
+Cette fonctionnalité renforce l'engagement utilisateur et apporte des retours utiles sur toute la plateforme, avec des outils d'administration solides pour gérer le contenu.

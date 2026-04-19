@@ -32,7 +32,7 @@ export async function PATCH(
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to update message" },
+      { error: "Impossible de mettre à jour le message" },
       { status: 500 },
     );
   }
@@ -60,7 +60,7 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to delete message" },
+      { error: "Impossible de supprimer le message" },
       { status: 500 },
     );
   }

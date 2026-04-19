@@ -16,23 +16,23 @@ const REACTION_CONFIG: Record<
 > = {
   like: {
     Icon: "👍",
-    label: "Likes",
+    label: "J'aime",
   },
   heart: {
     Icon: "❤️",
-    label: "Hearts",
+    label: "Coups de coeur",
   },
   celebrate: {
     Icon: "🎉",
-    label: "Celebrates",
+    label: "Célébrations",
   },
   insightful: {
     Icon: "💡",
-    label: "Insightful",
+    label: "Inspirant",
   },
   sceptic: {
     Icon: "🤔",
-    label: "Sceptic",
+    label: "Sceptique",
   },
 };
 

@@ -89,27 +89,27 @@ export default async function StatsPage() {
         <SectionLayout badge="Statistique 👨‍💻" isFlex className="py-0!">
           <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
             <StatCard
-              label="Total Site Views"
+              label="Vues totales du site"
               value={serverStats.totalViews}
               icon={<Eye size={32} variant="bulk" />}
               decoration="👁️"
-              description="Since launch"
+              description="Depuis le lancement"
             />
             <StatCard
-              label="Coffee Consumed"
+              label="Cafés consommés"
               value={coffeeCups}
-              suffix="cups"
+              suffix="tasses"
               icon={<Coffee size={32} variant="bulk" />}
               decoration="☕"
-              description="1 cup per 500 words"
+              description="1 tasse pour 500 mots"
             />
             <StatCard
-              label="Site Age"
+              label="Âge du site"
               value={daysSinceRevamp}
-              suffix="days"
+              suffix="jours"
               icon={<Calendar size={32} variant="bulk" />}
               decoration="📅"
-              description={`Launched ${REVAMP_DATE.toLocaleDateString(locale, {
+              description={`Lancé le ${REVAMP_DATE.toLocaleDateString(locale, {
                 month: "short",
                 day: "numeric",
                 year: "numeric",
@@ -127,8 +127,8 @@ export default async function StatsPage() {
         >
           <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
             <ThoughtsTopList
-              title="Top Viewed Thoughts"
-              description="Most read articles"
+              title="Articles les plus vus"
+              description="Articles les plus lus"
               type={TopThoughtsListType.REACTED}
               thoughts={serverStats.topViewedThoughts}
               icon={
@@ -141,8 +141,8 @@ export default async function StatsPage() {
               decoration="📈"
             />
             <ThoughtsTopList
-              title="Top Reacted Thoughts"
-              description="Most loved articles"
+              title="Articles les plus aimés"
+              description="Articles avec le plus de réactions"
               type={TopThoughtsListType.REACTED}
               thoughts={serverStats.topReactedThoughts}
               icon={
@@ -174,8 +174,8 @@ export default async function StatsPage() {
                   name: cat.name,
                   count: cat.count,
                 }))}
-                title="Categories"
-                description="Thoughts by topic"
+                title="Catégories"
+                description="Articles par sujet"
                 decorationEmoji="📊"
               />
               <ChangelogUpdatesCard
@@ -195,28 +195,28 @@ export default async function StatsPage() {
         >
           <div className="grid md:w-[90%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <StatCard
-              label="Total Thoughts"
+              label="Total des articles"
               value={buildTimeStats.totalPosts}
-              suffix="thoughts"
+              suffix="articles"
               icon={<BookOne size={32} variant="bulk" />}
               decorationPattern="💭"
             />
             <StatCard
-              label="Total Words"
+              label="Total des mots"
               value={buildTimeStats.totalWords}
-              suffix="words"
+              suffix="mots"
               icon={<TextFolder size={32} variant="bulk" />}
               decorationPattern="📝"
             />
             <StatCard
-              label="Community Messages"
+              label="Messages de la communauté"
               value={serverStats.communityMessages}
               suffix="messages"
               icon={<ChatBubbleCircle size={32} variant="bulk" />}
               decorationPattern="💬"
             />
             <StatCard
-              label="Reading Time"
+              label="Temps de lecture"
               value={buildTimeStats.totalReadingTime}
               suffix="min"
               icon={<Timelapse size={32} variant="bulk" />}
@@ -235,7 +235,7 @@ export default async function StatsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 w-fit">
             <GitHubStatsCard
               type="stars"
-              label="GitHub Stars"
+              label="Étoiles GitHub"
               value={githubStats.stars}
             />
             <GitHubStatsCard
@@ -254,7 +254,7 @@ export default async function StatsPage() {
       </Skeleton>
 
       <Skeleton name="stats-performance" loading={false}>
-        <SectionLayout badge="Site Performance ⚡">
+        <SectionLayout badge="Performance du site ⚡">
           <LighthouseScoreCard
             scores={lighthouseStats.mobile}
             strategy="mobile"

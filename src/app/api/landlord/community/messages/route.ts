@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: data });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to add message" },
+      { error: "Impossible d'ajouter le message" },
       { status: 500 },
     );
   }

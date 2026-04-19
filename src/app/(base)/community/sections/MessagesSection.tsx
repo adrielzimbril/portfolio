@@ -50,7 +50,7 @@ export function MessagesSection() {
   if (isLoading) {
     return (
       <div className="text-center text-muted-foreground">
-        Loading messages...
+        Chargement des messages...
       </div>
     );
   }

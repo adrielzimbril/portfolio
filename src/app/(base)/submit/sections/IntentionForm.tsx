@@ -211,7 +211,7 @@ export function IntentionForm() {
                       required
                       minLength={4}
                     />
-                    <FieldError>Name must be at least 4 characters</FieldError>
+                    <FieldError>Le nom doit contenir au moins 4 caractères</FieldError>
                   </Field>
                 </div>
                 <div className="space-y-2">
@@ -230,7 +230,7 @@ export function IntentionForm() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
-                    <FieldError>Please enter a valid email</FieldError>
+                    <FieldError>Veuillez saisir un email valide</FieldError>
                   </Field>
                 </div>
               </div>
@@ -250,7 +250,7 @@ export function IntentionForm() {
                   onChange={(e) => setUrl(e.target.value)}
                   required
                 />
-                <FieldError>Please enter a valid URL</FieldError>
+                <FieldError>Veuillez saisir une URL valide</FieldError>
               </Field>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

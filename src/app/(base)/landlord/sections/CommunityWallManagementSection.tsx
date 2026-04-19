@@ -152,9 +152,9 @@ export function CommunityWallManagementSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Community Wall Management</h2>
+        <h2 className="text-2xl font-bold">Gestion du mur communautaire</h2>
         <Button onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? "Cancel" : "Add Message"}
+          {showAddForm ? "Annuler" : "Ajouter un message"}
         </Button>
       </div>
 
@@ -165,7 +165,7 @@ export function CommunityWallManagementSection() {
             className="space-y-4"
           >
             <div>
-              <Label htmlFor="creatorName">Creator Name</Label>
+              <Label htmlFor="creatorName">Nom du créateur</Label>
               <Input
                 id="creatorName"
                 value={newMessage.creator_name}
@@ -176,7 +176,7 @@ export function CommunityWallManagementSection() {
               />
             </div>
             <div>
-              <Label htmlFor="avatarUrl">Avatar URL (optional)</Label>
+              <Label htmlFor="avatarUrl">URL de l'avatar (optionnel)</Label>
               <Input
                 id="avatarUrl"
                 value={newMessage.creator_avatar_url}
@@ -189,7 +189,7 @@ export function CommunityWallManagementSection() {
               />
             </div>
             <div className="space-y-4">
-              <Label>Messages by Language</Label>
+              <Label>Messages par langue</Label>
               {Object.values(Locale).map((locale) => (
                 <div key={locale}>
                   <Label htmlFor={`message-${locale}`}>
@@ -197,7 +197,7 @@ export function CommunityWallManagementSection() {
                   </Label>
                   <Textarea
                     id={`message-${locale}`}
-                    placeholder={`Message in ${locale.toUpperCase()}`}
+                    placeholder={`Message en ${locale.toUpperCase()}`}
                     value={newMessage.messages[locale] || ""}
                     onChange={(e) =>
                       setNewMessage({
@@ -213,14 +213,14 @@ export function CommunityWallManagementSection() {
               ))}
             </div>
             <Button type="submit">
-              {editingMessage ? "Update Message" : "Add Message"}
+              {editingMessage ? "Mettre à jour le message" : "Ajouter le message"}
             </Button>
           </form>
         </Card>
       )}
 
       {isLoading ? (
-        <div>Loading...</div>
+        <div>Chargement...</div>
       ) : (
         <div className="grid gap-4">
           {messages?.map((msg: CommunityMessage) => (
@@ -242,7 +242,7 @@ export function CommunityWallManagementSection() {
                         size="sm"
                         onClick={() => handleEditMessage(msg)}
                       >
-                        Edit
+                        Modifier
                       </Button>
                     </div>
                     {msg.messages &&
@@ -266,7 +266,7 @@ export function CommunityWallManagementSection() {
                   size="sm"
                   onClick={() => handleDeleteMessage(msg.id)}
                 >
-                  Delete
+                  Supprimer
                 </Button>
               </div>
             </Card>

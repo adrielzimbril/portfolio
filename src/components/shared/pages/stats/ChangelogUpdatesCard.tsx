@@ -169,7 +169,7 @@ export function ChangelogUpdatesCard({
                 <h6 className="tracking-wide">Changelog</h6>
                 <p className="flex gap-1 text-xs text-muted-foreground">
                   <span className="text-xs text-muted-foreground">
-                    {count} updates
+                    {count} mises à jour
                   </span>
                 </p>
               </div>

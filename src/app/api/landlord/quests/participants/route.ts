@@ -89,7 +89,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ participant: data });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to add participant" },
+      { error: "Impossible d'ajouter le participant" },
       { status: 500 },
     );
   }

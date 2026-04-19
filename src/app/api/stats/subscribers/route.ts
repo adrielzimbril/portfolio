@@ -99,7 +99,7 @@ export async function GET(req: NextRequest) {
     return json({ error: "Invalid scope" }, 400);
   } catch (e: unknown) {
     return json(
-      { error: (e as Error)?.message || "Failed to fetch stats" },
+      { error: (e as Error)?.message || "Impossible de récupérer les statistiques" },
       500,
     );
   }

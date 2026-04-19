@@ -100,7 +100,7 @@ export function ThoughtMostViewedCard({
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-b-base">
-                      <span className="text-sm">No image</span>
+                      <span className="text-sm">Aucune image</span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
@@ -143,13 +143,13 @@ export function ThoughtMostViewedCard({
           <div className="relative flex flex-col items-start justify-between gap-4 md:gap-6 size-full pointer-events-none">
             <div className="flex flex-col items-start justify-center gap-4">
               <Badge className={cn("relative font-medium")} size="xl">
-                Most Viewed Thought
+                Article le plus vu
               </Badge>
               <Link
                 href={getResourcesUrl(PageType.THOUGHT, slug)}
                 className="flex flex-col items-start justify-center gap-4"
               >
-                <h6 className="hidden h4 font-medium">Most Viewed Thought</h6>
+                <h6 className="hidden h4 font-medium">Article le plus vu</h6>
                 <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
                   {title}
                 </p>

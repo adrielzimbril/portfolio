@@ -128,9 +128,9 @@ export function QuestsManagementSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Quest Participants Management</h2>
+        <h2 className="text-2xl font-bold">Gestion des participants aux challenges</h2>
         <Button onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? "Cancel" : "Add Participant"}
+          {showAddForm ? "Annuler" : "Ajouter un participant"}
         </Button>
       </div>
 
@@ -138,14 +138,14 @@ export function QuestsManagementSection() {
         <Card className="p-6">
           <form onSubmit={handleAddParticipant} className="space-y-4">
             <div>
-              <Label htmlFor="quest">Quest</Label>
+              <Label htmlFor="quest">Challenge</Label>
               <Select
                 value={selectedQuest}
                 onValueChange={setSelectedQuest}
                 required
               >
                 <SelectTrigger id="quest">
-                  <SelectValue placeholder="Select a quest" />
+                  <SelectValue placeholder="Sélectionner un challenge" />
                 </SelectTrigger>
                 <SelectContent>
                   {quests?.map((quest) => (
@@ -157,7 +157,7 @@ export function QuestsManagementSection() {
               </Select>
             </div>
             <div>
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">Nom</Label>
               <Input
                 id="name"
                 value={newParticipant.name}
@@ -203,10 +203,10 @@ export function QuestsManagementSection() {
                   setNewParticipant({ ...newParticipant, sendEmail: checked })
                 }
               />
-              <Label htmlFor="sendEmail">Send email notification</Label>
+              <Label htmlFor="sendEmail">Envoyer une notification par email</Label>
             </div>
             <div>
-              <Label htmlFor="language">Language</Label>
+              <Label htmlFor="language">Langue</Label>
               <Select
                 value={newParticipant.language}
                 onValueChange={(value: Locale) =>
@@ -214,7 +214,7 @@ export function QuestsManagementSection() {
                 }
               >
                 <SelectTrigger id="language">
-                  <SelectValue placeholder="Select language" />
+                  <SelectValue placeholder="Sélectionner une langue" />
                 </SelectTrigger>
                 <SelectContent>
                   {Object.values(Locale).map((locale) => (
@@ -225,23 +225,23 @@ export function QuestsManagementSection() {
                 </SelectContent>
               </Select>
             </div>
-            <Button type="submit">Add Participant</Button>
+            <Button type="submit">Ajouter le participant</Button>
           </form>
         </Card>
       )}
 
       {isLoading ? (
-        <div>Loading...</div>
+        <div>Chargement...</div>
       ) : (
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
-            <Label htmlFor="filterQuest">Filter by Quest</Label>
+            <Label htmlFor="filterQuest">Filtrer par challenge</Label>
             <Select value={selectedQuest} onValueChange={setSelectedQuest}>
               <SelectTrigger id="filterQuest" className="w-64">
-                <SelectValue placeholder="All quests" />
+                <SelectValue placeholder="Tous les challenges" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All quests</SelectItem>
+                <SelectItem value="all">Tous les challenges</SelectItem>
                 {quests?.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
@@ -266,7 +266,7 @@ export function QuestsManagementSection() {
                       </span>
                       {participant.source && (
                         <span className="text-xs px-2 py-1 bg-muted rounded">
-                          from {participant.source}
+                          depuis {participant.source}
                         </span>
                       )}
                       <Select
@@ -299,7 +299,7 @@ export function QuestsManagementSection() {
                         rel="noopener noreferrer"
                         className="text-sm text-blue-500 hover:underline"
                       >
-                        View Work
+                        Voir le travail
                       </a>
                     )}
                     <p className="text-xs text-muted-foreground">
