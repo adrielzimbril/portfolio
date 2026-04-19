@@ -147,6 +147,8 @@ export function AdminShell({
               } else if (isQuestPage) {
                 const questType = item.key.replace("quests-", "");
                 route = `/landlord/quests/${questType}`;
+              } else if (item.key === "overview") {
+                route = "/landlord";
               }
 
               if (route) {
