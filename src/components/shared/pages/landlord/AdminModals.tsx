@@ -139,7 +139,10 @@ export function ParticipantModal({
                 id="participant-name"
                 value={form.name}
                 onChange={(event) =>
-                  setForm((current) => ({ ...current, name: event.target.value }))
+                  setForm((current) => ({
+                    ...current,
+                    name: event.target.value,
+                  }))
                 }
                 required
               />
@@ -277,7 +280,10 @@ export function MessageModal({
           </DialogDescription>
         </DialogHeader>
         <DialogSeparator />
-        <form onSubmit={handleSubmit} className="grid gap-5">
+        <form
+          onSubmit={handleSubmit}
+          className="grid gap-5 max-h-[calc(100vh-20rem)] overflow-y-auto pr-2"
+        >
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="creator-name">Nom du créateur</Label>
