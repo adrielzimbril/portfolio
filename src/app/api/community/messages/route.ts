@@ -1,10 +1,18 @@
 import { NextResponse } from "next/server";
 import logger from "@/utils/logger";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+import { Database } from "@/integrations/supabase/types";
+import { supabaseKey } from "@/integrations/supabase/client";
 
 export async function GET() {
   try {
     logger.info("API: Fetching messages from community_wall");
+
+    // Create a simple Supabase client without cookies for API route
+    const supabase = createSupabaseClient<Database>(
+      supabaseKey.url!,
+      supabaseKey.anonKey!,
+    );
 
     const { data: messages, error } = await supabase
       .from("community_wall")
