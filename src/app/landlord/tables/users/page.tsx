@@ -1,5 +1,5 @@
-import { UsersSection } from "./UsersSection";
+import { UsersTableSection } from "@/landlord/pages/UsersTableSection";
 
 export default function UsersPage() {
-  return <UsersSection />;
+  return <UsersTableSection />;
 }

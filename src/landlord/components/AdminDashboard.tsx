@@ -6,22 +6,28 @@ import { landlordRoutes } from "@/data/landlordRoutes";
 import { signOut } from "@/integrations/auth/provider/supabase";
 import { toast } from "@/lib/toast";
 import logger from "@/utils/logger";
-import { AdminShell } from "./AdminShell";
-import { ConfirmDialog } from "./AdminPrimitives";
-import { MessageModal, ParticipantModal } from "./AdminModals";
+import { AdminShell } from "@/landlord/components/AdminShell";
+import {
+  AdminPrimitives,
+  ConfirmDialog,
+} from "@/landlord/components/AdminPrimitives";
+import {
+  MessageModal,
+  ParticipantModal,
+} from "@/landlord/components/AdminModals";
 import {
   CommunityPanel,
   OverviewPanel,
   QuestsPanel,
   TablesPanel,
   UsersPanel,
-} from "./AdminPanels";
+} from "@/landlord/components/AdminPanels";
 import type {
   AdminUser,
   AdminView,
   CommunityMessage,
   DataTableKey,
-} from "./admin-types";
+} from "@/landlord/components/admin-types";
 import {
   dataTableKey,
   fetchLandlordTable,
@@ -29,7 +35,7 @@ import {
   fetchParticipants,
   fetchQuests,
   participantsKey,
-} from "./admin-utils";
+} from "@/landlord/components/admin-utils";
 
 const pageSize = 10;
 
@@ -44,9 +50,8 @@ export function AdminDashboard({ user }: { user: AdminUser }) {
   const [editingMessage, setEditingMessage] = useState<CommunityMessage | null>(
     null,
   );
-  const [messageToDelete, setMessageToDelete] = useState<CommunityMessage | null>(
-    null,
-  );
+  const [messageToDelete, setMessageToDelete] =
+    useState<CommunityMessage | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [usersPage, setUsersPage] = useState(1);
   const [activeTable, setActiveTable] = useState<DataTableKey>("newsletter");

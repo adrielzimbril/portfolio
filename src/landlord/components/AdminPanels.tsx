@@ -35,22 +35,37 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import { toast } from "@/lib/toast";
-import { AdminCard, EmptyState, MetricCard, SearchBox, StatusPill, TablePager } from "./AdminPrimitives";
+import { landlordRoutes } from "@/data/landlordRoutes";
+import { Locale } from "@/integrations/i18n/config";
+import logger from "@/utils/logger";
+import {
+  AdminCard,
+  EmptyState,
+  MetricCard,
+  SearchBox,
+  StatusPill,
+  TablePager,
+} from "@/landlord/components/AdminPrimitives";
 import type {
+  AdminUser,
+  AdminView,
   CommunityMessage,
   DataTableKey,
   LandlordTableResponse,
   Participant,
   QuestSummary,
-} from "./admin-types";
+} from "@/landlord/components/admin-types";
 import {
   dataTableKey,
+  fetchLandlordTable,
+  fetchMessages,
+  fetchParticipants,
+  fetchQuests,
   formatDate,
   formatTime,
   normalizeMessage,
   participantsKey,
-} from "./admin-utils";
+} from "@/landlord/components/admin-utils";
 
 export function OverviewPanel({
   participants,
@@ -64,14 +79,20 @@ export function OverviewPanel({
   messagesError?: unknown;
 }) {
   const stats = useMemo(() => {
-    const registrations = participants.filter((item) => item.type === "register");
-    const submissions = participants.filter((item) => item.type === "submission");
+    const registrations = participants.filter(
+      (item) => item.type === "register",
+    );
+    const submissions = participants.filter(
+      (item) => item.type === "submission",
+    );
     const today = new Date().toDateString();
     const todayActivity =
-      participants.filter((item) => new Date(item.created_at).toDateString() === today)
-        .length +
-      messages.filter((item) => new Date(item.created_at).toDateString() === today)
-        .length;
+      participants.filter(
+        (item) => new Date(item.created_at).toDateString() === today,
+      ).length +
+      messages.filter(
+        (item) => new Date(item.created_at).toDateString() === today,
+      ).length;
 
     return {
       registrations: registrations.length,
@@ -161,12 +182,16 @@ export function OverviewPanel({
                       <Icon size={17} />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium">{item.title}</p>
+                      <p className="truncate text-sm font-medium">
+                        {item.title}
+                      </p>
                       <p className="truncate text-xs text-black/45">
                         {item.subtitle}
                       </p>
                     </div>
-                    <p className="text-xs text-black/45">{formatDate(item.date)}</p>
+                    <p className="text-xs text-black/45">
+                      {formatDate(item.date)}
+                    </p>
                   </div>
                 );
               })}
@@ -197,7 +222,9 @@ export function OverviewPanel({
               >
                 <span className="text-sm">{label}</span>
                 <StatusPill
-                  tone={state === "OK" || state === "Admin" ? "success" : "danger"}
+                  tone={
+                    state === "OK" || state === "Admin" ? "success" : "danger"
+                  }
                 >
                   {state}
                 </StatusPill>
@@ -250,9 +277,7 @@ export function QuestsPanel({
     <div className="grid gap-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            Quests
-          </h2>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]">Quests</h2>
           <p className="mt-1 text-sm text-black/45">
             Inscriptions et soumissions, avec accès direct aux rendus.
           </p>
@@ -331,7 +356,9 @@ export function QuestsPanel({
                           {participant.name?.charAt(0)?.toUpperCase() || "?"}
                         </div>
                         <div className="min-w-0">
-                          <p className="truncate font-medium">{participant.name}</p>
+                          <p className="truncate font-medium">
+                            {participant.name}
+                          </p>
                           <p className="truncate text-xs text-black/45">
                             {participant.email}
                           </p>
@@ -345,7 +372,9 @@ export function QuestsPanel({
                     </td>
                     <td className="px-5 py-4">
                       <StatusPill
-                        tone={participant.type === "submission" ? "info" : "warning"}
+                        tone={
+                          participant.type === "submission" ? "info" : "warning"
+                        }
                       >
                         {participant.type === "submission"
                           ? "Soumission"
@@ -531,9 +560,13 @@ export function CommunityPanel({
                             </div>
                           )}
                           <div>
-                            <p className="font-medium">{message.creator_name}</p>
+                            <p className="font-medium">
+                              {message.creator_name}
+                            </p>
                             <p className="text-xs text-black/45">
-                              {message.user_id ? "Utilisateur lié" : "Ajout manuel"}
+                              {message.user_id
+                                ? "Utilisateur lié"
+                                : "Ajout manuel"}
                             </p>
                           </div>
                         </div>
@@ -578,7 +611,9 @@ export function CommunityPanel({
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="w-44">
-                            <DropdownMenuItem onClick={() => onOpenEdit(message)}>
+                            <DropdownMenuItem
+                              onClick={() => onOpenEdit(message)}
+                            >
                               <Pencil size={14} />
                               Modifier
                             </DropdownMenuItem>
@@ -654,7 +689,10 @@ function DataTable({
           </thead>
           <tbody className="divide-y divide-black/6">
             {rows.map((row, index) => (
-              <tr key={String(row.id || index)} className="hover:bg-black/[0.02]">
+              <tr
+                key={String(row.id || index)}
+                className="hover:bg-black/[0.02]"
+              >
                 {columns.map((column) => (
                   <td key={column} className="max-w-64 truncate px-5 py-4">
                     {formatCell(row[column])}
@@ -726,9 +764,17 @@ export function UsersPanel({
   );
 }
 
-const tableOptions: Array<{ value: DataTableKey; label: string; detail: string }> = [
+const tableOptions: Array<{
+  value: DataTableKey;
+  label: string;
+  detail: string;
+}> = [
   { value: "newsletter", label: "Newsletter", detail: "Abonnés et sources" },
-  { value: "submissions", label: "Submit entries", detail: "Demandes entrantes" },
+  {
+    value: "submissions",
+    label: "Submit entries",
+    detail: "Demandes entrantes",
+  },
   { value: "hubRequests", label: "Hub requests", detail: "Demandes produits" },
   { value: "reactions", label: "Reactions", detail: "Engagement contenu" },
 ];
@@ -758,7 +804,8 @@ export function TablesPanel({
             Tables Supabase
           </h2>
           <p className="mt-1 text-sm text-black/45">
-            Lecture rapide des tables utiles, paginée pour éviter les longues pages.
+            Lecture rapide des tables utiles, paginée pour éviter les longues
+            pages.
           </p>
         </div>
         <Select

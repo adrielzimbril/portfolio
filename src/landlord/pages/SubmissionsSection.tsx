@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AdminCard } from "@/components/shared/pages/landlord/AdminPrimitives";
+import { AdminCard } from "@/landlord/components/AdminPrimitives";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { Locale } from "@/integrations/i18n/config";
 import { logger } from "@/utils";
@@ -36,16 +36,18 @@ export function SubmissionsSection() {
     work_url: "",
   });
 
-  const { data: quests, isLoading: isLoadingQuests } = useSWR(
-    "quests",
-    () =>
-      getAllQuests().catch((err) => {
-        logger.error("Failed to fetch quests:", err);
-        return [];
-      }),
+  const { data: quests, isLoading: isLoadingQuests } = useSWR("quests", () =>
+    getAllQuests().catch((err) => {
+      logger.error("Failed to fetch quests:", err);
+      return [];
+    }),
   );
 
-  const { data: participants, isLoading, mutate } = useSWR(
+  const {
+    data: participants,
+    isLoading,
+    mutate,
+  } = useSWR(
     () =>
       `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
     async (url) => {
@@ -64,7 +66,8 @@ export function SubmissionsSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...newParticipant,
-          challenge_slug: selectedQuest === "all" ? (quests?.[0]?.slug || "") : selectedQuest,
+          challenge_slug:
+            selectedQuest === "all" ? quests?.[0]?.slug || "" : selectedQuest,
         }),
       });
       return response;
@@ -72,7 +75,12 @@ export function SubmissionsSection() {
   );
 
   const handleAddParticipant = async () => {
-    if (!newParticipant.name || !newParticipant.email || !newParticipant.work_url) return;
+    if (
+      !newParticipant.name ||
+      !newParticipant.email ||
+      !newParticipant.work_url
+    )
+      return;
     if (selectedQuest === "all" && !quests?.[0]?.slug) return;
 
     try {
@@ -96,14 +104,19 @@ export function SubmissionsSection() {
     }
   };
 
-  const filteredParticipants = participants?.filter((p: any) => p.type === "submission") || [];
+  const filteredParticipants =
+    participants?.filter((p: any) => p.type === "submission") || [];
 
   return (
     <div className="grid gap-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.02em]">Soumissions</h2>
-          <p className="mt-1 text-sm text-black/45">Gérer les rendus de quests</p>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]">
+            Soumissions
+          </h2>
+          <p className="mt-1 text-sm text-black/45">
+            Gérer les rendus de quests
+          </p>
         </div>
         <div className="flex gap-2">
           <Select
@@ -143,7 +156,9 @@ export function SubmissionsSection() {
               <Input
                 id="name"
                 value={newParticipant.name}
-                onChange={(e) => setNewParticipant({ ...newParticipant, name: e.target.value })}
+                onChange={(e) =>
+                  setNewParticipant({ ...newParticipant, name: e.target.value })
+                }
                 placeholder="Nom du participant"
               />
             </div>
@@ -153,7 +168,12 @@ export function SubmissionsSection() {
                 id="email"
                 type="email"
                 value={newParticipant.email}
-                onChange={(e) => setNewParticipant({ ...newParticipant, email: e.target.value })}
+                onChange={(e) =>
+                  setNewParticipant({
+                    ...newParticipant,
+                    email: e.target.value,
+                  })
+                }
                 placeholder="email@example.com"
               />
             </div>
@@ -163,7 +183,12 @@ export function SubmissionsSection() {
                 id="work_url"
                 type="url"
                 value={newParticipant.work_url}
-                onChange={(e) => setNewParticipant({ ...newParticipant, work_url: e.target.value })}
+                onChange={(e) =>
+                  setNewParticipant({
+                    ...newParticipant,
+                    work_url: e.target.value,
+                  })
+                }
                 placeholder="https://..."
               />
             </div>
@@ -172,7 +197,12 @@ export function SubmissionsSection() {
               <Textarea
                 id="message"
                 value={newParticipant.message}
-                onChange={(e) => setNewParticipant({ ...newParticipant, message: e.target.value })}
+                onChange={(e) =>
+                  setNewParticipant({
+                    ...newParticipant,
+                    message: e.target.value,
+                  })
+                }
                 placeholder="Message optionnel"
               />
             </div>
@@ -184,7 +214,9 @@ export function SubmissionsSection() {
                   setNewParticipant({ ...newParticipant, sendEmail: checked })
                 }
               />
-              <Label htmlFor="sendEmail">Envoyer un email de confirmation</Label>
+              <Label htmlFor="sendEmail">
+                Envoyer un email de confirmation
+              </Label>
             </div>
             <div>
               <Label htmlFor="language">Langue</Label>
@@ -208,7 +240,11 @@ export function SubmissionsSection() {
             </div>
             <div className="flex gap-2">
               <Button onClick={handleAddParticipant} disabled={isMutating}>
-                {isMutating ? <Loader2 size={16} className="animate-spin" /> : "Ajouter"}
+                {isMutating ? (
+                  <Loader2 size={16} className="animate-spin" />
+                ) : (
+                  "Ajouter"
+                )}
               </Button>
               <Button variant="outline" onClick={() => setShowAddForm(false)}>
                 Annuler
@@ -258,7 +294,9 @@ export function SubmissionsSection() {
                       )}
                     </td>
                     <td className="px-5 py-4">
-                      {new Date(participant.created_at).toLocaleDateString("fr-FR")}
+                      {new Date(participant.created_at).toLocaleDateString(
+                        "fr-FR",
+                      )}
                     </td>
                   </tr>
                 ))}

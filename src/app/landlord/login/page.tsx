@@ -8,7 +8,7 @@ import { createClient } from "@/integrations/supabase/server";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
 import { ConfigValue } from "@/config";
 import { landlordRoutes } from "@/data/landlordRoutes";
-import { LandlordLoginPanel } from "@/components/shared/pages/landlord/LoginButtons";
+import { LoginButtons } from "@/landlord/components/LoginButtons";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();

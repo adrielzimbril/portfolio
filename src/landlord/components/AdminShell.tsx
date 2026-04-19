@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import {
   Database,
   Home,
@@ -17,7 +18,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import { cn } from "@/utils/utils";
-import type { AdminUser, AdminView, NavItem } from "./admin-types";
+import type {
+  AdminUser,
+  AdminView,
+  NavItem,
+} from "@/landlord/components/admin-types";
 
 export const adminNavItems: NavItem[] = [
   {
@@ -143,17 +148,22 @@ export function AdminShell({
               let route = null;
 
               if (isTablePage) {
-                route = `/landlord/tables/${item.key}`;
+                route =
+                  landlordRoutes.tables[
+                    item.key as keyof typeof landlordRoutes.tables
+                  ]?.link;
               } else if (isQuestPage) {
-                const questType = item.key.replace("quests-", "");
-                route = `/landlord/quests/${questType}`;
+                const questType = item.key.replace("quests-", "") as
+                  | "registrations"
+                  | "submissions";
+                route = landlordRoutes.quests[questType]?.link;
               } else if (item.key === "overview") {
-                route = "/landlord";
+                route = landlordRoutes.landlord.link;
               }
 
               if (route) {
                 return (
-                  <a
+                  <Link
                     key={item.key}
                     href={route}
                     className={cn(
@@ -175,7 +185,7 @@ export function AdminShell({
                         {item.description}
                       </span>
                     </span>
-                  </a>
+                  </Link>
                 );
               }
 
@@ -220,21 +230,22 @@ export function AdminShell({
           </div>
 
           <div className="mt-auto grid gap-2">
-            <a
+            <Link
               href="/"
               className="flex items-center gap-3 rounded-2xl px-3 py-3 text-sm text-white/55 hover:bg-white/8 hover:text-white"
             >
               <Home size={17} />
               Retour au site
-            </a>
-            <button
+            </Link>
+            <Button
+              variant="none"
               type="button"
               onClick={onSignOut}
-              className="flex cursor-pointer items-center gap-3 rounded-2xl px-3 py-3 text-sm text-white/55 hover:bg-white/8 hover:text-white"
+              className="flex items-center gap-3 rounded-2xl px-3 py-3 text-sm text-white/55 hover:bg-white/8 hover:text-white"
             >
               <LogOut size={17} />
               Déconnexion
-            </button>
+            </Button>
           </div>
         </div>
       </aside>

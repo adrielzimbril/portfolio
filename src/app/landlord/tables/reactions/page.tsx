@@ -1,5 +1,5 @@
-import { ReactionsSection } from "./ReactionsSection";
+import { ReactionsTableSection } from "@/landlord/pages/ReactionsTableSection";
 
 export default function ReactionsPage() {
-  return <ReactionsSection />;
+  return <ReactionsTableSection />;
 }

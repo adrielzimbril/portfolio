@@ -6,15 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { AdminCard } from "@/landlord/components/AdminPrimitives";
+import type { CommunityMessage } from "@/landlord/components/admin-types";
+import { normalizeMessage } from "@/landlord/components/admin-utils";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
+import { landlordRoutes } from "@/data/landlordRoutes";
 import logger from "@/utils/logger";
 import { Locale } from "@/types";
 
@@ -154,9 +150,13 @@ export function CommunityWallManagementSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">{t("admin.landlord.community.title")}</h2>
+        <h2 className="text-2xl font-bold">
+          {t("admin.landlord.community.title")}
+        </h2>
         <Button onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? t("common.confirmation.cancel") : t("admin.landlord.community.actions.add")}
+          {showAddForm
+            ? t("common.confirmation.cancel")
+            : t("admin.landlord.community.actions.add")}
         </Button>
       </div>
 
@@ -167,7 +167,9 @@ export function CommunityWallManagementSection() {
             className="space-y-4"
           >
             <div>
-              <Label htmlFor="creatorName">{t("admin.landlord.community.fields.creatorName")}</Label>
+              <Label htmlFor="creatorName">
+                {t("admin.landlord.community.fields.creatorName")}
+              </Label>
               <Input
                 id="creatorName"
                 value={newMessage.creator_name}
@@ -178,7 +180,9 @@ export function CommunityWallManagementSection() {
               />
             </div>
             <div>
-              <Label htmlFor="avatarUrl">{t("admin.landlord.community.fields.avatarUrl")}</Label>
+              <Label htmlFor="avatarUrl">
+                {t("admin.landlord.community.fields.avatarUrl")}
+              </Label>
               <Input
                 id="avatarUrl"
                 value={newMessage.creator_avatar_url}
@@ -191,7 +195,9 @@ export function CommunityWallManagementSection() {
               />
             </div>
             <div className="space-y-4">
-              <Label>{t("admin.landlord.community.fields.messagesByLanguage")}</Label>
+              <Label>
+                {t("admin.landlord.community.fields.messagesByLanguage")}
+              </Label>
               {Object.values(Locale).map((locale) => (
                 <div key={locale}>
                   <Label htmlFor={`message-${locale}`}>
@@ -201,7 +207,10 @@ export function CommunityWallManagementSection() {
                   </Label>
                   <Textarea
                     id={`message-${locale}`}
-                    placeholder={t("admin.landlord.community.fields.messagePlaceholder", { locale: locale.toUpperCase() })}
+                    placeholder={t(
+                      "admin.landlord.community.fields.messagePlaceholder",
+                      { locale: locale.toUpperCase() },
+                    )}
                     value={newMessage.messages[locale] || ""}
                     onChange={(e) =>
                       setNewMessage({

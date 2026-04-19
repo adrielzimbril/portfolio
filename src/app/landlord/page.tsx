@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { AdminDashboard } from "@/components/shared/pages/landlord/AdminDashboard";
+import { AdminDashboard } from "@/landlord/components/AdminDashboard";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
 import { createClient } from "@/integrations/supabase/server";
 import { ConfigValue } from "@/config";

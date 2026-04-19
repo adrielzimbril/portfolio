@@ -1,5 +1,5 @@
-import { SubmissionsSection } from "./SubmissionsSection";
+import { SubmissionsTableSection } from "@/landlord/pages/SubmissionsTableSection";
 
 export default function SubmissionsPage() {
-  return <SubmissionsSection />;
+  return <SubmissionsTableSection />;
 }

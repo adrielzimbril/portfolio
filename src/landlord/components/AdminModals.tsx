@@ -23,11 +23,15 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import { Locale } from "@/types";
-import { toast } from "@/lib/toast";
+import { landlordRoutes } from "@/data/landlordRoutes";
 import logger from "@/utils/logger";
-import type { CommunityMessage, QuestSummary } from "./admin-types";
-import { normalizeMessage } from "./admin-utils";
+import { AdminPrimitives } from "@/landlord/components/AdminPrimitives";
+import type {
+  CommunityMessage,
+  QuestSummary,
+} from "@/landlord/components/admin-types";
+import { normalizeMessage } from "@/landlord/components/admin-utils";
+import { toast } from "@/lib/toast";
 
 export function ParticipantModal({
   open,

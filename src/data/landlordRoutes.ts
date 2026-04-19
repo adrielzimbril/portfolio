@@ -13,6 +13,22 @@ export const landlordRoutes = {
     inHeader: false,
     inSitemap: false,
   },
+  quests: {
+    registrations: {
+      name: "Inscriptions",
+      key: "landlord-quests-registrations",
+      link: "/landlord/quests/registrations",
+      inHeader: false,
+      inSitemap: false,
+    },
+    submissions: {
+      name: "Soumissions",
+      key: "landlord-quests-submissions",
+      link: "/landlord/quests/submissions",
+      inHeader: false,
+      inSitemap: false,
+    },
+  },
   tables: {
     newsletter: {
       name: "Newsletter",
