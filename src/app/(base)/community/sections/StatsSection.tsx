@@ -5,7 +5,6 @@ import { StatCard } from "@/components/shared/pages/community/StatCard";
 import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton";
 import { User } from "@supabase/supabase-js";
 import { apiRoutes } from "@/data/api-routes";
-import logger from "@/utils/logger";
 import { useWindowEvent } from "@/hooks/useWindowEvent";
 
 interface Stats {
@@ -28,15 +27,12 @@ export function StatsSection({ user }: StatsSectionProps) {
 
   const refreshStats = async () => {
     try {
-      logger.info("StatsSection: Fetching stats");
       const response = await fetch(apiRoutes.community.stats.link);
       if (response.ok) {
         const data = await response.json();
-        logger.info("StatsSection: Received stats", data);
         setStats(data);
       }
     } catch (error) {
-      logger.error("StatsSection: Failed to refresh community stats", error);
     } finally {
       setIsLoading(false);
     }

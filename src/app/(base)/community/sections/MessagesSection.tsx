@@ -1,6 +1,5 @@
 "use client";
 import React, { useCallback, useState, useEffect } from "react";
-import logger from "@/utils/logger";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
 import { DEMO_MESSAGES } from "@/app/(base)/community/sections/demo-message";
@@ -23,19 +22,14 @@ export function MessagesSection() {
 
   const fetchMessages = useCallback(async () => {
     try {
-      logger.info("MessagesSection: Fetching messages");
       const response = await fetch(apiRoutes.community.messages.link);
       if (response.ok) {
         const data = await response.json();
-        logger.info("MessagesSection: Received messages", {
-          count: data.messages?.length,
-        });
         if (data.messages && data.messages.length > 0) {
           setMessages(transformMessages(data.messages));
         }
       }
     } catch (error) {
-      logger.error("MessagesSection: Failed to fetch messages", error);
     } finally {
       setIsLoading(false);
     }
