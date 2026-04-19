@@ -6,7 +6,15 @@ export type AdminUser = {
   avatarUrl?: string;
 };
 
-export type AdminView = "overview" | "quests" | "community" | "users" | "tables";
+export type AdminView =
+  | "overview"
+  | "quests"
+  | "community"
+  | "newsletter"
+  | "users"
+  | "submissions"
+  | "hubRequests"
+  | "reactions";
 
 export type Participant = {
   id: string;

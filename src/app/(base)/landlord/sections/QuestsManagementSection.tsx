@@ -45,6 +45,8 @@ export function QuestsManagementSection() {
     source: "admin",
     sendEmail: false,
     language: Locale.EN,
+    type: "register" as "register" | "submission",
+    work_url: "",
   });
 
   const fetchQuests = async () => {
@@ -93,6 +95,8 @@ export function QuestsManagementSection() {
           source: "admin",
           sendEmail: false,
           language: Locale.EN,
+          type: "register",
+          work_url: "",
         });
         setShowAddForm(false);
         mutate(
@@ -130,9 +134,13 @@ export function QuestsManagementSection() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">{t("admin.landlord.quests.title")}</h2>
+        <h2 className="text-2xl font-bold">
+          {t("admin.landlord.quests.title")}
+        </h2>
         <Button onClick={() => setShowAddForm(!showAddForm)}>
-          {showAddForm ? t("common.confirmation.cancel") : t("admin.landlord.quests.actions.add")}
+          {showAddForm
+            ? t("common.confirmation.cancel")
+            : t("admin.landlord.quests.actions.add")}
         </Button>
       </div>
 
@@ -140,7 +148,9 @@ export function QuestsManagementSection() {
         <Card className="p-6">
           <form onSubmit={handleAddParticipant} className="space-y-4">
             <div>
-              <Label htmlFor="quest">{t("admin.landlord.quests.fields.quest")}</Label>
+              <Label htmlFor="quest">
+                {t("admin.landlord.quests.fields.quest")}
+              </Label>
               <Select
                 value={selectedQuest}
                 onValueChange={setSelectedQuest}
@@ -159,7 +169,9 @@ export function QuestsManagementSection() {
               </Select>
             </div>
             <div>
-              <Label htmlFor="name">{t("admin.landlord.quests.fields.name")}</Label>
+              <Label htmlFor="name">
+                {t("admin.landlord.quests.fields.name")}
+              </Label>
               <Input
                 id="name"
                 value={newParticipant.name}
@@ -185,7 +197,9 @@ export function QuestsManagementSection() {
               />
             </div>
             <div>
-              <Label htmlFor="message">{t("admin.landlord.quests.fields.message")}</Label>
+              <Label htmlFor="message">
+                {t("admin.landlord.quests.fields.message")}
+              </Label>
               <Textarea
                 id="message"
                 value={newParticipant.message}
@@ -205,10 +219,48 @@ export function QuestsManagementSection() {
                   setNewParticipant({ ...newParticipant, sendEmail: checked })
                 }
               />
-              <Label htmlFor="sendEmail">{t("admin.landlord.quests.fields.sendEmail")}</Label>
+              <Label htmlFor="sendEmail">
+                {t("admin.landlord.quests.fields.sendEmail")}
+              </Label>
             </div>
             <div>
-              <Label htmlFor="language">{t("admin.landlord.quests.fields.language")}</Label>
+              <Label htmlFor="type">Type</Label>
+              <Select
+                value={newParticipant.type}
+                onValueChange={(value: "register" | "submission") =>
+                  setNewParticipant({ ...newParticipant, type: value })
+                }
+              >
+                <SelectTrigger id="type">
+                  <SelectValue placeholder="Sélectionner un type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="register">Inscription</SelectItem>
+                  <SelectItem value="submission">Soumission</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {newParticipant.type === "submission" && (
+              <div>
+                <Label htmlFor="work_url">URL du travail</Label>
+                <Input
+                  id="work_url"
+                  type="url"
+                  value={newParticipant.work_url}
+                  onChange={(e) =>
+                    setNewParticipant({
+                      ...newParticipant,
+                      work_url: e.target.value,
+                    })
+                  }
+                  placeholder="https://..."
+                />
+              </div>
+            )}
+            <div>
+              <Label htmlFor="language">
+                {t("admin.landlord.quests.fields.language")}
+              </Label>
               <Select
                 value={newParticipant.language}
                 onValueChange={(value: Locale) =>
@@ -227,7 +279,9 @@ export function QuestsManagementSection() {
                 </SelectContent>
               </Select>
             </div>
-            <Button type="submit">{t("admin.landlord.quests.actions.addSubmit")}</Button>
+            <Button type="submit">
+              {t("admin.landlord.quests.actions.addSubmit")}
+            </Button>
           </form>
         </Card>
       )}
@@ -237,13 +291,19 @@ export function QuestsManagementSection() {
       ) : (
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
-            <Label htmlFor="filterQuest">{t("admin.landlord.quests.filters.byQuest")}</Label>
+            <Label htmlFor="filterQuest">
+              {t("admin.landlord.quests.filters.byQuest")}
+            </Label>
             <Select value={selectedQuest} onValueChange={setSelectedQuest}>
               <SelectTrigger id="filterQuest" className="w-64">
-                <SelectValue placeholder={t("admin.landlord.quests.filters.allQuests")} />
+                <SelectValue
+                  placeholder={t("admin.landlord.quests.filters.allQuests")}
+                />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{t("admin.landlord.quests.filters.allQuests")}</SelectItem>
+                <SelectItem value="all">
+                  {t("admin.landlord.quests.filters.allQuests")}
+                </SelectItem>
                 {quests?.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
@@ -268,7 +328,9 @@ export function QuestsManagementSection() {
                       </span>
                       {participant.source && (
                         <span className="text-xs px-2 py-1 bg-muted rounded">
-                          {t("admin.landlord.quests.source", { source: participant.source })}
+                          {t("admin.landlord.quests.source", {
+                            source: participant.source,
+                          })}
                         </span>
                       )}
                       <Select

@@ -40,15 +40,33 @@ export const adminNavItems: NavItem[] = [
     icon: MessageSquareText,
   },
   {
+    key: "newsletter",
+    label: "Newsletter",
+    description: "Abonnés et sources",
+    icon: Database,
+  },
+  {
     key: "users",
     label: "Users",
     description: "Contacts et comptes",
     icon: Users,
   },
   {
-    key: "tables",
-    label: "Tables",
-    description: "Données Supabase",
+    key: "submissions",
+    label: "Submissions",
+    description: "Demandes entrantes",
+    icon: Database,
+  },
+  {
+    key: "hubRequests",
+    label: "Hub Requests",
+    description: "Demandes produits",
+    icon: Database,
+  },
+  {
+    key: "reactions",
+    label: "Reactions",
+    description: "Engagement contenu",
     icon: Database,
   },
 ];
@@ -109,6 +127,47 @@ export function AdminShell({
             {adminNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeView === item.key;
+              const isTablePage = [
+                "newsletter",
+                "users",
+                "submissions",
+                "hubRequests",
+                "reactions",
+              ].includes(item.key);
+              const route = isTablePage
+                ? landlordRoutes.tables[
+                    item.key as keyof typeof landlordRoutes.tables
+                  ]?.link
+                : null;
+
+              if (isTablePage && route) {
+                return (
+                  <a
+                    key={item.key}
+                    href={route}
+                    className={cn(
+                      "flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition",
+                      isActive
+                        ? "bg-white text-[#11191f]"
+                        : "text-white/62 hover:bg-white/8 hover:text-white",
+                    )}
+                  >
+                    <Icon size={18} />
+                    <span className="flex flex-col">
+                      <span className="font-medium">{item.label}</span>
+                      <span
+                        className={cn(
+                          "text-xs",
+                          isActive ? "text-black/45" : "text-white/35",
+                        )}
+                      >
+                        {item.description}
+                      </span>
+                    </span>
+                  </a>
+                );
+              }
+
               return (
                 <button
                   key={item.key}
@@ -144,8 +203,8 @@ export function AdminShell({
           <div className="mt-8 rounded-3xl border border-white/10 bg-white/8 p-4">
             <p className="text-sm font-medium">Panel privé</p>
             <p className="mt-2 text-xs leading-5 text-white/50">
-              Gère les entrées du site, les messages publics et les tables utiles
-              sans passer par Supabase.
+              Gère les entrées du site, les messages publics et les tables
+              utiles sans passer par Supabase.
             </p>
           </div>
 
@@ -204,7 +263,12 @@ export function AdminShell({
           >
             <RefreshCw size={17} />
           </Button>
-          <Button variant="outline" size="icon" asPointer aria-label="Notifications">
+          <Button
+            variant="outline"
+            size="icon"
+            asPointer
+            aria-label="Notifications"
+          >
             <Bell size={17} />
           </Button>
           <div className="hidden items-center gap-3 rounded-2xl bg-[#f7f6f1] px-3 py-2 md:flex">
