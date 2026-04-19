@@ -80,15 +80,15 @@ function FloatingCard({
 
 const statsData = [
   { number: "18+", label: "Projects" },
-  { number: "5+", label: "Années" },
-  { number: "100%", label: "Passionné" },
+  { number: "5+", label: "Years" },
+  { number: "100%", label: "Enthusiast" },
 ];
 
 const floatingSkills = [
   "SaaS 🦄",
   "Design 🎨",
   "Innovation 💡",
-  "Go-to-market ✨",
+  "Go To Market ✨",
 ];
 
 export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({

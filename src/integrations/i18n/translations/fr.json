@@ -3,30 +3,24 @@
     "title": "Stats",
     "description": "Des chiffres pour suivre l'évolution, pas pour l'ego. Transparence sur mes métriques réelles.",
     "page": {
-      "title": "Les coulisses en chiffres",
-      "description": "Transparence, croissance et évolution de mon univers créatif."
+      "title": "Les coulisses en chiffres 📊",
+      "description": "Transparence, croissance et évolution de mon univers créatif ✨"
     },
     "sections": {
       "blog": {
-        "title": "Statistiques du Blog",
-        "description": "Métriques de création de contenu et analyse du temps de lecture.",
-        "badge": "Contenu "
+        "badge": "Contenu ✍️"
       },
       "engagement": {
-        "title": "Engagement",
-        "description": "Comment les gens interagissent avec mon contenu et ma communauté.",
-        "badge": "Communauté "
+        "badge": "Engagement 💬"
       },
       "github": {
-        "title": "GitHub",
-        "description": "Contributions open-source et métriques de dépôts.",
-        "badge": "Code "
+        "badge": "Code 🛠️"
       },
       "general": {
-        "badge": "Statistique 👨‍💻"
+        "badge": "Vue d’ensemble 📊"
       },
       "performance": {
-        "badge": "Performance du site ⚡"
+        "badge": "Performance ⚡"
       }
     },
     "cards": {
@@ -40,9 +34,9 @@
         "description": "1 tasse pour 500 mots"
       },
       "siteAge": {
-        "label": "?ge du site",
+        "label": "Âge du site",
         "suffix": "jours",
-        "description": "Lanc? le {date}"
+        "description": "Lancé le {date}"
       },
       "topViewed": {
         "title": "Articles les plus vus",
@@ -65,7 +59,7 @@
         "suffix": "mots"
       },
       "communityMessages": {
-        "label": "Messages de la communaut?",
+        "label": "Messages de la communauté",
         "suffix": "messages"
       },
       "readingTime": {
@@ -73,27 +67,27 @@
         "suffix": "min"
       },
       "githubStars": {
-        "label": "?toiles GitHub"
+        "label": "Étoiles GitHub"
       },
       "mostViewed": {
         "noImage": "Aucune image",
         "badge": "Article le plus vu"
       },
       "changelogUpdates": {
-        "count": "{count} mises ? jour"
+        "count": "{count} mises à jour"
       },
       "github": {
-        "stars": "?toiles GitHub",
+        "stars": "Étoiles GitHub",
         "forks": "Forks",
         "commits": "Commits"
       },
       "changelog": {
-        "updates": "{count} mises ? jour"
+        "updates": "{count} mises à jour"
       }
     },
     "lighthouse": {
       "performance": "Performance",
-      "accessibility": "Accessibilit?",
+      "accessibility": "Accessibilité",
       "bestPractices": "Bonnes pratiques",
       "seo": "SEO",
       "mobile": "Mobile",

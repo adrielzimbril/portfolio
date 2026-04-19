@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { ThoughtMetric } from "@/lib/stats/types";
 import { cn } from "@/utils/utils";
 import { truncateText } from "@/utils/format-text";
@@ -34,6 +35,7 @@ export function ThoughtsTopList({
   decoration,
 }: ThoughtsTopListProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
   const config = {
     truncate: {
       type: "char" as const,
@@ -144,7 +146,8 @@ export function ThoughtsTopList({
                   variant="base"
                 >
                   <span className="capitalize text-xs">
-                    +{thoughts.length - config.maxItems} more
+                    +{thoughts.length - config.maxItems}{" "}
+                    {t("common.button.see-more")}
                   </span>
                 </Link>
               </div>

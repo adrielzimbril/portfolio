@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { cn } from "@/utils/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,6 +31,7 @@ export function ThoughtsCategoriesCard({
   decorationEmoji,
 }: ThoughtsCategoriesCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations();
   const config = {
     maxItems: 2,
   };
@@ -121,7 +123,8 @@ export function ThoughtsCategoriesCard({
                   variant="base"
                 >
                   <span className="capitalize text-xs">
-                    +{data.length - config.maxItems} more
+                    +{data.length - config.maxItems}{" "}
+                    {t("common.button.see-more")}
                   </span>
                 </Link>
               </div>
