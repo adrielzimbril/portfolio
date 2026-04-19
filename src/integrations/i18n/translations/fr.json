@@ -766,7 +766,19 @@
         "mobile": "Routes 🗺️"
       },
       "rss": {
-        "default": "RSS"
+        "default": "RSS",
+        "desktop": "RSS",
+        "mobile": "RSS 📡"
+      },
+      "rss-atom": {
+        "default": "RSS Atom",
+        "desktop": "RSS Atom",
+        "mobile": "RSS Atom 📡"
+      },
+      "rss-json": {
+        "default": "RSS JSON",
+        "desktop": "RSS JSON",
+        "mobile": "RSS JSON 📡"
       },
       "submit": {
         "default": "Soumettre"
@@ -1490,6 +1502,7 @@
     "groups": {
       "main": "Pages Principales",
       "community": "Communauté",
+      "contact": "Contact",
       "tools": "Outils",
       "rss": "RSS",
       "legal": "Légal"
