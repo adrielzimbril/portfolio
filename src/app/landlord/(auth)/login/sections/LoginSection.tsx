@@ -77,15 +77,15 @@ export function LoginSection({ reason }: { reason?: string }) {
               <Sparkles size={20} />
             </div>
             <div>
-              <p className="text-sm font-semibold">Shirofolio</p>
+              <p className="text-sm font-semibold">Adriel Zimbril</p>
               <p className="text-xs text-white/60">Secure workspace</p>
             </div>
           </div>
 
-          <div className="relative z-10 overflow-hidden rounded-[28px] border border-white/10 bg-white/8 p-6">
+          <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-6">
             <div className="mb-6 flex items-center justify-between text-xs text-white/55">
               <span>Secure workspace</span>
-              <span>Shirofolio</span>
+              <span>Adriel Zimbril</span>
             </div>
             <div className="grid gap-3">
               <div className="rounded-2xl bg-white p-4 text-[#11191f]">

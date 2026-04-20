@@ -35,7 +35,7 @@ export function ReactionsTableSection() {
           <p className="mt-1 text-sm text-black/45">Engagement contenu</p>
         </div>
         <Button variant="outline" asIcon asPointer onClick={() => mutate()}>
-          <RefreshCw size={16} />
+          <RefreshCw size={16} className="mr-2" />
           Rafraîchir
         </Button>
       </div>

@@ -31,7 +31,7 @@ export function Header({
   const activeLabel = getActiveLabel();
 
   return (
-    <header className="mb-4 flex items-center gap-3 rounded-[26px] border border-black/8 bg-white p-3 shadow-sm">
+    <header className="mb-4 flex items-center gap-3 rounded-2xl border border-black/8 bg-white p-3 shadow-sm">
       <Button
         variant="outline"
         size="icon"

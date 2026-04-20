@@ -61,12 +61,12 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed inset-y-3 left-3 z-40 w-72 -translate-x-[calc(100%+1rem)] rounded-[28px] bg-[#11191f] p-4 text-white transition-transform duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full",
+        "fixed inset-y-3 left-3 z-40 w-72 -translate-x-[calc(100%+1rem)] rounded-2xl bg-[#11191f] p-4 text-white transition-transform duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full",
         sidebarOpen && "translate-x-0"
       )}
     >
       {/* Logo */}
-      <div className="mb-6 flex items-center justify-between flex-shrink-0">
+      <div className="mb-6 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           <div className="flex size-10 items-center justify-center rounded-xl bg-white text-[#11191f]">
             <ShieldCheck size={19} />

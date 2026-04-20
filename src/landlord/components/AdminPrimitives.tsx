@@ -26,7 +26,7 @@ export function AdminCard({
   return (
     <Card
       className={cn(
-        "rounded-[22px] border border-black/8 bg-white shadow-[0_1px_0_rgba(17,25,31,0.04)]",
+        "rounded-xl border border-black/8 bg-white shadow-[0_1px_0_rgba(17,25,31,0.04)]",
         className,
       )}
     >
