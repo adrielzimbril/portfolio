@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import useSWR from "swr";
-import { FileText, Loader2, RefreshCw } from "lucide-react";
+import { FileText, Loader2, RefreshCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AdminCard, EmptyState, TablePager } from "@/landlord/components/AdminPrimitives";
+import { DataDetailsModal } from "@/landlord/components/AdminModals";
 import { dataTableKey, fetchLandlordTable, formatDate } from "@/landlord/components/admin-utils";
 import type { DataTableKey, LandlordTableResponse } from "@/landlord/components/admin-types";
 
@@ -32,6 +33,9 @@ function DataRows({
   const rows = response?.rows || [];
   const columns = rows[0] ? Object.keys(rows[0]).slice(0, 8) : [];
 
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<Record<string, any> | null>(null);
+
   if (!rows.length) {
     return (
       <div className="p-6">
@@ -43,6 +47,11 @@ function DataRows({
       </div>
     );
   }
+
+  const onViewDetails = (row: Record<string, any>) => {
+    setSelectedRow(row);
+    setDetailsOpen(true);
+  };
 
   return (
     <div className="flex flex-col max-h-[600px] xl:max-h-[calc(100dvh-320px)]">
@@ -56,19 +65,31 @@ function DataRows({
                     {column}
                   </th>
                 ))}
+                <th className="px-5 py-4 text-right font-medium">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/6">
               {rows.map((row, index) => (
                 <tr
                   key={String(row.id || index)}
-                  className="hover:bg-black/2 transition-colors"
+                  className="hover:bg-black/2 transition-colors group"
                 >
                   {columns.map((column) => (
                     <td key={column} className="max-w-64 truncate px-5 py-4">
                       {formatCell(row[column])}
                     </td>
                   ))}
+                  <td className="px-5 py-4 text-right">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      asPointer
+                      onClick={() => onViewDetails(row as Record<string, any>)}
+                      className="size-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Eye size={14} />
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -83,6 +104,12 @@ function DataRows({
           onPageChange={onPageChange}
         />
       </div>
+
+      <DataDetailsModal
+        open={detailsOpen}
+        onOpenChange={setDetailsOpen}
+        data={selectedRow}
+      />
     </div>
   );
 }

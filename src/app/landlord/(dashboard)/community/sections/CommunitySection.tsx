@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import useSWR, { mutate } from "swr";
-import { Loader2, MessageSquareText, MoreHorizontal, Pencil, Plus, RefreshCw, Trash2 } from "lucide-react";
+import { Loader2, MessageSquareText, MoreHorizontal, Pencil, Plus, RefreshCw, Trash2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,7 +18,7 @@ import {
   SearchBox,
   StatusPill,
 } from "@/landlord/components/AdminPrimitives";
-import { MessageModal } from "@/landlord/components/AdminModals";
+import { MessageModal, DataDetailsModal } from "@/landlord/components/AdminModals";
 import type { CommunityMessage } from "@/landlord/components/admin-types";
 import {
   fetchMessages,
@@ -37,6 +37,8 @@ export function CommunitySection() {
   const [editingMessage, setEditingMessage] = useState<CommunityMessage | null>(null);
   const [messageToDelete, setMessageToDelete] = useState<CommunityMessage | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState<CommunityMessage | null>(null);
 
   const {
     data: messages = [],
@@ -211,6 +213,16 @@ export function CommunitySection() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="w-44">
+                            <DropdownMenuItem
+                              onClick={() => {
+                                setSelectedMessage(message);
+                                setDetailsOpen(true);
+                              }}
+                            >
+                              <Eye size={14} />
+                              Voir détails
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
                             <DropdownMenuItem onClick={() => onOpenEdit(message)}>
                               <Pencil size={14} />
                               Modifier
@@ -262,6 +274,13 @@ export function CommunitySection() {
         loading={isDeleting}
         onOpenChange={(open) => !open && setMessageToDelete(null)}
         onConfirm={handleDeleteMessage}
+      />
+
+      <DataDetailsModal
+        open={detailsOpen}
+        onOpenChange={setDetailsOpen}
+        data={selectedMessage as any}
+        title="Détails du message"
       />
     </div>
   );

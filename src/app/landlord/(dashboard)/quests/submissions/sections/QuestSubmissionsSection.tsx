@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import useSWR, { mutate } from "swr";
-import { ExternalLink, FileText, Filter, Loader2, Mail, MoreHorizontal, Plus, RefreshCw, Send } from "lucide-react";
+import { ExternalLink, FileText, Filter, Loader2, Mail, MoreHorizontal, Plus, RefreshCw, Send, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { AdminCard, EmptyState, SearchBox, StatusPill } from "@/landlord/components/AdminPrimitives";
-import { ParticipantModal } from "@/landlord/components/AdminModals";
+import { ParticipantModal, DataDetailsModal } from "@/landlord/components/AdminModals";
 import { fetchParticipants, fetchQuests, formatDate, formatTime, participantsKey } from "@/landlord/components/admin-utils";
 import { toast } from "@/lib/toast";
 
@@ -28,6 +28,8 @@ export function QuestSubmissionsSection() {
   const [search, setSearch] = useState("");
   const [selectedQuest, setSelectedQuest] = useState("all");
   const [participantModalOpen, setParticipantModalOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedParticipant, setSelectedParticipant] = useState<any>(null);
 
   const { data: quests = [] } = useSWR("landlord-quests", fetchQuests);
 
@@ -160,6 +162,16 @@ export function QuestSubmissionsSection() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-48">
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedParticipant(participant);
+                              setDetailsOpen(true);
+                            }}
+                          >
+                            <Eye size={14} />
+                            Voir détails
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
                           {participant.work_url ? (
                             <DropdownMenuItem asChild>
                               <a href={participant.work_url} target="_blank" rel="noopener noreferrer">
@@ -211,6 +223,13 @@ export function QuestSubmissionsSection() {
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
         onCreated={() => mutate(participantsKey(selectedQuest))}
+      />
+
+      <DataDetailsModal
+        open={detailsOpen}
+        onOpenChange={setDetailsOpen}
+        data={selectedParticipant}
+        title="Détails du participant"
       />
     </div>
   );

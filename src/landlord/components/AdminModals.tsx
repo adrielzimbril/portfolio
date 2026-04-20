@@ -370,3 +370,58 @@ export function MessageModal({
     </Dialog>
   );
 }
+export function DataDetailsModal({
+  open,
+  onOpenChange,
+  title = "Détails de l'entrée",
+  data,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title?: string;
+  data: Record<string, any> | null;
+}) {
+  if (!data) return null;
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent size="xl" variant="modern" scrollArea>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
+        <DialogSeparator />
+        <div className="grid gap-4 py-2">
+          {Object.entries(data).map(([key, value]) => {
+            // Hide some internal fields if necessary, or show all
+            const isJson = typeof value === "object" && value !== null;
+            const displayValue = isJson ? JSON.stringify(value, null, 2) : String(value);
+
+            return (
+              <div key={key} className="space-y-1">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-black/30">
+                  {key.replace(/_/g, " ")}
+                </p>
+                <div className="rounded-2xl border border-black/5 bg-black/[0.015] p-4 text-sm transition-colors hover:bg-black/[0.03]">
+                  {isJson ? (
+                    <pre className="overflow-x-auto whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-black/60">
+                      {displayValue}
+                    </pre>
+                  ) : (
+                    <p className="whitespace-pre-wrap font-medium text-black/70">
+                      {displayValue || "—"}
+                    </p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <DialogFooter className="mt-4">
+          <Button variant="outline" asPointer onClick={() => onOpenChange(false)}>
+            Fermer
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
