@@ -115,7 +115,7 @@ export function QuestSubmissionsSection() {
             Chargement des soumissions...
           </div>
         ) : filteredParticipants.length ? (
-          <div className="flex flex-col h-[600px] max-h-[calc(100dvh-320px)]">
+          <div className="flex flex-col max-h-[600px] xl:max-h-[calc(100dvh-320px)]">
             <ScrollArea className="flex-1" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[860px] border-collapse text-left text-sm">
