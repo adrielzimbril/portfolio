@@ -60,7 +60,7 @@ export function OverviewSection() {
     const messageRows = messages.slice(0, 5).map((message) => ({
       id: `message-${message.id}`,
       title: message.creator_name,
-      subtitle: "Message communauté",
+      subtitle: message.message?.fr || "",
       date: message.created_at,
       icon: MessageSquareText,
     }));

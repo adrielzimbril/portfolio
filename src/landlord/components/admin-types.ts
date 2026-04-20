@@ -38,7 +38,6 @@ export type CommunityMessage = {
   id: string;
   creator_name: string;
   creator_avatar_url?: string;
-  messages?: Record<string, string>;
   message?: Record<string, string>;
   created_at: string;
   user_id?: string;

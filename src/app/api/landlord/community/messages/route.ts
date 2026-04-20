@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
 import { Locale } from "@/types";
+import { logger } from "@/utils";
 
 export async function GET() {
   try {
@@ -26,7 +27,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { creator_name, creator_avatar_url, messages } = body;
+    const { creator_name, creator_avatar_url, message } = body;
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
@@ -36,18 +37,20 @@ export async function POST(request: Request) {
       .insert({
         creator_name,
         creator_avatar_url: creator_avatar_url || null,
-        message: messages || {},
-        user_id: null, // Admin messages don't have a user_id
+        message: message || {},
+        user_id: null,
       })
       .select()
       .single();
 
     if (error) {
+      logger.error(error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ message: data });
   } catch (error) {
+    logger.error(error);
     return NextResponse.json(
       { error: "Failed to add message" },
       { status: 500 },

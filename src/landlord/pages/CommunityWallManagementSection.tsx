@@ -21,7 +21,7 @@ export function CommunityWallManagementSection() {
   const [newMessage, setNewMessage] = useState({
     creator_name: "",
     creator_avatar_url: "",
-    messages: {} as Record<string, string>,
+    message: {} as Record<string, string>,
   });
 
   const fetcher = async (url: string) => {
@@ -53,7 +53,7 @@ export function CommunityWallManagementSection() {
         setNewMessage({
           creator_name: "",
           creator_avatar_url: "",
-          messages: {},
+          message: {},
         });
         setShowAddForm(false);
         mutate(landlordApiRoutes.community.messages);
@@ -104,7 +104,7 @@ export function CommunityWallManagementSection() {
     setNewMessage({
       creator_name: msg.creator_name,
       creator_avatar_url: msg.creator_avatar_url || "",
-      messages: { ...msg.messages },
+      message: { ...msg.message },
     });
     setShowAddForm(true);
   };
@@ -128,7 +128,7 @@ export function CommunityWallManagementSection() {
         setNewMessage({
           creator_name: "",
           creator_avatar_url: "",
-          messages: {},
+          message: {},
         });
         setShowAddForm(false);
         mutate(landlordApiRoutes.community.messages);
@@ -202,12 +202,12 @@ export function CommunityWallManagementSection() {
                       "admin.landlord.community.fields.messagePlaceholder",
                       { locale: locale.toUpperCase() },
                     )}
-                    value={newMessage.messages[locale] || ""}
+                    value={newMessage.message[locale] || ""}
                     onChange={(e) =>
                       setNewMessage({
                         ...newMessage,
-                        messages: {
-                          ...newMessage.messages,
+                        message: {
+                          ...newMessage.message,
                           [locale]: e.target.value,
                         },
                       })
@@ -251,8 +251,8 @@ export function CommunityWallManagementSection() {
                         {t("common.button.edit")}
                       </Button>
                     </div>
-                    {msg.messages &&
-                      Object.entries(msg.messages).map(
+                    {msg.message &&
+                      Object.entries(msg.message).map(
                         ([lang, message]: [string, string]) => (
                           <div key={lang} className="space-y-1">
                             <span className="text-xs text-muted-foreground font-medium">
