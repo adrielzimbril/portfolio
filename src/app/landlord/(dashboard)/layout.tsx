@@ -6,7 +6,7 @@ import { createClient } from "@/integrations/supabase/server";
 import { ConfigValue } from "@/config";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import { logger } from "@/utils";
-import { AdminShell } from "@/landlord/components/AdminShell";
+import { DashboardLayout } from "@/landlord/components/_layouts/dashboard-layout";
 
 export default async function LandlordLayout({
   children,
@@ -39,7 +39,7 @@ export default async function LandlordLayout({
   }
 
   return (
-    <AdminShell
+    <DashboardLayout
       user={{
         email: userEmail,
         name: user.user_metadata?.name || user.user_metadata?.full_name || userEmail.split("@")[0],
@@ -47,6 +47,6 @@ export default async function LandlordLayout({
       }}
     >
       {children}
-    </AdminShell>
+    </DashboardLayout>
   );
 }
