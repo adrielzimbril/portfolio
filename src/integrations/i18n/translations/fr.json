@@ -1611,14 +1611,14 @@
     }
   },
   "admin": {
-    "title": "Shirofolio - Accès Sécurisé",
+    "title": "Connexion",
     "description": "Authentification requise pour accéder à cette zone.",
     "landlord": {
       "community": {
         "title": "Gestion du mur communautaire",
         "actions": {
           "add": "Ajouter un message",
-          "update": "Mettre ? jour le message"
+          "update": "Mettre à jour le message"
         },
         "fields": {
           "creatorName": "Nom du créateur",

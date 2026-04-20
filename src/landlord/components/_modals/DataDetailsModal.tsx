@@ -94,7 +94,7 @@ export function DataDetailsModal({
                     />
                   </div>
                 ) : isTranslation ? (
-                  <div className="grid gap-2">
+                  <div className="grid min-w-0 gap-2">
                     {Object.entries(value).map(([lang, text]) => (
                       <div
                         key={lang}
@@ -105,20 +105,20 @@ export function DataDetailsModal({
                             {lang.toUpperCase()}
                           </StatusPill>
                         </div>
-                        <p className="whitespace-pre-wrap leading-relaxed text-black/70">
+                        <p className="whitespace-pre-wrap break-words leading-relaxed text-black/70">
                           {String(text) || "—"}
                         </p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="rounded-2xl border border-black/5 bg-black/[0.015] p-4 text-sm transition-all hover:bg-black/[0.03] hover:border-black/10">
+                  <div className="min-w-0 rounded-2xl border border-black/5 bg-black/[0.015] p-4 text-sm transition-all hover:bg-black/[0.03] hover:border-black/10">
                     {isJson ? (
-                      <pre className="overflow-x-auto whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-black/60">
+                      <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg font-mono text-[11px] leading-relaxed text-black/60">
                         {JSON.stringify(value, null, 2)}
                       </pre>
                     ) : (
-                      <p className="whitespace-pre-wrap font-medium leading-relaxed text-black/70">
+                      <p className="whitespace-pre-wrap break-all font-medium leading-relaxed text-black/70 md:break-words">
                         {String(value) || "—"}
                       </p>
                     )}
