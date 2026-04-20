@@ -180,7 +180,7 @@ export function Navbar() {
                 <ul className="w-full flex flex-col gap-2 text-sm mb-4">
                   {menuRoutesFiltered.map((item) => (
                     <li
-                      key={item.name}
+                      key={item.key}
                       className={cn(
                         "w-full p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
                         activeTab === item.key

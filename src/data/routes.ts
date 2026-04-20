@@ -1,30 +1,67 @@
-export const routes = {
+export type RouteType = {
+  key: string;
+  link: string;
+  inHeader: boolean;
+  inFooter: boolean;
+  inSitemap: boolean;
+};
+
+type RouteKeys =
+  | "home"
+  | "about"
+  | "hub"
+  | "hubGet"
+  | "projects"
+  | "talks"
+  | "quests"
+  | "submit"
+  | "thoughts"
+  | "contact"
+  | "newsletter"
+  | "rss"
+  | "rssAtom"
+  | "rssJson"
+  | "icon"
+  | "openGraphImage"
+  | "openGraphResource"
+  | "avatar"
+  | "avatarReal"
+  | "community"
+  | "stats"
+  | "toolbox"
+  | "connections"
+  | "changelog"
+  | "privacy"
+  | "terms"
+  | "routes";
+
+export const routes: { [K in RouteKeys]: RouteType } = {
   home: {
-    name: "Acceuil",
     key: "home",
     link: "/",
     inHeader: true,
+    inFooter: false,
     inSitemap: true,
   },
   about: {
-    name: "A propos",
     key: "about",
     link: "/about",
     inHeader: true,
+    inFooter: false,
     inSitemap: true,
   },
   hub: {
-    name: "Hub",
     key: "hub",
     link: "/hub",
     inHeader: true,
+    inFooter: false,
     inSitemap: true,
   },
   hubGet: {
-    name: "Hub",
     key: "hub-get",
     link: "/hub/get",
     inHeader: false,
+    inFooter: false,
     inSitemap: false,
   },
   // playground: {
@@ -34,164 +71,164 @@ export const routes = {
   //   inHeader: true,
   // },
   projects: {
-    name: "Projets",
     key: "projects",
     link: "/projects",
     inHeader: true,
+    inFooter: false,
     inSitemap: true,
   },
   talks: {
-    name: "Talks",
     key: "talks",
     link: "/talks",
-    inHeader: true,
+    inHeader: false,
+    inFooter: true,
     inSitemap: true,
   },
   quests: {
-    name: "Quests",
     key: "quests",
     link: "/quests",
     inHeader: true,
+    inFooter: false,
     inSitemap: true,
   },
   submit: {
-    name: "Soumettre",
     key: "submit",
     link: "/submit",
     inHeader: false,
+    inFooter: false,
     inSitemap: false,
   },
   thoughts: {
-    name: "Réflexions",
     key: "thoughts",
     link: "/thoughts",
     inHeader: true,
+    inFooter: false,
     inSitemap: true,
   },
   contact: {
-    name: "Contact",
     key: "contact",
     link: "/contact",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   newsletter: {
-    name: "Newsletter",
     key: "newsletter",
     link: "/newsletter",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   rss: {
-    name: "RSS",
     key: "rss",
     link: "/rss/rss",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   rssAtom: {
-    name: "RSS Atom",
     key: "rss-atom",
     link: "/rss/atom",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   rssJson: {
-    name: "RSS JSON",
     key: "rss-json",
     link: "/rss/json",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   icon: {
-    name: "Icon",
     key: "icon",
     link: "/icon",
     inHeader: false,
+    inFooter: false,
     inSitemap: false,
   },
   openGraphImage: {
-    name: "Open Graph Image",
     key: "open-graph-image",
     link: "/open-graph-image",
     inHeader: false,
+    inFooter: false,
     inSitemap: false,
   },
   openGraphResource: {
-    name: "Open Graph Resource",
     key: "open-graph-resource",
     link: "opengraph-image.png",
     inHeader: false,
+    inFooter: false,
     inSitemap: false,
   },
   avatar: {
-    name: "Avatar",
     key: "avatar",
     link: "/img/me/avatar.png",
     inHeader: false,
+    inFooter: false,
     inSitemap: false,
   },
   avatarReal: {
-    name: "Avatar Real",
     key: "avatar-real",
     link: "/img/me/avatar-real.png",
     inHeader: false,
+    inFooter: false,
     inSitemap: false,
   },
   community: {
-    name: "Community",
     key: "community",
     link: "/community",
     inHeader: false,
+    inFooter: true,
     inSitemap: true,
   },
   stats: {
-    name: "Stats",
     key: "stats",
     link: "/stats",
     inHeader: false,
+    inFooter: true,
     inSitemap: true,
   },
   toolbox: {
-    name: "Toolbox",
     key: "toolbox",
     link: "/toolbox",
     inHeader: false,
-    inSitemap: false,
+    inFooter: true,
+    inSitemap: true,
   },
   connections: {
-    name: "Connections",
     key: "connections",
     link: "/connections",
     inHeader: false,
+    inFooter: true,
     inSitemap: true,
   },
   changelog: {
-    name: "Changelog",
     key: "changelog",
     link: "/changelog",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   privacy: {
-    name: "Privacy Policy",
     key: "privacy",
     link: "/legal/privacy",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   terms: {
-    name: "Terms of Service",
     key: "terms",
     link: "/legal/terms",
     inHeader: false,
+    inFooter: false,
     inSitemap: true,
   },
   routes: {
-    name: "Routes",
     key: "routes",
     link: "/routes",
     inHeader: false,
-    inSitemap: false,
+    inFooter: true,
+    inSitemap: true,
   },
 };

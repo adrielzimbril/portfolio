@@ -8,7 +8,7 @@ import {
 import { getResourcesUrl, getThisMonth } from "@/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { siteConfig } from "@/data/config";
-import { routes } from "@/data/routes";
+import { routes, type RouteType } from "@/data/routes";
 import { PageType } from "@/types";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { LinkOne } from "@aurthle/icons";
@@ -17,27 +17,12 @@ import { FooterLocaleSwitch } from "@/components/shared/_layouts/footer-locale-s
 export async function Footer() {
   const t = await getTranslations();
   const locale = await getLocale();
+  const menuRoutes = Object.values(routes);
+  const menuRoutesFiltered = menuRoutes.filter((item) => item.inFooter);
   const resources = await getBestResourcesLink({
     limit: 4,
     locale,
   });
-
-  const footerLinks: {
-    name: string;
-    key: string;
-    link: string;
-    inHeader: boolean;
-    inSitemap: boolean;
-  }[] = [
-    routes.community,
-    routes.stats,
-    routes.toolbox,
-    routes.connections,
-    // routes.changelog,
-    routes.routes,
-    // routes.terms,
-    // routes.privacy,
-  ];
 
   return (
     <footer className="w-full">
@@ -125,7 +110,7 @@ export async function Footer() {
             </div>
           </div>
 
-          <FooterLinks links={footerLinks} />
+          <FooterLinks links={menuRoutesFiltered} />
           {/* <FooterResources resources={resources} /> */}
 
           <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-b-base dark:bg-zinc-900">
@@ -159,17 +144,7 @@ function FooterLinksContainer({ children }: { children: React.ReactNode }) {
   );
 }
 
-async function FooterLinks({
-  links,
-}: {
-  links: {
-    name: string;
-    key: string;
-    link: string;
-    inHeader: boolean;
-    inSitemap: boolean;
-  }[];
-}) {
+async function FooterLinks({ links }: { links: RouteType[] }) {
   const t = await getTranslations();
 
   return (

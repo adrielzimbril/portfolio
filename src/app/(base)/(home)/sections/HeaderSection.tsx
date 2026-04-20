@@ -19,104 +19,115 @@ const PlanningBadge = (
 
   switch (type) {
     case "simple":
-      <StatusBadge
-        mode="inline"
-        status="available"
-        primaryText={t("common.shared.planning-badge.available.title")}
-        variant="colored"
-        size="md"
-      >
-        <Link href={routes.contact.link}>
-          <span className="flex items-center gap-2 lowercase">
-            {t("common.shared.planning-badge.available.description", {
-              limit: 1,
-              date: t("common.shared.months." + getThisMonth()),
-            })}
-            <LinkOne variant="bulk" size={20} />
-          </span>
-        </Link>
-      </StatusBadge>;
-      break;
+      return (
+        <StatusBadge
+          mode="inline"
+          status="available"
+          primaryText={t("common.shared.planning-badge.available.title")}
+          variant="colored"
+          size="md"
+        >
+          <Link href={routes.contact.link}>
+            <span className="flex items-center gap-2 lowercase">
+              {t("common.shared.planning-badge.available.description", {
+                limit: 1,
+                date: t("common.shared.months." + getThisMonth()),
+              })}
+              <LinkOne variant="bulk" size={20} />
+            </span>
+          </Link>
+        </StatusBadge>
+      );
     case "secondary":
-      <StatusBadge
-        mode="inline"
-        status="offline"
-        primaryText={t("common.shared.planning-badge.unavailable.title")}
-        variant="colored"
-        size="md"
-      >
-        <Link href={routes.contact.link}>
-          <span className="flex items-center gap-2">
-            {t("common.shared.planning-badge.unavailable.description", {
-              hasDate: "true",
-              date: getDate({
-                date: lastDate.toISOString(),
-                lang: locale,
-                dateStyle: "medium",
-              }),
-            })}
-            <LinkOne variant="bulk" size={18} />
-          </span>
-        </Link>
-      </StatusBadge>;
-      break;
+      return (
+        <StatusBadge
+          mode="inline"
+          status="offline"
+          primaryText={t("common.shared.planning-badge.unavailable.title")}
+          variant="colored"
+          size="md"
+        >
+          <Link href={routes.contact.link}>
+            <span className="flex items-center gap-2">
+              {t("common.shared.planning-badge.unavailable.description", {
+                hasDate: "true",
+                date: getDate({
+                  date: lastDate.toISOString(),
+                  lang: locale,
+                  dateStyle: "medium",
+                }),
+              })}
+              <LinkOne variant="bulk" size={18} />
+            </span>
+          </Link>
+        </StatusBadge>
+      );
     case "tertiary":
-      <StatusBadge
-        mode="inline"
-        status="available"
-        primaryText={t("common.shared.planning-badge.available.title")}
-        variant="colored"
-        size="md"
-      >
-        <Link href={routes.contact.link}>
-          <span className="flex items-center gap-2">
-            {t("common.shared.planning-badge.available.description-secondary", {
-              showLimit: "true",
-              limit: 4,
-              showMission: "true",
-              hasDate: "true",
-              date: getDate({
-                date: lastDate.toISOString(),
-                lang: locale,
-                dateStyle: "medium",
-              }),
-            })}
-            <LinkOne variant="bulk" size={18} />
-          </span>
-        </Link>
-      </StatusBadge>;
-      break;
+      return (
+        <StatusBadge
+          mode="inline"
+          status="available"
+          primaryText={t("common.shared.planning-badge.available.title")}
+          variant="colored"
+          size="md"
+        >
+          <Link href={routes.contact.link}>
+            <span className="flex items-center gap-2">
+              {t(
+                "common.shared.planning-badge.available.description-secondary",
+                {
+                  showLimit: "true",
+                  limit: 4,
+                  showMission: "true",
+                  hasDate: "true",
+                  date: getDate({
+                    date: lastDate.toISOString(),
+                    lang: locale,
+                    dateStyle: "medium",
+                  }),
+                },
+              )}
+              <LinkOne variant="bulk" size={18} />
+            </span>
+          </Link>
+        </StatusBadge>
+      );
     case "quaternary":
-      <StatusBadge
-        mode="inline"
-        status="available"
-        primaryText={t("common.shared.planning-badge.available.title")}
-        variant="colored"
-        size="md"
-      >
-        <Link href={routes.contact.link}>
-          <span className="flex items-center gap-2">
-            {t("common.shared.planning-badge.available.description-simple")} 👋🏻
-            <LinkOne variant="bulk" size={20} />
-          </span>
-        </Link>
-      </StatusBadge>;
-      break;
+      return (
+        <StatusBadge
+          mode="inline"
+          status="available"
+          primaryText={t("common.shared.planning-badge.available.title")}
+          variant="colored"
+          size="md"
+        >
+          <Link href={routes.contact.link}>
+            <span className="flex items-center gap-2">
+              {t("common.shared.planning-badge.available.description-simple")}{" "}
+              👋🏻
+              <LinkOne variant="bulk" size={20} />
+            </span>
+          </Link>
+        </StatusBadge>
+      );
     case "quinary":
-      <StatusBadge
-        mode="inline"
-        status="available"
-        primaryText={t("common.shared.planning-badge.available.title")}
-        variant="colored"
-        size="md"
-      >
-        <Link href={routes.contact.link}>
-          <span className="flex items-center gap-2">
-            {t("common.shared.planning-badge.available.description-simple")} 👋🏻
-            <LinkOne variant="bulk" size={20} />
-          </span>
-        </Link>
-      </StatusBadge>;
+      return (
+        <StatusBadge
+          mode="inline"
+          status="available"
+          primaryText={t("common.shared.planning-badge.available.title")}
+          variant="colored"
+          size="md"
+        >
+          <Link href={routes.contact.link}>
+            <span className="flex items-center gap-2">
+              {t("common.shared.planning-badge.available.description-simple")}{" "}
+              👋🏻
+              <LinkOne variant="bulk" size={20} />
+            </span>
+          </Link>
+        </StatusBadge>
+      );
   }
 };
 
