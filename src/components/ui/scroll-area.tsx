@@ -9,10 +9,14 @@ export function ScrollArea({
   children,
   scrollFade = false,
   scrollbarGutter = false,
+  scrollbarClassName,
+  scrollbarThumbClassName,
   ...props
 }: ScrollAreaPrimitive.Root.Props & {
   scrollFade?: boolean;
   scrollbarGutter?: boolean;
+  scrollbarClassName?: string;
+  scrollbarThumbClassName?: string;
 }): React.ReactElement {
   return (
     <ScrollAreaPrimitive.Root
@@ -31,8 +35,8 @@ export function ScrollArea({
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar orientation="vertical" />
-      <ScrollBar orientation="horizontal" />
+      <ScrollBar className={scrollbarClassName} scrollbarThumbClassName={scrollbarThumbClassName} orientation="vertical" />
+      <ScrollBar className={scrollbarClassName} scrollbarThumbClassName={scrollbarThumbClassName} orientation="horizontal" />
       <ScrollAreaPrimitive.Corner data-slot="scroll-area-corner" />
     </ScrollAreaPrimitive.Root>
   );
@@ -41,8 +45,11 @@ export function ScrollArea({
 export function ScrollBar({
   className,
   orientation = "vertical",
+  scrollbarThumbClassName,
   ...props
-}: ScrollAreaPrimitive.Scrollbar.Props): React.ReactElement {
+}: ScrollAreaPrimitive.Scrollbar.Props & {
+  scrollbarThumbClassName?: string;
+}): React.ReactElement {
   return (
     <ScrollAreaPrimitive.Scrollbar
       className={cn(
@@ -54,7 +61,7 @@ export function ScrollBar({
       {...props}
     >
       <ScrollAreaPrimitive.Thumb
-        className="relative flex-1 rounded-full bg-foreground/20"
+        className={cn("relative flex-1 rounded-full bg-foreground/20", scrollbarThumbClassName)}
         data-slot="scroll-area-thumb"
       />
     </ScrollAreaPrimitive.Scrollbar>

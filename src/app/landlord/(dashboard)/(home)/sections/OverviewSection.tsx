@@ -116,7 +116,7 @@ export function OverviewSection() {
                 Inscriptions, soumissions et messages publics.
               </p>
             </div>
-            <Badge variant="white" className="bg-[#ffed90]">
+            <Badge className="squircle-[#ffed90]" variant="colored">
               Live
             </Badge>
           </div>
@@ -129,7 +129,7 @@ export function OverviewSection() {
                     key={item.id}
                     className="flex items-center gap-3 rounded-2xl border border-black/6 bg-[#fbfaf6] px-4 py-3"
                   >
-                    <div className="flex size-10 items-center justify-center rounded-2xl bg-black/[0.04]">
+                    <div className="flex size-10 items-center justify-center rounded-2xl bg-black/4">
                       <Icon size={17} />
                     </div>
                     <div className="min-w-0 flex-1">
