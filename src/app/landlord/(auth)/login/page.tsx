@@ -8,7 +8,7 @@ import { createClient } from "@/integrations/supabase/server";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
 import { ConfigValue } from "@/config";
 import { landlordRoutes } from "@/data/landlordRoutes";
-import { LandlordLoginPanel } from "@/landlord/components/LoginButtons";
+import { LoginSection } from "./sections/LoginSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -43,5 +43,5 @@ export default async function LandlordLoginPage(props: {
     }
   }
 
-  return <LandlordLoginPanel reason={searchParams.reason} />;
+  return <LoginSection reason={searchParams.reason} />;
 }

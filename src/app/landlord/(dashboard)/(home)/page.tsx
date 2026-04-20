@@ -1,16 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { Skeleton } from "@/components/ui/skeleton";
-import { OverviewSection } from "@/app/landlord/sections/OverviewSection";
-import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
-import { createClient } from "@/integrations/supabase/server";
-import { ConfigValue } from "@/config";
-import { landlordRoutes } from "@/data/landlordRoutes";
-import { logger } from "@/utils";
+import { OverviewSection } from "./sections/OverviewSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -22,10 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     robots: {
       index: false,
       follow: false,
-      googleBot: {
-        index: false,
-        follow: false,
-      },
+      googleBot: { index: false, follow: false },
     },
     openGraph: {
       ...baseMetadata.openGraph,
@@ -40,37 +29,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function AdminPage() {
-  const isAuthenticated = await isUserAuthenticatedServer();
-
-  if (!isAuthenticated) {
-    redirect(landlordRoutes.login.link);
-  }
-
-  let user = null;
-  try {
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
-    const {
-      data: { user: supabaseUser },
-    } = await supabase.auth.getUser();
-    user = supabaseUser;
-  } catch (error) {
-    logger.error("[AdminPage] Failed to fetch user data", error);
-  }
-
-  const adminEmails = ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",") || [];
-  const userEmail = user?.email;
-
-  if (!user || !userEmail || !adminEmails.includes(userEmail)) {
-    redirect(`${landlordRoutes.login.link}?reason=unauthorized`);
-  }
-
-  return (
-    <>
-      <Skeleton name="landlord-overview-header" loading={false}>
-        <OverviewSection />
-      </Skeleton>
-    </>
-  );
+export default function AdminPage() {
+  return <OverviewSection />;
 }

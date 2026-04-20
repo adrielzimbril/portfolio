@@ -2,15 +2,14 @@ import React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { Skeleton } from "@/components/ui/skeleton";
-import { QuestsSection } from "@/app/landlord/sections/QuestsSection";
+import { QuestSubmissionsSection } from "./sections/QuestSubmissionsSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Submissions",
+    title: t("admin.title") + " - Soumissions",
     description: t("admin.description"),
     robots: {
       index: false,
@@ -19,12 +18,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function SubmissionsPage() {
-  return (
-    <>
-      <Skeleton name="landlord-submissions-header" loading={false}>
-        <QuestsSection filterType="submission" />
-      </Skeleton>
-    </>
-  );
+export default function QuestSubmissionsPage() {
+  return <QuestSubmissionsSection />;
 }

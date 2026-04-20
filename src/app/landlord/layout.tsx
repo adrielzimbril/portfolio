@@ -39,14 +39,18 @@ export default async function LandlordLayout({
   }
 
   return (
-    <DashboardLayout
-      user={{
-        email: userEmail,
-        name: user.user_metadata?.name || user.user_metadata?.full_name || userEmail.split("@")[0],
-        avatarUrl: user.user_metadata?.avatar_url,
-      }}
-    >
-      {children}
-    </DashboardLayout>
+    <>
+      <div className="container mx-auto relative size-full min-h-dvh flex flex-col">
+        <DashboardLayout
+          user={{
+            email: userEmail,
+            name: user.user_metadata?.name || user.user_metadata?.full_name || userEmail.split("@")[0],
+            avatarUrl: user.user_metadata?.avatar_url,
+          }}
+        >
+          {children}
+        </DashboardLayout>
+      </div>
+    </>
   );
 }

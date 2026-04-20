@@ -76,9 +76,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                   <ToastProvider>
                     <AnchoredToastProvider>
                       <main>
-                          <div className="container mx-auto relative min-h-dvh min-w-dvw flex flex-col size-fit">
-                            {children}
-                          </div>
+                        {children}
                       </main>
                     </AnchoredToastProvider>
                   </ToastProvider>

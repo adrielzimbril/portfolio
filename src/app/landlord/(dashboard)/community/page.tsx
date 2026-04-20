@@ -2,8 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { Skeleton } from "@/components/ui/skeleton";
-import { CommunitySection } from "@/app/landlord/sections/CommunitySection";
+import { CommunitySection } from "./sections/CommunitySection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -20,11 +19,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function CommunityPage() {
-  return (
-    <>
-      <Skeleton name="landlord-community-header" loading={false}>
-        <CommunitySection />
-      </Skeleton>
-    </>
-  );
+  return <CommunitySection />;
 }

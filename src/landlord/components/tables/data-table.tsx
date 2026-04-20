@@ -2,13 +2,12 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 import { FileText, Loader2, RefreshCw } from "lucide-react";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Button } from "@/components/ui/button";
 import { AdminCard, EmptyState, TablePager } from "@/landlord/components/AdminPrimitives";
 import { dataTableKey, fetchLandlordTable, formatDate } from "@/landlord/components/admin-utils";
 import type { DataTableKey, LandlordTableResponse } from "@/landlord/components/admin-types";
 
-const pageSize = 10;
+const PAGE_SIZE = 10;
 
 function formatCell(value: unknown) {
   if (value === null || value === undefined || value === "") return "N/A";
@@ -20,15 +19,13 @@ function formatCell(value: unknown) {
   return String(value);
 }
 
-function DataTable({
+function DataRows({
   response,
   page,
-  pageSize,
   onPageChange,
 }: {
   response?: LandlordTableResponse;
   page: number;
-  pageSize: number;
   onPageChange: (page: number) => void;
 }) {
   const rows = response?.rows || [];
@@ -77,7 +74,7 @@ function DataTable({
       </div>
       <TablePager
         page={page}
-        pageSize={pageSize}
+        pageSize={PAGE_SIZE}
         count={response?.count || 0}
         onPageChange={onPageChange}
       />
@@ -85,58 +82,53 @@ function DataTable({
   );
 }
 
-const tableOptions: Record<DataTableKey, { label: string; detail: string }> = {
-  newsletter: { label: "Newsletter", detail: "Abonnés et sources" },
-  submissions: { label: "Submit entries", detail: "Demandes entrantes" },
-  hubRequests: { label: "Hub requests", detail: "Demandes produits" },
-  reactions: { label: "Reactions", detail: "Engagement contenu" },
-  users: { label: "Users", detail: "Contacts et comptes" },
-};
-
-export function TableSection({ activeTable }: { activeTable: DataTableKey }) {
+export function DataTable({
+  tableKey,
+  label,
+  detail,
+}: {
+  tableKey: DataTableKey;
+  label: string;
+  detail: string;
+}) {
   const [page, setPage] = useState(1);
   const { data: response, isLoading: loading, mutate } = useSWR(
-    dataTableKey(activeTable, page, pageSize),
+    dataTableKey(tableKey, page, PAGE_SIZE),
     fetchLandlordTable,
   );
 
-  const info = tableOptions[activeTable] || { label: activeTable, detail: "" };
-
   return (
-    <SectionBase isWide>
-      <div className="grid gap-5">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-[-0.02em]">{info.label}</h2>
-            <p className="mt-1 text-sm text-black/45">{info.detail}</p>
-          </div>
-          <Button
-            variant="outline"
-            asIcon
-            asPointer
-            onClick={() => mutate()}
-          >
-            <RefreshCw size={16} />
-            Rafraîchir
-          </Button>
+    <div className="grid gap-5">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]">{label}</h2>
+          <p className="mt-1 text-sm text-black/45">{detail}</p>
         </div>
-        
-        <AdminCard className="overflow-hidden">
-          {loading ? (
-            <div className="flex min-h-72 items-center justify-center gap-2 text-sm text-black/50">
-              <Loader2 size={18} className="animate-spin" />
-              Chargement des données...
-            </div>
-          ) : (
-            <DataTable
-              response={response}
-              page={page}
-              pageSize={pageSize}
-              onPageChange={setPage}
-            />
-          )}
-        </AdminCard>
+        <Button
+          variant="outline"
+          asIcon
+          asPointer
+          onClick={() => mutate()}
+        >
+          <RefreshCw size={16} />
+          Rafraîchir
+        </Button>
       </div>
-    </SectionBase>
+
+      <AdminCard className="overflow-hidden">
+        {loading ? (
+          <div className="flex min-h-72 items-center justify-center gap-2 text-sm text-black/50">
+            <Loader2 size={18} className="animate-spin" />
+            Chargement des données...
+          </div>
+        ) : (
+          <DataRows
+            response={response}
+            page={page}
+            onPageChange={setPage}
+          />
+        )}
+      </AdminCard>
+    </div>
   );
 }

@@ -2,15 +2,14 @@ import React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { Skeleton } from "@/components/ui/skeleton";
-import { QuestsSection } from "@/app/landlord/sections/QuestsSection";
+import { RegistrationsSection } from "./sections/RegistrationsSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Registrations",
+    title: t("admin.title") + " - Inscriptions",
     description: t("admin.description"),
     robots: {
       index: false,
@@ -20,11 +19,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RegistrationsPage() {
-  return (
-    <>
-      <Skeleton name="landlord-registrations-header" loading={false}>
-        <QuestsSection filterType="register" />
-      </Skeleton>
-    </>
-  );
+  return <RegistrationsSection />;
 }

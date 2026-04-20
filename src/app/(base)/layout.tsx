@@ -10,11 +10,13 @@ export default function BaseLayout({
 }) {
   return (
     <>
-      <Navbar />
-      {/* <Dockbar asFade={false} /> */}
-      {children}
-      <ScrollToTop />
-      <Footer />
+      <div className="container mx-auto relative min-h-dvh flex flex-col">
+        <Navbar />
+        {/* <Dockbar asFade={false} /> */}
+        {children}
+        <ScrollToTop />
+        <Footer />
+      </div>
     </>
   );
 }
