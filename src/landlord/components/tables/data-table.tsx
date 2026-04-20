@@ -6,20 +6,11 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AdminCard, EmptyState, TablePager } from "@/landlord/components/AdminPrimitives";
 import { DataDetailsModal } from "@/landlord/components/_modals";
-import { dataTableKey, fetchLandlordTable, formatDate } from "@/landlord/components/admin-utils";
+import { dataTableKey, fetchLandlordTable, formatCell, formatLabel } from "@/landlord/components/admin-utils";
 import type { DataTableKey, LandlordTableResponse } from "@/landlord/components/admin-types";
 
 const PAGE_SIZE = 10;
 
-function formatCell(value: unknown) {
-  if (value === null || value === undefined || value === "") return "N/A";
-  if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)) {
-    return formatDate(value);
-  }
-  if (Array.isArray(value)) return value.join(", ");
-  if (typeof value === "object") return JSON.stringify(value);
-  return String(value);
-}
 
 function DataRows({
   response,
@@ -62,7 +53,7 @@ function DataRows({
               <tr>
                 {columns.map((column) => (
                   <th key={column} className="px-5 py-4 font-medium capitalize">
-                    {column}
+                    {formatLabel(column)}
                   </th>
                 ))}
                 <th className="px-5 py-4 text-right font-medium">Action</th>
@@ -76,7 +67,7 @@ function DataRows({
                 >
                   {columns.map((column) => (
                     <td key={column} className="max-w-64 truncate px-5 py-4">
-                      {formatCell(row[column])}
+                      {formatCell(row[column], column)}
                     </td>
                   ))}
                   <td className="px-5 py-4 text-right">

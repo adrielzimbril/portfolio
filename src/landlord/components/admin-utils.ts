@@ -8,6 +8,7 @@ import type {
   Participant,
   QuestSummary,
 } from "./admin-types";
+import { REACTION_EMOJIS, ReactionType } from "@/lib/stats/types";
 
 export const participantsKey = (selectedQuest: string) =>
   `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`;
@@ -56,6 +57,21 @@ export function formatTime(value?: string) {
   return timeFormatter.format(date);
 }
 
+export function capitalize(str: string) {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+export function formatLabel(str: string) {
+  if (!str) return "";
+  return str.split(/[_\s]/).map(capitalize).join(" ");
+}
+
+export function formatReaction(reaction: string) {
+  const emoji = REACTION_EMOJIS[reaction.toLowerCase() as ReactionType];
+  return emoji ? `${emoji} ${capitalize(reaction)}` : capitalize(reaction);
+}
+
 export function formatDateTimePremium(value?: string) {
   if (!value) return "N/A";
   const date = new Date(value);
@@ -72,10 +88,19 @@ export function formatDateTimePremium(value?: string) {
   return formatted;
 }
 
-export function formatCell(value: unknown) {
+export function formatCell(value: unknown, key?: string) {
   if (value === null || value === undefined || value === "") return "N/A";
-  if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value)) {
-    return formatDate(value);
+  if (typeof value === "string") {
+    // Dates
+    if (/^\d{4}-\d{2}-\d{2}/.test(value)) {
+      return formatDate(value);
+    }
+    // Reactions
+    if (key?.toLowerCase().includes("reaction") || key?.toLowerCase() === "type") {
+      if (REACTION_EMOJIS[value.toLowerCase() as ReactionType]) {
+        return formatReaction(value);
+      }
+    }
   }
   if (Array.isArray(value)) return value.join(", ");
   if (typeof value === "object") return JSON.stringify(value);

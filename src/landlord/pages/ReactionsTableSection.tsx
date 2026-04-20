@@ -9,7 +9,6 @@ import {
   fetchLandlordTable,
   formatCell,
 } from "../components/admin-utils";
-import type { LandlordTableResponse } from "../components/admin-types";
 
 const pageSize = 10;
 
@@ -62,14 +61,14 @@ export function ReactionsTableSection() {
                   {rows.map((row, index) => (
                     <tr
                       key={String(row.id || index)}
-                      className="hover:bg-black/[0.02]"
+                      className="hover:bg-black/2"
                     >
                       {columns.map((column) => (
                         <td
                           key={column}
                           className="max-w-64 truncate px-5 py-4"
                         >
-                          {formatCell(row[column])}
+                          {formatCell(row[column], column)}
                         </td>
                       ))}
                     </tr>

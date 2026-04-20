@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { StatusPill } from "../AdminPrimitives";
 import { Locale } from "@/types/enum";
-import { formatDateTimePremium } from "../admin-utils";
+import { formatDateTimePremium, formatLabel, formatReaction } from "../admin-utils";
 
 export function DataDetailsModal({
   open,
@@ -83,13 +83,22 @@ export function DataDetailsModal({
               const isImage = isImageUrl(value);
               const isTranslation = isTranslationObject(value);
               const isDate = !isImage && !isTranslation && isDateUrl(value);
+              const isReaction =
+                !isImage &&
+                !isTranslation &&
+                !isDate &&
+                (key.toLowerCase().includes("reaction") || key.toLowerCase() === "type");
               const isJson =
-                !isTranslation && !isDate && typeof value === "object" && value !== null;
+                !isTranslation &&
+                !isDate &&
+                !isReaction &&
+                typeof value === "object" &&
+                value !== null;
 
               return (
                 <div key={key} className="group space-y-2">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-black/25 transition-colors group-hover:text-black/40">
-                    {key.replace(/_/g, " ")}
+                    {formatLabel(key)}
                   </p>
 
                   {isImage ? (
@@ -131,6 +140,10 @@ export function DataDetailsModal({
                       ) : isDate ? (
                         <p className="font-semibold leading-relaxed text-black/75">
                           {formatDateTimePremium(value)}
+                        </p>
+                      ) : isReaction ? (
+                        <p className="font-semibold leading-relaxed text-black/75">
+                          {formatReaction(String(value))}
                         </p>
                       ) : (
                         <p className="whitespace-pre-wrap break-all font-medium leading-relaxed text-black/70 md:break-words">

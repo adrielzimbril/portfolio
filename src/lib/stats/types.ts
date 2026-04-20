@@ -8,6 +8,14 @@ export enum ReactionType {
   SCEPTIC = "sceptic",
 }
 
+export const REACTION_EMOJIS: Record<ReactionType, string> = {
+  [ReactionType.LIKE]: "👍",
+  [ReactionType.HEART]: "❤️",
+  [ReactionType.CELEBRATE]: "🎉",
+  [ReactionType.INSIGHTFUL]: "💡",
+  [ReactionType.SCEPTIC]: "🤔",
+};
+
 export interface BuildTimeStats {
   totalWords: number;
   totalReadingTime: number;

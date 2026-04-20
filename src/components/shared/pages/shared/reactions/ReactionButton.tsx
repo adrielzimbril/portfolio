@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { cn } from "@/utils/utils";
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import { ReactionType } from "@/lib/stats/types";
+import { ReactionType, REACTION_EMOJIS } from "@/lib/stats/types";
 import { Badge } from "@/components/ui/badge";
 import { getCurrentUserId } from "@/lib/reactions/anonymous-user";
 import { apiRoutes } from "@/data/api-routes";
@@ -11,13 +11,6 @@ import { pickRandomColor } from "@/utils";
 import { useUser } from "@/integrations/auth/provider/supabase";
 import { logger } from "@/utils/logger";
 
-const REACTION_EMOJIS: Record<ReactionType, string> = {
-  [ReactionType.LIKE]: "👍",
-  [ReactionType.HEART]: "❤️",
-  [ReactionType.CELEBRATE]: "🎉",
-  [ReactionType.INSIGHTFUL]: "💡",
-  [ReactionType.SCEPTIC]: "🤔",
-};
 
 interface ReactionButtonProps {
   pageType: PageType;
