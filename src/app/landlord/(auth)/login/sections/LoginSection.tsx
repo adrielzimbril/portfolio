@@ -78,13 +78,13 @@ export function LoginSection({ reason }: { reason?: string }) {
             </div>
             <div>
               <p className="text-sm font-semibold">Shirofolio</p>
-              <p className="text-xs text-white/60">Landlord workspace</p>
+              <p className="text-xs text-white/60">Secure workspace</p>
             </div>
           </div>
 
           <div className="relative z-10 overflow-hidden rounded-[28px] border border-white/10 bg-white/8 p-6">
             <div className="mb-6 flex items-center justify-between text-xs text-white/55">
-              <span>Admin workspace</span>
+              <span>Secure workspace</span>
               <span>Shirofolio</span>
             </div>
             <div className="grid gap-3">
@@ -104,7 +104,7 @@ export function LoginSection({ reason }: { reason?: string }) {
                   src="/img/me/memoji/me-code.png"
                   width={88}
                   height={88}
-                  alt="Admin profile"
+                  alt="Secure access"
                   className="rounded-2xl object-cover"
                 />
                 <div>
@@ -132,7 +132,7 @@ export function LoginSection({ reason }: { reason?: string }) {
               </div>
               <div>
                 <p className="font-semibold">Shirofolio</p>
-                <p className="text-xs text-black/50">Landlord workspace</p>
+                <p className="text-xs text-black/50">Secure workspace</p>
               </div>
             </div>
 
@@ -141,7 +141,7 @@ export function LoginSection({ reason }: { reason?: string }) {
                 <LockKeyhole size={20} />
               </div>
               <h2 className="text-4xl font-semibold leading-tight tracking-[-0.02em]">
-                Connexion admin
+                Accès sécurisé
               </h2>
               <p className="mt-3 text-sm leading-6 text-black/55">
                 Connecte-toi avec ton compte autorisé pour ouvrir le panel.
@@ -151,7 +151,7 @@ export function LoginSection({ reason }: { reason?: string }) {
             {isUnauthorized && (
               <div className="mb-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                 Ce compte est connecté, mais il n'est pas autorisé à accéder au
-                dashboard admin.
+                dashboard.
               </div>
             )}
 

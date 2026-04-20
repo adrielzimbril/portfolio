@@ -31,6 +31,13 @@ export function isTest(): boolean {
   return ConfigValue.NODE_ENV === "test";
 }
 
+/**
+ * Check if running in local mode
+ */
+export function isLocal(): boolean {
+  return isDevelopment() || isTest();
+}
+
 // ============================================================================
 // ENVIRONMENT VARIABLE HELPERS
 // ============================================================================

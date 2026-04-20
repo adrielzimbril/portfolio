@@ -15,11 +15,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: `${t("admin.title")} - Login`,
+    title: t("admin.title"),
     description: t("admin.description"),
     robots: {
       index: false,
       follow: false,
+      noarchive: true,
+      nosnippet: true,
+      noimageindex: true,
+      nocache: true,
     },
   };
 }

@@ -1578,6 +1578,8 @@
     }
   },
   "admin": {
+    "title": "Shirofolio - 安全访问",
+    "description": "需要身份验证才能进入此区域。",
     "landlord": {
       "tabs": {
         "quests": "Quests",

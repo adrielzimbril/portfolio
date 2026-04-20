@@ -1611,8 +1611,8 @@
     }
   },
   "admin": {
-    "title": "Tableau de bord Admin",
-    "description": "Tableau de bord administratif pour gérer le site",
+    "title": "Shirofolio - Accès Sécurisé",
+    "description": "Authentification requise pour accéder à cette zone.",
     "landlord": {
       "community": {
         "title": "Gestion du mur communautaire",
