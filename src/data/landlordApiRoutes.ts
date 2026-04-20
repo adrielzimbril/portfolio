@@ -5,12 +5,15 @@ export const landlordApiRoutes = {
     messages: getApiUrl("landlord/community/messages"),
     messageById: (id: string) => getApiUrl(`landlord/community/messages/${id}`),
   },
-  data: {
-    table: getApiUrl("landlord/data"),
-  },
   quests: {
     participants: getApiUrl("landlord/quests/participants"),
-    participantById: (id: string) =>
-      getApiUrl(`landlord/quests/participants/${id}`),
+    participantById: (id: string) => getApiUrl(`landlord/quests/participants/${id}`),
+  },
+  data: {
+    newsletter: getApiUrl("landlord/newsletter"),
+    users: getApiUrl("landlord/users"),
+    submissions: getApiUrl("landlord/submissions"),
+    hubRequests: getApiUrl("landlord/hub-requests"),
+    reactions: getApiUrl("landlord/reactions"),
   },
 };

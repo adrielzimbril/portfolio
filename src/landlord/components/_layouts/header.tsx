@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { PanelLeft, RefreshCw, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { AdminUser } from "../admin-types";
-import { adminNavItems } from "./sidebar";
+import { adminNavItems } from "./nav-items";
 
 export function Header({
   user,
@@ -17,19 +17,18 @@ export function Header({
 }) {
   const pathname = usePathname();
 
-  const getActiveView = (): string => {
-    if (pathname.includes("/newsletter")) return "newsletter";
-    if (pathname.includes("/users")) return "users";
-    if (pathname.includes("/submissions")) return "submissions";
-    if (pathname.includes("/hub-requests")) return "hubRequests";
-    if (pathname.includes("/reactions")) return "reactions";
-    if (pathname.includes("/community")) return "community";
-    if (pathname.includes("/quests/registrations")) return "quests-registrations";
-    if (pathname.includes("/quests/submissions")) return "quests-submissions";
-    return "overview";
+  const getActiveLabel = (): string => {
+    if (pathname.includes("/quests/registrations")) return "Inscriptions";
+    if (pathname.includes("/quests/submissions")) return "Soumissions";
+    if (pathname.includes("/newsletter")) return "Newsletter";
+    if (pathname.includes("/users")) return "Users";
+    if (pathname.includes("/hub-requests")) return "Hub Requests";
+    if (pathname.includes("/reactions")) return "Reactions";
+    if (pathname.includes("/submissions")) return "Submissions";
+    if (pathname.includes("/community")) return "Community";
+    return "Dashboard";
   };
-  const activeView = getActiveView();
-  const activeItem = adminNavItems.find((item) => item.key === activeView);
+  const activeLabel = getActiveLabel();
 
   return (
     <header className="mb-4 flex items-center gap-3 rounded-[26px] border border-black/8 bg-white p-3 shadow-sm">
@@ -46,7 +45,7 @@ export function Header({
       <div className="min-w-0 flex-1 ml-2">
         <p className="text-xs text-black/45 font-medium uppercase tracking-wider">Admin Dashboard</p>
         <h1 className="truncate text-xl font-semibold tracking-[-0.02em] md:text-2xl">
-          {activeItem?.label || "Landlord"}
+          {activeLabel}
         </h1>
       </div>
       <Button

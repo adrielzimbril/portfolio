@@ -16,8 +16,10 @@ export const dataTableKey = (
   table: DataTableKey,
   page: number,
   pageSize = 10,
-) =>
-  `${landlordApiRoutes.data.table}?table=${table}&page=${page}&pageSize=${pageSize}`;
+) => {
+  const base = landlordApiRoutes.data[table as keyof typeof landlordApiRoutes.data];
+  return `${base}?page=${page}&pageSize=${pageSize}`;
+};
 
 const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
   day: "2-digit",
@@ -55,7 +57,7 @@ export function formatCell(value: unknown) {
 }
 
 export function normalizeMessage(message: CommunityMessage) {
-  return message.messages || message.message || {};
+  return message.message || {};
 }
 
 export async function fetchQuests(): Promise<QuestSummary[]> {
