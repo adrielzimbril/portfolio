@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { AdminCard, EmptyState, SearchBox, StatusPill } from "@/landlord/components/AdminPrimitives";
-import { ParticipantModal, DataDetailsModal } from "@/landlord/components/AdminModals";
+import { ParticipantModal, DataDetailsModal } from "@/landlord/components/_modals";
 import { fetchParticipants, fetchQuests, formatDate, formatTime, participantsKey } from "@/landlord/components/admin-utils";
 import { toast } from "@/lib/toast";
 

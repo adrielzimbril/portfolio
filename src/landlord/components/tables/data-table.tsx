@@ -5,7 +5,7 @@ import { FileText, Loader2, RefreshCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AdminCard, EmptyState, TablePager } from "@/landlord/components/AdminPrimitives";
-import { DataDetailsModal } from "@/landlord/components/AdminModals";
+import { DataDetailsModal } from "@/landlord/components/_modals";
 import { dataTableKey, fetchLandlordTable, formatDate } from "@/landlord/components/admin-utils";
 import type { DataTableKey, LandlordTableResponse } from "@/landlord/components/admin-types";
 

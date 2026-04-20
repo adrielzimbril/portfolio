@@ -18,7 +18,7 @@ import {
   SearchBox,
   StatusPill,
 } from "@/landlord/components/AdminPrimitives";
-import { MessageModal, DataDetailsModal } from "@/landlord/components/AdminModals";
+import { MessageModal, DataDetailsModal } from "@/landlord/components/_modals";
 import type { CommunityMessage } from "@/landlord/components/admin-types";
 import {
   fetchMessages,
