@@ -176,9 +176,9 @@ export function MetricCard({
 }) {
   const toneClass = {
     dark: "bg-[#11191f] text-white",
-    yellow: "bg-[#ffed90] text-[#11191f]",
-    green: "bg-emerald-50 text-emerald-800",
-    white: "bg-white text-[#11191f]",
+    yellow: "bg-[#ffed90]",
+    green: "bg-emerald-50",
+    white: "bg-violet-50",
   };
 
   return (
