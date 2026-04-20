@@ -19,7 +19,7 @@ import { landlordRoutes } from "@/data/landlordRoutes";
 import { getAllQuests } from "@/integrations/content/lib/quests";
 import { Locale } from "@/types/enum";
 import { logger } from "@/utils";
-import { AdminCard } from "../components/AdminPrimitives";
+import { AdminCard } from "@/landlord/components/AdminPrimitives";
 import { useTranslations } from "next-intl";
 
 interface Participant {

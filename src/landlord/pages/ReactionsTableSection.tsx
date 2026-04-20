@@ -4,13 +4,13 @@ import useSWR from "swr";
 import { RefreshCw, Loader2, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AdminCard, TablePager } from "../components/AdminPrimitives";
+import { AdminCard, TablePager } from "@/landlord/components/AdminPrimitives";
 import {
   dataTableKey,
   fetchLandlordTable,
   formatCell,
   formatLabel,
-} from "../components/admin-utils";
+} from "@/landlord/components/admin-utils";
 
 const pageSize = 10;
 
@@ -47,8 +47,8 @@ export function ReactionsTableSection() {
             Chargement de la table...
           </div>
         ) : rows.length ? (
-          <div className="flex flex-col max-h-[600px]">
-            <ScrollArea className="flex-1 border-b border-black/5" scrollbarGutter>
+          <div className="flex flex-col h-[600px] overflow-hidden">
+            <ScrollArea className="flex-1 w-full border-b border-black/5" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[920px] border-collapse text-left text-sm">
                   <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">

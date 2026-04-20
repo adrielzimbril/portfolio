@@ -1,5 +1,5 @@
 import { Database, LayoutDashboard, MessageSquareText, Trophy, Users } from "lucide-react";
-import type { NavItem } from "../admin-types";
+import type { NavItem } from "@/landlord/components/admin-types";
 
 export const adminNavItems: NavItem[] = [
   { key: "overview", label: "Dashboard", description: "Vue globale", icon: LayoutDashboard },

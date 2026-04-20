@@ -10,9 +10,9 @@ import {
   DialogSeparator,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { StatusPill } from "../AdminPrimitives";
-import { Locale } from "@/types/enum";
-import { formatDateTimePremium, formatLabel, formatReaction } from "../admin-utils";
+import { StatusPill } from "@/landlord/components/AdminPrimitives";
+import { Locale } from "@/types/index";
+import { formatDateTimePremium, formatLabel, formatReaction } from "@/landlord/components/admin-utils";
 
 export function DataDetailsModal({
   open,

@@ -3,13 +3,15 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { RefreshCw, Loader2, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AdminCard, TablePager } from "../components/AdminPrimitives";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { AdminCard, TablePager } from "@/landlord/components/AdminPrimitives";
 import {
   dataTableKey,
   fetchLandlordTable,
   formatCell,
-} from "../components/admin-utils";
-import type { LandlordTableResponse } from "../components/admin-types";
+  formatLabel,
+} from "@/landlord/components/admin-utils";
+import type { LandlordTableResponse } from "@/landlord/components/admin-types";
 
 const pageSize = 10;
 
@@ -44,44 +46,48 @@ export function UsersTableSection() {
             Chargement de la table...
           </div>
         ) : rows.length ? (
-          <>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[920px] border-collapse text-left text-sm">
-                <thead className="border-b border-black/8 text-xs text-black/45">
-                  <tr>
-                    {columns.map((column) => (
-                      <th key={column} className="px-5 py-4 font-medium">
-                        {column}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-black/6">
-                  {rows.map((row, index) => (
-                    <tr
-                      key={String(row.id || index)}
-                      className="hover:bg-black/[0.02]"
-                    >
+          <div className="flex flex-col h-[500px] overflow-hidden">
+            <ScrollArea className="flex-1 w-full" scrollbarGutter>
+              <div className="min-w-full inline-block align-middle">
+                <table className="w-full min-w-[920px] border-collapse text-left text-sm">
+                  <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
+                    <tr>
                       {columns.map((column) => (
-                        <td
-                          key={column}
-                          className="max-w-64 truncate px-5 py-4"
-                        >
-                          {formatCell(row[column])}
-                        </td>
+                        <th key={column} className="px-5 py-4 font-medium">
+                          {formatLabel(column)}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-black/6">
+                    {rows.map((row, index) => (
+                      <tr
+                        key={String(row.id || index)}
+                        className="hover:bg-black/[0.02] transition-colors"
+                      >
+                        {columns.map((column) => (
+                          <td
+                            key={column}
+                            className="max-w-64 truncate px-5 py-4"
+                          >
+                            {formatCell(row[column], column)}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </ScrollArea>
+            <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
+              <TablePager
+                page={page}
+                pageSize={pageSize}
+                count={tableData?.count || 0}
+                onPageChange={setPage}
+              />
             </div>
-            <TablePager
-              page={page}
-              pageSize={pageSize}
-              count={tableData?.count || 0}
-              onPageChange={setPage}
-            />
-          </>
+          </div>
         ) : (
           <div className="p-6">
             <div className="flex flex-col items-center gap-3 text-center text-sm text-black/50">

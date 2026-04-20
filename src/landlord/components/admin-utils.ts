@@ -7,7 +7,7 @@ import type {
   LandlordTableResponse,
   Participant,
   QuestSummary,
-} from "./admin-types";
+} from "@/landlord/components/admin-types";
 import { REACTION_EMOJIS, ReactionType } from "@/lib/stats/types";
 
 export const participantsKey = (selectedQuest: string) =>
@@ -95,11 +95,9 @@ export function formatCell(value: unknown, key?: string) {
     if (/^\d{4}-\d{2}-\d{2}/.test(value)) {
       return formatDate(value);
     }
-    // Reactions
+    // Reactions (text-only for table cells)
     if (key?.toLowerCase().includes("reaction") || key?.toLowerCase() === "type") {
-      if (REACTION_EMOJIS[value.toLowerCase() as ReactionType]) {
-        return formatReaction(value);
-      }
+      return capitalize(value);
     }
   }
   if (Array.isArray(value)) return value.join(", ");

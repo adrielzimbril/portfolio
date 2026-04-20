@@ -5,7 +5,7 @@ import { FileText, Loader2, RefreshCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AdminCard, EmptyState, TablePager } from "@/landlord/components/AdminPrimitives";
-import { DataDetailsModal } from "@/landlord/components/_modals";
+import { DataDetailsModal } from "@/landlord/components/_modals/DataDetailsModal";
 import { dataTableKey, fetchLandlordTable, formatCell, formatLabel } from "@/landlord/components/admin-utils";
 import type { DataTableKey, LandlordTableResponse } from "@/landlord/components/admin-types";
 
@@ -45,8 +45,8 @@ function DataRows({
   };
 
   return (
-    <div className="flex flex-col max-h-[600px] xl:max-h-[calc(100dvh-320px)]">
-      <ScrollArea className="flex-1 border-b border-black/5" scrollbarGutter>
+    <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-320px)] overflow-hidden">
+      <ScrollArea className="flex-1 w-full border-b border-black/5" scrollbarGutter>
         <div className="min-w-full inline-block align-middle">
           <table className="w-full min-w-[920px] border-collapse text-left text-sm">
             <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">

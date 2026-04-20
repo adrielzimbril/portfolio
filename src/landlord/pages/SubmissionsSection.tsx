@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useSWR from "swr/mutation";
 import { Plus, Loader2, FileText, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AdminCard } from "../components/AdminPrimitives";
+import { AdminCard } from "@/landlord/components/AdminPrimitives";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { Locale } from "@/types/enum";
 import { logger } from "@/utils";
@@ -248,49 +249,53 @@ export function SubmissionsSection() {
         </AdminCard>
       )}
 
-      <AdminCard>
+      <AdminCard className="overflow-hidden">
         {filteredParticipants.length ? (
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left text-sm">
-              <thead className="border-b border-black/8 text-xs text-black/45">
-                <tr>
-                  <th className="px-5 py-4 font-medium">Nom</th>
-                  <th className="px-5 py-4 font-medium">Email</th>
-                  <th className="px-5 py-4 font-medium">Quest</th>
-                  <th className="px-5 py-4 font-medium">URL du travail</th>
-                  <th className="px-5 py-4 font-medium">Date</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-black/6">
-                {filteredParticipants.map((participant: any) => (
-                  <tr key={participant.id} className="hover:bg-black/[0.02]">
-                    <td className="px-5 py-4">{participant.name}</td>
-                    <td className="px-5 py-4">{participant.email}</td>
-                    <td className="px-5 py-4">{participant.challenge_slug}</td>
-                    <td className="px-5 py-4">
-                      {participant.work_url ? (
-                        <a
-                          href={participant.work_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-blue-600 hover:underline"
-                        >
-                          <ExternalLink size={14} />
-                          Voir
-                        </a>
-                      ) : (
-                        "N/A"
-                      )}
-                    </td>
-                    <td className="px-5 py-4">
-                      {new Date(participant.created_at).toLocaleDateString(
-                        "fr-FR",
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="flex flex-col h-[500px] overflow-hidden">
+            <ScrollArea className="flex-1 w-full" scrollbarGutter>
+              <div className="min-w-full inline-block align-middle">
+                <table className="w-full min-w-[920px] border-collapse text-left text-sm">
+                  <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
+                    <tr>
+                      <th className="px-5 py-4 font-medium">Nom</th>
+                      <th className="px-5 py-4 font-medium">Email</th>
+                      <th className="px-5 py-4 font-medium">Quest</th>
+                      <th className="px-5 py-4 font-medium">URL du travail</th>
+                      <th className="px-5 py-4 font-medium">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-black/6">
+                    {filteredParticipants.map((participant: any) => (
+                      <tr key={participant.id} className="hover:bg-black/[0.02] transition-colors">
+                        <td className="px-5 py-4">{participant.name}</td>
+                        <td className="px-5 py-4">{participant.email}</td>
+                        <td className="px-5 py-4">{participant.challenge_slug}</td>
+                        <td className="px-5 py-4">
+                          {participant.work_url ? (
+                            <a
+                              href={participant.work_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-1 text-blue-600 hover:underline"
+                            >
+                              <ExternalLink size={14} />
+                              Voir
+                            </a>
+                          ) : (
+                            "N/A"
+                          )}
+                        </td>
+                        <td className="px-5 py-4 text-black/45">
+                          {new Date(participant.created_at).toLocaleDateString(
+                            "fr-FR",
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </ScrollArea>
           </div>
         ) : (
           <div className="p-6">
