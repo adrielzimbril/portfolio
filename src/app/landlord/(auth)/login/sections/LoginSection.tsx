@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
 import { Github, Google } from "@aurthle/icons";
-import Image from "next/image";
-import { LockKeyhole, Sparkles } from "lucide-react";
+import { Activity, LockKeyhole, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn, getPathUrl } from "@/utils";
+import { getPathUrl } from "@/utils";
 import {
   signInWithGithub,
   signInWithGoogle,
@@ -74,77 +73,77 @@ export function LoginSection({ reason }: { reason?: string }) {
         <aside className="relative hidden min-h-[680px] flex-col justify-between overflow-hidden bg-[#11191f] p-10 text-white lg:flex">
           <div className="relative z-10 flex items-center gap-3">
             <div className="flex size-11 items-center justify-center rounded-2xl bg-white text-[#11191f]">
-              <Sparkles size={20} />
+              <Terminal size={20} />
             </div>
             <div>
-              <p className="text-sm font-semibold">Adriel Zimbril</p>
-              <p className="text-xs text-white/60">Secure workspace</p>
+              <p className="text-sm font-semibold tracking-tight">Adriel Zimbril</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">[NODE_AUTHORIZATION_REQ] // FRAG-99</p>
             </div>
           </div>
 
           <div className="relative z-10 overflow-hidden rounded-2xl border border-white/10 bg-white/8 p-6">
-            <div className="mb-6 flex items-center justify-between text-xs text-white/55">
-              <span>Secure workspace</span>
-              <span>Adriel Zimbril</span>
+            <div className="mb-6 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.15em] text-white/25">
+              <span>KERNEL_PULSE_MONITOR</span>
+              <span>SIGNATURE_CAPTURED</span>
             </div>
             <div className="grid gap-3">
               <div className="rounded-2xl bg-white p-4 text-[#11191f]">
-                <p className="text-xs text-black/45">Aujourd'hui</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-black/35 shadow-sm">Metrics_Buffer_01</p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
-                  {["Quests", "Users", "Messages"].map((item) => (
-                    <div key={item} className="rounded-xl bg-[#f5f3ea] p-3">
-                      <p className="text-[11px] text-black/45">{item}</p>
-                      <p className="mt-2 text-xl font-semibold">12</p>
+                  {[
+                    { label: "Protocols", val: "12" },
+                    { label: "Entities", val: "48" },
+                    { label: "Signals", val: "09" },
+                  ].map((item) => (
+                    <div key={item.label} className="rounded-xl bg-[#f5f3ea] p-3 transition-transform hover:scale-[1.02]">
+                      <p className="text-[9px] font-bold uppercase text-black/45">{item.label}</p>
+                      <p className="mt-1 text-xl font-semibold tabular-nums tracking-tighter">{item.val}</p>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="flex items-center gap-4 rounded-2xl bg-white/10 p-4">
-                <Image
-                  src="/img/me/memoji/me-code.png"
-                  width={88}
-                  height={88}
-                  alt="Secure access"
-                  className="rounded-2xl object-cover"
-                />
+              <div className="flex items-center gap-4 rounded-2xl bg-white/10 p-4 transition-colors hover:bg-white/15">
+                <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-white/40">
+                  <Activity size={32} />
+                </div>
                 <div>
-                  <p className="text-sm font-medium">Gestion rapide</p>
-                  <p className="mt-1 text-xs leading-5 text-white/55">
-                    Les entrées importantes du site restent lisibles et faciles à
-                    contrôler.
+                  <p className="text-sm font-semibold uppercase tracking-[0.1em]">ADMIN_OVERRIDE_CONSOLE</p>
+                  <p className="mt-1 text-[11px] leading-relaxed text-white/45">
+                    Mutation de paquets et orchestration des flux critiques avec une
+                    latence proche de zéro.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <p className="relative z-10 max-w-md text-sm leading-6 text-white/55">
-            Un accès privé pour gérer les contenus, les inscriptions et les
-            messages du site.
+          <p className="relative z-10 max-w-sm text-[11px] leading-relaxed text-white/40">
+            Liaison restreinte. Authentification requise pour la mutation des
+            nœuds de données et des protocoles de communication.
           </p>
         </aside>
 
         <main className="flex min-h-[640px] items-center justify-center p-6 md:p-12">
           <div className="w-full max-w-md">
-            <div className="mb-10 flex items-center gap-3 lg:hidden">
-              <div className="flex size-10 items-center justify-center rounded-2xl bg-[#11191f] text-white">
-                <Sparkles size={18} />
+            
+
+            <div className="mb-8">
+              <div className="mb-10 flex items-center gap-3">
+              <div className="flex size-12 items-center justify-center rounded-2xl bg-[#11191f] text-white">
+                <LockKeyhole size={20} />
               </div>
-              <div>
-                <p className="font-semibold">Shirofolio</p>
+              <div className="lg:hidden">
+                <p className="font-semibold text-[13px] uppercase tracking-wider">Adriel Zimbril</p>
                 <p className="text-xs text-black/50">Secure workspace</p>
               </div>
             </div>
-
-            <div className="mb-8">
-              <div className="mb-6 flex size-12 items-center justify-center rounded-2xl bg-[#11191f] text-white">
-                <LockKeyhole size={20} />
-              </div>
-              <h2 className="text-4xl font-semibold leading-tight tracking-[-0.02em]">
-                Accès sécurisé
+              <h2 className="text-4xl font-semibold leading-tight tracking-[-0.04em] uppercase">
+                Accès_Racine
               </h2>
               <p className="mt-3 text-sm leading-6 text-black/55">
-                Connecte-toi avec ton compte autorisé pour ouvrir le panel.
+                Signature numérique détectée. Identifiez-vous pour ouvrir une liaison 
+                sécurisée avec le Shiro Core. Toute mutation non autorisée 
+                sera rejetée par le firewall.
               </p>
             </div>
 
@@ -157,8 +156,8 @@ export function LoginSection({ reason }: { reason?: string }) {
 
             <LoginButtons />
 
-            <p className="mt-8 text-xs leading-5 text-black/45">
-              Accès réservé aux emails configurés côté serveur.
+            <p className="mt-8 text-[10px] font-bold uppercase tracking-widest text-black/35">
+              Accès strictement réservé aux entités whitelisted.
             </p>
           </div>
         </main>

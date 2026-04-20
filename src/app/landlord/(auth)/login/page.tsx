@@ -15,8 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("admin.title"),
-    description: t("admin.description"),
+    title: "[ROOT] // AUTHENTICATION_TERMINAL",
+    description: "Portail d'accès privé. Authentification Racine requise pour la mutation des nœuds de données.",
     robots: {
       index: false,
       follow: false,
