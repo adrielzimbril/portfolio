@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
+import { SidebarOverlay } from "./sidebar-overlay";
 import type { AdminUser } from "../admin-types";
+import { apiRoutes } from "@/data/api-routes";
 import { landlordRoutes } from "@/data/landlordRoutes";
 
 export function DashboardLayout({
@@ -18,7 +20,7 @@ export function DashboardLayout({
 
   const handleSignOut = async () => {
     try {
-      const response = await fetch("/api/auth/signout", { method: "POST" });
+      const response = await fetch(apiRoutes.auth.logout.link, { method: "POST" });
       if (response.ok) {
         router.push(landlordRoutes.login.link);
       }
@@ -38,13 +40,10 @@ export function DashboardLayout({
         setSidebarOpen={setSidebarOpen}
         onSignOut={handleSignOut}
       />
-      {sidebarOpen && (
-        <button
-          className="fixed inset-0 z-30 cursor-pointer bg-black/20 md:hidden"
-          aria-label="Fermer la navigation"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      <SidebarOverlay
+        visible={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
       <main className="flex min-w-0 flex-1 flex-col overflow-hidden md:pl-6">
         <Header
           user={user}

@@ -40,7 +40,7 @@ export default async function LandlordLayout({
 
   return (
     <>
-      <div className="container mx-auto relative size-full min-h-dvh flex flex-col">
+      <div className="relative size-full min-h-dvh flex flex-col">
         <DashboardLayout
           user={{
             email: userEmail,
