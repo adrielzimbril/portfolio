@@ -91,11 +91,11 @@ export function AdminShell({
 
   // Determine active view from pathname
   const getActiveView = (): string => {
-    if (pathname.includes("/tables/newsletter")) return "newsletter";
-    if (pathname.includes("/tables/users")) return "users";
-    if (pathname.includes("/tables/submissions")) return "submissions";
-    if (pathname.includes("/tables/hub-requests")) return "hubRequests";
-    if (pathname.includes("/tables/reactions")) return "reactions";
+    if (pathname.includes("/newsletter")) return "newsletter";
+    if (pathname.includes("/users")) return "users";
+    if (pathname.includes("/submissions")) return "submissions";
+    if (pathname.includes("/hub-requests")) return "hubRequests";
+    if (pathname.includes("/reactions")) return "reactions";
     if (pathname.includes("/community")) return "community";
     if (pathname.includes("/quests/registrations")) return "quests-registrations";
     if (pathname.includes("/quests/submissions")) return "quests-submissions";

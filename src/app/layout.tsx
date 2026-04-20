@@ -87,7 +87,6 @@ export default async function RootLayout({ children }: PropsWithChildren) {
             </LayoutProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
-        {/* <AnalyticsScript /> */}
       </body>
     </html>
   );

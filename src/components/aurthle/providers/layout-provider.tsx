@@ -18,6 +18,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const t = useTranslations();
 
   const route = usePathname();
+  const isAdminRoute = route.startsWith("/landlord");
   const menuRoutes = Object.values(routes);
   const menuRoutesFiltered = menuRoutes.filter((item) => item.inHeader);
 
@@ -58,7 +59,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   });
 
   const loader = pageLoader(currentKey);
-  const showLoader = asLoader && !isLoaded;
+  const showLoader = !isAdminRoute && asLoader && !isLoaded;
   const isHomePage =
     currentRoute?.key === routes.home.key || currentRoute === undefined;
 
