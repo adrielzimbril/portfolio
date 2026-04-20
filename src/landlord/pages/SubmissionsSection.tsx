@@ -47,7 +47,10 @@ export function SubmissionsSection() {
     () =>
       `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
     async (url) => {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
       if (!response.ok) throw new Error("Failed to fetch participants");
       const data = await response.json();
       return data.participants || [];

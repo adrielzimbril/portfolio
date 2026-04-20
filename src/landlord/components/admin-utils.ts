@@ -32,6 +32,16 @@ const timeFormatter = new Intl.DateTimeFormat("fr-FR", {
   minute: "2-digit",
 });
 
+const premiumDateTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+});
+
 export function formatDate(value?: string) {
   if (!value) return "N/A";
   const date = new Date(value);
@@ -44,6 +54,22 @@ export function formatTime(value?: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
   return timeFormatter.format(date);
+}
+
+export function formatDateTimePremium(value?: string) {
+  if (!value) return "N/A";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "N/A";
+  // Format: "Sunday, April 19, 2026, 01:18 AM"
+  // Transform to: "Sunday, April 19, 2026 at 01:18 AM"
+  const formatted = premiumDateTimeFormatter.format(date);
+  const parts = formatted.split(", ");
+  if (parts.length >= 3) {
+    const dayAndMonth = parts.slice(0, 2).join(", ");
+    const yearAndTime = parts.slice(2).join(" at ");
+    return `${dayAndMonth}, ${yearAndTime}`;
+  }
+  return formatted;
 }
 
 export function formatCell(value: unknown) {
