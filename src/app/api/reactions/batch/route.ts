@@ -46,14 +46,6 @@ export async function GET(request: Request) {
       celebrate: 0,
       insightful: 0,
       sceptic: 0,
-      laugh: 0,
-      wow: 0,
-      sad: 0,
-      angry: 0,
-      fire: 0,
-      clap: 0,
-      rocket: 0,
-      party: 0,
     };
 
     if (countsData.data) {
@@ -71,14 +63,6 @@ export async function GET(request: Request) {
       celebrate: false,
       insightful: false,
       sceptic: false,
-      laugh: false,
-      wow: false,
-      sad: false,
-      angry: false,
-      fire: false,
-      clap: false,
-      rocket: false,
-      party: false,
     };
 
     if (userReactionsData.data) {

@@ -89,7 +89,7 @@ export function Sidebar({
       </div>
 
       {/* Scrollable nav area */}
-      <ScrollArea className="flex-1 -mx-2 px-2"  scrollbarGutter scrollFade>
+      <ScrollArea className="flex-1 -mx-2 px-2"  scrollbarGutter>
         <nav className="grid content-start gap-1 pb-4">
           {/* Dashboard */}
           <NavLink

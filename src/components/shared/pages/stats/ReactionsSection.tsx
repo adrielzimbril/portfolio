@@ -33,39 +33,7 @@ const REACTION_CONFIG: Record<
   sceptic: {
     Icon: "🤔",
     labelKey: "stats.reactions.sceptic",
-  },
-  laugh: {
-    Icon: "😂",
-    labelKey: "stats.reactions.laugh",
-  },
-  wow: {
-    Icon: "😮",
-    labelKey: "stats.reactions.wow",
-  },
-  sad: {
-    Icon: "😢",
-    labelKey: "stats.reactions.sad",
-  },
-  angry: {
-    Icon: "😡",
-    labelKey: "stats.reactions.angry",
-  },
-  fire: {
-    Icon: "🔥",
-    labelKey: "stats.reactions.fire",
-  },
-  clap: {
-    Icon: "👏",
-    labelKey: "stats.reactions.clap",
-  },
-  rocket: {
-    Icon: "🚀",
-    labelKey: "stats.reactions.rocket",
-  },
-  party: {
-    Icon: "🥳",
-    labelKey: "stats.reactions.party",
-  },
+  }
 };
 
 interface ReactionCardProps {

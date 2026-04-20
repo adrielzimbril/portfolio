@@ -37,14 +37,6 @@ export async function getServerStats(locale?: string): Promise<ServerStats> {
         [ReactionType.CELEBRATE]: 0,
         [ReactionType.INSIGHTFUL]: 0,
         [ReactionType.SCEPTIC]: 0,
-        [ReactionType.LAUGH]: 0,
-        [ReactionType.WOW]: 0,
-        [ReactionType.SAD]: 0,
-        [ReactionType.ANGRY]: 0,
-        [ReactionType.FIRE]: 0,
-        [ReactionType.CLAP]: 0,
-        [ReactionType.ROCKET]: 0,
-        [ReactionType.PARTY]: 0,
       };
 
       const { data: allReactions } = await supabase

@@ -97,7 +97,9 @@ export function formatCell(value: unknown, key?: string) {
     }
     // Reactions (text-only for table cells)
     if (key?.toLowerCase().includes("reaction") || key?.toLowerCase() === "type") {
-      return capitalize(value);
+       if (REACTION_EMOJIS[value.toLowerCase() as ReactionType]) {
+        return formatReaction(value);
+      }
     }
   }
   if (Array.isArray(value)) return value.join(", ");

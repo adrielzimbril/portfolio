@@ -117,7 +117,7 @@ export function QuestSubmissionsSection() {
             Chargement des soumissions...
           </div>
         ) : filteredParticipants.length ? (
-          <div className="flex flex-col max-h-[600px] xl:max-h-[calc(100dvh-320px)]">
+          <div className="flex flex-col max-h-[600px] xl:max-h-[calc(100dvh-270px)]">
             <ScrollArea className="flex-1" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[860px] border-collapse text-left text-sm">
@@ -132,7 +132,7 @@ export function QuestSubmissionsSection() {
                   </thead>
               <tbody className="divide-y divide-black/6">
                 {filteredParticipants.map((participant) => (
-                  <tr key={participant.id} className="hover:bg-black/[0.02]">
+                  <tr key={participant.id} className="hover:bg-black/2">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className="flex size-10 items-center justify-center rounded-full bg-[#ffed90] text-sm font-semibold">
