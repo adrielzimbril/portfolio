@@ -1,0 +1,255 @@
+"use client";
+import React, { useMemo, useState } from "react";
+import useSWR, { mutate } from "swr";
+import { ExternalLink, FileText, Filter, Loader2, Mail, MoreHorizontal, Plus, RefreshCw, Users } from "lucide-react";
+import { SectionBase } from "@/components/shared/pages/shared/section-base";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { AdminCard, EmptyState, SearchBox, StatusPill } from "@/landlord/components/AdminPrimitives";
+import { ParticipantModal } from "@/landlord/components/AdminModals";
+import { fetchParticipants, fetchQuests, formatDate, formatTime, participantsKey } from "@/landlord/components/admin-utils";
+import { toast } from "@/lib/toast";
+
+export function QuestsSection({ filterType }: { filterType?: "register" | "submission" }) {
+  const [search, setSearch] = useState("");
+  const [selectedQuest, setSelectedQuest] = useState("all");
+  const [participantModalOpen, setParticipantModalOpen] = useState(false);
+
+  const { data: quests = [] } = useSWR("landlord-quests", fetchQuests);
+  
+  const {
+    data: participants = [],
+    isLoading: loading,
+  } = useSWR(participantsKey(selectedQuest), fetchParticipants);
+
+  const filteredParticipants = useMemo(() => {
+    let filtered = participants;
+    
+    if (filterType) {
+      filtered = filtered.filter(p => p.type === filterType);
+    }
+
+    const query = search.trim().toLowerCase();
+    if (query) {
+      filtered = filtered.filter((participant) =>
+        [
+          participant.name,
+          participant.email,
+          participant.challenge_slug,
+          participant.type,
+          participant.status,
+          participant.meta?.source,
+        ]
+          .filter(Boolean)
+          .some((value) => String(value).toLowerCase().includes(query)),
+      );
+    }
+    return filtered;
+  }, [search, participants, filterType]);
+
+  return (
+    <SectionBase isWide>
+      <div className="grid gap-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-[-0.02em]">
+              {filterType === "register" ? "Inscriptions aux Quests" : filterType === "submission" ? "Soumissions des Quests" : "Quests"}
+            </h2>
+            <p className="mt-1 text-sm text-black/45">
+              Inscriptions et soumissions, avec accès direct aux rendus.
+            </p>
+          </div>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Button
+              variant="outline"
+              asIcon
+              asPointer
+              onClick={() => mutate(participantsKey(selectedQuest))}
+            >
+              <RefreshCw size={16} />
+              Rafraîchir
+            </Button>
+            <Button asIcon asPointer onClick={() => setParticipantModalOpen(true)}>
+              <Plus size={16} />
+              Ajouter
+            </Button>
+          </div>
+        </div>
+
+        <AdminCard className="p-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <SearchBox
+              value={search}
+              onChange={setSearch}
+              placeholder="Rechercher nom, email, quest..."
+            />
+            <div className="flex items-center gap-2">
+              <Filter size={16} className="text-black/35" />
+              <Select value={selectedQuest} onValueChange={setSelectedQuest}>
+                <SelectTrigger className="h-10 w-full min-w-56 bg-white text-sm md:w-72">
+                  <SelectValue placeholder="Toutes les quests" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Toutes les quests</SelectItem>
+                  {quests.map((quest) => (
+                    <SelectItem key={quest.slug} value={quest.slug}>
+                      {quest.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </AdminCard>
+
+        <AdminCard className="overflow-hidden">
+          {loading ? (
+            <div className="flex min-h-72 items-center justify-center gap-2 text-sm text-black/50">
+              <Loader2 size={18} className="animate-spin" />
+              Chargement des participants...
+            </div>
+          ) : filteredParticipants.length ? (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+                <thead className="border-b border-black/8 text-xs text-black/45">
+                  <tr>
+                    <th className="px-5 py-4 font-medium">Participant</th>
+                    <th className="px-5 py-4 font-medium">Quest</th>
+                    <th className="px-5 py-4 font-medium">Type</th>
+                    <th className="px-5 py-4 font-medium">Statut</th>
+                    <th className="px-5 py-4 font-medium">Date</th>
+                    <th className="px-5 py-4 text-right font-medium">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-black/6">
+                  {filteredParticipants.map((participant) => (
+                    <tr
+                      key={`${participant.type}-${participant.id}`}
+                      className="hover:bg-black/[0.02]"
+                    >
+                      <td className="px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="flex size-10 items-center justify-center rounded-full bg-[#ffed90] text-sm font-semibold">
+                            {participant.name?.charAt(0)?.toUpperCase() || "?"}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="truncate font-medium">
+                              {participant.name}
+                            </p>
+                            <p className="truncate text-xs text-black/45">
+                              {participant.email}
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-5 py-4">
+                        <span className="max-w-60 truncate text-black/70">
+                          {participant.challenge_slug}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4">
+                        <StatusPill
+                          tone={
+                            participant.type === "submission" ? "info" : "warning"
+                          }
+                        >
+                          {participant.type === "submission"
+                            ? "Soumission"
+                            : "Inscription"}
+                        </StatusPill>
+                      </td>
+                      <td className="px-5 py-4">
+                        <span className="text-sm text-black/55">
+                          {participant.status || "N/A"}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4 text-black/55">
+                        <div>{formatDate(participant.created_at)}</div>
+                        <div className="text-xs text-black/35">
+                          {formatTime(participant.created_at)}
+                        </div>
+                      </td>
+                      <td className="px-5 py-4 text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              asPointer
+                              aria-label="Actions participant"
+                            >
+                              <MoreHorizontal size={16} />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="w-48">
+                            {participant.work_url ? (
+                              <DropdownMenuItem asChild>
+                                <a
+                                  href={participant.work_url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <ExternalLink size={14} />
+                                  Voir le travail
+                                </a>
+                              </DropdownMenuItem>
+                            ) : (
+                              <DropdownMenuItem disabled>
+                                <FileText size={14} />
+                                Aucun travail
+                              </DropdownMenuItem>
+                            )}
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem
+                              onClick={() =>
+                                navigator.clipboard
+                                  ?.writeText(participant.email)
+                                  .then(() => toast.success("Email copié."))
+                              }
+                            >
+                              <Mail size={14} />
+                              Copier l'email
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="p-6">
+              <EmptyState
+                icon={Users}
+                title="Aucun participant"
+                description="Aucune entrée ne correspond au filtre actuel."
+              />
+            </div>
+          )}
+        </AdminCard>
+      </div>
+      
+      <ParticipantModal
+        open={participantModalOpen}
+        quests={quests}
+        selectedQuest={selectedQuest}
+        onOpenChange={setParticipantModalOpen}
+        onCreated={() => mutate(participantsKey(selectedQuest))}
+      />
+    </SectionBase>
+  );
+}

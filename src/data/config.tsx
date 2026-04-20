@@ -57,7 +57,7 @@ export const siteConfig = {
       {
         href: routes.contact.link,
         icon: User,
-        label: routes.contact.name,
+        label: "Contact",
       },
     ],
     contact: {

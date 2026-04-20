@@ -3,14 +3,14 @@ import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { Skeleton } from "@/components/ui/skeleton";
-import { TableSection } from "@/app/landlord/sections/TableSection";
+import { CommunitySection } from "@/app/landlord/sections/CommunitySection";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Reactions",
+    title: t("admin.title") + " - Community",
     description: t("admin.description"),
     robots: {
       index: false,
@@ -19,11 +19,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function ReactionsPage() {
+export default function CommunityPage() {
   return (
     <>
-      <Skeleton name="landlord-reactions-header" loading={false}>
-        <TableSection activeTable="reactions" />
+      <Skeleton name="landlord-community-header" loading={false}>
+        <CommunitySection />
       </Skeleton>
     </>
   );

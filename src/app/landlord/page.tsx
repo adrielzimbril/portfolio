@@ -4,7 +4,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { AdminDashboard } from "@/landlord/components/AdminDashboard";
+import { Skeleton } from "@/components/ui/skeleton";
+import { OverviewSection } from "@/app/landlord/sections/OverviewSection";
 import { isUserAuthenticatedServer } from "@/lib/reactions/anonymous-user";
 import { createClient } from "@/integrations/supabase/server";
 import { ConfigValue } from "@/config";
@@ -66,15 +67,10 @@ export default async function AdminPage() {
   }
 
   return (
-    <AdminDashboard
-      user={{
-        email: userEmail,
-        name:
-          user.user_metadata?.name ||
-          user.user_metadata?.full_name ||
-          userEmail.split("@")[0],
-        avatarUrl: user.user_metadata?.avatar_url,
-      }}
-    />
+    <>
+      <Skeleton name="landlord-overview-header" loading={false}>
+        <OverviewSection />
+      </Skeleton>
+    </>
   );
 }

@@ -13,6 +13,13 @@ export const landlordRoutes = {
     inHeader: false,
     inSitemap: false,
   },
+  community: {
+    name: "Mur communautaire",
+    key: "landlord-community",
+    link: "/landlord/community",
+    inHeader: false,
+    inSitemap: false,
+  },
   quests: {
     registrations: {
       name: "Inscriptions",
