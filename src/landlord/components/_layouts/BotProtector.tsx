@@ -4,8 +4,9 @@ import React, { useState, useEffect } from "react";
 import { Turnstile } from "@/integrations/anti-bot/turnstile-second";
 import { ConfigValue } from "@/config";
 import { Loader2, ShieldCheck, ShieldAlert } from "lucide-react";
-import { cn, logger } from "@/utils";
+import { cn } from "@/utils";
 import { isLocal } from "@/config/utils";
+import { logger } from "@/utils/logger";
 
 interface BotProtectorProps {
   children: React.ReactNode;
@@ -53,7 +54,7 @@ export function BotProtector({ children }: BotProtectorProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[#f5f3ea]/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#f5f3ea]/80 backdrop-blur-md">
       <div className="w-full max-w-sm rounded-[32px] border border-black/10 bg-white p-8 shadow-[0_24px_80px_rgba(17,25,31,0.14)] text-center">
         <div className="mb-6 flex justify-center">
           <div className={cn(

@@ -86,6 +86,8 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
           subtitle={loader.subtitle}
           isPage={isHomePage}
         />
+      ) : isAdminRoute ? (
+        children
       ) : (
         <ReactLenis root>{children}</ReactLenis>
       )}

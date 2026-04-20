@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { FileText, Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { AdminCard, EmptyState, TablePager } from "@/landlord/components/AdminPrimitives";
 import { dataTableKey, fetchLandlordTable, formatDate } from "@/landlord/components/admin-utils";
 import type { DataTableKey, LandlordTableResponse } from "@/landlord/components/admin-types";
@@ -44,41 +45,45 @@ function DataRows({
   }
 
   return (
-    <>
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[920px] border-collapse text-left text-sm">
-          <thead className="border-b border-black/8 text-xs text-black/45">
-            <tr>
-              {columns.map((column) => (
-                <th key={column} className="px-5 py-4 font-medium capitalize">
-                  {column}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-black/6">
-            {rows.map((row, index) => (
-              <tr
-                key={String(row.id || index)}
-                className="hover:bg-black/[0.02]"
-              >
+    <div className="flex flex-col h-[600px] max-h-[calc(100dvh-320px)]">
+      <ScrollArea className="flex-1 border-b border-black/5" scrollbarGutter>
+        <div className="min-w-full inline-block align-middle">
+          <table className="w-full min-w-[920px] border-collapse text-left text-sm">
+            <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
+              <tr>
                 {columns.map((column) => (
-                  <td key={column} className="max-w-64 truncate px-5 py-4">
-                    {formatCell(row[column])}
-                  </td>
+                  <th key={column} className="px-5 py-4 font-medium capitalize">
+                    {column}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-black/6">
+              {rows.map((row, index) => (
+                <tr
+                  key={String(row.id || index)}
+                  className="hover:bg-black/[0.02] transition-colors"
+                >
+                  {columns.map((column) => (
+                    <td key={column} className="max-w-64 truncate px-5 py-4">
+                      {formatCell(row[column])}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </ScrollArea>
+      <div className="flex-shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1">
+        <TablePager
+          page={page}
+          pageSize={PAGE_SIZE}
+          count={response?.count || 0}
+          onPageChange={onPageChange}
+        />
       </div>
-      <TablePager
-        page={page}
-        pageSize={PAGE_SIZE}
-        count={response?.count || 0}
-        onPageChange={onPageChange}
-      />
-    </>
+    </div>
   );
 }
 
