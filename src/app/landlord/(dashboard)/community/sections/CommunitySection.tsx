@@ -171,7 +171,7 @@ export function CommunitySection() {
                       </td>
                       <td className="px-5 py-4">
                         <div className="grid max-w-xl gap-1">
-                          {entries.slice(0, 2).map(([locale, value]) => (
+                          {(entries as [string, string][]).slice(0, 2).map(([locale, value]) => (
                             <p key={locale} className="truncate text-black/65">
                               <span className="mr-2 text-xs font-semibold uppercase text-black/35">
                                 {locale}

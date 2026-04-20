@@ -240,7 +240,7 @@ export function MessageModal({
   const [form, setForm] = useState({
     creator_name: "",
     creator_avatar_url: "",
-    messages: {} as Record<string, string>,
+    message: {} as Record<string, string>,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -249,7 +249,7 @@ export function MessageModal({
     setForm({
       creator_name: message?.creator_name || "",
       creator_avatar_url: message?.creator_avatar_url || "",
-      messages: message ? { ...normalizeMessage(message) } : {},
+      message: message ? { ...normalizeMessage(message) } : {},
     });
   }, [open, message]);
 
@@ -335,12 +335,12 @@ export function MessageModal({
                 </Label>
                 <Textarea
                   id={`message-${locale}`}
-                  value={form.messages[locale] || ""}
+                  value={form.message[locale] || ""}
                   onChange={(event) =>
                     setForm((current) => ({
                       ...current,
-                      messages: {
-                        ...current.messages,
+                      message: {
+                        ...current.message,
                         [locale]: event.target.value,
                       },
                     }))
