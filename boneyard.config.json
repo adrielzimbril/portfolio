@@ -1,11 +1,28 @@
 {
-  "animate": "shimmer",
-  "speed": "2s",
-  "borderRadius": "0.5rem",
+  "breakpoints": [375, 768, 1280],
+  "out": "./src/bones",
+  "wait": 800,
+
   "color": "hsl(210 40% 96.1%)",
   "darkColor": "hsl(223 47% 11%)",
+  "animate": "shimmer",
   "shimmerColor": "rgba(255, 255, 255, 0.4)",
   "darkShimmerColor": "rgba(255, 255, 255, 0.05)",
+  "speed": "2s",
+  "borderRadius": "0.5rem",
   "shimmerAngle": 110,
-  "transition": 300
+  "stagger": 80,
+  "transition": 300,
+
+  "resolveEnvVars": true,
+  "auth": {
+    "cookies": [
+      {
+        "name": "session",
+        "value": "env[SESSION_TOKEN]",
+        "domain": "localhost"
+      }
+    ],
+    "headers": { "Authorization": "Bearer env[API_TOKEN]" }
+  }
 }

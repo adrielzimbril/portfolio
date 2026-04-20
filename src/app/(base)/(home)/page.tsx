@@ -46,28 +46,38 @@ export default function Home() {
         <HeaderSection />
       </Skeleton>
       {showed.talks && (
-        <Suspense fallback={<Skeleton name="home-talks" className="w-full h-80" />}>
+        <Suspense
+          fallback={<Skeleton name="home-talks" className="w-full h-80" />}
+        >
           <Skeleton name="home-talks" loading={false}>
             <TalksSection />
           </Skeleton>
         </Suspense>
       )}
       {showed.quests && (
-        <Suspense fallback={<Skeleton name="home-quests" className="w-full h-80" />}>
+        <Suspense
+          fallback={<Skeleton name="home-quests" className="w-full h-80" />}
+        >
           <Skeleton name="home-quests" loading={false}>
             <QuestsSection />
           </Skeleton>
         </Suspense>
       )}
       {showed.resources && (
-        <Suspense fallback={<Skeleton name="home-resources" className="w-full h-80" />}>
+        <Suspense
+          fallback={<Skeleton name="home-resources" className="w-full h-80" />}
+        >
           <Skeleton name="home-resources" loading={false}>
             <ResourcesSection />
           </Skeleton>
         </Suspense>
       )}
       {showed.projects && (
-        <Suspense fallback={<Skeleton name="home-projects" className="w-full h-[500px]" />}>
+        <Suspense
+          fallback={
+            <Skeleton name="home-projects" className="w-full h-[500px]" />
+          }
+        >
           <Skeleton name="home-projects" loading={false}>
             <ProjectsSection />
           </Skeleton>
@@ -79,7 +89,9 @@ export default function Home() {
         </Skeleton>
       )}
       {showed.thoughts && (
-        <Suspense fallback={<Skeleton name="home-thoughts" className="w-full h-80" />}>
+        <Suspense
+          fallback={<Skeleton name="home-thoughts" className="w-full h-80" />}
+        >
           <Skeleton name="home-thoughts" loading={false}>
             <ThoughtsSection />
           </Skeleton>

@@ -9,9 +9,13 @@ import { LinkOne } from "@aurthle/icons";
 import { getDate, getPathUrl, getThisMonth } from "@/utils";
 import { usePageViews } from "@/hooks/usePageViews";
 
-const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
+const PlanningBadge = (
+  type: "simple" | "secondary" | "tertiary" | "quaternary" | "quinary",
+): React.ReactNode => {
   const t = useTranslations();
   const locale = useLocale();
+  const now = new Date();
+  const lastDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
   switch (type) {
     case "simple":
@@ -46,7 +50,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
             {t("common.shared.planning-badge.unavailable.description", {
               hasDate: "true",
               date: getDate({
-                date: new Date("2025-09-31").toISOString(),
+                date: lastDate.toISOString(),
                 lang: locale,
                 dateStyle: "medium",
               }),
@@ -72,7 +76,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
               showMission: "true",
               hasDate: "true",
               date: getDate({
-                date: new Date("2025-09-31").toISOString(),
+                date: lastDate.toISOString(),
                 lang: locale,
                 dateStyle: "medium",
               }),
@@ -82,7 +86,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
         </Link>
       </StatusBadge>;
       break;
-    default:
+    case "quaternary":
       <StatusBadge
         mode="inline"
         status="available"
@@ -92,15 +96,27 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary") => {
       >
         <Link href={routes.contact.link}>
           <span className="flex items-center gap-2">
-            {t("common.shared.planning-badge.available.description-simple", {
-              date: t("common.shared.months." + getThisMonth()),
-            })}{" "}
-            👋🏻
+            {t("common.shared.planning-badge.available.description-simple")} 👋🏻
             <LinkOne variant="bulk" size={20} />
           </span>
         </Link>
       </StatusBadge>;
       break;
+    case "quinary":
+      <StatusBadge
+        mode="inline"
+        status="available"
+        primaryText={t("common.shared.planning-badge.available.title")}
+        variant="colored"
+        size="md"
+      >
+        <Link href={routes.contact.link}>
+          <span className="flex items-center gap-2">
+            {t("common.shared.planning-badge.available.description-simple")} 👋🏻
+            <LinkOne variant="bulk" size={20} />
+          </span>
+        </Link>
+      </StatusBadge>;
   }
 };
 
@@ -120,23 +136,7 @@ export function HeaderSection() {
 
   return (
     <SectionBase sectionClassName="p-0 mt-16" isWide>
-      <StatusBadge
-        mode="inline"
-        status="available"
-        primaryText={t("common.shared.planning-badge.available.title")}
-        variant="colored"
-        size="md"
-      >
-        <Link href={routes.contact.link}>
-          <span className="flex items-center gap-2">
-            {t("common.shared.planning-badge.available.description-simple", {
-              date: t("common.shared.months." + getThisMonth()),
-            })}{" "}
-            👋🏻
-            <LinkOne variant="bulk" size={20} />
-          </span>
-        </Link>
-      </StatusBadge>
+      {PlanningBadge("quinary")}
       <h1 className="w-full relative">{t("home.page.header-section.title")}</h1>
       <p className="relative text-2xl">
         {t("home.page.header-section.description")}

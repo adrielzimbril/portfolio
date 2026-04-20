@@ -19,7 +19,8 @@
     "db:push": "npx supabase migration up --linked",
     "db:types": "npx supabase gen types typescript --linked > ./src/integrations/supabase/types.ts",
     "db:reset": "npx supabase db reset --linked",
-    "db:diff": "npx supabase db diff --linked"
+    "db:diff": "npx supabase db diff --linked",
+    "skeleton": "npx boneyard-js build"
   },
   "dependencies": {
     "@aurthle/emoji-hub": "^1.0.5",
