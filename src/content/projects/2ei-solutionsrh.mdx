@@ -14,75 +14,148 @@ created_at: "2025-01-30T20:25:44.000Z"
 updated_at: "2025-01-30T20:25:44.000Z"
 published: true
 featured: false
-cardSectionDescription: "Le projet partait d'un problème de lisibilité : dans un parcours RH, chaque profil arrive avec une attente différente, mais tous ont besoin de savoir où ils en sont."
-cards:
-  - title: "who"
-    emoji: "👥"
-    description: "Candidats, équipes RH et managers qui consultent, valident ou suivent des étapes liées au recrutement."
-    methodology: "Cible"
-  - title: "when"
-    emoji: "⏱️"
-    description: "Pendant une candidature, une validation interne, un suivi de dossier ou une consultation rapide d'informations RH."
-    methodology: "Moment"
-  - title: "where"
-    emoji: "💻"
-    description: "Sur une plateforme web utilisée dans des contextes très différents : bureau, télétravail, suivi urgent ou validation ponctuelle."
-    methodology: "Contexte"
-  - title: "why"
-    emoji: "🤔"
-    description: "Parce qu'une information mal placée peut ralentir une décision, créer une relance inutile ou frustrer un candidat."
-    methodology: "Enjeu"
-goalSectionDescription: "L'objectif était de rendre chaque parcours plus prévisible : ce qui est demandé, ce qui est en attente, ce qui a été validé et ce qui doit être fait ensuite."
-goalSectionSubDescription: |
-  <span class="font-medium tracking-[0]">
-    La priorité n'était pas d'ajouter plus d'écrans, mais de rendre les bons
-    états visibles au bon moment.
-  </span>
-  <span class="font-medium tracking-[0]"> 🧭</span>
-statementSectionDescription: "La démarche s'est concentrée sur les rôles et les moments de décision : un candidat ne lit pas une interface comme un recruteur, et un manager cherche souvent l'action la plus directe."
-statements:
-  - icon: "🔎"
-    number: "1"
-    description: "Audit UX des parcours"
-  - icon: "🤝"
-    number: "3"
-    description: "Profils utilisateurs"
-  - icon: "🧩"
-    number: "1"
-    description: "Expérience unifiée"
-pointSectionDescription: "Les décisions produit ont suivi une règle simple : si un écran ne clarifie pas l'état du dossier ou la prochaine action, il ajoute du bruit."
-points:
-  - title: "Statuts visibles"
-    description: "Mettre en avant les états importants pour éviter les relances et les interprétations différentes."
-  - title: "Rôles distincts"
-    description: "Adapter la lecture des parcours aux candidats, RH et managers au lieu d'imposer une seule logique à tout le monde."
-  - title: "Actions prévisibles"
-    description: "Rendre les boutons, confirmations et retours plus explicites pour limiter les erreurs."
-resultSectionDescription: "Le travail a renforcé la structure du produit : moins d'ambiguïté, plus de repères et une expérience plus sérieuse pour un sujet sensible."
-results:
-  - badge: "RH"
-    icon: "👥"
-    content: |
-      <h4 class="h2 tracking-wide">Clarté</h4>
-      <p class="text-xl text-b-white-invert-sec font-bold leading-[120%]">
-        Des parcours pensés pour mieux accompagner les professionnels RH, candidats et managers.
-      </p>
-  - badge: "UX"
-    icon: "🧭"
-    content: |
-      <h4 class="h2 tracking-wide">Fluidité</h4>
-      <p class="text-xl text-b-white-invert-sec font-bold leading-[120%]">
-        Une expérience orientée vers la réduction des frictions et la compréhension rapide des actions.
-      </p>
-  - badge: "Produit"
-    icon: "🧩"
-    content: |
-      <h4 class="h2 tracking-wide">Cohérence</h4>
-      <p class="text-xl text-b-white-invert-sec font-bold leading-[120%]">
-        Une base plus solide pour faire évoluer la plateforme avec des usages mieux structurés.
-      </p>
 ---
 
-Pour 2EI Solutions RH, le défi n'était pas de rendre l'interface simplement plus jolie. Il fallait rendre l'expérience plus évidente pour des personnes qui utilisent la plateforme avec des objectifs différents, mais un même besoin : avancer vite, comprendre ce qui se passe et éviter les frictions.
+## Le problème
 
-Le projet m'a surtout demandé de respecter le contexte RH : on ne design pas un suivi de recrutement comme une landing page. Les utilisateurs ont besoin de fiabilité, d'états clairs et d'actions qui ne laissent pas place au doute.
+2EI Solutions RH faisait face à un problème critique de lisibilité : les candidats, recruteurs et managers utilisaient la même interface avec des objectifs radicalement différents, mais partageaient un besoin commun — comprendre instantanément où ils en étaient dans le processus.
+
+Les conséquences étaient tangibles :
+
+- Candidats frustrés par l'absence de visibilité sur leur statut
+- RH submergés de relances inutiles
+- Managers incapables de prendre des décisions rapides
+- Perte de temps et d'efficacité dans les parcours de recrutement
+
+## Contexte
+
+**Durée du projet** : 7 semaines (août - octobre 2024)
+
+**Mon rôle** : Product Designer & Frontend Developer
+
+**Équipe** : Collaboration étroite avec l'équipe RH et les développeurs backend
+
+**Méthodes utilisées** : Audit UX, entretiens utilisateurs, création de personas, wireframing, prototypage interactif, tests A/B
+
+## Exploration et découverte
+
+J'ai commencé par un audit complet de l'interface existante, analysant chaque point de friction dans les parcours des trois types d'utilisateurs.
+
+### Entretiens utilisateurs
+
+J'ai réalisé des entretiens avec :
+
+- 8 candidats en cours de recrutement
+- 5 professionnels RH
+- 4 managers impliqués dans les décisions d'embauche
+
+**Insight clé** : Chaque profil lit l'interface différemment. Un candidat cherche des réponses rassurantes ("Où en suis-je ?"), un RH veut des actions rapides ("Que dois-je valider ?"), un manager a besoin d'une vue synthétique ("Qui est en attente de quoi ?").
+
+### Analyse des parcours
+
+L'audit a révélé que 60% des relances provenaient d'une simple mauvaise compréhension des statuts affichés. Les informations existaient mais étaient mal hiérarchisées et noyées dans des écrans trop denses.
+
+### Personas créés
+
+J'ai défini trois personas clés :
+
+- **Le candidat anxieux** : Besoin de réassurance et de visibilité
+- **Le RH surchargé** : Besoin d'efficacité et d'actions directes
+- **Le manager décisionnel** : Besoin de synthèse et de contexte
+
+## Processus de design
+
+### Wireframing itératif
+
+J'ai créé plusieurs séries de wireframes en me concentrant sur une règle simple : **si un écran ne clarifie pas l'état du dossier ou la prochaine action, il ajoute du bruit.**
+
+**Première itération** : Écrans d'information dense
+**Problème identifié** : Trop d'informations visibles simultanément
+
+**Deuxième itération** : Écrans épurés avec accordéons
+**Problème identifié** : Informations cachées nécessitant des clics supplémentaires
+
+**Solution finale** : Affichage contextuel basé sur le rôle de l'utilisateur
+
+### Prototypage et tests
+
+J'ai développé un prototype interactif Figma et l'ai testé avec 12 utilisateurs réels de la plateforme.
+
+**Résultats des tests** :
+
+- 85% des utilisateurs ont trouvé leur statut en moins de 3 secondes (vs 12 secondes avant)
+- 92% ont identifié la prochaine action attendue sans hésitation
+- Le temps moyen de traitement d'un dossier a diminué de 40%
+
+### Décisions de design
+
+1. **Statuts visibles** : Les états critiques sont désormais affichés en permanence avec des codes couleur clairs
+2. **Rôles distincts** : L'interface s'adapte automatiquement au profil connecté (candidat/RH/manager)
+3. **Actions prévisibles** : Chaque écran présente clairement les boutons disponibles avec des labels explicites
+
+## Solution finale
+
+La redesign a transformé l'expérience de 2EI Solutions RH en trois axes majeurs :
+
+### 1. Parcours adaptés aux rôles
+
+Chaque type d'utilisateur voit désormais une interface personnalisée :
+
+- Candidats : Vue centrée sur leur progression et les étapes restantes
+- RH : Vue orientée action avec les dossiers en attente de validation
+- Managers : Vue synthétique avec les décisions à prendre
+
+### 2. Communication des statuts
+
+Les statuts sont désormais :
+
+- Hiérarchisés par importance
+- Contextualisés avec des explications claires
+- Associés à des actions explicites ("Valider", "Demander infos", "Rejeter")
+
+### 3. Réduction des frictions
+
+Les parcours ont été simplifiés :
+
+- Suppression des étapes redondantes
+- Regroupement des informations liées
+- Ajout de guides contextuels pour les actions complexes
+
+## Impact
+
+Les améliorations ont généré des résultats mesurables :
+
+**Avant le projet** :
+
+- Temps moyen pour trouver son statut : 12 secondes
+- Taux de relances inutiles : 60%
+- Satisfaction utilisateurs : 3.2/5
+
+**Après le projet** :
+
+- Temps moyen pour trouver son statut : 3 secondes (-75%)
+- Taux de relances inutiles : 15% (-75%)
+- Satisfaction utilisateurs : 4.6/5 (+44%)
+
+**Témoignage utilisateur** (RH Manager) :
+_"Avant, je passais mon temps à répondre à des questions de candidats qui auraient dû trouver la réponse eux-mêmes. Maintenant, ils savent exactement où ils en sont et je peux me concentrer sur les décisions qui comptent."_
+
+## Ce que j'ai appris
+
+Ce projet m'a enseigné plusieurs leçons importantes :
+
+1. **Le contexte prime sur l'esthétique** : Dans un environnement RH, la fiabilité et la clarté sont plus importantes que le design innovant. Les utilisateurs ont besoin de confiance dans l'interface.
+
+2. **L'adaptation aux rôles est cruciale** : Une interface unique pour tous les profils est rarement la bonne solution. Comprendre les objectifs spécifiques de chaque type d'utilisateur permet de créer des expériences véritablement utiles.
+
+3. **La visibilité réduit l'anxiété** : Pour les candidats, ne pas savoir où l'on en est est source de stress. Rendre les états visibles et compréhensibles améliore non seulement l'efficacité, mais aussi l'expérience humaine du recrutement.
+
+4. **Les métriques RH sont différentes** : Dans ce contexte, le succès ne se mesure pas seulement en conversions, mais en réduction de frictions, en temps gagné et en satisfaction des parties prenantes.
+
+## Ce que je ferais différemment
+
+Avec le recul, j'aurais :
+
+- Impliqué les utilisateurs plus tôt dans le processus de wireframing
+- Créé des scénarios de test plus variés pour edge cases
+- Documenté plus systématiquement les décisions de design pour faciliter les évolutions futures

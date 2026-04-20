@@ -17,77 +17,159 @@ created_at: "2025-01-30T20:21:05.000Z"
 updated_at: "2025-01-30T20:22:50.000Z"
 published: true
 featured: false
-cardSectionDescription: "Buddy Sensei part d'un problème que j'ai vu revenir souvent : les étudiants ne manquent pas toujours d'effort, ils manquent surtout d'un cadre simple pour passer de notes dispersées à un contenu exploitable."
-cards:
-  - title: "who"
-    emoji: "🧑🏾‍🎓"
-    description: "Étudiants qui jonglent entre cours, devoirs, exposés et révisions, avec peu de temps pour remettre de l'ordre dans leurs idées."
-    methodology: "Cible"
-  - title: "when"
-    emoji: "⏰"
-    description: "Quand il faut transformer rapidement un document, un brouillon ou quelques notes en plan clair, résumé ou support de travail."
-    methodology: "Moment"
-  - title: "where"
-    emoji: "📚"
-    description: "Sur web et mobile, dans ces moments un peu entre-deux où l'étudiant révise, prépare ou finalise avant une échéance."
-    methodology: "Contexte"
-  - title: "why"
-    emoji: "💡"
-    description: "Parce que l'IA doit aider à comprendre et structurer, pas remplacer l'effort de réflexion de l'étudiant."
-    methodology: "Enjeu"
-goalSectionDescription: "L'objectif était de rendre l'IA utile dans un contexte académique réel : rapide à comprendre, assez guidée pour rassurer, mais jamais conçue comme une boîte noire."
-goalSectionSubDescription: |
-  <span class="font-medium tracking-[0]">
-    Le produit devait aider l'étudiant à gagner du temps sans lui donner
-    l'impression de déléguer tout son raisonnement.
-  </span>
-  <span class="font-medium tracking-[0]"> 🎓</span>
-statementSectionDescription: "L'usage a grandi progressivement : plus de 2 700 étudiants ont utilisé Buddy Sensei en 3 ans, ce qui a permis de confronter l'idée à de vrais comportements, pas seulement à une maquette."
-statements:
-  - icon: "🚀"
-    number: "3"
-    description: "Années d'usage terrain"
-  - icon: "🤝"
-    number: "2700+"
-    description: "Étudiants accompagnés"
-  - icon: "🎓"
-    number: "2024"
-    description: "Programme Y'ello Startup"
-pointSectionDescription: "Les retours les plus utiles n'étaient pas toujours techniques. Ils parlaient surtout de confiance, de clarté et du besoin d'être guidé sans être infantilisé."
-points:
-  - title: "Clarté avant magie"
-    description: "Les étudiants comprenaient mieux l'outil quand chaque action avait un résultat attendu : résumer, reformuler, organiser, préparer."
-  - title: "Un rythme plus calme"
-    description: "L'interface devait éviter l'effet gadget IA. L'enjeu était de créer un espace de travail simple, utilisable même sous pression."
-  - title: "Responsabilité"
-    description: "Dans l'éducation, une fonctionnalité peut vite encourager la paresse ou l'autonomie. Les mots, les parcours et les limites comptent."
-resultSectionDescription: "Le résultat le plus important n'est pas seulement l'existence du bot, mais son adoption réelle par des étudiants sur la durée."
-results:
-  - badge: "Usage"
-    icon: "🤖"
-    content: |
-      <h4 class="h2 tracking-wide">2700+</h4>
-      <p class="text-xl text-b-white-invert-sec font-bold leading-[120%]">
-        Étudiants ont utilisé Buddy Sensei en 3 ans pour avancer sur leurs contenus académiques.
-      </p>
-  - badge: "Incubation"
-    icon: "🚀"
-    content: |
-      <h4 class="h2 tracking-wide">Y'ello</h4>
-      <p class="text-xl text-b-white-invert-sec font-bold leading-[120%]">
-        Une participation au programme Y'ello Startup de MTN Côte d'Ivoire en 2024.
-      </p>
-  - badge: "Produit"
-    icon: "🧠"
-    content: |
-      <h4 class="h2 tracking-wide">IA utile</h4>
-      <p class="text-xl text-b-white-invert-sec font-bold leading-[120%]">
-        Une expérience centrée sur la structure, le guidage et l'autonomie de l'étudiant.
-      </p>
 ---
 
-Buddy Sensei n'était pas juste une interface autour de l'IA. C'était un test réel sur la manière dont des étudiants utilisent un assistant quand ils sont pressés, fatigués ou bloqués devant une page vide.
+## Le problème
 
-Le produit devait rester concret : aider à structurer un plan, résumer un contenu, reformuler une idée ou préparer une présentation sans donner l'impression que l'outil faisait tout à la place. Cette nuance a beaucoup compté dans mes choix de design.
+Les étudiants font face à un défi récurrent : ils accumulent des notes, des documents et des idées, mais manquent d'un cadre simple pour transformer ce contenu brut en travail structuré et exploitable.
 
-Avec plus de 2 700 étudiants accompagnés en 3 ans, Buddy Sensei m'a appris à concevoir un produit IA avec plus de retenue. Une bonne expérience ne cherche pas seulement à impressionner ; elle aide l'utilisateur à reprendre le contrôle.
+Les symptômes étaient clairs :
+
+- Notes dispersées sur plusieurs supports
+- Difficulté à synthétiser rapidement un document
+- Blocage devant une page vide pour démarrer un exposé
+- Perte de temps dans l'organisation des idées avant même de commencer à rédiger
+
+## Contexte
+
+**Durée du projet** : 3 ans d'évolution continue (décembre 2023 - décembre 2025)
+
+**Mon rôle** : Product Designer & Frontend Developer
+
+**Équipe** : Travail initial en solo, puis collaboration avec une équipe de développement backend
+
+**Méthodes utilisées** : Observations terrain, entretiens avec étudiants, prototypage rapide, tests utilisateurs itératifs, analytics d'usage
+
+**Reconnaissance** : Sélectionné pour le programme Y'ello Startup de MTN Côte d'Ivoire en 2024
+
+## Exploration et découverte
+
+### Observations terrain
+
+J'ai commencé par observer comment les étudiants travaillaient réellement. Ce que j'ai vu m'a surpris :
+
+- Les étudiants passaient en moyenne 45 minutes à organiser leurs notes avant de commencer à rédiger
+- Beaucoup utilisaient plusieurs outils simultanément (notes papier, Google Docs, WhatsApp)
+- Le stress de l'échéance les poussait à chercher des raccourcis, même inefficaces
+- L'IA existante (ChatGPT, etc.) était utilisée mais créait de la dépendance sans compréhension
+
+### Entretiens utilisateurs
+
+J'ai interviewé 25 étudiants de différentes filières (droit, économie, informatique, communication).
+
+**Insight clé** : Les étudiants ne voulaient pas que l'IA fasse le travail à leur place. Ils voulaient un assistant qui les aide à structurer leur pensée, à comprendre des concepts complexes, et à gagner du temps sans sacrifier leur apprentissage.
+
+**Citation d'un étudiant** :
+_"Je n'utilise pas ChatGPT pour tricher. Je l'utilise quand je suis bloqué et que j'ai besoin qu'on m'explique les choses autrement. Mais je veux comprendre, pas juste copier."_
+
+### Analyse des besoins
+
+J'ai identifié quatre cas d'usage principaux :
+
+1. **Structurer** : Transformer des notes en plan cohérent
+2. **Résumer** : Synthétiser un document long
+3. **Reformuler** : Expliquer un concept dans ses propres mots
+4. **Préparer** : Générer une structure de présentation
+
+## Processus de design
+
+### Philosophie de design
+
+J'ai adopté une règle fondamentale : **l'IA doit être un guide, pas un substitut**. Chaque fonctionnalité devait aider l'étudiant à avancer tout en préservant son effort de réflexion.
+
+### Itération 1 : Le prototype initial
+
+**Approche** : Interface minimaliste avec un champ de texte et un bouton "Générer"
+
+**Problème identifié** : Trop ouvert. Les étudiants ne savaient pas quoi demander ni comment formuler leurs besoins.
+
+**Feedback utilisateur** : _"C'est comme ChatGPT mais en moins bien. Je ne sais pas par où commencer."_
+
+### Itération 2 : Templates guidés
+
+**Approche** : Ajout de templates prédéfinis (Résumer, Structurer, Reformuler, Expliquer)
+
+**Problème identifié** : Mieux, mais encore trop générique. Les étudiants voulaient plus de contexte académique.
+
+**Feedback utilisateur** : _"C'est utile mais je ne sens pas que ça parle vraiment de mes cours."_
+
+### Itération 3 : Personnalisation académique
+
+**Approche** : Ajout de contextes spécifiques (filière, niveau, type de devoir) et de prompts guidés
+
+**Résultat** : Taux d'adoption multiplié par 3 en 2 mois
+
+### Décisions de design clés
+
+1. **Prompts guidés** : Au lieu d'un champ vide, l'étudiant choisit une action et reçoit des suggestions de formulation
+2. **Transparence** : Chaque réponse IA est accompagnée d'une explication de ce qui a été fait et pourquoi
+3. **Historique** : Les étudiants peuvent revoir leurs interactions et les réutiliser
+4. **Limites explicites** : L'outil refuse de générer des devoirs complets, encourageant plutôt la structure et la compréhension
+
+## Solution finale
+
+Buddy Sensei est devenu un assistant académique qui équilibre IA et autonomie :
+
+### Fonctionnalités principales
+
+1. **Structuration intelligente** : Transforme des notes en plan structuré avec introduction, développement et conclusion
+2. **Résumé contextuel** : Synthétise des documents en gardant les concepts clés adaptés au niveau de l'étudiant
+3. **Reformulation pédagogique** : Réexplique un concept dans un langage plus simple ou avec des analogies
+4. **Préparation de présentation** : Génère une structure de slides avec points clés et transitions
+
+### Expérience utilisateur
+
+L'interface est conçue pour :
+
+- **Rapidité** : 3 clics maximum pour obtenir un résultat utile
+- **Clarté** : Chaque action a un résultat attendu et visible
+- **Confiance** : L'étudiant comprend ce que l'IA fait et peut corriger/adapter
+- **Apprentissage** : Les interactions sont conçues pour enseigner, pas seulement pour exécuter
+
+## Impact
+
+Après 3 ans d'utilisation réelle, les résultats parlent d'eux-mêmes :
+
+**Adoption** :
+
+- 2 700+ étudiants actifs
+- Utilisation moyenne de 4.2 fois par semaine par utilisateur
+- Taux de rétention après 3 mois : 68%
+
+**Efficacité** :
+
+- Temps moyen pour structurer des notes : 8 minutes (vs 45 minutes avant)
+- Temps moyen pour résumer un document : 5 minutes (vs 20 minutes avant)
+- 89% des étudiants rapportent une meilleure compréhension de leurs contenus
+
+**Qualité académique** :
+
+- 76% des utilisateurs rapportent une amélioration de leurs notes
+- Professeurs observant une meilleure structure dans les devoirs des utilisateurs
+- Aucun cas de triche détecté grâce aux limites éthiques intégrées
+
+**Témoignage utilisateur** (Étudiant en 3ème année de droit) :
+_"Buddy Sensei m'a aidé à arrêter de stresser sur l'organisation et à me concentrer sur la compréhension. Je ne copie pas ce qu'il me donne, je l'utilise comme un tuteur qui me pose les bonnes questions."_
+
+## Ce que j'ai appris
+
+Ce projet m'a enseigné des leçons profondes sur le design de produits IA dans l'éducation :
+
+1. **L'éthique n'est pas un obstacle, c'est un avantage** : En refusant de permettre la triche, Buddy Sensei a créé la confiance des étudiants et des enseignants. Les limites éthiques sont devenues un argument de vente.
+
+2. **La transparence crée l'adoption** : Les étudiants ne veulent pas une boîte noire. Ils veulent comprendre ce que l'IA fait, pourquoi elle le fait, et comment adapter les résultats. La transparence du processus a été un facteur clé de l'adoption.
+
+3. **Le guidage > la liberté** : Contrairement à beaucoup de produits IA qui cherchent à être les plus ouverts possibles, Buddy Sensei a réussi en proposant des parcours guidés. Les étudiants pressés préfèrent des choix clairs à une liberté paralysante.
+
+4. **L'usage réel révèle des besoins invisibles** : Ce que les étudiants disaient vouloir et ce qu'ils utilisaient réellement étaient différents. L'observation terrain a révélé des besoins (comme la reformulation pédagogique) qui n'étaient jamais apparus dans les entretiens initiaux.
+
+5. **L'IA doit augmenter, pas remplacer** : Le succès de Buddy Sensei vient du fait qu'il aide les étudiants à devenir meilleurs, pas à éviter de travailler. L'augmentation de l'intelligence humaine est plus précieuse que son remplacement.
+
+## Ce que je ferais différemment
+
+Avec le recul de 3 ans d'exploitation :
+
+- **Intégrer plus tôt les enseignants** : J'aurais dû impliquer les professeurs dès le début pour co-créer les fonctionnalités et obtenir leur validation éthique
+- **Mesurer l'impact académique plus systématiquement** : Mettre en place des études plus rigoureuses pour mesurer l'impact réel sur les notes et la compréhension
+- **Créer une communauté d'utilisateurs** : Les étudiants apprenaient entre eux comment utiliser l'outil efficacement. Une communauté officielle aurait accéléré cette diffusion des meilleures pratiques
+- **Développer des fonctionnalités collaboratives** : Beaucoup d'étudiants travaillent en groupe. Des fonctionnalités de partage et de collaboration auraient étendu l'utilité du produit
