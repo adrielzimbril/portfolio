@@ -6,6 +6,14 @@ export enum ReactionType {
   CELEBRATE = "celebrate",
   INSIGHTFUL = "insightful",
   SCEPTIC = "sceptic",
+  LAUGH = "laugh",
+  WOW = "wow",
+  SAD = "sad",
+  ANGRY = "angry",
+  FIRE = "fire",
+  CLAP = "clap",
+  ROCKET = "rocket",
+  PARTY = "party",
 }
 
 export const REACTION_EMOJIS: Record<ReactionType, string> = {
@@ -14,6 +22,14 @@ export const REACTION_EMOJIS: Record<ReactionType, string> = {
   [ReactionType.CELEBRATE]: "🎉",
   [ReactionType.INSIGHTFUL]: "💡",
   [ReactionType.SCEPTIC]: "🤔",
+  [ReactionType.LAUGH]: "😂",
+  [ReactionType.WOW]: "😮",
+  [ReactionType.SAD]: "😢",
+  [ReactionType.ANGRY]: "😡",
+  [ReactionType.FIRE]: "🔥",
+  [ReactionType.CLAP]: "👏",
+  [ReactionType.ROCKET]: "🚀",
+  [ReactionType.PARTY]: "🥳",
 };
 
 export interface BuildTimeStats {

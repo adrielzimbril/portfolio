@@ -87,7 +87,9 @@ export function DataDetailsModal({
                 !isImage &&
                 !isTranslation &&
                 !isDate &&
-                (key.toLowerCase().includes("reaction") || key.toLowerCase() === "type");
+                (key.toLowerCase().includes("reaction") ||
+                  key.toLowerCase().includes("emoji") ||
+                  key.toLowerCase() === "type");
               const isJson =
                 !isTranslation &&
                 !isDate &&
