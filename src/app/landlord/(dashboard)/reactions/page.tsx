@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Reactions",
-    description: t("admin.description"),
+    title: "[ROOT] // SIGNAL_LOGS",
+    description: "Journal chiffré des réactions et interactions utilisateur.",
     robots: { index: false, follow: false },
   };
 }

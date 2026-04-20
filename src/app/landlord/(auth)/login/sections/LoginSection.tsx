@@ -95,19 +95,19 @@ export function LoginSection({ reason }: { reason?: string }) {
                     { label: "Entities", val: "48" },
                     { label: "Signals", val: "09" },
                   ].map((item) => (
-                    <div key={item.label} className="rounded-xl bg-[#f5f3ea] p-3 transition-transform hover:scale-[1.02]">
+                    <div key={item.label} className="rounded-xl bg-[#f5f3ea] p-3 transition-transform">
                       <p className="text-[9px] font-bold uppercase text-black/45">{item.label}</p>
                       <p className="mt-1 text-xl font-semibold tabular-nums tracking-tighter">{item.val}</p>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="flex items-center gap-4 rounded-2xl bg-white/10 p-4 transition-colors hover:bg-white/15">
+              <div className="flex items-center gap-4 rounded-2xl bg-white/10 p-4 transition-colors">
                 <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-white/40">
                   <Activity size={32} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.1em]">ADMIN_OVERRIDE_CONSOLE</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest">ADMIN_OVERRIDE_CONSOLE</p>
                   <p className="mt-1 text-[11px] leading-relaxed text-white/45">
                     Mutation de paquets et orchestration des flux critiques avec une
                     latence proche de zéro.

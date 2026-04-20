@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("admin.title"),
-    description: t("admin.description"),
+    title: "[ROOT] // OVERVIEW_CONSOLE",
+    description: "Console centrale sécurisée pour le monitoring de l'écosystème Shiro.",
     robots: {
       index: false,
       follow: false,

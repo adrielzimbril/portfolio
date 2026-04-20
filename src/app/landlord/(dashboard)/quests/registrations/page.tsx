@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Inscriptions",
-    description: t("admin.description"),
+    title: "[ROOT] // QUEST_REGISTRATIONS",
+    description: "Registre des inscriptions aux protocoles de quêtes.",
     robots: {
       index: false,
       follow: false,

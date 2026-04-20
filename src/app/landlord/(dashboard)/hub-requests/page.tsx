@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Hub Requests",
-    description: t("admin.description"),
+    title: "[ROOT] // HUB_ENTRIES",
+    description: "Monitoring des flux entrants du Hub Shiro.",
     robots: { index: false, follow: false },
   };
 }

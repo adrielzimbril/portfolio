@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Users",
-    description: t("admin.description"),
+    title: "[ROOT] // ENTITY_INDEX",
+    description: "Index des identités et entités autorisées sur le réseau Shiro.",
     robots: { index: false, follow: false },
   };
 }

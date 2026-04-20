@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     ...baseMetadata,
-    title: t("admin.title") + " - Community",
-    description: t("admin.description"),
+    title: "[ROOT] // COMMUNITY_NODE",
+    description: "Orchestration des signaux de la communauté.",
     robots: {
       index: false,
       follow: false,
