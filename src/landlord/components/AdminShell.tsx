@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Database,
   Home,
@@ -79,27 +80,47 @@ export const adminNavItems: NavItem[] = [
 
 export function AdminShell({
   user,
-  activeView,
-  sidebarOpen,
-  onViewChange,
-  onSidebarOpenChange,
-  onRefresh,
-  onSignOut,
   children,
 }: {
   user: AdminUser;
-  activeView: AdminView;
-  sidebarOpen: boolean;
-  onViewChange: (view: AdminView) => void;
-  onSidebarOpenChange: (open: boolean) => void;
-  onRefresh: () => void;
-  onSignOut: () => void;
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+
+  // Determine active view from pathname
+  const getActiveView = (): string => {
+    if (pathname.includes("/tables/newsletter")) return "newsletter";
+    if (pathname.includes("/tables/users")) return "users";
+    if (pathname.includes("/tables/submissions")) return "submissions";
+    if (pathname.includes("/tables/hub-requests")) return "hubRequests";
+    if (pathname.includes("/tables/reactions")) return "reactions";
+    if (pathname.includes("/community")) return "community";
+    if (pathname.includes("/quests/registrations")) return "quests-registrations";
+    if (pathname.includes("/quests/submissions")) return "quests-submissions";
+    return "overview";
+  };
+  const activeView = getActiveView();
   const activeItem = adminNavItems.find((item) => item.key === activeView);
 
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch("/api/auth/signout", { method: "POST" });
+      if (response.ok) {
+        router.push(landlordRoutes.login.link);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
-    <div className="flex h-dvh overflow-hidden bg-[#f4f2e8] p-3 text-[#11191f] md:p-6">
+    <div className="flex h-dvh overflow-hidden bg-[#f4f3ec] p-3 text-[#11191f] md:p-6">
       <aside
         className={cn(
           "fixed inset-y-3 left-3 z-40 w-72 -translate-x-[calc(100%+1rem)] rounded-[28px] bg-[#11191f] p-4 text-white transition-transform duration-300 md:static md:inset-auto md:translate-x-0",
@@ -109,7 +130,7 @@ export function AdminShell({
         <div className="flex h-full flex-col">
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-2xl bg-white text-[#11191f]">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-white text-[#11191f]">
                 <ShieldCheck size={19} />
               </div>
               <div>
@@ -122,7 +143,7 @@ export function AdminShell({
               size="icon"
               asPointer
               className="text-white md:hidden"
-              onClick={() => onSidebarOpenChange(false)}
+              onClick={() => setSidebarOpen(false)}
               aria-label="Fermer la navigation"
             >
               <X size={18} />
@@ -141,60 +162,31 @@ export function AdminShell({
                 "reactions",
               ].includes(item.key);
               const isQuestPage = item.key.startsWith("quests-");
-              let route = null;
+              let route = "";
 
               if (isTablePage) {
                 route =
                   landlordRoutes.tables[
                     item.key as keyof typeof landlordRoutes.tables
-                  ]?.link;
+                  ]?.link || "";
               } else if (isQuestPage) {
                 const questType = item.key.replace("quests-", "") as
                   | "registrations"
                   | "submissions";
-                route = landlordRoutes.quests[questType]?.link;
+                route = landlordRoutes.quests[questType]?.link || "";
               } else if (item.key === "overview") {
                 route = landlordRoutes.landlord.link;
-              }
-
-              if (route) {
-                return (
-                  <Link
-                    key={item.key}
-                    href={route}
-                    className={cn(
-                      "flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition",
-                      isActive
-                        ? "bg-white text-[#11191f]"
-                        : "text-white/62 hover:bg-white/8 hover:text-white",
-                    )}
-                  >
-                    <Icon size={18} />
-                    <span className="flex flex-col">
-                      <span className="font-medium">{item.label}</span>
-                      <span
-                        className={cn(
-                          "text-xs",
-                          isActive ? "text-black/45" : "text-white/35",
-                        )}
-                      >
-                        {item.description}
-                      </span>
-                    </span>
-                  </Link>
-                );
+              } else if (item.key === "community") {
+                route = landlordRoutes.community.link;
               }
 
               return (
-                <button
+                <Link
                   key={item.key}
-                  type="button"
-                  onClick={() => {
-                    onViewChange(item.key);
-                    onSidebarOpenChange(false);
-                  }}
+                  href={route}
+                  onClick={() => setSidebarOpen(false)}
                   className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition",
+                    "flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition",
                     isActive
                       ? "bg-white text-[#11191f]"
                       : "text-white/62 hover:bg-white/8 hover:text-white",
@@ -205,19 +197,19 @@ export function AdminShell({
                     <span className="font-medium">{item.label}</span>
                     <span
                       className={cn(
-                        "text-xs",
+                        "text-xs mt-0.5",
                         isActive ? "text-black/45" : "text-white/35",
                       )}
                     >
                       {item.description}
                     </span>
                   </span>
-                </button>
+                </Link>
               );
             })}
           </nav>
 
-          <div className="mt-8 rounded-3xl border border-white/10 bg-white/8 p-4">
+          <div className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-4">
             <p className="text-sm font-medium">Panel privé</p>
             <p className="mt-2 text-xs leading-5 text-white/50">
               Gère les entrées du site, les messages publics et les tables
@@ -236,8 +228,8 @@ export function AdminShell({
             <Button
               variant="none"
               type="button"
-              onClick={onSignOut}
-              className="flex items-center gap-3 rounded-2xl px-3 py-3 text-sm text-white/55 hover:bg-white/8 hover:text-white"
+              onClick={handleSignOut}
+              className="flex items-center justify-start gap-3 rounded-2xl px-3 py-3 text-sm text-white/55 hover:bg-white/8 hover:text-white cursor-pointer"
             >
               <LogOut size={17} />
               Déconnexion
@@ -250,57 +242,58 @@ export function AdminShell({
         <button
           className="fixed inset-0 z-30 cursor-pointer bg-black/20 md:hidden"
           aria-label="Fermer la navigation"
-          onClick={() => onSidebarOpenChange(false)}
+          onClick={() => setSidebarOpen(false)}
         />
       )}
 
       <main className="flex min-w-0 flex-1 flex-col overflow-hidden md:pl-6">
-        <header className="mb-4 flex items-center gap-3 rounded-[26px] border border-black/8 bg-white/92 p-3 shadow-sm backdrop-blur-xl">
+        <header className="mb-4 flex items-center gap-3 rounded-[26px] border border-black/8 bg-white p-3 shadow-sm">
           <Button
             variant="outline"
             size="icon"
             asPointer
             className="md:hidden"
-            onClick={() => onSidebarOpenChange(true)}
+            onClick={() => setSidebarOpen(true)}
             aria-label="Ouvrir la navigation"
           >
             <PanelLeft size={18} />
           </Button>
-          <div className="min-w-0 flex-1">
-            <p className="text-xs text-black/45">Admin panel</p>
+          <div className="min-w-0 flex-1 ml-2">
+            <p className="text-xs text-black/45 font-medium uppercase tracking-wider">Admin Dashboard</p>
             <h1 className="truncate text-xl font-semibold tracking-[-0.02em] md:text-2xl">
-              {activeItem?.label}
+              {activeItem?.label || "Landlord"}
             </h1>
           </div>
           <Button
             variant="outline"
             size="icon"
             asPointer
-            onClick={onRefresh}
+            onClick={handleRefresh}
             aria-label="Rafraîchir"
+            className="hidden md:flex"
           >
             <RefreshCw size={17} />
           </Button>
-          <div className="hidden items-center gap-3 rounded-2xl bg-[#f7f6f1] px-3 py-2 md:flex">
+          <div className="hidden items-center gap-3 rounded-2xl bg-[#f7f6f1] px-4 py-2.5 md:flex ml-2">
             {user.avatarUrl ? (
               <img
                 src={user.avatarUrl}
                 alt={user.name || user.email}
-                className="size-9 rounded-full object-cover"
+                className="size-9 rounded-full object-cover shadow-sm"
               />
             ) : (
-              <div className="flex size-9 items-center justify-center rounded-full bg-[#ffed90]">
+              <div className="flex size-9 items-center justify-center rounded-full bg-[#ffed90] shadow-sm">
                 <UserRound size={17} />
               </div>
             )}
             <div className="max-w-44">
-              <p className="truncate text-sm font-medium">{user.name}</p>
+              <p className="truncate text-sm font-semibold">{user.name}</p>
               <p className="truncate text-xs text-black/45">{user.email}</p>
             </div>
           </div>
         </header>
 
-        <section className="min-h-0 flex-1 overflow-y-auto rounded-[30px] border border-black/8 bg-[#fbfaf6] p-4 md:p-6">
+        <section className="min-h-0 flex-1 overflow-y-auto rounded-[30px] border border-black/8 bg-[#fbfaf6] p-4 md:p-6 pb-20 md:pb-6 relative z-10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]">
           {children}
         </section>
       </main>

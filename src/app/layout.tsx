@@ -5,9 +5,7 @@ import { metadata as metadataBase } from "@/app/metadata";
 import { LayoutProvider } from "@/components/aurthle/providers/layout-provider";
 import { SyncProvider } from "@/components/aurthle/providers/sync-provider";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
-import { Navbar } from "@/components/shared/_layouts/navbar";
-import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
-import { Footer } from "@/components/shared/_layouts/footer";
+// Front layout imports moved to (base)/layout.tsx
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import type { PropsWithChildren } from "react";
@@ -78,13 +76,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                   <ToastProvider>
                     <AnchoredToastProvider>
                       <main>
-                        <div className="container mx-auto relative">
-                          <Navbar />
-                          {/* <Dockbar asFade={false} /> */}
-                          {children}
-                          <ScrollToTop />
-                          <Footer />
-                        </div>
+                          <div className="container mx-auto relative min-h-dvh flex flex-col">
+                            {children}
+                          </div>
                       </main>
                     </AnchoredToastProvider>
                   </ToastProvider>

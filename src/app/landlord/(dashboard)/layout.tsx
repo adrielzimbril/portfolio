@@ -6,6 +6,7 @@ import { createClient } from "@/integrations/supabase/server";
 import { ConfigValue } from "@/config";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import { logger } from "@/utils";
+import { AdminShell } from "@/landlord/components/AdminShell";
 
 export default async function LandlordLayout({
   children,
@@ -37,5 +38,15 @@ export default async function LandlordLayout({
     redirect(`${landlordRoutes.login.link}?reason=unauthorized`);
   }
 
-  return <>{children}</>;
+  return (
+    <AdminShell
+      user={{
+        email: userEmail,
+        name: user.user_metadata?.name || user.user_metadata?.full_name || userEmail.split("@")[0],
+        avatarUrl: user.user_metadata?.avatar_url,
+      }}
+    >
+      {children}
+    </AdminShell>
+  );
 }
