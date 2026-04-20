@@ -29,6 +29,8 @@ import {
 import { toast } from "@/lib/toast";
 import logger from "@/utils/logger";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 export function CommunitySection() {
   const [search, setSearch] = useState("");
   const [messageModalOpen, setMessageModalOpen] = useState(false);
@@ -132,17 +134,19 @@ export function CommunitySection() {
             Chargement des messages...
           </div>
         ) : filteredMessages.length ? (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[860px] border-collapse text-left text-sm">
-              <thead className="border-b border-black/8 text-xs text-black/45">
-                <tr>
-                  <th className="px-5 py-4 font-medium">Créateur</th>
-                  <th className="px-5 py-4 font-medium">Messages</th>
-                  <th className="px-5 py-4 font-medium">Langues</th>
-                  <th className="px-5 py-4 font-medium">Date</th>
-                  <th className="px-5 py-4 text-right font-medium">Action</th>
-                </tr>
-              </thead>
+          <div className="flex flex-col h-[600px] max-h-[calc(100dvh-320px)]">
+            <ScrollArea className="flex-1" scrollbarGutter>
+              <div className="min-w-full inline-block align-middle">
+                <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+                  <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
+                    <tr>
+                      <th className="px-5 py-4 font-medium">Créateur</th>
+                      <th className="px-5 py-4 font-medium">Messages</th>
+                      <th className="px-5 py-4 font-medium">Langues</th>
+                      <th className="px-5 py-4 font-medium">Date</th>
+                      <th className="px-5 py-4 text-right font-medium">Action</th>
+                    </tr>
+                  </thead>
               <tbody className="divide-y divide-black/6">
                 {filteredMessages.map((message) => {
                   const entries = Object.entries(normalizeMessage(message));
@@ -228,6 +232,8 @@ export function CommunitySection() {
               </tbody>
             </table>
           </div>
+        </ScrollArea>
+      </div>
         ) : (
           <div className="p-6">
             <EmptyState

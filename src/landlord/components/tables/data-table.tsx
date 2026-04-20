@@ -62,7 +62,7 @@ function DataRows({
               {rows.map((row, index) => (
                 <tr
                   key={String(row.id || index)}
-                  className="hover:bg-black/[0.02] transition-colors"
+                  className="hover:bg-black/2 transition-colors"
                 >
                   {columns.map((column) => (
                     <td key={column} className="max-w-64 truncate px-5 py-4">
@@ -75,7 +75,7 @@ function DataRows({
           </table>
         </div>
       </ScrollArea>
-      <div className="flex-shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1">
+      <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1">
         <TablePager
           page={page}
           pageSize={PAGE_SIZE}
