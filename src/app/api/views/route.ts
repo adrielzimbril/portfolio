@@ -7,14 +7,6 @@ import logger from "@/utils/logger";
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
-  const isBot = searchParams.get("isBot") === "true";
-
-  if (isBot) {
-    logger.info("Supabase Views | Bot access detected", { url: req.url });
-  } else {
-    logger.info("Supabase Views | Human access detected", { url: req.url });
-  }
-
   const type = searchParams.get("type") || "page";
   const slug = searchParams.get("slug") || "/";
   const wantResponse = searchParams.get("wantResponse") === "true";
