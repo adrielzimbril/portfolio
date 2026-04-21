@@ -23,6 +23,9 @@ import { ResourceTypeKey } from "@/types";
 import { Loader } from "@/components/shared/_layouts/loader";
 import { useTranslations, useLocale } from "use-intl";
 import { apiRoutes } from "@/data/api-routes";
+import { redirect } from "next/navigation";
+import { getPathUrl, sleep } from "@/utils";
+import { routes } from "@/data/routes";
 
 interface SubscriptionModalProps {
   isOpen: boolean;
@@ -140,7 +143,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
             const frame = () => {
               if (Date.now() > end) return;
-              if (confettiConfig.beforeName) {
                 confetti({
                   particleCount: 2,
                   angle: 60,
@@ -161,13 +163,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   shapes: [triangle, square, coin, tree],
                   scalar,
                 });
-              }
               requestAnimationFrame(frame);
             };
             frame();
           };
-
-          handleClick();
+          if (confettiConfig.beforeName) {
+            handleClick();
+          }
         });
 
         setHasInitialSubscription(true);
@@ -262,9 +264,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           animateConfetti();
         }
         // Redirect to product page
-        if (typeof window !== "undefined") {
-          window.location.href = "/hub";
-        }
+        sleep(2000).then(() => {
+          redirect(getPathUrl(routes.hub.link))
+        })
       }, 2000);
     } catch (error) {
       logger.error(t("logger.newsletter.subscribe.failed"), error);

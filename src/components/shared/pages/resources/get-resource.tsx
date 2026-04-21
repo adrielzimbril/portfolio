@@ -186,7 +186,10 @@ export function GetResource({
         email={email || undefined}
         productId={productId}
         productType={type}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setEmail("")
+          setIsModalOpen(false)
+        }}
       />
     </>
   );
