@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { cn, logger } from "@/utils";
+import { cn } from "@/utils";
 import { VariantProps } from "class-variance-authority";
 import { inputVariants } from "@/components/ui/input";
 import { useTranslations } from "use-intl";
@@ -43,17 +43,6 @@ function Textarea({
       }
     }
   };
-
-  logger.info(
-    "value",
-    value,
-    "characterCount",
-    characterCount,
-    "maxLength",
-    maxLength,
-    "isControlled",
-    isControlled,
-  );
 
   return (
     <>

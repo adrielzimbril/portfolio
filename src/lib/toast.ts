@@ -11,7 +11,7 @@ const toast = {
       title: "Success",
       description: message,
       type: "success",
-      timeout: options?.timeout || 50000,
+      timeout: options?.timeout || 5000000,
     });
   },
   error: (message: string, options?: { timeout?: number }) => {
@@ -21,7 +21,7 @@ const toast = {
       title: "Error",
       description: message,
       type: "error",
-      timeout: options?.timeout || 50000,
+      timeout: options?.timeout || 5000000,
     });
   },
   info: (message: string, options?: { timeout?: number }) => {
@@ -31,7 +31,7 @@ const toast = {
       title: "Info",
       description: message,
       type: "info",
-      timeout: options?.timeout || 50000,
+      timeout: options?.timeout || 5000000,
     });
   },
   warning: (message: string, options?: { timeout?: number }) => {
@@ -41,7 +41,7 @@ const toast = {
       title: "Warning",
       description: message,
       type: "warning",
-      timeout: options?.timeout || 50000,
+      timeout: options?.timeout || 5000000,
     });
   },
   promise: <T>(
@@ -60,7 +60,7 @@ const toast = {
       title: "Loading",
       description: options.loading,
       type: "loading",
-      timeout: options?.timeout || 50000,
+      timeout: options?.timeout || 5000000,
     });
 
     promise
@@ -74,7 +74,7 @@ const toast = {
           title: "Success",
           description: message,
           type: "success",
-      timeout: options?.promiseTimeout ||  options?.timeout || 50000,
+      timeout: options?.promiseTimeout ||  options?.timeout || 5000000,
         });
       })
       .catch((error) => {
@@ -87,7 +87,7 @@ const toast = {
           title: "Error",
           description: message,
           type: "error",
-      timeout: options?.promiseTimeout ||  options?.timeout || 50000,
+      timeout: options?.promiseTimeout ||  options?.timeout || 5000000,
         });
       });
   },

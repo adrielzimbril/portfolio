@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import logger from "@/utils/logger";
 import { apiRoutes } from "@/data/api-routes";
 import { toast } from "@/lib/toast";
 import { useLocale } from "next-intl";
@@ -78,8 +77,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
     setIsSubmitting(true);
 
     try {
-      logger.info("Submitting comment", { comment });
-
       const res = await fetch(apiRoutes.community.guestbook.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -100,7 +97,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         throw new Error(data?.error || "Failed to submit comment");
       }
 
-      logger.info("Comment submitted successfully", data);
       toast.success(t("community.comment-form.toast.success"));
       setComment("");
       setScreen("input");
@@ -110,7 +106,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       // Dispatch custom event to refresh messages
       dispatchWindowEvent("community-message-added");
     } catch (error) {
-      logger.error("Failed to submit comment", error);
       toast.error(t("community.comment-form.toast.error"));
       throw error;
     } finally {
@@ -177,7 +172,6 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     onValueChange={(value) => {
                       const newValue = Array.isArray(value) ? value[0] : value;
                       setRotation(newValue as number);
-                      logger.info("value rotation", value);
                     }}
                     className="w-full"
                   />
