@@ -250,7 +250,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
       // Show playful toast
       toast.success("🎉 Super ! Tu vas être redirigé vers la page produit...", {
-        duration: 2000,
+        timeout: 2000,
       });
 
       setTimeout(() => {

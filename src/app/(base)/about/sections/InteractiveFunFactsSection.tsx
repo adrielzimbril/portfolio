@@ -473,7 +473,7 @@ export function InteractiveFunFacts() {
     setGameStarted(true);
     setScore(0);
     toast.success("C'est reparti pour un tour! 🚀", {
-      duration: 2000,
+      timeout: 2000,
     });
   };
 
