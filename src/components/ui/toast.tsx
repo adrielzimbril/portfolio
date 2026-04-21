@@ -26,19 +26,19 @@ const TOAST_ICONS = {
   },
   info:{
     icon: InfoCircle,
-    color: "text-blue-400"
+    color: "text-blue-500"
   },
   loading:{
     icon: Loader,
-    color: "text-violet-400"
+    color: "text-violet-500"
   },
   success:{
     icon: Checked,
-    color: "text-green-400"
+    color: "text-green-500"
   },
   warning:{
     icon: AlertTriangle,
-    color: "text-amber-400"
+    color: "text-amber-500"
   },
 } as const;
 
@@ -155,12 +155,13 @@ function Toasts({ position }: { position: ToastPosition }): React.ReactElement {
                     <div
                       className={cn(
                         // "[&>svg]:h-lh [&>svg]:w-4",
+                        "flex flex-center items-center justify-center p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
                         "[&_svg]:size-auto [&_svg]:pointer-events-none [&_svg]:shrink-0",
                         Color
                       )}
                       data-slot="toast-icon"
                     >
-                      <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={24} variant="bulk" />
+                      <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="outline" />
                     </div>
                   )}
 
@@ -244,12 +245,13 @@ function AnchoredToasts(): React.ReactElement {
                         <div
                           className={cn(
                             // "[&>svg]:h-lh [&>svg]:w-4",
+                        "flex flex-center items-center justify-center p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
                             "[&_svg]:size-auto [&_svg]:pointer-events-none [&_svg]:shrink-0",
                             Color
                           )}
                           data-slot="toast-icon"
                         >
-                          <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={24} variant="bulk" />
+                          <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="outline" />
                         </div>
                       )}
 
