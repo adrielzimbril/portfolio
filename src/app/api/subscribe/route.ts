@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
 
       if (userId) {
         try {
-          await supabase.from("hub_product_requests").insert({
+          const sup = await supabase.from("hub_product_requests").insert({
             user_id: userId,
             product_id: productId,
             product_title: title,
@@ -152,6 +152,7 @@ export async function POST(req: NextRequest) {
               url: req.url,
             }),
           });
+          logger.info("[SUBSCRIBE] hub_product_requests", sup);
         } catch (e: unknown) {
           logger.error(
             `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,

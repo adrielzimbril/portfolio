@@ -150,18 +150,18 @@ function Toasts({ position }: { position: ToastPosition }): React.ReactElement {
               toast={toast}
             >
               <Toast.Content className="pointer-events-auto flex items-center justify-between gap-1.5 overflow-hidden px-3.5 py-3 text-sm transition-opacity duration-250 data-behind:not-data-expanded:pointer-events-none data-behind:opacity-0 data-expanded:opacity-100">
-                <div className="flex gap-2">
+                <div className="flex gap-1">
                   {Icon && (
                     <div
                       className={cn(
                         // "[&>svg]:h-lh [&>svg]:w-4",
-                        "flex flex-center items-center justify-center p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
+                        "flex flex-center items-center justify-center size-fit p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
                         "[&_svg]:size-auto [&_svg]:pointer-events-none [&_svg]:shrink-0",
                         Color
                       )}
                       data-slot="toast-icon"
                     >
-                      <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="outline" />
+                      <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="bold" />
                     </div>
                   )}
 
@@ -240,18 +240,18 @@ function AnchoredToasts(): React.ReactElement {
                   </Toast.Content>
                 ) : (
                   <Toast.Content className="pointer-events-auto flex items-center justify-between gap-1.5 overflow-hidden px-3.5 py-3 text-sm">
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       {Icon && (
                         <div
                           className={cn(
                             // "[&>svg]:h-lh [&>svg]:w-4",
-                        "flex flex-center items-center justify-center p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
+                            "flex flex-center items-center justify-center size-fit p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
                             "[&_svg]:size-auto [&_svg]:pointer-events-none [&_svg]:shrink-0",
                             Color
                           )}
                           data-slot="toast-icon"
                         >
-                          <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="outline" />
+                          <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="bold" />
                         </div>
                       )}
 

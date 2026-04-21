@@ -8,7 +8,7 @@ import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { ProductAvatarsStats } from "@/components/shared/pages/newsletter/SubscriberBadges";
-import { generateSimpleClientToken, getDate, sleep } from "@/utils";
+import { generateSimpleClientToken, getDate, logger, sleep } from "@/utils";
 import { ResourceType } from "@/types";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
 import { toast } from "@/lib/toast";
@@ -17,7 +17,7 @@ import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils/base-url";
 import { useTurnstile } from "@/integrations/anti-bot/turnstile";
-import { getTurnstileConfig } from "@/config";
+import { getTurnstileConfig, isLocal } from "@/config";
 
 export function GetResource({
   id,
@@ -55,11 +55,13 @@ export function GetResource({
     label: "Email",
     required: true,
   });
-  const isEmailValid = !Boolean(emailValidator(email));
+  const isEmailValid = Boolean(emailValidator(email));
+  logger.info("isEmailValid", isEmailValid, emailValidator(email));
+  const isLocalMode = isLocal();
 
   const { siteKey } = getTurnstileConfig();
 
-  const { ref, token, error, isLoading, execute } = useTurnstile(
+  const { ref, token, error, isLoading, execute, reset } = useTurnstile(
     siteKey || "",
     {
       appearance: "execute",
@@ -169,7 +171,7 @@ export function GetResource({
             {error && <span className="text-red-500">{error}</span>}
             <Button
               onClick={() => {
-                if (isLoading) {
+                if (!isLocalMode && isLoading) {
                   toast.error(t("common.turnstile.loading"));
                   return;
                 }
@@ -182,6 +184,7 @@ export function GetResource({
                 if (!token) {
                   setIsWaitingForToken(true);
                   while (!token) {
+                    reset();
                     execute();
                     sleep(500);
                   }
