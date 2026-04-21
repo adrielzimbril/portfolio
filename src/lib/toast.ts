@@ -4,40 +4,44 @@ import { toastManager } from "@/components/ui/toast";
 
 // Helper functions to mimic sonner API
 const toast = {
-  success: (message: string, options?: { duration?: number }) => {
+  success: (message: string, options?: { timeout?: number }) => {
     const id = Math.random().toString(36).substring(7);
     toastManager.add({
       id,
       title: "Success",
       description: message,
       type: "success",
+      timeout: options?.timeout || 50000,
     });
   },
-  error: (message: string, options?: { duration?: number }) => {
+  error: (message: string, options?: { timeout?: number }) => {
     const id = Math.random().toString(36).substring(7);
     toastManager.add({
       id,
       title: "Error",
       description: message,
       type: "error",
+      timeout: options?.timeout || 50000,
     });
   },
-  info: (message: string, options?: { duration?: number }) => {
+  info: (message: string, options?: { timeout?: number }) => {
     const id = Math.random().toString(36).substring(7);
     toastManager.add({
       id,
       title: "Info",
       description: message,
       type: "info",
+      timeout: options?.timeout || 50000,
     });
   },
-  warning: (message: string, options?: { duration?: number }) => {
+  warning: (message: string, options?: { timeout?: number }) => {
     const id = Math.random().toString(36).substring(7);
     toastManager.add({
       id,
       title: "Warning",
       description: message,
       type: "warning",
+      timeout: options?.timeout || 50000,
     });
   },
   promise: <T>(
@@ -46,6 +50,8 @@ const toast = {
       loading: string;
       success: string | ((data: T) => string);
       error: string | ((error: Error) => string);
+      timeout?: number;
+      promiseTimeout?: number;
     },
   ) => {
     const id = Math.random().toString(36).substring(7);
@@ -54,6 +60,7 @@ const toast = {
       title: "Loading",
       description: options.loading,
       type: "loading",
+      timeout: options?.timeout || 50000,
     });
 
     promise
@@ -67,6 +74,7 @@ const toast = {
           title: "Success",
           description: message,
           type: "success",
+      timeout: options?.promiseTimeout ||  options?.timeout || 50000,
         });
       })
       .catch((error) => {
@@ -79,6 +87,7 @@ const toast = {
           title: "Error",
           description: message,
           type: "error",
+      timeout: options?.promiseTimeout ||  options?.timeout || 50000,
         });
       });
   },

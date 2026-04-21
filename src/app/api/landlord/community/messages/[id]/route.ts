@@ -10,7 +10,7 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { messages, creator_name, creator_avatar_url } = body;
+    const { message, creator_name, creator_avatar_url } = body;
 
     logger.info("PATCH message request:", { id, body });
 
@@ -18,7 +18,7 @@ export async function PATCH(
     const supabase = createClient(cookieStore);
 
     const updateData: any = {};
-    if (messages !== undefined) updateData.message = messages;
+    if (message !== undefined) updateData.message = message;
     if (creator_name !== undefined) updateData.creator_name = creator_name;
     if (creator_avatar_url !== undefined)
       updateData.creator_avatar_url = creator_avatar_url;

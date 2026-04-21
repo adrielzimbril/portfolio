@@ -138,11 +138,11 @@ function Toasts({ position }: { position: ToastPosition }): React.ReactElement {
 
                   <div className="flex flex-col gap-0.5">
                     <Toast.Title
-                      className="font-medium"
+                      className="h6 font-medium"
                       data-slot="toast-title"
                     />
                     <Toast.Description
-                      className="text-muted-foreground"
+                      className="text-sm font-normal text-muted-foreground"
                       data-slot="toast-description"
                     />
                   </div>
