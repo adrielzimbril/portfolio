@@ -64,7 +64,7 @@ export function ThemeToggle() {
       ref={buttonRef}
       onClick={changeTheme}
       aria-label={theme}
-      className="md:size-auto md:p-3 aspect-square"
+      className="md:size-auto md:p-2 aspect-square"
     >
       <Sun
         size={24}

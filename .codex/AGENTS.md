@@ -1,4 +1,4 @@
-﻿# AGENTS Guidance - Shirofolio
+﻿# AGENTS Guidance - Adriel Zimbril | Product & UI/UX Designer Portfolio (adrielzimbril.com)
 
 This file contains durable instructions for Codex in this repo.
 Keep it short, specific, and updated whenever user feedback corrects an assumption.

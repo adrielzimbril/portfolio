@@ -47,7 +47,7 @@ Portfolio professionnel d'**Adriel Zimbril**, développeur Fullstack passionné 
 git clone [url-du-repo]
 
 # Se déplacer dans le répertoire du projet
-cd shirofolio
+cd adrielzimbril.com
 
 # Installer les dépendances
 pnpm install

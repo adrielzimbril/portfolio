@@ -175,10 +175,10 @@ export function MetricCard({
   tone: "dark" | "yellow" | "green" | "white";
 }) {
   const toneClass = {
-    dark: "bg-[#11191f] text-white",
+    dark: "bg-[#90cbff]",
     yellow: "bg-[#ffed90]",
-    green: "bg-emerald-50",
-    white: "bg-violet-50",
+    green: "bg-[#98ff90]",
+    white: "bg-[#d890ff]",
   };
 
   return (
