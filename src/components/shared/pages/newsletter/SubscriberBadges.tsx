@@ -9,7 +9,7 @@ import {
 import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
 import { ResourceType } from "@/types";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
-import { cn } from "@/utils/utils";;
+import { cn } from "@/utils/utils";
 import { useTranslations } from "use-intl";
 
 function formatCount(n: number) {
@@ -56,22 +56,22 @@ export function ProductSlugRequestsBadge({
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.badge"
+      "common.page-sections.hub.base.resources-type.course.badge",
     ),
     [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.badge"
+      "common.page-sections.hub.base.resources-type.ebook.badge",
     ),
     [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.badge"
+      "common.page-sections.hub.base.resources-type.video.badge",
     ),
     [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.badge"
+      "common.page-sections.hub.base.resources-type.masterclass.badge",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.badge"
+      "common.page-sections.hub.base.resources-type.figma_template.badge",
     ),
     [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.badge"
+      "common.page-sections.hub.base.resources-type.code.badge",
     ),
   };
 
@@ -116,4 +116,3 @@ export function ProductAvatarsStats({
     />
   );
 }
-

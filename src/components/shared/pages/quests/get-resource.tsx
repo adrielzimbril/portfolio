@@ -97,7 +97,7 @@ export function GetResource({
       "common.page-sections.hub.base.resources-type.masterclass.title",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.title",
+      "common.page-sections.hub.base.resources-type.figma_template.title",
     ),
     [ResourceType.CODE]: t(
       "common.page-sections.hub.base.resources-type.code.title",

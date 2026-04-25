@@ -47,7 +47,7 @@ export function CardInfo({
       "common.page-sections.hub.base.resources-type.masterclass.title",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.title",
+      "common.page-sections.hub.base.resources-type.figma_template.title",
     ),
     [ResourceType.CODE]: t(
       "common.page-sections.hub.base.resources-type.code.title",
@@ -141,7 +141,7 @@ function Action({
       "common.page-sections.hub.base.resources-type.masterclass.button",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.button",
+      "common.page-sections.hub.base.resources-type.figma_template.button",
     ),
     [ResourceType.CODE]: t(
       "common.page-sections.hub.base.resources-type.code.button",

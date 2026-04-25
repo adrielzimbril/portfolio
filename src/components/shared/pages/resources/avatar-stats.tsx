@@ -109,7 +109,7 @@ function UserCount({
       "common.page-sections.hub.base.resources-type.masterclass.badge",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.badge",
+      "common.page-sections.hub.base.resources-type.figma_template.badge",
     ),
     [ResourceType.CODE]: t(
       "common.page-sections.hub.base.resources-type.code.badge",
