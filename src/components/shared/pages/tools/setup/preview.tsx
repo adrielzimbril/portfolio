@@ -32,13 +32,13 @@ export function CardPreview({
       )}
     >
       {cover ? (
-        <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
+        <div className={cn("flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl")}>
           {purchaseUrl ? (
-            <Link href={purchaseUrl} className="w-full">
+            <Link href={purchaseUrl} className={cn("w-full", "relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 overflow-hidden transition-all duration-300 squircle-border-[#ffd3ad]")}>
               <Image
                 width={1200}
                 height={630}
-                className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
+                className={cn("size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105", "squircle squircle-mask squircle-background squircle-7xl ")}
                 alt={title ?? ""}
                 src={getImageUrl(cover)}
                 loading="lazy"

@@ -14,29 +14,6 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "@/integrations/supabase/types";
 
 /**
- * Base URL for all resources
- */
-export enum AllUserResourceSlug {
-  THE_MISTAKE_THAT_STOPS_YOU_FROM_IMPROVING = "the-mistake-that-stops-you-from-improving",
-  SOCIAL_BANNER_TEMPLATE = "social-banner-template",
-}
-
-/**
- * Map of resource slugs to their custom data
- * You can define custom data for any resource here
- *
- * only existing resources slug in RESOURCE_BASE are allowed
- */
-const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
-  // Example:
-  // 'custom-resource': "url string"
-  "the-mistake-that-stops-you-from-improving":
-    "https://docs.google.com/document/d/1oWOfuqpznMF6rKObGimkBsnmShVTEw6LuZjV82Kuy-o/edit?usp=sharing",
-  "social-banner-template":
-    "https://www.figma.com/community/file/1623784451151162978",
-};
-
-/**
  * Gets the custom data for a resource based on its slug
  *
  * @param slug - The slug of the resource
@@ -60,8 +37,7 @@ export const getResourceUserUrl = async (
     }
   }
 
-  // 2. Fallback to hardcoded config
-  return CUSTOM_RESOURCES[slug as AllUserResourceSlug] || null;
+  return null;
 };
 
 /**
@@ -70,9 +46,7 @@ export const getResourceUserUrl = async (
  * @param slug - The slug of the resource to check
  * @returns Promise that resolves to true if the resource exists, false otherwise
  */
-export const resourceUserExists = async (
-  slug: AllUserResourceSlug,
-): Promise<boolean> => {
+export const resourceUserExists = async (slug: string): Promise<boolean> => {
   try {
     const resource = await getResourceBySlug(slug);
     return resource !== null;

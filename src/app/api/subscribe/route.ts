@@ -9,10 +9,7 @@ import { ContactProvider } from "@/integrations/contact/types/types";
 import { getResourcesUrl, validateSimpleClientToken } from "@/utils";
 import { getResourceById } from "@/integrations/content/lib";
 import { Locale, PageType, ResourceType } from "@/types";
-import {
-  AllUserResourceSlug,
-  getResourceUserUrl,
-} from "@/config/resources.config";
+import { getResourceUserUrl } from "@/config/resources.config";
 import { getBrevoConfig } from "@/config";
 
 export async function POST(req: NextRequest) {
