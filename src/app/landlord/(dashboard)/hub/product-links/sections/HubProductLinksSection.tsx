@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AdminCard, TablePager } from "@/components/landlord/components/AdminPrimitives";
-import { dataTableKey, fetchLandlordTable } from "@/components/landlord/components/admin-utils";
+import { dataTableKey, fetchLandlordTable } from "@/components/landlord/admin-utils";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";

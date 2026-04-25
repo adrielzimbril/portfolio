@@ -18,19 +18,28 @@ import {
   SearchBox,
   StatusPill,
 } from "@/components/landlord/components/AdminPrimitives";
-import { MessageModal, DataDetailsModal } from "@/components/landlord/components/_modals";
-import type { CommunityMessage } from "@/components/landlord/components/admin-types";
+import { MessageModal, DataDetailsModal } from "@/components/landlord/_modals";
+import type { CommunityMessage } from "@/components/landlord/admin-types";
 import {
   fetchMessages,
   formatDate,
   formatTime,
+  messagesKey,
   normalizeMessage,
-} from "@/components/landlord/components/admin-utils";
+} from "@/components/landlord/admin-utils";
 import { toast } from "@/lib/toast";
 import logger from "@/utils/logger";
-
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { TablePager } from "@/components/landlord/components/AdminPrimitives";
 
+export function CommunitySection() {
+  const [search, setSearch] = useState("");
+  const [messageModalOpen, setMessageModalOpen] = useState(false);
+  const [editingMessage, setEditingMessage] = useState<CommunityMessage | null>(null);
+  const [messageToDelete, setMessageToDelete] = useState<CommunityMessage | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState<CommunityMessage | null>(null);
   const [page, setPage] = useState(1);
   const pageSize = 10;
 

@@ -17,8 +17,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { Locale } from "@/types/enum";
 import logger from "@/utils/logger";
-import type { CommunityMessage } from "@/components/landlord/components/admin-types";
-import { normalizeMessage } from "@/components/landlord/components/admin-utils";
+import type { CommunityMessage } from "@/components/landlord/admin-types";
+import { normalizeMessage } from "@/components/landlord/admin-utils";
 import { toast } from "@/lib/toast";
 
 export function MessageModal({

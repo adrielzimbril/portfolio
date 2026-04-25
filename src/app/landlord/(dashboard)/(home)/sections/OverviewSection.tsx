@@ -20,7 +20,7 @@ import {
   fetchParticipants,
   formatDate,
   participantsKey,
-} from "@/components/landlord/components/admin-utils";
+} from "@/components/landlord/admin-utils";
 
 export function OverviewSection() {
   const {

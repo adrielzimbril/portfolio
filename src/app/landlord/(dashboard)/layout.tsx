@@ -6,7 +6,7 @@ import { createClient } from "@/integrations/supabase/server";
 import { ConfigValue } from "@/config";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import { logger } from "@/utils";
-import { DashboardLayout } from "@/components/landlord/components/_layouts/dashboard-layout";
+import { DashboardLayout } from "@/components/landlord/_layouts/dashboard-layout";
 
 export default async function DashboardLayoutWrapper({
   children,

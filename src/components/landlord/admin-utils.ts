@@ -7,7 +7,7 @@ import type {
   LandlordTableResponse,
   Participant,
   QuestSummary,
-} from "@/components/landlord/components/admin-types";
+} from "@/components/landlord/admin-types";
 import { REACTION_EMOJIS, ReactionType } from "@/lib/stats/types";
 
 export const participantsKey = (

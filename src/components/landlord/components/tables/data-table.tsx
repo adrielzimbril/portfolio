@@ -5,9 +5,9 @@ import { FileText, Loader2, RefreshCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { AdminCard, EmptyState, TablePager } from "@/components/landlord/components/AdminPrimitives";
-import { DataDetailsModal } from "@/components/landlord/components/_modals/DataDetailsModal";
-import { dataTableKey, fetchLandlordTable, formatCell, formatLabel } from "@/components/landlord/components/admin-utils";
-import type { DataTableKey, LandlordTableResponse } from "@/components/landlord/components/admin-types";
+import { DataDetailsModal } from "@/components/landlord/_modals/DataDetailsModal";
+import { dataTableKey, fetchLandlordTable, formatCell, formatLabel } from "@/components/landlord/admin-utils";
+import type { DataTableKey, LandlordTableResponse } from "@/components/landlord/admin-types";
 
 const PAGE_SIZE = 10;
 

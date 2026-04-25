@@ -17,9 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AdminCard, EmptyState, SearchBox, StatusPill } from "@/components/landlord/components/AdminPrimitives";
-import { ParticipantModal, DataDetailsModal } from "@/components/landlord/components/_modals";
-import { fetchParticipants, fetchQuests, formatDate, formatTime, participantsKey } from "@/components/landlord/components/admin-utils";
+import { AdminCard, EmptyState, SearchBox, StatusPill, TablePager } from "@/components/landlord/components/AdminPrimitives";
+import { ParticipantModal, DataDetailsModal } from "@/components/landlord/_modals";
+import { fetchParticipants, fetchQuests, formatDate, formatTime, participantsKey } from "@/components/landlord/admin-utils";
 import { toast } from "@/lib/toast";
 
 import { ScrollArea } from "@/components/ui/scroll-area";

@@ -10,7 +10,7 @@ import {
   fetchLandlordTable,
   formatCell,
   formatLabel,
-} from "@/components/landlord/components/admin-utils";
+} from "@/components/landlord/admin-utils";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 
 const pageSize = 10;
