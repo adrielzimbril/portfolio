@@ -315,7 +315,7 @@ function NavLink({
       href={href}
       onClick={onClick}
       className={cn(
-        "flex items-center gap-3 rounded-2xl text-left text-sm transition",
+        "flex items-center gap-3 rounded-xl text-left text-sm transition",
         compact ? "px-2 py-2" : "px-3 py-3",
         active
           ? "bg-white text-[#11191f]"

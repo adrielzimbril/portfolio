@@ -37,7 +37,7 @@ export async function PATCH(
     }
 
     if (!data || data.length === 0) {
-      logger.warn("No rows updated for id:", id);
+      logger.warn("No rows updated for id:", id, data);
       return NextResponse.json(
         { error: "Message not found or no changes made" },
         { status: 404 },
