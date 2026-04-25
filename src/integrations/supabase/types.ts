@@ -169,6 +169,27 @@ export type Database = {
         }
         Relationships: []
       }
+      hub_product_links: {
+        Row: {
+          created_at: string | null
+          private_url: string
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          private_url: string
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          private_url?: string
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       hub_product_requests: {
         Row: {
           cover_image: string | null
