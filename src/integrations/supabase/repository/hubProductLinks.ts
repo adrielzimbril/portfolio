@@ -1,15 +1,17 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "@/integrations/supabase/types";
 
-export interface HubResourceRow {
+export interface HubProductLinkRow {
   slug: string;
   private_url: string;
   created_at: string;
   updated_at: string;
 }
 
-export const hubResourcesRepository = (supabase: SupabaseClient<Database>) => {
-  const table = "hub_resources";
+export const hubProductLinksRepository = (
+  supabase: SupabaseClient<Database>,
+) => {
+  const table = "hub_product_links";
 
   return {
     /**
@@ -22,7 +24,7 @@ export const hubResourcesRepository = (supabase: SupabaseClient<Database>) => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data as HubResourceRow[];
+      return data as HubProductLinkRow[];
     },
 
     /**
@@ -39,7 +41,7 @@ export const hubResourcesRepository = (supabase: SupabaseClient<Database>) => {
         if (error.code === "PGRST116") return null; // Not found
         throw error;
       }
-      return data as HubResourceRow;
+      return data as HubProductLinkRow;
     },
 
     /**
@@ -51,13 +53,12 @@ export const hubResourcesRepository = (supabase: SupabaseClient<Database>) => {
         .upsert({
           slug,
           private_url,
-          updated_at: new Date().toISOString(),
         })
         .select()
         .single();
 
       if (error) throw error;
-      return data as HubResourceRow;
+      return data as HubProductLinkRow;
     },
 
     /**

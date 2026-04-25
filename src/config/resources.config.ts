@@ -9,7 +9,7 @@
 
 import { getResourceBySlug } from "@/integrations/content/lib";
 import logger from "@/utils/logger";
-import { hubResourcesRepository } from "@/integrations/supabase/repository/hubResources";
+import { hubProductLinksRepository } from "@/integrations/supabase/repository/hubProductLinks";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "@/integrations/supabase/types";
 
@@ -50,7 +50,7 @@ export const getResourceUserUrl = async (
   // 1. Try to fetch from Supabase if client is provided
   if (supabase) {
     try {
-      const repo = hubResourcesRepository(supabase);
+      const repo = hubProductLinksRepository(supabase);
       const data = await repo.getBySlug(slug);
       if (data?.private_url) {
         return data.private_url;

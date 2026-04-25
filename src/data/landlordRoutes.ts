@@ -36,6 +36,22 @@ export const landlordRoutes = {
       inSitemap: false,
     },
   },
+  hub: {
+    requests: {
+      name: "Hub Requests",
+      key: "landlord-hub-requests",
+      link: "/landlord/hub/requests",
+      inHeader: false,
+      inSitemap: false,
+    },
+    productLinks: {
+      name: "Product Links",
+      key: "landlord-hub-product-links",
+      link: "/landlord/hub/product-links",
+      inHeader: false,
+      inSitemap: false,
+    },
+  },
   tables: {
     newsletter: {
       name: "Newsletter",
@@ -55,27 +71,6 @@ export const landlordRoutes = {
       name: "Submissions",
       key: "landlord-submissions",
       link: "/landlord/submissions",
-      inHeader: false,
-      inSitemap: false,
-    },
-    hubRequests: {
-      name: "Hub Requests",
-      key: "landlord-hub-requests",
-      link: "/landlord/hub-requests",
-      inHeader: false,
-      inSitemap: false,
-    },
-    hubResources: {
-      name: "Hub Resources",
-      key: "landlord-hub-resources",
-      link: "/landlord/hub-resources",
-      inHeader: false,
-      inSitemap: false,
-    },
-    hubResources: {
-      name: "Hub Resources",
-      key: "landlord-hub-resources",
-      link: "/landlord/hub-resources",
       inHeader: false,
       inSitemap: false,
     },

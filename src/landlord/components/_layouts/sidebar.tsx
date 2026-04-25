@@ -41,16 +41,16 @@ export function Sidebar({
         return pathname.startsWith(landlordRoutes.quests.registrations.link);
       case "quests-submissions":
         return pathname.startsWith(landlordRoutes.quests.submissions.link);
+      case "hub-requests":
+        return pathname.startsWith(landlordRoutes.hub.requests.link);
+      case "hub-product-links":
+        return pathname.startsWith(landlordRoutes.hub.productLinks.link);
       case "newsletter":
         return pathname.startsWith(landlordRoutes.tables.newsletter.link);
       case "users":
         return pathname.startsWith(landlordRoutes.tables.users.link);
       case "submissions":
         return pathname.startsWith(landlordRoutes.tables.submissions.link);
-      case "hubRequests":
-        return pathname.startsWith(landlordRoutes.tables.hubRequests.link);
-      case "hubResources":
-        return pathname.startsWith(landlordRoutes.tables.hubResources.link);
       case "reactions":
         return pathname.startsWith(landlordRoutes.tables.reactions.link);
       default:
@@ -59,6 +59,8 @@ export function Sidebar({
   };
 
   const isQuestsGroupActive = pathname.includes("/quests");
+  const isHubGroupActive = pathname.includes("/hub/");
+  const [hubOpen, setHubOpen] = useState(isHubGroupActive);
 
   return (
     <aside
@@ -159,6 +161,62 @@ export function Sidebar({
             )}
           </div>
 
+          {/* Hub group */}
+          <div>
+            <button
+              type="button"
+              onClick={() => setHubOpen((o) => !o)}
+              className={cn(
+                "w-full flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition",
+                isHubGroupActive
+                  ? "text-white"
+                  : "text-white/62 hover:bg-white/8 hover:text-white"
+              )}
+            >
+              <Database size={18} />
+              <span className="flex flex-col flex-1 min-w-0">
+                <span className="font-medium">Hub</span>
+                <span
+                  className={cn(
+                    "text-xs mt-0.5",
+                    isHubGroupActive ? "text-white/35" : "text-white/35"
+                  )}
+                >
+                  Ressources et demandes
+                </span>
+              </span>
+              <ChevronDown
+                size={15}
+                className={cn(
+                  "flex-shrink-0 text-white/40 transition-transform duration-200",
+                  hubOpen && "rotate-180"
+                )}
+              />
+            </button>
+            {hubOpen && (
+              <div className="ml-4 mt-1 grid gap-1 border-l border-white/10 pl-3">
+                <NavLink
+                  href={landlordRoutes.hub.requests.link}
+                  active={isActive("hub-requests")}
+                  icon={MessageSquareText}
+                  label="Requests"
+                  description="Demandes produits"
+                  onClick={() => setSidebarOpen(false)}
+                  compact
+                />
+                <NavLink
+                  href={landlordRoutes.hub.productLinks.link}
+                  active={isActive("hub-product-links")}
+                  icon={Database}
+                  label="Product Links"
+                  description="Gestion ressources"
+                  onClick={() => setSidebarOpen(false)}
+                  compact
+                />
+              </div>
+            )}
+          </div>
+
           {/* Community */}
           <NavLink
             href={landlordRoutes.community.link}
@@ -197,22 +255,6 @@ export function Sidebar({
                 icon={Database}
                 label="Submissions"
                 description="Demandes entrantes"
-                onClick={() => setSidebarOpen(false)}
-              />
-              <NavLink
-                href={landlordRoutes.tables.hubRequests.link}
-                active={isActive("hubRequests")}
-                icon={Database}
-                label="Hub Requests"
-                description="Demandes produits"
-                onClick={() => setSidebarOpen(false)}
-              />
-              <NavLink
-                href={landlordRoutes.tables.hubResources.link}
-                active={isActive("hubResources")}
-                icon={Database}
-                label="Hub Resources"
-                description="Gestion ressources"
                 onClick={() => setSidebarOpen(false)}
               />
               <NavLink

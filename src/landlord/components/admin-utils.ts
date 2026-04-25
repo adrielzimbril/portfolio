@@ -18,7 +18,14 @@ export const dataTableKey = (
   page: number,
   pageSize = 10,
 ) => {
-  const base = landlordApiRoutes.data[table as keyof typeof landlordApiRoutes.data];
+  let base: string;
+  if (table === "hub-requests") {
+    base = landlordApiRoutes.hub.requests;
+  } else if (table === "hub-product-links") {
+    base = landlordApiRoutes.hub.productLinks;
+  } else {
+    base = landlordApiRoutes.data[table as keyof typeof landlordApiRoutes.data];
+  }
   return `${base}?page=${page}&pageSize=${pageSize}`;
 };
 

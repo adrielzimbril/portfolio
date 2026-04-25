@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import useSWR from "swr";
-import { RefreshCw, Loader2, Link, Save, Check, AlertCircle } from "lucide-react";
+import { RefreshCw, Loader2, Link as LinkIcon, Save, Check, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -10,7 +10,7 @@ import { fetchLandlordTable } from "@/landlord/components/admin-utils";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { toast } from "sonner";
 
-interface ResourceRow {
+interface ProductLinkRow {
   id: number;
   title: string;
   slug: string;
@@ -19,24 +19,24 @@ interface ResourceRow {
   published: boolean;
 }
 
-export function HubResourcesManagementSection() {
+export function HubProductLinksSection() {
   const {
     data: tableData,
     isLoading,
     mutate,
-  } = useSWR(landlordApiRoutes.data.hubResources, fetchLandlordTable);
+  } = useSWR(landlordApiRoutes.hub.productLinks, fetchLandlordTable);
 
   const [updatingSlugs, setUpdatingSlugs] = useState<Set<string>>(new Set());
   const [localUrls, setLocalUrls] = useState<Record<string, string>>({});
 
-  const rows = (tableData?.rows as ResourceRow[]) || [];
+  const rows = (tableData?.rows as ProductLinkRow[]) || [];
 
   const handleUpdate = async (slug: string) => {
     const private_url = localUrls[slug] ?? rows.find((r) => r.slug === slug)?.private_url;
 
     setUpdatingSlugs((prev) => new Set(prev).add(slug));
     try {
-      const response = await fetch(landlordApiRoutes.data.hubResources, {
+      const response = await fetch(landlordApiRoutes.hub.productLinks, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, private_url }),
@@ -62,7 +62,7 @@ export function HubResourcesManagementSection() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            Hub Resources Links
+            Hub Product Links
           </h2>
           <p className="mt-1 text-sm text-black/45">
             Gérer les liens privés envoyés par mail pour chaque ressource du Hub.
@@ -81,7 +81,7 @@ export function HubResourcesManagementSection() {
             Chargement des ressources...
           </div>
         ) : rows.length ? (
-          <div className="flex flex-col h-[600px] overflow-hidden">
+          <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
             <ScrollArea className="flex-1 w-full" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[800px] border-collapse text-left text-sm">
@@ -102,7 +102,7 @@ export function HubResourcesManagementSection() {
                       return (
                         <tr
                           key={row.slug}
-                          className="hover:bg-black/[0.02] transition-colors"
+                          className="hover:bg-black/[0.02] transition-colors group"
                         >
                           <td className="px-5 py-4">
                             <div className="font-medium text-black/85">{row.title}</div>
@@ -113,7 +113,7 @@ export function HubResourcesManagementSection() {
                           </td>
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-2">
-                              <Link size={14} className="shrink-0 text-black/30" />
+                              <LinkIcon size={14} className="shrink-0 text-black/30" />
                               <Input
                                 value={currentValue}
                                 onChange={(e) => setLocalUrls(prev => ({ ...prev, [row.slug]: e.target.value }))}

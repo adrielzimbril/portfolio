@@ -6,7 +6,6 @@ export type AdminUser = {
   avatarUrl?: string;
 };
 
-export type AdminView =
   | "overview"
   | "quests-registrations"
   | "quests-submissions"
@@ -14,7 +13,8 @@ export type AdminView =
   | "newsletter"
   | "users"
   | "submissions"
-  | "hubRequests"
+  | "hub-requests"
+  | "hub-product-links"
   | "reactions";
 
 export type Participant = {
@@ -48,11 +48,11 @@ export type QuestSummary = {
   title: string;
 };
 
-export type DataTableKey =
   | "users"
   | "newsletter"
   | "submissions"
-  | "hubRequests"
+  | "hub-requests"
+  | "hub-product-links"
   | "reactions";
 
 export type LandlordTableResponse = {
