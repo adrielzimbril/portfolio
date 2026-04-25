@@ -14,13 +14,13 @@ import {
   EmptyState,
   MetricCard,
   StatusPill,
-} from "@/landlord/components/AdminPrimitives";
+} from "@/components/landlord/components/AdminPrimitives";
 import {
   fetchMessages,
   fetchParticipants,
   formatDate,
   participantsKey,
-} from "@/landlord/components/admin-utils";
+} from "@/components/landlord/components/admin-utils";
 
 export function OverviewSection() {
   const {

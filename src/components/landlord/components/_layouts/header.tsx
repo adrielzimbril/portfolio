@@ -3,7 +3,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { PanelLeft, RefreshCw, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { AdminUser } from "@/landlord/components/admin-types";
+import type { AdminUser } from "@/components/landlord/components/admin-types";
 import { adminNavItems } from "./nav-items";
 
 export function Header({

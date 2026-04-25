@@ -25,7 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { Locale } from "@/types/enum";
 import logger from "@/utils/logger";
-import type { QuestSummary } from "@/landlord/components/admin-types";
+import type { QuestSummary } from "@/components/landlord/components/admin-types";
 import { toast } from "@/lib/toast";
 
 export function ParticipantModal({

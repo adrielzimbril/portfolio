@@ -4,10 +4,10 @@ import useSWR from "swr";
 import { FileText, Loader2, RefreshCw, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AdminCard, EmptyState, TablePager } from "@/landlord/components/AdminPrimitives";
-import { DataDetailsModal } from "@/landlord/components/_modals/DataDetailsModal";
-import { dataTableKey, fetchLandlordTable, formatCell, formatLabel } from "@/landlord/components/admin-utils";
-import type { DataTableKey, LandlordTableResponse } from "@/landlord/components/admin-types";
+import { AdminCard, EmptyState, TablePager } from "@/components/landlord/components/AdminPrimitives";
+import { DataDetailsModal } from "@/components/landlord/components/_modals/DataDetailsModal";
+import { dataTableKey, fetchLandlordTable, formatCell, formatLabel } from "@/components/landlord/components/admin-utils";
+import type { DataTableKey, LandlordTableResponse } from "@/components/landlord/components/admin-types";
 
 const PAGE_SIZE = 10;
 

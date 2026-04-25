@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { SidebarOverlay } from "./sidebar-overlay";
-import type { AdminUser } from "@/landlord/components/admin-types";
+import type { AdminUser } from "@/components/landlord/components/admin-types";
 import { apiRoutes } from "@/data/api-routes";
 import { landlordRoutes } from "@/data/landlordRoutes";
 

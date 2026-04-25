@@ -1,26 +1,27 @@
 "use client";
 import React, { useState } from "react";
 import useSWR from "swr";
-import { RefreshCw, Loader2, Heart } from "lucide-react";
+import { RefreshCw, Loader2, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AdminCard, TablePager } from "@/landlord/components/AdminPrimitives";
+import { AdminCard, TablePager } from "@/components/landlord/components/AdminPrimitives";
 import {
   dataTableKey,
   fetchLandlordTable,
   formatCell,
   formatLabel,
-} from "@/landlord/components/admin-utils";
+} from "@/components/landlord/components/admin-utils";
+import type { LandlordTableResponse } from "@/components/landlord/components/admin-types";
 
 const pageSize = 10;
 
-export function ReactionsTableSection() {
+export function HubRequestsTableSection() {
   const [page, setPage] = useState(1);
   const {
     data: tableData,
     isLoading,
     mutate,
-  } = useSWR(dataTableKey("reactions", page, pageSize), fetchLandlordTable);
+  } = useSWR(dataTableKey("hubRequests", page, pageSize), fetchLandlordTable);
 
   const rows = tableData?.rows || [];
   const columns = rows[0] ? Object.keys(rows[0]).slice(0, 8) : [];
@@ -30,12 +31,12 @@ export function ReactionsTableSection() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            Reactions
+            Hub Requests
           </h2>
-          <p className="mt-1 text-sm text-black/45">Engagement contenu</p>
+          <p className="mt-1 text-sm text-black/45">Demandes produits</p>
         </div>
         <Button variant="outline" asIcon asPointer onClick={() => mutate()}>
-          <RefreshCw size={16} className="mr-2" />
+          <RefreshCw size={16} />
           Rafraîchir
         </Button>
       </div>
@@ -48,7 +49,7 @@ export function ReactionsTableSection() {
           </div>
         ) : rows.length ? (
           <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
-            <ScrollArea className="flex-1 w-full border-b border-black/5" scrollbarGutter>
+            <ScrollArea className="flex-1 w-full" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[920px] border-collapse text-left text-sm">
                   <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
@@ -64,7 +65,7 @@ export function ReactionsTableSection() {
                     {rows.map((row, index) => (
                       <tr
                         key={String(row.id || index)}
-                        className="hover:bg-black/2 transition-colors"
+                        className="hover:bg-black/[0.02] transition-colors"
                       >
                         {columns.map((column) => (
                           <td
@@ -80,7 +81,7 @@ export function ReactionsTableSection() {
                 </table>
               </div>
             </ScrollArea>
-            <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1">
+            <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
               <TablePager
                 page={page}
                 pageSize={pageSize}
@@ -92,7 +93,7 @@ export function ReactionsTableSection() {
         ) : (
           <div className="p-6">
             <div className="flex flex-col items-center gap-3 text-center text-sm text-black/50">
-              <Heart size={32} />
+              <Package size={32} />
               <div>
                 <p className="font-medium">Aucune donnée</p>
                 <p className="text-xs">

@@ -17,15 +17,15 @@ import {
   EmptyState,
   SearchBox,
   StatusPill,
-} from "@/landlord/components/AdminPrimitives";
-import { MessageModal, DataDetailsModal } from "@/landlord/components/_modals";
-import type { CommunityMessage } from "@/landlord/components/admin-types";
+} from "@/components/landlord/components/AdminPrimitives";
+import { MessageModal, DataDetailsModal } from "@/components/landlord/components/_modals";
+import type { CommunityMessage } from "@/components/landlord/components/admin-types";
 import {
   fetchMessages,
   formatDate,
   formatTime,
   normalizeMessage,
-} from "@/landlord/components/admin-utils";
+} from "@/components/landlord/components/admin-utils";
 import { toast } from "@/lib/toast";
 import logger from "@/utils/logger";
 
