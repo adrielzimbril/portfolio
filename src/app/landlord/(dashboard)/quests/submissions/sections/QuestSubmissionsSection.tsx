@@ -120,7 +120,7 @@ export function QuestSubmissionsSection() {
       </AdminCard>
 
       <AdminCard className="overflow-hidden">
-        <div className="flex h-[600px] flex-col xl:h-[calc(100dvh-270px)]">
+        <div className="flex h-[600px] flex-col xl:h-[calc(100dvh-380px)] overflow-hidden">
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
               <Loader2 size={18} className="animate-spin" />

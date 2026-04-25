@@ -33,7 +33,8 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json({
-      messages: messages || [],
+      rows: messages || [],
+      messages: messages || [], // Keep for backward compatibility if needed
       count: count || 0,
       page,
       pageSize,

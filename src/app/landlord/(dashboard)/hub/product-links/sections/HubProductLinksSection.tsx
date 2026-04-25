@@ -36,7 +36,7 @@ export function HubProductLinksSection() {
     data: tableData,
     isLoading,
     mutate,
-  } = useSWR(dataTableKey(landlordApiRoutes.hub.productLinks, page, pageSize), fetchLandlordTable);
+  } = useSWR(dataTableKey("hub-product-links", page, pageSize), fetchLandlordTable);
 
   const [updatingSlugs, setUpdatingSlugs] = useState<Set<string>>(new Set());
   const [localUrls, setLocalUrls] = useState<Record<string, string>>({});

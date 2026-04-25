@@ -6,6 +6,8 @@ import { hubProductLinksRepository } from "@/integrations/supabase/repository/hu
 import { logger } from "@/utils";
 import { Locale } from "@/types";
 
+export async function GET(request: Request) {
+  try {
     const { searchParams } = new URL(request.url);
     const page = Math.max(Number(searchParams.get("page") || 1), 1);
     const pageSize = Math.min(
@@ -14,6 +16,19 @@ import { Locale } from "@/types";
     );
     const from = (page - 1) * pageSize;
     const to = from + pageSize;
+
+    // 1. Get resources from content
+    // We want all resources regardless of locale for the admin, but let's default to FR for labels if needed
+    // Or just fetch all and dedup by slug if they are localized?
+    // Actually, usually resources are same slug across locales but different titles.
+    const allResources = await getAllResources({ published: true, locale: Locale.FR });
+
+    // 2. Get private urls from DB
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
+    const repo = hubProductLinksRepository(supabase);
+    const dbLinks = await repo.getAll();
+    const dbMap = new Map(dbLinks.map((l) => [l.slug, l.private_url]));
 
     // 3. Merge them
     const allRows = allResources.map((resource) => ({
