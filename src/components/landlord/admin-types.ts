@@ -6,6 +6,7 @@ export type AdminUser = {
   avatarUrl?: string;
 };
 
+export type AdminView =
   | "overview"
   | "quests-registrations"
   | "quests-submissions"
@@ -48,6 +49,7 @@ export type QuestSummary = {
   title: string;
 };
 
+export type DataTableKey =
   | "users"
   | "newsletter"
   | "submissions"

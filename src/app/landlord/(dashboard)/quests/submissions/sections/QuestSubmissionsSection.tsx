@@ -21,7 +21,6 @@ import { AdminCard, EmptyState, SearchBox, StatusPill, TablePager } from "@/comp
 import { ParticipantModal, DataDetailsModal } from "@/components/landlord/_modals";
 import { fetchParticipants, fetchQuests, formatDate, formatTime, participantsKey } from "@/components/landlord/admin-utils";
 import { toast } from "@/lib/toast";
-
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function QuestSubmissionsSection() {
@@ -40,7 +39,7 @@ export function QuestSubmissionsSection() {
     isLoading: loading,
   } = useSWR(participantsKey(selectedQuest, page, pageSize, "submission"), fetchParticipants);
 
-  const participants = (tableData?.rows as any[]) || [];
+  const participants = useMemo(() => (tableData?.rows as any[]) || [], [tableData]);
 
   const filteredParticipants = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -120,15 +119,15 @@ export function QuestSubmissionsSection() {
       </AdminCard>
 
       <AdminCard className="overflow-hidden">
-        <div className="flex h-[600px] flex-col xl:h-[calc(100dvh-380px)] overflow-hidden">
+        <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-380px)] overflow-hidden">
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
               <Loader2 size={18} className="animate-spin" />
               Chargement des soumissions...
             </div>
-          ) : filteredParticipants.length ? (
+          ) : filteredParticipants.length > 0 ? (
             <>
-              <ScrollArea className="flex-1" scrollbarGutter>
+              <ScrollArea className="flex-1 w-full" scrollbarGutter>
                 <div className="min-w-full inline-block align-middle">
                   <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
@@ -142,7 +141,7 @@ export function QuestSubmissionsSection() {
                     </thead>
                     <tbody className="divide-y divide-black/6">
                       {filteredParticipants.map((participant) => (
-                        <tr key={participant.id} className="hover:bg-black/2">
+                        <tr key={participant.id} className="hover:bg-black/[0.02] transition-colors">
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-3">
                               <div className="flex size-10 items-center justify-center rounded-full bg-[#ffed90] text-sm font-semibold">
@@ -228,7 +227,7 @@ export function QuestSubmissionsSection() {
                   </table>
                 </div>
               </ScrollArea>
-              <div className="border-t border-black/5 bg-black/[0.01] p-3">
+              <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
                 <TablePager
                   page={page}
                   pageSize={pageSize}
@@ -238,16 +237,17 @@ export function QuestSubmissionsSection() {
               </div>
             </>
           ) : (
-            <div className="flex flex-1 items-center justify-center">
+            <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
                 icon={Send}
                 title="Aucune soumission"
-                description="Aucun rendu ne correspond au filtre actuel."
+                description="Aucun rendu ne correspond au filtre actuel ou la table est vide."
               />
             </div>
           )}
         </div>
       </AdminCard>
+
       <ParticipantModal
         open={participantModalOpen}
         quests={quests}
