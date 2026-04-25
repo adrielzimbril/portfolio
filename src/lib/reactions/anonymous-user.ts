@@ -44,13 +44,6 @@ export function isUserAuthenticated(): boolean {
   const authToken0 = getCookie(`${prefix}-auth-token.0`);
   const authToken1 = getCookie(`${prefix}-auth-token.1`);
 
-  logger.debug("[isUserAuthenticated] Client-side auth check", {
-    prefix,
-    hasToken0: !!authToken0,
-    hasToken1: !!authToken1,
-    isAuthenticated: !!(authToken0 || authToken1),
-  });
-
   return !!(authToken0 || authToken1);
 }
 
@@ -63,13 +56,6 @@ export async function isUserAuthenticatedServer(): Promise<boolean> {
   const authToken0 = cookieStore.get(`${prefix}-auth-token.0`);
   const authToken1 = cookieStore.get(`${prefix}-auth-token.1`);
   const isAuthenticated = !!(authToken0 || authToken1);
-
-  logger.debug("[isUserAuthenticatedServer] Server-side auth check", {
-    prefix,
-    hasToken0: !!authToken0,
-    hasToken1: !!authToken1,
-    isAuthenticated,
-  });
 
   return isAuthenticated;
 }
