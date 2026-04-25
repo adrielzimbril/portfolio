@@ -49,6 +49,8 @@ export function Sidebar({
         return pathname.startsWith(landlordRoutes.tables.submissions.link);
       case "hubRequests":
         return pathname.startsWith(landlordRoutes.tables.hubRequests.link);
+      case "hubResources":
+        return pathname.startsWith(landlordRoutes.tables.hubResources.link);
       case "reactions":
         return pathname.startsWith(landlordRoutes.tables.reactions.link);
       default:
@@ -203,6 +205,14 @@ export function Sidebar({
                 icon={Database}
                 label="Hub Requests"
                 description="Demandes produits"
+                onClick={() => setSidebarOpen(false)}
+              />
+              <NavLink
+                href={landlordRoutes.tables.hubResources.link}
+                active={isActive("hubResources")}
+                icon={Database}
+                label="Hub Resources"
+                description="Gestion ressources"
                 onClick={() => setSidebarOpen(false)}
               />
               <NavLink

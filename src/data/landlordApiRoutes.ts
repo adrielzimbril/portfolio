@@ -14,6 +14,7 @@ export const landlordApiRoutes = {
     users: getApiUrl("landlord/users"),
     submissions: getApiUrl("landlord/submissions"),
     hubRequests: getApiUrl("landlord/hub-requests"),
+    hubResources: getApiUrl("landlord/hub-resources"),
     reactions: getApiUrl("landlord/reactions"),
   },
 };

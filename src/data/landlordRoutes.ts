@@ -65,6 +65,20 @@ export const landlordRoutes = {
       inHeader: false,
       inSitemap: false,
     },
+    hubResources: {
+      name: "Hub Resources",
+      key: "landlord-hub-resources",
+      link: "/landlord/hub-resources",
+      inHeader: false,
+      inSitemap: false,
+    },
+    hubResources: {
+      name: "Hub Resources",
+      key: "landlord-hub-resources",
+      link: "/landlord/hub-resources",
+      inHeader: false,
+      inSitemap: false,
+    },
     reactions: {
       name: "Reactions",
       key: "landlord-reactions",

@@ -9,6 +9,9 @@
 
 import { getResourceBySlug } from "@/integrations/content/lib";
 import logger from "@/utils/logger";
+import { hubResourcesRepository } from "@/integrations/supabase/repository/hubResources";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Database } from "@/integrations/supabase/types";
 
 /**
  * Base URL for all resources
@@ -37,18 +40,28 @@ const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
  * Gets the custom data for a resource based on its slug
  *
  * @param slug - The slug of the resource
+ * @param supabase - Optional Supabase client to fetch from DB
  * @returns The custom data for the resource or null if not found
- *
- * @example
- * ```typescript
- * const data = getResourceUserUrl('custom-resource');
- * // Returns: 'url string' or null if not found
- * ```
  */
-export const getResourceUserUrl = <T = any>(
-  slug: AllUserResourceSlug,
-): string | null => {
-  return CUSTOM_RESOURCES[slug] || null;
+export const getResourceUserUrl = async (
+  slug: string,
+  supabase?: SupabaseClient<Database>,
+): Promise<string | null> => {
+  // 1. Try to fetch from Supabase if client is provided
+  if (supabase) {
+    try {
+      const repo = hubResourcesRepository(supabase);
+      const data = await repo.getBySlug(slug);
+      if (data?.private_url) {
+        return data.private_url;
+      }
+    } catch (error) {
+      logger.error(`Error fetching private URL for slug "${slug}":`, error);
+    }
+  }
+
+  // 2. Fallback to hardcoded config
+  return CUSTOM_RESOURCES[slug as AllUserResourceSlug] || null;
 };
 
 /**
