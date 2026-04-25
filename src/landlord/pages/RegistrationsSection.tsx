@@ -228,7 +228,7 @@ export function RegistrationsSection() {
 
       <AdminCard className="overflow-hidden">
         {filteredParticipants.length ? (
-          <div className="flex flex-col h-[500px] overflow-hidden">
+          <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
             <ScrollArea className="flex-1 w-full" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[920px] border-collapse text-left text-sm">

@@ -47,7 +47,7 @@ export function ReactionsTableSection() {
             Chargement de la table...
           </div>
         ) : rows.length ? (
-          <div className="flex flex-col h-[600px] overflow-hidden">
+          <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
             <ScrollArea className="flex-1 w-full border-b border-black/5" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[920px] border-collapse text-left text-sm">

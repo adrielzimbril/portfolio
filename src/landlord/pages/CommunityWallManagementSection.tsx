@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Loader2, Edit, Trash2 } from "lucide-react";
 import { AdminCard } from "@/landlord/components/AdminPrimitives";
 import type { CommunityMessage } from "@/landlord/components/admin-types";
 import { normalizeMessage } from "@/landlord/components/admin-utils";
@@ -226,58 +228,78 @@ export function CommunityWallManagementSection() {
       )}
 
       {isLoading ? (
-        <div>{t("common.button.loading")}</div>
+        <div className="flex min-h-72 items-center justify-center gap-2 text-sm text-black/50">
+          <Loader2 size={18} className="animate-spin" />
+          {t("common.button.loading")}
+        </div>
       ) : (
-        <div className="grid gap-4">
-          {messages?.map((msg: CommunityMessage) => (
-            <AdminCard key={msg.id} className="p-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start space-x-4">
-                  {msg.creator_avatar_url && (
-                    <img
-                      src={msg.creator_avatar_url}
-                      alt={msg.creator_name}
-                      className="w-12 h-12 rounded-full"
-                    />
-                  )}
-                  <div className="space-y-2 flex-1">
-                    <div className="flex items-center space-x-2">
-                      <h3 className="font-semibold">{msg.creator_name}</h3>
+        <AdminCard className="overflow-hidden">
+          <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
+            <ScrollArea className="flex-1 w-full" scrollbarGutter>
+              <div className="grid gap-4 p-5">
+                {messages?.map((msg: CommunityMessage) => (
+                  <div
+                    key={msg.id}
+                    className="p-4 rounded-xl border border-black/5 bg-black/[0.01] hover:bg-black/[0.02] transition-colors"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start space-x-4 flex-1">
+                        {msg.creator_avatar_url && (
+                          <img
+                            src={msg.creator_avatar_url}
+                            alt={msg.creator_name}
+                            className="w-10 h-10 rounded-full border border-black/10"
+                          />
+                        )}
+                        <div className="space-y-2 flex-1 min-w-0">
+                          <div className="flex items-center space-x-2">
+                            <h3 className="font-semibold text-black/85 truncate">
+                              {msg.creator_name}
+                            </h3>
+                            <Button
+                              variant="outline"
+                              size="xs"
+                              asIcon
+                              asPointer
+                              onClick={() => handleEditMessage(msg)}
+                            >
+                              <Edit size={14} />
+                            </Button>
+                          </div>
+                          {msg.message &&
+                            Object.entries(msg.message).map(
+                              ([lang, message]: [string, string]) => (
+                                <div key={lang} className="space-y-1">
+                                  <span className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
+                                    {lang}
+                                  </span>
+                                  <p className="text-sm text-black/70 leading-relaxed">
+                                    {message}
+                                  </p>
+                                </div>
+                              ),
+                            )}
+                          <p className="text-[10px] text-black/40">
+                            {new Date(msg.created_at).toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
                       <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleEditMessage(msg)}
+                        variant="destructive"
+                        size="xs"
+                        asIcon
+                        asPointer
+                        onClick={() => handleDeleteMessage(msg.id)}
                       >
-                        {t("common.button.edit")}
+                        <Trash2 size={14} />
                       </Button>
                     </div>
-                    {msg.message &&
-                      Object.entries(msg.message).map(
-                        ([lang, message]: [string, string]) => (
-                          <div key={lang} className="space-y-1">
-                            <span className="text-xs text-muted-foreground font-medium">
-                              {lang.toUpperCase()}
-                            </span>
-                            <p className="text-sm">{message}</p>
-                          </div>
-                        ),
-                      )}
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(msg.created_at).toLocaleString()}
-                    </p>
                   </div>
-                </div>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => handleDeleteMessage(msg.id)}
-                >
-                  {t("common.button.delete")}
-                </Button>
+                ))}
               </div>
-            </AdminCard>
-          ))}
-        </div>
+            </ScrollArea>
+          </div>
+        </AdminCard>
       )}
     </div>
   );

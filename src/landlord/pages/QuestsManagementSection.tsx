@@ -14,6 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Loader2, UserPlus, Mail, Edit, Trash2 } from "lucide-react";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { landlordRoutes } from "@/data/landlordRoutes";
 import { getAllQuests } from "@/integrations/content/lib/quests";
@@ -71,7 +73,7 @@ export function QuestsManagementSection() {
   };
 
   const { data: quests } = useSWR("quests", fetchQuests);
-  const { data: participants } = useSWR(
+  const { data: participants, isLoading } = useSWR(
     () =>
       `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`,
     fetchParticipants,
@@ -147,7 +149,7 @@ export function QuestsManagementSection() {
       </div>
 
       {showAddForm && (
-        <Card className="p-6">
+        <AdminCard className="p-6">
           <form onSubmit={handleAddParticipant} className="space-y-4">
             <div>
               <Label htmlFor="quest">
@@ -285,102 +287,126 @@ export function QuestsManagementSection() {
               {t("admin.landlord.quests.actions.addSubmit")}
             </Button>
           </form>
-        </Card>
+        </AdminCard>
       )}
 
-      {participants && (
-        <div className="space-y-4">
-          <div className="flex items-center space-x-4">
-            <Label htmlFor="filterQuest">
-              {t("admin.landlord.quests.filters.byQuest")}
-            </Label>
-            <Select value={selectedQuest} onValueChange={setSelectedQuest}>
-              <SelectTrigger id="filterQuest" className="w-64">
-                <SelectValue
-                  placeholder={t("admin.landlord.quests.filters.allQuests")}
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">
-                  {t("admin.landlord.quests.filters.allQuests")}
-                </SelectItem>
-                {quests?.map((quest) => (
-                  <SelectItem key={quest.slug} value={quest.slug}>
-                    {quest.title}
+      <AdminCard className="overflow-hidden">
+        <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
+          <div className="p-4 border-b border-black/5 bg-black/[0.01]">
+            <div className="flex items-center space-x-4">
+              <Label htmlFor="filterQuest" className="text-xs text-black/45">
+                {t("admin.landlord.quests.filters.byQuest")}
+              </Label>
+              <Select value={selectedQuest} onValueChange={setSelectedQuest}>
+                <SelectTrigger id="filterQuest" className="w-64 h-9">
+                  <SelectValue
+                    placeholder={t("admin.landlord.quests.filters.allQuests")}
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">
+                    {t("admin.landlord.quests.filters.allQuests")}
                   </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+                  {quests?.map((quest) => (
+                    <SelectItem key={quest.slug} value={quest.slug}>
+                      {quest.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
-          <div className="grid gap-4">
-            {participants?.map((participant: Participant) => (
-              <Card key={participant.id} className="p-4">
-                <div className="flex items-start justify-between">
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2 flex-wrap">
-                      <h3 className="font-semibold">{participant.name}</h3>
-                      <span className="text-sm text-muted-foreground">
-                        {participant.email}
-                      </span>
-                      <span className="text-xs px-2 py-1 bg-secondary rounded">
-                        {participant.type}
-                      </span>
-                      {participant.source && (
-                        <span className="text-xs px-2 py-1 bg-muted rounded">
-                          {t("admin.landlord.quests.source", {
-                            source: participant.source,
-                          })}
-                        </span>
-                      )}
-                      <Select
-                        value={participant.language || "en"}
-                        onValueChange={(value) =>
-                          handleUpdateLanguage(participant.id, value)
-                        }
-                      >
-                        <SelectTrigger className="w-24 h-6 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {Object.values(Locale).map((locale) => (
-                            <SelectItem key={locale} value={locale}>
-                              {locale.toLocaleUpperCase()}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+          {isLoading ? (
+            <div className="flex-1 flex items-center justify-center gap-2 text-sm text-black/50">
+              <Loader2 size={18} className="animate-spin" />
+              Chargement des participants...
+            </div>
+          ) : (
+            <ScrollArea className="flex-1 w-full" scrollbarGutter>
+              <div className="grid gap-4 p-5">
+                {participants?.length ? (
+                  participants.map((participant: Participant) => (
+                    <div
+                      key={participant.id}
+                      className="p-4 rounded-xl border border-black/5 bg-black/[0.01] hover:bg-black/[0.02] transition-colors"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="space-y-2 flex-1 min-w-0">
+                          <div className="flex items-center space-x-2 flex-wrap gap-y-1">
+                            <h3 className="font-semibold text-black/85">
+                              {participant.name}
+                            </h3>
+                            <span className="text-xs text-black/45 bg-black/5 px-2 py-0.5 rounded-full">
+                              {participant.email}
+                            </span>
+                            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-blue-500/10 text-blue-600 rounded">
+                              {participant.type}
+                            </span>
+                            {participant.source && (
+                              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-black/5 text-black/45 rounded">
+                                {participant.source}
+                              </span>
+                            )}
+                            <Select
+                              value={participant.language || "en"}
+                              onValueChange={(value) =>
+                                handleUpdateLanguage(participant.id, value)
+                              }
+                            >
+                              <SelectTrigger className="w-20 h-6 text-[10px] uppercase font-bold">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {Object.values(Locale).map((locale) => (
+                                  <SelectItem key={locale} value={locale}>
+                                    {locale.toUpperCase()}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          {participant.message && (
+                            <p className="text-sm text-black/70 leading-relaxed">
+                              {participant.message}
+                            </p>
+                          )}
+                          {participant.work_url && (
+                            <a
+                              href={participant.work_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"
+                            >
+                              {t("admin.landlord.quests.actions.viewWork")}
+                            </a>
+                          )}
+                          <p className="text-[10px] text-black/40">
+                            {new Date(participant.created_at).toLocaleString()}
+                          </p>
+                        </div>
+                        {participant.status && (
+                          <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-1 bg-black text-white rounded">
+                            {participant.status}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    {participant.message && (
-                      <p className="text-sm text-muted-foreground">
-                        {participant.message}
-                      </p>
-                    )}
-                    {participant.work_url && (
-                      <a
-                        href={participant.work_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-blue-500 hover:underline"
-                      >
-                        {t("admin.landlord.quests.actions.viewWork")}
-                      </a>
-                    )}
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(participant.created_at).toLocaleString()}
+                  ))
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-12 text-center text-black/45">
+                    <Mail size={32} className="mb-2 opacity-20" />
+                    <p className="text-sm font-medium">Aucun participant</p>
+                    <p className="text-xs">
+                      Ajustez vos filtres ou ajoutez un participant manuellement.
                     </p>
                   </div>
-                  {participant.status && (
-                    <span className="text-xs px-2 py-1 bg-primary text-primary-foreground rounded">
-                      {participant.status}
-                    </span>
-                  )}
-                </div>
-              </Card>
-            ))}
-          </div>
+                )}
+              </div>
+            </ScrollArea>
+          )}
         </div>
-      )}
+      </AdminCard>
     </div>
   );
 }
