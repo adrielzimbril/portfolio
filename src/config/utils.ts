@@ -256,6 +256,7 @@ export function getSupabaseConfig() {
   return {
     url: ConfigValue.NEXT_PUBLIC_SUPABASE_URL,
     anonKey: ConfigValue.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    serviceRoleKey: ConfigValue.NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY,
   };
 }
 

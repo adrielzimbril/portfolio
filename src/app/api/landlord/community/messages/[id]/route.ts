@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/integrations/supabase/server";
+import {
+  createClient,
+  createAdminClient,
+} from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
 import logger from "@/utils/logger";
+import { ConfigValue } from "@/config";
 
 export async function PATCH(
   request: Request,
@@ -17,6 +21,36 @@ export async function PATCH(
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
+    // Check authentication
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+    logger.info("Auth check:", { user: user?.id, authError });
+
+    // Check if user is admin
+    const adminEmails =
+      ConfigValue.NEXT_PRIVATE_ADMIN_EMAILS?.split(",").map((e) => e.trim()) ||
+      [];
+    const isAdmin = user?.email && adminEmails.includes(user.email);
+    logger.info("Admin check:", {
+      userEmail: user?.email,
+      adminEmails,
+      isAdmin,
+    });
+
+    // Use admin client if user is admin, otherwise use regular client
+    const client = isAdmin ? createAdminClient() : supabase;
+
+    // Fetch existing message to check user_id
+    const { data: existingMessage, error: fetchError } = await client
+      .from("community_wall")
+      .select("id, user_id, creator_name")
+      .eq("id", id)
+      .single();
+
+    logger.info("Existing message:", { existingMessage, fetchError });
+
     const updateData: any = {};
     if (message !== undefined) updateData.message = message;
     if (creator_name !== undefined) updateData.creator_name = creator_name;
@@ -25,7 +59,7 @@ export async function PATCH(
 
     logger.info("Update data:", updateData);
 
-    const { data, error } = await supabase
+    const { data, error } = await client
       .from("community_wall")
       .update(updateData)
       .eq("id", id)

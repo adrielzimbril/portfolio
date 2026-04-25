@@ -22,3 +22,23 @@ export const createClient = (cookieStore: any) => {
     },
   });
 };
+
+export const createAdminClient = () => {
+  if (!supabaseKey.serviceRoleKey) {
+    throw new Error("Missing Supabase Service Role Key environment variable");
+  }
+  return createServerClient<Database>(
+    supabaseKey.url!,
+    supabaseKey.serviceRoleKey,
+    {
+      cookies: {
+        getAll() {
+          return [];
+        },
+        setAll() {
+          // No-op for admin client
+        },
+      },
+    },
+  );
+};
