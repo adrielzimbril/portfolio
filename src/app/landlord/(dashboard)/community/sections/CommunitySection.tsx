@@ -31,19 +31,15 @@ import logger from "@/utils/logger";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-export function CommunitySection() {
-  const [search, setSearch] = useState("");
-  const [messageModalOpen, setMessageModalOpen] = useState(false);
-  const [editingMessage, setEditingMessage] = useState<CommunityMessage | null>(null);
-  const [messageToDelete, setMessageToDelete] = useState<CommunityMessage | null>(null);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const [selectedMessage, setSelectedMessage] = useState<CommunityMessage | null>(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   const {
-    data: messages = [],
+    data: tableData,
     isLoading: loading,
-  } = useSWR(landlordApiRoutes.community.messages, fetchMessages);
+  } = useSWR(messagesKey(page, pageSize), fetchMessages);
+
+  const messages = (tableData?.rows as CommunityMessage[]) || [];
 
   const filteredMessages = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -84,7 +80,7 @@ export function CommunitySection() {
       if (!response.ok) throw new Error("Failed to delete message");
       toast.success("Message supprimé.");
       setMessageToDelete(null);
-      mutate(landlordApiRoutes.community.messages);
+      mutate(messagesKey(page, pageSize));
     } catch (error) {
       logger.error("Failed to delete message:", error);
       toast.error("Impossible de supprimer le message.");
@@ -109,7 +105,7 @@ export function CommunitySection() {
             variant="outline"
             asIcon
             asPointer
-            onClick={() => mutate(landlordApiRoutes.community.messages)}
+            onClick={() => mutate(messagesKey(page, pageSize))}
           >
             <RefreshCw size={16} />
             Rafraîchir
@@ -136,8 +132,8 @@ export function CommunitySection() {
             Chargement des messages...
           </div>
         ) : filteredMessages.length ? (
-          <div className="flex flex-col max-h-[600px] xl:max-h-[calc(100dvh-270px)]">
-            <ScrollArea className="flex-1" scrollbarGutter>
+          <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
+            <ScrollArea className="flex-1 w-full" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                   <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
@@ -245,7 +241,15 @@ export function CommunitySection() {
             </table>
           </div>
         </ScrollArea>
-      </div>
+            <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
+              <TablePager
+                page={page}
+                pageSize={pageSize}
+                count={tableData?.count || 0}
+                onPageChange={setPage}
+              />
+            </div>
+          </div>
         ) : (
           <div className="p-6">
             <EmptyState
@@ -264,7 +268,7 @@ export function CommunitySection() {
           setMessageModalOpen(open);
           if (!open) setEditingMessage(null);
         }}
-        onSaved={() => mutate(landlordApiRoutes.community.messages)}
+        onSaved={() => mutate(messagesKey(page, pageSize))}
       />
       <ConfirmDialog
         open={!!messageToDelete}

@@ -10,8 +10,23 @@ import type {
 } from "@/components/landlord/components/admin-types";
 import { REACTION_EMOJIS, ReactionType } from "@/lib/stats/types";
 
-export const participantsKey = (selectedQuest: string) =>
-  `${landlordApiRoutes.quests.participants}${selectedQuest !== "all" ? `?slug=${selectedQuest}` : ""}`;
+export const participantsKey = (
+  selectedQuest: string,
+  page: number,
+  pageSize = 10,
+  type?: string,
+) => {
+  const url = new URL(landlordApiRoutes.quests.participants, window.location.origin);
+  if (selectedQuest !== "all") url.searchParams.set("slug", selectedQuest);
+  url.searchParams.set("page", String(page));
+  url.searchParams.set("pageSize", String(pageSize));
+  if (type) url.searchParams.set("type", type);
+  return url.toString();
+};
+
+export const messagesKey = (page: number, pageSize = 10) => {
+  return `${landlordApiRoutes.community.messages}?page=${page}&pageSize=${pageSize}`;
+};
 
 export const dataTableKey = (
   table: DataTableKey,
@@ -131,22 +146,24 @@ export async function fetchQuests(): Promise<QuestSummary[]> {
   }
 }
 
-export async function fetchParticipants(url: string): Promise<Participant[]> {
+export async function fetchParticipants(
+  url: string,
+): Promise<LandlordTableResponse> {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch participants");
   }
-  const data = await response.json();
-  return data.participants || [];
+  return response.json();
 }
 
-export async function fetchMessages(url: string): Promise<CommunityMessage[]> {
+export async function fetchMessages(
+  url: string,
+): Promise<LandlordTableResponse> {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch messages");
   }
-  const data = await response.json();
-  return data.messages || [];
+  return response.json();
 }
 
 export async function fetchLandlordTable(

@@ -12,8 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AdminCard } from "@/components/landlord/components/AdminPrimitives";
-import { fetchLandlordTable } from "@/components/landlord/components/admin-utils";
+import { AdminCard, TablePager } from "@/components/landlord/components/AdminPrimitives";
+import { dataTableKey, fetchLandlordTable } from "@/components/landlord/components/admin-utils";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
@@ -27,13 +27,16 @@ interface ProductLinkRow {
   published: boolean;
 }
 
+const pageSize = 10;
+
 export function HubProductLinksSection() {
   const t = useTranslations();
+  const [page, setPage] = useState(1);
   const {
     data: tableData,
     isLoading,
     mutate,
-  } = useSWR(landlordApiRoutes.hub.productLinks, fetchLandlordTable);
+  } = useSWR(dataTableKey(landlordApiRoutes.hub.productLinks, page, pageSize), fetchLandlordTable);
 
   const [updatingSlugs, setUpdatingSlugs] = useState<Set<string>>(new Set());
   const [localUrls, setLocalUrls] = useState<Record<string, string>>({});
@@ -184,6 +187,14 @@ export function HubProductLinksSection() {
                 </table>
               </div>
             </ScrollArea>
+            <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
+              <TablePager
+                page={page}
+                pageSize={pageSize}
+                count={tableData?.count || 0}
+                onPageChange={setPage}
+              />
+            </div>
           </div>
         ) : (
           <div className="p-6">

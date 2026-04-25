@@ -6,21 +6,17 @@ import { hubProductLinksRepository } from "@/integrations/supabase/repository/hu
 import { logger } from "@/utils";
 import { Locale } from "@/types";
 
-export async function GET() {
-  try {
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
-    const repo = hubProductLinksRepository(supabase);
-
-    // 1. Get all resources from Content Collections
-    const allResources = await getAllResources({ locale: Locale.EN });
-
-    // 2. Get all private URLs from Supabase (hub_product_links)
-    const dbResources = await repo.getAll();
-    const dbMap = new Map(dbResources.map((r) => [r.slug, r.private_url]));
+    const { searchParams } = new URL(request.url);
+    const page = Math.max(Number(searchParams.get("page") || 1), 1);
+    const pageSize = Math.min(
+      Math.max(Number(searchParams.get("pageSize") || 10), 1),
+      100,
+    );
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize;
 
     // 3. Merge them
-    const rows = allResources.map((resource) => ({
+    const allRows = allResources.map((resource) => ({
       id: resource.id,
       title: resource.title,
       slug: resource.slug,
@@ -29,7 +25,14 @@ export async function GET() {
       published: resource.published,
     }));
 
-    return NextResponse.json({ rows, count: rows.length });
+    const rows = allRows.slice(from, to);
+
+    return NextResponse.json({
+      rows,
+      count: allRows.length,
+      page,
+      pageSize,
+    });
   } catch (error) {
     logger.error("[landlord/hub/product-links] GET error:", error);
     return NextResponse.json(

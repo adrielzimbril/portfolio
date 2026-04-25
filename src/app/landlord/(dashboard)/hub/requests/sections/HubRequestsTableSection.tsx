@@ -11,7 +11,7 @@ import {
   formatCell,
   formatLabel,
 } from "@/components/landlord/components/admin-utils";
-import type { LandlordTableResponse } from "@/components/landlord/components/admin-types";
+import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 
 const pageSize = 10;
 
@@ -21,7 +21,7 @@ export function HubRequestsTableSection() {
     data: tableData,
     isLoading,
     mutate,
-  } = useSWR(dataTableKey("hubRequests", page, pageSize), fetchLandlordTable);
+  } = useSWR(dataTableKey(landlordApiRoutes.hub.requests, page, pageSize), fetchLandlordTable);
 
   const rows = tableData?.rows || [];
   const columns = rows[0] ? Object.keys(rows[0]).slice(0, 8) : [];

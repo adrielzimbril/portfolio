@@ -4,21 +4,40 @@ import { cookies } from "next/headers";
 import { Locale } from "@/types";
 import { logger } from "@/utils";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const page = Math.max(Number(searchParams.get("page") || 1), 1);
+    const pageSize = Math.min(
+      Math.max(Number(searchParams.get("pageSize") || 10), 1),
+      50,
+    );
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
-    const { data: messages, error } = await supabase
+    const {
+      data: messages,
+      error,
+      count,
+    } = await supabase
       .from("community_wall")
-      .select("*")
-      .order("created_at", { ascending: false });
+      .select("*", { count: "exact" })
+      .order("created_at", { ascending: false })
+      .range(from, to);
 
     if (error) {
-      return NextResponse.json({ messages: [] }, { status: 200 });
+      return NextResponse.json({ messages: [], count: 0 }, { status: 200 });
     }
 
-    return NextResponse.json({ messages: messages || [] });
+    return NextResponse.json({
+      messages: messages || [],
+      count: count || 0,
+      page,
+      pageSize,
+    });
   } catch (error) {
     return NextResponse.json({ messages: [] }, { status: 500 });
   }

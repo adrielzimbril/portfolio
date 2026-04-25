@@ -30,33 +30,32 @@ export function RegistrationsSection() {
   const [participantModalOpen, setParticipantModalOpen] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [selectedParticipant, setSelectedParticipant] = useState<any>(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   const { data: quests = [] } = useSWR("landlord-quests", fetchQuests);
 
   const {
-    data: participants = [],
+    data: tableData,
     isLoading: loading,
-  } = useSWR(participantsKey(selectedQuest), fetchParticipants);
+  } = useSWR(participantsKey(selectedQuest, page, pageSize, "register"), fetchParticipants);
+
+  const participants = (tableData?.rows as any[]) || [];
 
   const filteredParticipants = useMemo(() => {
-    let filtered = participants.filter((p) => p.type === "register");
-
     const query = search.trim().toLowerCase();
-    if (query) {
-      filtered = filtered.filter((participant) =>
-        [
-          participant.name,
-          participant.email,
-          participant.challenge_slug,
-          participant.type,
-          participant.status,
-          participant.meta?.source,
-        ]
-          .filter(Boolean)
-          .some((value) => String(value).toLowerCase().includes(query)),
-      );
-    }
-    return filtered;
+    if (!query) return participants;
+    return participants.filter((participant) =>
+      [
+        participant.name,
+        participant.email,
+        participant.challenge_slug,
+        participant.status,
+        participant.meta?.source,
+      ]
+        .filter(Boolean)
+        .some((value) => String(value).toLowerCase().includes(query)),
+    );
   }, [search, participants]);
 
   return (
@@ -73,7 +72,7 @@ export function RegistrationsSection() {
             variant="outline"
             asIcon
             asPointer
-            onClick={() => mutate(participantsKey(selectedQuest))}
+            onClick={() => mutate(participantsKey(selectedQuest, page, pageSize, "register"))}
           >
             <RefreshCw size={16} />
             Rafraîchir
@@ -118,8 +117,8 @@ export function RegistrationsSection() {
             Chargement des participants...
           </div>
         ) : filteredParticipants.length ? (
-          <div className="flex flex-col max-h-[600px] xl:max-h-[calc(100dvh-270px)]">
-            <ScrollArea className="flex-1" scrollbarGutter>
+          <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
+            <ScrollArea className="flex-1 w-full" scrollbarGutter>
               <div className="min-w-full inline-block align-middle">
                 <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                   <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
@@ -191,8 +190,16 @@ export function RegistrationsSection() {
               </tbody>
             </table>
           </div>
-        </ScrollArea>
-      </div>
+            </ScrollArea>
+            <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
+              <TablePager
+                page={page}
+                pageSize={pageSize}
+                count={tableData?.count || 0}
+                onPageChange={setPage}
+              />
+            </div>
+          </div>
         ) : (
           <div className="p-6">
             <EmptyState
@@ -209,7 +216,7 @@ export function RegistrationsSection() {
         quests={quests}
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
-        onCreated={() => mutate(participantsKey(selectedQuest))}
+        onCreated={() => mutate(participantsKey(selectedQuest, page, pageSize, "register"))}
       />
 
       <DataDetailsModal

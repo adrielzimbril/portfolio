@@ -310,7 +310,7 @@ function NavLink({
   onClick?: () => void;
   compact?: boolean;
 }) {
-  return (
+  return ( 
     <Link
       href={href}
       onClick={onClick}

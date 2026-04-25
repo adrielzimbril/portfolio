@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
-import { HubProductLinksSection } from "@/components/landlord/pages/HubProductLinksSection";
+import { HubProductLinksSection } from "./sections/HubProductLinksSection";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
