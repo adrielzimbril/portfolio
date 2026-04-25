@@ -48,7 +48,7 @@ export function CommunitySection() {
     isLoading: loading,
   } = useSWR(messagesKey(page, pageSize), fetchMessages);
 
-  const messages = useMemo(() => (tableData?.rows as CommunityMessage[]) || [], [tableData]);
+  const messages = useMemo(() => (tableData?.rows as unknown as CommunityMessage[]) || [], [tableData]);
 
   const filteredMessages = useMemo(() => {
     const query = search.trim().toLowerCase();

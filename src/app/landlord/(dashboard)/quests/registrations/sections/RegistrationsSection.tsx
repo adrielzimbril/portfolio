@@ -39,7 +39,7 @@ export function RegistrationsSection() {
     isLoading: loading,
   } = useSWR(participantsKey(selectedQuest, page, pageSize, "register"), fetchParticipants);
 
-  const participants = useMemo(() => (tableData?.rows as any[]) || [], [tableData]);
+  const participants = useMemo(() => (tableData?.rows as unknown as Participant[]) || [], [tableData]);
 
   const filteredParticipants = useMemo(() => {
     const query = search.trim().toLowerCase();

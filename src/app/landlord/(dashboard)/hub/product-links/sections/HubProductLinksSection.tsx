@@ -43,7 +43,7 @@ export function HubProductLinksSection() {
   const [updatingSlugs, setUpdatingSlugs] = useState<Set<string>>(new Set());
   const [localUrls, setLocalUrls] = useState<Record<string, string>>({});
 
-  const rows = useMemo(() => (tableData?.rows as ProductLinkRow[]) || [], [tableData]);
+  const rows = useMemo(() => (tableData?.rows as unknown as ProductLinkRow[]) || [], [tableData]);
 
   const handleUpdate = async (slug: string) => {
     const private_url =
