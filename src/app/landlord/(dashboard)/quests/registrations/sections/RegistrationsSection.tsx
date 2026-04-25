@@ -1,7 +1,16 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import useSWR, { mutate } from "swr";
-import { Filter, Loader2, Mail, MoreHorizontal, Plus, RefreshCw, Users, Eye } from "lucide-react";
+import {
+  Filter,
+  Loader2,
+  Mail,
+  MoreHorizontal,
+  Plus,
+  RefreshCw,
+  Users,
+  Eye,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -17,9 +26,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AdminCard, EmptyState, SearchBox, StatusPill, TablePager } from "@/components/landlord/components/AdminPrimitives";
-import { ParticipantModal, DataDetailsModal } from "@/components/landlord/_modals";
-import { fetchParticipants, fetchQuests, formatDate, formatTime, participantsKey } from "@/components/landlord/admin-utils";
+import {
+  AdminCard,
+  EmptyState,
+  SearchBox,
+  StatusPill,
+  TablePager,
+} from "@/components/landlord/components/AdminPrimitives";
+import {
+  ParticipantModal,
+  DataDetailsModal,
+} from "@/components/landlord/_modals";
+import {
+  fetchParticipants,
+  fetchQuests,
+  formatDate,
+  formatTime,
+  participantsKey,
+} from "@/components/landlord/admin-utils";
+import type { Participant } from "@/components/landlord/admin-types";
 import { toast } from "@/lib/toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -34,12 +59,15 @@ export function RegistrationsSection() {
 
   const { data: quests = [] } = useSWR("landlord-quests", fetchQuests);
 
-  const {
-    data: tableData,
-    isLoading: loading,
-  } = useSWR(participantsKey(selectedQuest, page, pageSize, "register"), fetchParticipants);
+  const { data: tableData, isLoading: loading } = useSWR(
+    participantsKey(selectedQuest, page, pageSize, "register"),
+    fetchParticipants,
+  );
 
-  const participants = useMemo(() => (tableData?.rows as unknown as Participant[]) || [], [tableData]);
+  const participants = useMemo(
+    () => (tableData?.rows as unknown as Participant[]) || [],
+    [tableData],
+  );
 
   const filteredParticipants = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -61,7 +89,9 @@ export function RegistrationsSection() {
     <div className="grid gap-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.02em]">Inscriptions aux Quests</h2>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]">
+            Inscriptions aux Quests
+          </h2>
           <p className="mt-1 text-sm text-black/45">
             Participants inscrits, avec accès direct aux profils.
           </p>
@@ -71,12 +101,18 @@ export function RegistrationsSection() {
             variant="outline"
             asIcon
             asPointer
-            onClick={() => mutate(participantsKey(selectedQuest, page, pageSize, "register"))}
+            onClick={() =>
+              mutate(participantsKey(selectedQuest, page, pageSize, "register"))
+            }
           >
             <RefreshCw size={16} />
             Rafraîchir
           </Button>
-          <Button asIcon asPointer onClick={() => setParticipantModalOpen(true)}>
+          <Button
+            asIcon
+            asPointer
+            onClick={() => setParticipantModalOpen(true)}
+          >
             <Plus size={16} />
             Ajouter
           </Button>
@@ -95,8 +131,8 @@ export function RegistrationsSection() {
           />
           <div className="flex items-center gap-2">
             <Filter size={16} className="text-black/35" />
-            <Select 
-              value={selectedQuest} 
+            <Select
+              value={selectedQuest}
               onValueChange={(v) => {
                 setSelectedQuest(v);
                 setPage(1);
@@ -136,37 +172,56 @@ export function RegistrationsSection() {
                         <th className="px-5 py-4 font-medium">Quest</th>
                         <th className="px-5 py-4 font-medium">Statut</th>
                         <th className="px-5 py-4 font-medium">Date</th>
-                        <th className="px-5 py-4 text-right font-medium">Action</th>
+                        <th className="px-5 py-4 text-right font-medium">
+                          Action
+                        </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-black/6">
                       {filteredParticipants.map((participant) => (
-                        <tr key={participant.id} className="hover:bg-black/[0.02] transition-colors">
+                        <tr
+                          key={participant.id}
+                          className="hover:bg-black/[0.02] transition-colors"
+                        >
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-3">
                               <div className="flex size-10 items-center justify-center rounded-full bg-[#ffed90] text-sm font-semibold">
-                                {participant.name?.charAt(0)?.toUpperCase() || "?"}
+                                {participant.name?.charAt(0)?.toUpperCase() ||
+                                  "?"}
                               </div>
                               <div className="min-w-0">
-                                <p className="truncate font-medium">{participant.name}</p>
-                                <p className="truncate text-xs text-black/45">{participant.email}</p>
+                                <p className="truncate font-medium">
+                                  {participant.name}
+                                </p>
+                                <p className="truncate text-xs text-black/45">
+                                  {participant.email}
+                                </p>
                               </div>
                             </div>
                           </td>
                           <td className="px-5 py-4">
-                            <span className="max-w-60 truncate text-black/70">{participant.challenge_slug}</span>
+                            <span className="max-w-60 truncate text-black/70">
+                              {participant.challenge_slug}
+                            </span>
                           </td>
                           <td className="px-5 py-4">
                             <StatusPill tone="warning">Inscription</StatusPill>
                           </td>
                           <td className="px-5 py-4 text-black/55">
                             <div>{formatDate(participant.created_at)}</div>
-                            <div className="text-xs text-black/35">{formatTime(participant.created_at)}</div>
+                            <div className="text-xs text-black/35">
+                              {formatTime(participant.created_at)}
+                            </div>
                           </td>
                           <td className="px-5 py-4 text-right">
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="icon" asPointer aria-label="Actions participant">
+                                <Button
+                                  variant="outline"
+                                  size="icon"
+                                  asPointer
+                                  aria-label="Actions participant"
+                                >
                                   <MoreHorizontal size={16} />
                                 </Button>
                               </DropdownMenuTrigger>
@@ -226,7 +281,9 @@ export function RegistrationsSection() {
         quests={quests}
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
-        onCreated={() => mutate(participantsKey(selectedQuest, page, pageSize, "register"))}
+        onCreated={() =>
+          mutate(participantsKey(selectedQuest, page, pageSize, "register"))
+        }
       />
 
       <DataDetailsModal

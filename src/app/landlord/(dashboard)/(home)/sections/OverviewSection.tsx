@@ -1,12 +1,7 @@
 "use client";
 import React, { useMemo } from "react";
 import useSWR from "swr";
-import {
-  Clock,
-  MessageSquareText,
-  Send,
-  Users,
-} from "lucide-react";
+import { Clock, MessageSquareText, Send, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import {
@@ -21,25 +16,39 @@ import {
   formatDate,
   participantsKey,
 } from "@/components/landlord/admin-utils";
+import type {
+  CommunityMessage,
+  Participant,
+} from "@/components/landlord/admin-types";
 
 export function OverviewSection() {
-  const {
-    data: participants = [],
-    error: participantsError,
-  } = useSWR(participantsKey("all"), fetchParticipants);
+  const { data: participantsData, error: participantsError } = useSWR(
+    participantsKey("all", 1, 1000),
+    fetchParticipants,
+  );
+  const participants = (participantsData?.rows || []) as Participant[];
 
-  const {
-    data: messages = [],
-    error: messagesError,
-  } = useSWR(landlordApiRoutes.community.messages, fetchMessages);
+  const { data: messagesData, error: messagesError } = useSWR(
+    landlordApiRoutes.community.messages,
+    fetchMessages,
+  );
+  const messages = (messagesData?.rows || []) as CommunityMessage[];
 
   const stats = useMemo(() => {
-    const registrations = participants.filter((item) => item.type === "register");
-    const submissions = participants.filter((item) => item.type === "submission");
+    const registrations = participants.filter(
+      (item) => item.type === "register",
+    );
+    const submissions = participants.filter(
+      (item) => item.type === "submission",
+    );
     const today = new Date().toDateString();
     const todayActivity =
-      participants.filter((item) => new Date(item.created_at).toDateString() === today).length +
-      messages.filter((item) => new Date(item.created_at).toDateString() === today).length;
+      participants.filter(
+        (item) => new Date(item.created_at).toDateString() === today,
+      ).length +
+      messages.filter(
+        (item) => new Date(item.created_at).toDateString() === today,
+      ).length;
 
     return {
       registrations: registrations.length,
@@ -73,8 +82,12 @@ export function OverviewSection() {
   return (
     <div className="grid gap-5">
       <div className="mb-2">
-        <h2 className="text-2xl font-semibold tracking-[-0.02em] md:text-3xl">Dashboard</h2>
-        <p className="mt-1 text-sm text-black/45">Vue globale de l'activité du site shirofolio.</p>
+        <h2 className="text-2xl font-semibold tracking-[-0.02em] md:text-3xl">
+          Dashboard
+        </h2>
+        <p className="mt-1 text-sm text-black/45">
+          Vue globale de l'activité du site shirofolio.
+        </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <MetricCard
@@ -133,10 +146,16 @@ export function OverviewSection() {
                       <Icon size={17} />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium">{item.title}</p>
-                      <p className="truncate text-xs text-black/45">{item.subtitle}</p>
+                      <p className="truncate text-sm font-medium">
+                        {item.title}
+                      </p>
+                      <p className="truncate text-xs text-black/45">
+                        {item.subtitle}
+                      </p>
                     </div>
-                    <p className="text-xs text-black/45">{formatDate(item.date)}</p>
+                    <p className="text-xs text-black/45">
+                      {formatDate(item.date)}
+                    </p>
                   </div>
                 );
               })}
@@ -166,7 +185,11 @@ export function OverviewSection() {
                 className="flex items-center justify-between rounded-2xl bg-[#fbfaf6] px-4 py-3"
               >
                 <span className="text-sm">{label}</span>
-                <StatusPill tone={state === "OK" || state === "Admin" ? "success" : "danger"}>
+                <StatusPill
+                  tone={
+                    state === "OK" || state === "Admin" ? "success" : "danger"
+                  }
+                >
                   {state}
                 </StatusPill>
               </div>
