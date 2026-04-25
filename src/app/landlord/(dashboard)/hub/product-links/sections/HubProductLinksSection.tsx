@@ -151,7 +151,7 @@ export function HubProductLinksSection() {
                                     }))
                                   }
                                   placeholder="https://docs.google.com/..."
-                                  className="text-sm border-black/8 focus-visible:ring-black/10 h-9"
+                                  className="text-sm border-black/8 focus-visible:ring-black/10 rounded-xl h-9 px-3"
                                   disabled={isUpdating}
                                 />
                               </div>
