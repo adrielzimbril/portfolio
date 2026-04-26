@@ -119,3 +119,7 @@ export enum ChangelogItemType {
   IMPROVEMENT = "improvement",
   MILESTONE = "milestone",
 }
+
+export enum Intention {
+  UI_UX_REVIEW = "ux_review",
+}

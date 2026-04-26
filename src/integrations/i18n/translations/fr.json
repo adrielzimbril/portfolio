@@ -1646,6 +1646,56 @@
   "admin": {
     "title": "Connexion",
     "description": "Authentification requise pour accéder à cette zone.",
+    "sidebar": {
+      "title": "Landlord",
+      "subtitle": "Admin Shirofolio",
+      "close_nav": "Fermer la navigation",
+      "data_section": "Données",
+      "back_to_site": "Retour au site",
+      "sign_out": "Déconnexion",
+      "items": {
+        "dashboard": {
+          "label": "Dashboard",
+          "description": "Vue globale"
+        },
+        "community": {
+          "label": "Community",
+          "description": "Messages publics"
+        },
+        "newsletter": {
+          "label": "Newsletter",
+          "description": "Abonnés"
+        },
+        "users": {
+          "label": "Users",
+          "description": "Contacts et comptes"
+        },
+        "submissions": {
+          "label": "Submissions",
+          "description": "Demandes entrantes"
+        },
+        "reactions": {
+          "label": "Reactions",
+          "description": "Engagement contenu"
+        }
+      }
+    },
+    "header": {
+      "subtitle": "Admin Dashboard",
+      "open_nav": "Ouvrir la navigation",
+      "refresh": "Rafraîchir",
+      "nav_labels": {
+        "dashboard": "Dashboard",
+        "quests_registrations": "Inscriptions",
+        "quests_submissions": "Soumissions",
+        "newsletter": "Newsletter",
+        "users": "Users",
+        "hub_requests": "Hub Requests",
+        "reactions": "Reactions",
+        "submissions": "Submissions",
+        "community": "Community"
+      }
+    },
     "landlord": {
       "community": {
         "title": "Gestion du mur communautaire",
@@ -1751,6 +1801,40 @@
           "select_quest_first": "Choisis d'abord une quest.",
           "email_copied": "Email copié."
         }
+      },
+      "submissions": {
+        "label": "Submissions",
+        "detail": "Demandes entrantes via le formulaire de contact."
+      },
+      "newsletter": {
+        "label": "Newsletter",
+        "detail": "Abonnés et sources d'inscription."
+      },
+      "hub_product_links": {
+        "title": "Hub Product Links",
+        "description": "Gérer les liens privés envoyés par mail pour chaque ressource du Hub.",
+        "actions": {
+          "refresh": "Rafraîchir",
+          "save": "Sauvegarder",
+          "up_to_date": "À jour"
+        },
+        "fields": {
+          "resource": "Ressource",
+          "slug": "Slug",
+          "private_link": "Lien Privé (Email)",
+          "actions": "Actions"
+        },
+        "messages": {
+          "loading": "Chargement des ressources...",
+          "link_updated": "Lien mis à jour pour {slug}",
+          "update_error": "Erreur lors de la mise à jour de {slug}",
+          "no_resources": "Aucune ressource trouvée",
+          "no_resources_desc": "Vérifiez vos content collections ou contactez l'admin."
+        }
+      },
+      "hub_requests": {
+        "label": "Hub Requests",
+        "detail": "Demandes produits et ressources."
       },
       "shared": {
         "no_data": "Aucune donnée",

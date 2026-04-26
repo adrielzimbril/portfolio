@@ -5,6 +5,7 @@ import { PanelLeft, RefreshCw, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { AdminUser } from "@/components/landlord/admin-types";
 import { adminNavItems } from "./nav-items";
+import { useTranslations } from "next-intl";
 
 export function Header({
   user,
@@ -15,18 +16,21 @@ export function Header({
   setSidebarOpen: (open: boolean) => void;
   onRefresh: () => void;
 }) {
+  const t = useTranslations("admin.header");
   const pathname = usePathname();
 
   const getActiveLabel = (): string => {
-    if (pathname.includes("/quests/registrations")) return "Inscriptions";
-    if (pathname.includes("/quests/submissions")) return "Soumissions";
-    if (pathname.includes("/newsletter")) return "Newsletter";
-    if (pathname.includes("/users")) return "Users";
-    if (pathname.includes("/hub-requests")) return "Hub Requests";
-    if (pathname.includes("/reactions")) return "Reactions";
-    if (pathname.includes("/submissions")) return "Submissions";
-    if (pathname.includes("/community")) return "Community";
-    return "Dashboard";
+    if (pathname.includes("/quests/registrations"))
+      return t("nav_labels.quests_registrations");
+    if (pathname.includes("/quests/submissions"))
+      return t("nav_labels.quests_submissions");
+    if (pathname.includes("/newsletter")) return t("nav_labels.newsletter");
+    if (pathname.includes("/users")) return t("nav_labels.users");
+    if (pathname.includes("/hub-requests")) return t("nav_labels.hub_requests");
+    if (pathname.includes("/reactions")) return t("nav_labels.reactions");
+    if (pathname.includes("/submissions")) return t("nav_labels.submissions");
+    if (pathname.includes("/community")) return t("nav_labels.community");
+    return t("nav_labels.dashboard");
   };
   const activeLabel = getActiveLabel();
 
@@ -38,12 +42,14 @@ export function Header({
         asPointer
         className="md:hidden"
         onClick={() => setSidebarOpen(true)}
-        aria-label="Ouvrir la navigation"
+        aria-label={t("open_nav")}
       >
         <PanelLeft size={18} />
       </Button>
       <div className="min-w-0 flex-1 ml-2">
-        <p className="text-xs text-black/45 font-medium uppercase tracking-wider">Admin Dashboard</p>
+        <p className="text-xs text-black/45 font-medium uppercase tracking-wider">
+          {t("subtitle")}
+        </p>
         <h1 className="truncate text-xl font-semibold tracking-[-0.02em] md:text-2xl">
           {activeLabel}
         </h1>
@@ -53,7 +59,7 @@ export function Header({
         size="icon"
         asPointer
         onClick={onRefresh}
-        aria-label="Rafraîchir"
+        aria-label={t("refresh")}
         className="hidden md:flex"
       >
         <RefreshCw size={17} />

@@ -21,12 +21,7 @@ import {
 import { apiRoutes } from "@/data/api-routes";
 import { Label } from "@/components/ui/label";
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
-
-enum Intention {
-  UI_UX_REVIEW = "ux_review",
-}
-
-const intentions = Object.values(Intention);
+import { Intention } from "@/types";
 
 const Select = ({
   label,
@@ -267,7 +262,7 @@ export function IntentionForm() {
                     onChange={(value) => setIntention(value as Intention)}
                     options={[
                       {
-                        value: "ui_ux_review",
+                        value: Intention.UI_UX_REVIEW,
                         label: `🕵️ ${t("submit.page.options.ui_ux_review")}`,
                       },
                     ]}
@@ -275,7 +270,7 @@ export function IntentionForm() {
                   />
                 </div>
                 {/* Conditional sections */}
-                {intention === "ux_review" && (
+                {intention === Intention.UI_UX_REVIEW && (
                   <div className="space-y-2">
                     <Select
                       label={t("submit.page.fields.target.label")}
