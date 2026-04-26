@@ -2,7 +2,6 @@
   "breakpoints": [375, 768, 1280],
   "out": "./src/bones",
   "wait": 800,
-
   "color": "hsl(210 40% 96.1%)",
   "darkColor": "hsl(223 47% 11%)",
   "animate": "shimmer",
@@ -15,14 +14,5 @@
   "transition": 300,
 
   "resolveEnvVars": true,
-  "auth": {
-    "cookies": [
-      {
-        "name": "session",
-        "value": "env[SESSION_TOKEN]",
-        "domain": "localhost"
-      }
-    ],
-    "headers": { "Authorization": "Bearer env[API_TOKEN]" }
-  }
+  "auth": {}
 }
