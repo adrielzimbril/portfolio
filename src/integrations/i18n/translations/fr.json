@@ -672,7 +672,7 @@
           "url_invalid": "Veuillez saisir une URL valide"
         },
         "intention": {
-          "label": "Panel de feedback demandé"
+          "label": "Panel de revue demandé"
         },
         "name": {
           "label": "Ton nom ou pseudo",
@@ -684,7 +684,7 @@
         },
         "url": {
           "label": "Lien vers ton projet (site, app, Figma, etc.)",
-          "placeholder": "https://www.figma.com/design/4qgzkFPOb3YhzpHCmFc41d2/"
+          "placeholder": "https://www.figma.com/@adrielzimbril"
         },
         "description": {
           "label": "Explique ta demande",
