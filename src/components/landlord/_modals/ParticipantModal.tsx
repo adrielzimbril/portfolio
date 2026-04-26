@@ -145,12 +145,6 @@ export function ParticipantModal({
               : (type === "submission" ? "Ajouter une soumission" : "Ajouter un participant")
             }
           </DialogTitle>
-          <DialogDescription>
-            {type === "submission" 
-              ? (isEditing ? "Modifie les détails de ce rendu." : "Crée un rendu manuel pour ce participant.")
-              : (isEditing ? "Modifie les détails de cette inscription." : "Crée une inscription manuelle. Les soumissions gardent leur propre formulaire public.")
-            }
-          </DialogDescription>
         </DialogHeader>
         <DialogSeparator />
         <form onSubmit={handleSubmit} className="grid gap-5">
@@ -238,8 +232,8 @@ export function ParticipantModal({
               />
             </div>
           )}
-          {type === "register" && !isEditing && (
-            <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/[0.02] p-4">
+          {!isEditing && (
+            <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/2 p-4">
               <div>
                 <p className="text-sm font-medium">Envoyer un email</p>
                 <p className="text-xs text-black/45">

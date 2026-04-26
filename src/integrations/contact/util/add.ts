@@ -21,7 +21,6 @@ export async function addContact(
 ) {
   const provider = resolveProvider(input.provider);
   try {
-    logger.info("addContact success", { provider });
     return await add(input);
 
     // if (provider === ContactProvider.BREVO) {
