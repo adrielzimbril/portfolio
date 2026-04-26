@@ -2,14 +2,10 @@
 import React from "react";
 import { cn } from "@/utils/utils";
 import { motion } from "motion/react";
-import Image from "next/image";
 import { useRealisticLoading } from "@/components/shared/pages/useRealisticLoading";
-import { getImageUrl } from "@/utils/base-url";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 import { LogoName } from "@/components/shared/icons/logo/logo-name";
 import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
-import { siteConfig } from "@/data/config";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface GenericLoadingPageProps {

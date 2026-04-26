@@ -18,7 +18,6 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const t = useTranslations();
 
   const route = usePathname();
-  const isAdminRoute = route.startsWith("/landlord");
   const menuRoutes = Object.values(routes);
   const menuRoutesFiltered = menuRoutes.filter((item) => item.inHeader);
 
@@ -32,6 +31,10 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     (item) => item.link === activePath,
   );
   const currentKey = currentRoute?.key || routes.home.key;
+  
+  const isHomePage =
+    currentRoute?.key === routes.home.key || currentRoute === undefined;
+  const isAdminRoute = route.startsWith("/landlord");
 
   useEffect(() => {
     let cancelled = false;
@@ -60,8 +63,6 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
   const loader = pageLoader(currentKey);
   const showLoader = !isAdminRoute && asLoader && !isLoaded;
-  const isHomePage =
-    currentRoute?.key === routes.home.key || currentRoute === undefined;
 
   return (
     <>
