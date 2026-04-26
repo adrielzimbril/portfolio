@@ -1,0 +1,18 @@
+{
+  "breakpoints": [375, 768, 1280],
+  "out": "./src/bones",
+  "wait": 800,
+  "color": "hsl(210 40% 96.1%)",
+  "darkColor": "hsl(223 47% 11%)",
+  "animate": "shimmer",
+  "shimmerColor": "rgba(255, 255, 255, 0.4)",
+  "darkShimmerColor": "rgba(255, 255, 255, 0.05)",
+  "speed": "2s",
+  "borderRadius": "0.5rem",
+  "shimmerAngle": 110,
+  "stagger": 80,
+  "transition": 300,
+
+  "resolveEnvVars": true,
+  "auth": {}
+}

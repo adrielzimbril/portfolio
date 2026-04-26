@@ -1,17 +1,28 @@
 "use client";
-
-import { type VariantProps } from "class-variance-authority";
 import * as React from "react";
+import { cn } from "@/utils/utils";
+import { type VariantProps } from "class-variance-authority";
 import NextLink from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
 
 export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  extends
+    React.AnchorHTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof buttonVariants> {
+  variant?:
+    | "default"
+    | "base"
+    | "secondary"
+    | "destructive"
+    | "outline"
+    | "colored"
+    | "ghost"
+    | "icon"
+    | "link"
+    | "none";
+  size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none";
   linkClassName?: string;
-  asSquare?: boolean;
+  likeButton?: boolean;
   asFull?: boolean;
   asIcon?: boolean;
   whileTap?: boolean;
@@ -25,31 +36,33 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
       size,
       href,
       linkClassName,
-      asSquare,
+      likeButton,
       asFull,
       asIcon,
       whileTap,
       ...props
     },
-    ref
+    ref,
   ) => {
-    return asSquare ? (
+    return likeButton ? (
       <Button
         variant={variant}
         size={size}
         asFull={asFull}
         asIcon={asIcon}
-        className={cn(className, "cursor-pointer")}
+        className={cn(className)}
         asChild={true}
+        whileTap={whileTap}
+        asPointer
       >
-        <motion.span whileTap={whileTap ? { scale: 1.05 } : undefined}>
+        <span className="relative">
           <NextLink
             className={cn("relative size-full", linkClassName)}
             href={href!}
             ref={ref}
             {...props}
           />
-        </motion.span>
+        </span>
       </Button>
     ) : (
       <NextLink
@@ -59,7 +72,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Link.displayName = "Link";
 

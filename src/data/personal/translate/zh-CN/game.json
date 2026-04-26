@@ -1,0 +1,156 @@
+[
+  {
+    "description": "我关了一个能赚钱的项目。",
+    "emoji": "💣",
+    "funFact": "那是一个有收益的项目，但并不符合我。",
+    "funnyLieMessage": "哈哈不，那是真的… 💥",
+    "funnyTruthMessage": "没错！🎯 有时需要摧毁才能更好地重建。",
+    "id": 1,
+    "isTrue": true,
+    "subtitle": "是自愿的选择，不是错误。",
+    "title": "我毁掉了一个盈利的SaaS"
+  },
+  {
+    "description": "他没有给我钱，反而请了披萨，不过... 😝。",
+    "emoji": "🍕",
+    "funFact": "我资金少…但总是现金，从来不是用莫扎里拉支付。",
+    "funnyLieMessage": "哈哈，你信了！😅 不过这倒可能成为一次有趣的经历。",
+    "funnyTruthMessage": "看得真准！🎯 这是假故事，从未被披萨支付过。",
+    "id": 2,
+    "isTrue": false,
+    "subtitle": "意大利辣香肠 > 发票 ？",
+    "title": "我的第一个客户用披萨支付了我"
+  },
+  {
+    "description": "我的4个项目通过了孵化器的初选阶段。",
+    "emoji": "🚀",
+    "funFact": "这是通过MTN CI的Y’ELLO Startup项目。",
+    "funnyLieMessage": "不不，这个是真的 😉",
+    "funnyTruthMessage": "没错！🎯 这是我最满意的验证之一。",
+    "id": 3,
+    "isTrue": true,
+    "subtitle": "任务通过！",
+    "title": "4个SaaS提交，4个都被选中"
+  },
+  {
+    "description": "华丽的原型但从未编码，毫无用处。",
+    "emoji": "🚫",
+    "funFact": "不符合用户体验或不可访问的设计对用户来说是灾难，即便它很漂亮。",
+    "funnyLieMessage": "不不，这是真的…我讨厌那样，不能忽视可访问性。",
+    "funnyTruthMessage": "没错！🎯 单靠审美无法打动我。",
+    "id": 4,
+    "isTrue": true,
+    "subtitle": "形式 ≠ 内容。",
+    "title": "我讨厌无用的漂亮设计"
+  },
+  {
+    "description": "我是个莫扎里拉奶酪的爱好者，离不开它。",
+    "emoji": "🧀",
+    "funFact": "我可以每餐都吃，永不厌倦。",
+    "funnyLieMessage": "不不，这是真的… 🧀 对我来说，奶酪是友谊的基础 😝。",
+    "funnyTruthMessage": "没错！🎯 奶酪是我的弱点，所以如果你想送我礼物，你知道该送什么 🧀😝。",
+    "id": 5,
+    "isTrue": true,
+    "subtitle": "奶酪上瘾者 😋。",
+    "title": "我爱奶酪"
+  },
+  {
+    "description": "精疲力尽，不想再碰键盘。",
+    "emoji": "😮‍💨",
+    "funFact": "这次休息让我重新关注产品和设计。",
+    "funnyLieMessage": "不不，这是真的…经历很难受 😅。",
+    "funnyTruthMessage": "没错！🎯 这让我以更强的姿态回归。",
+    "id": 6,
+    "isTrue": true,
+    "subtitle": "几乎要结束，但还未完全。",
+    "title": "我差点在18岁就放弃写代码"
+  },
+  {
+    "description": "复制、调整、反复重做。",
+    "emoji": "🎨",
+    "funFact": "设计比写代码更教会我耐心与精确。",
+    "funnyLieMessage": "不不，这个是真的 😅。",
+    "funnyTruthMessage": "没错！🎯 这是我的隐形学校。",
+    "id": 7,
+    "isTrue": true,
+    "subtitle": "设计 = 严谨。",
+    "title": "设计教会了我纪律"
+  },
+  {
+    "description": "通过复刻我喜欢的设计师的网站，我在设计上有了进步。",
+    "emoji": "🖼️",
+    "funFact": "这是我最好的学校：观察并复刻。",
+    "funnyLieMessage": "不不，这个是真的，那是一次很棒的体验 😅。",
+    "funnyTruthMessage": "没错！🎯 这是一次强化训练 😆。",
+    "id": 9,
+    "isTrue": true,
+    "subtitle": "50个克隆之后…",
+    "title": "我在Dribbble上临摹了50个设计"
+  },
+  {
+    "description": "不只是一个应用，而是真正的数字银行。",
+    "emoji": "🏦",
+    "funFact": "可以说这不是我当前的项目，但谁知道呢 🤭？",
+    "funnyLieMessage": "哈哈，你信了？😅 但不是的，还没有新型银行。",
+    "funnyTruthMessage": "说得好！🎯 这并不是我的正式项目。",
+    "id": 10,
+    "isTrue": false,
+    "subtitle": "长期项目。",
+    "title": "我想有一天创建一家新型银行"
+  },
+  {
+    "description": "我只推出以A开头的名字。",
+    "emoji": "🔤",
+    "funFact": "我喜欢以A开头的名字（更有节奏、易记），但这不是硬性规则。",
+    "funnyLieMessage": "哈哈你信了？😅 并不是我所有品牌都以A开头。",
+    "funnyTruthMessage": "看得准！🎯 我喜欢“A”但不死板。",
+    "id": 11,
+    "isTrue": false,
+    "subtitle": "字母力量。",
+    "title": "我所有的品牌都以A开头"
+  },
+  {
+    "description": "两天被卡，结果只是忘了一个 ';'。",
+    "emoji": "😭",
+    "funFact": "两天被卡只因一个 ';'。我仍记得那份沮丧，吸取了教训 😭",
+    "funnyLieMessage": "不不，这可是真的 😅",
+    "funnyTruthMessage": "没错！🎯 虽痛苦但有启发 😆。",
+    "id": 12,
+    "isTrue": true,
+    "subtitle": "开发者的悲剧。",
+    "title": "我曾为一个500错误哭过"
+  },
+  {
+    "description": "我忘了续费一个域名，它被变成了老虎机网站。",
+    "emoji": "🎰",
+    "funFact": "这是一个旧的个人项目域名。大失败 😭。",
+    "funnyLieMessage": "不不，这是真的…很痛。",
+    "funnyTruthMessage": "没错！🎯 发生时很刺痛。",
+    "id": 13,
+    "isTrue": true,
+    "subtitle": "头奖？",
+    "title": "我的域名变成了一个赌场网站"
+  },
+  {
+    "description": "想象 'AdrielLang'，听起来不错吧？",
+    "emoji": "🧑‍💻",
+    "funFact": "我愿意，但这并非我当前的具体计划（至少目前不是）。",
+    "funnyLieMessage": "哈哈你信了！😅 不不，目前还没有语言。",
+    "funnyTruthMessage": "说得好！🎯 还没有 'AdrielLang'。",
+    "id": 14,
+    "isTrue": false,
+    "subtitle": "极客的梦想。",
+    "title": "我梦想创造一门以我名字命名的语言"
+  },
+  {
+    "description": "我得等很久才能开始写代码。",
+    "emoji": "🐢",
+    "funFact": "Celeron 1.10ghz，无法启动 Next.js 服务器。真是一只乌龟 😭。",
+    "funnyLieMessage": "不不，这可是真的 😉",
+    "funnyTruthMessage": "没错！🎯 这锻炼了开发者的耐心。",
+    "id": 15,
+    "isTrue": true,
+    "subtitle": "耐心模式。",
+    "title": "我的第一台电脑启动要花5-10分钟"
+  }
+]

@@ -1,16 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { siteConfig } from "@/data/config";
 import { ThemeProvider } from "next-themes";
-import Dockbar from "@/components/shared/dockbar";
+import { metadata as metadataBase } from "@/app/metadata";
+import { LayoutProvider } from "@/components/aurthle/providers/layout-provider";
+import { SyncProvider } from "@/components/aurthle/providers/sync-provider";
+import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
+// Front layout imports moved to (base)/layout.tsx
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import type { PropsWithChildren } from "react";
+import { appConfig } from "@/data/app-config";
+import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Navbar } from "@/components/shared/navbar";
-import { SquircleProvider } from "@/components/shiro/providers/squircle-provider";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
-import { metadata as metadataBase } from "./metadata";
-import ScrollToTop from "@/components/shared/scroll-to-top";
-import { Footer } from "@/components/shared/footer";
-import SplashCursor from "@/components/shiro/builder/splash-cursor";
+import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
+
+import { notFound } from "next/navigation";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -31,43 +36,54 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   ...metadataBase,
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const locales = Object.keys(appConfig.i18n.locales);
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const locale = await getUserLocale();
+
+  setRequestLocale(locale);
+
+  if (!locales.includes(locale)) {
+    logger.error("Locale not found", locale);
+    setRequestLocale(appConfig.i18n.defaultLocale);
+    return notFound();
+  }
+
+  const messages = await getMessages();
+
   return (
-    <html lang={siteConfig.languagePrimary} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`antialiased ${SFProDisplay.variable} ${SFProText.variable}`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
+          enableColorScheme
           disableTransitionOnChange
         >
-          <TooltipProvider openDelay={0} closeDelay={0}>
-            <SquircleProvider>
-              <main>
-                <div className="max-w-7xls container mx-auto relative">
-                  <Navbar />
-                  <Dockbar asFade={false} />
-                  {/* <SmoothCursor /> */}
-                  {children}
-                  <ScrollToTop />
-                  {/* <SplashCursor /> */}
-                  <Footer />
-                </div>
-              </main>
-            </SquircleProvider>
-          </TooltipProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <LayoutProvider>
+              <TooltipProvider openDelay={0} closeDelay={0}>
+                <SyncProvider>
+                  <ToastProvider>
+                    <AnchoredToastProvider>
+                      <main>
+                        {children}
+                      </main>
+                    </AnchoredToastProvider>
+                  </ToastProvider>
+                </SyncProvider>
+              </TooltipProvider>
+            </LayoutProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

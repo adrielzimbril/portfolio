@@ -1,72 +1,56 @@
 import React from "react";
-import { ContactSection } from "./sections/ContactSection/ContactSection";
-import { HeaderSection } from "./sections/HeaderSection/HeaderSection";
-import { NavbarSection } from "./sections/NavbarSection/NavbarSection";
-import { ProjectSection } from "./sections/ProjectSection/ProjectSection";
+import { HeaderSection } from "@/app/(base)/hub/sections/HeaderSection";
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
+import { metadata as baseMetadata } from "@/app/metadata";
+import logger from "@/utils/logger";
+import { getAllResources } from "@/integrations/content/lib/resources";
+import { MyHubSection } from "@/app/(base)/hub/sections/MyHubSection";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default function MyHub() {
-  const socialLinks = [
-    {
-      alt: "Linkedin",
-      src: "/linkedin.svg",
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+
+  const metadata: Metadata = {
+    ...baseMetadata,
+    title: t("hub.title"),
+    description: t("hub.description"),
+    keywords: t("hub.keywords"),
+    openGraph: {
+      ...baseMetadata.openGraph,
+      title: t("hub.title"),
+      description: t("hub.description"),
     },
-    {
-      alt: "Instagram",
-      src: "/instagram.svg",
+    twitter: {
+      ...baseMetadata.twitter,
+      title: t("hub.title"),
+      description: t("hub.description"),
     },
-    {
-      alt: "Github",
-      src: "/github.svg",
-    },
-    {
-      alt: "Dribbble",
-      src: "/dribbble.svg",
-    },
-    {
-      alt: "Facebook",
-      src: "/facebook.svg",
-    },
-    {
-      alt: "X twitter",
-      src: "/x-twitter-.svg",
-    },
-    {
-      alt: "Mail",
-      src: "/mail.svg",
-    },
-  ];
+  };
+
+  return metadata;
+}
+
+export default async function MyHub() {
+  const locale = await getLocale();
+  const data = await getAllResources({ locale }).catch((err) => {
+    logger.error(err);
+    return [];
+  });
 
   return (
-    <div className="flex flex-col w-full max-w-[1440px] items-start relative bg-white">
-      <NavbarSection />
-      <HeaderSection />
-      <ProjectSection />
-      <ContactSection />
-      <footer className="flex items-center justify-center gap-2.5 relative w-full bg-white">
-        <div className="flex items-center justify-center gap-2.5 px-[152px] py-[45px] relative flex-1 bg-[#f9f9f9] rounded-[32px_32px_0px_0px] overflow-hidden">
-          <div className="flex flex-col w-full max-w-[718px] items-center justify-center gap-[7px] relative">
-            <p className="relative w-fit mt-[-1.00px] [font-family:'SF_Pro_Text-Bold',Helvetica] font-bold text-[#000000de] text-[17px] tracking-[0.07px] leading-[22px] whitespace-nowrap">
-              Copyright Holder © 2025 - All Right Reserved - Designed with ❤ by
-              Adriel ZIMBRIL.
-            </p>
-
-            <div className="inline-flex items-start gap-1 p-1 relative flex-[0_0_auto] bg-white rounded-lg overflow-hidden">
-              {socialLinks.map((social, index) => (
-                <div
-                  key={`social-${index}`}
-                  className="inline-flex flex-wrap items-center justify-center gap-[11.45px_11.45px] p-[5.72px] relative flex-[0_0_auto] bg-black rounded-[29.03px] overflow-hidden"
-                >
-                  <img
-                    className="relative w-[17.17px] h-[17.17px]"
-                    alt={social.alt}
-                    src={social.src}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+    <>
+      <Skeleton name="hub-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="hub-listing" loading={false}>
+        <MyHubSection data={data} />
+      </Skeleton>
+      {/* <ResourceWrapper initialData={data} type={PageType.HUB} /> */}
+      <Skeleton name="hub-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
+    </>
   );
 }

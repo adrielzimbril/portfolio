@@ -1,0 +1,36 @@
+---
+id: "v1.0.0"
+version: "v1.0.0-origin"
+type: "milestone"
+date: "2025-09-06"
+published: true
+---
+
+# Suivi des vues & analytics
+
+Cette version introduit un suivi complet des vues de pages et des capacités analytics pour le portfolio.
+
+## Nouvelles fonctionnalités
+
+### Suivi des vues de pages
+
+- **Suivi côté serveur** : analytics robuste côté serveur avec mises à jour atomiques
+- **Récupération des infos IP** : meilleure gestion de l'IP lookup avec validation et cache
+- **Badges de vues** : composants ViewsBadge et ViewsIncrementor pour afficher les compteurs
+- **Support multi-pages** : suivi des vues intégré à plusieurs pages de contenu
+
+### API analytics
+
+- **Endpoint des vues** : API pour suivre et récupérer les vues de pages
+- **Vues uniques** : fonctions pour gérer les upserts de vues uniques avec validation
+- **Appels RPC** : passage aux RPC pour récupérer les données analytics efficacement
+- **Schéma de base de données** : schéma Supabase page_views avec contraintes adaptées
+
+### Améliorations techniques
+
+- **Mises à jour atomiques** : comptage précis des vues côté serveur
+- **Cache** : cache renforcé pour l'IP lookup et les données analytics
+- **Validation** : validation robuste des données de vues
+- **Intégration** : intégration fluide dans les pages de contenu
+
+Cette version apporte des informations utiles sur l'engagement utilisateur et la performance des contenus dans tout le portfolio.

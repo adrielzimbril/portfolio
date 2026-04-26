@@ -1,32 +1,69 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/components/ui/link";
+import { cn } from "@/utils/utils";
 import { ArrowRightOne } from "@aurthle/icons";
+import { useTranslations } from "use-intl";
 
 export function SectionHeader({
   title,
   description,
   link,
   badge,
+  layoutStart,
+  isPage,
 }: {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   link?: string;
   badge?: string;
+  layoutStart?: boolean;
+  isPage?: boolean;
 }) {
+  const t = useTranslations();
+
   return (
-    <div className="max-w-2xl mx-auto flex flex-col items-center text-center gap-4 mb-12">
-      {badge && <Badge>{badge}</Badge>}
+    <div
+      className={cn(
+        "max-w-2xl flex flex-col items-start justify-start gap-4 mb-12",
+        !layoutStart && " mx-auto items-center justify-center text-center",
+      )}
+    >
+      {badge && <Badge size="md">{badge}</Badge>}
 
-      <h2 className="capitalize">{title}</h2>
+      {title && (
+        <h2
+          className={cn(
+            layoutStart ? "h2 md:h3 font-normals" : "capitalize",
+            isPage && "font-normal",
+          )}
+        >
+          {title}
+        </h2>
+      )}
 
-      <p className="text-xl md:text-2xl text-gray-600 font-medium">
-        {description}
-      </p>
+      {description && (
+        <p
+          className={cn(
+            "text-xl md:text-2xl text-b-white-invert-sec whitespace-pre-line",
+            !layoutStart && "font-medium",
+          )}
+        >
+          {description}
+        </p>
+      )}
 
       {link && (
-        <Link href={link} variant="outline" asSquare asIcon whileTap size="xs">
+        <Link
+          href={link}
+          variant="outline"
+          likeButton
+          asIcon
+          whileTap
+          size="xs"
+        >
           <span className="flex items-center gap-1">
-            Voir plus <ArrowRightOne size={16} />
+            {t("common.button.see-more")} <ArrowRightOne size={16} />
           </span>
         </Link>
       )}

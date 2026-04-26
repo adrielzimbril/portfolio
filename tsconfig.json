@@ -1,4 +1,5 @@
 {
+  "extends": "@aurthle/tsconfig/bundler.json",
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -13,6 +14,14 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "composite": false,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "strictNullChecks": true,
+    "allowArbitraryExtensions": true,
     "plugins": [
       {
         "name": "next"
@@ -20,16 +29,28 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@module/*": ["./src/module/*"],
+      "@config/*": ["./src/config/*"],
+      "@integrations/*": ["./src/integrations/*"],
       "@lib/*": ["./src/lib/*"],
       "@data/*": ["./src/data/*"],
       "@components/*": ["./src/components/*"],
       "@shared/*": ["./src/components/shared/*"],
       "@ui/*": ["./src/components/ui/*"],
-      "@shiro/*": ["./src/components/shiro/*"],
-      "@i18n/*": ["./src/module/i18n/*"]
+      "@i18n/*": ["./src/integrations/i18n/*"],
+      "@types/*": ["./src/types/*"],
+      "@utils/*": ["./src/utils/*"],
+      "content-collections": ["./.content-collections/generated"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.mdx",
+    ".next/types/**/*.ts",
+    "node_modules/@aurthle/**/*"
+  ],
+  "exclude": ["node_modules", "scripts/**/*", "sources/**/*"]
 }

@@ -1,0 +1,54 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { SectionLayout } from "@/components/shared/sections/layout";
+import { cn } from "@/utils/utils";
+
+export function SectionBase({
+  children,
+  isCallToAction,
+  isWide,
+  className,
+  cardClassName,
+  cardContentClassName,
+  sectionClassName,
+  sectionContentClassName,
+}: {
+  children: React.ReactNode;
+  isCallToAction?: boolean;
+  isWide?: boolean;
+  className?: string;
+  cardClassName?: string;
+  cardContentClassName?: string;
+  sectionClassName?: string;
+  sectionContentClassName?: string;
+}) {
+  return (
+    <SectionLayout
+      isFlex
+      className={sectionClassName}
+      contentClassName={sectionContentClassName}
+    >
+      <Card
+        className={cn(
+          "squircle squircle-b-base squircle-smooth-xl",
+          isCallToAction ? "squircle-7xl" : "squircle-6xl",
+          cardClassName
+        )}
+      >
+        <CardContent
+          className={cn("md:px-12 py-16 md:py-20", cardContentClassName)}
+        >
+          <div
+            className={cn(
+              "flex flex-col items-center justify-between gap-6 max-w-full",
+              isWide ? "items-start justify-center" : "md:flex-row",
+              !isCallToAction && !isWide && "md:gap-16",
+              className
+            )}
+          >
+            {children}
+          </div>
+        </CardContent>
+      </Card>
+    </SectionLayout>
+  );
+}

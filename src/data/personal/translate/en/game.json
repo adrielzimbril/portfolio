@@ -1,0 +1,156 @@
+[
+  {
+    "description": "I shut down a project that was making money.",
+    "emoji": "💣",
+    "funFact": "It was a profitable project, but it didn't reflect who I am.",
+    "funnyLieMessage": "Haha no, that one is real… 💥",
+    "funnyTruthMessage": "Exactly! 🎯 Sometimes you need to destroy to rebuild better.",
+    "id": 1,
+    "isTrue": true,
+    "subtitle": "A deliberate choice, not a mistake.",
+    "title": "I destroyed a profitable SaaS"
+  },
+  {
+    "description": "Instead of giving me money, he gave me pizzas, though... 😝.",
+    "emoji": "🍕",
+    "funFact": "I had small budgets… but always paid in cash, never in mozzarella.",
+    "funnyLieMessage": "Haha, you believed it! 😅 But no, it could have been a fun experience.",
+    "funnyTruthMessage": "Good catch! 🎯 That was false, never paid in pizza.",
+    "id": 2,
+    "isTrue": false,
+    "subtitle": "Pepperoni > invoice?",
+    "title": "My first client paid me in pizzas"
+  },
+  {
+    "description": "My 4 projects passed the initial phases of an incubator.",
+    "emoji": "🚀",
+    "funFact": "It was with the Y’ELLO Startup program from MTN CI.",
+    "funnyLieMessage": "Nope, that one is true 😉",
+    "funnyTruthMessage": "Exactly! 🎯 One of my biggest validations.",
+    "id": 3,
+    "isTrue": true,
+    "subtitle": "Mission accomplished!",
+    "title": "4 SaaS presented, 4 selected"
+  },
+  {
+    "description": "A gorgeous mockup that's never coded is useless.",
+    "emoji": "🚫",
+    "funFact": "A design that's not UX-ready or accessible is a disaster for users, even if it's pretty.",
+    "funnyLieMessage": "Nope, it's true… I hate that; accessibility shouldn't be overlooked.",
+    "funnyTruthMessage": "Exactly! 🎯 Aesthetics alone don't appeal to me.",
+    "id": 4,
+    "isTrue": true,
+    "subtitle": "Form ≠ substance.",
+    "title": "I hate beautiful but useless designs"
+  },
+  {
+    "description": "Big on mozzarella, I can't do without it.",
+    "emoji": "🧀",
+    "funFact": "I can eat it at every meal without ever getting tired of it.",
+    "funnyLieMessage": "Nope, it's true… 🧀 is the basis of a good friendship for me 😝.",
+    "funnyTruthMessage": "Exactly! 🎯 Cheese is my weakness, so if you want to gift me something you know what to give 🧀😝.",
+    "id": 5,
+    "isTrue": true,
+    "subtitle": "Cheese addict 😋.",
+    "title": "I love cheese"
+  },
+  {
+    "description": "Burnout—no desire to touch a keyboard anymore.",
+    "emoji": "😮‍💨",
+    "funFact": "That break refocused me on product and design.",
+    "funnyLieMessage": "Nope, it's true… and it was hard to go through 😅.",
+    "funnyTruthMessage": "Exactly! 🎯 It allowed me to come back stronger.",
+    "id": 6,
+    "isTrue": true,
+    "subtitle": "Almost the end, but not quite.",
+    "title": "I almost quit coding at 18"
+  },
+  {
+    "description": "Reproduce, tweak, repeat again and again.",
+    "emoji": "🎨",
+    "funFact": "Design taught me patience and precision more than code did.",
+    "funnyLieMessage": "No no, that one is true 😅.",
+    "funnyTruthMessage": "Exactly! 🎯 It's my invisible school.",
+    "id": 7,
+    "isTrue": true,
+    "subtitle": "Design = rigor.",
+    "title": "Design taught me discipline"
+  },
+  {
+    "description": "I improved at design by reproducing the sites of my favorite designers.",
+    "emoji": "🖼️",
+    "funFact": "It was my best school: observe and reproduce.",
+    "funnyLieMessage": "No no, that one is true, and it was a great experience 😅.",
+    "funnyTruthMessage": "Exactly! 🎯 It was intensive training 😆.",
+    "id": 9,
+    "isTrue": true,
+    "subtitle": "50 clones later…",
+    "title": "I copied 50 designs on Dribbble"
+  },
+  {
+    "description": "Not just an app, a real digital bank.",
+    "emoji": "🏦",
+    "funFact": "Let's say it's not my current project, but who knows 🤭 ?",
+    "funnyLieMessage": "Haha, you believed me? 😅 But no, not a neobank yet.",
+    "funnyTruthMessage": "Good catch! 🎯 It's not my official project.",
+    "id": 10,
+    "isTrue": false,
+    "subtitle": "Long-term project.",
+    "title": "I want to create a neobank someday"
+  },
+  {
+    "description": "I only launch names starting with A.",
+    "emoji": "🔤",
+    "funFact": "I love names that start with A (flow, memorability), but it's not a strict rule.",
+    "funnyLieMessage": "Haha you believed me? 😅 Not all my brands start with A.",
+    "funnyTruthMessage": "Good catch! 🎯 I like 'A's but I'm not rigid.",
+    "id": 11,
+    "isTrue": false,
+    "subtitle": "Alphabet power.",
+    "title": "All my brands start with A"
+  },
+  {
+    "description": "After two days stuck, it was just a missing ';'.",
+    "emoji": "😭",
+    "funFact": "Two days stuck over just a ';'. I still remember my frustration, lesson learned 😭",
+    "funnyLieMessage": "Nope, it's really true 😅",
+    "funnyTruthMessage": "Exactly! 🎯 It was painful but educational 😆.",
+    "id": 12,
+    "isTrue": true,
+    "subtitle": "The dev drama.",
+    "title": "I cried over a 500 error"
+  },
+  {
+    "description": "I forgot to renew a domain; it ended up as a slot machine site.",
+    "emoji": "🎰",
+    "funFact": "It was an old domain from a personal project. Big fail 😭.",
+    "funnyLieMessage": "No no, it's true… and painful.",
+    "funnyTruthMessage": "Exactly! 🎯 It stings when it happens.",
+    "id": 13,
+    "isTrue": true,
+    "subtitle": "Jackpot?",
+    "title": "My domain became a casino site"
+  },
+  {
+    "description": "Imagine 'AdrielLang', sounds good, right?",
+    "emoji": "🧑‍💻",
+    "funFact": "I'd like to, but it's not in my concrete plans (for now).",
+    "funnyLieMessage": "Haha you believed it! 😅 No language for now.",
+    "funnyTruthMessage": "Good catch! 🎯 No 'AdrielLang' yet.",
+    "id": 14,
+    "isTrue": false,
+    "subtitle": "Geek dream.",
+    "title": "I dream of creating a language named after me"
+  },
+  {
+    "description": "I had to wait an eternity before coding.",
+    "emoji": "🐢",
+    "funFact": "Celeron 1.10GHz, impossible to run a Next.js server. A real turtle 😭.",
+    "funnyLieMessage": "Nope, it's really true 😉",
+    "funnyTruthMessage": "Exactly! 🎯 It builds a developer's patience.",
+    "id": 15,
+    "isTrue": true,
+    "subtitle": "Patience mode.",
+    "title": "My first PC took 5–10 minutes to boot"
+  }
+]
