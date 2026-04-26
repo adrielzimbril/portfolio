@@ -23,7 +23,7 @@ import { Label } from "@/components/ui/label";
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
 
 enum Intention {
-  UX_REVIEW = "ux_review",
+  UI_UX_REVIEW = "ux_review",
 }
 
 const intentions = Object.values(Intention);
@@ -82,7 +82,7 @@ export function IntentionForm() {
     setFeedback((prev) => ({ ...prev, open: false }));
   }, []);
 
-  const [intention, setIntention] = useState(Intention.UX_REVIEW);
+  const [intention, setIntention] = useState(Intention.UI_UX_REVIEW);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
@@ -154,7 +154,7 @@ export function IntentionForm() {
       setUrl("");
       setDescription("");
       setTarget("");
-      setIntention(Intention.UX_REVIEW);
+      setIntention(Intention.UI_UX_REVIEW);
     } catch (error) {
       setFeedback({
         open: true,
@@ -211,7 +211,9 @@ export function IntentionForm() {
                       required
                       minLength={4}
                     />
-                    <FieldError>{t("submit.page.fields.validation.name_required")}</FieldError>
+                    <FieldError>
+                      {t("submit.page.fields.validation.name_required")}
+                    </FieldError>
                   </Field>
                 </div>
                 <div className="space-y-2">
@@ -230,7 +232,9 @@ export function IntentionForm() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
-                    <FieldError>{t("submit.page.fields.validation.email_invalid")}</FieldError>
+                    <FieldError>
+                      {t("submit.page.fields.validation.email_invalid")}
+                    </FieldError>
                   </Field>
                 </div>
               </div>
@@ -250,7 +254,9 @@ export function IntentionForm() {
                   onChange={(e) => setUrl(e.target.value)}
                   required
                 />
-                <FieldError>{t("submit.page.fields.validation.url_invalid")}</FieldError>
+                <FieldError>
+                  {t("submit.page.fields.validation.url_invalid")}
+                </FieldError>
               </Field>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -261,8 +267,8 @@ export function IntentionForm() {
                     onChange={(value) => setIntention(value as Intention)}
                     options={[
                       {
-                        value: "ux_review",
-                        label: `🕵️ ${t("submit.page.options.ux_review")}`,
+                        value: "ui_ux_review",
+                        label: `🕵️ ${t("submit.page.options.ui_ux_review")}`,
                       },
                     ]}
                     placeholder={t("common.button.select")}

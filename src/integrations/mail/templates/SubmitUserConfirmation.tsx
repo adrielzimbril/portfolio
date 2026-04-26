@@ -108,7 +108,7 @@ SubmitUserConfirmation.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
   name: "Adriel",
-  intention: "ux_review",
+  intention: "ui_ux_review",
   url: "https://example.com",
 };
 

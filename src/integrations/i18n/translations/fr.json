@@ -229,7 +229,7 @@
         "lighting": "Éclairage",
         "capture": "Capture",
         "webcam": "Webcam",
-        "controller": "Manette"  
+        "controller": "Manette"
       }
     }
   },
@@ -697,7 +697,7 @@
         }
       },
       "options": {
-        "ux_review": "UI/UX Review",
+        "ui_ux_review": "UI/UX Review",
         "support": {
           "website": "Site web",
           "mobile": "App mobile",

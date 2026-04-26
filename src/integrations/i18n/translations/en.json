@@ -1526,7 +1526,7 @@
           "saas": "SaaS",
           "website": "Website"
         },
-        "ux_review": "UI/UX Review"
+        "ui_ux_review": "UI/UX Review"
       },
       "feedback": {
         "success": {

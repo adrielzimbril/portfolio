@@ -115,7 +115,7 @@ SubmitAdminNotification.PreviewProps = {
   translations: defaultTranslations,
   name: "John Doe",
   email: "john@example.com",
-  intention: "ux_review",
+  intention: "ui_ux_review",
   url: "https://example.com",
   description: "Un peu de contexte sur le projet…",
   target: "website",

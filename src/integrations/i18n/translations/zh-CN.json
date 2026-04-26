@@ -1387,7 +1387,7 @@
           "saas": "SaaS",
           "website": "网站"
         },
-        "ux_review": "UI/UX 评审"
+        "ui_ux_review": "UI/UX 评审"
       },
       "toast": {
         "error": "哎呀！发生错误，请重试 😅",
