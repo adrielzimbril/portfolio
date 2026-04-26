@@ -42,7 +42,7 @@ export function ContentSection({
   onClick: () => void;
 }) {
   return (
-    <div className="flex flex-col gap-8 items-start justify-start relative md:max-w-[52%]">
+    <div className="flex flex-col gap-8 items-start justify-start relative md:w-[52%] md:max-w-[52%]">
       {badge && (
         <Badge
           size="lg"

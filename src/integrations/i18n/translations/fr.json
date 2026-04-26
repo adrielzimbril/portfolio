@@ -1,9 +1,10 @@
 {
   "stats": {
-    "title": "Stats",
+    "title": "Statistiques",
     "description": "Des chiffres pour suivre l'évolution, pas pour l'ego. Transparence sur mes métriques réelles.",
+    "keywords": "statistiques portfolio, analytics, métriques GitHub, Lighthouse score, engagement contenu, Adriel Zimbril",
     "page": {
-      "title": "Les coulisses en chiffres 📊",
+      "title": "Métriques & Performance 📊",
       "description": "Transparence, croissance et évolution de mon univers créatif ✨"
     },
     "sections": {
@@ -108,8 +109,8 @@
     "keywords": "connexions, réseau, rencontres, personnes rencontrées, rencontrer des gens, réseau Adriel Zimbril, connexions professionnelles, communauté créative",
     "page": {
       "header-section": {
-        "title": "Rencontres",
-        "description": "Découvrez les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour. Construire des connexions significatives et des idées partagées, une conversation à la fois.",
+        "title": "Rencontres 🫂",
+        "description": "Les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour. Construire des connexions significatives, une conversation à la fois.",
         "badge": "Mon Réseau "
       }
     },
@@ -128,20 +129,21 @@
   "community": {
     "title": "Communauté",
     "description": "Un mur pour laisser un message, pas un feed infini. Simple, humain et bienveillant.",
+    "keywords": "livre d'or, messages portfolio, guestbook, feedback portfolio, Adriel Zimbril",
     "page": {
-      "title": "Un espace pour les créateurs et les curieux",
-      "description": "Échangez, apprenez et construisez ensemble dans un espace bienveillant."
+      "title": "Laissez votre trace 💌",
+      "description": "Un espace pour partager vos pensées, votre appréciation de mon travail ou simplement dire bonjour. Simple, humain et bienveillant."
     },
     "sections": {
       "wall": {
-        "title": "Mur Communautaire",
-        "description": "Messages de la communauté.",
-        "badge": "Mur "
+        "title": "Messages reçus",
+        "description": "Tous les messages laissés par les visiteurs.",
+        "badge": "Guestbook"
       },
       "stats": {
         "messages": "Messages",
-        "members": "Membres",
-        "weekly": "Hebdomadaire"
+        "members": "Visiteurs",
+        "weekly": "Cette semaine"
       }
     },
     "form": {
@@ -231,9 +233,10 @@
   "changelog": {
     "title": "Changelog",
     "description": "Ce qui change ici. Pas de marketing, juste les évolutions réelles que je passe en revue.",
+    "keywords": "changelog portfolio, mise à jour site, évolution projet, release notes, Adriel Zimbril",
     "page": {
       "title": "Évolutions et nouveautés",
-      "description": "Découvrez ce qui a changé dans l'univers Shirofolio."
+      "description": "Découvrez ce qui a changé dans l'univers de mon portfolio : nouvelles fonctionnalités, améliorations et corrections."
     },
     "sections": {
       "timeline": {
@@ -877,9 +880,9 @@
         "mobile": "CGU 📜"
       },
       "routes": {
-        "default": "Routes",
-        "desktop": "Routes",
-        "mobile": "Routes 🗺️"
+        "default": "Plan du Site",
+        "desktop": "Plan du Site",
+        "mobile": "Plan du Site 🗺️"
       },
       "rss": {
         "default": "RSS",
@@ -1032,16 +1035,16 @@
         "quests": {
           "emoji": "🏆",
           "title": "Challenges en cours",
-          "subtitle": "Inscris-toi, soumets ton travail et vise le podium 🏆"
+          "subtitle": "Inscris-toi, soumets ton travail et vise le podium "
         },
         "community": {
           "emoji": "🐼",
-          "title": "Un espace pour les créateurs et les curieux",
-          "subtitle": "Échange, apprends et construis avec nous dans un espace bienveillant 🫶🏻"
+          "title": "Laissez votre trace",
+          "subtitle": "Un espace pour partager vos pensées sur mon portfolio 🫶🏻"
         },
         "stats": {
           "emoji": "📈",
-          "title": "Les coulisses en chiffres",
+          "title": "Métriques & Performance",
           "subtitle": "Transparence, croissance et évolution de mon univers créatif 📊"
         },
         "toolbox": {
@@ -1062,7 +1065,7 @@
         "changelog": {
           "emoji": "✨",
           "title": "Évolutions et nouveautés",
-          "subtitle": "Découvre ce qui a changé dans l'univers Shirofolio 🪵"
+          "subtitle": "Découvre ce qui a changé dans l'univers de mon portfolio 🪵"
         }
       },
       "planning-badge": {
@@ -1626,11 +1629,12 @@
     }
   },
   "routes": {
-    "title": "Routes",
-    "description": "Découvrez toutes les pages et sections de ce site.",
+    "title": "Plan du Site",
+    "description": "Navigation complète de toutes les pages, sections et ressources disponibles sur ce portfolio.",
+    "keywords": "plan du site, sitemap portfolio, navigation portfolio, pages portfolio, Adriel Zimbril",
     "page": {
-      "title": "Routes",
-      "description": "Navigation complète de toutes les pages disponibles sur ce portfolio."
+      "title": "Plan du Site",
+      "description": "Explorez toutes les pages et sections de mon portfolio : projets, ressources, articles et plus encore."
     },
     "groups": {
       "main": "Pages Principales",

@@ -55,17 +55,17 @@ export function StatsSection({ user }: StatsSectionProps) {
       <div className="flex flex-row flex-wrap justify-center gap-6 max-w-4xl mx-auto">
         <StatCard
           icon={ChatBubbleCircle}
-          label={t("community.stats.messages")}
+          label={t("community.sections.stats.messages")}
           value={isLoading ? "..." : stats.totalMessages.toLocaleString()}
         />
         <StatCard
           icon={Users}
-          label={t("community.stats.members")}
+          label={t("community.sections.stats.members")}
           value={isLoading ? "..." : stats.uniqueMembers.toLocaleString()}
         />
         <StatCard
           icon={TrendUp}
-          label={t("community.stats.weekly")}
+          label={t("community.sections.stats.weekly")}
           value={isLoading ? "..." : stats.weekMessages.toLocaleString()}
         />
       </div>
