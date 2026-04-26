@@ -58,7 +58,7 @@ export function QuestRegisterUserConfirmation({
                 as="h1"
                 className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                {t("mail.questRegisterUserConfirmation.subject")} ?
+                {t("mail.questRegisterUserConfirmation.subject")}
               </Heading>
             </Section>
 

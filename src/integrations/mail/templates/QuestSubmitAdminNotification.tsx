@@ -64,7 +64,7 @@ export function QuestSubmitAdminNotification({
                 as="h1"
                 className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                {t("mail.questSubmitAdminNotification.subject")} ??
+                {t("mail.questSubmitAdminNotification.subject")}
               </Heading>
             </Section>
 

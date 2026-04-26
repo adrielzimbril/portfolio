@@ -1234,10 +1234,10 @@
     },
     "questRegisterUserConfirmation": {
       "subject": "✅ Inscription bien recue",
-      "preview": "Ton inscription au challenge est confirmee 📝",
+      "preview": "Ton inscription au challenge est confirmée 📝",
       "greeting": "Bonjour {firstName},",
       "content": {
-        "intro": "Ton inscription au challenge \"{questTitle}\" a bien ete enregistree 🎉",
+        "intro": "Ton inscription au challenge \"{questTitle}\" a bien été enregistrée 🎉",
         "wait": "Tu recevras les prochaines informations par email 📨",
         "challengeLinkLabel": "Voir le challenge"
       }
@@ -1255,11 +1255,11 @@
       }
     },
     "questSubmitUserConfirmation": {
-      "subject": "🚀 Soumission bien recue",
-      "preview": "Ta soumission a bien ete enregistree 🧪",
+      "subject": "🚀 Soumission bien reçue",
+      "preview": "Ta soumission a bien été enregistrée 🧪",
       "greeting": "Bonjour {firstName},",
       "content": {
-        "intro": "Ta soumission pour \"{questTitle}\" a bien ete recue 🚀",
+        "intro": "Ta soumission pour \"{questTitle}\" a bien été reçue 🚀",
         "link": "Lien soumis",
         "wait": "Merci de patienter jusqu'a la fin du challenge pour le retour ⏳",
         "challengeLinkLabel": "Challenge"
