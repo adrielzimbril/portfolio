@@ -333,7 +333,8 @@ const projects = defineCollection({
     cards: z
       .array(
         z.object({
-          title: z.enum(Object.values(PortfolioProjectResearchScope)),
+          // title: z.enum(Object.values(PortfolioProjectResearchScope)),
+          title: z.string(),
           emoji: z.string(),
           description: z.string(),
           methodology: z.string(),

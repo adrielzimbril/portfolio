@@ -6,7 +6,8 @@ import { PortfolioProjectResearchScope } from "@/types/enum";
 import { useTranslations } from "use-intl";
 
 export interface CardData {
-  title: PortfolioProjectResearchScope;
+  // title: PortfolioProjectResearchScope;
+  title: string;
   emoji: string;
   description: string;
   methodology?: string;
