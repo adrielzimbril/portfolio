@@ -26,7 +26,9 @@ export function MyProjectsSection({
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<Skeleton name="projects-load-more" className="w-full h-40" />}
+      loadingFallback={
+        <Skeleton name="projects-load-more" className="w-full h-40" />
+      }
     >
       {data.map((project, index) => (
         <ProjectCard
@@ -38,7 +40,7 @@ export function MyProjectsSection({
           tags={project.tags}
           categories={project.categories}
           description={project.excerpt || ""}
-          reactionsPosition="top"
+          hideReactions
         />
       ))}
     </LoadMoreSection>

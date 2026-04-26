@@ -62,6 +62,7 @@ export async function TalksSection() {
             tags={tags}
             participantsCount={talk.participants || 0}
             action={action}
+            hideReactions
           />
         );
       })}

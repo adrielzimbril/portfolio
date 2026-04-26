@@ -4,7 +4,6 @@ import { CardInfo } from "@/components/shared/pages/thoughts/details";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageType } from "@/types/enum";
 
-
 export function ThoughtCard({
   title,
   cover,
@@ -12,7 +11,7 @@ export function ThoughtCard({
   excerpt,
   primaryTag,
   tags,
-  reactionsPosition,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -20,7 +19,7 @@ export function ThoughtCard({
   excerpt: string;
   primaryTag?: string;
   tags: { name: string }[];
-  reactionsPosition?: "top" | "bottom";
+  hideReactions?: boolean;
 }) {
   return (
     <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0">
@@ -42,7 +41,7 @@ export function ThoughtCard({
           primaryTag={primaryTag}
           tags={tags}
           slug={slug}
-          hideReactions={false}
+          hideReactions={hideReactions}
         />
       </CardContent>
     </Card>

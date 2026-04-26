@@ -31,6 +31,7 @@ export async function ThoughtsSection() {
               slug={post.slug}
               excerpt={post.excerpt || ""}
               tags={post.tags}
+              hideReactions
             />
           </div>
         );

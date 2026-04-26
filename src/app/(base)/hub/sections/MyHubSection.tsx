@@ -24,7 +24,9 @@ export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<Skeleton name="hub-load-more" className="w-full h-40" />}
+      loadingFallback={
+        <Skeleton name="hub-load-more" className="w-full h-40" />
+      }
     >
       {data.map((item, index) => (
         <ResourceCard
@@ -38,7 +40,7 @@ export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
           features={item.features ?? []}
           avatars={item.studentsProfileImage}
           userCount={item.studentsNumber}
-          reactionsPosition="top"
+          hideReactions
         />
       ))}
     </LoadMoreSection>

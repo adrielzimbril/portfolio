@@ -14,7 +14,7 @@ export function ProjectCard({
   tags,
   categories,
   isWide,
-  reactionsPosition,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -23,7 +23,7 @@ export function ProjectCard({
   tags: { name: string }[];
   categories: { name: string; color: string }[];
   isWide: boolean;
-  reactionsPosition?: "top" | "bottom";
+  hideReactions?: boolean;
 }) {
   return (
     <Card
@@ -57,10 +57,8 @@ export function ProjectCard({
           tags={tags}
           categories={categories}
           isWide={isWide}
-          hideReactions={false}
+          hideReactions={hideReactions}
         />
-
-
       </CardContent>
     </Card>
   );

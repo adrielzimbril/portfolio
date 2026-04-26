@@ -15,7 +15,7 @@ export function ResourceCard({
   features,
   avatars,
   userCount,
-  reactionsPosition,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -26,7 +26,7 @@ export function ResourceCard({
   features: string[];
   avatars: string[];
   userCount?: number;
-  reactionsPosition?: "top" | "bottom";
+  hideReactions?: boolean;
 }) {
   return (
     <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0">
@@ -52,10 +52,8 @@ export function ResourceCard({
           features={features}
           avatars={avatars}
           userCount={userCount}
-          hideReactions={false}
+          hideReactions={hideReactions}
         />
-
-
       </CardContent>
     </Card>
   );

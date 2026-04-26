@@ -105,7 +105,7 @@ export default async function SubProject(props: {
           tags={tags}
           role={role}
         />
-        <ReactionBar pageType={PageType.PROJECT} entityId={slug} />
+        {/* <ReactionBar pageType={PageType.PROJECT} entityId={slug} /> */}
       </Skeleton>
       {cardSectionDescription && cards && (
         <Skeleton name="project-detail-research" loading={false}>

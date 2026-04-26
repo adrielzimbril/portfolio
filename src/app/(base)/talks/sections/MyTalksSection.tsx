@@ -74,7 +74,7 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
             tags={tags}
             participantsCount={talk.participants || 0}
             action={action}
-            reactionsPosition="top"
+            hideReactions
           />
         );
       })}

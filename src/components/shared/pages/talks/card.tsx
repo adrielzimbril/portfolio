@@ -13,7 +13,7 @@ export function TalksCard({
   tags = [],
   participantsCount,
   action,
-  reactionsPosition,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -25,7 +25,7 @@ export function TalksCard({
     label: string;
     href: string;
   } | null;
-  reactionsPosition?: "top" | "bottom";
+  hideReactions?: boolean;
 }) {
   return (
     <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
@@ -46,10 +46,8 @@ export function TalksCard({
           tags={tags ?? []}
           participantsCount={participantsCount}
           action={action}
-          hideReactions={false}
+          hideReactions={hideReactions}
         />
-
-
       </CardContent>
     </Card>
   );

@@ -28,7 +28,9 @@ export function MyThoughtsSection({
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<Skeleton name="thoughts-load-more" className="w-full h-40" />}
+      loadingFallback={
+        <Skeleton name="thoughts-load-more" className="w-full h-40" />
+      }
     >
       {data.map((post, index) => (
         <ThoughtCard
@@ -39,7 +41,7 @@ export function MyThoughtsSection({
           excerpt={post.excerpt || ""}
           primaryTag={getDate({ date: post.created_at })}
           tags={post.tags}
-          reactionsPosition="top"
+          hideReactions
         />
       ))}
     </LoadMoreSection>

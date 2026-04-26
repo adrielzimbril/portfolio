@@ -35,6 +35,7 @@ export async function ResourcesSection() {
             features={resource.features ?? []}
             avatars={resource.studentsProfileImage}
             userCount={resource.studentsNumber}
+            hideReactions
           />
         );
       })}
