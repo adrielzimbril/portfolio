@@ -69,6 +69,5 @@ export type LandlordTableResponse = {
 export type NavItem = {
   key: AdminView;
   label: string;
-  description: string;
   icon: React.ElementType;
 };

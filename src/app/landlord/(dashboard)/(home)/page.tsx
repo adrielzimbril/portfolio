@@ -5,12 +5,12 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { OverviewSection } from "./sections/OverviewSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations("admin.pages.home");
 
   return {
     ...baseMetadata,
     title: "[ROOT] // OVERVIEW_CONSOLE",
-    description: "Console centrale sécurisée pour le monitoring de l'écosystème Shiro.",
+    description: t("description"),
     robots: {
       index: false,
       follow: false,

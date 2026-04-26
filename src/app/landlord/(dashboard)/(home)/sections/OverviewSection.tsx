@@ -20,8 +20,10 @@ import type {
   CommunityMessage,
   Participant,
 } from "@/components/landlord/admin-types";
+import { useTranslations } from "next-intl";
 
 export function OverviewSection() {
+  const t = useTranslations("admin.overview");
   const { data: participantsData, error: participantsError } = useSWR(
     participantsKey("all", 1, 1000),
     fetchParticipants,
@@ -85,36 +87,34 @@ export function OverviewSection() {
         <h2 className="text-2xl font-semibold tracking-[-0.02em] md:text-3xl">
           Dashboard
         </h2>
-        <p className="mt-1 text-sm text-black/45">
-          Vue globale de l'activité du site shirofolio.
-        </p>
+        <p className="mt-1 text-sm text-black/45">{t("description")}</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <MetricCard
-          label="Inscriptions"
+          label={t("metrics.registrations.label")}
           value={stats.registrations}
-          detail="Entrées register"
+          detail={t("metrics.registrations.detail")}
           icon={Users}
           tone="dark"
         />
         <MetricCard
-          label="Soumissions"
+          label={t("metrics.submissions.label")}
           value={stats.submissions}
-          detail="Travaux envoyés"
+          detail={t("metrics.submissions.detail")}
           icon={Send}
           tone="yellow"
         />
         <MetricCard
-          label="Messages"
+          label={t("metrics.messages.label")}
           value={stats.messages}
-          detail="Mur communautaire"
+          detail={t("metrics.messages.detail")}
           icon={MessageSquareText}
           tone="green"
         />
         <MetricCard
-          label="Aujourd'hui"
+          label={t("metrics.today.label")}
           value={stats.todayActivity}
-          detail="Nouvelles entrées"
+          detail={t("metrics.today.detail")}
           icon={Clock}
           tone="white"
         />
@@ -124,9 +124,11 @@ export function OverviewSection() {
         <AdminCard className="p-5">
           <div className="mb-5 flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold">Activité récente</h3>
+              <h3 className="text-lg font-semibold">
+                {t("recent_activity.title")}
+              </h3>
               <p className="text-sm text-black/45">
-                Inscriptions, soumissions et messages publics.
+                {t("recent_activity.description")}
               </p>
             </div>
             <Badge className="squircle-[#ffed90]" variant="colored">
@@ -163,22 +165,28 @@ export function OverviewSection() {
           ) : (
             <EmptyState
               icon={Clock}
-              title="Aucune activité"
-              description="Les prochaines entrées apparaîtront ici."
+              title={t("empty_state.title")}
+              description={t("empty_state.description")}
             />
           )}
         </AdminCard>
 
         <AdminCard className="p-5">
-          <h3 className="text-lg font-semibold">État du panel</h3>
+          <h3 className="text-lg font-semibold">{t("panel_status.title")}</h3>
           <p className="mt-1 text-sm text-black/45">
-            Contrôle rapide des modules utilisés.
+            {t("panel_status.description")}
           </p>
           <div className="mt-5 grid gap-3">
             {[
-              ["Quests API", participantsError ? "À vérifier" : "OK"],
-              ["Community API", messagesError ? "À vérifier" : "OK"],
-              ["Session", "Admin"],
+              [
+                t("panel_status.quests_api"),
+                participantsError ? t("panel_status.check") : "OK",
+              ],
+              [
+                t("panel_status.community_api"),
+                messagesError ? t("panel_status.check") : "OK",
+              ],
+              [t("panel_status.session"), "Admin"],
             ].map(([label, state]) => (
               <div
                 key={label}

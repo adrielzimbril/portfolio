@@ -5,12 +5,12 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { NewsletterSection } from "./sections/NewsletterSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations("admin.pages.newsletter");
 
   return {
     ...baseMetadata,
     title: "[ROOT] // SIGNAL_REGISTRY",
-    description: "Registre des entités connectées au flux newsletter.",
+    description: t("description"),
     robots: { index: false, follow: false },
   };
 }

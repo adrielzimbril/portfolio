@@ -763,9 +763,13 @@
     }
   },
   "newsletter": {
-    "title": "Ton kit créatif t’attend 💌",
+    "title": "Ton kit créatif t'attend 💌",
     "description": "Reçois chaque semaine des idées, astuces et ressources pour transformer tes idées en produits SaaS que les gens adorent.",
     "keywords": "newsletter SaaS Adriel Zimbril, conseils SaaS, Product Designer SaaS, growth SaaS, stratégie produit SaaS",
+    "badges": {
+      "subscribers": "abonnés",
+      "requests": "demandes"
+    },
     "page": {
       "badge": "Pour les fondateurs et créateurs qui veulent passer à l’action 🚀",
       "title": "Passe de l'idée au <thin>produit</thin> grâce à la <thin>Méthode</thin> ShiroSaaS 🦄",
@@ -1646,6 +1650,88 @@
   "admin": {
     "title": "Connexion",
     "description": "Authentification requise pour accéder à cette zone.",
+    "login": {
+      "continue_github": "Continuer avec GitHub",
+      "continue_google": "Continuer avec Google",
+      "kernel_pulse_description": "Mutation de paquets et orchestration des flux critiques avec une latence proche de zéro.",
+      "restricted_access_description": "Liaison restreinte. Authentification requise pour la mutation des nœuds de données et des protocoles de communication.",
+      "signature_detected_description": "Signature numérique détectée. Identifiez-vous pour ouvrir une liaison sécurisée avec le Shiro Core. Toute mutation non autorisée sera rejetée par le firewall.",
+      "unauthorized_message": "Ce compte est connecté, mais il n'est pas autorisé à accéder au dashboard.",
+      "whitelisted_access": "Accès strictement réservé aux entités whitelisted."
+    },
+    "overview": {
+      "description": "Vue globale de l'activité du site shirofolio.",
+      "metrics": {
+        "registrations": {
+          "label": "Inscriptions",
+          "detail": "Entrées register"
+        },
+        "submissions": {
+          "label": "Soumissions",
+          "detail": "Travaux envoyés"
+        },
+        "messages": {
+          "label": "Messages",
+          "detail": "Mur communautaire"
+        },
+        "today": {
+          "label": "Aujourd'hui",
+          "detail": "Nouvelles entrées"
+        }
+      },
+      "recent_activity": {
+        "title": "Activité récente",
+        "description": "Inscriptions, soumissions et messages publics."
+      },
+      "empty_state": {
+        "title": "Aucune activité",
+        "description": "Les prochaines entrées apparaîtront ici."
+      },
+      "panel_status": {
+        "title": "État du panel",
+        "description": "Contrôle rapide des modules utilisés.",
+        "quests_api": "Quests API",
+        "community_api": "Community API",
+        "session": "Session",
+        "check": "À vérifier"
+      }
+    },
+    "modals": {
+      "data_details": {
+        "default_title": "Détails de l'entrée"
+      }
+    },
+    "pages": {
+      "users": {
+        "description": "Index des identités et entités autorisées sur le réseau Shiro."
+      },
+      "submissions": {
+        "description": "Monitoring des soumissions de données entrantes."
+      },
+      "newsletter": {
+        "description": "Registre des entités connectées au flux newsletter."
+      },
+      "reactions": {
+        "description": "Journal chiffré des réactions et interactions utilisateur."
+      },
+      "hub_product_links": {
+        "description": "Gestion des liens privés des produits du Hub."
+      },
+      "community": {
+        "description": "Orchestration des signaux de la communauté."
+      },
+      "home": {
+        "description": "Console centrale sécurisée pour le monitoring de l'écosystème Shiro."
+      }
+    },
+    "bot_protector": {
+      "title": "Vérification de sécurité",
+      "title_failed": "Vérification échouée",
+      "description": "Veuillez patienter un instant pendant que nous sécurisons votre session.",
+      "description_failed": "Nous n'avons pas pu confirmer que vous n'êtes pas un robot. Veuillez actualiser la page.",
+      "verification_failed": "La vérification de sécurité a échoué. Veuillez réessayer.",
+      "retry": "Réessayer"
+    },
     "sidebar": {
       "title": "Landlord",
       "subtitle": "Admin Shirofolio",

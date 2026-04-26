@@ -5,12 +5,12 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { UsersSection } from "./sections/UsersSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations("admin.pages.users");
 
   return {
     ...baseMetadata,
     title: "[ROOT] // ENTITY_INDEX",
-    description: "Index des identités et entités autorisées sur le réseau Shiro.",
+    description: t("description"),
     robots: { index: false, follow: false },
   };
 }

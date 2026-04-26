@@ -13,12 +13,16 @@ import {
 } from "@/components/ui/dialog";
 import { StatusPill } from "@/components/landlord/components/AdminPrimitives";
 import { Locale } from "@/types/index";
-import { formatDateTimePremium, formatLabel, formatReaction } from "@/components/landlord/admin-utils";
+import {
+  formatDateTimePremium,
+  formatLabel,
+  formatReaction,
+} from "@/components/landlord/admin-utils";
 
 export function DataDetailsModal({
   open,
   onOpenChange,
-  title = "Détails de l'entrée",
+  title,
   data,
 }: {
   open: boolean;
@@ -27,12 +31,15 @@ export function DataDetailsModal({
   data: Record<string, any> | null;
 }) {
   const tShared = useTranslations("admin.landlord.shared");
+  const tModal = useTranslations("admin.modals.data_details");
+  const displayTitle = title || tModal("default_title");
   if (!data) return null;
 
   const locales = Object.values(Locale) as string[];
 
   const isTranslationObject = (value: any) => {
-    if (typeof value !== "object" || value === null || Array.isArray(value)) return false;
+    if (typeof value !== "object" || value === null || Array.isArray(value))
+      return false;
     const keys = Object.keys(value);
     if (keys.length === 0) return false;
     return keys.every((key) => locales.includes(key));
@@ -76,15 +83,18 @@ export function DataDetailsModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent size="xl" variant="modern">
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle>{displayTitle}</DialogTitle>
         </DialogHeader>
         <DialogSeparator />
-        <ScrollArea className="max-h-[min(640px,75dvh)] w-full py-2" scrollbarGutter>
+        <ScrollArea
+          className="max-h-[min(640px,75dvh)] w-full py-2"
+          scrollbarGutter
+        >
           <div className="grid min-w-0 gap-6 px-1">
             {Object.entries(data).map(([key, value]) => {
-              const restrictedAreas = ["ip", "userAgent"]
-              if(restrictedAreas.includes(key)){
-                return
+              const restrictedAreas = ["ip", "userAgent"];
+              if (restrictedAreas.includes(key)) {
+                return;
               }
               const isImage = isImageUrl(value);
               const isTranslation = isTranslationObject(value);
@@ -97,12 +107,17 @@ export function DataDetailsModal({
                   key.toLowerCase().includes("emoji") ||
                   key.toLowerCase() === "type");
               const isJson =
-                !isTranslation &&
-                !isDate &&
-                !isReaction &&
-                (typeof value === "object" &&
+                (!isTranslation &&
+                  !isDate &&
+                  !isReaction &&
+                  typeof value === "object" &&
                   value !== null) ||
-                (typeof value === "string" && value.toString().replace(/^"/, "").replace(/"$/, "").startsWith("{"));
+                (typeof value === "string" &&
+                  value
+                    .toString()
+                    .replace(/^"/, "")
+                    .replace(/"$/, "")
+                    .startsWith("{"));
 
               return (
                 <div key={key} className="group space-y-2">
@@ -144,7 +159,9 @@ export function DataDetailsModal({
                     <div className="min-w-0 rounded-2xl border border-black/5 bg-black/1.5 p-4 text-sm transition-all hover:bg-black/3 hover:border-black/10">
                       {isJson ? (
                         <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg font-mono text-[11px] leading-relaxed text-black/60">
-                          {typeof value === "object" ? JSON.stringify(value, null, 2) : JSON.stringify(JSON.parse(value), null, 2)}
+                          {typeof value === "object"
+                            ? JSON.stringify(value, null, 2)
+                            : JSON.stringify(JSON.parse(value), null, 2)}
                         </pre>
                       ) : isDate ? (
                         <p className="font-semibold leading-relaxed text-black/75">
@@ -167,7 +184,11 @@ export function DataDetailsModal({
           </div>
         </ScrollArea>
         <DialogFooter className="mt-4">
-          <Button variant="outline" asPointer onClick={() => onOpenChange(false)}>
+          <Button
+            variant="outline"
+            asPointer
+            onClick={() => onOpenChange(false)}
+          >
             {tShared("close")}
           </Button>
         </DialogFooter>

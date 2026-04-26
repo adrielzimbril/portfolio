@@ -20,11 +20,12 @@ function formatCount(n: number) {
 
 export function NewsletterSubscribersBadge() {
   const { count, loading } = useNewsletterSubscribersCount();
+  const t = useTranslations("newsletter.badges");
   return (
     <Badge className="squircle squircle-violet-100" variant="colored">
       <span className="flex items-center gap-2">
         <UsersGroup size={16} className="text-indigo-400" variant="bulk" />
-        {loading ? "..." : `${formatCount(count ?? 0)} abonnés`}
+        {loading ? "..." : `${formatCount(count ?? 0)} ${t("subscribers")}`}
       </span>
     </Badge>
   );
@@ -32,11 +33,14 @@ export function NewsletterSubscribersBadge() {
 
 export function ProductTypeSubscribersBadge({ type }: { type: ResourceType }) {
   const { count, loading } = useProductTypeSubscribersCount(type);
+  const t = useTranslations("newsletter.badges");
   return (
     <Badge className="squircle squircle-emerald-100" variant="colored">
       <span className="flex items-center gap-2">
         <Box size={16} className="text-emerald-500" variant="bulk" />
-        {loading ? "..." : `${formatCount(count ?? 0)} demandes ${type}`}
+        {loading
+          ? "..."
+          : `${formatCount(count ?? 0)} ${t("requests")} ${type}`}
       </span>
     </Badge>
   );

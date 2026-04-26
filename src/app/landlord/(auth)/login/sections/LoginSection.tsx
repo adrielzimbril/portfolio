@@ -9,6 +9,7 @@ import {
   signInWithGoogle,
 } from "@/integrations/auth/provider/supabase";
 import { landlordRoutes } from "@/data/landlordRoutes";
+import { useTranslations } from "next-intl";
 
 function ProviderButton({
   provider,
@@ -19,6 +20,7 @@ function ProviderButton({
   onClick: () => void;
   variant: "default" | "secondary";
 }) {
+  const t = useTranslations("admin.login");
   const Icon = provider === "github" ? Github : Google;
 
   return (
@@ -32,7 +34,7 @@ function ProviderButton({
     >
       <span className="flex items-center justify-center gap-2">
         <Icon size={18} variant="bulk" />
-        {provider === "github" ? "Continuer avec GitHub" : "Continuer avec Google"}
+        {provider === "github" ? t("continue_github") : t("continue_google")}
       </span>
     </Button>
   );
@@ -65,6 +67,7 @@ function LoginButtons() {
 }
 
 export function LoginSection({ reason }: { reason?: string }) {
+  const t = useTranslations("admin.login");
   const isUnauthorized = reason === "unauthorized";
 
   return (
@@ -76,8 +79,12 @@ export function LoginSection({ reason }: { reason?: string }) {
               <Terminal size={20} />
             </div>
             <div>
-              <p className="text-sm font-semibold tracking-tight">Adriel Zimbril</p>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">[NODE_AUTHORIZATION_REQ] // FRAG-99</p>
+              <p className="text-sm font-semibold tracking-tight">
+                Adriel Zimbril
+              </p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+                [NODE_AUTHORIZATION_REQ] // FRAG-99
+              </p>
             </div>
           </div>
 
@@ -88,16 +95,25 @@ export function LoginSection({ reason }: { reason?: string }) {
             </div>
             <div className="grid gap-3">
               <div className="rounded-2xl bg-white p-4 text-[#11191f]">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-black/35 shadow-sm">Metrics_Buffer_01</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-black/35 shadow-sm">
+                  Metrics_Buffer_01
+                </p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   {[
                     { label: "Protocols", val: "12" },
                     { label: "Entities", val: "48" },
                     { label: "Signals", val: "09" },
                   ].map((item) => (
-                    <div key={item.label} className="rounded-xl bg-[#f5f3ea] p-3 transition-transform">
-                      <p className="text-[9px] font-bold uppercase text-black/45">{item.label}</p>
-                      <p className="mt-1 text-xl font-semibold tabular-nums tracking-tighter">{item.val}</p>
+                    <div
+                      key={item.label}
+                      className="rounded-xl bg-[#f5f3ea] p-3 transition-transform"
+                    >
+                      <p className="text-[9px] font-bold uppercase text-black/45">
+                        {item.label}
+                      </p>
+                      <p className="mt-1 text-xl font-semibold tabular-nums tracking-tighter">
+                        {item.val}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -107,10 +123,11 @@ export function LoginSection({ reason }: { reason?: string }) {
                   <Activity size={32} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-widest">ADMIN_OVERRIDE_CONSOLE</p>
+                  <p className="text-sm font-semibold uppercase tracking-widest">
+                    ADMIN_OVERRIDE_CONSOLE
+                  </p>
                   <p className="mt-1 text-[11px] leading-relaxed text-white/45">
-                    Mutation de paquets et orchestration des flux critiques avec une
-                    latence proche de zéro.
+                    {t("kernel_pulse_description")}
                   </p>
                 </div>
               </div>
@@ -118,46 +135,42 @@ export function LoginSection({ reason }: { reason?: string }) {
           </div>
 
           <p className="relative z-10 max-w-sm text-[11px] leading-relaxed text-white/40">
-            Liaison restreinte. Authentification requise pour la mutation des
-            nœuds de données et des protocoles de communication.
+            {t("restricted_access_description")}
           </p>
         </aside>
 
         <main className="flex min-h-[640px] items-center justify-center p-6 md:p-12">
           <div className="w-full max-w-md">
-            
-
             <div className="mb-8">
               <div className="mb-10 flex items-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-[#11191f] text-white">
-                <LockKeyhole size={20} />
+                <div className="flex size-12 items-center justify-center rounded-2xl bg-[#11191f] text-white">
+                  <LockKeyhole size={20} />
+                </div>
+                <div className="lg:hidden">
+                  <p className="font-semibold text-[13px] uppercase tracking-wider">
+                    Adriel Zimbril
+                  </p>
+                  <p className="text-xs text-black/50">Secure workspace</p>
+                </div>
               </div>
-              <div className="lg:hidden">
-                <p className="font-semibold text-[13px] uppercase tracking-wider">Adriel Zimbril</p>
-                <p className="text-xs text-black/50">Secure workspace</p>
-              </div>
-            </div>
               <h2 className="text-4xl font-semibold leading-tight tracking-[-0.04em] uppercase">
                 Accès_Racine
               </h2>
               <p className="mt-3 text-sm leading-6 text-black/55">
-                Signature numérique détectée. Identifiez-vous pour ouvrir une liaison 
-                sécurisée avec le Shiro Core. Toute mutation non autorisée 
-                sera rejetée par le firewall.
+                {t("signature_detected_description")}
               </p>
             </div>
 
             {isUnauthorized && (
               <div className="mb-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                Ce compte est connecté, mais il n'est pas autorisé à accéder au
-                dashboard.
+                {t("unauthorized_message")}
               </div>
             )}
 
             <LoginButtons />
 
             <p className="mt-8 text-[10px] font-bold uppercase tracking-widest text-black/35">
-              Accès strictement réservé aux entités whitelisted.
+              {t("whitelisted_access")}
             </p>
           </div>
         </main>

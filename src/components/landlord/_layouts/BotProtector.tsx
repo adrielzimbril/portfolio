@@ -7,12 +7,14 @@ import { Loader2, ShieldCheck, ShieldAlert } from "lucide-react";
 import { cn } from "@/utils";
 import { isLocal } from "@/config/utils";
 import { logger } from "@/utils/logger";
+import { useTranslations } from "next-intl";
 
 interface BotProtectorProps {
   children: React.ReactNode;
 }
 
 export function BotProtector({ children }: BotProtectorProps) {
+  const t = useTranslations("admin.bot_protector");
   const [isVerified, setIsVerified] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -45,7 +47,7 @@ export function BotProtector({ children }: BotProtectorProps) {
 
   const handleError = (err: any) => {
     logger.error("[BotProtector] Turnstile error:", err);
-    setError("La vérification de sécurité a échoué. Veuillez réessayer.");
+    setError(t("verification_failed"));
     setIsLoading(false);
   };
 
@@ -74,13 +76,11 @@ export function BotProtector({ children }: BotProtectorProps) {
         </div>
 
         <h2 className="text-2xl font-semibold tracking-tight text-[#11191f]">
-          {error ? "Vérification échouée" : "Vérification de sécurité"}
+          {error ? t("title_failed") : t("title")}
         </h2>
 
         <p className="mt-3 text-sm leading-relaxed text-black/55">
-          {error
-            ? "Nous n'avons pas pu confirmer que vous n'êtes pas un robot. Veuillez actualiser la page."
-            : "Veuillez patienter un instant pendant que nous sécurisons votre session."}
+          {error ? t("description_failed") : t("description")}
         </p>
 
         <div className="mt-8 flex justify-center">
@@ -101,7 +101,7 @@ export function BotProtector({ children }: BotProtectorProps) {
             onClick={() => window.location.reload()}
             className="mt-6 w-full rounded-xl bg-[#11191f] px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-[#11191f]/90"
           >
-            Réessayer
+            {t("retry")}
           </button>
         )}
       </div>

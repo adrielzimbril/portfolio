@@ -177,7 +177,7 @@ function DialogDescription({
   );
 }
 
-// Composants supplémentaires dans le style de référence
+// Additional components in the style of the reference
 function DialogSeparator({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div className={cn("h-px bg-b-base-accent w-full", className)} {...props} />

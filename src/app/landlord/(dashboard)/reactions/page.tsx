@@ -5,12 +5,12 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { ReactionsSection } from "./sections/ReactionsSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations("admin.pages.reactions");
 
   return {
     ...baseMetadata,
     title: "[ROOT] // SIGNAL_LOGS",
-    description: "Journal chiffré des réactions et interactions utilisateur.",
+    description: t("description"),
     robots: { index: false, follow: false },
   };
 }

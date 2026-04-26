@@ -126,14 +126,13 @@ export function Sidebar({
             active={isActive("overview")}
             icon={LayoutDashboard}
             label={t("items.dashboard.label")}
-            description={t("items.dashboard.description")}
             onClick={() => setSidebarOpen(false)}
             collapsed={collapsed}
           />
 
           {/* Quest group */}
           <NavGroup
-            group={adminNavGroups[0]}
+            group={adminNavGroups[0]!}
             isOpen={questsOpen}
             setIsOpen={setQuestsOpen}
             isActive={isQuestsGroupActive}
@@ -144,7 +143,7 @@ export function Sidebar({
 
           {/* Hub group */}
           <NavGroup
-            group={adminNavGroups[1]}
+            group={adminNavGroups[1]!}
             isOpen={hubOpen}
             setIsOpen={setHubOpen}
             isActive={isHubGroupActive}
@@ -159,7 +158,6 @@ export function Sidebar({
             active={isActive("community")}
             icon={MessageSquareText}
             label={t("items.community.label")}
-            description={t("items.community.description")}
             onClick={() => setSidebarOpen(false)}
             collapsed={collapsed}
           />
@@ -175,7 +173,6 @@ export function Sidebar({
                 active={isActive("newsletter")}
                 icon={Database}
                 label={t("items.newsletter.label")}
-                description={t("items.newsletter.description")}
                 onClick={() => setSidebarOpen(false)}
                 collapsed={collapsed}
               />
@@ -184,7 +181,6 @@ export function Sidebar({
                 active={isActive("users")}
                 icon={Users}
                 label={t("items.users.label")}
-                description={t("items.users.description")}
                 onClick={() => setSidebarOpen(false)}
                 collapsed={collapsed}
               />
@@ -193,7 +189,6 @@ export function Sidebar({
                 active={isActive("submissions")}
                 icon={Database}
                 label={t("items.submissions.label")}
-                description={t("items.submissions.description")}
                 onClick={() => setSidebarOpen(false)}
                 collapsed={collapsed}
               />
@@ -202,7 +197,6 @@ export function Sidebar({
                 active={isActive("reactions")}
                 icon={Database}
                 label={t("items.reactions.label")}
-                description={t("items.reactions.description")}
                 onClick={() => setSidebarOpen(false)}
                 collapsed={collapsed}
               />
@@ -239,7 +233,6 @@ function NavLink({
   active,
   icon: Icon,
   label,
-  description,
   onClick,
   compact = false,
   collapsed = false,
@@ -248,7 +241,6 @@ function NavLink({
   active: boolean;
   icon: React.ElementType;
   label: string;
-  description: string;
   onClick?: () => void;
   compact?: boolean;
   collapsed?: boolean;
@@ -270,15 +262,6 @@ function NavLink({
       {!collapsed && (
         <span className="flex flex-col min-w-0">
           <span className="font-medium truncate">{label}</span>
-          <span
-            className={cn(
-              "mt-0.5 truncate",
-              compact ? "text-[10px]" : "text-xs",
-              active ? "text-black/45" : "text-white/35",
-            )}
-          >
-            {description}
-          </span>
         </span>
       )}
     </Link>
@@ -297,12 +280,10 @@ function NavGroup({
   group: {
     key: string;
     label: string;
-    description: string;
     icon: React.ElementType;
     items: {
       key: string;
       label: string;
-      description: string;
       icon: React.ElementType;
     }[];
   };
@@ -319,7 +300,7 @@ function NavGroup({
     <div>
       <button
         type="button"
-        onClick={() => setIsOpen((o) => !o)}
+        onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "w-full flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition cursor-pointer",
           isActive
@@ -332,9 +313,6 @@ function NavGroup({
         {!collapsed && (
           <span className="flex flex-col flex-1 min-w-0">
             <span className="font-medium">{group.label}</span>
-            <span className="text-xs mt-0.5 text-white/35">
-              {group.description}
-            </span>
           </span>
         )}
         {!collapsed && (
@@ -366,7 +344,6 @@ function NavGroup({
               active={isActiveCheck(item.key)}
               icon={item.icon}
               label={item.label}
-              description={item.description}
               onClick={onNavClick}
               compact
               collapsed={collapsed}
