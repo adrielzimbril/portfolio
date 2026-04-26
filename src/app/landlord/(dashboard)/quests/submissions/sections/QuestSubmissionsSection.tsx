@@ -44,7 +44,7 @@ import {
   fetchQuests,
   formatDate,
   formatTime,
-  participantsKey,
+  submissionsKey,
 } from "@/components/landlord/admin-utils";
 import type { Participant } from "@/components/landlord/admin-types";
 import { toast } from "@/lib/toast";
@@ -62,7 +62,7 @@ export function QuestSubmissionsSection() {
   const { data: quests = [] } = useSWR("landlord-quests", fetchQuests);
 
   const { data: tableData, isLoading: loading } = useSWR(
-    participantsKey(selectedQuest, page, pageSize, "submission"),
+    submissionsKey(selectedQuest, page, pageSize),
     fetchParticipants,
   );
 
@@ -105,7 +105,7 @@ export function QuestSubmissionsSection() {
             asPointer
             onClick={() =>
               mutate(
-                participantsKey(selectedQuest, page, pageSize, "submission"),
+                submissionsKey(selectedQuest, page, pageSize),
               )
             }
           >
@@ -303,8 +303,9 @@ export function QuestSubmissionsSection() {
         quests={quests}
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
+        type="submission"
         onCreated={() =>
-          mutate(participantsKey(selectedQuest, page, pageSize, "submission"))
+          mutate(submissionsKey(selectedQuest, page, pageSize))
         }
       />
 

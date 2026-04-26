@@ -6,8 +6,10 @@ export const landlordApiRoutes = {
     messageById: (id: string) => getApiUrl(`landlord/community/messages/${id}`),
   },
   quests: {
-    participants: getApiUrl("landlord/quests/participants"),
-    participantById: (id: string) => getApiUrl(`landlord/quests/participants/${id}`),
+    registrations: getApiUrl("landlord/quests/registrations"),
+    registrationById: (id: string) => getApiUrl(`landlord/quests/registrations/${id}`),
+    submissions: getApiUrl("landlord/quests/submissions"),
+    submissionById: (id: string) => getApiUrl(`landlord/quests/submissions/${id}`),
   },
   hub: {
     requests: getApiUrl("landlord/hub/requests"),

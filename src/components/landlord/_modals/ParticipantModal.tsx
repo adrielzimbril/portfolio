@@ -34,12 +34,14 @@ export function ParticipantModal({
   selectedQuest,
   onOpenChange,
   onCreated,
+  type = "register",
 }: {
   open: boolean;
   quests: QuestSummary[];
   selectedQuest: string;
   onOpenChange: (open: boolean) => void;
   onCreated: () => void;
+  type?: "register" | "submission";
 }) {
   const [form, setForm] = useState({
     challenge_slug: selectedQuest !== "all" ? selectedQuest : "",
@@ -49,7 +51,7 @@ export function ParticipantModal({
     source: "admin",
     sendEmail: false,
     language: Locale.EN,
-    type: "register",
+    type: type,
     work_url: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,9 +68,10 @@ export function ParticipantModal({
       setForm((current) => ({
         ...current,
         challenge_slug: selectedQuestValue,
+        type,
       }));
     }
-  }, [open, selectedQuestValue]);
+  }, [open, selectedQuestValue, type]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -79,7 +82,11 @@ export function ParticipantModal({
 
     setIsSubmitting(true);
     try {
-      const response = await fetch(landlordApiRoutes.quests.participants, {
+      const url = type === "submission" 
+        ? landlordApiRoutes.quests.submissions 
+        : landlordApiRoutes.quests.registrations;
+
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -99,7 +106,7 @@ export function ParticipantModal({
         source: "admin",
         sendEmail: false,
         language: Locale.EN,
-        type: "register",
+        type,
         work_url: "",
       });
       onCreated();
@@ -116,10 +123,13 @@ export function ParticipantModal({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent size="xl" variant="modern" scrollArea>
         <DialogHeader>
-          <DialogTitle>Ajouter un participant</DialogTitle>
+          <DialogTitle>
+            {type === "submission" ? "Ajouter une soumission" : "Ajouter un participant"}
+          </DialogTitle>
           <DialogDescription>
-            Crée une inscription manuelle. Les soumissions gardent leur propre
-            formulaire public.
+            {type === "submission" 
+              ? "Crée un rendu manuel pour ce participant."
+              : "Crée une inscription manuelle. Les soumissions gardent leur propre formulaire public."}
           </DialogDescription>
         </DialogHeader>
         <DialogSeparator />
@@ -186,9 +196,26 @@ export function ParticipantModal({
                   message: event.target.value,
                 }))
               }
-              rows={4}
+              rows={2}
             />
           </div>
+          {type === "submission" && (
+            <div className="space-y-2">
+              <Label htmlFor="participant-work-url">URL du travail</Label>
+              <Input
+                id="participant-work-url"
+                value={form.work_url}
+                onChange={(event) =>
+                  setForm((current) => ({
+                    ...current,
+                    work_url: event.target.value,
+                  }))
+                }
+                placeholder="https://..."
+                required
+              />
+            </div>
+          )}
           <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/[0.02] p-4">
             <div>
               <p className="text-sm font-medium">Envoyer un email</p>

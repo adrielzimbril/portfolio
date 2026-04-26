@@ -10,18 +10,38 @@ import type {
 } from "@/components/landlord/admin-types";
 import { REACTION_EMOJIS, ReactionType } from "@/lib/stats/types";
 
+export const registrationsKey = (
+  selectedQuest: string,
+  page: number,
+  pageSize = 10,
+) => {
+  const url = new URL(landlordApiRoutes.quests.registrations, window.location.origin);
+  if (selectedQuest !== "all") url.searchParams.set("slug", selectedQuest);
+  url.searchParams.set("page", String(page));
+  url.searchParams.set("pageSize", String(pageSize));
+  return url.toString();
+};
+
+export const submissionsKey = (
+  selectedQuest: string,
+  page: number,
+  pageSize = 10,
+) => {
+  const url = new URL(landlordApiRoutes.quests.submissions, window.location.origin);
+  if (selectedQuest !== "all") url.searchParams.set("slug", selectedQuest);
+  url.searchParams.set("page", String(page));
+  url.searchParams.set("pageSize", String(pageSize));
+  return url.toString();
+};
+
 export const participantsKey = (
   selectedQuest: string,
   page: number,
   pageSize = 10,
   type?: string,
 ) => {
-  const url = new URL(landlordApiRoutes.quests.participants, window.location.origin);
-  if (selectedQuest !== "all") url.searchParams.set("slug", selectedQuest);
-  url.searchParams.set("page", String(page));
-  url.searchParams.set("pageSize", String(pageSize));
-  if (type) url.searchParams.set("type", type);
-  return url.toString();
+  if (type === "submission") return submissionsKey(selectedQuest, page, pageSize);
+  return registrationsKey(selectedQuest, page, pageSize);
 };
 
 export const messagesKey = (page: number, pageSize = 10) => {

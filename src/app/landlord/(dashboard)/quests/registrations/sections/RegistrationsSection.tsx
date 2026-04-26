@@ -42,7 +42,7 @@ import {
   fetchQuests,
   formatDate,
   formatTime,
-  participantsKey,
+  registrationsKey,
 } from "@/components/landlord/admin-utils";
 import type { Participant } from "@/components/landlord/admin-types";
 import { toast } from "@/lib/toast";
@@ -60,7 +60,7 @@ export function RegistrationsSection() {
   const { data: quests = [] } = useSWR("landlord-quests", fetchQuests);
 
   const { data: tableData, isLoading: loading } = useSWR(
-    participantsKey(selectedQuest, page, pageSize, "register"),
+    registrationsKey(selectedQuest, page, pageSize),
     fetchParticipants,
   );
 
@@ -102,7 +102,7 @@ export function RegistrationsSection() {
             asIcon
             asPointer
             onClick={() =>
-              mutate(participantsKey(selectedQuest, page, pageSize, "register"))
+              mutate(registrationsKey(selectedQuest, page, pageSize))
             }
           >
             <RefreshCw size={16} />
@@ -282,7 +282,7 @@ export function RegistrationsSection() {
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
         onCreated={() =>
-          mutate(participantsKey(selectedQuest, page, pageSize, "register"))
+          mutate(registrationsKey(selectedQuest, page, pageSize))
         }
       />
 
