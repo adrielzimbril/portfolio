@@ -35,6 +35,7 @@ export function ParticipantModal({
   onOpenChange,
   onCreated,
   type = "register",
+  initialData,
 }: {
   open: boolean;
   quests: QuestSummary[];
@@ -42,7 +43,10 @@ export function ParticipantModal({
   onOpenChange: (open: boolean) => void;
   onCreated: () => void;
   type?: "register" | "submission";
+  initialData?: any;
 }) {
+  const isEditing = Boolean(initialData);
+
   const [form, setForm] = useState({
     challenge_slug: selectedQuest !== "all" ? selectedQuest : "",
     name: "",
@@ -65,13 +69,33 @@ export function ParticipantModal({
 
   React.useEffect(() => {
     if (open) {
-      setForm((current) => ({
-        ...current,
-        challenge_slug: selectedQuestValue,
-        type,
-      }));
+      if (initialData) {
+        setForm({
+          challenge_slug: initialData.challenge_slug || "",
+          name: initialData.name || "",
+          email: initialData.email || "",
+          message: initialData.message || "",
+          source: initialData.meta?.source || "admin",
+          sendEmail: false,
+          language: initialData.language || Locale.EN,
+          type: type,
+          work_url: initialData.work_url || "",
+        });
+      } else {
+        setForm({
+          challenge_slug: selectedQuestValue,
+          name: "",
+          email: "",
+          message: "",
+          source: "admin",
+          sendEmail: false,
+          language: Locale.EN,
+          type,
+          work_url: "",
+        });
+      }
     }
-  }, [open, selectedQuestValue, type]);
+  }, [open, selectedQuestValue, type, initialData]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,38 +106,30 @@ export function ParticipantModal({
 
     setIsSubmitting(true);
     try {
-      const url = type === "submission" 
+      const baseUrl = type === "submission" 
         ? landlordApiRoutes.quests.submissions 
         : landlordApiRoutes.quests.registrations;
+      
+      const url = isEditing ? `${baseUrl}/${initialData.id}` : baseUrl;
+      const method = isEditing ? "PATCH" : "POST";
 
       const response = await fetch(url, {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
-        throw new Error(data?.error || "Failed to add participant");
+        throw new Error(data?.error || "Failed to process request");
       }
 
-      toast.success("Participant ajouté.");
-      setForm({
-        challenge_slug: selectedQuest !== "all" ? selectedQuest : "",
-        name: "",
-        email: "",
-        message: "",
-        source: "admin",
-        sendEmail: false,
-        language: Locale.EN,
-        type,
-        work_url: "",
-      });
+      toast.success(isEditing ? "Modifié avec succès." : "Participant ajouté.");
       onCreated();
       onOpenChange(false);
     } catch (error) {
-      logger.error("Failed to add participant:", error);
-      toast.error("Impossible d'ajouter le participant.");
+      logger.error(`Failed to ${isEditing ? 'edit' : 'add'} participant:`, error);
+      toast.error(`Impossible de ${isEditing ? 'modifier' : 'ajouter'} le participant.`);
     } finally {
       setIsSubmitting(false);
     }
@@ -124,12 +140,16 @@ export function ParticipantModal({
       <DialogContent size="xl" variant="modern" scrollArea>
         <DialogHeader>
           <DialogTitle>
-            {type === "submission" ? "Ajouter une soumission" : "Ajouter un participant"}
+            {isEditing 
+              ? (type === "submission" ? "Modifier la soumission" : "Modifier l'inscription")
+              : (type === "submission" ? "Ajouter une soumission" : "Ajouter un participant")
+            }
           </DialogTitle>
           <DialogDescription>
             {type === "submission" 
-              ? "Crée un rendu manuel pour ce participant."
-              : "Crée une inscription manuelle. Les soumissions gardent leur propre formulaire public."}
+              ? (isEditing ? "Modifie les détails de ce rendu." : "Crée un rendu manuel pour ce participant.")
+              : (isEditing ? "Modifie les détails de cette inscription." : "Crée une inscription manuelle. Les soumissions gardent leur propre formulaire public.")
+            }
           </DialogDescription>
         </DialogHeader>
         <DialogSeparator />
@@ -141,6 +161,7 @@ export function ParticipantModal({
               onValueChange={(value) =>
                 setForm((current) => ({ ...current, challenge_slug: value }))
               }
+              disabled={isEditing}
             >
               <SelectTrigger id="quest">
                 <SelectValue placeholder="Sélectionner une quest" />
@@ -182,6 +203,7 @@ export function ParticipantModal({
                   }))
                 }
                 required
+                disabled={isEditing}
               />
             </div>
           </div>
@@ -216,7 +238,7 @@ export function ParticipantModal({
               />
             </div>
           )}
-          {type === "register" && (
+          {type === "register" && !isEditing && (
             <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/[0.02] p-4">
               <div>
                 <p className="text-sm font-medium">Envoyer un email</p>
@@ -244,7 +266,7 @@ export function ParticipantModal({
             </Button>
             <Button type="submit" disabled={isSubmitting} asIcon asPointer>
               {isSubmitting && <Loader2 size={16} className="animate-spin" />}
-              Ajouter
+              {isEditing ? "Enregistrer" : "Ajouter"}
             </Button>
           </DialogFooter>
         </form>

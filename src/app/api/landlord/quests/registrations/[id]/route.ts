@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/integrations/supabase/server";
 import { cookies } from "next/headers";
+import logger from "@/utils/logger";
 
 export async function PATCH(
   request: Request,
@@ -21,11 +22,13 @@ export async function PATCH(
       .single();
 
     if (error) {
+      logger.error(`Failed to update registration ${id}`, error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
+    logger.error(`PATCH registration ${id} failed`, error);
     return NextResponse.json(
       { error: "Failed to update registration" },
       { status: 500 },
@@ -48,11 +51,13 @@ export async function DELETE(
       .eq("id", id);
 
     if (error) {
+      logger.error(`Failed to delete registration ${id}`, error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    logger.error(`DELETE registration ${id} failed`, error);
     return NextResponse.json(
       { error: "Failed to delete registration" },
       { status: 500 },

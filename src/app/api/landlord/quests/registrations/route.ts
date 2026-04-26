@@ -58,8 +58,9 @@ export async function POST(request: Request) {
       email,
       message,
       challenge_slug,
-      source,
+      source = "admin_dashboard",
       sendEmail: shouldSendEmail,
+      locale = "fr", // Default to fr for landlord
     } = body;
 
     const cookieStore = await cookies();
@@ -70,6 +71,10 @@ export async function POST(request: Request) {
     if (!quest) {
       return NextResponse.json({ error: "QUEST_NOT_FOUND" }, { status: 404 });
     }
+
+    // Get IP for metadata
+    const ipHeader = request.headers.get("x-forwarded-for");
+    const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined;
 
     // 1. User Upsert (Meticulous logic from public API)
     let userId: string | undefined;
@@ -98,8 +103,11 @@ export async function POST(request: Request) {
 
     // 2. Registration Upsert
     const meta = {
-      source: source || "admin",
+      source: source,
       silent_add: !shouldSendEmail,
+      origin: request.headers.get("origin"),
+      referer: request.headers.get("referer"),
+      url: request.url,
     };
 
     const { data, error: registrationError } = await db
@@ -111,6 +119,7 @@ export async function POST(request: Request) {
           name,
           email,
           message: message || null,
+          ip: ip ?? null,
           meta,
         },
         { onConflict: "challenge_slug,email" }
@@ -119,6 +128,7 @@ export async function POST(request: Request) {
       .single();
 
     if (registrationError) {
+      logger.error("landlord quest register: db upsert failed", registrationError);
       return NextResponse.json({ error: registrationError.message }, { status: 500 });
     }
 
@@ -130,6 +140,8 @@ export async function POST(request: Request) {
           subscribed_from_page: JSON.stringify({
             path: `/landlord/quests/registrations`,
             source: "admin_dashboard",
+            origin: request.headers.get("origin"),
+            referer: request.headers.get("referer"),
           }),
           updateexisting: Boolean(existingUserData),
         },
@@ -163,6 +175,7 @@ export async function POST(request: Request) {
       // Always notify admin
       await sendEmail({
         to: [{ email: appConfig.contactForm.to }],
+        locale: locale as any,
         templateId: "questRegisterAdminNotification",
         context: {
           name,
@@ -178,6 +191,7 @@ export async function POST(request: Request) {
       if (shouldSendEmail) {
         await sendEmail({
           to: [{ email, name }],
+          locale: locale as any,
           templateId: "questRegisterUserConfirmation",
           context: {
             name,

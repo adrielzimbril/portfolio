@@ -12,6 +12,8 @@ import {
   RefreshCw,
   Send,
   Eye,
+  Edit,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,6 +47,7 @@ import {
   formatDate,
   formatTime,
   submissionsKey,
+  deleteParticipant,
 } from "@/components/landlord/admin-utils";
 import type { Participant } from "@/components/landlord/admin-types";
 import { toast } from "@/lib/toast";
@@ -115,7 +118,10 @@ export function QuestSubmissionsSection() {
           <Button
             asIcon
             asPointer
-            onClick={() => setParticipantModalOpen(true)}
+            onClick={() => {
+              setSelectedParticipant(null);
+              setParticipantModalOpen(true);
+            }}
           >
             <Plus size={16} />
             Ajouter
@@ -258,16 +264,53 @@ export function QuestSubmissionsSection() {
                                   </DropdownMenuItem>
                                 )}
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem
-                                  onClick={() =>
-                                    navigator.clipboard
-                                      ?.writeText(participant.email)
-                                      .then(() => toast.success("Email copié."))
-                                  }
-                                >
-                                  <Mail size={14} />
-                                  Copier l'email
-                                </DropdownMenuItem>
+                                  <DropdownMenuItem
+                                    onClick={() =>
+                                      navigator.clipboard
+                                        ?.writeText(participant.email)
+                                        .then(() => toast.success("Email copié."))
+                                    }
+                                  >
+                                    <Mail size={14} />
+                                    Copier l'email
+                                  </DropdownMenuItem>
+                                  <DropdownMenuSeparator />
+                                  <DropdownMenuItem
+                                    onClick={() => {
+                                      setSelectedParticipant(participant);
+                                      setParticipantModalOpen(true);
+                                    }}
+                                  >
+                                    <Edit size={14} />
+                                    Modifier
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem
+                                    className="text-red-600 focus:text-red-600"
+                                    onClick={() => {
+                                      if (
+                                        window.confirm(
+                                          "Voulez-vous vraiment supprimer cette soumission ?",
+                                        )
+                                      ) {
+                                        deleteParticipant(
+                                          "submission",
+                                          participant.id,
+                                        ).then(() => {
+                                          toast.success("Supprimé.");
+                                          mutate(
+                                            submissionsKey(
+                                              selectedQuest,
+                                              page,
+                                              pageSize,
+                                            ),
+                                          );
+                                        });
+                                      }
+                                    }}
+                                  >
+                                    <Trash2 size={14} />
+                                    Supprimer
+                                  </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </td>
@@ -304,6 +347,7 @@ export function QuestSubmissionsSection() {
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
         type="submission"
+        initialData={selectedParticipant}
         onCreated={() =>
           mutate(submissionsKey(selectedQuest, page, pageSize))
         }

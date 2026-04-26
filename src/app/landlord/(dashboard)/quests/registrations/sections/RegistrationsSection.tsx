@@ -10,6 +10,8 @@ import {
   RefreshCw,
   Users,
   Eye,
+  Edit,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -43,6 +45,7 @@ import {
   formatDate,
   formatTime,
   registrationsKey,
+  deleteParticipant,
 } from "@/components/landlord/admin-utils";
 import type { Participant } from "@/components/landlord/admin-types";
 import { toast } from "@/lib/toast";
@@ -111,7 +114,10 @@ export function RegistrationsSection() {
           <Button
             asIcon
             asPointer
-            onClick={() => setParticipantModalOpen(true)}
+            onClick={() => {
+              setSelectedParticipant(null);
+              setParticipantModalOpen(true);
+            }}
           >
             <Plus size={16} />
             Ajouter
@@ -235,6 +241,43 @@ export function RegistrationsSection() {
                                   <Eye size={14} />
                                   Voir détails
                                 </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={() => {
+                                    setSelectedParticipant(participant);
+                                    setParticipantModalOpen(true);
+                                  }}
+                                >
+                                  <Edit size={14} />
+                                  Modifier
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  className="text-red-500 focus:text-red-500"
+                                  onClick={async () => {
+                                    if (
+                                      window.confirm("Supprimer cette inscription ?")
+                                    ) {
+                                      try {
+                                        await deleteParticipant(
+                                          "register",
+                                          participant.id,
+                                        );
+                                        toast.success("Supprimé.");
+                                        mutate(
+                                          registrationsKey(
+                                            selectedQuest,
+                                            page,
+                                            pageSize,
+                                          ),
+                                        );
+                                      } catch (e) {
+                                        toast.error("Erreur de suppression.");
+                                      }
+                                    }
+                                  }}
+                                >
+                                  <Trash2 size={14} />
+                                  Supprimer
+                                </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                   onClick={() =>
@@ -281,6 +324,7 @@ export function RegistrationsSection() {
         quests={quests}
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
+        initialData={selectedParticipant}
         onCreated={() =>
           mutate(registrationsKey(selectedQuest, page, pageSize))
         }

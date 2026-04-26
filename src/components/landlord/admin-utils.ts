@@ -186,12 +186,39 @@ export async function fetchMessages(
   return response.json();
 }
 
-export async function fetchLandlordTable(
-  url: string,
-): Promise<LandlordTableResponse> {
-  const response = await fetch(url);
+export async function deleteParticipant(
+  type: "register" | "submission",
+  id: string,
+) {
+  const baseUrl =
+    type === "submission"
+      ? landlordApiRoutes.quests.submissions
+      : landlordApiRoutes.quests.registrations;
+  const url = `${baseUrl}/${id}`;
+  const response = await fetch(url, { method: "DELETE" });
   if (!response.ok) {
-    throw new Error("Failed to fetch landlord table");
+    throw new Error("Failed to delete participant");
+  }
+  return response.json();
+}
+
+export async function updateParticipant(
+  type: "register" | "submission",
+  id: string,
+  data: any,
+) {
+  const baseUrl =
+    type === "submission"
+      ? landlordApiRoutes.quests.submissions
+      : landlordApiRoutes.quests.registrations;
+  const url = `${baseUrl}/${id}`;
+  const response = await fetch(url, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to update participant");
   }
   return response.json();
 }
