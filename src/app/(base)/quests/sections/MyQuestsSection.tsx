@@ -100,7 +100,7 @@ export function MyQuestsSection({ data }: { data: Quest[] }) {
               ),
               href: getResourcesUrl(PageType.QUESTS, quest.slug),
             }}
-            reactionsPosition="top"
+            hideReactions
           />
         );
       })}

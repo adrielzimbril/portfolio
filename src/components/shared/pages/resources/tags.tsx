@@ -32,6 +32,7 @@ export function Tags({
       {primaryTag && (
         <Badge
           className={cn(
+            "h-auto",
             pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE),
           )}
           variant="colored"
@@ -43,6 +44,7 @@ export function Tags({
       {secondaryTag && (
         <Badge
           className={cn(
+            "h-auto",
             pickRandomColor(
               secondaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE,
             ),

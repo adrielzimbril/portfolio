@@ -18,7 +18,7 @@ export function MorePreviewSection({ data }: { data: Post[] }) {
           slug={post.slug}
           excerpt={post.excerpt || ""}
           tags={post.tags}
-          reactionsPosition="bottom"
+          hideReactions
         />
       ))}
     </CardPreviewSection>

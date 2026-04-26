@@ -13,7 +13,7 @@ export function QuestCard({
   description,
   features,
   action,
-  reactionsPosition,
+  hideReactions = false,
 }: {
   title: string;
   cover?: string;
@@ -25,7 +25,7 @@ export function QuestCard({
     label: string;
     href: string;
   } | null;
-  reactionsPosition?: "top" | "bottom";
+  hideReactions?: boolean;
 }) {
   return (
     <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
@@ -48,10 +48,8 @@ export function QuestCard({
           description={description}
           features={features}
           action={action}
-          hideReactions={false}
+          hideReactions={hideReactions}
         />
-
-
       </CardContent>
     </Card>
   );

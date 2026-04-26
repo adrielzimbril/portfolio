@@ -31,7 +31,7 @@ function ProjectCategories({
       {categories.map((category, index) => (
         <Badge
           key={index}
-          className={cn(pickRandomColor(category.color))}
+          className={cn("h-auto", pickRandomColor(category.color))}
           variant="colored"
         >
           {category.name}

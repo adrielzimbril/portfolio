@@ -80,6 +80,7 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
               ),
               href: getResourcesUrl(PageType.QUESTS, quest.slug),
             }}
+            hideReactions
           />
         );
       })}
