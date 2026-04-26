@@ -1806,14 +1806,17 @@
         "description": "Renseigne le créateur et les variantes utiles du message.",
         "actions": {
           "add": "Ajouter un message",
-          "update": "Mettre à jour le message"
+          "update": "Mettre à jour le message",
+          "view_details": "Voir détails"
         },
         "fields": {
           "creatorName": "Nom du créateur",
           "avatarUrl": "URL de l'avatar (optionnel)",
           "messagesByLanguage": "Messages par langue",
           "messagePlaceholder": "Message en {locale}",
-          "messageLanguage": "Message ({locale})"
+          "messageLanguage": "Message ({locale})",
+          "linked_user": "Utilisateur lié",
+          "manual_add": "Ajout manuel"
         },
         "messages": {
           "success_added": "Message ajouté.",
@@ -1829,21 +1832,7 @@
         "placeholders": {
           "search": "Rechercher créateur, message, langue..."
         },
-        "actions": {
-          "add": "Ajouter un message",
-          "update": "Mettre à jour le message",
-          "view_details": "Voir détails"
-        },
-        "details_title": "Détails du message",
-        "fields": {
-          "creatorName": "Nom du créateur",
-          "avatarUrl": "URL de l'avatar (optionnel)",
-          "messagesByLanguage": "Messages par langue",
-          "messagePlaceholder": "Message en {locale}",
-          "messageLanguage": "Message ({locale})",
-          "linked_user": "Utilisateur lié",
-          "manual_add": "Ajout manuel"
-        }
+        "details_title": "Détails du message"
       },
       "quests": {
         "title": "Gestion des challenges",
