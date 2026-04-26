@@ -102,7 +102,7 @@ async function compileBodyMDX(context: any, document: any) {
   });
 }
 
-// Collection of authors (dans posts/authors/)
+// Collection of authors (In posts/authors/)
 const authors = defineCollection({
   name: "authors",
   directory: `${BASE_COLLECTION_PATH}/posts/authors`,
@@ -278,19 +278,11 @@ const posts = defineCollection({
     // Resolve relations
     const categories = context
       .documents(postCategories)
-      .filter(
-        (c) =>
-          document.categories_id.includes(c.id) &&
-          getLocaleFromFilePath(c._meta.filePath) === locale,
-      );
+      .filter((c) => document.categories_id.includes(c.id));
 
     const tags = context
       .documents(postTags)
-      .filter(
-        (t) =>
-          document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale,
-      );
+      .filter((t) => document.tags_id.includes(t.id));
 
     return {
       ...document,
@@ -376,20 +368,12 @@ const projects = defineCollection({
     // Resolve relations
     const categories = context
       .documents(projectCategories)
-      .filter(
-        (c) =>
-          document.categories_id.includes(c.id) &&
-          getLocaleFromFilePath(c._meta.filePath) === locale,
-      );
+      .filter((c) => document.categories_id.includes(c.id));
 
     // Use projectTags or postTags according to your preference
     const tags = context
       .documents(projectTags)
-      .filter(
-        (t) =>
-          document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale,
-      );
+      .filter((t) => document.tags_id.includes(t.id));
 
     return {
       ...document,
@@ -430,11 +414,7 @@ const resources = defineCollection({
     // Use resourcesTags or postTags according to your preference
     const tags = context
       .documents(resourceTags)
-      .filter(
-        (t) =>
-          document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale,
-      );
+      .filter((t) => document.tags_id.includes(t.id));
 
     return {
       ...document,
