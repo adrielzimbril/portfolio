@@ -111,7 +111,7 @@ export function Sidebar({
               type="button"
               onClick={() => setQuestsOpen((o) => !o)}
               className={cn(
-                "w-full flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition",
+                "w-full flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition cursor-pointer",
                 isQuestsGroupActive
                   ? "text-white"
                   : "text-white/62 hover:bg-white/8 hover:text-white"
@@ -132,7 +132,7 @@ export function Sidebar({
               <ChevronDown
                 size={15}
                 className={cn(
-                  "flex-shrink-0 text-white/40 transition-transform duration-200",
+                  "shrink-0 text-white/40 transition-transform duration-200",
                   questsOpen && "rotate-180"
                 )}
               />
@@ -167,7 +167,7 @@ export function Sidebar({
               type="button"
               onClick={() => setHubOpen((o) => !o)}
               className={cn(
-                "w-full flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition",
+                "w-full flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition cursor-pointer",
                 isHubGroupActive
                   ? "text-white"
                   : "text-white/62 hover:bg-white/8 hover:text-white"
@@ -188,7 +188,7 @@ export function Sidebar({
               <ChevronDown
                 size={15}
                 className={cn(
-                  "flex-shrink-0 text-white/40 transition-transform duration-200",
+                  "shrink-0 text-white/40 transition-transform duration-200",
                   hubOpen && "rotate-180"
                 )}
               />
@@ -271,7 +271,7 @@ export function Sidebar({
       </ScrollArea>
 
       {/* Footer actions */}
-      <div className="mt-4 flex-shrink-0 grid gap-1 border-t border-white/10 pt-4">
+      <div className="mt-4 shrink-0 grid gap-1 border-t border-white/10 pt-4">
         <Link
           href="/"
           className="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm text-white/55 hover:bg-white/8 hover:text-white transition"
@@ -310,7 +310,7 @@ function NavLink({
   onClick?: () => void;
   compact?: boolean;
 }) {
-  return ( 
+  return (
     <Link
       href={href}
       onClick={onClick}

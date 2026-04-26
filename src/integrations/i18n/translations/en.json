@@ -148,6 +148,11 @@
         "title": "Community Wall",
         "description": "Messages from the community.",
         "badge": "Wall 🎨"
+      },
+      "stats": {
+        "messages": "Messages",
+        "members": "Members",
+        "weekly": "Weekly"
       }
     },
     "form": {
@@ -395,6 +400,7 @@
         "description": "History of changes and improvements.",
         "badge": "Updates ✨",
         "release": "release",
+        "loadMore": "Load more",
         "filter": {
           "title": "Filter Changelog",
           "button": "Filters",
@@ -1425,6 +1431,11 @@
           "submit": "Send my submission ",
           "submitting": "Sending..."
         },
+        "validation": {
+          "name_required": "Name is required",
+          "email_invalid": "Invalid email",
+          "url_invalid": "Invalid URL"
+        },
         "badge": "Challenge submission ",
         "closedInline": "The submission period is over for this challenge ",
         "deadline": "Deadline : {date}. After this date, submissions will no longer be accepted ",
@@ -1469,9 +1480,14 @@
     "keywords": "SaaS project submission, Adriel Zimbril, Product Designer, UX Review, Figma Redesign, Website analysis, Product feedback, ShiroSaaS, Design System, Product Design",
     "page": {
       "actions": {
-        "submit": "Here we go ! "
+        "submit": "Here we go ! 🤩"
       },
       "fields": {
+        "validation": {
+          "name_required": "Name must contain at least 4 characters",
+          "email_invalid": "Please enter a valid email",
+          "url_invalid": "Please enter a valid URL"
+        },
         "description": {
           "label": "Explain your request",
           "placeholder": "Briefly describe your project and what you'd like us to analyze"
@@ -1512,9 +1528,15 @@
         },
         "ux_review": "UI/UX Review"
       },
-      "toast": {
-        "error": "Oops ! An error occurred, please try again ",
-        "success": "Thanks ! Your design is in orbit ! "
+      "feedback": {
+        "success": {
+          "title": "Thanks !",
+          "description": "Your design is in orbit ! 🪐"
+        },
+        "error": {
+          "title": "Oops !",
+          "description": "An error occurred, please try again 😅"
+        }
       }
     }
   },
@@ -1697,6 +1719,132 @@
       "ulid": "ulid",
       "url": "url",
       "uuid": "uuid"
+    }
+  },
+  "admin": {
+    "title": "Login",
+    "description": "Authentication required to access this area.",
+    "landlord": {
+      "community": {
+        "title": "Community Wall Management",
+        "edit_title": "Edit message",
+        "add_title": "Add a message",
+        "description": "Fill in the creator and useful variants of the message.",
+        "actions": {
+          "add": "Add a message",
+          "update": "Update message"
+        },
+        "fields": {
+          "creatorName": "Creator name",
+          "avatarUrl": "Avatar URL (optional)",
+          "messagesByLanguage": "Messages by language",
+          "messagePlaceholder": "Message in {locale}",
+          "messageLanguage": "Message ({locale})",
+          "linked_user": "Linked user",
+          "manual_add": "Manual add"
+        },
+        "messages": {
+          "success_added": "Message added.",
+          "success_updated": "Message updated.",
+          "success_deleted": "Message deleted.",
+          "error_save": "Unable to save message.",
+          "error_delete": "Unable to delete message.",
+          "empty_messages": "No messages",
+          "empty_messages_desc": "No messages match your search or the table is empty.",
+          "delete_confirm_title": "Delete this message?",
+          "delete_confirm_desc": "This action removes the message from the community wall. It cannot be undone from the dashboard."
+        },
+        "placeholders": {
+          "search": "Search creator, message, language..."
+        },
+        "actions_secondary": {
+          "add": "Add a message",
+          "update": "Update message",
+          "view_details": "View details"
+        },
+        "details_title": "Message details"
+      },
+      "quests": {
+        "title": "Challenges Management",
+        "registrations": {
+          "title": "Quest Registrations",
+          "subtitle": "Registered participants, with direct access to profiles."
+        },
+        "submissions": {
+          "title": "Quest Submissions",
+          "subtitle": "Participant entries, with direct access to work."
+        },
+        "actions": {
+          "add": "Add",
+          "add_registration": "Add participant",
+          "add_submission": "Add submission",
+          "edit_registration": "Edit registration",
+          "edit_submission": "Edit submission",
+          "view_details": "View details",
+          "view_work": "View work",
+          "delete": "Delete",
+          "delete_confirm": "Are you sure you want to delete this item?",
+          "delete_registration_confirm": "Delete this registration?",
+          "delete_submission_confirm": "Are you sure you want to delete this submission?",
+          "copy_email": "Copy email",
+          "refresh": "Refresh"
+        },
+        "fields": {
+          "quest": "Quest",
+          "name": "Name",
+          "email": "Email",
+          "message": "Message",
+          "work_url": "Work URL",
+          "send_email": "Send email",
+          "send_email_hint": "Disabled by default for manual adds.",
+          "status": "Status",
+          "date": "Date",
+          "participant": "Participant",
+          "language": "Language",
+          "no_work": "No work"
+        },
+        "placeholders": {
+          "select_quest": "Select a quest",
+          "all_quests": "All quests",
+          "search": "Search name, email, quest...",
+          "url": "https://..."
+        },
+        "messages": {
+          "loading_participants": "Loading participants...",
+          "loading_submissions": "Loading submissions...",
+          "empty_participants": "No participants found.",
+          "empty_submissions": "No submissions found.",
+          "success_added": "Added successfully.",
+          "success_modified": "Modified successfully.",
+          "success_deleted": "Deleted.",
+          "error_delete": "Error during deletion.",
+          "error_process": "Unable to process request.",
+          "select_quest_first": "Choose a quest first.",
+          "email_copied": "Email copied."
+        }
+      },
+      "shared": {
+        "no_data": "No data",
+        "no_data_description": "This table contains no entries at the moment.",
+        "loading_data": "Loading data...",
+        "page": "Page {page} / {total}",
+        "previous": "Previous",
+        "next": "Next",
+        "cancel": "Cancel",
+        "save": "Save",
+        "close": "Close",
+        "details_title": "Entry details",
+        "participant_details": "Participant details",
+        "refresh": "Refresh",
+        "add": "Add",
+        "edit": "Edit",
+        "delete": "Delete",
+        "actions": "Actions",
+        "fields": {
+          "languages": "Languages",
+          "date": "Date"
+        }
+      }
     }
   }
 }

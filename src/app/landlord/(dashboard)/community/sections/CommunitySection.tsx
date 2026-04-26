@@ -167,7 +167,7 @@ export function CommunitySection() {
                         const normalized = normalizeMessage(message);
                         const entries = Object.entries(normalized);
                         return (
-                          <tr key={message.id} className="hover:bg-black/[0.02] transition-colors">
+                          <tr key={message.id} className="hover:bg-black/2 transition-colors">
                             <td className="px-5 py-4">
                               <div className="flex items-center gap-3">
                                 {message.creator_avatar_url ? (

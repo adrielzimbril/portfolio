@@ -125,7 +125,7 @@ export function HubProductLinksSection() {
                         return (
                           <tr
                             key={row.slug}
-                            className="hover:bg-black/[0.02] transition-colors group"
+                            className="hover:bg-black/2 transition-colors group"
                           >
                             <td className="px-5 py-4">
                               <div className="font-medium text-black/85">

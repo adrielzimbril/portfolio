@@ -73,7 +73,7 @@ export function EmptyState({
   description: string;
 }) {
   return (
-    <div className="flex min-h-64 flex-col items-center justify-center rounded-[20px] border border-dashed border-black/10 bg-black/[0.02] p-8 text-center">
+    <div className="flex min-h-64 flex-col items-center justify-center rounded-[20px] border border-dashed border-black/10 bg-black/2 p-8 text-center">
       <div className="mb-4 flex size-12 items-center justify-center rounded-2xl bg-white text-black/70 shadow-sm">
         <Icon size={20} />
       </div>

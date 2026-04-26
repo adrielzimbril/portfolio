@@ -142,6 +142,11 @@
         "title": "Mur Communautaire",
         "description": "Messages de la communauté.",
         "badge": "Mur "
+      },
+      "stats": {
+        "messages": "Messages",
+        "members": "Membres",
+        "weekly": "Hebdomadaire"
       }
     },
     "form": {
@@ -241,6 +246,7 @@
         "description": "Historique des changements et améliorations.",
         "badge": "Mises à jour ",
         "release": "release",
+        "loadMore": "Charger plus",
         "filter": {
           "title": "Filtrer le Changelog",
           "button": "Filtres",
@@ -255,7 +261,7 @@
           }
         },
         "entry": {
-          "latest": "Dernière",
+          "latest": "Stable",
           "types": {
             "milestone": "Jalon",
             "feature": "Fonctionnalité",
@@ -600,6 +606,11 @@
           "submitting": "Envoi en cours...",
           "submit": "Envoyer ma soumission 🚀"
         },
+        "validation": {
+          "name_required": "Le nom est requis",
+          "email_invalid": "Email invalide",
+          "url_invalid": "URL invalide"
+        },
         "feedback": {
           "success": {
             "title": "Soumission envoyée ✅",
@@ -657,6 +668,11 @@
         "subDescription": "Propose ton site, ton app ou ton fichier Figma — et je le décortiquer, l’améliorer et te donner du feedback en direct ou en vidéo sur ma chaîne. Chaque épisode est l’occasion de transformer des idées en pépites et d’apprendre 🫶🏻👨🏻‍🚀 "
       },
       "fields": {
+        "validation": {
+          "name_required": "Le nom doit contenir au moins 4 caractères",
+          "email_invalid": "Veuillez saisir un email valide",
+          "url_invalid": "Veuillez saisir une URL valide"
+        },
         "intention": {
           "label": "Panel de feedback demandé"
         },
@@ -692,9 +708,15 @@
       "actions": {
         "submit": "Here we go ! 🤩"
       },
-      "toast": {
-        "success": "Merci ! Ton design est en orbite ! 🪐",
-        "error": "Oups ! Une erreur est survenue, veuillez réessayer s'il vous plaît 😅"
+      "feedback": {
+        "success": {
+          "title": "Merci !",
+          "description": "Ton design est en orbite ! 🪐"
+        },
+        "error": {
+          "title": "Oups !",
+          "description": "Une erreur est survenue, veuillez réessayer s'il vous plaît 😅"
+        }
       }
     }
   },

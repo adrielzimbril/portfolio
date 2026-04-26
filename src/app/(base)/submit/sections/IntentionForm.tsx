@@ -211,7 +211,7 @@ export function IntentionForm() {
                       required
                       minLength={4}
                     />
-                    <FieldError>Le nom doit contenir au moins 4 caractères</FieldError>
+                    <FieldError>{t("submit.page.fields.validation.name_required")}</FieldError>
                   </Field>
                 </div>
                 <div className="space-y-2">
@@ -230,7 +230,7 @@ export function IntentionForm() {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
-                    <FieldError>Veuillez saisir un email valide</FieldError>
+                    <FieldError>{t("submit.page.fields.validation.email_invalid")}</FieldError>
                   </Field>
                 </div>
               </div>
@@ -250,7 +250,7 @@ export function IntentionForm() {
                   onChange={(e) => setUrl(e.target.value)}
                   required
                 />
-                <FieldError>Veuillez saisir une URL valide</FieldError>
+                <FieldError>{t("submit.page.fields.validation.url_invalid")}</FieldError>
               </Field>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

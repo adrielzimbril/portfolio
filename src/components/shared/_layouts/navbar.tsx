@@ -95,7 +95,7 @@ export function Navbar() {
               {/* <LogoName
                 className={cn(
                   "hidden lg:block",
-                  "h-5! qlg:h-6! w-48! qlg:w-60! flex-shrink-0"
+                  "h-5! qlg:h-6! w-48! qlg:w-60! shrink-0"
                   // hasScrolled && "h-3.5! w-36!"
                 )}
               /> */}

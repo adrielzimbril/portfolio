@@ -191,7 +191,7 @@ export function RegistrationsSection() {
                       {filteredParticipants.map((participant) => (
                         <tr
                           key={participant.id}
-                          className="hover:bg-black/[0.02] transition-colors"
+                          className="hover:bg-black/2 transition-colors"
                         >
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-3">

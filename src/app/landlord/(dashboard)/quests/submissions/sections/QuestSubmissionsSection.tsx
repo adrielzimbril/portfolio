@@ -195,7 +195,7 @@ export function QuestSubmissionsSection() {
                       {filteredParticipants.map((participant) => (
                         <tr
                           key={participant.id}
-                          className="hover:bg-black/[0.02] transition-colors"
+                          className="hover:bg-black/2 transition-colors"
                         >
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-3">
@@ -289,7 +289,7 @@ export function QuestSubmissionsSection() {
                                     {tShared("edit")}
                                   </DropdownMenuItem>
                                   <DropdownMenuItem
-                                    className="text-red-600 focus:text-red-600"
+                                    className="text-red-600 hover:text-white !focus:text-white"
                                     onClick={() => {
                                       if (
                                         window.confirm(

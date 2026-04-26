@@ -100,8 +100,9 @@ export function DataDetailsModal({
                 !isTranslation &&
                 !isDate &&
                 !isReaction &&
-                typeof value === "object" &&
-                value !== null;
+                (typeof value === "object" &&
+                  value !== null) ||
+                (typeof value === "string" && value.toString().replace(/^"/, "").replace(/"$/, "").startsWith("{"));
 
               return (
                 <div key={key} className="group space-y-2">
@@ -110,7 +111,7 @@ export function DataDetailsModal({
                   </p>
 
                   {isImage ? (
-                    <div className="relative aspect-video max-h-48 w-full overflow-hidden rounded-3xl border border-black/5 bg-black/[0.02]">
+                    <div className="relative aspect-video max-h-48 w-full overflow-hidden rounded-3xl border border-black/5 bg-black/2">
                       <img
                         src={value}
                         alt={key}
@@ -126,7 +127,7 @@ export function DataDetailsModal({
                       {Object.entries(value).map(([lang, text]) => (
                         <div
                           key={lang}
-                          className="flex flex-col gap-1 rounded-2xl border border-black/5 bg-black/1 p-3 text-sm transition-all hover:bg-black/[0.03]"
+                          className="flex flex-col gap-1 rounded-2xl border border-black/5 bg-black/1 p-3 text-sm transition-all hover:bg-black/3"
                         >
                           <div className="flex items-center gap-2">
                             <StatusPill tone="neutral">
@@ -140,10 +141,10 @@ export function DataDetailsModal({
                       ))}
                     </div>
                   ) : (
-                    <div className="min-w-0 rounded-2xl border border-black/5 bg-black/1.5 p-4 text-sm transition-all hover:bg-black/[0.03] hover:border-black/10">
+                    <div className="min-w-0 rounded-2xl border border-black/5 bg-black/1.5 p-4 text-sm transition-all hover:bg-black/3 hover:border-black/10">
                       {isJson ? (
                         <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg font-mono text-[11px] leading-relaxed text-black/60">
-                          {JSON.stringify(value, null, 2)}
+                          {typeof value === "object" ? JSON.stringify(value, null, 2) : JSON.stringify(JSON.parse(value), null, 2)}
                         </pre>
                       ) : isDate ? (
                         <p className="font-semibold leading-relaxed text-black/75">
