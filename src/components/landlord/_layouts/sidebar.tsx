@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   ChevronDown,
@@ -21,6 +20,11 @@ import { cn } from "@/utils/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useTranslations } from "next-intl";
 import { adminNavItems, adminNavGroups } from "./nav-items";
+import Image from "next/image";
+import { getImageUrl } from "@/utils";
+import { siteConfig } from "@/data/config";
+import { routes } from "@/data/routes";
+import { Link } from "@/components/ui/link";
 
 export function Sidebar({
   sidebarOpen,
@@ -74,15 +78,28 @@ export function Sidebar({
     <aside
       className={cn(
         "fixed inset-y-3 left-3 z-40 bg-[#11191f] p-4 text-white transition-all duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full rounded-2xl overflow-hidden",
-        sidebarOpen && "translate-x-0 -translate-x-[calc(100%+1rem)]",
+        sidebarOpen && "-translate-x-[calc(100%+1rem)]",
         collapsed ? "w-0 opacity-0 p-0" : "w-72 opacity-100",
       )}
     >
       {/* Logo */}
       <div className="mb-6 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-white text-[#11191f] shrink-0">
-            <ShieldCheck size={19} />
+          <div className="flex size-10 lg:size-12 items-center justify-center rounded-xl bg-white text-[#11191f] shrink-0">
+            <Link
+              href={routes.home.link}
+              variant="none"
+              size="none"
+              className="flex items-center gap-1 md:gap-2 aspect-square "
+            >
+              <Image
+                className="size-10! lg:size-12! rounded-2xl aspect-square overflow-hidden object-cover pointer-events-none"
+                src={getImageUrl("icon.png")}
+                alt={siteConfig.description}
+                width={256}
+                height={256}
+              />
+            </Link>
           </div>
           <div>
             <p className="text-sm font-semibold">{t("title")}</p>

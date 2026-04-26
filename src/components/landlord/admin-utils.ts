@@ -15,11 +15,11 @@ export const registrationsKey = (
   page: number,
   pageSize = 10,
 ) => {
-  const url = new URL(landlordApiRoutes.quests.registrations, window.location.origin);
-  if (selectedQuest !== "all") url.searchParams.set("slug", selectedQuest);
-  url.searchParams.set("page", String(page));
-  url.searchParams.set("pageSize", String(pageSize));
-  return url.toString();
+  const params = new URLSearchParams();
+  if (selectedQuest !== "all") params.set("slug", selectedQuest);
+  params.set("page", String(page));
+  params.set("pageSize", String(pageSize));
+  return `${landlordApiRoutes.quests.registrations}?${params.toString()}`;
 };
 
 export const submissionsKey = (
@@ -27,11 +27,11 @@ export const submissionsKey = (
   page: number,
   pageSize = 10,
 ) => {
-  const url = new URL(landlordApiRoutes.quests.submissions, window.location.origin);
-  if (selectedQuest !== "all") url.searchParams.set("slug", selectedQuest);
-  url.searchParams.set("page", String(page));
-  url.searchParams.set("pageSize", String(pageSize));
-  return url.toString();
+  const params = new URLSearchParams();
+  if (selectedQuest !== "all") params.set("slug", selectedQuest);
+  params.set("page", String(page));
+  params.set("pageSize", String(pageSize));
+  return `${landlordApiRoutes.quests.submissions}?${params.toString()}`;
 };
 
 export const participantsKey = (
@@ -40,7 +40,8 @@ export const participantsKey = (
   pageSize = 10,
   type?: string,
 ) => {
-  if (type === "submission") return submissionsKey(selectedQuest, page, pageSize);
+  if (type === "submission")
+    return submissionsKey(selectedQuest, page, pageSize);
   return registrationsKey(selectedQuest, page, pageSize);
 };
 
@@ -73,7 +74,6 @@ function getFormatter(locale: string, options: Intl.DateTimeFormatOptions) {
   }
   return formattersCache[key];
 }
-
 
 export function formatDate(value?: string, locale: string = "fr-FR") {
   if (!value) return "N/A";
@@ -111,7 +111,10 @@ export function formatReaction(reaction: string) {
   return emoji ? `${emoji} ${capitalize(reaction)}` : capitalize(reaction);
 }
 
-export function formatDateTimePremium(value?: string, locale: string = "en-US") {
+export function formatDateTimePremium(
+  value?: string,
+  locale: string = "en-US",
+) {
   if (!value) return "N/A";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "N/A";
@@ -126,7 +129,7 @@ export function formatDateTimePremium(value?: string, locale: string = "en-US") 
     minute: "2-digit",
     hour12: true,
   }).format(date);
-  
+
   const parts = formatted.split(", ");
   if (parts.length >= 3) {
     const dayAndMonth = parts.slice(0, 2).join(", ");
@@ -136,7 +139,11 @@ export function formatDateTimePremium(value?: string, locale: string = "en-US") 
   return formatted;
 }
 
-export function formatCell(value: unknown, key?: string, locale: string = "fr-FR") {
+export function formatCell(
+  value: unknown,
+  key?: string,
+  locale: string = "fr-FR",
+) {
   if (value === null || value === undefined || value === "") return "N/A";
   if (typeof value === "string") {
     // Dates
@@ -144,8 +151,11 @@ export function formatCell(value: unknown, key?: string, locale: string = "fr-FR
       return formatDate(value, locale);
     }
     // Reactions (text-only for table cells)
-    if (key?.toLowerCase().includes("reaction") || key?.toLowerCase() === "type") {
-       if (REACTION_EMOJIS[value.toLowerCase() as ReactionType]) {
+    if (
+      key?.toLowerCase().includes("reaction") ||
+      key?.toLowerCase() === "type"
+    ) {
+      if (REACTION_EMOJIS[value.toLowerCase() as ReactionType]) {
         return formatReaction(value);
       }
     }
