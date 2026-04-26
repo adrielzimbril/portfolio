@@ -47,14 +47,6 @@ export function MessagesSection() {
 
   const displayMessages = messages;
 
-  if (isLoading) {
-    return (
-      <div className="text-center text-muted-foreground">
-        Chargement des messages...
-      </div>
-    );
-  }
-
   return (
     <>
       {/* Mobile: Grid layout */}

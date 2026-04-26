@@ -272,6 +272,7 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
               onClick={handleRecenter}
               className={cn(
                 "absolute right-4 top-4 z-10 flex items-center justify-center cursor-pointer",
+                "h-auto",
                 hasMoved
                   ? "opacity-100 pointer-cursor pointer-events-auto"
                   : "opacity-0 pointer-none pointer-events-none",

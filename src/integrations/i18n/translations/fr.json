@@ -1586,6 +1586,14 @@
       "description": "Abonne-toi pour ne rien manquer des nouveaux articles."
     }
   },
+  "rss-atom": {
+    "title": "RSS Atom",
+    "description": "Abonne-toi pour recevoir les articles directement dans ton lecteur RSS préféré."
+  },
+  "rss-json": {
+    "title": "RSS Json",
+    "description": "Abonne-toi pour recevoir les articles directement dans ton lecteur RSS préféré."
+  },
   "terms": {
     "title": "Conditions d'Utilisation",
     "description": "Les règles du jeu. Simple et honnête, comme l'esprit de ce portfolio.",
