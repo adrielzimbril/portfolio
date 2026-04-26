@@ -252,10 +252,10 @@ export function RegistrationsSection() {
                                   }}
                                 >
                                   <Edit size={14} />
-                                  {t("actions.edit")}
+                                  {tShared("edit")}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
-                                  className="text-red-500 focus:text-red-500"
+                                  className="text-red-500 hover:text-white !focus:text-white"
                                   onClick={async () => {
                                     if (
                                       window.confirm(t("actions.delete_registration_confirm"))
