@@ -27,6 +27,16 @@ export function TimelineSection() {
     improvement: 0,
   });
 
+  const handleTypeChange = (type: string) => {
+    setSelectedType(type);
+    setVisibleCount(3);
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setVisibleCount(3);
+  };
+
   React.useEffect(() => {
     const loadData = async () => {
       const data: Changelog[] = await getAllChangelog();
@@ -64,10 +74,6 @@ export function TimelineSection() {
   const visibleChangelog = filteredChangelog.slice(0, visibleCount);
   const hasMore = visibleCount < filteredChangelog.length;
 
-  React.useEffect(() => {
-    setVisibleCount(3);
-  }, [selectedType, searchQuery]);
-
   return (
     <>
       {/* Filter Modal */}
@@ -75,9 +81,9 @@ export function TimelineSection() {
         isOpen={isFilterModalOpen}
         onOpenChange={setIsFilterModalOpen}
         selectedType={selectedType}
-        onTypeChange={setSelectedType}
+        onTypeChange={handleTypeChange}
         searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
+        onSearchChange={handleSearchChange}
         onClearFilters={clearFilters}
         typeCounts={typeCounts}
       />
