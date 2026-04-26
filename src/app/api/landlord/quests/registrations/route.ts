@@ -6,6 +6,9 @@ import { appConfig } from "@/data/app-config";
 import { getQuestBySlug } from "@/integrations/content/lib";
 import { getResourcesUrl } from "@/utils/base-url";
 import { PageType } from "@/types";
+import { addContact, ContactProvider } from "@/integrations/contact";
+import { getBrevoConfig } from "@/config";
+import logger from "@/utils/logger";
 
 export async function GET(request: Request) {
   try {
@@ -61,33 +64,101 @@ export async function POST(request: Request) {
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
+    const db = supabase as any;
 
+    const quest = await getQuestBySlug(challenge_slug);
+    if (!quest) {
+      return NextResponse.json({ error: "QUEST_NOT_FOUND" }, { status: 404 });
+    }
+
+    // 1. User Upsert (Meticulous logic from public API)
+    let userId: string | undefined;
+    const { data: existingUser } = await db
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .limit(1);
+
+    const existingUserData = existingUser?.[0];
+    if (!existingUserData) {
+      const { data: userData } = await db.rpc("upsert_user", {
+        p_name: name,
+        p_email: email,
+        p_phone: "",
+      });
+      userId = userData?.id;
+    } else {
+      userId = existingUserData.id;
+    }
+
+    if (!userId) {
+      logger.error("landlord quest register: missing user_id after upsert_user", { email, challenge_slug });
+      return NextResponse.json({ error: "USER_UPSERT_FAILED" }, { status: 500 });
+    }
+
+    // 2. Registration Upsert
     const meta = {
       source: source || "admin",
       silent_add: !shouldSendEmail,
     };
 
-    const { data, error } = await supabase
+    const { data, error: registrationError } = await db
       .from("challenge_registrations")
-      .insert({
-        name,
-        email,
-        message,
-        challenge_slug,
-        meta,
-      })
+      .upsert(
+        {
+          challenge_slug,
+          user_id: userId,
+          name,
+          email,
+          message: message || null,
+          meta,
+        },
+        { onConflict: "challenge_slug,email" }
+      )
       .select()
       .single();
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (registrationError) {
+      return NextResponse.json({ error: registrationError.message }, { status: 500 });
     }
 
-    // Email Notifications Logic
+    // 3. Newsletter & Brevo (Meticulous logic from public API)
     try {
-      const quest = await getQuestBySlug(challenge_slug);
+      await db.from("newsletter_subscribers").upsert(
+        {
+          user_id: userId,
+          subscribed_from_page: JSON.stringify({
+            path: `/landlord/quests/registrations`,
+            source: "admin_dashboard",
+          }),
+          updateexisting: Boolean(existingUserData),
+        },
+        { onConflict: "user_id" }
+      );
+
+      const brevoConfig = getBrevoConfig();
+      const globalListId = Number(brevoConfig.generalListId);
+      const registerListId = Number(brevoConfig.questsRegisterId);
+      const listIds = [globalListId, registerListId].filter(
+        (id): id is number => Boolean(id) && !Number.isNaN(id),
+      );
+
+      if (listIds.length > 0) {
+        await addContact({
+          email,
+          firstName: name,
+          listIds,
+          provider: ContactProvider.BREVO,
+        });
+      }
+    } catch (newsError) {
+      logger.error("landlord quest register: newsletter/brevo failed", newsError);
+    }
+
+    // 4. Email Notifications
+    try {
       const challengeUrl = getResourcesUrl(PageType.QUESTS, challenge_slug);
-      const questTitle = quest?.title || challenge_slug;
+      const questTitle = quest.title;
 
       // Always notify admin
       await sendEmail({
@@ -116,12 +187,12 @@ export async function POST(request: Request) {
         });
       }
     } catch (emailError) {
-      console.error("Failed to send notification emails:", emailError);
-      // We don't fail the request if emails fail, as the registration was already saved
+      logger.error("landlord quest register: emails failed", emailError);
     }
 
     return NextResponse.json({ registration: data });
   } catch (error) {
+    logger.error("landlord quest register: failed", error);
     return NextResponse.json(
       { error: "Failed to add registration" },
       { status: 500 },

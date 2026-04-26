@@ -216,20 +216,22 @@ export function ParticipantModal({
               />
             </div>
           )}
-          <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/[0.02] p-4">
-            <div>
-              <p className="text-sm font-medium">Envoyer un email</p>
-              <p className="text-xs text-black/45">
-                Désactivé par défaut pour les ajouts manuels.
-              </p>
+          {type === "register" && (
+            <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/[0.02] p-4">
+              <div>
+                <p className="text-sm font-medium">Envoyer un email</p>
+                <p className="text-xs text-black/45">
+                  Désactivé par défaut pour les ajouts manuels.
+                </p>
+              </div>
+              <Switch
+                checked={form.sendEmail}
+                onCheckedChange={(checked) =>
+                  setForm((current) => ({ ...current, sendEmail: checked }))
+                }
+              />
             </div>
-            <Switch
-              checked={form.sendEmail}
-              onCheckedChange={(checked) =>
-                setForm((current) => ({ ...current, sendEmail: checked }))
-              }
-            />
-          </div>
+          )}
           <DialogFooter>
             <Button
               type="button"
