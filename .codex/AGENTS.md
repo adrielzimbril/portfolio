@@ -18,15 +18,16 @@ Keep it short, specific, and updated whenever user feedback corrects an assumpti
 ## Project Conventions
 
 - Naming:
-  - `thoughts` = blog
-  - `talks` = masterclasses/talks
+  - `thoughts` = blog (réflexions)
+  - `talks` = masterclasses/talks (conférences)
   - `quests` = challenges (route in EN, FR copy can say "challenge")
 - Quests flow:
-  - info page
-  - register page (`/quests/[slug]/register`)
-  - submit page (`/quests/[slug]/submit`)
+  - info page `/quests/[slug]`
+  - register page `/quests/[slug]/register`
+  - submit page `/quests/[slug]/submit`
   - respect registration/submission deadlines
 - MDX-first for editorial quest data (`rewards`, `winners`) unless backend is explicitly required.
+- Use `logger` from `@/utils/logger` instead of `console` for logging (logger.error, logger.warn, logger.info, etc.).
 
 ## UI / Components
 
@@ -44,9 +45,10 @@ Keep it short, specific, and updated whenever user feedback corrects an assumpti
 ## i18n Rules
 
 - Any new key used in UI/mail must exist in:
-  - `fr.json`
-  - `en.json`
-  - `zh-CN.json`
+  - `src/integrations/i18n/translations/fr.json`
+  - `src/integrations/i18n/translations/en.json`
+  - `src/integrations/i18n/translations/zh-CN.json`
+- Use `useTranslations()` for client components and `getTranslations()` for server components (next-intl).
 - If FR source text is corrected, EN/ZH must be translated from that FR source intent.
 
 ## Encoding Safety (Critical)

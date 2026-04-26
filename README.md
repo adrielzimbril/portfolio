@@ -16,21 +16,35 @@ Portfolio professionnel d'**Adriel Zimbril**, développeur Fullstack passionné 
 
 ### 📱 Sections principales
 
-1. **Accueil** - Présentation personnelle et mise en avant des projets
+1. **Accueil** - Présentation personnelle et mise en avant des projets, ressources, réflexions
 2. **Projets** - Portfolio de réalisations avec détails techniques
 3. **À propos** - Parcours professionnel et compétences
-4. **Blog** - Articles et réflexions sur le développement
-5. **Contact** - Formulaire de contact et réseaux sociaux
+4. **Réflexions (Blog)** - Articles et réflexions sur le développement
+5. **Ressources (Hub)** - Formations, e-books, vidéos, templates, code
+6. **Challenges (Quests)** - Challenges créatifs avec inscription et soumission
+7. **Conférences (Talks)** - Masterclasses et sessions en ligne
+8. **Connexions** - Réseau et personnes rencontrées
+9. **Contact** - Formulaire de contact et réseaux sociaux
+10. **Livre d'Or (Community)** - Messages des visiteurs
+11. **Statistiques** - Métriques et performance du site
+12. **Changelog** - Historique des évolutions
+13. **Newsletter** - Inscription à la newsletter
+14. **Soumettre un projet** - Formulaire pour le ShiroSaaS Lab
+15. **Outils (Toolbox)** - Stack et setup de développement
+16. **Plan du site (Routes)** - Navigation complète
+17. **RSS** - Flux RSS du site
+18. **Légal** - Politique de confidentialité et CGU
 
 ### 🛠️ Stack technique
 
-- **Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
+- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS 4
 - **Backend**: API Routes, Server Components
 - **Base de données**: Supabase
-- **Authentification**: NextAuth.js
+- **Authentification**: Better Auth
 - **Déploiement**: Vercel
 - **CI/CD**: GitHub Actions
-- **Autres outils**: Radix UI, React Hook Form, Zod, React Email
+- **Tâches planifiées**: Trigger.dev
+- **Autres outils**: Radix UI, React Hook Form, Zod, React Email, Motion, Lenis
 
 ## 🚀 Installation et démarrage
 
@@ -47,13 +61,13 @@ Portfolio professionnel d'**Adriel Zimbril**, développeur Fullstack passionné 
 git clone [url-du-repo]
 
 # Se déplacer dans le répertoire du projet
-cd adrielzimbril.com
+cd shirofolio
 
 # Installer les dépendances
 pnpm install
 
 # Copier le fichier d'environnement exemple
-cp .env.local.example .env.local
+cp .env.example .env.local
 
 # Configurer les variables d'environnement dans .env.local
 
@@ -70,21 +84,41 @@ pnpm run dev:all
 src/
 ├── app/                    # Routes de l'application (App Router)
 │   ├── (base)/            # Layout de base avec navigation
+│   │   ├── (home)/        # Page d'accueil
 │   │   ├── about/         # Page À propos
+│   │   ├── changelog/     # Page Changelog
+│   │   ├── community/     # Page Livre d'Or
+│   │   ├── connections/   # Page Connexions
 │   │   ├── contact/       # Page Contact
+│   │   ├── hub/           # Page Ressources
+│   │   ├── legal/         # Pages légales (privacy, terms)
+│   │   ├── newsletter/    # Page Newsletter
 │   │   ├── projects/      # Page Projets
-│   │   └── thoughts/      # Blog et articles
+│   │   ├── quests/        # Page Challenges
+│   │   ├── routes/        # Page Plan du site
+│   │   ├── rss/           # Pages RSS
+│   │   ├── stats/         # Page Statistiques
+│   │   ├── submit/        # Page Soumettre projet
+│   │   ├── talks/         # Page Conférences
+│   │   ├── thoughts/      # Page Blog (réflexions)
+│   │   └── toolbox/       # Page Outils/Setup
 │   ├── api/               # Routes API
-│   └── layout.tsx         # Layout racine
+│   ├── landlord/          # Section admin (dashboard)
+│   ├── image-proxy/       # Proxy d'images
+│   ├── globals.css        # Styles globaux
+│   ├── layout.tsx         # Layout racine
+│   └── metadata.ts        # Métadonnées globales
 ├── components/            # Composants réutilisables
-│   ├── shiro/            # Composants personnalisés
+│   ├── aurthle/          # Composants Aurthle
+│   ├── landlord/         # Composants admin
 │   ├── shared/           # Composants partagés
-│   └── ui/               # Composants d'interface utilisateur
+│   └── ui/               # Composants d'interface utilisateur (Radix UI)
 ├── config/               # Configuration de l'application
-├── content/              # Contenu statique (MDX, etc.)
+├── content/              # Contenu statique (MDX, changelog, etc.)
+├── data/                 # Données statiques (routes, config, etc.)
+├── hooks/                # Hooks React personnalisés
+├── integrations/         # Intégrations (Supabase, i18n, etc.)
 ├── lib/                  # Utilitaires et helpers
-├── integrations/               # Logique métier
-├── services/             # Services externes
 ├── types/                # Définitions TypeScript
 └── utils/                # Utilitaires divers
 ```
@@ -103,52 +137,62 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+
+# Better Auth
+BETTER_AUTH_SECRET=your-better-auth-secret
+BETTER_AUTH_URL=http://localhost:3000
+
+# Email (Brevo)
+BREVO_API_KEY=your-brevo-api-key
+RESEND_API_KEY=your-resend-api-key
+
+# AWS S3 (optionnel)
+S3_ACCESS_KEY_ID=your-aws-access-key
+S3_SECRET_ACCESS_KEY=your-aws-secret-key
+S3_REGION=your-aws-region
+S3_BUCKET_NAME=your-bucket-name
+
+# Google Analytics (optionnel)
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=your-ga-id
+
+# Trigger.dev (optionnel)
+TRIGGER_SECRET_KEY=your-trigger-secret-key
 ```
 
 ### Commandes Supabase
 
 ```bash
-# Générer les types TypeScript depuis la base de données liée
-npx supabase gen types typescript --linked > src/integrations/supabase/types.ts
-
 # Appliquer les migrations locales à la base de données distante
-npx supabase db push
+pnpm db:push
 
-# Mettre à jour les migrations locales depuis la base de données distante
-npx supabase db pull
+# Générer les types TypeScript depuis la base de données liée
+pnpm db:types
 
-# Authentification
-NEXTAUTH_SECRET=your-nextauth-secret
-NEXTAUTH_URL=http://localhost:3000
+# Réinitialiser la base de données locale
+pnpm db:reset
 
-# Autres services
-BREVO_API_KEY=your-brevo-api-key
-AWS_ACCESS_KEY_ID=your-aws-access-key
-AWS_SECRET_ACCESS_KEY=your-aws-secret-key
-AWS_REGION=your-aws-region
-AWS_BUCKET_NAME=your-bucket-name
+# Voir les différences entre migrations locales et base distante
+pnpm db:diff
 ```
 
 ### Styles
 
 Le projet utilise Tailwind CSS avec des couleurs personnalisées et des utilitaires. Les styles globaux se trouvent dans `src/app/globals.css`.
 
-## 🌍 Traductions (lobe-i18n)
+## 🌍 Traductions (next-intl)
 
-Utilise `lobe-i18n` selon le type de contenu :
+Le projet utilise `next-intl` pour l'internationalisation.
 
-- `npx lobe-i18n`
-  - Pour les fichiers de traduction (`fr/en/zh-CN`) et les données personnalisées (témoignages, contenus métier), selon la config.
-- `npx lobe-i18n md`
-  - Pour les contenus Markdown.
+- Les fichiers de traduction se trouvent dans `src/integrations/i18n/translations/`
+- Langues supportées : `fr.json`, `en.json`, `zh-CN.json`
+- Utilisez `useTranslations()` dans les composants client
+- Utilisez `getTranslations()` dans les composants serveur
 
-Sélection via config :
+Pour ajouter une nouvelle clé de traduction :
 
-- `markdown` pour les contenus éditoriaux :
-  - `.mdx` (blog et contenus de pages)
-  - `.md` (tags et données de base de liaison)
-- `json`/fichiers de langues pour la traduction UI.
-- `json`/données personnelles pour les témoignages et autres datasets.
+1. Ajoutez la clé dans `fr.json` (source)
+2. Traduisez dans `en.json` et `zh-CN.json`
+3. Utilisez la clé dans votre composant
 
 ## 🌌 Rencontrons-nous dans l'espace (ou sur Terre) 🚀
 
