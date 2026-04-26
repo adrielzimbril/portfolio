@@ -11,8 +11,8 @@
   /* Base colors */
   --color-base-white: var(--base-white);
 
-	/* Custom colors */
-	--color-b-base: var(--b-base);
+  /* Custom colors */
+  --color-b-base: var(--b-base);
   --color-b-base-second: var(--b-base-second);
   --color-b-base-it: var(--b-base-it);
   --color-b-white: var(--b-white);
@@ -64,100 +64,101 @@
 }
 
 @layer utilities {
-	:root {
-	/* Base colors */
-	--base-white: rgba(255, 255, 255, 1);
+  :root {
+    /* Base colors */
+    --base-white: rgba(255, 255, 255, 1);
 
-	/* Custom colors */
-  --b-base: var(--color-stone-100);
-  --b-base-second: var(--color-neutral-100);
-  --b-base-it: var(--color-zinc-50);
-  --b-white: var(--color-white);
-  --sh-white: var(--color-white);
-  --sh-base-white: var(--color-white);
-  --b-white-foreground: var(--color-zinc-700);
-  --b-white-unchanged: var(--color-zinc-800);
-  --b-black-unchanged: var(--color-zinc-100);
-  --b-white-invert: var(--color-zinc-800);
-  --b-white-invert-sec: var(--color-zinc-600);
-  --b-white-invert-thr: var(--color-zinc-500);
-  --b-white-invert-fr: var(--color-zinc-200);
-  --b-white-invert-qr: var(--color-stone-200);
-  --b-base-accent: var(--color-zinc-200);
+    /* Custom colors */
+    --b-base: var(--color-stone-100);
+    --b-base-second: var(--color-neutral-100);
+    --b-base-it: var(--color-zinc-50);
+    --b-white: var(--color-white);
+    --sh-white: var(--color-white);
+    --sh-base-white: var(--color-white);
+    --b-white-foreground: var(--color-zinc-700);
+    --b-white-unchanged: var(--color-zinc-800);
+    --b-black-unchanged: var(--color-zinc-100);
+    --b-white-invert: var(--color-zinc-800);
+    --b-white-invert-sec: var(--color-zinc-600);
+    --b-white-invert-thr: var(--color-zinc-500);
+    --b-white-invert-fr: var(--color-zinc-200);
+    --b-white-invert-qr: var(--color-stone-200);
+    --b-base-accent: var(--color-zinc-200);
 
-	/* Design system colors - Light mode */
-	--background: hsl(0 0% 100%);
-	--foreground: hsl(222.2 47.4% 11.2%);
-  --color-white: hsl(0 0% 100%);
-	--muted: hsl(210 40% 96.1%);
-	--muted-foreground: hsl(215.4 16.3% 46.9%);
-	--popover: hsl(0 0% 100%);
-	--popover-foreground: hsl(222.2 47.4% 11.2%);
-	--border: var(--color-zinc-200);
-	--input: var(--color-zinc-200);
-	--card: transparent;
-	--card-foreground: hsl(222.2 47.4% 11.2%);
-	--primary: var(--color-zinc-800);
-	--primary-foreground: var(--color-white);
-	--secondary: var(--color-zinc-100);
-	--secondary-foreground: var(--color-zinc-800);
-	--accent: var(--color-zinc-800);
-	--accent-foreground: var(--color-white);
-	--destructive: hsl(0 100% 50%);
-	--destructive-foreground: hsl(210 40% 98%);
-	--ring: hsl(215 20.2% 65.1%);
+    /* Design system colors - Light mode */
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(222.2 47.4% 11.2%);
+    --color-white: hsl(0 0% 100%);
+    --muted: hsl(210 40% 96.1%);
+    --muted-foreground: hsl(215.4 16.3% 46.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(222.2 47.4% 11.2%);
+    --border: var(--color-zinc-200);
+    --input: var(--color-zinc-200);
+    --card: transparent;
+    --card-foreground: hsl(222.2 47.4% 11.2%);
+    --primary: var(--color-zinc-800);
+    --primary-foreground: var(--color-white);
+    --secondary: var(--color-zinc-100);
+    --secondary-foreground: var(--color-zinc-800);
+    --accent: var(--color-zinc-800);
+    --accent-foreground: var(--color-white);
+    --destructive: hsl(0 100% 50%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --ring: hsl(215 20.2% 65.1%);
 
-	/* Shadows */
-	--elevation-02: 0px 16px 24px 0px rgba(0, 0, 0, 0.12);
+    /* Shadows */
+    --elevation-02: 0px 16px 24px 0px rgba(0, 0, 0, 0.12);
 
-	/* Radius */
-	--radius: 0.5rem;
-	}
+    /* Radius */
+    --radius: 0.5rem;
+  }
 
-	.dark {
-	/* Custom colors */
-  --b-base: var(--color-zinc-900);
-  --b-base-second: var(--color-neutral-900);
-  --b-base-it: var(--color-zinc-900);
-  --b-white: var(--color-zinc-800);
-  --sh-white: var(--color-zinc-800);
-  --sh-base-white: var(--color-zinc-800);
-  --b-white-foreground: var(--color-zinc-300);
-  --b-white-unchanged: var(--color-zinc-800);
-  --b-black-unchanged: var(--color-zinc-100);
-  --b-white-invert: var(--color-white);
-  --b-white-invert-sec: var(--color-zinc-200);
-  --b-white-invert-thr: var(--color-zinc-400);
-  --b-white-invert-fr: var(--color-zinc-700);
-  --b-white-invert-qr: hsl(0 0% 6.67%);
-  --b-base-accent: var(--color-zinc-500);
+  .dark {
+    /* Custom colors */
+    --b-base: var(--color-zinc-900);
+    --b-base-second: var(--color-neutral-900);
+    --b-base-it: var(--color-zinc-900);
+    --b-white: var(--color-zinc-800);
+    --sh-white: var(--color-zinc-800);
+    --sh-base-white: var(--color-zinc-800);
+    --b-white-foreground: var(--color-zinc-300);
+    --b-white-unchanged: var(--color-zinc-800);
+    --b-black-unchanged: var(--color-zinc-100);
+    --b-white-invert: var(--color-white);
+    --b-white-invert-sec: var(--color-zinc-200);
+    --b-white-invert-thr: var(--color-zinc-400);
+    --b-white-invert-fr: var(--color-zinc-700);
+    --b-white-invert-qr: hsl(0 0% 6.67%);
+    --b-base-accent: var(--color-zinc-500);
 
-	/* Design system colors - Dark mode */
-	--background: var(--color-neutrals-900);
-	--foreground: hsl(213 31% 91%);
-  --color-white: hsl(0 0% 100%);
-	--muted: hsl(223 47% 11%);
-	--muted-foreground: hsl(215.4 16.3% 56.9%);
-	--accent: hsl(216 34% 17%);
-	--accent-foreground: hsl(210 40% 98%);
-	--popover: hsl(224 71% 4%);
-	--popover-foreground: hsl(215 20.2% 65.1%);
-	--border: hsl(216 34% 17%);
-	--input: hsl(216 34% 17%);
-	--card: transparent;
-	--card-foreground: hsl(213 31% 91%);
-	--primary: var(--color-zinc-950);
-	--primary-foreground: var(--color-white);
-	--secondary: hsl(222.2 47.4% 11.2%);
-	--secondary-foreground: hsl(210 40% 98%);
-	--destructive: hsl(0 63% 31%);
-	--destructive-foreground: hsl(210 40% 98%);
-	--ring: hsl(216 34% 17%);
-	}
+    /* Design system colors - Dark mode */
+    --background: var(--color-neutrals-900);
+    --foreground: hsl(213 31% 91%);
+    --color-white: hsl(0 0% 100%);
+    --muted: hsl(223 47% 11%);
+    --muted-foreground: hsl(215.4 16.3% 56.9%);
+    --accent: hsl(216 34% 17%);
+    --accent-foreground: hsl(210 40% 98%);
+    --popover: hsl(224 71% 4%);
+    --popover-foreground: hsl(215 20.2% 65.1%);
+    --border: hsl(216 34% 17%);
+    --input: hsl(216 34% 17%);
+    --card: transparent;
+    --card-foreground: hsl(213 31% 91%);
+    --primary: var(--color-zinc-950);
+    --primary-foreground: var(--color-white);
+    --secondary: hsl(222.2 47.4% 11.2%);
+    --secondary-foreground: hsl(210 40% 98%);
+    --destructive: hsl(0 63% 31%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --ring: hsl(216 34% 17%);
+  }
 }
 
 @theme {
-  --animate-loading-progress: loading-progress 2s ease-in-out 0s infinite normal none running;
+  --animate-loading-progress: loading-progress 2s ease-in-out 0s infinite normal
+    none running;
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-collapsible-down: collapsible-down 0.2s ease-out;
@@ -176,9 +177,15 @@
   }
 
   @keyframes loading-progress {
-    0% { width: 0%; }
-    50% { width: 70%; }
-    100% { width: 100%; }
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 70%;
+    }
+    100% {
+      width: 100%;
+    }
   }
   @keyframes accordion-down {
     from {
@@ -251,7 +258,7 @@
   *:not(input):not(textarea):not(select):not(button):not([class*="border"])::before,
   *:not(input):not(textarea):not(select):not(button):not([class*="border"])::backdrop,
   *:not(input):not(textarea):not(select):not(button):not([class*="border"])::file-selector-button,
-  /* Réinclude border-none et border-0 */
+  /* Reinclude border-none et border-0 */
   .border-none:not(input):not(textarea):not(select):not(button),
   .border-none:not(input):not(textarea):not(select):not(button)::after,
   .border-none:not(input):not(textarea):not(select):not(button)::before,
@@ -266,21 +273,24 @@
   }
 
   @supports not (background: paint(squircle)) {
-    [class*="squircle-5xl"], [class*="squircle-6xl"]:not(.text-card-foreground), [class*="squircle-7xl"] {
-      border-radius: var(--squircle-border-radius-2xl)!important;
+    [class*="squircle-5xl"],
+    [class*="squircle-6xl"]:not(.text-card-foreground),
+    [class*="squircle-7xl"] {
+      border-radius: var(--squircle-border-radius-2xl) !important;
     }
   }
 
   [class*="squircle-"] {
-    @supports (color: color-mix(in lab,red,red)) {
+    @supports (color: color-mix(in lab, red, red)) {
       --squircle-background-colors: inherit;
     }
   }
 
-  html body .squircle-sh-white, .squircle-sh-white {
-    --squircle-background-color: var(--sh-white)!important;
-    @supports (color: color-mix(in lab,red,red)) {
-      --squircle-background-color: var(--sh-white)!important;
+  html body .squircle-sh-white,
+  .squircle-sh-white {
+    --squircle-background-color: var(--sh-white) !important;
+    @supports (color: color-mix(in lab, red, red)) {
+      --squircle-background-color: var(--sh-white) !important;
     }
   }
 
@@ -394,24 +404,26 @@
     @apply text-[0.875rem] font-medium mb-2 block;
   }
 
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     @apply text-sm;
   }
 }
 
 @utility container {
-	margin-inline: auto;
-	padding-inline: 1.5rem;
-	width: 100%;
-	max-width: var(--container-7xl);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  width: 100%;
+  max-width: var(--container-7xl);
 }
 
 @utility no-scrollbar {
-	&::-webkit-scrollbar {
-		display: none;
-	}
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 input,

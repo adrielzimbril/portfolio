@@ -15,27 +15,18 @@ interface BotProtectorProps {
 
 export function BotProtector({ children }: BotProtectorProps) {
   const t = useTranslations("admin.bot_protector");
-  const [isVerified, setIsVerified] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const isLocalMode = isLocal();
 
-  // Check if we already have a session verification or if we are in local mode
-  useEffect(() => {
-    if (isLocalMode) {
-      setIsVerified(true);
-      setIsLoading(false);
-      return;
-    }
+  const sessionVerified =
+    !isLocalMode && sessionStorage.getItem("shiro_bot_verified") === "true";
 
-    const sessionVerified =
-      sessionStorage.getItem("shiro_bot_verified") === "true";
-    if (sessionVerified) {
-      setIsVerified(true);
-      setIsLoading(false);
-    }
-  }, [isLocalMode]);
+  const [isVerified, setIsVerified] = useState<boolean>(
+    isLocalMode || sessionVerified,
+  );
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(
+    !isLocalMode && !sessionVerified,
+  );
 
   const handleVerify = (token: string) => {
     if (token) {
