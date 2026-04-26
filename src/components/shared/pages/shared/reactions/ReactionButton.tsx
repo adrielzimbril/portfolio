@@ -119,6 +119,7 @@ export function ReactionButton({
           "group/reaction relative flex items-center justify-center cursor-pointer",
           "capitalize text-xs font-medium",
           "squircle-border-2",
+          "squircle-sh-white",
           pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
           "size-max text-primary-foreground!",
           isReacted ? "squircle-border-[#8e8eff]" : "squircle-border-[#b3baf5]",
@@ -147,11 +148,11 @@ export function ReactionButton({
             className={cn(
               "absolute font-bold squircle squircle-xl squircle-border-1",
               isReacted
-                ? "squircle-sh-white text-indigo-500 squircle-border-[#8e8eff]"
+                ? "squircle-[#8e8eff] text-primary-foreground! squircle-border-[#8e8eff]"
                 : "squircle-[#8e8eff] text-primary-foreground! squircle-border-sh-white",
               compact
                 ? "-bottom-1.5 text-[.5rem] px-1 py-0.5"
-                : "-bottom-1 text-[.625rem] px-1.5 py-0.5",
+                : "-bottom-2 text-[.8rem] px-2 py-1",
             )}
           >
             {reactionCount}

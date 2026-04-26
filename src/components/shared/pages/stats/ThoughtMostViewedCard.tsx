@@ -140,7 +140,7 @@ export function ThoughtMostViewedCard({
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-32 bg-linear-to-t from-sh-white via-sh-white/80 to-transparent transition-colors group-hover:from-white group-hover:via-white/80" />
             </div>
           </Link>
-          <div className="relative flex flex-col items-start justify-between gap-4 md:gap-6 size-full pointer-events-none">
+          <div className="relative z-20 flex flex-col items-start justify-between gap-4 md:gap-6 size-full">
             <div className="flex flex-col items-start justify-center gap-4">
               <Badge className={cn("relative font-medium")} size="xl">
                 {t("stats.cards.mostViewed.badge")}
