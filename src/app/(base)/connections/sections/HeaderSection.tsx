@@ -24,7 +24,6 @@ export function HeaderSection() {
     <PageHero
       title={t("connections.page.header-section.title")}
       description={t("connections.page.header-section.description")}
-      badge={t("connections.page.header-section.badge")}
       imagePath={{ emoji: "🔗" }}
       isMobileShowed
     />

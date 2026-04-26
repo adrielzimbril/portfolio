@@ -5,7 +5,12 @@ import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
-import { getExternalUrl, getMachineDate, pickRandomColorCode } from "@/utils";
+import {
+  getExternalUrl,
+  getMachineDate,
+  pickRandomColorCode,
+  getIsToday,
+} from "@/utils";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import BoringAvatar from "boring-avatars";
 import { useTranslations } from "use-intl";
@@ -35,8 +40,7 @@ export function CardInfo({
   const [currentTime] = useState(() => Date.now());
   const t = useTranslations();
   const isDatePast = currentTime >= new Date(getMachineDate(date)).getTime();
-  const isToday =
-    new Date(getMachineDate(date)).getDate() === new Date().getDate();
+  const isToday = getIsToday(date);
   const shouldShow = isDatePast || isToday || participantsCount > 0;
 
   return (

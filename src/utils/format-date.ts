@@ -376,7 +376,10 @@ export function getHumanDate(dateString: string, withTime?: boolean): string {
  * getMachineDate("2026年4月25日 14:30"); // returns "2026-04-25T14:30:00[Europe/Paris]"
  * getMachineDate("2026-04-25T14:30:00Z"); // returns "2026-04-25T14:30:00[Europe/Paris]"
  */
-export function getMachineDate(dateString: string, withTimezone: boolean = false): string {
+export function getMachineDate(
+  dateString: string,
+  withTimezone: boolean = false,
+): string {
   // Try to parse directly (works for ISO, timestamps, etc)
   let date = new Date(dateString);
 
@@ -388,23 +391,62 @@ export function getMachineDate(dateString: string, withTimezone: boolean = false
 
     if (numberMatch) {
       const [, day, monthOrNum, year, hours = "0", minutes = "0"] = numberMatch;
-      
+
       let month = Number(monthOrNum);
-      
+
       // Si ce n'est pas un nombre, c'est le nom du mois
       if (isNaN(month)) {
         const monthNames: { [key: string]: number } = {
           // Français
-          janvier: 1, février: 2, mars: 3, avril: 4, mai: 5, juin: 6,
-          juillet: 7, août: 8, septembre: 9, octobre: 10, novembre: 11, décembre: 12,
+          janvier: 1,
+          février: 2,
+          mars: 3,
+          avril: 4,
+          mai: 5,
+          juin: 6,
+          juillet: 7,
+          août: 8,
+          septembre: 9,
+          octobre: 10,
+          novembre: 11,
+          décembre: 12,
           // Anglais
-          january: 1, february: 2, march: 3, april: 4, may: 5, june: 6,
-          july: 7, august: 8, september: 9, october: 10, november: 11, december: 12,
-          jan: 1, feb: 2, mar: 3, apr: 4, jun: 6,
-          jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
+          january: 1,
+          february: 2,
+          march: 3,
+          april: 4,
+          may: 5,
+          june: 6,
+          july: 7,
+          august: 8,
+          september: 9,
+          october: 10,
+          november: 11,
+          december: 12,
+          jan: 1,
+          feb: 2,
+          mar: 3,
+          apr: 4,
+          jun: 6,
+          jul: 7,
+          aug: 8,
+          sep: 9,
+          oct: 10,
+          nov: 11,
+          dec: 12,
           // Chinois
-          一月: 1, 二月: 2, 三月: 3, 四月: 4, 五月: 5, 六月: 6,
-          七月: 7, 八月: 8, 九月: 9, 十月: 10, 十一月: 11, 十二月: 12,
+          一月: 1,
+          二月: 2,
+          三月: 3,
+          四月: 4,
+          五月: 5,
+          六月: 6,
+          七月: 7,
+          八月: 8,
+          九月: 9,
+          十月: 10,
+          十一月: 11,
+          十二月: 12,
         };
         month = monthNames[monthOrNum?.toLowerCase() || ""] || 1;
       }
@@ -427,4 +469,25 @@ export function getMachineDate(dateString: string, withTimezone: boolean = false
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   return withTimezone ? `${isoDate}[${timezone}]` : isoDate;
+}
+
+/**
+ * Check if a date string is today
+ *
+ * @param dateString - The date string to check
+ *
+ * @returns A boolean indicating if the date is today
+ *
+ * @example
+ * getIsToday("2023-01-01") // returns false
+ * getIsToday("2026-04-25") // returns true (if today is 2026-04-25)
+ */
+export function getIsToday(dateString: string): boolean {
+  const d = new Date(getMachineDate(dateString));
+  const today = new Date();
+  return (
+    d.getDate() === today.getDate() &&
+    d.getMonth() === today.getMonth() &&
+    d.getFullYear() === today.getFullYear()
+  );
 }
