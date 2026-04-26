@@ -251,9 +251,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
       }
 
       // Show playful toast
-      toast.success("🎉 Super ! Tu vas être redirigé vers la page produit...", {
-        timeout: 2000,
-      });
+      toast.success(
+        t("common.page-sections.newsletter.form.success.redirect"),
+        {
+          timeout: 2000,
+        },
+      );
 
       setTimeout(() => {
         onClose();

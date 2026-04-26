@@ -11,12 +11,12 @@ import { landlordRoutes } from "@/data/landlordRoutes";
 import { LoginSection } from "./sections/LoginSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations("admin.login");
 
   return {
     ...baseMetadata,
-    title: "[ROOT] // AUTHENTICATION_TERMINAL",
-    description: "Portail d'accès privé. Authentification Racine requise pour la mutation des nœuds de données.",
+    title: t("title"),
+    description: t("description"),
     robots: {
       index: false,
       follow: false,

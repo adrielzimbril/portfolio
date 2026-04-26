@@ -944,6 +944,7 @@
         "presentation": "Présentation",
         "results": "Résultats",
         "role": "Rôle",
+        "heading_presentation": "Présentation",
         "stack": "Stack",
         "duration": "Durée",
         "language": "Langue",
@@ -1220,7 +1221,8 @@
             "message": {
               "title": "Merci pour votre inscription !",
               "description": "Vos informations ont été mises à jour avec succès. Merci ! 🎉"
-            }
+            },
+            "redirect": "🎉 Super ! Tu vas être redirigé vers la page produit..."
           }
         }
       },
@@ -1651,6 +1653,8 @@
     "title": "Connexion",
     "description": "Authentification requise pour accéder à cette zone.",
     "login": {
+      "title": "[ROOT] // AUTHENTICATION_TERMINAL",
+      "description": "Portail d'accès privé. Authentification Racine requise pour la mutation des nœuds de données.",
       "continue_github": "Continuer avec GitHub",
       "continue_google": "Continuer avec Google",
       "kernel_pulse_description": "Mutation de paquets et orchestration des flux critiques avec une latence proche de zéro.",
@@ -1722,6 +1726,15 @@
       },
       "home": {
         "description": "Console centrale sécurisée pour le monitoring de l'écosystème Shiro."
+      },
+      "quests_registrations": {
+        "description": "Registre des inscriptions aux protocoles de quêtes."
+      },
+      "quests_submissions": {
+        "description": "Monitoring des soumissions aux protocoles de quêtes."
+      },
+      "hub_requests": {
+        "description": "Monitoring des flux entrants du Hub Shiro."
       }
     },
     "bot_protector": {
@@ -1756,7 +1769,7 @@
         },
         "users": {
           "label": "Users",
-          "description": "Contacts et comptes"
+          "description": "Contacts et comptes enregistrés."
         },
         "submissions": {
           "label": "Submissions",
@@ -1764,7 +1777,7 @@
         },
         "reactions": {
           "label": "Reactions",
-          "description": "Engagement contenu"
+          "description": "Engagement et réactions sur les contenus du site."
         }
       }
     },

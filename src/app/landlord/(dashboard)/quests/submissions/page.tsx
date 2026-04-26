@@ -5,12 +5,12 @@ import { metadata as baseMetadata } from "@/app/metadata";
 import { QuestSubmissionsSection } from "./sections/QuestSubmissionsSection";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations("admin.pages.quests_submissions");
 
   return {
     ...baseMetadata,
     title: "[ROOT] // QUEST_SUBMISSIONS",
-    description: "Monitoring des soumissions aux protocoles de quêtes.",
+    description: t("description"),
     robots: {
       index: false,
       follow: false,

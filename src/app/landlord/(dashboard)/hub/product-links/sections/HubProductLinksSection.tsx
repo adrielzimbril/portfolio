@@ -218,8 +218,8 @@ export function HubProductLinksSection() {
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
                 icon={AlertCircle}
-                title="Aucune ressource trouvée"
-                description="Vérifiez vos content collections ou contactez l'admin."
+                title={t("messages.no_resources")}
+                description={t("messages.no_resources_desc")}
               />
             </div>
           )}

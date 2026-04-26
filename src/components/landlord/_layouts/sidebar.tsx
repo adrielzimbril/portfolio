@@ -73,9 +73,9 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed inset-y-3 left-3 z-40 bg-[#11191f] p-4 text-white transition-all duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full rounded-2xl",
+        "fixed inset-y-3 left-3 z-40 bg-[#11191f] p-4 text-white transition-all duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full rounded-2xl overflow-hidden",
         sidebarOpen && "translate-x-0 -translate-x-[calc(100%+1rem)]",
-        collapsed ? "w-20" : "w-72",
+        collapsed ? "w-0 opacity-0 p-0" : "w-72 opacity-100",
       )}
     >
       {/* Logo */}
@@ -84,12 +84,10 @@ export function Sidebar({
           <div className="flex size-10 items-center justify-center rounded-xl bg-white text-[#11191f] shrink-0">
             <ShieldCheck size={19} />
           </div>
-          {!collapsed && (
-            <div>
-              <p className="text-sm font-semibold">{t("title")}</p>
-              <p className="text-xs text-white/45">{t("subtitle")}</p>
-            </div>
-          )}
+          <div>
+            <p className="text-sm font-semibold">{t("title")}</p>
+            <p className="text-xs text-white/45">{t("subtitle")}</p>
+          </div>
         </div>
         <Button
           variant="none"
@@ -127,7 +125,6 @@ export function Sidebar({
             icon={LayoutDashboard}
             label={t("items.dashboard.label")}
             onClick={() => setSidebarOpen(false)}
-            collapsed={collapsed}
           />
 
           {/* Quest group */}
@@ -138,7 +135,6 @@ export function Sidebar({
             isActive={isQuestsGroupActive}
             onNavClick={() => setSidebarOpen(false)}
             isActiveCheck={isActive}
-            collapsed={collapsed}
           />
 
           {/* Hub group */}
@@ -149,7 +145,6 @@ export function Sidebar({
             isActive={isHubGroupActive}
             onNavClick={() => setSidebarOpen(false)}
             isActiveCheck={isActive}
-            collapsed={collapsed}
           />
 
           {/* Community */}
@@ -159,7 +154,6 @@ export function Sidebar({
             icon={MessageSquareText}
             label={t("items.community.label")}
             onClick={() => setSidebarOpen(false)}
-            collapsed={collapsed}
           />
 
           {/* Data tables */}
@@ -174,7 +168,6 @@ export function Sidebar({
                 icon={Database}
                 label={t("items.newsletter.label")}
                 onClick={() => setSidebarOpen(false)}
-                collapsed={collapsed}
               />
               <NavLink
                 href={landlordRoutes.tables.users.link}
@@ -182,7 +175,6 @@ export function Sidebar({
                 icon={Users}
                 label={t("items.users.label")}
                 onClick={() => setSidebarOpen(false)}
-                collapsed={collapsed}
               />
               <NavLink
                 href={landlordRoutes.tables.submissions.link}
@@ -190,7 +182,6 @@ export function Sidebar({
                 icon={Database}
                 label={t("items.submissions.label")}
                 onClick={() => setSidebarOpen(false)}
-                collapsed={collapsed}
               />
               <NavLink
                 href={landlordRoutes.tables.reactions.link}
@@ -198,7 +189,6 @@ export function Sidebar({
                 icon={Database}
                 label={t("items.reactions.label")}
                 onClick={() => setSidebarOpen(false)}
-                collapsed={collapsed}
               />
             </div>
           </div>
@@ -235,7 +225,6 @@ function NavLink({
   label,
   onClick,
   compact = false,
-  collapsed = false,
 }: {
   href: string;
   active: boolean;
@@ -243,7 +232,6 @@ function NavLink({
   label: string;
   onClick?: () => void;
   compact?: boolean;
-  collapsed?: boolean;
 }) {
   return (
     <Link
@@ -256,14 +244,11 @@ function NavLink({
           ? "bg-white text-[#11191f]"
           : "text-white/62 hover:bg-white/8 hover:text-white",
       )}
-      title={collapsed ? label : undefined}
     >
       <Icon size={compact ? 15 : 18} />
-      {!collapsed && (
-        <span className="flex flex-col min-w-0">
-          <span className="font-medium truncate">{label}</span>
-        </span>
-      )}
+      <span className="flex flex-col min-w-0">
+        <span className="font-medium truncate">{label}</span>
+      </span>
     </Link>
   );
 }
@@ -275,7 +260,6 @@ function NavGroup({
   isActive,
   onNavClick,
   isActiveCheck,
-  collapsed,
 }: {
   group: {
     key: string;
@@ -292,7 +276,6 @@ function NavGroup({
   isActive: boolean;
   onNavClick: () => void;
   isActiveCheck: (key: string) => boolean;
-  collapsed: boolean;
 }) {
   const t = useTranslations("admin.sidebar");
 
@@ -307,25 +290,20 @@ function NavGroup({
             ? "text-white"
             : "text-white/62 hover:bg-white/8 hover:text-white",
         )}
-        title={collapsed ? group.label : undefined}
       >
         <group.icon size={18} />
-        {!collapsed && (
-          <span className="flex flex-col flex-1 min-w-0">
-            <span className="font-medium">{group.label}</span>
-          </span>
-        )}
-        {!collapsed && (
-          <ChevronDown
-            size={15}
-            className={cn(
-              "shrink-0 text-white/40 transition-transform duration-200",
-              isOpen && "rotate-180",
-            )}
-          />
-        )}
+        <span className="flex flex-col flex-1 min-w-0">
+          <span className="font-medium">{group.label}</span>
+        </span>
+        <ChevronDown
+          size={15}
+          className={cn(
+            "shrink-0 text-white/40 transition-transform duration-200",
+            isOpen && "rotate-180",
+          )}
+        />
       </button>
-      {isOpen && !collapsed && (
+      {isOpen && (
         <div className="ml-4 mt-1 grid gap-1 border-l border-white/10 pl-3">
           {group.items.map((item) => (
             <NavLink
@@ -346,7 +324,6 @@ function NavGroup({
               label={item.label}
               onClick={onNavClick}
               compact
-              collapsed={collapsed}
             />
           ))}
         </div>
