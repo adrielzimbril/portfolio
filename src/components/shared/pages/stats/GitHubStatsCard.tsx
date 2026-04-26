@@ -232,7 +232,7 @@ export function GitHubStatsCard({
           >
             <Badge
               className={cn(
-                "capitalize whitespace-pre-line",
+                "capitalize whitespace-pre-line size-auto",
                 pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
               )}
               variant="colored"
