@@ -6,6 +6,7 @@ import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteBu
 import { User } from "@supabase/supabase-js";
 import { apiRoutes } from "@/data/api-routes";
 import { useWindowEvent } from "@/hooks/useWindowEvent";
+import { useTranslations } from "use-intl";
 
 interface Stats {
   totalMessages: number;
@@ -18,6 +19,7 @@ interface StatsSectionProps {
 }
 
 export function StatsSection({ user }: StatsSectionProps) {
+  const t = useTranslations();
   const [stats, setStats] = useState<Stats>({
     totalMessages: 0,
     uniqueMembers: 0,
@@ -53,17 +55,17 @@ export function StatsSection({ user }: StatsSectionProps) {
       <div className="flex flex-row flex-wrap justify-center gap-6 max-w-4xl mx-auto">
         <StatCard
           icon={ChatBubbleCircle}
-          label="Messages"
+          label={t("community.stats.messages")}
           value={isLoading ? "..." : stats.totalMessages.toLocaleString()}
         />
         <StatCard
           icon={Users}
-          label="Members"
+          label={t("community.stats.members")}
           value={isLoading ? "..." : stats.uniqueMembers.toLocaleString()}
         />
         <StatCard
           icon={TrendUp}
-          label="Weekly"
+          label={t("community.stats.weekly")}
           value={isLoading ? "..." : stats.weekMessages.toLocaleString()}
         />
       </div>

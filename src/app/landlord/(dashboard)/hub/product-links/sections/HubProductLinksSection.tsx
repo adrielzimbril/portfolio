@@ -1,18 +1,19 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import useSWR from "swr";
-import {
-  RefreshCw,
-  Loader2,
-  Save,
-  Check,
-  AlertCircle,
-} from "lucide-react";
+import { RefreshCw, Loader2, Save, Check, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AdminCard, TablePager, EmptyState } from "@/components/landlord/components/AdminPrimitives";
-import { dataTableKey, fetchLandlordTable } from "@/components/landlord/admin-utils";
+import {
+  AdminCard,
+  TablePager,
+  EmptyState,
+} from "@/components/landlord/components/AdminPrimitives";
+import {
+  dataTableKey,
+  fetchLandlordTable,
+} from "@/components/landlord/admin-utils";
 import { landlordApiRoutes } from "@/data/landlordApiRoutes";
 import { toast } from "@/lib/toast";
 import { useTranslations } from "next-intl";
@@ -29,11 +30,14 @@ interface ProductLinkRow {
 const pageSize = 10;
 
 export function HubProductLinksSection() {
-  const t = useTranslations();
+  const t = useTranslations("admin.landlord.hub_product_links");
   const [page, setPage] = useState(1);
-  
-  const swrKey = useMemo(() => dataTableKey("hub-product-links", page, pageSize), [page]);
-  
+
+  const swrKey = useMemo(
+    () => dataTableKey("hub-product-links", page, pageSize),
+    [page],
+  );
+
   const {
     data: tableData,
     isLoading,
@@ -43,7 +47,10 @@ export function HubProductLinksSection() {
   const [updatingSlugs, setUpdatingSlugs] = useState<Set<string>>(new Set());
   const [localUrls, setLocalUrls] = useState<Record<string, string>>({});
 
-  const rows = useMemo(() => (tableData?.rows as unknown as ProductLinkRow[]) || [], [tableData]);
+  const rows = useMemo(
+    () => (tableData?.rows as unknown as ProductLinkRow[]) || [],
+    [tableData],
+  );
 
   const handleUpdate = async (slug: string) => {
     const private_url =
@@ -59,10 +66,10 @@ export function HubProductLinksSection() {
 
       if (!response.ok) throw new Error("Failed to update");
 
-      toast.success(`Lien mis à jour pour ${slug}`);
+      toast.success(t("messages.link_updated", { slug }));
       mutate();
     } catch (error) {
-      toast.error(`Erreur lors de la mise à jour de ${slug}`);
+      toast.error(t("messages.update_error", { slug }));
     } finally {
       setUpdatingSlugs((prev) => {
         const next = new Set(prev);
@@ -77,15 +84,13 @@ export function HubProductLinksSection() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            Hub Product Links
+            {t("title")}
           </h2>
-          <p className="mt-1 text-sm text-black/45">
-            Gérer les liens privés envoyés par mail pour chaque ressource du Hub.
-          </p>
+          <p className="mt-1 text-sm text-black/45">{t("description")}</p>
         </div>
         <Button variant="outline" asIcon asPointer onClick={() => mutate()}>
           <RefreshCw size={16} />
-          Rafraîchir
+          {t("actions.refresh")}
         </Button>
       </div>
 
@@ -94,7 +99,7 @@ export function HubProductLinksSection() {
           {isLoading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
               <Loader2 size={18} className="animate-spin" />
-              Chargement des ressources...
+              {t("messages.loading")}
             </div>
           ) : rows.length > 0 ? (
             <>
@@ -103,13 +108,17 @@ export function HubProductLinksSection() {
                   <table className="w-full min-w-[800px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
                       <tr>
-                        <th className="px-5 py-4 font-medium">Ressource</th>
-                        <th className="px-5 py-4 font-medium">Slug</th>
                         <th className="px-5 py-4 font-medium">
-                          Lien Privé (Email)
+                          {t("fields.resource")}
+                        </th>
+                        <th className="px-5 py-4 font-medium">
+                          {t("fields.slug")}
+                        </th>
+                        <th className="px-5 py-4 font-medium">
+                          {t("fields.private_link")}
                         </th>
                         <th className="px-5 py-4 font-medium w-32 text-right">
-                          Actions
+                          {t("fields.actions")}
                         </th>
                       </tr>
                     </thead>
@@ -132,8 +141,12 @@ export function HubProductLinksSection() {
                                 {row.title}
                               </div>
                               <div className="text-xs text-black/40 capitalize">
-                                {t.has(`common.page-sections.hub.base.resources-type.${row.type}.title`)
-                                  ? t(`common.page-sections.hub.base.resources-type.${row.type}.title`)
+                                {t.has(
+                                  `common.page-sections.hub.base.resources-type.${row.type}.title`,
+                                )
+                                  ? t(
+                                      `common.page-sections.hub.base.resources-type.${row.type}.title`,
+                                    )
                                   : row.type}
                               </div>
                             </td>
@@ -171,14 +184,17 @@ export function HubProductLinksSection() {
                                 ) : hasChanged ? (
                                   <Save size={14} />
                                 ) : (
-                                  <Check size={14} className="text-emerald-500" />
+                                  <Check
+                                    size={14}
+                                    className="text-emerald-500"
+                                  />
                                 )}
                                 <span>
                                   {isUpdating
                                     ? "..."
                                     : hasChanged
-                                      ? "Sauvegarder"
-                                      : "À jour"}
+                                      ? t("actions.save")
+                                      : t("actions.up_to_date")}
                                 </span>
                               </Button>
                             </td>

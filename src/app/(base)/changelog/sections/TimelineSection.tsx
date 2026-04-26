@@ -12,8 +12,10 @@ import { TimelineEntry } from "@/components/shared/pages/changelog/TimelineEntry
 import { TimelineYearHeader } from "@/components/shared/pages/changelog/TimelineYearHeader";
 import { EmptyState } from "@/components/shared/pages/changelog/EmptyState";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "use-intl";
 
 export function TimelineSection() {
+  const t = useTranslations();
   const [selectedType, setSelectedType] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -157,7 +159,7 @@ export function TimelineSection() {
                   asPointer
                   onClick={() => setVisibleCount((count) => count + 3)}
                 >
-                  Charger plus
+                  {t("changelog.load_more")}
                 </Button>
               </div>
             )}

@@ -143,26 +143,26 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
             const frame = () => {
               if (Date.now() > end) return;
-                confetti({
-                  particleCount: 2,
-                  angle: 60,
-                  spread: 55,
-                  startVelocity: 60,
-                  origin: { x: 0, y: 0.5 },
-                  colors: colors,
-                  shapes: [triangle, square, coin, tree],
-                  scalar,
-                });
-                confetti({
-                  particleCount: 2,
-                  angle: 120,
-                  spread: 55,
-                  startVelocity: 60,
-                  origin: { x: 1, y: 0.5 },
-                  colors: colors,
-                  shapes: [triangle, square, coin, tree],
-                  scalar,
-                });
+              confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 0, y: 0.5 },
+                colors: colors,
+                shapes: [triangle, square, coin, tree],
+                scalar,
+              });
+              confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                startVelocity: 60,
+                origin: { x: 1, y: 0.5 },
+                colors: colors,
+                shapes: [triangle, square, coin, tree],
+                scalar,
+              });
               requestAnimationFrame(frame);
             };
             frame();
@@ -265,8 +265,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         }
         // Redirect to product page
         sleep(2000).then(() => {
-          redirect(getPathUrl(routes.hub.link))
-        })
+          redirect(getPathUrl(routes.hub.link));
+        });
       }, 2000);
     } catch (error) {
       logger.error(t("logger.newsletter.subscribe.failed"), error);
@@ -330,7 +330,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 required
                 minLength={4}
               />
-              <FieldError>Name must be at least 4 characters</FieldError>
+              <FieldError>
+                {t("zod.errors.customized.name.required")}
+              </FieldError>
             </Field>
 
             <Field>
@@ -357,7 +359,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 value={phone || ""}
                 onChange={(value) => setPhone(value || "")}
               />
-              <FieldError>Phone must be at least 10 digits</FieldError>
+              <FieldError>
+                {t("zod.errors.customized.phone.required")}
+              </FieldError>
             </Field>
 
             <div className="flex gap-3">
