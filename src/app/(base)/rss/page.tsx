@@ -1,6 +1,7 @@
 import { Metadata } from "next";
+import { metadata as baseMetadata } from "@/app/metadata";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { siteConfig } from "@/data/config";
 import { Locale } from "@/types";
 import { routes } from "@/data/routes";
 
@@ -11,23 +12,29 @@ enum RssFormat {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `RSS Feed - ${siteConfig.name}`;
-  const description = `Subscribe to the RSS feed to follow the latest news, projects and resources of ${siteConfig.name}`;
+  const t = await getTranslations();
 
   return {
-    title,
-    description,
-    alternates: {
-      types: {
-        "application/rss+xml": "/rss",
-        "application/atom+xml": "/rss/atom",
-        "application/feed+json": "/rss/json",
-      },
-    },
+    ...baseMetadata,
+    title: t("rss.title"),
+    description: t("rss.description"),
     openGraph: {
-      title,
-      description,
-      type: "website",
+      ...baseMetadata.openGraph,
+      title: t("rss.title"),
+      description: t("rss.description"),
+    },
+    twitter: {
+      ...baseMetadata.twitter,
+      title: t("rss.title"),
+      description: t("rss.description"),
+    },
+    alternates: {
+      ...baseMetadata.alternates,
+      types: {
+        "application/rss+xml": routes.rss.link,
+        "application/atom+xml": routes.rssAtom.link,
+        "application/feed+json": routes.rssJson.link,
+      },
     },
   };
 }

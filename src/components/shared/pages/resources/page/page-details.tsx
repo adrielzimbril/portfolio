@@ -1,6 +1,7 @@
 import React from "react";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { FormattedText } from "@/components/shared/formatted-text";
+import { useTranslations } from "next-intl";
 
 // Interface for page details props
 interface PageDetailsProps {
@@ -22,11 +23,15 @@ export function PageDetails({
   previewValueCard,
   useMarkdown,
 }: PageDetailsProps) {
+  const t = useTranslations("common.shared.text");
+
   return (
     <section className="relative w-full">
       <div className="relative w-full max-w-2xl mx-auto">
         <div className="flex flex-col w-full max-w-[90%] mx-auto items-start justify-center gap-4 relative">
-          <h2 className="relative self-stretch h3 font-normal">Présentation</h2>
+          <h2 className="relative self-stretch h3 font-normal">
+            {t("heading_presentation")}
+          </h2>
 
           <div className="flex flex-col gap-8 md:gap-12 text-b-white-invert-thr font-normal text-base">
             {/* Top description */}

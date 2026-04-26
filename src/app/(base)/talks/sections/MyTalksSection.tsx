@@ -1,7 +1,6 @@
 "use client";
-
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 import { TalksCard } from "@/components/shared/pages/talks/card";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import type { Talk } from "@/integrations/content/lib/talks";
@@ -34,12 +33,15 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<LoadMoreCardsSkeleton kind="talks" count={2} />}
+      loadingFallback={
+        <Skeleton name="talks-load-more" className="w-full h-40" />
+      }
     >
       {list.map((talk) => {
         const eventDate = new Date(talk.event_date);
         const eventTime = eventDate.getTime();
-        const isPastEvent = Number.isFinite(eventTime) && currentTime >= eventTime;
+        const isPastEvent =
+          Number.isFinite(eventTime) && currentTime >= eventTime;
         const replayUrl = getExternalUrl(talk.replay_url);
         const eventUrl = getExternalUrl(talk.event_url);
 
@@ -72,6 +74,7 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
             tags={tags}
             participantsCount={talk.participants || 0}
             action={action}
+            hideReactions
           />
         );
       })}

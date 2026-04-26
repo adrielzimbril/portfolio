@@ -9,48 +9,35 @@
 
 import { getResourceBySlug } from "@/integrations/content/lib";
 import logger from "@/utils/logger";
-
-/**
- * Base URL for all resources
- */
-export enum AllUserResourceSlug {
-  THE_MISTAKE_THAT_STOPS_YOU_FROM_IMPROVING = "the-mistake-that-stops-you-from-improving",
-  SOCIAL_BANNER_TEMPLATE = "social-banner-template",
-  TEST = "test",
-}
-
-/**
- * Map of resource slugs to their custom data
- * You can define custom data for any resource here
- *
- * only existing resources slug in RESOURCE_BASE are allowed
- */
-const CUSTOM_RESOURCES: Record<AllUserResourceSlug, string> = {
-  // Example:
-  // 'custom-resource': "url string"
-  test: "https://shirofolio.com/projects/test",
-  "the-mistake-that-stops-you-from-improving":
-    "https://docs.google.com/document/d/1oWOfuqpznMF6rKObGimkBsnmShVTEw6LuZjV82Kuy-o/edit?usp=sharing",
-  "social-banner-template":
-    "https://www.figma.com/community/file/1623784451151162978",
-};
+import { hubProductLinksRepository } from "@/integrations/supabase/repository/hubProductLinks";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Database } from "@/integrations/supabase/types";
 
 /**
  * Gets the custom data for a resource based on its slug
  *
  * @param slug - The slug of the resource
+ * @param supabase - Optional Supabase client to fetch from DB
  * @returns The custom data for the resource or null if not found
- *
- * @example
- * ```typescript
- * const data = getResourceUserUrl('custom-resource');
- * // Returns: 'url string' or null if not found
- * ```
  */
-export const getResourceUserUrl = <T = any>(
-  slug: AllUserResourceSlug,
-): string | null => {
-  return CUSTOM_RESOURCES[slug] || null;
+export const getResourceUserUrl = async (
+  slug: string,
+  supabase?: SupabaseClient<Database>,
+): Promise<string | null> => {
+  // 1. Try to fetch from Supabase if client is provided
+  if (supabase) {
+    try {
+      const repo = hubProductLinksRepository(supabase);
+      const data = await repo.getBySlug(slug);
+      if (data?.private_url) {
+        return data.private_url;
+      }
+    } catch (error) {
+      logger.error(`Error fetching private URL for slug "${slug}":`, error);
+    }
+  }
+
+  return null;
 };
 
 /**
@@ -59,9 +46,7 @@ export const getResourceUserUrl = <T = any>(
  * @param slug - The slug of the resource to check
  * @returns Promise that resolves to true if the resource exists, false otherwise
  */
-export const resourceUserExists = async (
-  slug: AllUserResourceSlug,
-): Promise<boolean> => {
+export const resourceUserExists = async (slug: string): Promise<boolean> => {
   try {
     const resource = await getResourceBySlug(slug);
     return resource !== null;

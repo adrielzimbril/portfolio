@@ -1,12 +1,13 @@
 import React from "react";
-import { HeaderSection } from "./sections/HeaderSection";
+import { HeaderSection } from "@/app/(base)/hub/sections/HeaderSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllResources } from "@/integrations/content/lib/resources";
-import { MyHubSection } from "./sections/MyHubSection";
+import { MyHubSection } from "@/app/(base)/hub/sections/MyHubSection";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -40,10 +41,16 @@ export default async function MyHub() {
 
   return (
     <>
-      <HeaderSection />
-      <MyHubSection data={data} />
+      <Skeleton name="hub-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="hub-listing" loading={false}>
+        <MyHubSection data={data} />
+      </Skeleton>
       {/* <ResourceWrapper initialData={data} type={PageType.HUB} /> */}
-      <CallToAction isPage />
+      <Skeleton name="hub-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

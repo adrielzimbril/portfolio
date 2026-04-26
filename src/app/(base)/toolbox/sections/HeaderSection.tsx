@@ -5,7 +5,6 @@ import { routes } from "@/data/routes";
 import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { getPathUrl } from "@/utils/base-url";
-import { cn } from "@/utils/utils";
 
 export function HeaderSection() {
   const t = useTranslations();
@@ -26,8 +25,7 @@ export function HeaderSection() {
       <PageHero
         title={t("toolbox.page.header-section.title")}
         description={t("toolbox.page.header-section.description")}
-        badge={t("toolbox.page.header-section.badge")}
-        imagePath={{ emoji: "🛠️" }}
+        imagePath={{ emoji: "🧑‍⚕️" }}
         isMobileShowed
       />
     </div>

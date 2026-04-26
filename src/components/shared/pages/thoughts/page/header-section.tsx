@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Calendar, Eye, HourglassFill } from "@aurthle/icons";
 import { cn } from "@/utils/utils";
-import { PreviewContentType, PageType } from "@/types";
+import { PreviewContentType } from "@/types";
 import {
   HeaderPreviewCard,
   PreviewContent,
@@ -13,7 +13,6 @@ import {
 } from "@/components/shared/pages/shared/page/header-preview-card";
 import { formatCount, getDate } from "@/utils";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -22,11 +21,14 @@ interface HeaderSectionProps {
   // Main Title
   mainTitle?: string;
 
+  // Slug
+  slug?: string;
+
   // Tags
   tags?: { name: string }[];
 
   // Article details : Date  + Min read + Views
-  articleDetails?: {
+  thoughtDetails?: {
     date?: string;
     readingTime?: string;
     views?: number;
@@ -45,8 +47,7 @@ export function HeaderSection({
   previewContent: initPreviewContent,
   mainTitle,
   tags,
-  articleDetails,
-  slug,
+  thoughtDetails,
 }: HeaderSectionProps) {
   const t = useTranslations();
 
@@ -61,7 +62,7 @@ export function HeaderSection({
 
   return (
     <SectionBase
-      sectionClassName="p-0 mt-16 mb-10 md:mb-20"
+      sectionClassName="p-0 md:pb-0 mt-16 mb-10 md:mb-20"
       isWide
       cardClassName="w-full"
       cardContentClassName="px-4 md:px-12 py-6 md:py-12"
@@ -83,57 +84,50 @@ export function HeaderSection({
 
       <h1 className="h3 w-full font-normals relative">{mainTitle}</h1>
 
-      {articleDetails && Object.keys(articleDetails).length > 0 && (
-        <div className="flex flex-wrap items-center gap-2 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
-          <div className="flex flex-wrap items-start gap-1.5">
-            {articleDetails.date && (
-              <Badge
-                className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
-                variant="colored"
-                size="md"
-              >
-                <span className="flex items-center gap-2">
-                  <Calendar
-                    size={16}
-                    className="text-indigo-400"
-                    variant="bulk"
-                  />
-                  {getDate({ date: articleDetails.date })}
-                </span>
-              </Badge>
-            )}
-
+      {thoughtDetails && Object.keys(thoughtDetails).length > 0 && (
+        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
+          {thoughtDetails.date && (
             <Badge
               className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
               variant="colored"
               size="md"
             >
               <span className="flex items-center gap-2">
-                <HourglassFill
+                <Calendar
                   size={16}
                   className="text-indigo-400"
                   variant="bulk"
                 />
-                {articleDetails.readingTime}
+                {getDate({ date: thoughtDetails.date })}
               </span>
             </Badge>
-
-            <Badge
-              className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
-              variant="colored"
-              size="md"
-            >
-              <span className="flex items-center gap-2">
-                <Eye size={16} className="text-indigo-400" variant="bulk" />
-                {formatCount(articleDetails.views ?? 0)}{" "}
-                {t("common.stats.views")}
-              </span>
-            </Badge>
-          </div>
-
-          {slug && (
-            <ReactionBar entityType={PageType.THOUGHT} entityId={slug} />
           )}
+
+          <Badge
+            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+            variant="colored"
+            size="md"
+          >
+            <span className="flex items-center gap-2">
+              <HourglassFill
+                size={16}
+                className="text-indigo-400"
+                variant="bulk"
+              />
+              {thoughtDetails.readingTime}
+            </span>
+          </Badge>
+
+          <Badge
+            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+            variant="colored"
+            size="md"
+          >
+            <span className="flex items-center gap-2">
+              <Eye size={16} className="text-indigo-400" variant="bulk" />
+              {formatCount(thoughtDetails.views ?? 0)} {t("common.stats.views")}
+            </span>
+          </Badge>
         </div>
       )}
 

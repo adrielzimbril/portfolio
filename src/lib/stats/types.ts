@@ -5,7 +5,16 @@ export enum ReactionType {
   HEART = "heart",
   CELEBRATE = "celebrate",
   INSIGHTFUL = "insightful",
+  SCEPTIC = "sceptic",
 }
+
+export const REACTION_EMOJIS: Record<ReactionType, string> = {
+  [ReactionType.LIKE]: "👍",
+  [ReactionType.HEART]: "❤️",
+  [ReactionType.CELEBRATE]: "🎉",
+  [ReactionType.INSIGHTFUL]: "💡",
+  [ReactionType.SCEPTIC]: "🤔",
+};
 
 export interface BuildTimeStats {
   totalWords: number;
@@ -22,14 +31,15 @@ export interface CategoryCount {
 export interface ServerStats {
   totalViews: number;
   reactions: Record<ReactionType, number>;
-  topViewedArticles: ArticleMetric[];
-  topReactedArticles: ArticleMetric[];
+  topViewedThoughts: ThoughtMetric[];
+  topReactedThoughts: ThoughtMetric[];
   communityMessages: number;
 }
 
-export interface ArticleMetric {
+export interface ThoughtMetric {
   slug: string;
   title: string;
+  coverImage?: string;
   count: number;
 }
 

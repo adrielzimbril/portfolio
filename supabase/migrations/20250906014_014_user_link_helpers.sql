@@ -77,6 +77,7 @@ end;
 $$;
 
 -- 5) RPC to add hub product request with optional user_id
+drop function if exists public.add_hub_product_request cascade;
 create or replace function public.add_hub_product_request(
   p_user_id uuid default null,
   p_email text default null,
@@ -85,7 +86,7 @@ create or replace function public.add_hub_product_request(
   p_product_title text default null,
   p_product_type text default null,
   p_features text[] default null,
-  p_cover_image text default null,
+  p_cover text default null,
   p_product_url text default null,
   p_custom_text text default null,
   p_subscribed_from_page text default null
@@ -103,11 +104,11 @@ begin
 
   insert into public.hub_product_requests(
     email, name, phone,
-    product_title, product_type, features, cover_image, product_url, custom_text,
+    product_title, product_type, features, cover, product_url, custom_text,
     subscribed_from_page, user_id
   ) values (
     p_email, p_name, p_phone,
-    p_product_title, p_product_type, p_features, p_cover_image, p_product_url, p_custom_text,
+    p_product_title, p_product_type, p_features, p_cover, p_product_url, p_custom_text,
     p_subscribed_from_page, v_user_id
   ) returning * into v_row;
 

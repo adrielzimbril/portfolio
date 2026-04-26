@@ -8,7 +8,7 @@ export function NavMenu({
   activeTab,
   setActiveTab,
 }: {
-  menuRoutes: { key: string; link: string; name: string }[];
+  menuRoutes: { key: string; link: string }[];
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }) {

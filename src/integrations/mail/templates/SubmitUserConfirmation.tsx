@@ -21,6 +21,7 @@ import {
 import type { BaseMailProps } from "@/integrations/mail/types/types";
 import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { siteConfig } from "@/data/config";
+import { Intention } from "@/types";
 
 export function SubmitUserConfirmation({
   locale,
@@ -108,7 +109,7 @@ SubmitUserConfirmation.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
   name: "Adriel",
-  intention: "ux_review",
+  intention: Intention.UI_UX_REVIEW,
   url: "https://example.com",
 };
 

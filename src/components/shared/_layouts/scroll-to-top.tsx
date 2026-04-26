@@ -1,10 +1,9 @@
 "use client";
-
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpOne } from "@aurthle/icons";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
-import { cn } from "@/utils/utils";;
+import { cn } from "@/utils/utils";
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -73,7 +72,7 @@ export function ScrollToTop() {
         onClick={scrollToTop}
         className={cn(
           "relative p-3 transition-all duration-200 group hover:scale-105 active:scale-95 cursor-pointer",
-          isBadIOS ? "squircle-b-base-accent" : "rounded-full"
+          isBadIOS ? "squircle-b-base-accent" : "rounded-full",
         )}
         variant={isBadIOS ? "colored" : "outline"}
         asIcon

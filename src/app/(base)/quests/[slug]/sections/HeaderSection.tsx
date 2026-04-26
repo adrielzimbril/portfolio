@@ -2,9 +2,10 @@
 import React from "react";
 import { HeaderSection as QuestHeaderSection } from "@/components/shared/pages/quests/page/header-section";
 import { PreviewContentType } from "@/types";
-import { useTranslations } from "use-intl";
-import { getQuestAskUrl } from "@/utils/base-url";
-import { QuestAskType } from "@/types/enum";
+import { useTranslations, useLocale } from "use-intl";
+import { getQuestAskUrl, getResourcesUrl } from "@/utils/base-url";
+import { usePageViews } from "@/hooks/usePageViews";
+import { PageType, QuestAskType } from "@/types/enum";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
@@ -12,14 +13,13 @@ import {
 
 export function HeaderSection({
   title,
-  slug,
   cover,
   description,
   dates,
   tags,
+  pageViewsData,
 }: {
   title: string;
-  slug: string;
   cover: string;
   description: string;
   dates: {
@@ -28,13 +28,23 @@ export function HeaderSection({
     results: string;
   };
   tags?: { name: string; color: string }[];
+  pageViewsData: { slug: string; locale: string };
 }) {
   const t = useTranslations();
-
   const isRegistrationOpen = !isRegistrationClosed(dates.registration_end);
   const isSubmissionOpen = !isSubmissionClosed(
     dates.submission_end,
     dates.results,
+  );
+
+  usePageViews(
+    pageViewsData.slug,
+    PageType.QUESTS,
+    {
+      locale: pageViewsData.locale,
+      path: getResourcesUrl(PageType.QUESTS, pageViewsData.slug),
+    },
+    false,
   );
 
   return (
@@ -55,14 +65,14 @@ export function HeaderSection({
             }
       }
       mainTitle={title}
-      slug={slug}
+      slug={pageViewsData.slug}
       description={description}
       tags={tags}
       ctaButton={
         isRegistrationOpen
-          ? getQuestAskUrl(slug, QuestAskType.ENROLL)
+          ? getQuestAskUrl(pageViewsData.slug, QuestAskType.ENROLL)
           : isSubmissionOpen
-            ? getQuestAskUrl(slug, QuestAskType.SUBMIT)
+            ? getQuestAskUrl(pageViewsData.slug, QuestAskType.SUBMIT)
             : undefined
       }
       ctaButtonText={`${
@@ -72,7 +82,6 @@ export function HeaderSection({
             ? t("quests.inner-page.header.cta.submitWork")
             : ""
       } 🦄`}
-      slug={slug}
       pageType={PageType.QUESTS}
     />
   );

@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
-import { cn } from "@/utils/utils";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
-import { pickRandomColor } from "@/utils/pick-random-color";
+import { cn, pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "@aurthle/icons";
 
@@ -14,7 +13,7 @@ export function ToolAvatar({
 }: {
   name: string;
   icon: React.ReactNode;
-  color?: DEFAULT_COLOR_CODE_NAME_LIST;
+  color?: DEFAULT_COLOR_CODE_NAME;
   size?: "sm" | "md" | "lg";
 }) {
   const sizeClasses = {
@@ -47,7 +46,7 @@ export function ToolAvatar({
       <div className="absolute bottom-0 right-0">
         <Badge
           className={cn(
-            pickRandomColor(color || DEFAULT_COLOR_CODE_NAME_LIST.VIOLET),
+            pickRandomColor(color || DEFAULT_COLOR_CODE_NAME.VIOLET),
             " p-1 rounded-full",
           )}
           variant="secondary"

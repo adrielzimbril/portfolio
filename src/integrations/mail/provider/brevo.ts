@@ -1,5 +1,5 @@
 import { appConfig } from "@/data/app-config";
-import logger from "@/utils/logger";
+import { logger } from "@/utils";
 import type { SendEmailHandler } from "@/integrations/mail/types/types";
 import {
   TransactionalEmailsApi,
@@ -7,14 +7,18 @@ import {
   SendSmtpEmail,
 } from "@getbrevo/brevo";
 import { siteConfig } from "@/data/config";
+import { getBrevoConfig } from "@/config";
 
 const { from, replyTo } = appConfig.mails;
 const { details } = siteConfig;
 
-const MAIL_PROVIDER_API_KEY = process.env.BREVO_API_KEY || "";
+const { apiKey: MAIL_PROVIDER_API_KEY } = getBrevoConfig();
 
 const provider = new TransactionalEmailsApi();
-provider.setApiKey(TransactionalEmailsApiApiKeys.apiKey, MAIL_PROVIDER_API_KEY);
+provider.setApiKey(
+  TransactionalEmailsApiApiKeys.apiKey,
+  MAIL_PROVIDER_API_KEY || "",
+);
 
 export const send: SendEmailHandler = async ({ to, subject, body }) => {
   if (!MAIL_PROVIDER_API_KEY) {
@@ -41,7 +45,9 @@ export const send: SendEmailHandler = async ({ to, subject, body }) => {
       });
   } catch (err: unknown) {
     const message =
-      (err as { body?: { message: string } })?.body?.message || (err as { message: string })?.message || "Unknown Brevo error";
+      (err as { body?: { message: string } })?.body?.message ||
+      (err as { message: string })?.message ||
+      "Unknown Brevo error";
     // Treat "exists" as success for idempotency
     if (
       typeof message === "string" &&

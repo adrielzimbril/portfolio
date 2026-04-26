@@ -1,11 +1,10 @@
 "use client";
-
 import * as React from "react";
 import { Sun, Moon, MoonSparkle, SolarEclipseTwo } from "@aurthle/icons";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { flushSync } from "react-dom";
-import { cn } from "@/utils";
+import { cn } from "@/utils/utils";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -65,7 +64,7 @@ export function ThemeToggle() {
       ref={buttonRef}
       onClick={changeTheme}
       aria-label={theme}
-      className="md:size-auto md:p-3 aspect-square"
+      className="md:size-auto md:p-2 aspect-square"
     >
       <Sun
         size={24}

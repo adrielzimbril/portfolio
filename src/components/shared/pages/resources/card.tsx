@@ -1,7 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/resources/details";
-import { PageType, ResourceType } from "@/types";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { PageType, ResourceType } from "@/types/enum";
 
 export function ResourceCard({
   title,
@@ -13,6 +15,7 @@ export function ResourceCard({
   features,
   avatars,
   userCount,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -23,10 +26,11 @@ export function ResourceCard({
   features: string[];
   avatars: string[];
   userCount?: number;
+  hideReactions?: boolean;
 }) {
   return (
-    <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
-      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
+    <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0">
+      <CardContent className="relative grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
         <CardPreview
           title={title}
           type={PageType.HUB}
@@ -48,8 +52,13 @@ export function ResourceCard({
           features={features}
           avatars={avatars}
           userCount={userCount}
+          hideReactions={hideReactions}
         />
       </CardContent>
     </Card>
   );
+}
+
+export function ResourceCardSkeleton() {
+  return <Skeleton name="resource-card" className="w-full h-80" />;
 }

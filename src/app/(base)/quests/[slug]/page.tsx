@@ -1,15 +1,17 @@
 import React from "react";
-import { HeaderSection } from "./sections/HeaderSection";
-import { QuestDetailsSection } from "./sections/QuestDetailsSection";
+import { HeaderSection } from "@/app/(base)/quests/[slug]/sections/HeaderSection";
+import { QuestDetailsSection } from "@/app/(base)/quests/[slug]/sections/QuestDetailsSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
+import { PageType, PageParams } from "@/types";
 import { getLocale, getTranslations } from "next-intl/server";
-import { PageParams } from "@/types";
 import { localeRedirect } from "@/integrations/i18n/routing";
 import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   getQuestWithAdjacent,
   getQuestBySlug,
@@ -17,8 +19,8 @@ import {
   isSubmissionClosed,
   isResultsPublished,
 } from "@/integrations/content/lib/quests";
-import { QuestParticipantsSection } from "./sections/QuestParticipantsSection";
-import { MorePreviewSection } from "./sections/MorePreviewSection";
+import { QuestParticipantsSection } from "@/app/(base)/quests/[slug]/sections/QuestParticipantsSection";
+import { MorePreviewSection } from "@/app/(base)/quests/[slug]/sections/MorePreviewSection";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -88,8 +90,8 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       ),
       meta: {
         color: registrationClosed
-          ? DEFAULT_COLOR_CODE_NAME_LIST.RED
-          : DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+          ? DEFAULT_COLOR_CODE_NAME.RED
+          : DEFAULT_COLOR_CODE_NAME.PURPLE,
       },
     },
     {
@@ -100,8 +102,8 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
       ),
       meta: {
         color: submissionClosed
-          ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
-          : DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+          ? DEFAULT_COLOR_CODE_NAME.ORANGE
+          : DEFAULT_COLOR_CODE_NAME.BLUE,
       },
     },
     {
@@ -111,7 +113,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           : "quests.cards.tags.results.upcoming",
       ),
       meta: {
-        color: DEFAULT_COLOR_CODE_NAME_LIST.WHITE_GOLD,
+        color: DEFAULT_COLOR_CODE_NAME.WHITE_GOLD,
       },
     },
   ];
@@ -128,31 +130,39 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
 
   return (
     <>
-      <HeaderSection
-        title={title}
-        slug={slug}
-        cover={cover ?? ""}
-        description={excerpt}
-        dates={dates}
-        tags={tags.map((tag) => ({
-          name: tag.name,
-          color: tag.meta.color as any,
-        }))}
-      />
-      <QuestDetailsSection
-        content={body || ""}
-        slug={slug}
-        dates={dates}
-        tags={tags}
-        rewards={rewards}
-      />
+      <Skeleton name="quest-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          cover={cover ?? ""}
+          description={excerpt}
+          dates={dates}
+          pageViewsData={{ slug, locale }}
+          tags={tags.map((tag) => ({
+            name: tag.name,
+            color: tag.meta.color as any,
+          }))}
+        />
+      </Skeleton>
+      <Skeleton name="quest-detail-content" loading={false}>
+        <QuestDetailsSection
+          content={body || ""}
+          slug={slug}
+          dates={dates}
+          tags={tags}
+          rewards={rewards}
+        />
+        <ReactionBar pageType={PageType.QUESTS} entityId={slug} />
+      </Skeleton>
       {isResultsPublished(quest_end, results_published) && (
-        <QuestParticipantsSection winners={winners} />
+        <Skeleton name="quest-detail-participants" loading={false}>
+          <QuestParticipantsSection winners={winners} />
+        </Skeleton>
       )}
-      {quest.adjacentQuests.length > 0 && (
-        <MorePreviewSection data={quest.adjacentQuests} />
+      {quest.adjacentQuests && quest.adjacentQuests.length > 0 && (
+        <Skeleton name="quest-detail-more" loading={false}>
+          <MorePreviewSection data={quest.adjacentQuests} />
+        </Skeleton>
       )}
-      <CallToAction isPage />
     </>
   );
 }

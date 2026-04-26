@@ -1,4 +1,4 @@
-import logger from "@/utils/logger";
+import { logger } from "@/utils";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
           ...corsHeaders,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
   } catch (error) {
     logger.error("Erreur lors de l'envoi de l'email:", error);
@@ -99,7 +99,7 @@ export async function POST(req: Request) {
           ...corsHeaders,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
   }
 }

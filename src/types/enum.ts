@@ -1,8 +1,8 @@
-import { ReactionType } from "./../lib/stats/types";
-import { changelog } from "@/data/personal/changelog";
+import { ReactionType } from "@/lib/stats/types";
+
 export enum SortOrder {
-  Asc = "asc",
-  Desc = "desc",
+  ASC = "asc",
+  DESC = "desc",
 }
 
 export enum Locale {
@@ -35,6 +35,11 @@ export enum PageType {
   CHANGELOG = "changelog",
   STATS = "stats",
   TOOLBOX = "toolbox",
+}
+
+export enum TopThoughtsListType {
+  VIEWED = "viewed",
+  REACTED = "reacted",
 }
 
 export enum QuestAskType {
@@ -89,4 +94,32 @@ export enum PortfolioProjectStatus {
   ON_HOLD = "on_hold",
   DRAFT = "draft",
   ARCHIVED = "archived",
+}
+
+export enum ToolboxToolCategory {
+  FRONTEND = "frontend",
+  BACKEND = "backend",
+  DESIGN = "design",
+  TOOLS = "tools",
+  OTHER = "other",
+  CODE = "code",
+  PRODUCTIVITY = "productivity",
+}
+
+export enum ToolboxSetupItemCategory {
+  HARDWARE = "hardware",
+  ACCESSORIES = "accessories",
+  SOFTWARE = "software",
+  AUDIO = "audio",
+}
+
+export enum ChangelogItemType {
+  FEATURE = "feature",
+  FIX = "fix",
+  IMPROVEMENT = "improvement",
+  MILESTONE = "milestone",
+}
+
+export enum Intention {
+  UI_UX_REVIEW = "ux_review",
 }

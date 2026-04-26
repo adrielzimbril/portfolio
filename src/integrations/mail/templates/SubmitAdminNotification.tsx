@@ -19,6 +19,7 @@ import {
   defaultLocale,
 } from "@/integrations/mail/util/translations";
 import type { BaseMailProps } from "@/integrations/mail/types/types";
+import { Intention } from "@/types";
 
 export function SubmitAdminNotification({
   locale,
@@ -115,7 +116,7 @@ SubmitAdminNotification.PreviewProps = {
   translations: defaultTranslations,
   name: "John Doe",
   email: "john@example.com",
-  intention: "ux_review",
+  intention: Intention.UI_UX_REVIEW,
   url: "https://example.com",
   description: "Un peu de contexte sur le projet…",
   target: "website",

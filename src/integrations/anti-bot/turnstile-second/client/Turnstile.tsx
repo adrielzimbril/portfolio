@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useCallback } from "react";
-import { TurnstileProps, TURNSTILE_CONSTANTS } from "../types";
+import {
+  TurnstileProps,
+  TURNSTILE_CONSTANTS,
+} from "@/integrations/anti-bot/turnstile-second/types";
 
 declare global {
   interface Window {

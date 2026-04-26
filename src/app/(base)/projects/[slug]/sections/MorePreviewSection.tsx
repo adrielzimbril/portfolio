@@ -22,6 +22,7 @@ export function MorePreviewSection({ data }: { data: Project[] }) {
           tags={project.tags}
           categories={project.categories}
           isWide={false}
+          hideReactions
         />
       ))}
     </CardPreviewSection>

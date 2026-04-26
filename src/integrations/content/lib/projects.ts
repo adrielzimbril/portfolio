@@ -1,22 +1,23 @@
 import type { Project } from "@/integrations/content/types/types";
 import { allProjects } from "content-collections";
+import { SortOrder } from "@/types/enum";
 
 type GetAllProjectsOptions = {
   published?: boolean;
   locale?: string;
   pageSlug?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 
 export async function getAllProjects(
-  options: Partial<GetAllProjectsOptions> = {}
+  options: Partial<GetAllProjectsOptions> = {},
 ): Promise<Project[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
@@ -26,15 +27,15 @@ export async function getAllProjects(
       .filter(
         (project) =>
           project.published === published &&
-          (!locale || project.locale === locale)
+          (!locale || project.locale === locale),
       )
       .sort((a, b) =>
-        sort === "asc"
+        sort === SortOrder.ASC
           ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at)
+          : b.created_at.localeCompare(a.created_at),
       )
       .filter((project) => project.slug !== pageSlug)
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
@@ -42,7 +43,7 @@ export async function getProjectBySlug(
   slug: string,
   options?: {
     locale?: string;
-  }
+  },
 ): Promise<Project | null> {
   const { locale } = options ?? {};
 
@@ -81,7 +82,7 @@ export async function getProjectWithAdjacent(
   slug: string,
   options?: {
     locale?: string;
-  }
+  },
 ): Promise<ProjectsResult | null> {
   const { locale } = options ?? {};
   // Filter by locale if specified
@@ -94,12 +95,12 @@ export async function getProjectWithAdjacent(
   const sortedProjects = filteredProjects.sort(
     (a, b) =>
       new Date(b.created_at || "").getTime() -
-      new Date(a.created_at || "").getTime()
+      new Date(a.created_at || "").getTime(),
   );
 
   // Find the current project
   const currentIndex = sortedProjects.findIndex(
-    (project: Project) => project.slug === slug
+    (project: Project) => project.slug === slug,
   );
 
   if (currentIndex === -1) {
@@ -159,17 +160,17 @@ export async function getProjectWithAdjacent(
 type GetAllProjectSlugsOptions = {
   published?: boolean;
   locale?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 
 export async function getAllProjectSlugs(
-  options: Partial<GetAllProjectSlugsOptions> = {}
+  options: Partial<GetAllProjectSlugsOptions> = {},
 ): Promise<string[]> {
   const { published, locale, sort, limit } = {
     published: true,
     locale: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
@@ -178,15 +179,15 @@ export async function getAllProjectSlugs(
       .filter(
         (project) =>
           project.published === published &&
-          (!locale || project.locale === locale)
+          (!locale || project.locale === locale),
       )
       .sort((a, b) =>
-        sort === "asc"
+        sort === SortOrder.ASC
           ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at)
+          : b.created_at.localeCompare(a.created_at),
       )
       .map((project) => project.slug)
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
@@ -212,7 +213,7 @@ type FilterOptions = {
  * // Returns all projects filtered by category "technology"
  */
 export async function getFilteredProjects(
-  options: FilterOptions = { published: undefined, locale: undefined }
+  options: FilterOptions = { published: undefined, locale: undefined },
 ): Promise<Project[]> {
   const projects = await getAllProjects({
     published: options.published,
@@ -249,7 +250,7 @@ export async function getFilteredProjects(
       }
 
       return true;
-    })
+    }),
   );
 }
 
@@ -265,7 +266,7 @@ export async function getFilteredProjects(
  */
 export async function getAllProjectCategories(): Promise<string[]> {
   const categories = allProjects.map((project) =>
-    project.categories.map((cat) => cat.slug)
+    project.categories.map((cat) => cat.slug),
   );
   return Promise.resolve([...new Set(categories.flat())]);
 }
@@ -283,7 +284,7 @@ export async function getAllProjectCategories(): Promise<string[]> {
  */
 export async function getAllProjectTags(): Promise<string[]> {
   const allTags = allProjects.flatMap((project) =>
-    project.tags.map((tag) => tag.slug)
+    project.tags.map((tag) => tag.slug),
   );
   return Promise.resolve([...new Set(allTags)]);
 }

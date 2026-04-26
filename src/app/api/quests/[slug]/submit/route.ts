@@ -6,11 +6,13 @@ import {
   isSubmissionClosed,
 } from "@/integrations/content/lib/quests";
 import { sendEmail } from "@/integrations/mail";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import { addContact, ContactProvider } from "@/integrations/contact";
 import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
 import { getResourcesUrl } from "@/utils/base-url";
+import { getBrevoConfig } from "@/config";
 
 const submitSchema = z.object({
   name: z.string().min(2),
@@ -22,9 +24,11 @@ const submitSchema = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
     const db = supabase as any;
     const { slug } = await params;
     const quest = await getQuestBySlug(slug);
@@ -37,9 +41,12 @@ export async function POST(
     }
 
     if (isSubmissionClosed(quest.submission_deadline, quest.quest_end)) {
-      return new Response(JSON.stringify({ error: "QUEST_SUBMISSION_CLOSED" }), {
-        status: 400,
-      });
+      return new Response(
+        JSON.stringify({ error: "QUEST_SUBMISSION_CLOSED" }),
+        {
+          status: 400,
+        },
+      );
     }
 
     const body = await req.json().catch(() => ({}));
@@ -116,18 +123,18 @@ export async function POST(
     const { error: newsletterError } = await db
       .from("newsletter_subscribers")
       .upsert(
-      {
-        user_id: userId,
-        subscribed_from_page: JSON.stringify({
-          path: `/quests/${slug}/submit`,
-          origin: req.headers.get("origin"),
-          referer: req.headers.get("referer"),
-          url: req.url,
-        }),
-        updateexisting: Boolean(existingUserData),
-      },
-      { onConflict: "user_id" }
-    );
+        {
+          user_id: userId,
+          subscribed_from_page: JSON.stringify({
+            path: `/quests/${slug}/submit`,
+            origin: req.headers.get("origin"),
+            referer: req.headers.get("referer"),
+            url: req.url,
+          }),
+          updateexisting: Boolean(existingUserData),
+        },
+        { onConflict: "user_id" },
+      );
 
     if (newsletterError) {
       logger.error("quest submit newsletter upsert failed", newsletterError);
@@ -136,10 +143,11 @@ export async function POST(
       });
     }
 
-    const globalListId = Number(process.env.BREVO_GENERAL_LIST_ID);
-    const submissionsListId = Number(process.env.BREVO_QUESTS_SUBMISSIONS_ID);
+    const brevoConfig = getBrevoConfig();
+    const globalListId = Number(brevoConfig.generalListId);
+    const submissionsListId = Number(brevoConfig.questsSubmissionsId);
     const listIds = [globalListId, submissionsListId].filter(
-      (id): id is number => Boolean(id) && !Number.isNaN(id)
+      (id): id is number => Boolean(id) && !Number.isNaN(id),
     );
 
     if (listIds.length > 0) {

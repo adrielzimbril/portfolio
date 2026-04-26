@@ -15,7 +15,7 @@
  * @example
  * rangeMap({n: 5, fn: (i) => i * 3}); // returns [0, 3, 6, 9, 12]
  */
-export default function rangeMap({
+export function rangeMap({
   n,
   fn,
 }: {

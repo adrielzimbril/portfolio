@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/resources/page/details";
-import { ResourceInnerStatementPreviewCardInfoProps } from "@/types/type";
+import { ResourceInnerStatementPreviewCardInfoProps } from "@/types";
 
 export function ResourceCard({
   details,

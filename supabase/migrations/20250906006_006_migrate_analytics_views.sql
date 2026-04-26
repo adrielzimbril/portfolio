@@ -1,4 +1,4 @@
--- Fonction RPC PostgreSQL pour gérer les analytics de manière atomique
+-- PostgreSQL RPC function to handle analytics atomically
 CREATE OR REPLACE FUNCTION increment_page_analytics(
   p_path TEXT,
   p_type TEXT,
@@ -20,7 +20,7 @@ DECLARE
   v_unique_users BIGINT;
   v_existing_user_count INTEGER;
 BEGIN
-  -- 1. Incrémenter le compteur total de vues
+  -- 1. Increment total view counter
   INSERT INTO page_counters (path, type, slug, total_views, created_at, updated_at)
   VALUES (p_path, p_type, p_slug, 1, p_timestamp, p_timestamp)
   ON CONFLICT (path, type, COALESCE(slug, '')) 
@@ -28,14 +28,14 @@ BEGIN
     total_views = page_counters.total_views + 1,
     updated_at = p_timestamp;
 
-  -- Récupérer la nouvelle valeur du compteur total
+  -- Get new total counter value
   SELECT pc.total_views INTO v_total_views
   FROM page_counters pc
   WHERE pc.path = p_path 
     AND pc.type = p_type 
     AND (pc.slug = p_slug OR (pc.slug IS NULL AND p_slug IS NULL));
 
-  -- 2. Vérifier si cet utilisateur a déjà vu cette page
+  -- 2. Check if this user has already seen this page
   SELECT view_count INTO v_existing_user_count
   FROM unique_views
   WHERE user_ip = p_user_ip 
@@ -44,13 +44,13 @@ BEGIN
     AND (slug = p_slug OR (slug IS NULL AND p_slug IS NULL));
 
   IF v_existing_user_count IS NULL THEN
-    -- Nouvel utilisateur unique
+    -- New unique user
     v_is_new_unique_user := TRUE;
     
     INSERT INTO unique_views (user_ip, path, type, slug, first_view_at, last_view_at, view_count, details)
     VALUES (p_user_ip, p_path, p_type, p_slug, p_timestamp, p_timestamp, 1, p_details);
   ELSE
-    -- Utilisateur existant - mettre à jour sa dernière vue
+    -- Existing user - update their last view
     UPDATE unique_views 
     SET 
       last_view_at = p_timestamp,
@@ -62,21 +62,21 @@ BEGIN
       AND (slug = p_slug OR (slug IS NULL AND p_slug IS NULL));
   END IF;
 
-  -- 3. Compter le nombre total d'utilisateurs uniques pour cette page
+  -- 3. Count total unique users for this page
   SELECT COUNT(*) INTO v_unique_users
   FROM unique_views uv
   WHERE uv.path = p_path 
     AND uv.type = p_type 
     AND (uv.slug = p_slug OR (uv.slug IS NULL AND p_slug IS NULL));
 
-  -- Retourner les résultats
+  -- Return results
   RETURN QUERY SELECT v_total_views, v_unique_users, v_is_new_unique_user;
 END;
 $$;
 
--- Structure des tables recommandée :
+-- Recommended table structure:
 
--- Table pour compter le nombre total de vues par page
+-- Table to count total views per page
 CREATE TABLE IF NOT EXISTS page_counters (
   id BIGSERIAL PRIMARY KEY,
   path TEXT NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS page_counters (
   UNIQUE(path, type, slug)
 );
 
--- Table pour tracker les vues par utilisateur unique
+-- Table to track views per unique user
 CREATE TABLE IF NOT EXISTS unique_views (
   id BIGSERIAL PRIMARY KEY,
   user_ip TEXT NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS unique_views (
   UNIQUE(user_ip, path, type, slug)
 );
 
--- Index pour optimiser les performances
+-- Indexes to optimize performance
 CREATE UNIQUE INDEX IF NOT EXISTS idx_page_counters_unique 
 ON page_counters (path, type, slug);
 
@@ -115,7 +115,7 @@ ON unique_views (path, type, slug);
 CREATE INDEX IF NOT EXISTS idx_page_counters_lookup 
 ON page_counters (path, type, slug);
 
--- Fonction alternative plus simple si vous préférez
+-- Alternative simpler function if you prefer
 CREATE OR REPLACE FUNCTION get_page_analytics(
   p_path TEXT,
   p_type TEXT,
@@ -131,14 +131,14 @@ DECLARE
   v_total_views BIGINT;
   v_unique_users BIGINT;
 BEGIN
-  -- Récupérer le compteur total
+  -- Get total counter
   SELECT COALESCE(pc.total_views, 0) INTO v_total_views
   FROM page_counters pc
   WHERE pc.path = p_path 
     AND pc.type = p_type 
     AND (pc.slug = p_slug OR (pc.slug IS NULL AND p_slug IS NULL));
 
-  -- Compter les utilisateurs uniques
+  -- Count unique users
   SELECT COUNT(*) INTO v_unique_users
   FROM unique_views uv
   WHERE uv.path = p_path 

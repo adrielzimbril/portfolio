@@ -1,12 +1,13 @@
 import React from "react";
-import { HeaderSection } from "./sections/HeaderSection";
+import { HeaderSection } from "@/app/(base)/thoughts/sections/HeaderSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { metadata as baseMetadata } from "@/app/metadata";
 import logger from "@/utils/logger";
 import { getAllPosts } from "@/integrations/content/lib";
-import { MyThoughtsSection } from "./sections/MyThoughtsSection";
+import { MyThoughtsSection } from "@/app/(base)/thoughts/sections/MyThoughtsSection";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -40,10 +41,18 @@ export default async function MyThoughts() {
 
   return (
     <>
-      <HeaderSection />
-      {data.length > 0 && <MyThoughtsSection data={data} />}
+      <Skeleton name="thoughts-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      {data.length > 0 && (
+        <Skeleton name="thoughts-listing" loading={false}>
+          <MyThoughtsSection data={data} />
+        </Skeleton>
+      )}
       {/* <ResourceWrapper initialData={data} type={PageType.THOUGHT} /> */}
-      <CallToAction isPage />
+      <Skeleton name="thoughts-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

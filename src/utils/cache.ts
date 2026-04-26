@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import logger from "@/utils/logger";
+import { logger } from "@/utils";
 
 export const clearCache = async (path?: string) => {
   try {

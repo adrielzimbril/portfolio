@@ -7,7 +7,10 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("xl w-full bg-inherit text-card-foreground", className)}
+    className={cn(
+      "relative xl w-full bg-inherit text-card-foreground",
+      className,
+    )}
     {...props}
   />
 ));
@@ -53,7 +56,7 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  <div ref={ref} className={cn("relative p-6 pt-0", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 

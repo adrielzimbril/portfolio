@@ -1,5 +1,4 @@
 import { logger, schedules } from "@trigger.dev/sdk";
-import { apiRoutes } from "@/data/api-routes";
 
 export const supabaseLiveCheckTask = schedules.task({
   //unique id for the schedule
@@ -19,7 +18,7 @@ export const supabaseLiveCheckTask = schedules.task({
   },
   //run the task
   run: async () => {
-    const url = `${process.env.NEXT_SHIROFOLIO_PUBLIC_APP_URL}/api/views`;
+    const url = `${process.env.NEXT_TRIGGER_PUBLIC_APP_URL}/api/views`;
 
     try {
       logger.info("Starting Supabase health check via API...");

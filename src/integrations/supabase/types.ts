@@ -12,11 +12,187 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "13.0.4"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
+      challenge_registrations: {
+        Row: {
+          challenge_slug: string
+          created_at: string
+          email: string
+          id: string
+          ip: string | null
+          message: string | null
+          meta: Json | null
+          name: string
+          user_id: string | null
+        }
+        Insert: {
+          challenge_slug: string
+          created_at?: string
+          email: string
+          id?: string
+          ip?: string | null
+          message?: string | null
+          meta?: Json | null
+          name: string
+          user_id?: string | null
+        }
+        Update: {
+          challenge_slug?: string
+          created_at?: string
+          email?: string
+          id?: string
+          ip?: string | null
+          message?: string | null
+          meta?: Json | null
+          name?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_registrations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenge_submissions: {
+        Row: {
+          challenge_slug: string
+          created_at: string
+          email: string
+          id: string
+          ip: string | null
+          is_public: boolean
+          message: string | null
+          meta: Json | null
+          name: string
+          status: string
+          user_id: string | null
+          work_url: string
+        }
+        Insert: {
+          challenge_slug: string
+          created_at?: string
+          email: string
+          id?: string
+          ip?: string | null
+          is_public?: boolean
+          message?: string | null
+          meta?: Json | null
+          name: string
+          status?: string
+          user_id?: string | null
+          work_url: string
+        }
+        Update: {
+          challenge_slug?: string
+          created_at?: string
+          email?: string
+          id?: string
+          ip?: string | null
+          is_public?: boolean
+          message?: string | null
+          meta?: Json | null
+          name?: string
+          status?: string
+          user_id?: string | null
+          work_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_wall: {
+        Row: {
+          created_at: string
+          creator_avatar_url: string | null
+          creator_name: string
+          id: string
+          message: Json | null
+          pattern_index: number | null
+          rotation: number | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          creator_avatar_url?: string | null
+          creator_name: string
+          id?: string
+          message?: Json | null
+          pattern_index?: number | null
+          rotation?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          creator_avatar_url?: string | null
+          creator_name?: string
+          id?: string
+          message?: Json | null
+          pattern_index?: number | null
+          rotation?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      hub_product_links: {
+        Row: {
+          created_at: string | null
+          private_url: string
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          private_url: string
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          private_url?: string
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       hub_product_requests: {
         Row: {
-          cover: string | null
+          cover_image: string | null
           created_at: string
           custom_text: string | null
           features: string[] | null
@@ -30,7 +206,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          cover?: string | null
+          cover_image?: string | null
           created_at?: string
           custom_text?: string | null
           features?: string[] | null
@@ -44,7 +220,7 @@ export type Database = {
           user_id: string
         }
         Update: {
-          cover?: string | null
+          cover_image?: string | null
           created_at?: string
           custom_text?: string | null
           features?: string[] | null
@@ -72,28 +248,28 @@ export type Database = {
           created_at: string
           id: string
           subscribed_from_page: string | null
-          updateexisting: boolean
+          updateexisting: boolean | null
           user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
           subscribed_from_page?: string | null
-          updateexisting?: boolean
+          updateexisting?: boolean | null
           user_id: string
         }
         Update: {
           created_at?: string
           id?: string
           subscribed_from_page?: string | null
-          updateexisting?: boolean
+          updateexisting?: boolean | null
           user_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "newsletter_subscribers_user_id_fkey"
             columns: ["user_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -153,6 +329,39 @@ export type Database = {
           slug?: string
           type?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      reactions: {
+        Row: {
+          anonymous_id: string | null
+          created_at: string
+          entity_id: string
+          id: string
+          migrated_from_anonymous: string | null
+          page_type: string
+          reaction_type: string
+          user_id: string | null
+        }
+        Insert: {
+          anonymous_id?: string | null
+          created_at?: string
+          entity_id: string
+          id?: string
+          migrated_from_anonymous?: string | null
+          page_type: string
+          reaction_type: string
+          user_id?: string | null
+        }
+        Update: {
+          anonymous_id?: string | null
+          created_at?: string
+          entity_id?: string
+          id?: string
+          migrated_from_anonymous?: string | null
+          page_type?: string
+          reaction_type?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -263,14 +472,66 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      hub_product_requests_with_user: {
+        Row: {
+          cover_image: string | null
+          created_at: string | null
+          custom_text: string | null
+          email: string | null
+          features: string[] | null
+          id: string | null
+          name: string | null
+          phone: string | null
+          product_title: string | null
+          product_type: string | null
+          product_url: string | null
+          subscribed_from_page: string | null
+          user_created_at: string | null
+          user_id: string | null
+          user_updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hub_product_requests_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      newsletter_subscribers_with_user: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          id: string | null
+          name: string | null
+          phone: string | null
+          subscribed_from_page: string | null
+          user_created_at: string | null
+          user_id: string | null
+          user_updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "newsletter_subscribers_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       add_hub_product_request: {
         Args: {
           p_cover?: string
           p_custom_text?: string
+          p_email?: string
           p_features?: string[]
+          p_name?: string
+          p_phone?: string
           p_product_id?: string
           p_product_title?: string
           p_product_type?: string
@@ -279,42 +540,110 @@ export type Database = {
           p_user_id?: string
         }
         Returns: {
-          id: string
+          id: number
           user_id: string
         }[]
       }
       add_newsletter_subscriber: {
-        Args: { p_subscribed_from_page?: string; p_user_id?: string }
+        Args: {
+          p_email?: string
+          p_name?: string
+          p_phone?: string
+          p_subscribed_from_page?: string
+          p_user_id?: string
+        }
         Returns: {
-          id: string
+          id: number
           user_id: string
         }[]
+      }
+      create_newsletter_subscription: {
+        Args: {
+          p_email: string
+          p_name?: string
+          p_subscribed_from_page?: string
+        }
+        Returns: string
+      }
+      create_product_request: {
+        Args: {
+          p_cover?: string
+          p_custom_text?: string
+          p_email: string
+          p_features?: string
+          p_name?: string
+          p_phone?: string
+          p_product_title?: string
+          p_product_type?: string
+          p_product_url?: string
+          p_subscribed_from_page?: string
+        }
+        Returns: string
       }
       get_or_create_user: {
         Args: { p_email: string; p_name: string; p_phone: string }
         Returns: string
       }
-      get_page_analytics: {
-        Args: { p_slug: string; p_type: string }
-        Returns: {
-          total_views: number
-          unique_users: number
-        }[]
-      }
-      increment_page_analytics: {
-        Args: {
-          p_details?: Json
-          p_slug: string
-          p_timestamp?: string
-          p_type: string
-          p_user_ip?: string
-        }
-        Returns: {
-          is_new_unique_user: boolean
-          total_views: number
-          unique_users: number
-        }[]
-      }
+      get_page_analytics:
+        | {
+            Args: { p_path: string; p_slug?: string; p_type: string }
+            Returns: {
+              total_views: number
+              unique_users: number
+            }[]
+          }
+        | {
+            Args: { p_slug: string; p_type: string }
+            Returns: {
+              total_views: number
+              unique_users: number
+            }[]
+          }
+      increment_page_analytics:
+        | {
+            Args: {
+              p_details?: Json
+              p_path: string
+              p_slug?: string
+              p_type: string
+              p_user_ip?: string
+            }
+            Returns: {
+              is_new_unique_user: boolean
+              total_views: number
+              unique_users: number
+              user_view_count: number
+            }[]
+          }
+        | {
+            Args: {
+              p_details?: Json
+              p_path: string
+              p_slug?: string
+              p_timestamp?: string
+              p_type: string
+              p_user_ip?: string
+            }
+            Returns: {
+              is_new_unique_user: boolean
+              total_views: number
+              unique_users: number
+            }[]
+          }
+        | {
+            Args: {
+              p_details?: Json
+              p_slug: string
+              p_timestamp?: string
+              p_type: string
+              p_user_ip?: string
+            }
+            Returns: {
+              is_new_unique_user: boolean
+              total_views: number
+              unique_users: number
+            }[]
+          }
       link_hub_request_to_user: {
         Args: { p_request_id: string; p_user_id: string }
         Returns: undefined
@@ -326,6 +655,14 @@ export type Database = {
       merge_users: {
         Args: { p_source: string; p_target: string }
         Returns: undefined
+      }
+      sync_anonymous_reactions: {
+        Args: { p_anonymous_id: string; p_user_id: string }
+        Returns: number
+      }
+      sync_anonymous_reactions_rpc: {
+        Args: { p_anonymous_id: string }
+        Returns: number
       }
       upsert_page_counter: {
         Args: {
@@ -358,6 +695,12 @@ export type Database = {
           name: string | null
           phone: string | null
           updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "users"
+          isOneToOne: true
+          isSetofReturn: false
         }
       }
     }
@@ -488,6 +831,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },

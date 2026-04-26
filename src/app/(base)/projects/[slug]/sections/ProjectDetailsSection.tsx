@@ -3,10 +3,10 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { pickRandomColor } from "@/utils/pick-random-color";
 import { Card, CardContent } from "@/components/ui/card";
-import { getDateDifference } from "@/utils";
+import { cn, getDateDifference } from "@/utils";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
 import { useTranslations } from "use-intl";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 
 export function ProjectDetailsSection({
   content,
@@ -45,13 +45,12 @@ export function ProjectDetailsSection({
                     {role.map((role, index) => (
                       <Badge
                         key={index}
-                        className={
+                        className={cn(
+                          "size-auto",
                           index % 2 === 0
-                            ? pickRandomColor(DEFAULT_COLOR_CODE_NAME_LIST.PINK)
-                            : pickRandomColor(
-                                DEFAULT_COLOR_CODE_NAME_LIST.YELLOW,
-                              )
-                        }
+                            ? pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINK)
+                            : pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),
+                        )}
                         variant="colored"
                       >
                         {role}
@@ -72,8 +71,9 @@ export function ProjectDetailsSection({
 
                         <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                           <Badge
-                            className={pickRandomColor(
-                              DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+                            className={cn(
+                              "size-auto",
+                              pickRandomColor(DEFAULT_COLOR_CODE_NAME.PURPLE),
                             )}
                             variant="colored"
                           >
@@ -88,8 +88,11 @@ export function ProjectDetailsSection({
 
                         <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                           <Badge
-                            className={pickRandomColor(
-                              DEFAULT_COLOR_CODE_NAME_LIST.GREENISH_YELLOW,
+                            className={cn(
+                              "size-auto",
+                              pickRandomColor(
+                                DEFAULT_COLOR_CODE_NAME.GREENISH_YELLOW,
+                              ),
                             )}
                             variant="colored"
                           >
@@ -108,7 +111,9 @@ export function ProjectDetailsSection({
 
                 <div className="flex flex-wrap items-start gap-2 self-stretch w-full">
                   {tags.map((tag, index) => (
-                    <Badge key={index}>{tag.name}</Badge>
+                    <Badge className="size-auto" key={index}>
+                      {tag.name}
+                    </Badge>
                   ))}
                 </div>
               </div>

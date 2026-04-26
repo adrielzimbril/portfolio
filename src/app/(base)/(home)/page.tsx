@@ -1,21 +1,18 @@
 import React from "react";
 import { Suspense } from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { HeaderSection } from "./sections/HeaderSection";
-import { TalksSection } from "./sections/TalksSection";
-import { QuestsSection } from "./sections/QuestsSection";
-import { ProjectsSection } from "./sections/ProjectsSection";
-import { ResourcesSection } from "./sections/ResourcesSection";
-import { ThoughtsSection } from "./sections/ThoughtsSection";
-import { TestimonialsSection } from "./sections/TestimonialsSection";
+import { HeaderSection } from "@/app/(base)/(home)/sections/HeaderSection";
+import { TalksSection } from "@/app/(base)/(home)/sections/TalksSection";
+import { QuestsSection } from "@/app/(base)/(home)/sections/QuestsSection";
+import { ProjectsSection } from "@/app/(base)/(home)/sections/ProjectsSection";
+import { ResourcesSection } from "@/app/(base)/(home)/sections/ResourcesSection";
+import { ThoughtsSection } from "@/app/(base)/(home)/sections/ThoughtsSection";
+import { TestimonialsSection } from "@/app/(base)/(home)/sections/TestimonialsSection";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { siteConfig } from "@/data/config";
-import {
-  DefaultSectionSkeleton,
-  ProjectsSectionSkeleton,
-} from "../../../components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -45,34 +42,64 @@ export default function Home() {
 
   return (
     <>
-      <HeaderSection />
+      <Skeleton name="home-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
       {showed.talks && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <TalksSection />
+        <Suspense
+          fallback={<Skeleton name="home-talks" className="w-full h-80" />}
+        >
+          <Skeleton name="home-talks" loading={false}>
+            <TalksSection />
+          </Skeleton>
         </Suspense>
       )}
       {showed.quests && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <QuestsSection />
+        <Suspense
+          fallback={<Skeleton name="home-quests" className="w-full h-80" />}
+        >
+          <Skeleton name="home-quests" loading={false}>
+            <QuestsSection />
+          </Skeleton>
         </Suspense>
       )}
       {showed.resources && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <ResourcesSection />
+        <Suspense
+          fallback={<Skeleton name="home-resources" className="w-full h-80" />}
+        >
+          <Skeleton name="home-resources" loading={false}>
+            <ResourcesSection />
+          </Skeleton>
         </Suspense>
       )}
       {showed.projects && (
-        <Suspense fallback={<ProjectsSectionSkeleton />}>
-          <ProjectsSection />
+        <Suspense
+          fallback={
+            <Skeleton name="home-projects" className="w-full h-[500px]" />
+          }
+        >
+          <Skeleton name="home-projects" loading={false}>
+            <ProjectsSection />
+          </Skeleton>
         </Suspense>
       )}
-      {showed.testimonials && <TestimonialsSection />}
+      {showed.testimonials && (
+        <Skeleton name="home-testimonials" loading={false}>
+          <TestimonialsSection />
+        </Skeleton>
+      )}
       {showed.thoughts && (
-        <Suspense fallback={<DefaultSectionSkeleton count={2} />}>
-          <ThoughtsSection />
+        <Suspense
+          fallback={<Skeleton name="home-thoughts" className="w-full h-80" />}
+        >
+          <Skeleton name="home-thoughts" loading={false}>
+            <ThoughtsSection />
+          </Skeleton>
         </Suspense>
       )}
-      <CallToAction />
+      <Skeleton name="home-cta" loading={false}>
+        <CallToAction />
+      </Skeleton>
     </>
   );
 }

@@ -1,20 +1,14 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+import { Database } from "@/integrations/supabase/types";
+import { supabaseKey } from "@/integrations/supabase/client";
 
 export async function GET() {
   try {
-    const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PRIVATE_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-        },
-      },
+    // Create a simple Supabase client without cookies for API route
+    const supabase = createSupabaseClient<Database>(
+      supabaseKey.url!,
+      supabaseKey.anonKey!,
     );
 
     const { data: messages, error } = await supabase

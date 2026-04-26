@@ -1,6 +1,7 @@
 import { getImageUrl } from "@/utils/base-url";
 import { NextRequest } from "next/server";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import logger from "@/utils/logger";
 import { sendEmail } from "@/integrations/mail";
 import { addContact } from "@/integrations/contact";
@@ -8,12 +9,13 @@ import { ContactProvider } from "@/integrations/contact/types/types";
 import { getResourcesUrl, validateSimpleClientToken } from "@/utils";
 import { getResourceById } from "@/integrations/content/lib";
 import { Locale, PageType, ResourceType } from "@/types";
-import {
-  AllUserResourceSlug,
-  getResourceUserUrl,
-} from "@/config/resources.config";
+import { getResourceUserUrl } from "@/config/resources.config";
+import { getBrevoConfig } from "@/config";
 
 export async function POST(req: NextRequest) {
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+
   const body = await req.json().catch(() => ({}));
   const {
     email,
@@ -125,19 +127,19 @@ export async function POST(req: NextRequest) {
     if (productData) {
       const { title, features, cover, slug, type } = productData;
       const productUrl = getResourcesUrl(PageType.HUB, slug);
-      const productEndUrl = getResourceUserUrl(slug as AllUserResourceSlug);
+      const productEndUrl = await getResourceUserUrl(slug, supabase);
       const customText = undefined;
 
       if (userId) {
         try {
-          await supabase.from("hub_product_requests").insert({
+          const sup = await supabase.from("hub_product_requests").insert({
             user_id: userId,
             product_id: productId,
             product_title: title,
             product_type: type,
             requested_at: new Date().toISOString(),
             features: features,
-            cover: getImageUrl(cover || ""),
+            cover_image: getImageUrl(cover || ""),
             product_url: slug,
             custom_text: customText,
             subscribed_from_page: JSON.stringify({
@@ -147,6 +149,7 @@ export async function POST(req: NextRequest) {
               url: req.url,
             }),
           });
+          logger.info("[SUBSCRIBE] hub_product_requests", sup);
         } catch (e: unknown) {
           logger.error(
             `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
@@ -182,16 +185,17 @@ export async function POST(req: NextRequest) {
   }
 
   // 2) Add to Brevo lists (general + product-specific)
-  const generalId = Number(process.env.BREVO_GENERAL_LIST_ID);
+  const brevoConfig = getBrevoConfig();
+  const generalId = Number(brevoConfig.generalListId);
 
   function getListIdByProduct(product?: ResourceType) {
     const map: Record<ResourceType, number | undefined> = {
-      course: Number(process.env.BREVO_COURSE_LIST_ID),
-      ebook: Number(process.env.BREVO_EBOOKS_LIST_ID),
-      video: Number(process.env.BREVO_VIDEO_LIST_ID),
-      masterclass: Number(process.env.BREVO_MASTERCLASS_LIST_ID),
-      figma_template: Number(process.env.BREVO_FIGMA_TEMPLATE_LIST_ID),
-      code: Number(process.env.BREVO_CODE_LIST_ID),
+      course: Number(brevoConfig.courseListId),
+      ebook: Number(brevoConfig.ebooksListId),
+      video: Number(brevoConfig.videoListId),
+      masterclass: Number(brevoConfig.masterclassListId),
+      figma_template: Number(brevoConfig.figmaTemplateListId),
+      code: Number(brevoConfig.codeListId),
     };
     return product ? map[product] : undefined;
   }

@@ -1,4 +1,5 @@
 import { routes } from "@/data/routes";
+import { getBaseUrl, getImageUrl } from "@/utils";
 import {
   User,
   House,
@@ -13,7 +14,6 @@ import {
   Figma,
   Tiktok,
 } from "@aurthle/icons";
-import { getBaseUrl, getImageUrl } from "@/utils/base-url";
 
 const BASE_URL = getBaseUrl();
 
@@ -57,7 +57,7 @@ export const siteConfig = {
       {
         href: routes.contact.link,
         icon: User,
-        label: routes.contact.name,
+        label: "Contact",
       },
     ],
     contact: {
@@ -178,12 +178,12 @@ export const siteConfig = {
   home: {
     sections: {
       showed: {
-        talks: true,
-        quests: true,
+        talks: false,
+        quests: false,
         resources: true,
         projects: true,
         testimonials: true,
-        thoughts: true,
+        thoughts: false,
       },
     },
   },

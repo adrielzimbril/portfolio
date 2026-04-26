@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/thoughts/details";
-import { PageType } from "@/types";
+import { Skeleton } from "@/components/ui/skeleton";
+import { PageType } from "@/types/enum";
 
 export function ThoughtCard({
   title,
@@ -10,6 +11,7 @@ export function ThoughtCard({
   excerpt,
   primaryTag,
   tags,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -17,10 +19,11 @@ export function ThoughtCard({
   excerpt: string;
   primaryTag?: string;
   tags: { name: string }[];
+  hideReactions?: boolean;
 }) {
   return (
-    <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
-      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
+    <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0">
+      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr] relative">
         <CardPreview
           title={title}
           type={PageType.THOUGHT}
@@ -38,8 +41,13 @@ export function ThoughtCard({
           primaryTag={primaryTag}
           tags={tags}
           slug={slug}
+          hideReactions={hideReactions}
         />
       </CardContent>
     </Card>
   );
+}
+
+export function ThoughtCardSkeleton() {
+  return <Skeleton name="thought-card" className="w-full h-80" />;
 }

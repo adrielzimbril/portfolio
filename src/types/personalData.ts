@@ -4,8 +4,12 @@ import gameZhCN from "@/data/personal/translate/zh-CN/game.json";
 import testimonialsEn from "@/data/personal/translate/en/testimonials.json";
 import testimonialsFr from "@/data/personal/translate/testimonials.json";
 import testimonialsZhCN from "@/data/personal/translate/zh-CN/testimonials.json";
-
-type SupportedLocale = "fr" | "en" | "zh-CN";
+import {
+  ChangelogItemType,
+  Locale,
+  ToolboxSetupItemCategory,
+  ToolboxToolCategory,
+} from "@/types/enum";
 
 export interface TestimonialItem {
   id: number;
@@ -29,30 +33,30 @@ export interface GameItem {
   funnyLieMessage?: string;
 }
 
-const testimonialsByLocale: Record<SupportedLocale, TestimonialItem[]> = {
-  fr: testimonialsFr,
-  en: testimonialsEn,
-  "zh-CN": testimonialsZhCN,
+const testimonialsByLocale: Record<Locale, TestimonialItem[]> = {
+  [Locale.FR]: testimonialsFr,
+  [Locale.EN]: testimonialsEn,
+  [Locale.ZH_CN]: testimonialsZhCN,
 };
 
-const gamesByLocale: Record<SupportedLocale, GameItem[]> = {
-  fr: gameFr,
-  en: gameEn,
-  "zh-CN": gameZhCN,
+const gamesByLocale: Record<Locale, GameItem[]> = {
+  [Locale.FR]: gameFr,
+  [Locale.EN]: gameEn,
+  [Locale.ZH_CN]: gameZhCN,
 };
 
-function resolveLocale(locale: string): SupportedLocale {
+function resolveLocale(locale: string): Locale {
   const normalized = locale.toLowerCase();
 
   if (normalized === "en") {
-    return "en";
+    return Locale.EN;
   }
 
   if (normalized === "zh-cn" || normalized === "zh") {
-    return "zh-CN";
+    return Locale.ZH_CN;
   }
 
-  return "fr";
+  return Locale.FR;
 }
 
 export function getTestimonialsByLocale(locale: string): TestimonialItem[] {
@@ -75,14 +79,7 @@ export interface ConnectionItem {
 export interface ToolItem {
   id: string;
   name: string;
-  category:
-    | "frontend"
-    | "backend"
-    | "design"
-    | "tools"
-    | "other"
-    | "code"
-    | "productivity";
+  category: ToolboxToolCategory;
   description: string;
   url?: string;
   icon?: string;
@@ -91,7 +88,7 @@ export interface ToolItem {
 export interface SetupItem {
   id: string;
   name: string;
-  category: "hardware" | "accessories" | "software" | "audio";
+  category: ToolboxSetupItemCategory;
   tags: string[];
   description: string;
   imageUrl?: string;
@@ -103,5 +100,5 @@ export interface ChangelogItem {
   version: string;
   date: string;
   changes: string[];
-  type: "feature" | "fix" | "improvement" | "milestone";
+  type: ChangelogItemType;
 }

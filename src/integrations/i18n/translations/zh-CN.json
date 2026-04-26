@@ -21,7 +21,91 @@
         "title": "GitHub",
         "description": "开源贡献和仓库指标。",
         "badge": "代码 💻"
+      },
+      "general": {
+        "badge": "统计数据 📊"
+      },
+      "performance": {
+        "badge": "网站性能⚡"
       }
+    },
+    "cards": {
+      "totalViews": {
+        "label": "Total Site Views",
+        "description": "Since launch"
+      },
+      "coffee": {
+        "label": "Coffee Consumed",
+        "suffix": "cups",
+        "description": "1 cup per 500 words"
+      },
+      "siteAge": {
+        "label": "Site Age",
+        "suffix": "days",
+        "description": "Launched {date}"
+      },
+      "topViewed": {
+        "title": "Top Viewed Thoughts",
+        "description": "Most read articles"
+      },
+      "topReacted": {
+        "title": "Top Reacted Thoughts",
+        "description": "Most loved articles"
+      },
+      "categories": {
+        "title": "Categories",
+        "description": "Thoughts by topic"
+      },
+      "totalThoughts": {
+        "label": "Total Thoughts",
+        "suffix": "thoughts"
+      },
+      "totalWords": {
+        "label": "Total Words",
+        "suffix": "words"
+      },
+      "communityMessages": {
+        "label": "Community Messages",
+        "suffix": "messages"
+      },
+      "readingTime": {
+        "label": "Reading Time",
+        "suffix": "min"
+      },
+      "githubStars": {
+        "label": "GitHub Stars"
+      },
+      "mostViewed": {
+        "noImage": "No image",
+        "badge": "Most Viewed Thought"
+      },
+      "changelogUpdates": {
+        "count": "{count} updates"
+      },
+      "github": {
+        "stars": "GitHub stars",
+        "forks": "Forks",
+        "commits": "Commits"
+      },
+      "changelog": {
+        "updates": "{count} updates"
+      }
+    },
+    "lighthouse": {
+      "performance": "Performance",
+      "accessibility": "Accessibility",
+      "bestPractices": "Best Practices",
+      "seo": "SEO",
+      "mobile": "Mobile",
+      "desktop": "Desktop",
+      "score": "Lighthouse Score"
+    },
+    "reactions": {
+      "like": "Likes",
+      "heart": "Hearts",
+      "celebrate": "Celebrates",
+      "insightful": "Insightful",
+      "sceptic": "Sceptic"
     }
   },
   "connections": {
@@ -70,6 +154,24 @@
       "title": "分享你的消息",
       "signInPrompt": "你需要使用 GitHub 登录才能发布消息。",
       "signInButton": "使用 GitHub 登录"
+    },
+    "comment-form": {
+      "submitting": "Sending...",
+      "validation": {
+        "empty": "Comment cannot be empty",
+        "max": "Comment must be less than {max} characters"
+      },
+      "toast": {
+        "success": "Comment submitted successfully!",
+        "error": "Failed to submit comment"
+      },
+      "controls": {
+        "rotation": "Rotation:",
+        "pattern": "Pattern:",
+        "patternAria": "Pattern {index}",
+        "previousPattern": "Previous pattern",
+        "nextPattern": "Next pattern"
+      }
     }
   },
   "toolbox": {
@@ -116,7 +218,7 @@
   },
   "changelog": {
     "title": "更新日志",
-    "description": "跟踪此项目的演变、功能和修复。",
+    "description": "跟踪此项目的演变、功能和修复，我会审阅每个更新。",
     "page": {
       "title": "演变与更新",
       "description": "探索 Shirofolio 世界的新动态。"
@@ -125,7 +227,34 @@
       "timeline": {
         "title": "时间线",
         "description": "变更和改进的历史。",
-        "badge": "更新 ✨"
+        "badge": "更新 ✨",
+        "release": "release",
+        "filter": {
+          "title": "筛选更新日志",
+          "button": "筛选",
+          "searchPlaceholder": "搜索版本...",
+          "clearFilters": "清除筛选",
+          "applyFilters": "应用筛选",
+          "types": {
+            "milestone": "里程碑",
+            "feature": "功能",
+            "fix": "修复",
+            "improvement": "改进"
+          }
+        },
+        "entry": {
+          "latest": "最新",
+          "types": {
+            "milestone": "里程碑",
+            "feature": "功能",
+            "fix": "修复",
+            "improvement": "改进"
+          }
+        },
+        "emptyState": {
+          "message": "未找到符合条件的版本。",
+          "clearFilters": "清除筛选"
+        }
       }
     }
   },
@@ -244,7 +373,9 @@
       "sending": "发送中",
       "sent": "已发送",
       "understood": "知道了",
-      "view-more": "查看更多"
+      "view-more": "查看更多",
+      "edit": "Edit",
+      "delete": "Delete"
     },
     "turnstile": {
       "loading": "请稍等... 🔄",
@@ -309,6 +440,69 @@
         "default": "想法",
         "desktop": "博客",
         "mobile": "博客 📝"
+      },
+      "submit": {
+        "default": "提交"
+      },
+      "community": {
+        "default": "社区",
+        "desktop": "社区",
+        "mobile": "社区 👥"
+      },
+      "stats": {
+        "default": "统计",
+        "desktop": "统计",
+        "mobile": "统计 📊"
+      },
+      "toolbox": {
+        "default": "工具箱",
+        "desktop": "工具箱",
+        "mobile": "工具箱 🧰"
+      },
+      "connections": {
+        "default": "连接",
+        "desktop": "连接",
+        "mobile": "连接 🔗"
+      },
+      "routes": {
+        "default": "路线",
+        "desktop": "路线",
+        "mobile": "路线 🗺️"
+      },
+      "changelog": {
+        "default": "更新日志",
+        "desktop": "更新日志",
+        "mobile": "更新日志 📝"
+      },
+      "privacy": {
+        "default": "隐私政策",
+        "desktop": "隐私",
+        "mobile": "隐私 🔒"
+      },
+      "terms": {
+        "default": "服务条款",
+        "desktop": "条款",
+        "mobile": "条款 📜"
+      },
+      "setup": {
+        "default": "我的设置",
+        "desktop": "设置",
+        "mobile": "设置 ⚙️"
+      },
+      "rss": {
+        "default": "RSS",
+        "desktop": "RSS",
+        "mobile": "RSS 📡"
+      },
+      "rss-atom": {
+        "default": "RSS Atom",
+        "desktop": "RSS Atom",
+        "mobile": "RSS Atom 📡"
+      },
+      "rss-json": {
+        "default": "RSS JSON",
+        "desktop": "RSS JSON",
+        "mobile": "RSS JSON 📡"
       }
     },
     "page-sections": {
@@ -352,7 +546,7 @@
               "description": "实用、简明的指南，帮助你避免错误并更快前进。",
               "title": "电子书 📕"
             },
-            "figma-template": {
+            "figma_template": {
               "badge": "创作者 🖌️",
               "button": "探索",
               "description": "现成的模板，来源于我的设计实践，帮助你创建令人愿意使用的产品。",
@@ -455,7 +649,7 @@
     },
     "shared": {
       "base": {
-        "badge": "问题解决者 & 你的 SaaS 产品设计师 🦄❣️",
+        "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
         "subtitle": "创新的问题解决者 & SaaS 产品设计师 ❣️",
         "subtitle-secondary": "把想法转化为影响 | SaaS 产品设计师 & 问题解决者 ❣️",
         "subtitle-simple": "创新的问题解决者 & 你的首选 SaaS 产品设计师 ❣️",
@@ -598,10 +792,10 @@
     }
   },
   "contact": {
-    "description": "我会亲自回复你的消息。无论是项目、合作还是单纯讨论产品设计与创新，我的邮箱是开放的。",
-    "keywords": "联系 SaaS, Adriel Zimbril, 产品设计师, 讨论 SaaS 想法, 产品合作, SaaS 设计, 自由职业联系, SaaS 专家, 产品陪伴, SaaS 导师, 设计培训师",
+    "description": "我会亲自审阅你的消息。无论是项目、合作还是单纯讨论产品设计与创新，我的邮箱是开放的。",
+    "keywords": "联系 SaaS, 产品设计师, 讨论 SaaS 想法, 产品合作, SaaS 设计, 自由职业联系, SaaS 专家, 产品陪伴, SaaS 导师, 设计培训师",
     "page": {
-      "badge": "问题解决者 & 你的 SaaS 产品设计师 ❣️",
+      "badge": "Problem Solver & Your SaaS Product designer",
       "form": {
         "notifications": {
           "error": "抱歉，我们无法发送您的消息。请稍后再试。",
@@ -673,7 +867,7 @@
       "contactAdmin": "Adriel Zimbril，你收到了一条新消息。有人认可你的影响并想与你交流。现在你是这个世界的王，展示给他看吧。就去做吧 🚀",
       "copyright": "由 Adriel Zimbril 用 ❤️ 制作",
       "defaultName": "设计师朋友",
-      "signature": "Adriel Zimbril | 问题解决者 & 你的 SaaS 产品设计师 🦄"
+      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product designer 🦄"
     },
     "freeProductDelivery": {
       "ctaButton": "访问资源",
@@ -709,7 +903,7 @@
         "presentation": "我叫 Adriel，过去五年我为 SaaS 设计界面，我注意到一件事：我们经常把事情复杂化，而用户真正想要的是简单。"
       },
       "subject": "你好，我是 Adriel ！",
-      "tagline": "问题解决者 & 你的 SaaS 产品设计师 🦄",
+      "tagline": "Problem Solver & Your SaaS Product designer 🦄",
       "why": {
         "motivation": "我想分享这些小发现，那些让人会心一笑的瞬间。无意张扬，只是出于共同的好奇 ❤️.",
         "reason": "因为我喜欢了解事物如何运作。在设计中，我们常常预期会奏效的东西，与实际有效的存在差距。",
@@ -809,6 +1003,26 @@
       "preview": "你的提交已记录 🧪",
       "subject": "🚀 提交已收到"
     },
+    "communityWallAdminNotification": {
+      "labels": {
+        "email": "电子邮件",
+        "language": "语言",
+        "message": "留言",
+        "name": "姓名"
+      },
+      "preview": "社区墙上有新消息发布",
+      "subject": "🧾 新的社区墙消息"
+    },
+    "communityWallUserConfirmation": {
+      "content": {
+        "intro": "感谢你在社区墙上发布消息！你的消息现在对所有人可见。",
+        "messageLabel": "你的消息：",
+        "thanks": "感谢成为我们社区的一员！"
+      },
+      "greeting": "你好 {firstName},",
+      "preview": "你的社区墙消息已发布",
+      "subject": "✅ 社区墙消息已发布"
+    },
     "submitAdminNotification": {
       "preview": "Shirosaas Lab | 收到一份新表单！",
       "subject": "🚀 新表单提交 — ShiroSaaS Lab"
@@ -849,6 +1063,25 @@
       },
       "subject": "欢迎订阅我的邮件！",
       "tagline": "开始我们的小冒险吧"
+    }
+  },
+  "routes": {
+    "title": "路线",
+    "description": "发现本网站的所有页面和部分。",
+    "page": {
+      "title": "路线",
+      "description": "此作品集上所有可用页面的完整导航。"
+    },
+    "groups": {
+      "main": "主要页面",
+      "community": "社区",
+      "contact": "联系",
+      "tools": "工具",
+      "rss": "RSS",
+      "legal": "法律"
+    },
+    "badges": {
+      "header": "菜单"
     }
   },
   "newsletter": {
@@ -1109,8 +1342,8 @@
     "title": "创意挑战 🎖️"
   },
   "submit": {
-    "description": "分享你的项目、想法或产品以获得 UX 分析、Figma 重设计或产品反馈。Adriel Zimbril 会陪你将想法转化为有影响力的体验。",
-    "keywords": "提交项目 SaaS, Adriel Zimbril, 产品设计师, UX 评审, Figma 重设计, 网站分析, 产品反馈, ShiroSaaS, 设计系统, 产品设计",
+    "description": "分享你的项目、想法或产品以获得 UX 分析、Figma 重设计或产品反馈。我会审阅你的想法并帮你将其转化为有影响力的体验。",
+    "keywords": "提交项目 SaaS, 产品设计师, UX 评审, Figma 重设计, 网站分析, 产品反馈, ShiroSaaS, 设计系统, 产品设计",
     "page": {
       "actions": {
         "submit": "开始吧！ 🤩"
@@ -1154,7 +1387,7 @@
           "saas": "SaaS",
           "website": "网站"
         },
-        "ux_review": "UI/UX 评审"
+        "ui_ux_review": "UI/UX 评审"
       },
       "toast": {
         "error": "哎呀！发生错误，请重试 😅",
@@ -1343,5 +1576,57 @@
       "url": "url",
       "uuid": "uuid"
     }
+  },
+  "admin": {
+    "title": "Shirofolio - 安全访问",
+    "description": "需要身份验证才能进入此区域。",
+    "landlord": {
+      "tabs": {
+        "quests": "Quests",
+        "community": "Community Wall"
+      },
+      "community": {
+        "title": "Community Wall Management",
+        "actions": {
+          "add": "Add Message",
+          "update": "Update Message"
+        },
+        "fields": {
+          "creatorName": "Creator Name",
+          "avatarUrl": "Avatar URL (optional)",
+          "messagesByLanguage": "Messages by Language",
+          "messagePlaceholder": "Message in {locale}",
+          "messageLanguage": "Message ({locale})"
+        }
+      },
+      "quests": {
+        "title": "Quest Participants Management",
+        "actions": {
+          "add": "Add Participant",
+          "addSubmit": "Add Participant",
+          "viewWork": "View Work"
+        },
+        "fields": {
+          "quest": "Quest",
+          "name": "Name",
+          "message": "Message",
+          "sendEmail": "Send email notification",
+          "language": "Language"
+        },
+        "placeholders": {
+          "selectQuest": "Select a quest",
+          "selectLanguage": "Select language"
+        },
+        "filters": {
+          "byQuest": "Filter by Quest",
+          "allQuests": "All quests"
+        },
+        "source": "from {source}"
+      }
+    }
+  },
+  "rss": {
+    "title": "RSS",
+    "description": "Subscribe to get articles directly in your favorite RSS reader."
   }
 }

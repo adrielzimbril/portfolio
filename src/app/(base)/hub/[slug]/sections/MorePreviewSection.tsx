@@ -21,6 +21,7 @@ export function MorePreviewSection({ data }: { data: Resource[] }) {
           features={resource.features ?? []}
           avatars={resource.studentsProfileImage}
           userCount={resource.studentsNumber}
+          hideReactions
         />
       ))}
     </CardPreviewSection>

@@ -1,12 +1,10 @@
 import { LocaleLink } from "@/integrations/i18n/routing";
-import { slugifyHeadline } from "@/utils/format-content";
+import { cn, getImageUrl, getThisPageUrl, slugifyHeadline } from "@/utils";
 import type { MDXComponents } from "mdx/types";
 import type { ImageProps } from "next/image";
 import Image from "next/image";
 import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { getImageUrl, getThisPageUrl } from "@/utils/base-url";
-import { cn } from "@/utils/utils";;
 import { Link } from "@/components/ui/link";
 import { siteConfig } from "@/data/config";
 import { routes } from "@/data/routes";
@@ -208,7 +206,7 @@ export function Highlight({
     <span
       className={cn(
         "p-1 py-0.5 bg-violet-200 text-b-white-unchanged rounded-md font-medium font-bold",
-        className
+        className,
       )}
     >
       {children}

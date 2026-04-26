@@ -1,5 +1,4 @@
 "use client";
-
 import { ResourceTypeKey } from "@/types";
 import useSWR from "swr";
 import { apiRoutes } from "@/data/api-routes";
@@ -13,11 +12,11 @@ async function fetchJSON(url: string) {
 
 export function useNewsletterSubscribersCount() {
   const { data, error, isLoading, mutate } = useSWR(
-    `${apiRoutes.statsSubscribers.link}?scope=newsletter`,
+    `${apiRoutes.stats.subscribers.link}?scope=newsletter`,
     fetchJSON,
     {
       revalidateOnFocus: true, // 👈 re-fetch when we come back to the page
-    }
+    },
   );
 
   return {
@@ -31,9 +30,9 @@ export function useNewsletterSubscribersCount() {
 export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
   const { data, error, isLoading, mutate } = useSWR(
     type
-      ? `${apiRoutes.statsSubscribers.link}?scope=productType&type=${encodeURIComponent(type)}`
+      ? `${apiRoutes.stats.subscribers.link}?scope=productType&type=${encodeURIComponent(type)}`
       : null, // null = skip fetch if no type
-    fetchJSON
+    fetchJSON,
   );
 
   return {
@@ -47,11 +46,11 @@ export function useProductTypeSubscribersCount(type: ResourceTypeKey) {
 export function useProductSlugRequestsCount(slug: string) {
   const { data, error, isLoading, mutate } = useSWR(
     slug
-      ? `${apiRoutes.statsSubscribers.link}?scope=productUrl&url=${encodeURIComponent(
-          slug
+      ? `${apiRoutes.stats.subscribers.link}?scope=productUrl&url=${encodeURIComponent(
+          slug,
         )}`
       : null, // null = skip fetch if no title
-    fetchJSON
+    fetchJSON,
   );
 
   return {
@@ -70,7 +69,7 @@ type QuestParticipantsStats = {
 
 export function useQuestParticipantsStats(slug: string) {
   const { data, error, isLoading, mutate } = useSWR(
-    slug ? apiRoutes.questsParticipants(slug).link : null,
+    slug ? apiRoutes.quests.participants(slug).link : null,
     fetchJSON,
   );
 

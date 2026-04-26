@@ -60,7 +60,7 @@ export function QuestSubmitUserConfirmation({
                 as="h1"
                 className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
               >
-                {t("mail.questSubmitUserConfirmation.subject")} ??
+                {t("mail.questSubmitUserConfirmation.subject")}
               </Heading>
             </Section>
 

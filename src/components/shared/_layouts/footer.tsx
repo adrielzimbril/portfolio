@@ -6,17 +6,19 @@ import {
   type ResourcePreview,
 } from "@/integrations/content/lib";
 import { getResourcesUrl, getThisMonth } from "@/utils";
-import { SectionBase } from "../pages/shared/section-base";
+import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { siteConfig } from "@/data/config";
-import { routes } from "@/data/routes";
+import { routes, type RouteType } from "@/data/routes";
 import { PageType } from "@/types";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { LinkOne } from "@aurthle/icons";
-import { FooterLocaleSwitch } from "./footer-locale-switch";
+import { FooterLocaleSwitch } from "@/components/shared/_layouts/footer-locale-switch";
 
 export async function Footer() {
   const t = await getTranslations();
   const locale = await getLocale();
+  const menuRoutes = Object.values(routes);
+  const menuRoutesFiltered = menuRoutes.filter((item) => item.inFooter);
   const resources = await getBestResourcesLink({
     limit: 4,
     locale,
@@ -77,7 +79,7 @@ export async function Footer() {
                       aria-label={name}
                     >
                       <span className="flex items-center size-full justify-center m-auto">
-                        <span className="capsitalize">
+                        <span className="capitalize">
                           {social.key !== "email"
                             ? t("common.base." + social.key)
                             : social.name}
@@ -108,7 +110,8 @@ export async function Footer() {
             </div>
           </div>
 
-          <FooterResources resources={resources} />
+          <FooterLinks links={menuRoutesFiltered} />
+          {/* <FooterResources resources={resources} /> */}
 
           <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-b-base dark:bg-zinc-900">
             <div className="flex items-center md:items-start gap-2 text-b-white-foreground dark:text-zinc-200">
@@ -131,6 +134,41 @@ export async function Footer() {
   );
 }
 
+function FooterLinksContainer({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
+      <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+async function FooterLinks({ links }: { links: RouteType[] }) {
+  const t = await getTranslations();
+
+  return (
+    <FooterLinksContainer>
+      {links.map((link, index) => (
+        <React.Fragment key={link.key}>
+          <Link
+            href={link.link}
+            className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
+          >
+            {t("common.menu." + link.key + ".desktop")}
+          </Link>
+          {index < links.length - 1 && (
+            <>
+              <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
+              <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
+            </>
+          )}
+        </React.Fragment>
+      ))}
+    </FooterLinksContainer>
+  );
+}
+
 async function FooterResources({
   resources,
 }: {
@@ -138,55 +176,24 @@ async function FooterResources({
 }) {
   const t = await getTranslations();
 
-  const footerLinks = [
-    routes.community,
-    routes.stats,
-    routes.toolbox,
-    routes.connections,
-    routes.changelog,
-  ];
-
   return (
-    <div className="w-full place-self-center rounded-3xl bg-b-base dark:bg-zinc-900 py-4 md:py-6">
-      {/* <div className="w-full flex flex-col gap-8 md:gap-10 py-6 md:py-10 border-t border-b-bases/10 border-t-bases/10 mt-4"> */}
-      {/* Primary Navigation */}
-      <nav
-        className="w-full flex flex-wrap justify-center items-center gap-x-6 gap-y-3 px-4"
-        aria-label="Footer navigation"
-      >
-        {footerLinks.map((item, index) => (
-          <React.Fragment key={item.key}>
-            <Link
-              href={item.link}
-              className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-b-white-invert-thr hover:text-b-primary transition-all duration-300 hover:tracking-[0.25em]"
-            >
-              {t(`common.menu.${item.key}.default`)}
-            </Link>
-            {index < footerLinks.length - 1 && (
-              <div className="size-1 rounded-full bg-b-white-invert-thr/20 hidden md:block shrink-0" />
-            )}
-          </React.Fragment>
-        ))}
-      </nav>
-
-      <div className="w-full flex flex-col flex-wrap md:flex-row justify-center place-content-center items-center gap-2">
-        {resources.map((resource, index) => (
-          <React.Fragment key={resource.slug ?? index}>
-            <Link
-              href={getResourcesUrl(PageType.HUB, resource.slug)}
-              className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
-            >
-              {resource.title}
-            </Link>
-            {index < resources.length - 1 && (
-              <>
-                <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
-                <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
-              </>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-    </div>
+    <FooterLinksContainer>
+      {resources.map((resource, index) => (
+        <React.Fragment key={resource.slug ?? index}>
+          <Link
+            href={getResourcesUrl(PageType.HUB, resource.slug)}
+            className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
+          >
+            {resource.title}
+          </Link>
+          {index < resources.length - 1 && (
+            <>
+              <div className="hidden md:block w-px h-5 bg-zinc-300 rounded-xl" />
+              <div className="block md:hidden w-12 h-px bg-zinc-300 rounded-xl" />
+            </>
+          )}
+        </React.Fragment>
+      ))}
+    </FooterLinksContainer>
   );
 }

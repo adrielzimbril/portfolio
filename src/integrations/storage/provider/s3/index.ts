@@ -4,11 +4,14 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl as getS3SignedUrl } from "@aws-sdk/s3-request-presigner";
-import logger from "@/utils/logger";
+import { logger } from "@/utils";
 import {
   GetSignedUploadUrlHandler,
-  GetSignedUrlHander,
-} from "@/integrations/storage/types";
+  GetSignedUrlHandler,
+  UploadHandler,
+} from "@/integrations/storage/types/types";
+import { getS3Config } from "@/config";
+import { fileToUint8Array } from "@/integrations/storage/util";
 
 let s3Client: S3Client | null = null;
 
@@ -17,30 +20,27 @@ const getS3Client = () => {
     return s3Client;
   }
 
-  const s3Endpoint = process.env.S3_ENDPOINT as string;
-  if (!s3Endpoint) {
+  const { endpoint, region, accessKeyId, secretAccessKey } = getS3Config();
+
+  if (!endpoint) {
     throw new Error("Missing env variable S3_ENDPOINT");
   }
 
-  const s3Region = (process.env.S3_REGION as string) || "auto";
-
-  const s3AccessKeyId = process.env.S3_ACCESS_KEY_ID as string;
-  if (!s3AccessKeyId) {
+  if (!accessKeyId) {
     throw new Error("Missing env variable S3_ACCESS_KEY_ID");
   }
 
-  const s3SecretAccessKey = process.env.S3_SECRET_ACCESS_KEY as string;
-  if (!s3SecretAccessKey) {
+  if (!secretAccessKey) {
     throw new Error("Missing env variable S3_SECRET_ACCESS_KEY");
   }
 
   s3Client = new S3Client({
-    region: s3Region,
-    endpoint: s3Endpoint,
+    region: region || "auto",
+    endpoint,
     forcePathStyle: true,
     credentials: {
-      accessKeyId: s3AccessKeyId,
-      secretAccessKey: s3SecretAccessKey,
+      accessKeyId,
+      secretAccessKey,
     },
   });
 
@@ -49,7 +49,7 @@ const getS3Client = () => {
 
 export const getSignedUploadUrl: GetSignedUploadUrlHandler = async (
   path,
-  { bucket }
+  { bucket },
 ) => {
   const s3Client = getS3Client();
   try {
@@ -62,7 +62,7 @@ export const getSignedUploadUrl: GetSignedUploadUrlHandler = async (
       }),
       {
         expiresIn: 60,
-      }
+      },
     );
   } catch (e) {
     logger.error(e);
@@ -71,19 +71,47 @@ export const getSignedUploadUrl: GetSignedUploadUrlHandler = async (
   }
 };
 
-export const getSignedUrl: GetSignedUrlHander = async (
+export const getSignedUrl: GetSignedUrlHandler = async (
   path,
-  { bucket, expiresIn }
+  { bucket, expiresIn },
 ) => {
   const s3Client = getS3Client();
   try {
     return getS3SignedUrl(
       s3Client,
       new GetObjectCommand({ Bucket: bucket, Key: path }),
-      { expiresIn }
+      { expiresIn },
     );
   } catch (e) {
     logger.error(e);
     throw new Error("Could not get signed url");
+  }
+};
+
+export const uploadFile: UploadHandler = async (
+  file,
+  path,
+  { bucket, contentType },
+) => {
+  const s3Client = getS3Client();
+  try {
+    const body = await fileToUint8Array(file);
+
+    await s3Client.send(
+      new PutObjectCommand({
+        Bucket: bucket,
+        Key: path,
+        Body: body,
+        ContentType: contentType || "application/octet-stream",
+      }),
+    );
+
+    // Get public URL
+    const url = await getSignedUrl(path, { bucket, expiresIn: 3600 });
+
+    return { url, path };
+  } catch (e) {
+    logger.error(e);
+    throw new Error("Could not upload file");
   }
 };

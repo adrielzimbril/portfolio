@@ -1,93 +1,101 @@
-import { SetupItem } from "@/types/personalData";
+import { SetupItem } from "@/types";
+import { ToolboxSetupItemCategory } from "@/types/enum";
 
 export const setup: SetupItem[] = [
   {
     id: "macbook-pro-16",
-    name: "MacBook Pro (16 inch), 2021",
-    category: "hardware",
+    name: "Asus TUF F17 (17 inch), 2021",
+    category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Laptop"],
     description:
-      "10-core CPU, 16-core GPU, 16-core Neural Engine, 32GB unified memory, 2TB SSD storage",
-    imageUrl: "/img/setup/macbook-pro-16.jpg",
-    purchaseUrl: "https://www.apple.com/shop/buy-mac/macbook-pro/16-inch",
+      "17.3-inch FHD IPS panel with 144Hz refresh rate. Military-grade durability for daily use.",
+    imageUrl: "/img/setup/asus-f17-17-inch-2021.jpg",
+    purchaseUrl:
+      "https://www.asus.com/us/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-f17/",
   },
   {
-    id: "zoom65-keyboard",
-    name: "Zoom65 Mechanical Keyboard",
-    category: "accessories",
-    tags: ["Keyboard", "Mechanical"],
+    id: "obsbot-tiny-3-lite",
+    name: "Obsbot Tiny 3 Lite Webcam",
+    category: ToolboxSetupItemCategory.HARDWARE,
+    tags: ["Webcam"],
     description:
-      "With a navy blue finish, this 65% custom mechanical keyboard has Oil King linear switches topped with GMK Hennessey keycaps",
-    imageUrl: "/img/setup/zoom65.jpg",
-    purchaseUrl: "https://zoom65.com/",
+      "Compact webcam with 1/2-inch CMOS sensor, 4K at 30fps and 1080p at 120fps. AI-powered tracking and framing for seamless video calls.",
+    imageUrl: "/img/setup/obsbot-tiny-3-lite.jpg",
+    purchaseUrl:
+      "https://www.obsbot.com/store/products/tiny-3-lite?variant=Regular_Price",
   },
   {
-    id: "gigabyte-monitor",
-    name: "GIGABYTE M27Q-X 27 Monitor",
-    category: "hardware",
+    id: "xiaomi-redmi-g34wq",
+    name: "Xiaomi Redmi G34WQ Monitor",
+    category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Monitor"],
-    description: "A 240Hz 1440P KVM monitor that I use for work and gaming",
-    imageUrl: "/img/setup/gigabyte-m27q-x.jpg",
-    purchaseUrl: "https://www.gigabyte.com/Monitor/M27Q-X-rev-10#kf",
-  },
-  {
-    id: "ergochair-2",
-    name: "Autonomous ErgoChair 2",
-    category: "hardware",
-    tags: ["Chair"],
     description:
-      "A fully adjustable, completely supportive, and super breathable desk chair in a black and white finish",
-    imageUrl: "/img/setup/ergochair-2.jpg",
-    purchaseUrl: "https://www.autonomous.ai/office-chairs/ergonomic-chair",
+      "34-inch curved gaming monitor, WQHD resolution, 180Hz refresh rate, 1500R curvature. TÜV certified for reduced eye strain.",
+    imageUrl: "/img/setup/monitor-redmi-g34wq-2026.png",
+    purchaseUrl:
+      "https://www.mi.com/global/product/xiaomi-curved-gaming-monitor-g34wqi-2026/",
   },
   {
-    id: "smartdesk-diy",
-    name: "Autonomous SmartDesk DIY Standing Desk",
-    category: "hardware",
-    tags: ["Desk"],
+    id: "steelseries-apex-pro-gen-3",
+    name: "SteelSeries Apex Pro Gen 3",
+    category: ToolboxSetupItemCategory.ACCESSORIES,
+    tags: ["Keyboard"],
     description:
-      "A standing desk frame in a white finish. Topped with the IKEA Karlby tabletop, the desk measures almost 9' wide",
-    imageUrl: "/img/setup/smartdesk-diy.jpg",
-    purchaseUrl: "https://www.autonomous.ai/standing-desks/diy-smart-desk-kit",
+      "OmniPoint 3.0 adjustable switches let you fine-tune actuation distance for every key. Personalized typing and gaming experience.",
+    imageUrl: "/img/setup/steelseries-apex-pro-gen-3.jpg",
+    purchaseUrl: "https://steelseries.com/gaming-keyboards/apex-pro-gen-3",
   },
   {
-    id: "wave-dx",
-    name: "Wave DX Dynamic Microphone",
-    category: "audio",
+    id: "steelseries-aerox-5-wireless",
+    name: "SteelSeries Aerox 5 Wireless",
+    category: ToolboxSetupItemCategory.ACCESSORIES,
+    tags: ["Mouse"],
+    description:
+      "Lightweight honeycomb shell at 66g. TrueMove Air optical sensor for precise tracking.",
+    imageUrl: "/img/setup/steelseries-aerox-5-wireless.png",
+    purchaseUrl: "https://steelseries.com/gaming-mice/aerox-5-wireless",
+  },
+  {
+    id: "steelseries-alias-usb-mic",
+    name: "SteelSeries Alias USB Mic",
+    category: ToolboxSetupItemCategory.AUDIO,
     tags: ["Microphone"],
     description:
-      "A dynamic mic that captures detail like a condenser without the noise, Wave DX is a remarkable feat of audio engineering",
-    imageUrl: "/img/setup/wave-dx.jpg",
-    purchaseUrl: "https://www.elgato.com/us/en/p/wave-dx-dynamic-microphone",
+      "Professional-grade sound for streamers. Balanced frequency response with minimal background noise.",
+    imageUrl: "/img/setup/steelseries-alias-usb-mic.png",
+    purchaseUrl:
+      "https://steelseries.com/gaming-microphones/alias?model=Regular",
   },
   {
-    id: "stream-deck-plus",
-    name: "Stream Deck +",
-    category: "accessories",
-    tags: ["Streaming"],
-    description:
-      "Iconic Stream Deck tech with customizable LCD keys, dials, and touch strip",
-    imageUrl: "/img/setup/stream-deck-plus.jpg",
-    purchaseUrl: "https://www.elgato.com/us/en/p/stream-deck-plus-black",
-  },
-  {
-    id: "key-light",
-    name: "Key Light MK.2",
-    category: "accessories",
+    id: "quntis-rgb-pro-plus",
+    name: "Quntis RGB Pro Plus",
+    category: ToolboxSetupItemCategory.ACCESSORIES,
     tags: ["Lighting"],
     description:
-      "Ultra-bright and dimmable. Space-saving and built to last. App-controlled and destined to evolve with you",
-    imageUrl: "/img/setup/key-light-mk2.jpg",
-    purchaseUrl: "https://www.elgato.com/us/en/p/key-light",
+      "Desktop RGB light strip with 360° rotatable bracket. Multiple color modes and brightness levels for custom lighting.",
+    imageUrl: "/img/setup/quntis-rgb-pro-plus.jpg",
+    purchaseUrl: "https://www.amazon.com/dp/B0D5BBPJ23",
   },
   {
-    id: "hd60-x",
-    name: "HD60 X Capture Card",
-    category: "accessories",
-    tags: ["Streaming", "Capture"],
+    id: "diablo-v-basic-black-grey",
+    name: "Diablo V Basic Black Grey",
+    category: ToolboxSetupItemCategory.HARDWARE,
+    tags: ["Chair"],
     description:
-      "HD60 X lets you capture PS5 or Xbox gameplay like a pro. Stream or record high resolution content for audiences on any platform",
-    imageUrl: "/img/setup/hd60-x.jpg",
-    purchaseUrl: "https://www.elgato.com/us/en/p/game-capture-hd60-x",
+      "Fully adjustable, supportive, and breathable desk chair in black and white finish.",
+    imageUrl: "/img/setup/diablo-v-basic-black-grey.jpg",
+    purchaseUrl:
+      "https://diablochairs.com/en/3540-ergonomic-chair-diablo-v-basic-black-grey",
+  },
+  {
+    id: "playstation-dualsense-gray-camouflage",
+    name: "PlayStation DualSense® - Gray Camouflage",
+    category: ToolboxSetupItemCategory.HARDWARE,
+    tags: ["Controller"],
+    description:
+      "Refined design with subtle texture details and updated logo in Gray Camouflage.",
+    imageUrl: "/img/setup/playstation-dualsense-gray-camouflage.jpg",
+    purchaseUrl:
+      "https://direct.playstation.com/fr-fr/buy-accessories/dualsense-wireless-controller-grey-camouflage-for-ps5-pc-mac-mobile",
   },
 ];

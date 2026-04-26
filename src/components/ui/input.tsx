@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { cn } from "@/utils/utils";
 import { cva } from "class-variance-authority";
@@ -22,11 +23,12 @@ export const inputVariants = cva(
       variant: "default",
       inputSize: "default",
     },
-  }
+  },
 );
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+  extends
+    React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputVariants> {
   asFull?: boolean;
   inputSize?: "default" | "sm" | "lg";
@@ -48,14 +50,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type === "file" &&
               "text-muted-foreground/70 file:border-b-base-accent file:text-foreground p-0 pr-3 italic file:me-3 file:h-full file:border-0 file:border-r file:border-solid file:bg-b-white file:px-3 file:text-lg file:font-medium file:not-italic",
 
-            inputVariants({ variant, inputSize, className })
+            inputVariants({ variant, inputSize, className }),
           )}
           ref={ref}
           {...props}
         />
       </>
     );
-  }
+  },
 );
 Input.displayName = "Input";
 

@@ -15,6 +15,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import {
   AttendanceType,
+  ChangelogItemType,
   PortfolioProjectResearchScope,
   ResourceType,
 } from "@/types";
@@ -101,7 +102,7 @@ async function compileBodyMDX(context: any, document: any) {
   });
 }
 
-// Collection of authors (dans posts/authors/)
+// Collection of authors (In posts/authors/)
 const authors = defineCollection({
   name: "authors",
   directory: `${BASE_COLLECTION_PATH}/posts/authors`,
@@ -277,19 +278,11 @@ const posts = defineCollection({
     // Resolve relations
     const categories = context
       .documents(postCategories)
-      .filter(
-        (c) =>
-          document.categories_id.includes(c.id) &&
-          getLocaleFromFilePath(c._meta.filePath) === locale,
-      );
+      .filter((c) => document.categories_id.includes(c.id));
 
     const tags = context
       .documents(postTags)
-      .filter(
-        (t) =>
-          document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale,
-      );
+      .filter((t) => document.tags_id.includes(t.id));
 
     return {
       ...document,
@@ -332,7 +325,8 @@ const projects = defineCollection({
     cards: z
       .array(
         z.object({
-          title: z.enum(Object.values(PortfolioProjectResearchScope)),
+          // title: z.enum(Object.values(PortfolioProjectResearchScope)),
+          title: z.string(),
           emoji: z.string(),
           description: z.string(),
           methodology: z.string(),
@@ -374,20 +368,12 @@ const projects = defineCollection({
     // Resolve relations
     const categories = context
       .documents(projectCategories)
-      .filter(
-        (c) =>
-          document.categories_id.includes(c.id) &&
-          getLocaleFromFilePath(c._meta.filePath) === locale,
-      );
+      .filter((c) => document.categories_id.includes(c.id));
 
     // Use projectTags or postTags according to your preference
     const tags = context
       .documents(projectTags)
-      .filter(
-        (t) =>
-          document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale,
-      );
+      .filter((t) => document.tags_id.includes(t.id));
 
     return {
       ...document,
@@ -428,11 +414,7 @@ const resources = defineCollection({
     // Use resourcesTags or postTags according to your preference
     const tags = context
       .documents(resourceTags)
-      .filter(
-        (t) =>
-          document.tags_id.includes(t.id) &&
-          getLocaleFromFilePath(t._meta.filePath) === locale,
-      );
+      .filter((t) => document.tags_id.includes(t.id));
 
     return {
       ...document,
@@ -534,7 +516,7 @@ const changelog = defineCollection({
   include: "*.{mdx,md}",
   schema: z.object({
     version: z.string(),
-    type: z.enum(["milestone", "feature", "fix", "improvement"]),
+    type: z.enum(Object.values(ChangelogItemType)),
     date: z.string(),
     cover: z.string().optional(),
     published: z.boolean().default(true),
@@ -548,6 +530,27 @@ const changelog = defineCollection({
       locale,
       path: sanitizePath(document._meta.path),
       id: document.version,
+    };
+  },
+});
+
+const legal = defineCollection({
+  name: "legal",
+  directory: `${BASE_COLLECTION_PATH}/legal`,
+  include: "*.{mdx,md}",
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    updated_at: z.string().optional(),
+  }),
+  transform: async (document, context) => {
+    const body = await compileBodyMDX(context, document);
+    const locale = getLocaleFromFilePath(document._meta.filePath);
+    return {
+      ...document,
+      body,
+      locale,
+      path: sanitizePath(document._meta.path),
     };
   },
 });
@@ -568,5 +571,6 @@ export default defineConfig({
     talks,
     quests,
     changelog,
+    legal,
   ],
 });

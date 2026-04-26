@@ -15,7 +15,6 @@ export function HeaderSection({
   tags,
   type,
   pageViewsData,
-  slug,
 }: {
   title: string;
   cover: string;
@@ -23,7 +22,6 @@ export function HeaderSection({
   tags: { name: string; color: string }[];
   type?: ResourceType;
   pageViewsData: { slug: string; locale: string };
-  slug: string;
 }) {
   const t = useTranslations();
 
@@ -50,7 +48,7 @@ export function HeaderSection({
           : undefined
       }
       mainTitle={title}
-      slug={slug}
+      slug={pageViewsData.slug}
       description={description}
       tags={tags}
       type={type}

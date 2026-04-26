@@ -8,9 +8,9 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { routes } from "@/data/routes";
 import { useTranslations } from "use-intl";
-import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 
 function EmailForm() {
@@ -36,7 +36,7 @@ function EmailForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t(
-            "common.page-sections.cta.variant-two.form.placeholder"
+            "common.page-sections.cta.variant-two.form.placeholder",
           )}
           type="email"
         />

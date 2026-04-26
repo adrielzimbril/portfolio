@@ -4,10 +4,12 @@ import { appConfig } from "@/data/app-config";
 import { getQuestBySlug } from "@/integrations/content/lib";
 import { addContact, ContactProvider } from "@/integrations/contact";
 import { sendEmail } from "@/integrations/mail";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import { Locale, PageType } from "@/types";
 import logger from "@/utils/logger";
 import { getResourcesUrl } from "@/utils/base-url";
+import { getBrevoConfig } from "@/config";
 
 const registerSchema = z.object({
   name: z.string().min(2),
@@ -18,9 +20,11 @@ const registerSchema = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: Promise<{ slug: string }> },
 ) {
   try {
+    const cookieStore = await cookies();
+    const supabase = createClient(cookieStore);
     const db = supabase as any;
     const { slug } = await params;
     const quest = await getQuestBySlug(slug);
@@ -108,18 +112,18 @@ export async function POST(
     const { error: newsletterError } = await db
       .from("newsletter_subscribers")
       .upsert(
-      {
-        user_id: userId,
-        subscribed_from_page: JSON.stringify({
-          path: `/quests/${slug}/register`,
-          origin: req.headers.get("origin"),
-          referer: req.headers.get("referer"),
-          url: req.url,
-        }),
-        updateexisting: Boolean(existingUserData),
-      },
-      { onConflict: "user_id" }
-    );
+        {
+          user_id: userId,
+          subscribed_from_page: JSON.stringify({
+            path: `/quests/${slug}/register`,
+            origin: req.headers.get("origin"),
+            referer: req.headers.get("referer"),
+            url: req.url,
+          }),
+          updateexisting: Boolean(existingUserData),
+        },
+        { onConflict: "user_id" },
+      );
 
     if (newsletterError) {
       logger.error("quest register newsletter upsert failed", newsletterError);
@@ -128,10 +132,11 @@ export async function POST(
       });
     }
 
-    const globalListId = Number(process.env.BREVO_GENERAL_LIST_ID);
-    const registerListId = Number(process.env.BREVO_QUESTS_REGISTER_ID);
+    const brevoConfig = getBrevoConfig();
+    const globalListId = Number(brevoConfig.generalListId);
+    const registerListId = Number(brevoConfig.questsRegisterId);
     const listIds = [globalListId, registerListId].filter(
-      (id): id is number => Boolean(id) && !Number.isNaN(id)
+      (id): id is number => Boolean(id) && !Number.isNaN(id),
     );
 
     if (listIds.length > 0) {

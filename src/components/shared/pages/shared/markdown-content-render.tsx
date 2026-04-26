@@ -1,5 +1,4 @@
 "use client";
-
 import { MDXContent } from "@content-collections/mdx/react";
 import { mdxComponents } from "@/integrations/content/utils/mdx-components";
 import { mdxCustomComponents } from "@/integrations/content/utils/mdx-components";

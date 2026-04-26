@@ -1,30 +1,4 @@
-enum DEFAULT_TAG_COLOR {
-  BLUE = "squircle-[#ade9ff]",
-  GREEN = "squircle-[#adffad]",
-  WHITE_GOLD = "squircle-[#f9f9f9]",
-  PURPLE = "squircle-[#e2e4ff]",
-  INDIGO = "squircle-[#b3baf5]",
-  YELLOW = "squircle-[#ffe9ad]",
-  RED = "squircle-[#ffadad]",
-  SKY = "squircle-[#adffff]",
-  PINK = "squircle-[#ffadff]",
-  ORANGE = "squircle-[#ffd3ad]",
-  VIOLET = "squircle-[#8e8eff]",
-  GREENISH_YELLOW = "squircle-[#ffeccc]",
-  TURQUOISE = "squircle-[#adfbff]",
-  GOLD = "squircle-[#ffd700]",
-  AMBER = "squircle-[#ffc107]",
-  TEAL = "squircle-[#00bfa5]",
-  CYAN = "squircle-[#00e5ff]",
-  LIME = "squircle-[#c8e6c9]",
-  PINKISH_PURPLE = "squircle-[#d8b6ff]",
-  PINKISH_ORANGE = "squircle-[#ffab91]",
-  PINKISH_PINK = "squircle-[#ff83b0]",
-  PINKISH_GREEN = "squircle-[#c5e1a5]",
-  PINKISH_BLUE = "squircle-[#b3cde0]",
-}
-
-enum DEFAULT_COLOR_CODE {
+export enum DEFAULT_COLOR_CODE {
   BLUE = "#ade9ff",
   GREEN = "#adffad",
   WHITE_GOLD = "#f9f9f9",
@@ -50,7 +24,33 @@ enum DEFAULT_COLOR_CODE {
   PINKISH_BLUE = "#b3cde0",
 }
 
-enum DEFAULT_COLOR_CODE_NAME_LIST {
+export enum DEFAULT_SQUIRCLE_COLOR {
+  BLUE = "squircle-[#ade9ff]",
+  GREEN = "squircle-[#adffad]",
+  WHITE_GOLD = "squircle-[#f9f9f9]",
+  PURPLE = "squircle-[#e2e4ff]",
+  INDIGO = "squircle-[#b3baf5]",
+  YELLOW = "squircle-[#ffe9ad]",
+  RED = "squircle-[#ffadad]",
+  SKY = "squircle-[#adffff]",
+  PINK = "squircle-[#ffadff]",
+  ORANGE = "squircle-[#ffd3ad]",
+  VIOLET = "squircle-[#8e8eff]",
+  GREENISH_YELLOW = "squircle-[#ffeccc]",
+  TURQUOISE = "squircle-[#adfbff]",
+  GOLD = "squircle-[#ffd700]",
+  AMBER = "squircle-[#ffc107]",
+  TEAL = "squircle-[#00bfa5]",
+  CYAN = "squircle-[#00e5ff]",
+  LIME = "squircle-[#c8e6c9]",
+  PINKISH_PURPLE = "squircle-[#d8b6ff]",
+  PINKISH_ORANGE = "squircle-[#ffab91]",
+  PINKISH_PINK = "squircle-[#ff83b0]",
+  PINKISH_GREEN = "squircle-[#c5e1a5]",
+  PINKISH_BLUE = "squircle-[#b3cde0]",
+}
+
+export enum DEFAULT_COLOR_CODE_NAME {
   BLUE,
   GREEN,
   WHITE_GOLD,
@@ -76,9 +76,4 @@ enum DEFAULT_COLOR_CODE_NAME_LIST {
   PINKISH_BLUE,
 }
 
-type DEFAULT_CATEGORY_COLOR_NAME = keyof typeof DEFAULT_TAG_COLOR;
-type DEFAULT_COLOR_CODE_NAME = keyof typeof DEFAULT_COLOR_CODE;
-
-export { DEFAULT_TAG_COLOR, DEFAULT_COLOR_CODE, DEFAULT_COLOR_CODE_NAME_LIST };
-
-export { type DEFAULT_CATEGORY_COLOR_NAME, type DEFAULT_COLOR_CODE_NAME };
+export type DEFAULT_COLOR_CODE_NAME_TYPE = keyof typeof DEFAULT_COLOR_CODE_NAME;

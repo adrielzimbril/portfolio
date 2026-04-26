@@ -74,7 +74,7 @@ export function EmojiPlaceholder({
         ) : typeof src === "object" && "mp4" in src && "webm" in src ? (
           <video
             className={cn(
-              "relative m-auto squircle squircle-mask squircle-transparent squircle-7xl size-full object-cover pointer-events-none",
+              "relative m-auto squircle squircle-mask squircle-sh-white squircle-7xl size-full object-cover pointer-events-none",
               variant === "squircle" &&
                 "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName,
@@ -102,7 +102,7 @@ export function EmojiPlaceholder({
             className={cn(
               "relative size-full object-cover pointer-events-none",
               variant === "squircle" &&
-                "squircle squircle-mask squircle-transparent squircle-7xl max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
+                "squircle squircle-mask squircle-sh-white squircle-7xl max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName,
             )}
             width={600}

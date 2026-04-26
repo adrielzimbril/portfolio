@@ -1,50 +1,124 @@
 {
   "stats": {
     "title": "Statistiques",
-    "description": "Informations et métriques sur mon travail et mes projets.",
+    "description": "Des chiffres pour suivre l'évolution, pas pour l'ego. Transparence sur mes métriques réelles.",
+    "keywords": "statistiques portfolio, analytics, métriques GitHub, Lighthouse score, engagement contenu, Adriel Zimbril",
     "page": {
-      "title": "Les coulisses en chiffres",
-      "description": "Transparence, croissance et évolution de mon univers créatif."
+      "title": "Métriques & Performance 📊",
+      "description": "Transparence, croissance et évolution de mon univers créatif ✨"
     },
     "sections": {
       "blog": {
-        "title": "Statistiques du Blog",
-        "description": "Métriques de création de contenu et analyse du temps de lecture.",
-        "badge": "Contenu 📝"
+        "badge": "Contenu ✍️"
       },
       "engagement": {
-        "title": "Engagement",
-        "description": "Comment les gens interagissent avec mon contenu et ma communauté.",
-        "badge": "Communauté ❤️"
+        "badge": "Engagement 💬"
       },
       "github": {
-        "title": "GitHub",
-        "description": "Contributions open-source et métriques de dépôts.",
-        "badge": "Code 💻"
+        "badge": "Code 🛠️"
+      },
+      "general": {
+        "badge": "Vue d’ensemble 📊"
+      },
+      "performance": {
+        "badge": "Performance ⚡"
       }
+    },
+    "cards": {
+      "totalViews": {
+        "label": "Vues totales du site",
+        "description": "Depuis le lancement"
+      },
+      "coffee": {
+        "label": "Cafés consommés",
+        "suffix": "tasses",
+        "description": "1 tasse pour 500 mots"
+      },
+      "siteAge": {
+        "label": "Âge du site",
+        "suffix": "jours",
+        "description": "Lancé le {date}"
+      },
+      "topViewed": {
+        "title": "Articles les plus vus",
+        "description": "Articles les plus lus"
+      },
+      "topReacted": {
+        "title": "Articles les plus aimés",
+        "description": "Articles avec le plus de réactions"
+      },
+      "categories": {
+        "title": "Catégories",
+        "description": "Articles par sujet"
+      },
+      "totalThoughts": {
+        "label": "Total des articles",
+        "suffix": "articles"
+      },
+      "totalWords": {
+        "label": "Total des mots",
+        "suffix": "mots"
+      },
+      "communityMessages": {
+        "label": "Messages de la communauté",
+        "suffix": "messages"
+      },
+      "readingTime": {
+        "label": "Temps de lecture",
+        "suffix": "min"
+      },
+      "githubStars": {
+        "label": "Étoiles GitHub"
+      },
+      "mostViewed": {
+        "noImage": "Aucune image",
+        "badge": "Article le plus vu"
+      },
+      "changelogUpdates": {
+        "count": "{count} mises à jour"
+      },
+      "github": {
+        "stars": "Étoiles GitHub",
+        "forks": "Forks",
+        "commits": "Commits"
+      },
+      "changelog": {
+        "updates": "{count} mises à jour"
+      }
+    },
+    "lighthouse": {
+      "performance": "Performance",
+      "accessibility": "Accessibilité",
+      "bestPractices": "Bonnes pratiques",
+      "seo": "SEO",
+      "mobile": "Mobile",
+      "desktop": "Bureau",
+      "score": "Score Lighthouse"
+    },
+    "reactions": {
+      "like": "J'aime",
+      "heart": "Coups de coeur",
+      "celebrate": "Célébrations",
+      "insightful": "Inspirant",
+      "sceptic": "Sceptique"
     }
   },
   "connections": {
-    "title": "Rencontres",
-    "description": "Découvrez les personnes avec qui je me suis connecté et celles que j'espère rencontrer à l'avenir.",
+    "title": "Connexions",
+    "description": "Les gens que j'ai rencontrés et ceux que je veux rencontrer. Réseau humain, pas networking forcé.",
     "keywords": "connexions, réseau, rencontres, personnes rencontrées, rencontrer des gens, réseau Adriel Zimbril, connexions professionnelles, communauté créative",
     "page": {
       "header-section": {
-        "title": "Rencontres",
-        "description": "Découvrez les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour. Construire des connexions significatives et des idées partagées, une conversation à la fois.",
-        "badge": "Mon Réseau 🤝"
-      },
-      "people-section": {
-        "title": "Personnes que j'ai rencontrées & que je veux rencontrer",
-        "description": "Un voyage à travers les connexions significatives et les aspirations futures dans la communauté du design produit et SaaS.",
-        "badge": "Mon Réseau 🤝"
+        "title": "Rencontres 🫂",
+        "description": "Les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour. Construire des connexions significatives, une conversation à la fois.",
+        "badge": "Mon Réseau "
       }
     },
     "sections": {
       "people": {
         "title": "Personnes",
         "description": "Personnes que je veux rencontrer ou que j'ai déjà rencontrées.",
-        "badge": "Connexions 🤝"
+        "badge": "Connexions "
       }
     },
     "badge": {
@@ -53,28 +127,67 @@
     }
   },
   "community": {
-    "title": "Mur Communautaire",
-    "description": "Laissez un message sur le mur et rejoignez la communauté.",
+    "title": "Communauté",
+    "description": "Un mur pour laisser un message, pas un feed infini. Simple, humain et bienveillant.",
+    "keywords": "livre d'or, messages portfolio, guestbook, feedback portfolio, Adriel Zimbril",
     "page": {
-      "title": "Un espace pour les créateurs et les curieux",
-      "description": "Échangez, apprenez et construisez ensemble dans un espace bienveillant."
+      "title": "Laissez votre trace 💌",
+      "description": "Un espace pour partager vos pensées, votre appréciation de mon travail ou simplement dire bonjour. Simple, humain et bienveillant."
     },
     "sections": {
       "wall": {
-        "title": "Mur Communautaire",
-        "description": "Messages de la communauté.",
-        "badge": "Mur 🎨"
+        "title": "Messages reçus",
+        "description": "Tous les messages laissés par les visiteurs.",
+        "badge": "Guestbook"
+      },
+      "stats": {
+        "messages": "Messages",
+        "members": "Visiteurs",
+        "weekly": "Cette semaine"
       }
     },
     "form": {
       "title": "Partagez votre message",
       "signInPrompt": "Vous devez être connecté avec GitHub pour poster un message.",
       "signInButton": "Se connecter avec GitHub"
+    },
+    "leave-note": {
+      "button": "Laisser une note",
+      "online": "Vous êtes en ligne - Laissez une note"
+    },
+    "login-modal": {
+      "title": "Connectez-vous pour laisser une note",
+      "description": "Choisissez votre méthode préférée pour vous connecter et rejoindre la conversation.",
+      "github": "Continuer avec GitHub",
+      "google": "Continuer avec Google"
+    },
+    "comment-form": {
+      "title": "Partagez vos pensées",
+      "description": "Laissez un message pour la communauté.",
+      "label": "Votre message",
+      "placeholder": "Écrivez quelque chose de sympa...",
+      "submit": "Envoyer le message",
+      "submitting": "Envoi...",
+      "validation": {
+        "empty": "Le commentaire ne peut pas être vide",
+        "max": "Le commentaire doit contenir moins de {max} caractères"
+      },
+      "toast": {
+        "success": "Commentaire envoyé avec succès !",
+        "error": "Impossible d'envoyer le commentaire"
+      },
+      "controls": {
+        "rotation": "Rotation :",
+        "pattern": "Motif :",
+        "patternAria": "Motif {index}",
+        "previousPattern": "Motif précédent",
+        "nextPattern": "Motif suivant"
+      }
     }
   },
   "toolbox": {
     "title": "Boîte à Outils",
-    "description": "Les outils, bibliothèques et technologies que j'utilise pour créer des logiciels.",
+    "description": "Mon setup et les outils que j'utilise vraiment. Pas de recommandations sponsorisées.",
     "keywords": "outils, matériel, logiciel, outils de développement, setup Adriel Zimbril, stack tech, environnement de développement",
     "page": {
       "title": "L'atelier indispensable pour ton SaaS",
@@ -82,15 +195,15 @@
       "header-section": {
         "title": "Boîte à Outils",
         "description": "Mon arsenal d'outils matériels et logiciels que j'utilise chaque jour pour créer, développer et livrer des produits avec excellence et efficacité.",
-        "badge": "Ma Trousse 🛠️"
+        "badge": "Ma Trousse "
       },
       "tools-section": {
         "title": "Outils Quotidiens",
-        "badge": "Outils 🧰"
+        "badge": "Outils "
       },
       "setup-section": {
         "title": "Mon Setup",
-        "badge": "Setup 💻"
+        "badge": "Matériel"
       }
     },
     "setup": {
@@ -105,109 +218,141 @@
         "keyboard": "Clavier",
         "mechanical": "Mécanique",
         "monitor": "Écran",
+        "mouse": "Souris",
         "chair": "Chaise",
         "desk": "Bureau",
         "microphone": "Microphone",
         "streaming": "Streaming",
         "lighting": "Éclairage",
-        "capture": "Capture"
+        "capture": "Capture",
+        "webcam": "Webcam",
+        "controller": "Manette"
       }
     }
   },
   "changelog": {
     "title": "Changelog",
-    "description": "Suivi de l'évolution, des fonctionnalités et des corrections de ce projet.",
+    "description": "Ce qui change ici. Pas de marketing, juste les évolutions réelles que je passe en revue.",
+    "keywords": "changelog portfolio, mise à jour site, évolution projet, release notes, Adriel Zimbril",
     "page": {
       "title": "Évolutions et nouveautés",
-      "description": "Découvrez ce qui a changé dans l'univers Shirofolio."
+      "description": "Découvrez ce qui a changé dans l'univers de mon portfolio : nouvelles fonctionnalités, améliorations et corrections."
     },
     "sections": {
       "timeline": {
         "title": "Timeline",
         "description": "Historique des changements et améliorations.",
-        "badge": "Mises à jour ✨"
+        "badge": "Mises à jour ",
+        "release": "release",
+        "loadMore": "Charger plus",
+        "filter": {
+          "title": "Filtrer le Changelog",
+          "button": "Filtres",
+          "searchPlaceholder": "Rechercher des releases...",
+          "clearFilters": "Effacer les filtres",
+          "applyFilters": "Appliquer les filtres",
+          "types": {
+            "milestone": "Jalon",
+            "feature": "Fonctionnalité",
+            "fix": "Correction",
+            "improvement": "Amélioration"
+          }
+        },
+        "entry": {
+          "latest": "Stable",
+          "types": {
+            "milestone": "Jalon",
+            "feature": "Fonctionnalité",
+            "fix": "Correction",
+            "improvement": "Amélioration"
+          }
+        },
+        "emptyState": {
+          "message": "Aucune release trouvée correspondant à vos critères.",
+          "clearFilters": "Effacer les filtres"
+        }
       }
     }
   },
   "home": {
-    "title": "Hey 👋🏻",
-    "description": "Designer produit et créateur de la méthode ShiroSaaS, j'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles, beaux et rentables.",
+    "title": "Hey ",
+    "description": "Product designer passionné par la simplification des expériences SaaS. J'accompagne les fondateurs à transformer leurs idées en produits réels, sans le jargon inutile.",
     "keywords": "design produit SaaS, SaaS Adriel Zimbril, Product Designer SaaS, création SaaS, UX UI SaaS",
     "page": {
       "header-section": {
-        "title": "Transformez vos idées en produits que vos utilisateurs adorent 🦄",
-        "description-2": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design pour les les fondateurs et porteurs de projets qui veulent structurer, tester et valider leurs idées pour en faire des solutions qui trouvent leur place 🫶🏻.",
-        "description-3": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design, j’aide les fondateurs et porteurs de projets à structurer, tester et valider leurs idées pour en faire des solutions avec un réel impact 🫶🏻.",
+        "title": "Transformez vos idées en produits que vos utilisateurs adorent ",
+        "description-2": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design pour les les fondateurs et porteurs de projets qui veulent structurer, tester et valider leurs idées pour en faire des solutions qui trouvent leur place .",
+        "description-3": "Product designer spécialisé dans la simplification des expériences SaaS & formateur design, j’aide les fondateurs et porteurs de projets à structurer, tester et valider leurs idées pour en faire des solutions avec un réel impact .",
         "description": "Product designer spécialisé dans la simplification des expériences SaaS et formateur en design, j’accompagne les fondateurs et porteurs de projets pour structurer, tester et transformer leurs idées en solutions concrètes et à fort impact.",
-        "cta": "Discutons 👋🏻",
+        "cta": "Discutons ",
         "cta-2": "Voir mes projets"
       }
     }
   },
   "about": {
-    "title": "Je suis 🧑🏻‍🚀",
-    "description": "Je suis Adriel, product designer et formateur. Ma mission : simplifier la création de SaaS, inspirer et guider ceux qui veulent donner vie à leurs idées.",
+    "title": "Je suis ",
+    "description": "Mon parcours, mes valeurs et pourquoi je fais ce que je fais. Pas de bio corporate, juste moi et ma passion pour le design produit.",
     "keywords": "à propos Adriel Zimbril, Product Designer SaaS, formateur SaaS, parcours design produit SaaS, méthode ShiroSaaS",
     "page": {
       "header-section": {
-        "title": "Hello, je suis 👋 \n Adriel Zimbril 🐼 \n Product Designer & Formateur ",
+        "title": "Hello, je suis  \n Adriel Zimbril  \n Product Designer & Formateur ",
         "description": "Depuis mes débuts dans le design, j’ai appris que le produit le plus réussi n’est pas celui qu’on voit en premier, mais celui qu’on comprend, teste et fait évoluer avec intention.",
-        "title-secondary": "Créer, simplifier, inspirer 🧑🏻‍🚀 \n Bienvenue dans mon univers 🌌",
-        "description-secondary": "Sic itur ad astra — c'est ainsi qu'on atteint les étoiles 🫰🏻.\n\nDepuis que je suis petit, j’ai toujours été fasciné par la technologie et l’invention. Iron Man m’a donné le goût du possible : je me souviens de mes yeux qui pétillaient en voyant son armure et de l’inspiration qui me traversait à chaque épisode. Je passais des heures à imaginer, bricoler, et rêver de créer mes propres robots.\n\nEn laissant libre cours à cette passion j'ai decouvert le design et avec le temps, j’ai compris que mon rêve ne se limitait pas à construire des machines : je voulais créer des expériences qui touchent les gens, qui résolvent de vrais problèmes et qui donnent envie d’être utilisées. Le design est devenu mon terrain de jeu, mon laboratoire pour imaginer, construire et transformer des idées brutes en produits concrets et concevoir des expériences qui comptent.\n\nAujourd'hui, je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.\n\nJ’aime questionner ce qui existe, explorer ce qui fonctionne et ce qui ne fonctionne pas, et construire de manière intentionnelle. Je préfère faire les choses avec un pourquoi plutôt que par habitude.\n\nEn parallèle, je partage les méthodes et ressources issues de mes expériences créatives pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance.\n\nPour moi, le design n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain.",
+        "title-secondary": "Créer, simplifier, inspirer  \n Bienvenue dans mon univers ",
+        "description-secondary": "Sic itur ad astra — c'est ainsi qu'on atteint les étoiles .\n\nDepuis que je suis petit, j’ai toujours été fasciné par la technologie et l’invention. Iron Man m’a donné le goût du possible : je me souviens de mes yeux qui pétillaient en voyant son armure et de l’inspiration qui me traversait à chaque épisode. Je passais des heures à imaginer, bricoler, et rêver de créer mes propres robots.\n\nEn laissant libre cours à cette passion j'ai decouvert le design et avec le temps, j’ai compris que mon rêve ne se limitait pas à construire des machines : je voulais créer des expériences qui touchent les gens, qui résolvent de vrais problèmes et qui donnent envie d’être utilisées. Le design est devenu mon terrain de jeu, mon laboratoire pour imaginer, construire et transformer des idées brutes en produits concrets et concevoir des expériences qui comptent.\n\nAujourd'hui, je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.\n\nJ’aime questionner ce qui existe, explorer ce qui fonctionne et ce qui ne fonctionne pas, et construire de manière intentionnelle. Je préfère faire les choses avec un pourquoi plutôt que par habitude.\n\nEn parallèle, je partage les méthodes et ressources issues de mes expériences créatives pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance.\n\nPour moi, le design n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain.",
         "cta": "Voir mes projets"
       },
       "craft-section": {
-        "badge": "Votre allié produit & design 🫶🏻",
+        "badge": "Votre allié produit & design ",
         "title": "Transformer des idées en produits qui comptent.",
         "description": "Placer l’utilisateur au centre de chaque décision, guider et enseigner aux créateurs pour transformer chaque idées en expériences inoubliables."
       },
       "interactive-fun-facts-section": {
-        "badge": "Jouons 🤭",
+        "badge": "Jouons ",
         "badge-score": "Score:",
-        "title": "Qui suis-je vraiment ? 🕵️‍♂️",
-        "description": "Parmi ces anecdotes, une seule est un mensonge… sauras-tu la démasquer ? Essaie de ne pas te tromper 😏",
+        "title": "Qui suis-je vraiment ? ",
+        "description": "Parmi ces anecdotes, une seule est un mensonge… sauras-tu la démasquer ? Essaie de ne pas te tromper ",
         "buttons": {
           "show-all": {
             "want-response": {
-              "has-false": "Je veux les réponses 😣",
-              "has-true": "Je veux les réponses 😄"
+              "has-false": "Je veux les réponses ",
+              "has-true": "Je veux les réponses "
             },
-            "want-retry": "Recommencer le quiz 🔄"
+            "want-retry": "Recommencer le quiz "
           },
-          "retry": "Rejouer 🔄"
+          "retry": "Rejouer "
         },
         "sections": {
           "fact-alert": {
             "is-correct": {
               "true": {
                 "title": "Bravo !",
-                "description": "Tu as trouvé la bonne réponse ! 😆"
+                "description": "Tu as trouvé la bonne réponse ! "
               },
               "false": {
                 "title": "Pas tout à fait !",
-                "description": "Ce n'était pas la bonne réponse... 😖"
+                "description": "Ce n'était pas la bonne réponse... "
               }
             },
             "response": "Réponse"
           },
           "facts-modal": {
-            "title": "Créateur et Amoureux de SaaS 🦄❣️",
+            "title": "Créateur et Amoureux de SaaS ",
             "score": {
               "title": "Ton score : {score}/{total}",
               "state": {
-                "good": "Tu as tout bon, Oula tu me connais un peu trop 😄🏆",
-                "medium": "Tu peux mieux faire ! 😅",
-                "bad": "Tu peux mieux faire ! 😅"
+                "good": "Tu as tout bon, Oula tu me connais un peu trop ",
+                "medium": "Tu peux mieux faire ! ",
+                "bad": "Tu peux mieux faire ! "
               }
             },
             "badge": {
               "fact": {
-                "is-true": "✅ Vérité",
-                "is-false": "❌ Mensonge"
+                "is-true": " Vérité",
+                "is-false": " Mensonge"
               },
               "guessed": {
-                "correct": "🎯 Correct!",
-                "incorrect": "❌ Raté!"
+                "correct": " Correct!",
+                "incorrect": " Raté!"
               }
             }
           },
@@ -220,19 +365,19 @@
         }
       },
       "philosophy-section": {
-        "badge": "Unicorn 🦄",
+        "badge": "Unicorn ",
         "title": "Mon approche du design & du produit",
         "description": "Concevoir des produits en plaçant l’utilisateur au centre, tout en valorisant les équipes et les idées partagées pour construire ensemble."
       }
     }
   },
   "hub": {
-    "title": "Le Hub 🌒",
-    "description": "Ressources exclusives : checklists, modèles Figma, guides pratiques et idées pour t’aider à lancer ton produit sans stress.",
+    "title": "Le Hub ",
+    "description": "Tout ce que j'aurais aimé avoir quand j'ai commencé. Des ressources concrètes pour gagner du temps et éviter les erreurs.",
     "keywords": "ressources SaaS Adriel Zimbril, outils SaaS, templates SaaS, Product Designer SaaS, UI kit SaaS",
     "page": {
       "header-section": {
-        "title": "Ton hub de créativité 🔗",
+        "title": "Ton hub de créativité ",
         "description": "Un espace où je regroupe tout ce que j’aurais aimé avoir quand j’ai commencé : des guides clairs, des templates, des idées et des outils pour te faire gagner du temps.",
         "cta": "Voir mes ressources"
       }
@@ -244,12 +389,12 @@
     }
   },
   "projects": {
-    "title": "Mes projets 🐼",
-    "description": "Un aperçu des projets que j’ai conçus et lancés, avec le process et les résultats. Pas juste des écrans jolis : des histoires de collaboration et de succès.",
+    "title": "Mes projets ",
+    "description": "Des projets réels, pas des concepts. Chaque projet raconte une histoire de problème, solution et apprentissage.",
     "keywords": "projets SaaS Adriel Zimbril, portfolio SaaS, Product Designer SaaS, études de cas design, création SaaS",
     "page": {
       "header-section": {
-        "title": "Études de cas 🚀",
+        "title": "Études de cas ",
         "description": "Chaque projet est une aventure. Ici je partage les coulisses : les défis, les solutions trouvées et les résultats obtenus.",
         "cta": "Voir mes projets"
       }
@@ -288,12 +433,12 @@
     }
   },
   "thoughts": {
-    "title": "Carnet de Bord 📒",
-    "description": "Mes pensées brutes sur le design produit, l’innovation et la création de SaaS. Des réflexions sans filtre pour progresser et voir les choses autrement.",
+    "title": "Carnet de Bord ",
+    "description": "Ce que j'apprends en construisant. Pas de tutoriels, juste mes découvertes et erreurs partagées honnêtement.",
     "keywords": "blog SaaS Adriel Zimbril, design produit SaaS, Product Designer SaaS, réflexions design, innovation SaaS",
     "page": {
       "header-section": {
-        "title": "Réflexions & Déclics ✍️",
+        "title": "Réflexions & Déclics ",
         "description": "Ici je partage mes découvertes, mes erreurs et les leçons qui m’ont permis d’avancer. C’est le coin un peu plus intime, où je parle sans jargon ni paillettes.",
         "cta": "Voir mes réflexions"
       }
@@ -306,7 +451,7 @@
   },
   "quests": {
     "title": "Challenges créatifs 🎖️",
-    "description": "Repousse tes limites avec des challenges concrets, gagne des récompenses et mets ton travail en avant.",
+    "description": "Des challenges pour t'entraîner et gagner des récompenses. Pas de compétition, juste de l'entraide et du progrès.",
     "keywords": "challenge design, challenge UX UI, concours créatif, challenge SaaS, Adriel Zimbril",
     "page": {
       "header-section": {
@@ -459,6 +604,11 @@
           "submitting": "Envoi en cours...",
           "submit": "Envoyer ma soumission 🚀"
         },
+        "validation": {
+          "name_required": "Le nom est requis",
+          "email_invalid": "Email invalide",
+          "url_invalid": "URL invalide"
+        },
         "feedback": {
           "success": {
             "title": "Soumission envoyée ✅",
@@ -504,8 +654,8 @@
   },
   "submit": {
     "title": "Shirosaas Lab 😮‍💨🧪",
-    "description": "Partage ton projet, idée ou produit pour une analyse UX, un redesign Figma ou un feedback produit. Adriel Zimbril t'accompagne pour transformer tes idées en expériences impactantes.",
-    "keywords": "Soumission projet SaaS, Adriel Zimbril, Product Designer, UX Review, Redesign Figma, Analyse site web, Feedback produit, ShiroSaaS, Design System, Product Design",
+    "description": "Partage ton projet, idée ou produit pour une analyse UX, un redesign Figma ou un feedback produit. Je passe en revue tes idées pour les transformer en expériences impactantes.",
+    "keywords": "Soumission projet SaaS, Product Designer, UX Review, Redesign Figma, Analyse site web, Feedback produit, ShiroSaaS, Design System, Product Design",
     "page": {
       "header-section": {
         "badge": "Participe a la Shirosaas Lab 😮‍💨🧪",
@@ -516,8 +666,13 @@
         "subDescription": "Propose ton site, ton app ou ton fichier Figma — et je le décortiquer, l’améliorer et te donner du feedback en direct ou en vidéo sur ma chaîne. Chaque épisode est l’occasion de transformer des idées en pépites et d’apprendre 🫶🏻👨🏻‍🚀 "
       },
       "fields": {
+        "validation": {
+          "name_required": "Le nom doit contenir au moins 4 caractères",
+          "email_invalid": "Veuillez saisir un email valide",
+          "url_invalid": "Veuillez saisir une URL valide"
+        },
         "intention": {
-          "label": "Panel de feedback demandé"
+          "label": "Panel de revue demandé"
         },
         "name": {
           "label": "Ton nom ou pseudo",
@@ -529,7 +684,7 @@
         },
         "url": {
           "label": "Lien vers ton projet (site, app, Figma, etc.)",
-          "placeholder": "https://www.figma.com/design/4qgzkFPOb3YhzpHCmFc41d2/"
+          "placeholder": "https://www.figma.com/@adrielzimbril"
         },
         "description": {
           "label": "Explique ta demande",
@@ -540,7 +695,7 @@
         }
       },
       "options": {
-        "ux_review": "UI/UX Review",
+        "ui_ux_review": "UI/UX Review",
         "support": {
           "website": "Site web",
           "mobile": "App mobile",
@@ -551,9 +706,15 @@
       "actions": {
         "submit": "Here we go ! 🤩"
       },
-      "toast": {
-        "success": "Merci ! Ton design est en orbite ! 🪐",
-        "error": "Oups ! Une erreur est survenue, veuillez réessayer s'il vous plaît 😅"
+      "feedback": {
+        "success": {
+          "title": "Merci !",
+          "description": "Ton design est en orbite ! 🪐"
+        },
+        "error": {
+          "title": "Oups !",
+          "description": "Une erreur est survenue, veuillez réessayer s'il vous plaît 😅"
+        }
       }
     }
   },
@@ -569,12 +730,12 @@
     }
   },
   "contact": {
-    "title": "Construisons ensemble 🤝",
-    "description": "Je réponds à vos messages personnellement. Que ce soit pour un projet, une collaboration ou simplement pour échanger sur le design produit et l’innovation, ma boîte mail est ouverte.",
-    "keywords": "Contact SaaS, Adriel Zimbril, Product Designer, discuter idée SaaS, collaboration produit, design SaaS, contact freelance SaaS, expert SaaS, accompagnement produit, mentor SaaS, formateur design",
+    "title": "Construisons ensemble ",
+    "description": "Je passe en revue vos messages personnellement. Que ce soit pour un projet, une collaboration ou simplement pour échanger sur le design produit et l'innovation, ma boîte mail est ouverte.",
+    "keywords": "Contact SaaS, Product Designer, discuter idée SaaS, collaboration produit, design SaaS, contact freelance SaaS, expert SaaS, accompagnement produit, mentor SaaS, formateur design",
     "page": {
-      "badge": "Problem Solver & Your SaaS Product designer ❣️",
-      "title": "Transforme tes idées en produits que tes utilisateurs adorent 🦄",
+      "badge": "Problem Solver & Your SaaS Product designer",
+      "title": "Transforme tes idées en produits que tes utilisateurs adorent ",
       "form": {
         "notifications": {
           "error": "Désolé, mais nous n'avons pas pu envoyer votre message. Veuillez réessayer plus tard.",
@@ -600,9 +761,13 @@
     }
   },
   "newsletter": {
-    "title": "Ton kit créatif t’attend 💌",
+    "title": "Ton kit créatif t'attend 💌",
     "description": "Reçois chaque semaine des idées, astuces et ressources pour transformer tes idées en produits SaaS que les gens adorent.",
     "keywords": "newsletter SaaS Adriel Zimbril, conseils SaaS, Product Designer SaaS, growth SaaS, stratégie produit SaaS",
+    "badges": {
+      "subscribers": "abonnés",
+      "requests": "demandes"
+    },
     "page": {
       "badge": "Pour les fondateurs et créateurs qui veulent passer à l’action 🚀",
       "title": "Passe de l'idée au <thin>produit</thin> grâce à la <thin>Méthode</thin> ShiroSaaS 🦄",
@@ -680,22 +845,67 @@
         "mobile": "Rejoins le Cercle 💌"
       },
       "community": {
-        "default": "Communauté"
+        "default": "Communauté",
+        "desktop": "Communauté",
+        "mobile": "Communauté 👥"
       },
       "stats": {
-        "default": "Stats"
+        "default": "Stats",
+        "desktop": "Stats",
+        "mobile": "Stats 📊"
       },
       "toolbox": {
-        "default": "Outils"
-      },
-      "setup": {
-        "default": "Mon Setup"
+        "default": "Outils",
+        "desktop": "Outils",
+        "mobile": "Outils 🧰"
       },
       "connections": {
-        "default": "Connexions"
+        "default": "Connexions",
+        "desktop": "Connexions",
+        "mobile": "Connexions 🔗"
       },
       "changelog": {
-        "default": "Changelog"
+        "default": "Changelog",
+        "desktop": "Changelog",
+        "mobile": "Changelog 📝"
+      },
+      "privacy": {
+        "default": "Politique de Confidentialité",
+        "desktop": "Confidentialité",
+        "mobile": "Confidentialité 🔒"
+      },
+      "terms": {
+        "default": "Conditions d'Utilisation",
+        "desktop": "CGU",
+        "mobile": "CGU 📜"
+      },
+      "routes": {
+        "default": "Plan du Site",
+        "desktop": "Plan du Site",
+        "mobile": "Plan du Site 🗺️"
+      },
+      "rss": {
+        "default": "RSS",
+        "desktop": "RSS",
+        "mobile": "RSS 📡"
+      },
+      "rss-atom": {
+        "default": "RSS Atom",
+        "desktop": "RSS Atom",
+        "mobile": "RSS Atom 📡"
+      },
+      "rss-json": {
+        "default": "RSS JSON",
+        "desktop": "RSS JSON",
+        "mobile": "RSS JSON 📡"
+      },
+      "submit": {
+        "default": "Soumettre"
+      },
+      "setup": {
+        "default": "Mon setup",
+        "desktop": "Setup",
+        "mobile": "Setup ⚙️"
       }
     },
     "button": {
@@ -714,7 +924,9 @@
       "sending": "Envoi en cours",
       "sent": "Envoyé",
       "understood": "Compris",
-      "view-more": "Voir plus"
+      "view-more": "Voir plus",
+      "edit": "Modifier",
+      "delete": "Supprimer"
     },
     "turnstile": {
       "loading": "Attends un instant... 🔄",
@@ -729,7 +941,8 @@
       "text": {
         "presentation": "Présentation",
         "results": "Résultats",
-        "role": "Role",
+        "role": "Rôle",
+        "heading_presentation": "Présentation",
         "stack": "Stack",
         "duration": "Durée",
         "language": "Langue",
@@ -762,11 +975,11 @@
         "december": "Décembre"
       },
       "base": {
-        "badge": "Problem Solver & Your SaaS Product designer 🦄❣️",
-        "title": "Your ideas into products that your users adore",
-        "subtitle-simple": "Innovative Problem Solver & Your Go-To SaaS Product Designer ❣️",
-        "subtitle": "Innovative Problem Solver & SaaS Product Designer ❣️",
-        "subtitle-secondary": "Turning Ideas into Impact | SaaS Product Designer & Problem Solver ❣️"
+        "badge": "Problem Solver & Your SaaS Product designer",
+        "title": "Vos idées en produits que vos utilisateurs adorent",
+        "subtitle-simple": "Problem Solver innovant & ton Product Designer SaaS de référence ❣️",
+        "subtitle": "Problem Solver innovant & Product Designer SaaS ❣️",
+        "subtitle-secondary": "Transformer les idées en impact | Product Designer SaaS & Problem Solver ❣️"
       },
       "page-loader": {
         "home": {
@@ -816,22 +1029,22 @@
         },
         "talks": {
           "emoji": "🎤",
-          "title": "Talks, conférences & masterclasses",
+          "title": "Conférences & masterclasses",
           "subtitle": "Sessions en ligne et en présentiel pour apprendre plus vite 🎤"
         },
         "quests": {
           "emoji": "🏆",
-          "title": "Challenges & quests en cours",
-          "subtitle": "Inscris-toi, soumets ton travail et vise le podium 🏆"
+          "title": "Challenges en cours",
+          "subtitle": "Inscris-toi, soumets ton travail et vise le podium "
         },
         "community": {
           "emoji": "🐼",
-          "title": "Un espace pour les créateurs et les curieux",
-          "subtitle": "Échange, apprends et construis avec nous dans un espace bienveillant 🫶🏻"
+          "title": "Laissez votre trace",
+          "subtitle": "Un espace pour partager vos pensées sur mon portfolio 🫶🏻"
         },
         "stats": {
           "emoji": "📈",
-          "title": "Les coulisses en chiffres",
+          "title": "Métriques & Performance",
           "subtitle": "Transparence, croissance et évolution de mon univers créatif 📊"
         },
         "toolbox": {
@@ -852,7 +1065,7 @@
         "changelog": {
           "emoji": "✨",
           "title": "Évolutions et nouveautés",
-          "subtitle": "Découvre ce qui a changé dans l'univers Shirofolio 🪵"
+          "subtitle": "Découvre ce qui a changé dans l'univers de mon portfolio 🪵"
         }
       },
       "planning-badge": {
@@ -890,8 +1103,8 @@
       },
       "preview": {
         "emoji": "😎",
-        "title": "I made you looked.",
-        "description": "You can have the rest of the empty space here."
+        "title": "Je t’ai eu.",
+        "description": "Tu peux garder le reste de l’espace vide ici."
       },
       "hub": {
         "badge": "Hub 🫶🏻",
@@ -923,7 +1136,7 @@
               "description": "Des vidéos courtes et pratiques — YouTube et autres — pour t’inspirer, apprendre et passer à l’action.",
               "button": "Regarder"
             },
-            "figma-template": {
+            "figma_template": {
               "badge": "Créateurs 🖌️",
               "title": "Templates Figma 🎨",
               "description": "Des modèles prêts à l’emploi, issues de mes frénésies de design, pour t’aider à créer des produits qui donnent envie d'être utilisés.",
@@ -1006,18 +1219,19 @@
             "message": {
               "title": "Merci pour votre inscription !",
               "description": "Vos informations ont été mises à jour avec succès. Merci ! 🎉"
-            }
+            },
+            "redirect": "🎉 Super ! Tu vas être redirigé vers la page produit..."
           }
         }
       },
       "talks": {
         "badge": "Événements 🎤",
-        "title": "Talks & Masterclasses",
+        "title": "Conférences & masterclasses",
         "description": "Les conférences, webinaires et masterclasses où je partage mon expertise en design produit et SaaS."
       },
       "quests": {
         "badge": "Challenges 🏆",
-        "title": "Quests & Challenges",
+        "title": "Challenges en cours",
         "description": "Les challenges en cours et passés pour apprendre en pratiquant, soumettre ton travail et progresser avec la communauté."
       }
     }
@@ -1025,7 +1239,7 @@
   "mail": {
     "common": {
       "defaultName": "ami designer",
-      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product Designer 🦄",
+      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product designer 🦄",
       "contact": "Si tu veux échanger ou juste dire bonjour, réponds simplement à cet email. Je lis tout personnellement.",
       "contactAdmin": "Adriel Zimbril, tu as reçu un nouveau message. Quelqu'un reconnaît ton impact et veut échanger avec toi. Tu es le roi de ce monde, maintenant montre-lui pourquoi. Just do it 🚀",
       "copyright": "Crafted with ❤️ by Adriel Zimbril"
@@ -1046,10 +1260,10 @@
     },
     "questRegisterUserConfirmation": {
       "subject": "✅ Inscription bien recue",
-      "preview": "Ton inscription au challenge est confirmee 📝",
+      "preview": "Ton inscription au challenge est confirmée 📝",
       "greeting": "Bonjour {firstName},",
       "content": {
-        "intro": "Ton inscription au challenge \"{questTitle}\" a bien ete enregistree 🎉",
+        "intro": "Ton inscription au challenge \"{questTitle}\" a bien été enregistrée 🎉",
         "wait": "Tu recevras les prochaines informations par email 📨",
         "challengeLinkLabel": "Voir le challenge"
       }
@@ -1067,11 +1281,11 @@
       }
     },
     "questSubmitUserConfirmation": {
-      "subject": "🚀 Soumission bien recue",
-      "preview": "Ta soumission a bien ete enregistree 🧪",
+      "subject": "🚀 Soumission bien reçue",
+      "preview": "Ta soumission a bien été enregistrée 🧪",
       "greeting": "Bonjour {firstName},",
       "content": {
-        "intro": "Ta soumission pour \"{questTitle}\" a bien ete recue 🚀",
+        "intro": "Ta soumission pour \"{questTitle}\" a bien été reçue 🚀",
         "link": "Lien soumis",
         "wait": "Merci de patienter jusqu'a la fin du challenge pour le retour ⏳",
         "challengeLinkLabel": "Challenge"
@@ -1089,6 +1303,26 @@
         "submittedWork": "Lien rendu 🔗",
         "message": "Message 💬"
       }
+    },
+    "communityWallAdminNotification": {
+      "labels": {
+        "email": "Email",
+        "language": "Langue",
+        "message": "Message",
+        "name": "Nom"
+      },
+      "preview": "Nouveau message posté sur le mur de la communauté",
+      "subject": " Nouveau message sur le mur de la communauté"
+    },
+    "communityWallUserConfirmation": {
+      "content": {
+        "intro": "Merci d'avoir posté un message sur le mur de la communauté ! Votre message est maintenant visible par tous.",
+        "messageLabel": "Votre message :",
+        "thanks": "Merci de faire partie de notre communauté !"
+      },
+      "greeting": "Bonjour {firstName},",
+      "preview": "Votre message sur le mur de la communauté a été posté",
+      "subject": " Message posté sur le mur de la communauté"
     },
     "welcome": {
       "subject": "Bienvenue sur ma newsletter !",
@@ -1121,7 +1355,7 @@
       "subject": "Hello, c'est Adriel !",
       "preview": "Salut ! Je voulais te parler de quelque chose qui me tient à cœur...",
       "greeting": "Salut {firstName}",
-      "tagline": "Problem Solver & Your SaaS Product Designer 🦄",
+      "tagline": "Problem Solver & Your SaaS Product designer 🦄",
       "story": {
         "intro": "Il y a quelques semaines, l'un des clients de l'une de mes apps m'a écrit pour me dire qu'il avait mis du temps à annuler une action. Je me suis rendu compte que c'était à cause d'un choix de design que j'aimais bien… mais qui compliquait l'expérience.",
         "presentation": "Je m'appelle Adriel, et depuis 5 ans je crée des interfaces pour des SaaS et j'ai remarqué quelque chose : on complique souvent les choses alors que les utilisateurs cherchent juste de la simplicité.",
@@ -1227,105 +1461,105 @@
           "required": "Oups, l'URL est requise 😅"
         }
       },
-      "invalid_arguments": "Invalid function arguments",
-      "invalid_date": "Invalid date",
-      "invalid_enum_value": "Invalid enum value. Expected {- options}, received '{received}'",
-      "invalid_intersection_types": "Intersection results could not be merged",
-      "invalid_literal": "Invalid literal value, expected {expected}",
-      "invalid_return_type": "Invalid function return type",
+      "invalid_arguments": "Arguments de fonction invalides",
+      "invalid_date": "Date invalide",
+      "invalid_enum_value": "Valeur d’énumération invalide. Attendu {- options}, reçu {received}",
+      "invalid_intersection_types": "Les résultats de l’intersection n’ont pas pu être fusionnés",
+      "invalid_literal": "Valeur littérale invalide, attendu {expected}",
+      "invalid_return_type": "Type de retour de fonction invalide",
       "invalid_string": {
-        "cuid": "Invalid {validation}",
-        "datetime": "Invalid {validation}",
-        "email": "Invalid {validation}",
-        "endsWith": "Invalid input: must end with \"{endsWith}\"",
-        "regex": "Invalid",
-        "startsWith": "Invalid input: must start with \"{startsWith}\"",
-        "url": "Invalid {validation}",
-        "uuid": "Invalid {validation}"
+        "cuid": "{validation} invalide",
+        "datetime": "{validation} invalide",
+        "email": "{validation} invalide",
+        "endsWith": "Entrée invalide : doit se terminer par \"{endsWith}\"",
+        "regex": "Invalide",
+        "startsWith": "Entrée invalide : doit commencer par \"{startsWith}\"",
+        "url": "{validation} invalide",
+        "uuid": "{validation} invalide"
       },
-      "invalid_type": "Expected {expected}, received {received}",
-      "invalid_type_received_undefined": "Required",
-      "invalid_union": "Invalid input",
-      "invalid_union_discriminator": "Invalid discriminator value. Expected {- options}",
-      "not_finite": "Number must be finite",
-      "not_multiple_of": "Number must be a multiple of {multipleOf}",
+      "invalid_type": "Attendu {expected}, reçu {received}",
+      "invalid_type_received_undefined": "Requis",
+      "invalid_union": "Entrée invalide",
+      "invalid_union_discriminator": "Valeur de discriminateur invalide. Attendu {- options}",
+      "not_finite": "Le nombre doit être fini",
+      "not_multiple_of": "Le nombre doit être un multiple de {multipleOf}",
       "too_big": {
         "array": {
-          "exact": "Array must contain exactly {maximum} element(s)",
-          "inclusive": "Array must contain at most {maximum} element(s)",
-          "not_inclusive": "Array must contain less than {maximum} element(s)"
+          "exact": "Le tableau doit contenir exactement {maximum} élément(s)",
+          "inclusive": "Le tableau doit contenir au maximum {maximum} élément(s)",
+          "not_inclusive": "Le tableau doit contenir moins de {maximum} élément(s)"
         },
         "date": {
-          "exact": "Date must be exactly {- maximum, datetime}",
-          "inclusive": "Date must be smaller than or equal to {- maximum, datetime}",
-          "not_inclusive": "Date must be smaller than {- maximum, datetime}"
+          "exact": "La date doit être exactement {- maximum, datetime}",
+          "inclusive": "La date doit être inférieure ou égale à {- maximum, datetime}",
+          "not_inclusive": "La date doit être inférieure à {- maximum, datetime}"
         },
         "number": {
-          "exact": "Number must be exactly {maximum}",
-          "inclusive": "Number must be less than or equal to {maximum}",
-          "not_inclusive": "Number must be less than {maximum}"
+          "exact": "Le nombre doit être exactement {maximum}",
+          "inclusive": "Le nombre doit être inférieur ou égal à {maximum}",
+          "not_inclusive": "Le nombre doit être inférieur à {maximum}"
         },
         "set": {
-          "exact": "Invalid input",
-          "inclusive": "Invalid input",
-          "not_inclusive": "Invalid input"
+          "exact": "Entrée invalide",
+          "inclusive": "Entrée invalide",
+          "not_inclusive": "Entrée invalide"
         },
         "string": {
-          "exact": "String must contain exactly {maximum} character(s)",
-          "inclusive": "String must contain at most {maximum} character(s)",
-          "not_inclusive": "String must contain under {maximum} character(s)"
+          "exact": "La chaîne doit contenir exactement {maximum} caractère(s)",
+          "inclusive": "La chaîne doit contenir au maximum {maximum} caractère(s)",
+          "not_inclusive": "La chaîne doit contenir moins de {maximum} caractère(s)"
         }
       },
       "too_small": {
         "array": {
-          "exact": "Array must contain exactly {minimum} element(s)",
-          "inclusive": "Array must contain at least {minimum} element(s)",
-          "not_inclusive": "Array must contain more than {minimum} element(s)"
+          "exact": "Le tableau doit contenir exactement {minimum} élément(s)",
+          "inclusive": "Le tableau doit contenir au moins {minimum} élément(s)",
+          "not_inclusive": "Le tableau doit contenir plus de {minimum} élément(s)"
         },
         "date": {
-          "exact": "Date must be exactly {- minimum, datetime}",
-          "inclusive": "Date must be greater than or equal to {- minimum, datetime}",
-          "not_inclusive": "Date must be greater than {- minimum, datetime}"
+          "exact": "La date doit être exactement {- minimum, datetime}",
+          "inclusive": "La date doit être supérieure ou égale à {- minimum, datetime}",
+          "not_inclusive": "La date doit être supérieure à {- minimum, datetime}"
         },
         "number": {
-          "exact": "Number must be exactly {minimum}",
-          "inclusive": "Number must be greater than or equal to {minimum}",
-          "not_inclusive": "Number must be greater than {minimum}"
+          "exact": "Le nombre doit être exactement {minimum}",
+          "inclusive": "Le nombre doit être supérieur ou égal à {minimum}",
+          "not_inclusive": "Le nombre doit être supérieur à {minimum}"
         },
         "set": {
-          "exact": "Invalid input",
-          "inclusive": "Invalid input",
-          "not_inclusive": "Invalid input"
+          "exact": "Entrée invalide",
+          "inclusive": "Entrée invalide",
+          "not_inclusive": "Entrée invalide"
         },
         "string": {
-          "exact": "String must contain exactly {minimum} character(s)",
-          "inclusive": "String must contain at least {minimum} character(s)",
-          "not_inclusive": "String must contain over {minimum} character(s)"
+          "exact": "La chaîne doit contenir exactement {minimum} caractère(s)",
+          "inclusive": "La chaîne doit contenir au moins {minimum} caractère(s)",
+          "not_inclusive": "La chaîne doit contenir plus de {minimum} caractère(s)"
         }
       },
-      "unrecognized_keys": "Unrecognized key(s) in object: {- keys}"
+      "unrecognized_keys": "Clé(s) non reconnue(s) dans l’objet : {- keys}"
     },
     "types": {
-      "array": "array",
-      "bigint": "bigint",
-      "boolean": "boolean",
+      "array": "tableau",
+      "bigint": "grand entier",
+      "boolean": "booléen",
       "date": "date",
-      "float": "float",
-      "function": "function",
-      "integer": "integer",
+      "float": "nombre décimal",
+      "function": "fonction",
+      "integer": "entier",
       "map": "map",
-      "nan": "nan",
+      "nan": "NaN",
       "never": "never",
       "null": "null",
-      "number": "number",
-      "object": "object",
-      "promise": "promise",
+      "number": "nombre",
+      "object": "objet",
+      "promise": "promesse",
       "set": "set",
-      "string": "string",
-      "symbol": "symbol",
-      "undefined": "undefined",
-      "unknown": "unknown",
-      "void": "void"
+      "string": "chaîne",
+      "symbol": "symbole",
+      "undefined": "indéfini",
+      "unknown": "inconnu",
+      "void": "vide"
     },
     "validations": {
       "cuid": "cuid",
@@ -1359,6 +1593,361 @@
     "components": {
       "button-copy": {
         "failed": "Erreur lors de la copie"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité",
+    "description": "Comment je gère vos données. Simple, transparent et respectueux de votre vie privée.",
+    "page": {
+      "title": "Politique de Confidentialité",
+      "description": "Votre vie privée est importante pour moi. Cette politique explique comment je gère vos données."
+    }
+  },
+  "rss": {
+    "title": "RSS",
+    "description": "Abonne-toi pour recevoir les articles directement dans ton lecteur RSS préféré.",
+    "page": {
+      "title": "Flux RSS",
+      "description": "Abonne-toi pour ne rien manquer des nouveaux articles."
+    }
+  },
+  "rss-atom": {
+    "title": "RSS Atom",
+    "description": "Abonne-toi pour recevoir les articles directement dans ton lecteur RSS préféré."
+  },
+  "rss-json": {
+    "title": "RSS Json",
+    "description": "Abonne-toi pour recevoir les articles directement dans ton lecteur RSS préféré."
+  },
+  "terms": {
+    "title": "Conditions d'Utilisation",
+    "description": "Les règles du jeu. Simple et honnête, comme l'esprit de ce portfolio.",
+    "page": {
+      "title": "Conditions d'Utilisation",
+      "description": "Veuillez lire attentivement ces conditions avant d'utiliser mon site web et mes services."
+    }
+  },
+  "routes": {
+    "title": "Plan du Site",
+    "description": "Navigation complète de toutes les pages, sections et ressources disponibles sur ce portfolio.",
+    "keywords": "plan du site, sitemap portfolio, navigation portfolio, pages portfolio, Adriel Zimbril",
+    "page": {
+      "title": "Plan du Site",
+      "description": "Explorez toutes les pages et sections de mon portfolio : projets, ressources, articles et plus encore."
+    },
+    "groups": {
+      "main": "Pages Principales",
+      "community": "Communauté",
+      "contact": "Contact",
+      "tools": "Outils",
+      "rss": "RSS",
+      "legal": "Légal"
+    },
+    "badges": {
+      "header": "Menu"
+    }
+  },
+  "admin": {
+    "title": "Connexion",
+    "description": "Authentification requise pour accéder à cette zone.",
+    "login": {
+      "title": "[ROOT] // AUTHENTICATION_TERMINAL",
+      "description": "Portail d'accès privé. Authentification Racine requise pour la mutation des nœuds de données.",
+      "continue_github": "Continuer avec GitHub",
+      "continue_google": "Continuer avec Google",
+      "kernel_pulse_description": "Mutation de paquets et orchestration des flux critiques avec une latence proche de zéro.",
+      "restricted_access_description": "Liaison restreinte. Authentification requise pour la mutation des nœuds de données et des protocoles de communication.",
+      "signature_detected_description": "Signature numérique détectée. Identifiez-vous pour ouvrir une liaison sécurisée avec le Shiro Core. Toute mutation non autorisée sera rejetée par le firewall.",
+      "unauthorized_message": "Ce compte est connecté, mais il n'est pas autorisé à accéder au dashboard.",
+      "whitelisted_access": "Accès strictement réservé aux entités whitelisted."
+    },
+    "overview": {
+      "description": "Vue globale de l'activité du site shirofolio.",
+      "metrics": {
+        "registrations": {
+          "label": "Inscriptions",
+          "detail": "Entrées register"
+        },
+        "submissions": {
+          "label": "Soumissions",
+          "detail": "Travaux envoyés"
+        },
+        "messages": {
+          "label": "Messages",
+          "detail": "Mur communautaire"
+        },
+        "today": {
+          "label": "Aujourd'hui",
+          "detail": "Nouvelles entrées"
+        }
+      },
+      "recent_activity": {
+        "title": "Activité récente",
+        "description": "Inscriptions, soumissions et messages publics."
+      },
+      "empty_state": {
+        "title": "Aucune activité",
+        "description": "Les prochaines entrées apparaîtront ici."
+      },
+      "panel_status": {
+        "title": "État du panel",
+        "description": "Contrôle rapide des modules utilisés.",
+        "quests_api": "Quests API",
+        "community_api": "Community API",
+        "session": "Session",
+        "check": "À vérifier"
+      }
+    },
+    "modals": {
+      "data_details": {
+        "default_title": "Détails de l'entrée"
+      }
+    },
+    "pages": {
+      "users": {
+        "description": "Index des identités et entités autorisées sur le réseau Shiro."
+      },
+      "submissions": {
+        "description": "Monitoring des soumissions de données entrantes."
+      },
+      "newsletter": {
+        "description": "Registre des entités connectées au flux newsletter."
+      },
+      "reactions": {
+        "description": "Journal chiffré des réactions et interactions utilisateur."
+      },
+      "hub_product_links": {
+        "description": "Gestion des liens privés des produits du Hub."
+      },
+      "community": {
+        "description": "Orchestration des signaux de la communauté."
+      },
+      "home": {
+        "description": "Console centrale sécurisée pour le monitoring de l'écosystème Shiro."
+      },
+      "quests_registrations": {
+        "description": "Registre des inscriptions aux protocoles de quêtes."
+      },
+      "quests_submissions": {
+        "description": "Monitoring des soumissions aux protocoles de quêtes."
+      },
+      "hub_requests": {
+        "description": "Monitoring des flux entrants du Hub Shiro."
+      }
+    },
+    "bot_protector": {
+      "title": "Vérification de sécurité",
+      "title_failed": "Vérification échouée",
+      "description": "Veuillez patienter un instant pendant que nous sécurisons votre session.",
+      "description_failed": "Nous n'avons pas pu confirmer que vous n'êtes pas un robot. Veuillez actualiser la page.",
+      "verification_failed": "La vérification de sécurité a échoué. Veuillez réessayer.",
+      "retry": "Réessayer"
+    },
+    "sidebar": {
+      "title": "Landlord",
+      "subtitle": "Admin Shirofolio",
+      "close_nav": "Fermer la navigation",
+      "data_section": "Données",
+      "back_to_site": "Retour au site",
+      "sign_out": "Déconnexion",
+      "expand": "Agrandir",
+      "collapse": "Réduire",
+      "items": {
+        "dashboard": {
+          "label": "Dashboard",
+          "description": "Vue globale"
+        },
+        "community": {
+          "label": "Community",
+          "description": "Messages publics"
+        },
+        "newsletter": {
+          "label": "Newsletter",
+          "description": "Abonnés"
+        },
+        "users": {
+          "label": "Users",
+          "description": "Contacts et comptes enregistrés."
+        },
+        "submissions": {
+          "label": "Submissions",
+          "description": "Demandes entrantes"
+        },
+        "reactions": {
+          "label": "Reactions",
+          "description": "Engagement et réactions sur les contenus du site."
+        }
+      }
+    },
+    "header": {
+      "subtitle": "Admin Dashboard",
+      "open_nav": "Ouvrir la navigation",
+      "refresh": "Rafraîchir",
+      "collapse_sidebar": "Réduire la sidebar",
+      "expand_sidebar": "Agrandir la sidebar",
+      "nav_labels": {
+        "dashboard": "Dashboard",
+        "quests_registrations": "Inscriptions",
+        "quests_submissions": "Soumissions",
+        "newsletter": "Newsletter",
+        "users": "Users",
+        "hub_requests": "Hub Requests",
+        "reactions": "Reactions",
+        "submissions": "Submissions",
+        "community": "Community"
+      }
+    },
+    "landlord": {
+      "community": {
+        "title": "Gestion du mur communautaire",
+        "edit_title": "Modifier le message",
+        "add_title": "Ajouter un message",
+        "description": "Renseigne le créateur et les variantes utiles du message.",
+        "actions": {
+          "add": "Ajouter un message",
+          "update": "Mettre à jour le message",
+          "view_details": "Voir détails"
+        },
+        "fields": {
+          "creatorName": "Nom du créateur",
+          "avatarUrl": "URL de l'avatar (optionnel)",
+          "messagesByLanguage": "Messages par langue",
+          "messagePlaceholder": "Message en {locale}",
+          "messageLanguage": "Message ({locale})",
+          "linked_user": "Utilisateur lié",
+          "manual_add": "Ajout manuel"
+        },
+        "messages": {
+          "success_added": "Message ajouté.",
+          "success_updated": "Message mis à jour.",
+          "success_deleted": "Message supprimé.",
+          "error_save": "Impossible d'enregistrer le message.",
+          "error_delete": "Impossible de supprimer le message.",
+          "empty_messages": "Aucun message",
+          "empty_messages_desc": "Aucun message ne correspond à ta recherche ou la table est vide.",
+          "delete_confirm_title": "Supprimer ce message ?",
+          "delete_confirm_desc": "Cette action retire le message du mur communautaire. Elle ne peut pas être annulée depuis le dashboard."
+        },
+        "placeholders": {
+          "search": "Rechercher créateur, message, langue..."
+        },
+        "details_title": "Détails du message"
+      },
+      "quests": {
+        "title": "Gestion des challenges",
+        "registrations": {
+          "title": "Inscriptions aux Quests",
+          "subtitle": "Participants inscrits, avec accès direct aux profils."
+        },
+        "submissions": {
+          "title": "Soumissions aux Quests",
+          "subtitle": "Rendus de participants, avec accès direct aux travaux."
+        },
+        "actions": {
+          "add": "Ajouter",
+          "add_registration": "Ajouter un participant",
+          "add_submission": "Ajouter une soumission",
+          "edit_registration": "Modifier l'inscription",
+          "edit_submission": "Modifier la soumission",
+          "view_details": "Voir détails",
+          "view_work": "Voir le travail",
+          "delete": "Supprimer",
+          "delete_confirm": "Voulez-vous vraiment supprimer cet élément ?",
+          "delete_registration_confirm": "Supprimer cette inscription ?",
+          "delete_submission_confirm": "Voulez-vous vraiment supprimer cette soumission ?",
+          "copy_email": "Copier l'email",
+          "refresh": "Rafraîchir"
+        },
+        "fields": {
+          "quest": "Quest",
+          "name": "Nom",
+          "email": "Email",
+          "message": "Message",
+          "work_url": "URL du travail",
+          "send_email": "Envoyer un email",
+          "send_email_hint": "Désactivé par défaut pour les ajouts manuels.",
+          "status": "Statut",
+          "date": "Date",
+          "participant": "Participant",
+          "language": "Langue",
+          "no_work": "Aucun travail"
+        },
+        "placeholders": {
+          "select_quest": "Sélectionner une quest",
+          "all_quests": "Toutes les quests",
+          "search": "Rechercher nom, email, quest...",
+          "url": "https://..."
+        },
+        "messages": {
+          "loading_participants": "Chargement des participants...",
+          "loading_submissions": "Chargement des soumissions...",
+          "empty_participants": "Aucun participant trouvé.",
+          "empty_submissions": "Aucune soumission trouvée.",
+          "success_added": "Ajouté avec succès.",
+          "success_modified": "Modifié avec succès.",
+          "success_deleted": "Supprimé.",
+          "error_delete": "Erreur lors de la suppression.",
+          "error_process": "Impossible de traiter la demande.",
+          "select_quest_first": "Choisis d'abord une quest.",
+          "email_copied": "Email copié."
+        }
+      },
+      "submissions": {
+        "label": "Submissions",
+        "detail": "Demandes entrantes via le formulaire de contact."
+      },
+      "newsletter": {
+        "label": "Newsletter",
+        "detail": "Abonnés et sources d'inscription."
+      },
+      "hub_product_links": {
+        "title": "Hub Product Links",
+        "description": "Gérer les liens privés envoyés par mail pour chaque ressource du Hub.",
+        "actions": {
+          "refresh": "Rafraîchir",
+          "save": "Sauvegarder",
+          "up_to_date": "À jour"
+        },
+        "fields": {
+          "resource": "Ressource",
+          "slug": "Slug",
+          "private_link": "Lien Privé (Email)",
+          "actions": "Actions"
+        },
+        "messages": {
+          "loading": "Chargement des ressources...",
+          "link_updated": "Lien mis à jour pour {slug}",
+          "update_error": "Erreur lors de la mise à jour de {slug}",
+          "no_resources": "Aucune ressource trouvée",
+          "no_resources_desc": "Vérifiez vos content collections ou contactez l'admin."
+        }
+      },
+      "hub_requests": {
+        "label": "Hub Requests",
+        "detail": "Demandes produits et ressources."
+      },
+      "shared": {
+        "no_data": "Aucune donnée",
+        "no_data_description": "Cette table ne contient aucune entrée pour le moment.",
+        "loading_data": "Chargement des données...",
+        "page": "Page {page} / {total}",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "cancel": "Annuler",
+        "save": "Enregistrer",
+        "close": "Fermer",
+        "details_title": "Détails de l'entrée",
+        "participant_details": "Détails du participant",
+        "refresh": "Rafraîchir",
+        "add": "Ajouter",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "actions": "Actions",
+        "fields": {
+          "languages": "Langues",
+          "date": "Date"
+        }
       }
     }
   }

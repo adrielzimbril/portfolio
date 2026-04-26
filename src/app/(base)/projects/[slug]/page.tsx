@@ -1,16 +1,17 @@
 import React from "react";
-import { MorePreviewSection } from "./sections/MorePreviewSection";
-import { HeaderSection } from "./sections/HeaderSection";
-import { ProjectPreviewSection } from "./sections/ProjectPreviewSection";
-import { ProjectPointsResearchSection } from "./sections/ProjectPointsResearchSection";
-import { ProjectStatementSection } from "./sections/ProjectStatementSection";
-import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
+import { MorePreviewSection } from "@/app/(base)/projects/[slug]/sections/MorePreviewSection";
+import { HeaderSection } from "@/app/(base)/projects/[slug]/sections/HeaderSection";
+import { ProjectPreviewSection } from "@/app/(base)/projects/[slug]/sections/ProjectPreviewSection";
+import { ProjectPointsResearchSection } from "@/app/(base)/projects/[slug]/sections/ProjectPointsResearchSection";
+import { ProjectStatementSection } from "@/app/(base)/projects/[slug]/sections/ProjectStatementSection";
+import { ProjectDetailsSection } from "@/app/(base)/projects/[slug]/sections/ProjectDetailsSection";
 import {
   CardData,
   ProjectResearchSection,
-} from "./sections/ProjectResearchSection";
-import { ProjectResultSection } from "./sections/ProjectResultSection";
-import { GoalResearchSection } from "./sections/GoalResearchSection";
+} from "@/app/(base)/projects/[slug]/sections/ProjectResearchSection";
+import { ProjectResultSection } from "@/app/(base)/projects/[slug]/sections/ProjectResultSection";
+import { GoalResearchSection } from "@/app/(base)/projects/[slug]/sections/GoalResearchSection";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
 import { localeRedirect } from "@/integrations/i18n/routing";
 import {
@@ -19,9 +20,10 @@ import {
 } from "@/integrations/content/lib/projects";
 import { getLocale } from "next-intl/server";
 import { routes } from "@/data/routes";
-import { PageParams } from "@/types";
+import { PageParams, PageType } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(props: { params: Promise<PageParams> }) {
   const { slug } = await props.params;
@@ -86,63 +88,82 @@ export default async function SubProject(props: {
   } = project!.currentProject;
   return (
     <>
-      <HeaderSection
-        title={title}
-        cover={image_big || ""}
-        description={excerpt || ""}
-        tags={categories}
-        projectLink={project_link}
-        pageViewsData={{ slug, locale }}
-        slug={slug}
-      />
-      <ProjectDetailsSection
-        content={body || ""}
-        duration={date_project?.map((date) => date || null) || []}
-        tags={tags}
-        role={role}
-      />
-      {cardSectionDescription ||
-        (cards && (
+      <Skeleton name="project-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          cover={image_big || ""}
+          description={excerpt || ""}
+          tags={categories}
+          projectLink={project_link}
+          pageViewsData={{ slug, locale }}
+        />
+      </Skeleton>
+      <Skeleton name="project-detail-content" loading={false}>
+        <ProjectDetailsSection
+          content={body || ""}
+          duration={date_project?.map((date) => date || null) || []}
+          tags={tags}
+          role={role}
+        />
+        {/* <ReactionBar pageType={PageType.PROJECT} entityId={slug} /> */}
+      </Skeleton>
+      {cardSectionDescription && cards && (
+        <Skeleton name="project-detail-research" loading={false}>
           <ProjectResearchSection
             cards={cards as CardData[]}
             cardSectionDescription={cardSectionDescription}
           />
-        ))}
+        </Skeleton>
+      )}
       {goalSectionDescription && (
-        <GoalResearchSection
-          description={goalSectionDescription}
-          subDescription={goalSectionSubDescription}
-        />
+        <Skeleton name="project-detail-goal" loading={false}>
+          <GoalResearchSection
+            description={goalSectionDescription}
+            subDescription={goalSectionSubDescription}
+          />
+        </Skeleton>
       )}
       {statementSectionDescription && statements && (
-        <ProjectStatementSection
-          description={statementSectionDescription}
-          statements={statements}
-        />
+        <Skeleton name="project-detail-statement" loading={false}>
+          <ProjectStatementSection
+            description={statementSectionDescription}
+            statements={statements}
+          />
+        </Skeleton>
       )}
       {pointSectionDescription && points && (
-        <ProjectPointsResearchSection
-          pointSectionDescription={pointSectionDescription}
-          points={points}
-        />
+        <Skeleton name="project-detail-points" loading={false}>
+          <ProjectPointsResearchSection
+            pointSectionDescription={pointSectionDescription}
+            points={points}
+          />
+        </Skeleton>
       )}
       {gallery && (
-        <ProjectPreviewSection
-          title={title}
-          description={previewSectionDescription}
-          gallery={gallery}
-        />
+        <Skeleton name="project-detail-preview" loading={false}>
+          <ProjectPreviewSection
+            title={title}
+            description={previewSectionDescription}
+            gallery={gallery}
+          />
+        </Skeleton>
       )}
       {resultSectionDescription && results && (
-        <ProjectResultSection
-          description={resultSectionDescription}
-          results={results}
-        />
+        <Skeleton name="project-detail-result" loading={false}>
+          <ProjectResultSection
+            description={resultSectionDescription}
+            results={results}
+          />
+        </Skeleton>
       )}
       {project!.adjacentProjects.length > 0 && (
-        <MorePreviewSection data={project!.adjacentProjects} />
+        <Skeleton name="project-detail-more" loading={false}>
+          <MorePreviewSection data={project!.adjacentProjects} />
+        </Skeleton>
       )}
-      <CallToAction isPage />
+      <Skeleton name="project-detail-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

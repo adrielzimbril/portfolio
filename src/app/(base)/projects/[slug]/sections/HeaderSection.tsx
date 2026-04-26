@@ -52,7 +52,6 @@ export function HeaderSection({
       tags={tags}
       ctaButton={projectLink ?? undefined}
       ctaButtonText={`${t("projects.inner-page.header-section.cta")} 🦄`}
-      slug={slug}
       pageType={PageType.PROJECT}
     />
   );

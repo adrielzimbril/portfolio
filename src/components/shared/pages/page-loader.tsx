@@ -1,14 +1,11 @@
 "use client";
 import React from "react";
 import { cn } from "@/utils/utils";
-import Image from "next/image";
-import { useRealisticLoading } from "./useRealisticLoading";
-import { getImageUrl } from "@/utils/base-url";
+import { motion } from "motion/react";
+import { useRealisticLoading } from "@/components/shared/pages/useRealisticLoading";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 import { LogoName } from "@/components/shared/icons/logo/logo-name";
 import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
-import { siteConfig } from "@/data/config";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface GenericLoadingPageProps {
@@ -49,7 +46,7 @@ function FloatingCard({
   position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
 }) {
   return (
-    <div
+    <motion.div
       className={cn(
         "absolute bg-b-base backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
         position === "top-left" && "top-32 left-2 md:top-32 md:left-32",
@@ -59,9 +56,21 @@ function FloatingCard({
         position === "bottom-right" &&
           "bottom-32 right-2 md:bottom-32 md:right-32",
       )}
+      initial={{ opacity: 0, y: 20, scale: 0.8 }}
+      animate={{
+        opacity: [0, 1, 1, 0],
+        y: [20, -10, -20, -40],
+        scale: [0.8, 1, 1, 0.8],
+      }}
+      transition={{
+        duration: 2,
+        delay,
+        repeat: Infinity,
+        repeatDelay: 2,
+      }}
     >
       <span className="text-base font-medium text-zinc-400">{title}</span>
-    </div>
+    </motion.div>
   );
 }
 
@@ -106,75 +115,168 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
           />
         ))}
 
-      {/* Principal content */}
-      <div className="flex flex-col items-center justify-center self-center gap-8 px-4 md:px-8 max-w-xl">
-        {/* Header */}
-        <header className="absolute top-0 left-0 right-0 h-28 bg-greys-00">
+      {/* Principal content with sequential animations */}
+      <motion.div className="flex flex-col items-center justify-center self-center gap-8 px-4 md:px-8 max-w-xl">
+        {/* Header with animation */}
+        <motion.header
+          className="absolute top-0 left-0 right-0 h-28 bg-greys-00"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <nav className="flex items-center justify-center pt-14">
-            <div className="flex items-center justify-center align-center w-fit gap-2.5">
-              <LogoIcon className={cn("flex-shrink-0 size-14")} />
+            <motion.div
+              className="flex items-center justify-center align-center w-fit gap-2.5"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{
+                delay: 0.3,
+                duration: 0.5,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <LogoIcon className={cn("shrink-0 size-14")} />
               <LogoName
-                className={cn("h-5! qmd:h-6! w-48! qmd:w-60! flex-shrink-0")}
+                className={cn("h-5! qmd:h-6! w-48! qmd:w-60! shrink-0")}
               />
-            </div>
+            </motion.div>
           </nav>
-        </header>
+        </motion.header>
 
-        {/* Main loading */}
-        <div className="relative">
+        {/* Main loading animation */}
+        <motion.div
+          className="relative"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           {isPage ? (
-            <div className="size-24 border-4 border-zinc-100 dark:border-zinc-700 border-t-zinc-800 dark:border-t-zinc-950 rounded-full animate-spin" />
+            <motion.div
+              className="size-24 border-4 border-zinc-100 dark:border-zinc-700 border-t-zinc-800 dark:border-t-zinc-950 rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 1,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+            />
           ) : (
-            <div className="size-24 bg-zinc-100 dark:bg-zinc-900 rounded-full animate-pulse" />
+            <motion.div
+              className="size-24 bg-zinc-100 dark:bg-zinc-900 rounded-full"
+              animate={{
+                scale: [1, 1.1, 1],
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeInOut",
+                repeat: Infinity,
+              }}
+            />
           )}
-          <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.8, duration: 0.4, ease: "backOut" }}
+          >
             {isPage ? (
-              <div className="w-12 h-12 bg-zinc-900 dark:bg-zinc-950 rounded-full flex items-center justify-center animate-pulse">
+              <motion.div
+                className="w-12 h-12 bg-zinc-900 dark:bg-zinc-950 rounded-full flex items-center justify-center"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.8, 1, 0.8],
+                }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+              >
                 <span className="text-white text-xl">{emoji}</span>
-              </div>
+              </motion.div>
             ) : (
               <div className="w-12 h-12 bg-zinc-900 dark:bg-zinc-950 rounded-full flex items-center justify-center">
                 <span className="text-white text-xl">{emoji}</span>
               </div>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Loading text */}
-        <div className="size-full flex flex-col items-center gap-4 text-center">
-          <h1 className="h3 font-normal">{title}</h1>
+        {/* Loading text with animations */}
+        <motion.div
+          className="size-full flex flex-col items-center gap-4 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
+          <motion.h1
+            className="h3 font-normal"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1, duration: 0.6 }}
+          >
+            {title}
+          </motion.h1>
 
-          <p className="text-xl text-zinc-400 font-normal max-w-md">
+          <motion.p
+            className="text-xl text-zinc-400 font-normal max-w-md"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+          >
             {subtitle}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* Progress indicators */}
-        <div className="flex flex-col items-center gap-4 w-full max-w-md">
+        {/* Progress indicators with animations */}
+        <motion.div
+          className="flex flex-col items-center gap-4 w-full max-w-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4, duration: 0.6 }}
+        >
           <LoadingProgressBar isPage={isPage} />
-        </div>
+        </motion.div>
 
         <div className="flex items-center gap-2">
           <Loader color="bg-zinc-900 dark:bg-zinc-100" />
         </div>
-      </div>
+      </motion.div>
 
-      {/* Stats preview */}
-      <div className="content-stretch flex gap-8 items-center justify-center mt-12">
+      {/* Stats preview with animation */}
+      <motion.div className="content-stretch flex gap-8 items-center justify-center mt-12">
         {statsData.map((stat, index) => (
           <React.Fragment key={stat.label}>
-            <div className="content-stretch flex flex-col gap-1 items-center justify-center">
+            <motion.div
+              className="content-stretch flex flex-col gap-1 items-center justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                delay: 2.2 + index * 0.1,
+                duration: 0.5,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
               <div className="relative shrink-0 text-2x">
                 <p className="leading-[120%]">{stat.number}</p>
               </div>
               <div className="relative shrink-0 text-base text-b-white-invert-thr">
                 <p className="leading-[120%]">{stat.label}</p>
               </div>
-            </div>
-            {index !== 2 && <div className="bg-[rgba(0,0,0,0.1)] w-px h-12" />}
+            </motion.div>
+            {/* Check if motion is not the after last add the separator */}
+            {index !== 2 && (
+              <motion.div
+                className="bg-[rgba(0,0,0,0.1)] w-px h-12"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ delay: 2.3, duration: 0.3 }}
+              />
+            )}
           </React.Fragment>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

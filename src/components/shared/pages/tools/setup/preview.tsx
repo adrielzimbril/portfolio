@@ -29,16 +29,17 @@ export function CardPreview({
         "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
         isWide && "md:min-h-80",
         cover ? "p-2 h-48 md:h-80" : "p-4",
+        "squircle-[#ffd3ad]"
       )}
     >
       {cover ? (
-        <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
+        <div className={cn("flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl")}>
           {purchaseUrl ? (
-            <Link href={purchaseUrl} className="w-full">
+            <Link href={purchaseUrl} className={cn("w-full", "relative flex bg-inherit squircle squircle-maskrf squircle-background squircle-7xl squircle-border-4 overflow-hidden transition-all duration-300 squircle-border-[#ffd3ad]")}>
               <Image
                 width={1200}
                 height={630}
-                className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
+                className={cn("size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105", "squircle squircle-masked squircle-background squircle-7xl ")}
                 alt={title ?? ""}
                 src={getImageUrl(cover)}
                 loading="lazy"
@@ -73,7 +74,7 @@ export function CardPreview({
                 </button>
               </DialogTrigger>
               <DialogContent
-                size="full"
+                size="2xl"
                 className="max-w-6xl p-2 sm:p-3"
                 variant="glass"
               >

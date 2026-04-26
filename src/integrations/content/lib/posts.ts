@@ -1,22 +1,23 @@
 import type { Post } from "@/integrations/content/types/types";
 import { allPosts } from "content-collections";
+import { SortOrder } from "@/types/enum";
 
 type GetAllPostsOptions = {
   published?: boolean;
   locale?: string;
   pageSlug?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 
 export async function getAllPosts(
-  options: Partial<GetAllPostsOptions> = {}
+  options: Partial<GetAllPostsOptions> = {},
 ): Promise<Post[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
     pageSlug: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
@@ -24,15 +25,15 @@ export async function getAllPosts(
     allPosts
       .filter(
         (post) =>
-          post.published === published && (!locale || post.locale === locale)
+          post.published === published && (!locale || post.locale === locale),
       )
       .sort((a, b) =>
-        sort === "asc"
+        sort === SortOrder.ASC
           ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at)
+          : b.created_at.localeCompare(a.created_at),
       )
       .filter((post) => post.slug !== pageSlug)
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
@@ -40,7 +41,7 @@ export async function getPostBySlug(
   slug: string,
   options?: {
     locale?: string;
-  }
+  },
 ): Promise<Post | null> {
   const { locale } = options ?? {};
 
@@ -79,7 +80,7 @@ export async function getPostWithAdjacent(
   slug: string,
   options?: {
     locale?: string;
-  }
+  },
 ): Promise<PostsResult | null> {
   const { locale } = options ?? {};
   // Filter by locale if specified
@@ -92,12 +93,12 @@ export async function getPostWithAdjacent(
   const sortedPosts = filteredPosts.sort(
     (a, b) =>
       new Date(b.created_at || "").getTime() -
-      new Date(a.created_at || "").getTime()
+      new Date(a.created_at || "").getTime(),
   );
 
   // Find the current post
   const currentIndex = sortedPosts.findIndex(
-    (post: Post) => post.slug === slug
+    (post: Post) => post.slug === slug,
   );
 
   if (currentIndex === -1) {
@@ -157,17 +158,17 @@ export async function getPostWithAdjacent(
 type GetAllPostSlugsOptions = {
   published?: boolean;
   locale?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
 };
 
 export async function getAllPostSlugs(
-  options: Partial<GetAllPostSlugsOptions> = {}
+  options: Partial<GetAllPostSlugsOptions> = {},
 ): Promise<string[]> {
   const { published, locale, sort, limit } = {
     published: true,
     locale: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
   };
@@ -176,15 +177,15 @@ export async function getAllPostSlugs(
     allPosts
       .filter(
         (post) =>
-          post.published === published && (!locale || post.locale === locale)
+          post.published === published && (!locale || post.locale === locale),
       )
       .sort((a, b) =>
-        sort === "asc"
+        sort === SortOrder.ASC
           ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at)
+          : b.created_at.localeCompare(a.created_at),
       )
       .map((post) => post.slug)
-      .slice(0, limit)
+      .slice(0, limit),
   );
 }
 
@@ -210,7 +211,7 @@ type FilterOptions = {
  * // Returns all posts filtered by category "technology"
  */
 export async function getFilteredPosts(
-  options: FilterOptions = { published: undefined, locale: undefined }
+  options: FilterOptions = { published: undefined, locale: undefined },
 ): Promise<Post[]> {
   const posts = await getAllPosts({
     published: options.published,
@@ -244,7 +245,7 @@ export async function getFilteredPosts(
       }
 
       return true;
-    })
+    }),
   );
 }
 
@@ -260,7 +261,7 @@ export async function getFilteredPosts(
  */
 export async function getAllPostCategories(): Promise<string[]> {
   const categories = allPosts.map((post) =>
-    post.categories.map((cat) => cat.slug)
+    post.categories.map((cat) => cat.slug),
   );
   return Promise.resolve([...new Set(categories.flat())]);
 }

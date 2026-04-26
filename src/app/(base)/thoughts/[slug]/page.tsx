@@ -2,15 +2,17 @@ import { getBaseUrl, getImageUrl, getResourcesUrl } from "@/utils/base-url";
 import { localeRedirect } from "@/integrations/i18n/routing";
 import { getPostBySlug, getPostWithAdjacent } from "@/integrations/content/lib";
 import { getLocale } from "next-intl/server";
-import { HeaderSection } from "./sections/HeaderSection";
-import { MorePreviewSection } from "./sections/MorePreviewSection";
-import { ContentsSection } from "./sections/ContentSection";
+import { HeaderSection } from "@/app/(base)/thoughts/[slug]/sections/HeaderSection";
+import { MorePreviewSection } from "@/app/(base)/thoughts/[slug]/sections/MorePreviewSection";
+import { ContentsSection } from "@/app/(base)/thoughts/[slug]/sections/ContentSection";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 import { routes } from "@/data/routes";
 import { calculateReadingTime, formatTime } from "@/hooks/useReadingTime";
 import { PageParams, PageType } from "@/types";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -63,18 +65,27 @@ export default async function BlogPostPage(props: {
 
   return (
     <>
-      <HeaderSection
-        title={title}
-        cover={cover || ""}
-        tags={tags}
-        date={created_at}
-        readingTime={formattedReadingTime}
-        pageViewsData={{ slug, locale }}
-        slug={slug}
-      />
-      <ContentsSection content={body} />
-      <MorePreviewSection data={post.adjacentPosts} />
-      <CallToAction isPage />
+      <Skeleton name="thought-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          cover={cover || ""}
+          tags={tags}
+          date={created_at}
+          readingTime={formattedReadingTime}
+          pageType={PageType.THOUGHT}
+          pageViewsData={{ slug, locale }}
+        />
+      </Skeleton>
+      <Skeleton name="thought-detail-content" loading={false}>
+        <ContentsSection content={body} />
+      </Skeleton>
+      <Skeleton name="thought-detail-more" loading={false}>
+        <ReactionBar pageType={PageType.THOUGHT} entityId={slug} />
+        <MorePreviewSection data={post.adjacentPosts} />
+      </Skeleton>
+      <Skeleton name="thought-detail-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

@@ -3,18 +3,19 @@ import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { useTranslations, useLocale } from "use-intl";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { routes } from "@/data/routes";
 import { usePageViews } from "@/hooks/usePageViews";
 import { getPathUrl, sleep } from "@/utils";
 import { useTurnstile } from "@/integrations/anti-bot/turnstile";
+import { getTurnstileConfig } from "@/config";
 
 export function NewsletterForm() {
   const t = useTranslations();
@@ -23,7 +24,7 @@ export function NewsletterForm() {
     routes.newsletter.key,
     undefined,
     { locale: locale, path: getPathUrl(routes.newsletter.link) },
-    false
+    false,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -33,14 +34,17 @@ export function NewsletterForm() {
     required: true,
   });
   const isEmailValid = !Boolean(emailValidator(email));
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
+  const { siteKey } = getTurnstileConfig();
 
-  const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
-    appearance: "execute",
-    execution: "execute",
-    "retry-interval": 1000,
-    theme: "auto",
-  });
+  const { ref, token, error, isLoading, execute } = useTurnstile(
+    siteKey || "",
+    {
+      appearance: "execute",
+      execution: "execute",
+      "retry-interval": 1000,
+      theme: "auto",
+    },
+  );
   sleep(1000).then(() => execute());
 
   return (
@@ -54,7 +58,7 @@ export function NewsletterForm() {
       >
         <div
           className={cn(
-            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto"
+            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto",
           )}
         >
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4">
@@ -81,7 +85,7 @@ export function NewsletterForm() {
             <div ref={ref} className="hidden" />
             <Input
               placeholder={t(
-                "common.page-sections.newsletter.form.fields.email-page.placeholder"
+                "common.page-sections.newsletter.form.fields.email-page.placeholder",
               )}
               type="email"
               value={email}

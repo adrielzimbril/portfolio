@@ -1,9 +1,10 @@
 import logger from "@/utils/logger";
 import type { AddContactHandler } from "@/integrations/contact/types/types";
 import { Resend } from "resend";
+import { getResendConfig } from "@/config";
 
-const CONTACT_PROVIDER_API_KEY = process.env.RESEND_API_KEY;
-const CONTACT_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID || "*";
+const { apiKey: CONTACT_PROVIDER_API_KEY, audienceId: CONTACT_AUDIENCE_ID } =
+  getResendConfig();
 
 const provider = new Resend(CONTACT_PROVIDER_API_KEY!);
 
@@ -26,7 +27,7 @@ export const add: AddContactHandler = async (params) => {
           id: audienceId,
           name: err?.name,
           message: err?.message,
-        }
+        },
       );
       // no-op success to keep flow resilient
       return { ok: true } as const;

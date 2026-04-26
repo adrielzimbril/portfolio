@@ -1,7 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/talks/preview";
 import { CardInfo } from "@/components/shared/pages/talks/details";
-import { PageType } from "@/types";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { PageType } from "@/types/enum";
 
 export function TalksCard({
   title,
@@ -11,6 +13,7 @@ export function TalksCard({
   tags = [],
   participantsCount,
   action,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -22,10 +25,11 @@ export function TalksCard({
     label: string;
     href: string;
   } | null;
+  hideReactions?: boolean;
 }) {
   return (
-    <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
-      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
+    <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
+      <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr] relative">
         <CardPreview
           title={title}
           cover={cover}
@@ -39,11 +43,16 @@ export function TalksCard({
           title={title}
           excerpt={excerpt}
           date={date}
-          tags={tags}
+          tags={tags ?? []}
           participantsCount={participantsCount}
           action={action}
+          hideReactions={hideReactions}
         />
       </CardContent>
     </Card>
   );
+}
+
+export function TalkCardSkeleton() {
+  return <Skeleton name="talk-card" className="w-full h-80" />;
 }

@@ -1,9 +1,8 @@
 "use client";
-
 import { useMemo } from "react";
 import BoringAvatar from "boring-avatars";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
+import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
 import { pickRandomColorCode } from "@/utils";
 import { cn } from "@/utils/utils";
 

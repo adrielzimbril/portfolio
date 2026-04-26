@@ -1,5 +1,5 @@
 import { cn } from "@/utils/utils";
-import { ResourceInnerStatementPreviewCardInfoProps } from "@/types/type";
+import { ResourceInnerStatementPreviewCardInfoProps } from "@/types";
 
 export function CardPreview({
   details,
@@ -7,7 +7,7 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex flex-row items-center gap-6 md:gap-8 px-6 py-6 md:px-8 md:py-8 squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden"
+        "flex flex-row items-center gap-6 md:gap-8 px-6 py-6 md:px-8 md:py-8 squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
       )}
     >
       <PreviewIcon icon={details.icon} />

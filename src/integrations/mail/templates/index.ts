@@ -8,6 +8,8 @@ import { QuestRegisterUserConfirmation } from "@/integrations/mail/templates/Que
 import { QuestRegisterAdminNotification } from "@/integrations/mail/templates/QuestRegisterAdminNotification";
 import { QuestSubmitUserConfirmation } from "@/integrations/mail/templates/QuestSubmitUserConfirmation";
 import { QuestSubmitAdminNotification } from "@/integrations/mail/templates/QuestSubmitAdminNotification";
+import { CommunityWallAdminNotification } from "@/integrations/mail/templates/CommunityWallAdminNotification";
+import { CommunityWallUserConfirmation } from "@/integrations/mail/templates/CommunityWallUserConfirmation";
 
 export const mailTemplates = {
   welcome: WelcomeEmail,
@@ -20,4 +22,6 @@ export const mailTemplates = {
   questRegisterAdminNotification: QuestRegisterAdminNotification,
   questSubmitUserConfirmation: QuestSubmitUserConfirmation,
   questSubmitAdminNotification: QuestSubmitAdminNotification,
+  communityWallAdminNotification: CommunityWallAdminNotification,
+  communityWallUserConfirmation: CommunityWallUserConfirmation,
 } as const;

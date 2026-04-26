@@ -1,14 +1,15 @@
 import { unstable_cache } from "next/cache";
-import type { LighthouseStats, LighthouseScores } from "./types";
-import logger from "@/utils/logger";
+import type { LighthouseStats, LighthouseScores } from "@/lib/stats/types";
+import { logger } from "@/utils";
+import { ConfigValue } from "@/config";
 
 // Configuration
-const SITE_URL = process.env.SITE_URL || "https://www.adrielzimbril.com/";
-const PAGESPEED_API_KEY = process.env.PAGESPEED_API_KEY;
+const SITE_URL = ConfigValue.SITE_URL || "https://www.adrielzimbril.com";
+const PAGESPEED_API_KEY = ConfigValue.PAGESPEED_API_KEY;
 
 // Cache duration in seconds (default 10 days = 864000 seconds)
 const LIGHTHOUSE_CACHE_DAYS = parseInt(
-  process.env.LIGHTHOUSE_CACHE_DAYS || "10",
+  ConfigValue.LIGHTHOUSE_CACHE_DAYS || "10",
   10,
 );
 const LIGHTHOUSE_REVALIDATE = LIGHTHOUSE_CACHE_DAYS * 86400;
@@ -94,8 +95,8 @@ async function fetchLighthouseScores(
 
   if (!response.ok) {
     logger.error(
-      `[Lighthouse Stats] Failed to fetch ${strategy} stats:`,
-      response.status,
+      `[Lighthouse Stats] Failed to fetch ${strategy} stats: ${response.status} ${response.statusText}`,
+      response,
     );
     throw new Error(`Failed to fetch Lighthouse ${strategy} stats`);
   }

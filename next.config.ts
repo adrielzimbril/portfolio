@@ -1,21 +1,22 @@
 import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
 import nextIntlPlugin from "next-intl/plugin";
-import { appConfig } from "@data/app-config";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { ConfigValue } from "@/config/config";
+import { appConfig } from "@data/app-config";
 
 const withNextIntl = nextIntlPlugin({
   requestConfig: "./src/integrations/i18n/request.ts",
   experimental: {
     createMessagesDeclaration: Object.keys(appConfig.i18n.locales).map(
-      (locale) => `./src/integrations/i18n/translations/${locale}.json`
+      (locale) => `./src/integrations/i18n/translations/${locale}.json`,
     ),
   },
 });
 
-const IsDEV = process.env.NODE_ENV === "development";
+const IsDEV = ConfigValue.NODE_ENV === "development";
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
+  enabled: ConfigValue.ANALYZE_BUNDLE === "true",
 });
 
 const nextConfig: NextConfig = {
@@ -25,31 +26,40 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75],
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "designmodo.com",
-      },
+      // production
       {
         protocol: "https",
         hostname: "www.adrielzimbril.com",
+        pathname: "/img/**",
       },
       {
-        protocol: "http",
-        hostname: "localhost",
-      },
-      {
-        // google profile images
         protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-      },
-      {
-        // github profile images
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
+        hostname: "preview.adrielzimbril.com",
+        pathname: "/img/**",
       },
       {
         protocol: "https",
         hostname: "cdn.aurthle.one",
+      },
+      // local development
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      // google profile images
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      // github profile images
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
+      // dicebear avatars
+      {
+        protocol: "https",
+        hostname: "api.dicebear.com",
       },
     ],
   },
@@ -60,4 +70,6 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@vercel/og"],
 };
 
-export default withContentCollections(withNextIntl(withBundleAnalyzer(nextConfig)));
+export default withContentCollections(
+  withNextIntl(withBundleAnalyzer(nextConfig)),
+);

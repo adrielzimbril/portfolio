@@ -1,5 +1,4 @@
 "use client";
-
 import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -10,7 +9,7 @@ export function AnalyticsScript() {
 export function useAnalytics() {
   const trackEvent = (
     event: string,
-    data?: Record<string, string | number | boolean | null>
+    data?: Record<string, string | number | boolean | null>,
   ) => {
     track(event, data);
   };

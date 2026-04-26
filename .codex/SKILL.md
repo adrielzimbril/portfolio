@@ -21,11 +21,14 @@ description: Apply Shirofolio conventions for quests/talks/thoughts, premium FR-
    - French first, clean, premium tone
    - emoji-friendly where thematic
 7. For any new translation key, update all locales:
-   - `fr.json`
-   - `en.json`
-   - `zh-CN.json`
-8. Prefer MDX for editorial challenge data (winners, rewards, participants showcase) unless backend requirement is explicit.
-9. Validate output before closing:
-   - `pnpm exec tsc --noEmit`
-   - `pnpm lint` if relevant
-10. Ensure UTF-8 integrity and remove mojibake artifacts.
+   - `src/integrations/i18n/translations/fr.json`
+   - `src/integrations/i18n/translations/en.json`
+   - `src/integrations/i18n/translations/zh-CN.json`
+8. Use `useTranslations()` for client components and `getTranslations()` for server components (next-intl).
+9. Prefer MDX for editorial challenge data (winners, rewards, participants showcase) unless backend requirement is explicit.
+10. Validate output before closing:
+
+- `pnpm exec tsc --noEmit`
+- `pnpm lint` if relevant
+
+11. Ensure UTF-8 integrity and remove mojibake artifacts.

@@ -1,4 +1,5 @@
 import { PageType, QuestAskType } from "@/types";
+import { ConfigValue, getSiteUrl } from "@/config";
 
 /**
  * Gets the base URL of the application.
@@ -7,13 +8,14 @@ import { PageType, QuestAskType } from "@/types";
  * @returns {string} The base URL of the application.
  */
 export function getBaseUrl(): string {
-  if (process.env.NEXT_PUBLIC_SITE_URL) {
-    return process.env.NEXT_PUBLIC_SITE_URL;
+  const siteConfig = getSiteUrl();
+  if (siteConfig.url) {
+    return siteConfig.url;
   }
-  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+  if (siteConfig.vercelUrl) {
+    return `https://${siteConfig.vercelUrl}`;
   }
-  return `http://localhost:${process.env.PORT ?? 3000}`;
+  return `http://localhost:${ConfigValue.PORT}`;
 }
 
 /**
@@ -57,11 +59,12 @@ export function getPathUrl(path: string): string {
  * @returns {string} The base URL of the application.
  */
 export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
+  const siteConfig = getSiteUrl();
   if (type === "s3") {
-    return `${process.env.NEXT_PUBLIC_S3_DOMAIN_SITE_URL}/`;
+    return `${siteConfig.s3DomainUrl}/`;
   }
-  return process.env.NEXT_PUBLIC_DOMAIN_SITE_URL
-    ? `${process.env.NEXT_PUBLIC_DOMAIN_SITE_URL}/`
+  return siteConfig.domainUrl
+    ? `${siteConfig.domainUrl}/`
     : "https://www.adrielzimbril.com/";
 }
 
@@ -100,7 +103,24 @@ export function getAbsolutePathUrl({
  * @returns {string} The API base URL.
  */
 export function getApiBaseUrl(): string {
-  return `${getBaseUrl()}/api`;
+  const base = getBaseUrl().replace(/\/+$/, "");
+  return `${base}/api`;
+}
+
+/**
+ * Gets the URL of an API path.
+ * @param {string} path - The API path.
+ *
+ * Returns the URL of an API path.
+ * @returns {string} The URL of the API path.
+ *
+ * @example
+ * getApiUrl("/views"); // returns "https://base-url/api/views"
+ */
+export function getApiUrl(path: string): string {
+  const base = getApiBaseUrl();
+  const safePath = path.replace(/^\//, "");
+  return `${base}/${safePath}`;
 }
 
 /**
@@ -189,11 +209,11 @@ export function getImageUrl(slug: string): string {
 export function getThisPageUrl(): string {
   const url = new URL(window.location.href);
   // Remove hash and query params
-  url.hash = '';
-  url.search = '';
+  url.hash = "";
+  url.search = "";
   // Remove trailing slash
   let pathname = url.pathname;
-  if (pathname.endsWith('/')) {
+  if (pathname.endsWith("/")) {
     pathname = pathname.slice(0, -1);
   }
   return `${url.origin}${pathname}`;

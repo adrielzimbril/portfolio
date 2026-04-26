@@ -11,10 +11,11 @@ const config = {
   limit: 2,
 };
 
+const currentTime = Date.now();
+
 export async function TalksSection() {
   const t = await getTranslations();
   const locale = await getLocale();
-  const currentTime = Date.now();
   const talks = await getAllTalks({ limit: config.limit, locale });
 
   return (
@@ -38,7 +39,7 @@ export async function TalksSection() {
             : null
           : {
               label: t("talks.card.actions.participate"),
-              href: eventUrl || `/talks#${talk.slug}`,
+              href: eventUrl,
             };
 
         const mode = talk.attendance_mode;
@@ -61,6 +62,7 @@ export async function TalksSection() {
             tags={tags}
             participantsCount={talk.participants || 0}
             action={action}
+            hideReactions
           />
         );
       })}

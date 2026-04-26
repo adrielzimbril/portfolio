@@ -1,0 +1,54 @@
+---
+id: "v2.0.1"
+version: "v2.0.1-kaleidoscope"
+type: "feature"
+date: "2026-04-18"
+published: true
+---
+
+# Système de réactions & panneau d'administration
+
+Cette version introduit un système complet de réactions par emoji, avec prise en charge des utilisateurs anonymes, synchronisation et nouveau panneau d'administration pour gérer le contenu.
+
+## Nouvelles fonctionnalités
+
+### Réactions par emoji
+
+Nous avons ajouté un système de réactions complet qui permet aux utilisateurs de s'exprimer avec des emojis animés :
+
+- **Plusieurs types de réactions** : j'aime, coeur, célébration, inspirant et sceptique
+- **États animés** : les emojis s'animent lorsqu'ils sont actifs pour rendre le retour plus vivant
+- **Interface inline** : interface compacte et adaptée au mobile
+- **Compteurs en temps réel** : mises à jour instantanées du nombre de réactions
+- **Bibliothèque d'emojis** : bibliothèque complète pour diversifier les réactions
+
+### Support des utilisateurs anonymes
+
+- **Identification par cookie** : les utilisateurs anonymes sont identifiés via des cookies persistants
+- **Synchronisation multi-appareils** : les réactions se synchronisent quand l'utilisateur se connecte
+- **Migration fluide** : les réactions anonymes fusionnent avec le compte authentifié
+
+### Panneau d'administration
+
+- **Support multilingue** : panneau d'administration compatible avec plusieurs langues
+- **Protection d'accès** : routes admin protégées par authentification
+- **Configuration centralisée** : configuration et interface admin unifiées
+- **Gestion de session** : durée de session configurable
+
+### Intégration
+
+- **Articles** : réactions sur les articles et billets du blog
+- **Projets** : réactions sur les études de cas et pages projet
+- **Hub** : réactions sur les ressources et outils
+- **Changelog** : réactions sur les entrées du changelog
+
+## Détails techniques
+
+- **Migration Supabase** : schéma de base de données complet avec politiques RLS
+- **Gestion des cookies** : suivi de l'identifiant anonyme avec expiration à 365 jours
+- **Provider de synchronisation** : synchronisation automatique à l'authentification
+- **Types TypeScript** : typage complet des structures de données des réactions
+- **API batch** : endpoint optimisé pour récupérer l'état des réactions
+- **Auth modulaire** : système flexible de fournisseurs d'authentification
+
+Cette fonctionnalité renforce l'engagement utilisateur et apporte des retours utiles sur toute la plateforme, avec des outils d'administration solides pour gérer le contenu.

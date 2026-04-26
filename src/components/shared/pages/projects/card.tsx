@@ -1,8 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/projects/details";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/utils/utils";
-import { PageType } from "@/types";
+
+import { PageType } from "@/types/enum";
 
 export function ProjectCard({
   title,
@@ -12,6 +14,7 @@ export function ProjectCard({
   tags,
   categories,
   isWide,
+  hideReactions,
 }: {
   title: string;
   cover?: string;
@@ -20,17 +23,18 @@ export function ProjectCard({
   tags: { name: string }[];
   categories: { name: string; color: string }[];
   isWide: boolean;
+  hideReactions?: boolean;
 }) {
   return (
     <Card
       className={cn(
-        "flex flex-col items-center justify-center squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 overflow-hidden size-full",
+        "group relative flex flex-col items-center justify-center squircle squircle-b-base-second squircle-6xl squircle-smooth-xl border-0 size-full",
         isWide && "md:flex-row md:col-span-2",
       )}
     >
       <CardContent
         className={cn(
-          `flex flex-col px-6 md:px-8 py-8 md:py-10 gap-4 size-full`,
+          "relative flex flex-col px-6 md:px-8 py-8 md:py-10 gap-4 size-full",
           isWide ? "md:flex-row" : "grid-rows-[auto_1fr]",
         )}
       >
@@ -53,8 +57,22 @@ export function ProjectCard({
           tags={tags}
           categories={categories}
           isWide={isWide}
+          hideReactions={hideReactions}
         />
       </CardContent>
     </Card>
   );
+}
+
+export function ProjectCardSkeleton({ isWide = false }: { isWide?: boolean }) {
+  return (
+    <Skeleton
+      name={isWide ? "project-card-wide" : "project-card"}
+      className={isWide ? "w-full h-64 md:col-span-2" : "w-full h-96"}
+    />
+  );
+}
+
+export function InnerStatementCardSkeleton() {
+  return <Skeleton name="inner-statement-card" className="w-full h-32" />;
 }

@@ -1,7 +1,7 @@
 "use client";
 import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useLoadMore } from "@/hooks/useLoadMore";
 import { Post } from "@/integrations/content/types";
 import { getDate } from "@/utils";
@@ -28,7 +28,9 @@ export function MyThoughtsSection({
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={<LoadMoreCardsSkeleton kind="thoughts" count={2} />}
+      loadingFallback={
+        <Skeleton name="thoughts-load-more" className="w-full h-40" />
+      }
     >
       {data.map((post, index) => (
         <ThoughtCard
@@ -39,6 +41,7 @@ export function MyThoughtsSection({
           excerpt={post.excerpt || ""}
           primaryTag={getDate({ date: post.created_at })}
           tags={post.tags}
+          hideReactions
         />
       ))}
     </LoadMoreSection>

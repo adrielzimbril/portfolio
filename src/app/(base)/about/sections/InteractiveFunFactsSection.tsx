@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
 import { cn } from "@/utils/utils";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -473,14 +473,7 @@ export function InteractiveFunFacts() {
     setGameStarted(true);
     setScore(0);
     toast.success("C'est reparti pour un tour! 🚀", {
-      duration: 2000,
-      style: {
-        background: "#6366F1",
-        color: "white",
-        border: "none",
-        fontSize: "16px",
-        borderRadius: "12px",
-      },
+      timeout: 2000,
     });
   };
 

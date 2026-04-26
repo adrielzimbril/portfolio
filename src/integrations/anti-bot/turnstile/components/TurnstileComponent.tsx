@@ -1,5 +1,4 @@
 "use client";
-
 import React, { forwardRef, useImperativeHandle } from "react";
 import useTurnstile, {
   TurnstileOptions,
@@ -35,7 +34,7 @@ export const TurnstileComponent = forwardRef<
       execute,
       getResponse,
     }),
-    [reset, execute, getResponse]
+    [reset, execute, getResponse],
   );
 
   return <div ref={turnstileRef} className={className} style={style} />;

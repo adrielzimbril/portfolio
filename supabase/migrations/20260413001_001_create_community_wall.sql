@@ -1,13 +1,11 @@
 -- Community Wall / Guestbook table
--- Inspired by braydoncoyer.dev community wall feature
-
 create table if not exists public.community_wall (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id) on delete cascade,
   creator_name text not null,
   creator_avatar_url text,
   message text not null,
-  patternindex integer default 0,
+  pattern_index integer default 0,
   rotation integer default 0,
   created_at timestamptz not null default now()
 );

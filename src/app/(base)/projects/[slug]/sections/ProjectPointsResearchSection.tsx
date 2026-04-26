@@ -43,7 +43,7 @@ export function ProjectPointsResearchSection({
           t("projects.inner-page.project-points-research-section.description")
         }
         //className="p-0"
-        contentClassName="lg:max-w-[80%] items-start"
+        contentClassName="justify-center lg:max-w-[80%] items-center"
       >
         <EmojiPlaceholder
           //src={getImageUrl(getEmojiHub("✏️", "apple"))}

@@ -1,10 +1,10 @@
 "use client";
 import * as React from "react";
+import { cn } from "@/utils/utils";
 import { X } from "@aurthle/icons";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/utils/utils";
 
 function Dialog({
   ...props
@@ -57,7 +57,7 @@ function DialogContent({
   closeButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  size?: "sm" | "md" | "lg" | "xl" | "full";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   variant?: "default" | "modern" | "glass";
   scrollArea?: boolean;
   closeButton?: boolean;
@@ -67,7 +67,8 @@ function DialogContent({
     md: "sm:max-w-md",
     lg: "sm:max-w-lg",
     xl: "sm:max-w-2xl",
-    full: "sm:max-w-4xl",
+    "2xl": "sm:max-w-4xl",
+    full: "sm:max-w-6xl",
   };
 
   const variantClasses = {
@@ -110,10 +111,10 @@ function DialogContent({
             )}
             asChild
           >
-            <Button asPointer whileTap size="icon">
+            <Button asPointer whileTap asIcon size="icon">
               <X
                 size={16}
-                className="opacity-70 transition-opacity group-hover:opacity-100"
+                className="opacity-80 transition-opacity duration-200 group-hover:opacity-100"
               />
               <span className="sr-only">Close</span>
             </Button>
@@ -176,7 +177,7 @@ function DialogDescription({
   );
 }
 
-// Composants supplémentaires dans le style de référence
+// Additional components in the style of the reference
 function DialogSeparator({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div className={cn("h-px bg-b-base-accent w-full", className)} {...props} />

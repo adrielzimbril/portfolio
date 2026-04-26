@@ -13,23 +13,15 @@ export function SetupSection() {
     <SectionLayout badge={t("toolbox.page.setup-section.badge")} isFlex>
       <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-3">
         {setup.map((item) => (
-          <div key={item.id}>
-            <div
-              className={cn(
-                "relative h-full",
-                "squircle squircle-smooth-xl squircle-3xl",
-              )}
-            >
-              <SetupCard
-                title={item.name}
-                cover={item.imageUrl}
-                description={item.description}
-                category={item.category}
-                tags={item.tags}
-                purchaseUrl={item.purchaseUrl}
-              />
-            </div>
-          </div>
+          <SetupCard
+            key={item.id}
+            title={item.name}
+            cover={item.imageUrl}
+            description={item.description}
+            category={item.category}
+            tags={item.tags}
+            purchaseUrl={item.purchaseUrl}
+          />
         ))}
       </div>
     </SectionLayout>

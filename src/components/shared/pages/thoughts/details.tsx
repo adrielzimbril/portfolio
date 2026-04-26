@@ -5,7 +5,7 @@ import { Tags } from "@/components/shared/pages/resources/tags";
 import { getResourcesUrl } from "@/utils/base-url";
 import { PageType } from "@/types";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -13,12 +13,14 @@ export function CardInfo({
   primaryTag,
   tags,
   slug,
+  hideReactions = false,
 }: {
   title: string;
   excerpt: string;
   primaryTag?: string;
   tags: { name: string }[];
   slug: string;
+  hideReactions?: boolean;
 }) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -37,9 +39,15 @@ export function CardInfo({
         <Description description={excerpt} />
       </div>
 
-      <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar entityType={PageType.THOUGHT} entityId={slug} />
-        <Action slug={slug} />
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
+        <div className="flex-1">
+          <Action slug={slug} />
+        </div>
+        {!hideReactions && (
+          <div className="">
+            <ReactionBar pageType={PageType.THOUGHT} entityId={slug} compact />
+          </div>
+        )}
       </div>
     </div>
   );

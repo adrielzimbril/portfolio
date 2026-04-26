@@ -1,10 +1,11 @@
 import React from "react";
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { HeaderSection } from "./sections/HeaderSection";
-import { MorePreviewSection } from "./sections/MorePreviewSection";
-import { ProjectDetailsSection } from "./sections/ProjectDetailsSection";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
+import { HeaderSection } from "@/app/(base)/hub/[slug]/sections/HeaderSection";
+import { MorePreviewSection } from "@/app/(base)/hub/[slug]/sections/MorePreviewSection";
+import { ResourceDetailsSection } from "@/app/(base)/hub/[slug]/sections/ResourceDetailsSection";
 import { getLocale } from "next-intl/server";
-import { PageParams } from "@/types";
+import { PageParams, PageType } from "@/types";
 import {
   getResourceWithAdjacent,
   getResourceBySlug,
@@ -14,6 +15,8 @@ import { routes } from "@/data/routes";
 import { getImageUrl } from "@/utils/base-url";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/utils/utils";
 
 export async function generateMetadata(props: {
   params: Promise<PageParams>;
@@ -57,20 +60,28 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
 
   return (
     <>
-      <HeaderSection
-        title={title}
-        cover={cover ?? ""}
-        description={excerpt}
-        type={type}
-        tags={tags}
-        pageViewsData={{ slug, locale }}
-        slug={slug}
-      />
-      <ProjectDetailsSection content={body || ""} />
+      <Skeleton name="resource-detail-header" loading={false}>
+        <HeaderSection
+          title={title}
+          cover={cover ?? ""}
+          description={excerpt}
+          type={type}
+          tags={tags}
+          pageViewsData={{ slug, locale }}
+        />
+      </Skeleton>
+      <Skeleton name="resource-detail-content" loading={false}>
+        <ResourceDetailsSection content={body || ""} />
+        <ReactionBar pageType={PageType.HUB} entityId={slug} />
+      </Skeleton>
       {resource!.adjacentResources.length > 0 && (
-        <MorePreviewSection data={resource!.adjacentResources} />
+        <Skeleton name="resource-detail-more" loading={false}>
+          <MorePreviewSection data={resource!.adjacentResources} />
+        </Skeleton>
       )}
-      <CallToAction isPage />
+      <Skeleton name="resource-detail-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   );
 }

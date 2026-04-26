@@ -1,18 +1,22 @@
 import { unstable_cache } from "next/cache";
+import { logger } from "@/utils";
 import type {
   GitHubStats,
   ContributionData,
   ContributionDay,
   ContributionWeek,
 } from "@/lib/stats/types";
-import logger from "@/utils/logger";
+import { getGitHubConfig } from "@/config";
 
-// Configuration GitHub
-const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "adrielzimbril";
-const GITHUB_REPO = process.env.GITHUB_REPO || "portfolio-shiro";
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+// GitHub configuration
+const {
+  token: GITHUB_TOKEN,
+  username: GITHUB_USERNAME,
+  repo: GITHUB_REPO,
+  branch: GITHUB_BRANCH,
+} = getGitHubConfig();
 
-// Fonction pour récupérer les statistiques GitHub
+// Function to fetch GitHub statistics
 export async function getGitHubStats(): Promise<GitHubStats> {
   return unstable_cache(
     async () => {
@@ -25,7 +29,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
 
       try {
         const [repoStats, contributions] = await Promise.all([
-          fetchRepoStats(),
+          fetchRepoStats(GITHUB_BRANCH),
           fetchContributions(),
         ]);
 
@@ -37,7 +41,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
         return {
           stars: repoStats.stargazerCount || 0,
           forks: repoStats.forkCount || 0,
-          commits: repoStats.defaultBranchRef?.target?.history?.totalCount || 0,
+          commits: repoStats.commits || 0,
           contributions,
         };
       } catch (error) {
@@ -45,16 +49,34 @@ export async function getGitHubStats(): Promise<GitHubStats> {
         return getEmptyGitHubStats();
       }
     },
-    ["github-stats"],
+    ["github-stats", GITHUB_BRANCH],
     {
-      revalidate: 3600, // Revalider toutes les heures
-      tags: ["stats", "github"],
+      revalidate: 3600, // Revalidate every hour
+      tags: ["stats", "github", GITHUB_BRANCH],
     },
   )();
 }
 
-async function fetchRepoStats() {
-  const query = `
+async function fetchRepoStats(branch?: string) {
+  const query = branch
+    ? `
+    query($owner: String!, $name: String!, $branch: String!) {
+      repository(owner: $owner, name: $name) {
+        stargazerCount
+        forkCount
+        ref(qualifiedName: $branch) {
+          target {
+            ... on Commit {
+              history(first: 1) {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+    : `
     query($owner: String!, $name: String!) {
       repository(owner: $owner, name: $name) {
         stargazerCount
@@ -72,6 +94,10 @@ async function fetchRepoStats() {
     }
   `;
 
+  const variables = branch
+    ? { owner: GITHUB_USERNAME, name: GITHUB_REPO, branch }
+    : { owner: GITHUB_USERNAME, name: GITHUB_REPO };
+
   const response = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
@@ -80,7 +106,7 @@ async function fetchRepoStats() {
     },
     body: JSON.stringify({
       query,
-      variables: { owner: GITHUB_USERNAME, name: GITHUB_REPO },
+      variables,
     }),
   });
 
@@ -112,7 +138,18 @@ async function fetchRepoStats() {
     return null;
   }
 
-  return data.data.repository;
+  const repository = data.data.repository;
+
+  // Return commits from the specified branch or default branch
+  if (branch) {
+    return {
+      stargazerCount: repository.stargazerCount,
+      forkCount: repository.forkCount,
+      commits: repository.ref?.target?.history?.totalCount || 0,
+    };
+  }
+
+  return repository;
 }
 
 async function fetchContributions(): Promise<ContributionData> {

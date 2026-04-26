@@ -1,33 +1,30 @@
-"use client"
+"use client";
 
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState } from "react";
 
 type UseCharacterLimitProps = {
-  maxLength: number
-  initialValue?: string
-}
+  maxLength: number;
+  initialValue?: string;
+};
 
 export function useCharacterLimit({
   maxLength,
   initialValue = "",
 }: UseCharacterLimitProps) {
-  const [value, setValue] = useState(initialValue)
-  const [characterCount, setCharacterCount] = useState(initialValue.length)
+  const [value, setValue] = useState(initialValue);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const newValue = e.target.value
-    if (newValue.length <= maxLength) {
-      setValue(newValue)
-      setCharacterCount(newValue.length)
-    }
-  }
+    const newValue = e.target.value;
+
+    setValue(newValue.slice(0, maxLength));
+  };
 
   return {
     value,
-    characterCount,
+    characterCount: value.length,
     handleChange,
     maxLength,
-  }
+  };
 }

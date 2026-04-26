@@ -1,4 +1,4 @@
-import { appConfig } from "@/data/app-config";
+import { ConfigValue } from "@/config";
 import { getSignedUrl } from "@/integrations/storage";
 import { NextResponse } from "next/server";
 
@@ -14,7 +14,7 @@ export const GET = async (
     return new Response("Invalid path", { status: 400 });
   }
 
-  if (bucket === appConfig.storage.bucketNames.avatars) {
+  if (bucket === ConfigValue.NEXT_PUBLIC_AVATARS_BUCKET_NAME) {
     const signedUrl = await getSignedUrl(filePath, {
       bucket,
       expiresIn: 60 * 60,

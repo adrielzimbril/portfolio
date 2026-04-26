@@ -4,11 +4,12 @@ import {
   ContactsApiApiKeys,
   CreateContact,
 } from "@getbrevo/brevo";
+import { getBrevoConfig } from "@/config";
 
-const CONTACT_PROVIDER_API_KEY = process.env.BREVO_API_KEY || "";
+const { apiKey: CONTACT_PROVIDER_API_KEY } = getBrevoConfig();
 
 const provider = new ContactsApi();
-provider.setApiKey(ContactsApiApiKeys.apiKey, CONTACT_PROVIDER_API_KEY);
+provider.setApiKey(ContactsApiApiKeys.apiKey, CONTACT_PROVIDER_API_KEY || "");
 
 export const add: AddContactHandler = async ({
   email,
@@ -64,7 +65,11 @@ export const add: AddContactHandler = async ({
     const alreadyExists: boolean = Boolean(res) || Boolean(phoneRes);
     return { ok: true, alreadyExists } as const;
   } catch (err: unknown) {
-    if (err && (err as { status: number }).status === 400 && (err as { message: string }).message.includes("400")) {
+    if (
+      err &&
+      (err as { status: number }).status === 400 &&
+      (err as { message: string }).message.includes("400")
+    ) {
       try {
         const updateRes = await provider.updateContact(email, nameContact);
         // logger.info("Brevo contact name update response", {
@@ -76,7 +81,7 @@ export const add: AddContactHandler = async ({
         // });
         const updatePhoneRes = await provider.updateContact(
           email,
-          phoneContact
+          phoneContact,
         );
         // logger.info("Brevo contact phone update response", {
         //   email,

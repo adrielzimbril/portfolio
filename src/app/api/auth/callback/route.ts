@@ -1,84 +1,63 @@
-import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { createClient } from "@/integrations/supabase/server";
+import { authRoutes } from "@/integrations/auth/routes";
 import { sendEmail } from "@/integrations/mail";
 import { Locale } from "@/types";
 import logger from "@/utils/logger";
+import { ConfigValue } from "@/config";
+import { getPathUrl } from "@/utils/base-url";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  // if "next" is in search params, use it as the redirection URL
-  const next = searchParams.get("next") ?? "/community";
+  const next = searchParams.get("next") ?? authRoutes.defaultRedirect;
 
   if (code) {
     const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PRIVATE_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          setAll(cookiesToSet) {
-            try {
-              cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options)
-              );
-            } catch {
-              // The `setAll` method was called from a Server Component.
-              // This can be ignored if you have middleware refreshing
-              // user sessions.
-            }
-          },
-        },
-      }
-    );
+    const supabase = createClient(cookieStore);
 
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error && data.user) {
-      // Check if it's the first login
-      // standard Supabase user object has created_at and last_sign_in_at
-      // If they are almost the same (within a few seconds), it's a new user
+      // Check if it's a new user to send a welcome email
       const createdAt = new Date(data.user.created_at).getTime();
       const lastSignIn = data.user.last_sign_in_at
         ? new Date(data.user.last_sign_in_at).getTime()
         : createdAt;
 
-      const isNewUser = lastSignIn - createdAt < 10000; // 10 seconds threshold
+      // 10 seconds threshold to consider it a "new signup"
+      const isNewSignup = lastSignIn - createdAt < 10000;
 
-      if (isNewUser) {
-        logger.info("New user connected via GitHub, sending welcome email", {
+      if (isNewSignup && data.user.email) {
+        logger.info("New user connected, sending welcome email", {
           email: data.user.email,
+          provider: data.user.app_metadata.provider,
         });
 
-        if (data.user.email) {
+        try {
           await sendEmail({
-            to: [{ email: data.user.email, name: data.user.user_metadata.full_name }],
+            to: [
+              {
+                email: data.user.email,
+                name: data.user.user_metadata.full_name || data.user.email,
+              },
+            ],
             templateId: "welcome",
-            locale: Locale.EN, // Default to EN for now, or detect from user metadata
+            locale: Locale.EN,
             context: {
               name: data.user.user_metadata.full_name || data.user.email,
             },
           });
+        } catch (emailError) {
+          logger.error("Failed to send welcome email:", emailError);
         }
       }
 
-      const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
-      const isLocalEnv = process.env.NODE_ENV === "development";
-      if (isLocalEnv) {
-        // we can be sure that there is no proxy
-        return NextResponse.redirect(`${origin}${next}`);
-      } else if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`);
-      } else {
-        return NextResponse.redirect(`${origin}${next}`);
-      }
+      return NextResponse.redirect(getPathUrl(next));
     }
   }
 
-  // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+  // Handle errors - redirect to default (toast will show error message)
+  return NextResponse.redirect(getPathUrl(ConfigValue.AUTH_DEFAULT_REDIRECT));
 }

@@ -7,9 +7,9 @@ import {
 } from "@/components/shared/pages/projects/tags";
 import { cn } from "@/utils/utils";
 import { getResourcesUrl } from "@/utils/base-url";
-import { DEFAULT_CATEGORY_COLOR_NAME, PageType } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -18,6 +18,7 @@ export function CardInfo({
   tags,
   categories,
   isWide,
+  hideReactions = false,
 }: {
   title: string;
   description: string;
@@ -25,6 +26,7 @@ export function CardInfo({
   tags: { name: string }[];
   categories: { name: string; color: string }[];
   isWide: boolean;
+  hideReactions?: boolean;
 }) {
   return (
     <div
@@ -41,15 +43,19 @@ export function CardInfo({
         <ProjectCategories
           categories={categories.map((category) => ({
             name: category.name,
-            color: category.color as DEFAULT_CATEGORY_COLOR_NAME,
+            color: category.color as DEFAULT_COLOR_CODE_NAME_TYPE,
           }))}
         />
 
         <Description description={description} />
       </div>
 
-      <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar entityType={PageType.PROJECT} entityId={slug} />
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
+        {!hideReactions && (
+          <div className="flex-1">
+            <ReactionBar pageType={PageType.PROJECT} entityId={slug} compact />
+          </div>
+        )}
         <Action slug={slug} />
       </div>
     </div>

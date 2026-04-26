@@ -1,8 +1,14 @@
 "use client";
 import Image from "next/image";
-import { cn, pickRandomColor, pickRandomColorCode } from "@/utils";
-import { PageType, ResourceType } from "@/types/enum";
-import { getExternalUrl, getImageUrl, getResourcesUrl } from "@/utils/base-url";
+import {
+  cn,
+  getExternalUrl,
+  getImageUrl,
+  getResourcesUrl,
+  pickRandomColor,
+  pickRandomColorCode,
+} from "@/utils";
+import { PageType, ResourceType } from "@/types";
 import {
   DeveloperFile,
   Figma,
@@ -15,7 +21,7 @@ import {
 import { Link } from "@/components/ui/link";
 import { useTranslations } from "use-intl";
 import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 
 interface PreviewProps {
   title?: string;

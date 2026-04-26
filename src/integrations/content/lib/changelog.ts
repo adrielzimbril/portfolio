@@ -1,12 +1,13 @@
 import type { Changelog } from "@/integrations/content/types/types";
 import { allChangelogs } from "content-collections";
+import { ChangelogItemType, SortOrder } from "@/types/enum";
 
 type GetAllChangelogOptions = {
   published?: boolean;
   locale?: string;
-  sort?: "asc" | "desc";
+  sort?: SortOrder;
   limit?: number;
-  type?: "milestone" | "feature" | "fix" | "improvement";
+  type?: ChangelogItemType;
 };
 
 export async function getAllChangelog(
@@ -15,7 +16,7 @@ export async function getAllChangelog(
   const { published, locale, sort, limit, type } = {
     published: true,
     locale: undefined,
-    sort: "desc",
+    sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     type: undefined,
     ...options,
@@ -29,7 +30,7 @@ export async function getAllChangelog(
           (!type || entry.type === type),
       )
       .sort((a, b) =>
-        sort === "asc"
+        sort === SortOrder.ASC
           ? a.date.localeCompare(b.date)
           : b.date.localeCompare(a.date),
       )
@@ -56,7 +57,7 @@ export async function getChangelogByVersion(
 }
 
 type FilterOptions = {
-  type?: "milestone" | "feature" | "fix" | "improvement";
+  type?: ChangelogItemType;
   search?: string;
   published?: boolean;
   locale?: string;
@@ -99,9 +100,11 @@ export async function getChangelogTypeCounts(
   const entries = await getAllChangelog(options);
   return Promise.resolve({
     all: entries.length,
-    milestone: entries.filter((e) => e.type === "milestone").length,
-    feature: entries.filter((e) => e.type === "feature").length,
-    fix: entries.filter((e) => e.type === "fix").length,
-    improvement: entries.filter((e) => e.type === "improvement").length,
+    milestone: entries.filter((e) => e.type === ChangelogItemType.MILESTONE)
+      .length,
+    feature: entries.filter((e) => e.type === ChangelogItemType.FEATURE).length,
+    fix: entries.filter((e) => e.type === ChangelogItemType.FIX).length,
+    improvement: entries.filter((e) => e.type === ChangelogItemType.IMPROVEMENT)
+      .length,
   });
 }

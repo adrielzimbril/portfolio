@@ -12,6 +12,7 @@ export function HeaderSection({
   date,
   readingTime,
   pageViewsData,
+  pageType,
 }: {
   date: string;
   tags: { name: string }[];
@@ -19,15 +20,16 @@ export function HeaderSection({
   title: string;
   readingTime: string;
   pageViewsData: { slug: string; locale: string };
+  pageType: PageType;
 }) {
   const { count } = usePageViews(
     pageViewsData.slug,
-    PageType.THOUGHT,
+    pageType,
     {
       locale: pageViewsData.locale,
-      path: getResourcesUrl(PageType.THOUGHT, pageViewsData.slug),
+      path: getResourcesUrl(pageType, pageViewsData.slug),
     },
-    true
+    true,
   );
 
   return (
@@ -43,12 +45,12 @@ export function HeaderSection({
       }
       mainTitle={title}
       tags={tags}
-      articleDetails={{
+      thoughtDetails={{
         date,
         readingTime,
         views: count ?? 0,
       }}
-      slug={slug}
+      slug={pageViewsData.slug}
     />
   );
 }

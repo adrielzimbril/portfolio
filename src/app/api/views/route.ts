@@ -1,28 +1,22 @@
-import { NextRequest } from "next/server";
-import { supabase } from "@/integrations/supabase/client";
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/integrations/supabase/server";
+import { cookies } from "next/headers";
 import { getIpInfo } from "@/hooks/useIpInfo";
 import logger from "@/utils/logger";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
-  const isBot = searchParams.get("isBot") === "true";
-
-  if (isBot) {
-    logger.info("Supabase Views | Bot access detected", { url: req.url });
-  } else {
-    logger.info("Supabase Views | Human access detected", { url: req.url });
-  }
-
   const type = searchParams.get("type") || "page";
   const slug = searchParams.get("slug") || "/";
   const wantResponse = searchParams.get("wantResponse") === "true";
 
   if (!slug) {
-    return new Response(JSON.stringify({ error: "Page not found" }), {
-      status: 400,
-    });
+    return NextResponse.json({ error: "Page not found" }, { status: 400 });
   }
+
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
 
   try {
     const { data: analyticsData, error: rpcError } = await supabase.rpc(
@@ -42,32 +36,18 @@ export async function GET(req: NextRequest) {
       unique_users: 0,
     };
 
-    return new Response(
-      // JSON.stringify({
-      //   totalViews: result.total_views,
-      //   uniqueUsers: result.unique_users,
-      //   path,
-      //   type,
-      //   slug,
-      // }),
-      JSON.stringify({
-        ...(wantResponse ? { count: result.total_views } : {}),
-      }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
+    return NextResponse.json(
+      { ...(wantResponse ? { count: result.total_views } : {}) },
+      { status: 200 }
     );
   } catch (error: unknown) {
     logger.error(
       "Error fetching analytics:",
       (error as Error)?.message || error
     );
-    return new Response(
-      JSON.stringify({ error: (error as Error)?.message || "UNKNOWN_ERROR" }),
-      {
-        status: 500,
-      }
+    return NextResponse.json(
+      { error: (error as Error)?.message || "UNKNOWN_ERROR" },
+      { status: 500 }
     );
   }
 }
@@ -80,6 +60,8 @@ export async function POST(req: NextRequest) {
 
   const blockedIp: string[] = ["::1", "127.0.0.1"];
   const ipInfo = blockedIp.includes(ip) ? null : await getIpInfo(ip);
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
 
   try {
     const body = await req.json().catch(() => ({}));
@@ -113,34 +95,18 @@ export async function POST(req: NextRequest) {
       is_new_unique_user: true,
     };
 
-    return new Response(
-      // JSON.stringify({
-      //   totalViews: result.total_views,
-      //   uniqueUsers: result.unique_users,
-      //   userViewCount: result.user_view_count,
-      //   isNewUniqueUser: result.is_new_unique_user,
-      //   path,
-      //   type,
-      //   slug,
-      // }),
-      JSON.stringify({
-        ...(wantResponse ? { count: result.total_views } : {}),
-      }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
+    return NextResponse.json(
+      { ...(wantResponse ? { count: result.total_views } : {}) },
+      { status: 200 }
     );
   } catch (error: unknown) {
     logger.error(
       "Error incrementing analytics:",
       (error as Error)?.message || error
     );
-    return new Response(
-      JSON.stringify({ error: (error as Error)?.message || "UNKNOWN_ERROR" }),
-      {
-        status: 500,
-      }
+    return NextResponse.json(
+      { error: (error as Error)?.message || "UNKNOWN_ERROR" },
+      { status: 500 }
     );
   }
 }

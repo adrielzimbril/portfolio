@@ -61,7 +61,7 @@ function useRealisticLoading() {
     };
 
     setTimeout(executeStep, timeOutDelay);
-  }, [cycle, timeOutDelay, animateTimeOutDelay]);
+  }, [timeOutDelay, animateTimeOutDelay]);
 
   return progress;
 }

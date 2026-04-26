@@ -4,7 +4,7 @@ import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/utils/utils";
 import { Menu, X } from "@aurthle/icons";
-import { useScroll } from "motion/react";
+import { useScroll, type Variants } from "motion/react";
 import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
@@ -12,49 +12,12 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "use-intl";
 import { getActivePathInArray, getImageUrl, sleep } from "@/utils";
 import { usePathname } from "next/navigation";
-import { LogoIcon } from "../icons/logo/logo-icon";
+import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
 import Image from "next/image";
 
 const INITIAL_WIDTH = "68rem";
 const MAX_WIDTH = "65rem";
-
-// Animation variants
-const overlayVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
-};
-
-const drawerVariants: Variants = {
-  hidden: { opacity: 0, y: 100 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    transition: {
-      type: "spring",
-      damping: 15,
-      stiffness: 200,
-      staggerChildren: 0.03,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 100,
-    transition: { duration: 0.1 },
-  },
-};
-
-const drawerMenuContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
-
-const drawerMenuVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
 
 export function Navbar() {
   const t = useTranslations();
@@ -132,7 +95,7 @@ export function Navbar() {
               {/* <LogoName
                 className={cn(
                   "hidden lg:block",
-                  "h-5! qlg:h-6! w-48! qlg:w-60! flex-shrink-0"
+                  "h-5! qlg:h-6! w-48! qlg:w-60! shrink-0"
                   // hasScrolled && "h-3.5! w-36!"
                 )}
               /> */}
@@ -217,7 +180,7 @@ export function Navbar() {
                 <ul className="w-full flex flex-col gap-2 text-sm mb-4">
                   {menuRoutesFiltered.map((item) => (
                     <li
-                      key={item.name}
+                      key={item.key}
                       className={cn(
                         "w-full p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
                         activeTab === item.key

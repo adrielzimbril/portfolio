@@ -1,6 +1,7 @@
 "use client";
 import { useTurnstile } from "@/integrations/anti-bot/turnstile";
 import { useEffect } from "react";
+import { getTurnstileConfig } from "@/config";
 
 export function Turnstile({
   execute,
@@ -11,14 +12,14 @@ export function Turnstile({
   onTokenReady?: (token: string) => void;
   onError?: (error: any) => void;
 }) {
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
+  const { siteKey } = getTurnstileConfig();
   const {
     ref,
     token,
     error,
     isLoading,
     execute: executeTurnstile,
-  } = useTurnstile(siteKey, {
+  } = useTurnstile(siteKey || "", {
     appearance: "execute",
     execution: "execute",
     "retry-interval": 1000,

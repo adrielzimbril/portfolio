@@ -3,20 +3,21 @@ import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
 import { cn } from "@/utils/utils";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { ProductAvatarsStats } from "@/components/SubscriberBadges";
+import { ProductAvatarsStats } from "@/components/shared/pages/newsletter/SubscriberBadges";
 import { generateSimpleClientToken, getDate, sleep } from "@/utils";
 import { ResourceType } from "@/types";
 import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
-import { toast } from "sonner";
+import { toast } from "@/lib/toast";
 import { useTranslations, useLocale } from "use-intl";
 import { usePageViews } from "@/hooks/usePageViews";
 import { routes } from "@/data/routes";
 import { getPathUrl } from "@/utils/base-url";
 import { useTurnstile } from "@/integrations/anti-bot/turnstile";
+import { getTurnstileConfig } from "@/config";
 
 export function GetResource({
   id,
@@ -44,7 +45,7 @@ export function GetResource({
       locale: locale,
       path: getPathUrl(routes.hubGet.link),
     },
-    false
+    false,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -55,14 +56,17 @@ export function GetResource({
   });
   const isEmailValid = !Boolean(emailValidator(email));
 
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string;
+  const { siteKey } = getTurnstileConfig();
 
-  const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
-    appearance: "execute",
-    execution: "execute",
-    "retry-interval": 1000,
-    theme: "auto",
-  });
+  const { ref, token, error, isLoading, execute } = useTurnstile(
+    siteKey || "",
+    {
+      appearance: "execute",
+      execution: "execute",
+      "retry-interval": 1000,
+      theme: "auto",
+    },
+  );
   sleep(1000).then(() => execute());
 
   const productId = generateSimpleClientToken({
@@ -72,22 +76,22 @@ export function GetResource({
 
   const productTypeMap: Record<ResourceType, string> = {
     [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.title"
+      "common.page-sections.hub.base.resources-type.course.title",
     ),
     [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.title"
+      "common.page-sections.hub.base.resources-type.ebook.title",
     ),
     [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.title"
+      "common.page-sections.hub.base.resources-type.video.title",
     ),
     [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.title"
+      "common.page-sections.hub.base.resources-type.masterclass.title",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.title"
+      "common.page-sections.hub.base.resources-type.figma_template.title",
     ),
     [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.title"
+      "common.page-sections.hub.base.resources-type.code.title",
     ),
   };
 
@@ -105,7 +109,7 @@ export function GetResource({
       >
         <div
           className={cn(
-            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto"
+            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 max-w-4xl mx-auto",
             // isWide && "md:min-h-96"
           )}
         >
@@ -133,7 +137,7 @@ export function GetResource({
           {/* <ProjectCategories
             categories={tags.map((tag) => ({
               name: tag.name,
-              color: tag.color as DEFAULT_CATEGORY_COLOR_NAME,
+              color: tag.color as DEFAULT_COLOR_CODE_NAME_TYPE,
             }))}
           /> */}
           <Tags
@@ -148,7 +152,7 @@ export function GetResource({
             <div ref={ref} className="hidden" />
             <Input
               placeholder={t(
-                "common.page-sections.newsletter.form.fields.email-page.placeholder"
+                "common.page-sections.newsletter.form.fields.email-page.placeholder",
               )}
               type="email"
               //className="ml-auto rounded-s-md"
@@ -182,7 +186,10 @@ export function GetResource({
         email={email || undefined}
         productId={productId}
         productType={type}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setEmail("");
+          setIsModalOpen(false);
+        }}
       />
     </>
   );

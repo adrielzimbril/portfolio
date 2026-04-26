@@ -1,5 +1,4 @@
 "use client";
-
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
@@ -8,7 +7,7 @@ import { PageType, ResourceType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useProductSlugRequestsCount } from "@/hooks/useSubscriberStats";
 import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -19,6 +18,7 @@ export function CardInfo({
   features,
   avatars,
   userCount,
+  hideReactions = false,
 }: {
   title: string;
   slug: string;
@@ -28,6 +28,7 @@ export function CardInfo({
   features: string[];
   avatars: string[];
   userCount?: number;
+  hideReactions?: boolean;
 }) {
   const t = useTranslations();
   const { count: avatarCount } = useProductSlugRequestsCount(slug);
@@ -46,7 +47,7 @@ export function CardInfo({
       "common.page-sections.hub.base.resources-type.masterclass.title",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.title",
+      "common.page-sections.hub.base.resources-type.figma_template.title",
     ),
     [ResourceType.CODE]: t(
       "common.page-sections.hub.base.resources-type.code.title",
@@ -71,8 +72,12 @@ export function CardInfo({
         />
       </div>
 
-      <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar entityType={PageType.HUB} entityId={slug} />
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
+        {!hideReactions && (
+          <div className="flex-1">
+            <ReactionBar pageType={PageType.HUB} entityId={slug} compact />
+          </div>
+        )}
         <Action slug={slug} resourceType={resourceType} />
       </div>
     </div>
@@ -136,7 +141,7 @@ function Action({
       "common.page-sections.hub.base.resources-type.masterclass.button",
     ),
     [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma-template.button",
+      "common.page-sections.hub.base.resources-type.figma_template.button",
     ),
     [ResourceType.CODE]: t(
       "common.page-sections.hub.base.resources-type.code.button",

@@ -5,8 +5,8 @@ import { CardPreviewSection } from "@/components/shared/pages/shared/card-previe
 import { Quest } from "@/integrations/content/types";
 import { useTranslations } from "use-intl";
 import { getResourcesUrl } from "@/utils/base-url";
-import {  getHumanDate } from "@utils/format-date";
-import { DEFAULT_COLOR_CODE_NAME_LIST, PageType } from "@/types";
+import { getHumanDate } from "@utils/format-date";
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
 import {
   isRegistrationClosed,
   isSubmissionClosed,
@@ -16,9 +16,13 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
   const t = useTranslations();
 
   return (
-    <CardPreviewSection title={t("quests.inner-page.more-preview-section.title")}>
+    <CardPreviewSection
+      title={t("quests.inner-page.more-preview-section.title")}
+    >
       {data.map((quest) => {
-        const registrationClosed = isRegistrationClosed(quest.registration_deadline);
+        const registrationClosed = isRegistrationClosed(
+          quest.registration_deadline,
+        );
         const submissionClosed = isSubmissionClosed(
           quest.submission_deadline,
           quest.quest_end,
@@ -39,8 +43,8 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
                 ),
                 meta: {
                   color: registrationClosed
-                    ? DEFAULT_COLOR_CODE_NAME_LIST.RED
-                    : DEFAULT_COLOR_CODE_NAME_LIST.PURPLE,
+                    ? DEFAULT_COLOR_CODE_NAME.RED
+                    : DEFAULT_COLOR_CODE_NAME.PURPLE,
                 },
               },
               {
@@ -51,8 +55,8 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
                 ),
                 meta: {
                   color: submissionClosed
-                    ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
-                    : DEFAULT_COLOR_CODE_NAME_LIST.BLUE,
+                    ? DEFAULT_COLOR_CODE_NAME.ORANGE
+                    : DEFAULT_COLOR_CODE_NAME.BLUE,
                 },
               },
             ]}
@@ -76,6 +80,7 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
               ),
               href: getResourcesUrl(PageType.QUESTS, quest.slug),
             }}
+            hideReactions
           />
         );
       })}

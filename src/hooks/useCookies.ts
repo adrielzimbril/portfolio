@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useCallback } from "react";
 
 export interface CookieOptions {
@@ -53,7 +52,7 @@ function buildCookieAttributes(options: CookieOptions): string {
 function setCookie(
   name: string,
   value: string,
-  options: CookieOptions = {}
+  options: CookieOptions = {},
 ): void {
   // Prevent server-side execution (Node/SSR):
   if (typeof document === "undefined") {
@@ -133,7 +132,7 @@ function deleteCookie(name: string, options: CookieOptions = {}): void {
 export function useCookie<T = unknown>(
   cookieName: string,
   defaultValue?: T,
-  options: CookieOptions = {}
+  options: CookieOptions = {},
 ): [T, (value: T, overrideOptions?: CookieOptions) => void, () => void] {
   const [cookieValue, setCookieValue] = useState<T>(() => {
     // Note: On the server (SSR), getCookie() returns null anyway due to the guard above.
@@ -155,7 +154,7 @@ export function useCookie<T = unknown>(
       setCookie(cookieName, stringifiedValue, mergedOptions);
       setCookieValue(value);
     },
-    [cookieName, options]
+    [cookieName, options],
   );
 
   const removeCookie = useCallback(() => {

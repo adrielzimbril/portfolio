@@ -1,5 +1,4 @@
 "use client";
-
 import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/quests/tags";
@@ -7,7 +6,7 @@ import { PageType } from "@/types";
 import { getResourcesUrl } from "@/utils/base-url";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
 import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
 
 export function CardInfo({
   title,
@@ -16,6 +15,7 @@ export function CardInfo({
   description,
   features,
   action,
+  hideReactions = false,
 }: {
   title: string;
   slug: string;
@@ -26,6 +26,7 @@ export function CardInfo({
     label: string;
     href: string;
   } | null;
+  hideReactions?: boolean;
 }) {
   const { stats } = useQuestParticipantsStats(slug);
 
@@ -52,8 +53,12 @@ export function CardInfo({
         />
       </div>
 
-      <div className="flex items-center justify-between w-full gap-3">
-        <ReactionBar entityType={PageType.QUESTS} entityId={slug} />
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
+        {!hideReactions && (
+          <div className="flex-1">
+            <ReactionBar pageType={PageType.QUESTS} entityId={slug} compact />
+          </div>
+        )}
         {action ? <Action label={action.label} href={action.href} /> : null}
       </div>
     </div>

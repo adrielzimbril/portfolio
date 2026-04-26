@@ -4,13 +4,18 @@ import { Link } from "@/components/ui/link";
 import { LinkDiagonalOne } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/shiro/builder/avatar-group";
-import { getExternalUrl } from "@/utils/base-url";
-import { getMachineDate } from "@/utils/format-date";
-import { DEFAULT_COLOR_CODE_NAME_LIST } from "@/types/default";
-import { pickRandomColorCode } from "@/utils";
+import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
+import {
+  getExternalUrl,
+  getMachineDate,
+  pickRandomColorCode,
+  getIsToday,
+} from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import BoringAvatar from "boring-avatars";
 import { useTranslations } from "use-intl";
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
+import { PageType } from "@/types";
 
 export function CardInfo({
   title,
@@ -19,6 +24,7 @@ export function CardInfo({
   tags,
   participantsCount,
   action,
+  hideReactions = false,
 }: {
   title: string;
   excerpt: string;
@@ -29,13 +35,13 @@ export function CardInfo({
     label: string;
     href: string;
   } | null;
+  hideReactions?: boolean;
 }) {
   const [currentTime] = useState(() => Date.now());
   const t = useTranslations();
   const isDatePast = currentTime >= new Date(getMachineDate(date)).getTime();
-  const isToday =
-    new Date(getMachineDate(date)).getDate() === new Date().getDate();
-  const shouldShow = (isDatePast || isToday) || participantsCount > 0;
+  const isToday = getIsToday(date);
+  const shouldShow = isDatePast || isToday || participantsCount > 0;
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -46,10 +52,10 @@ export function CardInfo({
             primaryTag={date ?? tags[0]?.name}
             primaryTagColor={
               isDatePast
-                ? DEFAULT_COLOR_CODE_NAME_LIST.RED
+                ? DEFAULT_COLOR_CODE_NAME.RED
                 : isToday
-                  ? DEFAULT_COLOR_CODE_NAME_LIST.YELLOW
-                  : DEFAULT_COLOR_CODE_NAME_LIST.BLUE
+                  ? DEFAULT_COLOR_CODE_NAME.YELLOW
+                  : DEFAULT_COLOR_CODE_NAME.BLUE
             }
             secondaryTag={
               isToday
@@ -60,22 +66,27 @@ export function CardInfo({
             }
             secondaryTagColor={
               isDatePast
-                ? DEFAULT_COLOR_CODE_NAME_LIST.ORANGE
+                ? DEFAULT_COLOR_CODE_NAME.ORANGE
                 : isToday
-                  ? DEFAULT_COLOR_CODE_NAME_LIST.PURPLE
-                  : DEFAULT_COLOR_CODE_NAME_LIST.GREEN
+                  ? DEFAULT_COLOR_CODE_NAME.PURPLE
+                  : DEFAULT_COLOR_CODE_NAME.GREEN
             }
             className="capitalize"
             tags={tags.map((tag) => tag.name)}
           />
         )}
         <Description description={excerpt} />
-        {shouldShow ? (
-          <ParticipantsStats count={participantsCount} />
-        ) : null}
+        {shouldShow ? <ParticipantsStats count={participantsCount} /> : null}
       </div>
 
-      {action ? <Action label={action.label} href={action.href} /> : null}
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
+        {!hideReactions && (
+          <div className="flex-1">
+            <ReactionBar pageType={PageType.TALKS} entityId={title} compact />
+          </div>
+        )}
+        {action ? <Action label={action.label} href={action.href} /> : null}
+      </div>
     </div>
   );
 }
@@ -114,7 +125,9 @@ function ParticipantsStats({ count }: { count: number }) {
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
     <Link href={getExternalUrl(slug)}>
-      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">{title}</h3>
+      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
+        {title}
+      </h3>
     </Link>
   );
 }

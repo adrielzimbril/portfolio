@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { NewsletterForm } from "./sections/NewsletterForm";
+import { NewsletterForm } from "@/app/(base)/newsletter/sections/NewsletterForm";
 import { metadata as baseMetadata } from "@/app/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,6 +28,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Newsletter() {
-
-  return <NewsletterForm />
-};
+  return <NewsletterForm />;
+}

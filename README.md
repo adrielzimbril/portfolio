@@ -1,180 +1,253 @@
 # Portfolio - Adriel Zimbril
 
-## 🚀 À propos
+## 🚀 About
 
-Portfolio professionnel d'**Adriel Zimbril**, développeur Fullstack passionné et créatif. Ce portfolio présente mes compétences, projets et expertise dans le développement web moderne, avec une attention particulière portée à l'expérience utilisateur et aux performances.
+Professional portfolio of **Adriel Zimbril**, passionate and creative Fullstack Developer. This portfolio showcases my skills, projects, and expertise in modern web development, with a particular focus on user experience and performance.
 
-## ✨ Fonctionnalités
+## ✨ Features
 
 ### 🎨 Design & UX
-- **Design moderne et responsive** adapté à tous les appareils
-- **Mode sombre/clair** avec transition fluide
-- **Animations fluides** pour une expérience utilisateur immersive
-- **Interface intuitive** avec navigation claire et structurée
-- **Optimisation des performances** avec Next.js et Turbopack
 
-### 📱 Sections principales
-1. **Accueil** - Présentation personnelle et mise en avant des projets
-2. **Projets** - Portfolio de réalisations avec détails techniques
-3. **À propos** - Parcours professionnel et compétences
-4. **Blog** - Articles et réflexions sur le développement
-5. **Contact** - Formulaire de contact et réseaux sociaux
+- **Modern and responsive design** adapted to all devices
+- **Dark/light mode** with smooth transition
+- **Fluid animations** for an immersive user experience
+- **Intuitive interface** with clear and structured navigation
+- **Performance optimization** with Next.js and Turbopack
 
-### 🛠️ Stack technique
-- **Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
+### 📱 Main Sections
+
+1. **Home** - Personal presentation and showcase of projects, resources, reflections
+2. **Projects** - Portfolio of achievements with technical details
+3. **About** - Professional background and skills
+4. **Reflections (Blog)** - Articles and thoughts on development
+5. **Resources (Hub)** - Courses, e-books, videos, templates, code
+6. **Challenges (Quests)** - Creative challenges with registration and submission
+7. **Conferences (Talks)** - Masterclasses and online sessions
+8. **Connections** - Network and people met
+9. **Contact** - Contact form and social networks
+10. **Guestbook (Community)** - Visitor messages
+11. **Statistics** - Site metrics and performance
+12. **Changelog** - Evolution history
+13. **Newsletter** - Newsletter subscription
+14. **Submit a project** - Form for ShiroSaaS Lab
+15. **Tools (Toolbox)** - Development stack and setup
+16. **Site Map (Routes)** - Complete navigation
+17. **RSS** - Site RSS feeds
+18. **Legal** - Privacy policy and Terms of Use
+
+### 🛠️ Tech Stack
+
+- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS 4
 - **Backend**: API Routes, Server Components
-- **Base de données**: Supabase
-- **Authentification**: NextAuth.js
-- **Déploiement**: Vercel
+- **Database**: Supabase
+- **Authentication**: Better Auth
+- **Deployment**: Vercel
 - **CI/CD**: GitHub Actions
-- **Autres outils**: Radix UI, React Hook Form, Zod, React Email
+- **Scheduled Tasks**: Trigger.dev
+- **Other tools**: Radix UI, React Hook Form, Zod, React Email, Motion, Lenis
 
-## 🚀 Installation et démarrage
+## 🚀 Installation and Setup
 
-### Prérequis
+### Prerequisites
+
 - Node.js 18+
-- pnpm (recommandé) ou npm/yarn
-- Compte Supabase (pour les fonctionnalités backend)
+- pnpm (recommended) or npm/yarn
+- Supabase account (for backend features)
 
-### Instructions d'installation
+### Installation Instructions
 
 ```bash
-# Cloner le dépôt
-git clone [url-du-repo]
+# Clone the repository
+git clone [repo-url]
 
-# Se déplacer dans le répertoire du projet
+# Navigate to the project directory
 cd shirofolio
 
-# Installer les dépendances
+# Install dependencies
 pnpm install
 
-# Copier le fichier d'environnement exemple
-cp .env.local.example .env.local
+# Copy the environment example file
+cp .env.example .env.local
 
-# Configurer les variables d'environnement dans .env.local
+# Configure environment variables in .env.local
 
-# Lancer le serveur de développement
+# Start the development server
 pnpm dev
 
-# Pour le développement avec Trigger.dev (tâches planifiées)
+# For development with Trigger.dev (scheduled tasks)
 pnpm run dev:all
 ```
 
-## 🏗️ Structure du projet
+## 🏗️ Project Structure
 
 ```
 src/
-├── app/                    # Routes de l'application (App Router)
-│   ├── (base)/            # Layout de base avec navigation
-│   │   ├── about/         # Page À propos
-│   │   ├── contact/       # Page Contact
-│   │   ├── projects/      # Page Projets
-│   │   └── thoughts/      # Blog et articles
-│   ├── api/               # Routes API
-│   └── layout.tsx         # Layout racine
-├── components/            # Composants réutilisables
-│   ├── shiro/            # Composants personnalisés
-│   ├── shared/           # Composants partagés
-│   └── ui/               # Composants d'interface utilisateur
-├── config/               # Configuration de l'application
-├── content/              # Contenu statique (MDX, etc.)
-├── lib/                  # Utilitaires et helpers
-├── integrations/               # Logique métier
-├── services/             # Services externes
-├── types/                # Définitions TypeScript
-└── utils/                # Utilitaires divers
+├── app/                    # Application routes (App Router)
+│   ├── (base)/            # Base layout with navigation
+│   │   ├── (home)/        # Home page
+│   │   ├── about/         # About page
+│   │   ├── changelog/     # Changelog page
+│   │   ├── community/     # Guestbook page
+│   │   ├── connections/   # Connections page
+│   │   ├── contact/       # Contact page
+│   │   ├── hub/           # Resources page
+│   │   ├── legal/         # Legal pages (privacy, terms)
+│   │   ├── newsletter/    # Newsletter page
+│   │   ├── projects/      # Projects page
+│   │   ├── quests/        # Challenges page
+│   │   ├── routes/        # Site map page
+│   │   ├── rss/           # RSS pages
+│   │   ├── stats/         # Statistics page
+│   │   ├── submit/        # Submit project page
+│   │   ├── talks/         # Conferences page
+│   │   ├── thoughts/      # Blog page (reflections)
+│   │   └── toolbox/       # Tools/Setup page
+│   ├── api/               # API routes
+│   ├── landlord/          # Admin section (dashboard)
+│   ├── image-proxy/       # Image proxy
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── metadata.ts        # Global metadata
+├── components/            # Reusable components
+│   ├── aurthle/          # Aurthle components
+│   ├── landlord/         # Admin components
+│   ├── shared/           # Shared components
+│   └── ui/               # UI components (Radix UI)
+├── config/               # Application configuration
+├── content/              # Static content (MDX, changelog, etc.)
+├── data/                 # Static data (routes, config, etc.)
+├── hooks/                # Custom React hooks
+├── integrations/         # Integrations (Supabase, i18n, etc.)
+├── lib/                  # Utilities and helpers
+├── types/                # TypeScript definitions
+└── utils/                # Various utilities
 ```
 
-## 🎨 Personnalisation
+## 🎨 Customization
 
-### Variables d'environnement
-Créez un fichier `.env.local` à la racine du projet avec les variables suivantes :
+### Environment Variables
+
+**Required variables for development:**
 
 ```env
-# URL de l'application
+# Application URL (required)
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# Supabase
+# If using Better Auth (recommended):
+BETTER_AUTH_SECRET=your-secure-secret
+
+# If using Supabase:
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+```
 
-# Authentification
-NEXTAUTH_SECRET=your-nextauth-secret
-NEXTAUTH_URL=http://localhost:3000
+**Optional variables (for advanced features):**
 
-# Autres services
-BREVO_API_KEY=your-brevo-api-key
-AWS_ACCESS_KEY_ID=your-aws-access-key
-AWS_SECRET_ACCESS_KEY=your-aws-secret-key
-AWS_REGION=your-aws-region
-AWS_BUCKET_NAME=your-bucket-name
+```env
+# GitHub (for GitHub stats)
+NEXT_PRIVATE_GITHUB_TOKEN=your-github-token
+NEXT_PUBLIC_GITHUB_USERNAME=your-username
+NEXT_PUBLIC_GITHUB_REPO=your-repo
+
+# Email (Brevo or Resend)
+BREVO_API_KEY=your-brevo-key
+RESEND_API_KEY=your-resend-key
+
+# S3 Storage (for avatars, backups)
+S3_ACCESS_KEY_ID=your-s3-key
+S3_SECRET_ACCESS_KEY=your-s3-secret
+S3_ENDPOINT=your-s3-endpoint
+S3_REGION=your-s3-region
+
+# Analytics
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=your-ga-id
+
+# Scheduled tasks (Trigger.dev)
+TRIGGER_ACCESS_TOKEN=your-trigger-token
+NEXT_TRIGGER_PUBLIC_APP_URL=your-trigger-url
+```
+
+For a complete list, see the `.env.example` file.
+
+### Supabase Commands
+
+```bash
+# Apply local migrations to remote database
+pnpm db:push
+
+# Generate TypeScript types from linked database
+pnpm db:types
+
+# Reset local database
+pnpm db:reset
+
+# View differences between local migrations and remote database
+pnpm db:diff
 ```
 
 ### Styles
-Le projet utilise Tailwind CSS avec des couleurs personnalisées et des utilitaires. Les styles globaux se trouvent dans `src/app/globals.css`.
 
-## 🌍 Traductions (lobe-i18n)
+The project uses Tailwind CSS with custom colors and utilities. Global styles are in `src/app/globals.css`.
 
-Utilise `lobe-i18n` selon le type de contenu :
+## 🌍 Translations (next-intl)
 
-- `npx lobe-i18n`
-  - Pour les fichiers de traduction (`fr/en/zh-CN`) et les données personnalisées (témoignages, contenus métier), selon la config.
-- `npx lobe-i18n md`
-  - Pour les contenus Markdown.
+The project uses `next-intl` for internationalization.
 
-Sélection via config :
+- Translation files are in `src/integrations/i18n/translations/`
+- Supported languages: `fr.json`, `en.json`, `zh-CN.json`
+- Use `useTranslations()` in client components
+- Use `getTranslations()` in server components
 
-- `markdown` pour les contenus éditoriaux :
-  - `.mdx` (blog et contenus de pages)
-  - `.md` (tags et données de base de liaison)
-- `json`/fichiers de langues pour la traduction UI.
-- `json`/données personnelles pour les témoignages et autres datasets.
+To add a new translation key:
 
-## 🌌 Rencontrons-nous dans l'espace (ou sur Terre) 🚀
+1. Add the key in `fr.json` (source)
+2. Translate in `en.json` and `zh-CN.json`
+3. Use the key in your component
 
-Je suis toujours ravi de discuter de nouveaux projets, collaborations ou simplement échanger sur des idées créatives. Voici comment me contacter :
+## 🌌 Let's meet in space (or on Earth) 🚀
 
+I'm always happy to discuss new projects, collaborations, or simply exchange creative ideas. Here's how to contact me:
 
 - **📧 Email**: [contact@adrielzimbril.com](mailto:contact@adrielzimbril.com)
-- **🌐 Site**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)  
-- **🐦 Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)  
-- **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbril](https://www.linkedin.com/in/adrielzimbril)  
+- **🌐 Website**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)
+- **🐦 Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)
+- **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbril](https://www.linkedin.com/in/adrielzimbril)
 - **🐱‍💻 GitHub**: [https://github.com/adrielzimbril](https://github.com/adrielzimbril)
 
-
 ### 🐼 Fun Facts
-- 🚀 Passionné par l'exploration spatiale et la technologie
-- 🐼 Amoureux des pandas (et des animaux en général !)
-- 🎨 Créatif dans l'âme, que ce soit en design ou en code
-- ☕ Accro au café et aux défis techniques complexes
 
-## 🛰️ Déploiement
+- 🚀 Passionate about space exploration and technology
+- 🐼 Love pandas (and animals in general!)
+- 🎨 Creative at heart, whether in design or code
+- ☕ Addicted to coffee and complex technical challenges
 
-Le projet est configuré pour être déployé sur Vercel. Pour déployer :
+## 🛰️ Deployment
 
-1. 🚀 Poussez votre code sur GitHub/GitLab
-2. 🌌 Créez un nouveau projet sur Vercel
-3. 🔗 Connectez votre dépôt
-4. ⚙️ Configurez les variables d'environnement
-5. 🚀 Décollez !
+The project is configured to be deployed on Vercel. To deploy:
 
-> 💡 Pour les tâches planifiées, assurez-vous d'avoir configuré Trigger.dev avec votre instance Vercel.
+1. 🚀 Push your code to GitHub/GitLab
+2. 🌌 Create a new project on Vercel
+3. 🔗 Connect your repository
+4. ⚙️ Configure environment variables
+5. 🚀 Blast off!
 
-## 🌟 Rejoignez l'aventure
+> 💡 For scheduled tasks, make sure to configure Trigger.dev with your Vercel instance.
 
-Si ce projet vous plaît, n'hésitez pas à :
-- ⭐ Donner une étoile au projet
-- 🐞 Signaler des bugs
-- ✨ Proposer des améliorations
-- 🚀 Partager avec d'autres passionnés
+## 🌟 Join the Adventure
 
-## 📄 Licence
+If you like this project, feel free to:
 
-Ce projet est sous licence MIT. N'hésitez pas à l'utiliser comme base pour votre propre portfolio ou projet.
+- ⭐ Star the project
+- 🐞 Report bugs
+- ✨ Suggest improvements
+- 🚀 Share with other enthusiasts
+
+## 📄 License
+
+This project is under the MIT license. Feel free to use it as a base for your own portfolio or project.
 
 ---
 
-**Développé avec ❤️ par Adriel Zimbril**  
-*Product Designer & Développeur Fullstack*  
-🚀 Explorateur de l'univers numérique | 🐼 Ami des pandas | 🎨 Créateur passionné
+**Developed with ❤️ by Adriel Zimbril**  
+_Product Designer & Fullstack Developer_  
+🚀 Digital Universe Explorer | 🐼 Panda Friend | 🎨 Passionate Creator

@@ -1,4 +1,4 @@
-import { ResourceType } from "./enum";
+import { ResourceType } from "@/types/enum";
 
 export interface LoginInput {
   email: string;
@@ -65,8 +65,7 @@ export interface PreviewCardContainerSectionProps {
   limit?: number;
 }
 
-export interface ProjectPreviewCardContainerSectionProps
-  extends PreviewCardContainerSectionProps {
+export interface ProjectPreviewCardContainerSectionProps extends PreviewCardContainerSectionProps {
   /**
    * Force all cards to be wide on desktop
    * @default false
@@ -107,4 +106,4 @@ export type GetServerMode = {
 
 export interface PageParams {
   slug: string;
-};
+}

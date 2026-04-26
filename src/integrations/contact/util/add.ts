@@ -1,13 +1,14 @@
-import logger from "@/utils/logger";
+import { logger } from "@/utils";
 import {
   ContactInput,
   ContactProvider,
   type ContactProviderType,
 } from "@/integrations/contact/types/types";
 import { add } from "@/integrations/contact/provider";
+import { ConfigValue } from "@/config";
 
 function resolveProvider(input?: ContactProviderType): ContactProvider {
-  const fromEnv = (process.env.CONTACTS_PROVIDER || "").toLowerCase();
+  const fromEnv = (ConfigValue.CONTACTS_PROVIDER || "").toLowerCase();
   const envProvider =
     fromEnv === "brevo" || fromEnv === "resend" || fromEnv === "custom"
       ? (fromEnv as ContactProvider)
@@ -16,11 +17,10 @@ function resolveProvider(input?: ContactProviderType): ContactProvider {
 }
 
 export async function addContact(
-  input: ContactInput & { provider?: ContactProvider }
+  input: ContactInput & { provider?: ContactProvider },
 ) {
   const provider = resolveProvider(input.provider);
   try {
-    logger.info("addContact success", { provider });
     return await add(input);
 
     // if (provider === ContactProvider.BREVO) {

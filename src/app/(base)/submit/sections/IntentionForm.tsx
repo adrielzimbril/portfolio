@@ -1,17 +1,7 @@
 "use client";
-
 import React, { useCallback, useId, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTranslations, useLocale } from "next-intl";
@@ -31,12 +21,43 @@ import {
 import { apiRoutes } from "@/data/api-routes";
 import { Label } from "@/components/ui/label";
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
+import { Intention } from "@/types";
 
-enum Intention {
-  UX_REVIEW = "ux_review",
-}
-
-const intentions = Object.values(Intention);
+const Select = ({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: Array<{ value: string; label: string }>;
+  placeholder: string;
+}) => {
+  const id = useId();
+  return (
+    <Field>
+      <Label htmlFor={id}>{label}</Label>
+      <SelectComponent value={value} onValueChange={onChange}>
+        <SelectTrigger id={id} variant="secondary" className="rounded-xl">
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>{label}</SelectLabel>
+            {options.map((opt) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </SelectComponent>
+    </Field>
+  );
+};
 
 export function IntentionForm() {
   const t = useTranslations();
@@ -56,107 +77,89 @@ export function IntentionForm() {
     setFeedback((prev) => ({ ...prev, open: false }));
   }, []);
 
-  const schema = z.object({
-    intention: z.enum(intentions),
-    name: z
-      .string({ error: t("zod.errors.customized.name.invalid") })
-      .min(4, { error: t("zod.errors.customized.name.required") }),
-    email: z.email({ error: t("zod.errors.customized.email.invalid") }),
-    url: z.url({ error: t("zod.errors.customized.url.invalid") }),
-    description: z.string().optional(),
-    // A/C
-    target: z.string().optional(),
-  });
+  const [intention, setIntention] = useState(Intention.UI_UX_REVIEW);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [url, setUrl] = useState("");
+  const [description, setDescription] = useState("");
+  const [target, setTarget] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  type IntentionFormValues = z.infer<typeof schema>;
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const form = useForm<IntentionFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { intention: Intention.UX_REVIEW },
-  });
+    if (name.length < 4) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("submit.page.feedback.error.title"),
+        description: t("zod.errors.customized.name.required"),
+      });
+      return;
+    }
 
-  const intention = form.watch("intention");
+    if (!email || !email.includes("@")) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("submit.page.feedback.error.title"),
+        description: t("zod.errors.customized.email.invalid"),
+      });
+      return;
+    }
 
-  const onSubmit: SubmitHandler<IntentionFormValues> = async (values) => {
+    if (!url) {
+      setFeedback({
+        open: true,
+        status: "error",
+        title: t("submit.page.feedback.error.title"),
+        description: t("zod.errors.customized.url.invalid"),
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
       const res = await fetch(apiRoutes.submit.link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, locale }),
+        body: JSON.stringify({
+          intention,
+          name,
+          email,
+          url,
+          description,
+          target,
+          locale,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        throw new Error(data?.error || "REQUEST_FAILED");
+        throw new Error(data?.error || "Failed to submit");
       }
       setFeedback({
         open: true,
         status: "success",
-        title: t("submit.page.toast.success"),
-        description:
-          "Ton projet a ete recu. On revient vers toi tres vite par email.",
+        title: t("submit.page.feedback.success.title"),
+        description: t("submit.page.feedback.success.description"),
       });
-      form.reset({ intention: Intention.UX_REVIEW });
-    } catch {
+      setName("");
+      setEmail("");
+      setUrl("");
+      setDescription("");
+      setTarget("");
+      setIntention(Intention.UI_UX_REVIEW);
+    } catch (error) {
       setFeedback({
         open: true,
         status: "error",
-        title: t("submit.page.toast.error"),
-        description:
-          "Une erreur est survenue pendant l'envoi. Merci de reessayer.",
+        title: t("submit.page.feedback.error.title"),
+        description: t("submit.page.feedback.error.description"),
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  };
-
-  const Select = ({
-    label,
-    name,
-    options,
-    placeholder,
-  }: {
-    label: string;
-    name: keyof IntentionFormValues;
-    options: Array<{ value: string; label: string }>;
-    placeholder?: string;
-  }) => {
-    const id = useId();
-    return (
-      <FormField
-        control={form.control}
-        name={name}
-        render={({ field }) => (
-          <FormItem>
-            <Label htmlFor={id}>{label}</Label>
-            <FormControl>
-              <SelectComponent
-                value={field.value ?? ""}
-                onValueChange={field.onChange}
-              >
-                <SelectTrigger
-                  id={id}
-                  variant="secondary"
-                  className="rounded-xl"
-                >
-                  <SelectValue
-                    placeholder={placeholder ?? t("common.button.select")}
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>{label}</SelectLabel>
-                    {options.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </SelectComponent>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    );
   };
 
   return (
@@ -170,117 +173,109 @@ export function IntentionForm() {
       >
         <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
-          <div className="flex flex-col items-center text-center gap-2">
-            <Badge size="lg">{t("submit.page.header-section.subBadge")}</Badge>
-            <h1 className="h3 hidsden">
-              {t("submit.page.header-section.subTitle")}
-            </h1>
-            <p className="text-b-white-invert-sec max-w-2xl hidden">
-              {t("submit.page.header-section.subDescription")}
-            </p>
-          </div>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
+            <div className="flex flex-col items-center text-center gap-2">
+              <Badge size="lg">
+                {t("submit.page.header-section.subBadge")}
+              </Badge>
+              <h1 className="h3 hidsden">
+                {t("submit.page.header-section.subTitle")}
+              </h1>
+              <p className="text-b-white-invert-sec max-w-2xl hidden">
+                {t("submit.page.header-section.subDescription")}
+              </p>
+            </div>
+            <Form
+              onSubmit={onSubmit}
               className="space-y-6 w-full max-w-xl self-center place-self-center"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          {t("submit.page.fields.name.label")}{" "}
-                          <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder={t(
-                              "submit.page.fields.name.placeholder"
-                            )}
-                            className="rounded-xl"
-                            variant="secondary"
-                            type="text"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <Field>
+                    <FieldLabel>
+                      {t("submit.page.fields.name.label")}{" "}
+                      <span className="text-red-500">*</span>
+                    </FieldLabel>
+                    <Input
+                      name="name"
+                      placeholder={t("submit.page.fields.name.placeholder")}
+                      className="rounded-xl"
+                      variant="secondary"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      minLength={4}
+                    />
+                    <FieldError>
+                      {t("submit.page.fields.validation.name_required")}
+                    </FieldError>
+                  </Field>
                 </div>
                 <div className="space-y-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          {t("submit.page.fields.email.label")}{" "}
-                          <span className="text-red-500">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder={t(
-                              "submit.page.fields.email.placeholder"
-                            )}
-                            className="rounded-xl"
-                            variant="secondary"
-                            type="email"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <Field>
+                    <FieldLabel>
+                      {t("submit.page.fields.email.label")}{" "}
+                      <span className="text-red-500">*</span>
+                    </FieldLabel>
+                    <Input
+                      name="email"
+                      placeholder={t("submit.page.fields.email.placeholder")}
+                      className="rounded-xl"
+                      variant="secondary"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                    <FieldError>
+                      {t("submit.page.fields.validation.email_invalid")}
+                    </FieldError>
+                  </Field>
                 </div>
               </div>
 
-              <FormField
-                control={form.control}
-                name="url"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {t("submit.page.fields.url.label")}{" "}
-                      <span className="text-red-500">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={t("submit.page.fields.url.placeholder")}
-                        className="rounded-xl"
-                        variant="secondary"
-                        type="url"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <Field>
+                <FieldLabel>
+                  {t("submit.page.fields.url.label")}{" "}
+                  <span className="text-red-500">*</span>
+                </FieldLabel>
+                <Input
+                  name="url"
+                  placeholder={t("submit.page.fields.url.placeholder")}
+                  className="rounded-xl"
+                  variant="secondary"
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  required
+                />
+                <FieldError>
+                  {t("submit.page.fields.validation.url_invalid")}
+                </FieldError>
+              </Field>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Select
                     label={t("submit.page.fields.intention.label")}
-                    name="intention"
+                    value={intention}
+                    onChange={(value) => setIntention(value as Intention)}
                     options={[
                       {
-                        value: "ux_review",
-                        label: `🕵️ ${t("submit.page.options.ux_review")}`,
+                        value: Intention.UI_UX_REVIEW,
+                        label: `🕵️ ${t("submit.page.options.ui_ux_review")}`,
                       },
                     ]}
+                    placeholder={t("common.button.select")}
                   />
                 </div>
                 {/* Conditional sections */}
-                {intention === "ux_review" && (
+                {intention === Intention.UI_UX_REVIEW && (
                   <div className="space-y-2">
                     <Select
                       label={t("submit.page.fields.target.label")}
-                      name="target"
+                      value={target}
+                      onChange={setTarget}
                       options={[
                         {
                           value: "website",
@@ -299,51 +294,41 @@ export function IntentionForm() {
                           label: `🧪 ${t("submit.page.options.support.prototype")}`,
                         },
                       ]}
+                      placeholder={t("common.button.select")}
                     />
                   </div>
                 )}
               </div>
 
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      {t("submit.page.fields.description.label")}
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        rows={5}
-                        placeholder={t(
-                          "submit.page.fields.description.placeholder"
-                        )}
-                        className="rounded-xl"
-                        variant="secondary"
-                        value={field.value ?? ""}
-                        onChange={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-                <div className="pt-2">
-                  <Button
-                    type="submit"
-                    whileTap
-                    asPointer
-                    asFull
-                    size="lg"
-                    disabled={form.formState.isSubmitting}
-                  >
-                    {form.formState.isSubmitting
-                      ? t("common.button.sending")
-                      : t("submit.page.actions.submit")}
-                  </Button>
-                </div>
-            </form>
-          </Form>
+              <Field>
+                <FieldLabel>
+                  {t("submit.page.fields.description.label")}
+                </FieldLabel>
+                <Textarea
+                  name="description"
+                  rows={5}
+                  placeholder={t("submit.page.fields.description.placeholder")}
+                  className="rounded-xl"
+                  variant="secondary"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </Field>
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  whileTap
+                  asPointer
+                  asFull
+                  size="lg"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting
+                    ? t("common.button.sending")
+                    : t("submit.page.actions.submit")}
+                </Button>
+              </div>
+            </Form>
           </CardContent>
         </Card>
       </SectionBase>

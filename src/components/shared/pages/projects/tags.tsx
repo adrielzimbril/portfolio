@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { pickRandomColor } from "@/utils/pick-random-color";
-import { cn } from "@/utils/utils";
-import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
+import { cn, pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 
 function ProjectTags({ tags }: { tags: string[] }) {
   return (
@@ -24,7 +23,7 @@ function ProjectCategories({
 }: {
   categories: {
     name: string;
-    color: DEFAULT_CATEGORY_COLOR_NAME;
+    color: DEFAULT_COLOR_CODE_NAME_TYPE;
   }[];
 }) {
   return (
@@ -32,7 +31,7 @@ function ProjectCategories({
       {categories.map((category, index) => (
         <Badge
           key={index}
-          className={cn(pickRandomColor(category.color))}
+          className={cn("h-auto", pickRandomColor(category.color))}
           variant="colored"
         >
           {category.name}

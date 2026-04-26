@@ -1,6 +1,6 @@
 "use client";
 import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { LoadMoreCardsSkeleton } from "@/components/shared/pages/skeletons";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Project, Post, Resource } from "@/integrations/content/types";
 import { PageType } from "@/types";
 import { getDate } from "@/utils";
@@ -53,7 +53,7 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={<LoadMoreCardsSkeleton kind="projects" count={2} />}
+        loadingFallback={<Skeleton name="projects-load-more" className="w-full h-40" />}
       >
         {(visibleResources as unknown as Project[]).map((item, index) => (
           <ProjectCard
@@ -81,7 +81,7 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={<LoadMoreCardsSkeleton kind="thoughts" count={2} />}
+        loadingFallback={<Skeleton name="thoughts-load-more" className="w-full h-40" />}
       >
         {(visibleResources as unknown as Post[]).map((item, index) => (
           <ThoughtCard
@@ -108,7 +108,7 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={<LoadMoreCardsSkeleton kind="resources" count={2} />}
+        loadingFallback={<Skeleton name="hub-load-more" className="w-full h-40" />}
       >
         {(visibleResources as unknown as Resource[]).map((item, index) => {
           return (

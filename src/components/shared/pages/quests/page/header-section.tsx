@@ -4,21 +4,21 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { Link } from "@/components/ui/link";
-import { cn } from "@/utils/utils";
-import { PreviewContentType } from "@/types/enum";
+import { cn, pickRandomColor } from "@/utils";
 import {
   HeaderPreviewCard,
   TextPreviewContent,
   PreviewContent,
 } from "@/components/shared/pages/shared/page/header-preview-card";
-import { pickRandomColor } from "@/utils";
-import { DEFAULT_CATEGORY_COLOR_NAME } from "@/types/default";
+import {
+  PreviewContentType,
+  DEFAULT_COLOR_CODE_NAME_TYPE,
+  PageType,
+} from "@/types";
 import { useTranslations } from "use-intl";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
 import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
-import { ReactionBar } from "@/components/shared/reactions/ReactionBar";
-import { PageType } from "@/types";
 
 interface HeaderSectionProps {
   // Preview Content
@@ -78,7 +78,10 @@ export function HeaderSection({
 
   return (
     <SectionBase
-      sectionClassName={cn("p-0 mt-16 mb-10 md:mb-20", sectionClassName)}
+      sectionClassName={cn(
+        "p-0 md:pb-0 mt-16 mb-10 md:mb-20",
+        sectionClassName,
+      )}
       isWide
       cardClassName="w-full"
       cardContentClassName="px-4 md:px-12 py-6 md:py-12"
@@ -118,7 +121,7 @@ export function HeaderSection({
               <Badge
                 key={index}
                 className={pickRandomColor(
-                  tag.color as DEFAULT_CATEGORY_COLOR_NAME,
+                  tag.color as DEFAULT_COLOR_CODE_NAME_TYPE,
                 )}
                 variant="colored"
                 size="sm"
@@ -127,8 +130,6 @@ export function HeaderSection({
               </Badge>
             ))}
           </div>
-
-          {pageType && <ReactionBar entityType={pageType} entityId={slug} />}
         </div>
       )}
 
