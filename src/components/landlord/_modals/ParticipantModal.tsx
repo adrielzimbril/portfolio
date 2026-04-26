@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,6 +46,8 @@ export function ParticipantModal({
   type?: "register" | "submission";
   initialData?: any;
 }) {
+  const t = useTranslations("admin.landlord.quests");
+  const tShared = useTranslations("admin.landlord.shared");
   const isEditing = Boolean(initialData);
 
   const [form, setForm] = useState({
@@ -100,7 +103,7 @@ export function ParticipantModal({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!form.challenge_slug) {
-      toast.error("Choisis d'abord une quest.");
+      toast.error(t("messages.select_quest_first"));
       return;
     }
 
@@ -121,15 +124,15 @@ export function ParticipantModal({
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
-        throw new Error(data?.error || "Failed to process request");
+        throw new Error(data?.error || t("messages.error_process"));
       }
 
-      toast.success(isEditing ? "Modifié avec succès." : "Participant ajouté.");
+      toast.success(isEditing ? t("messages.success_modified") : t("messages.success_added"));
       onCreated();
       onOpenChange(false);
     } catch (error) {
       logger.error(`Failed to ${isEditing ? 'edit' : 'add'} participant:`, error);
-      toast.error(`Impossible de ${isEditing ? 'modifier' : 'ajouter'} le participant.`);
+      toast.error(isEditing ? t("messages.error_process") : t("messages.error_process"));
     } finally {
       setIsSubmitting(false);
     }
@@ -141,15 +144,15 @@ export function ParticipantModal({
         <DialogHeader>
           <DialogTitle>
             {isEditing 
-              ? (type === "submission" ? "Modifier la soumission" : "Modifier l'inscription")
-              : (type === "submission" ? "Ajouter une soumission" : "Ajouter un participant")
+              ? (type === "submission" ? t("actions.edit_submission") : t("actions.edit_registration"))
+              : (type === "submission" ? t("actions.add_submission") : t("actions.add_registration"))
             }
           </DialogTitle>
         </DialogHeader>
         <DialogSeparator />
         <form onSubmit={handleSubmit} className="grid gap-5">
           <div className="space-y-2">
-            <Label htmlFor="quest">Quest</Label>
+            <Label htmlFor="quest">{t("fields.quest")}</Label>
             <Select
               value={form.challenge_slug}
               onValueChange={(value) =>
@@ -158,7 +161,7 @@ export function ParticipantModal({
               disabled={isEditing}
             >
               <SelectTrigger id="quest">
-                <SelectValue placeholder="Sélectionner une quest" />
+                <SelectValue placeholder={t("placeholders.select_quest")} />
               </SelectTrigger>
               <SelectContent>
                 {quests.map((quest) => (
@@ -171,7 +174,7 @@ export function ParticipantModal({
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="participant-name">Nom</Label>
+              <Label htmlFor="participant-name">{t("fields.name")}</Label>
               <Input
                 id="participant-name"
                 value={form.name}
@@ -185,7 +188,7 @@ export function ParticipantModal({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="participant-email">Email</Label>
+              <Label htmlFor="participant-email">{t("fields.email")}</Label>
               <Input
                 id="participant-email"
                 type="email"
@@ -201,8 +204,24 @@ export function ParticipantModal({
               />
             </div>
           </div>
+          {!isEditing && (
+            <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/2 p-4">
+              <div>
+                <p className="text-sm font-medium">{t("fields.send_email")}</p>
+                <p className="text-xs text-black/45">
+                  {t("fields.send_email_hint")}
+                </p>
+              </div>
+              <Switch
+                checked={form.sendEmail}
+                onCheckedChange={(checked) =>
+                  setForm((current) => ({ ...current, sendEmail: checked }))
+                }
+              />
+            </div>
+          )}
           <div className="space-y-2">
-            <Label htmlFor="participant-message">Message</Label>
+            <Label htmlFor="participant-message">{t("fields.message")}</Label>
             <Textarea
               id="participant-message"
               value={form.message}
@@ -217,7 +236,7 @@ export function ParticipantModal({
           </div>
           {type === "submission" && (
             <div className="space-y-2">
-              <Label htmlFor="participant-work-url">URL du travail</Label>
+              <Label htmlFor="participant-work-url">{t("fields.work_url")}</Label>
               <Input
                 id="participant-work-url"
                 value={form.work_url}
@@ -232,22 +251,6 @@ export function ParticipantModal({
               />
             </div>
           )}
-          {!isEditing && (
-            <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/2 p-4">
-              <div>
-                <p className="text-sm font-medium">Envoyer un email</p>
-                <p className="text-xs text-black/45">
-                  Désactivé par défaut pour les ajouts manuels.
-                </p>
-              </div>
-              <Switch
-                checked={form.sendEmail}
-                onCheckedChange={(checked) =>
-                  setForm((current) => ({ ...current, sendEmail: checked }))
-                }
-              />
-            </div>
-          )}
           <DialogFooter>
             <Button
               type="button"
@@ -256,11 +259,11 @@ export function ParticipantModal({
               onClick={() => onOpenChange(false)}
               disabled={isSubmitting}
             >
-              Annuler
+              {tShared("cancel")}
             </Button>
             <Button type="submit" disabled={isSubmitting} asIcon asPointer>
               {isSubmitting && <Loader2 size={16} className="animate-spin" />}
-              {isEditing ? "Enregistrer" : "Ajouter"}
+              {isEditing ? tShared("save") : t("actions.add")}
             </Button>
           </DialogFooter>
         </form>

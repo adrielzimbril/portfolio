@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import useSWR, { mutate } from "swr";
 import {
   Filter,
@@ -52,6 +53,9 @@ import { toast } from "@/lib/toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function RegistrationsSection() {
+  const locale = useLocale();
+  const t = useTranslations("admin.landlord.quests");
+  const tShared = useTranslations("admin.landlord.shared");
   const [search, setSearch] = useState("");
   const [selectedQuest, setSelectedQuest] = useState("all");
   const [participantModalOpen, setParticipantModalOpen] = useState(false);
@@ -93,10 +97,10 @@ export function RegistrationsSection() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            Inscriptions aux Quests
+            {t("registrations.title")}
           </h2>
           <p className="mt-1 text-sm text-black/45">
-            Participants inscrits, avec accès direct aux profils.
+            {t("registrations.subtitle")}
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
@@ -109,7 +113,7 @@ export function RegistrationsSection() {
             }
           >
             <RefreshCw size={16} />
-            Rafraîchir
+            {t("actions.refresh")}
           </Button>
           <Button
             asIcon
@@ -120,7 +124,7 @@ export function RegistrationsSection() {
             }}
           >
             <Plus size={16} />
-            Ajouter
+            {t("actions.add")}
           </Button>
         </div>
       </div>
@@ -133,7 +137,7 @@ export function RegistrationsSection() {
               setSearch(v);
               setPage(1);
             }}
-            placeholder="Rechercher nom, email, quest..."
+            placeholder={t("placeholders.search")}
           />
           <div className="flex items-center gap-2">
             <Filter size={16} className="text-black/35" />
@@ -145,10 +149,10 @@ export function RegistrationsSection() {
               }}
             >
               <SelectTrigger className="h-10 w-full min-w-56 bg-white text-sm md:w-72">
-                <SelectValue placeholder="Toutes les quests" />
+                <SelectValue placeholder={t("placeholders.all_quests")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Toutes les quests</SelectItem>
+                <SelectItem value="all">{t("placeholders.all_quests")}</SelectItem>
                 {quests.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
@@ -165,7 +169,7 @@ export function RegistrationsSection() {
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
               <Loader2 size={18} className="animate-spin" />
-              Chargement des participants...
+              {t("messages.loading_participants")}
             </div>
           ) : filteredParticipants.length > 0 ? (
             <>
@@ -174,12 +178,12 @@ export function RegistrationsSection() {
                   <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
                       <tr>
-                        <th className="px-5 py-4 font-medium">Participant</th>
-                        <th className="px-5 py-4 font-medium">Quest</th>
-                        <th className="px-5 py-4 font-medium">Statut</th>
-                        <th className="px-5 py-4 font-medium">Date</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.participant")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.quest")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.status")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.date")}</th>
                         <th className="px-5 py-4 text-right font-medium">
-                          Action
+                          {tShared("actions")}
                         </th>
                       </tr>
                     </thead>
@@ -211,12 +215,12 @@ export function RegistrationsSection() {
                             </span>
                           </td>
                           <td className="px-5 py-4">
-                            <StatusPill tone="warning">Inscription</StatusPill>
+                            <StatusPill tone="warning">{t("fields.participant")}</StatusPill>
                           </td>
                           <td className="px-5 py-4 text-black/55">
-                            <div>{formatDate(participant.created_at)}</div>
+                            <div>{formatDate(participant.created_at, locale)}</div>
                             <div className="text-xs text-black/35">
-                              {formatTime(participant.created_at)}
+                              {formatTime(participant.created_at, locale)}
                             </div>
                           </td>
                           <td className="px-5 py-4 text-right">
@@ -226,7 +230,7 @@ export function RegistrationsSection() {
                                   variant="outline"
                                   size="icon"
                                   asPointer
-                                  aria-label="Actions participant"
+                                  aria-label={tShared("actions")}
                                 >
                                   <MoreHorizontal size={16} />
                                 </Button>
@@ -239,7 +243,7 @@ export function RegistrationsSection() {
                                   }}
                                 >
                                   <Eye size={14} />
-                                  Voir détails
+                                  {t("actions.view_details")}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
                                   onClick={() => {
@@ -248,20 +252,20 @@ export function RegistrationsSection() {
                                   }}
                                 >
                                   <Edit size={14} />
-                                  Modifier
+                                  {t("actions.edit")}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
                                   className="text-red-500 focus:text-red-500"
                                   onClick={async () => {
                                     if (
-                                      window.confirm("Supprimer cette inscription ?")
+                                      window.confirm(t("actions.delete_registration_confirm"))
                                     ) {
                                       try {
                                         await deleteParticipant(
                                           "register",
                                           participant.id,
                                         );
-                                        toast.success("Supprimé.");
+                                        toast.success(t("messages.success_deleted"));
                                         mutate(
                                           registrationsKey(
                                             selectedQuest,
@@ -270,24 +274,24 @@ export function RegistrationsSection() {
                                           ),
                                         );
                                       } catch (e) {
-                                        toast.error("Erreur de suppression.");
+                                        toast.error(t("messages.error_delete"));
                                       }
                                     }
                                   }}
                                 >
                                   <Trash2 size={14} />
-                                  Supprimer
+                                  {t("actions.delete")}
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                   onClick={() =>
                                     navigator.clipboard
                                       ?.writeText(participant.email)
-                                      .then(() => toast.success("Email copié."))
+                                      .then(() => toast.success(t("messages.email_copied")))
                                   }
                                 >
                                   <Mail size={14} />
-                                  Copier l'email
+                                  {t("actions.copy_email")}
                                 </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
@@ -311,8 +315,8 @@ export function RegistrationsSection() {
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
                 icon={Users}
-                title="Aucun participant"
-                description="Aucune inscription ne correspond au filtre actuel ou la table est vide."
+                title={t("messages.empty_participants")}
+                description={t("messages.empty_participants")}
               />
             </div>
           )}
@@ -334,7 +338,7 @@ export function RegistrationsSection() {
         open={detailsOpen}
         onOpenChange={setDetailsOpen}
         data={selectedParticipant}
-        title="Détails du participant"
+        title={tShared("participant_details")}
       />
     </div>
   );

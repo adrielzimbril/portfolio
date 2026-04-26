@@ -1,6 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import useSWR, { mutate } from "swr";
+import { useLocale, useTranslations } from "next-intl";
 import { Loader2, MessageSquareText, MoreHorizontal, Pencil, Plus, RefreshCw, Trash2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,6 +34,9 @@ import logger from "@/utils/logger";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function CommunitySection() {
+  const locale = useLocale();
+  const t = useTranslations("admin.landlord.community");
+  const tShared = useTranslations("admin.landlord.shared");
   const [search, setSearch] = useState("");
   const [messageModalOpen, setMessageModalOpen] = useState(false);
   const [editingMessage, setEditingMessage] = useState<CommunityMessage | null>(null);
@@ -87,12 +91,12 @@ export function CommunitySection() {
         { method: "DELETE" },
       );
       if (!response.ok) throw new Error("Failed to delete message");
-      toast.success("Message supprimé.");
+      toast.success(t("messages.success_deleted"));
       setMessageToDelete(null);
       mutate(messagesKey(page, pageSize));
     } catch (error) {
       logger.error("Failed to delete message:", error);
-      toast.error("Impossible de supprimer le message.");
+      toast.error(t("messages.error_delete"));
     } finally {
       setIsDeleting(false);
     }
@@ -103,10 +107,10 @@ export function CommunitySection() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            Mur communautaire
+            {t("title")}
           </h2>
           <p className="mt-1 text-sm text-black/45">
-            Messages visibles publiquement, avec édition et confirmation.
+            {t("description")}
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
@@ -117,11 +121,11 @@ export function CommunitySection() {
             onClick={() => mutate(messagesKey(page, pageSize))}
           >
             <RefreshCw size={16} />
-            Rafraîchir
+            {tShared("refresh")}
           </Button>
           <Button asIcon asPointer onClick={onOpenCreate}>
             <Plus size={16} />
-            Ajouter
+            {tShared("add")}
           </Button>
         </div>
       </div>
@@ -133,7 +137,7 @@ export function CommunitySection() {
             setSearch(v);
             setPage(1);
           }}
-          placeholder="Rechercher créateur, message, langue..."
+          placeholder={t("placeholders.search")}
         />
       </AdminCard>
 
@@ -142,7 +146,7 @@ export function CommunitySection() {
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
               <Loader2 size={18} className="animate-spin" />
-              Chargement des messages...
+              {tShared("loading_data")}
             </div>
           ) : filteredMessages.length > 0 ? (
             <>
@@ -151,11 +155,11 @@ export function CommunitySection() {
                   <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
                       <tr>
-                        <th className="px-5 py-4 font-medium">Créateur</th>
-                        <th className="px-5 py-4 font-medium">Messages</th>
-                        <th className="px-5 py-4 font-medium">Langues</th>
-                        <th className="px-5 py-4 font-medium">Date</th>
-                        <th className="px-5 py-4 text-right font-medium">Action</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.creatorName")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.messagesByLanguage")}</th>
+                        <th className="px-5 py-4 font-medium">{tShared("fields.languages")}</th>
+                        <th className="px-5 py-4 font-medium">{tShared("fields.date")}</th>
+                        <th className="px-5 py-4 text-right font-medium">{tShared("actions")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-black/6">
@@ -180,7 +184,7 @@ export function CommunitySection() {
                                 <div className="min-w-0">
                                   <p className="font-medium truncate">{message.creator_name}</p>
                                   <p className="text-xs text-black/45">
-                                    {message.user_id ? "Utilisateur lié" : "Ajout manuel"}
+                                    {message.user_id ? t("fields.linked_user") : t("fields.manual_add")}
                                   </p>
                                 </div>
                               </div>
@@ -207,8 +211,8 @@ export function CommunitySection() {
                               </div>
                             </td>
                             <td className="px-5 py-4 text-black/55">
-                              <div>{formatDate(message.created_at)}</div>
-                              <div className="text-xs text-black/35">{formatTime(message.created_at)}</div>
+                              <div>{formatDate(message.created_at, locale)}</div>
+                              <div className="text-xs text-black/35">{formatTime(message.created_at, locale)}</div>
                             </td>
                             <td className="px-5 py-4 text-right">
                               <DropdownMenu>
@@ -217,7 +221,7 @@ export function CommunitySection() {
                                     variant="outline"
                                     size="icon"
                                     asPointer
-                                    aria-label="Actions message"
+                                    aria-label={tShared("actions")}
                                   >
                                     <MoreHorizontal size={16} />
                                   </Button>
@@ -230,12 +234,12 @@ export function CommunitySection() {
                                     }}
                                   >
                                     <Eye size={14} />
-                                    Voir détails
+                                    {t("actions.view_details")}
                                   </DropdownMenuItem>
                                   <DropdownMenuSeparator />
                                   <DropdownMenuItem onClick={() => onOpenEdit(message)}>
                                     <Pencil size={14} />
-                                    Modifier
+                                    {tShared("edit")}
                                   </DropdownMenuItem>
                                   <DropdownMenuSeparator />
                                   <DropdownMenuItem
@@ -243,7 +247,7 @@ export function CommunitySection() {
                                     onClick={() => onAskDelete(message)}
                                   >
                                     <Trash2 size={14} />
-                                    Supprimer
+                                    {tShared("delete")}
                                   </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>
@@ -268,8 +272,8 @@ export function CommunitySection() {
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
                 icon={MessageSquareText}
-                title="Aucun message"
-                description="Aucun message ne correspond à ta recherche ou la table est vide."
+                title={t("messages.empty_messages")}
+                description={t("messages.empty_messages_desc")}
               />
             </div>
           )}
@@ -287,9 +291,9 @@ export function CommunitySection() {
       />
       <ConfirmDialog
         open={!!messageToDelete}
-        title="Supprimer ce message ?"
-        description="Cette action retire le message du mur communautaire. Elle ne peut pas être annulée depuis le dashboard."
-        confirmLabel="Supprimer"
+        title={t("messages.delete_confirm_title")}
+        description={t("messages.delete_confirm_desc")}
+        confirmLabel={tShared("delete")}
         loading={isDeleting}
         onOpenChange={(open) => !open && setMessageToDelete(null)}
         onConfirm={handleDeleteMessage}
@@ -299,7 +303,7 @@ export function CommunitySection() {
         open={detailsOpen}
         onOpenChange={setDetailsOpen}
         data={selectedMessage as any}
-        title="Détails du message"
+        title={t("details_title")}
       />
     </div>
   );

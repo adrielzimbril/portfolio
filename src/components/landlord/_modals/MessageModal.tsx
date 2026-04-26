@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +33,8 @@ export function MessageModal({
   onOpenChange: (open: boolean) => void;
   onSaved: () => void;
 }) {
+  const t = useTranslations("admin.landlord.community");
+  const tShared = useTranslations("admin.landlord.shared");
   const [form, setForm] = useState({
     creator_name: "",
     creator_avatar_url: "",
@@ -66,12 +69,14 @@ export function MessageModal({
         throw new Error(data?.error || "Failed to save message");
       }
 
-      toast.success(message ? "Message mis à jour." : "Message ajouté.");
+      toast.success(
+        message ? t("messages.success_updated") : t("messages.success_added"),
+      );
       onSaved();
       onOpenChange(false);
     } catch (error) {
       logger.error("Failed to save message:", error);
-      toast.error("Impossible d'enregistrer le message.");
+      toast.error(t("messages.error_save"));
     } finally {
       setIsSubmitting(false);
     }
@@ -82,10 +87,10 @@ export function MessageModal({
       <DialogContent size="xl" variant="modern" scrollArea>
         <DialogHeader>
           <DialogTitle>
-            {message ? "Modifier le message" : "Ajouter un message"}
+            {message ? t("edit_title") : t("add_title")}
           </DialogTitle>
           <DialogDescription>
-            Renseigne le créateur et les variantes utiles du message.
+            {t("description")}
           </DialogDescription>
         </DialogHeader>
         <DialogSeparator />
@@ -95,7 +100,7 @@ export function MessageModal({
         >
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="creator-name">Nom du créateur</Label>
+              <Label htmlFor="creator-name">{t("fields.creatorName")}</Label>
               <Input
                 id="creator-name"
                 value={form.creator_name}
@@ -109,7 +114,7 @@ export function MessageModal({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="creator-avatar">Avatar URL</Label>
+              <Label htmlFor="creator-avatar">{t("fields.avatarUrl")}</Label>
               <Input
                 id="creator-avatar"
                 value={form.creator_avatar_url}
@@ -126,7 +131,7 @@ export function MessageModal({
             {Object.values(Locale).map((locale) => (
               <div key={locale} className="space-y-2">
                 <Label htmlFor={`message-${locale}`}>
-                  Message ({locale.toUpperCase()})
+                  {t("fields.messageLanguage", { locale: locale.toUpperCase() })}
                 </Label>
                 <Textarea
                   id={`message-${locale}`}
@@ -153,11 +158,11 @@ export function MessageModal({
               onClick={() => onOpenChange(false)}
               disabled={isSubmitting}
             >
-              Annuler
+              {tShared("cancel")}
             </Button>
             <Button type="submit" disabled={isSubmitting} asIcon asPointer>
               {isSubmitting && <Loader2 size={16} className="animate-spin" />}
-              {message ? "Mettre à jour" : "Ajouter"}
+              {message ? tShared("save") : t("actions.add")}
             </Button>
           </DialogFooter>
         </form>

@@ -64,39 +64,36 @@ export const dataTableKey = (
   return `${base}?page=${page}&pageSize=${pageSize}`;
 };
 
-const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-});
+const formattersCache: Record<string, Intl.DateTimeFormat> = {};
 
-const timeFormatter = new Intl.DateTimeFormat("fr-FR", {
-  hour: "2-digit",
-  minute: "2-digit",
-});
+function getFormatter(locale: string, options: Intl.DateTimeFormatOptions) {
+  const key = `${locale}-${JSON.stringify(options)}`;
+  if (!formattersCache[key]) {
+    formattersCache[key] = new Intl.DateTimeFormat(locale, options);
+  }
+  return formattersCache[key];
+}
 
-const premiumDateTimeFormatter = new Intl.DateTimeFormat("en-US", {
-  weekday: "long",
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: true,
-});
 
-export function formatDate(value?: string) {
+export function formatDate(value?: string, locale: string = "fr-FR") {
   if (!value) return "N/A";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "N/A";
-  return dateFormatter.format(date);
+  return getFormatter(locale, {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
 }
 
-export function formatTime(value?: string) {
+export function formatTime(value?: string, locale: string = "fr-FR") {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "";
-  return timeFormatter.format(date);
+  return getFormatter(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
 }
 
 export function capitalize(str: string) {
@@ -114,13 +111,22 @@ export function formatReaction(reaction: string) {
   return emoji ? `${emoji} ${capitalize(reaction)}` : capitalize(reaction);
 }
 
-export function formatDateTimePremium(value?: string) {
+export function formatDateTimePremium(value?: string, locale: string = "en-US") {
   if (!value) return "N/A";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "N/A";
   // Format: "Sunday, April 19, 2026, 01:18 AM"
   // Transform to: "Sunday, April 19, 2026 at 01:18 AM"
-  const formatted = premiumDateTimeFormatter.format(date);
+  const formatted = getFormatter(locale, {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  }).format(date);
+  
   const parts = formatted.split(", ");
   if (parts.length >= 3) {
     const dayAndMonth = parts.slice(0, 2).join(", ");
@@ -130,12 +136,12 @@ export function formatDateTimePremium(value?: string) {
   return formatted;
 }
 
-export function formatCell(value: unknown, key?: string) {
+export function formatCell(value: unknown, key?: string, locale: string = "fr-FR") {
   if (value === null || value === undefined || value === "") return "N/A";
   if (typeof value === "string") {
     // Dates
     if (/^\d{4}-\d{2}-\d{2}/.test(value)) {
-      return formatDate(value);
+      return formatDate(value, locale);
     }
     // Reactions (text-only for table cells)
     if (key?.toLowerCase().includes("reaction") || key?.toLowerCase() === "type") {

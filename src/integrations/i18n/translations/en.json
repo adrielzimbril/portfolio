@@ -246,6 +246,9 @@
       },
       "community": {
         "title": "Community Wall Management",
+        "edit_title": "Edit Message",
+        "add_title": "Add Message",
+        "description": "Provide the creator and the useful variants of the message.",
         "actions": {
           "add": "Add Message",
           "update": "Update Message"
@@ -256,31 +259,84 @@
           "messagesByLanguage": "Messages by Language",
           "messagePlaceholder": "Message in {locale}",
           "messageLanguage": "Message ({locale})"
+        },
+        "messages": {
+          "success_added": "Message added.",
+          "success_updated": "Message updated.",
+          "error_save": "Unable to save message."
         }
       },
       "quests": {
-        "title": "Quest Participants Management",
+        "title": "Quest Management",
+        "registrations": {
+          "title": "Quest Registrations",
+          "subtitle": "Registered participants, with direct access to profiles."
+        },
+        "submissions": {
+          "title": "Quest Submissions",
+          "subtitle": "Participant submissions, with direct access to work."
+        },
         "actions": {
-          "add": "Add Participant",
-          "addSubmit": "Add Participant",
-          "viewWork": "View Work"
+          "add": "Add",
+          "add_registration": "Add Participant",
+          "add_submission": "Add Submission",
+          "edit_registration": "Edit Registration",
+          "edit_submission": "Edit Submission",
+          "view_details": "View Details",
+          "view_work": "View Work",
+          "delete": "Delete",
+          "delete_confirm": "Are you sure you want to delete this item?",
+          "delete_registration_confirm": "Delete this registration?",
+          "delete_submission_confirm": "Are you sure you want to delete this submission?",
+          "copy_email": "Copy Email",
+          "refresh": "Refresh"
         },
         "fields": {
           "quest": "Quest",
           "name": "Name",
+          "email": "Email",
           "message": "Message",
-          "sendEmail": "Send email notification",
-          "language": "Language"
+          "work_url": "Work URL",
+          "send_email": "Send Email",
+          "send_email_hint": "Disabled by default for manual additions.",
+          "status": "Status",
+          "date": "Date",
+          "participant": "Participant",
+          "language": "Language",
+          "no_work": "No work"
         },
         "placeholders": {
-          "selectQuest": "Select a quest",
-          "selectLanguage": "Select language"
+          "select_quest": "Select a quest",
+          "all_quests": "All quests",
+          "search": "Search name, email, quest...",
+          "url": "https://..."
         },
-        "filters": {
-          "byQuest": "Filter by Quest",
-          "allQuests": "All quests"
-        },
-        "source": "from {source}"
+        "messages": {
+          "loading_participants": "Loading participants...",
+          "loading_submissions": "Loading submissions...",
+          "empty_participants": "No participants found.",
+          "empty_submissions": "No submissions found.",
+          "success_added": "Successfully added.",
+          "success_modified": "Successfully modified.",
+          "success_deleted": "Deleted.",
+          "error_delete": "Error deleting.",
+          "error_process": "Unable to process request.",
+          "select_quest_first": "Please select a quest first.",
+          "email_copied": "Email copied."
+        }
+      },
+      "shared": {
+        "no_data": "No data",
+        "no_data_description": "This table has no entries yet.",
+        "loading_data": "Loading data...",
+        "page": "Page {page} / {total}",
+        "previous": "Previous",
+        "next": "Next",
+        "cancel": "Cancel",
+        "save": "Save",
+        "close": "Close",
+        "details_title": "Entry Details",
+        "participant_details": "Participant Details"
       }
     }
   },

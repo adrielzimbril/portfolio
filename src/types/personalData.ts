@@ -6,10 +6,10 @@ import testimonialsFr from "@/data/personal/translate/testimonials.json";
 import testimonialsZhCN from "@/data/personal/translate/zh-CN/testimonials.json";
 import {
   ChangelogItemType,
+  Locale,
   ToolboxSetupItemCategory,
   ToolboxToolCategory,
 } from "@/types/enum";
-import { Locale } from "@/integrations/i18n";
 
 export interface TestimonialItem {
   id: number;
@@ -34,29 +34,29 @@ export interface GameItem {
 }
 
 const testimonialsByLocale: Record<Locale, TestimonialItem[]> = {
-  fr: testimonialsFr,
-  en: testimonialsEn,
-  "zh-CN": testimonialsZhCN,
+  [Locale.FR]: testimonialsFr,
+  [Locale.EN]: testimonialsEn,
+  [Locale.ZH_CN]: testimonialsZhCN,
 };
 
 const gamesByLocale: Record<Locale, GameItem[]> = {
-  fr: gameFr,
-  en: gameEn,
-  "zh-CN": gameZhCN,
+  [Locale.FR]: gameFr,
+  [Locale.EN]: gameEn,
+  [Locale.ZH_CN]: gameZhCN,
 };
 
 function resolveLocale(locale: string): Locale {
   const normalized = locale.toLowerCase();
 
   if (normalized === "en") {
-    return "en";
+    return Locale.EN;
   }
 
   if (normalized === "zh-cn" || normalized === "zh") {
-    return "zh-CN";
+    return Locale.ZH_CN;
   }
 
-  return "fr";
+  return Locale.FR;
 }
 
 export function getTestimonialsByLocale(locale: string): TestimonialItem[] {

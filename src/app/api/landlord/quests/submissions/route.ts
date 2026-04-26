@@ -5,7 +5,7 @@ import { sendEmail } from "@/integrations/mail";
 import { appConfig } from "@/data/app-config";
 import { getQuestBySlug } from "@/integrations/content/lib";
 import { getResourcesUrl } from "@/utils/base-url";
-import { PageType } from "@/types";
+import { Locale, PageType } from "@/types";
 import { addContact, ContactProvider } from "@/integrations/contact";
 import { getBrevoConfig } from "@/config";
 import logger from "@/utils/logger";
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       challenge_slug,
       source = "admin_dashboard",
       sendEmail: shouldSendEmail,
-      locale = "fr", // Default to fr for landlord
+      locale = Locale.EN,
     } = body;
 
     const cookieStore = await cookies();

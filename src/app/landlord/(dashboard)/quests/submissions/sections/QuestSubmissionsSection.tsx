@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import useSWR, { mutate } from "swr";
 import {
   ExternalLink,
@@ -54,6 +55,9 @@ import { toast } from "@/lib/toast";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function QuestSubmissionsSection() {
+  const locale = useLocale();
+  const t = useTranslations("admin.landlord.quests");
+  const tShared = useTranslations("admin.landlord.shared");
   const [search, setSearch] = useState("");
   const [selectedQuest, setSelectedQuest] = useState("all");
   const [participantModalOpen, setParticipantModalOpen] = useState(false);
@@ -95,10 +99,10 @@ export function QuestSubmissionsSection() {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            Soumissions des Quests
+            {t("submissions.title")}
           </h2>
           <p className="mt-1 text-sm text-black/45">
-            Rendus de participants, avec accès direct aux travaux.
+            {t("submissions.subtitle")}
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
@@ -113,7 +117,7 @@ export function QuestSubmissionsSection() {
             }
           >
             <RefreshCw size={16} />
-            Rafraîchir
+            {t("actions.refresh")}
           </Button>
           <Button
             asIcon
@@ -124,7 +128,7 @@ export function QuestSubmissionsSection() {
             }}
           >
             <Plus size={16} />
-            Ajouter
+            {t("actions.add")}
           </Button>
         </div>
       </div>
@@ -137,7 +141,7 @@ export function QuestSubmissionsSection() {
               setSearch(v);
               setPage(1);
             }}
-            placeholder="Rechercher nom, email, quest..."
+            placeholder={t("placeholders.search")}
           />
           <div className="flex items-center gap-2">
             <Filter size={16} className="text-black/35" />
@@ -149,10 +153,10 @@ export function QuestSubmissionsSection() {
               }}
             >
               <SelectTrigger className="h-10 w-full min-w-56 bg-white text-sm md:w-72">
-                <SelectValue placeholder="Toutes les quests" />
+                <SelectValue placeholder={t("placeholders.all_quests")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Toutes les quests</SelectItem>
+                <SelectItem value="all">{t("placeholders.all_quests")}</SelectItem>
                 {quests.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
@@ -169,7 +173,7 @@ export function QuestSubmissionsSection() {
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
               <Loader2 size={18} className="animate-spin" />
-              Chargement des soumissions...
+              {t("messages.loading_submissions")}
             </div>
           ) : filteredParticipants.length > 0 ? (
             <>
@@ -178,12 +182,12 @@ export function QuestSubmissionsSection() {
                   <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
                       <tr>
-                        <th className="px-5 py-4 font-medium">Participant</th>
-                        <th className="px-5 py-4 font-medium">Quest</th>
-                        <th className="px-5 py-4 font-medium">Statut</th>
-                        <th className="px-5 py-4 font-medium">Date</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.participant")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.quest")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.status")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.date")}</th>
                         <th className="px-5 py-4 text-right font-medium">
-                          Action
+                          {tShared("actions")}
                         </th>
                       </tr>
                     </thead>
@@ -215,12 +219,12 @@ export function QuestSubmissionsSection() {
                             </span>
                           </td>
                           <td className="px-5 py-4">
-                            <StatusPill tone="info">Soumission</StatusPill>
+                            <StatusPill tone="info">{t("fields.participant")}</StatusPill>
                           </td>
                           <td className="px-5 py-4 text-black/55">
-                            <div>{formatDate(participant.created_at)}</div>
+                            <div>{formatDate(participant.created_at, locale)}</div>
                             <div className="text-xs text-black/35">
-                              {formatTime(participant.created_at)}
+                              {formatTime(participant.created_at, locale)}
                             </div>
                           </td>
                           <td className="px-5 py-4 text-right">
@@ -230,7 +234,7 @@ export function QuestSubmissionsSection() {
                                   variant="outline"
                                   size="icon"
                                   asPointer
-                                  aria-label="Actions soumission"
+                                  aria-label={tShared("actions")}
                                 >
                                   <MoreHorizontal size={16} />
                                 </Button>
@@ -243,7 +247,7 @@ export function QuestSubmissionsSection() {
                                   }}
                                 >
                                   <Eye size={14} />
-                                  Voir détails
+                                  {t("actions.view_details")}
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 {participant.work_url ? (
@@ -254,25 +258,25 @@ export function QuestSubmissionsSection() {
                                       rel="noopener noreferrer"
                                     >
                                       <ExternalLink size={14} />
-                                      Voir le travail
+                                      {t("actions.view_work")}
                                     </a>
                                   </DropdownMenuItem>
                                 ) : (
                                   <DropdownMenuItem disabled>
                                     <FileText size={14} />
-                                    Aucun travail
+                                    {t("fields.no_work")}
                                   </DropdownMenuItem>
                                 )}
                                 <DropdownMenuSeparator />
                                   <DropdownMenuItem
                                     onClick={() =>
-                                      navigator.clipboard
+                                    navigator.clipboard
                                         ?.writeText(participant.email)
-                                        .then(() => toast.success("Email copié."))
+                                        .then(() => toast.success(t("messages.email_copied")))
                                     }
                                   >
                                     <Mail size={14} />
-                                    Copier l'email
+                                    {t("actions.copy_email")}
                                   </DropdownMenuItem>
                                   <DropdownMenuSeparator />
                                   <DropdownMenuItem
@@ -282,21 +286,21 @@ export function QuestSubmissionsSection() {
                                     }}
                                   >
                                     <Edit size={14} />
-                                    Modifier
+                                    {tShared("edit")}
                                   </DropdownMenuItem>
                                   <DropdownMenuItem
                                     className="text-red-600 focus:text-red-600"
                                     onClick={() => {
                                       if (
                                         window.confirm(
-                                          "Voulez-vous vraiment supprimer cette soumission ?",
+                                          t("actions.delete_submission_confirm"),
                                         )
                                       ) {
                                         deleteParticipant(
                                           "submission",
                                           participant.id,
                                         ).then(() => {
-                                          toast.success("Supprimé.");
+                                          toast.success(t("messages.success_deleted"));
                                           mutate(
                                             submissionsKey(
                                               selectedQuest,
@@ -309,7 +313,7 @@ export function QuestSubmissionsSection() {
                                     }}
                                   >
                                     <Trash2 size={14} />
-                                    Supprimer
+                                    {tShared("delete")}
                                   </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
@@ -333,8 +337,8 @@ export function QuestSubmissionsSection() {
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
                 icon={Send}
-                title="Aucune soumission"
-                description="Aucun rendu ne correspond au filtre actuel ou la table est vide."
+                title={t("messages.empty_submissions")}
+                description={t("messages.empty_submissions")}
               />
             </div>
           )}
@@ -357,7 +361,7 @@ export function QuestSubmissionsSection() {
         open={detailsOpen}
         onOpenChange={setDetailsOpen}
         data={selectedParticipant}
-        title="Détails du participant"
+        title={tShared("participant_details")}
       />
     </div>
   );

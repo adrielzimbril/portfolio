@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Loader2, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -103,7 +104,7 @@ export function SearchBox({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="h-10 rounded-xl border-black/8 bg-white pl-9 text-sm"
+        className="h-10 rounded-xl border-black/8 bg-white text-sm"
       />
     </div>
   );
@@ -126,6 +127,7 @@ export function ConfirmDialog({
   onOpenChange: (open: boolean) => void;
   onConfirm: () => void;
 }) {
+  const tShared = useTranslations("admin.landlord.shared");
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent size="md" variant="modern">
@@ -142,7 +144,7 @@ export function ConfirmDialog({
             onClick={() => onOpenChange(false)}
             disabled={loading}
           >
-            Annuler
+            {tShared("cancel")}
           </Button>
           <Button
             type="button"
@@ -215,11 +217,12 @@ export function TablePager({
   count: number;
   onPageChange: (page: number) => void;
 }) {
+  const tShared = useTranslations("admin.landlord.shared");
   const totalPages = Math.max(Math.ceil(count / pageSize), 1);
   return (
     <div className="flex items-center justify-between gap-3 border-t border-black/8 px-5 py-4 text-sm">
       <Badge variant="white">
-        Page {page} / {totalPages}
+        {tShared("page", { page, total: totalPages })}
       </Badge>
       <div className="flex items-center gap-2">
         <Button
@@ -229,7 +232,7 @@ export function TablePager({
           disabled={page <= 1}
           onClick={() => onPageChange(page - 1)}
         >
-          Précédent
+          {tShared("previous")}
         </Button>
         <Button
           variant="outline"
@@ -238,7 +241,7 @@ export function TablePager({
           disabled={page >= totalPages}
           onClick={() => onPageChange(page + 1)}
         >
-          Suivant
+          {tShared("next")}
         </Button>
       </div>
     </div>

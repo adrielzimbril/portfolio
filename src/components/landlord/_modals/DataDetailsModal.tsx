@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -25,6 +26,7 @@ export function DataDetailsModal({
   title?: string;
   data: Record<string, any> | null;
 }) {
+  const tShared = useTranslations("admin.landlord.shared");
   if (!data) return null;
 
   const locales = Object.values(Locale) as string[];
@@ -80,6 +82,10 @@ export function DataDetailsModal({
         <ScrollArea className="max-h-[min(640px,75dvh)] w-full py-2" scrollbarGutter>
           <div className="grid min-w-0 gap-6 px-1">
             {Object.entries(data).map(([key, value]) => {
+              const restrictedAreas = ["ip", "userAgent"]
+              if(restrictedAreas.includes(key)){
+                return
+              }
               const isImage = isImageUrl(value);
               const isTranslation = isTranslationObject(value);
               const isDate = !isImage && !isTranslation && isDateUrl(value);
@@ -120,21 +126,21 @@ export function DataDetailsModal({
                       {Object.entries(value).map(([lang, text]) => (
                         <div
                           key={lang}
-                          className="flex flex-col gap-1 rounded-2xl border border-black/5 bg-black/[0.01] p-3 text-sm transition-all hover:bg-black/[0.03]"
+                          className="flex flex-col gap-1 rounded-2xl border border-black/5 bg-black/1 p-3 text-sm transition-all hover:bg-black/[0.03]"
                         >
                           <div className="flex items-center gap-2">
                             <StatusPill tone="neutral">
                               {lang.toUpperCase()}
                             </StatusPill>
                           </div>
-                          <p className="whitespace-pre-wrap break-words leading-relaxed text-black/70">
+                          <p className="whitespace-pre-wrap wrap-break-word leading-relaxed text-black/70">
                             {String(text) || "—"}
                           </p>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="min-w-0 rounded-2xl border border-black/5 bg-black/[0.015] p-4 text-sm transition-all hover:bg-black/[0.03] hover:border-black/10">
+                    <div className="min-w-0 rounded-2xl border border-black/5 bg-black/1.5 p-4 text-sm transition-all hover:bg-black/[0.03] hover:border-black/10">
                       {isJson ? (
                         <pre className="overflow-x-auto whitespace-pre-wrap rounded-lg font-mono text-[11px] leading-relaxed text-black/60">
                           {JSON.stringify(value, null, 2)}
@@ -148,7 +154,7 @@ export function DataDetailsModal({
                           {formatReaction(String(value))}
                         </p>
                       ) : (
-                        <p className="whitespace-pre-wrap break-all font-medium leading-relaxed text-black/70 md:break-words">
+                        <p className="whitespace-pre-wrap break-all font-medium leading-relaxed text-black/70 md:wrap-break-word">
                           {String(value) || "—"}
                         </p>
                       )}
@@ -161,7 +167,7 @@ export function DataDetailsModal({
         </ScrollArea>
         <DialogFooter className="mt-4">
           <Button variant="outline" asPointer onClick={() => onOpenChange(false)}>
-            Fermer
+            {tShared("close")}
           </Button>
         </DialogFooter>
       </DialogContent>
