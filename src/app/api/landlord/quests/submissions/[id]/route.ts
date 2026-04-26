@@ -7,8 +7,8 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const { id } = await params;
   try {
-    const { id } = await params;
     const body = await request.json();
 
     const cookieStore = await cookies();
@@ -40,8 +40,8 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const { id } = await params;
   try {
-    const { id } = await params;
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 

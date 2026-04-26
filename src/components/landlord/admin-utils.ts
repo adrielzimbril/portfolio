@@ -166,24 +166,26 @@ export async function fetchQuests(): Promise<QuestSummary[]> {
   }
 }
 
-export async function fetchParticipants(
+export async function fetchLandlordTable(
   url: string,
 ): Promise<LandlordTableResponse> {
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error("Failed to fetch participants");
+    throw new Error("Failed to fetch data");
   }
   return response.json();
+}
+
+export async function fetchParticipants(
+  url: string,
+): Promise<LandlordTableResponse> {
+  return fetchLandlordTable(url);
 }
 
 export async function fetchMessages(
   url: string,
 ): Promise<LandlordTableResponse> {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("Failed to fetch messages");
-  }
-  return response.json();
+  return fetchLandlordTable(url);
 }
 
 export async function deleteParticipant(

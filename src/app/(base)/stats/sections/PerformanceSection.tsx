@@ -1,20 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { LighthouseScoreCard } from "@/components/shared/pages/stats/LighthouseScoreCard";
+import type { LighthouseScores } from "@/lib/stats/types";
 
 interface PerformanceSectionProps {
-  mobileScores: {
-    performance: number;
-    accessibility: number;
-    bestPractices: number;
-    seo: number;
-  };
-  desktopScores: {
-    performance: number;
-    accessibility: number;
-    bestPractices: number;
-    seo: number;
-  };
+  mobileScores: LighthouseScores;
+  desktopScores: LighthouseScores;
 }
 
 export async function PerformanceSection({
