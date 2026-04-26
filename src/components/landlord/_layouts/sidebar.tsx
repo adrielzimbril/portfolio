@@ -78,7 +78,7 @@ export function Sidebar({
     <aside
       className={cn(
         "fixed inset-y-3 left-3 z-40 bg-[#11191f] p-4 text-white transition-all duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full rounded-2xl overflow-hidden",
-        sidebarOpen && "-translate-x-[calc(100%+1rem)]",
+        !sidebarOpen && "-translate-x-[calc(100%+1rem)]",
         collapsed ? "w-0 opacity-0 p-0" : "w-72 opacity-100",
       )}
     >
