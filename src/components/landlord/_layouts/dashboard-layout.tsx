@@ -16,11 +16,14 @@ export function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const router = useRouter();
 
   const handleSignOut = async () => {
     try {
-      const response = await fetch(apiRoutes.auth.logout.link, { method: "POST" });
+      const response = await fetch(apiRoutes.auth.logout.link, {
+        method: "POST",
+      });
       if (response.ok) {
         router.push(landlordRoutes.login.link);
       }
@@ -39,6 +42,8 @@ export function DashboardLayout({
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
         onSignOut={handleSignOut}
+        collapsed={sidebarCollapsed}
+        setCollapsed={setSidebarCollapsed}
       />
       <SidebarOverlay
         visible={sidebarOpen}
@@ -49,6 +54,8 @@ export function DashboardLayout({
           user={user}
           setSidebarOpen={setSidebarOpen}
           onRefresh={handleRefresh}
+          sidebarCollapsed={sidebarCollapsed}
+          setSidebarCollapsed={setSidebarCollapsed}
         />
         <section className="min-h-0 flex-1 overflow-y-auto rounded-[30px] border border-black/8 bg-[#fbfaf6] p-4 md:p-6 pb-20 md:pb-6 relative z-10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]">
           {children}

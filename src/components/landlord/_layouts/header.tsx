@@ -1,20 +1,25 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { PanelLeft, RefreshCw, UserRound } from "lucide-react";
+import { PanelLeft, RefreshCw, UserRound, PanelLeftClose } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { AdminUser } from "@/components/landlord/admin-types";
 import { adminNavItems } from "./nav-items";
 import { useTranslations } from "next-intl";
+import { FooterLocaleSwitch } from "@/components/shared/_layouts/footer-locale-switch";
 
 export function Header({
   user,
   setSidebarOpen,
   onRefresh,
+  sidebarCollapsed,
+  setSidebarCollapsed,
 }: {
   user: AdminUser;
   setSidebarOpen: (open: boolean) => void;
   onRefresh: () => void;
+  sidebarCollapsed: boolean;
+  setSidebarCollapsed: (collapsed: boolean) => void;
 }) {
   const t = useTranslations("admin.header");
   const pathname = usePathname();
@@ -64,6 +69,23 @@ export function Header({
       >
         <RefreshCw size={17} />
       </Button>
+      <Button
+        variant="outline"
+        size="icon"
+        asPointer
+        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+        aria-label={
+          sidebarCollapsed ? t("expand_sidebar") : t("collapse_sidebar")
+        }
+        className="hidden md:flex"
+      >
+        {sidebarCollapsed ? (
+          <PanelLeft size={17} />
+        ) : (
+          <PanelLeftClose size={17} />
+        )}
+      </Button>
+      <FooterLocaleSwitch />
       <div className="hidden items-center gap-3 rounded-2xl bg-[#f7f6f1] px-4 py-2.5 md:flex ml-2">
         {user.avatarUrl ? (
           <img

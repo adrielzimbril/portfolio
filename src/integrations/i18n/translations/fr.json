@@ -1653,6 +1653,8 @@
       "data_section": "Données",
       "back_to_site": "Retour au site",
       "sign_out": "Déconnexion",
+      "expand": "Agrandir",
+      "collapse": "Réduire",
       "items": {
         "dashboard": {
           "label": "Dashboard",
@@ -1684,6 +1686,8 @@
       "subtitle": "Admin Dashboard",
       "open_nav": "Ouvrir la navigation",
       "refresh": "Rafraîchir",
+      "collapse_sidebar": "Réduire la sidebar",
+      "expand_sidebar": "Agrandir la sidebar",
       "nav_labels": {
         "dashboard": "Dashboard",
         "quests_registrations": "Inscriptions",

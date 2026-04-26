@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   LogOut,
   MessageSquareText,
+  PanelLeftClose,
   ShieldCheck,
   Trophy,
   Users,
@@ -25,10 +26,14 @@ export function Sidebar({
   sidebarOpen,
   setSidebarOpen,
   onSignOut,
+  collapsed,
+  setCollapsed,
 }: {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
   onSignOut: () => void;
+  collapsed: boolean;
+  setCollapsed: (collapsed: boolean) => void;
 }) {
   const t = useTranslations("admin.sidebar");
   const pathname = usePathname();
@@ -68,20 +73,23 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed inset-y-3 left-3 z-40 w-72 -translate-x-[calc(100%+1rem)] rounded-2xl bg-[#11191f] p-4 text-white transition-transform duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full",
-        sidebarOpen && "translate-x-0",
+        "fixed inset-y-3 left-3 z-40 bg-[#11191f] p-4 text-white transition-all duration-300 md:static md:inset-auto md:translate-x-0 flex flex-col h-full rounded-2xl",
+        sidebarOpen && "translate-x-0 -translate-x-[calc(100%+1rem)]",
+        collapsed ? "w-20" : "w-72",
       )}
     >
       {/* Logo */}
       <div className="mb-6 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-white text-[#11191f]">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-white text-[#11191f] shrink-0">
             <ShieldCheck size={19} />
           </div>
-          <div>
-            <p className="text-sm font-semibold">{t("title")}</p>
-            <p className="text-xs text-white/45">{t("subtitle")}</p>
-          </div>
+          {!collapsed && (
+            <div>
+              <p className="text-sm font-semibold">{t("title")}</p>
+              <p className="text-xs text-white/45">{t("subtitle")}</p>
+            </div>
+          )}
         </div>
         <Button
           variant="none"
@@ -92,6 +100,16 @@ export function Sidebar({
           aria-label={t("close_nav")}
         >
           <X size={18} />
+        </Button>
+        <Button
+          variant="none"
+          size="icon"
+          asPointer
+          className="hidden md:flex text-white/55 hover:text-white"
+          onClick={() => setCollapsed(!collapsed)}
+          aria-label={collapsed ? t("expand") : t("collapse")}
+        >
+          <PanelLeftClose size={18} className={collapsed ? "rotate-180" : ""} />
         </Button>
       </div>
 
@@ -110,6 +128,7 @@ export function Sidebar({
             label={t("items.dashboard.label")}
             description={t("items.dashboard.description")}
             onClick={() => setSidebarOpen(false)}
+            collapsed={collapsed}
           />
 
           {/* Quest group */}
@@ -120,6 +139,7 @@ export function Sidebar({
             isActive={isQuestsGroupActive}
             onNavClick={() => setSidebarOpen(false)}
             isActiveCheck={isActive}
+            collapsed={collapsed}
           />
 
           {/* Hub group */}
@@ -130,6 +150,7 @@ export function Sidebar({
             isActive={isHubGroupActive}
             onNavClick={() => setSidebarOpen(false)}
             isActiveCheck={isActive}
+            collapsed={collapsed}
           />
 
           {/* Community */}
@@ -140,6 +161,7 @@ export function Sidebar({
             label={t("items.community.label")}
             description={t("items.community.description")}
             onClick={() => setSidebarOpen(false)}
+            collapsed={collapsed}
           />
 
           {/* Data tables */}
@@ -155,6 +177,7 @@ export function Sidebar({
                 label={t("items.newsletter.label")}
                 description={t("items.newsletter.description")}
                 onClick={() => setSidebarOpen(false)}
+                collapsed={collapsed}
               />
               <NavLink
                 href={landlordRoutes.tables.users.link}
@@ -163,6 +186,7 @@ export function Sidebar({
                 label={t("items.users.label")}
                 description={t("items.users.description")}
                 onClick={() => setSidebarOpen(false)}
+                collapsed={collapsed}
               />
               <NavLink
                 href={landlordRoutes.tables.submissions.link}
@@ -171,6 +195,7 @@ export function Sidebar({
                 label={t("items.submissions.label")}
                 description={t("items.submissions.description")}
                 onClick={() => setSidebarOpen(false)}
+                collapsed={collapsed}
               />
               <NavLink
                 href={landlordRoutes.tables.reactions.link}
@@ -179,6 +204,7 @@ export function Sidebar({
                 label={t("items.reactions.label")}
                 description={t("items.reactions.description")}
                 onClick={() => setSidebarOpen(false)}
+                collapsed={collapsed}
               />
             </div>
           </div>
@@ -216,6 +242,7 @@ function NavLink({
   description,
   onClick,
   compact = false,
+  collapsed = false,
 }: {
   href: string;
   active: boolean;
@@ -224,6 +251,7 @@ function NavLink({
   description: string;
   onClick?: () => void;
   compact?: boolean;
+  collapsed?: boolean;
 }) {
   return (
     <Link
@@ -236,20 +264,23 @@ function NavLink({
           ? "bg-white text-[#11191f]"
           : "text-white/62 hover:bg-white/8 hover:text-white",
       )}
+      title={collapsed ? label : undefined}
     >
       <Icon size={compact ? 15 : 18} />
-      <span className="flex flex-col min-w-0">
-        <span className="font-medium truncate">{label}</span>
-        <span
-          className={cn(
-            "mt-0.5 truncate",
-            compact ? "text-[10px]" : "text-xs",
-            active ? "text-black/45" : "text-white/35",
-          )}
-        >
-          {description}
+      {!collapsed && (
+        <span className="flex flex-col min-w-0">
+          <span className="font-medium truncate">{label}</span>
+          <span
+            className={cn(
+              "mt-0.5 truncate",
+              compact ? "text-[10px]" : "text-xs",
+              active ? "text-black/45" : "text-white/35",
+            )}
+          >
+            {description}
+          </span>
         </span>
-      </span>
+      )}
     </Link>
   );
 }
@@ -261,6 +292,7 @@ function NavGroup({
   isActive,
   onNavClick,
   isActiveCheck,
+  collapsed,
 }: {
   group: {
     key: string;
@@ -279,6 +311,7 @@ function NavGroup({
   isActive: boolean;
   onNavClick: () => void;
   isActiveCheck: (key: string) => boolean;
+  collapsed: boolean;
 }) {
   const t = useTranslations("admin.sidebar");
 
@@ -293,23 +326,28 @@ function NavGroup({
             ? "text-white"
             : "text-white/62 hover:bg-white/8 hover:text-white",
         )}
+        title={collapsed ? group.label : undefined}
       >
         <group.icon size={18} />
-        <span className="flex flex-col flex-1 min-w-0">
-          <span className="font-medium">{group.label}</span>
-          <span className="text-xs mt-0.5 text-white/35">
-            {group.description}
+        {!collapsed && (
+          <span className="flex flex-col flex-1 min-w-0">
+            <span className="font-medium">{group.label}</span>
+            <span className="text-xs mt-0.5 text-white/35">
+              {group.description}
+            </span>
           </span>
-        </span>
-        <ChevronDown
-          size={15}
-          className={cn(
-            "shrink-0 text-white/40 transition-transform duration-200",
-            isOpen && "rotate-180",
-          )}
-        />
+        )}
+        {!collapsed && (
+          <ChevronDown
+            size={15}
+            className={cn(
+              "shrink-0 text-white/40 transition-transform duration-200",
+              isOpen && "rotate-180",
+            )}
+          />
+        )}
       </button>
-      {isOpen && (
+      {isOpen && !collapsed && (
         <div className="ml-4 mt-1 grid gap-1 border-l border-white/10 pl-3">
           {group.items.map((item) => (
             <NavLink
@@ -331,6 +369,7 @@ function NavGroup({
               description={item.description}
               onClick={onNavClick}
               compact
+              collapsed={collapsed}
             />
           ))}
         </div>
