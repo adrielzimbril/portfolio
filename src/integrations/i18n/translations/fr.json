@@ -201,7 +201,7 @@
       },
       "setup-section": {
         "title": "Mon Setup",
-        "badge": "Setup "
+        "badge": "Matériel"
       }
     },
     "setup": {
@@ -216,12 +216,15 @@
         "keyboard": "Clavier",
         "mechanical": "Mécanique",
         "monitor": "Écran",
+        "mouse": "Souris",
         "chair": "Chaise",
         "desk": "Bureau",
         "microphone": "Microphone",
         "streaming": "Streaming",
         "lighting": "Éclairage",
-        "capture": "Capture"
+        "capture": "Capture",
+        "webcam": "Webcam",
+        "controller": "Manette"  
       }
     }
   },
