@@ -31,7 +31,7 @@ export function EmojiPlaceholder({
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center size-full pointer-events-none",
+        "row-1 relative flex items-center justify-center size-full w-[stretch]! max-w-104 pointer-events-none",
         !unOrdered && "md:order-2",
         (variant === "default" || variant === "bordered") &&
           "size-fit md:size-[90%] aspect-square",
