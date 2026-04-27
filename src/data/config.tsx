@@ -149,8 +149,8 @@ export const siteConfig = {
           key: "figma",
           url: "https://go.adrielzimbril.com/fg",
           icon: Figma,
-          navbar: false,
-          available: false,
+          navbar: true,
+          available: true,
         },
         tiktok: {
           name: "Tiktok",
