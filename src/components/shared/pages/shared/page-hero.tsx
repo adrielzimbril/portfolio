@@ -35,7 +35,7 @@ export function PageHero({
   onClick?: () => void;
 }) {
   return (
-    <SectionBase>
+    <SectionBase className="flex-row-3">
       {imagePath && (
         <EmojiPlaceholder
           src={imagePath}
