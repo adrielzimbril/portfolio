@@ -109,7 +109,6 @@ const environmentVariablesSchema = z.object({
   TURNSTILE_SECRET_KEY: z.string().optional(),
 
   // Performance
-  SITE_URL: z.string().optional(),
   PAGESPEED_API_KEY: z.string().optional(),
   LIGHTHOUSE_CACHE_DAYS: z.string().default("10"),
 
@@ -202,7 +201,6 @@ export function validateEnvironmentVariables(): EnvVars {
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
     NEXT_PRIVATE_TURNSTILE_SECRET_KEY:
       process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
-    SITE_URL: process.env.SITE_URL,
     PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
     LIGHTHOUSE_CACHE_DAYS: process.env.LIGHTHOUSE_CACHE_DAYS,
     NEXT_PUBLIC_REST_API_ENDPOINT: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
