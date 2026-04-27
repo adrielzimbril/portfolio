@@ -1,7 +1,7 @@
 ---
 ref: "adriel"
 displayName: "Adriel Zimbril"
-email: "contact@adrielzimbril.com"
+email: "hello@adrielzimbril.com"
 bio: "Full-stack web developer passionate about modern technologies."
 avatar: "/img/authors/adriel.jpg"
 social:
@@ -9,4 +9,3 @@ social:
   github: "adrielzimbril"
   linkedin: "adrielzimbril"
 ---
-
