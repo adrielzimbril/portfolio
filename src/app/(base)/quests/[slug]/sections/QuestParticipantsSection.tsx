@@ -19,6 +19,7 @@ import { LinkDiagonalOne } from "@aurthle/icons";
 import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
 import type { Quest } from "@/integrations/content/lib/quests";
 import { useTranslations } from "use-intl";
+import { PreviewContent } from "@/components/shared/pages/shared/preview";
 
 type Winner = NonNullable<Quest["winners"]>[number];
 
@@ -79,15 +80,25 @@ function WinnerCard({ participant }: { participant: Winner }) {
               "p-2 h-48 md:h-80",
             )}
           >
-            <Link href={workUrl} className="flex size-full">
+            <Link href={profileUrl || workUrl} className="flex size-full">
               <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
-                <Image
-                  width={1200}
-                  height={630}
-                  className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
-                  alt={participant.name}
-                  src={getImageUrl(participant.work_cover)}
-                />
+                {participant.work_cover ? (
+                  <Image
+                    width={1200}
+                    height={630}
+                    className="size-full h-48 md:h-72 object-cover transition-all duration-800 ease hover:scale-105"
+                    alt={participant.name}
+                    src={getImageUrl(participant.work_cover)}
+                  />
+                ) : (
+                  <PreviewContent
+                    emoji={rankBadge.emoji ?? t("page-sections.preview.emoji")}
+                    title={participant.name ?? t("page-sections.preview.title")}
+                    description={
+                      participant.role ?? t("page-sections.preview.description")
+                    }
+                  />
+                )}
               </div>
             </Link>
             <div className="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
@@ -163,7 +174,7 @@ function WinnerCard({ participant }: { participant: Winner }) {
 
         <div className="flex justify-between items-center gap-2">
           <Link
-            href={workUrl}
+            href={profileUrl || workUrl}
             likeButton
             whileTap
             size="xs"
