@@ -208,7 +208,7 @@ To add a new translation key:
 
 I'm always happy to discuss new projects, collaborations, or simply exchange creative ideas. Here's how to contact me:
 
-- **📧 Email**: [contact@adrielzimbril.com](mailto:contact@adrielzimbril.com)
+- **📧 Email**: [hello@adrielzimbril.com](mailto:hello@adrielzimbril.com)
 - **🌐 Website**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)
 - **🐦 Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)
 - **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbril](https://www.linkedin.com/in/adrielzimbril)

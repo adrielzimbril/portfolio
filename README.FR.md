@@ -208,7 +208,7 @@ Pour ajouter une nouvelle clé de traduction :
 
 Je suis toujours ravi de discuter de nouveaux projets, collaborations ou simplement échanger sur des idées créatives. Voici comment me contacter :
 
-- **📧 Email**: [contact@adrielzimbril.com](mailto:contact@adrielzimbril.com)
+- **📧 Email**: [hello@adrielzimbril.com](mailto:hello@adrielzimbril.com)
 - **🌐 Site**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)
 - **🐦 Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)
 - **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbril](https://www.linkedin.com/in/adrielzimbril)
