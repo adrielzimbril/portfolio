@@ -61,7 +61,7 @@ export async function getLighthouseStats(): Promise<LighthouseStats> {
     },
     ["lighthouse-stats"],
     {
-      revalidate: 86400, // Revalider tous les jours
+      revalidate: 86400, // Revalidate every day
       tags: ["stats", "lighthouse"],
     },
   )();

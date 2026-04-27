@@ -56,7 +56,9 @@ export function Tags({
       )}
 
       {tags?.map((tag, index) => (
-        <Badge key={index}>{tag}</Badge>
+        <Badge className="h-auto" key={index}>
+          {tag}
+        </Badge>
       ))}
     </div>
   );
