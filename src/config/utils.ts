@@ -148,7 +148,6 @@ export function getEnvVars(): Record<string, string | undefined> {
       ConfigValue.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
 
     // Performance
-    SITE_URL: ConfigValue.SITE_URL,
     PAGESPEED_API_KEY: ConfigValue.PAGESPEED_API_KEY,
     LIGHTHOUSE_CACHE_DAYS: ConfigValue.LIGHTHOUSE_CACHE_DAYS,
 

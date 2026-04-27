@@ -127,7 +127,6 @@ export const ConfigValue = {
     process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
 
   // Performance
-  SITE_URL: process.env.SITE_URL,
   PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
   LIGHTHOUSE_CACHE_DAYS: process.env.LIGHTHOUSE_CACHE_DAYS || "10",
 
