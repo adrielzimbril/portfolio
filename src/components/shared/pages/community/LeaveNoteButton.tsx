@@ -1,0 +1,60 @@
+"use client";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { cn } from "@/utils/utils";
+import { useTranslations } from "use-intl";
+import { ChatBubbleCircle } from "@aurthle/icons";
+import { LoginModal } from "@/components/shared/pages/community/LoginModal";
+import { CommentForm } from "@/components/shared/pages/community/CommentForm";
+
+interface LeaveNoteButtonProps {
+  user: any;
+}
+
+export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
+  const t = useTranslations();
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div className="flex justify-center mt-8">
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button
+            variant="default"
+            asIcon
+            asPointer
+            className={cn(
+              "squircle squircle-smooth-lg squircle-2xl",
+              "flex items-center gap-3 px-6 py-4",
+            )}
+          >
+            <div className="relative">
+              <StatusBadge
+                status={user ? "online" : "busy"}
+                showIndicator
+                animated
+                size="sm"
+              />
+            </div>
+            <span className="flex items-center gap-2">
+              {/* <ChatBubbleCircle size={24} variant="bulk" /> */}
+              {/* {user
+                ? t("community.leave-note.online")
+                : t("community.leave-note.button")} */}
+              {t("community.leave-note.button")}
+            </span>
+          </Button>
+        </DialogTrigger>
+        <DialogContent size={user ? "2xl" : "md"}>
+          {user ? (
+            <CommentForm user={user} onSuccess={() => setOpen(false)} />
+          ) : (
+            <LoginModal />
+          )}
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}

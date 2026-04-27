@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/supabase-live-check",
+      "schedule": "0 0 * * 0"
+    },
+    {
+      "path": "/api/cron/backup-database",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}

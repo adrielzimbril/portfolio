@@ -1,0 +1,85 @@
+export const landlordRoutes = {
+  landlord: {
+    name: "Landlord Dashboard",
+    key: "landlord",
+    link: "/landlord",
+    inHeader: false,
+    inSitemap: false,
+  },
+  login: {
+    name: "Landlord Login",
+    key: "landlord-login",
+    link: "/landlord/login",
+    inHeader: false,
+    inSitemap: false,
+  },
+  community: {
+    name: "Mur communautaire",
+    key: "landlord-community",
+    link: "/landlord/community",
+    inHeader: false,
+    inSitemap: false,
+  },
+  quests: {
+    registrations: {
+      name: "Inscriptions",
+      key: "landlord-quests-registrations",
+      link: "/landlord/quests/registrations",
+      inHeader: false,
+      inSitemap: false,
+    },
+    submissions: {
+      name: "Soumissions",
+      key: "landlord-quests-submissions",
+      link: "/landlord/quests/submissions",
+      inHeader: false,
+      inSitemap: false,
+    },
+  },
+  hub: {
+    requests: {
+      name: "Hub Requests",
+      key: "landlord-hub-requests",
+      link: "/landlord/hub/requests",
+      inHeader: false,
+      inSitemap: false,
+    },
+    productLinks: {
+      name: "Product Links",
+      key: "landlord-hub-product-links",
+      link: "/landlord/hub/product-links",
+      inHeader: false,
+      inSitemap: false,
+    },
+  },
+  tables: {
+    newsletter: {
+      name: "Newsletter",
+      key: "landlord-newsletter",
+      link: "/landlord/newsletter",
+      inHeader: false,
+      inSitemap: false,
+    },
+    users: {
+      name: "Users",
+      key: "landlord-users",
+      link: "/landlord/users",
+      inHeader: false,
+      inSitemap: false,
+    },
+    submissions: {
+      name: "Submissions",
+      key: "landlord-submissions",
+      link: "/landlord/submissions",
+      inHeader: false,
+      inSitemap: false,
+    },
+    reactions: {
+      name: "Reactions",
+      key: "landlord-reactions",
+      link: "/landlord/reactions",
+      inHeader: false,
+      inSitemap: false,
+    },
+  },
+};
