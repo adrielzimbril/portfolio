@@ -23,14 +23,15 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     dangerouslyAllowLocalIP: IsDEV,
-    formats: ["image/avif", "image/webp"],
-    qualities: [60, 75],
     remotePatterns: [
       // production
       {
         protocol: "https",
+        hostname: "adrielzimbril.com",
+      },
+      {
+        protocol: "https",
         hostname: "www.adrielzimbril.com",
-        pathname: "/img/**",
       },
       {
         protocol: "https",
