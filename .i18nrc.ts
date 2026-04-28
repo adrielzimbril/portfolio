@@ -1,22 +1,19 @@
-// This file is intentionally kept in CommonJS format (.cjs)
-// to resolve compatibility issues with dependencies that require CommonJS.
-// Do not convert this file to ESModule format unless all dependencies support it.
-const { defineConfig } = require("@lobehub/i18n-cli");
+import { defineConfig } from "@lobehub/i18n-cli";
 
 const config = {
-  modelName: "gpt-5-mini",
-  mode: "content", // "default" or "content"
-  isMdx: false, // Set to true if you are using MDX files
+  modelName: "gpt-5-nano" as any,
+  mode: "default", // "default" for i18n translations files or "content" for md/mdx files
+  isMdx: false, // Set to true if you are using MDX files (I currently use mdx files for content, and md for tags, and categories and others)
 };
 
-module.exports = defineConfig({
+export default defineConfig({
   modelName: config.modelName,
   entry:
     config.mode === "default"
       ? "src/integrations/i18n/translations/fr.json"
       : "src/data/personal/translate",
   entryLocale: "fr",
-  temperature: config.modelName === "gpt-5-mini" ? 1 : 0,
+  temperature: config.modelName === "gpt-5-nano" ? 1 : 0,
   output:
     config.mode === "default"
       ? "src/integrations/i18n/translations"
@@ -51,6 +48,8 @@ module.exports = defineConfig({
       7. Preserve line breaks, indentation, and spacing.
       8. Never add \`\`\` fences or comments.
       9. Never reformat or restructure the file — it must remain valid MDX.
+      10. Keep the file structure intact and respect emojis and special characters.
+      11. Ensure you correctly added any "accent" characters and character encoding is utf-8.
 
     Output:
     Return the fully translated MDX content with all the above rules applied, ready to save directly as a \`.mdx\` file. Do not add any extra text or explanation.

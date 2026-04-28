@@ -20,7 +20,10 @@
     "db:types": "npx supabase gen types typescript --linked > ./src/integrations/supabase/types.ts",
     "db:reset": "npx supabase db reset --linked",
     "db:diff": "npx supabase db diff --linked",
-    "skeleton": "npx boneyard-js build"
+    "skeleton": "npx boneyard-js build",
+    "translate": "npx lobe-i18n",
+    "translate:lint": "npx lobe-i18n lint",
+    "translate:md": "npx lobe-i18n md"
   },
   "dependencies": {
     "@aurthle/emoji-hub": "^1.0.5",
