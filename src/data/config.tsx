@@ -96,6 +96,14 @@ export const siteConfig = {
           navbar: true,
           available: true,
         },
+        githubRepo: {
+          name: "GitHub Repository",
+          key: "github-repo",
+          url: "https://go.adrielzimbril.com/ghr",
+          icon: Github,
+          navbar: false,
+          available: false,
+        },
         producthunt: {
           name: "Product Hunt",
           key: "product-hunt",

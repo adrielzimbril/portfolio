@@ -38,7 +38,7 @@ export function CardInfo({
 
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
-    <Link href={getExternalUrl(slug)}>
+    <Link href={getExternalUrl(slug)} target="_blank">
       <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
         {title}
       </h3>

@@ -1,5 +1,11 @@
 # Portfolio - Adriel Zimbril
 
+> 🌟 **Aperçu visuel :** Consulte la [Galerie d'aperçus du Portfolio](preview/preview.md) pour explorer l'interface.
+
+|                 Mode Clair                  |                 Mode Sombre                 |
+| :-----------------------------------------: | :-----------------------------------------: |
+| ![preview-light](preview/preview-light.png) | ![preview-dark](preview/preview-dark.png)   |
+
 ## 🚀 À propos
 
 Portfolio professionnel d'**Adriel Zimbril**, développeur Fullstack passionné et créatif. Ce portfolio présente mes compétences, projets et expertise dans le développement web moderne, avec une attention particulière portée à l'expérience utilisateur et aux performances.

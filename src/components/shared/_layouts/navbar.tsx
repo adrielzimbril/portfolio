@@ -69,7 +69,7 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white",
+            "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white shadow-md",
             hasScrolled
               ? "px-2 py-1 backdrop-blur-lg bg-b-white/80"
               : "shadow-none",
@@ -87,7 +87,7 @@ export function Navbar() {
             >
               <Image
                 className="size-10! lg:size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
-                src={getImageUrl("icon-four.png")}
+                src={getImageUrl("icon-five.png")}
                 alt={siteConfig.description}
                 width={256}
                 height={256}

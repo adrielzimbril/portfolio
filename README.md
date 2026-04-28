@@ -1,6 +1,6 @@
 # Portfolio - Adriel Zimbril
 
-> 🌟 **Visual Showcase:** Check out the [PulsorClip Preview Gallery](preview/preview.md) to see the UI.
+> 🌟 **Visual Showcase:** Check out the [Portfolio Preview Gallery](preview/preview.md) to explore the UI.
 
 |                 Light Mode                  |                 Dark Mode                 |
 | :-----------------------------------------: | :---------------------------------------: |

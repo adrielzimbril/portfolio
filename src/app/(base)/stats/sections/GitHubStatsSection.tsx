@@ -51,7 +51,7 @@ export async function GitHubStatsSection({
           <ContributionGraphCard contributions={contributions} />
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
             <Link
-              href={siteConfig.links.contact.social.github.url}
+              href={siteConfig.links.contact.social.githubRepo.url}
               likeButton
               whileTap
             >
@@ -84,7 +84,7 @@ export async function GitHubStatsSection({
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
               <Link
-                href={siteConfig.links.contact.social.github.url}
+                href={siteConfig.links.contact.social.githubRepo.url}
                 likeButton
                 whileTap
               >
