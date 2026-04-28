@@ -248,6 +248,15 @@ Si ce projet vous plaît, n'hésitez pas à :
 - ✨ Proposer des améliorations
 - 🚀 Partager avec d'autres passionnés
 
+## 💖 Soutenir le projet
+
+Si vous trouvez ce projet utile et souhaitez soutenir son développement, vous pouvez le faire via ces plateformes :
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/adrielzimbril)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-16be00?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/adrielzimbril)
+[![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://polar.sh/adrielzimbril)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/adrielzimbril)
+
 ## 📄 Licence
 
 Ce projet est sous licence MIT. N'hésitez pas à l'utiliser comme base pour votre propre portfolio ou projet.
