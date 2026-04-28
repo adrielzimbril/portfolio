@@ -54,6 +54,7 @@ export async function GitHubStatsSection({
               href={siteConfig.links.contact.social.githubRepo.url}
               likeButton
               whileTap
+              target="_blank"
             >
               <span className="font-bold text-base">
                 {t("common.button.see")}
@@ -87,6 +88,7 @@ export async function GitHubStatsSection({
                 href={siteConfig.links.contact.social.githubRepo.url}
                 likeButton
                 whileTap
+                target="_blank"
               >
                 <span className="font-bold text-base">
                   {t("common.button.see")}
