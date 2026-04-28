@@ -10,194 +10,28 @@
 
 Portfolio professionnel d'**Adriel Zimbril**, développeur Fullstack passionné et créatif. Ce portfolio présente mes compétences, projets et expertise dans le développement web moderne, avec une attention particulière portée à l'expérience utilisateur et aux performances.
 
-## ✨ Fonctionnalités
+## 📖 Documentation
 
-### 🎨 Design & UX
+Pour des informations détaillées sur le projet, veuillez vous référer aux sections suivantes :
 
-- **Design moderne et responsive** adapté à tous les appareils
-- **Mode sombre/clair** avec transition fluide
-- **Animations fluides** pour une expérience utilisateur immersive
-- **Interface intuitive** avec navigation claire et structurée
-- **Optimisation des performances** avec Next.js et Turbopack
+- **✨ [Fonctionnalités & Sections](preview/features.FR.md)** : Explorez toutes les pages et les fonctionnalités uniques du portfolio.
+- **🛠️ [Stack Technique & Structure](preview/tech-stack.FR.md)** : Vue d'ensemble détaillée des technologies et de l'organisation des fichiers du projet.
+- **🚀 [Installation & Configuration](preview/setup.FR.md)** : Étapes d'installation, variables d'environnement et commandes de base de données.
+- **🌍 [Internationalisation](preview/i18n.FR.md)** : Fonctionnement du système de traduction et ajout de nouvelles langues.
 
-### 📱 Sections principales
-
-1. **Accueil** - Présentation personnelle et mise en avant des projets, ressources, réflexions
-2. **Projets** - Portfolio de réalisations avec détails techniques
-3. **À propos** - Parcours professionnel et compétences
-4. **Réflexions (Blog)** - Articles et réflexions sur le développement
-5. **Ressources (Hub)** - Formations, e-books, vidéos, templates, code
-6. **Challenges (Quests)** - Challenges créatifs avec inscription et soumission
-7. **Conférences (Talks)** - Masterclasses et sessions en ligne
-8. **Connexions** - Réseau et personnes rencontrées
-9. **Contact** - Formulaire de contact et réseaux sociaux
-10. **Livre d'Or (Community)** - Messages des visiteurs
-11. **Statistiques** - Métriques et performance du site
-12. **Changelog** - Historique des évolutions
-13. **Newsletter** - Inscription à la newsletter
-14. **Soumettre un projet** - Formulaire pour le ShiroSaaS Lab
-15. **Outils (Toolbox)** - Stack et setup de développement
-16. **Plan du site (Routes)** - Navigation complète
-17. **RSS** - Flux RSS du site
-18. **Légal** - Politique de confidentialité et CGU
-
-### 🛠️ Stack technique
-
-- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS 4
-- **Backend**: API Routes, Server Components
-- **Base de données**: Supabase
-- **Authentification**: Better Auth
-- **Déploiement**: Vercel
-- **CI/CD**: GitHub Actions
-- **Tâches planifiées**: Trigger.dev
-- **Autres outils**: Radix UI, React Hook Form, Zod, React Email, Motion, Lenis
-
-## 🚀 Installation et démarrage
-
-### Prérequis
-
-- Node.js 18+
-- pnpm (recommandé) ou npm/yarn
-- Compte Supabase (pour les fonctionnalités backend)
-
-### Instructions d'installation
+## 🚀 Démarrage Rapide
 
 ```bash
-# Cloner le dépôt
-git clone [url-du-repo]
-
-# Se déplacer dans le répertoire du projet
-cd shirofolio
-
 # Installer les dépendances
 pnpm install
 
-# Copier le fichier d'environnement exemple
+# Configurer l'environnement
 cp .env.example .env.local
-
-# Configurer les variables d'environnement dans .env.local
 
 # Lancer le serveur de développement
 pnpm dev
-
-# Pour le développement avec Trigger.dev (tâches planifiées)
-pnpm run dev:all
 ```
 
-## 🏗️ Structure du projet
-
-```
-src/
-├── app/                    # Routes de l'application (App Router)
-│   ├── (base)/            # Layout de base avec navigation
-│   │   ├── (home)/        # Page d'accueil
-│   │   ├── about/         # Page À propos
-│   │   ├── changelog/     # Page Changelog
-│   │   ├── community/     # Page Livre d'Or
-│   │   ├── connections/   # Page Connexions
-│   │   ├── contact/       # Page Contact
-│   │   ├── hub/           # Page Ressources
-│   │   ├── legal/         # Pages légales (privacy, terms)
-│   │   ├── newsletter/    # Page Newsletter
-│   │   ├── projects/      # Page Projets
-│   │   ├── quests/        # Page Challenges
-│   │   ├── routes/        # Page Plan du site
-│   │   ├── rss/           # Pages RSS
-│   │   ├── stats/         # Page Statistiques
-│   │   ├── submit/        # Page Soumettre projet
-│   │   ├── talks/         # Page Conférences
-│   │   ├── thoughts/      # Page Blog (réflexions)
-│   │   └── toolbox/       # Page Outils/Setup
-│   ├── api/               # Routes API
-│   ├── landlord/          # Section admin (dashboard)
-│   ├── image-proxy/       # Proxy d'images
-│   ├── globals.css        # Styles globaux
-│   ├── layout.tsx         # Layout racine
-│   └── metadata.ts        # Métadonnées globales
-├── components/            # Composants réutilisables
-│   ├── aurthle/          # Composants Aurthle
-│   ├── landlord/         # Composants admin
-│   ├── shared/           # Composants partagés
-│   └── ui/               # Composants d'interface utilisateur (Radix UI)
-├── config/               # Configuration de l'application
-├── content/              # Contenu statique (MDX, changelog, etc.)
-├── data/                 # Données statiques (routes, config, etc.)
-├── hooks/                # Hooks React personnalisés
-├── integrations/         # Intégrations (Supabase, i18n, etc.)
-├── lib/                  # Utilitaires et helpers
-├── types/                # Définitions TypeScript
-└── utils/                # Utilitaires divers
-```
-
-## 🎨 Personnalisation
-
-### Variables d'environnement
-
-**Variables obligatoires pour le développement:**
-
-```env
-# URL de l'application (obligatoire)
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-
-# Si vous utilisez Better Auth (recommandé):
-BETTER_AUTH_SECRET=votre-secret-securise
-
-# Si vous utilisez Supabase:
-NEXT_PUBLIC_SUPABASE_URL=votre-url-supabase
-NEXT_PUBLIC_SUPABASE_ANON_KEY=votre-cle-anon-supabase
-```
-
-**Variables optionnelles (pour fonctionnalités avancées):**
-
-```env
-# GitHub (pour les stats GitHub)
-NEXT_PRIVATE_GITHUB_TOKEN=votre-token-github
-NEXT_PUBLIC_GITHUB_USERNAME=votre-username
-NEXT_PUBLIC_GITHUB_REPO=votre-repo
-
-# Email (Brevo ou Resend)
-BREVO_API_KEY=votre-cle-brevo
-RESEND_API_KEY=votre-cle-resend
-
-# Stockage S3 (pour avatars, backups)
-S3_ACCESS_KEY_ID=votre-cle-s3
-S3_SECRET_ACCESS_KEY=votre-secret-s3
-S3_ENDPOINT=votre-endpoint-s3
-S3_REGION=votre-region-s3
-
-# Analytics
-NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=votre-id-ga
-
-# Tâches planifiées (Trigger.dev)
-TRIGGER_ACCESS_TOKEN=votre-token-trigger
-NEXT_TRIGGER_PUBLIC_APP_URL=votre-url-trigger
-```
-
-Pour une liste complète, voir le fichier `.env.example`.
-
-### Commandes Supabase
-
-```bash
-# Appliquer les migrations locales à la base de données distante
-pnpm db:push
-
-# Générer les types TypeScript depuis la base de données liée
-pnpm db:types
-
-# Réinitialiser la base de données locale
-pnpm db:reset
-
-# Voir les différences entre migrations locales et base distante
-pnpm db:diff
-```
-
-### Styles
-
-Le projet utilise Tailwind CSS avec des couleurs personnalisées et des utilitaires. Les styles globaux se trouvent dans `src/app/globals.css`.
-
-## 🌍 Traductions (next-intl)
-
-Le projet utilise `next-intl` pour l'internationalisation.
 
 - Les fichiers de traduction se trouvent dans `src/integrations/i18n/translations/`
 - Langues supportées : `fr.json`, `en.json`, `zh-CN.json`
