@@ -164,7 +164,7 @@ export function HeaderSection() {
         </Link>
 
         <Link
-          href={routes.projects.link}
+          href={routes.hub.link}
           variant="secondary"
           likeButton
           asFull
