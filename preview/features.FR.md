@@ -57,7 +57,36 @@
 ```
 src/
 ├── app/                    # Routes de l'application (App Router)
+│   ├── (base)/            # Layout de base avec navigation
+│   │   ├── (home)/        # Page d'accueil
+│   │   ├── about/         # Page À propos
+│   │   ├── changelog/     # Page Changelog
+│   │   ├── community/     # Page Livre d'Or
+│   │   ├── connections/   # Page Connexions
+│   │   ├── contact/       # Page Contact
+│   │   ├── hub/           # Page Ressources
+│   │   ├── legal/         # Pages légales (privacy, terms)
+│   │   ├── newsletter/    # Page Newsletter
+│   │   ├── projects/      # Page Projets
+│   │   ├── quests/        # Page Challenges
+│   │   ├── routes/        # Plan du site
+│   │   ├── rss/           # Pages RSS
+│   │   ├── stats/         # Page Statistiques
+│   │   ├── submit/        # Page Soumettre projet
+│   │   ├── talks/         # Page Conférences
+│   │   ├── thoughts/      # Page Blog (réflexions)
+│   │   └── toolbox/       # Page Outils/Setup
+│   ├── api/               # Routes API pour la logique backend
+│   ├── landlord/          # Section admin (dashboard)
+│   ├── image-proxy/       # Service de proxy d'images
+│   ├── globals.css        # Styles globaux et imports Tailwind
+│   ├── layout.tsx         # Layout racine
+│   └── metadata.ts        # Métadonnées SEO globales
 ├── components/            # Composants React réutilisables
+│   ├── aurthle/          # Composants spécialisés
+│   ├── landlord/         # Composants spécifiques à l'admin
+│   ├── shared/           # Composants partagés entre les pages
+│   └── ui/               # Primitives UI de base (Radix UI)
 ├── config/               # Fichiers de configuration de l'application
 ├── content/              # Contenu MDX statique (Blog, Projets, etc.)
 ├── data/                 # Données statiques et configuration locale
@@ -67,5 +96,11 @@ src/
 ├── types/                # Définitions TypeScript globales
 └── utils/                # Fonctions utilitaires générales
 ```
+
+## 🎨 Styles
+
+Le projet utilise **Tailwind CSS 4** avec un système de design personnalisé.
+- Les styles globaux se trouvent dans `src/app/globals.css`.
+- Les jetons de design personnalisés (couleurs, animations, polices) sont définis à l'aide de variables CSS et de la directive moderne `@theme` de Tailwind.
 
 > Pour une décomposition complète de la structure des fichiers, veuillez consulter directement le code source.

@@ -1,6 +1,6 @@
 # Portfolio - Adriel Zimbril
 
-> 🌟 **Aperçu visuel :** Consulte la [Galerie d'aperçus du Portfolio](preview/preview.md) pour explorer l'interface.
+> 🌟 **Aperçu visuel :** Consulte la [Galerie d'aperçus du Portfolio](preview/preview.FR.md) pour explorer l'interface.
 
 |                 Mode Clair                  |                 Mode Sombre                 |
 | :-----------------------------------------: | :-----------------------------------------: |

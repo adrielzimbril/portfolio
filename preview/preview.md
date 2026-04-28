@@ -1,77 +1,52 @@
-# Portfolio - Adriel Zimbril 🐼
+# 🖼️ Portfolio Preview & Documentation Hub 🐼
 
-Welcome to the visual gallery of the portfolio! Below you'll find screenshots of the interface in both light and dark mode.
+Welcome to the central documentation hub for Adriel Zimbril's portfolio. This page provides a visual overview of the project and serves as a directory for all technical documentation.
 
 ---
 
-## 🎨 General Interface
+## 🎨 Visual Gallery
 
-|                 Light Mode                 |                Dark Mode                 |
+Explore the interface in its two main states. The portfolio features a polished, modern design with full support for light and dark modes, smooth transitions, and premium animations.
+
+|                 Light Mode                 |                 Dark Mode                 |
 | :----------------------------------------: | :--------------------------------------: |
 | ![Portfolio Light Mode](preview-light.png) | ![Portfolio Dark Mode](preview-dark.png) |
 
-_Modern, minimal interface with full dark/light mode support, smooth transitions, and polished animations._
+---
+
+## 📖 Documentation Directory
+
+To understand the full scope of this project, explore the specialized documentation files below:
+
+### ✨ [Features & Tech Stack](features.md)
+Detailed list of all pages (Home, Projects, Hub, Quests, etc.) and the modern technology stack powered by Next.js 16, Tailwind CSS 4, and Supabase.
+
+### 🚀 [Setup & Configuration](setup.md)
+Comprehensive guide on how to clone the repository, install dependencies, and configure environment variables for local development.
+
+### 🌍 [Internationalization (i18n)](i18n.md)
+Learn how the multi-language system works (FR / EN / ZH-CN) and how to use **Lobe i18n** for automated translations.
+
+### 🛰️ [Deployment Guide](deployment.md)
+Step-by-step instructions for deploying the project on Vercel and setting up scheduled tasks with Trigger.dev.
 
 ---
 
-## ✨ Highlighted Features
+## 🏗️ Project Architecture
 
-### 🏠 Home
+The portfolio follows a modular structure within the `src/` directory, separating concerns between routes (`app/`), reusable components (`components/`), and data management (`integrations/`, `hooks/`, `utils/`).
 
-- Personal introduction with quick links to projects, resources, and reflections
-- Animated hero section with smooth navigation
-
-### 📂 Projects
-
-- Project grid with interactive cards and technical details
-- Filters by technology and project type
-
-### 💬 Guestbook (Community)
-
-- Infinite canvas where visitors can freely drop messages
-- Dynamic display of community wall cards
-
-### 📊 Statistics
-
-- Real-time site metrics (views, visitors, etc.)
-- GitHub stats with contribution graphs
-
-### 📚 Resources (Hub)
-
-- Catalog of resources: courses, e-books, videos, templates, code snippets
-- Filter and search system
-
-### 🎯 Challenges (Quests)
-
-- Creative challenges with registration and answer submission
-- Progress tracking interface
-
-### 🛠️ Tools (Toolbox)
-
-- Full tech stack and development setup overview
-- Technologies and tools used daily
-
-### 📝 Blog (Thoughts)
-
-- Articles and reflections on web development
-- MDX support with rich layout
-
-### 📋 Changelog
-
-- Detailed history of site updates
-- Clear and dated versioning
+For a high-level view of the file structure, refer to the [Tech Stack & Structure](features.md#🏗️-project-structure) section.
 
 ---
 
-## 🛠️ Tech Stack
+## 💬 Community & Feedback
 
-- **Next.js 16** + **React 19** + **TypeScript**
-- **Tailwind CSS 4** for styling
-- **Supabase** for the database
-- **Motion** (Framer Motion) for animations
-- **Radix UI** for accessible components
-- **next-intl** for internationalization (FR / EN / ZH-CN)
+If you have questions about the implementation or suggestions for improvement:
+- **GitHub Issues**: Report bugs or suggest features
+- **GitHub Discussions**: Discuss ideas or ask for help
+- **Contact**: Reach out via the [Portfolio Contact Page](https://www.adrielzimbril.com/contact)
 
 ---
 
-_(More screenshots can be added here as the portfolio evolves.)_
+_Developed with ❤️ by Adriel Zimbril_
