@@ -1,17 +1,16 @@
 "use client";
-import { ProgressProvider as AppProgressProvider } from "@bprogress/next/app"; 
-import { useTheme } from "next-themes";
+import { ProgressProvider as AppProgressProvider } from "@bprogress/next/app";
+import { useIsDarkMode } from "@/hooks/useIsDarkMode";
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
+  const isDarkMode = useIsDarkMode();
 
   return (
     <>
       <AppProgressProvider
-        color={isDark ? "#60a5fa" : "#2563eb"}
+        color={isDarkMode ? "#f5f5f5" : "#27272a"}
         height="3px"
-        options={{ showSpinner: true }}
+        options={{ showSpinner: false }}
         shallowRouting={false}
       >
         {children}
