@@ -69,6 +69,13 @@ If you find this project useful and would like to support its development, you c
 <!-- [![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://go.adrielzimbril.com/plr) -->
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://go.adrielzimbril.com/gs)
 
+## 🌐 Hosting
+
+This project is 100% hosted on modern cloud infrastructure for maximum performance and reliability:
+
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
+
 ## 📄 License
 
 This project is under the MIT license. Feel free to use it as a base for your own portfolio or project.
