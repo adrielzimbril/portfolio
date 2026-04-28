@@ -17,6 +17,7 @@ Pour des informations détaillées sur le projet, veuillez vous référer aux se
 - **✨ [Fonctionnalités & Stack Technique](preview/features.FR.md)** : Explorez les fonctionnalités, la stack technologique et la structure du projet.
 - **🚀 [Installation & Configuration](preview/setup.FR.md)** : Étapes d'installation, variables d'environnement et commandes de base de données.
 - **🌍 [Internationalisation](preview/i18n.FR.md)** : Fonctionnement du système de traduction et ajout de nouvelles langues.
+- **🗄️ [Base de Données & Supabase](preview/database.FR.md)** : Détails sur la structure de la base, les crons Supabase et les sauvegardes auto.
 - **🛰️ [Guide de Déploiement](preview/deployment.FR.md)** : Comment déployer le projet sur Vercel et configurer les tâches planifiées.
 
 ## 🚀 Démarrage Rapide

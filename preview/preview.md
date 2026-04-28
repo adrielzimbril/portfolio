@@ -27,6 +27,9 @@ Comprehensive guide on how to clone the repository, install dependencies, and co
 ### 🌍 [Internationalization (i18n)](i18n.md)
 Learn how the multi-language system works (FR / EN / ZH-CN) and how to use **Lobe i18n** for automated translations.
 
+### 🗄️ [Database & Supabase](database.md)
+Explore the database architecture, Supabase scheduled tasks (crons), and the automated daily backup system to S3.
+
 ### 🛰️ [Deployment Guide](deployment.md)
 Step-by-step instructions for deploying the project on Vercel and setting up scheduled tasks with Trigger.dev.
 

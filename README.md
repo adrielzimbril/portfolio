@@ -17,6 +17,7 @@ For detailed information about the project, please refer to the following sectio
 - **✨ [Features & Tech Stack](preview/features.md)**: Explore the functionalities, technology stack, and project structure.
 - **🚀 [Setup & Configuration](preview/setup.md)**: Step-by-step installation, environment variables, and database commands.
 - **🌍 [Internationalization](preview/i18n.md)**: How the translation system works and how to add new languages.
+- **🗄️ [Database & Supabase](preview/database.md)**: Details about the database structure, Supabase crons, and automated backups.
 - **🛰️ [Deployment Guide](preview/deployment.md)**: How to deploy the project on Vercel and setup scheduled tasks.
 
 ## 🚀 Quick Start

@@ -27,6 +27,9 @@ Guide complet sur la façon de cloner le dépôt, d'installer les dépendances e
 ### 🌍 [Internationalisation (i18n)](i18n.FR.md)
 Découvrez comment fonctionne le système multilingue (FR / EN / ZH-CN) et comment utiliser **Lobe i18n** pour les traductions automatisées.
 
+### 🗄️ [Base de Données & Supabase](database.FR.md)
+Explorez l'architecture de la base de données, les tâches planifiées Supabase (crons) et le système de sauvegarde quotidienne automatique vers S3.
+
 ### 🛰️ [Guide de Déploiement](deployment.FR.md)
 Instructions étape par étape pour déployer le projet sur Vercel et configurer les tâches planifiées avec Trigger.dev.
 
