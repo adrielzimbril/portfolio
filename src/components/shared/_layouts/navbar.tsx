@@ -3,7 +3,7 @@ import { NavMenu } from "@/components/shared/_layouts/nav-menu";
 import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
 import { siteConfig } from "@/data/config";
 import { cn } from "@/utils/utils";
-import { Menu, X } from "@aurthle/icons";
+import { Menu, X, Github } from "@aurthle/icons";
 import { useScroll, type Variants } from "motion/react";
 import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
@@ -114,9 +114,21 @@ export function Navbar() {
                 </Link>
               </div>
               <ThemeToggle />
-              <Button
-                className="lg:hidden"
+              <Link
+                className="hidden lg:block md:size-auto md:p-2 aspect-square"
                 size="icon"
+                likeButton
+                asIcon
+                target="_blank"
+                href={siteConfig.links.contact.social.githubRepo.url}
+              >
+                <Github size={24} className="size-5" variant="duotone" />
+              </Link>
+              <Button
+                className="lg:hidden md:size-auto md:p-2 aspect-square"
+                size="icon"
+                asIcon
+                asPointer
                 //variant="secondary"
                 onClick={toggleDrawer}
               >
@@ -171,9 +183,12 @@ export function Navbar() {
                   </Link>
                   <Button
                     onClick={toggleDrawer}
-                    className="border border-border rounded-md p-1 cursor-pointer"
+                    className="border border-border rounded-md p-2 cursor-pointer"
+                    whileTap
+                    asIcon
+                    size="icon"
                   >
-                    <X className="size-8!" />
+                    <X size={20} className="size-5" />
                   </Button>
                 </div>
 
@@ -215,6 +230,14 @@ export function Navbar() {
               <div className="flex flex-col gap-2">
                 <Link href={routes.contact.link} likeButton whileTap asFull>
                   {t("common.page-sections.header.cta")}
+                </Link>
+                <Link
+                  href={siteConfig.links.contact.social.githubRepo.url}
+                  likeButton
+                  whileTap
+                  asFull
+                >
+                  {t("common.base.github-repo")}
                 </Link>
               </div>
             </div>
