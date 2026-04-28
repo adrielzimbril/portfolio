@@ -14,6 +14,7 @@ import logger from "@/utils/logger";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
+import { ProgressBar } from "@/components/shared/progress-bar";
 
 import { notFound } from "next/navigation";
 
@@ -69,15 +70,14 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           enableColorScheme
           disableTransitionOnChange
         >
+          <ProgressBar />
           <NextIntlClientProvider locale={locale} messages={messages}>
             <LayoutProvider>
               <TooltipProvider openDelay={0} closeDelay={0}>
                 <SyncProvider>
                   <ToastProvider>
                     <AnchoredToastProvider>
-                      <main>
-                        {children}
-                      </main>
+                      <main>{children}</main>
                     </AnchoredToastProvider>
                   </ToastProvider>
                 </SyncProvider>
