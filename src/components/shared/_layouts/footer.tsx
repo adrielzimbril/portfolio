@@ -113,6 +113,18 @@ export async function Footer() {
           <FooterLinks links={menuRoutesFiltered} />
           {/* <FooterResources resources={resources} /> */}
 
+          {/* Only used for Google Search Console login verification */}
+          <div className="hidden opacity-0">
+            <div className="flex flex-col gap-4 max-w-sms">
+              <Link href={routes.privacy.link}>
+                {t("common.menu.privacy.desktop")}
+              </Link>
+              <Link href={routes.terms.link}>
+                {t("common.menu.terms.desktop")}
+              </Link>
+            </div>
+          </div>
+
           <div className="flex flex-col md:flex-row w-full justify-center md:justify-between align-center place-content-center items-center gap-4 rounded-2xl py-4 md:px-6 bg-b-base dark:bg-zinc-900">
             <div className="flex items-center md:items-start gap-2 text-b-white-foreground dark:text-zinc-200">
               <p className="relative font-medium text-base text-center md:text-left">

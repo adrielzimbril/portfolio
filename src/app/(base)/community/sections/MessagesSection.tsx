@@ -2,11 +2,9 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
 import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
-import { DEMO_MESSAGES } from "@/app/(base)/community/sections/demo-message";
 import { apiRoutes } from "@/data/api-routes";
 import { useWindowEvent } from "@/hooks/useWindowEvent";
 
-// Helper function to add random pattern and rotation to messages
 const transformMessages = (msgs: any[]) =>
   msgs.map((msg: any) => ({
     ...msg,
@@ -15,10 +13,7 @@ const transformMessages = (msgs: any[]) =>
   }));
 
 export function MessagesSection() {
-  const [messages, setMessages] = useState(() =>
-    transformMessages(DEMO_MESSAGES),
-  );
-  const [isLoading, setIsLoading] = useState(true);
+  const [messages, setMessages] = useState<any[]>([]);
 
   const fetchMessages = useCallback(async () => {
     try {
@@ -29,10 +24,7 @@ export function MessagesSection() {
           setMessages(transformMessages(data.messages));
         }
       }
-    } catch (error) {
-    } finally {
-      setIsLoading(false);
-    }
+    } catch (error) {}
   }, []);
 
   useEffect(() => {

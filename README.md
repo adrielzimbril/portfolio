@@ -1,5 +1,11 @@
 # Portfolio - Adriel Zimbril
 
+> 🌟 **Visual Showcase:** Check out the [PulsorClip Preview Gallery](preview/preview.md) to see the UI.
+
+|                 Light Mode                  |                 Dark Mode                 |
+| :-----------------------------------------: | :---------------------------------------: |
+| ![preview-light](preview/preview-light.png) | ![preview-dark](preview/preview-dark.png) |
+
 ## 🚀 About
 
 Professional portfolio of **Adriel Zimbril**, passionate and creative Fullstack Developer. This portfolio showcases my skills, projects, and expertise in modern web development, with a particular focus on user experience and performance.

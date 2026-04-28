@@ -3,6 +3,8 @@ import { SectionLayout } from "@/components/shared/sections/layout";
 import { GitHubStatsCard } from "@/components/shared/pages/stats/GitHubStatsCard";
 import { ContributionGraphCard } from "@/components/shared/pages/stats/ContributionGraphCard";
 import { ContributionData } from "@/lib/stats/types";
+import { Link } from "@/components/ui/link";
+import { siteConfig } from "@/data/config";
 
 interface GitHubStatsSectionProps {
   stars: number;
@@ -47,6 +49,17 @@ export async function GitHubStatsSection({
             />
           </div>
           <ContributionGraphCard contributions={contributions} />
+          <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+            <Link
+              href={siteConfig.links.contact.social.github.url}
+              likeButton
+              whileTap
+            >
+              <span className="font-bold text-base">
+                {t("common.button.see")}
+              </span>
+            </Link>
+          </div>
         </>
       ) : (
         <>
@@ -68,6 +81,17 @@ export async function GitHubStatsSection({
                 label={t("stats.cards.github.commits")}
                 value={commits}
               />
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
+              <Link
+                href={siteConfig.links.contact.social.github.url}
+                likeButton
+                whileTap
+              >
+                <span className="font-bold text-base">
+                  {t("common.button.see")}
+                </span>
+              </Link>
             </div>
           </div>
         </>
