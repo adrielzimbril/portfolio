@@ -5,6 +5,7 @@
 - **Node.js**: version 18 or higher
 - **Package Manager**: pnpm (highly recommended) or npm/yarn
 - **Supabase Account**: required for backend features (community, quests, etc.)
+- **Trigger.dev Account**: optional, for background tasks
 
 ## 🛠️ Installation Instructions
 
@@ -30,27 +31,30 @@ pnpm run dev:all
 
 ## ⚙️ Environment Variables
 
-Copy `.env.example` to `.env.local` and fill in the required values.
+The project uses a strict validation system for environment variables. On startup, the application checks for required variables and logs warnings/errors if any are missing or invalid.
 
-### Required variables:
+### Required variables (Quick Start):
+Copy `.env.example` to `.env.local` and fill in at least these values to get started:
+
 ```env
 # Application URL
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# Better Auth (Authentication)
-BETTER_AUTH_SECRET=your-secure-secret
+# Authentication Provider (Options: "supabase" or "betterauth")
+AUTH_PROVIDER="supabase"
 
 # Supabase (Database & Auth)
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 
-### Optional variables:
-- **GitHub**: `NEXT_PRIVATE_GITHUB_TOKEN`, `NEXT_PUBLIC_GITHUB_USERNAME`
-- **Email**: `BREVO_API_KEY`, `RESEND_API_KEY`
-- **S3 Storage**: `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`
-- **Analytics**: `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID`
-- **Trigger.dev**: `TRIGGER_ACCESS_TOKEN`, `NEXT_TRIGGER_PUBLIC_APP_URL`
+### Environment Validation
+The validation logic is located in **`src/config/validate-environment-variables.ts`**. It uses **Zod** to ensure:
+- **Type Safety**: Variables are validated against a schema (URLs, strings, enums).
+- **Default Values**: Many variables have sensible defaults (e.g., `PORT: 3000`, `NODE_ENV: production`).
+- **Logging**: In development, the `logger` will notify you of any missing optional variables.
+
+> 💡 **Tip**: Refer to the extensive comments in **`.env.example`** for a full list of all available variables and how to obtain their values.
 
 ## 🗄️ Supabase Commands
 

@@ -77,7 +77,7 @@ Si vous trouvez ce projet utile et souhaitez soutenir son développement, vous p
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://go.adrielzimbril.com/bmc)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-16be00?style=for-the-badge&logo=ko-fi&logoColor=white)](https://go.adrielzimbril.com/kfi)
-[![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://go.adrielzimbril.com/plr)
+<!-- [![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://go.adrielzimbril.com/plr) -->
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://go.adrielzimbril.com/gs)
 
 ## 📄 Licence

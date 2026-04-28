@@ -5,6 +5,7 @@
 - **Node.js**: version 18 ou supérieure
 - **Gestionnaire de paquets**: pnpm (fortement recommandé) ou npm/yarn
 - **Compte Supabase**: requis pour les fonctionnalités backend (communauté, quêtes, etc.)
+- **Compte Trigger.dev**: optionnel, pour les tâches en arrière-plan
 
 ## 🛠️ Instructions d'Installation
 
@@ -30,27 +31,30 @@ pnpm run dev:all
 
 ## ⚙️ Variables d'Environnement
 
-Copiez `.env.example` vers `.env.local` et remplissez les valeurs requises.
+Le projet utilise un système de validation strict pour les variables d'environnement. Au démarrage, l'application vérifie les variables requises et consigne des avertissements ou des erreurs si certaines sont manquantes ou invalides.
 
-### Variables requises :
+### Variables requises (Démarrage rapide) :
+Copiez `.env.example` vers `.env.local` et remplissez au moins ces valeurs pour commencer :
+
 ```env
 # URL de l'application
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
-# Better Auth (Authentification)
-BETTER_AUTH_SECRET=votre-secret-securise
+# Fournisseur d'authentification (Options: "supabase" ou "betterauth")
+AUTH_PROVIDER="supabase"
 
 # Supabase (Base de données & Auth)
 NEXT_PUBLIC_SUPABASE_URL=votre-url-supabase
 NEXT_PUBLIC_SUPABASE_ANON_KEY=votre-cle-anon-supabase
 ```
 
-### Variables optionnelles :
-- **GitHub**: `NEXT_PRIVATE_GITHUB_TOKEN`, `NEXT_PUBLIC_GITHUB_USERNAME`
-- **Email**: `BREVO_API_KEY`, `RESEND_API_KEY`
-- **Stockage S3**: `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`
-- **Analytics**: `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID`
-- **Trigger.dev**: `TRIGGER_ACCESS_TOKEN`, `NEXT_TRIGGER_PUBLIC_APP_URL`
+### Validation de l'Environnement
+La logique de validation se trouve dans **`src/config/validate-environment-variables.ts`**. Elle utilise **Zod** pour garantir :
+- **Sécurité de type** : Les variables sont validées par rapport à un schéma (URLs, chaînes, enums).
+- **Valeurs par défaut** : De nombreuses variables ont des valeurs par défaut raisonnables (ex: `PORT: 3000`, `NODE_ENV: production`).
+- **Logs** : En développement, le `logger` vous informera de toutes les variables optionnelles manquantes.
+
+> 💡 **Conseil** : Reportez-vous aux nombreux commentaires dans **`.env.example`** pour une liste complète de toutes les variables disponibles et comment obtenir leurs valeurs.
 
 ## 🗄️ Commandes Supabase
 
