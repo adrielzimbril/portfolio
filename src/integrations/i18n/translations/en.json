@@ -289,7 +289,7 @@
           "label": "Messages"
         },
         "registrations": {
-          "detail": "Entrées register",
+          "detail": "Register entries",
           "label": "Registrations"
         },
         "submissions": {
@@ -1272,7 +1272,7 @@
       },
       "desc": "The page you are looking for does not exist… or no longer.",
       "title": "Looks like you got lost among the stars",
-      "title_old": "On <thin>dirait</thin> que vous vous êtes <thin>perdu</thin> dans les <thin>étoiles</thin> ✨"
+      "title_old": "Looks like you got <thin>lost</thin> among the <thin>stars</thin> ✨"
     },
     "title": "404 | Page not found 🪐"
   },

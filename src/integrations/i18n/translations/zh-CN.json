@@ -289,7 +289,7 @@
           "label": "消息"
         },
         "registrations": {
-          "detail": "Entrées register",
+          "detail": "注册条目",
           "label": "注册"
         },
         "submissions": {
@@ -565,14 +565,14 @@
         "default": "提交"
       },
       "talks": {
-        "default": " Conferences",
-        "desktop": "Conférences",
-        "mobile": "Conférences 🎤"
+        "default": "会议",
+        "desktop": "会议",
+        "mobile": "会议 🎤"
       },
       "terms": {
         "default": "使用条款",
-        "desktop": "CGU",
-        "mobile": "CGU 📜"
+        "desktop": "ToU",
+        "mobile": "ToU 📜"
       },
       "thoughts": {
         "default": "反思",
@@ -1170,7 +1170,7 @@
       },
       "greeting": "您好 {firstName},",
       "preview": "你的挑战报名已确认 📝",
-      "subject": "✅ Inscription bien recue"
+      "subject": "✅ 报名已收到"
     },
     "questSubmitAdminNotification": {
       "labels": {
@@ -1452,7 +1452,7 @@
         "badge": "参加挑战 🧪",
         "description": "请报名以获取官方简报、规则和活动步骤通过邮箱发送"
       },
-      "keywords": "challenge design, challenge UX UI, concours créatif, challenge SaaS, Adriel Zimbril",
+      "keywords": "挑战 设计, 挑战 UX UI, 创意竞赛, 挑战 SaaS, Adriel Zimbril",
       "title": "挑战报名"
     },
     "submit": {
@@ -1507,8 +1507,8 @@
         "badge": "参加挑战 🧪",
         "description": "在此提交你的作品以确认你的参与。你可能成为下一组三名获胜者 ⏤ 😏"
       },
-      "keywords": "Soumission projet SaaS, Product Designer, UX Review, Redesign Figma, Analyse site web, Feedback produit, ShiroSaaS, Design System, Product Design",
-      "title": "Shirosaas Lab 😮‍💨🧪"
+      "keywords": "提交 SaaS 项目, 产品设计师, UX 评审, Figma 重新设计, 网站分析, 产品反馈, ShiroSaaS, 设计系统, 产品设计",
+      "title": "创意实验室 😮‍💨🧪"
     },
     "title": "创意挑战 🎖️"
   },
@@ -1612,7 +1612,7 @@
       }
     },
     "description": "用于跟踪发展趋势的数字，而非炫耀。关于我的真实指标的透明度。",
-    "keywords": "统计数据 投资组合, analytics, métriques GitHub, Lighthouse 分数, 内容参与, Adriel Zimbril",
+    "keywords": "统计数据 作品集, analytics, GitHub 指标, Lighthouse 分数, 内容参与, Adriel Zimbril",
     "lighthouse": {
       "accessibility": "无障碍性",
       "bestPractices": "最佳实践",
