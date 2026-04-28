@@ -111,14 +111,14 @@
       "header-section": {
         "title": "Rencontres 🫂",
         "description": "Les personnes que j'ai eu le privilège de rencontrer et celles que j'espère rencontrer un jour. Construire des connexions significatives, une conversation à la fois.",
-        "badge": "Mon Réseau "
+        "badge": "Mon Réseau 🤝"
       }
     },
     "sections": {
       "people": {
         "title": "Personnes",
         "description": "Personnes que je veux rencontrer ou que j'ai déjà rencontrées.",
-        "badge": "Connexions "
+        "badge": "Connexions 🤝"
       }
     },
     "badge": {
@@ -138,7 +138,7 @@
       "wall": {
         "title": "Messages reçus",
         "description": "Tous les messages laissés par les visiteurs.",
-        "badge": "Guestbook"
+        "badge": "Guestbook 🎨"
       },
       "stats": {
         "messages": "Messages",
@@ -195,15 +195,15 @@
       "header-section": {
         "title": "Boîte à Outils",
         "description": "Mon arsenal d'outils matériels et logiciels que j'utilise chaque jour pour créer, développer et livrer des produits avec excellence et efficacité.",
-        "badge": "Ma Trousse "
+        "badge": "Ma Trousse 🛠️"
       },
       "tools-section": {
         "title": "Outils Quotidiens",
-        "badge": "Outils "
+        "badge": "Outils 🛠️"
       },
       "setup-section": {
         "title": "Mon Setup",
-        "badge": "Matériel"
+        "badge": "Matériel 💻"
       }
     },
     "setup": {
@@ -242,7 +242,7 @@
       "timeline": {
         "title": "Timeline",
         "description": "Historique des changements et améliorations.",
-        "badge": "Mises à jour ",
+        "badge": "Mises à jour ✨",
         "release": "release",
         "loadMore": "Charger plus",
         "filter": {
@@ -275,7 +275,7 @@
     }
   },
   "home": {
-    "title": "Hey ",
+    "title": "Hey",
     "description": "Product designer passionné par la simplification des expériences SaaS. J'accompagne les fondateurs à transformer leurs idées en produits réels, sans le jargon inutile.",
     "keywords": "design produit SaaS, SaaS Adriel Zimbril, Product Designer SaaS, création SaaS, UX UI SaaS",
     "page": {
@@ -290,69 +290,69 @@
     }
   },
   "about": {
-    "title": "Je suis ",
+    "title": "Je suis",
     "description": "Mon parcours, mes valeurs et pourquoi je fais ce que je fais. Pas de bio corporate, juste moi et ma passion pour le design produit.",
     "keywords": "à propos Adriel Zimbril, Product Designer SaaS, formateur SaaS, parcours design produit SaaS, méthode ShiroSaaS",
     "page": {
       "header-section": {
-        "title": "Hello, je suis  \n Adriel Zimbril  \n Product Designer & Formateur ",
+        "title": "Hello, je suis \n Adriel Zimbril 🐼 \n Product Designer & Formateur ",
         "description": "Depuis mes débuts dans le design, j’ai appris que le produit le plus réussi n’est pas celui qu’on voit en premier, mais celui qu’on comprend, teste et fait évoluer avec intention.",
-        "title-secondary": "Créer, simplifier, inspirer  \n Bienvenue dans mon univers ",
-        "description-secondary": "Sic itur ad astra — c'est ainsi qu'on atteint les étoiles .\n\nDepuis que je suis petit, j’ai toujours été fasciné par la technologie et l’invention. Iron Man m’a donné le goût du possible : je me souviens de mes yeux qui pétillaient en voyant son armure et de l’inspiration qui me traversait à chaque épisode. Je passais des heures à imaginer, bricoler, et rêver de créer mes propres robots.\n\nEn laissant libre cours à cette passion j'ai decouvert le design et avec le temps, j’ai compris que mon rêve ne se limitait pas à construire des machines : je voulais créer des expériences qui touchent les gens, qui résolvent de vrais problèmes et qui donnent envie d’être utilisées. Le design est devenu mon terrain de jeu, mon laboratoire pour imaginer, construire et transformer des idées brutes en produits concrets et concevoir des expériences qui comptent.\n\nAujourd'hui, je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.\n\nJ’aime questionner ce qui existe, explorer ce qui fonctionne et ce qui ne fonctionne pas, et construire de manière intentionnelle. Je préfère faire les choses avec un pourquoi plutôt que par habitude.\n\nEn parallèle, je partage les méthodes et ressources issues de mes expériences créatives pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance.\n\nPour moi, le design n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain.",
+        "title-secondary": "Créer, simplifier, inspirer 🧑🏻‍🚀 \n Bienvenue dans mon univers ",
+        "description-secondary": "Depuis que je suis petit, j’ai toujours été fasciné par la technologie et l’invention. Iron Man m’a donné le goût du possible : je me souviens de mes yeux qui pétillaient en voyant son armure et de l’inspiration qui me traversait à chaque épisode. Je passais des heures à imaginer, bricoler, et rêver de créer mes propres robots.\n\nEn laissant libre cours à cette passion j'ai decouvert le design et avec le temps, j’ai compris que mon rêve ne se limitait pas à construire des machines : je voulais créer des expériences qui touchent les gens, qui résolvent de vrais problèmes et qui donnent envie d’être utilisées. Le design est devenu mon terrain de jeu, mon laboratoire pour imaginer, construire et transformer des idées brutes en produits concrets et concevoir des expériences qui comptent.\n\nAujourd'hui, je transforme des idées en expériences concrètes, accompagnant fondateurs, équipes et créateurs à clarifier leurs problèmes, imaginer des solutions et les lancer rapidement. Mon approche combine design réfléchi, stratégie agile et apprentissage continu pour que chaque projet ait un vrai impact.\n\nJ’aime questionner ce qui existe, explorer ce qui fonctionne et ce qui ne fonctionne pas, et construire de manière intentionnelle. Je préfère faire les choses avec un pourquoi plutôt que par habitude.\n\nEn parallèle, je partage les méthodes et ressources issues de mes expériences créatives pour que d’autres puissent apprendre à concevoir et lancer des produits eux-mêmes, en toute confiance.\n\nPour moi, le design n’est pas un livrable isolé : c’est un processus collaboratif, créatif et humain.",
         "cta": "Voir mes projets"
       },
       "craft-section": {
-        "badge": "Votre allié produit & design ",
+        "badge": "Votre allié produit & design 🫶🏻",
         "title": "Transformer des idées en produits qui comptent.",
         "description": "Placer l’utilisateur au centre de chaque décision, guider et enseigner aux créateurs pour transformer chaque idées en expériences inoubliables."
       },
       "interactive-fun-facts-section": {
-        "badge": "Jouons ",
+        "badge": "Jouons 🤭",
         "badge-score": "Score:",
-        "title": "Qui suis-je vraiment ? ",
+        "title": "Qui suis-je vraiment ? 🕵️‍♂️",
         "description": "Parmi ces anecdotes, une seule est un mensonge… sauras-tu la démasquer ? Essaie de ne pas te tromper ",
         "buttons": {
           "show-all": {
             "want-response": {
-              "has-false": "Je veux les réponses ",
-              "has-true": "Je veux les réponses "
+              "has-false": "Je veux les réponses 😣",
+              "has-true": "Je veux les réponses 😄"
             },
-            "want-retry": "Recommencer le quiz "
+            "want-retry": "Recommencer le quiz 🔄"
           },
-          "retry": "Rejouer "
+          "retry": "Rejouer 🔄"
         },
         "sections": {
           "fact-alert": {
             "is-correct": {
               "true": {
                 "title": "Bravo !",
-                "description": "Tu as trouvé la bonne réponse ! "
+                "description": "Tu as trouvé la bonne réponse ! 😆"
               },
               "false": {
                 "title": "Pas tout à fait !",
-                "description": "Ce n'était pas la bonne réponse... "
+                "description": "Ce n'était pas la bonne réponse... 😖"
               }
             },
             "response": "Réponse"
           },
           "facts-modal": {
-            "title": "Créateur et Amoureux de SaaS ",
+            "title": "Créateur et Amoureux de SaaS 🦄❣️",
             "score": {
               "title": "Ton score : {score}/{total}",
               "state": {
-                "good": "Tu as tout bon, Oula tu me connais un peu trop ",
-                "medium": "Tu peux mieux faire ! ",
-                "bad": "Tu peux mieux faire ! "
+                "good": "Tu as tout bon, Oula tu me connais un peu trop 😄🏆",
+                "medium": "Tu peux mieux faire ! 😅",
+                "bad": "Tu peux mieux faire ! 😅"
               }
             },
             "badge": {
               "fact": {
-                "is-true": " Vérité",
-                "is-false": " Mensonge"
+                "is-true": "✅ Vérité",
+                "is-false": "❌ Mensonge"
               },
               "guessed": {
-                "correct": " Correct!",
-                "incorrect": " Raté!"
+                "correct": "🎯 Correct!",
+                "incorrect": "❌ Raté!"
               }
             }
           },
@@ -365,14 +365,14 @@
         }
       },
       "philosophy-section": {
-        "badge": "Unicorn ",
+        "badge": "Unicorn 🦄",
         "title": "Mon approche du design & du produit",
         "description": "Concevoir des produits en plaçant l’utilisateur au centre, tout en valorisant les équipes et les idées partagées pour construire ensemble."
       }
     }
   },
   "hub": {
-    "title": "Le Hub ",
+    "title": "Le Hub",
     "description": "Tout ce que j'aurais aimé avoir quand j'ai commencé. Des ressources concrètes pour gagner du temps et éviter les erreurs.",
     "keywords": "ressources SaaS Adriel Zimbril, outils SaaS, templates SaaS, Product Designer SaaS, UI kit SaaS",
     "page": {
@@ -389,12 +389,12 @@
     }
   },
   "projects": {
-    "title": "Mes projets ",
+    "title": "Mes projets",
     "description": "Des projets réels, pas des concepts. Chaque projet raconte une histoire de problème, solution et apprentissage.",
     "keywords": "projets SaaS Adriel Zimbril, portfolio SaaS, Product Designer SaaS, études de cas design, création SaaS",
     "page": {
       "header-section": {
-        "title": "Études de cas ",
+        "title": "Études de cas",
         "description": "Chaque projet est une aventure. Ici je partage les coulisses : les défis, les solutions trouvées et les résultats obtenus.",
         "cta": "Voir mes projets"
       }

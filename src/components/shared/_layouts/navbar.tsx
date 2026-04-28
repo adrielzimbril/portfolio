@@ -69,9 +69,9 @@ export function Navbar() {
       >
         <div
           className={cn(
-            "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white shadow-md",
+            "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white",
             hasScrolled
-              ? "px-2 py-1 backdrop-blur-lg bg-b-white/80"
+              ? "px-2 py-1 backdrop-blur-lg bg-b-white/60"
               : "shadow-none",
           )}
         >
