@@ -8,16 +8,16 @@
 
 ## 🚀 About
 
-Professional portfolio of **Adriel Zimbril**, passionate and creative Fullstack Developer. This portfolio showcases my skills, projects, and expertise in modern web development, with a particular focus on user experience and performance.
+Professional portfolio of **Adriel Zimbril**, developed with **Next.js 16** and **Tailwind CSS 4**. This project showcases my skills, projects, and expertise in modern web development, with a particular focus on user experience and performance.
 
 ## 📖 Documentation
 
 For detailed information about the project, please refer to the following sections:
 
-- **✨ [Features & Sections](preview/features.md)**: Explore all the pages and unique features of the portfolio.
-- **🛠️ [Tech Stack & Structure](preview/tech-stack.md)**: Detailed overview of the technologies and project file organization.
+- **✨ [Features & Tech Stack](preview/features.md)**: Explore the functionalities, technology stack, and project structure.
 - **🚀 [Setup & Configuration](preview/setup.md)**: Step-by-step installation, environment variables, and database commands.
 - **🌍 [Internationalization](preview/i18n.md)**: How the translation system works and how to add new languages.
+- **🛰️ [Deployment Guide](preview/deployment.md)**: How to deploy the project on Vercel and setup scheduled tasks.
 
 ## 🚀 Quick Start
 
@@ -49,17 +49,6 @@ I'm always happy to discuss new projects, collaborations, or simply exchange cre
 - 🎨 Creative at heart, whether in design or code
 - ☕ Addicted to coffee and complex technical challenges
 
-## 🛰️ Deployment
-
-The project is configured to be deployed on Vercel. To deploy:
-
-1. 🚀 Push your code to GitHub/GitLab
-2. 🌌 Create a new project on Vercel
-3. 🔗 Connect your repository
-4. ⚙️ Configure environment variables
-5. 🚀 Blast off!
-
-> 💡 For scheduled tasks, make sure to configure Trigger.dev with your Vercel instance.
 
 ## 🌟 Join the Adventure
 

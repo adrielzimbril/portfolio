@@ -8,16 +8,16 @@
 
 ## 🚀 À propos
 
-Portfolio professionnel d'**Adriel Zimbril**, développeur Fullstack passionné et créatif. Ce portfolio présente mes compétences, projets et expertise dans le développement web moderne, avec une attention particulière portée à l'expérience utilisateur et aux performances.
+Portfolio professionnel d'**Adriel Zimbril**, développé avec **Next.js 16** et **Tailwind CSS 4**. Ce portfolio présente mes compétences, projets et expertise dans le développement web moderne, avec une attention particulière portée à l'expérience utilisateur et aux performances.
 
 ## 📖 Documentation
 
 Pour des informations détaillées sur le projet, veuillez vous référer aux sections suivantes :
 
-- **✨ [Fonctionnalités & Sections](preview/features.FR.md)** : Explorez toutes les pages et les fonctionnalités uniques du portfolio.
-- **🛠️ [Stack Technique & Structure](preview/tech-stack.FR.md)** : Vue d'ensemble détaillée des technologies et de l'organisation des fichiers du projet.
+- **✨ [Fonctionnalités & Stack Technique](preview/features.FR.md)** : Explorez les fonctionnalités, la stack technologique et la structure du projet.
 - **🚀 [Installation & Configuration](preview/setup.FR.md)** : Étapes d'installation, variables d'environnement et commandes de base de données.
 - **🌍 [Internationalisation](preview/i18n.FR.md)** : Fonctionnement du système de traduction et ajout de nouvelles langues.
+- **🛰️ [Guide de Déploiement](preview/deployment.FR.md)** : Comment déployer le projet sur Vercel et configurer les tâches planifiées.
 
 ## 🚀 Démarrage Rapide
 
@@ -61,17 +61,6 @@ Je suis toujours ravi de discuter de nouveaux projets, collaborations ou simplem
 - 🎨 Créatif dans l'âme, que ce soit en design ou en code
 - ☕ Accro au café et aux défis techniques complexes
 
-## 🛰️ Déploiement
-
-Le projet est configuré pour être déployé sur Vercel. Pour déployer :
-
-1. 🚀 Poussez votre code sur GitHub/GitLab
-2. 🌌 Créez un nouveau projet sur Vercel
-3. 🔗 Connectez votre dépôt
-4. ⚙️ Configurez les variables d'environnement
-5. 🚀 Décollez !
-
-> 💡 Pour les tâches planifiées, assurez-vous d'avoir configuré Trigger.dev avec votre instance Vercel.
 
 ## 🌟 Rejoignez l'aventure
 
@@ -86,10 +75,10 @@ Si ce projet vous plaît, n'hésitez pas à :
 
 Si vous trouvez ce projet utile et souhaitez soutenir son développement, vous pouvez le faire via ces plateformes :
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/adrielzimbril)
-[![Ko-fi](https://img.shields.io/badge/Ko--fi-16be00?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/adrielzimbril)
-[![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://polar.sh/adrielzimbril)
-[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/adrielzimbril)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://go.adrielzimbril.com/bmc)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-16be00?style=for-the-badge&logo=ko-fi&logoColor=white)](https://go.adrielzimbril.com/kfi)
+[![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://go.adrielzimbril.com/plr)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://go.adrielzimbril.com/gs)
 
 ## 📄 Licence
 
