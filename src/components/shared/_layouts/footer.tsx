@@ -5,7 +5,7 @@ import {
   getBestResourcesLink,
   type ResourcePreview,
 } from "@/integrations/content/lib";
-import { getResourcesUrl, getThisMonth } from "@/utils";
+import { cn, getResourcesUrl, getThisMonth } from "@/utils";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { siteConfig } from "@/data/config";
 import { routes, type RouteType } from "@/data/routes";
@@ -79,7 +79,7 @@ export async function Footer() {
                       aria-label={name}
                     >
                       <span className="flex items-center size-full justify-center m-auto">
-                        <span className="capitalize">
+                        <span className={cn(social.key !== "email" && "capitalize")}>
                           {social.key !== "email"
                             ? t("common.base." + social.key)
                             : social.name}
