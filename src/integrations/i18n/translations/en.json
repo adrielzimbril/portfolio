@@ -589,11 +589,11 @@
       "cta": {
         "variant-one": {
           "button": "Talk SaaS 🦄",
-          "description": "<p>I share resources, my reflections, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br/> Looking to talk SaaS, design, product or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
+          "description": "<p>I share resources, my reflections, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Looking to talk SaaS, design, product or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
           "title": "Want to talk SaaS?"
         },
         "variant-two": {
-          "description": "<p>I share resources, my reflections, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br/> Looking to talk SaaS, design, product or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
+          "description": "<p>I share resources, my reflections, experiences, and advice on my <blog>Blog</blog> and on <linkedin>LinkedIn</linkedin> 🫶🏻.<br></br> Looking to talk SaaS, design, product or innovation? 💡 Write to me, I love to chat 👋🏻</p>",
           "form": {
             "button": "Talk SaaS 🦄",
             "placeholder": "Your email here… ✉️"
