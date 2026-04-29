@@ -9,7 +9,7 @@ export function ConnectionBadge({ met }: { met: string | null }) {
   const t = useTranslations();
 
   return (
-    <div className="absolute bottom-6 right-1/2 translate-x-1/2">
+    <div className="absolute -bottom-1 right-1/2 translate-x-1/2">
       {met ? (
         <Badge
           className={cn(
