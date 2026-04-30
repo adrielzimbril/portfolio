@@ -85,8 +85,8 @@ export const siteConfig = {
           key: "x",
           url: "https://go.adrielzimbril.com/x",
           icon: Xtwitter,
-          navbar: false,
-          available: false,
+          navbar: true,
+          available: true, false,
         },
         
         github: {
