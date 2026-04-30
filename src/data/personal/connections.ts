@@ -5,6 +5,18 @@ export const connections: Array<{
   met: string | null;
 }> = [
   {
+    id: "anais_allou",
+    name: "Anais Allou",
+    image: "/img/connections/anais_allou.jpg",
+    met: "2026-02-10",
+  },
+  {
+    id: "yannis_haismann",
+    name: "Yannis Haismann",
+    image: "/img/connections/yannis_haismann.jpg",
+    met: "2025-03-19",
+  },
+  {
     id: "anwuri_alabi",
     name: "Anwuri Alabi",
     image: "/img/connections/anwuri_alabi.jpg",
@@ -47,15 +59,15 @@ export const connections: Array<{
     met: null,
   },
   {
-    id: "samantha_ming",
-    name: "Samantha Ming",
-    image: "/img/connections/samantha_ming.jpg",
-    met: null,
-  },
-  {
     id: "bryl_lym",
     name: "Bryl Lym",
     image: "/img/connections/bryl_lym.jpg",
+    met: null,
+  },
+  {
+    id: "spike_yuan",
+    name: "Spike Yuan",
+    image: "/img/connections/spike_yuan.png",
     met: null,
   },
   {
@@ -107,6 +119,12 @@ export const connections: Array<{
     met: null,
   },
   {
+    id: "samantha_ming",
+    name: "Samantha Ming",
+    image: "/img/connections/samantha_ming.jpg",
+    met: null,
+  },
+  {
     id: "efy_saboutey",
     name: "Efy Saboutey",
     image: "/img/connections/efy_saboutey.jpg",
@@ -147,17 +165,5 @@ export const connections: Array<{
     name: "Somey Amegnibo",
     image: "/img/connections/somey_amegnibo.jpg",
     met: null,
-  },
-  {
-    id: "anais_allou",
-    name: "Anais Allou",
-    image: "/img/connections/anais_allou.jpg",
-    met: "2026-02-10",
-  },
-  {
-    id: "yannis_haismann",
-    name: "Yannis Haismann",
-    image: "/img/connections/yannis_haismann.jpg",
-    met: "2025-03-19",
   },
 ];
