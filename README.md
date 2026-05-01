@@ -40,7 +40,7 @@ I'm always happy to discuss new projects, collaborations, or simply exchange cre
 - **📧 Email**: [hello@adrielzimbril.com](mailto:hello@adrielzimbril.com)
 - **🌐 Website**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)
 - **🐦 Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)
-- **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbril](https://www.linkedin.com/in/adrielzimbril)
+- **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbrilcode](https://www.linkedin.com/in/adrielzimbrilcode)
 - **🐱‍💻 GitHub**: [https://github.com/adrielzimbril](https://github.com/adrielzimbril)
 
 ### 🐼 Fun Facts
@@ -49,7 +49,6 @@ I'm always happy to discuss new projects, collaborations, or simply exchange cre
 - 🐼 Love pandas (and animals in general!)
 - 🎨 Creative at heart, whether in design or code
 - ☕ Addicted to coffee and complex technical challenges
-
 
 ## 🌟 Join the Adventure
 
@@ -66,7 +65,9 @@ If you find this project useful and would like to support its development, you c
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://go.adrielzimbril.com/bmc)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-16be00?style=for-the-badge&logo=ko-fi&logoColor=white)](https://go.adrielzimbril.com/kfi)
+
 <!-- [![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://go.adrielzimbril.com/plr) -->
+
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://go.adrielzimbril.com/gs)
 
 ## 🌐 Hosting

@@ -2,9 +2,9 @@
 
 > 🌟 **Aperçu visuel :** Consulte la [Galerie d'aperçus du Portfolio](preview/preview.FR.md) pour explorer l'interface.
 
-|                 Mode Clair                  |                 Mode Sombre                 |
-| :-----------------------------------------: | :-----------------------------------------: |
-| ![preview-light](preview/preview-light.png) | ![preview-dark](preview/preview-dark.png)   |
+|                 Mode Clair                  |                Mode Sombre                |
+| :-----------------------------------------: | :---------------------------------------: |
+| ![preview-light](preview/preview-light.png) | ![preview-dark](preview/preview-dark.png) |
 
 ## 🚀 À propos
 
@@ -33,7 +33,6 @@ cp .env.example .env.local
 pnpm dev
 ```
 
-
 - Les fichiers de traduction se trouvent dans `src/integrations/i18n/translations/`
 - Langues supportées : `fr.json`, `en.json`, `zh-CN.json`
 - Utilisez `useTranslations()` dans les composants client
@@ -52,7 +51,7 @@ Je suis toujours ravi de discuter de nouveaux projets, collaborations ou simplem
 - **📧 Email**: [hello@adrielzimbril.com](mailto:hello@adrielzimbril.com)
 - **🌐 Site**: [https://www.adrielzimbril.com](https://www.adrielzimbril.com)
 - **🐦 Twitter**: [https://twitter.com/adrielzimbril](https://twitter.com/adrielzimbril)
-- **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbril](https://www.linkedin.com/in/adrielzimbril)
+- **💼 LinkedIn**: [https://www.linkedin.com/in/adrielzimbrilcode](https://www.linkedin.com/in/adrielzimbrilcode)
 - **🐱‍💻 GitHub**: [https://github.com/adrielzimbril](https://github.com/adrielzimbril)
 
 ### 🐼 Fun Facts
@@ -61,7 +60,6 @@ Je suis toujours ravi de discuter de nouveaux projets, collaborations ou simplem
 - 🐼 Amoureux des pandas (et des animaux en général !)
 - 🎨 Créatif dans l'âme, que ce soit en design ou en code
 - ☕ Accro au café et aux défis techniques complexes
-
 
 ## 🌟 Rejoignez l'aventure
 
@@ -78,7 +76,9 @@ Si vous trouvez ce projet utile et souhaitez soutenir son développement, vous p
 
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://go.adrielzimbril.com/bmc)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-16be00?style=for-the-badge&logo=ko-fi&logoColor=white)](https://go.adrielzimbril.com/kfi)
+
 <!-- [![Polar.sh](https://img.shields.io/badge/Polar.sh-000000?style=for-the-badge&logo=polar&logoColor=white)](https://go.adrielzimbril.com/plr) -->
+
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://go.adrielzimbril.com/gs)
 
 ## 🌐 Hébergement
