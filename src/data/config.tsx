@@ -88,7 +88,6 @@ export const siteConfig = {
           navbar: true,
           available: true,
         },
-        
         github: {
           name: "GitHub",
           key: "github",
@@ -137,14 +136,6 @@ export const siteConfig = {
           navbar: false,
           available: false,
         },
-        instagram: {
-          name: "Instagram",
-          key: "instagram",
-          url: "https://go.adrielzimbril.com/in",
-          icon: Instagram,
-          navbar: true,
-          available: true,
-        },
         peerlist: {
           name: "Peerlist",
           key: "peerlist",
@@ -152,6 +143,14 @@ export const siteConfig = {
           icon: "",
           navbar: false,
           available: false,
+        },
+        instagram: {
+          name: "Instagram",
+          key: "instagram",
+          url: "https://go.adrielzimbril.com/in",
+          icon: Instagram,
+          navbar: true,
+          available: true,
         },
         dribbble: {
           name: "Dribbble",
