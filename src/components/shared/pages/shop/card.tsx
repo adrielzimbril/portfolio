@@ -4,20 +4,9 @@ import { CardInfo } from "@/components/shared/pages/shop/details";
 import { PageType } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/utils/utils";
+import type { Product as ProductType } from "@/data/personal/shop-products";
 
-export interface Product {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  price: number;
-  currency: string;
-  primaryTag: string;
-  tags: string[];
-  featured?: boolean;
-  available?: boolean;
-  createdAt: string;
-}
+export type Product = ProductType;
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -50,9 +39,7 @@ export function ProductCard({ product }: { product: Product }) {
   );
 }
 
-function AvailabilityBadge({ available }: { available?: boolean }) {
-  if (available === undefined) return null;
-
+function AvailabilityBadge({ available }: { available: boolean }) {
   return (
     <div className="absolute top-4 right-4 z-10">
       <Badge

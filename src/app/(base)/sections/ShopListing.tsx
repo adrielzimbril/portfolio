@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ProductCard, type Product } from "@/components/shared/pages/shop/card";
-import shopProducts from "@/data/personal/shop-products.json";
+import { ProductCard } from "@/components/shared/pages/shop/card";
+import { shopProducts } from "@/data/personal/shop-products";
 import { SectionLayout } from "@/components/shared/sections/layout";
 
 const ITEMS_PER_PAGE = 6;
@@ -12,9 +12,8 @@ export function ShopListing() {
   const [isLoading, setIsLoading] = useState(false);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const products = shopProducts as Product[];
-  const displayedProducts = products.slice(0, visibleItems);
-  const hasMore = visibleItems < products.length;
+  const displayedProducts = shopProducts.slice(0, visibleItems);
+  const hasMore = visibleItems < shopProducts.length;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,7 +23,7 @@ export function ShopListing() {
           // Simulate loading delay
           setTimeout(() => {
             setVisibleItems((prev) =>
-              Math.min(prev + ITEMS_PER_PAGE, products.length),
+              Math.min(prev + ITEMS_PER_PAGE, shopProducts.length),
             );
             setIsLoading(false);
           }, 500);
@@ -43,7 +42,7 @@ export function ShopListing() {
         observer.unobserve(currentRef);
       }
     };
-  }, [hasMore, isLoading, products.length]);
+  }, [hasMore, isLoading, shopProducts.length]);
 
   return (
     <SectionLayout

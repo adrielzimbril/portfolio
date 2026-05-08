@@ -44,20 +44,15 @@ export const siteConfig = {
     nameShared:
       "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
     hook: "Let's chat about your next project 👋",
-    avatar: getImageUrl(routes.avatar.link),
-    avatarReal: getImageUrl(routes.avatarReal.link),
+    avatar: getImageUrl("/img/me/avatar.png"),
+    avatarReal: getImageUrl("/img/me/avatar-real.png"),
   },
   links: {
     navbar: [
-      // {
-      //   href: routes.home.link,
-      //   icon: House,
-      //   label: routes.home.name,
-      // },
       {
-        href: routes.contact.link,
-        icon: User,
-        label: "Contact",
+        href: routes.shop.link,
+        icon: House,
+        label: "Shop",
       },
     ],
     contact: {
