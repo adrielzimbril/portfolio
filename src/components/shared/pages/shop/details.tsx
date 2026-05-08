@@ -2,7 +2,6 @@
 import { Link } from "@/components/ui/link";
 import { ShoppingBag } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
-import { useTranslations } from "use-intl";
 import { formatPrice } from "@/utils/formatPricing";
 
 export function CardInfo({
@@ -22,8 +21,6 @@ export function CardInfo({
   price: number;
   currency: string;
 }) {
-  const t = useTranslations();
-
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
@@ -65,8 +62,6 @@ function Description({ description }: { description: string }) {
 }
 
 function Action({ slug }: { slug: string }) {
-  const t = useTranslations();
-
   return (
     <Link
       href={`/shop/${slug}`}
@@ -77,7 +72,7 @@ function Action({ slug }: { slug: string }) {
       className="gap-2"
     >
       <span className="flex items-center gap-1">
-        {t("shop.buy")}
+        Acheter
         <ShoppingBag size={16} />
       </span>
     </Link>
