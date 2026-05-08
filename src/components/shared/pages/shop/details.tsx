@@ -4,20 +4,21 @@ import { ShoppingBag } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { formatPrice } from "@/utils/formatPricing";
 import { siteConfig } from "@/data/config";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 
 export function CardInfo({
   title,
-  slug,
   primaryTag,
   tags,
+  isAvailable,
   description,
   price,
   currency,
 }: {
   title: string;
-  slug: string;
   primaryTag: string;
   tags: string[];
+  isAvailable: boolean;
   description: string;
   price: number;
   currency: string;
@@ -25,9 +26,17 @@ export function CardInfo({
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
       <div className="flex flex-col items-start justify-center gap-4 w-full">
-        <Header title={title} slug={slug} />
+        <Header title={title} />
 
-        <Tags primaryTag={primaryTag} tags={tags} />
+        <Tags
+          primaryTag={isAvailable ? "Disponible" : "Indisponible"}
+          primaryTagColor={
+            isAvailable
+              ? DEFAULT_COLOR_CODE_NAME.GREEN
+              : DEFAULT_COLOR_CODE_NAME.RED
+          }
+          tags={tags}
+        />
 
         <Description description={description} />
       </div>
@@ -38,15 +47,15 @@ export function CardInfo({
             {formatPrice(price, currency)}
           </span>
         </div>
-        <Action slug={slug} />
+        <Action />
       </div>
     </div>
   );
 }
 
-function Header({ title, slug }: { title: string; slug: string }) {
+function Header({ title }: { title: string }) {
   return (
-    <Link href={siteConfig.links.contact.social.whatsapp}>
+    <Link href={siteConfig.links.contact.social.whatsapp.url}>
       <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
         {title}
       </h3>
@@ -62,10 +71,10 @@ function Description({ description }: { description: string }) {
   );
 }
 
-function Action({ slug }: { slug: string }) {
+function Action() {
   return (
     <Link
-      href={siteConfig.links.contact.social.whatsapp}
+      href={siteConfig.links.contact.social.whatsapp.url}
       likeButton
       whileTap
       size="xs"

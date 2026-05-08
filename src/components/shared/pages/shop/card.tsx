@@ -15,45 +15,24 @@ export function ProductCard({ product }: { product: Product }) {
       <CardContent className="relative grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
         <CardPreview
           title={product.title}
-          type={PageType.HUB as any}
-          href={siteConfig.links.contact.social.whatsapp}
+          slug={siteConfig.links.contact.social.whatsapp.url}
           cover={product.image}
-          isCustomUrl
           coverText={{
             emoji: "🛍️",
             title: product.title,
             description: product.description,
           }}
         />
-        <AvailabilityBadge available={product.available} />
         <CardInfo
           title={product.title}
-          slug={product.id}
           primaryTag={product.primaryTag}
           tags={product.tags}
+          isAvailable={product.available}
           description={product.description}
           price={product.price}
           currency={product.currency}
         />
       </CardContent>
     </Card>
-  );
-}
-
-function AvailabilityBadge({ available }: { available: boolean }) {
-  return (
-    <div className="absolute top-4 right-4 z-10">
-      <Badge
-        className={cn(
-          "text-xs font-medium",
-          available
-            ? "squircle-green-500 text-white"
-            : "squircle-red-500 text-white",
-        )}
-        variant="colored"
-      >
-        {available ? "Disponible" : "Indisponible"}
-      </Badge>
-    </div>
   );
 }
