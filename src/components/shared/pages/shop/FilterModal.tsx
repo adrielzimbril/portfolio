@@ -18,7 +18,7 @@ import { pickRandomColor } from "@/utils";
 interface FilterModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  selectedCategory: string | null;
+  selectedCategory: string[];
   onCategoryClick: (category: string) => void;
   selectedType: string | null;
   onTypeClick: (type: string) => void;
@@ -80,7 +80,9 @@ export function FilterModal({
             {categories.map((category) => (
               <Button
                 key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
+                variant={
+                  selectedCategory.includes(category) ? "default" : "outline"
+                }
                 size="xs"
                 onClick={() => onCategoryClick(category)}
                 className="capitalize"
@@ -113,6 +115,7 @@ export function FilterModal({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="pl-4"
+            asFull
           />
         </div>
 
@@ -150,7 +153,7 @@ export function FilterModal({
         <DialogSeparator />
 
         <DialogFooter className="gap-2 sm:justify-center">
-          {(selectedCategory || selectedType) && (
+          {(selectedCategory.length > 0 || selectedType) && (
             <Button
               variant="outline"
               onClick={() => {

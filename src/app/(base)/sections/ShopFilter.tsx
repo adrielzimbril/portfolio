@@ -58,9 +58,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
       null
     : null;
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(
-    initialCategory,
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -92,7 +90,8 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   // Calculate filtered products for counter
   const filteredProducts = shopProducts.filter((product) => {
     const matchesCategory =
-      !selectedCategory || product.primaryTag === selectedCategory;
+      selectedCategory.length === 0 ||
+      selectedCategory.includes(product.primaryTag);
     const matchesType =
       !selectedType ||
       (selectedType === "Personnel" && !product.isShared) ||
@@ -108,13 +107,14 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   });
 
   const hasActiveFilters =
-    selectedCategory !== null || selectedType !== null || searchQuery !== "";
+    selectedCategory.length > 0 || selectedType !== null || searchQuery !== "";
 
   // Notify parent when filter changes
   useEffect(() => {
     const filtered = shopProducts.filter((product) => {
       const matchesCategory =
-        !selectedCategory || product.primaryTag === selectedCategory;
+        selectedCategory.length === 0 ||
+        selectedCategory.includes(product.primaryTag);
       const matchesType =
         !selectedType ||
         (selectedType === "Personnel" && !product.isShared) ||
@@ -132,7 +132,11 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   }, [selectedCategory, searchQuery, selectedType]);
 
   const handleCategoryClick = (category: string) => {
-    setSelectedCategory((prev) => (prev === category ? null : category));
+    setSelectedCategory((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category],
+    );
   };
 
   const handleTypeClick = (type: string) => {
@@ -148,7 +152,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   };
 
   const handleClearFilters = () => {
-    setSelectedCategory(null);
+    setSelectedCategory([]);
     setSelectedType(null);
     setSearchQuery("");
     router.push("/");
