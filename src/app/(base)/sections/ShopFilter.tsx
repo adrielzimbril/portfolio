@@ -19,7 +19,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Extraire les catégories uniques des produits
+  // Extract unique categories from products
   const categories = [
     "IA",
     "Vidéo IA",
@@ -34,9 +34,11 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
     "Bureautique",
     "Créatif",
     "Développement",
+    "Personnel",
+    "Partagé",
   ];
 
-  // Initialiser le filtre depuis les paramètres URL
+  // Init filter from URL parameters
   const showParam = searchParams.get("show");
   const initialCategory = showParam
     ? categories.find((cat) => cat.toLowerCase() === showParam.toLowerCase()) ||
@@ -49,7 +51,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-  // Calculer les comptes par catégorie
+  // Calculate category counts
   const categoryCounts = categories.reduce(
     (acc, category) => {
       acc[category] = shopProducts.filter(
@@ -60,7 +62,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
     {} as Record<string, number>,
   );
 
-  // Calculer les produits filtrés pour le compteur
+  // Calculate filtered products for counter
   const filteredProducts = shopProducts.filter((product) => {
     const matchesCategory =
       !selectedCategory || product.primaryTag === selectedCategory;
@@ -76,7 +78,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
 
   const hasActiveFilters = selectedCategory !== null || searchQuery !== "";
 
-  // Notifier le parent quand le filtre change
+  // Notify parent when filter changes
   useEffect(() => {
     onFilterChange(selectedCategory, searchQuery);
   }, [selectedCategory, searchQuery, onFilterChange]);
@@ -96,7 +98,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
   const handleClearFilters = () => {
     setSelectedCategory(null);
     setSearchQuery("");
-    router.push("/shop");
+    router.push("/");
   };
 
   return (
@@ -112,7 +114,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
         </div>
       </SectionLayout>
 
-      {/* Barre de recherche */}
+      {/* Search bar */}
       <div className="relative w-full">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-b-white-invert-sec h-4 w-4" />
         <Input
@@ -138,7 +140,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
         )}
       </div>
 
-      {/* Filtres par catégorie */}
+      {/* Category filters */}
       <div className="flex flex-wrap gap-2">
         {categories.map((category) => (
           <Badge
@@ -155,7 +157,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
         ))}
       </div>
 
-      {/* Bouton pour effacer les filtres */}
+      {/* Clear filters button */}
       {(selectedCategory || searchQuery) && (
         <Button
           variant="ghost"

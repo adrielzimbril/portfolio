@@ -64,7 +64,7 @@ export function FilterModal({
                 className={cn(
                   pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),
                   "px-1 py-0.5 text-[.625rem]",
-                  "size-max",
+                  "size-max content-center place-content-center",
                 )}
                 variant="colored"
                 size="xs"
@@ -90,17 +90,19 @@ export function FilterModal({
         <DialogSeparator />
 
         <DialogFooter className="gap-2 sm:justify-center">
-          <Button
-            variant="outline"
-            onClick={() => {
-              onClearFilters();
-              onOpenChange(false);
-            }}
-            asPointer
-            whileTap
-          >
-            Effacer les filtres
-          </Button>
+          {selectedCategory && selectedCategory.length > 0 && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                onClearFilters();
+                onOpenChange(false);
+              }}
+              asPointer
+              whileTap
+            >
+              Effacer les filtres
+            </Button>
+          )}
           <Button onClick={() => onOpenChange(false)} asPointer whileTap>
             Appliquer
           </Button>

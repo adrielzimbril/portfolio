@@ -23,7 +23,6 @@ export default async function NotFound() {
   return (
     <>
       <div className="container mx-auto relative min-h-dvh flex flex-col">
-        <Navbar />
         <SectionBase
           sectionClassName="w-full"
           sectionContentClassName="w-full"
