@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { metadata as metadataBase } from "@/app/metadata";
-import { SyncProvider } from "@/components/aurthle/providers/sync-provider";
 import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 // Front layout imports moved to (base)/layout.tsx
 import type { PropsWithChildren } from "react";
