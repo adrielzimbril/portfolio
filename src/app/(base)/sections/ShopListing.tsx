@@ -4,16 +4,39 @@ import { useEffect, useRef, useState } from "react";
 import { ProductCard } from "@/components/shared/pages/shop/card";
 import { shopProducts } from "@/data/personal/shop-products";
 import { SectionLayout } from "@/components/shared/sections/layout";
+import { ShopFilter } from "./ShopFilter";
 
 const ITEMS_PER_PAGE = 6;
 
 export function ShopListing() {
   const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
   const [isLoading, setIsLoading] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState(shopProducts);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const displayedProducts = shopProducts.slice(0, visibleItems);
-  const hasMore = visibleItems < shopProducts.length;
+  const displayedProducts = filteredProducts.slice(0, visibleItems);
+  const hasMore = visibleItems < filteredProducts.length;
+
+  const handleFilterChange = (category: string | null, search: string) => {
+    let filtered = shopProducts;
+
+    if (category) {
+      filtered = filtered.filter((product) => product.primaryTag === category);
+    }
+
+    if (search) {
+      const searchLower = search.toLowerCase();
+      filtered = filtered.filter(
+        (product) =>
+          product.title.toLowerCase().includes(searchLower) ||
+          product.description.toLowerCase().includes(searchLower) ||
+          product.tags.some((tag) => tag.toLowerCase().includes(searchLower)),
+      );
+    }
+
+    setFilteredProducts(filtered);
+    setVisibleItems(ITEMS_PER_PAGE); // Reset pagination when filter changes
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,7 +47,7 @@ export function ShopListing() {
           // Simulate loading delay
           setTimeout(() => {
             setVisibleItems((prev) =>
-              Math.min(prev + ITEMS_PER_PAGE, shopProducts.length),
+              Math.min(prev + ITEMS_PER_PAGE, filteredProducts.length),
             );
             setIsLoading(false);
           }, 500);
@@ -43,28 +66,40 @@ export function ShopListing() {
         observer.unobserve(currentRef);
       }
     };
-  }, [hasMore, isLoading, shopProducts.length]);
+  }, [hasMore, isLoading, filteredProducts.length]);
 
   return (
-    <SectionLayout
-      title={undefined}
-      description={undefined}
-      className="py-14 md:py-[104px]"
-      contentClassName="md:grid-cols-2 lg:grid-cols-3"
-    >
-      {displayedProducts.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div className="flex flex-col gap-8 py-14 md:py-[104px]">
+      <ShopFilter onFilterChange={handleFilterChange} />
 
-      <div ref={loadMoreRef} className="w-full h-10" />
+      <SectionLayout
+        title={undefined}
+        description={undefined}
+        className="py-0"
+        contentClassName="md:grid-cols-2 lg:grid-cols-3"
+      >
+        {displayedProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
 
-      {!hasMore && !isLoading && displayedProducts.length > 0 && (
-        <div className="col-span-full text-center py-8">
-          <p className="text-b-white-invert-sec">
-            Tous les produits ont été affichés
-          </p>
-        </div>
-      )}
-    </SectionLayout>
+        <div ref={loadMoreRef} className="w-full h-10" />
+
+        {!hasMore && !isLoading && displayedProducts.length > 0 && (
+          <div className="col-span-full text-center py-8">
+            <p className="text-b-white-invert-sec">
+              Tous les produits ont été affichés
+            </p>
+          </div>
+        )}
+
+        {displayedProducts.length === 0 && (
+          <div className="col-span-full text-center py-16">
+            <p className="text-b-white-invert-sec text-lg">
+              Aucun produit ne correspond à votre recherche
+            </p>
+          </div>
+        )}
+      </SectionLayout>
+    </div>
   );
 }

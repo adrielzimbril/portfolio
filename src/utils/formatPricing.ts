@@ -1,12 +1,14 @@
 /**
- * Formate un prix avec la devise appropriée (F.CFA)
+ * Format a price with the appropriate currency (F.CFA)
  */
 export function formatPrice(
   amount: number,
   currency: string = "F.CFA",
 ): string {
-  // Formater le nombre avec les séparateurs appropriés (espace pour les milliers)
-  const formattedNumber = new Intl.NumberFormat("fr-FR", {
+  // Format the number with appropriate separators (comma for thousands)
+  // Use "fr-FR" to format with spaces as thousand separators
+  // And use "en-US" to format with commas as thousand separators
+  const formattedNumber = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(amount);
@@ -15,7 +17,7 @@ export function formatPrice(
 }
 
 /**
- * Formate un prix statique (alias pour formatPrice)
+ * Format a static price (alias for formatPrice)
  */
 export function formatPriceStatic(
   amount: number,
