@@ -102,7 +102,7 @@ export function CardInfo({
               : DEFAULT_COLOR_CODE_NAME.RED
           }
           secondaryTag={duration}
-          secondaryTagColor={DEFAULT_COLOR_CODE_NAME.BLUE}
+          secondaryTagColor={DEFAULT_COLOR_CODE_NAME.YELLOW}
           tags={tags}
         />
 
