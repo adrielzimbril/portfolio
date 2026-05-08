@@ -10,7 +10,6 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     const run = async () => {
       await init();
     };
-
     void run();
   }, []);
 

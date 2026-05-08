@@ -6,12 +6,12 @@ import { siteConfig } from "@/data/config";
 export function HeaderSection() {
   return (
     <PageHero
-      title="Ressources & Outils"
-      description="Découvrez mes templates, UI kits et outils pour construire vos produits plus rapidement."
+      title="Abonnements"
+      description="Découvrez mes abonnements pour accéder à tous mes templates, UI kits et outils."
       buttonLink={siteConfig.links.contact.social.whatsapp.url}
-      buttonText="Whatsapp"
+      buttonText="WhatsApp"
       isMobileShowed
-      imagePath={{ emoji: "🛍️" }}
+      imagePath={{ emoji: "🐼" }}
       actionButton
     />
   );
