@@ -1037,9 +1037,10 @@
   "mail": {
     "common": {
       "contact": "If you want to chat or just say hello, just reply to this email. I read everything personally.",
-      "contactAdmin": "Adriel Zimbril, you have a new message. Someone recognizes your impact and wants to chat with you. You rule this world, now show them why. Just do it 🚀",
-      "copyright": "Crafted with ❤️ by Adriel Zimbril",
+      "contactAdmin": "Adriel Zimbril, you have a new message. Someone recognizes your impact and wants to chat with you. You rule this world, now show them why. Just do it ",
+      "copyright": "Crafted with  by Adriel Zimbril",
       "defaultName": "friendly designer",
+      "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product designer "
       "signature": "Adriel Zimbril | Problem Solver & Your SaaS Product designer 🦄"
     },
     "communityWallAdminNotification": {
@@ -1260,6 +1261,18 @@
       "title": "Turn your idea into a <thin>product</thin> with the <thin>ShiroSaaS Method</thin> 🦄"
     },
     "title": "Your creative kit awaits 💌"
+  },
+  "shop": {
+    "title": "Shop",
+    "description": "Resources and tools to accelerate your SaaS product development.",
+    "keywords": "shop, SaaS resources, templates, UI kits, design tools, Adriel Zimbril",
+    "page": {
+      "header-section": {
+        "title": "Resources & Tools",
+        "description": "Discover my templates, UI kits and tools to build your products faster.",
+        "badge": "Shop 🛍️"
+      }
+    }
   },
   "not-found": {
     "description": "The page you are looking for doesn't exist... or no longer 🕳️.",

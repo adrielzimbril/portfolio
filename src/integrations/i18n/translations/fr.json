@@ -783,6 +783,18 @@
       }
     }
   },
+  "shop": {
+    "title": "Shop",
+    "description": "Des ressources et outils pour accélérer votre développement de produits SaaS.",
+    "keywords": "shop, ressources SaaS, templates, UI kits, outils design, Adriel Zimbril",
+    "page": {
+      "header-section": {
+        "title": "Ressources & Outils",
+        "description": "Découvrez mes templates, UI kits et outils pour construire vos produits plus rapidement.",
+        "badge": "Shop 🛍️"
+      }
+    }
+  },
   "common": {
     "rss": {
       "subscribe": "S'abonner au flux RSS",

@@ -33,7 +33,8 @@ type RouteKeys =
   | "changelog"
   | "privacy"
   | "terms"
-  | "routes";
+  | "routes"
+  | "shop";
 
 export const routes: { [K in RouteKeys]: RouteType } = {
   home: {
@@ -229,6 +230,13 @@ export const routes: { [K in RouteKeys]: RouteType } = {
     link: "/routes",
     inHeader: false,
     inFooter: true,
+    inSitemap: true,
+  },
+  shop: {
+    key: "shop",
+    link: "/shop",
+    inHeader: true,
+    inFooter: false,
     inSitemap: true,
   },
 };
