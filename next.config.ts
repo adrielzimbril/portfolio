@@ -21,7 +21,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "shop.adrielzimbril.com",
-        pathname: "/img/**",
       },
       {
         protocol: "https",
