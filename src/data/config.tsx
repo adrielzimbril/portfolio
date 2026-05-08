@@ -20,14 +20,15 @@ import {
 const BASE_URL = getBaseUrl();
 
 export const siteConfig = {
-  name: "Adriel Zimbril",
-  description: "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
+  name: "Le dealer d'abonnement",
+  description:
+    "Le dealer d'abonnement - Abonnements à prix réduits pour vos outils préférés : ChatGPT, Gemini, Claude, CapCut, Figma, Canva et plus encore",
   seoDescription:
-    "J'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles.",
+    "Profitez d'abonnements à prix réduits pour les meilleurs outils : ChatGPT, Gemini, Claude, CapCut, Figma, Canva, Midjourney et bien d'autres. Économisez sur vos abonnements préférés.",
   url: BASE_URL,
   languagePrimary: "fr_FR",
   keywords: [
-    "design produit SaaS, SaaS Adriel Zimbril, Product Designer SaaS, création SaaS, UX UI SaaS",
+    "abonnements prix réduits, ChatGPT pas cher, Gemini discount, Claude AI promo, CapCut abonnement, Figma discount, Canva promo, abonnements outils, abonnements SaaS",
   ],
   seo: {
     ogImage: {
@@ -39,12 +40,12 @@ export const siteConfig = {
     },
   },
   details: {
-    id: "adrielzimbril",
-    username: "@adrielzimbril",
-    name: "Adriel Zimbril",
+    id: "le-dealer-abonnement",
+    username: "@ledealerabonnement",
+    name: "Le dealer d'abonnement",
     nameShared:
-      "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
-    hook: "Let's chat about your next project 👋",
+      "Le dealer d'abonnement - Abonnements à prix réduits pour vos outils préférés",
+    hook: "Économisez sur vos abonnements préférés �",
     avatar: getImageUrl("/img/me/avatar.png"),
     avatarReal: getImageUrl("/img/me/avatar-real.png"),
   },

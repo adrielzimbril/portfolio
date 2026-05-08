@@ -7,21 +7,22 @@ import { ShopListing } from "@/app/(base)/sections/ShopListing";
 export async function generateMetadata(): Promise<Metadata> {
   const metadata: Metadata = {
     ...baseMetadata,
-    title: "Shop - Ressources & Outils",
+    title: "Le dealer d'abonnement - Abonnements à prix réduits",
     description:
-      "Des ressources et outils pour accélérer votre développement de produits SaaS.",
-    keywords: "shop, ressources SaaS, templates, UI kits, outils design",
+      "Abonnements à prix réduits pour vos outils préférés : ChatGPT, Gemini, Claude, CapCut, Figma, Canva et bien d'autres. Économisez jusqu'à 50% sur vos abonnements.",
+    keywords:
+      "abonnements prix réduits, ChatGPT pas cher, Gemini discount, Claude AI promo, CapCut abonnement, Figma discount, Canva promo, abonnements outils, abonnements SaaS",
     openGraph: {
       ...baseMetadata.openGraph,
-      title: "Shop - Ressources & Outils",
+      title: "Le dealer d'abonnement - Abonnements à prix réduits",
       description:
-        "Des ressources et outils pour accélérer votre développement de produits SaaS.",
+        "Abonnements à prix réduits pour vos outils préférés : ChatGPT, Gemini, Claude, CapCut, Figma, Canva et bien d'autres. Économisez jusqu'à 50% sur vos abonnements.",
     },
     twitter: {
       ...baseMetadata.twitter,
-      title: "Shop - Ressources & Outils",
+      title: "Le dealer d'abonnement - Abonnements à prix réduits",
       description:
-        "Des ressources et outils pour accélérer votre développement de produits SaaS.",
+        "Abonnements à prix réduits pour vos outils préférés : ChatGPT, Gemini, Claude, CapCut, Figma, Canva et bien d'autres. Économisez jusqu'à 50% sur vos abonnements.",
     },
   };
 
