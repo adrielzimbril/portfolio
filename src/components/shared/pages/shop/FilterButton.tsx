@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FilterOne } from "@aurthle/icons";
-import { useTranslations } from "use-intl";
 
 interface FilterButtonProps {
   onClick: () => void;
@@ -16,8 +15,6 @@ export function FilterButton({
   hasActiveFilters,
   resultCount,
 }: FilterButtonProps) {
-  const t = useTranslations("changelog.sections.timeline.filter");
-
   return (
     <Button
       onClick={onClick}
@@ -29,7 +26,7 @@ export function FilterButton({
       className="gap-2"
     >
       <FilterOne size={20} variant="bulk" />
-      {t("button")}
+      Filtrer
       {hasActiveFilters && (
         <Badge variant="white" size="xs" circle className="ml-1 h-auto!">
           {resultCount}

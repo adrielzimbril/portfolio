@@ -11,104 +11,76 @@ import {
   DialogFooter,
   DialogSeparator,
 } from "@/components/ui/dialog";
-import { SparklesTwo, LightbulbTwoPower, Bug, Wrench } from "@aurthle/icons";
-import { ChangelogItemType, DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { cn } from "@/utils/utils";
+import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { pickRandomColor } from "@/utils";
-import { useTranslations } from "use-intl";
 
 interface FilterModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  selectedType: string;
-  onTypeChange: (type: string) => void;
+  selectedCategory: string | null;
+  onCategoryChange: (category: string | null) => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClearFilters: () => void;
-  typeCounts: Record<string, number>;
+  categoryCounts: Record<string, number>;
+  categories: string[];
 }
-
-const typeIcons = {
-  milestone: SparklesTwo,
-  feature: LightbulbTwoPower,
-  fix: Bug,
-  improvement: Wrench,
-};
 
 export function FilterModal({
   isOpen,
   onOpenChange,
-  selectedType,
-  onTypeChange,
+  selectedCategory,
+  onCategoryChange,
   searchQuery,
   onSearchChange,
   onClearFilters,
-  typeCounts,
+  categoryCounts,
+  categories,
 }: FilterModalProps) {
-  const t = useTranslations("changelog.sections.timeline.filter");
-
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent size="lg" variant="modern" className="flex flex-col gap-6">
         <DialogHeader>
-          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogTitle>Filtrer les abonnements</DialogTitle>
         </DialogHeader>
 
         <DialogSeparator />
 
         {/* Filter Buttons */}
         <div className="flex flex-wrap gap-2 justify-center">
-          {(Object.values(ChangelogItemType) as (keyof typeof typeIcons)[]).map(
-            (type) => {
-              const Icon = typeIcons[type as keyof typeof typeIcons];
-              return (
-                <Button
-                  key={type}
-                  variant={selectedType === type ? "default" : "outline"}
-                  size="xs"
-                  onClick={() => onTypeChange(type)}
-                  className="capitalize"
-                  asIcon
-                  asPointer
-                >
-                  {Icon && (
-                    <Badge
-                      className={cn(
-                        pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
-                        "size-max text-primary-foreground!",
-                        "px-0.5 py-1 text-[.625rem]",
-                      )}
-                      variant="colored"
-                      size="xs"
-                      circle
-                    >
-                      <Icon size={16} variant="bulk" />
-                    </Badge>
-                  )}
-                  {t(`types.${type}`)}
-                  <Badge
-                    className={cn(
-                      pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),
-                      "px-1 py-0.5 text-[.625rem]",
-                      "size-max",
-                    )}
-                    variant="colored"
-                    size="xs"
-                    circle
-                  >
-                    {typeCounts[type]}
-                  </Badge>
-                </Button>
-              );
-            },
-          )}
+          {categories.map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              size="xs"
+              onClick={() => onCategoryChange(category)}
+              className="capitalize"
+              asIcon
+              asPointer
+            >
+              {category}
+              <Badge
+                className={cn(
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),
+                  "px-1 py-0.5 text-[.625rem]",
+                  "size-max",
+                )}
+                variant="colored"
+                size="xs"
+                circle
+              >
+                {categoryCounts[category] || 0}
+              </Badge>
+            </Button>
+          ))}
         </div>
 
         {/* Search Input */}
         <div className="relative w-full">
           <Input
             type="text"
-            placeholder={t("searchPlaceholder")}
+            placeholder="Rechercher un abonnement..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="pl-4"
@@ -117,7 +89,7 @@ export function FilterModal({
 
         <DialogSeparator />
 
-        <DialogFooter className="gap-2">
+        <DialogFooter className="gap-2 sm:justify-center">
           <Button
             variant="outline"
             onClick={() => {
@@ -127,10 +99,10 @@ export function FilterModal({
             asPointer
             whileTap
           >
-            {t("clearFilters")}
+            Effacer les filtres
           </Button>
           <Button onClick={() => onOpenChange(false)} asPointer whileTap>
-            {t("applyFilters")}
+            Appliquer
           </Button>
         </DialogFooter>
       </DialogContent>

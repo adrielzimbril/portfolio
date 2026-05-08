@@ -8,6 +8,8 @@ import { cn } from "@/utils/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { FilterButton } from "@/components/shared/pages/shop/FilterButton";
+import { FilterModal } from "@/components/shared/pages/shop/FilterModal";
+import { shopProducts } from "@/data/personal/shop-products";
 
 interface ShopFilterProps {
   onFilterChange: (category: string | null, search: string) => void;
@@ -16,8 +18,6 @@ interface ShopFilterProps {
 export function ShopFilter({ onFilterChange }: ShopFilterProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
 
   // Extraire les catégories uniques des produits
   const categories = [
@@ -37,18 +37,44 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
   ];
 
   // Initialiser le filtre depuis les paramètres URL
-  useEffect(() => {
-    const showParam = searchParams.get("show");
-    if (showParam) {
-      const normalizedParam = showParam.toLowerCase();
-      const matchedCategory = categories.find(
-        (cat) => cat.toLowerCase() === normalizedParam,
+  const showParam = searchParams.get("show");
+  const initialCategory = showParam
+    ? categories.find((cat) => cat.toLowerCase() === showParam.toLowerCase()) ||
+      null
+    : null;
+
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    initialCategory,
+  );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
+  // Calculer les comptes par catégorie
+  const categoryCounts = categories.reduce(
+    (acc, category) => {
+      acc[category] = shopProducts.filter(
+        (p) => p.primaryTag === category,
+      ).length;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  // Calculer les produits filtrés pour le compteur
+  const filteredProducts = shopProducts.filter((product) => {
+    const matchesCategory =
+      !selectedCategory || product.primaryTag === selectedCategory;
+    const matchesSearch =
+      !searchQuery ||
+      product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.tags.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase()),
       );
-      if (matchedCategory) {
-        setSelectedCategory(matchedCategory);
-      }
-    }
-  }, [searchParams]);
+    return matchesCategory && matchesSearch;
+  });
+
+  const hasActiveFilters = selectedCategory !== null || searchQuery !== "";
 
   // Notifier le parent quand le filtre change
   useEffect(() => {
@@ -80,8 +106,8 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
         <div className="flex justify-center w-full">
           <FilterButton
             onClick={() => setIsFilterModalOpen(true)}
-            hasActiveFilters={Boolean(hasActiveFilters)}
-            resultCount={filteredChangelog.length}
+            hasActiveFilters={hasActiveFilters}
+            resultCount={filteredProducts.length}
           />
         </div>
       </SectionLayout>
@@ -99,12 +125,11 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
         {searchQuery && (
           <Button
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 hover:bg-b-base"
+            className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 hover:bg-b-base gap-2"
             onClick={handleClearSearch}
             asIcon
             asPointer
             whileTap
-            className="gap-2"
           >
             <Badge variant="white" size="xs" circle className="ml-1">
               <X className="h-4 w-4 text-b-white-invert-sec" />
@@ -141,6 +166,19 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
           Effacer les filtres
         </Button>
       )}
+
+      {/* Filter Modal */}
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onOpenChange={setIsFilterModalOpen}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onClearFilters={handleClearFilters}
+        categoryCounts={categoryCounts}
+        categories={categories}
+      />
     </div>
   );
 }
