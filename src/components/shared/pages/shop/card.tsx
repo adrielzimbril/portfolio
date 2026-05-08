@@ -2,6 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/shop/details";
 import { PageType } from "@/types";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/utils/utils";
 
 export interface Product {
   id: string;
@@ -13,6 +15,7 @@ export interface Product {
   primaryTag: string;
   tags: string[];
   featured?: boolean;
+  available?: boolean;
   createdAt: string;
 }
 
@@ -32,6 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
             description: product.description,
           }}
         />
+        <AvailabilityBadge available={product.available} />
         <CardInfo
           title={product.title}
           slug={product.id}
@@ -43,5 +47,25 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </CardContent>
     </Card>
+  );
+}
+
+function AvailabilityBadge({ available }: { available?: boolean }) {
+  if (available === undefined) return null;
+
+  return (
+    <div className="absolute top-4 right-4 z-10">
+      <Badge
+        className={cn(
+          "text-xs font-medium",
+          available
+            ? "squircle-green-500 text-white"
+            : "squircle-red-500 text-white",
+        )}
+        variant="colored"
+      >
+        {available ? "Disponible" : "Indisponible"}
+      </Badge>
+    </div>
   );
 }
