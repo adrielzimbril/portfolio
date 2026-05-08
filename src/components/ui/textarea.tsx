@@ -3,7 +3,6 @@ import * as React from "react";
 import { cn } from "@/utils";
 import { VariantProps } from "class-variance-authority";
 import { inputVariants } from "@/components/ui/input";
-import { useTranslations } from "use-intl";
 
 function Textarea({
   className,
@@ -22,7 +21,6 @@ function Textarea({
   variant?: VariantProps<typeof inputVariants>["variant"];
   inputSize?: VariantProps<typeof inputVariants>["inputSize"];
 }) {
-  const t = useTranslations();
   const id = React.useId();
   const maxLength = limit;
 
@@ -72,7 +70,7 @@ function Textarea({
           aria-live="polite"
         >
           <span className="tabular-nums">{maxLength - characterCount}</span>{" "}
-          {t("common.shared.text.characters-left")}
+          caractères restants
         </p>
       )}
     </>

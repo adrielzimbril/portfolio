@@ -3,8 +3,6 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
 import { Loader } from "@/components/shared/_layouts/loader";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
-import { useTranslations } from "use-intl";
 
 interface LoadMoreUIProps {
   children: React.ReactNode;
@@ -27,7 +25,6 @@ export function LoadMoreSection({
   showCounter = false,
   loadingFallback,
 }: LoadMoreUIProps) {
-  const t = useTranslations();
   return (
     <SectionLayout className="p-0">
       {children}
@@ -38,31 +35,23 @@ export function LoadMoreSection({
             {loading ? (
               <span className="flex gap-2 items-center">
                 <Loader variant="pulse" />{" "}
-                {/* <span>{t("common.button.loading")} 🦄</span> */}
               </span>
             ) : (
-              t("common.button.view-more")
+              "Voir plus"
             )}
           </Button>
         ) : (
           <>
             <div className="content-stretch flex flex-col text-center gap-2 text-b-white-invert-thr items-center justify-center relative shrink-0 max-w-md">
               <p>
-                <span className="text-foreground">
-                  {t("common.shared.loadMore.greeting")}
-                </span>
+                <span className="text-foreground">C&apos;est tout !</span>
                 <br />
-                {t.rich("common.shared.loadMore.end.cta", {
-                  ...richTextComponent,
-                })}
+                Vous avez vu tous les éléments disponibles.
               </p>
 
               {showCounter && (
                 <p>
-                  {t("common.shared.loadMore.counter", {
-                    loadedItems,
-                    totalItems,
-                  })}
+                  {loadedItems} / {totalItems} éléments affichés
                 </p>
               )}
             </div>

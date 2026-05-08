@@ -19,7 +19,6 @@ import {
   VideoPlaylistOne,
 } from "@aurthle/icons";
 import { Link } from "@/components/ui/link";
-import { useTranslations } from "use-intl";
 import { Badge } from "@/components/ui/badge";
 import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
 
@@ -44,7 +43,6 @@ export function CardPreview({
   isWide,
   resourceType,
 }: PreviewProps) {
-  const t = useTranslations();
   return (
     <div
       className={cn(
@@ -75,11 +73,9 @@ export function CardPreview({
           </div>
         ) : (
           <PreviewContent
-            emoji={coverText?.emoji ?? t("page-sections.preview.emoji")}
-            title={coverText?.title ?? t("page-sections.preview.title")}
-            description={
-              coverText?.description ?? t("page-sections.preview.description")
-            }
+            emoji={coverText?.emoji ?? "🚀"}
+            title={coverText?.title ?? "Titre"}
+            description={coverText?.description ?? "Description"}
           />
         )}
         {resourceType && <PreviewIcon resourceType={resourceType} />}

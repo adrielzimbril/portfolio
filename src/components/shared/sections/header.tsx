@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/utils/utils";
 import { ArrowRightOne } from "@aurthle/icons";
-import { useTranslations } from "use-intl";
 
 export function SectionHeader({
   title,
@@ -20,8 +19,6 @@ export function SectionHeader({
   layoutStart?: boolean;
   isPage?: boolean;
 }) {
-  const t = useTranslations();
-
   return (
     <div
       className={cn(
@@ -63,7 +60,7 @@ export function SectionHeader({
           size="xs"
         >
           <span className="flex items-center gap-1">
-            {t("common.button.see-more")} <ArrowRightOne size={16} />
+            Voir plus <ArrowRightOne size={16} />
           </span>
         </Link>
       )}

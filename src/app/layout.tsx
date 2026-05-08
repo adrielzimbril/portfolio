@@ -8,8 +8,7 @@ import type { PropsWithChildren } from "react";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { ProgressProvider } from "@/components/aurthle/providers/progress-provider";
 import { siteConfig } from "@/data/config";
-
-import ReactLenis from "lenis/react";
+import { LayoutProvider } from "@/components/aurthle/providers/layout-provider";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
 import { Navbar } from "@/components/shared/_layouts/navbar";
 
@@ -47,7 +46,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           enableColorScheme
           disableTransitionOnChange
         >
-          <ReactLenis root>
+          <LayoutProvider>
             <ProgressProvider>
               <ToastProvider>
                 <AnchoredToastProvider>
@@ -61,7 +60,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                 </AnchoredToastProvider>
               </ToastProvider>
             </ProgressProvider>
-          </ReactLenis>
+          </LayoutProvider>
         </ThemeProvider>
       </body>
     </html>

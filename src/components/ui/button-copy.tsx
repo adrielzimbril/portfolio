@@ -11,7 +11,6 @@ import {
 import { cn } from "@/utils/utils";
 import { useControlledState } from "@/hooks/useControlledState";
 import logger from "@/utils/logger";
-import { useTranslations } from "use-intl";
 
 type ButtonCopyProps = Omit<ButtonPrimitiveProps, "children"> &
   VariantProps<typeof buttonVariants> & {
@@ -40,7 +39,6 @@ function ButtonCopy({
     value: copied,
     onChange: onCopiedChange,
   });
-  const t = useTranslations();
 
   const handleCopy = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -58,7 +56,7 @@ function ButtonCopy({
             }, delay);
           })
           .catch((error) => {
-            logger.error(t("logger.components.button-copy.failed"), error);
+            logger.error("Failed to copy to clipboard", error);
           });
       }
     },
@@ -79,11 +77,7 @@ function ButtonCopy({
     >
       <AnimatePresence mode="wait">
         <motion.span
-          key={
-            isCopied
-              ? t("common.shared.text.copied")
-              : t("common.shared.text.copy")
-          }
+          key={isCopied ? "copied" : "copy"}
           data-slot="copy-button-icon"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}

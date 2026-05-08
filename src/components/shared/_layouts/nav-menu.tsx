@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/utils/utils";
 import Link from "next/link";
-import { useTranslations } from "use-intl";
 
 export function NavMenu({
   menuRoutes,
@@ -12,7 +11,6 @@ export function NavMenu({
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }) {
-  const t = useTranslations();
   return (
     <div className="w-fit hidden lg:block">
       <div className={cn("mx-auto flex w-full items-center justify-center")}>
@@ -51,7 +49,7 @@ export function NavMenu({
                     : "text-b-white-invert/60",
                 )}
               >
-                {t("common.menu." + item.key + ".desktop")}
+                {item.key.charAt(0).toUpperCase() + item.key.slice(1)}
               </span>
             </Link>
           ))}

@@ -3,7 +3,6 @@ import { cn } from "@/utils/utils";
 import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { getImageUrl } from "@/utils/base-url";
-import { useTranslations } from "use-intl";
 
 export function EmojiPlaceholder({
   src,
@@ -25,7 +24,6 @@ export function EmojiPlaceholder({
   imgContainerClassName?: string;
   unOrdered?: boolean;
 }) {
-  const t = useTranslations();
   const isMobile = useIsMobile();
 
   return (
@@ -94,7 +92,7 @@ export function EmojiPlaceholder({
           >
             <source src={getImageUrl(src.webm)} type="video/webm" />
             <source src={getImageUrl(src.mp4)} type="video/mp4" />
-            {t("common.shared.text.browser-does-not-support-video")}
+            Votre navigateur ne supporte pas la vidéo.
           </video>
         ) : typeof src === "string" ? (
           <Image

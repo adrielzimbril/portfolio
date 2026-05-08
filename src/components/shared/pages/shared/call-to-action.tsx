@@ -7,15 +7,11 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
 import { routes } from "@/data/routes";
-import { useTranslations } from "use-intl";
 import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
 import { useEmailValidator } from "@/hooks/useValidation";
 import { toast } from "@/lib/toast";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 
 function EmailForm() {
-  const t = useTranslations();
-
   const id = useId();
   const isMobile = useIsMobile();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,9 +31,7 @@ function EmailForm() {
           id={id}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder={t(
-            "common.page-sections.cta.variant-two.form.placeholder",
-          )}
+          placeholder="Votre email"
           type="email"
         />
 
@@ -46,13 +40,13 @@ function EmailForm() {
             if (isEmailValid) {
               setIsModalOpen(true);
             } else {
-              toast.error(t("zod.errors.customized.email.invalid"));
+              toast.error("Email invalide");
             }
           }}
           size="lg"
           asPointer
         >
-          {t("common.page-sections.cta.variant-two.form.button")}{" "}
+          S&apos;abonner{" "}
           <span className="relative">{isMobile ? "📥" : "!"}</span>
         </Button>
       </div>
@@ -67,32 +61,28 @@ function EmailForm() {
 }
 
 function ContentSection({ isPage }: { isPage?: boolean }) {
-  const t = useTranslations();
-
   return (
     <div className="flex flex-col gap-8 items-start justify-start relative">
       {isPage ? (
         <>
-          <h2 className="relative">
-            {t("common.page-sections.cta.variant-one.title")}
-          </h2>
+          <h2 className="relative">Discutons de votre projet</h2>
 
-          {t.rich("common.page-sections.cta.variant-one.description", {
-            ...richTextComponent,
-          })}
+          <p className="text-b-white-invert-sec">
+            Vous avez un projet en tête ? N&apos;hésitez pas à me contacter pour
+            en discuter.
+          </p>
           <Link href={routes.contact.link} likeButton whileTap size="lg">
-            {t("common.page-sections.cta.variant-one.button")}
+            Me contacter
           </Link>
         </>
       ) : (
         <>
-          <h2 className="relative">
-            {t("common.page-sections.cta.variant-two.title")}
-          </h2>
+          <h2 className="relative">Restez informé</h2>
 
-          {t.rich("common.page-sections.cta.variant-two.description", {
-            ...richTextComponent,
-          })}
+          <p className="text-b-white-invert-sec">
+            Inscrivez-vous à ma newsletter pour recevoir les dernières mises à
+            jour.
+          </p>
           <EmailForm />
         </>
       )}
