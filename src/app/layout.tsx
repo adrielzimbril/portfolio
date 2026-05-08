@@ -55,7 +55,6 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                     <main>
                       <div className="container mx-auto relative min-h-dvh flex flex-col">
                         <Navbar />
-                        {/* <Dockbar asFade={false} /> */}
                         {children}
                         <ScrollToTop />
                       </div>
