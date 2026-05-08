@@ -2,7 +2,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { Loader } from "@/components/shared/_layouts/loader";
 
 interface LoadMoreUIProps {
   children: React.ReactNode;
@@ -13,6 +12,25 @@ interface LoadMoreUIProps {
   totalItems: number;
   showCounter?: boolean;
   loadingFallback?: React.ReactNode;
+}
+
+function LoadingDots() {
+  return (
+    <span className="flex gap-1 items-center">
+      <span
+        className="w-2 h-2 bg-current rounded-full animate-bounce"
+        style={{ animationDelay: "0ms" }}
+      />
+      <span
+        className="w-2 h-2 bg-current rounded-full animate-bounce"
+        style={{ animationDelay: "150ms" }}
+      />
+      <span
+        className="w-2 h-2 bg-current rounded-full animate-bounce"
+        style={{ animationDelay: "300ms" }}
+      />
+    </span>
+  );
 }
 
 export function LoadMoreSection({
@@ -34,7 +52,7 @@ export function LoadMoreSection({
           <Button onClick={onLoadMore} disabled={loading} whileTap asPointer>
             {loading ? (
               <span className="flex gap-2 items-center">
-                <Loader variant="pulse" />{" "}
+                <LoadingDots />
               </span>
             ) : (
               "Voir plus"
