@@ -143,8 +143,11 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     setSelectedType((prev) => (prev === type ? null : type));
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const handleSearchChange = (
+    e: React.ChangeEvent<HTMLInputElement> | string,
+  ) => {
+    const value = typeof e === "string" ? e : e?.target?.value || "";
+    setSearchQuery(value);
   };
 
   const handleClearSearch = () => {

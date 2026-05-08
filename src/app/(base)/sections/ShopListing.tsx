@@ -74,7 +74,7 @@ export function ShopListing() {
         {!hasMore && !isLoading && displayedProducts.length > 0 && (
           <div className="col-span-full text-center py-8">
             <p className="text-b-white-invert-sec">
-              Tous les produits ont été affichés
+              Oups, nous n&apos;avons plus d&apos;autres abonnements 😅
             </p>
           </div>
         )}
@@ -82,7 +82,7 @@ export function ShopListing() {
         {displayedProducts.length === 0 && (
           <div className="col-span-full text-center py-16">
             <p className="text-b-white-invert-sec text-lg">
-              Aucun produit ne correspond à votre recherche
+              Aucun abonnement ne correspond à votre recherche 😫
             </p>
           </div>
         )}
