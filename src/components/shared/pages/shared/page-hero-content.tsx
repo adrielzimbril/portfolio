@@ -1,5 +1,4 @@
 import { Link } from "@/components/ui/link";
-import { ArrowRightOne, ArrowDownOne } from "@aurthle/icons";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 

@@ -18,7 +18,8 @@ export function ShopListing() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore && !isLoading) {
+        const entry = entries[0];
+        if (entry?.isIntersecting && hasMore && !isLoading) {
           setIsLoading(true);
           // Simulate loading delay
           setTimeout(() => {
