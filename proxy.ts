@@ -1,6 +1,5 @@
 import logger from "@/utils/logger";
 
-import createMiddleware from "next-intl/middleware";
 import { type NextRequest } from "next/server";
 
 export default async function proxy(req: NextRequest) {

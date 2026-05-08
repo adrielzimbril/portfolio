@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { Skeleton } from "boneyard-js/react";
 import { ProductCard } from "@/components/shared/pages/shop/card";
 import { shopProducts } from "@/data/personal/shop-products";
 import { SectionLayout } from "@/components/shared/sections/layout";
@@ -66,7 +67,9 @@ export function ShopListing() {
         contentClassName="md:grid-cols-2 lg:grid-cols-3"
       >
         {displayedProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <Skeleton key={product.id} name="shop-product-card" loading={false}>
+            <ProductCard product={product} />
+          </Skeleton>
         ))}
 
         <div ref={loadMoreRef} className="w-full h-10" />
