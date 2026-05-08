@@ -3,9 +3,9 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { metadata as metadataBase } from "@/app/metadata";
 import type { PropsWithChildren } from "react";
-import { ProgressProvider } from "@/components/aurthle/providers/progress-provider";
+import { ProgressProvider } from "@/components/providers/progress-provider";
 import { siteConfig } from "@/data/config";
-import { LayoutProvider } from "@/components/aurthle/providers/layout-provider";
+import { LayoutProvider } from "@/components/providers/layout-provider";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
 import { Navbar } from "@/components/shared/_layouts/navbar";
 
