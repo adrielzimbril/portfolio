@@ -1,24 +1,7 @@
-import { withContentCollections } from "@content-collections/next";
 import type { NextConfig } from "next";
-import nextIntlPlugin from "next-intl/plugin";
-import bundleAnalyzer from "@next/bundle-analyzer";
 import { ConfigValue } from "@/config/config";
-import { appConfig } from "@data/app-config";
-
-const withNextIntl = nextIntlPlugin({
-  requestConfig: "./src/integrations/i18n/request.ts",
-  experimental: {
-    createMessagesDeclaration: Object.keys(appConfig.i18n.locales).map(
-      (locale) => `./src/integrations/i18n/translations/${locale}.json`,
-    ),
-  },
-});
 
 const IsDEV = ConfigValue.NODE_ENV === "development";
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: ConfigValue.ANALYZE_BUNDLE === "true",
-});
-
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
@@ -35,7 +18,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "preview.adrielzimbril.com",
+        hostname: "shop.adrielzimbril.com",
         pathname: "/img/**",
       },
       {
@@ -71,6 +54,4 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@vercel/og"],
 };
 
-export default withContentCollections(
-  withNextIntl(withBundleAnalyzer(nextConfig)),
-);
+export default nextConfig;

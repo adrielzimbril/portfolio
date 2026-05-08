@@ -7,6 +7,7 @@ import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
 import type { PropsWithChildren } from "react";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { ProgressProvider } from "@/components/aurthle/providers/progress-provider";
+import { siteConfig } from "@/data/config";
 
 import ReactLenis from "lenis/react";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="fr-FR" suppressHydrationWarning>
+    <html lang={siteConfig.languagePrimary} suppressHydrationWarning>
       <body
         className={`antialiased ${SFProDisplay.variable} ${SFProText.variable}`}
       >
@@ -48,19 +49,17 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         >
           <ReactLenis root>
             <ProgressProvider>
-              <SyncProvider>
-                <ToastProvider>
-                  <AnchoredToastProvider>
-                    <main>
-                      <div className="container mx-auto relative min-h-dvh flex flex-col">
-                        <Navbar />
-                        {children}
-                        <ScrollToTop />
-                      </div>
-                    </main>
-                  </AnchoredToastProvider>
-                </ToastProvider>
-              </SyncProvider>
+              <ToastProvider>
+                <AnchoredToastProvider>
+                  <main>
+                    <div className="container mx-auto relative min-h-dvh flex flex-col">
+                      <Navbar />
+                      {children}
+                      <ScrollToTop />
+                    </div>
+                  </main>
+                </AnchoredToastProvider>
+              </ToastProvider>
             </ProgressProvider>
           </ReactLenis>
         </ThemeProvider>

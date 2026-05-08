@@ -66,7 +66,7 @@ export function Navbar() {
                 asIcon
                 target="_blank"
                 variant="colored"
-                href="https://wa.me/1234567890"
+                href={siteConfig.links.contact.social.whatsapp.url}
               >
                 <Whatsapp size={24} className="size-5" variant="duotone" />
               </Link>
