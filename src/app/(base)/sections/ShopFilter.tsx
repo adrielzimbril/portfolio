@@ -34,9 +34,10 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
     "Bureautique",
     "Créatif",
     "Développement",
-    "Personnel",
-    "Partagé",
   ];
+
+  // Extract unique categories from products
+  const type = ["Personnel", "Partagé"];
 
   // Init filter from URL parameters
   const showParam = searchParams.get("show");
@@ -113,61 +114,6 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
           />
         </div>
       </SectionLayout>
-
-      {/* Search bar */}
-      <div className="relative w-full">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-b-white-invert-sec h-4 w-4" />
-        <Input
-          type="text"
-          placeholder="Rechercher un abonnement..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className="pl-10 pr-10 border-0"
-        />
-        {searchQuery && (
-          <Button
-            size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 hover:bg-b-base gap-2"
-            onClick={handleClearSearch}
-            asIcon
-            asPointer
-            whileTap
-          >
-            <Badge variant="white" size="xs" circle className="ml-1">
-              <X className="h-4 w-4 text-b-white-invert-sec" />
-            </Badge>
-          </Button>
-        )}
-      </div>
-
-      {/* Category filters */}
-      <div className="flex flex-wrap gap-2">
-        {categories.map((category) => (
-          <Badge
-            key={category}
-            variant={selectedCategory === category ? "colored" : "primary"}
-            className={cn(
-              "cursor-pointer transition-all hover:scale-105",
-              selectedCategory === category && "squircle-blue-500 text-white",
-            )}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
-          </Badge>
-        ))}
-      </div>
-
-      {/* Clear filters button */}
-      {(selectedCategory || searchQuery) && (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleClearFilters}
-          className="text-sm text-b-white-invert-sec hover:text-b-white-invert"
-        >
-          Effacer les filtres
-        </Button>
-      )}
 
       {/* Filter Modal */}
       <FilterModal
