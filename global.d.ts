@@ -1,4 +1,3 @@
-import type { Messages } from "@/integrations/i18n/types";
 import type { JSX as Jsx } from "react/jsx-runtime";
 
 // temporary fix for mdx types
@@ -11,6 +10,4 @@ declare global {
   }
 }
 
-declare global {
-  interface IntlMessages extends Messages {}
-}
+declare global {}
