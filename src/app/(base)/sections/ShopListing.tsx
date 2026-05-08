@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { ProductCard } from "@/components/shared/pages/shop/card";
 import { shopProducts } from "@/data/personal/shop-products";
 import { SectionLayout } from "@/components/shared/sections/layout";
@@ -17,41 +17,13 @@ export function ShopListing() {
   const displayedProducts = filteredProducts.slice(0, visibleItems);
   const hasMore = visibleItems < filteredProducts.length;
 
-  const handleFilterChange = (
-    category: string | null,
-    search: string,
-    type: string | null,
-  ) => {
-    let filtered = shopProducts;
-
-    if (category) {
-      filtered = filtered.filter((product) => product.primaryTag === category);
-    }
-
-    if (type) {
-      filtered = filtered.filter((product) => {
-        if (type === "Personnel") {
-          return !product.isShared;
-        } else if (type === "Partagé") {
-          return product.isShared;
-        }
-        return true;
-      });
-    }
-
-    if (search) {
-      const searchLower = search.toLowerCase();
-      filtered = filtered.filter(
-        (product) =>
-          product.title.toLowerCase().includes(searchLower) ||
-          product.description.toLowerCase().includes(searchLower) ||
-          product.tags.some((tag) => tag.toLowerCase().includes(searchLower)),
-      );
-    }
-
-    setFilteredProducts(filtered);
-    setVisibleItems(12); // Reset pagination when filter changes
-  };
+  const handleFilteredProductsChange = useCallback(
+    (products: typeof shopProducts) => {
+      setFilteredProducts(products);
+      setVisibleItems(12);
+    },
+    [],
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -85,7 +57,7 @@ export function ShopListing() {
 
   return (
     <div className="flex flex-col gap-8 py-14 md:py-[104px]">
-      <ShopFilter onFilterChange={handleFilterChange} />
+      <ShopFilter onFilteredProductsChange={handleFilteredProductsChange} />
 
       <SectionLayout
         title={undefined}

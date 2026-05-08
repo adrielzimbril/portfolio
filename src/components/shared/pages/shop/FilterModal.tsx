@@ -19,9 +19,9 @@ interface FilterModalProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   selectedCategory: string | null;
-  onCategoryChange: (category: string | null) => void;
+  onCategoryClick: (category: string) => void;
   selectedType: string | null;
-  onTypeChange: (type: string | null) => void;
+  onTypeClick: (type: string) => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClearFilters: () => void;
@@ -29,15 +29,16 @@ interface FilterModalProps {
   typeCounts: Record<string, number>;
   categories: string[];
   types: string[];
+  resultCount: number;
 }
 
 export function FilterModal({
   isOpen,
   onOpenChange,
   selectedCategory,
-  onCategoryChange,
+  onCategoryClick,
   selectedType,
-  onTypeChange,
+  onTypeClick,
   searchQuery,
   onSearchChange,
   onClearFilters,
@@ -45,12 +46,28 @@ export function FilterModal({
   typeCounts,
   categories,
   types,
+  resultCount,
 }: FilterModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent size="lg" variant="modern" className="flex flex-col gap-6">
         <DialogHeader>
-          <DialogTitle>Filtrer les abonnements</DialogTitle>
+          <DialogTitle>
+            <div className="flex items-center gap-2">
+              Filtrer les abonnements{" "}
+              <Badge
+                className={cn(
+                  pickRandomColor(DEFAULT_COLOR_CODE_NAME.PURPLE),
+                  "py-1",
+                  "size-max content-center place-content-center",
+                )}
+                variant="colored"
+                circle
+              >
+                {resultCount}
+              </Badge>
+            </div>
+          </DialogTitle>
         </DialogHeader>
 
         <DialogSeparator />
@@ -65,11 +82,7 @@ export function FilterModal({
                 key={category}
                 variant={selectedCategory === category ? "default" : "outline"}
                 size="xs"
-                onClick={() =>
-                  onCategoryChange(
-                    selectedCategory === category ? null : category,
-                  )
-                }
+                onClick={() => onCategoryClick(category)}
                 className="capitalize"
                 asIcon
                 asPointer
@@ -77,7 +90,7 @@ export function FilterModal({
                 {category}
                 <Badge
                   className={cn(
-                    pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),
+                    pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_PURPLE),
                     "px-1 py-0.5 text-[.625rem]",
                     "size-max content-center place-content-center",
                   )}
@@ -105,18 +118,13 @@ export function FilterModal({
 
         {/* Type Filters */}
         <div>
-          <p className="text-sm font-medium mb-3 text-b-white-invert-sec">
-            Type d&apos;abonnement
-          </p>
           <div className="flex flex-wrap gap-2 justify-center">
             {types.map((type) => (
               <Button
                 key={type}
                 variant={selectedType === type ? "default" : "outline"}
                 size="xs"
-                onClick={() =>
-                  onTypeChange(selectedType === type ? null : type)
-                }
+                onClick={() => onTypeClick(type)}
                 className="capitalize"
                 asIcon
                 asPointer

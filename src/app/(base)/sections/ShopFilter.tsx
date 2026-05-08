@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Search, X, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -18,16 +18,18 @@ import { FilterModal } from "@/components/shared/pages/shop/FilterModal";
 import { shopProducts } from "@/data/personal/shop-products";
 
 interface ShopFilterProps {
-  onFilterChange: (
-    category: string | null,
-    search: string,
-    type: string | null,
-  ) => void;
+  onFilteredProductsChange: (products: typeof shopProducts) => void;
 }
 
-export function ShopFilter({ onFilterChange }: ShopFilterProps) {
+export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const onFilteredProductsChangeRef = useRef(onFilteredProductsChange);
+
+  // Update ref when prop changes
+  useEffect(() => {
+    onFilteredProductsChangeRef.current = onFilteredProductsChange;
+  }, [onFilteredProductsChange]);
 
   // Extract unique categories from products
   const categories = [
@@ -110,8 +112,24 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
 
   // Notify parent when filter changes
   useEffect(() => {
-    onFilterChange(selectedCategory, searchQuery, selectedType);
-  }, [selectedCategory, searchQuery, selectedType, onFilterChange]);
+    const filtered = shopProducts.filter((product) => {
+      const matchesCategory =
+        !selectedCategory || product.primaryTag === selectedCategory;
+      const matchesType =
+        !selectedType ||
+        (selectedType === "Personnel" && !product.isShared) ||
+        (selectedType === "Partagé" && product.isShared);
+      const matchesSearch =
+        !searchQuery ||
+        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.tags.some((tag) =>
+          tag.toLowerCase().includes(searchQuery.toLowerCase()),
+        );
+      return matchesCategory && matchesType && matchesSearch;
+    });
+    onFilteredProductsChangeRef.current(filtered);
+  }, [selectedCategory, searchQuery, selectedType]);
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory((prev) => (prev === category ? null : category));
@@ -154,16 +172,17 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
         isOpen={isFilterModalOpen}
         onOpenChange={setIsFilterModalOpen}
         selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
+        onCategoryClick={handleCategoryClick}
         selectedType={selectedType}
-        onTypeChange={setSelectedType}
+        onTypeClick={handleTypeClick}
         searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
+        onSearchChange={handleSearchChange}
         onClearFilters={handleClearFilters}
         categoryCounts={categoryCounts}
         typeCounts={typeCounts}
         categories={categories}
         types={types}
+        resultCount={filteredProducts.length}
       />
     </div>
   );

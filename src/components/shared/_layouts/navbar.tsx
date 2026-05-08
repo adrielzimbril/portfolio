@@ -78,7 +78,7 @@ export function Navbar() {
                 variant="colored"
                 href={siteConfig.links.contact.social.whatsapp.url}
               >
-                <Whatsapp size={24} variant="duotone" />
+                <Whatsapp size={24} variant="bulk" />
               </Link>
             </div>
           </div>
