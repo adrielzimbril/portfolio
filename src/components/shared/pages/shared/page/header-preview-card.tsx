@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { PreviewContentType, ResourceType } from "@/types";
 import { getImageUrl } from "@/utils/base-url";
-import { PreviewIcon } from "@/components/shared/pages/shared/preview";
-import { cn } from "@/utils/utils";;
+import { cn } from "@/utils/utils";
 
 interface BasePreviewContent {
   type: PreviewContentType;
@@ -93,7 +92,6 @@ export function HeaderPreviewCard({
             loading="lazy"
             sizes="100vw"
           />
-          {type && <PreviewIcon resourceType={type} />}
         </div>
       );
 
@@ -109,7 +107,6 @@ export function HeaderPreviewCard({
             controls={content.controls !== false}
             className="max-w-full max-h-full rounded-lg"
           />
-          {type && <PreviewIcon resourceType={type} />}
           {content.caption && (
             <p className="text-zinc-400 text-center mt-4 text-lg">
               {content.caption}
@@ -119,12 +116,7 @@ export function HeaderPreviewCard({
       );
 
     case PreviewContentType.CUSTOM:
-      return (
-        <div className="relative w-full">
-          {content.content}
-          {type && <PreviewIcon resourceType={type} />}
-        </div>
-      );
+      return <div className="relative w-full">{content.content}</div>;
 
     default:
       return null;
