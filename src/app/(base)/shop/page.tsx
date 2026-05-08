@@ -34,7 +34,6 @@ export default function ShopPage() {
     <>
       <HeaderSection />
       <ShopListing />
-      <CallToAction isPage />
     </>
   );
 }

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { getImageUrl } from "@/utils";
+import { Whatsapp } from "@aurthle/icons";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
 import Image from "next/image";
 
@@ -59,14 +60,15 @@ export function Navbar() {
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
               <ThemeToggle />
               <Link
-                className="md:size-auto md:p-2 aspect-square"
+                className="md:size-auto md:p-2 aspect-square squircle-[#0fe01a]"
                 size="icon"
                 likeButton
                 asIcon
                 target="_blank"
+                variant="colored"
                 href="https://wa.me/1234567890"
               >
-                <MessageCircle size={20} className="size-5" />
+                <Whatsapp size={24} className="size-5" variant="duotone" />
               </Link>
             </div>
           </div>
