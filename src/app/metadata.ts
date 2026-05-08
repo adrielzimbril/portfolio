@@ -1,14 +1,6 @@
 import { Metadata } from "next";
 import { siteConfig } from "@/data/config";
-import {
-  getAbsolutePathUrl,
-  getBaseUrl,
-  getImageUrl,
-  getPathUrl,
-} from "@/utils";
-import { Locale } from "@/types";
-import { routes } from "@/data/routes";
-
+import { getBaseUrl, getImageUrl } from "@/utils";
 export interface InnerPageSeo {
   title: string;
   description: string;
@@ -58,7 +50,6 @@ export const metadata: Metadata = {
     siteName: siteConfig.details.nameShared,
     images: [
       {
-        //url: getPathUrl("/opengraph-image"),
         url: getImageUrl("opengraph-image.png"),
         width: 1200,
         height: 630,

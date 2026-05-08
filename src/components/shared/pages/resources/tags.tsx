@@ -32,7 +32,7 @@ export function Tags({
       {primaryTag && (
         <Badge
           className={cn(
-            "h-auto",
+            "h-auto!",
             pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE),
           )}
           variant="colored"
@@ -44,7 +44,7 @@ export function Tags({
       {secondaryTag && (
         <Badge
           className={cn(
-            "h-auto",
+            "h-auto!",
             pickRandomColor(
               secondaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE,
             ),
@@ -56,7 +56,7 @@ export function Tags({
       )}
 
       {tags?.map((tag, index) => (
-        <Badge className="h-auto" key={index}>
+        <Badge className="h-auto!" key={index}>
           {tag}
         </Badge>
       ))}

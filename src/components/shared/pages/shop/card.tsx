@@ -5,6 +5,7 @@ import { PageType } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/utils/utils";
 import type { Product as ProductType } from "@/data/personal/shop-products";
+import { siteConfig } from "@/data/config";
 
 export type Product = ProductType;
 
@@ -15,7 +16,7 @@ export function ProductCard({ product }: { product: Product }) {
         <CardPreview
           title={product.title}
           type={PageType.HUB as any}
-          slug={`/shop/${product.id}`}
+          href={siteConfig.links.contact.social.whatsapp}
           cover={product.image}
           isCustomUrl
           coverText={{

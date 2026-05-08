@@ -3,6 +3,7 @@ import { Link } from "@/components/ui/link";
 import { ShoppingBag } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { formatPrice } from "@/utils/formatPricing";
+import { siteConfig } from "@/data/config";
 
 export function CardInfo({
   title,
@@ -45,7 +46,7 @@ export function CardInfo({
 
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
-    <Link href={`/shop/${slug}`}>
+    <Link href={siteConfig.links.contact.social.whatsapp}>
       <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
         {title}
       </h3>
@@ -64,7 +65,7 @@ function Description({ description }: { description: string }) {
 function Action({ slug }: { slug: string }) {
   return (
     <Link
-      href={`/shop/${slug}`}
+      href={siteConfig.links.contact.social.whatsapp}
       likeButton
       whileTap
       size="xs"
