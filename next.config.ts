@@ -57,7 +57,6 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: !IsDEV,
   },
-  swcMinify: true,
   compress: true,
   serverExternalPackages: ["@vercel/og"],
 };

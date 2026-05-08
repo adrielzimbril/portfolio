@@ -2,10 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { metadata as metadataBase } from "@/app/metadata";
-import { AnchoredToastProvider, ToastProvider } from "@/components/ui/toast";
-// Front layout imports moved to (base)/layout.tsx
 import type { PropsWithChildren } from "react";
-import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { ProgressProvider } from "@/components/aurthle/providers/progress-provider";
 import { siteConfig } from "@/data/config";
 import { LayoutProvider } from "@/components/aurthle/providers/layout-provider";
@@ -36,9 +33,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang={siteConfig.languagePrimary} suppressHydrationWarning>
-      <body
-        className={`antialiased ${SFProDisplay.variable} ${SFProText.variable}`}
-      >
+      <body className="antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -48,17 +43,13 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         >
           <LayoutProvider>
             <ProgressProvider>
-              <ToastProvider>
-                <AnchoredToastProvider>
-                  <main>
-                    <div className="container mx-auto relative min-h-dvh flex flex-col">
-                      <Navbar />
-                      {children}
-                      <ScrollToTop />
-                    </div>
-                  </main>
-                </AnchoredToastProvider>
-              </ToastProvider>
+              <main>
+                <div className="container mx-auto relative min-h-dvh flex flex-col">
+                  <Navbar />
+                  {children}
+                  <ScrollToTop />
+                </div>
+              </main>
             </ProgressProvider>
           </LayoutProvider>
         </ThemeProvider>
