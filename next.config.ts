@@ -52,7 +52,6 @@ const nextConfig: NextConfig = {
   experimental: {
     mdxRs: true,
     optimizePackageImports: ["@aurthle/icons", "lucide-react"],
-    optimizeCss: true,
   },
   compiler: {
     removeConsole: !IsDEV,

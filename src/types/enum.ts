@@ -1,5 +1,3 @@
-import { ReactionType } from "@/lib/stats/types";
-
 export enum SortOrder {
   ASC = "asc",
   DESC = "desc",
