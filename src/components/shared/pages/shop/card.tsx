@@ -1,9 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { CardPreview } from "@/components/shared/pages/shared/preview";
 import { CardInfo } from "@/components/shared/pages/shop/details";
-import { PageType } from "@/types";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/utils/utils";
 import type { Product as ProductType } from "@/data/personal/shop-products";
 import { siteConfig } from "@/data/config";
 

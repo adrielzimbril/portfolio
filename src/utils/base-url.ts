@@ -1,4 +1,3 @@
-import { PageType, QuestAskType } from "@/types";
 import { ConfigValue, getSiteUrl } from "@/config";
 
 /**
@@ -121,59 +120,6 @@ export function getApiUrl(path: string): string {
   const base = getApiBaseUrl();
   const safePath = path.replace(/^\//, "");
   return `${base}/${safePath}`;
-}
-
-/**
- * Gets the resources URL.
- *
- * @param {string} resource - The resource type.
- * @param {string | undefined} slug - The slug of the resource.
- *
- * Returns the resources URL.
- * @returns {string} The resources URL.
- *
- * @example
- * getResourcesUrl(PageType.HUB, "slug"); // returns "https://base-url/hub/slug"
- * getResourcesUrl(PageType.PROJECTS); // returns "https://base-url/projects"
- * getResourcesUrl(PageType.THINKS, "slug"); // returns "https://base-url/thoughts/slug"
- * getResourcesUrl(PageType.QUESTS, "slug"); // returns "https://base-url/quests/slug"
- */
-export function getResourcesUrl(
-  resource: PageType,
-  slug?: string | undefined,
-): string {
-  return `${getBaseUrl()}/${resource}${slug ? `/${slug}` : ""}`;
-}
-
-/**
- * Gets the resource ask URL.
- *
- * @param {string} slug - The slug of the resource.
- *
- * Returns the resource ask URL.
- * @returns {string} The resource ask URL.
- *
- * @example
- * getResourceAskUrl("slug"); // returns "https://base-url/hub/get/slug"
- */
-export function getResourceAskUrl(slug?: string): string {
-  if (!slug) return "";
-  return getResourcesUrl(PageType.HUB, `get/${slug}`);
-}
-
-/**
- * Gets the resource ask URL.
- *
- * @param {string} slug - The slug of the resource.
- *
- * Returns the resource ask URL.
- * @returns {string} The resource ask URL.
- *
- * @example
- * getResourceAskUrl("slug"); // returns "https://base-url/hub/get/slug"
- */
-export function getQuestAskUrl(slug: string, type: QuestAskType): string {
-  return getResourcesUrl(PageType.QUESTS, `${slug}/${type}`);
 }
 
 /**
