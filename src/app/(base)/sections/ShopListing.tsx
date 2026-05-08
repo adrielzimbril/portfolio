@@ -17,11 +17,26 @@ export function ShopListing() {
   const displayedProducts = filteredProducts.slice(0, visibleItems);
   const hasMore = visibleItems < filteredProducts.length;
 
-  const handleFilterChange = (category: string | null, search: string) => {
+  const handleFilterChange = (
+    category: string | null,
+    search: string,
+    type: string | null,
+  ) => {
     let filtered = shopProducts;
 
     if (category) {
       filtered = filtered.filter((product) => product.primaryTag === category);
+    }
+
+    if (type) {
+      filtered = filtered.filter((product) => {
+        if (type === "Personnel") {
+          return !product.isShared;
+        } else if (type === "Partagé") {
+          return product.isShared;
+        }
+        return true;
+      });
     }
 
     if (search) {
@@ -35,7 +50,7 @@ export function ShopListing() {
     }
 
     setFilteredProducts(filtered);
-    setVisibleItems(ITEMS_PER_PAGE); // Reset pagination when filter changes
+    setVisibleItems(12); // Reset pagination when filter changes
   };
 
   useEffect(() => {

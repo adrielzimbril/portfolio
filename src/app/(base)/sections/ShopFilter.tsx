@@ -1,9 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Search, X } from "lucide-react";
+import { Search, X, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/utils/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SectionLayout } from "@/components/shared/sections/layout";
@@ -12,7 +18,11 @@ import { FilterModal } from "@/components/shared/pages/shop/FilterModal";
 import { shopProducts } from "@/data/personal/shop-products";
 
 interface ShopFilterProps {
-  onFilterChange: (category: string | null, search: string) => void;
+  onFilterChange: (
+    category: string | null,
+    search: string,
+    type: string | null,
+  ) => void;
 }
 
 export function ShopFilter({ onFilterChange }: ShopFilterProps) {
@@ -37,7 +47,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
   ];
 
   // Extract unique categories from products
-  const type = ["Personnel", "Partagé"];
+  const types = ["Personnel", "Partagé"];
 
   // Init filter from URL parameters
   const showParam = searchParams.get("show");
@@ -49,6 +59,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     initialCategory,
   );
+  const [selectedType, setSelectedType] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
@@ -63,10 +74,27 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
     {} as Record<string, number>,
   );
 
+  // Calculate type counts
+  const typeCounts = types.reduce(
+    (acc, type) => {
+      if (type === "Personnel") {
+        acc[type] = shopProducts.filter((p) => !p.isShared).length;
+      } else if (type === "Partagé") {
+        acc[type] = shopProducts.filter((p) => p.isShared).length;
+      }
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
   // Calculate filtered products for counter
   const filteredProducts = shopProducts.filter((product) => {
     const matchesCategory =
       !selectedCategory || product.primaryTag === selectedCategory;
+    const matchesType =
+      !selectedType ||
+      (selectedType === "Personnel" && !product.isShared) ||
+      (selectedType === "Partagé" && product.isShared);
     const matchesSearch =
       !searchQuery ||
       product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -74,18 +102,23 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
       product.tags.some((tag) =>
         tag.toLowerCase().includes(searchQuery.toLowerCase()),
       );
-    return matchesCategory && matchesSearch;
+    return matchesCategory && matchesType && matchesSearch;
   });
 
-  const hasActiveFilters = selectedCategory !== null || searchQuery !== "";
+  const hasActiveFilters =
+    selectedCategory !== null || selectedType !== null || searchQuery !== "";
 
   // Notify parent when filter changes
   useEffect(() => {
-    onFilterChange(selectedCategory, searchQuery);
-  }, [selectedCategory, searchQuery, onFilterChange]);
+    onFilterChange(selectedCategory, searchQuery, selectedType);
+  }, [selectedCategory, searchQuery, selectedType, onFilterChange]);
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory((prev) => (prev === category ? null : category));
+  };
+
+  const handleTypeClick = (type: string) => {
+    setSelectedType((prev) => (prev === type ? null : type));
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,6 +131,7 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
 
   const handleClearFilters = () => {
     setSelectedCategory(null);
+    setSelectedType(null);
     setSearchQuery("");
     router.push("/");
   };
@@ -121,11 +155,15 @@ export function ShopFilter({ onFilterChange }: ShopFilterProps) {
         onOpenChange={setIsFilterModalOpen}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
+        selectedType={selectedType}
+        onTypeChange={setSelectedType}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         onClearFilters={handleClearFilters}
         categoryCounts={categoryCounts}
+        typeCounts={typeCounts}
         categories={categories}
+        types={types}
       />
     </div>
   );
