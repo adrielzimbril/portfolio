@@ -1,12 +1,5 @@
 import { getResourcesUrl } from "@/utils/base-url";
-import {
-  getAllPosts,
-  getAllProjects,
-  getAllQuests,
-  getAllResources
-} from "@/integrations/content/lib";
 import type { MetadataRoute } from "next";
-import { Post, Project, Quest, Resource, Talk } from "@/integrations/content/types/types";
 import { getAbsolutePathUrl } from "@/utils/base-url";
 import { routes } from "@/data/routes";
 import { PageType } from "@/types";
@@ -46,40 +39,11 @@ const getPriority = (type: "home" | "marketing" | "resources"): number => {
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getAllPosts();
-  const resources = await getAllResources();
-  const projects = await getAllProjects();
-  const quests = await getAllQuests();
-
   return [
     ...staticMarketingPages.flatMap((page: string) => ({
       url: getAbsolutePathUrl({ type: "default", path: page }),
       lastModified: new Date(),
       priority: getPriority(page === "/" ? "home" : "marketing"),
-    })),
-    ...posts.map((post: Post) => ({
-      url: getResourcesUrl(PageType.THOUGHT, post.slug),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: getPriority("resources"),
-    })),
-    ...resources.map((resource: Resource) => ({
-      url: getResourcesUrl(PageType.HUB, resource.slug),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: getPriority("resources"),
-    })),
-    ...projects.map((project: Project) => ({
-      url: getResourcesUrl(PageType.PROJECT, project.slug),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: getPriority("resources"),
-    })),
-    ...quests.map((quest: Quest) => ({
-      url: getResourcesUrl(PageType.QUESTS, quest.slug),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: getPriority("resources"),
     })),
   ];
 }

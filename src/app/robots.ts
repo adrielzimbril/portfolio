@@ -3,33 +3,16 @@ import { getBaseUrl, getPathUrl } from "@/utils/base-url";
 import { routes } from "@/data/routes";
 import { Locale } from "@/types";
 
-const rssRoutes = Object.values(Locale).map((locale) => {
-  return [
-    getPathUrl(`${routes.rss.link}/?locale=${locale}`),
-    getPathUrl(`${routes.rssAtom.link}/?locale=${locale}`),
-    getPathUrl(`${routes.rssJson.link}/?locale=${locale}`),
-  ];
-});
-
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "*",
-        allow: ["*", "/api/preview", "/rss/*"],
-        disallow: [
-          "/private/",
-          "/private/*",
-          "/admin/",
-          "/api/",
-          "/*?*draft=true",
-          "/*/drafts/*",
-          "/admin/",
-        ],
+        userAgent: "",
+        allow: [],
+        disallow: ["*"],
       },
     ],
-    sitemap: [getPathUrl("sitemap.xml"), ...rssRoutes.flat()],
+    sitemap: [getPathUrl("sitemap.xml")],
     host: getBaseUrl(),
   };
 }
-

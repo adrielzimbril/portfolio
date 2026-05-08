@@ -1,32 +1,25 @@
 import { Badge } from "@/components/ui/badge";
 import { SectionBase } from "@/components/shared/pages/shared/section-base";
 import { cn } from "@/utils/utils";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
 import { routes } from "@/data/routes";
-import { getTranslations } from "next-intl/server";
 import { Link } from "@/components/ui/link";
 import { Metadata } from "next";
 import { metadata as baseMetadata } from "@/app/metadata";
 import { Navbar } from "@/components/shared/_layouts/navbar";
 import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
-import { Footer } from "@/components/shared/_layouts/footer";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
-
   const metadata: Metadata = {
     ...baseMetadata,
-    title: t("not-found.title"),
-    description: t("not-found.description"),
-    keywords: t("not-found.keywords"),
+    title: "Page non trouvée",
+    description: "La page que vous recherchez n'existe pas.",
+    keywords: "404, page non trouvée, erreur",
   };
 
   return metadata;
 }
 
 export default async function NotFound() {
-  const t = await getTranslations();
-
   return (
     <>
       <div className="container mx-auto relative min-h-dvh flex flex-col">
@@ -45,33 +38,30 @@ export default async function NotFound() {
           >
             <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-6">
               <Badge className="relative text-base font-normal md:font-medium md:text-xl max-w-3xl leading-[120%] text-b-white-invert-sec">
-                {t("not-found.page.badge")}
+                404
               </Badge>
 
               <div className="text-7xl md:text-9xl py-2 leading-none select-none">
                 🪐
               </div>
 
-              <h1 className="self-stretch font-medium">
-                {t.rich("not-found.page.title", { ...richTextComponent })}
-              </h1>
+              <h1 className="self-stretch font-medium">Page non trouvée</h1>
 
               <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-snug text-b-white-invert-sec">
-                {t("not-found.page.desc")}
+                La page que vous recherchez n&apos;existe pas ou a été déplacée.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
               <Link href={routes.home.link} likeButton whileTap>
                 <span className="font-bold text-base">
-                  {t("not-found.page.cta.home")}
+                  Retour à l&apos;accueil
                 </span>
               </Link>
             </div>
           </div>
         </SectionBase>
         <ScrollToTop />
-        <Footer />
       </div>
     </>
   );
