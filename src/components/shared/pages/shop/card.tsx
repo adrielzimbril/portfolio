@@ -17,6 +17,7 @@ export function ProductCard({ product }: { product: Product }) {
           title={product.title}
           slug={siteConfig.links.contact.social.whatsapp.url}
           cover={product.image}
+          priority={product.featured}
           coverText={{
             emoji: "🛍️",
             title: product.title,

@@ -27,7 +27,7 @@ export const SFProDisplay = localFont({
   display: "swap",
   weight: "400 700",
   style: "normal",
-  preload: true,
+  preload: false,
   fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
   adjustFontFallback: "Arial",
 });

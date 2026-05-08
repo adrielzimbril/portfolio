@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     dangerouslyAllowLocalIP: IsDEV,
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60,
     remotePatterns: [
       // production
       {
@@ -49,8 +51,14 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     mdxRs: true,
-    optimizePackageImports: ["@aurthle/icons"],
+    optimizePackageImports: ["@aurthle/icons", "lucide-react"],
+    optimizeCss: true,
   },
+  compiler: {
+    removeConsole: !IsDEV,
+  },
+  swcMinify: true,
+  compress: true,
   serverExternalPackages: ["@vercel/og"],
 };
 

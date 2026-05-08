@@ -7,9 +7,19 @@ import { useEffect, useState } from "react";
 import { routes } from "@/data/routes";
 import { Link } from "@/components/ui/link";
 import { getImageUrl } from "@/utils";
-import { Whatsapp } from "@aurthle/icons";
+import dynamic from "next/dynamic";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
 import Image from "next/image";
+
+const Whatsapp = dynamic(
+  () => import("@aurthle/icons").then((mod) => mod.Whatsapp),
+  {
+    loading: () => (
+      <div className="size-5 animate-pulse bg-primary/20 rounded-full" />
+    ),
+    ssr: false,
+  },
+);
 
 export function Navbar() {
   const { scrollY } = useScroll();
