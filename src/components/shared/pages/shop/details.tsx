@@ -78,6 +78,7 @@ export function CardInfo({
   description,
   price,
   currency,
+  duration,
 }: {
   title: string;
   primaryTag: string;
@@ -86,6 +87,7 @@ export function CardInfo({
   description: string;
   price: number;
   currency: string;
+  duration: string;
 }) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -99,6 +101,8 @@ export function CardInfo({
               ? DEFAULT_COLOR_CODE_NAME.GREEN
               : DEFAULT_COLOR_CODE_NAME.RED
           }
+          secondaryTag={duration}
+          secondaryTagColor={DEFAULT_COLOR_CODE_NAME.BLUE}
           tags={tags}
         />
 

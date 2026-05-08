@@ -29,6 +29,7 @@ export function ProductCard({ product }: { product: Product }) {
           description={product.description}
           price={product.price}
           currency={product.currency}
+          duration={product.duration}
         />
       </CardContent>
     </Card>
