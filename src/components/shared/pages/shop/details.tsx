@@ -3,8 +3,7 @@ import { Link } from "@/components/ui/link";
 import { ShoppingBag } from "@aurthle/icons";
 import { Tags } from "@/components/shared/pages/resources/tags";
 import { useTranslations } from "use-intl";
-import { formatPricingForUser } from "@/utils/formatPricing";
-import { useEffect, useState } from "react";
+import { formatPrice } from "@/utils/formatPricing";
 
 export function CardInfo({
   title,
@@ -24,22 +23,6 @@ export function CardInfo({
   currency: string;
 }) {
   const t = useTranslations();
-  const [formattedPrice, setFormattedPrice] = useState<{
-    price: string;
-    currency: string;
-  }>({
-    price: `${price} ${currency}`,
-    currency,
-  });
-
-  useEffect(() => {
-    formatPricingForUser(price, currency).then((result) => {
-      setFormattedPrice({
-        price: result.price,
-        currency: result.currency,
-      });
-    });
-  }, [price, currency]);
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -54,7 +37,7 @@ export function CardInfo({
       <div className="flex items-center justify-between w-full gap-3 mt-auto">
         <div className="flex flex-col">
           <span className="text-xl font-semibold text-b-white-invert">
-            {formattedPrice.price}
+            {formatPrice(price, currency)}
           </span>
         </div>
         <Action slug={slug} />

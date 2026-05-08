@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ProductCard, ProductCardSkeleton, type Product } from "@/components/shared/pages/shop/card";
+import { ProductCard, type Product } from "@/components/shared/pages/shop/card";
 import shopProducts from "@/data/personal/shop-products.json";
 import { SectionLayout } from "@/components/shared/sections/layout";
 
@@ -23,12 +23,14 @@ export function ShopListing() {
           setIsLoading(true);
           // Simulate loading delay
           setTimeout(() => {
-            setVisibleItems((prev) => Math.min(prev + ITEMS_PER_PAGE, products.length));
+            setVisibleItems((prev) =>
+              Math.min(prev + ITEMS_PER_PAGE, products.length),
+            );
             setIsLoading(false);
           }, 500);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const currentRef = loadMoreRef.current;
@@ -53,17 +55,9 @@ export function ShopListing() {
       {displayedProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
-      
-      {isLoading && (
-        <>
-          <ProductCardSkeleton />
-          <ProductCardSkeleton />
-          <ProductCardSkeleton />
-        </>
-      )}
-      
+
       <div ref={loadMoreRef} className="w-full h-10" />
-      
+
       {!hasMore && !isLoading && displayedProducts.length > 0 && (
         <div className="col-span-full text-center py-8">
           <p className="text-b-white-invert-sec">
