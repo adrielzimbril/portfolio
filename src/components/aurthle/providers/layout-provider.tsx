@@ -31,7 +31,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     (item) => item.link === activePath,
   );
   const currentKey = currentRoute?.key || routes.home.key;
-  
+
   const isHomePage =
     currentRoute?.key === routes.home.key || currentRoute === undefined;
   const isAdminRoute = route.startsWith("/landlord");

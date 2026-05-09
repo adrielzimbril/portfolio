@@ -7,10 +7,11 @@ const origin = process.env.BONEYARD_ORIGIN ?? "http://localhost:3000";
 const routes = Array.isArray(config.routes) ? config.routes : ["/"];
 const urls = routes.map((route) => new URL(route, origin).toString());
 const cliPath = resolve("node_modules/boneyard-js/bin/cli.js");
+const wait = String(process.env.BONEYARD_WAIT ?? config.wait ?? 12000);
 
 const child = spawn(
   process.execPath,
-  [cliPath, "build", ...urls, "--no-scan"],
+  [cliPath, "build", ...urls, "--no-scan", "--wait", wait],
   {
     stdio: "inherit",
     env: process.env,
