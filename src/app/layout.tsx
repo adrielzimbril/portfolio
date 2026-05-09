@@ -15,6 +15,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SFProDisplay, SFProText } from "@/lib/fonts/fonts";
 import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie";
 import { ProgressProvider } from "@/components/aurthle/providers/progress-provider";
+import { BoneyardRegistry } from "@/components/shared/boneyard-registry";
 
 import { notFound } from "next/navigation";
 
@@ -63,6 +64,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       <body
         className={`antialiased ${SFProDisplay.variable} ${SFProText.variable}`}
       >
+        <BoneyardRegistry />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
