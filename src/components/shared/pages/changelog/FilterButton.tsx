@@ -31,7 +31,7 @@ export function FilterButton({
       <FilterOne size={20} variant="bulk" />
       {t("button")}
       {hasActiveFilters && (
-        <Badge variant="white" size="xs" circle className="ml-1">
+        <Badge variant="white" size="xs" circle className="ml-1 h-auto!">
           {resultCount}
         </Badge>
       )}

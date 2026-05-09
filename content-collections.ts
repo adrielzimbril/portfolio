@@ -143,7 +143,7 @@ const postCategories = defineCollection({
     id: z.number(),
     name: z.string(),
     description: z.string().optional(),
-    color: z.string(), // Squircle color (ex: "BLUE")
+    color: z.string(), // Color (ex: "BLUE")
     slug: z.string(),
   }),
   transform: async (document, context) => {

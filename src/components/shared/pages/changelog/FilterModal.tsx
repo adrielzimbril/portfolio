@@ -90,7 +90,7 @@ export function FilterModal({
                     className={cn(
                       pickRandomColor(DEFAULT_COLOR_CODE_NAME.YELLOW),
                       "px-1 py-0.5 text-[.625rem]",
-                      "size-max",
+                      "size-max content-center place-content-center",
                     )}
                     variant="colored"
                     size="xs"
