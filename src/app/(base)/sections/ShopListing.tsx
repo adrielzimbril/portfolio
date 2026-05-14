@@ -5,7 +5,7 @@ import { Skeleton } from "boneyard-js/react";
 import { ProductCard } from "@/components/shared/pages/shop/card";
 import { shopProducts } from "@/data/personal/shop-products";
 import { SectionLayout } from "@/components/shared/sections/layout";
-import { ShopFilter } from "./ShopFilter";
+import { ShopFilter } from "@/app/(base)/sections/ShopFilter";
 import { useSquircleReady } from "@/components/providers/layout-provider";
 
 const DEFAULT_VISIBLE_ITEMS = 6;

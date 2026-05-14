@@ -39,13 +39,17 @@ export function FilterModal({
   onCategoryClick,
   selectedType,
   onTypeClick,
+  selectedAvailability,
+  onAvailabilityClick,
   searchQuery,
   onSearchChange,
   onClearFilters,
   categoryCounts,
   typeCounts,
+  availabilityCounts,
   categories,
   types,
+  availabilities,
   resultCount,
 }: FilterModalProps) {
   return (
@@ -153,7 +157,9 @@ export function FilterModal({
         <DialogSeparator />
 
         <DialogFooter className="gap-2 sm:justify-center">
-          {(selectedCategory.length > 0 || selectedType) && (
+          {(selectedCategory.length > 0 ||
+            selectedType ||
+            selectedAvailability) && (
             <Button
               variant="outline"
               onClick={() => {

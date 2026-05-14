@@ -8,6 +8,38 @@ import { siteConfig } from "@/data/config";
 import { DEFAULT_COLOR_CODE_NAME } from "@/types";
 import { pickRandomColor } from "@/utils";
 
+interface AvailabilityIndicatorProps {
+  isAvailable: boolean;
+}
+
+function AvailabilityIndicator({ isAvailable }: AvailabilityIndicatorProps) {
+  const color = isAvailable ? "#adffad" : "#ffadad";
+
+  return (
+    <div className="relative flex items-center justify-center mb-2">
+      {/* Pulse effect */}
+      <div
+        className="absolute rounded-full animate-ping"
+        style={{
+          width: "16px",
+          height: "16px",
+          backgroundColor: color,
+          opacity: "0.5",
+        }}
+      />
+      {/* Main circle */}
+      <div
+        className="relative rounded-full"
+        style={{
+          width: "12px",
+          height: "12px",
+          backgroundColor: color,
+        }}
+      />
+    </div>
+  );
+}
+
 interface TagsProps {
   primaryTag?: string;
   primaryTagColor?: DEFAULT_COLOR_CODE_NAME;
@@ -91,16 +123,13 @@ export function CardInfo({
 }) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
-      <div className="flex flex-col items-start justify-center gap-4 w-full">
+      <div className="flex flex-col items-start justify-center gap-2 w-full">
+        <AvailabilityIndicator isAvailable={isAvailable} />
         <Header title={title} />
 
         <Tags
-          primaryTag={isAvailable ? "Disponible" : "Indisponible"}
-          primaryTagColor={
-            isAvailable
-              ? DEFAULT_COLOR_CODE_NAME.GREEN
-              : DEFAULT_COLOR_CODE_NAME.RED
-          }
+          primaryTag={primaryTag}
+          primaryTagColor={DEFAULT_COLOR_CODE_NAME.PURPLE}
           secondaryTag={duration}
           secondaryTagColor={DEFAULT_COLOR_CODE_NAME.YELLOW}
           tags={tags}

@@ -60,6 +60,9 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
 
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedAvailability, setSelectedAvailability] = useState<
+    string | null
+  >(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
@@ -87,6 +90,19 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     {} as Record<string, number>,
   );
 
+  // Calculate availability counts
+  const availabilityCounts = availabilities.reduce(
+    (acc, availability) => {
+      if (availability === "Disponible") {
+        acc[availability] = shopProducts.filter((p) => p.available).length;
+      } else if (availability === "Indisponible") {
+        acc[availability] = shopProducts.filter((p) => !p.available).length;
+      }
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
   // Calculate filtered products for counter
   const filteredProducts = shopProducts.filter((product) => {
     const matchesCategory =
@@ -96,6 +112,10 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
       !selectedType ||
       (selectedType === "Personnel" && !product.isShared) ||
       (selectedType === "Partagé" && product.isShared);
+    const matchesAvailability =
+      !selectedAvailability ||
+      (selectedAvailability === "Disponible" && product.available) ||
+      (selectedAvailability === "Indisponible" && !product.available);
     const matchesSearch =
       !searchQuery ||
       product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -103,11 +123,16 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
       product.tags.some((tag) =>
         tag.toLowerCase().includes(searchQuery.toLowerCase()),
       );
-    return matchesCategory && matchesType && matchesSearch;
+    return (
+      matchesCategory && matchesType && matchesAvailability && matchesSearch
+    );
   });
 
   const hasActiveFilters =
-    selectedCategory.length > 0 || selectedType !== null || searchQuery !== "";
+    selectedCategory.length > 0 ||
+    selectedType !== null ||
+    selectedAvailability !== null ||
+    searchQuery !== "";
 
   // Notify parent when filter changes
   useEffect(() => {
@@ -119,6 +144,10 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
         !selectedType ||
         (selectedType === "Personnel" && !product.isShared) ||
         (selectedType === "Partagé" && product.isShared);
+      const matchesAvailability =
+        !selectedAvailability ||
+        (selectedAvailability === "Disponible" && product.available) ||
+        (selectedAvailability === "Indisponible" && !product.available);
       const matchesSearch =
         !searchQuery ||
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -126,10 +155,12 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
         product.tags.some((tag) =>
           tag.toLowerCase().includes(searchQuery.toLowerCase()),
         );
-      return matchesCategory && matchesType && matchesSearch;
+      return (
+        matchesCategory && matchesType && matchesAvailability && matchesSearch
+      );
     });
     onFilteredProductsChangeRef.current(filtered);
-  }, [selectedCategory, searchQuery, selectedType]);
+  }, [selectedCategory, searchQuery, selectedType, selectedAvailability]);
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory((prev) =>
@@ -141,6 +172,12 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
 
   const handleTypeClick = (type: string) => {
     setSelectedType((prev) => (prev === type ? null : type));
+  };
+
+  const handleAvailabilityClick = (availability: string) => {
+    setSelectedAvailability((prev) =>
+      prev === availability ? null : availability,
+    );
   };
 
   const handleSearchChange = (
@@ -157,6 +194,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   const handleClearFilters = () => {
     setSelectedCategory([]);
     setSelectedType(null);
+    setSelectedAvailability(null);
     setSearchQuery("");
     router.push("/");
   };
@@ -182,13 +220,17 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
         onCategoryClick={handleCategoryClick}
         selectedType={selectedType}
         onTypeClick={handleTypeClick}
+        selectedAvailability={selectedAvailability}
+        onAvailabilityClick={handleAvailabilityClick}
         searchQuery={searchQuery}
         onSearchChange={handleSearchChange}
         onClearFilters={handleClearFilters}
         categoryCounts={categoryCounts}
         typeCounts={typeCounts}
+        availabilityCounts={availabilityCounts}
         categories={categories}
         types={types}
+        availabilities={availabilities}
         resultCount={filteredProducts.length}
       />
     </div>
