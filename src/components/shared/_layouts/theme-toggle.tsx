@@ -5,9 +5,12 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { flushSync } from "react-dom";
 import { cn } from "@/utils/utils";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+  const isMounted = useIsMounted();
+  const currentTheme = isMounted ? theme : "light";
   const buttonRef = React.useRef<HTMLButtonElement | null>(null);
 
   const changeTheme = async () => {
@@ -15,7 +18,11 @@ export function ThemeToggle() {
 
     // Cycle through light -> dark -> system -> light
     const newTheme =
-      theme === "light" ? "dark" : theme === "dark" ? "system" : "light";
+      currentTheme === "light"
+        ? "dark"
+        : currentTheme === "dark"
+          ? "system"
+          : "light";
 
     // Check if the browser supports the View Transition API
     const supportsViewTransition = "startViewTransition" in document;
@@ -63,7 +70,7 @@ export function ThemeToggle() {
       asPointer
       ref={buttonRef}
       onClick={changeTheme}
-      aria-label={theme}
+      aria-label={currentTheme}
       className="md:size-auto md:p-2 aspect-square"
     >
       <Sun
@@ -71,8 +78,8 @@ export function ThemeToggle() {
         variant="duotone"
         className={cn(
           "rotate-0 scale-100 transition-all",
-          theme === "dark" && "-rotate-90 scale-0",
-          theme === "system" && "-rotate-90 scale-0",
+          currentTheme === "dark" && "-rotate-90 scale-0",
+          currentTheme === "system" && "-rotate-90 scale-0",
         )}
       />
       <MoonSparkle
@@ -80,8 +87,8 @@ export function ThemeToggle() {
         variant="duotone"
         className={cn(
           "absolute rotate-90 scale-0 transition-all",
-          theme === "dark" && "rotate-0 scale-100",
-          theme === "system" && "-rotate-90 scale-0",
+          currentTheme === "dark" && "rotate-0 scale-100",
+          currentTheme === "system" && "-rotate-90 scale-0",
         )}
       />
       <SolarEclipseTwo
@@ -89,7 +96,7 @@ export function ThemeToggle() {
         variant="duotone"
         className={cn(
           "absolute rotate-180 scale-0 transition-all",
-          theme === "system" && "rotate-0 scale-100",
+          currentTheme === "system" && "rotate-0 scale-100",
         )}
       />
       <span className="sr-only">Toggle theme</span>

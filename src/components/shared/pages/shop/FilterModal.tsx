@@ -56,6 +56,11 @@ export function FilterModal({
   availabilities,
   resultCount,
 }: FilterModalProps) {
+  const getAvailabilityColor = (availability: string) =>
+    availability === "Disponible"
+      ? DEFAULT_COLOR_CODE_NAME.GREEN
+      : DEFAULT_COLOR_CODE_NAME.RED;
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent size="lg" variant="modern" className="flex flex-col gap-6">
@@ -152,6 +157,39 @@ export function FilterModal({
                   circle
                 >
                   {typeCounts[type] || 0}
+                </Badge>
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* Availability Filters */}
+        <div>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {availabilities.map((availability) => (
+              <Button
+                key={availability}
+                variant={
+                  selectedAvailability === availability ? "default" : "outline"
+                }
+                size="xs"
+                onClick={() => onAvailabilityClick(availability)}
+                className="capitalize"
+                asIcon
+                asPointer
+              >
+                {availability}
+                <Badge
+                  className={cn(
+                    pickRandomColor(getAvailabilityColor(availability)),
+                    "px-1 py-0.5 text-[.625rem]",
+                    "size-max content-center place-content-center",
+                  )}
+                  variant="colored"
+                  size="xs"
+                  circle
+                >
+                  {availabilityCounts[availability] || 0}
                 </Badge>
               </Button>
             ))}

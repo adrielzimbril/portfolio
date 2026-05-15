@@ -44,7 +44,7 @@ export const shopProducts: Product[] = [
     duration: "1 mois",
     isShared: true,
     featured: true,
-    available: true,
+    available: false,
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
@@ -76,7 +76,7 @@ export const shopProducts: Product[] = [
     duration: "1 mois",
     isShared: true,
     featured: false,
-    available: true,
+    available: false,
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
@@ -92,7 +92,7 @@ export const shopProducts: Product[] = [
     duration: "8 mois",
     isShared: false,
     featured: false,
-    available: true,
+    available: false,
     createdAt: "2026-05-08T00:00:00Z",
   },
   {

@@ -5,38 +5,95 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/utils/utils";
 import { formatPrice } from "@/utils/formatPricing";
 import { siteConfig } from "@/data/config";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
-import { pickRandomColor } from "@/utils";
+import { DEFAULT_COLOR_CODE, DEFAULT_COLOR_CODE_NAME } from "@/types";
+import { pickRandomColor, pickRandomColorCode } from "@/utils";
+
+export function CardInfo({
+  title,
+  primaryTag,
+  tags,
+  isAvailable,
+  description,
+  price,
+  currency,
+  duration,
+}: {
+  title: string;
+  primaryTag: string;
+  tags: string[];
+  isAvailable: boolean;
+  description: string;
+  price: number;
+  currency: string;
+  duration: string;
+}) {
+  return (
+    <div className="flex flex-col items-start justify-between gap-4 size-full">
+      <div className="flex flex-col items-start justify-center gap-2 w-full">
+        <Header title={title} />
+
+        <AvailabilityIndicator isAvailable={isAvailable} />
+
+        <Tags
+          primaryTag={primaryTag}
+          primaryTagColor={DEFAULT_COLOR_CODE_NAME.PURPLE}
+          secondaryTag={duration}
+          secondaryTagColor={DEFAULT_COLOR_CODE_NAME.YELLOW}
+          tags={tags}
+        />
+
+        <Description description={description} />
+      </div>
+
+      <div className="flex items-center justify-between w-full gap-3 mt-auto">
+        <div className="flex flex-col">
+          <span className="text-xl font-semibold text-b-white-invert">
+            {formatPrice(price, currency)}
+          </span>
+        </div>
+        <Action />
+      </div>
+    </div>
+  );
+}
 
 interface AvailabilityIndicatorProps {
   isAvailable: boolean;
 }
 
 function AvailabilityIndicator({ isAvailable }: AvailabilityIndicatorProps) {
-  const color = isAvailable ? "#adffad" : "#ffadad";
+  const colorName = isAvailable
+    ? DEFAULT_COLOR_CODE_NAME.GREEN
+    : DEFAULT_COLOR_CODE_NAME.RED;
+  const color = pickRandomColorCode(colorName) ?? DEFAULT_COLOR_CODE.GREEN;
 
   return (
-    <div className="relative flex items-center justify-center mb-2">
-      {/* Pulse effect */}
-      <div
-        className="absolute rounded-full animate-ping"
-        style={{
-          width: "16px",
-          height: "16px",
-          backgroundColor: color,
-          opacity: "0.5",
-        }}
-      />
-      {/* Main circle */}
-      <div
-        className="relative rounded-full"
-        style={{
-          width: "12px",
-          height: "12px",
-          backgroundColor: color,
-        }}
-      />
-    </div>
+    <Badge
+      className={cn(
+        "mb-1 self-start h-auto! md:h-auto! w-max! px-3.5 py-2 gap-2",
+        "squircle-sh-white text-b-white-invert",
+        "",
+      )}
+      variant="colored"
+      size="sm"
+      contentClassName="flex items-center gap-2 text-sm font-semibold leading-none"
+    >
+      <span className="relative inline-flex size-4 shrink-0 items-center justify-center">
+        <span
+          className={cn(
+            "absolute inline-flex size-full animate-ping-slow rounded-full opacity-60",
+            isAvailable ? "bg-green-300" : "bg-red-300",
+          )}
+        />
+        <span
+          className={cn(
+            "relative inline-flex size-3 rounded-full",
+            isAvailable ? "bg-green-500" : "bg-red-500",
+          )}
+        />
+      </span>
+      {isAvailable ? "Disponible" : "Indisponible"}
+    </Badge>
   );
 }
 
@@ -98,54 +155,6 @@ export function Tags({
           {tag}
         </Badge>
       ))}
-    </div>
-  );
-}
-
-export function CardInfo({
-  title,
-  primaryTag,
-  tags,
-  isAvailable,
-  description,
-  price,
-  currency,
-  duration,
-}: {
-  title: string;
-  primaryTag: string;
-  tags: string[];
-  isAvailable: boolean;
-  description: string;
-  price: number;
-  currency: string;
-  duration: string;
-}) {
-  return (
-    <div className="flex flex-col items-start justify-between gap-4 size-full">
-      <div className="flex flex-col items-start justify-center gap-2 w-full">
-        <AvailabilityIndicator isAvailable={isAvailable} />
-        <Header title={title} />
-
-        <Tags
-          primaryTag={primaryTag}
-          primaryTagColor={DEFAULT_COLOR_CODE_NAME.PURPLE}
-          secondaryTag={duration}
-          secondaryTagColor={DEFAULT_COLOR_CODE_NAME.YELLOW}
-          tags={tags}
-        />
-
-        <Description description={description} />
-      </div>
-
-      <div className="flex items-center justify-between w-full gap-3 mt-auto">
-        <div className="flex flex-col">
-          <span className="text-xl font-semibold text-b-white-invert">
-            {formatPrice(price, currency)}
-          </span>
-        </div>
-        <Action />
-      </div>
     </div>
   );
 }

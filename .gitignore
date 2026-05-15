@@ -61,3 +61,5 @@ sources/
 
 # Supabase temp files
 supabase/.temp/
+
+.playwright-mcp/
