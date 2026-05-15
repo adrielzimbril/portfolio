@@ -181,7 +181,11 @@ export function Tags({
       )}
 
       {tags
-        ?.filter((tag) => tag !== primaryTag && tag !== secondaryTag)
+        ?.filter(
+          (tag) =>
+            tag.trim().toLowerCase() !== primaryTag?.trim().toLowerCase() &&
+            tag.trim().toLowerCase() !== secondaryTag?.trim().toLowerCase(),
+        )
         .map((tag, index) => (
           <Badge className="h-auto!" key={index}>
             {tag}

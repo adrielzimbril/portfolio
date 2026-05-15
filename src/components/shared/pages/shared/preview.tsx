@@ -29,14 +29,12 @@ export function CardPreview({
     >
       <Link href={getExternalUrl(slug!)} className="flex size-full">
         {cover ? (
-          <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
+          <div className="relative flex items-center justify-center w-full h-[9.375rem] mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl bg-black/5 dark:bg-white/5">
             <Image
-              width={1200}
-              height={630}
-              className="w-full h-[9.375rem] object-cover transition-all duration-800 ease hover:scale-105"
+              className="object-contain p-4 transition-all duration-800 ease hover:scale-105"
               alt={title ?? ""}
               src={getImageUrl(cover!)}
-              loading={priority ? "eager" : "lazy"}
+              fill
               priority={priority}
               sizes={
                 isWide

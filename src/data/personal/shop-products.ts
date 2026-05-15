@@ -351,23 +351,6 @@ export const shopProductsRaw = [
   },
   {
     id: generateID(),
-    title: "CapCut Pro",
-    description:
-      "Abonnement CapCut Pro pour l'édition vidéo. Effets premium, sans watermark, export HD illimité.",
-    image: "/img/shop/capcut.jpg",
-    price: 14.22,
-    officialPrice: 20,
-    currency: "F.CFA",
-    primaryTag: "Vidéo",
-    tags: ["CapCut", "Édition", "Mobile"],
-    duration: "1 mois",
-    isShared: false,
-    featured: false,
-    available: true,
-    createdAt: "2026-05-08T00:00:00Z",
-  },
-  {
-    id: generateID(),
     title: "Figma Professional",
     description:
       "Abonnement Figma Professional pour le design collaboratif. Projets illimités, historique des versions, export haute résolution.",
@@ -467,6 +450,23 @@ export const shopProductsRaw = [
     featured: false,
     available: true,
     createdAt: "2026-05-15T00:00:00Z",
+  },
+  {
+    id: generateID(),
+    title: "CapCut Pro (650 Crédits AI + 1 TB Stockage)",
+    description:
+      "Abonnement CapCut Pro avec 650 Crédits AI + 1 TB Stockage pour l'édition vidéo. Effets premium, sans watermark, export HD illimité.",
+    image: "/img/shop/capcut.jpg",
+    price: 70,
+    officialPrice: 89.99,
+    currency: "F.CFA",
+    primaryTag: "Vidéo",
+    tags: ["CapCut", "Édition", "Mobile"],
+    duration: "1 année",
+    isShared: false,
+    featured: false,
+    available: true,
+    createdAt: "2026-05-08T00:00:00Z",
   },
 ];
 
