@@ -44,7 +44,7 @@ export function CardInfo({
           {discountPercentage > 0 && (
             <Badge
               variant="colored"
-              className="bg-red-500/10 text-red-500 border-red-500/20 h-auto! py-1 px-2"
+              className="squircle-green-400 text-white squircle-border-green-400 font-bold h-auto! py-1 px-2"
             >
               -{discountPercentage}%
             </Badge>
@@ -67,7 +67,6 @@ export function CardInfo({
             </p>
           )}
         </div>
-
       </div>
 
       <div className="flex items-center justify-between w-full gap-3 mt-auto">
