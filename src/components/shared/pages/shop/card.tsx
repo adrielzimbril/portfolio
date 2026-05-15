@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
         />
         <CardInfo
           title={product.title}
-          categories={product.categories}
+          primaryTag={product.primaryTag}
           tags={product.tags}
           isAvailable={product.available}
           description={product.description}

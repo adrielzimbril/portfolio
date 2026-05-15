@@ -31,9 +31,9 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     onFilteredProductsChangeRef.current = onFilteredProductsChange;
   }, [onFilteredProductsChange]);
 
-  // Dynamically extract unique categories that actually have products
+  // Dynamically extract unique primary tags that actually have products
   const categories = Array.from(
-    new Set(shopProducts.flatMap((p) => p.categories)),
+    new Set(shopProducts.map((p) => p.primaryTag)),
   ).sort();
 
   // Types remain static
@@ -75,7 +75,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     const targetFields = [
       normalize(product.title),
       normalize(product.description),
-      ...product.categories.map((c) => normalize(c)),
+      normalize(product.primaryTag),
       ...product.tags.map((t) => normalize(t)),
     ];
 
@@ -91,7 +91,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     if (normalizedQuery.length > 2) {
       // If query looks like a category name
       const queryInCategories = categories.some(cat => normalize(cat).includes(normalizedQuery));
-      if (queryInCategories && product.categories.some(cat => normalize(cat).includes(normalizedQuery))) return true;
+      if (queryInCategories && normalize(product.primaryTag).includes(normalizedQuery)) return true;
     }
 
     return false;
@@ -101,7 +101,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   const categoryCounts = categories.reduce(
     (acc, category) => {
       acc[category] = shopProducts.filter(
-        (p) => p.categories.includes(category),
+        (p) => p.primaryTag === category,
       ).length;
       return acc;
     },
@@ -139,7 +139,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     return products.map((product) => {
       const matchesCategory =
         cat.length === 0 ||
-        product.categories.some((c) => cat.includes(c));
+        cat.includes(product.primaryTag);
       const matchesType =
         !type ||
         (type === "Personnel" && !product.isShared) ||

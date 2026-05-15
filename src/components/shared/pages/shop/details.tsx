@@ -10,7 +10,7 @@ import { pickRandomColor, pickRandomColorCode } from "@/utils";
 
 export function CardInfo({
   title,
-  categories,
+  primaryTag,
   tags,
   isAvailable,
   description,
@@ -21,7 +21,7 @@ export function CardInfo({
   isLookalike,
 }: {
   title: string;
-  categories: string[];
+  primaryTag: string;
   tags: string[];
   isAvailable: boolean;
   description: string;
@@ -58,7 +58,7 @@ export function CardInfo({
         </div>
 
         <Tags
-          categories={categories}
+          primaryTag={primaryTag}
           primaryTagColor={DEFAULT_COLOR_CODE_NAME.PURPLE}
           secondaryTag={duration}
           secondaryTagColor={DEFAULT_COLOR_CODE_NAME.YELLOW}
@@ -135,7 +135,7 @@ function AvailabilityIndicator({ isAvailable }: AvailabilityIndicatorProps) {
 }
 
 interface TagsProps {
-  categories?: string[];
+  primaryTag?: string;
   primaryTagColor?: DEFAULT_COLOR_CODE_NAME;
   secondaryTag?: string;
   secondaryTagColor?: DEFAULT_COLOR_CODE_NAME;
@@ -146,7 +146,7 @@ interface TagsProps {
 }
 
 export function Tags({
-  categories,
+  primaryTag,
   primaryTagColor,
   secondaryTag,
   secondaryTagColor,
@@ -165,24 +165,24 @@ export function Tags({
         className,
       )}
     >
-      {categories?.map((cat, index) => {
-        const label = cat.trim();
-        if (!label || renderedLabels.has(label.toLowerCase())) return null;
-        renderedLabels.add(label.toLowerCase());
+      {primaryTag &&
+        (() => {
+          const label = primaryTag.trim();
+          if (!label || renderedLabels.has(label.toLowerCase())) return null;
+          renderedLabels.add(label.toLowerCase());
 
-        return (
-          <Badge
-            key={`${cat}-${index}`}
-            className={cn(
-              "h-auto!",
-              pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE),
-            )}
-            variant="colored"
-          >
-            {label}
-          </Badge>
-        );
-      })}
+          return (
+            <Badge
+              className={cn(
+                "h-auto!",
+                pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE),
+              )}
+              variant="colored"
+            >
+              {label}
+            </Badge>
+          );
+        })()}
 
       {secondaryTag &&
         (() => {
