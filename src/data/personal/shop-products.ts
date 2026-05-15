@@ -44,7 +44,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+    id: generateID(),
     title: "ChatGPT Plus Partagé",
     description:
       "Abonnement ChatGPT Plus partagé entre plusieurs utilisateurs. Accès à GPT-4, réponses plus rapides. Solution économique pour petits groupes.",
@@ -61,7 +61,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430c7",
+    id: generateID(),
     title: "ChatGPT Pro 5x",
     description:
       "Abonnement ChatGPT Pro avec 5x plus d'usage. Idéal pour équipes ou familles. Accès à GPT-4, réponses plus rapides et priorité.",
@@ -78,7 +78,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "d4e5f6a7-b8c9-4d8e-1f2a-3b4c5d6e7f8a",
+    id: generateID(),
     title: "ChatGPT Pro 20x",
     description:
       "Abonnement ChatGPT Pro avec 20x plus d'usage. Solution entreprise pour grandes équipes. Accès GPT-4, priorité maximale.",
@@ -95,7 +95,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430ca",
+    id: generateID(),
     title: "ChatGPT Go",
     description:
       "Abonnement ChatGPT Go pour usage intensif. Accès étendu et prioritaire. Parfait pour professionnels.",
@@ -112,7 +112,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430ca",
+    id: generateID(),
     title: "ChatGPT Go",
     description:
       "Abonnement ChatGPT Go pour usage intensif. Accès étendu et prioritaire. Parfait pour professionnels.",
@@ -129,7 +129,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "i6j7k8l9-m0n1-4o2p-3q4r-5s6t7u8v9w0x",
+    id: generateID(),
     title: "Claude Team (1.25x)",
     description:
       "Abonnement Claude Team avec 1.25x plus d'avantages que le Claude Pro standard. Idéal pour collaborer.",
@@ -146,7 +146,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-15T00:00:00Z",
   },
   {
-    id: "j7k8l9m0-n1o2-4p3q-4r5s-6t7u8v9w0x1y",
+    id: generateID(),
     title: "Claude Team Premium (6.25x)",
     description:
       "Abonnement Claude Team Premium avec 6.25x plus d'avantages que le Claude Pro standard. Puissance maximale pour équipes.",
@@ -163,7 +163,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-15T00:00:00Z",
   },
   {
-    id: "a7b8c9d0-e1f2-4a1b-4c5d-6e7f8a9b0c1d",
+    id: generateID(),
     title: "Google One Pro",
     description:
       "Abonnement Gemini Pro de Google avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures.",
@@ -180,7 +180,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "a7b8c9d0-e1f2-4a1b-4c5d-6e7f8a9b0c1d",
+    id: generateID(),
     title: "Google One Pro",
     description:
       "Abonnement Gemini Pro de Google avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures.",
@@ -197,7 +197,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430ce",
+    id: generateID(),
     title: "Veo 3 (45.000 Crédits)",
     description:
       "Abonnement Veo 3 Ultra avec 45,000 crédits IA pour génération vidéo. Créations de haute qualité, résolution 4K.",
@@ -214,7 +214,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "f2a3b4c5-d6e7-4f6a-9b0c-1d2e3f4a5b6c",
+    id: generateID(),
     title: "Google AI Ultra (25.000 Crédits)",
     description:
       "Abonnement Google AI Ultra + Antygravity et pour génération d'images et vidéos. Créations artistiques de haute qualité.",
@@ -231,7 +231,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d3",
+    id: generateID(),
     title: "Google One Pro 5TB - 18 mois",
     description:
       "Abonnement Google One Pro avec 5TB de stockage cloud pour 18 mois. Meilleur tarif long terme.",
@@ -248,7 +248,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cb",
+    id: generateID(),
     title: "Super Grok",
     description:
       "Abonnement Super Grok de xAI avec IA avancée. Capacités de reasoning supérieures et multimodalité.",
@@ -265,7 +265,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cb",
+    id: generateID(),
     title: "Super Grok",
     description:
       "Abonnement Super Grok de xAI avec IA avancée. Capacités de reasoning supérieures et multimodalité.",
@@ -282,7 +282,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cb",
+    id: generateID(),
     title: "Super Grok Heavy",
     description:
       "Abonnement Super Grok de xAI avec IA avancée. Capacités de reasoning supérieures et multimodalité.",
@@ -299,7 +299,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "g4h5i6j7-k8l9-4m0n-1o2p-3q4r5s6t7u8v",
+    id: generateID(),
     title: "Higgsfield Starter (200 Crédits)",
     description:
       "Abonnement Higgsfield Starter pour la génération vidéo IA sociale. Créez des vidéos virales en quelques secondes.",
@@ -316,7 +316,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-15T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cf",
+    id: generateID(),
     title: "Kling Standard (1,100 Crédits)",
     description:
       "Abonnement Kling Standard avec 1,100 crédits IA pour génération vidéo. Créations vidéo de haute qualité.",
@@ -333,7 +333,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "e1f2a3b4-c5d6-4e5f-8a9b-0c1d2e3f4a5b",
+    id: generateID(),
     title: "Eleven Labs Creator",
     description:
       "Abonnement Eleven Labs Creator pour synthèse vocale IA. Voix ultra-réalistes, cloning vocal, multiple langues.",
@@ -350,7 +350,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d4",
+    id: generateID(),
     title: "CapCut Pro",
     description:
       "Abonnement CapCut Pro pour l'édition vidéo. Effets premium, sans watermark, export HD illimité.",
@@ -367,7 +367,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "d6e7f8a9-b0c1-4d0e-3f4a-5b6c7d8e9f0a",
+    id: generateID(),
     title: "Figma Professional",
     description:
       "Abonnement Figma Professional pour le design collaboratif. Projets illimités, historique des versions, export haute résolution.",
@@ -384,7 +384,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d8",
+    id: generateID(),
     title: "Notion Plus",
     description:
       "Abonnement Notion Plus pour la productivité. Uploads illimités, version history, collaboration avancée.",
@@ -401,7 +401,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "c1d2e3f4-a5b6-4c5d-8e9f-0a1b2c3d4e5f",
+    id: generateID(),
     title: "Microsoft 365",
     description:
       "Abonnement Microsoft 365 pour la bureautique. Word, Excel, PowerPoint, Outlook, 1TB OneDrive.",
@@ -418,7 +418,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "f3g4h5i6-j7k8-4l9m-0n1o-2p3q4r5s6t7u",
+    id: generateID(),
     title: "Cursor Pro 1 an",
     description:
       "Abonnement Cursor Pro annuel. L'IDE IA ultime pour coder plus vite. Accès illimité à Claude 3.5 Sonnet et GPT-4o.",
@@ -435,7 +435,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-15T00:00:00Z",
   },
   {
-    id: "e2f3g4h5-i6j7-4k8l-9m0n-1o2p3q4r5s6t",
+    id: generateID(),
     title: "Kiro Pro",
     description:
       "Abonnement Kiro Pro pour l'optimisation et le développement IA. Accès complet aux outils avancés.",
@@ -452,7 +452,7 @@ export const shopProductsRaw = [
     createdAt: "2026-05-15T00:00:00Z",
   },
   {
-    id: "h5i6j7k8-l9m0-4n1o-2p3q-4r5s6t7u8v9w",
+    id: generateID(),
     title: "Suno Pro",
     description:
       "Abonnement Suno Pro pour la génération de musique IA. 2,500 crédits par mois, usage commercial inclus.",
