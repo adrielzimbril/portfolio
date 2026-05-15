@@ -309,6 +309,23 @@ export const shopProductsRaw = [
   },
   {
     id: generateID(),
+    title: "Perplexity Pro",
+    description:
+      "Abonnement Perplexity Pro pour la recherche IA avancée. Accès aux modèles GPT-4, Claude 3, et recherche en temps réel sur le web.",
+    image: "/img/shop/perplexity.webp",
+    price: 62.73,
+    officialPrice: 17 * 12,
+    currency: "F.CFA",
+    primaryTag: "IA",
+    tags: ["Perplexity", "IA", "AI", "Recherche", "Productivité", "Dev"],
+    duration: "1 an",
+    isShared: false,
+    featured: true,
+    available: true,
+    createdAt: "2026-05-15T00:00:00Z",
+  },
+  {
+    id: generateID(),
     title: "Higgsfield Starter (200 Crédits)",
     description:
       "Abonnement Higgsfield Starter pour la génération vidéo IA sociale. Créez des vidéos virales en quelques secondes.",
