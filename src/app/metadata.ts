@@ -21,9 +21,9 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   icons: {
-    icon: getImageUrl("icon.svg"),
-    shortcut: getImageUrl("icon.svg"),
-    apple: getImageUrl("icon.svg"),
+    icon: getImageUrl("icon.png"),
+    shortcut: getImageUrl("icon.png"),
+    apple: getImageUrl("icon.png"),
   },
   authors: [
     {

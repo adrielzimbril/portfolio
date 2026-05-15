@@ -59,7 +59,7 @@ export function Navbar() {
             >
               <Image
                 className="size-10! lg:size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
-                src={getImageUrl("icon-five.png")}
+                src={getImageUrl("logo.png")}
                 alt={siteConfig.description}
                 width={256}
                 height={256}
