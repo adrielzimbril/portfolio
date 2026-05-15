@@ -57,7 +57,7 @@ export const shopProductsRaw = [
     duration: "1 mois",
     isShared: true,
     featured: true,
-    available: false,
+    available: true,
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
@@ -91,7 +91,7 @@ export const shopProductsRaw = [
     duration: "1 mois",
     isShared: true,
     featured: false,
-    available: false,
+    available: true,
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
@@ -108,7 +108,7 @@ export const shopProductsRaw = [
     duration: "1 mois",
     isShared: false,
     featured: false,
-    available: false,
+    available: true,
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
@@ -125,7 +125,7 @@ export const shopProductsRaw = [
     duration: "1 année",
     isShared: false,
     featured: false,
-    available: false,
+    available: true,
     createdAt: "2026-05-08T00:00:00Z",
   },
   {

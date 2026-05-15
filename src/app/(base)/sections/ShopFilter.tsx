@@ -31,24 +31,12 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     onFilteredProductsChangeRef.current = onFilteredProductsChange;
   }, [onFilteredProductsChange]);
 
-  // Extract unique categories from products
-  const categories = [
-    "IA",
-    "Vidéo IA",
-    "Audio IA",
-    "Vidéo",
-    "Design",
-    "Musique",
-    "Streaming",
-    "Cloud",
-    "VPN",
-    "Productivité",
-    "Bureautique",
-    "Créatif",
-    "Développement",
-  ];
+  // Dynamically extract unique categories that actually have products
+  const categories = Array.from(
+    new Set(shopProducts.map((p) => p.primaryTag)),
+  ).sort();
 
-  // Extract unique categories from products
+  // Types remain static
   const types = ["Personnel", "Partagé"];
 
   // Availability options
@@ -68,6 +56,46 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   >(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
+  // Normalize text for comparison
+  const normalize = (text: string) =>
+    text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+
+  // Boosted Search Logic
+  const getMatchesSearch = (product: (typeof shopProducts)[0], query: string) => {
+    if (!query) return true;
+
+    const normalizedQuery = normalize(query);
+    const searchTerms = normalizedQuery.split(/\s+/).filter((t) => t.length > 1);
+
+    const targetFields = [
+      normalize(product.title),
+      normalize(product.description),
+      normalize(product.primaryTag),
+      ...product.tags.map((t) => normalize(t)),
+    ];
+
+    // 1. Direct substring match (Strongest)
+    if (targetFields.some((field) => field.includes(normalizedQuery))) return true;
+
+    // 2. Word-by-word match (Look-alike)
+    if (searchTerms.length > 0 && searchTerms.some((term) => 
+      targetFields.some((field) => field.includes(term))
+    )) return true;
+
+    // 3. Category/Tag match (Cross-reference)
+    if (normalizedQuery.length > 2) {
+      // If query looks like a category name
+      const queryInCategories = categories.some(cat => normalize(cat).includes(normalizedQuery));
+      if (queryInCategories && normalize(product.primaryTag).includes(normalizedQuery)) return true;
+    }
+
+    return false;
+  };
 
   // Calculate category counts
   const categoryCounts = categories.reduce(
@@ -106,30 +134,29 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     {} as Record<string, number>,
   );
 
-  // Calculate filtered products for counter
-  const filteredProducts = shopProducts.filter((product) => {
-    const matchesCategory =
-      selectedCategory.length === 0 ||
-      selectedCategory.includes(product.primaryTag);
-    const matchesType =
-      !selectedType ||
-      (selectedType === "Personnel" && !product.isShared) ||
-      (selectedType === "Partagé" && product.isShared);
-    const matchesAvailability =
-      !selectedAvailability ||
-      (selectedAvailability === "Disponible" && product.available) ||
-      (selectedAvailability === "Indisponible" && !product.available);
-    const matchesSearch =
-      !searchQuery ||
-      product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.tags.some((tag) =>
-        tag.toLowerCase().includes(searchQuery.toLowerCase()),
+  // Central filtering logic
+  const performFiltering = (products: typeof shopProducts, query: string, cat: string[], type: string | null, avail: string | null) => {
+    return products.filter((product) => {
+      const matchesCategory =
+        cat.length === 0 ||
+        cat.includes(product.primaryTag);
+      const matchesType =
+        !type ||
+        (type === "Personnel" && !product.isShared) ||
+        (type === "Partagé" && product.isShared);
+      const matchesAvailability =
+        !avail ||
+        (avail === "Disponible" && product.available) ||
+        (avail === "Indisponible" && !product.available);
+      const matchesSearch = getMatchesSearch(product, query);
+      
+      return (
+        matchesCategory && matchesType && matchesAvailability && matchesSearch
       );
-    return (
-      matchesCategory && matchesType && matchesAvailability && matchesSearch
-    );
-  });
+    });
+  };
+
+  const filteredProducts = performFiltering(shopProducts, searchQuery, selectedCategory, selectedType, selectedAvailability);
 
   const hasActiveFilters =
     selectedCategory.length > 0 ||
@@ -139,29 +166,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
 
   // Notify parent when filter changes
   useEffect(() => {
-    const filtered = shopProducts.filter((product) => {
-      const matchesCategory =
-        selectedCategory.length === 0 ||
-        selectedCategory.includes(product.primaryTag);
-      const matchesType =
-        !selectedType ||
-        (selectedType === "Personnel" && !product.isShared) ||
-        (selectedType === "Partagé" && product.isShared);
-      const matchesAvailability =
-        !selectedAvailability ||
-        (selectedAvailability === "Disponible" && product.available) ||
-        (selectedAvailability === "Indisponible" && !product.available);
-      const matchesSearch =
-        !searchQuery ||
-        product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.tags.some((tag) =>
-          tag.toLowerCase().includes(searchQuery.toLowerCase()),
-        );
-      return (
-        matchesCategory && matchesType && matchesAvailability && matchesSearch
-      );
-    });
+    const filtered = performFiltering(shopProducts, searchQuery, selectedCategory, selectedType, selectedAvailability);
     onFilteredProductsChangeRef.current(filtered);
   }, [selectedCategory, searchQuery, selectedType, selectedAvailability]);
 
