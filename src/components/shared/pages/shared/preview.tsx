@@ -23,9 +23,8 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
-        isWide && "md:min-h-80",
-        cover ? "p-2 h-48 md:h-80" : "p-4",
+        "flex relative flex-col flex-1 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
+        cover ? "p-2 h-[9.375rem]" : "p-4 min-h-[9.375rem]",
       )}
     >
       <Link href={getExternalUrl(slug!)} className="flex size-full">
@@ -34,7 +33,7 @@ export function CardPreview({
             <Image
               width={1200}
               height={630}
-              className="size-full min-h-48 md:min-h-72 object-cover transition-all duration-800 ease hover:scale-105"
+              className="w-full h-[9.375rem] object-cover transition-all duration-800 ease hover:scale-105"
               alt={title ?? ""}
               src={getImageUrl(cover!)}
               loading={priority ? "eager" : "lazy"}
@@ -67,7 +66,7 @@ export function PreviewContent({
   description: string;
 }) {
   return (
-    <div className="flex flex-col size-full h-48 md:h-72 max-w-[90%] mx-auto transition-all duration-800 ease hover:scale-105">
+    <div className="flex flex-col size-full h-[9.375rem] max-w-[90%] mx-auto transition-all duration-800 ease hover:scale-105">
       <div className="flex flex-col items-start place-content-center gap-3 size-full pointer-events-none">
         <h4 className="text-3xl tracking-wide leading-[120%]">
           {emoji && (
