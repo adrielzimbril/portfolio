@@ -79,7 +79,7 @@ export function CardInfo({
       <div className="flex items-center justify-between w-full gap-3 mt-auto">
         <div className="flex flex-col">
           {officialPrice && officialPrice > price && (
-            <span className="text-[10px] line-through text-b-white-invert-sec opacity-70 leading-none mb-0.5">
+            <span className="text-[.625rem] line-through text-b-white-invert-sec opacity-70 leading-none mb-0.5">
               {formatPrice((officialPrice + 0.4) as number, currency)}
             </span>
           )}

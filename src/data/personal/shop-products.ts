@@ -415,7 +415,7 @@ export const shopProductsRaw = [
     description:
       "Abonnement Cursor Pro annuel. L'IDE IA ultime pour coder plus vite. Accès illimité à Claude 3.5 Sonnet et GPT-4o.",
     image: "/img/shop/cursor.png",
-    price: 45.68,
+    price: 62.58,
     officialPrice: 192,
     currency: "F.CFA",
     primaryTag: "Développement",
