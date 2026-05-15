@@ -24,14 +24,14 @@ export function CardPreview({
     <div
       className={cn(
         "flex relative flex-col flex-1 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
-        cover ? "p-2 h-[9.375rem]" : "p-4 min-h-[9.375rem]",
+        cover ? "p-2 h-37.5" : "p-4 min-h-37.5",
       )}
     >
       <Link href={getExternalUrl(slug!)} className="flex size-full">
         {cover ? (
-          <div className="relative flex items-center justify-center w-full h-[9.375rem] mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl bg-black/5 dark:bg-white/5">
+          <div className="relative flex items-center justify-center w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl bg-black/5 dark:bg-white/5">
             <Image
-              className="object-contain p-4 transition-all duration-800 ease hover:scale-105"
+              className="rounded-2xl overflow-hidden object-contain p-4 transition-all duration-500 ease-out hover:scale-105"
               alt={title ?? ""}
               src={getImageUrl(cover!)}
               fill

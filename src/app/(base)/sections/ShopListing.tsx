@@ -76,6 +76,7 @@ export function ShopListing() {
             key={product.id}
             name="shop-product-card"
             loading={!isReady}
+            className="size-full *:size-full"
           >
             <ProductCard product={product} />
           </Skeleton>
@@ -86,7 +87,7 @@ export function ShopListing() {
         {!hasMore && !isLoading && displayedProducts.length > 0 && (
           <div className="col-span-full text-center py-8">
             <p className="text-b-white-invert-sec">
-              Oups, nous n&apos;avons plus d&apos;autres abonnements 😅
+              De nouveaux abonnements seront bientôt disponibles 🐼
             </p>
           </div>
         )}
@@ -94,7 +95,7 @@ export function ShopListing() {
         {displayedProducts.length === 0 && (
           <div className="col-span-full text-center py-16">
             <p className="text-b-white-invert-sec text-lg">
-              Aucun abonnement ne correspond à votre recherche 😫
+              Aucun abonnement ne correspond à votre recherche 🦄
             </p>
           </div>
         )}

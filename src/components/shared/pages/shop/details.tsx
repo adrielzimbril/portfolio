@@ -44,7 +44,11 @@ export function CardInfo({
           {discountPercentage > 0 && (
             <Badge
               variant="colored"
-              className="squircle-green-400 text-white squircle-border-green-400 font-bold h-auto! py-1 px-2"
+              className={cn(
+                pickRandomColor(DEFAULT_COLOR_CODE_NAME.GREEN),
+                "squircle-border-green-400",
+                "font-bold h-auto! py-1 px-2",
+              )}
             >
               -{discountPercentage}%
             </Badge>

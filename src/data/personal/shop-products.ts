@@ -164,9 +164,9 @@ export const shopProductsRaw = [
   },
   {
     id: generateID(),
-    title: "Google One Pro",
+    title: "Google AI Pro",
     description:
-      "Abonnement Gemini Pro de Google avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures.",
+      "Abonnement Google AI Pro + 5TB de stockage Google One avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures.",
     image: "/img/shop/gemini.png",
     price: 26,
     officialPrice: 19.99 * 4,
@@ -181,9 +181,9 @@ export const shopProductsRaw = [
   },
   {
     id: generateID(),
-    title: "Google One Pro",
+    title: "Google AI Pro",
     description:
-      "Abonnement Gemini Pro de Google avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures.",
+      "Abonnement Google AI Pro + 5TB de stockage Google One avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures.",
     image: "/img/shop/gemini.png",
     price: 26 * 2.6,
     officialPrice: 19.99 * 12,
@@ -232,9 +232,9 @@ export const shopProductsRaw = [
   },
   {
     id: generateID(),
-    title: "Google One Pro 5TB - 18 mois",
+    title: "Google AI Pro 5TB - 18 mois",
     description:
-      "Abonnement Google One Pro avec 5TB de stockage cloud pour 18 mois. Meilleur tarif long terme.",
+      "Abonnement Google AI Pro avec 5TB de stockage cloud pour 18 mois. Meilleur tarif long terme.",
     image: "/img/shop/googleone.jpg",
     price: 48,
     officialPrice: 19.99 * 12 * 0.84,
@@ -422,7 +422,7 @@ export const shopProductsRaw = [
     title: "Kiro Pro",
     description:
       "Abonnement Kiro Pro pour l'optimisation et le développement IA. Accès complet aux outils avancés.",
-    image: "/img/shop/kiro.png",
+    image: "/img/shop/kiro.svg",
     price: 9,
     officialPrice: 20,
     currency: "F.CFA",
@@ -439,7 +439,7 @@ export const shopProductsRaw = [
     title: "Suno Pro",
     description:
       "Abonnement Suno Pro pour la génération de musique IA. 2,500 crédits par mois, usage commercial inclus.",
-    image: "/img/shop/suno.png",
+    image: "/img/shop/suno.jpg",
     price: 8.88,
     officialPrice: 10,
     currency: "F.CFA",
