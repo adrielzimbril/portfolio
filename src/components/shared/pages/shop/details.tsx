@@ -15,6 +15,7 @@ export function CardInfo({
   isAvailable,
   description,
   price,
+  officialPrice,
   currency,
   duration,
 }: {
@@ -24,15 +25,31 @@ export function CardInfo({
   isAvailable: boolean;
   description: string;
   price: number;
+  officialPrice?: number;
   currency: string;
   duration: string;
 }) {
+  const discountPercentage =
+    officialPrice && officialPrice > price
+      ? Math.round(((officialPrice - price) / officialPrice) * 100)
+      : 0;
+
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
       <div className="flex flex-col items-start justify-center gap-2 w-full">
         <Header title={title} />
 
-        <AvailabilityIndicator isAvailable={isAvailable} />
+        <div className="flex items-center gap-2">
+          <AvailabilityIndicator isAvailable={isAvailable} />
+          {discountPercentage > 0 && (
+            <Badge
+              variant="colored"
+              className="bg-red-500/10 text-red-500 border-red-500/20 h-auto! py-1 px-2"
+            >
+              -{discountPercentage}%
+            </Badge>
+          )}
+        </div>
 
         <Tags
           primaryTag={primaryTag}
@@ -42,15 +59,29 @@ export function CardInfo({
           tags={tags}
         />
 
-        <Description description={description} />
+        <div className="flex flex-col gap-1 w-full">
+          <Description description={description} />
+          {discountPercentage > 0 && (
+            <p className="text-[10px] font-bold uppercase tracking-wider text-green-500/80">
+              ✨ Économisez {discountPercentage}% sur le prix officiel
+            </p>
+          )}
+        </div>
+
       </div>
 
       <div className="flex items-center justify-between w-full gap-3 mt-auto">
         <div className="flex flex-col">
-          <span className="text-xl font-semibold text-b-white-invert">
+          {officialPrice && officialPrice > price && (
+            <span className="text-[10px] line-through text-b-white-invert-sec opacity-50 leading-none mb-0.5">
+              {formatPrice(officialPrice, currency)}
+            </span>
+          )}
+          <span className="text-xl font-semibold text-b-white-invert leading-tight">
             {formatPrice(price, currency)}
           </span>
         </div>
+
         <Action />
       </div>
     </div>

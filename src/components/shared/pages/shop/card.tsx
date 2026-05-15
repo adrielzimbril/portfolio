@@ -28,6 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
           isAvailable={product.available}
           description={product.description}
           price={product.price}
+          officialPrice={product.officialPrice}
           currency={product.currency}
           duration={product.duration}
         />
