@@ -51,6 +51,9 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   // Extract unique categories from products
   const types = ["Personnel", "Partagé"];
 
+  // Availability options
+  const availabilities = ["Disponible", "Indisponible"];
+
   // Init filter from URL parameters
   const showParam = searchParams.get("show");
   const initialCategory = showParam

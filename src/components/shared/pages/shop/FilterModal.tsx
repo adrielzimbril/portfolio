@@ -22,13 +22,17 @@ interface FilterModalProps {
   onCategoryClick: (category: string) => void;
   selectedType: string | null;
   onTypeClick: (type: string) => void;
+  selectedAvailability: string | null;
+  onAvailabilityClick: (availability: string) => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
   onClearFilters: () => void;
   categoryCounts: Record<string, number>;
   typeCounts: Record<string, number>;
+  availabilityCounts: Record<string, number>;
   categories: string[];
   types: string[];
+  availabilities: string[];
   resultCount: number;
 }
 
