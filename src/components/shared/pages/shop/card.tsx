@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
         />
         <CardInfo
           title={product.title}
-          primaryTag={product.primaryTag}
+          categories={product.categories}
           tags={product.tags}
           isAvailable={product.available}
           description={product.description}
@@ -31,6 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
           officialPrice={product.officialPrice}
           currency={product.currency}
           duration={product.duration}
+          isLookalike={(product as any)._isLookalike}
         />
       </CardContent>
     </Card>

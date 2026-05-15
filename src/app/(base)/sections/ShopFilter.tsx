@@ -33,7 +33,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
 
   // Dynamically extract unique categories that actually have products
   const categories = Array.from(
-    new Set(shopProducts.map((p) => p.primaryTag)),
+    new Set(shopProducts.flatMap((p) => p.categories)),
   ).sort();
 
   // Types remain static
@@ -75,7 +75,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     const targetFields = [
       normalize(product.title),
       normalize(product.description),
-      normalize(product.primaryTag),
+      ...product.categories.map((c) => normalize(c)),
       ...product.tags.map((t) => normalize(t)),
     ];
 
@@ -91,7 +91,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
     if (normalizedQuery.length > 2) {
       // If query looks like a category name
       const queryInCategories = categories.some(cat => normalize(cat).includes(normalizedQuery));
-      if (queryInCategories && normalize(product.primaryTag).includes(normalizedQuery)) return true;
+      if (queryInCategories && product.categories.some(cat => normalize(cat).includes(normalizedQuery))) return true;
     }
 
     return false;
@@ -101,7 +101,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   const categoryCounts = categories.reduce(
     (acc, category) => {
       acc[category] = shopProducts.filter(
-        (p) => p.primaryTag === category,
+        (p) => p.categories.includes(category),
       ).length;
       return acc;
     },
@@ -136,10 +136,10 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
 
   // Central filtering logic
   const performFiltering = (products: typeof shopProducts, query: string, cat: string[], type: string | null, avail: string | null) => {
-    return products.filter((product) => {
+    return products.map((product) => {
       const matchesCategory =
         cat.length === 0 ||
-        cat.includes(product.primaryTag);
+        product.categories.some((c) => cat.includes(c));
       const matchesType =
         !type ||
         (type === "Personnel" && !product.isShared) ||
@@ -148,12 +148,20 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
         !avail ||
         (avail === "Disponible" && product.available) ||
         (avail === "Indisponible" && !product.available);
-      const matchesSearch = getMatchesSearch(product, query);
       
-      return (
-        matchesCategory && matchesType && matchesAvailability && matchesSearch
-      );
-    });
+      const searchMatch = getMatchesSearch(product, query);
+      
+      // A "Lookalike" match is a search match that isn't a direct title match
+      const normalizedQuery = normalize(query);
+      const isExactTitleMatch = query ? normalize(product.title).includes(normalizedQuery) : true;
+      const isLookalike = query && searchMatch && !isExactTitleMatch;
+
+      return {
+        ...product,
+        _isVisible: matchesCategory && matchesType && matchesAvailability && searchMatch,
+        _isLookalike: isLookalike
+      };
+    }).filter(p => p._isVisible);
   };
 
   const filteredProducts = performFiltering(shopProducts, searchQuery, selectedCategory, selectedType, selectedAvailability);
@@ -167,7 +175,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   // Notify parent when filter changes
   useEffect(() => {
     const filtered = performFiltering(shopProducts, searchQuery, selectedCategory, selectedType, selectedAvailability);
-    onFilteredProductsChangeRef.current(filtered);
+    onFilteredProductsChangeRef.current(filtered as any);
   }, [selectedCategory, searchQuery, selectedType, selectedAvailability]);
 
   const handleCategoryClick = (category: string) => {

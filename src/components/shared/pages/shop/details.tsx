@@ -10,7 +10,7 @@ import { pickRandomColor, pickRandomColorCode } from "@/utils";
 
 export function CardInfo({
   title,
-  primaryTag,
+  categories,
   tags,
   isAvailable,
   description,
@@ -18,9 +18,10 @@ export function CardInfo({
   officialPrice,
   currency,
   duration,
+  isLookalike,
 }: {
   title: string;
-  primaryTag: string;
+  categories: string[];
   tags: string[];
   isAvailable: boolean;
   description: string;
@@ -28,6 +29,7 @@ export function CardInfo({
   officialPrice?: number;
   currency: string;
   duration: string;
+  isLookalike?: boolean;
 }) {
   const discountPercentage =
     officialPrice && officialPrice > price
@@ -56,11 +58,12 @@ export function CardInfo({
         </div>
 
         <Tags
-          primaryTag={primaryTag}
+          categories={categories}
           primaryTagColor={DEFAULT_COLOR_CODE_NAME.PURPLE}
           secondaryTag={duration}
           secondaryTagColor={DEFAULT_COLOR_CODE_NAME.YELLOW}
           tags={tags}
+          lookalikeTag={isLookalike ? "Lookalike" : undefined}
         />
 
         <div className="flex flex-col gap-1 w-full">
@@ -132,24 +135,28 @@ function AvailabilityIndicator({ isAvailable }: AvailabilityIndicatorProps) {
 }
 
 interface TagsProps {
-  primaryTag?: string;
+  categories?: string[];
   primaryTagColor?: DEFAULT_COLOR_CODE_NAME;
   secondaryTag?: string;
   secondaryTagColor?: DEFAULT_COLOR_CODE_NAME;
   tags?: string[];
+  lookalikeTag?: string;
   isCentered?: boolean;
   className?: string;
 }
 
 export function Tags({
-  primaryTag,
+  categories,
   primaryTagColor,
   secondaryTag,
   secondaryTagColor,
   tags,
+  lookalikeTag,
   isCentered,
   className,
 }: TagsProps) {
+  const renderedLabels = new Set<string>();
+
   return (
     <div
       className={cn(
@@ -158,43 +165,77 @@ export function Tags({
         className,
       )}
     >
-      {primaryTag && (
-        <Badge
-          className={cn(
-            "h-auto!",
-            pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE),
-          )}
-          variant="colored"
-        >
-          {primaryTag}
-        </Badge>
-      )}
+      {categories?.map((cat, index) => {
+        const label = cat.trim();
+        if (!label || renderedLabels.has(label.toLowerCase())) return null;
+        renderedLabels.add(label.toLowerCase());
 
-      {secondaryTag && (
-        <Badge
-          className={cn(
-            "h-auto!",
-            pickRandomColor(
-              secondaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE,
-            ),
-          )}
-          variant="colored"
-        >
-          {secondaryTag}
-        </Badge>
-      )}
-
-      {tags
-        ?.filter(
-          (tag) =>
-            tag.trim().toLowerCase() !== primaryTag?.trim().toLowerCase() &&
-            tag.trim().toLowerCase() !== secondaryTag?.trim().toLowerCase(),
-        )
-        .map((tag, index) => (
-          <Badge className="h-auto!" key={index}>
-            {tag}
+        return (
+          <Badge
+            key={`${cat}-${index}`}
+            className={cn(
+              "h-auto!",
+              pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE),
+            )}
+            variant="colored"
+          >
+            {label}
           </Badge>
-        ))}
+        );
+      })}
+
+      {secondaryTag &&
+        (() => {
+          const label = secondaryTag.trim();
+          if (!label || renderedLabels.has(label.toLowerCase())) return null;
+          renderedLabels.add(label.toLowerCase());
+
+          return (
+            <Badge
+              className={cn(
+                "h-auto!",
+                pickRandomColor(
+                  secondaryTagColor ?? DEFAULT_COLOR_CODE_NAME.YELLOW,
+                ),
+              )}
+              variant="colored"
+            >
+              {label}
+            </Badge>
+          );
+        })()}
+
+      {lookalikeTag &&
+        (() => {
+          const label = lookalikeTag.trim();
+          if (!label || renderedLabels.has(label.toLowerCase())) return null;
+          renderedLabels.add(label.toLowerCase());
+
+          return (
+            <Badge
+              className={cn(
+                "h-auto!",
+                pickRandomColor(DEFAULT_COLOR_CODE_NAME.BLUE),
+                "squircle-border-blue-400 font-bold",
+              )}
+              variant="colored"
+            >
+              ✨ {label}
+            </Badge>
+          );
+        })()}
+
+      {tags?.map((tag, index) => {
+        const label = tag.trim();
+        if (!label || renderedLabels.has(label.toLowerCase())) return null;
+        renderedLabels.add(label.toLowerCase());
+
+        return (
+          <Badge className="h-auto!" key={index}>
+            {label}
+          </Badge>
+        );
+      })}
     </div>
   );
 }
