@@ -3,8 +3,8 @@ export interface Product {
   title: string;
   description: string;
   image: string;
-  priceUSD: number; // Price in USD
-  officialPriceUSD?: number; // Official price in USD
+  price: number; // Price in USD
+  officialPrice?: number; // Official price in USD
   currency: string;
   primaryTag: string;
   tags: string[];
@@ -24,8 +24,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement ChatGPT Plus personnel avec accès à GPT-4, réponses plus rapides et accès prioritaire aux nouvelles fonctionnalités.",
     image: "/img/shop/chatgpt.png",
-    priceUSD: 14.22,
-    officialPriceUSD: 20,
+    price: 14.22,
+    officialPrice: 20,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["ChatGPT", "GPT-4", "IA"],
@@ -41,8 +41,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement ChatGPT Plus partagé entre plusieurs utilisateurs. Accès à GPT-4, réponses plus rapides. Solution économique pour petits groupes.",
     image: "/img/shop/chatgpt.png",
-    priceUSD: 5.33,
-    officialPriceUSD: 20,
+    price: 5.33,
+    officialPrice: 20,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["ChatGPT", "GPT-4", "IA", "Partagé"],
@@ -58,8 +58,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement ChatGPT Pro avec 5x plus d'usage. Idéal pour équipes ou familles. Accès à GPT-4, réponses plus rapides et priorité.",
     image: "/img/shop/chatgpt.png",
-    priceUSD: 79.96,
-    officialPriceUSD: 118,
+    price: 62,
+    officialPrice: 118,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["ChatGPT", "GPT-4", "IA", "Équipe"],
@@ -75,8 +75,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement ChatGPT Pro avec 20x plus d'usage. Solution entreprise pour grandes équipes. Accès GPT-4, priorité maximale.",
     image: "/img/shop/chatgpt.png",
-    priceUSD: 266.53,
-    officialPriceUSD: 400,
+    price: 100,
+    officialPrice: 200,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["ChatGPT", "GPT-4", "IA", "Entreprise"],
@@ -92,12 +92,29 @@ export const shopProductsRaw = [
     description:
       "Abonnement ChatGPT Go pour usage intensif. Accès étendu et prioritaire. Parfait pour professionnels.",
     image: "/img/shop/chatgpt.png",
-    priceUSD: 4.44,
-    officialPriceUSD: 5,
+    price: 4.44,
+    officialPrice: 5,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["ChatGPT", "GPT-4", "IA"],
     duration: "1 mois",
+    isShared: false,
+    featured: false,
+    available: false,
+    createdAt: "2026-05-08T00:00:00Z",
+  },
+  {
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430ca",
+    title: "ChatGPT Go",
+    description:
+      "Abonnement ChatGPT Go pour usage intensif. Accès étendu et prioritaire. Parfait pour professionnels.",
+    image: "/img/shop/chatgpt.png",
+    price: 35,
+    officialPrice: 5 * 12,
+    currency: "F.CFA",
+    primaryTag: "IA",
+    tags: ["ChatGPT", "GPT-4", "IA"],
+    duration: "1 an",
     isShared: false,
     featured: false,
     available: false,
@@ -109,12 +126,46 @@ export const shopProductsRaw = [
     description:
       "Abonnement Super Grok de xAI avec IA avancée. Capacités de reasoning supérieures et multimodalité.",
     image: "/img/shop/grok.png",
-    priceUSD: 21.32,
-    officialPriceUSD: 30,
+    price: 21.32,
+    officialPrice: 30,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Grok", "xAI", "IA"],
     duration: "1 mois",
+    isShared: false,
+    featured: true,
+    available: true,
+    createdAt: "2026-05-08T00:00:00Z",
+  },
+  {
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cb",
+    title: "Super Grok",
+    description:
+      "Abonnement Super Grok de xAI avec IA avancée. Capacités de reasoning supérieures et multimodalité.",
+    image: "/img/shop/grok.png",
+    price: 21.32,
+    officialPrice: 30 * 8,
+    currency: "F.CFA",
+    primaryTag: "IA",
+    tags: ["Grok", "xAI", "IA"],
+    duration: "8 mois",
+    isShared: false,
+    featured: true,
+    available: true,
+    createdAt: "2026-05-08T00:00:00Z",
+  },
+  {
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cb",
+    title: "Super Grok Heavy",
+    description:
+      "Abonnement Super Grok de xAI avec IA avancée. Capacités de reasoning supérieures et multimodalité.",
+    image: "/img/shop/grok.png",
+    price: 170,
+    officialPrice: 30 * 11,
+    currency: "F.CFA",
+    primaryTag: "IA",
+    tags: ["Grok", "xAI", "IA"],
+    duration: "11 mois",
     isShared: false,
     featured: true,
     available: true,
@@ -126,8 +177,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Gemini Pro de Google avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures.",
     image: "/img/shop/gemini.png",
-    priceUSD: 15.99,
-    officialPriceUSD: 20,
+    price: 15.99,
+    officialPrice: 20,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Gemini", "Google", "IA"],
@@ -143,8 +194,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Claude Pro d'Anthropic avec accès à Claude 3 Opus. IA de nouvelle génération avec capacités de reasoning exceptionnelles.",
     image: "/img/shop/claude.svg",
-    priceUSD: 15.99,
-    officialPriceUSD: 20,
+    price: 15.99,
+    officialPrice: 20,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Claude", "Anthropic", "IA"],
@@ -160,8 +211,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Veo 3 Ultra avec 25,000 crédits IA pour génération vidéo. Créations de haute qualité, résolution 4K.",
     image: "/img/shop/veo.png",
-    priceUSD: 62.19,
-    officialPriceUSD: 250,
+    price: 62.19,
+    officialPrice: 250,
     currency: "F.CFA",
     primaryTag: "Vidéo IA",
     tags: ["Veo", "IA", "Vidéo", "Génération"],
@@ -177,8 +228,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Kling Standard avec 1,100 crédits IA pour génération vidéo. Créations vidéo de haute qualité.",
     image: "/img/shop/kling.png",
-    priceUSD: 8.88,
-    officialPriceUSD: 10,
+    price: 8.88,
+    officialPrice: 10,
     currency: "F.CFA",
     primaryTag: "Vidéo IA",
     tags: ["Kling", "IA", "Vidéo", "Génération"],
@@ -194,8 +245,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Eleven Labs Creator pour synthèse vocale IA. Voix ultra-réalistes, cloning vocal, multiple langues.",
     image: "/img/shop/elevenlabs.png",
-    priceUSD: 15.99,
-    officialPriceUSD: 22,
+    price: 15.99,
+    officialPrice: 22,
     currency: "F.CFA",
     primaryTag: "Audio IA",
     tags: ["Eleven Labs", "IA", "Audio", "Voix"],
@@ -211,8 +262,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Antigravity Ultra pour génération d'images et vidéos. Créations artistiques de haute qualité.",
     image: "/img/shop/googleantigravity.svg",
-    priceUSD: 26.65,
-    officialPriceUSD: 50,
+    price: 26.65,
+    officialPrice: 50,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Antigravity", "IA", "Images", "Vidéos"],
@@ -228,8 +279,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Google One Pro avec 5TB de stockage cloud. Inclut Google Photos, Drive, Gmail premium.",
     image: "/img/shop/googleone.jpg",
-    priceUSD: 79.96,
-    officialPriceUSD: 240,
+    price: 79.96,
+    officialPrice: 240,
     currency: "F.CFA",
     primaryTag: "Cloud",
     tags: ["Google One", "Cloud", "Stockage"],
@@ -245,8 +296,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Google One Pro avec 5TB de stockage cloud pour 18 mois. Meilleur tarif long terme.",
     image: "/img/shop/googleone.jpg",
-    priceUSD: 115.5,
-    officialPriceUSD: 360,
+    price: 115.5,
+    officialPrice: 360,
     currency: "F.CFA",
     primaryTag: "Cloud",
     tags: ["Google One", "Cloud", "Stockage"],
@@ -262,8 +313,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement CapCut Pro pour l'édition vidéo. Effets premium, sans watermark, export HD illimité.",
     image: "/img/shop/capcut.jpg",
-    priceUSD: 14.22,
-    officialPriceUSD: 20,
+    price: 14.22,
+    officialPrice: 20,
     currency: "F.CFA",
     primaryTag: "Vidéo",
     tags: ["CapCut", "Édition", "Mobile"],
@@ -279,8 +330,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Figma Professional pour le design collaboratif. Projets illimités, historique des versions, export haute résolution.",
     image: "/img/shop/figma.png",
-    priceUSD: 10.66,
-    officialPriceUSD: 15,
+    price: 10.66,
+    officialPrice: 15,
     currency: "F.CFA",
     primaryTag: "Design",
     tags: ["Figma", "Design", "Collaboratif"],
@@ -296,8 +347,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Canva Pro pour la création graphique. Templates premium, Brand Kit, suppression du fond, millions de ressources.",
     image: "/img/shop/canva.svg",
-    priceUSD: 8.88,
-    officialPriceUSD: 15,
+    price: 8.88,
+    officialPrice: 15,
     currency: "F.CFA",
     primaryTag: "Design",
     tags: ["Canva", "Graphisme", "Templates"],
@@ -313,8 +364,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Midjourney pour la génération d'images par IA. Créations artistiques de haute qualité, accès rapide, mode relax.",
     image: "/img/shop/midjourney.png",
-    priceUSD: 26.65,
-    officialPriceUSD: 30,
+    price: 26.65,
+    officialPrice: 30,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Midjourney", "IA", "Images"],
@@ -330,8 +381,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Notion Plus pour la productivité. Uploads illimités, version history, collaboration avancée.",
     image: "/img/shop/notion.webp",
-    priceUSD: 7.99,
-    officialPriceUSD: 10,
+    price: 7.99,
+    officialPrice: 10,
     currency: "F.CFA",
     primaryTag: "Productivité",
     tags: ["Notion", "Productivité", "Organisation"],
@@ -347,8 +398,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Adobe Creative Cloud complet. Photoshop, Illustrator, Premiere Pro, et plus de 20 applications.",
     image: "/img/shop/adobe.png",
-    priceUSD: 44.42,
-    officialPriceUSD: 60,
+    price: 44.42,
+    officialPrice: 60,
     currency: "F.CFA",
     primaryTag: "Créatif",
     tags: ["Adobe", "Photoshop", "Illustrator"],
@@ -364,8 +415,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Microsoft 365 pour la bureautique. Word, Excel, PowerPoint, Outlook, 1TB OneDrive.",
     image: "/img/shop/m365.png",
-    priceUSD: 5.33,
-    officialPriceUSD: 7,
+    price: 5.33,
+    officialPrice: 7,
     currency: "F.CFA",
     primaryTag: "Bureautique",
     tags: ["Microsoft", "Office", "Cloud"],
@@ -381,8 +432,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Kiro Pro pour l'optimisation et le développement IA. Accès complet aux outils avancés.",
     image: "/img/shop/kiro.png",
-    priceUSD: 14.22,
-    officialPriceUSD: 20,
+    price: 14.22,
+    officialPrice: 20,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Kiro", "Dev", "IA"],
@@ -398,8 +449,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Cursor Pro annuel. L'IDE IA ultime pour coder plus vite. Accès illimité à Claude 3.5 Sonnet et GPT-4o.",
     image: "/img/shop/cursor.png",
-    priceUSD: 151.03,
-    officialPriceUSD: 192,
+    price: 151.03,
+    officialPrice: 192,
     currency: "F.CFA",
     primaryTag: "Dev",
     tags: ["Cursor", "IDE", "IA", "Annuel"],
@@ -415,8 +466,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Higgsfield Starter pour la génération vidéo IA sociale. Créez des vidéos virales en quelques secondes.",
     image: "/img/shop/higgsfield.png",
-    priceUSD: 10.66,
-    officialPriceUSD: 15,
+    price: 10.66,
+    officialPrice: 15,
     currency: "F.CFA",
     primaryTag: "Vidéo IA",
     tags: ["Higgsfield", "Vidéo", "IA"],
@@ -432,8 +483,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Suno Pro pour la génération de musique IA. 2,500 crédits par mois, usage commercial inclus.",
     image: "/img/shop/suno.png",
-    priceUSD: 8.88,
-    officialPriceUSD: 10,
+    price: 8.88,
+    officialPrice: 10,
     currency: "F.CFA",
     primaryTag: "Audio IA",
     tags: ["Suno", "Musique", "IA"],
@@ -449,8 +500,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Claude Team avec 1.25x plus d'avantages que le Claude Pro standard. Idéal pour collaborer.",
     image: "/img/shop/claude.svg",
-    priceUSD: 17.77,
-    officialPriceUSD: 25,
+    price: 17.77,
+    officialPrice: 25,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Claude", "Anthropic", "Team"],
@@ -466,8 +517,8 @@ export const shopProductsRaw = [
     description:
       "Abonnement Claude Team Premium avec 6.25x plus d'avantages que le Claude Pro standard. Puissance maximale pour équipes.",
     image: "/img/shop/claude.svg",
-    priceUSD: 88.84,
-    officialPriceUSD: 125,
+    price: 88.84,
+    officialPrice: 125,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["Claude", "Anthropic", "Team", "Premium"],
@@ -481,8 +532,8 @@ export const shopProductsRaw = [
 
 export const shopProducts = shopProductsRaw.map((product) => ({
   ...product,
-  price: Math.round(product.priceUSD * GLOBAL_CONVERSION_RATE),
-  officialPrice: product.officialPriceUSD
-    ? Math.round(product.officialPriceUSD * GLOBAL_CONVERSION_RATE)
+  price: Math.round(product.price * GLOBAL_CONVERSION_RATE),
+  officialPrice: product.officialPrice
+    ? Math.round(product.officialPrice * GLOBAL_CONVERSION_RATE)
     : undefined,
 }));

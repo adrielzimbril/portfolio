@@ -62,7 +62,7 @@ export function CardInfo({
         <div className="flex flex-col gap-1 w-full">
           <Description description={description} />
           {discountPercentage > 0 && (
-            <p className="text-[10px] font-bold uppercase tracking-wider text-green-500/80">
+            <p className="w-full relative text-sm text-b-white-invert-sec line-clamp-3 leading-[140%] font-bold uppercase tracking-wider">
               ✨ Économisez {discountPercentage}% sur le prix officiel
             </p>
           )}
@@ -73,11 +73,11 @@ export function CardInfo({
         <div className="flex flex-col">
           {officialPrice && officialPrice > price && (
             <span className="text-[10px] line-through text-b-white-invert-sec opacity-50 leading-none mb-0.5">
-              {formatPrice(officialPrice, currency)}
+              {formatPrice((officialPrice + 0.4) as number, currency)}
             </span>
           )}
           <span className="text-xl font-semibold text-b-white-invert leading-tight">
-            {formatPrice(price, currency)}
+            {formatPrice(price, currency, true)}
           </span>
         </div>
 
