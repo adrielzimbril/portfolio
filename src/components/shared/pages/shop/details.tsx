@@ -180,11 +180,13 @@ export function Tags({
         </Badge>
       )}
 
-      {tags?.map((tag, index) => (
-        <Badge className="h-auto!" key={index}>
-          {tag}
-        </Badge>
-      ))}
+      {tags
+        ?.filter((tag) => tag !== primaryTag && tag !== secondaryTag)
+        .map((tag, index) => (
+          <Badge className="h-auto!" key={index}>
+            {tag}
+          </Badge>
+        ))}
     </div>
   );
 }
