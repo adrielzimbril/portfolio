@@ -9,7 +9,7 @@ import { ShopFilter } from "@/app/(base)/sections/ShopFilter";
 import { useSquircleReady } from "@/components/providers/layout-provider";
 
 const DEFAULT_VISIBLE_ITEMS = 6;
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 6;
 
 export function ShopListing() {
   const [visibleItems, setVisibleItems] = useState(DEFAULT_VISIBLE_ITEMS);
@@ -34,14 +34,9 @@ export function ShopListing() {
       (entries) => {
         const entry = entries[0];
         if (entry?.isIntersecting && hasMore && !isLoading) {
-          setIsLoading(true);
-          // Simulate loading delay
-          setTimeout(() => {
-            setVisibleItems((prev) =>
-              Math.min(prev + ITEMS_PER_PAGE, filteredProducts.length),
-            );
-            setIsLoading(false);
-          }, 500);
+          setVisibleItems((prev) =>
+            Math.min(prev + ITEMS_PER_PAGE, filteredProducts.length),
+          );
         }
       },
       { threshold: 0.1 },
