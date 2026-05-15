@@ -60,7 +60,7 @@ export function ShopListing() {
   }, [hasMore, isLoading, filteredProducts.length]);
 
   return (
-    <div className="flex flex-col gap-8 py-14 md:py-[104px]">
+    <div className="flex flex-col gap-8 py-14">
       <Skeleton name="shop-filter" loading={!isReady}>
         <ShopFilter onFilteredProductsChange={handleFilteredProductsChange} />
       </Skeleton>

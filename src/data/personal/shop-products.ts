@@ -16,7 +16,7 @@ export interface Product {
 
 export const shopProducts: Product[] = [
   {
-    id: "1",
+    id: "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
     title: "ChatGPT Plus Personnel",
     description:
       "Abonnement ChatGPT Plus personnel avec accès à GPT-4, réponses plus rapides et accès prioritaire aux nouvelles fonctionnalités. Économisez 40% sur le prix officiel.",
@@ -32,12 +32,12 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "2",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
     title: "ChatGPT Plus Partagé",
     description:
       "Abonnement ChatGPT Plus partagé entre plusieurs utilisateurs. Accès à GPT-4, réponses plus rapides. Solution économique pour petits groupes. Économisez 60%.",
     image: "/img/shop/chatgpt.png",
-    price: 5000,
+    price: 3000,
     currency: "F.CFA",
     primaryTag: "IA",
     tags: ["ChatGPT", "GPT-4", "IA", "Partagé"],
@@ -48,7 +48,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "3",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430c7",
     title: "ChatGPT Pro x5",
     description:
       "Abonnement ChatGPT Pro avec 5 comptes. Idéal pour équipes ou familles. Accès à GPT-4, réponses plus rapides et priorité. Économisez 55%.",
@@ -64,7 +64,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "4",
+    id: "d4e5f6a7-b8c9-4d8e-1f2a-3b4c5d6e7f8a",
     title: "ChatGPT Pro x20",
     description:
       "Abonnement ChatGPT Pro avec 20 comptes. Solution entreprise pour grandes équipes. Accès GPT-4, priorité maximale. Économisez 65%.",
@@ -80,7 +80,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "5",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430ca",
     title: "ChatGPT Go",
     description:
       "Abonnement ChatGPT Go pour usage intensif. Accès étendu et prioritaire. Parfait pour professionnels. Économisez 35%.",
@@ -96,11 +96,11 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "6",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cb",
     title: "Super Grok",
     description:
       "Abonnement Super Grok de xAI avec IA avancée. Capacités de reasoning supérieures et multimodalité. Économisez 40%.",
-    image: "/img/shop/grok.jpg",
+    image: "/img/shop/grok.png",
     price: 18000,
     currency: "F.CFA",
     primaryTag: "IA",
@@ -112,7 +112,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "7",
+    id: "a7b8c9d0-e1f2-4a1b-4c5d-6e7f8a9b0c1d",
     title: "Gemini Pro",
     description:
       "Abonnement Gemini Pro de Google avec accès à l'IA multimodale avancée. Capacités de reasoning et de génération supérieures. Économisez 35%.",
@@ -128,7 +128,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "8",
+    id: "b8c9d0e1-f2a3-4b2c-5d6e-7f8a9b0c1d2e",
     title: "Claude Pro",
     description:
       "Abonnement Claude Pro d'Anthropic avec accès à Claude 3 Opus. IA de nouvelle génération avec capacités de reasoning exceptionnelles. Économisez 45%.",
@@ -144,7 +144,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "9",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430ce",
     title: "Veo 3 Ultra",
     description:
       "Abonnement Veo 3 Ultra avec 25,000 crédits IA pour génération vidéo. Créations de haute qualité, résolution 4K. Économisez 40%.",
@@ -160,7 +160,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "10",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430cf",
     title: "Kling Standard",
     description:
       "Abonnement Kling Standard avec 1,100 crédits IA pour génération vidéo. Créations vidéo de haute qualité. Économisez 35%.",
@@ -176,7 +176,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "11",
+    id: "e1f2a3b4-c5d6-4e5f-8a9b-0c1d2e3f4a5b",
     title: "Eleven Labs Creator",
     description:
       "Abonnement Eleven Labs Creator pour synthèse vocale IA. Voix ultra-réalistes, cloning vocal, multiple langues. Économisez 45%.",
@@ -192,7 +192,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "12",
+    id: "f2a3b4c5-d6e7-4f6a-9b0c-1d2e3f4a5b6c",
     title: "Antigravity Ultra",
     description:
       "Abonnement Antigravity Ultra avec 0 crédits IA pour génération d'images et vidéos. Créations artistiques de haute qualité. Économisez 50%.",
@@ -208,7 +208,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "13",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d2",
     title: "Google One Pro 5TB - 1 an",
     description:
       "Abonnement Google One Pro avec 5TB de stockage cloud. Inclut Google Photos, Drive, Gmail premium. Économisez 40%.",
@@ -224,7 +224,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "14",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d3",
     title: "Google One Pro 5TB - 18 mois",
     description:
       "Abonnement Google One Pro avec 5TB de stockage cloud pour 18 mois. Meilleur tarif long terme. Économisez 50%.",
@@ -240,7 +240,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "16",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d4",
     title: "CapCut Pro",
     description:
       "Abonnement CapCut Pro pour l'édition vidéo. Effets premium, sans watermark, export HD illimité. Économisez 50% sur le prix officiel.",
@@ -256,7 +256,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "17",
+    id: "d6e7f8a9-b0c1-4d0e-3f4a-5b6c7d8e9f0a",
     title: "Figma Professional",
     description:
       "Abonnement Figma Professional pour le design collaboratif. Projets illimités, historique des versions, export haute résolution. Économisez 40%.",
@@ -272,7 +272,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "18",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d6",
     title: "Canva Pro",
     description:
       "Abonnement Canva Pro pour la création graphique. Templates premium, Brand Kit, suppression du fond, millions de ressources. Économisez 45%.",
@@ -288,7 +288,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "19",
+    id: "f8a9b0c1-d2e3-4f2a-5b6c-7d8e9f0a1b2c",
     title: "Midjourney",
     description:
       "Abonnement Midjourney pour la génération d'images par IA. Créations artistiques de haute qualité, accès rapide, mode relax. Économisez 30%.",
@@ -304,7 +304,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "20",
+    id: "6ba7b810-9dad-11d1-80b4-00c04fd430d8",
     title: "Notion Plus",
     description:
       "Abonnement Notion Plus pour la productivité. Uploads illimités, version history, collaboration avancée. Économisez 40%.",
@@ -320,7 +320,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "21",
+    id: "b0c1d2e3-f4a5-4b4c-7d8e-9f0a1b2c3d4e",
     title: "Adobe Creative Cloud",
     description:
       "Abonnement Adobe Creative Cloud complet. Photoshop, Illustrator, Premiere Pro, et plus de 20 applications. Économisez 35%.",
@@ -336,7 +336,7 @@ export const shopProducts: Product[] = [
     createdAt: "2026-05-08T00:00:00Z",
   },
   {
-    id: "25",
+    id: "c1d2e3f4-a5b6-4c5d-8e9f-0a1b2c3d4e5f",
     title: "Microsoft 365",
     description:
       "Abonnement Microsoft 365 pour la bureautique. Word, Excel, PowerPoint, Outlook, 1TB OneDrive. Économisez 35%.",

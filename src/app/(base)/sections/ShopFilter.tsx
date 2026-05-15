@@ -203,7 +203,7 @@ export function ShopFilter({ onFilteredProductsChange }: ShopFilterProps) {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4 mb-8">
+    <div className="w-full flex flex-col">
       {/* Filter Button */}
       <SectionLayout isFlex className="p-0!">
         <div className="flex justify-center w-full">
