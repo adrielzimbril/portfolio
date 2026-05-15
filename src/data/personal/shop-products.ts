@@ -49,9 +49,9 @@ export const shopProducts: Product[] = [
   },
   {
     id: "6ba7b810-9dad-11d1-80b4-00c04fd430c7",
-    title: "ChatGPT Pro x5",
+    title: "ChatGPT Pro 5x",
     description:
-      "Abonnement ChatGPT Pro avec 5 comptes. Idéal pour équipes ou familles. Accès à GPT-4, réponses plus rapides et priorité. Économisez 55%.",
+      "Abonnement ChatGPT Pro avec 5x plus d'usage. Idéal pour équipes ou familles. Accès à GPT-4, réponses plus rapides et priorité. Économisez 55%.",
     image: "/img/shop/chatgpt.png",
     price: 45000,
     currency: "F.CFA",
@@ -65,9 +65,9 @@ export const shopProducts: Product[] = [
   },
   {
     id: "d4e5f6a7-b8c9-4d8e-1f2a-3b4c5d6e7f8a",
-    title: "ChatGPT Pro x20",
+    title: "ChatGPT Pro 20x",
     description:
-      "Abonnement ChatGPT Pro avec 20 comptes. Solution entreprise pour grandes équipes. Accès GPT-4, priorité maximale. Économisez 65%.",
+      "Abonnement ChatGPT Pro avec 20x plus d'usage. Solution entreprise pour grandes équipes. Accès GPT-4, priorité maximale. Économisez 65%.",
     image: "/img/shop/chatgpt.png",
     price: 150000,
     currency: "F.CFA",
