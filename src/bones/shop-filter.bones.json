@@ -1,0 +1,50 @@
+{
+  "breakpoints": {
+    "375": {
+      "name": "shop-filter",
+      "viewportWidth": 327,
+      "width": 327,
+      "height": 52,
+      "bones": [
+        [
+          30.4759,
+          0,
+          39.0482,
+          52,
+          8
+        ]
+      ]
+    },
+    "768": {
+      "name": "shop-filter",
+      "viewportWidth": 720,
+      "width": 720,
+      "height": 52,
+      "bones": [
+        [
+          41.1328,
+          0,
+          17.7344,
+          52,
+          8
+        ]
+      ]
+    },
+    "1280": {
+      "name": "shop-filter",
+      "viewportWidth": 1232,
+      "width": 1232,
+      "height": 52,
+      "bones": [
+        [
+          44.8179,
+          0,
+          10.3642,
+          52,
+          8
+        ]
+      ]
+    }
+  },
+  "_hash": "a4651f735eabda7c201be12f8f0bb0c0"
+}
