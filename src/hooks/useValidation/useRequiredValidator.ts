@@ -9,7 +9,7 @@ export const useRequiredValidator = <T>({
   label,
   required,
 }: RequiredValidatorProps<T>): ((
-  value: string | number | T[] | Date | File
+  value: string | number | T[] | Date | File,
 ) => string | null) => {
   return (value: string | number | T[] | Date | File): string | null => {
     if (required) {

@@ -99,7 +99,7 @@ function ParticipantsStats({ count }: { count: number }) {
   );
 
   return (
-    <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl squircle-sh-white/99">
+    <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle-7xl bg-sh-white/99">
       <div className="inline-flex items-start">
         <AvatarGroup numPeople={count}>
           {Array.from({ length: visibleCount }).map((_, index) => (

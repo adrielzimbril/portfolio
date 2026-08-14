@@ -22,7 +22,7 @@ export function NewsletterSubscribersBadge() {
   const { count, loading } = useNewsletterSubscribersCount();
   const t = useTranslations("newsletter.badges");
   return (
-    <Badge className="squircle squircle-violet-100" variant="colored">
+    <Badge className="bg-violet-100" variant="colored">
       <span className="flex items-center gap-2">
         <UsersGroup size={16} className="text-indigo-400" variant="bulk" />
         {loading ? "..." : `${formatCount(count ?? 0)} ${t("subscribers")}`}
@@ -35,7 +35,7 @@ export function ProductTypeSubscribersBadge({ type }: { type: ResourceType }) {
   const { count, loading } = useProductTypeSubscribersCount(type);
   const t = useTranslations("newsletter.badges");
   return (
-    <Badge className="squircle squircle-emerald-100" variant="colored">
+    <Badge className="bg-emerald-100" variant="colored">
       <span className="flex items-center gap-2">
         <Box size={16} className="text-emerald-500" variant="bulk" />
         {loading
@@ -82,7 +82,7 @@ export function ProductSlugRequestsBadge({
   const productType = productTypeMap[type] ?? "";
 
   return (
-    <Badge className="squircle squircle-amber-100" variant="colored">
+    <Badge className="bg-amber-100" variant="colored">
       <span className="flex items-center gap-1">
         <GiftBoxOne size={16} className="text-amber-600" variant="bulk" />
         {loading ? (
@@ -115,7 +115,7 @@ export function ProductAvatarsStats({
       userCount={count ?? 0}
       avatars={count < 1 ? [""] : ["", "", "", "", "", "", "", ""]}
       resourceType={type}
-      colorName={cn(colorName ?? "squircle-b-base")}
+      colorName={cn(colorName ?? "bg-b-base")}
       badgeClassName={badgeClassName}
     />
   );

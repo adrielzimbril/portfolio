@@ -105,8 +105,6 @@ const data: CraftSectionCard[] = [
   },
 ];
 
-
-
 export function CraftSection() {
   const t = useTranslations();
   const locale = useLocale();

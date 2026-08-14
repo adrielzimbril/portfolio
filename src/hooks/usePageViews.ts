@@ -7,7 +7,7 @@ export function usePageViews(
   slug: string,
   type?: PageType,
   details?: Record<string, unknown>,
-  wantResponse?: boolean
+  wantResponse?: boolean,
 ) {
   const [count, setCount] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ export function usePageViews(
   const stringifiedDetails = details ? JSON.stringify(details) : null;
   const memoizedDetails = useMemo(
     () => JSON.parse(stringifiedDetails ?? "{}"),
-    [stringifiedDetails]
+    [stringifiedDetails],
   );
 
   useEffect(() => {
@@ -43,10 +43,10 @@ export function usePageViews(
           // Fallback: just read
           const res = await fetch(
             `${apiRoutes.views.link}?slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
-              type ?? "page"
+              type ?? "page",
             )}&details=${encodeURIComponent(
-              memoizedDetails ?? ""
-            )}&wantResponse=${wantResponse}`
+              memoizedDetails ?? "",
+            )}&wantResponse=${wantResponse}`,
           );
           const json = await res.json();
           if (!res.ok) throw new Error(json?.error || "Failed to fetch");

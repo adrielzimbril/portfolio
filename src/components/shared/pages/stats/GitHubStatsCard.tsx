@@ -107,7 +107,6 @@ const themeConfig = {
     decorColor: "text-amber-400",
     iconColor: "text-amber-500",
     bgColor: "bg-amber-500/10",
-    squircleColor: "squircle-amber-500",
     glowColor: "shadow-amber-500/20",
     gradient: "from-amber-500/20 to-transparent",
   },
@@ -116,7 +115,6 @@ const themeConfig = {
     decorColor: "text-teal-400",
     iconColor: "text-teal-500",
     bgColor: "bg-teal-500/10",
-    squircleColor: "squircle-teal-500",
     glowColor: "shadow-teal-500/20",
     gradient: "from-teal-500/20 to-transparent",
   },
@@ -125,7 +123,6 @@ const themeConfig = {
     decorColor: "text-violet-400",
     iconColor: "text-violet-500",
     bgColor: "bg-violet-500/10",
-    squircleColor: "squircle-violet-500",
     glowColor: "shadow-violet-500/20",
     gradient: "from-violet-500/20 to-transparent",
   },
@@ -146,14 +143,10 @@ export function GitHubStatsCard({
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="flex-1 squircle size-full squircle-b-base squircle-3xl squircle-smooth-md border-0 overflow-hidden"
+      className="flex-1  size-full bg-b-base squircle-3xl/60  border-0 overflow-hidden"
     >
       <CardContent className="grid grid-cols-1 size-full p-2 gap-2">
-        <div
-          className={cn(
-            "squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
-          )}
-        >
+        <div className={cn(" squircle-4xl/100 bg-sh-white overflow-hidden")}>
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             {type === "stars" &&
               starDecorations.map((star, i) => (

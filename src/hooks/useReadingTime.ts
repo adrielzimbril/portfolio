@@ -75,14 +75,14 @@ const countWords = (text: string) => {
   // Split CJK characters and non-CJK words
   const cjkMatches =
     text.match(
-      /[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF\u3400-\u4DBF]/g
+      /[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF\u3400-\u4DBF]/g,
     ) || [];
 
   // Remove CJK characters from text to count non-CJK words
   const nonCjkText = text
     .replace(
       /[\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF\u3400-\u4DBF]/g,
-      " "
+      " ",
     )
     .replace(/[，。！？：；""''（）【】]/g, " "); // Chinese punctuation: comma, period, exclamation, question, colon, semicolon, double quotes, single quotes, parentheses, brackets
 
@@ -292,12 +292,12 @@ export function useReadingTime(
     imageTime: 12,
     includeCodeBlocks: true,
     codeMultiplier: 0.5,
-  }
+  },
 ): ReadingTimeResult | null {
   const stringifiedOptions = JSON.stringify(options);
   const memoizedOptions = useMemo(
     () => JSON.parse(stringifiedOptions),
-    [stringifiedOptions]
+    [stringifiedOptions],
   );
 
   const memoizedReadingTime = useMemo(() => {
@@ -334,7 +334,7 @@ interface ReadingTime {
  */
 export function formatTime(
   time: ReadingTime,
-  format: "minutes" | "seconds" | "detailed" | "short" = "detailed"
+  format: "minutes" | "seconds" | "detailed" | "short" = "detailed",
 ) {
   const { minutes, seconds, totalSeconds } = time;
 

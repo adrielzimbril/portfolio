@@ -21,7 +21,7 @@ export function TestimonialsSection() {
 
   const localeTestimonials = useMemo(
     () => getTestimonialsByLocale(locale),
-    [locale]
+    [locale],
   );
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function TestimonialsSection() {
 
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: localeTestimonials.length }).map(() =>
-      Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
+      Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
     );
   }, [localeTestimonials]);
 
@@ -57,19 +57,19 @@ export function TestimonialsSection() {
       isFlex
     >
       <div className="flex flex-col gap-4 md:gap-8 items-center justify-center md:px-6 md:max-w-5xl mx-auto">
-        <Card className="squircle squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden h-full">
+        <Card className="bg-b-base squircle-4xl/100 md:squircle-6xl/100  border-0 overflow-hidden h-full">
           <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
             <div
               className={cn(
-                "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden"
+                "flex relative flex-col min-h-60 items-center justify-center p-4 squircle-2xl/100 md:squircle-4xl/100 bg-sh-white overflow-hidden",
               )}
             >
               <div className="flex flex-col items-start gap-4 md:gap-6 w-full max-w-[90%] py-6 md:py-8 mx-auto">
                 <Badge
                   className={cn(
                     currentTestimonial.linkedinUrl
-                      ? "squircle-blue-100"
-                      : "squircle-orange-200"
+                      ? "bg-blue-100"
+                      : "bg-orange-200",
                   )}
                   contentClassName="flex items-center gap-1 font-bold"
                   variant="colored"
@@ -134,7 +134,7 @@ export function TestimonialsSection() {
                   "rounded-full cursor-pointer transition-all duration-800 ease",
                   index === currentIndex
                     ? "bg-b-white-invert-sec w-6 h-2"
-                    : "bg-b-base w-2 h-2"
+                    : "bg-b-base w-2 h-2",
                 )}
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Testimonial ${index + 1}`}

@@ -32,11 +32,9 @@ export function ToolAvatar({
     <div className="relative size-fit">
       <div
         className={cn(
-          "relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 overflow-hidden transition-all duration-300",
+          "relative flex bg-background squircle-7xl border-4 overflow-hidden transition-all duration-300",
           sizeClasses[size],
-          color
-            ? `squircle-border-[${pickRandomColor(color)}]`
-            : "squircle-border-b-base-accent",
+          color ? `border-[${pickRandomColor(color)}]` : "border-b-base-accent",
         )}
       >
         <div className="flex items-center justify-center size-full">

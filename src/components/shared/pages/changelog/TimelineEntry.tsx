@@ -68,9 +68,9 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
       </div>
 
       {/* Content Card */}
-      <Card className="squircle squircle-b-base squircle-smooth-xl squircle-6xl flex-1 transition-all duration-300 overflow-hidden">
+      <Card className="bg-b-base squircle-6xl/100 flex-1 transition-all duration-300 overflow-hidden">
         {entry.cover && (
-          <div className="relative h-72 w-full [corner-shape:squircle] rounded-t-xl md:rounded-t-3xl overflow-hidden">
+          <div className="relative h-72 w-full [corner-shape:] rounded-t-xl md:rounded-t-3xl overflow-hidden">
             <Image
               src={entry.cover}
               alt={entry.version}
@@ -118,7 +118,7 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
             </div>
             <Badge
               className={cn(
-                "capitalize squircle-border-2 squircle-border-sh-white",
+                "capitalize border-2 border-sh-white",
                 getColorForType(entry.type),
               )}
               variant="colored"

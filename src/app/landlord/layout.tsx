@@ -6,9 +6,5 @@ export default function LandlordRootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <BotProtector>
-      {children}
-    </BotProtector>
-  );
+  return <BotProtector>{children}</BotProtector>;
 }

@@ -53,7 +53,9 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={<Skeleton name="projects-load-more" className="w-full h-40" />}
+        loadingFallback={
+          <Skeleton name="projects-load-more" className="w-full h-40" />
+        }
       >
         {(visibleResources as unknown as Project[]).map((item, index) => (
           <ProjectCard
@@ -81,7 +83,9 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={<Skeleton name="thoughts-load-more" className="w-full h-40" />}
+        loadingFallback={
+          <Skeleton name="thoughts-load-more" className="w-full h-40" />
+        }
       >
         {(visibleResources as unknown as Post[]).map((item, index) => (
           <ThoughtCard
@@ -108,7 +112,9 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={<Skeleton name="hub-load-more" className="w-full h-40" />}
+        loadingFallback={
+          <Skeleton name="hub-load-more" className="w-full h-40" />
+        }
       >
         {(visibleResources as unknown as Resource[]).map((item, index) => {
           return (

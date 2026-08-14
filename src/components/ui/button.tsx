@@ -4,20 +4,20 @@ import * as React from "react";
 import { cn } from "@/utils/utils";
 
 const buttonVariants = cva(
-  "inline-flex squircle squircle-7xl squircle-smooth-xl hover:squircle-xl items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex squircle-7xl/100  hover:squircle-xl/100 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-inherit squircle-primary squircle-border-2 squircle-border-primary text-b-black-unchanged hover:squircle-primary/90",
-        base: "bg-inherit squircle-b-base squircle-border-0 squircle-border-transparent hover:squircle-b-base/90",
+          "bg-inherit bg-primary border-2 border-primary text-b-black-unchanged hover:bg-primary/90",
+        base: "bg-inherit bg-b-base border-0 border-transparent hover:bg-b-base/90",
         secondary:
-          "bg-inherit squircle-sh-white squircle-border-2 squircle-border-b-base-accent text-b-white-invert",
+          "bg-inherit bg-sh-white border-2 border-b-base-accent text-b-white-invert",
         destructive:
-          "squircle-destructive text-destructive-foreground hover:squircle-destructive/90",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "bg-inherit squircle squircle-transparent squircle-7xl squircle-border-2 squircle-border-b-base-accent",
-        colored: "bg-inherit squircle squircle-7xl text-b-black-unchanged",
+          "bg-inherit bg-transparent squircle-7xl border-2 border-b-base-accent",
+        colored: "bg-inherit squircle-7xl text-b-black-unchanged",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         icon: "hover:bg-accent hover:text-accent-foreground",
         link: "text-b-white-invert underline-offset-4 hover:underline",

@@ -24,7 +24,7 @@ export function Tags({
   return (
     <div
       className={cn(
-        "flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white overflow-hidden",
+        "flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle-2xl/100 md:squircle-7xl/100 bg-sh-white overflow-hidden",
         isCentered && "text-center items-center justify-center",
         className,
       )}

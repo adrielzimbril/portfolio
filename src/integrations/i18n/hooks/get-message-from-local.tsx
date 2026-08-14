@@ -7,14 +7,14 @@ export const importLocale = async (locale: string): Promise<Messages> => {
 };
 
 export const getMessagesForLocale = async (
-  locale: string
+  locale: string,
 ): Promise<Messages> => {
   const localeMessages = await importLocale(locale);
   if (locale === appConfig.i18n.defaultLocale) {
     return localeMessages;
   }
   const defaultLocaleMessages = await importLocale(
-    appConfig.i18n.defaultLocale
+    appConfig.i18n.defaultLocale,
   );
   return deepmerge(defaultLocaleMessages, localeMessages);
 };

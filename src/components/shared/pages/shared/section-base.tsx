@@ -29,9 +29,9 @@ export function SectionBase({
     >
       <Card
         className={cn(
-          "squircle squircle-b-base squircle-smooth-xl",
+          "bg-b-base ",
           isCallToAction ? "squircle-7xl" : "squircle-6xl",
-          cardClassName
+          cardClassName,
         )}
       >
         <CardContent
@@ -42,7 +42,7 @@ export function SectionBase({
               "flex flex-col items-center justify-between gap-6 max-w-full",
               isWide ? "items-start justify-center" : "md:flex-row",
               !isCallToAction && !isWide && "md:gap-16",
-              className
+              className,
             )}
           >
             {children}

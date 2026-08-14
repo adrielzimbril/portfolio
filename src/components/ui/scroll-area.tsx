@@ -35,8 +35,16 @@ export function ScrollArea({
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar className={scrollbarClassName} scrollbarThumbClassName={scrollbarThumbClassName} orientation="vertical" />
-      <ScrollBar className={scrollbarClassName} scrollbarThumbClassName={scrollbarThumbClassName} orientation="horizontal" />
+      <ScrollBar
+        className={scrollbarClassName}
+        scrollbarThumbClassName={scrollbarThumbClassName}
+        orientation="vertical"
+      />
+      <ScrollBar
+        className={scrollbarClassName}
+        scrollbarThumbClassName={scrollbarThumbClassName}
+        orientation="horizontal"
+      />
       <ScrollAreaPrimitive.Corner data-slot="scroll-area-corner" />
     </ScrollAreaPrimitive.Root>
   );
@@ -61,7 +69,10 @@ export function ScrollBar({
       {...props}
     >
       <ScrollAreaPrimitive.Thumb
-        className={cn("relative flex-1 rounded-full bg-foreground/20", scrollbarThumbClassName)}
+        className={cn(
+          "relative flex-1 rounded-full bg-foreground/20",
+          scrollbarThumbClassName,
+        )}
         data-slot="scroll-area-thumb"
       />
     </ScrollAreaPrimitive.Scrollbar>

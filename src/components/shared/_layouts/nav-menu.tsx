@@ -20,7 +20,7 @@ export function NavMenu({
           className={cn(
             "relative flex w-fit overflow-hidden items-center p-1",
             //"rounded-2xl overflow-hidden border-2 border-solid border-secondary",
-            "squircle squircle-7xl squircle-transparent squircle-border-2 squircle-border-b-base-accent",
+            "squircle-7xl bg-transparent border-2 border-b-base-accent",
           )}
         >
           {menuRoutes.map((item) => (
@@ -38,8 +38,8 @@ export function NavMenu({
               {activeTab === item.key && (
                 <div
                   className={cn(
-                    "absolute inset-0 bg-b-base-accent squircle-b-base-accent size-[95%] self-center place-self-center",
-                    "squircle squircle-2xl md:squircle-7xl squircle-smooth-lg md:squircle-smooth-xl rounded-xl",
+                    "absolute inset-0 bg-b-base-accent size-[95%] self-center place-self-center",
+                    "squircle-2xl/80 md:squircle-7xl/80 rounded-xl",
                   )}
                 />
               )}

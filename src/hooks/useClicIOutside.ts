@@ -3,18 +3,13 @@ import { useEventListener } from "@/hooks/useEventListener";
 import type { RefObject } from "react";
 
 type EventType =
-  | "mousedown"
-  | "mouseup"
-  | "touchstart"
-  | "touchend"
-  | "focusin"
-  | "focusout";
+  "mousedown" | "mouseup" | "touchstart" | "touchend" | "focusin" | "focusout";
 
 export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T | null> | RefObject<T | null>[],
   handler: (event: MouseEvent | TouchEvent | FocusEvent) => void,
   eventType: EventType = "mousedown",
-  eventListenerOptions: AddEventListenerOptions = {}
+  eventListenerOptions: AddEventListenerOptions = {},
 ): void {
   useEventListener(
     eventType,
@@ -37,6 +32,6 @@ export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
       }
     },
     undefined,
-    eventListenerOptions
+    eventListenerOptions,
   );
 }

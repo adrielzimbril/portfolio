@@ -71,12 +71,12 @@ function WinnerCard({ participant }: { participant: Winner }) {
             };
 
   return (
-    <Card className="squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0 overflow-hidden">
+    <Card className="bg-b-base-second squircle-6xl/100  size-full border-0 overflow-hidden">
       <CardContent className="grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4">
-        <div className="relative min-h-52 md:min-h-72 squircle squircle-smooth-xl squircle-3xl squircle-sh-white overflow-hidden">
+        <div className="relative min-h-52 md:min-h-72 squircle-3xl/100 bg-sh-white overflow-hidden">
           <div
             className={cn(
-              "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
+              "flex relative flex-col flex-1 min-h-32 md:min-h-60 items-center justify-center squircle-xl/100 md:squircle-3xl/100 bg-sh-white overflow-hidden",
               "p-2 h-48 md:h-80",
             )}
           >

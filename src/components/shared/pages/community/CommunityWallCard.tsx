@@ -58,7 +58,7 @@ export function CommunityWallCard({
   return (
     <Card
       className={cn(
-        "squircle squircle-b-base squircle-3xl squircle-smooth-lg squircle-border-2 squircle-border-b-base-accent cursor-pointer pointer-events-none",
+        "bg-b-base squircle-3xl/80  border-2 border-b-base-accent cursor-pointer pointer-events-none",
         "transition-all duration-300 group cursor-pointer",
         className,
       )}
@@ -67,13 +67,13 @@ export function CommunityWallCard({
       <CardContent className="flex flex-col items-start justify-between gap-3 p-4 h-full">
         <div
           className={cn(
-            "relative size-full flex flex-col items-center gap-2 squircle squircle-smooth-lg squircle-2xl squircle-sh-white p-2 overflow-hidden",
+            "relative size-full flex flex-col items-center gap-2 squircle-2xl/80 bg-sh-white p-2 overflow-hidden",
           )}
         >
           <div
             className={cn(
               "relative size-full flex flex-row items-center justify-center p-4 min-h-[200px]",
-              "squircle squircle-smooth-lg squircle-2xl squircle-b-base overflow-hidden",
+              " squircle-2xl/80 bg-b-base overflow-hidden",
             )}
           >
             {pattern?.content}

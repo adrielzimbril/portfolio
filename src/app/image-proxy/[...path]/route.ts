@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export const GET = async (
   _req: Request,
-  { params }: { params: Promise<{ path: string[] }> }
+  { params }: { params: Promise<{ path: string[] }> },
 ) => {
   const { path } = await params;
 

@@ -106,7 +106,7 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
 // Set display name immediately
 ConfettiComponent.displayName = "Confetti";
 
-// Export as Confetti
+// export as Confetti
 export const Confetti = ConfettiComponent;
 
 interface ConfettiButtonProps extends ButtonProps {

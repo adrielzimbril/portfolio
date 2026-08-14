@@ -1,4 +1,4 @@
-export const USFlagRound = ({ width = '32px', height = '32px' }) => {
+export const USFlagRound = ({ width = "32px", height = "32px" }) => {
   return (
     <>
       <svg

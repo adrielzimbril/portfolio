@@ -29,7 +29,7 @@ export function ResourceCard({
   hideReactions?: boolean;
 }) {
   return (
-    <Card className="group relative squircle squircle-b-base-second squircle-6xl squircle-smooth-xl size-full border-0">
+    <Card className="group relative bg-b-base-second squircle-6xl/100  size-full border-0">
       <CardContent className="relative grid grid-cols-1 px-6 md:px-8 py-8 md:py-10 gap-4 size-full grid-rows-[auto_1fr]">
         <CardPreview
           title={title}

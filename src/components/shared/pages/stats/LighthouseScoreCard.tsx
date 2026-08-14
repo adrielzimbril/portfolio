@@ -47,14 +47,14 @@ export function LighthouseScoreCard({
   return (
     <Card
       className={cn(
-        "squircle size-full max-w-[95%] squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto",
+        " size-full max-w-[95%] bg-b-base squircle-4xl/80 md:squircle-6xl/80  border-0 overflow-hidden mx-auto",
         className,
       )}
     >
       <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
         <div
           className={cn(
-            "flex relative flex-col gap-4 md:gap-6 items-start justify-between px-4 py-6 md:px-6 md:py-8 squircle squircle-smooth-md squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col gap-4 md:gap-6 items-start justify-between px-4 py-6 md:px-6 md:py-8 squircle-2xl/60 md:squircle-4xl/60 bg-sh-white overflow-hidden",
           )}
         >
           <RadarBackground scores={scoreValues} />
@@ -76,7 +76,9 @@ export function LighthouseScoreCard({
                 <div className="flex items-center gap-3">
                   <div>
                     <h6 className="text-sm font-semibold text-foreground">
-                      {strategy === "mobile" ? t("stats.lighthouse.mobile") : t("stats.lighthouse.desktop")}
+                      {strategy === "mobile"
+                        ? t("stats.lighthouse.mobile")
+                        : t("stats.lighthouse.desktop")}
                     </h6>
                     <p className="text-xs text-muted-foreground">
                       {t("stats.lighthouse.score")}

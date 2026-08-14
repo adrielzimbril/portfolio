@@ -7,7 +7,6 @@ export function getScoreColor(score: number) {
       barBg: "bg-green-600/20",
       text: "text-green-600",
       glow: "shadow-green-600/60",
-      squircle: "squircle-green-600",
       iconColor: "text-green-600",
     };
   }
@@ -17,7 +16,6 @@ export function getScoreColor(score: number) {
       barBg: "bg-green-400/20",
       text: "text-green-400",
       glow: "shadow-green-400/60",
-      squircle: "squircle-green-400",
       iconColor: "text-green-400",
     };
   }
@@ -27,7 +25,6 @@ export function getScoreColor(score: number) {
       barBg: "bg-blue-500/20",
       text: "text-blue-500",
       glow: "shadow-blue-500/60",
-      squircle: "squircle-blue-500",
       iconColor: "text-blue-500",
     };
   }
@@ -37,7 +34,6 @@ export function getScoreColor(score: number) {
       barBg: "bg-amber-500/20",
       text: "text-amber-500",
       glow: "shadow-amber-500/60",
-      squircle: "squircle-amber-500",
       iconColor: "text-amber-500",
     };
   }
@@ -47,7 +43,6 @@ export function getScoreColor(score: number) {
       barBg: "bg-yellow-500/20",
       text: "text-yellow-500",
       glow: "shadow-yellow-500/60",
-      squircle: "squircle-yellow-500",
       iconColor: "text-yellow-500",
     };
   }
@@ -56,7 +51,6 @@ export function getScoreColor(score: number) {
     barBg: "bg-destructive/20",
     text: "text-destructive",
     glow: "shadow-destructive/60",
-    squircle: "squircle-destructive",
     iconColor: "text-destructive",
   };
 }

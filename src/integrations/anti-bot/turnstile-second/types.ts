@@ -52,11 +52,7 @@ export type TurnstileExecution = "render" | "execute";
 export type TurnstileRetry = "auto" | "never";
 export type TurnstileRefresh = "auto" | "manual" | "never";
 export type TurnstileSandbox =
-  | "pass"
-  | "block"
-  | "pass-invisible"
-  | "block-invisible"
-  | boolean;
+  "pass" | "block" | "pass-invisible" | "block-invisible" | boolean;
 export type TurnstileServerSandbox = "pass" | "fail" | "error" | boolean;
 
 export const TURNSTILE_CONSTANTS = {

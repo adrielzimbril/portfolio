@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export function useLockBodyScroll(freezeBodyScroll: boolean) {
   useEffect(() => {
@@ -7,9 +7,9 @@ export function useLockBodyScroll(freezeBodyScroll: boolean) {
       window.innerWidth - document.documentElement.clientWidth;
     if (freezeBodyScroll) {
       document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
-      window.document.documentElement.style.overflow = 'hidden';
+      window.document.documentElement.style.overflow = "hidden";
     } else {
-      document.documentElement.style.removeProperty('overflow');
+      document.documentElement.style.removeProperty("overflow");
     }
     return () => {
       document.documentElement.style.paddingRight = paddingRight;

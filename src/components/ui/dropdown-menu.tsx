@@ -267,7 +267,10 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon size={16} className="text-muted-foreground/80 ml-auto" />
+      <ChevronRightIcon
+        size={16}
+        className="text-muted-foreground/80 ml-auto"
+      />
     </DropdownMenuPrimitive.SubTrigger>
   );
 }

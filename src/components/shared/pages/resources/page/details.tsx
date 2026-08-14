@@ -7,7 +7,7 @@ export function CardPreview({
   return (
     <div
       className={cn(
-        "flex flex-row items-center gap-6 px-6 py-6 squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
+        "flex flex-row items-center gap-6 px-6 py-6 squircle-4xl/100 bg-sh-white overflow-hidden",
       )}
     >
       <PreviewIcon icon={details.icon} />

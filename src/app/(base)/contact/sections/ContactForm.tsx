@@ -21,7 +21,7 @@ export default function ContactForm({}) {
       locale: locale,
       path: getPathUrl(routes.contact.link),
     },
-    false
+    false,
   );
 
   useEffect(() => {
@@ -38,11 +38,11 @@ export default function ContactForm({}) {
         sectionContentClassName="w-full"
         cardClassName="w-full"
         cardContentClassName="w-full px-4 py-6 md:p-8"
-        className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+        className="bg-sh-white squircle-xl/100 md:squircle-3xl/100  border-0 overflow-hidden min-h-60 py-12"
       >
         <div
           className={cn(
-            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 md:gap-8 max-w-5xl mx-auto"
+            "flex relative flex-col min-h-60 items-center justify-center text-center p-4 gap-4 md:gap-8 max-w-5xl mx-auto",
           )}
         >
           <div className="flex relative flex-col items-center justify-center text-center pb-2 gap-3 md:gap-4">
@@ -62,14 +62,14 @@ export default function ContactForm({}) {
               overflow: "scroll",
               minHeight: "400px",
             }}
-            className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden size-full"
+            className="bg-sh-white squircle-xl/100 md:squircle-3xl/100  border-0 overflow-hidden size-full"
             config={{ layout: "month_view" }}
           />
 
           <div
             className={cn(
               "flex flex-col items-start gap-4 w-full md:max-w-[80%]",
-              "hidden"
+              "hidden",
             )}
           >
             <Button

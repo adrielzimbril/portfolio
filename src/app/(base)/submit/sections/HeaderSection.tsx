@@ -14,7 +14,7 @@ export function HeaderSection() {
     routes.submit.key,
     undefined,
     { locale: locale, path: getPathUrl(routes.submit.link) },
-    false
+    false,
   );
 
   return (

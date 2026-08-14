@@ -3,7 +3,7 @@ import { z } from "zod";
 
 // Schema Zod with anti-bot protection
 export const createProtectedSchema = <T extends z.ZodRawShape>(
-  baseSchema: z.ZodObject<T>
+  baseSchema: z.ZodObject<T>,
 ) => {
   return baseSchema.extend({
     // Honeypot field (should remain empty)

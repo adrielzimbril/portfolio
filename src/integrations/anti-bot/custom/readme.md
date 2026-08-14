@@ -31,7 +31,7 @@ type FormData = z.infer<typeof protectedSchema>;
 
 export const ContactForm = () => {
   const { botProtection, validateBotProtection } = useAntiBot();
-  
+
   const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<FormData>({
     resolver: zodResolver(protectedSchema),
   });
@@ -44,7 +44,7 @@ export const ContactForm = () => {
   const onSubmit = async (data: FormData) => {
     try {
       validateBotProtection(data);
-      
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -63,14 +63,14 @@ export const ContactForm = () => {
       <input {...register('name')} placeholder="Name" />
       <input {...register('email')} type="email" placeholder="Email" />
       <textarea {...register('message')} placeholder="Message" />
-      
+
       {/* Invisible honeypot */}
       <input {...register('website')} style={{ display: 'none' }} tabIndex={-1} />
-      
+
       {/* Hidden fields */}
       <input {...register('_token')} type="hidden" />
       <input {...register('_timestamp')} type="hidden" />
-      
+
       <button type="submit" disabled={!botProtection.isReady || isSubmitting}>
         {isSubmitting ? 'Sending...' : 'Send'}
       </button>
@@ -83,9 +83,9 @@ export const ContactForm = () => {
 
 ```typescript
 // pages/api/contact.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { createProtectedSchema } from '../../hooks/useAntiBot';
-import { validateServerBotProtection } from '../../utils/serverAntiBot';
+import type { NextApiRequest, NextApiResponse } from "next";
+import { createProtectedSchema } from "../../hooks/useAntiBot";
+import { validateServerBotProtection } from "../../utils/serverAntiBot";
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -95,24 +95,28 @@ const contactSchema = z.object({
 
 const protectedSchema = createProtectedSchema(contactSchema);
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
   }
 
   try {
     const validatedData = protectedSchema.parse(req.body);
-    
-    const clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+    const clientIp =
+      req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     validateServerBotProtection(validatedData, clientIp as string);
 
     // Process your form data here
-    console.log('Valid message:', validatedData);
+    console.log("Valid message:", validatedData);
 
-    res.status(200).json({ message: 'Message sent successfully' });
+    res.status(200).json({ message: "Message sent successfully" });
   } catch (error) {
-    console.error('Form error:', error);
-    res.status(400).json({ message: 'Invalid request' });
+    console.error("Form error:", error);
+    res.status(400).json({ message: "Invalid request" });
   }
 }
 ```
@@ -123,7 +127,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 ```typescript
 const { botProtection, validateBotProtection } = useAntiBot({
-  minTime: 3000,        // 3 seconds minimum
+  minTime: 3000, // 3 seconds minimum
   maxTime: 10 * 60 * 1000, // 10 minutes maximum
 });
 ```
@@ -132,9 +136,9 @@ const { botProtection, validateBotProtection } = useAntiBot({
 
 ```typescript
 validateServerBotProtection(data, clientIp, {
-  minTime: 2000,         // Server-side minimum time
-  maxTime: 30 * 60 * 1000, // 30 minutes maximum  
-  checkIpRate: true,     // Enable IP rate limiting
+  minTime: 2000, // Server-side minimum time
+  maxTime: 30 * 60 * 1000, // 30 minutes maximum
+  checkIpRate: true, // Enable IP rate limiting
 });
 ```
 
@@ -154,7 +158,7 @@ try {
   validateBotProtection(data);
 } catch (error) {
   // "Bot detected via honeypot"
-  // "Form submitted too quickly" 
+  // "Form submitted too quickly"
   // "Form expired"
   // "Invalid token"
 }
@@ -163,12 +167,14 @@ try {
 ## Best Practices
 
 ### ✅ Do
+
 - Keep honeypot completely invisible
 - Adjust timing based on your form complexity
 - Use generic error messages for security
 - Implement server-side rate limiting
 
-### ❌ Don't  
+### ❌ Don't
+
 - Reveal specific bot detection details
 - Use overly strict timing (accessibility)
 - Make honeypot visible in any way
@@ -177,8 +183,9 @@ try {
 ## Effectiveness
 
 Blocks ~95% of common bots:
+
 - ✅ Automated spam bots
-- ✅ Basic scraping scripts  
+- ✅ Basic scraping scripts
 - ✅ Form submission attacks
 - ❌ Sophisticated bots with delays
 - ❌ Manual attacks

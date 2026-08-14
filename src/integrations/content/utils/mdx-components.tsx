@@ -106,9 +106,9 @@ export const mdxComponents = {
   blockquote: ({ children, ...rest }) => (
     <blockquote
       {...rest}
-      className="mb-6 squircle-b-base p-2 md:p-3 squircle squircle-xl md:squircle-4xl"
+      className="mb-6 bg-b-base p-2 md:p-3 squircle-xl md:squircle-4xl"
     >
-      <div className="flex flex-col not-italic squircle-sh-white p-2 md:p-4 squircle squircle-xl md:squircle-3xl [&>p]:mb-2 [&>p:last-child]:mb-0">
+      <div className="flex flex-col not-italic bg-sh-white p-2 md:p-4 squircle-xl md:squircle-3xl [&>p]:mb-2 [&>p:last-child]:mb-0">
         {children}
       </div>
     </blockquote>

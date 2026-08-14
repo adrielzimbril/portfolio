@@ -62,15 +62,15 @@ function pickRandomColorCode(
  *
  * @example
  * const color = pickRandomColor("BLUE");
- * logger.info(color); // Output: squircle-[#ade9ff]
+ * logger.info(color); // Output: bg-[#ade9ff]
  *
  * @example
  * const color = pickRandomColor(0);
- * logger.info(color); // Output: squircle-[#ade9ff]
+ * logger.info(color); // Output: bg-[#ade9ff]
  *
  * @example
  * const color = pickRandomColor("WHITE_GOLD");
- * logger.info(color); // Output: squircle-[#f9f9f9]
+ * logger.info(color); // Output: bg-[#f9f9f9]
  */
 function pickRandomColor(
   id?: DEFAULT_COLOR_CODE_NAME_TYPE | number,

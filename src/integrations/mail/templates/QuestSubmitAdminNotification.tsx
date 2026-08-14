@@ -70,27 +70,48 @@ export function QuestSubmitAdminNotification({
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questSubmitAdminNotification.labels.challenge")}</strong>: {questTitle}
+                <strong>
+                  {t("mail.questSubmitAdminNotification.labels.challenge")}
+                </strong>
+                : {questTitle}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questSubmitAdminNotification.labels.url")}</strong>: <Link href={challengeUrl}>{challengeUrl}</Link>
+                <strong>
+                  {t("mail.questSubmitAdminNotification.labels.url")}
+                </strong>
+                : <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questSubmitAdminNotification.labels.slug")}</strong>: {questSlug}
+                <strong>
+                  {t("mail.questSubmitAdminNotification.labels.slug")}
+                </strong>
+                : {questSlug}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questSubmitAdminNotification.labels.name")}</strong>: {name}
+                <strong>
+                  {t("mail.questSubmitAdminNotification.labels.name")}
+                </strong>
+                : {name}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questSubmitAdminNotification.labels.email")}</strong>: {email}
+                <strong>
+                  {t("mail.questSubmitAdminNotification.labels.email")}
+                </strong>
+                : {email}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.questSubmitAdminNotification.labels.submittedWork")}</strong>: <Link href={workUrl}>{workUrl}</Link>
+                <strong>
+                  {t("mail.questSubmitAdminNotification.labels.submittedWork")}
+                </strong>
+                : <Link href={workUrl}>{workUrl}</Link>
               </Text>
 
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                <strong>{t("mail.questSubmitAdminNotification.labels.message")}</strong>: {message || "-"}
+                <strong>
+                  {t("mail.questSubmitAdminNotification.labels.message")}
+                </strong>
+                : {message || "-"}
               </Text>
             </Section>
 

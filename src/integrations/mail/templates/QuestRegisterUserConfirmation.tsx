@@ -64,7 +64,9 @@ export function QuestRegisterUserConfirmation({
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questRegisterUserConfirmation.greeting", { firstName })}
+                {t("mail.questRegisterUserConfirmation.greeting", {
+                  firstName,
+                })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
                 {t("mail.questRegisterUserConfirmation.content.intro", {
@@ -72,7 +74,10 @@ export function QuestRegisterUserConfirmation({
                 })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.questRegisterUserConfirmation.content.challengeLinkLabel")}: <Link href={challengeUrl}>{challengeUrl}</Link>
+                {t(
+                  "mail.questRegisterUserConfirmation.content.challengeLinkLabel",
+                )}
+                : <Link href={challengeUrl}>{challengeUrl}</Link>
               </Text>
               <Hr className="border-t border-[#e0e0e0] my-8" />
               <Text className="text-[#666666] text-sm leading-relaxed">
@@ -86,7 +91,7 @@ export function QuestRegisterUserConfirmation({
                 {t("mail.common.signature")}
               </Text>
               <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.contact")}: {" "}
+                {t("mail.common.contact")}:{" "}
                 <Link href={`mailto:${siteConfig.links.contact.email}`}>
                   {siteConfig.links.contact.email}
                 </Link>

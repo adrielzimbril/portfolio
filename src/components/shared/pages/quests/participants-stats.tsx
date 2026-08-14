@@ -38,8 +38,8 @@ export function ParticipantsStats({
     <div className={cn("flex flex-col items-start gap-1", className)}>
       <div
         className={cn(
-          "inline-flex items-center gap-1.5 px-1 py-0.5 squircle squircle-7xl",
-          colorName ?? "squircle-sh-white/99",
+          "inline-flex items-center gap-1.5 px-1 py-0.5 squircle-7xl",
+          colorName ?? "bg-sh-white/99",
         )}
       >
         <div className="inline-flex items-start">

@@ -89,9 +89,7 @@ export function MessageModal({
           <DialogTitle>
             {message ? t("edit_title") : t("add_title")}
           </DialogTitle>
-          <DialogDescription>
-            {t("description")}
-          </DialogDescription>
+          <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
         <DialogSeparator />
         <form
@@ -131,7 +129,9 @@ export function MessageModal({
             {Object.values(Locale).map((locale) => (
               <div key={locale} className="space-y-2">
                 <Label htmlFor={`message-${locale}`}>
-                  {t("fields.messageLanguage", { locale: locale.toUpperCase() })}
+                  {t("fields.messageLanguage", {
+                    locale: locale.toUpperCase(),
+                  })}
                 </Label>
                 <Textarea
                   id={`message-${locale}`}

@@ -33,7 +33,7 @@ const REACTION_CONFIG: Record<
   sceptic: {
     Icon: "🤔",
     labelKey: "stats.reactions.sceptic",
-  }
+  },
 };
 
 interface ReactionCardProps {
@@ -51,12 +51,12 @@ function ReactionCard({ type, count, delay = 0 }: ReactionCardProps) {
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
+      className=" size-full bg-b-base squircle-6xl/100  border-0 overflow-hidden"
     >
       <CardContent className="grid grid-cols-1 p-4 gap-4 h-full">
         <div
           className={cn(
-            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle-2xl/100 md:squircle-4xl/100 bg-sh-white overflow-hidden",
           )}
         >
           <motion.div

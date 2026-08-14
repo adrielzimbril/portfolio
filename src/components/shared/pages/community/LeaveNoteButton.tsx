@@ -26,7 +26,7 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
             asIcon
             asPointer
             className={cn(
-              "squircle squircle-smooth-lg squircle-2xl",
+              " squircle-2xl/80",
               "flex items-center gap-3 px-6 py-4",
             )}
           >

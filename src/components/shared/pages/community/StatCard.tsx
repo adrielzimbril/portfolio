@@ -20,8 +20,8 @@ export function StatCard({
       <div className="relative size-fit">
         <div
           className={cn(
-            "relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-28 overflow-hidden transition-all duration-300",
-            "squircle-border-[#8e8eff]",
+            "relative flex bg-background squircle-7xl border-4 size-28 overflow-hidden transition-all duration-300",
+            "border-[#8e8eff]",
           )}
         >
           <div className="pointer-events-none flex h-full w-full items-center justify-center">

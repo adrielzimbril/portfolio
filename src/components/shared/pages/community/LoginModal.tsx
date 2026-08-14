@@ -40,7 +40,7 @@ export function LoginModal() {
             asIcon
             asPointer
             whileTap
-            className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
+            className={cn(" squircle-2xl/80 w-full")}
           >
             <span className="flex items-center justify-center gap-2">
               <Github size={16} variant="bulk" />
@@ -53,7 +53,7 @@ export function LoginModal() {
             asIcon
             asPointer
             whileTap
-            className={cn("squircle squircle-smooth-lg squircle-2xl w-full")}
+            className={cn(" squircle-2xl/80 w-full")}
           >
             <span className="flex items-center justify-center gap-2">
               <Google size={16} variant="bulk" />

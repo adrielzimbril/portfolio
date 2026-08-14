@@ -49,7 +49,7 @@ export function ProjectPointsResearchSection({
           //src={getImageUrl(getEmojiHub("✏️", "apple"))}
           //src={getImageUrl(getEmojiHub("✍🏻", "fluent", "anim"))}
           src={{ emoji: "✍🏻" }}
-          variant="squircle"
+          variant=""
           isMobileShowed
           unOrdered
         />

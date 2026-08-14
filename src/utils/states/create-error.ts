@@ -12,8 +12,7 @@ export interface CreateErrorOptions {
 }
 
 export type CreateErrorInput =
-  | string
-  | (CreateErrorOptions & Record<string, unknown>);
+  string | (CreateErrorOptions & Record<string, unknown>);
 
 /**
  * A specialized error type that extends the native `Error` object
@@ -70,7 +69,7 @@ type KeyOfDefaultErrors = keyof typeof defaultErrors;
  */
 export function createError(
   input: KeyOfDefaultErrors | string | CreateErrorOptions,
-  overrides?: CreateErrorOptions
+  overrides?: CreateErrorOptions,
 ): NormalizedError {
   // If input is a string, check if it matches a default error key
   if (typeof input === "string") {

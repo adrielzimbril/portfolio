@@ -47,7 +47,7 @@ export function ContentSection({
         <Badge
           size="lg"
           variant="colored"
-          className="squircle-sh-white text-b-white-invert"
+          className="bg-sh-white text-b-white-invert"
         >
           {badge}
         </Badge>

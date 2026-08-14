@@ -131,7 +131,7 @@ export function OverviewSection() {
                 {t("recent_activity.description")}
               </p>
             </div>
-            <Badge className="squircle-[#ffed90]" variant="colored">
+            <Badge className="bg-[#ffed90]" variant="colored">
               Live
             </Badge>
           </div>

@@ -11,7 +11,6 @@ import { pickRandomColor } from "@/utils";
 import { useUser } from "@/integrations/auth/provider/supabase";
 import { logger } from "@/utils/logger";
 
-
 interface ReactionButtonProps {
   pageType: PageType;
   entityId: string;
@@ -118,11 +117,11 @@ export function ReactionButton({
         className={cn(
           "group/reaction relative flex items-center justify-center cursor-pointer",
           "capitalize text-xs font-medium",
-          "squircle-border-2",
-          "squircle-sh-white",
+          "border-2",
+          "bg-sh-white",
           pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
           "size-max text-primary-foreground!",
-          isReacted ? "squircle-border-[#8e8eff]" : "squircle-border-[#b3baf5]",
+          isReacted ? "border-[#8e8eff]" : "border-[#b3baf5]",
           compact && "px-1 py-0.5",
           isLoading && "opacity-50 cursor-not-allowed",
           // isReacted ? "grayscale-0" : "grayscale-90",
@@ -146,10 +145,10 @@ export function ReactionButton({
         {reactionCount > 0 && !minimal && (
           <span
             className={cn(
-              "absolute font-bold squircle squircle-xl squircle-border-1",
+              "absolute font-bold squircle-xl border-1",
               isReacted
-                ? "squircle-[#8e8eff] text-primary-foreground! squircle-border-[#8e8eff]"
-                : "squircle-[#8e8eff] text-primary-foreground! squircle-border-sh-white",
+                ? "bg-[#8e8eff] text-primary-foreground! border-[#8e8eff]"
+                : "bg-[#8e8eff] text-primary-foreground! border-sh-white",
               compact
                 ? "-bottom-1.5 text-[.5rem] px-1 py-0.5"
                 : "-bottom-2 text-[.8rem] px-2 py-1",
@@ -165,18 +164,16 @@ export function ReactionButton({
         title={`${REACTION_EMOJIS[reactionType]} (${reactionCount})`}
         className={cn(
           "hidden! flex items-center justify-center transition-all duration-300 cursor-pointer group/btn disabled:opacity-50",
-          "squircle squircle-7xl squircle-smooth-xl",
+          "squircle-7xl/100 ",
           minimal
             ? "size-10"
             : compact
-              ? "gap-1 px-2 py-1 squircle-sh-white squircle-border squircle-border-b-base-accent"
-              : "gap-1.5 px-3 py-1.5 squircle-sh-white squircle-border-2 squircle-border-b-base-accent",
+              ? "gap-1 px-2 py-1 bg-sh-white border border-b-base-accent"
+              : "gap-1.5 px-3 py-1.5 bg-sh-white border-2 border-b-base-accent",
           isReacted &&
             !minimal &&
-            "squircle-background-background squircle-border-2 squircle-border-indigo-500",
-          isReacted &&
-            minimal &&
-            "squircle-sh-white squircle-border-2 squircle-border-indigo-500",
+            "bg-background-background border-2 border-indigo-500",
+          isReacted && minimal && "bg-sh-white border-2 border-indigo-500",
           className,
         )}
       >

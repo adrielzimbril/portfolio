@@ -212,14 +212,14 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
 
   return (
     <div className="relative w-full h-150 min-h-150">
-      <Card className="size-full squircle squircle-b-base squircle-smooth-xl squircle-4xl flex-1 transition-all duration-300 overflow-hidden">
+      <Card className="size-full bg-b-base squircle-4xl/100 flex-1 transition-all duration-300 overflow-hidden">
         <CardContent className="size-full p-6">
           {/* Interactive canvas area */}
           <div
             ref={containerRef}
             className={cn(
               "absolute inset-0 overflow-hidden",
-              "squircle squircle-mask squircle-smooth-lg squircle-2xl squircle-b-base p-2",
+              " squircle-2xl/80 bg-b-base p-2",
             )}
             style={{
               cursor: isDragging ? "grabbing" : "grab",

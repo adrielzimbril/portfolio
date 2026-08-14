@@ -10,13 +10,18 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const page = Math.max(Number(searchParams.get("page") || 1), 1);
-    const pageSize = Math.min(Math.max(Number(searchParams.get("pageSize") || 10), 1), 50);
+    const pageSize = Math.min(
+      Math.max(Number(searchParams.get("pageSize") || 10), 1),
+      50,
+    );
     const from = (page - 1) * pageSize;
     const to = from + pageSize - 1;
 
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
-    const fromRelation = supabase.from.bind(supabase) as (relation: string) => any;
+    const fromRelation = supabase.from.bind(supabase) as (
+      relation: string,
+    ) => any;
 
     const { data, error, count } = await fromRelation(TABLE)
       .select(SELECT, { count: "exact" })
@@ -28,9 +33,17 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ rows: data || [], count: count || 0, page, pageSize });
+    return NextResponse.json({
+      rows: data || [],
+      count: count || 0,
+      page,
+      pageSize,
+    });
   } catch (error) {
     logger.error("[landlord/newsletter] GET catch:", error);
-    return NextResponse.json({ error: "Failed to load newsletter subscribers" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to load newsletter subscribers" },
+      { status: 500 },
+    );
   }
 }

@@ -38,12 +38,12 @@ export function ThoughtMostViewedCard({
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="squircle size-full md:col-span-8 squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
+      className=" size-full md:col-span-8 bg-b-base squircle-6xl/100  border-0 overflow-hidden"
     >
       <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full">
         <div
           className={cn(
-            "flex relative flex-col size-full items-center justify-start p-4 squircle squircle-smooth-xl squircle-2xl md:squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-start p-4 squircle-2xl/100 md:squircle-4xl/100 bg-sh-white overflow-hidden",
           )}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -100,7 +100,9 @@ export function ThoughtMostViewedCard({
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-b-base">
-                      <span className="text-sm">{t("stats.cards.mostViewed.noImage")}</span>
+                      <span className="text-sm">
+                        {t("stats.cards.mostViewed.noImage")}
+                      </span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
@@ -149,7 +151,9 @@ export function ThoughtMostViewedCard({
                 href={getResourcesUrl(PageType.THOUGHT, slug)}
                 className="flex flex-col items-start justify-center gap-4"
               >
-                <h6 className="hidden h4 font-medium">{t("stats.cards.mostViewed.badge")}</h6>
+                <h6 className="hidden h4 font-medium">
+                  {t("stats.cards.mostViewed.badge")}
+                </h6>
                 <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
                   {title}
                 </p>

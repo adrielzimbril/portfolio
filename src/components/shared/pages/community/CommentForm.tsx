@@ -155,13 +155,17 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   required
                   maxLength={config.maxCommentLength}
                 />
-                <FieldError>{t("community.comment-form.validation.empty")}</FieldError>
+                <FieldError>
+                  {t("community.comment-form.validation.empty")}
+                </FieldError>
               </Field>
 
               <div className="space-y-4">
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <label className="text-sm font-medium">{t("community.comment-form.controls.rotation")}</label>
+                    <label className="text-sm font-medium">
+                      {t("community.comment-form.controls.rotation")}
+                    </label>
                     <span className="text-sm">{rotation}°</span>
                   </div>
                   <Slider
@@ -178,7 +182,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Label className="text-sm font-medium">{t("community.comment-form.controls.pattern")}</Label>
+                  <Label className="text-sm font-medium">
+                    {t("community.comment-form.controls.pattern")}
+                  </Label>
                   <RadioGroup
                     value={patternIndex.toString()}
                     onValueChange={(value) => setPatternIndex(parseInt(value))}
@@ -189,7 +195,10 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         key={index}
                         value={index.toString()}
                         size="xl"
-                        aria-label={t("community.comment-form.controls.patternAria", { index: index + 1 })}
+                        aria-label={t(
+                          "community.comment-form.controls.patternAria",
+                          { index: index + 1 },
+                        )}
                       />
                     ))}
                   </RadioGroup>
@@ -234,7 +243,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 size="icon"
                 asIcon
                 onClick={handlePrevPattern}
-                aria-label={t("community.comment-form.controls.previousPattern")}
+                aria-label={t(
+                  "community.comment-form.controls.previousPattern",
+                )}
               >
                 <ArrowLeftOne size={20} />
               </Button>
@@ -281,7 +292,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   required
                   maxLength={config.maxCommentLength}
                 />
-                <FieldError>{t("community.comment-form.validation.empty")}</FieldError>
+                <FieldError>
+                  {t("community.comment-form.validation.empty")}
+                </FieldError>
               </Field>
 
               <div className="flex gap-2">
@@ -328,7 +341,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   size="icon"
                   asIcon
                   onClick={handlePrevPattern}
-                  aria-label={t("community.comment-form.controls.previousPattern")}
+                  aria-label={t(
+                    "community.comment-form.controls.previousPattern",
+                  )}
                 >
                   <ArrowLeftOne size={20} />
                 </Button>
@@ -346,7 +361,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
 
               <div className="flex flex-col gap-4 w-full max-w-md">
                 <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium">{t("community.comment-form.controls.rotation")}</label>
+                  <label className="text-sm font-medium">
+                    {t("community.comment-form.controls.rotation")}
+                  </label>
                   <Slider
                     value={[rotation]}
                     min={config.rotation.startAt}
@@ -362,7 +379,9 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Label className="text-sm font-medium">{t("community.comment-form.controls.pattern")}</Label>
+                  <Label className="text-sm font-medium">
+                    {t("community.comment-form.controls.pattern")}
+                  </Label>
                   <RadioGroup
                     value={patternIndex.toString()}
                     onValueChange={(value) => setPatternIndex(parseInt(value))}
@@ -373,7 +392,10 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         key={index}
                         value={index.toString()}
                         size="xl"
-                        aria-label={t("community.comment-form.controls.patternAria", { index: index + 1 })}
+                        aria-label={t(
+                          "community.comment-form.controls.patternAria",
+                          { index: index + 1 },
+                        )}
                       />
                     ))}
                   </RadioGroup>

@@ -41,12 +41,12 @@ export function ThoughtsCategoriesCard({
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="squircle size-full squircle-b-base squircle-6xl squircle-smooth-xl border-0 overflow-hidden"
+      className=" size-full bg-b-base squircle-6xl/100  border-0 overflow-hidden"
     >
       <CardContent className="size-full grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4 h-full overflow-hidden">
         <div
           className={cn(
-            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle squircle-smooth-xl squircle-4xl squircle-sh-white overflow-hidden",
+            "flex relative flex-col size-full items-center justify-center gap-4 md:gap-8 p-4 squircle-4xl/100 bg-sh-white overflow-hidden",
           )}
         >
           <motion.div

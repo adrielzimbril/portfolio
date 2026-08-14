@@ -13,7 +13,7 @@
  * }
  */
 export async function catchError<T>(
-  fn: Promise<T> | (() => T)
+  fn: Promise<T> | (() => T),
 ): Promise<[undefined, T] | [Error]> {
   try {
     const result = typeof fn === "function" ? fn() : await fn;

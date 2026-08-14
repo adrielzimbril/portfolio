@@ -64,19 +64,31 @@ export function CommunityWallAdminNotification({
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.communityWallAdminNotification.labels.name")}</strong>: {name}
+                <strong>
+                  {t("mail.communityWallAdminNotification.labels.name")}
+                </strong>
+                : {name}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>{t("mail.communityWallAdminNotification.labels.email")}</strong>: <Link href={`mailto:${email}`}>{email}</Link>
+                <strong>
+                  {t("mail.communityWallAdminNotification.labels.email")}
+                </strong>
+                : <Link href={`mailto:${email}`}>{email}</Link>
               </Text>
               {language && (
                 <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                  <strong>{t("mail.communityWallAdminNotification.labels.language")}</strong>: {language}
+                  <strong>
+                    {t("mail.communityWallAdminNotification.labels.language")}
+                  </strong>
+                  : {language}
                 </Text>
               )}
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                <strong>{t("mail.communityWallAdminNotification.labels.message")}</strong>: {message}
+                <strong>
+                  {t("mail.communityWallAdminNotification.labels.message")}
+                </strong>
+                : {message}
               </Text>
             </Section>
 

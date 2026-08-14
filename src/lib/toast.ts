@@ -74,7 +74,7 @@ const toast = {
           title: "Success",
           description: message,
           type: "success",
-      timeout: options?.promiseTimeout ||  options?.timeout || 5000,
+          timeout: options?.promiseTimeout || options?.timeout || 5000,
         });
       })
       .catch((error) => {
@@ -87,7 +87,7 @@ const toast = {
           title: "Error",
           description: message,
           type: "error",
-      timeout: options?.promiseTimeout ||  options?.timeout || 5000,
+          timeout: options?.promiseTimeout || options?.timeout || 5000,
         });
       });
   },

@@ -3,22 +3,20 @@ import * as React from "react";
 import { cn } from "@/utils/utils";
 
 const badgeVariants = cva(
-  "squircle squircle-2xl md:squircle-7xl squircle-smooth-lg md:squircle-smooth-xl flex h-auto md:h-[stretch] items-center border-none px-3 py-1.5 font-semibold transition-colors",
+  "squircle-2xl/80 md:squircle-7xl/80 lex h-auto md:h-[stretch] items-center border-none px-3 py-1.5 font-semibold transition-colors",
   {
     variants: {
       variant: {
-        default: "border-transparent bg-inherit squircle-b-base",
-        white:
-          "border-transparent bg-inherit squircle-sh-white text-foreground",
+        default: "border-transparent bg-inherit bg-b-base",
+        white: "border-transparent bg-inherit bg-sh-white text-foreground",
         primary:
-          "border-transparent bg-inherit squircle-primary text-b-black-unchanged hover:squircle-primary/90",
+          "border-transparent bg-inherit bg-primary text-b-black-unchanged hover:bg-primary/90",
         colored: "border-transparent bg-inherit text-b-white-unchanged",
-        inverted:
-          "border-transparent bg-inherit squircle-b-white text-foreground",
+        inverted: "border-transparent bg-inherit bg-b-white text-foreground",
         secondary:
-          "border-transparent bg-inherit squircle-secondary text-secondary-foreground hover:squircle-secondary/80",
+          "border-transparent bg-inherit bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
-          "border-transparent bg-inherit squircle-destructive text-destructive-foreground hover:squircle-destructive/80",
+          "border-transparent bg-inherit bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
       },
       size: {

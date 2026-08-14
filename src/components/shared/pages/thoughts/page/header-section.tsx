@@ -68,10 +68,10 @@ export function HeaderSection({
       cardContentClassName="px-4 md:px-12 py-6 md:py-12"
     >
       {/* Header Preview Card */}
-      <Card className="w-full squircle squircle-sh-white squircle-smooth-xl squircle-xl md:squircle-4xl overflow-hidden p-3 md:p-5">
+      <Card className="w-full bg-sh-white squircle-xl/100 md:squircle-4xl/100 overflow-hidden p-3 md:p-5">
         <CardContent
           className={cn(
-            "w-full squircle squircle-b-base squircle-smooth-xl squircle-xl md:squircle-3xl overflow-hidden flex flex-col justify-center",
+            "w-full bg-b-base squircle-xl/100 md:squircle-3xl/100 overflow-hidden flex flex-col justify-center",
             previewContent.type === PreviewContentType.TEXT ||
               previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
@@ -88,7 +88,7 @@ export function HeaderSection({
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
           {thoughtDetails.date && (
             <Badge
-              className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+              className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100"
               variant="colored"
               size="md"
             >
@@ -104,7 +104,7 @@ export function HeaderSection({
           )}
 
           <Badge
-            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+            className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100"
             variant="colored"
             size="md"
           >
@@ -119,7 +119,7 @@ export function HeaderSection({
           </Badge>
 
           <Badge
-            className="squircle squircle-violet-100 squircle-smooth-xl squircle-3xl md:squircle-5xl"
+            className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100"
             variant="colored"
             size="md"
           >
@@ -132,7 +132,7 @@ export function HeaderSection({
       )}
 
       {tags && tags.length > 0 && (
-        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle squircle-smooth-xl squircle-2xl md:squircle-7xl squircle-sh-white overflow-hidden">
+        <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full squircle-2xl/100 md:squircle-7xl/100 bg-sh-white overflow-hidden">
           {tags.map((tag, index) => (
             <Badge key={index} size="sm">
               {tag.name || (tag as unknown as string)}

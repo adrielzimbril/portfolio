@@ -16,7 +16,9 @@ export async function GET(request: Request) {
 
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   try {
     let query = supabase

@@ -20,8 +20,8 @@ export function PreviewValueCard({
   return (
     <Card
       className={cn(
-        "squircle size-full max-w-[95%] squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-lg border-0 overflow-hidden mx-auto",
-        className
+        " size-full max-w-[95%] bg-b-base squircle-4xl/80 md:squircle-6xl/80  border-0 overflow-hidden mx-auto",
+        className,
       )}
     >
       <CardContent className="grid grid-cols-1 size-full p-4 gap-2">

@@ -13,8 +13,8 @@ const radioVariants = cva(
       variant: {
         default:
           "rounded-full border border-input bg-background not-dark:bg-clip-padding before:rounded-full not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-none aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/48 dark:not-data-checked:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [[data-disabled],[data-checked],[aria-invalid]]:shadow-none",
-        squircle:
-          "squircle squircle-mask squircle-4xl squircle-smooth-3xl squircle-border-2 squircle-border-b-base-accent squircle-b-base data-[state=checked]:squircle-primary data-[state=checked]:squircle-border-primary",
+        :
+          " squircle-4xl  border-2 border-b-base-accent bg-b-base data-[state=checked]:bg-primary data-[state=checked]:border-primary",
         glass:
           "rounded-full border-0 bg-b-base backdrop-blur-2xl before:rounded-full shadow-[0_0_0_0.1em_hsla(0,0%,100%,0.3)_inset] data-[state=checked]:bg-b-base/25 data-[state=checked]:shadow-[0_0_0_0.15em_hsla(0,0%,100%,0.4)_inset]",
       },
@@ -38,42 +38,42 @@ const radioVariants = cva(
     },
     compoundVariants: [
       {
-        variant: "squircle",
+        variant: "",
         color: "default",
-        class: "data-[state=checked]:squircle-primary",
+        class: "data-[state=checked]:bg-primary",
       },
       {
-        variant: "squircle",
+        variant: "",
         color: "primary",
-        class: "data-[state=checked]:squircle-primary",
+        class: "data-[state=checked]:bg-primary",
       },
       {
-        variant: "squircle",
+        variant: "",
         color: "secondary",
-        class: "data-[state=checked]:squircle-secondary",
+        class: "data-[state=checked]:bg-secondary",
       },
       {
-        variant: "squircle",
+        variant: "",
         color: "destructive",
-        class: "data-[state=checked]:squircle-destructive",
+        class: "data-[state=checked]:bg-destructive",
       },
       {
-        variant: "squircle",
+        variant: "",
         color: "accent",
         class: "data-[state=checked]:squircle-accent",
       },
       {
-        variant: "squircle",
+        variant: "",
         color: "muted",
         class: "data-[state=checked]:squircle-muted",
       },
       {
-        variant: "squircle",
+        variant: "",
         color: "success",
         class: "data-[state=checked]:squircle-success",
       },
       {
-        variant: "squircle",
+        variant: "",
         color: "warning",
         class: "data-[state=checked]:squircle-warning",
       },
@@ -119,7 +119,7 @@ export function Radio({
         className={cn(
           "absolute flex items-center justify-center before:rounded-full before:bg-primary-foreground data-unchecked:hidden data-checked:bg-primary",
           variant === "default" && "-inset-px",
-          variant !== "squircle" && "rounded-full",
+          variant !== "" && "rounded-full",
           size === "xs" && "size-2.5 before:size-1",
           size === "sm" && "size-3.5 before:size-1.5",
           (size === "default" || !size) &&

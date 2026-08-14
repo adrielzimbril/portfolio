@@ -46,12 +46,12 @@ export function QuestDetailsSection({
                   <Card
                     key={`${reward}-${index}`}
                     className={cn(
-                      "squircle squircle-b-base squircle-2xl squircle-smooth-md border-0 overflow-hidden",
+                      "bg-b-base squircle-2xl/60  border-0 overflow-hidden",
                       index === 0 ? "col-span-2" : "col-span-2",
                     )}
                   >
                     <CardContent className="p-2 md:p-3">
-                      <div className="flex relative flex-col size-full gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle squircle-smooth-sm squircle-xl squircle-sh-white overflow-hidden">
+                      <div className="flex relative flex-col size-full gap-6 md:gap-8 items-start justify-between p-2 md:p-4 squircle-xl/40 bg-sh-white overflow-hidden">
                         <div className="flex size-full flex-col gap-2">
                           <p className="text-b-white-foreground leading-[130%]">
                             {reward}
@@ -66,9 +66,9 @@ export function QuestDetailsSection({
           )}
         </div>
 
-        <Card className="squircle size-full md:max-w-[30%] squircle-b-base squircle-4xl squircle-smooth-md border-0 overflow-hidden mx-auto">
+        <Card className=" size-full md:max-w-[30%] bg-b-base squircle-4xl/60  border-0 overflow-hidden mx-auto">
           <CardContent className="grid grid-cols-1 size-full p-4 gap-2">
-            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle squircle-smooth-sm squircle-2xl squircle-sh-white overflow-hidden">
+            <div className="flex relative flex-col gap-6 md:gap-8 items-start justify-between p-6 md:p-8 squircle-2xl/40 bg-sh-white overflow-hidden">
               <div className="flex w-full flex-col gap-2">
                 <span className="font-normal text-b-white-foreground">
                   {t("quests.inner-page.details.dates.registrationEnd")}

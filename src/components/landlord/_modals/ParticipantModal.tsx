@@ -109,10 +109,11 @@ export function ParticipantModal({
 
     setIsSubmitting(true);
     try {
-      const baseUrl = type === "submission" 
-        ? landlordApiRoutes.quests.submissions 
-        : landlordApiRoutes.quests.registrations;
-      
+      const baseUrl =
+        type === "submission"
+          ? landlordApiRoutes.quests.submissions
+          : landlordApiRoutes.quests.registrations;
+
       const url = isEditing ? `${baseUrl}/${initialData.id}` : baseUrl;
       const method = isEditing ? "PATCH" : "POST";
 
@@ -127,12 +128,21 @@ export function ParticipantModal({
         throw new Error(data?.error || t("messages.error_process"));
       }
 
-      toast.success(isEditing ? t("messages.success_modified") : t("messages.success_added"));
+      toast.success(
+        isEditing
+          ? t("messages.success_modified")
+          : t("messages.success_added"),
+      );
       onCreated();
       onOpenChange(false);
     } catch (error) {
-      logger.error(`Failed to ${isEditing ? 'edit' : 'add'} participant:`, error);
-      toast.error(isEditing ? t("messages.error_process") : t("messages.error_process"));
+      logger.error(
+        `Failed to ${isEditing ? "edit" : "add"} participant:`,
+        error,
+      );
+      toast.error(
+        isEditing ? t("messages.error_process") : t("messages.error_process"),
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -143,10 +153,13 @@ export function ParticipantModal({
       <DialogContent size="xl" variant="modern" scrollArea>
         <DialogHeader>
           <DialogTitle>
-            {isEditing 
-              ? (type === "submission" ? t("actions.edit_submission") : t("actions.edit_registration"))
-              : (type === "submission" ? t("actions.add_submission") : t("actions.add_registration"))
-            }
+            {isEditing
+              ? type === "submission"
+                ? t("actions.edit_submission")
+                : t("actions.edit_registration")
+              : type === "submission"
+                ? t("actions.add_submission")
+                : t("actions.add_registration")}
           </DialogTitle>
         </DialogHeader>
         <DialogSeparator />
@@ -236,7 +249,9 @@ export function ParticipantModal({
           </div>
           {type === "submission" && (
             <div className="space-y-2">
-              <Label htmlFor="participant-work-url">{t("fields.work_url")}</Label>
+              <Label htmlFor="participant-work-url">
+                {t("fields.work_url")}
+              </Label>
               <Input
                 id="participant-work-url"
                 value={form.work_url}

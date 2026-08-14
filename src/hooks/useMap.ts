@@ -15,11 +15,11 @@ type UseMapActions<K, V> = {
 type UseMapReturn<K, V> = [
   Omit<Map<K, V>, "set" | "clear" | "delete">,
 
-  UseMapActions<K, V>
+  UseMapActions<K, V>,
 ];
 
 export function useMap<K, V>(
-  initialState: MapOrEntries<K, V> = new Map()
+  initialState: MapOrEntries<K, V> = new Map(),
 ): UseMapReturn<K, V> {
   const [map, setMap] = useState(new Map(initialState));
 

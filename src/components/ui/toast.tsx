@@ -13,32 +13,32 @@ import {
   Checked,
   XRectangle,
   AlertTriangle,
-  Loader
+  Loader,
 } from "@aurthle/icons";
 import type React from "react";
 import { cn } from "@/utils";
 import { buttonVariants } from "@/components/ui/button";
 
 const TOAST_ICONS = {
-  error:{
+  error: {
     icon: XRectangle,
-    color: "text-red-500"
+    color: "text-red-500",
   },
-  info:{
+  info: {
     icon: InfoCircle,
-    color: "text-blue-500"
+    color: "text-blue-500",
   },
-  loading:{
+  loading: {
     icon: Loader,
-    color: "text-violet-500"
+    color: "text-violet-500",
   },
-  success:{
+  success: {
     icon: Checked,
-    color: "text-green-500"
+    color: "text-green-500",
   },
-  warning:{
+  warning: {
     icon: AlertTriangle,
-    color: "text-amber-500"
+    color: "text-amber-500",
   },
 } as const;
 
@@ -97,8 +97,9 @@ function Toasts({ position }: { position: ToastPosition }): React.ReactElement {
           const Icon = toast.type
             ? TOAST_ICONS[toast.type as keyof typeof TOAST_ICONS].icon
             : null;
-            const Color = toast.type ? TOAST_ICONS[toast.type as keyof typeof TOAST_ICONS].color : null;
-            
+          const Color = toast.type
+            ? TOAST_ICONS[toast.type as keyof typeof TOAST_ICONS].color
+            : null;
 
           return (
             <Toast.Root
@@ -157,11 +158,15 @@ function Toasts({ position }: { position: ToastPosition }): React.ReactElement {
                         // "[&>svg]:h-lh [&>svg]:w-4",
                         "flex flex-center items-center justify-center size-fit p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
                         "[&_svg]:size-auto [&_svg]:pointer-events-none [&_svg]:shrink-0",
-                        Color
+                        Color,
                       )}
                       data-slot="toast-icon"
                     >
-                      <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="bold" />
+                      <Icon
+                        className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80"
+                        size={20}
+                        variant="bold"
+                      />
                     </div>
                   )}
 
@@ -206,7 +211,9 @@ function AnchoredToasts(): React.ReactElement {
           const Icon = toast.type
             ? TOAST_ICONS[toast.type as keyof typeof TOAST_ICONS].icon
             : null;
-          const Color = toast.type ? TOAST_ICONS[toast.type as keyof typeof TOAST_ICONS].color : null;
+          const Color = toast.type
+            ? TOAST_ICONS[toast.type as keyof typeof TOAST_ICONS].color
+            : null;
           const tooltipStyle =
             (toast.data as { tooltipStyle?: boolean })?.tooltipStyle ?? false;
           const positionerProps = toast.positionerProps;
@@ -236,7 +243,10 @@ function AnchoredToasts(): React.ReactElement {
               >
                 {tooltipStyle ? (
                   <Toast.Content className="pointer-events-auto px-2 py-1">
-                    <Toast.Title className="h6 font-medium" data-slot="toast-title" />
+                    <Toast.Title
+                      className="h6 font-medium"
+                      data-slot="toast-title"
+                    />
                   </Toast.Content>
                 ) : (
                   <Toast.Content className="pointer-events-auto flex items-center justify-between gap-1.5 overflow-hidden px-3.5 py-3 text-sm">
@@ -247,11 +257,15 @@ function AnchoredToasts(): React.ReactElement {
                             // "[&>svg]:h-lh [&>svg]:w-4",
                             "flex flex-center items-center justify-center size-fit p-0.5 rounded-lg bg-b-base aspect-square overflow-hidden",
                             "[&_svg]:size-auto [&_svg]:pointer-events-none [&_svg]:shrink-0",
-                            Color
+                            Color,
                           )}
                           data-slot="toast-icon"
                         >
-                          <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" size={20} variant="bold" />
+                          <Icon
+                            className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80"
+                            size={20}
+                            variant="bold"
+                          />
                         </div>
                       )}
 

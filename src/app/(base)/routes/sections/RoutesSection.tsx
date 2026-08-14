@@ -74,13 +74,13 @@ function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
         {routes.map((route) => (
           <Card
             key={route.key}
-            className="group relative squircle squircle-b-base squircle-2xl squircle-smooth-lg border-0"
+            className="group relative bg-b-base squircle-2xl/80  border-0"
           >
             <Link href={route.link} className="absolute inset-0 z-10" />
             <CardContent className="p-4 relative size-full z-0">
               <div
                 className={cn(
-                  "flex relative flex-col size-full gap-4 p-4 squircle squircle-smooth-md squircle-xl md:squircle-2xl squircle-sh-white overflow-hidden",
+                  "flex relative flex-col size-full gap-4 p-4 squircle-xl/60 md:squircle-2xl/60 bg-sh-white overflow-hidden",
                 )}
               >
                 <div className="flex items-center justify-between">
@@ -90,7 +90,7 @@ function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
                   {route.inHeader && (
                     <Badge
                       className={cn(
-                        "capitalize squircle-border-2 squircle-border-sh-white",
+                        "capitalize border-2 border-sh-white",
                         pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
                       )}
                       variant="colored"

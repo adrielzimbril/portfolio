@@ -62,7 +62,10 @@ export async function POST(request: Request) {
     // Send email notifications
     const userEmail = user.email || "";
     const userName = user.user_metadata.full_name || user.email || "";
-    const messageText = typeof message === "string" ? message : message[language || Locale.EN] || Object.values(message)[0] || "";
+    const messageText =
+      typeof message === "string"
+        ? message
+        : message[language || Locale.EN] || Object.values(message)[0] || "";
 
     // Send thank you email to user
     const userMailSent = await sendEmail({
@@ -89,7 +92,9 @@ export async function POST(request: Request) {
     });
 
     if (!userMailSent || !adminMailSent) {
-      logger.warn("Failed to send email notifications for community wall message");
+      logger.warn(
+        "Failed to send email notifications for community wall message",
+      );
     }
 
     return NextResponse.json({ success: true });

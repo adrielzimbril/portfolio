@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
       {
         p_type: type,
         p_slug: slug,
-      }
+      },
     );
 
     if (rpcError) {
@@ -38,16 +38,16 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(
       { ...(wantResponse ? { count: result.total_views } : {}) },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error: unknown) {
     logger.error(
       "Error fetching analytics:",
-      (error as Error)?.message || error
+      (error as Error)?.message || error,
     );
     return NextResponse.json(
       { error: (error as Error)?.message || "UNKNOWN_ERROR" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
         p_slug: slug,
         p_user_ip: ip,
         p_details: { ...details, userInfo: ipInfo },
-      }
+      },
     );
 
     if (rpcError) {
@@ -97,16 +97,16 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { ...(wantResponse ? { count: result.total_views } : {}) },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error: unknown) {
     logger.error(
       "Error incrementing analytics:",
-      (error as Error)?.message || error
+      (error as Error)?.message || error,
     );
     return NextResponse.json(
       { error: (error as Error)?.message || "UNKNOWN_ERROR" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

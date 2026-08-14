@@ -31,7 +31,7 @@ export async function Footer() {
         sectionContentClassName="w-full"
         cardClassName="w-full rounded-4xl bg-stone-100 dark:bg-zinc-900"
         cardContentClassName="w-full px-4 py-6 md:p-8"
-        className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl rounded-3xl border-0 overflow-hidden max-w-none"
+        className="bg-sh-white squircle-xl/100 md:squircle-3xl/100  rounded-3xl border-0 overflow-hidden max-w-none"
       >
         <div className="flex relative flex-col w-full items-center justify-center p-2 md:p-16 gap-4 md:gap-8 mx-auto">
           <div className="flex flex-col justify-center items-center lg:grid grid-cols-1 lg:grid-cols-2 lg:flex-row lg:justify-between lg:items-start gap-8">
@@ -44,7 +44,7 @@ export async function Footer() {
                     primaryText={t(
                       "common.shared.planning-badge.available.title",
                     )}
-                    className="squircle-sh-white text-b-white-invert"
+                    className="bg-sh-white text-b-white-invert"
                     variant="colored"
                     size="md"
                   >
@@ -79,7 +79,9 @@ export async function Footer() {
                       aria-label={name}
                     >
                       <span className="flex items-center size-full justify-center m-auto">
-                        <span className={cn(social.key !== "email" && "capitalize")}>
+                        <span
+                          className={cn(social.key !== "email" && "capitalize")}
+                        >
                           {social.key !== "email"
                             ? t("common.base." + social.key)
                             : social.name}

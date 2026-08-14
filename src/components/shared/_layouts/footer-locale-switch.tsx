@@ -40,7 +40,7 @@ export function FooterLocaleSwitch() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="colored"
-          className="flex w-fit items-center gap-2 squircle-sh-white! squircle-7xl squircle-border-2 squircle-border-b-base-accent text-b-white-foreground min-w-10"
+          className="flex w-fit items-center gap-2 bg-sh-white! squircle-7xl border-2 border-b-base-accent text-b-white-foreground min-w-10"
           size="xs"
           asIcon
           asPointer

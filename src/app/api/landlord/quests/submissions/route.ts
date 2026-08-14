@@ -97,8 +97,14 @@ export async function POST(request: Request) {
     }
 
     if (!userId) {
-      logger.error("landlord quest submit: missing user_id after upsert_user", { email, challenge_slug });
-      return NextResponse.json({ error: "USER_UPSERT_FAILED" }, { status: 500 });
+      logger.error("landlord quest submit: missing user_id after upsert_user", {
+        email,
+        challenge_slug,
+      });
+      return NextResponse.json(
+        { error: "USER_UPSERT_FAILED" },
+        { status: 500 },
+      );
     }
 
     // 2. Submission Upsert
@@ -124,14 +130,17 @@ export async function POST(request: Request) {
           is_public: false,
           meta,
         },
-        { onConflict: "challenge_slug,email" }
+        { onConflict: "challenge_slug,email" },
       )
       .select()
       .single();
 
     if (submissionError) {
       logger.error("landlord quest submit: db upsert failed", submissionError);
-      return NextResponse.json({ error: submissionError.message }, { status: 500 });
+      return NextResponse.json(
+        { error: submissionError.message },
+        { status: 500 },
+      );
     }
 
     // 3. Newsletter & Brevo (Meticulous logic from public API)
@@ -147,7 +156,7 @@ export async function POST(request: Request) {
           }),
           updateexisting: Boolean(existingUserData),
         },
-        { onConflict: "user_id" }
+        { onConflict: "user_id" },
       );
 
       const brevoConfig = getBrevoConfig();

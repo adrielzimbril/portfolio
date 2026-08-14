@@ -155,11 +155,11 @@ function QuestionCard({
         opacity: isPast ? 0.8 : 1,
       }}
     >
-      <Card className="squircle squircle-b-base squircle-4xl md:squircle-6xl squircle-smooth-xl border-0 overflow-hidden">
+      <Card className="bg-b-base squircle-4xl/100 md:squircle-6xl/100  border-0 overflow-hidden">
         <CardContent className="grid grid-cols-1 px-4 md:px-6 py-4 md:py-6 gap-4">
           <div
             className={cn(
-              "flex relative flex-col min-h-60 items-center justify-center p-4 squircle squircle-smooth-xl squircle-xl md:squircle-3xl squircle-sh-white overflow-hidden",
+              "flex relative flex-col min-h-60 items-center justify-center p-4 squircle-xl/100 md:squircle-3xl/100 bg-sh-white overflow-hidden",
             )}
           >
             <div className="flex flex-col items-start gap-4 w-full max-w-[90%] py-12 mx-auto">
@@ -376,8 +376,8 @@ function AllFactsModal({
                           <DialogBadge
                             className={cn(
                               userGuessedCorrect
-                                ? "squircle-blue-100 text-blue-900"
-                                : "squircle-orange-100 text-orange-900",
+                                ? "bg-blue-100 text-blue-900"
+                                : "bg-orange-100 text-orange-900",
                             )}
                             variant="colored"
                           >

@@ -118,9 +118,9 @@ export function IntentionForm({
         sectionContentClassName="w-full"
         cardClassName="w-full"
         cardContentClassName="w-full px-4 py-6 md:p-8"
-        className="squircle squircle-sh-white squircle-xl md:squircle-3xl squircle-smooth-xl border-0 overflow-hidden min-h-60 py-12"
+        className="bg-sh-white squircle-xl/100 md:squircle-3xl/100  border-0 overflow-hidden min-h-60 py-12"
       >
-        <Card className="w-full squircle squircle-sh-white squircle-smooth-xl">
+        <Card className="w-full bg-sh-white ">
           <CardContent className="flex flex-col items-center justify-center p-6 md:p-8 space-y-6 gap-6 md:gap-8">
             <div className="flex flex-col items-center text-center gap-2">
               <Badge size="lg">{t("quests.submit.form.badge")}</Badge>
@@ -133,7 +133,7 @@ export function IntentionForm({
             </div>
 
             {isClosed ? (
-              <Card className="w-full max-w-xl squircle squircle-b-base squircle-smooth-xl border">
+              <Card className="w-full max-w-xl bg-b-base  border">
                 <CardContent className="p-4 text-sm text-b-white-invert-sec text-center">
                   {t("quests.submit.form.closedInline")}
                 </CardContent>

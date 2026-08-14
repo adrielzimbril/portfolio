@@ -122,14 +122,14 @@ export function getActivePathInArray({
   // "Include" mode: return only the first matching segment
   if (asInclude) {
     const firstMatch = segments.find((segment) =>
-      normalizedArray.includes(segment)
+      normalizedArray.includes(segment),
     );
     return firstMatch || "";
   }
 
   // Normal mode: return all matching segments joined by "/"
   const matchedSegments = segments.filter((segment) =>
-    normalizedArray.includes(segment)
+    normalizedArray.includes(segment),
   );
 
   const result = matchedSegments.join("/");

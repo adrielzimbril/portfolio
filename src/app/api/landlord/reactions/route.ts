@@ -4,13 +4,17 @@ import { createClient } from "@/integrations/supabase/server";
 import { logger } from "@/utils";
 
 const TABLE = "reactions";
-const SELECT = "id,page_type,entity_id,reaction_type,user_id,anonymous_id,created_at";
+const SELECT =
+  "id,page_type,entity_id,reaction_type,user_id,anonymous_id,created_at";
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const page = Math.max(Number(searchParams.get("page") || 1), 1);
-    const pageSize = Math.min(Math.max(Number(searchParams.get("pageSize") || 10), 1), 50);
+    const pageSize = Math.min(
+      Math.max(Number(searchParams.get("pageSize") || 10), 1),
+      50,
+    );
     const from = (page - 1) * pageSize;
     const to = from + pageSize - 1;
 
@@ -28,9 +32,17 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ rows: data || [], count: count || 0, page, pageSize });
+    return NextResponse.json({
+      rows: data || [],
+      count: count || 0,
+      page,
+      pageSize,
+    });
   } catch (error) {
     logger.error("[landlord/reactions] GET catch:", error);
-    return NextResponse.json({ error: "Failed to load reactions" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to load reactions" },
+      { status: 500 },
+    );
   }
 }

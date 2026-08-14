@@ -197,10 +197,10 @@ export function Navbar() {
                     <li
                       key={item.key}
                       className={cn(
-                        "w-full p-2.5 squircle squircle-7xl squircle-smooth-xl hover:squircle-xl squircle-border-2 squircle-border-b-base-accent hover:squircle-b-base",
+                        "w-full p-2.5 squircle-7xl/100  hover:squircle-xl/100 border-2 border-b-base-accent hover:bg-b-base",
                         activeTab === item.key
-                          ? "squircle-b-white-invert-fr"
-                          : "squircle-sh-white",
+                          ? "bg-b-white-invert-fr"
+                          : "bg-sh-white",
                       )}
                     >
                       <Link

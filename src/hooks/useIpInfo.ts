@@ -221,7 +221,7 @@ function transformToSummary(data: IpInfoResponse): IpInfoSummary {
  */
 export async function getIpInfo<T = IpInfoResponse>(
   ip?: string,
-  options: GetIpInfoOptions = {}
+  options: GetIpInfoOptions = {},
 ): Promise<IpInfoResult<T>> {
   const {
     timeout = 10000,
@@ -258,7 +258,7 @@ export async function getIpInfo<T = IpInfoResponse>(
 
         if (!response.ok) {
           throw new Error(
-            `HTTP Error: ${response.status} ${response.statusText}`
+            `HTTP Error: ${response.status} ${response.statusText}`,
           );
         }
         const rawResult = await response.json();
@@ -283,7 +283,7 @@ export async function getIpInfo<T = IpInfoResponse>(
               return {
                 data: null,
                 error: `Données invalides: ${JSON.stringify(
-                  validationError.issues
+                  validationError.issues,
                 )}`,
                 isValid: false,
                 validationErrors: validationError,
@@ -292,7 +292,7 @@ export async function getIpInfo<T = IpInfoResponse>(
               // Permissive mode : use raw data
               logger.warn(
                 "Validation échouée, utilisation des données brutes:",
-                (validationError as z.ZodError).message
+                (validationError as z.ZodError).message,
               );
               const finalData =
                 simplified && rawResult

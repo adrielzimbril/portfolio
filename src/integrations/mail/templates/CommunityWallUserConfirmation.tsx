@@ -62,7 +62,9 @@ export function CommunityWallUserConfirmation({
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.communityWallUserConfirmation.greeting", { firstName })}
+                {t("mail.communityWallUserConfirmation.greeting", {
+                  firstName,
+                })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
                 {t("mail.communityWallUserConfirmation.content.intro")}
@@ -85,7 +87,7 @@ export function CommunityWallUserConfirmation({
                 {t("mail.common.signature")}
               </Text>
               <Text className="text-[#666666] text-sm leading-relaxed">
-                {t("mail.common.contact")}: {" "}
+                {t("mail.common.contact")}:{" "}
                 <Link href={`mailto:${siteConfig.links.contact.email}`}>
                   {siteConfig.links.contact.email}
                 </Link>

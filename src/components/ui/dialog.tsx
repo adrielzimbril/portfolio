@@ -72,12 +72,11 @@ function DialogContent({
   };
 
   const variantClasses = {
-    default:
-      "squircle squircle-background squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl border-0",
+    default: "bg-background squircle-2xl/80 md:squircle-5xl/80 border-0",
     modern:
-      "squircle squircle-sh-white squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl squircle-border-4 squircle-border-b-base-accent",
+      "bg-sh-white squircle-2xl/80 md:squircle-5xl/80 border-4 border-b-base-accent",
     glass:
-      "squircle squircle-sh-white squircle-2xl md:squircle-5xl squircle-smooth-lg md:squircle-smooth-xl squircle-border-4 squircle-border-b-base-accent",
+      "bg-sh-white squircle-2xl/80 md:squircle-5xl/80 border-4 border-b-base-accent",
   };
 
   return (
@@ -193,17 +192,17 @@ function DialogCard({
 }) {
   const variantClasses = {
     default:
-      "squircle-stone-50 dark:squircle-b-base-second squircle-border-2 dark:squircle-border-b-base-accent",
-    highlight: "squircle-blue-50 squircle-border-2 squircle-border-blue-200",
-    success: "squircle-green-50 squircle-border-2 squircle-border-green-200",
-    warning: "squircle-orange-50 squircle-border-2 squircle-border-orange-200",
-    info: "squircle-indigo-50 squircle-border-2 squircle-border-indigo-200",
+      "squircle-stone-50 dark:bg-b-base-second border-2 dark:border-b-base-accent",
+    highlight: "squircle-blue-50 border-2 border-blue-200",
+    success: "squircle-green-50 border-2 border-green-200",
+    warning: "squircle-orange-50 border-2 border-orange-200",
+    info: "squircle-indigo-50 border-2 border-indigo-200",
   };
 
   return (
     <div
       className={cn(
-        "squircle squircle-xl md:squircle-3xl squircle-smooth-xl p-4 sm:p-6",
+        "squircle-xl/100 md:squircle-3xl/100  p-4 sm:p-6",
         variantClasses[variant],
         className,
       )}
@@ -221,18 +220,18 @@ function DialogBadge({
   variant?: "default" | "success" | "warning" | "info" | "colored";
 }) {
   const variantClasses = {
-    default: "squircle-b-base text-white-invert-fr",
+    default: "bg-b-base text-white-invert-fr",
     success: "squircle-green-100 text-green-800",
-    warning: "squircle-orange-100 text-orange-800",
-    info: "squircle-blue-100 text-blue-800",
+    warning: "bg-orange-100 text-orange-800",
+    info: "bg-blue-100 text-blue-800",
     colored:
-      "squircle-b-base-accent squircle-border-2 squircle-border-b-base-accent text-white-invert-fr",
+      "bg-b-base-accent border-2 border-b-base-accent text-white-invert-fr",
   };
 
   return (
     <div
       className={cn(
-        "inline-flex items-center px-3 py-1 text-sm font-medium squircle squircle-lg",
+        "inline-flex items-center px-3 py-1 text-sm font-medium squircle-lg",
         variantClasses[variant],
         className,
       )}

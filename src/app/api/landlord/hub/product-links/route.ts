@@ -21,7 +21,10 @@ export async function GET(request: Request) {
     // We want all resources regardless of locale for the admin, but let's default to FR for labels if needed
     // Or just fetch all and dedup by slug if they are localized?
     // Actually, usually resources are same slug across locales but different titles.
-    const allResources = await getAllResources({ published: true, locale: Locale.FR });
+    const allResources = await getAllResources({
+      published: true,
+      locale: Locale.FR,
+    });
 
     // 2. Get private urls from DB
     const cookieStore = await cookies();

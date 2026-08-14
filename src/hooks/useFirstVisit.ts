@@ -4,7 +4,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 export const useFirstVisit = (): boolean => {
   const [firstVisit, setFirstVisit] = useLocalStorage<boolean>(
     "firstVisit",
-    false
+    false,
   );
 
   useEffect(() => {

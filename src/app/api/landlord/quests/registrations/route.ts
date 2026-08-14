@@ -97,8 +97,14 @@ export async function POST(request: Request) {
     }
 
     if (!userId) {
-      logger.error("landlord quest register: missing user_id after upsert_user", { email, challenge_slug });
-      return NextResponse.json({ error: "USER_UPSERT_FAILED" }, { status: 500 });
+      logger.error(
+        "landlord quest register: missing user_id after upsert_user",
+        { email, challenge_slug },
+      );
+      return NextResponse.json(
+        { error: "USER_UPSERT_FAILED" },
+        { status: 500 },
+      );
     }
 
     // 2. Registration Upsert
@@ -122,14 +128,20 @@ export async function POST(request: Request) {
           ip: ip ?? null,
           meta,
         },
-        { onConflict: "challenge_slug,email" }
+        { onConflict: "challenge_slug,email" },
       )
       .select()
       .single();
 
     if (registrationError) {
-      logger.error("landlord quest register: db upsert failed", registrationError);
-      return NextResponse.json({ error: registrationError.message }, { status: 500 });
+      logger.error(
+        "landlord quest register: db upsert failed",
+        registrationError,
+      );
+      return NextResponse.json(
+        { error: registrationError.message },
+        { status: 500 },
+      );
     }
 
     // 3. Newsletter & Brevo (Meticulous logic from public API)
@@ -145,7 +157,7 @@ export async function POST(request: Request) {
           }),
           updateexisting: Boolean(existingUserData),
         },
-        { onConflict: "user_id" }
+        { onConflict: "user_id" },
       );
 
       const brevoConfig = getBrevoConfig();
@@ -164,7 +176,10 @@ export async function POST(request: Request) {
         });
       }
     } catch (newsError) {
-      logger.error("landlord quest register: newsletter/brevo failed", newsError);
+      logger.error(
+        "landlord quest register: newsletter/brevo failed",
+        newsError,
+      );
     }
 
     // 4. Email Notifications

@@ -24,9 +24,7 @@ export function PageHero({
   buttonText?: string;
   buttonVariant?: "default" | "secondary";
   imagePath?:
-    | string
-    | { emoji: string }
-    | { mp4: string; webm: string; poster: string };
+    string | { emoji: string } | { mp4: string; webm: string; poster: string };
   imgClassName?: string;
   imageVariant?: "default" | "bordered" | "squircle";
   isMobileShowed?: boolean;

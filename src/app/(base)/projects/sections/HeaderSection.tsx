@@ -13,7 +13,7 @@ export function HeaderSection() {
     routes.projects.key,
     undefined,
     { locale: locale, path: getPathUrl(routes.projects.link) },
-    false
+    false,
   );
 
   return (

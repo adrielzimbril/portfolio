@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
-import { cn } from "@/utils/utils";;
+import { cn } from "@/utils/utils";
 import { useTranslations } from "use-intl";
 
 // Interface for page details props
@@ -20,7 +20,7 @@ export function PageDetails({ content, className }: PageDetailsProps) {
         <div
           className={cn(
             "flex flex-col w-full max-w-[90%] mx-auto items-start justify-center gap-4 md:gap-8 relative",
-            className
+            className,
           )}
         >
           <h2 className="relative self-stretch h3 font-normal-not">

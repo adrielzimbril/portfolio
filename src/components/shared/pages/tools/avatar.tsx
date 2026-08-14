@@ -8,8 +8,8 @@ export function ToolAvatar({ icon, name }: { icon: string; name: string }) {
     <div className="group relative size-max">
       <div
         className={cn(
-          "relative flex bg-inherit squircle squircle-mask squircle-background squircle-7xl squircle-border-4 size-30 overflow-hidden transition-all duration-300 squircle-border-b-base-accent",
-          "squircle-border-[#8e8eff] group-hover:squircle-border-[#ffd3ad]",
+          "relative flex bg-background squircle-7xl border-4 size-30 overflow-hidden transition-all duration-300 border-b-base-accent",
+          "border-[#8e8eff] group-hover:border-[#ffd3ad]",
         )}
       >
         <Image
@@ -17,7 +17,7 @@ export function ToolAvatar({ icon, name }: { icon: string; name: string }) {
           alt={name}
           fill
           className={cn(
-            "pointer-events-none squircle squircle-mask squircle-background squircle-7xl max-w-[65%] max-h-[65%] m-auto object-cover transition-all ease-in-out duration-300 group-hover:scale-110",
+            "pointer-events-none bg-background squircle-7xl max-w-[65%] max-h-[65%] m-auto object-cover transition-all ease-in-out duration-300 group-hover:scale-110",
           )}
         />
       </div>

@@ -10,7 +10,7 @@ const ipAttempts = new Map<string, number[]>();
 export const validateServerBotProtection = (
   data: any,
   clientIp?: string,
-  options: ServerBotValidationOptions = {}
+  options: ServerBotValidationOptions = {},
 ) => {
   const {
     minTime = 2000, // More strict on the server side
@@ -48,7 +48,7 @@ export const validateServerBotProtection = (
 
     // Clean old attempts (more than 1 hour)
     const recentAttempts = attempts.filter(
-      (time) => now - time < 60 * 60 * 1000
+      (time) => now - time < 60 * 60 * 1000,
     );
 
     // Max 10 submissions per hour per IP

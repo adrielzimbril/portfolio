@@ -24,11 +24,11 @@ if (typeof window === "undefined") {
   );
 }
 
-// Export configuration values
+// export configuration values
 export * from "@/config/config";
 
-// Export utility functions
+// export utility functions
 export * from "@/config/utils";
 
-// Export validation functions
+// export validation functions
 export * from "@/config/validate-environment-variables";

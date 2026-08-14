@@ -152,7 +152,9 @@ export function RegistrationsSection() {
                 <SelectValue placeholder={t("placeholders.all_quests")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{t("placeholders.all_quests")}</SelectItem>
+                <SelectItem value="all">
+                  {t("placeholders.all_quests")}
+                </SelectItem>
                 {quests.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
@@ -178,10 +180,18 @@ export function RegistrationsSection() {
                   <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
                       <tr>
-                        <th className="px-5 py-4 font-medium">{t("fields.participant")}</th>
-                        <th className="px-5 py-4 font-medium">{t("fields.quest")}</th>
-                        <th className="px-5 py-4 font-medium">{t("fields.status")}</th>
-                        <th className="px-5 py-4 font-medium">{t("fields.date")}</th>
+                        <th className="px-5 py-4 font-medium">
+                          {t("fields.participant")}
+                        </th>
+                        <th className="px-5 py-4 font-medium">
+                          {t("fields.quest")}
+                        </th>
+                        <th className="px-5 py-4 font-medium">
+                          {t("fields.status")}
+                        </th>
+                        <th className="px-5 py-4 font-medium">
+                          {t("fields.date")}
+                        </th>
                         <th className="px-5 py-4 text-right font-medium">
                           {tShared("actions")}
                         </th>
@@ -215,10 +225,14 @@ export function RegistrationsSection() {
                             </span>
                           </td>
                           <td className="px-5 py-4">
-                            <StatusPill tone="warning">{t("fields.participant")}</StatusPill>
+                            <StatusPill tone="warning">
+                              {t("fields.participant")}
+                            </StatusPill>
                           </td>
                           <td className="px-5 py-4 text-black/55">
-                            <div>{formatDate(participant.created_at, locale)}</div>
+                            <div>
+                              {formatDate(participant.created_at, locale)}
+                            </div>
                             <div className="text-xs text-black/35">
                               {formatTime(participant.created_at, locale)}
                             </div>
@@ -258,14 +272,20 @@ export function RegistrationsSection() {
                                   className="text-red-500 hover:text-white !focus:text-white"
                                   onClick={async () => {
                                     if (
-                                      window.confirm(t("actions.delete_registration_confirm"))
+                                      window.confirm(
+                                        t(
+                                          "actions.delete_registration_confirm",
+                                        ),
+                                      )
                                     ) {
                                       try {
                                         await deleteParticipant(
                                           "register",
                                           participant.id,
                                         );
-                                        toast.success(t("messages.success_deleted"));
+                                        toast.success(
+                                          t("messages.success_deleted"),
+                                        );
                                         mutate(
                                           registrationsKey(
                                             selectedQuest,
@@ -287,7 +307,11 @@ export function RegistrationsSection() {
                                   onClick={() =>
                                     navigator.clipboard
                                       ?.writeText(participant.email)
-                                      .then(() => toast.success(t("messages.email_copied")))
+                                      .then(() =>
+                                        toast.success(
+                                          t("messages.email_copied"),
+                                        ),
+                                      )
                                   }
                                 >
                                   <Mail size={14} />

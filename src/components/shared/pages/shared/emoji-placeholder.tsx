@@ -15,9 +15,7 @@ export function EmojiPlaceholder({
   unOrdered = false,
 }: {
   src:
-    | string
-    | { emoji: string }
-    | { mp4: string; webm: string; poster: string };
+    string | { emoji: string } | { mp4: string; webm: string; poster: string };
   variant?: "default" | "bordered" | "squircle";
   isMobileShowed?: boolean;
   className?: string;
@@ -39,7 +37,7 @@ export function EmojiPlaceholder({
         variant === "bordered" &&
           "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-b-base-accent",
         variant === "squircle" &&
-          "squircle squircle-sh-white squircle-smooth-xl squircle-6xl squircle-border-8 md:squircle-border-12 squircle-border-b-base-accent aspect-square size-full md:size-96 p-12 overflow-hidden",
+          "bg-sh-white squircle-6xl/100 border-8 md:border-12 border-b-base-accent aspect-square size-full md:size-96 p-12 overflow-hidden",
         !isMobileShowed && isMobile && "hidden",
         className,
       )}
@@ -74,7 +72,7 @@ export function EmojiPlaceholder({
         ) : typeof src === "object" && "mp4" in src && "webm" in src ? (
           <video
             className={cn(
-              "relative m-auto squircle squircle-mask squircle-sh-white squircle-7xl size-full w-[stretch] object-cover pointer-events-none",
+              "relative m-auto  bg-sh-white squircle-7xl size-full w-[stretch] object-cover pointer-events-none",
               variant === "squircle" &&
                 "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName,
@@ -102,7 +100,7 @@ export function EmojiPlaceholder({
             className={cn(
               "relative size-full object-cover pointer-events-none",
               variant === "squircle" &&
-                "squircle squircle-mask squircle-sh-white squircle-7xl max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
+                "bg-sh-white squircle-7xl max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName,
             )}
             width={600}

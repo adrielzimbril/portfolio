@@ -39,7 +39,7 @@ export const useIsIOS = (): boolean => {
   useEffect(() => {
     const checkIOS = () =>
       setIsIOS(
-        /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+        /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
       );
     checkIOS();
   }, []);
@@ -90,7 +90,7 @@ export const getIOSMajorVersion = (): number | null => {
  */
 export const useCompareIOSVersion = (
   version: number = 17,
-  type: "equals" | "sup" | "sup-eq" | "inf" | "inf-eq" = "inf"
+  type: "equals" | "sup" | "sup-eq" | "inf" | "inf-eq" = "inf",
 ): boolean => {
   const iosVersion = getIOSMajorVersion();
 
@@ -115,4 +115,4 @@ export const useCompareIOSVersion = (
     default:
       return false;
   }
-}; 
+};
