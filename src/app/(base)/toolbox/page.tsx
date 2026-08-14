@@ -32,16 +32,16 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ToolsPage() {
   return (
     <>
-      <Skeleton name="toolbox-header" loading={false}>
+      <Skeleton name="toolbox-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="toolbox-tools" loading={false}>
+      <Skeleton name="toolbox-tools">
         <ToolsSection />
       </Skeleton>
-      <Skeleton name="toolbox-setup" loading={false}>
+      <Skeleton name="toolbox-setup">
         <SetupSection />
       </Skeleton>
-      <Skeleton name="toolbox-cta" loading={false}>
+      <Skeleton name="toolbox-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

@@ -112,7 +112,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
 
   return (
     <>
-      <Skeleton name="quest-detail-header" loading={false}>
+      <Skeleton name="quest-detail-header">
         <HeaderSection
           title={title}
           cover={cover ?? ""}
@@ -125,17 +125,17 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           }))}
         />
       </Skeleton>
-      <Skeleton name="quest-detail-content" loading={false}>
+      <Skeleton name="quest-detail-content">
         <QuestDetailsSection content={body || ""} slug={slug} dates={dates} tags={tags} rewards={rewards} />
         <ReactionBar pageType={PageType.QUESTS} entityId={slug} />
       </Skeleton>
       {isResultsPublished(quest_end, results_published) && (
-        <Skeleton name="quest-detail-participants" loading={false}>
+        <Skeleton name="quest-detail-participants">
           <QuestParticipantsSection winners={winners} />
         </Skeleton>
       )}
       {quest.adjacentQuests && quest.adjacentQuests.length > 0 && (
-        <Skeleton name="quest-detail-more" loading={false}>
+        <Skeleton name="quest-detail-more">
           <MorePreviewSection data={quest.adjacentQuests} />
         </Skeleton>
       )}

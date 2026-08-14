@@ -48,7 +48,7 @@ export default async function CommunityPage() {
 
   return (
     <>
-      <Skeleton name="community-hero" loading={false}>
+      <Skeleton name="community-hero">
         <PageHero
           title={t("community.page.title")}
           description={t("community.page.description")}
@@ -57,13 +57,13 @@ export default async function CommunityPage() {
         />
       </Skeleton>
 
-      <Skeleton name="community-stats" loading={false}>
+      <Skeleton name="community-stats">
         <SectionLayout className="p-0!" isFlex>
           <StatsSection user={user} />
         </SectionLayout>
       </Skeleton>
 
-      <Skeleton name="community-messages" loading={false}>
+      <Skeleton name="community-messages">
         <SectionLayout isFlex>
           {/* <LeaveNoteButton user={user} /> */}
           <div className="flex justify-center size-full">

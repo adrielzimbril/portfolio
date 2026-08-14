@@ -31,13 +31,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function ConnectionsPage() {
   return (
     <>
-      <Skeleton name="connections-header" loading={false}>
+      <Skeleton name="connections-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="connections-people" loading={false}>
+      <Skeleton name="connections-people">
         <PeopleSection />
       </Skeleton>
-      <Skeleton name="connections-cta" loading={false}>
+      <Skeleton name="connections-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

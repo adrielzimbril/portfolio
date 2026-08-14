@@ -35,19 +35,19 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function About() {
   return (
     <>
-      <Skeleton name="about-header" loading={false}>
+      <Skeleton name="about-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="about-craft" loading={false}>
+      <Skeleton name="about-craft">
         <CraftSection />
       </Skeleton>
-      <Skeleton name="about-facts" loading={false}>
+      <Skeleton name="about-facts">
         <InteractiveFunFacts />
       </Skeleton>
-      <Skeleton name="about-philosophy" loading={false}>
+      <Skeleton name="about-philosophy">
         <PhilosophySection />
       </Skeleton>
-      <Skeleton name="about-cta" loading={false}>
+      <Skeleton name="about-cta">
         <CallToAction />
       </Skeleton>
     </>

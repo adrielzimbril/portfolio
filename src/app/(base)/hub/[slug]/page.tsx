@@ -55,7 +55,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
 
   return (
     <>
-      <Skeleton name="resource-detail-header" loading={false}>
+      <Skeleton name="resource-detail-header">
         <HeaderSection
           title={title}
           cover={cover ?? ""}
@@ -65,16 +65,16 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
           pageViewsData={{ slug, locale }}
         />
       </Skeleton>
-      <Skeleton name="resource-detail-content" loading={false}>
+      <Skeleton name="resource-detail-content">
         <ResourceDetailsSection content={body || ""} />
         <ReactionBar pageType={PageType.HUB} entityId={slug} />
       </Skeleton>
       {resource!.adjacentResources.length > 0 && (
-        <Skeleton name="resource-detail-more" loading={false}>
+        <Skeleton name="resource-detail-more">
           <MorePreviewSection data={resource!.adjacentResources} />
         </Skeleton>
       )}
-      <Skeleton name="resource-detail-cta" loading={false}>
+      <Skeleton name="resource-detail-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

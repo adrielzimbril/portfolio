@@ -49,13 +49,13 @@ export default async function StatsPage() {
 
   return (
     <>
-      <Skeleton name="stats-hero" loading={false}>
+      <Skeleton name="stats-hero">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="stats-general" loading={false}>
+      <Skeleton name="stats-general">
         <GeneralStatsSection totalViews={serverStats.totalViews} totalWords={buildTimeStats.totalWords} />
       </Skeleton>
-      <Skeleton name="stats-engagement" loading={false}>
+      <Skeleton name="stats-engagement">
         <EngagementSection
           topViewedThoughts={serverStats.topViewedThoughts}
           topReactedThoughts={serverStats.topReactedThoughts}
@@ -67,7 +67,7 @@ export default async function StatsPage() {
           changelog={changelog}
         />
       </Skeleton>
-      <Skeleton name="stats-blog" loading={false}>
+      <Skeleton name="stats-blog">
         <BlogStatsSection
           totalPosts={buildTimeStats.totalPosts}
           totalWords={buildTimeStats.totalWords}
@@ -75,7 +75,7 @@ export default async function StatsPage() {
           totalReadingTime={buildTimeStats.totalReadingTime}
         />
       </Skeleton>
-      <Skeleton name="stats-github" loading={false}>
+      <Skeleton name="stats-github">
         <GitHubStatsSection
           stars={githubStats.stars}
           forks={githubStats.forks}
@@ -84,7 +84,7 @@ export default async function StatsPage() {
           variant="default"
         />
       </Skeleton>
-      <Skeleton name="stats-performance" loading={false}>
+      <Skeleton name="stats-performance">
         <PerformanceSection mobileScores={lighthouseStats.mobile} desktopScores={lighthouseStats.desktop} />
       </Skeleton>
     </>

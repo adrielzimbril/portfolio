@@ -31,10 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Privacy() {
   return (
     <>
-      <Skeleton name="privacy-header" loading={false}>
+      <Skeleton name="privacy-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="privacy-content" loading={false}>
+      <Skeleton name="privacy-content">
         <PageContent />
       </Skeleton>
     </>

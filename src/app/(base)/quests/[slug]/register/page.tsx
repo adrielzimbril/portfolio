@@ -58,7 +58,7 @@ export default async function QuestRegisterPage(props: {
 
   return (
     <>
-      <Skeleton name="quest-register-header" loading={false}>
+      <Skeleton name="quest-register-header">
         <HeaderSection
           title={quest.title}
           actionButton={true}
@@ -67,7 +67,7 @@ export default async function QuestRegisterPage(props: {
         />
       </Skeleton>
       {closed ? (
-        <Skeleton name="quest-register-closed" loading={false}>
+        <Skeleton name="quest-register-closed">
           <ChallengeClosedState
             badge={t("quests.register.closed.badge")}
             title={t("quests.register.closed.title")}
@@ -77,7 +77,7 @@ export default async function QuestRegisterPage(props: {
           />
         </Skeleton>
       ) : (
-        <Skeleton name="quest-register-form" loading={false}>
+        <Skeleton name="quest-register-form">
           <IntentionForm questSlug={slug} />
         </Skeleton>
       )}

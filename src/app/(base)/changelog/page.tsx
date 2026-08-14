@@ -30,13 +30,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ChangelogPage() {
   return (
     <>
-      <Skeleton name="changelog-header" loading={false}>
+      <Skeleton name="changelog-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="changelog-timeline" loading={false}>
+      <Skeleton name="changelog-timeline">
         <TimelineSection />
       </Skeleton>
-      <Skeleton name="changelog-cta" loading={false}>
+      <Skeleton name="changelog-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

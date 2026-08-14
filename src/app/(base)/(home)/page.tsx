@@ -42,50 +42,50 @@ export default function Home() {
 
   return (
     <>
-      <Skeleton name="home-header" loading={false}>
+      <Skeleton name="home-header">
         <HeaderSection />
       </Skeleton>
       {showed.talks && (
         <Suspense fallback={<Skeleton name="home-talks" className="w-full h-80" />}>
-          <Skeleton name="home-talks" loading={false}>
+          <Skeleton name="home-talks">
             <TalksSection />
           </Skeleton>
         </Suspense>
       )}
       {showed.quests && (
         <Suspense fallback={<Skeleton name="home-quests" className="w-full h-80" />}>
-          <Skeleton name="home-quests" loading={false}>
+          <Skeleton name="home-quests">
             <QuestsSection />
           </Skeleton>
         </Suspense>
       )}
       {showed.resources && (
         <Suspense fallback={<Skeleton name="home-resources" className="w-full h-80" />}>
-          <Skeleton name="home-resources" loading={false}>
+          <Skeleton name="home-resources">
             <ResourcesSection />
           </Skeleton>
         </Suspense>
       )}
       {showed.projects && (
         <Suspense fallback={<Skeleton name="home-projects" className="w-full h-[500px]" />}>
-          <Skeleton name="home-projects" loading={false}>
+          <Skeleton name="home-projects">
             <ProjectsSection />
           </Skeleton>
         </Suspense>
       )}
       {showed.testimonials && (
-        <Skeleton name="home-testimonials" loading={false}>
+        <Skeleton name="home-testimonials">
           <TestimonialsSection />
         </Skeleton>
       )}
       {showed.thoughts && (
         <Suspense fallback={<Skeleton name="home-thoughts" className="w-full h-80" />}>
-          <Skeleton name="home-thoughts" loading={false}>
+          <Skeleton name="home-thoughts">
             <ThoughtsSection />
           </Skeleton>
         </Suspense>
       )}
-      <Skeleton name="home-cta" loading={false}>
+      <Skeleton name="home-cta">
         <CallToAction />
       </Skeleton>
     </>

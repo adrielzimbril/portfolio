@@ -31,10 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Routes() {
   return (
     <>
-      <Skeleton name="routes-header" loading={false}>
+      <Skeleton name="routes-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="routes-list" loading={false}>
+      <Skeleton name="routes-list">
         <RoutesSection />
       </Skeleton>
     </>

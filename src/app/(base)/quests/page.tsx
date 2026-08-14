@@ -41,13 +41,13 @@ export default async function MyQuests() {
 
   return (
     <>
-      <Skeleton name="quests-header" loading={false}>
+      <Skeleton name="quests-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="quests-listing" loading={false}>
+      <Skeleton name="quests-listing">
         <MyQuestsSection data={data} />
       </Skeleton>
-      <Skeleton name="quests-cta" loading={false}>
+      <Skeleton name="quests-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

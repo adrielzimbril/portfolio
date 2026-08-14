@@ -80,7 +80,7 @@ export default async function SubProject(props: { params: Promise<PageParams> })
   } = project!.currentProject
   return (
     <>
-      <Skeleton name="project-detail-header" loading={false}>
+      <Skeleton name="project-detail-header">
         <HeaderSection
           title={title}
           cover={image_big || ""}
@@ -90,7 +90,7 @@ export default async function SubProject(props: { params: Promise<PageParams> })
           pageViewsData={{ slug, locale }}
         />
       </Skeleton>
-      <Skeleton name="project-detail-content" loading={false}>
+      <Skeleton name="project-detail-content">
         <ProjectDetailsSection
           content={body || ""}
           duration={date_project?.map((date) => date || null) || []}
@@ -100,41 +100,41 @@ export default async function SubProject(props: { params: Promise<PageParams> })
         {/* <ReactionBar pageType={PageType.PROJECT} entityId={slug} /> */}
       </Skeleton>
       {cardSectionDescription && cards && (
-        <Skeleton name="project-detail-research" loading={false}>
+        <Skeleton name="project-detail-research">
           <ProjectResearchSection cards={cards as CardData[]} cardSectionDescription={cardSectionDescription} />
         </Skeleton>
       )}
       {goalSectionDescription && (
-        <Skeleton name="project-detail-goal" loading={false}>
+        <Skeleton name="project-detail-goal">
           <GoalResearchSection description={goalSectionDescription} subDescription={goalSectionSubDescription} />
         </Skeleton>
       )}
       {statementSectionDescription && statements && (
-        <Skeleton name="project-detail-statement" loading={false}>
+        <Skeleton name="project-detail-statement">
           <ProjectStatementSection description={statementSectionDescription} statements={statements} />
         </Skeleton>
       )}
       {pointSectionDescription && points && (
-        <Skeleton name="project-detail-points" loading={false}>
+        <Skeleton name="project-detail-points">
           <ProjectPointsResearchSection pointSectionDescription={pointSectionDescription} points={points} />
         </Skeleton>
       )}
       {gallery && (
-        <Skeleton name="project-detail-preview" loading={false}>
+        <Skeleton name="project-detail-preview">
           <ProjectPreviewSection title={title} description={previewSectionDescription} gallery={gallery} />
         </Skeleton>
       )}
       {resultSectionDescription && results && (
-        <Skeleton name="project-detail-result" loading={false}>
+        <Skeleton name="project-detail-result">
           <ProjectResultSection description={resultSectionDescription} results={results} />
         </Skeleton>
       )}
       {project!.adjacentProjects.length > 0 && (
-        <Skeleton name="project-detail-more" loading={false}>
+        <Skeleton name="project-detail-more">
           <MorePreviewSection data={project!.adjacentProjects} />
         </Skeleton>
       )}
-      <Skeleton name="project-detail-cta" loading={false}>
+      <Skeleton name="project-detail-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

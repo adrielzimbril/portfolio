@@ -31,10 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ThoughtsSubmitPage() {
   return (
     <>
-      <Skeleton name="submit-header" loading={false}>
+      <Skeleton name="submit-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="form-default" loading={false}>
+      <Skeleton name="form-default">
         <IntentionForm />
       </Skeleton>
     </>

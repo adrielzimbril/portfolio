@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function Contact() {
   return (
-    <Skeleton name="form-contact" loading={false}>
+    <Skeleton name="form-contact">
       <ContactForm />
     </Skeleton>
   )

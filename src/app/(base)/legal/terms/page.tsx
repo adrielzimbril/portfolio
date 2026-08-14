@@ -31,10 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Terms() {
   return (
     <>
-      <Skeleton name="terms-header" loading={false}>
+      <Skeleton name="terms-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="terms-content" loading={false}>
+      <Skeleton name="terms-content">
         <PageContent />
       </Skeleton>
     </>

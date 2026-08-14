@@ -41,14 +41,14 @@ export default async function MyHub() {
 
   return (
     <>
-      <Skeleton name="hub-header" loading={false}>
+      <Skeleton name="hub-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="hub-listing" loading={false}>
+      <Skeleton name="hub-listing">
         <MyHubSection data={data} />
       </Skeleton>
       {/* <ResourceWrapper initialData={data} type={PageType.HUB} /> */}
-      <Skeleton name="hub-cta" loading={false}>
+      <Skeleton name="hub-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

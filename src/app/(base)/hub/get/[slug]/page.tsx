@@ -53,7 +53,7 @@ export default async function SubShopGet(props: { params: Promise<PageParams> })
 
   return (
     <>
-      <Skeleton name="resource-get-content" loading={false}>
+      <Skeleton name="resource-get-content">
         <GetResource
           id={id}
           title={title}

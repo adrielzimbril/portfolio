@@ -41,16 +41,16 @@ export default async function MyThoughts() {
 
   return (
     <>
-      <Skeleton name="thoughts-header" loading={false}>
+      <Skeleton name="thoughts-header">
         <HeaderSection />
       </Skeleton>
       {data.length > 0 && (
-        <Skeleton name="thoughts-listing" loading={false}>
+        <Skeleton name="thoughts-listing">
           <MyThoughtsSection data={data} />
         </Skeleton>
       )}
       {/* <ResourceWrapper initialData={data} type={PageType.THOUGHT} /> */}
-      <Skeleton name="thoughts-cta" loading={false}>
+      <Skeleton name="thoughts-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

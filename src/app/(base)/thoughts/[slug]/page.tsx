@@ -61,7 +61,7 @@ export default async function BlogPostPage(props: { params: Promise<PageParams> 
 
   return (
     <>
-      <Skeleton name="thought-detail-header" loading={false}>
+      <Skeleton name="thought-detail-header">
         <HeaderSection
           title={title}
           cover={cover || ""}
@@ -72,14 +72,14 @@ export default async function BlogPostPage(props: { params: Promise<PageParams> 
           pageViewsData={{ slug, locale }}
         />
       </Skeleton>
-      <Skeleton name="thought-detail-content" loading={false}>
+      <Skeleton name="thought-detail-content">
         <ContentsSection content={body} />
       </Skeleton>
-      <Skeleton name="thought-detail-more" loading={false}>
+      <Skeleton name="thought-detail-more">
         <ReactionBar pageType={PageType.THOUGHT} entityId={slug} />
         <MorePreviewSection data={post.adjacentPosts} />
       </Skeleton>
-      <Skeleton name="thought-detail-cta" loading={false}>
+      <Skeleton name="thought-detail-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

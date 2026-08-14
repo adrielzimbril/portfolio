@@ -52,7 +52,7 @@ export default async function QuestWorkSubmitPage(props: { params: Promise<{ slu
 
   return (
     <>
-      <Skeleton name="quest-submit-header" loading={false}>
+      <Skeleton name="quest-submit-header">
         <HeaderSection
           title={quest.title}
           actionButton={true}
@@ -61,7 +61,7 @@ export default async function QuestWorkSubmitPage(props: { params: Promise<{ slu
         />
       </Skeleton>
       {closed ? (
-        <Skeleton name="quest-submit-closed" loading={false}>
+        <Skeleton name="quest-submit-closed">
           <ChallengeClosedState
             badge={t("quests.submit.closed.badge")}
             title={t("quests.submit.closed.title")}
@@ -71,7 +71,7 @@ export default async function QuestWorkSubmitPage(props: { params: Promise<{ slu
           />
         </Skeleton>
       ) : (
-        <Skeleton name="quest-submit-form" loading={false}>
+        <Skeleton name="quest-submit-form">
           <IntentionForm quest={quest} isClosed={closed} />
         </Skeleton>
       )}

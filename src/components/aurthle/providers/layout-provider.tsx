@@ -45,8 +45,8 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     let cancelled = false
 
     const run = async () => {
-      await initSquircle()
-      await sleep(4000)
+      initSquircle()
+      await sleep(50)
 
       if (!cancelled) {
         setIsLoaded(true)
@@ -67,8 +67,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   })
 
   const loader = pageLoader(currentKey)
-  // const showLoader = !isAdminRoute && asLoader && !isLoaded
-  const showLoader = false
+  const showLoader = !isAdminRoute && asLoader && !isLoaded
 
   const content = isBadIOS ? (
     showLoader ? (

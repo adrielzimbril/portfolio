@@ -41,13 +41,13 @@ export default async function MyTalks() {
 
   return (
     <>
-      <Skeleton name="talks-header" loading={false}>
+      <Skeleton name="talks-header">
         <HeaderSection />
       </Skeleton>
-      <Skeleton name="talks-listing" loading={false}>
+      <Skeleton name="talks-listing">
         <MyTalksSection data={data} />
       </Skeleton>
-      <Skeleton name="talks-cta" loading={false}>
+      <Skeleton name="talks-cta">
         <CallToAction isPage />
       </Skeleton>
     </>

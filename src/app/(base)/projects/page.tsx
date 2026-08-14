@@ -40,16 +40,16 @@ export default async function MyProject() {
 
   return (
     <>
-      <Skeleton name="projects-header" loading={false}>
+      <Skeleton name="projects-header">
         <HeaderSection />
       </Skeleton>
       {data.length > 0 && (
-        <Skeleton name="projects-listing" loading={false}>
+        <Skeleton name="projects-listing">
           <MyProjectsSection data={data} />
         </Skeleton>
       )}
       {/* <ResourceWrapper initialData={data} type={PageType.PROJECT} /> */}
-      <Skeleton name="projects-cta" loading={false}>
+      <Skeleton name="projects-cta">
         <CallToAction isPage />
       </Skeleton>
     </>
