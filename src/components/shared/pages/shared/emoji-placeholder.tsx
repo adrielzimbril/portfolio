@@ -102,6 +102,7 @@ export function EmojiPlaceholder({
             height={600}
             loading="lazy"
             sizes="(max-width: 768px) 288px, 384px"
+            alt=""
           />
         ) : null}
       </div>

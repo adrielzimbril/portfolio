@@ -4,7 +4,7 @@ import React from "react"
 import { cn } from "@/utils/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent } from "@/components/ui/card"
-import BoringAvatar from "boring-avatars"
+import { Avatar as SpaceAvatar } from "@usespaceui/avatars/react"
 import { getImageUrl, pickRandomColorCode } from "@/utils"
 import { useMemo } from "react"
 import { patterns } from "@/components/shared/pages/community/pattern"
@@ -33,7 +33,7 @@ export function CommunityWallCard({
   const pattern = patterns[patternIndex % patterns.length]
   const locale: Locale = useLocale() as Locale
 
-  // Generate random colors for BoringAvatar
+  // Generate random colors for Avatar
   const avatarColors = useMemo(() => {
     return Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
   }, [])
@@ -81,10 +81,10 @@ export function CommunityWallCard({
             <Avatar className="h-8 w-8 shrink-0">
               <AvatarImage src={getImageUrl(profilePicture ?? "")} />
               <AvatarFallback className="relative pointer-events-none">
-                <BoringAvatar
+                <SpaceAvatar
                   name={author || (profilePicture?.slice(8)?.replace(".png", "") ?? "")}
-                  colors={avatarColors}
-                  variant="beam"
+                  size={32}
+                  circle
                 />
               </AvatarFallback>
             </Avatar>

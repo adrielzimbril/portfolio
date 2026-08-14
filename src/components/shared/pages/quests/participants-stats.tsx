@@ -1,6 +1,6 @@
 "use client"
 import { useMemo } from "react"
-import BoringAvatar from "boring-avatars"
+import { Avatar as SpaceAvatar } from "@usespaceui/avatars/react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { AvatarGroup } from "@/components/aurthle/ui/avatar-group"
 import { pickRandomColorCode } from "@/utils"
@@ -29,7 +29,7 @@ export function ParticipantsStats({
   const colorSets = useMemo(
     () =>
       Array.from({ length: visibleCount }).map(() =>
-        Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
+        Array.from({ length: 5 }).map(() => pickRandomColorCode() ?? "#ffffff"),
       ),
     [visibleCount],
   )
@@ -42,10 +42,11 @@ export function ParticipantsStats({
             {Array.from({ length: visibleCount }).map((_, index) => (
               <Avatar key={index} className="w-6 h-6">
                 <AvatarFallback className="relative pointer-events-none">
-                  <BoringAvatar
+                  <SpaceAvatar
                     name={`quest-participant-${index + 1}`}
                     colors={colorSets[index] ?? []}
-                    variant="beam"
+                    size={24}
+                    circle
                   />
                 </AvatarFallback>
               </Avatar>

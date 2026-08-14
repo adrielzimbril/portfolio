@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Link } from "@/components/ui/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import BoringAvatar from "boring-avatars"
+import { Avatar as SpaceAvatar } from "@usespaceui/avatars/react"
 import { getExternalUrl, getImageUrl } from "@/utils/base-url"
 import { Tags } from "@/components/shared/pages/quests/tags"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types/default"
@@ -121,10 +121,10 @@ function WinnerCard({ participant }: { participant: Winner }) {
               <Avatar className="size-11">
                 <AvatarImage src={getImageUrl(participant.avatar || "")} />
                 <AvatarFallback>
-                  <BoringAvatar
+                  <SpaceAvatar
                     name={participant.name}
-                    colors={colorSets[(participant.rank - 1) % WINNER_NUMBER] ?? []}
-                    variant="beam"
+                    size={44}
+                    circle
                   />
                 </AvatarFallback>
               </Avatar>

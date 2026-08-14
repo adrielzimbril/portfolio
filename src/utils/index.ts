@@ -9,6 +9,7 @@ export * from "@/utils/states/create-error"
 export * from "@/utils/states/catch-error"
 
 export * from "@/utils/format-content"
+export * from "@/utils/format-text"
 
 export * from "@/utils/key-encrypt"
 

@@ -2,8 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { AvatarGroup } from "@/components/aurthle/ui/avatar-group"
 import { cn } from "@/utils/utils"
 import { ResourceType } from "@/types"
-import BoringAvatar from "boring-avatars"
-import { getImageUrl, pickRandomColorCode } from "@/utils"
+import { Avatar as SpaceAvatar } from "@usespaceui/avatars/react"
+import { getImageUrl, pickRandomColorCode, randomWord } from "@/utils"
 import { useMemo } from "react"
 import { useTranslations } from "use-intl"
 
@@ -37,7 +37,7 @@ function UserAvatars({ avatars, userCount }: { avatars?: string[]; userCount?: n
   // ✅ Generate all colors in one time, outside of .map()
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: numPeople }).map(() =>
-      Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
+      Array.from({ length: 5 }).map(() => pickRandomColorCode() ?? "#ffffff"),
     )
   }, [numPeople])
 
@@ -49,12 +49,13 @@ function UserAvatars({ avatars, userCount }: { avatars?: string[]; userCount?: n
           .map((_, index) => {
             return (
               <Avatar key={index} className="w-6 h-6">
-                <AvatarImage src={getImageUrl(avatars?.[index] ?? "")} />
+                {avatars?.[index] ? <AvatarImage src={getImageUrl(avatars[index])} /> : null}
                 <AvatarFallback className={cn("relative pointer-events-none")}>
-                  <BoringAvatar
-                    name={avatars?.[index]?.slice(8)?.replace(".png", "") ?? (index + 1).toString()}
+                  <SpaceAvatar
+                    name={avatars?.[index]?.slice(8)?.replace(".png", "") || randomWord()}
                     colors={colorSets[index] ?? []}
-                    variant="beam"
+                    size={24}
+                    circle
                   />
                 </AvatarFallback>
               </Avatar>

@@ -1,7 +1,7 @@
 "use client"
 import { Linkedin, LinkOne } from "@aurthle/icons"
 import { useState, useEffect, useMemo } from "react"
-import BoringAvatar from "boring-avatars"
+import { Avatar as SpaceAvatar } from "@usespaceui/avatars/react"
 import { cn, pickRandomColorCode } from "@/utils"
 import { SectionLayout } from "@/components/shared/sections/layout"
 import { Card, CardContent } from "@/components/ui/card"
@@ -87,10 +87,10 @@ export function TestimonialsSection() {
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-4 max-w-lg md:max-w-2xl">
                     <div className="size-10 md:size-12 rounded-full flex items-center justify-center">
-                      <BoringAvatar
-                        name={currentTestimonial?.avatar ?? ""}
-                        colors={colorSets[currentIndex] ?? []}
-                        variant="beam"
+                      <SpaceAvatar
+                        name={currentTestimonial?.avatar ?? currentTestimonial.name}
+                        size={48}
+                        circle
                         className="size-10 md:size-12"
                       />
                     </div>

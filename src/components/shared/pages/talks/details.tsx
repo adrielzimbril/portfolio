@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { AvatarGroup } from "@/components/aurthle/ui/avatar-group"
 import { getExternalUrl, getMachineDate, pickRandomColorCode, getIsToday } from "@/utils"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types"
-import BoringAvatar from "boring-avatars"
+import { Avatar as SpaceAvatar } from "@usespaceui/avatars/react"
 import { useTranslations } from "use-intl"
 import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar"
 import { PageType } from "@/types"
@@ -90,7 +90,7 @@ function ParticipantsStats({ count }: { count: number }) {
   const t = useTranslations()
   const visibleCount = Math.min(count, 5)
   const colorSets = Array.from({ length: visibleCount }).map(() =>
-    Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
+    Array.from({ length: 5 }).map(() => pickRandomColorCode() ?? "#ffffff"),
   )
 
   return (
@@ -100,7 +100,7 @@ function ParticipantsStats({ count }: { count: number }) {
           {Array.from({ length: visibleCount }).map((_, index) => (
             <Avatar key={index} className="w-6 h-6">
               <AvatarFallback className="relative pointer-events-none">
-                <BoringAvatar name={`participant-${index + 1}`} colors={colorSets[index] ?? []} variant="beam" />
+                <SpaceAvatar name={`participant-${index + 1}`} colors={colorSets[index] ?? []} size={24} circle />
               </AvatarFallback>
             </Avatar>
           ))}
