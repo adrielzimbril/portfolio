@@ -9,7 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AnalyticsScript } from "@/integrations/analytics";
 import ReactLenis from "lenis/react";
 import { useCompareIOSVersion } from "@/hooks/useIsMobile";
-import { init } from "@squircle/core";
+import { initSquircle } from "@usespaceui/squircle";
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -40,7 +40,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     let cancelled = false;
 
     const run = async () => {
-      await init();
+      await initSquircle();
       await sleep(4000);
 
       if (!cancelled) {

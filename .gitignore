@@ -63,3 +63,5 @@ sources/
 supabase/.temp/
 .playwright-mcp/
 .next-dev-*.log
+
+migrate-squircle.js
