@@ -136,6 +136,9 @@
     "overrides": {
       "@types/react": "19.2.14",
       "@types/react-dom": "19.2.3"
+    },
+    "patchedDependencies": {
+      "@better-auth/core@1.6.28": "patches/@better-auth__core@1.6.28.patch"
     }
   }
 }
