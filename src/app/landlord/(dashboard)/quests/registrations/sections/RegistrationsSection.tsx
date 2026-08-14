@@ -176,10 +176,8 @@ export function RegistrationsSection() {
                           </td>
                           <td className="px-5 py-4 text-right">
                             <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="icon" asPointer aria-label={tShared("actions")}>
-                                  <MoreHorizontal size={16} />
-                                </Button>
+                              <DropdownMenuTrigger render={<Button variant="outline" size="icon" asPointer aria-label={tShared("actions")} />}>
+                                <MoreHorizontal size={16} />
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem

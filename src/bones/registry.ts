@@ -3,14 +3,92 @@
 import { registerBones } from 'boneyard-js'
 import { configureBoneyard } from 'boneyard-js/react'
 
+import _home_header from './home-header.bones.json'
+import _home_resources from './home-resources.bones.json'
+import _home_projects from './home-projects.bones.json'
+import _home_testimonials from './home-testimonials.bones.json'
+import _home_cta from './home-cta.bones.json'
+import _about_header from './about-header.bones.json'
+import _about_craft from './about-craft.bones.json'
+import _about_facts from './about-facts.bones.json'
+import _about_philosophy from './about-philosophy.bones.json'
+import _about_cta from './about-cta.bones.json'
 import _projects_header from './projects-header.bones.json'
 import _projects_listing from './projects-listing.bones.json'
 import _projects_cta from './projects-cta.bones.json'
+import _project_detail_header from './project-detail-header.bones.json'
+import _project_detail_content from './project-detail-content.bones.json'
+import _project_detail_research from './project-detail-research.bones.json'
+import _project_detail_goal from './project-detail-goal.bones.json'
+import _project_detail_statement from './project-detail-statement.bones.json'
+import _project_detail_points from './project-detail-points.bones.json'
+import _project_detail_preview from './project-detail-preview.bones.json'
+import _project_detail_result from './project-detail-result.bones.json'
+import _project_detail_more from './project-detail-more.bones.json'
+import _project_detail_cta from './project-detail-cta.bones.json'
+import _thoughts_header from './thoughts-header.bones.json'
+import _thoughts_listing from './thoughts-listing.bones.json'
+import _thoughts_cta from './thoughts-cta.bones.json'
+import _talks_header from './talks-header.bones.json'
+import _talks_listing from './talks-listing.bones.json'
+import _talks_cta from './talks-cta.bones.json'
+import _quests_header from './quests-header.bones.json'
+import _quests_listing from './quests-listing.bones.json'
+import _quests_cta from './quests-cta.bones.json'
+import _quest_detail_header from './quest-detail-header.bones.json'
+import _quest_detail_content from './quest-detail-content.bones.json'
+import _quest_detail_participants from './quest-detail-participants.bones.json'
+import _resource_detail_header from './resource-detail-header.bones.json'
+import _resource_detail_content from './resource-detail-content.bones.json'
+import _resource_detail_more from './resource-detail-more.bones.json'
+import _resource_detail_cta from './resource-detail-cta.bones.json'
+import _form_contact from './form-contact.bones.json'
+import _submit_header from './submit-header.bones.json'
+import _form_default from './form-default.bones.json'
 
 configureBoneyard({"color":"hsl(210 40% 96.1%)","darkColor":"hsl(223 47% 11%)","animate":"shimmer","shimmerColor":"rgba(255, 255, 255, 0.4)","darkShimmerColor":"rgba(255, 255, 255, 0.05)","speed":"2s","shimmerAngle":110,"stagger":80,"transition":300})
 
 registerBones({
+  "home-header": _home_header,
+  "home-resources": _home_resources,
+  "home-projects": _home_projects,
+  "home-testimonials": _home_testimonials,
+  "home-cta": _home_cta,
+  "about-header": _about_header,
+  "about-craft": _about_craft,
+  "about-facts": _about_facts,
+  "about-philosophy": _about_philosophy,
+  "about-cta": _about_cta,
   "projects-header": _projects_header,
   "projects-listing": _projects_listing,
   "projects-cta": _projects_cta,
+  "project-detail-header": _project_detail_header,
+  "project-detail-content": _project_detail_content,
+  "project-detail-research": _project_detail_research,
+  "project-detail-goal": _project_detail_goal,
+  "project-detail-statement": _project_detail_statement,
+  "project-detail-points": _project_detail_points,
+  "project-detail-preview": _project_detail_preview,
+  "project-detail-result": _project_detail_result,
+  "project-detail-more": _project_detail_more,
+  "project-detail-cta": _project_detail_cta,
+  "thoughts-header": _thoughts_header,
+  "thoughts-listing": _thoughts_listing,
+  "thoughts-cta": _thoughts_cta,
+  "talks-header": _talks_header,
+  "talks-listing": _talks_listing,
+  "talks-cta": _talks_cta,
+  "quests-header": _quests_header,
+  "quests-listing": _quests_listing,
+  "quests-cta": _quests_cta,
+  "quest-detail-header": _quest_detail_header,
+  "quest-detail-content": _quest_detail_content,
+  "quest-detail-participants": _quest_detail_participants,
+  "resource-detail-header": _resource_detail_header,
+  "resource-detail-content": _resource_detail_content,
+  "resource-detail-more": _resource_detail_more,
+  "resource-detail-cta": _resource_detail_cta,
+  "form-contact": _form_contact,
+  "submit-header": _submit_header,
+  "form-default": _form_default,
 })

@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useEffect, useState, createContext, useContext } from "react"
 import { GenericLoadingPage } from "@/components/shared/pages/page-loader"
 import { useTranslations } from "use-intl"
 import { usePathname } from "next/navigation"
@@ -10,6 +10,14 @@ import { AnalyticsScript } from "@/integrations/analytics"
 import ReactLenis from "lenis/react"
 import { useCompareIOSVersion } from "@/hooks/useIsMobile"
 import { initSquircle } from "@usespaceui/squircle"
+
+type LayoutContextType = {
+  isLoaded: boolean
+}
+
+const LayoutContext = createContext<LayoutContextType>({ isLoaded: false })
+
+export const useLayout = () => useContext(LayoutContext)
 
 export function LayoutProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -59,31 +67,29 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   })
 
   const loader = pageLoader(currentKey)
-  const showLoader = !isAdminRoute && asLoader && !isLoaded
+  // const showLoader = !isAdminRoute && asLoader && !isLoaded
+  const showLoader = false
+
+  const content = isBadIOS ? (
+    showLoader ? (
+      <GenericLoadingPage title={loader.title} emoji={loader.emoji} subtitle={loader.subtitle} isPage={isHomePage} />
+    ) : (
+      children
+    )
+  ) : showLoader ? (
+    <GenericLoadingPage title={loader.title} emoji={loader.emoji} subtitle={loader.subtitle} isPage={isHomePage} />
+  ) : isAdminRoute ? (
+    children
+  ) : (
+    <ReactLenis root>{children}</ReactLenis>
+  )
 
   return (
-    <>
+    <LayoutContext.Provider value={{ isLoaded }}>
       <SpeedInsights />
       <AnalyticsScript />
-
-      {isBadIOS ? (
-        showLoader ? (
-          <GenericLoadingPage
-            title={loader.title}
-            emoji={loader.emoji}
-            subtitle={loader.subtitle}
-            isPage={isHomePage}
-          />
-        ) : (
-          children
-        )
-      ) : showLoader ? (
-        <GenericLoadingPage title={loader.title} emoji={loader.emoji} subtitle={loader.subtitle} isPage={isHomePage} />
-      ) : isAdminRoute ? (
-        children
-      ) : (
-        <ReactLenis root>{children}</ReactLenis>
-      )}
-    </>
+      {/* {content} */}
+      {isAdminRoute ? children : <ReactLenis root>{children}</ReactLenis>}
+    </LayoutContext.Provider>
   )
 }

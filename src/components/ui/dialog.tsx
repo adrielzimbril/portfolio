@@ -91,12 +91,10 @@ function DialogContent({
               "group absolute top-2.5 md:top-6 right-4 md:right-6 flex size-8 items-center justify-center disabled:pointer-events-none",
               "p-0",
             )}
-            asChild
+            render={<Button asPointer whileTap asIcon size="icon" data-space-click="close" />}
           >
-            <Button asPointer whileTap asIcon size="icon" data-space-click="close">
-              <X size={16} className="opacity-80 transition-opacity duration-200 group-hover:opacity-100" />
-              <span className="sr-only">Close</span>
-            </Button>
+            <X size={16} className="opacity-80 transition-opacity duration-200 group-hover:opacity-100" />
+            <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>

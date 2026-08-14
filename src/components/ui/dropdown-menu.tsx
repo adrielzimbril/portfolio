@@ -19,11 +19,12 @@ function DropdownMenuTrigger({ ...props }: React.ComponentProps<typeof DropdownM
 function DropdownMenuContent({
   className,
   sideOffset = 4,
+  align = "center",
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Popup> & { sideOffset?: number }) {
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Popup> & { sideOffset?: number; align?: "start" | "center" | "end" }) {
   return (
     <DropdownMenuPrimitive.Portal>
-      <DropdownMenuPrimitive.Positioner sideOffset={sideOffset}>
+      <DropdownMenuPrimitive.Positioner sideOffset={sideOffset} alignment={align}>
         <DropdownMenuPrimitive.Popup
           data-slot="dropdown-menu-content"
           className={cn(
@@ -194,10 +195,11 @@ function DropdownMenuSubTrigger({
 function DropdownMenuSubContent({
   className,
   sideOffset = 4,
+  align = "center",
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Popup> & { sideOffset?: number }) {
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Popup> & { sideOffset?: number; align?: "start" | "center" | "end" }) {
   return (
-    <DropdownMenuPrimitive.Positioner sideOffset={sideOffset}>
+    <DropdownMenuPrimitive.Positioner sideOffset={sideOffset} alignment={align}>
       <DropdownMenuPrimitive.Popup
         data-slot="dropdown-menu-sub-content"
         className={cn(

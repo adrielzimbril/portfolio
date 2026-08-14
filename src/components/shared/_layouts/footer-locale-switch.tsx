@@ -36,7 +36,7 @@ export function FooterLocaleSwitch() {
 
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger render={
         <Button
           variant="colored"
           className="flex w-fit items-center gap-2 bg-sh-white! squircle-7xl border-2 border-b-base-accent text-b-white-foreground min-w-10"
@@ -44,10 +44,10 @@ export function FooterLocaleSwitch() {
           asIcon
           asPointer
           aria-label="Language"
-        >
-          {SelectedFlag && <SelectedFlag className="transform scale-125 rounded-sm" />}
-          <span className="relative">{t("common.shared.text.language")}</span>
-        </Button>
+        />
+      }>
+        {SelectedFlag && <SelectedFlag className="transform scale-125 rounded-sm" />}
+        <span className="relative">{t("common.shared.text.language")}</span>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-fit min-w-32">

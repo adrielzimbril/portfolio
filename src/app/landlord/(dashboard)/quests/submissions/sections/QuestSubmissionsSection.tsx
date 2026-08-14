@@ -189,10 +189,8 @@ export function QuestSubmissionsSection() {
                           </td>
                           <td className="px-5 py-4 text-right">
                             <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="icon" asPointer aria-label={tShared("actions")}>
-                                  <MoreHorizontal size={16} />
-                                </Button>
+                              <DropdownMenuTrigger render={<Button variant="outline" size="icon" asPointer aria-label={tShared("actions")} />}>
+                                <MoreHorizontal size={16} />
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem
@@ -206,11 +204,9 @@ export function QuestSubmissionsSection() {
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 {participant.work_url ? (
-                                  <DropdownMenuItem asChild>
-                                    <a href={participant.work_url} target="_blank" rel="noopener noreferrer">
-                                      <ExternalLink size={14} />
-                                      {t("actions.view_work")}
-                                    </a>
+                                  <DropdownMenuItem render={<a href={participant.work_url} target="_blank" rel="noopener noreferrer" />}>
+                                    <ExternalLink size={14} />
+                                    {t("actions.view_work")}
                                   </DropdownMenuItem>
                                 ) : (
                                   <DropdownMenuItem disabled>
