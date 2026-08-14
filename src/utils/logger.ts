@@ -18,7 +18,7 @@
  * logger.success("Operation completed successfully!");
  * // ✅ [SUCCESS] Operation completed successfully!
  */
-import { isDevelopment } from "@/config";
+import { isDevelopment } from "@/config"
 
 export const logger = {
   info: (...args: unknown[]) => console.log("ℹ️ [INFO]", ...args),
@@ -26,37 +26,27 @@ export const logger = {
   error: (...args: unknown[]) => console.error("❌ [ERROR]", ...args),
   success: (...args: unknown[]) => console.log("✅ [SUCCESS]", ...args),
 
-  debug: (...args: unknown[]) =>
-    isDevelopment() && console.debug("🐛 [DEBUG]", ...args),
+  debug: (...args: unknown[]) => isDevelopment() && console.debug("🐛 [DEBUG]", ...args),
 
-  trace: (...args: unknown[]) =>
-    isDevelopment() && console.trace("[🗺️ TRACE]", ...args),
+  trace: (...args: unknown[]) => isDevelopment() && console.trace("[🗺️ TRACE]", ...args),
 
   /**
    * Environment variable logging
    * Logs environment variable validation results
    */
   env: {
-    error: (varName: string, message: string) =>
-      console.error(`❌ [ENV_VAR_ERROR] ${varName}: ${message}`),
+    error: (varName: string, message: string) => console.error(`❌ [ENV_VAR_ERROR] ${varName}: ${message}`),
 
-    warn: (varName: string, message: string) =>
-      console.warn(`⚠️ [ENV_VAR_WARNING] ${varName}: ${message}`),
+    warn: (varName: string, message: string) => console.warn(`⚠️ [ENV_VAR_WARNING] ${varName}: ${message}`),
 
-    info: (varName: string, message: string) =>
-      console.log(`ℹ️ [ENV_VAR_INFO] ${varName}: ${message}`),
+    info: (varName: string, message: string) => console.log(`ℹ️ [ENV_VAR_INFO] ${varName}: ${message}`),
 
-    success: (varName: string, message: string) =>
-      console.log(`✅ [ENV_VAR_SUCCESS] ${varName}: ${message}`),
+    success: (varName: string, message: string) => console.log(`✅ [ENV_VAR_SUCCESS] ${varName}: ${message}`),
 
-    missing: (varName: string) =>
-      console.warn(
-        `⚠️ [ENV_VAR_WARNING] Optional variable not set: ${varName}`,
-      ),
+    missing: (varName: string) => console.warn(`⚠️ [ENV_VAR_WARNING] Optional variable not set: ${varName}`),
 
-    required: (varName: string) =>
-      console.error(`❌ [ENV_VAR_ERROR] Required variable missing: ${varName}`),
+    required: (varName: string) => console.error(`❌ [ENV_VAR_ERROR] Required variable missing: ${varName}`),
   },
-};
+}
 
-export default logger;
+export default logger

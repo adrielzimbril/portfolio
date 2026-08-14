@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export function Logo({ withLabel = true }: { withLabel?: boolean }) {
   return (
@@ -24,5 +24,5 @@ export function Logo({ withLabel = true }: { withLabel?: boolean }) {
       </svg>
       {withLabel && <span className="ml-3 text-xl">acme</span>}
     </span>
-  );
+  )
 }

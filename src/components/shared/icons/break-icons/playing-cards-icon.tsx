@@ -1,21 +1,12 @@
-import React from "react";
+import React from "react"
 
 interface PlayingCardsIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
+  size?: number | string
 }
 
-export const PlayingCardsIcon = ({
-  size = 49,
-  ...props
-}: PlayingCardsIconProps) => {
+export const PlayingCardsIcon = ({ size = 49, ...props }: PlayingCardsIconProps) => {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 49 49"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width={size} height={size} viewBox="0 0 49 49" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -68,5 +59,5 @@ export const PlayingCardsIcon = ({
         </linearGradient>
       </defs>
     </svg>
-  );
-};
+  )
+}

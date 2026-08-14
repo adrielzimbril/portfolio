@@ -1,59 +1,58 @@
 export interface TurnstileProps {
-  siteKey: string;
-  onVerify?: (token: string) => void;
-  onError?: (error: unknown) => void;
-  onExpire?: () => void;
-  onLoad?: () => void;
-  onBeforeInteractive?: () => void;
-  onAfterInteractive?: () => void;
-  onUnsupported?: () => void;
-  onTimeout?: () => void;
-  action?: string;
-  id?: string;
-  className?: string;
-  theme?: "light" | "dark" | "auto";
-  tabIndex?: number;
-  responseField?: boolean;
-  responseFieldName?: string;
-  size?: "normal" | "compact" | "flexible";
-  retry?: "auto" | "never";
-  retryInterval?: number;
-  refreshExpired?: "auto" | "manual" | "never";
-  refreshTimeout?: "auto" | "manual" | "never";
-  appearance?: "always" | "execute" | "interaction-only";
-  execution?: "render" | "execute";
-  cData?: string;
-  language?: string;
-  sandbox?: "pass" | "block" | "pass-invisible" | "block-invisible" | boolean;
-  feedbackEnabled?: boolean;
+  siteKey: string
+  onVerify?: (token: string) => void
+  onError?: (error: unknown) => void
+  onExpire?: () => void
+  onLoad?: () => void
+  onBeforeInteractive?: () => void
+  onAfterInteractive?: () => void
+  onUnsupported?: () => void
+  onTimeout?: () => void
+  action?: string
+  id?: string
+  className?: string
+  theme?: "light" | "dark" | "auto"
+  tabIndex?: number
+  responseField?: boolean
+  responseFieldName?: string
+  size?: "normal" | "compact" | "flexible"
+  retry?: "auto" | "never"
+  retryInterval?: number
+  refreshExpired?: "auto" | "manual" | "never"
+  refreshTimeout?: "auto" | "manual" | "never"
+  appearance?: "always" | "execute" | "interaction-only"
+  execution?: "render" | "execute"
+  cData?: string
+  language?: string
+  sandbox?: "pass" | "block" | "pass-invisible" | "block-invisible" | boolean
+  feedbackEnabled?: boolean
 }
 
 export interface TurnstileValidateOptions {
-  token: string;
-  secretKey: string;
-  remoteip?: string;
-  idempotencyKey?: string;
-  sandbox?: "pass" | "fail" | "error" | boolean;
+  token: string
+  secretKey: string
+  remoteip?: string
+  idempotencyKey?: string
+  sandbox?: "pass" | "fail" | "error" | boolean
 }
 
 export interface TurnstileValidateResponse {
-  success: boolean;
-  challenge_ts?: string;
-  hostname?: string;
-  error_codes?: string[];
-  action?: string;
-  cdata?: string;
+  success: boolean
+  challenge_ts?: string
+  hostname?: string
+  error_codes?: string[]
+  action?: string
+  cdata?: string
 }
 
-export type TurnstileTheme = "light" | "dark" | "auto";
-export type TurnstileSize = "normal" | "compact" | "flexible";
-export type TurnstileAppearance = "always" | "execute" | "interaction-only";
-export type TurnstileExecution = "render" | "execute";
-export type TurnstileRetry = "auto" | "never";
-export type TurnstileRefresh = "auto" | "manual" | "never";
-export type TurnstileSandbox =
-  "pass" | "block" | "pass-invisible" | "block-invisible" | boolean;
-export type TurnstileServerSandbox = "pass" | "fail" | "error" | boolean;
+export type TurnstileTheme = "light" | "dark" | "auto"
+export type TurnstileSize = "normal" | "compact" | "flexible"
+export type TurnstileAppearance = "always" | "execute" | "interaction-only"
+export type TurnstileExecution = "render" | "execute"
+export type TurnstileRetry = "auto" | "never"
+export type TurnstileRefresh = "auto" | "manual" | "never"
+export type TurnstileSandbox = "pass" | "block" | "pass-invisible" | "block-invisible" | boolean
+export type TurnstileServerSandbox = "pass" | "fail" | "error" | boolean
 
 export const TURNSTILE_CONSTANTS = {
   DEFAULT_THEME: "auto" as const,
@@ -84,7 +83,7 @@ export const TURNSTILE_CONSTANTS = {
 
   API_ENDPOINT: "https://challenges.cloudflare.com/turnstile/v0/siteverify",
   SCRIPT_URL: "https://challenges.cloudflare.com/turnstile/v0/api.js",
-} as const;
+} as const
 
 export const TURNSTILE_ERROR_CODES = {
   MISSING_INPUT_SECRET: "missing-input-secret",
@@ -94,12 +93,11 @@ export const TURNSTILE_ERROR_CODES = {
   BAD_REQUEST: "bad-request",
   TIMEOUT_OR_DUPLICATE: "timeout-or-duplicate",
   INTERNAL_ERROR: "internal-error",
-} as const;
+} as const
 
-export type TurnstileErrorCode =
-  (typeof TURNSTILE_ERROR_CODES)[keyof typeof TURNSTILE_ERROR_CODES];
+export type TurnstileErrorCode = (typeof TURNSTILE_ERROR_CODES)[keyof typeof TURNSTILE_ERROR_CODES]
 
 export interface TurnstileError {
-  code: TurnstileErrorCode;
-  message: string;
+  code: TurnstileErrorCode
+  message: string
 }

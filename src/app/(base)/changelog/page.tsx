@@ -1,13 +1,13 @@
-import React from "react";
-import { getTranslations } from "next-intl/server";
-import { Metadata } from "next";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { HeaderSection } from "@/app/(base)/changelog/sections/HeaderSection";
-import { TimelineSection } from "@/app/(base)/changelog/sections/TimelineSection";
-import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import React from "react"
+import { getTranslations } from "next-intl/server"
+import { Metadata } from "next"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { HeaderSection } from "@/app/(base)/changelog/sections/HeaderSection"
+import { TimelineSection } from "@/app/(base)/changelog/sections/TimelineSection"
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return {
     ...baseMetadata,
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("changelog.title"),
       description: t("changelog.description"),
     },
-  };
+  }
 }
 
 export default async function ChangelogPage() {
@@ -33,5 +33,5 @@ export default async function ChangelogPage() {
       <TimelineSection />
       <CallToAction isPage />
     </>
-  );
+  )
 }

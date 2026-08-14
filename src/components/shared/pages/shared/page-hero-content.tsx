@@ -1,15 +1,9 @@
-import { Link } from "@/components/ui/link";
-import { ArrowRightOne, ArrowDownOne } from "@aurthle/icons";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Link } from "@/components/ui/link"
+import { ArrowRightOne, ArrowDownOne } from "@aurthle/icons"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
-function ButtonContent({
-  variant,
-  buttonText,
-}: {
-  variant: "default" | "secondary" | "ghost";
-  buttonText: string;
-}) {
+function ButtonContent({ variant, buttonText }: { variant: "default" | "secondary" | "ghost"; buttonText: string }) {
   return (
     <span className="flex items-center gap-1">
       {buttonText}
@@ -19,7 +13,7 @@ function ButtonContent({
         <ArrowRightOne size={18} />
       ) : variant === "ghost" && null} */}
     </span>
-  );
+  )
 }
 
 export function ContentSection({
@@ -32,23 +26,19 @@ export function ContentSection({
   actionButton,
   onClick,
 }: {
-  title: string;
-  description: string | React.ReactNode;
-  badge?: string;
-  buttonLink?: string;
-  buttonText?: string;
-  buttonVariant: "default" | "secondary" | "ghost";
-  actionButton: boolean;
-  onClick: () => void;
+  title: string
+  description: string | React.ReactNode
+  badge?: string
+  buttonLink?: string
+  buttonText?: string
+  buttonVariant: "default" | "secondary" | "ghost"
+  actionButton: boolean
+  onClick: () => void
 }) {
   return (
     <div className="row-2 flex flex-col gap-8 items-start justify-start relative md:max-w-full">
       {badge && (
-        <Badge
-          size="lg"
-          variant="colored"
-          className="bg-sh-white text-b-white-invert"
-        >
+        <Badge size="lg" variant="colored" className="bg-sh-white text-b-white-invert">
           {badge}
         </Badge>
       )}
@@ -57,29 +47,14 @@ export function ContentSection({
       {buttonLink &&
         buttonText &&
         (actionButton ? (
-          <Button
-            onClick={onClick}
-            variant={buttonVariant}
-            size="lg"
-            asIcon
-            whileTap
-            asPointer
-          >
+          <Button onClick={onClick} variant={buttonVariant} size="lg" asIcon whileTap asPointer>
             <ButtonContent variant={buttonVariant} buttonText={buttonText} />
           </Button>
         ) : (
-          <Link
-            href={buttonLink}
-            variant={buttonVariant}
-            size="lg"
-            onClick={onClick}
-            asIcon
-            whileTap
-            likeButton
-          >
+          <Link href={buttonLink} variant={buttonVariant} size="lg" onClick={onClick} asIcon whileTap likeButton>
             <ButtonContent variant={buttonVariant} buttonText={buttonText} />
           </Link>
         ))}
     </div>
-  );
+  )
 }

@@ -10,5 +10,5 @@
  * isNegative(1) // returns false
  */
 export function isNegative(value: number) {
-  return value < 0;
+  return value < 0
 }

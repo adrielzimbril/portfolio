@@ -1,36 +1,25 @@
-"use client";
-import React from "react";
-import { Github, Google } from "@aurthle/icons";
-import { useTranslations } from "use-intl";
-import { cn } from "@/utils/utils";
-import {
-  DialogHeader,
-  DialogTitle,
-  DialogSeparator,
-} from "@/components/ui/dialog";
-import {
-  signInWithGithub,
-  signInWithGoogle,
-} from "@/integrations/auth/provider/supabase";
-import { Button } from "@/components/ui/button";
+"use client"
+import React from "react"
+import { Github, Google } from "@aurthle/icons"
+import { useTranslations } from "use-intl"
+import { cn } from "@/utils/utils"
+import { DialogHeader, DialogTitle, DialogSeparator } from "@/components/ui/dialog"
+import { signInWithGithub, signInWithGoogle } from "@/integrations/auth/provider/supabase"
+import { Button } from "@/components/ui/button"
 
 export function LoginModal() {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle className="text-2xl font-bold text-start">
-          {t("community.login-modal.title")}
-        </DialogTitle>
+        <DialogTitle className="text-2xl font-bold text-start">{t("community.login-modal.title")}</DialogTitle>
       </DialogHeader>
 
       <DialogSeparator />
       <div className="space-y-6">
         <div className="text-center space-y-2">
-          <p className="text-b-white-invert-sec">
-            {t("community.login-modal.description")}
-          </p>
+          <p className="text-b-white-invert-sec">{t("community.login-modal.description")}</p>
         </div>
 
         <div className="space-y-3">
@@ -63,5 +52,5 @@ export function LoginModal() {
         </div>
       </div>
     </>
-  );
+  )
 }

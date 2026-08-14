@@ -1,12 +1,12 @@
-import { getTranslations } from "next-intl/server";
-import { Metadata } from "next";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { HeaderSection } from "@/app/(base)/submit/sections/HeaderSection";
-import { IntentionForm } from "@/app/(base)/submit/sections/IntentionForm";
-import { Skeleton } from "@/components/ui/skeleton";
+import { getTranslations } from "next-intl/server"
+import { Metadata } from "next"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { HeaderSection } from "@/app/(base)/submit/sections/HeaderSection"
+import { IntentionForm } from "@/app/(base)/submit/sections/IntentionForm"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -23,9 +23,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("submit.title"),
       description: t("submit.description"),
     },
-  };
+  }
 
-  return metadata;
+  return metadata
 }
 
 export default async function ThoughtsSubmitPage() {
@@ -38,5 +38,5 @@ export default async function ThoughtsSubmitPage() {
         <IntentionForm />
       </Skeleton>
     </>
-  );
+  )
 }

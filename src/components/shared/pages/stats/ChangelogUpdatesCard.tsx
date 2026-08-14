@@ -1,52 +1,47 @@
-"use client";
-import { motion } from "motion/react";
-import Link from "next/link";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { cn } from "@/utils/utils";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Star, Bug, Wrench } from "@aurthle/icons";
-import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import { pickRandomColor } from "@/utils/pick-random-color";
-import { getResourcesUrl } from "@/utils";
-import type { Changelog } from "@/integrations/content/types/types";
+"use client"
+import { motion } from "motion/react"
+import Link from "next/link"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { cn } from "@/utils/utils"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { Sparkles, Star, Bug, Wrench } from "@aurthle/icons"
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
+import { pickRandomColor } from "@/utils/pick-random-color"
+import { getResourcesUrl } from "@/utils"
+import type { Changelog } from "@/integrations/content/types/types"
 
 interface ChangelogUpdatesCardProps {
-  count: number;
-  changelog: Changelog[];
+  count: number
+  changelog: Changelog[]
 }
 
-export function ChangelogUpdatesCard({
-  count,
-  changelog,
-}: ChangelogUpdatesCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const t = useTranslations();
+export function ChangelogUpdatesCard({ count, changelog }: ChangelogUpdatesCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
+  const t = useTranslations()
 
   const typeIcons = {
     milestone: Sparkles,
     feature: Star,
     fix: Bug,
     improvement: Wrench,
-  };
+  }
 
   const typeColors = {
     milestone: "text-green-500",
     feature: "text-amber-500",
     fix: "text-red-500",
     improvement: "text-blue-500",
-  };
+  }
 
-  const recentItems = changelog
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 8);
+  const recentItems = changelog.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 8)
 
   const getTopPosition = (index: number) => {
-    const basePosition = -5;
-    const spacing = 42;
-    return `${basePosition + index * spacing}px`;
-  };
+    const basePosition = -5
+    const spacing = 42
+    return `${basePosition + index * spacing}px`
+  }
 
   return (
     <Card
@@ -95,9 +90,7 @@ export function ChangelogUpdatesCard({
                   className="absolute"
                   style={{
                     top: getTopPosition(index),
-                    ...(index % 2 === 1
-                      ? { left: "calc(50% + 6px)" }
-                      : { right: "calc(50% + 6px)" }),
+                    ...(index % 2 === 1 ? { left: "calc(50% + 6px)" } : { right: "calc(50% + 6px)" }),
                   }}
                 >
                   <span
@@ -109,34 +102,22 @@ export function ChangelogUpdatesCard({
                   <div className="z-20 inline-block w-[100px] space-y-px squircle-2xl/100 bg-sh-white border-2 border-b-base px-2 py-1.5 text-xs overflow-hidden">
                     <div className="flex items-center gap-1">
                       {(() => {
-                        const Icon =
-                          typeIcons[item.type as keyof typeof typeIcons];
+                        const Icon = typeIcons[item.type as keyof typeof typeIcons]
                         return Icon ? (
-                          <Badge
-                            className={cn("p-[.075rem] relative")}
-                            size="xs"
-                            circle
-                          >
+                          <Badge className={cn("p-[.075rem] relative")} size="xs" circle>
                             <Icon
-                              className={cn(
-                                typeColors[
-                                  item.type as keyof typeof typeColors
-                                ],
-                              )}
+                              className={cn(typeColors[item.type as keyof typeof typeColors])}
                               size={12}
                               variant="bulk"
                             />
                           </Badge>
-                        ) : null;
+                        ) : null
                       })()}
                       <div className="flex flex-col items-start">
                         <p className="text-sm overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-foreground leading-none">
                           {item.version}
                         </p>
-                        <time
-                          dateTime={item.date}
-                          className="text-[.5rem] text-muted-foreground leading-none"
-                        >
+                        <time dateTime={item.date} className="text-[.5rem] text-muted-foreground leading-none">
                           {new Date(item.date).toLocaleDateString("en-US", {
                             month: "short",
                             day: "numeric",
@@ -170,20 +151,15 @@ export function ChangelogUpdatesCard({
               <div className="flex flex-col items-start gap-1">
                 <h6 className="tracking-wide">Changelog</h6>
                 <p className="flex gap-1 text-xs text-muted-foreground">
-                  <span className="text-xs text-muted-foreground">
-                    {t("stats.cards.changelog.updates", { count })}
-                  </span>
+                  <span className="text-xs text-muted-foreground">{t("stats.cards.changelog.updates", { count })}</span>
                 </p>
               </div>
             </div>
           </div>
 
-          <Link
-            href={getResourcesUrl(PageType.CHANGELOG)}
-            className="absolute size-full top-0 left-0 z-30"
-          />
+          <Link href={getResourcesUrl(PageType.CHANGELOG)} className="absolute size-full top-0 left-0 z-30" />
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

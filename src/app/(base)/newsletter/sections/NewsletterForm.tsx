@@ -1,51 +1,43 @@
-"use client";
-import React, { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
-import { cn } from "@/utils/utils";
-import { Tags } from "@/components/shared/pages/resources/tags";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { useTranslations, useLocale } from "use-intl";
-import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
-import { toast } from "@/lib/toast";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
-import { routes } from "@/data/routes";
-import { usePageViews } from "@/hooks/usePageViews";
-import { getPathUrl, sleep } from "@/utils";
-import { useTurnstile } from "@/integrations/anti-bot/turnstile";
-import { getTurnstileConfig } from "@/config";
+"use client"
+import React, { useState } from "react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal"
+import { cn } from "@/utils/utils"
+import { Tags } from "@/components/shared/pages/resources/tags"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { useTranslations, useLocale } from "use-intl"
+import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator"
+import { toast } from "@/lib/toast"
+import { richTextComponent } from "@/integrations/content/utils/mdx-components"
+import { routes } from "@/data/routes"
+import { usePageViews } from "@/hooks/usePageViews"
+import { getPathUrl, sleep } from "@/utils"
+import { useTurnstile } from "@/integrations/anti-bot/turnstile"
+import { getTurnstileConfig } from "@/config"
 
 export function NewsletterForm() {
-  const t = useTranslations();
-  const locale = useLocale();
-  usePageViews(
-    routes.newsletter.key,
-    undefined,
-    { locale: locale, path: getPathUrl(routes.newsletter.link) },
-    false,
-  );
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [email, setEmail] = useState("");
+  const t = useTranslations()
+  const locale = useLocale()
+  usePageViews(routes.newsletter.key, undefined, { locale: locale, path: getPathUrl(routes.newsletter.link) }, false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [email, setEmail] = useState("")
   const emailValidator = useEmailValidator({
     value: email,
     label: "Email",
     required: true,
-  });
-  const isEmailValid = !Boolean(emailValidator(email));
-  const { siteKey } = getTurnstileConfig();
+  })
+  const isEmailValid = !Boolean(emailValidator(email))
+  const { siteKey } = getTurnstileConfig()
 
-  const { ref, token, error, isLoading, execute } = useTurnstile(
-    siteKey || "",
-    {
-      appearance: "execute",
-      execution: "execute",
-      "retry-interval": 1000,
-      theme: "auto",
-    },
-  );
-  sleep(1000).then(() => execute());
+  const { ref, token, error, isLoading, execute } = useTurnstile(siteKey || "", {
+    appearance: "execute",
+    execution: "execute",
+    "retry-interval": 1000,
+    theme: "auto",
+  })
+  sleep(1000).then(() => execute())
 
   return (
     <>
@@ -76,17 +68,12 @@ export function NewsletterForm() {
               })}
             </p>
           </div>
-          <Tags
-            tags={t("common.page-sections.newsletter.tags").split(",")}
-            isCentered
-          />
+          <Tags tags={t("common.page-sections.newsletter.tags").split(",")} isCentered />
 
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <div ref={ref} className="hidden" />
             <Input
-              placeholder={t(
-                "common.page-sections.newsletter.form.fields.email-page.placeholder",
-              )}
+              placeholder={t("common.page-sections.newsletter.form.fields.email-page.placeholder")}
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -95,29 +82,23 @@ export function NewsletterForm() {
             <Button
               onClick={() => {
                 if (isEmailValid && token) {
-                  setIsModalOpen(true);
+                  setIsModalOpen(true)
                 } else {
-                  execute();
-                  toast.error(t("zod.errors.customized.email.invalid"));
+                  execute()
+                  toast.error(t("zod.errors.customized.email.invalid"))
                 }
               }}
               asFull
               whileTap
               asPointer
             >
-              <span className="font-bold text-base">
-                {t("contact.page.form.submit")}
-              </span>
+              <span className="font-bold text-base">{t("contact.page.form.submit")}</span>
             </Button>
           </div>
         </div>
       </SectionBase>
 
-      <SubscriptionModal
-        isOpen={isModalOpen}
-        email={email || undefined}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <SubscriptionModal isOpen={isModalOpen} email={email || undefined} onClose={() => setIsModalOpen(false)} />
     </>
-  );
+  )
 }

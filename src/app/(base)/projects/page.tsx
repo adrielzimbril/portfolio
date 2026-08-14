@@ -1,16 +1,16 @@
-import React from "react";
-import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { HeaderSection } from "@/app/(base)/projects/sections/HeaderSection";
-import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
-import { metadata as baseMetadata } from "@/app/metadata";
-import logger from "@/utils/logger";
-import { getAllProjects } from "@/integrations/content/lib";
-import { MyProjectsSection } from "@/app/(base)/projects/sections/MyProjectsSection";
-import { Skeleton } from "@/components/ui/skeleton";
+import React from "react"
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
+import { HeaderSection } from "@/app/(base)/projects/sections/HeaderSection"
+import { Metadata } from "next"
+import { getLocale, getTranslations } from "next-intl/server"
+import { metadata as baseMetadata } from "@/app/metadata"
+import logger from "@/utils/logger"
+import { getAllProjects } from "@/integrations/content/lib"
+import { MyProjectsSection } from "@/app/(base)/projects/sections/MyProjectsSection"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -27,16 +27,16 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("projects.title"),
       description: t("projects.description"),
     },
-  };
-  return metadata;
+  }
+  return metadata
 }
 
 export default async function MyProject() {
-  const locale = await getLocale();
+  const locale = await getLocale()
   const data = await getAllProjects({ locale }).catch((err) => {
-    logger.error(err);
-    return [];
-  });
+    logger.error(err)
+    return []
+  })
 
   return (
     <>
@@ -53,5 +53,5 @@ export default async function MyProject() {
         <CallToAction isPage />
       </Skeleton>
     </>
-  );
+  )
 }

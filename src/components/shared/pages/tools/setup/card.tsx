@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { CardPreview } from "@/components/shared/pages/tools/setup/preview";
-import { CardInfo } from "@/components/shared/pages/tools/setup/details";
+import { Card, CardContent } from "@/components/ui/card"
+import { CardPreview } from "@/components/shared/pages/tools/setup/preview"
+import { CardInfo } from "@/components/shared/pages/tools/setup/details"
 
 export function SetupCard({
   title,
@@ -10,12 +10,12 @@ export function SetupCard({
   tags,
   purchaseUrl,
 }: {
-  title: string;
-  cover?: string;
-  description: string;
-  category: string;
-  tags: string[];
-  purchaseUrl?: string;
+  title: string
+  cover?: string
+  description: string
+  category: string
+  tags: string[]
+  purchaseUrl?: string
 }) {
   return (
     <Card className="relative bg-b-base-second squircle-6xl/100  size-full border-0 overflow-hidden">
@@ -30,14 +30,8 @@ export function SetupCard({
           }}
           purchaseUrl={purchaseUrl}
         />
-        <CardInfo
-          title={title}
-          description={description}
-          category={category}
-          tags={tags}
-          purchaseUrl={purchaseUrl}
-        />
+        <CardInfo title={title} description={description} category={category} tags={tags} purchaseUrl={purchaseUrl} />
       </CardContent>
     </Card>
-  );
+  )
 }

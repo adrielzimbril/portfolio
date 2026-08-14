@@ -1,53 +1,46 @@
-"use client";
-import { Linkedin, LinkOne } from "@aurthle/icons";
-import { useState, useEffect, useMemo } from "react";
-import BoringAvatar from "boring-avatars";
-import { cn, pickRandomColorCode } from "@/utils";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useLocale, useTranslations } from "use-intl";
-import { Link } from "@/components/ui/link";
-import { siteConfig } from "@/data/config";
-import {
-  getTestimonialsByLocale,
-  type TestimonialItem,
-} from "@/types/personalData";
+"use client"
+import { Linkedin, LinkOne } from "@aurthle/icons"
+import { useState, useEffect, useMemo } from "react"
+import BoringAvatar from "boring-avatars"
+import { cn, pickRandomColorCode } from "@/utils"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { useLocale, useTranslations } from "use-intl"
+import { Link } from "@/components/ui/link"
+import { siteConfig } from "@/data/config"
+import { getTestimonialsByLocale, type TestimonialItem } from "@/types/personalData"
 
 export function TestimonialsSection() {
-  const t = useTranslations();
-  const locale = useLocale();
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const t = useTranslations()
+  const locale = useLocale()
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
 
-  const localeTestimonials = useMemo(
-    () => getTestimonialsByLocale(locale),
-    [locale],
-  );
+  const localeTestimonials = useMemo(() => getTestimonialsByLocale(locale), [locale])
 
   useEffect(() => {
     if (localeTestimonials.length === 0) {
-      return;
+      return
     }
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % localeTestimonials.length);
-    }, 10000); // Time interval to change testimonial cards is 10 seconds
+      setCurrentIndex((prev) => (prev + 1) % localeTestimonials.length)
+    }, 10000) // Time interval to change testimonial cards is 10 seconds
 
-    return () => clearInterval(interval);
-  }, [localeTestimonials]);
+    return () => clearInterval(interval)
+  }, [localeTestimonials])
 
-  const currentTestimonial: TestimonialItem | undefined =
-    localeTestimonials[currentIndex] ?? localeTestimonials[0];
+  const currentTestimonial: TestimonialItem | undefined = localeTestimonials[currentIndex] ?? localeTestimonials[0]
 
   if (!currentTestimonial) {
-    return null;
+    return null
   }
 
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: localeTestimonials.length }).map(() =>
       Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
-    );
-  }, [localeTestimonials]);
+    )
+  }, [localeTestimonials])
 
   return (
     <SectionLayout
@@ -66,30 +59,21 @@ export function TestimonialsSection() {
             >
               <div className="flex flex-col items-start gap-4 md:gap-6 w-full max-w-[90%] py-6 md:py-8 mx-auto">
                 <Badge
-                  className={cn(
-                    currentTestimonial.linkedinUrl
-                      ? "bg-blue-100"
-                      : "bg-orange-200",
-                  )}
+                  className={cn(currentTestimonial.linkedinUrl ? "bg-blue-100" : "bg-orange-200")}
                   contentClassName="flex items-center gap-1 font-bold"
                   variant="colored"
                 >
-                  {(currentTestimonial.linkedinUrl ||
-                    currentTestimonial.websiteUrl) && (
+                  {(currentTestimonial.linkedinUrl || currentTestimonial.websiteUrl) && (
                     <>
                       {currentTestimonial?.linkedinUrl ? (
                         <>
                           <Linkedin size={18} variant="bulk" />
-                          <span className="hidden md:block leading-0">
-                            {t("common.base.linkedin")}
-                          </span>
+                          <span className="hidden md:block leading-0">{t("common.base.linkedin")}</span>
                         </>
                       ) : (
                         <>
                           <LinkOne size={18} variant="bulk" />
-                          <span className="hidden md:block leading-0">
-                            {t("common.base.website")}
-                          </span>
+                          <span className="hidden md:block leading-0">{t("common.base.website")}</span>
                         </>
                       )}
                     </>
@@ -114,9 +98,7 @@ export function TestimonialsSection() {
                       <cite className="text-lg font-medium text-b-white-invert not-italic">
                         {currentTestimonial.name}
                       </cite>
-                      <p className="text-sm text-b-white-invert">
-                        {currentTestimonial.position}
-                      </p>
+                      <p className="text-sm text-b-white-invert">{currentTestimonial.position}</p>
                     </div>
                   </div>
                 </div>
@@ -132,9 +114,7 @@ export function TestimonialsSection() {
                 key={index}
                 className={cn(
                   "rounded-full cursor-pointer transition-all duration-800 ease",
-                  index === currentIndex
-                    ? "bg-b-white-invert-sec w-6 h-2"
-                    : "bg-b-base w-2 h-2",
+                  index === currentIndex ? "bg-b-white-invert-sec w-6 h-2" : "bg-b-base w-2 h-2",
                 )}
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Testimonial ${index + 1}`}
@@ -154,13 +134,12 @@ export function TestimonialsSection() {
               //size="xs"
             >
               <span className="flex items-center gap-1">
-                {t("common.page-sections.testimonials.button")}{" "}
-                <LinkOne size={16} />
+                {t("common.page-sections.testimonials.button")} <LinkOne size={16} />
               </span>
             </Link>
           </div>
         </div>
       </div>
     </SectionLayout>
-  );
+  )
 }

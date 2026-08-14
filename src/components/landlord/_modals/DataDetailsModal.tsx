@@ -1,23 +1,12 @@
-"use client";
-import React from "react";
-import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogSeparator,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { StatusPill } from "@/components/landlord/components/AdminPrimitives";
-import { Locale } from "@/types/index";
-import {
-  formatDateTimePremium,
-  formatLabel,
-  formatReaction,
-} from "@/components/landlord/admin-utils";
+"use client"
+import React from "react"
+import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogSeparator, DialogTitle } from "@/components/ui/dialog"
+import { StatusPill } from "@/components/landlord/components/AdminPrimitives"
+import { Locale } from "@/types/index"
+import { formatDateTimePremium, formatLabel, formatReaction } from "@/components/landlord/admin-utils"
 
 export function DataDetailsModal({
   open,
@@ -25,32 +14,31 @@ export function DataDetailsModal({
   title,
   data,
 }: {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  title?: string;
-  data: Record<string, any> | null;
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  title?: string
+  data: Record<string, any> | null
 }) {
-  const tShared = useTranslations("admin.landlord.shared");
-  const tModal = useTranslations("admin.modals.data_details");
-  const displayTitle = title || tModal("default_title");
-  if (!data) return null;
+  const tShared = useTranslations("admin.landlord.shared")
+  const tModal = useTranslations("admin.modals.data_details")
+  const displayTitle = title || tModal("default_title")
+  if (!data) return null
 
-  const locales = Object.values(Locale) as string[];
+  const locales = Object.values(Locale) as string[]
 
   const isTranslationObject = (value: any) => {
-    if (typeof value !== "object" || value === null || Array.isArray(value))
-      return false;
-    const keys = Object.keys(value);
-    if (keys.length === 0) return false;
-    return keys.every((key) => locales.includes(key));
-  };
+    if (typeof value !== "object" || value === null || Array.isArray(value)) return false
+    const keys = Object.keys(value)
+    if (keys.length === 0) return false
+    return keys.every((key) => locales.includes(key))
+  }
 
   const isImageUrl = (value: any) => {
-    if (typeof value !== "string") return false;
-    const lower = value.toLowerCase();
+    if (typeof value !== "string") return false
+    const lower = value.toLowerCase()
 
     // Standard extensions
-    if (lower.match(/\.(jpeg|jpg|gif|png|webp|svg|avif)/i)) return true;
+    if (lower.match(/\.(jpeg|jpg|gif|png|webp|svg|avif)/i)) return true
 
     // Common CDNs and keywords
     const imagePatterns = [
@@ -64,20 +52,20 @@ export function DataDetailsModal({
       "avatar",
       "image",
       "profile_photo",
-    ];
+    ]
 
     if (imagePatterns.some((pattern) => lower.includes(pattern))) {
-      return lower.startsWith("http") || lower.startsWith("/api/");
+      return lower.startsWith("http") || lower.startsWith("/api/")
     }
 
-    return false;
-  };
+    return false
+  }
 
   const isDateUrl = (value: any) => {
-    if (typeof value !== "string") return false;
+    if (typeof value !== "string") return false
     // Basic ISO 8601 check (simplified)
-    return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(value);
-  };
+    return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(value)
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -86,38 +74,26 @@ export function DataDetailsModal({
           <DialogTitle>{displayTitle}</DialogTitle>
         </DialogHeader>
         <DialogSeparator />
-        <ScrollArea
-          className="max-h-[min(640px,75dvh)] w-full py-2"
-          scrollbarGutter
-        >
+        <ScrollArea className="max-h-[min(640px,75dvh)] w-full py-2" scrollbarGutter>
           <div className="grid min-w-0 gap-6 px-1">
             {Object.entries(data).map(([key, value]) => {
-              const restrictedAreas = ["ip", "userAgent"];
+              const restrictedAreas = ["ip", "userAgent"]
               if (restrictedAreas.includes(key)) {
-                return;
+                return
               }
-              const isImage = isImageUrl(value);
-              const isTranslation = isTranslationObject(value);
-              const isDate = !isImage && !isTranslation && isDateUrl(value);
+              const isImage = isImageUrl(value)
+              const isTranslation = isTranslationObject(value)
+              const isDate = !isImage && !isTranslation && isDateUrl(value)
               const isReaction =
                 !isImage &&
                 !isTranslation &&
                 !isDate &&
                 (key.toLowerCase().includes("reaction") ||
                   key.toLowerCase().includes("emoji") ||
-                  key.toLowerCase() === "type");
+                  key.toLowerCase() === "type")
               const isJson =
-                (!isTranslation &&
-                  !isDate &&
-                  !isReaction &&
-                  typeof value === "object" &&
-                  value !== null) ||
-                (typeof value === "string" &&
-                  value
-                    .toString()
-                    .replace(/^"/, "")
-                    .replace(/"$/, "")
-                    .startsWith("{"));
+                (!isTranslation && !isDate && !isReaction && typeof value === "object" && value !== null) ||
+                (typeof value === "string" && value.toString().replace(/^"/, "").replace(/"$/, "").startsWith("{"))
 
               return (
                 <div key={key} className="group space-y-2">
@@ -132,8 +108,8 @@ export function DataDetailsModal({
                         alt={key}
                         className="size-full object-contain p-2"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            "https://ui-avatars.com/api/?name=Error&background=f87171&color=fff";
+                          ;(e.target as HTMLImageElement).src =
+                            "https://ui-avatars.com/api/?name=Error&background=f87171&color=fff"
                         }}
                       />
                     </div>
@@ -145,9 +121,7 @@ export function DataDetailsModal({
                           className="flex flex-col gap-1 rounded-2xl border border-black/5 bg-black/1 p-3 text-sm transition-all hover:bg-black/3"
                         >
                           <div className="flex items-center gap-2">
-                            <StatusPill tone="neutral">
-                              {lang.toUpperCase()}
-                            </StatusPill>
+                            <StatusPill tone="neutral">{lang.toUpperCase()}</StatusPill>
                           </div>
                           <p className="whitespace-pre-wrap wrap-break-word leading-relaxed text-black/70">
                             {String(text) || "—"}
@@ -164,13 +138,9 @@ export function DataDetailsModal({
                             : JSON.stringify(JSON.parse(value), null, 2)}
                         </pre>
                       ) : isDate ? (
-                        <p className="font-semibold leading-relaxed text-black/75">
-                          {formatDateTimePremium(value)}
-                        </p>
+                        <p className="font-semibold leading-relaxed text-black/75">{formatDateTimePremium(value)}</p>
                       ) : isReaction ? (
-                        <p className="font-semibold leading-relaxed text-black/75">
-                          {formatReaction(String(value))}
-                        </p>
+                        <p className="font-semibold leading-relaxed text-black/75">{formatReaction(String(value))}</p>
                       ) : (
                         <p className="whitespace-pre-wrap break-all font-medium leading-relaxed text-black/70 md:wrap-break-word">
                           {String(value) || "—"}
@@ -179,20 +149,16 @@ export function DataDetailsModal({
                     </div>
                   )}
                 </div>
-              );
+              )
             })}
           </div>
         </ScrollArea>
         <DialogFooter className="mt-4">
-          <Button
-            variant="outline"
-            asPointer
-            onClick={() => onOpenChange(false)}
-          >
+          <Button variant="outline" asPointer onClick={() => onOpenChange(false)}>
             {tShared("close")}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

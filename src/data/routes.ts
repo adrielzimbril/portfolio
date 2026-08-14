@@ -1,10 +1,10 @@
 export type RouteType = {
-  key: string;
-  link: string;
-  inHeader: boolean;
-  inFooter: boolean;
-  inSitemap: boolean;
-};
+  key: string
+  link: string
+  inHeader: boolean
+  inFooter: boolean
+  inSitemap: boolean
+}
 
 type RouteKeys =
   | "home"
@@ -33,7 +33,7 @@ type RouteKeys =
   | "changelog"
   | "privacy"
   | "terms"
-  | "routes";
+  | "routes"
 
 export const routes: { [K in RouteKeys]: RouteType } = {
   home: {
@@ -231,4 +231,4 @@ export const routes: { [K in RouteKeys]: RouteType } = {
     inFooter: true,
     inSitemap: true,
   },
-};
+}

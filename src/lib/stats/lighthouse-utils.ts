@@ -1,4 +1,4 @@
-import type { LighthouseScores } from "@/lib/stats/types";
+import type { LighthouseScores } from "@/lib/stats/types"
 
 export function getScoreColor(score: number) {
   if (score === 100) {
@@ -8,7 +8,7 @@ export function getScoreColor(score: number) {
       text: "text-green-600",
       glow: "shadow-green-600/60",
       iconColor: "text-green-600",
-    };
+    }
   }
   if (score >= 90) {
     return {
@@ -17,7 +17,7 @@ export function getScoreColor(score: number) {
       text: "text-green-400",
       glow: "shadow-green-400/60",
       iconColor: "text-green-400",
-    };
+    }
   }
   if (score >= 70) {
     return {
@@ -26,7 +26,7 @@ export function getScoreColor(score: number) {
       text: "text-blue-500",
       glow: "shadow-blue-500/60",
       iconColor: "text-blue-500",
-    };
+    }
   }
   if (score >= 50) {
     return {
@@ -35,7 +35,7 @@ export function getScoreColor(score: number) {
       text: "text-amber-500",
       glow: "shadow-amber-500/60",
       iconColor: "text-amber-500",
-    };
+    }
   }
   if (score >= 25) {
     return {
@@ -44,7 +44,7 @@ export function getScoreColor(score: number) {
       text: "text-yellow-500",
       glow: "shadow-yellow-500/60",
       iconColor: "text-yellow-500",
-    };
+    }
   }
   return {
     bar: "bg-destructive",
@@ -52,15 +52,10 @@ export function getScoreColor(score: number) {
     text: "text-destructive",
     glow: "shadow-destructive/60",
     iconColor: "text-destructive",
-  };
+  }
 }
 
 export function getOverallScore(scores: LighthouseScores) {
-  const avg =
-    (scores.performance +
-      scores.accessibility +
-      scores.bestPractices +
-      scores.seo) /
-    4;
-  return Math.round(avg);
+  const avg = (scores.performance + scores.accessibility + scores.bestPractices + scores.seo) / 4
+  return Math.round(avg)
 }

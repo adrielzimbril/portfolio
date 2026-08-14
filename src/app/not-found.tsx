@@ -1,31 +1,31 @@
-import { Badge } from "@/components/ui/badge";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { cn } from "@/utils/utils";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
-import { routes } from "@/data/routes";
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/components/ui/link";
-import { Metadata } from "next";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { Navbar } from "@/components/shared/_layouts/navbar";
-import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top";
-import { Footer } from "@/components/shared/_layouts/footer";
+import { Badge } from "@/components/ui/badge"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { cn } from "@/utils/utils"
+import { richTextComponent } from "@/integrations/content/utils/mdx-components"
+import { routes } from "@/data/routes"
+import { getTranslations } from "next-intl/server"
+import { Link } from "@/components/ui/link"
+import { Metadata } from "next"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { Navbar } from "@/components/shared/_layouts/navbar"
+import { ScrollToTop } from "@/components/shared/_layouts/scroll-to-top"
+import { Footer } from "@/components/shared/_layouts/footer"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   const metadata: Metadata = {
     ...baseMetadata,
     title: t("not-found.title"),
     description: t("not-found.description"),
     keywords: t("not-found.keywords"),
-  };
+  }
 
-  return metadata;
+  return metadata
 }
 
 export default async function NotFound() {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return (
     <>
@@ -48,13 +48,9 @@ export default async function NotFound() {
                 {t("not-found.page.badge")}
               </Badge>
 
-              <div className="text-7xl md:text-9xl py-2 leading-none select-none">
-                🪐
-              </div>
+              <div className="text-7xl md:text-9xl py-2 leading-none select-none">🪐</div>
 
-              <h1 className="self-stretch font-medium">
-                {t.rich("not-found.page.title", { ...richTextComponent })}
-              </h1>
+              <h1 className="self-stretch font-medium">{t.rich("not-found.page.title", { ...richTextComponent })}</h1>
 
               <p className="relative text-base font-normal md:font-medium md:text-2xl max-w-3xl leading-snug text-b-white-invert-sec">
                 {t("not-found.page.desc")}
@@ -63,9 +59,7 @@ export default async function NotFound() {
 
             <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
               <Link href={routes.home.link} likeButton whileTap>
-                <span className="font-bold text-base">
-                  {t("not-found.page.cta.home")}
-                </span>
+                <span className="font-bold text-base">{t("not-found.page.cta.home")}</span>
               </Link>
             </div>
           </div>
@@ -74,5 +68,5 @@ export default async function NotFound() {
         <Footer />
       </div>
     </>
-  );
+  )
 }

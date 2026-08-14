@@ -15,8 +15,7 @@ export const ConfigValue = {
   NODE_ENV: process.env.NODE_ENV || "production",
 
   // Site Configuration
-  NEXT_PUBLIC_SITE_URL:
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   NEXT_PUBLIC_DOMAIN_SITE_URL: process.env.NEXT_PUBLIC_DOMAIN_SITE_URL,
   NEXT_PUBLIC_S3_DOMAIN_SITE_URL: process.env.NEXT_PUBLIC_S3_DOMAIN_SITE_URL,
   NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
@@ -39,12 +38,10 @@ export const ConfigValue = {
   BETTER_AUTH_URL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   AUTH_TOKEN_KEY: "shiro-auth-token",
   NEXT_PRIVATE_ADMIN_EMAILS: process.env.NEXT_PRIVATE_ADMIN_EMAILS,
-  NEXT_PRIVATE_SESSION_TIMEOUT_HOURS:
-    process.env.NEXT_PRIVATE_SESSION_TIMEOUT_HOURS || "1",
+  NEXT_PRIVATE_SESSION_TIMEOUT_HOURS: process.env.NEXT_PRIVATE_SESSION_TIMEOUT_HOURS || "1",
 
   // Callback URLs for different pages
-  AUTH_CALLBACK_URL_COMMUNITY:
-    process.env.AUTH_CALLBACK_URL_COMMUNITY || "/community",
+  AUTH_CALLBACK_URL_COMMUNITY: process.env.AUTH_CALLBACK_URL_COMMUNITY || "/community",
   AUTH_CALLBACK_URL_DEFAULT: process.env.AUTH_CALLBACK_URL_DEFAULT || "/",
   AUTH_DEFAULT_REDIRECT: process.env.AUTH_DEFAULT_REDIRECT || "/",
 
@@ -54,8 +51,7 @@ export const ConfigValue = {
   // Supabase
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY:
-    process.env.NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY,
+  NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY: process.env.NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY,
 
   // Email & Contact
   CONTACTS_PROVIDER: process.env.CONTACTS_PROVIDER,
@@ -99,10 +95,8 @@ export const ConfigValue = {
   NEXT_PRIVATE_POSTHOG_CODE: process.env.NEXT_PRIVATE_POSTHOG_CODE,
   NEXT_PRIVATE_POSTHOG_KEY: process.env.NEXT_PRIVATE_POSTHOG_KEY,
   NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-  NEXT_PRIVATE_POSTHOG_PERSONAL_KEY:
-    process.env.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
-  NEXT_PUBLIC_POSTHOG_HOST:
-    process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+  NEXT_PRIVATE_POSTHOG_PERSONAL_KEY: process.env.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
+  NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
   NEXT_PUBLIC_PLAUSIBLE_URL: process.env.NEXT_PUBLIC_PLAUSIBLE_URL,
   NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
 
@@ -111,8 +105,7 @@ export const ConfigValue = {
   S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
   S3_ENDPOINT: process.env.S3_ENDPOINT,
   S3_REGION: process.env.S3_REGION,
-  NEXT_PUBLIC_AVATARS_BUCKET_NAME:
-    process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME || "avatars",
+  NEXT_PUBLIC_AVATARS_BUCKET_NAME: process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME || "avatars",
   S3_BACKUP_BUCKET: process.env.S3_BACKUP_BUCKET || "database-backups",
 
   // AI (Optional - used for markdown file translations and i18n nextintl translations)
@@ -120,11 +113,9 @@ export const ConfigValue = {
 
   // Bot Protection
   NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-  NEXT_PRIVATE_RECAPTCHA_SECRET_KEY:
-    process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
+  NEXT_PRIVATE_RECAPTCHA_SECRET_KEY: process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-  NEXT_PRIVATE_TURNSTILE_SECRET_KEY:
-    process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
+  NEXT_PRIVATE_TURNSTILE_SECRET_KEY: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
 
   // Performance
   PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
@@ -132,9 +123,9 @@ export const ConfigValue = {
 
   // Legacy / Other
   NEXT_PUBLIC_REST_API_ENDPOINT: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
-} as const;
+} as const
 
 /**
  * Type definition for ConfigValue
  */
-export type ConfigValue = typeof ConfigValue;
+export type ConfigValue = typeof ConfigValue

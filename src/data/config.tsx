@@ -1,5 +1,5 @@
-import { routes } from "@/data/routes";
-import { getBaseUrl, getImageUrl } from "@/utils";
+import { routes } from "@/data/routes"
+import { getBaseUrl, getImageUrl } from "@/utils"
 import {
   User,
   House,
@@ -13,21 +13,18 @@ import {
   Youtube,
   Figma,
   Tiktok,
-} from "@aurthle/icons";
+} from "@aurthle/icons"
 
-const BASE_URL = getBaseUrl();
+const BASE_URL = getBaseUrl()
 
 export const siteConfig = {
   name: "Adriel Zimbril",
   description: "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
-  seoDescription:
-    "J'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles.",
+  seoDescription: "J'aide les entrepreneurs et les entreprises à transformer leurs idées en SaaS utiles.",
   url: BASE_URL,
   languagePrimary: "fr_FR",
   languagesArray: ["fr_FR", "en_US", "cn_CN"],
-  keywords: [
-    "design produit SaaS, SaaS Adriel Zimbril, Product Designer SaaS, création SaaS, UX UI SaaS",
-  ],
+  keywords: ["design produit SaaS, SaaS Adriel Zimbril, Product Designer SaaS, création SaaS, UX UI SaaS"],
   seo: {
     ogImage: {
       original: getImageUrl("opengraph-image.png"),
@@ -41,8 +38,7 @@ export const siteConfig = {
     id: "adrielzimbril",
     username: "@adrielzimbril",
     name: "Adriel Zimbril",
-    nameShared:
-      "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
+    nameShared: "Adriel Zimbril - Product designer & Problem Solver for SaaS 🦄",
     hook: "Let's chat about your next project 👋",
     avatar: getImageUrl(routes.avatar.link),
     avatarReal: getImageUrl(routes.avatarReal.link),
@@ -195,6 +191,6 @@ export const siteConfig = {
       },
     },
   },
-};
+}
 
-export type SiteConfig = typeof siteConfig;
+export type SiteConfig = typeof siteConfig

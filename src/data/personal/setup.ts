@@ -1,5 +1,5 @@
-import { SetupItem } from "@/types";
-import { ToolboxSetupItemCategory } from "@/types/enum";
+import { SetupItem } from "@/types"
+import { ToolboxSetupItemCategory } from "@/types/enum"
 
 export const setup: SetupItem[] = [
   {
@@ -7,11 +7,9 @@ export const setup: SetupItem[] = [
     name: "Asus TUF F17 (17 inch), 2021",
     category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Laptop"],
-    description:
-      "17.3-inch FHD IPS panel with 144Hz refresh rate. Military-grade durability for daily use.",
+    description: "17.3-inch FHD IPS panel with 144Hz refresh rate. Military-grade durability for daily use.",
     imageUrl: "/img/setup/asus-f17-17-inch-2021.jpg",
-    purchaseUrl:
-      "https://www.asus.com/us/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-f17/",
+    purchaseUrl: "https://www.asus.com/us/laptops/for-gaming/tuf-gaming/asus-tuf-gaming-f17/",
   },
   {
     id: "obsbot-tiny-3-lite",
@@ -21,8 +19,7 @@ export const setup: SetupItem[] = [
     description:
       "Compact webcam with 1/2-inch CMOS sensor, 4K at 30fps and 1080p at 120fps. AI-powered tracking and framing for seamless video calls.",
     imageUrl: "/img/setup/obsbot-tiny-3-lite.jpg",
-    purchaseUrl:
-      "https://www.obsbot.com/store/products/tiny-3-lite?variant=Regular_Price",
+    purchaseUrl: "https://www.obsbot.com/store/products/tiny-3-lite?variant=Regular_Price",
   },
   {
     id: "xiaomi-redmi-g34wq",
@@ -32,8 +29,7 @@ export const setup: SetupItem[] = [
     description:
       "34-inch curved gaming monitor, WQHD resolution, 180Hz refresh rate, 1500R curvature. TÜV certified for reduced eye strain.",
     imageUrl: "/img/setup/monitor-redmi-g34wq-2026.png",
-    purchaseUrl:
-      "https://www.mi.com/global/product/xiaomi-curved-gaming-monitor-g34wqi-2026/",
+    purchaseUrl: "https://www.mi.com/global/product/xiaomi-curved-gaming-monitor-g34wqi-2026/",
   },
   {
     id: "steelseries-apex-pro-gen-3",
@@ -50,8 +46,7 @@ export const setup: SetupItem[] = [
     name: "SteelSeries Aerox 5 Wireless",
     category: ToolboxSetupItemCategory.ACCESSORIES,
     tags: ["Mouse"],
-    description:
-      "Lightweight honeycomb shell at 66g. TrueMove Air optical sensor for precise tracking.",
+    description: "Lightweight honeycomb shell at 66g. TrueMove Air optical sensor for precise tracking.",
     imageUrl: "/img/setup/steelseries-aerox-5-wireless.png",
     purchaseUrl: "https://steelseries.com/gaming-mice/aerox-5-wireless",
   },
@@ -60,11 +55,9 @@ export const setup: SetupItem[] = [
     name: "SteelSeries Alias USB Mic",
     category: ToolboxSetupItemCategory.AUDIO,
     tags: ["Microphone"],
-    description:
-      "Professional-grade sound for streamers. Balanced frequency response with minimal background noise.",
+    description: "Professional-grade sound for streamers. Balanced frequency response with minimal background noise.",
     imageUrl: "/img/setup/steelseries-alias-usb-mic.png",
-    purchaseUrl:
-      "https://steelseries.com/gaming-microphones/alias?model=Regular",
+    purchaseUrl: "https://steelseries.com/gaming-microphones/alias?model=Regular",
   },
   {
     id: "quntis-rgb-pro-plus",
@@ -81,21 +74,18 @@ export const setup: SetupItem[] = [
     name: "Diablo V Basic Black Grey",
     category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Chair"],
-    description:
-      "Fully adjustable, supportive, and breathable desk chair in black and white finish.",
+    description: "Fully adjustable, supportive, and breathable desk chair in black and white finish.",
     imageUrl: "/img/setup/diablo-v-basic-black-grey.jpg",
-    purchaseUrl:
-      "https://diablochairs.com/en/3540-ergonomic-chair-diablo-v-basic-black-grey",
+    purchaseUrl: "https://diablochairs.com/en/3540-ergonomic-chair-diablo-v-basic-black-grey",
   },
   {
     id: "playstation-dualsense-gray-camouflage",
     name: "PlayStation DualSense® - Gray Camouflage",
     category: ToolboxSetupItemCategory.HARDWARE,
     tags: ["Controller"],
-    description:
-      "Refined design with subtle texture details and updated logo in Gray Camouflage.",
+    description: "Refined design with subtle texture details and updated logo in Gray Camouflage.",
     imageUrl: "/img/setup/playstation-dualsense-gray-camouflage.jpg",
     purchaseUrl:
       "https://direct.playstation.com/fr-fr/buy-accessories/dualsense-wireless-controller-grey-camouflage-for-ps5-pc-mac-mobile",
   },
-];
+]

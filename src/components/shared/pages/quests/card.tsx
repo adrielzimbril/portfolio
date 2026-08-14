@@ -1,9 +1,9 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { CardPreview } from "@/components/shared/pages/shared/preview";
-import { CardInfo } from "@/components/shared/pages/quests/details";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent } from "@/components/ui/card"
+import { CardPreview } from "@/components/shared/pages/shared/preview"
+import { CardInfo } from "@/components/shared/pages/quests/details"
+import { Skeleton } from "@/components/ui/skeleton"
 
-import { PageType } from "@/types/enum";
+import { PageType } from "@/types/enum"
 
 export function QuestCard({
   title,
@@ -15,17 +15,17 @@ export function QuestCard({
   action,
   hideReactions = false,
 }: {
-  title: string;
-  cover?: string;
-  slug: string;
-  tags: { name: string; meta?: Record<string, any> }[];
-  description: string;
-  features: string[];
+  title: string
+  cover?: string
+  slug: string
+  tags: { name: string; meta?: Record<string, any> }[]
+  description: string
+  features: string[]
   action?: {
-    label: string;
-    href: string;
-  } | null;
-  hideReactions?: boolean;
+    label: string
+    href: string
+  } | null
+  hideReactions?: boolean
 }) {
   return (
     <Card className="group relative bg-b-base-second squircle-6xl/100  size-full border-0 overflow-hidden">
@@ -52,9 +52,9 @@ export function QuestCard({
         />
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export function QuestCardSkeleton() {
-  return <Skeleton name="quest-card" className="w-full h-80" />;
+  return <Skeleton name="quest-card" className="w-full h-80" />
 }

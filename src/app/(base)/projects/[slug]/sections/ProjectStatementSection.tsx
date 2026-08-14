@@ -1,26 +1,23 @@
-"use client";
-import React from "react";
-import { ResourceCard } from "@/components/shared/pages/resources/page/card";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import { ResourceCard } from "@/components/shared/pages/resources/page/card"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { useTranslations } from "use-intl"
 
 export function ProjectStatementSection({
   description,
   statements,
 }: {
-  description: string;
-  statements: { icon: string; number: string; description: string }[];
+  description: string
+  statements: { icon: string; number: string; description: string }[]
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <>
       <SectionLayout
         title={t("projects.inner-page.project-statement-section.title")}
-        description={
-          description ||
-          t("projects.inner-page.project-statement-section.description")
-        }
+        description={description || t("projects.inner-page.project-statement-section.description")}
         className="p-0"
         contentClassName="md:grid-cols-3"
       >
@@ -29,5 +26,5 @@ export function ProjectStatementSection({
         ))}
       </SectionLayout>
     </>
-  );
+  )
 }

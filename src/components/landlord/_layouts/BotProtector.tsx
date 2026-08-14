@@ -1,49 +1,44 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import { Turnstile } from "@/integrations/anti-bot/turnstile-second";
-import { ConfigValue } from "@/config";
-import { Loader2, ShieldCheck, ShieldAlert } from "lucide-react";
-import { cn } from "@/utils";
-import { isLocal } from "@/config/utils";
-import { logger } from "@/utils/logger";
-import { useTranslations } from "next-intl";
+import React, { useState, useEffect } from "react"
+import { Turnstile } from "@/integrations/anti-bot/turnstile-second"
+import { ConfigValue } from "@/config"
+import { Loader2, ShieldCheck, ShieldAlert } from "lucide-react"
+import { cn } from "@/utils"
+import { isLocal } from "@/config/utils"
+import { logger } from "@/utils/logger"
+import { useTranslations } from "next-intl"
 
 interface BotProtectorProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export function BotProtector({ children }: BotProtectorProps) {
-  const t = useTranslations("admin.bot_protector");
-  const isLocalMode = isLocal();
+  const t = useTranslations("admin.bot_protector")
+  const isLocalMode = isLocal()
 
-  const sessionVerified =
-    !isLocalMode && sessionStorage.getItem("shiro_bot_verified") === "true";
+  const sessionVerified = !isLocalMode && sessionStorage.getItem("shiro_bot_verified") === "true"
 
-  const [isVerified, setIsVerified] = useState<boolean>(
-    isLocalMode || sessionVerified,
-  );
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(
-    !isLocalMode && !sessionVerified,
-  );
+  const [isVerified, setIsVerified] = useState<boolean>(isLocalMode || sessionVerified)
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(!isLocalMode && !sessionVerified)
 
   const handleVerify = (token: string) => {
     if (token) {
-      setIsVerified(true);
-      setIsLoading(false);
-      sessionStorage.setItem("shiro_bot_verified", "true");
+      setIsVerified(true)
+      setIsLoading(false)
+      sessionStorage.setItem("shiro_bot_verified", "true")
     }
-  };
+  }
 
   const handleError = (err: any) => {
-    logger.error("[BotProtector] Turnstile error:", err);
-    setError(t("verification_failed"));
-    setIsLoading(false);
-  };
+    logger.error("[BotProtector] Turnstile error:", err)
+    setError(t("verification_failed"))
+    setIsLoading(false)
+  }
 
   if (isVerified) {
-    return <>{children}</>;
+    return <>{children}</>
   }
 
   return (
@@ -76,10 +71,7 @@ export function BotProtector({ children }: BotProtectorProps) {
 
         <div className="mt-8 flex justify-center">
           <Turnstile
-            siteKey={
-              ConfigValue.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
-              "1x00000000000000000000AA"
-            }
+            siteKey={ConfigValue.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
             onVerify={handleVerify}
             onError={handleError}
             appearance="execute"
@@ -97,5 +89,5 @@ export function BotProtector({ children }: BotProtectorProps) {
         )}
       </div>
     </div>
-  );
+  )
 }

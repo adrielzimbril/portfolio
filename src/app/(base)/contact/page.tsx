@@ -1,12 +1,12 @@
-import React from "react";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import ContactForm from "@/app/(base)/contact/sections/ContactForm";
-import { Skeleton } from "@/components/ui/skeleton";
-import { metadata as baseMetadata } from "@/app/metadata";
+import React from "react"
+import { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
+import ContactForm from "@/app/(base)/contact/sections/ContactForm"
+import { Skeleton } from "@/components/ui/skeleton"
+import { metadata as baseMetadata } from "@/app/metadata"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -23,9 +23,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("contact.title"),
       description: t("contact.description"),
     },
-  };
+  }
 
-  return metadata;
+  return metadata
 }
 
 export default function Contact() {
@@ -33,5 +33,5 @@ export default function Contact() {
     <Skeleton name="form-contact" loading={false}>
       <ContactForm />
     </Skeleton>
-  );
+  )
 }

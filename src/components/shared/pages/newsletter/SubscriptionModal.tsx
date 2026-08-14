@@ -1,47 +1,41 @@
-"use client";
-import React, { useEffect, useState, useRef } from "react";
-import { CheckCircle } from "@aurthle/icons";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Form } from "@/components/ui/form";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import logger from "@/utils/logger";
-import { toast } from "@/lib/toast";
-import { PhoneInput } from "@aurthle/react-phone";
-import * as RPNInput from "react-phone-number-input";
-import confetti from "canvas-confetti";
-import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo";
-import { cn } from "@/utils/utils";
-import { ResourceTypeKey } from "@/types";
-import { Loader } from "@/components/shared/_layouts/loader";
-import { useTranslations, useLocale } from "use-intl";
-import { apiRoutes } from "@/data/api-routes";
-import { redirect } from "next/navigation";
-import { getPathUrl, sleep } from "@/utils";
-import { routes } from "@/data/routes";
+"use client"
+import React, { useEffect, useState, useRef } from "react"
+import { CheckCircle } from "@aurthle/icons"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Form } from "@/components/ui/form"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import logger from "@/utils/logger"
+import { toast } from "@/lib/toast"
+import { PhoneInput } from "@aurthle/react-phone"
+import * as RPNInput from "react-phone-number-input"
+import confetti from "canvas-confetti"
+import { getIpInfo, useGetIpInfo } from "@/hooks/useIpInfo"
+import { cn } from "@/utils/utils"
+import { ResourceTypeKey } from "@/types"
+import { Loader } from "@/components/shared/_layouts/loader"
+import { useTranslations, useLocale } from "use-intl"
+import { apiRoutes } from "@/data/api-routes"
+import { redirect } from "next/navigation"
+import { getPathUrl, sleep } from "@/utils"
+import { routes } from "@/data/routes"
 
 interface SubscriptionModalProps {
-  isOpen: boolean;
-  email?: string;
-  productId?: string;
-  productType?: ResourceTypeKey;
-  onClose: () => void;
+  isOpen: boolean
+  email?: string
+  productId?: string
+  productType?: ResourceTypeKey
+  onClose: () => void
 }
 
 const confettiConfig: {
-  beforeName: boolean;
-  afterName: boolean;
+  beforeName: boolean
+  afterName: boolean
 } = {
   beforeName: false,
   afterName: true,
-};
+}
 
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
@@ -50,65 +44,61 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   productType,
   onClose,
 }) => {
-  const t = useTranslations();
-  const locale = useLocale();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [userCountry, setUserCountry] = useState<RPNInput.Country>("FR");
-  const [hasInitialSubscription, setHasInitialSubscription] = useState(false);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const t = useTranslations()
+  const locale = useLocale()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [userCountry, setUserCountry] = useState<RPNInput.Country>("FR")
+  const [hasInitialSubscription, setHasInitialSubscription] = useState(false)
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
 
   // Use of useRef to ensure we only fetch the IP once
-  const ipInfoFetched = useRef(false);
-  const countryFetched = useRef(false);
+  const ipInfoFetched = useRef(false)
+  const countryFetched = useRef(false)
 
   // Fetch the country once at open
   useEffect(() => {
-    if (!isOpen || countryFetched.current) return;
+    if (!isOpen || countryFetched.current) return
 
     const getCountry = async () => {
       try {
-        const country = await getIpInfo();
-        setUserCountry(
-          (country.data?.country?.iso2 as RPNInput.Country) ??
-            ("FR" as unknown as RPNInput.Country),
-        );
+        const country = await getIpInfo()
+        setUserCountry((country.data?.country?.iso2 as RPNInput.Country) ?? ("FR" as unknown as RPNInput.Country))
       } catch (error) {
-        logger.error(t("logger.ip.fetch.country-failed"), error);
+        logger.error(t("logger.ip.fetch.country-failed"), error)
       }
-    };
+    }
 
-    getCountry();
-    countryFetched.current = true;
-  }, [isOpen]);
+    getCountry()
+    countryFetched.current = true
+  }, [isOpen])
 
   const apiSubscribe = (data: {
-    email: string;
-    name?: string;
-    phone?: string;
-    subscribedFromPage?: string;
-    updateExisting: boolean;
-    productId?: string;
-    productType?: ResourceTypeKey;
-    updateLayer?: boolean;
+    email: string
+    name?: string
+    phone?: string
+    subscribedFromPage?: string
+    updateExisting: boolean
+    productId?: string
+    productType?: ResourceTypeKey
+    updateLayer?: boolean
   }) => {
     return fetch(apiRoutes.subscribe.link, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data, locale }),
-    });
-  };
+    })
+  }
 
   // Automatic subscription with email at open
   useEffect(() => {
     //if (!isOpen || !email || hasInitialSubscription || ipInfoFetched.current)
-    if (!isOpen || !email) return;
+    if (!isOpen || !email) return
 
     const subscribeWithEmail = async () => {
       try {
-        const subscribedFromPage =
-          typeof window !== "undefined" ? window.location.pathname : undefined;
+        const subscribedFromPage = typeof window !== "undefined" ? window.location.pathname : undefined
 
         await apiSubscribe({
           email,
@@ -118,31 +108,31 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           productType,
           updateLayer: false,
         }).then(async (res) => {
-          const json = await res.json();
+          const json = await res.json()
           if (!res.ok) {
-            throw new Error(json?.error || t("zod.errors.customized.hint"));
+            throw new Error(json?.error || t("zod.errors.customized.hint"))
           }
 
           const handleClick = () => {
-            const end = Date.now() + 3 * 1000; // 3 seconds
-            const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+            const end = Date.now() + 3 * 1000 // 3 seconds
+            const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"]
 
-            const scalar = 2;
+            const scalar = 2
             const triangle = confetti.shapeFromPath({
               path: "M0 10 L5 0 L10 10z",
-            });
+            })
             const square = confetti.shapeFromPath({
               path: "M0 0 L10 0 L10 10 L0 10 Z",
-            });
+            })
             const coin = confetti.shapeFromPath({
               path: "M5 0 A5 5 0 1 0 5 10 A5 5 0 1 0 5 0 Z",
-            });
+            })
             const tree = confetti.shapeFromPath({
               path: "M5 0 L10 10 L0 10 Z",
-            });
+            })
 
             const frame = () => {
-              if (Date.now() > end) return;
+              if (Date.now() > end) return
               confetti({
                 particleCount: 2,
                 angle: 60,
@@ -152,7 +142,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 colors: colors,
                 shapes: [triangle, square, coin, tree],
                 scalar,
-              });
+              })
               confetti({
                 particleCount: 2,
                 angle: 120,
@@ -162,75 +152,74 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 colors: colors,
                 shapes: [triangle, square, coin, tree],
                 scalar,
-              });
-              requestAnimationFrame(frame);
-            };
-            frame();
-          };
-          if (confettiConfig.beforeName) {
-            handleClick();
+              })
+              requestAnimationFrame(frame)
+            }
+            frame()
           }
-        });
+          if (confettiConfig.beforeName) {
+            handleClick()
+          }
+        })
 
-        setHasInitialSubscription(true);
+        setHasInitialSubscription(true)
       } catch (error) {
-        toast.error(t("logger.newsletter.subscribe.failed"));
-        logger.error(t("logger.newsletter.subscribe.failed"), error);
+        toast.error(t("logger.newsletter.subscribe.failed"))
+        logger.error(t("logger.newsletter.subscribe.failed"), error)
       }
-    };
+    }
 
-    subscribeWithEmail();
-    ipInfoFetched.current = true;
-  }, [isOpen, email, hasInitialSubscription]);
+    subscribeWithEmail()
+    ipInfoFetched.current = true
+  }, [isOpen, email, hasInitialSubscription])
 
   const animateConfetti = () => {
-    const duration = 8 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+    const duration = 8 * 1000
+    const animationEnd = Date.now() + duration
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
 
-    const randomInRange = (min: number, max: number) =>
-      Math.random() * (max - min) + min;
+    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min
 
     const interval = window.setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
+      const timeLeft = animationEnd - Date.now()
 
       if (timeLeft <= 0) {
-        return clearInterval(interval);
+        return clearInterval(interval)
       }
 
-      const particleCount = 50 * (timeLeft / duration);
+      const particleCount = 50 * (timeLeft / duration)
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-      });
+      })
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-      });
-    }, 250);
-  };
+      })
+    }, 250)
+  }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!email) {
-      toast.error(t("zod.errors.customized.email.update-required"));
-      return;
+      toast.error(t("zod.errors.customized.email.update-required"))
+      return
     }
 
     if (name.length < 4) {
-      toast.error(t("zod.errors.customized.name.required"));
-      return;
+      toast.error(t("zod.errors.customized.name.required"))
+      return
     }
 
     if (phone.length < 10) {
-      toast.error(t("zod.errors.customized.phone.required"));
-      return;
+      toast.error(t("zod.errors.customized.phone.required"))
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       await apiSubscribe({
@@ -239,63 +228,57 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         phone: phone || undefined,
         productId,
         productType,
-        subscribedFromPage:
-          typeof window !== "undefined" ? window.location.pathname : undefined,
+        subscribedFromPage: typeof window !== "undefined" ? window.location.pathname : undefined,
         updateExisting: true,
         updateLayer: true,
-      });
+      })
 
-      setIsSuccess(true);
+      setIsSuccess(true)
       if (confettiConfig.afterName) {
-        animateConfetti();
+        animateConfetti()
       }
 
       // Show playful toast
-      toast.success(
-        t("common.page-sections.newsletter.form.success.redirect"),
-        {
-          timeout: 2000,
-        },
-      );
+      toast.success(t("common.page-sections.newsletter.form.success.redirect"), {
+        timeout: 2000,
+      })
 
       setTimeout(() => {
-        onClose();
-        setIsSuccess(false);
-        setName("");
-        setPhone("");
+        onClose()
+        setIsSuccess(false)
+        setName("")
+        setPhone("")
         if (confettiConfig.afterName) {
-          animateConfetti();
+          animateConfetti()
         }
         // Redirect to product page
         sleep(2000).then(() => {
-          redirect(getPathUrl(routes.hub.link));
-        });
-      }, 2000);
+          redirect(getPathUrl(routes.hub.link))
+        })
+      }, 2000)
     } catch (error) {
-      logger.error(t("logger.newsletter.subscribe.failed"), error);
-      toast.error(t("logger.form.submit-update-failed"));
+      logger.error(t("logger.newsletter.subscribe.failed"), error)
+      toast.error(t("logger.form.submit-update-failed"))
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const handleClose = () => {
     if (!isSubmitting) {
-      onClose();
-      setIsSuccess(false);
-      setName("");
-      setPhone("");
+      onClose()
+      setIsSuccess(false)
+      setName("")
+      setPhone("")
     }
-  };
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-start">
-            {productId
-              ? t("common.page-sections.newsletter.hub-title")
-              : t("common.page-sections.newsletter.title")}
+            {productId ? t("common.page-sections.newsletter.hub-title") : t("common.page-sections.newsletter.title")}
           </DialogTitle>
           <DialogDescription className="text-center hidden text-b-white-invert-sec">
             {hasInitialSubscription
@@ -311,9 +294,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               {t("common.page-sections.newsletter.form.success.message.title")}
             </h3>
             <p className="text-center text-b-white-invert-sec">
-              {t(
-                "common.page-sections.newsletter.form.success.message.description",
-              )}
+              {t("common.page-sections.newsletter.form.success.message.description")}
             </p>
           </div>
         ) : (
@@ -324,18 +305,14 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               </FieldLabel>
               <Input
                 name="name"
-                placeholder={t(
-                  "common.page-sections.newsletter.form.fields.name.placeholder",
-                )}
+                placeholder={t("common.page-sections.newsletter.form.fields.name.placeholder")}
                 className="h-12 border-2"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
                 minLength={4}
               />
-              <FieldError>
-                {t("zod.errors.customized.name.required")}
-              </FieldError>
+              <FieldError>{t("zod.errors.customized.name.required")}</FieldError>
             </Field>
 
             <Field>
@@ -347,13 +324,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 wrapperClassName="rounded-xl w-full h-12"
                 className="rounded-xl w-full h-12"
                 inputComponent={Input}
-                inputClassName={cn(
-                  "-ms-px shadow-none",
-                  "peer ps-18",
-                  "h-auto",
-                  "rounded-xl",
-                  "text-base",
-                )}
+                inputClassName={cn("-ms-px shadow-none", "peer ps-18", "h-auto", "rounded-xl", "text-base")}
                 triggerClassName={cn(
                   "bg-b-base-it border-b-base-accent! hover:bg-b-base h-auto rounded-s-xl peer z-10",
                   "h-auto border-2",
@@ -362,28 +333,14 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 value={phone || ""}
                 onChange={(value) => setPhone(value || "")}
               />
-              <FieldError>
-                {t("zod.errors.customized.phone.required")}
-              </FieldError>
+              <FieldError>{t("zod.errors.customized.phone.required")}</FieldError>
             </Field>
 
             <div className="flex gap-3">
-              <Button
-                type="submit"
-                size="lg"
-                disabled={isSubmitting}
-                className="flex-1"
-                asFull
-                asPointer
-                whileTap
-              >
+              <Button type="submit" size="lg" disabled={isSubmitting} className="flex-1" asFull asPointer whileTap>
                 {isSubmitting ? (
                   <>
-                    <Loader
-                      color="bg-b-base"
-                      variant="bounce"
-                      className="py-2"
-                    />
+                    <Loader color="bg-b-base" variant="bounce" className="py-2" />
                     {/* <span>{t("common.button.sending")}</span> */}
                   </>
                 ) : (
@@ -397,5 +354,5 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         )}
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

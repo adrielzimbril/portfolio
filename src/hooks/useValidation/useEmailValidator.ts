@@ -1,6 +1,6 @@
-import { useRequiredValidator } from "@/hooks/useValidation/useRequiredValidator";
-import { RequiredValidatorProps } from "@/hooks/useValidation/useRequiredValidator";
-import isEmail from "validator/lib/isEmail";
+import { useRequiredValidator } from "@/hooks/useValidation/useRequiredValidator"
+import { RequiredValidatorProps } from "@/hooks/useValidation/useRequiredValidator"
+import isEmail from "validator/lib/isEmail"
 
 export const useEmailValidator = ({
   label,
@@ -10,13 +10,13 @@ export const useEmailValidator = ({
     value: "",
     label,
     required,
-  });
+  })
 
   return (value: string) => {
     if (value && !isEmail(value.trim())) {
-      return `${label} is not a valid email address`;
+      return `${label} is not a valid email address`
     }
 
-    return requiredValidator(value);
-  };
-};
+    return requiredValidator(value)
+  }
+}

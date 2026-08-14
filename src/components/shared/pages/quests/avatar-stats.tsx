@@ -1,29 +1,22 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
-import { cn } from "@/utils/utils";
-import { ResourceType } from "@/types";
-import BoringAvatar from "boring-avatars";
-import { getImageUrl, pickRandomColorCode } from "@/utils";
-import { useMemo } from "react";
-import { useTranslations } from "use-intl";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { AvatarGroup } from "@/components/aurthle/ui/avatar-group"
+import { cn } from "@/utils/utils"
+import { ResourceType } from "@/types"
+import BoringAvatar from "boring-avatars"
+import { getImageUrl, pickRandomColorCode } from "@/utils"
+import { useMemo } from "react"
+import { useTranslations } from "use-intl"
 
 interface StatsProps {
-  avatars?: string[];
-  userCount: number;
-  resourceType: ResourceType;
-  colorName?: string;
-  className?: string;
-  badgeClassName?: string;
+  avatars?: string[]
+  userCount: number
+  resourceType: ResourceType
+  colorName?: string
+  className?: string
+  badgeClassName?: string
 }
 
-export function AvatarsStats({
-  avatars,
-  userCount,
-  resourceType,
-  colorName,
-  className,
-  badgeClassName,
-}: StatsProps) {
+export function AvatarsStats({ avatars, userCount, resourceType, colorName, className, badgeClassName }: StatsProps) {
   return (
     <div
       className={cn(
@@ -33,30 +26,20 @@ export function AvatarsStats({
       )}
     >
       <UserAvatars avatars={avatars} userCount={userCount} />
-      <UserCount
-        count={userCount}
-        resourceType={resourceType}
-        className={badgeClassName}
-      />
+      <UserCount count={userCount} resourceType={resourceType} className={badgeClassName} />
     </div>
-  );
+  )
 }
 
-function UserAvatars({
-  avatars,
-  userCount,
-}: {
-  avatars?: string[];
-  userCount?: number;
-}) {
-  const numPeople = avatars?.length ?? userCount ?? 0;
+function UserAvatars({ avatars, userCount }: { avatars?: string[]; userCount?: number }) {
+  const numPeople = avatars?.length ?? userCount ?? 0
 
   // ✅ Generate all colors in one time, outside of .map()
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: numPeople }).map(() =>
       Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
-    );
-  }, [numPeople]);
+    )
+  }, [numPeople])
 
   return (
     <div className="inline-flex items-start">
@@ -69,20 +52,17 @@ function UserAvatars({
                 <AvatarImage src={getImageUrl(avatars?.[index] ?? "")} />
                 <AvatarFallback className={cn("relative pointer-events-none")}>
                   <BoringAvatar
-                    name={
-                      avatars?.[index]?.slice(8)?.replace(".png", "") ??
-                      (index + 1).toString()
-                    }
+                    name={avatars?.[index]?.slice(8)?.replace(".png", "") ?? (index + 1).toString()}
                     colors={colorSets[index] ?? []}
                     variant="beam"
                   />
                 </AvatarFallback>
               </Avatar>
-            );
+            )
           })}
       </AvatarGroup>
     </div>
-  );
+  )
 }
 
 function UserCount({
@@ -90,42 +70,25 @@ function UserCount({
   resourceType,
   className,
 }: {
-  count: number;
-  resourceType: ResourceType;
-  className?: string;
+  count: number
+  resourceType: ResourceType
+  className?: string
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
   const productTypeMap: Record<ResourceType, string> = {
-    [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.badge",
-    ),
-    [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.badge",
-    ),
-    [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.badge",
-    ),
-    [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.badge",
-    ),
-    [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma_template.badge",
-    ),
-    [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.badge",
-    ),
-  };
+    [ResourceType.COURSE]: t("common.page-sections.hub.base.resources-type.course.badge"),
+    [ResourceType.EBOOK]: t("common.page-sections.hub.base.resources-type.ebook.badge"),
+    [ResourceType.VIDEO]: t("common.page-sections.hub.base.resources-type.video.badge"),
+    [ResourceType.MASTERCLASS]: t("common.page-sections.hub.base.resources-type.masterclass.badge"),
+    [ResourceType.FIGMA_TEMPLATE]: t("common.page-sections.hub.base.resources-type.figma_template.badge"),
+    [ResourceType.CODE]: t("common.page-sections.hub.base.resources-type.code.badge"),
+  }
 
-  const productType = productTypeMap[resourceType] ?? "";
+  const productType = productTypeMap[resourceType] ?? ""
 
   return (
-    <span
-      className={cn(
-        "relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec",
-        className,
-      )}
-    >
+    <span className={cn("relative flex items-center gap-1 ps-2 font-bold text-sm text-b-white-invert-sec", className)}>
       {count > 2 ? `${count}` : count} {productType}
     </span>
-  );
+  )
 }

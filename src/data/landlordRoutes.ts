@@ -82,4 +82,4 @@ export const landlordRoutes = {
       inSitemap: false,
     },
   },
-};
+}

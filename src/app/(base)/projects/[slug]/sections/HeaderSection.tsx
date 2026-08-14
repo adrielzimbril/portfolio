@@ -1,11 +1,11 @@
-"use client";
-import React from "react";
-import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section";
-import { PreviewContentType } from "@/types/enum";
-import { usePageViews } from "@/hooks/usePageViews";
-import { PageType } from "@/types";
-import { getResourcesUrl } from "@/utils/base-url";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import { HeaderSection as ResourceHeaderSection } from "@/components/shared/pages/resources/page/header-section"
+import { PreviewContentType } from "@/types/enum"
+import { usePageViews } from "@/hooks/usePageViews"
+import { PageType } from "@/types"
+import { getResourcesUrl } from "@/utils/base-url"
+import { useTranslations } from "use-intl"
 
 export function HeaderSection({
   title,
@@ -15,14 +15,14 @@ export function HeaderSection({
   projectLink,
   pageViewsData,
 }: {
-  title: string;
-  cover: string;
-  description: string;
-  tags: { name: string; color: string }[];
-  projectLink?: string;
-  pageViewsData: { slug: string; locale: string };
+  title: string
+  cover: string
+  description: string
+  tags: { name: string; color: string }[]
+  projectLink?: string
+  pageViewsData: { slug: string; locale: string }
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   usePageViews(
     pageViewsData.slug,
@@ -32,7 +32,7 @@ export function HeaderSection({
       path: getResourcesUrl(PageType.PROJECT, pageViewsData.slug),
     },
     false,
-  );
+  )
 
   return (
     <ResourceHeaderSection
@@ -54,5 +54,5 @@ export function HeaderSection({
       ctaButtonText={`${t("projects.inner-page.header-section.cta")} 🦄`}
       pageType={PageType.PROJECT}
     />
-  );
+  )
 }

@@ -1,29 +1,29 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { getLegalByPath } from "@/integrations/content/lib";
-import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useLocale } from "use-intl";
+"use client"
+import React, { useEffect, useState } from "react"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { getLegalByPath } from "@/integrations/content/lib"
+import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useLocale } from "use-intl"
 
 export function PageContent() {
-  const [privacy, setPrivacy] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const locale = useLocale();
+  const [privacy, setPrivacy] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const locale = useLocale()
 
   useEffect(() => {
     const loadPrivacy = async () => {
       try {
-        const data = await getLegalByPath("privacy", { locale });
-        setPrivacy(data);
+        const data = await getLegalByPath("privacy", { locale })
+        setPrivacy(data)
       } catch (error) {
-        console.error("Failed to load privacy:", error);
+        console.error("Failed to load privacy:", error)
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
-    loadPrivacy();
-  }, [locale]);
+    }
+    loadPrivacy()
+  }, [locale])
 
   if (isLoading) {
     return (
@@ -35,14 +35,12 @@ export function PageContent() {
           <Skeleton className="h-4 w-4/6" />
         </div>
       </SectionLayout>
-    );
+    )
   }
 
   return (
     <SectionLayout isFlex>
-      <div className="max-w-3xl mx-auto">
-        {privacy?.body && <MarkdownContentRender content={privacy.body} />}
-      </div>
+      <div className="max-w-3xl mx-auto">{privacy?.body && <MarkdownContentRender content={privacy.body} />}</div>
     </SectionLayout>
-  );
+  )
 }

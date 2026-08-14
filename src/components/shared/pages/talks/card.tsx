@@ -1,9 +1,9 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { CardPreview } from "@/components/shared/pages/talks/preview";
-import { CardInfo } from "@/components/shared/pages/talks/details";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent } from "@/components/ui/card"
+import { CardPreview } from "@/components/shared/pages/talks/preview"
+import { CardInfo } from "@/components/shared/pages/talks/details"
+import { Skeleton } from "@/components/ui/skeleton"
 
-import { PageType } from "@/types/enum";
+import { PageType } from "@/types/enum"
 
 export function TalksCard({
   title,
@@ -15,17 +15,17 @@ export function TalksCard({
   action,
   hideReactions,
 }: {
-  title: string;
-  cover?: string;
-  excerpt: string;
-  date: string;
-  tags?: { name: string }[];
-  participantsCount: number;
+  title: string
+  cover?: string
+  excerpt: string
+  date: string
+  tags?: { name: string }[]
+  participantsCount: number
   action?: {
-    label: string;
-    href: string;
-  } | null;
-  hideReactions?: boolean;
+    label: string
+    href: string
+  } | null
+  hideReactions?: boolean
 }) {
   return (
     <Card className="group relative bg-b-base-second squircle-6xl/100  size-full border-0 overflow-hidden">
@@ -50,9 +50,9 @@ export function TalksCard({
         />
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export function TalkCardSkeleton() {
-  return <Skeleton name="talk-card" className="w-full h-80" />;
+  return <Skeleton name="talk-card" className="w-full h-80" />
 }

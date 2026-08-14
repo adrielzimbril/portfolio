@@ -3,9 +3,9 @@ export const CNFlag = ({
   height = "15",
   className,
 }: {
-  width?: string;
-  height?: string;
-  className?: string;
+  width?: string
+  height?: string
+  className?: string
 }) => {
   return (
     <svg
@@ -35,5 +35,5 @@ export const CNFlag = ({
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}

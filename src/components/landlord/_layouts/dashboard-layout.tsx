@@ -1,40 +1,34 @@
-"use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Sidebar } from "./sidebar";
-import { Header } from "./header";
-import { SidebarOverlay } from "./sidebar-overlay";
-import type { AdminUser } from "@/components/landlord/admin-types";
-import { apiRoutes } from "@/data/api-routes";
-import { landlordRoutes } from "@/data/landlordRoutes";
+"use client"
+import React, { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Sidebar } from "./sidebar"
+import { Header } from "./header"
+import { SidebarOverlay } from "./sidebar-overlay"
+import type { AdminUser } from "@/components/landlord/admin-types"
+import { apiRoutes } from "@/data/api-routes"
+import { landlordRoutes } from "@/data/landlordRoutes"
 
-export function DashboardLayout({
-  user,
-  children,
-}: {
-  user: AdminUser;
-  children: React.ReactNode;
-}) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const router = useRouter();
+export function DashboardLayout({ user, children }: { user: AdminUser; children: React.ReactNode }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const router = useRouter()
 
   const handleSignOut = async () => {
     try {
       const response = await fetch(apiRoutes.auth.logout.link, {
         method: "POST",
-      });
+      })
       if (response.ok) {
-        router.push(landlordRoutes.login.link);
+        router.push(landlordRoutes.login.link)
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const handleRefresh = () => {
-    window.location.reload();
-  };
+    window.location.reload()
+  }
 
   return (
     <div className="flex h-dvh overflow-hidden bg-[#f4f3ec] p-3 text-[#11191f] md:p-6">
@@ -45,10 +39,7 @@ export function DashboardLayout({
         collapsed={sidebarCollapsed}
         setCollapsed={setSidebarCollapsed}
       />
-      <SidebarOverlay
-        visible={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
+      <SidebarOverlay visible={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <main className="flex min-w-0 flex-1 flex-col overflow-hidden md:pl-6">
         <Header
           user={user}
@@ -62,5 +53,5 @@ export function DashboardLayout({
         </section>
       </main>
     </div>
-  );
+  )
 }

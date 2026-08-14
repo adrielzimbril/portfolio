@@ -1,18 +1,12 @@
-import React from "react";
+import React from "react"
 
 interface LongitudeIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
+  size?: number | string
 }
 
 export const LongitudeIcon = ({ size = 49, ...props }: LongitudeIconProps) => {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 49 49"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width={size} height={size} viewBox="0 0 49 49" xmlns="http://www.w3.org/2000/svg" {...props}>
       <circle
         cx="24.8889"
         cy="24.8889"
@@ -83,5 +77,5 @@ export const LongitudeIcon = ({ size = 49, ...props }: LongitudeIconProps) => {
         </linearGradient>
       </defs>
     </svg>
-  );
-};
+  )
+}

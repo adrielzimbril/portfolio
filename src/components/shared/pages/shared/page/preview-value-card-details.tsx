@@ -1,21 +1,15 @@
-import { cn } from "@/utils/utils";
-import { CardInfoProps } from "@/components/shared/pages/shared/page/preview-value-card";
-import { Badge } from "@/components/ui/badge";
+import { cn } from "@/utils/utils"
+import { CardInfoProps } from "@/components/shared/pages/shared/page/preview-value-card"
+import { Badge } from "@/components/ui/badge"
 
-function PreviewContent({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+function PreviewContent({ title, description }: { title: string; description: string }) {
   return (
     <div className="flex flex-col items-start gap-4 md:gap-6 w-full">
       <h4 className="text-3xl leading-[120%]">{title}</h4>
 
       <p className="text-b-white-invert-thr leading-[120%]">{description}</p>
     </div>
-  );
+  )
 }
 
 function PreviewIcon({ icon }: { icon: string }) {
@@ -34,15 +28,10 @@ function PreviewIcon({ icon }: { icon: string }) {
         {icon}
       </span>
     </div>
-  );
+  )
 }
 
-export function PreviewValueCardDetails({
-  icon,
-  badge,
-  title,
-  description,
-}: CardInfoProps) {
+export function PreviewValueCardDetails({ icon, badge, title, description }: CardInfoProps) {
   return (
     <div
       className={cn(
@@ -57,5 +46,5 @@ export function PreviewValueCardDetails({
       </div>
       <PreviewContent title={title} description={description} />
     </div>
-  );
+  )
 }

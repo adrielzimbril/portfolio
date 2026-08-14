@@ -1,4 +1,4 @@
-import { getApiUrl } from "@/utils";
+import { getApiUrl } from "@/utils"
 
 export const landlordApiRoutes = {
   community: {
@@ -7,11 +7,9 @@ export const landlordApiRoutes = {
   },
   quests: {
     registrations: getApiUrl("landlord/quests/registrations"),
-    registrationById: (id: string) =>
-      getApiUrl(`landlord/quests/registrations/${id}`),
+    registrationById: (id: string) => getApiUrl(`landlord/quests/registrations/${id}`),
     submissions: getApiUrl("landlord/quests/submissions"),
-    submissionById: (id: string) =>
-      getApiUrl(`landlord/quests/submissions/${id}`),
+    submissionById: (id: string) => getApiUrl(`landlord/quests/submissions/${id}`),
   },
   hub: {
     requests: getApiUrl("landlord/hub/requests"),
@@ -23,4 +21,4 @@ export const landlordApiRoutes = {
     submissions: getApiUrl("landlord/submissions"),
     reactions: getApiUrl("landlord/reactions"),
   },
-};
+}

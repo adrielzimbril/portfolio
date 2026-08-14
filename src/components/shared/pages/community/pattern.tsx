@@ -1,4 +1,4 @@
-import { type ReactElement } from "react";
+import { type ReactElement } from "react"
 
 export const pattern1: ReactElement = (
   <div className="absolute inset-0 w-full h-full">
@@ -10,7 +10,7 @@ export const pattern1: ReactElement = (
     <div className="absolute bottom-20 left-20 text-2xl opacity-30">💾</div>
     <div className="absolute top-24 right-24 text-lg opacity-20">🎯</div>
   </div>
-);
+)
 
 export const pattern2: ReactElement = (
   <div className="absolute inset-0 w-full h-full">
@@ -22,7 +22,7 @@ export const pattern2: ReactElement = (
     <div className="absolute bottom-24 left-24 text-2xl opacity-30">⭐</div>
     <div className="absolute top-28 right-28 text-lg opacity-20">✨</div>
   </div>
-);
+)
 
 export const pattern3: ReactElement = (
   <div className="absolute inset-0 w-full h-full">
@@ -34,7 +34,7 @@ export const pattern3: ReactElement = (
     <div className="absolute bottom-20 left-20 text-2xl opacity-30">🎇</div>
     <div className="absolute top-24 right-24 text-lg opacity-20">🎆</div>
   </div>
-);
+)
 
 export const pattern4: ReactElement = (
   <div className="absolute inset-0 w-full h-full">
@@ -46,7 +46,7 @@ export const pattern4: ReactElement = (
     <div className="absolute bottom-24 left-24 text-2xl opacity-30">🐼</div>
     <div className="absolute top-28 right-28 text-lg opacity-20">🦁</div>
   </div>
-);
+)
 
 export const pattern5: ReactElement = (
   <div className="absolute inset-0 w-full h-full">
@@ -58,7 +58,7 @@ export const pattern5: ReactElement = (
     <div className="absolute bottom-24 left-24 text-2xl opacity-30">🍑</div>
     <div className="absolute top-28 right-28 text-lg opacity-20">🍒</div>
   </div>
-);
+)
 
 export const pattern6: ReactElement = (
   <div className="absolute inset-0 w-full h-full">
@@ -70,7 +70,7 @@ export const pattern6: ReactElement = (
     <div className="absolute bottom-24 left-24 text-2xl opacity-30">❄️</div>
     <div className="absolute top-28 right-28 text-lg opacity-20">🌙</div>
   </div>
-);
+)
 
 export const pattern7: ReactElement = (
   <div className="absolute inset-0 w-full h-full">
@@ -82,11 +82,11 @@ export const pattern7: ReactElement = (
     <div className="absolute bottom-20 left-20 text-2xl opacity-30">🪐</div>
     <div className="absolute top-24 right-24 text-lg opacity-20">🌌</div>
   </div>
-);
+)
 
 export type Pattern = {
-  content: ReactElement;
-};
+  content: ReactElement
+}
 
 export const patterns: Pattern[] = [
   {
@@ -110,4 +110,4 @@ export const patterns: Pattern[] = [
   {
     content: pattern7,
   },
-];
+]

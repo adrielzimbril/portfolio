@@ -1,14 +1,8 @@
-"use client";
-import React from "react";
+"use client"
+import React from "react"
 
-export function SidebarOverlay({
-  visible,
-  onClose,
-}: {
-  visible: boolean;
-  onClose: () => void;
-}) {
-  if (!visible) return null;
+export function SidebarOverlay({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+  if (!visible) return null
 
   return (
     <button
@@ -16,5 +10,5 @@ export function SidebarOverlay({
       aria-label="Fermer la navigation"
       onClick={onClose}
     />
-  );
+  )
 }

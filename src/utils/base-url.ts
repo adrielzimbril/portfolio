@@ -1,5 +1,5 @@
-import { PageType, QuestAskType } from "@/types";
-import { ConfigValue, getSiteUrl } from "@/config";
+import { PageType, QuestAskType } from "@/types"
+import { ConfigValue, getSiteUrl } from "@/config"
 
 /**
  * Gets the base URL of the application.
@@ -8,14 +8,14 @@ import { ConfigValue, getSiteUrl } from "@/config";
  * @returns {string} The base URL of the application.
  */
 export function getBaseUrl(): string {
-  const siteConfig = getSiteUrl();
+  const siteConfig = getSiteUrl()
   if (siteConfig.url) {
-    return siteConfig.url;
+    return siteConfig.url
   }
   if (siteConfig.vercelUrl) {
-    return `https://${siteConfig.vercelUrl}`;
+    return `https://${siteConfig.vercelUrl}`
   }
-  return `http://localhost:${ConfigValue.PORT}`;
+  return `http://localhost:${ConfigValue.PORT}`
 }
 
 /**
@@ -29,8 +29,8 @@ export function getBaseUrl(): string {
  * getExternalUrl("https://example.com"); // returns "https://example.com"
  */
 export function getExternalUrl(url: string | null | undefined): string {
-  if (!url) return "";
-  return new URL(url, getBaseUrl()).href;
+  if (!url) return ""
+  return new URL(url, getBaseUrl()).href
 }
 
 /**
@@ -44,8 +44,8 @@ export function getExternalUrl(url: string | null | undefined): string {
  * getPathUrl("/about"); // returns "https://base-url/about"
  */
 export function getPathUrl(path: string): string {
-  const BASE_URL = getBaseUrl();
-  return new URL(path, BASE_URL).href;
+  const BASE_URL = getBaseUrl()
+  return new URL(path, BASE_URL).href
 }
 
 /**
@@ -59,13 +59,11 @@ export function getPathUrl(path: string): string {
  * @returns {string} The base URL of the application.
  */
 export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
-  const siteConfig = getSiteUrl();
+  const siteConfig = getSiteUrl()
   if (type === "s3") {
-    return `${siteConfig.s3DomainUrl}/`;
+    return `${siteConfig.s3DomainUrl}/`
   }
-  return siteConfig.domainUrl
-    ? `${siteConfig.domainUrl}/`
-    : "https://www.adrielzimbril.com/";
+  return siteConfig.domainUrl ? `${siteConfig.domainUrl}/` : "https://www.adrielzimbril.com/"
 }
 
 /**
@@ -78,22 +76,16 @@ export function getAbsoluteUrl(type: "default" | "s3" = "default"): string {
  * @example
  * getAbsolutePathUrl("/about"); // returns "https://base-url/about"
  */
-export function getAbsolutePathUrl({
-  type = "default",
-  path,
-}: {
-  type?: "default" | "s3";
-  path: string;
-}): string {
-  const BASE_URL = getAbsoluteUrl(type);
+export function getAbsolutePathUrl({ type = "default", path }: { type?: "default" | "s3"; path: string }): string {
+  const BASE_URL = getAbsoluteUrl(type)
 
   // ✅ Remove the leading slash from the path to avoid overwriting the path // Eg: /about -> about
-  const safePath = path.replace(/^\//, "");
+  const safePath = path.replace(/^\//, "")
 
   // ✅ Ensure that BASE_URL ends with a single slash // Eg: https://example.com -> https://example.com/
-  const safeBase = BASE_URL.replace(/\/+$/, "") + "/";
+  const safeBase = BASE_URL.replace(/\/+$/, "") + "/"
 
-  return new URL(safePath, safeBase).href;
+  return new URL(safePath, safeBase).href
 }
 
 /**
@@ -103,8 +95,8 @@ export function getAbsolutePathUrl({
  * @returns {string} The API base URL.
  */
 export function getApiBaseUrl(): string {
-  const base = getBaseUrl().replace(/\/+$/, "");
-  return `${base}/api`;
+  const base = getBaseUrl().replace(/\/+$/, "")
+  return `${base}/api`
 }
 
 /**
@@ -118,9 +110,9 @@ export function getApiBaseUrl(): string {
  * getApiUrl("/views"); // returns "https://base-url/api/views"
  */
 export function getApiUrl(path: string): string {
-  const base = getApiBaseUrl();
-  const safePath = path.replace(/^\//, "");
-  return `${base}/${safePath}`;
+  const base = getApiBaseUrl()
+  const safePath = path.replace(/^\//, "")
+  return `${base}/${safePath}`
 }
 
 /**
@@ -138,11 +130,8 @@ export function getApiUrl(path: string): string {
  * getResourcesUrl(PageType.THINKS, "slug"); // returns "https://base-url/thoughts/slug"
  * getResourcesUrl(PageType.QUESTS, "slug"); // returns "https://base-url/quests/slug"
  */
-export function getResourcesUrl(
-  resource: PageType,
-  slug?: string | undefined,
-): string {
-  return `${getBaseUrl()}/${resource}${slug ? `/${slug}` : ""}`;
+export function getResourcesUrl(resource: PageType, slug?: string | undefined): string {
+  return `${getBaseUrl()}/${resource}${slug ? `/${slug}` : ""}`
 }
 
 /**
@@ -157,8 +146,8 @@ export function getResourcesUrl(
  * getResourceAskUrl("slug"); // returns "https://base-url/hub/get/slug"
  */
 export function getResourceAskUrl(slug?: string): string {
-  if (!slug) return "";
-  return getResourcesUrl(PageType.HUB, `get/${slug}`);
+  if (!slug) return ""
+  return getResourcesUrl(PageType.HUB, `get/${slug}`)
 }
 
 /**
@@ -173,7 +162,7 @@ export function getResourceAskUrl(slug?: string): string {
  * getResourceAskUrl("slug"); // returns "https://base-url/hub/get/slug"
  */
 export function getQuestAskUrl(slug: string, type: QuestAskType): string {
-  return getResourcesUrl(PageType.QUESTS, `${slug}/${type}`);
+  return getResourcesUrl(PageType.QUESTS, `${slug}/${type}`)
 }
 
 /**
@@ -190,15 +179,15 @@ export function getQuestAskUrl(slug: string, type: QuestAskType): string {
  * getImageUrl("https://example.com/image.jpg"); // returns "https://example.com/image.jpg"
  */
 export function getImageUrl(slug: string): string {
-  if (!slug) return "";
+  if (!slug) return ""
   if (slug.startsWith("http://") || slug.startsWith("https://")) {
-    return slug;
+    return slug
   }
 
-  const base = getBaseUrl().replace(/\/+$/, "");
-  const path = slug.replace(/^\/+/, "");
+  const base = getBaseUrl().replace(/\/+$/, "")
+  const path = slug.replace(/^\/+/, "")
 
-  return `${base}/${path}`;
+  return `${base}/${path}`
 }
 
 /**
@@ -207,14 +196,14 @@ export function getImageUrl(slug: string): string {
  * @returns {string} The clean page URL.
  */
 export function getThisPageUrl(): string {
-  const url = new URL(window.location.href);
+  const url = new URL(window.location.href)
   // Remove hash and query params
-  url.hash = "";
-  url.search = "";
+  url.hash = ""
+  url.search = ""
   // Remove trailing slash
-  let pathname = url.pathname;
+  let pathname = url.pathname
   if (pathname.endsWith("/")) {
-    pathname = pathname.slice(0, -1);
+    pathname = pathname.slice(0, -1)
   }
-  return `${url.origin}${pathname}`;
+  return `${url.origin}${pathname}`
 }

@@ -1,9 +1,9 @@
-import { useCallback } from "react";
+import { useCallback } from "react"
 
 interface UseShareOptions {
-  share: ShareData;
-  onSuccess?: () => void;
-  onError?: () => void;
+  share: ShareData
+  onSuccess?: () => void
+  onError?: () => void
 }
 
 /**
@@ -28,7 +28,7 @@ interface UseShareOptions {
  * <button onClick={share}>Share</button>
  */
 const useShare = ({ share, onSuccess, onError }: UseShareOptions) => {
-  const isSupported = "share" in navigator;
+  const isSupported = "share" in navigator
 
   const shareContent = useCallback(async () => {
     if (isSupported) {
@@ -38,17 +38,17 @@ const useShare = ({ share, onSuccess, onError }: UseShareOptions) => {
           text: share.text,
           url: share.url,
           files: share.files,
-        });
-        onSuccess?.();
+        })
+        onSuccess?.()
       } catch (error) {
-        onError?.();
+        onError?.()
       }
     } else {
-      onError?.();
+      onError?.()
     }
-  }, [isSupported, share, onSuccess, onError]);
+  }, [isSupported, share, onSuccess, onError])
 
-  return { isSupported, share: shareContent };
-};
+  return { isSupported, share: shareContent }
+}
 
-export default useShare;
+export default useShare

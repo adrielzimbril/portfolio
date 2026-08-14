@@ -1,21 +1,16 @@
-"use client";
-import { useState } from "react";
-import { Link } from "@/components/ui/link";
-import { LinkDiagonalOne } from "@aurthle/icons";
-import { Tags } from "@/components/shared/pages/resources/tags";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
-import {
-  getExternalUrl,
-  getMachineDate,
-  pickRandomColorCode,
-  getIsToday,
-} from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
-import BoringAvatar from "boring-avatars";
-import { useTranslations } from "use-intl";
-import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
-import { PageType } from "@/types";
+"use client"
+import { useState } from "react"
+import { Link } from "@/components/ui/link"
+import { LinkDiagonalOne } from "@aurthle/icons"
+import { Tags } from "@/components/shared/pages/resources/tags"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { AvatarGroup } from "@/components/aurthle/ui/avatar-group"
+import { getExternalUrl, getMachineDate, pickRandomColorCode, getIsToday } from "@/utils"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types"
+import BoringAvatar from "boring-avatars"
+import { useTranslations } from "use-intl"
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar"
+import { PageType } from "@/types"
 
 export function CardInfo({
   title,
@@ -26,22 +21,22 @@ export function CardInfo({
   action,
   hideReactions = false,
 }: {
-  title: string;
-  excerpt: string;
-  date: string;
-  tags: { name: string }[];
-  participantsCount: number;
+  title: string
+  excerpt: string
+  date: string
+  tags: { name: string }[]
+  participantsCount: number
   action?: {
-    label: string;
-    href: string;
-  } | null;
-  hideReactions?: boolean;
+    label: string
+    href: string
+  } | null
+  hideReactions?: boolean
 }) {
-  const [currentTime] = useState(() => Date.now());
-  const t = useTranslations();
-  const isDatePast = currentTime >= new Date(getMachineDate(date)).getTime();
-  const isToday = getIsToday(date);
-  const shouldShow = isDatePast || isToday || participantsCount > 0;
+  const [currentTime] = useState(() => Date.now())
+  const t = useTranslations()
+  const isDatePast = currentTime >= new Date(getMachineDate(date)).getTime()
+  const isToday = getIsToday(date)
+  const shouldShow = isDatePast || isToday || participantsCount > 0
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 size-full">
@@ -88,15 +83,15 @@ export function CardInfo({
         {action ? <Action label={action.label} href={action.href} /> : null}
       </div>
     </div>
-  );
+  )
 }
 
 function ParticipantsStats({ count }: { count: number }) {
-  const t = useTranslations();
-  const visibleCount = Math.min(count, 5);
+  const t = useTranslations()
+  const visibleCount = Math.min(count, 5)
   const colorSets = Array.from({ length: visibleCount }).map(() =>
     Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
-  );
+  )
 
   return (
     <div className="inline-flex items-center gap-1.5 px-1 py-0.5 squircle-7xl bg-sh-white/99">
@@ -105,11 +100,7 @@ function ParticipantsStats({ count }: { count: number }) {
           {Array.from({ length: visibleCount }).map((_, index) => (
             <Avatar key={index} className="w-6 h-6">
               <AvatarFallback className="relative pointer-events-none">
-                <BoringAvatar
-                  name={`participant-${index + 1}`}
-                  colors={colorSets[index] ?? []}
-                  variant="beam"
-                />
+                <BoringAvatar name={`participant-${index + 1}`} colors={colorSets[index] ?? []} variant="beam" />
               </AvatarFallback>
             </Avatar>
           ))}
@@ -119,17 +110,15 @@ function ParticipantsStats({ count }: { count: number }) {
         {t("talks.card.participants", { count })}
       </span>
     </div>
-  );
+  )
 }
 
 function Header({ title, slug }: { title: string; slug: string }) {
   return (
     <Link href={getExternalUrl(slug)}>
-      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">
-        {title}
-      </h3>
+      <h3 className="relative h4 capitalize leading-[120%] line-clamp-2">{title}</h3>
     </Link>
-  );
+  )
 }
 
 function Description({ description }: { description: string }) {
@@ -137,7 +126,7 @@ function Description({ description }: { description: string }) {
     <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
       {description}
     </p>
-  );
+  )
 }
 
 function Action({ label, href }: { label: string; href: string }) {
@@ -148,5 +137,5 @@ function Action({ label, href }: { label: string; href: string }) {
         <LinkDiagonalOne size={16} />
       </span>
     </Link>
-  );
+  )
 }

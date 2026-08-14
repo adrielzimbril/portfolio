@@ -12,13 +12,11 @@
  *   // use result data
  * }
  */
-export async function catchError<T>(
-  fn: Promise<T> | (() => T),
-): Promise<[undefined, T] | [Error]> {
+export async function catchError<T>(fn: Promise<T> | (() => T)): Promise<[undefined, T] | [Error]> {
   try {
-    const result = typeof fn === "function" ? fn() : await fn;
-    return [undefined, result] as [undefined, T];
+    const result = typeof fn === "function" ? fn() : await fn
+    return [undefined, result] as [undefined, T]
   } catch (error) {
-    return [error as Error];
+    return [error as Error]
   }
 }

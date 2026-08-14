@@ -1,17 +1,17 @@
-"use client";
-import { motion } from "motion/react";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import type { ReactionType } from "@/lib/stats/types";
-import { cn } from "@/utils/utils";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+"use client"
+import { motion } from "motion/react"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import type { ReactionType } from "@/lib/stats/types"
+import { cn } from "@/utils/utils"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 const REACTION_CONFIG: Record<
   ReactionType,
   {
-    Icon: string;
-    labelKey: string;
+    Icon: string
+    labelKey: string
   }
 > = {
   like: {
@@ -34,18 +34,18 @@ const REACTION_CONFIG: Record<
     Icon: "🤔",
     labelKey: "stats.reactions.sceptic",
   },
-};
+}
 
 interface ReactionCardProps {
-  type: ReactionType;
-  count: number;
-  delay?: number;
+  type: ReactionType
+  count: number
+  delay?: number
 }
 
 function ReactionCard({ type, count, delay = 0 }: ReactionCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const t = useTranslations();
-  const config = REACTION_CONFIG[type];
+  const [isHovered, setIsHovered] = useState(false)
+  const t = useTranslations()
+  const config = REACTION_CONFIG[type]
 
   return (
     <Card
@@ -72,16 +72,9 @@ function ReactionCard({ type, count, delay = 0 }: ReactionCardProps) {
           </motion.div>
 
           <div className="relative w-full flex flex-col gap-2">
-            <div
-              className={cn(
-                "relative flex flex-row items-center gap-2 md:gap-4",
-              )}
-            >
+            <div className={cn("relative flex flex-row items-center gap-2 md:gap-4")}>
               <Badge
-                className={cn(
-                  "capitalize text-xs font-medium",
-                  "size-max text-primary-foreground",
-                )}
+                className={cn("capitalize text-xs font-medium", "size-max text-primary-foreground")}
                 size="lg"
                 circle
               >
@@ -89,37 +82,27 @@ function ReactionCard({ type, count, delay = 0 }: ReactionCardProps) {
               </Badge>
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">{t(config.labelKey)}</h6>
-                <p className="text-sm text-b-white-invert-thr leading-[120%]">
-                  {count.toLocaleString()}
-                </p>
+                <p className="text-sm text-b-white-invert-thr leading-[120%]">{count.toLocaleString()}</p>
               </div>
             </div>
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
 
 interface ReactionsSectionProps {
-  reactions: Record<ReactionType, number>;
-  delay?: number;
+  reactions: Record<ReactionType, number>
+  delay?: number
 }
 
-export function ReactionsSection({
-  reactions,
-  delay = 0,
-}: ReactionsSectionProps) {
+export function ReactionsSection({ reactions, delay = 0 }: ReactionsSectionProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
       {(Object.keys(REACTION_CONFIG) as ReactionType[]).map((type, index) => (
-        <ReactionCard
-          key={type}
-          type={type}
-          count={reactions[type] || 0}
-          delay={delay + index * 0.1}
-        />
+        <ReactionCard key={type} type={type} count={reactions[type] || 0} delay={delay + index * 0.1} />
       ))}
     </div>
-  );
+  )
 }

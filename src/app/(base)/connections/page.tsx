@@ -1,13 +1,13 @@
-import React from "react";
-import { getTranslations } from "next-intl/server";
-import { Metadata } from "next";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { HeaderSection } from "@/app/(base)/connections/sections/HeaderSection";
-import { PeopleSection } from "@/app/(base)/connections/sections/PeopleSection";
-import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
+import React from "react"
+import { getTranslations } from "next-intl/server"
+import { Metadata } from "next"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { HeaderSection } from "@/app/(base)/connections/sections/HeaderSection"
+import { PeopleSection } from "@/app/(base)/connections/sections/PeopleSection"
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return {
     ...baseMetadata,
@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("connections.title"),
       description: t("connections.description"),
     },
-  };
+  }
 }
 
 export default function ConnectionsPage() {
@@ -34,5 +34,5 @@ export default function ConnectionsPage() {
       <PeopleSection />
       <CallToAction isPage />
     </>
-  );
+  )
 }

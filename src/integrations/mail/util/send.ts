@@ -1,52 +1,49 @@
-import { logger } from "@/utils";
-import type { mailTemplates } from "@/integrations/mail/templates";
-import { send } from "@/integrations/mail/provider";
-import type { TemplateId } from "@/integrations/mail/util/templates";
-import { getTemplate } from "@/integrations/mail/util/templates";
-import { Locale } from "@/types";
+import { logger } from "@/utils"
+import type { mailTemplates } from "@/integrations/mail/templates"
+import { send } from "@/integrations/mail/provider"
+import type { TemplateId } from "@/integrations/mail/util/templates"
+import { getTemplate } from "@/integrations/mail/util/templates"
+import { Locale } from "@/types"
 
 export async function sendEmail<T extends TemplateId>(
   params: {
-    to: { email: string; name?: string }[];
-    locale?: Locale;
+    to: { email: string; name?: string }[]
+    locale?: Locale
   } & (
     | {
-        templateId: T;
-        context: Omit<
-          Parameters<(typeof mailTemplates)[T]>[0],
-          "locale" | "translations"
-        >;
+        templateId: T
+        context: Omit<Parameters<(typeof mailTemplates)[T]>[0], "locale" | "translations">
       }
     | {
-        subject: string;
-        text?: string;
-        html?: string;
-        react?: string;
+        subject: string
+        text?: string
+        html?: string
+        react?: string
       }
   ),
 ) {
-  const { to, locale = Locale.FR } = params;
+  const { to, locale = Locale.FR } = params
 
-  let html: string = "";
-  let text: string;
-  let subject: string;
-  let react: string;
+  let html: string = ""
+  let text: string
+  let subject: string
+  let react: string
 
   if ("templateId" in params) {
-    const { templateId, context } = params;
+    const { templateId, context } = params
     const template = await getTemplate({
       templateId,
       context,
       locale,
-    });
-    subject = template.subject;
-    text = template.text;
-    react = template.react ?? "";
+    })
+    subject = template.subject
+    text = template.text
+    react = template.react ?? ""
   } else {
-    subject = params.subject;
-    text = params.text ?? "";
-    html = params.html ?? "";
-    react = params.react ?? "";
+    subject = params.subject
+    text = params.text ?? ""
+    html = params.html ?? ""
+    react = params.react ?? ""
   }
 
   try {
@@ -55,10 +52,10 @@ export async function sendEmail<T extends TemplateId>(
       subject,
       text,
       body: { html, react },
-    });
-    return true;
+    })
+    return true
   } catch (e) {
-    logger.error(e);
-    return false;
+    logger.error(e)
+    return false
   }
 }

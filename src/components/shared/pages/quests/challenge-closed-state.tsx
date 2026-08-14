@@ -1,23 +1,17 @@
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Link } from "@/components/ui/link";
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Link } from "@/components/ui/link"
 
 type ChallengeClosedStateProps = {
-  badge: string;
-  title: string;
-  description: string;
-  href: string;
-  actionLabel: string;
-};
+  badge: string
+  title: string
+  description: string
+  href: string
+  actionLabel: string
+}
 
-export function ChallengeClosedState({
-  badge,
-  title,
-  description,
-  href,
-  actionLabel,
-}: ChallengeClosedStateProps) {
+export function ChallengeClosedState({ badge, title, description, href, actionLabel }: ChallengeClosedStateProps) {
   return (
     <SectionBase
       sectionClassName="w-full"
@@ -39,5 +33,5 @@ export function ChallengeClosedState({
         </CardContent>
       </Card>
     </SectionBase>
-  );
+  )
 }

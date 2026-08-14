@@ -1,21 +1,16 @@
-"use client";
-import React from "react";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { DetailsCard } from "@/components/shared/pages/shared/details-card";
-import { useLocale, useTranslations } from "use-intl";
-import {
-  HandshakeIcon,
-  PlayingCardsIcon,
-  ShapeIcon,
-  ThreeDIcon,
-} from "@/components/shared/icons/break-icons";
-import { Locale } from "@/types";
+"use client"
+import React from "react"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { DetailsCard } from "@/components/shared/pages/shared/details-card"
+import { useLocale, useTranslations } from "use-intl"
+import { HandshakeIcon, PlayingCardsIcon, ShapeIcon, ThreeDIcon } from "@/components/shared/icons/break-icons"
+import { Locale } from "@/types"
 
 interface CraftSectionCard {
-  icon: string | React.ReactNode;
-  locale: string;
-  title: string;
-  description: string;
+  icon: string | React.ReactNode
+  locale: string
+  title: string
+  description: string
 }
 
 const data: CraftSectionCard[] = [
@@ -103,11 +98,11 @@ const data: CraftSectionCard[] = [
     description:
       "学习设计不仅仅是上课，而是理解如何将一个原始想法变成可行的项目。我的培训和资源能让你从一开始就养成正确的思维习惯。\n\n🎯 影响：更多自信，更少放弃，看到自己的想法变为现实的满足感。",
   },
-];
+]
 
 export function CraftSection() {
-  const t = useTranslations();
-  const locale = useLocale();
+  const t = useTranslations()
+  const locale = useLocale()
 
   return (
     <SectionLayout
@@ -119,13 +114,8 @@ export function CraftSection() {
       {data
         .filter((item) => item.locale === locale)
         .map((item, index) => (
-          <DetailsCard
-            key={index}
-            icon={item.icon}
-            title={item.title}
-            description={item.description}
-          />
+          <DetailsCard key={index} icon={item.icon} title={item.title} description={item.description} />
         ))}
     </SectionLayout>
-  );
+  )
 }

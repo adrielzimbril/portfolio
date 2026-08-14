@@ -1,8 +1,8 @@
 export const connections: Array<{
-  id: string;
-  name: string;
-  image: string;
-  met: string | null;
+  id: string
+  name: string
+  image: string
+  met: string | null
 }> = [
   {
     id: "anais_allou",
@@ -166,4 +166,4 @@ export const connections: Array<{
     image: "/img/connections/somey_amegnibo.jpg",
     met: null,
   },
-];
+]

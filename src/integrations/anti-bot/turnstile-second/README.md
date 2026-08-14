@@ -37,40 +37,38 @@ bun add next-turnstile
 ### Client-Side Usage
 
 ```tsx
-import { Turnstile } from "next-turnstile";
+import { Turnstile } from "next-turnstile"
 
 function MyForm() {
   const handleVerify = (token: string) => {
     // Handle the verification token
-    console.log("Verification successful:", token);
-  };
+    console.log("Verification successful:", token)
+  }
 
-  return (
-    <Turnstile siteKey="your-site-key" onVerify={handleVerify} theme="light" />
-  );
+  return <Turnstile siteKey="your-site-key" onVerify={handleVerify} theme="light" />
 }
 ```
 
 ### Server-Side Validation
 
 ```tsx
-import { validateTurnstileToken } from "next-turnstile";
+import { validateTurnstileToken } from "next-turnstile"
 
 async function validateToken(token: string) {
   try {
     const result = await validateTurnstileToken({
       token,
       secretKey: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
-    });
+    })
 
     if (result.success) {
       // Token is valid
-      return true;
+      return true
     }
   } catch (error) {
-    console.error("Validation failed:", error);
+    console.error("Validation failed:", error)
   }
-  return false;
+  return false
 }
 ```
 
@@ -123,59 +121,56 @@ async function validateToken(token: string) {
 ### With Form Submission
 
 ```tsx
-import { Turnstile } from "next-turnstile";
+import { Turnstile } from "next-turnstile"
 
 export default function Form() {
-  const [token, setToken] = useState<string>();
+  const [token, setToken] = useState<string>()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!token) return;
+    e.preventDefault()
+    if (!token) return
 
     const response = await fetch("/api/submit", {
       method: "POST",
       body: JSON.stringify({ token }),
       headers: { "Content-Type": "application/json" },
-    });
+    })
 
     // Handle response...
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit}>
       <input type="email" required />
-      <Turnstile
-        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-        onVerify={setToken}
-      />
+      <Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!} onVerify={setToken} />
       <button type="submit" disabled={!token}>
         Submit
       </button>
     </form>
-  );
+  )
 }
 ```
 
 ### Server Action Validation
 
 ```tsx
-import { validateTurnstileToken } from "next-turnstile";
+import { validateTurnstileToken } from "next-turnstile"
 
 async function submitForm(formData: FormData) {
-  "use server";
+  "use server"
 
-  const token = formData.get("cf-turnstile-response");
+  const token = formData.get("cf-turnstile-response")
   if (!token || typeof token !== "string") {
-    return { error: "No token provided" };
+    return { error: "No token provided" }
   }
 
   const result = await validateTurnstileToken({
     token,
     secretKey: process.env.TURNSTILE_SECRET_KEY!,
-  });
+  })
 
   if (!result.success) {
-    return { error: "Invalid token" };
+    return { error: "Invalid token" }
   }
 
   // Process form submission...
@@ -197,11 +192,7 @@ During development, you can use sandbox mode to test without real credentials:
 ### Dark Mode Support
 
 ```tsx
-<Turnstile
-  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-  theme="dark"
-  onVerify={handleVerify}
-/>
+<Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!} theme="dark" onVerify={handleVerify} />
 ```
 
 ### With Custom Styling

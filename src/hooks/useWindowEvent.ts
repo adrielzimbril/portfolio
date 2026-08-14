@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import { useEffect } from "react";
+import { useEffect } from "react"
 
 export function useWindowEvent(eventName: string, handler: () => void) {
   useEffect(() => {
     const handleEvent = () => {
-      handler();
-    };
+      handler()
+    }
 
-    window.addEventListener(eventName, handleEvent);
+    window.addEventListener(eventName, handleEvent)
 
     return () => {
-      window.removeEventListener(eventName, handleEvent);
-    };
-  }, [eventName, handler]);
+      window.removeEventListener(eventName, handleEvent)
+    }
+  }, [eventName, handler])
 }
 
 export function dispatchWindowEvent(eventName: string) {
-  window.dispatchEvent(new CustomEvent(eventName));
+  window.dispatchEvent(new CustomEvent(eventName))
 }

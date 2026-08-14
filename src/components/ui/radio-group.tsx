@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { Radio as RadioPrimitive } from "@base-ui/react/radio";
-import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
-import type React from "react";
-import { cn } from "@/utils";
-import { cva, type VariantProps } from "class-variance-authority";
+import { Radio as RadioPrimitive } from "@base-ui/react/radio"
+import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group"
+import type React from "react"
+import { cn } from "@/utils"
+import { cva, type VariantProps } from "class-variance-authority"
 
 const radioVariants = cva(
   "relative aspect-square inline-flex shrink-0 items-center justify-center outline-none before:pointer-events-none before:absolute before:inset-0 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background data-disabled:cursor-not-allowed data-disabled:opacity-64",
@@ -13,7 +13,7 @@ const radioVariants = cva(
       variant: {
         default:
           "rounded-full border border-input bg-background not-dark:bg-clip-padding before:rounded-full not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-none aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/48 dark:not-data-checked:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [[data-disabled],[data-checked],[aria-invalid]]:shadow-none",
-        :
+        squircle:
           " squircle-4xl  border-2 border-b-base-accent bg-b-base data-[state=checked]:bg-primary data-[state=checked]:border-primary",
         glass:
           "rounded-full border-0 bg-b-base backdrop-blur-2xl before:rounded-full shadow-[0_0_0_0.1em_hsla(0,0%,100%,0.3)_inset] data-[state=checked]:bg-b-base/25 data-[state=checked]:shadow-[0_0_0_0.15em_hsla(0,0%,100%,0.4)_inset]",
@@ -38,42 +38,42 @@ const radioVariants = cva(
     },
     compoundVariants: [
       {
-        variant: "",
+        variant: "squircle",
         color: "default",
         class: "data-[state=checked]:bg-primary",
       },
       {
-        variant: "",
+        variant: "squircle",
         color: "primary",
         class: "data-[state=checked]:bg-primary",
       },
       {
-        variant: "",
+        variant: "squircle",
         color: "secondary",
         class: "data-[state=checked]:bg-secondary",
       },
       {
-        variant: "",
+        variant: "squircle",
         color: "destructive",
         class: "data-[state=checked]:bg-destructive",
       },
       {
-        variant: "",
+        variant: "squircle",
         color: "accent",
         class: "data-[state=checked]:squircle-accent",
       },
       {
-        variant: "",
+        variant: "squircle",
         color: "muted",
         class: "data-[state=checked]:squircle-muted",
       },
       {
-        variant: "",
+        variant: "squircle",
         color: "success",
         class: "data-[state=checked]:squircle-success",
       },
       {
-        variant: "",
+        variant: "squircle",
         color: "warning",
         class: "data-[state=checked]:squircle-warning",
       },
@@ -84,31 +84,15 @@ const radioVariants = cva(
       color: "default",
     },
   },
-);
+)
 
-export function RadioGroup({
-  className,
-  ...props
-}: RadioGroupPrimitive.Props): React.ReactElement {
-  return (
-    <RadioGroupPrimitive
-      className={cn("flex flex-col gap-3", className)}
-      data-slot="radio-group"
-      {...props}
-    />
-  );
+export function RadioGroup({ className, ...props }: RadioGroupPrimitive.Props): React.ReactElement {
+  return <RadioGroupPrimitive className={cn("flex flex-col gap-3", className)} data-slot="radio-group" {...props} />
 }
 
-export interface RadioProps
-  extends RadioPrimitive.Root.Props, VariantProps<typeof radioVariants> {}
+export interface RadioProps extends RadioPrimitive.Root.Props, VariantProps<typeof radioVariants> {}
 
-export function Radio({
-  className,
-  variant,
-  size,
-  color,
-  ...props
-}: RadioProps): React.ReactElement {
+export function Radio({ className, variant, size, color, ...props }: RadioProps): React.ReactElement {
   return (
     <RadioPrimitive.Root
       className={cn(radioVariants({ variant, size, color }), className)}
@@ -119,18 +103,17 @@ export function Radio({
         className={cn(
           "absolute flex items-center justify-center before:rounded-full before:bg-primary-foreground data-unchecked:hidden data-checked:bg-primary",
           variant === "default" && "-inset-px",
-          variant !== "" && "rounded-full",
+          variant !== "squircle" && "rounded-full",
           size === "xs" && "size-2.5 before:size-1",
           size === "sm" && "size-3.5 before:size-1.5",
-          (size === "default" || !size) &&
-            "size-4.5 sm:size-4 before:size-2 sm:before:size-1.5",
+          (size === "default" || !size) && "size-4.5 sm:size-4 before:size-2 sm:before:size-1.5",
           size === "lg" && "size-6 sm:size-5 before:size-2.5 sm:before:size-2",
           size === "xl" && "size-8 sm:size-6 before:size-3 sm:before:size-2.5",
         )}
         data-slot="radio-indicator"
       />
     </RadioPrimitive.Root>
-  );
+  )
 }
 
-export { RadioGroupPrimitive, RadioPrimitive, Radio as RadioGroupItem };
+export { RadioGroupPrimitive, RadioPrimitive, Radio as RadioGroupItem }

@@ -1,15 +1,15 @@
-import { NextResponse } from "next/server";
-import { generateRssFeed } from "@/lib/rss";
-import { Locale } from "@/types";
-import logger from "@/utils/logger";
+import { NextResponse } from "next/server"
+import { generateRssFeed } from "@/lib/rss"
+import { Locale } from "@/types"
+import logger from "@/utils/logger"
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const locale = searchParams.get("locale") || Locale.FR;
-    const feed = await generateRssFeed({ locale: locale as Locale });
+    const { searchParams } = new URL(request.url)
+    const locale = searchParams.get("locale") || Locale.FR
+    const feed = await generateRssFeed({ locale: locale as Locale })
 
     return new NextResponse(feed.rss2, {
       status: 200,
@@ -17,9 +17,9 @@ export async function GET(request: Request) {
         "Content-Type": "application/rss+xml",
         "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=1800",
       },
-    });
+    })
   } catch (error) {
-    logger.error("Error generating RSS feed:", error);
-    return new NextResponse("Error generating RSS feed", { status: 500 });
+    logger.error("Error generating RSS feed:", error)
+    return new NextResponse("Error generating RSS feed", { status: 500 })
   }
 }

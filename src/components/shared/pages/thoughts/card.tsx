@@ -1,8 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { CardPreview } from "@/components/shared/pages/shared/preview";
-import { CardInfo } from "@/components/shared/pages/thoughts/details";
-import { Skeleton } from "@/components/ui/skeleton";
-import { PageType } from "@/types/enum";
+import { Card, CardContent } from "@/components/ui/card"
+import { CardPreview } from "@/components/shared/pages/shared/preview"
+import { CardInfo } from "@/components/shared/pages/thoughts/details"
+import { Skeleton } from "@/components/ui/skeleton"
+import { PageType } from "@/types/enum"
 
 export function ThoughtCard({
   title,
@@ -13,13 +13,13 @@ export function ThoughtCard({
   tags,
   hideReactions,
 }: {
-  title: string;
-  cover?: string;
-  slug: string;
-  excerpt: string;
-  primaryTag?: string;
-  tags: { name: string }[];
-  hideReactions?: boolean;
+  title: string
+  cover?: string
+  slug: string
+  excerpt: string
+  primaryTag?: string
+  tags: { name: string }[]
+  hideReactions?: boolean
 }) {
   return (
     <Card className="group relative bg-b-base-second squircle-6xl/100  size-full border-0">
@@ -45,9 +45,9 @@ export function ThoughtCard({
         />
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export function ThoughtCardSkeleton() {
-  return <Skeleton name="thought-card" className="w-full h-80" />;
+  return <Skeleton name="thought-card" className="w-full h-80" />
 }

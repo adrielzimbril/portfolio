@@ -1,1 +1,1 @@
-export { sendEmail } from "@/integrations/mail/util/send";
+export { sendEmail } from "@/integrations/mail/util/send"

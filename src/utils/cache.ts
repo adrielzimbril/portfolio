@@ -1,16 +1,16 @@
-"use server";
+"use server"
 
-import { revalidatePath } from "next/cache";
-import { logger } from "@/utils";
+import { revalidatePath } from "next/cache"
+import { logger } from "@/utils"
 
 export const clearCache = async (path?: string) => {
   try {
     if (path) {
-      revalidatePath(path);
+      revalidatePath(path)
     } else {
-      revalidatePath("/", "layout");
+      revalidatePath("/", "layout")
     }
   } catch (error) {
-    logger.error("Could not revalidate path", path, error);
+    logger.error("Could not revalidate path", path, error)
   }
-};
+}

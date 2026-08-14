@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { cn } from "@/utils/utils";
+import { Card, CardContent } from "@/components/ui/card"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { cn } from "@/utils/utils"
 
 export function SectionBase({
   children,
@@ -12,31 +12,19 @@ export function SectionBase({
   sectionClassName,
   sectionContentClassName,
 }: {
-  children: React.ReactNode;
-  isCallToAction?: boolean;
-  isWide?: boolean;
-  className?: string;
-  cardClassName?: string;
-  cardContentClassName?: string;
-  sectionClassName?: string;
-  sectionContentClassName?: string;
+  children: React.ReactNode
+  isCallToAction?: boolean
+  isWide?: boolean
+  className?: string
+  cardClassName?: string
+  cardContentClassName?: string
+  sectionClassName?: string
+  sectionContentClassName?: string
 }) {
   return (
-    <SectionLayout
-      isFlex
-      className={sectionClassName}
-      contentClassName={sectionContentClassName}
-    >
-      <Card
-        className={cn(
-          "bg-b-base ",
-          isCallToAction ? "squircle-7xl" : "squircle-6xl",
-          cardClassName,
-        )}
-      >
-        <CardContent
-          className={cn("md:px-12 py-16 md:py-20", cardContentClassName)}
-        >
+    <SectionLayout isFlex className={sectionClassName} contentClassName={sectionContentClassName}>
+      <Card className={cn("bg-b-base ", isCallToAction ? "squircle-7xl" : "squircle-6xl", cardClassName)}>
+        <CardContent className={cn("md:px-12 py-16 md:py-20", cardContentClassName)}>
           <div
             className={cn(
               "flex flex-col items-center justify-between gap-6 max-w-full",
@@ -50,5 +38,5 @@ export function SectionBase({
         </CardContent>
       </Card>
     </SectionLayout>
-  );
+  )
 }

@@ -1,11 +1,5 @@
-import {
-  Database,
-  LayoutDashboard,
-  MessageSquareText,
-  Trophy,
-  Users,
-} from "lucide-react";
-import type { NavItem } from "@/components/landlord/admin-types";
+import { Database, LayoutDashboard, MessageSquareText, Trophy, Users } from "lucide-react"
+import type { NavItem } from "@/components/landlord/admin-types"
 
 export const adminNavItems: NavItem[] = [
   {
@@ -58,13 +52,13 @@ export const adminNavItems: NavItem[] = [
     label: "Reactions",
     icon: Database,
   },
-];
+]
 
 export interface NavGroup {
-  key: string;
-  label: string;
-  icon: React.ElementType;
-  items: NavItem[];
+  key: string
+  label: string
+  icon: React.ElementType
+  items: NavItem[]
 }
 
 export const adminNavGroups: NavGroup[] = [
@@ -102,9 +96,9 @@ export const adminNavGroups: NavGroup[] = [
       },
     ],
   },
-];
+]
 
 export const adminNavGroupKeys = {
   quests: "quests",
   hub: "hub",
-} as const;
+} as const

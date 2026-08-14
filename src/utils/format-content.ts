@@ -1,14 +1,14 @@
-"use client";
-import { useEffect, useState } from "react";
-import slugify from "slugify";
-import sanitizeHtml from "sanitize-html";
+"use client"
+import { useEffect, useState } from "react"
+import slugify from "slugify"
+import sanitizeHtml from "sanitize-html"
 
 export type ContentStructureItem = {
-  label: string;
-  path: string;
-  children: ContentStructureItem[];
-  isPage: boolean;
-};
+  label: string
+  path: string
+  children: ContentStructureItem[]
+  isPage: boolean
+}
 
 /**
  * Slugify a headline
@@ -27,7 +27,7 @@ export function slugifyHeadline(headline: string) {
     trim: true,
     strict: true,
     remove: /[*+~.()'"!:@]/g,
-  });
+  })
 }
 
 /**
@@ -44,12 +44,12 @@ export function slugifyHeadline(headline: string) {
  * // returns "&lt;script&gt;alert('Hello World')&lt;/script&gt;"
  */
 export function useSanitizeContent({ description }: { description: string }) {
-  const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false)
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    setIsClient(true)
+  }, [])
   if (!description) {
-    return;
+    return
   }
   const cleanDescription = sanitizeHtml(description, {
     allowedTags: sanitizeHtml?.defaults?.allowedTags?.concat(["img", "iframe"]),
@@ -63,16 +63,7 @@ export function useSanitizeContent({ description }: { description: string }) {
       sup: ["style"],
       span: ["style", "class"],
       a: ["style", "href", "data-*", "name", "target", "class"],
-      img: [
-        "src",
-        "srcset",
-        "alt",
-        "title",
-        "width",
-        "height",
-        "loading",
-        "class",
-      ],
+      img: ["src", "srcset", "alt", "title", "width", "height", "loading", "class"],
       li: ["style", "class"],
       iframe: ["src", "frameborder", "allowfullscreen", "class"],
     },
@@ -80,14 +71,8 @@ export function useSanitizeContent({ description }: { description: string }) {
     allowedStyles: {
       "*": {
         // Match HEX and RGB
-        color: [
-          /^#(0x)?[0-9a-f]+$/i,
-          /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/,
-        ],
-        "background-color": [
-          /^#(0x)?[0-9a-f]+$/i,
-          /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/,
-        ],
+        color: [/^#(0x)?[0-9a-f]+$/i, /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/],
+        "background-color": [/^#(0x)?[0-9a-f]+$/i, /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/],
         "text-align": [/^left$/, /^right$/, /^center$/],
         // Match any number with px, em, or %
         "font-size": [/^\d+(?:px|em|%)$/],
@@ -96,7 +81,7 @@ export function useSanitizeContent({ description }: { description: string }) {
     allowedSchemesByTag: {
       img: ["data", "http", "https"],
     },
-  });
+  })
 
-  return isClient ? cleanDescription : "";
+  return isClient ? cleanDescription : ""
 }

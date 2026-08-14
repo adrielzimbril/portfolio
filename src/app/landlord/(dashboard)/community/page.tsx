@@ -1,11 +1,11 @@
-import React from "react";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { CommunitySection } from "./sections/CommunitySection";
+import React from "react"
+import { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { CommunitySection } from "./sections/CommunitySection"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.pages.community");
+  const t = await getTranslations("admin.pages.community")
 
   return {
     ...baseMetadata,
@@ -15,9 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
       index: false,
       follow: false,
     },
-  };
+  }
 }
 
 export default function CommunityPage() {
-  return <CommunitySection />;
+  return <CommunitySection />
 }

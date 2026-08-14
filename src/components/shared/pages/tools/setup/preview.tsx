@@ -1,28 +1,22 @@
-"use client";
-import Image from "next/image";
-import { cn } from "@/utils/utils";
-import { getImageUrl } from "@/utils/base-url";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useTranslations } from "use-intl";
-import { PreviewContent } from "@/components/shared/pages/shared/preview";
-import { Link } from "@/components/ui/link";
+"use client"
+import Image from "next/image"
+import { cn } from "@/utils/utils"
+import { getImageUrl } from "@/utils/base-url"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { useTranslations } from "use-intl"
+import { PreviewContent } from "@/components/shared/pages/shared/preview"
+import { Link } from "@/components/ui/link"
 
 interface PreviewProps {
-  title?: string;
-  cover?: string;
-  coverText?: { emoji: string; title: string; description: string };
-  isWide?: boolean;
-  purchaseUrl?: string;
+  title?: string
+  cover?: string
+  coverText?: { emoji: string; title: string; description: string }
+  isWide?: boolean
+  purchaseUrl?: string
 }
 
-export function CardPreview({
-  title,
-  cover,
-  coverText,
-  isWide,
-  purchaseUrl,
-}: PreviewProps) {
-  const t = useTranslations();
+export function CardPreview({ title, cover, coverText, isWide, purchaseUrl }: PreviewProps) {
+  const t = useTranslations()
   return (
     <div
       className={cn(
@@ -56,21 +50,13 @@ export function CardPreview({
                 alt={title ?? ""}
                 src={getImageUrl(cover)}
                 loading="lazy"
-                sizes={
-                  isWide
-                    ? "(max-width: 768px) 100vw, 66vw"
-                    : "(max-width: 768px) 100vw, 33vw"
-                }
+                sizes={isWide ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
               />
             </Link>
           ) : (
             <Dialog>
               <DialogTrigger asChild>
-                <button
-                  type="button"
-                  className="w-full text-left"
-                  aria-label={`View ${title}`}
-                >
+                <button type="button" className="w-full text-left" aria-label={`View ${title}`}>
                   <Image
                     width={1200}
                     height={630}
@@ -78,19 +64,11 @@ export function CardPreview({
                     alt={title ?? ""}
                     src={getImageUrl(cover)}
                     loading="lazy"
-                    sizes={
-                      isWide
-                        ? "(max-width: 768px) 100vw, 66vw"
-                        : "(max-width: 768px) 100vw, 33vw"
-                    }
+                    sizes={isWide ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
                   />
                 </button>
               </DialogTrigger>
-              <DialogContent
-                size="2xl"
-                className="max-w-6xl p-2 sm:p-3"
-                variant="glass"
-              >
+              <DialogContent size="2xl" className="max-w-6xl p-2 sm:p-3" variant="glass">
                 <div className="w-full h-full max-h-[85vh] overflow-hidden rounded-xl pointer-events-none">
                   <Image
                     width={1920}
@@ -116,5 +94,5 @@ export function CardPreview({
         </div>
       )}
     </div>
-  );
+  )
 }

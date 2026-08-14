@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
 export interface PerformanceMode {
-  isMobile: boolean;
-  prefersReducedMotion: boolean;
-  shouldReduceAnimations: boolean;
+  isMobile: boolean
+  prefersReducedMotion: boolean
+  shouldReduceAnimations: boolean
 }
 
 export function usePerformanceMode(): PerformanceMode {
@@ -11,40 +11,38 @@ export function usePerformanceMode(): PerformanceMode {
     isMobile: false,
     prefersReducedMotion: false,
     shouldReduceAnimations: false,
-  });
+  })
 
   useEffect(() => {
     const checkPerformanceMode = () => {
-      const isMobile = window.innerWidth < 768;
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+      const isMobile = window.innerWidth < 768
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       setMode({
         isMobile,
         prefersReducedMotion,
         shouldReduceAnimations: isMobile || prefersReducedMotion,
-      });
-    };
+      })
+    }
 
-    checkPerformanceMode();
-    window.addEventListener("resize", checkPerformanceMode);
+    checkPerformanceMode()
+    window.addEventListener("resize", checkPerformanceMode)
 
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
     if (motionQuery.addEventListener) {
-      motionQuery.addEventListener("change", checkPerformanceMode);
+      motionQuery.addEventListener("change", checkPerformanceMode)
     } else {
-      motionQuery.addListener(checkPerformanceMode);
+      motionQuery.addListener(checkPerformanceMode)
     }
 
     return () => {
-      window.removeEventListener("resize", checkPerformanceMode);
+      window.removeEventListener("resize", checkPerformanceMode)
       if (motionQuery.removeEventListener) {
-        motionQuery.removeEventListener("change", checkPerformanceMode);
+        motionQuery.removeEventListener("change", checkPerformanceMode)
       } else {
-        motionQuery.removeListener(checkPerformanceMode);
+        motionQuery.removeListener(checkPerformanceMode)
       }
-    };
-  }, []);
+    }
+  }, [])
 
-  return mode;
+  return mode
 }

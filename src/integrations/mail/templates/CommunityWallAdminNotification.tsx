@@ -1,5 +1,5 @@
-import React from "react";
-import { createTranslator } from "use-intl/core";
+import React from "react"
+import { createTranslator } from "use-intl/core"
 import {
   Body,
   Container,
@@ -13,12 +13,9 @@ import {
   Hr,
   Tailwind,
   Link,
-} from "@react-email/components";
-import {
-  defaultTranslations,
-  defaultLocale,
-} from "@/integrations/mail/util/translations";
-import type { BaseMailProps } from "@/integrations/mail/types/types";
+} from "@react-email/components"
+import { defaultTranslations, defaultLocale } from "@/integrations/mail/util/translations"
+import type { BaseMailProps } from "@/integrations/mail/types/types"
 
 export function CommunityWallAdminNotification({
   locale,
@@ -28,12 +25,12 @@ export function CommunityWallAdminNotification({
   message,
   language,
 }: BaseMailProps & {
-  name: string;
-  email: string;
-  message: string;
-  language?: string;
+  name: string
+  email: string
+  message: string
+  language?: string
 }) {
-  const t = createTranslator({ locale, messages: translations });
+  const t = createTranslator({ locale, messages: translations })
 
   return (
     <Html>
@@ -54,41 +51,27 @@ export function CommunityWallAdminNotification({
         <Body className="bg-[#fafaf9] my-8 font-sans">
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             <Section className="px-10 pt-10 pb-5 bg-white text-center">
-              <Heading
-                as="h1"
-                className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
-              >
+              <Heading as="h1" className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
                 {t("mail.communityWallAdminNotification.subject")}
               </Heading>
             </Section>
 
             <Section className="px-10 pb-10 bg-white text-left">
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>
-                  {t("mail.communityWallAdminNotification.labels.name")}
-                </strong>
-                : {name}
+                <strong>{t("mail.communityWallAdminNotification.labels.name")}</strong>: {name}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                <strong>
-                  {t("mail.communityWallAdminNotification.labels.email")}
-                </strong>
-                : <Link href={`mailto:${email}`}>{email}</Link>
+                <strong>{t("mail.communityWallAdminNotification.labels.email")}</strong>:{" "}
+                <Link href={`mailto:${email}`}>{email}</Link>
               </Text>
               {language && (
                 <Text className="text-[#333333] text-base leading-relaxed mb-2">
-                  <strong>
-                    {t("mail.communityWallAdminNotification.labels.language")}
-                  </strong>
-                  : {language}
+                  <strong>{t("mail.communityWallAdminNotification.labels.language")}</strong>: {language}
                 </Text>
               )}
               <Hr className="border-t border-[#e0e0e0] my-6" />
               <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                <strong>
-                  {t("mail.communityWallAdminNotification.labels.message")}
-                </strong>
-                : {message}
+                <strong>{t("mail.communityWallAdminNotification.labels.message")}</strong>: {message}
               </Text>
             </Section>
 
@@ -105,7 +88,7 @@ export function CommunityWallAdminNotification({
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }
 
 CommunityWallAdminNotification.PreviewProps = {
@@ -115,6 +98,6 @@ CommunityWallAdminNotification.PreviewProps = {
   email: "jane@example.com",
   message: "Great work on this project!",
   language: "en",
-};
+}
 
-export default CommunityWallAdminNotification;
+export default CommunityWallAdminNotification

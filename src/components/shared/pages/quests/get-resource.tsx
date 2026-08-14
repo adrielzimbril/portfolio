@@ -1,23 +1,23 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal";
-import { cn } from "@/utils/utils";
-import { Tags } from "@/components/shared/pages/resources/tags";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { ProductAvatarsStats } from "@/components/shared/pages/newsletter/SubscriberBadges";
-import { generateSimpleClientToken, getDate, logger, sleep } from "@/utils";
-import { ResourceType } from "@/types";
-import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator";
-import { toast } from "@/lib/toast";
-import { useTranslations, useLocale } from "use-intl";
-import { usePageViews } from "@/hooks/usePageViews";
-import { routes } from "@/data/routes";
-import { getPathUrl } from "@/utils/base-url";
-import { useTurnstile } from "@/integrations/anti-bot/turnstile";
-import { getTurnstileConfig, isLocal } from "@/config";
+"use client"
+import React, { useEffect, useState } from "react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { SubscriptionModal } from "@/components/shared/pages/newsletter/SubscriptionModal"
+import { cn } from "@/utils/utils"
+import { Tags } from "@/components/shared/pages/resources/tags"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { ProductAvatarsStats } from "@/components/shared/pages/newsletter/SubscriberBadges"
+import { generateSimpleClientToken, getDate, logger, sleep } from "@/utils"
+import { ResourceType } from "@/types"
+import { useEmailValidator } from "@/hooks/useValidation/useEmailValidator"
+import { toast } from "@/lib/toast"
+import { useTranslations, useLocale } from "use-intl"
+import { usePageViews } from "@/hooks/usePageViews"
+import { routes } from "@/data/routes"
+import { getPathUrl } from "@/utils/base-url"
+import { useTurnstile } from "@/integrations/anti-bot/turnstile"
+import { getTurnstileConfig, isLocal } from "@/config"
 
 export function GetResource({
   id,
@@ -28,16 +28,16 @@ export function GetResource({
   type,
   created_at,
 }: {
-  id?: string | number;
-  title: string;
-  slug: string;
-  tags: { name: string; color: string }[];
-  excerpt: string;
-  type: ResourceType;
-  created_at: string;
+  id?: string | number
+  title: string
+  slug: string
+  tags: { name: string; color: string }[]
+  excerpt: string
+  type: ResourceType
+  created_at: string
 }) {
-  const t = useTranslations();
-  const locale = useLocale();
+  const t = useTranslations()
+  const locale = useLocale()
   const { count } = usePageViews(
     routes.hubGet.key,
     undefined,
@@ -46,65 +46,50 @@ export function GetResource({
       path: getPathUrl(routes.hubGet.link),
     },
     false,
-  );
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isWaitingForToken, setIsWaitingForToken] = useState(false);
+  )
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [email, setEmail] = useState("")
+  const [isWaitingForToken, setIsWaitingForToken] = useState(false)
   const emailValidator = useEmailValidator({
     value: email,
     label: "Email",
     required: true,
-  });
-  const isEmailValid = Boolean(emailValidator(email));
-  logger.info("isEmailValid", isEmailValid, emailValidator(email));
-  const isLocalMode = isLocal();
+  })
+  const isEmailValid = Boolean(emailValidator(email))
+  logger.info("isEmailValid", isEmailValid, emailValidator(email))
+  const isLocalMode = isLocal()
 
-  const { siteKey } = getTurnstileConfig();
+  const { siteKey } = getTurnstileConfig()
 
-  const { ref, token, error, isLoading, execute, reset } = useTurnstile(
-    siteKey || "",
-    {
-      appearance: "execute",
-      execution: "execute",
-      "retry-interval": 1000,
-      theme: "auto",
-    },
-  );
-  sleep(1000).then(() => execute());
+  const { ref, token, error, isLoading, execute, reset } = useTurnstile(siteKey || "", {
+    appearance: "execute",
+    execution: "execute",
+    "retry-interval": 1000,
+    theme: "auto",
+  })
+  sleep(1000).then(() => execute())
 
   // Auto-open modal when token arrives after waiting
   if (isWaitingForToken && token && isEmailValid) {
-    setIsWaitingForToken(false);
-    setIsModalOpen(true);
+    setIsWaitingForToken(false)
+    setIsModalOpen(true)
   }
 
   const productId = generateSimpleClientToken({
     action: "validate-product-id",
     id: id ?? "",
-  });
+  })
 
   const productTypeMap: Record<ResourceType, string> = {
-    [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.title",
-    ),
-    [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.title",
-    ),
-    [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.title",
-    ),
-    [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.title",
-    ),
-    [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma_template.title",
-    ),
-    [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.title",
-    ),
-  };
+    [ResourceType.COURSE]: t("common.page-sections.hub.base.resources-type.course.title"),
+    [ResourceType.EBOOK]: t("common.page-sections.hub.base.resources-type.ebook.title"),
+    [ResourceType.VIDEO]: t("common.page-sections.hub.base.resources-type.video.title"),
+    [ResourceType.MASTERCLASS]: t("common.page-sections.hub.base.resources-type.masterclass.title"),
+    [ResourceType.FIGMA_TEMPLATE]: t("common.page-sections.hub.base.resources-type.figma_template.title"),
+    [ResourceType.CODE]: t("common.page-sections.hub.base.resources-type.code.title"),
+  }
 
-  const productType = productTypeMap[type] ?? "";
+  const productType = productTypeMap[type] ?? ""
 
   return (
     <>
@@ -149,20 +134,14 @@ export function GetResource({
               color: tag.color as DEFAULT_COLOR_CODE_NAME_TYPE,
             }))}
           /> */}
-          <Tags
-            primaryTag={getDate({ date: created_at })}
-            tags={tags.map((tag) => tag.name)}
-            isCentered
-          />
+          <Tags primaryTag={getDate({ date: created_at })} tags={tags.map((tag) => tag.name)} isCentered />
           <div className="mt-2 flex items-center gap-2">
             <ProductAvatarsStats slug={slug} type={type} />
           </div>
           <div className="flex flex-col items-start gap-4 w-full md:max-w-[80%]">
             <div ref={ref} className="hidden" />
             <Input
-              placeholder={t(
-                "common.page-sections.newsletter.form.fields.email-page.placeholder",
-              )}
+              placeholder={t("common.page-sections.newsletter.form.fields.email-page.placeholder")}
               type="email"
               //className="ml-auto rounded-s-md"
               value={email}
@@ -172,28 +151,28 @@ export function GetResource({
             <Button
               onClick={() => {
                 if (!isLocalMode && isLoading) {
-                  toast.error(t("common.turnstile.loading"));
-                  return;
+                  toast.error(t("common.turnstile.loading"))
+                  return
                 }
 
                 if (!isEmailValid) {
-                  toast.error(t("zod.errors.customized.email.invalid"));
-                  return;
+                  toast.error(t("zod.errors.customized.email.invalid"))
+                  return
                 }
 
                 if (!token) {
-                  setIsWaitingForToken(true);
+                  setIsWaitingForToken(true)
                   while (!token) {
-                    reset();
-                    execute();
-                    sleep(500);
+                    reset()
+                    execute()
+                    sleep(500)
                   }
-                  setIsWaitingForToken(false);
-                  toast.error(t("common.turnstile.waiting"));
-                  return;
+                  setIsWaitingForToken(false)
+                  toast.error(t("common.turnstile.waiting"))
+                  return
                 }
 
-                setIsModalOpen(true);
+                setIsModalOpen(true)
               }}
               asFull
               whileTap
@@ -201,9 +180,7 @@ export function GetResource({
               disabled={isLoading || isWaitingForToken}
             >
               <span className="font-bold text-base">
-                {isLoading || isWaitingForToken
-                  ? t("common.turnstile.button")
-                  : `${t("common.button.receive")} !🦄`}
+                {isLoading || isWaitingForToken ? t("common.turnstile.button") : `${t("common.button.receive")} !🦄`}
               </span>
             </Button>
           </div>
@@ -218,5 +195,5 @@ export function GetResource({
         onClose={() => setIsModalOpen(false)}
       />
     </>
-  );
+  )
 }

@@ -5,5 +5,5 @@ export const FRFlagRound = ({ width = "900px", height = "600px" }) => {
       <path fill="#fff" d="M0 0h600v600H0" />
       <path fill="#002654" d="M0 0h300v600H0" />
     </svg>
-  );
-};
+  )
+}

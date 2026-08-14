@@ -1,58 +1,56 @@
-"use client";
-import { NavMenu } from "@/components/shared/_layouts/nav-menu";
-import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle";
-import { siteConfig } from "@/data/config";
-import { cn } from "@/utils/utils";
-import { Menu, X, Github } from "@aurthle/icons";
-import { useScroll, type Variants } from "motion/react";
-import { useEffect, useState } from "react";
-import { routes } from "@/data/routes";
-import { Link } from "@/components/ui/link";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "use-intl";
-import { getActivePathInArray, getImageUrl, sleep } from "@/utils";
-import { usePathname } from "next/navigation";
-import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
-import { useCompareIOSVersion } from "@/hooks/useIsMobile";
-import Image from "next/image";
+"use client"
+import { NavMenu } from "@/components/shared/_layouts/nav-menu"
+import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle"
+import { siteConfig } from "@/data/config"
+import { cn } from "@/utils/utils"
+import { Menu, X, Github } from "@aurthle/icons"
+import { useScroll, type Variants } from "motion/react"
+import { useEffect, useState } from "react"
+import { routes } from "@/data/routes"
+import { Link } from "@/components/ui/link"
+import { Button } from "@/components/ui/button"
+import { useTranslations } from "use-intl"
+import { getActivePathInArray, getImageUrl, sleep } from "@/utils"
+import { usePathname } from "next/navigation"
+import { LogoIcon } from "@/components/shared/icons/logo/logo-icon"
+import { useCompareIOSVersion } from "@/hooks/useIsMobile"
+import Image from "next/image"
 
-const INITIAL_WIDTH = "68rem";
-const MAX_WIDTH = "65rem";
+const INITIAL_WIDTH = "68rem"
+const MAX_WIDTH = "65rem"
 
 export function Navbar() {
-  const t = useTranslations();
-  const { scrollY } = useScroll();
-  const [hasScrolled, setHasScrolled] = useState(false);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const isBadIOS = useCompareIOSVersion();
+  const t = useTranslations()
+  const { scrollY } = useScroll()
+  const [hasScrolled, setHasScrolled] = useState(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const isBadIOS = useCompareIOSVersion()
 
   useEffect(() => {
-    if (isBadIOS) return;
+    if (isBadIOS) return
     const unsubscribe = scrollY.on("change", (latest) => {
-      setHasScrolled(latest > 10);
-    });
-    return unsubscribe;
-  }, [scrollY, isBadIOS]);
+      setHasScrolled(latest > 10)
+    })
+    return unsubscribe
+  }, [scrollY, isBadIOS])
 
-  const toggleDrawer = () => setIsDrawerOpen((prev) => !prev);
-  const handleOverlayClick = () => setIsDrawerOpen(false);
+  const toggleDrawer = () => setIsDrawerOpen((prev) => !prev)
+  const handleOverlayClick = () => setIsDrawerOpen(false)
 
-  const route = usePathname();
-  const menuRoutes = Object.values(routes);
-  const menuRoutesFiltered = menuRoutes.filter((item) => item.inHeader);
+  const route = usePathname()
+  const menuRoutes = Object.values(routes)
+  const menuRoutesFiltered = menuRoutes.filter((item) => item.inHeader)
 
   const activePath = getActivePathInArray({
     path: route,
     array: menuRoutes.map((item) => item.link),
     withSlash: true,
-  });
+  })
 
   // Find the current route directly from filtered menu routes
-  const currentRoute = menuRoutesFiltered.find(
-    (item) => item.link === activePath,
-  );
-  const currentKey = currentRoute?.key || routes.home.key;
-  const [activeTab, setActiveTab] = useState<string>(currentKey);
+  const currentRoute = menuRoutesFiltered.find((item) => item.link === activePath)
+  const currentKey = currentRoute?.key || routes.home.key
+  const [activeTab, setActiveTab] = useState<string>(currentKey)
 
   return (
     <header
@@ -70,16 +68,14 @@ export function Navbar() {
         <div
           className={cn(
             "mx-auto container rounded-2xl transition-all duration-300 px-0 bg-b-white",
-            hasScrolled
-              ? "px-2 py-1 backdrop-blur-lg bg-b-white/60"
-              : "shadow-none",
+            hasScrolled ? "px-2 py-1 backdrop-blur-lg bg-b-white/60" : "shadow-none",
           )}
         >
           <div className="flex h-[56px] items-center justify-between px-2 md:p-4">
             <Link
               href={routes.home.link}
               onClick={async () => {
-                setActiveTab(routes.home.key);
+                setActiveTab(routes.home.key)
               }}
               variant="none"
               size="none"
@@ -101,11 +97,7 @@ export function Navbar() {
               /> */}
             </Link>
 
-            <NavMenu
-              menuRoutes={menuRoutesFiltered}
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
+            <NavMenu menuRoutes={menuRoutesFiltered} activeTab={activeTab} setActiveTab={setActiveTab} />
 
             <div className="flex flex-row items-center gap-1 md:gap-3 shrink-0">
               <div className="hidden lg:flex items-center space-x-6">
@@ -132,11 +124,7 @@ export function Navbar() {
                 //variant="secondary"
                 onClick={toggleDrawer}
               >
-                {isDrawerOpen ? (
-                  <X size={20} className="size-5" />
-                ) : (
-                  <Menu size={20} className="size-5" />
-                )}
+                {isDrawerOpen ? <X size={20} className="size-5" /> : <Menu size={20} className="size-5" />}
               </Button>
             </div>
           </div>
@@ -146,10 +134,7 @@ export function Navbar() {
       {/* Mobile Drawer */}
       {isDrawerOpen && (
         <>
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={handleOverlayClick}
-          />
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={handleOverlayClick} />
 
           <div className="fixed inset-x-0 w-[95%] h-[95%] mx-auto top-3 bg-b-white border-4 border-b-base-accent p-4 rounded-xl">
             {/* Mobile menu content */}
@@ -160,10 +145,10 @@ export function Navbar() {
                     href={routes.home.link}
                     className="flex items-center gap-3"
                     onClick={async () => {
-                      setActiveTab(routes.home.key);
+                      setActiveTab(routes.home.key)
                       sleep(2000).then(() => {
-                        toggleDrawer();
-                      });
+                        toggleDrawer()
+                      })
                     }}
                   >
                     <Image
@@ -197,25 +182,21 @@ export function Navbar() {
                     <li
                       key={item.key}
                       className={cn(
-                        "w-full p-2.5 squircle-7xl/100  hover:squircle-xl/100 border-2 border-b-base-accent hover:bg-b-base",
-                        activeTab === item.key
-                          ? "bg-b-white-invert-fr"
-                          : "bg-sh-white",
+                        "w-full p-2.5 squircle-7xl/100 hover:squircle-3xl/100 border-2 border-b-base-accent hover:bg-b-base",
+                        activeTab === item.key ? "bg-b-white-invert-fr" : "bg-sh-white",
                       )}
                     >
                       <Link
                         href={item.link}
                         className={cn(
                           "w-full underline-offset-4 hover:text-b-white-invert/80 transition-colors",
-                          activeTab === item.key
-                            ? "text-b-white-invert font-medium"
-                            : "text-b-white-invert/80",
+                          activeTab === item.key ? "text-b-white-invert font-medium" : "text-b-white-invert/80",
                         )}
                         onClick={async () => {
-                          setActiveTab(item.key);
+                          setActiveTab(item.key)
                           sleep(2000).then(() => {
-                            toggleDrawer();
-                          });
+                            toggleDrawer()
+                          })
                         }}
                       >
                         {/* {t("common.menu." + item.key + ".mobile")} */}
@@ -231,12 +212,7 @@ export function Navbar() {
                 <Link href={routes.contact.link} likeButton whileTap asFull>
                   {t("common.page-sections.header.cta")}
                 </Link>
-                <Link
-                  href={siteConfig.links.contact.social.githubRepo.url}
-                  likeButton
-                  whileTap
-                  asFull
-                >
+                <Link href={siteConfig.links.contact.social.githubRepo.url} likeButton whileTap asFull>
                   {t("common.base.github-repo")}
                 </Link>
               </div>
@@ -245,5 +221,5 @@ export function Navbar() {
         </>
       )}
     </header>
-  );
+  )
 }

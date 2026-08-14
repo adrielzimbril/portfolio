@@ -1,4 +1,4 @@
-import { ReactionType } from "@/lib/stats/types";
+import { ReactionType } from "@/lib/stats/types"
 
 export enum SortOrder {
   ASC = "asc",
@@ -11,7 +11,7 @@ export enum Locale {
   ZH_CN = "zh-CN",
 }
 
-export type LocaleKey = (typeof Locale)[keyof typeof Locale];
+export type LocaleKey = (typeof Locale)[keyof typeof Locale]
 
 export enum ResourceType {
   COURSE = "course",
@@ -22,7 +22,7 @@ export enum ResourceType {
   CODE = "code",
 }
 
-export type ResourceTypeKey = (typeof ResourceType)[keyof typeof ResourceType];
+export type ResourceTypeKey = (typeof ResourceType)[keyof typeof ResourceType]
 
 export enum PageType {
   PROJECT = "projects",

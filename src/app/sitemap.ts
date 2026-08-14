@@ -1,32 +1,21 @@
-import { getResourcesUrl } from "@/utils/base-url";
-import {
-  getAllPosts,
-  getAllProjects,
-  getAllQuests,
-  getAllResources,
-} from "@/integrations/content/lib";
-import type { MetadataRoute } from "next";
-import {
-  Post,
-  Project,
-  Quest,
-  Resource,
-  Talk,
-} from "@/integrations/content/types/types";
-import { getAbsolutePathUrl } from "@/utils/base-url";
-import { routes } from "@/data/routes";
-import { PageType } from "@/types";
+import { getResourcesUrl } from "@/utils/base-url"
+import { getAllPosts, getAllProjects, getAllQuests, getAllResources } from "@/integrations/content/lib"
+import type { MetadataRoute } from "next"
+import { Post, Project, Quest, Resource, Talk } from "@/integrations/content/types/types"
+import { getAbsolutePathUrl } from "@/utils/base-url"
+import { routes } from "@/data/routes"
+import { PageType } from "@/types"
 
 const baseRoutes = Object.values(routes)
   .map((route) => {
     if (route.inSitemap) {
-      return route.link;
+      return route.link
     }
-    return null;
+    return null
   })
-  .filter((page) => page !== null);
+  .filter((page) => page !== null)
 
-const staticMarketingPages = [...new Set([...baseRoutes, "/contact"])];
+const staticMarketingPages = [...new Set([...baseRoutes, "/contact"])]
 
 /**
  * Get the priority of a route
@@ -47,15 +36,15 @@ const getPriority = (type: "home" | "marketing" | "resources"): number => {
     home: 1,
     marketing: 0.8,
     resources: 0.6,
-  };
-  return typePriority[type];
-};
+  }
+  return typePriority[type]
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getAllPosts();
-  const resources = await getAllResources();
-  const projects = await getAllProjects();
-  const quests = await getAllQuests();
+  const posts = await getAllPosts()
+  const resources = await getAllResources()
+  const projects = await getAllProjects()
+  const quests = await getAllQuests()
 
   return [
     ...staticMarketingPages.flatMap((page: string) => ({
@@ -87,5 +76,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: getPriority("resources"),
     })),
-  ];
+  ]
 }

@@ -1,11 +1,11 @@
-"use client";
-import { useState, useEffect, useMemo } from "react";
-import { cn } from "@/utils/utils";
-import { toast } from "@/lib/toast";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+"use client"
+import { useState, useEffect, useMemo } from "react"
+import { cn } from "@/utils/utils"
+import { toast } from "@/lib/toast"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   Dialog,
   DialogContent,
@@ -16,23 +16,15 @@ import {
   DialogBadge,
   DialogFooter,
   DialogSeparator,
-} from "@/components/ui/dialog";
-import { useLocale, useTranslations } from "use-intl";
-import { getGamesByLocale, type GameItem } from "@/types/personalData";
+} from "@/components/ui/dialog"
+import { useLocale, useTranslations } from "use-intl"
+import { getGamesByLocale, type GameItem } from "@/types/personalData"
 
-type Question = GameItem;
+type Question = GameItem
 
 // Custom Emoji Component
-function GuessButton({
-  isFalse,
-  onClick,
-  canAnswer,
-}: {
-  isFalse?: boolean;
-  onClick: () => void;
-  canAnswer: boolean;
-}) {
-  const t = useTranslations();
+function GuessButton({ isFalse, onClick, canAnswer }: { isFalse?: boolean; onClick: () => void; canAnswer: boolean }) {
+  const t = useTranslations()
   // const imgEmojiFalse = getImageUrl(getEmojiHub("🤥", "fluent", "anim"));
   // const imgEmojiTrue = getImageUrl(getEmojiHub("😀", "fluent", "anim"));
   // const imgEmojiFalse = getImageUrl(getEmojiHub("🤥", "apple"));
@@ -76,17 +68,13 @@ function GuessButton({
             }`}
           >
             {isFalse
-              ? t(
-                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.false",
-                )
-              : t(
-                  "about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.true",
-                )}
+              ? t("about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.false")
+              : t("about.page.interactive-fun-facts-section.sections.guess-buttons.buttons.true")}
           </span>
         )}
       </div>
     </div>
-  );
+  )
 }
 
 // Question Card Component
@@ -96,19 +84,19 @@ function QuestionCard({
   currentQuestionIndex,
   totalQuestions,
 }: {
-  question: Question;
-  index: number;
-  currentQuestionIndex: number;
-  totalQuestions: number;
+  question: Question
+  index: number
+  currentQuestionIndex: number
+  totalQuestions: number
 }) {
-  const isActive = index === currentQuestionIndex;
-  const isPast = index < currentQuestionIndex;
+  const isActive = index === currentQuestionIndex
+  const isPast = index < currentQuestionIndex
 
   // Calculate rotation and position
   const getCardTransform = () => {
-    const rotation = index * (index % 2 === 0 ? 1.5 : -1.5);
-    const x = Math.sin(((rotation * Math.PI) / 180) * 40);
-    const y = Math.cos(((rotation * Math.PI) / 180) * 20);
+    const rotation = index * (index % 2 === 0 ? 1.5 : -1.5)
+    const x = Math.sin(((rotation * Math.PI) / 180) * 40)
+    const y = Math.cos(((rotation * Math.PI) / 180) * 20)
 
     if (isActive) {
       // Active card - right and front
@@ -118,7 +106,7 @@ function QuestionCard({
         x,
         y,
         zIndex: 20,
-      };
+      }
     }
 
     if (isPast) {
@@ -129,21 +117,21 @@ function QuestionCard({
         x,
         y,
         zIndex: totalQuestions - index,
-      };
+      }
     }
 
     // Future cards - stacked behind with rotation
-    const distanceFromCurrent = index - currentQuestionIndex;
+    const distanceFromCurrent = index - currentQuestionIndex
     return {
       rotate: rotation || (distanceFromCurrent % 2 === 0 ? 0.8 : -0.8),
       scale: 1 - distanceFromCurrent * 0.05,
       x,
       y,
       zIndex: totalQuestions - distanceFromCurrent,
-    };
-  };
+    }
+  }
 
-  const transform = getCardTransform();
+  const transform = getCardTransform()
 
   return (
     <div
@@ -166,22 +154,16 @@ function QuestionCard({
               <Badge className="aspect-square p-4 rounded-full">
                 <span className=" text-4xl">{question.emoji}</span>
               </Badge>
-              <h3 className="text-3xl tracking-wide leading-[120%]">
-                {question.title}
-              </h3>
+              <h3 className="text-3xl tracking-wide leading-[120%]">{question.title}</h3>
 
-              <p className="text-b-white-invert-thr text-xl leading-[140%]">
-                {question.description}
-              </p>
-              <p className="text-zinc-400 text-lg leading-[120%]">
-                {question.subtitle}
-              </p>
+              <p className="text-b-white-invert-thr text-xl leading-[140%]">{question.description}</p>
+              <p className="text-zinc-400 text-lg leading-[120%]">{question.subtitle}</p>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }
 
 // Custom Alert Component with Dialog
@@ -191,29 +173,24 @@ function CustomAlert({
   question,
   onClose,
 }: {
-  isVisible: boolean;
-  isCorrect: boolean;
-  question: Question | null;
-  onClose: () => void;
+  isVisible: boolean
+  isCorrect: boolean
+  question: Question | null
+  onClose: () => void
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
   useEffect(() => {
     if (isVisible) {
       const timer = setTimeout(() => {
-        onClose();
-      }, 3000);
-      return () => clearTimeout(timer);
+        onClose()
+      }, 3000)
+      return () => clearTimeout(timer)
     }
-  }, [isVisible, onClose]);
+  }, [isVisible, onClose])
 
   return (
     <Dialog open={isVisible} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent
-        size="sm"
-        variant="modern"
-        className="text-center"
-        closeButton={false}
-      >
+      <DialogContent size="sm" variant="modern" className="text-center" closeButton={false}>
         <DialogHeader>
           <div className="relative flex flex-col gap-2 items-center justify-center">
             <h3 className="mb-2 text-4xl">{isCorrect ? "🎉" : "😅"}</h3>
@@ -225,22 +202,14 @@ function CustomAlert({
               })}
             >
               {isCorrect
-                ? t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.title",
-                  )
-                : t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.title",
-                  )}
+                ? t("about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.title")
+                : t("about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.title")}
             </DialogTitle>
 
             <DialogDescription>
               {isCorrect
-                ? t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.description",
-                  )
-                : t(
-                    "about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.description",
-                  )}
+                ? t("about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.true.description")
+                : t("about.page.interactive-fun-facts-section.sections.fact-alert.is-correct.false.description")}
             </DialogDescription>
           </div>
         </DialogHeader>
@@ -248,10 +217,7 @@ function CustomAlert({
         {question?.funFact && (
           <DialogCard variant="default" className="text-center">
             <DialogBadge variant="colored" className="mb-2">
-              {t(
-                "about.page.interactive-fun-facts-section.sections.fact-alert.response",
-              )}{" "}
-              🥸
+              {t("about.page.interactive-fun-facts-section.sections.fact-alert.response")} 🥸
             </DialogBadge>
             <p className="text-white-invert-fr">{question.funFact}</p>
           </DialogCard>
@@ -259,14 +225,12 @@ function CustomAlert({
 
         <DialogFooter>
           <Button onClick={onClose} asFull asPointer whileTap>
-            {isCorrect
-              ? `${t("common.button.continue")} 😍`
-              : `${t("common.button.retry")} 😩`}
+            {isCorrect ? `${t("common.button.continue")} 😍` : `${t("common.button.retry")} 😩`}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
 
 // All Facts Modal Component with Dialog
@@ -276,17 +240,15 @@ function AllFactsModal({
   guessedFacts,
   questions,
 }: {
-  isOpen: boolean;
-  onClose: () => void;
-  guessedFacts: { [key: number]: boolean };
-  questions: Question[];
+  isOpen: boolean
+  onClose: () => void
+  guessedFacts: { [key: number]: boolean }
+  questions: Question[]
 }) {
-  const t = useTranslations();
-  const totalGuessed = Object.keys(guessedFacts).length;
-  const totalQuestions = questions.length;
-  const correctGuesses = questions.filter(
-    (fact) => guessedFacts[fact.id] !== undefined && guessedFacts[fact.id],
-  ).length;
+  const t = useTranslations()
+  const totalGuessed = Object.keys(guessedFacts).length
+  const totalQuestions = questions.length
+  const correctGuesses = questions.filter((fact) => guessedFacts[fact.id] !== undefined && guessedFacts[fact.id]).length
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -297,9 +259,7 @@ function AllFactsModal({
       >
         <DialogHeader>
           <DialogTitle className="text-base font-normal md:font-medium md:text-xl text-b-white-invert-sec">
-            {t(
-              "about.page.interactive-fun-facts-section.sections.facts-modal.title",
-            )}
+            {t("about.page.interactive-fun-facts-section.sections.facts-modal.title")}
           </DialogTitle>
         </DialogHeader>
 
@@ -312,23 +272,17 @@ function AllFactsModal({
               <DialogCard variant="default">
                 <h5 className="font-bold mb-2">
                   🎯{" "}
-                  {t(
-                    "about.page.interactive-fun-facts-section.sections.facts-modal.score.title",
-                    { score: correctGuesses, total: totalQuestions },
-                  )}
+                  {t("about.page.interactive-fun-facts-section.sections.facts-modal.score.title", {
+                    score: correctGuesses,
+                    total: totalQuestions,
+                  })}
                 </h5>
                 <p className="text-white-invert-fr">
                   {correctGuesses === totalQuestions
-                    ? t(
-                        "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.good",
-                      )
+                    ? t("about.page.interactive-fun-facts-section.sections.facts-modal.score.state.good")
                     : correctGuesses > totalQuestions / 2
-                      ? t(
-                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.medium",
-                        )
-                      : t(
-                          "about.page.interactive-fun-facts-section.sections.facts-modal.score.state.bad",
-                        )}
+                      ? t("about.page.interactive-fun-facts-section.sections.facts-modal.score.state.medium")
+                      : t("about.page.interactive-fun-facts-section.sections.facts-modal.score.state.bad")}
                 </p>
               </DialogCard>
             </div>
@@ -336,8 +290,8 @@ function AllFactsModal({
 
           {/* Facts Grid */}
           {questions.map((question, index) => {
-            const userGuessed = guessedFacts[question.id] !== undefined;
-            const userGuessedCorrect = userGuessed && guessedFacts[question.id];
+            const userGuessed = guessedFacts[question.id] !== undefined
+            const userGuessedCorrect = userGuessed && guessedFacts[question.id]
 
             return (
               <div key={question.id}>
@@ -349,42 +303,30 @@ function AllFactsModal({
 
                     <div className="flex-1 min-w-0">
                       <h5 className="font-bold mb-1">{question.title}</h5>
-                      <p className="text-base text-white-invert-fr mb-3">
-                        {question.description}
-                      </p>
+                      <p className="text-base text-white-invert-fr mb-3">{question.description}</p>
 
                       {/* Badges */}
                       <div className="flex gap-2 flex-wrap">
                         <DialogBadge
                           variant="colored"
                           className={cn(
-                            question.isTrue
-                              ? "text-green-800 dark:text-green-400"
-                              : "text-red-800 dark:text-red-500",
+                            question.isTrue ? "text-green-800 dark:text-green-400" : "text-red-800 dark:text-red-500",
                           )}
                         >
                           {question.isTrue
-                            ? t(
-                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-true",
-                              )
-                            : t(
-                                "about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-false",
-                              )}
+                            ? t("about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-true")
+                            : t("about.page.interactive-fun-facts-section.sections.facts-modal.badge.fact.is-false")}
                         </DialogBadge>
 
                         {userGuessed && (
                           <DialogBadge
                             className={cn(
-                              userGuessedCorrect
-                                ? "bg-blue-100 text-blue-900"
-                                : "bg-orange-100 text-orange-900",
+                              userGuessedCorrect ? "bg-blue-100 text-blue-900" : "bg-orange-100 text-orange-900",
                             )}
                             variant="colored"
                           >
                             {userGuessedCorrect
-                              ? t(
-                                  "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.correct",
-                                )
+                              ? t("about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.correct")
                               : t(
                                   "about.page.interactive-fun-facts-section.sections.facts-modal.badge.guessed.incorrect",
                                 )}
@@ -395,7 +337,7 @@ function AllFactsModal({
                   </div>
                 </DialogCard>
               </div>
-            );
+            )
           })}
         </div>
 
@@ -408,80 +350,77 @@ function AllFactsModal({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
 
 // Interactive Fun Facts Component
 export function InteractiveFunFacts() {
-  const t = useTranslations();
-  const locale = useLocale();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>(
-    {},
-  );
-  const [showAlert, setShowAlert] = useState(false);
+  const t = useTranslations()
+  const locale = useLocale()
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [guessedFacts, setGuessedFacts] = useState<{ [key: number]: boolean }>({})
+  const [showAlert, setShowAlert] = useState(false)
   const [alertData, setAlertData] = useState<{
-    isCorrect: boolean;
-    question: Question | null;
-  }>({ isCorrect: false, question: null });
-  const [score, setScore] = useState(0);
-  const [gameStarted, setGameStarted] = useState(true);
-  const [showAllFacts, setShowAllFacts] = useState(false);
+    isCorrect: boolean
+    question: Question | null
+  }>({ isCorrect: false, question: null })
+  const [score, setScore] = useState(0)
+  const [gameStarted, setGameStarted] = useState(true)
+  const [showAllFacts, setShowAllFacts] = useState(false)
 
-  const questionsLocale = useMemo(() => getGamesByLocale(locale), [locale]);
+  const questionsLocale = useMemo(() => getGamesByLocale(locale), [locale])
 
   // Derive calculations based on guessedFacts
-  const answeredQuestionsCount = Object.keys(guessedFacts).length;
-  const allQuestionsAnswered =
-    answeredQuestionsCount === questionsLocale.length;
+  const answeredQuestionsCount = Object.keys(guessedFacts).length
+  const allQuestionsAnswered = answeredQuestionsCount === questionsLocale.length
 
   // Verify if there is a false in the guessed answers
-  const hasGuessedFalse = Object.values(guessedFacts).includes(false);
+  const hasGuessedFalse = Object.values(guessedFacts).includes(false)
 
   const handleEmojiClick = (isTrue: boolean) => {
-    const currentQuestion = questionsLocale[currentQuestionIndex];
+    const currentQuestion = questionsLocale[currentQuestionIndex]
     if (!currentQuestion || guessedFacts[currentQuestion.id] !== undefined) {
-      return;
+      return
     }
 
-    const isCorrect = currentQuestion.isTrue === isTrue;
+    const isCorrect = currentQuestion.isTrue === isTrue
 
     if (isCorrect) {
-      setScore((prev) => prev + 1);
+      setScore((prev) => prev + 1)
     }
 
-    setGuessedFacts((prev) => ({ ...prev, [currentQuestion.id]: isCorrect }));
-    setAlertData({ isCorrect, question: currentQuestion });
-    setShowAlert(true);
-  };
+    setGuessedFacts((prev) => ({ ...prev, [currentQuestion.id]: isCorrect }))
+    setAlertData({ isCorrect, question: currentQuestion })
+    setShowAlert(true)
+  }
 
   const closeAlert = () => {
-    setShowAlert(false);
-    setAlertData({ isCorrect: false, question: null });
+    setShowAlert(false)
+    setAlertData({ isCorrect: false, question: null })
 
     // Pass to the next question after closing the alert
     if (currentQuestionIndex < questionsLocale.length - 1) {
       setTimeout(() => {
-        setCurrentQuestionIndex((prev) => prev + 1);
-      }, 300);
+        setCurrentQuestionIndex((prev) => prev + 1)
+      }, 300)
     }
-  };
+  }
 
   const resetGame = () => {
-    setCurrentQuestionIndex(0);
-    setGuessedFacts({});
-    setGameStarted(true);
-    setScore(0);
+    setCurrentQuestionIndex(0)
+    setGuessedFacts({})
+    setGameStarted(true)
+    setScore(0)
     toast.success("C'est reparti pour un tour! 🚀", {
       timeout: 2000,
-    });
-  };
+    })
+  }
 
-  const canAnswer = gameStarted && !showAllFacts && !allQuestionsAnswered;
+  const canAnswer = gameStarted && !showAllFacts && !allQuestionsAnswered
   const badge =
     gameStarted || showAllFacts
       ? `${t("about.page.interactive-fun-facts-section.badge-score")}: ${score}/${questionsLocale.length}`
-      : t("about.page.interactive-fun-facts-section.badge");
+      : t("about.page.interactive-fun-facts-section.badge")
 
   return (
     <SectionLayout
@@ -494,16 +433,9 @@ export function InteractiveFunFacts() {
       {/* Main Game Zone */}
       <div className="content-center flex flex-col md:flex-row gap-4 md:gap-6 items-center justify-between w-full">
         <div className="flex flex-row gap-6 sm:gap-0 justify-center w-full sm:w-auto order-2 sm:order-1">
-          <GuessButton
-            isFalse
-            onClick={() => handleEmojiClick(false)}
-            canAnswer={canAnswer}
-          />
+          <GuessButton isFalse onClick={() => handleEmojiClick(false)} canAnswer={canAnswer} />
           <div className="block sm:hidden">
-            <GuessButton
-              onClick={() => handleEmojiClick(true)}
-              canAnswer={canAnswer}
-            />
+            <GuessButton onClick={() => handleEmojiClick(true)} canAnswer={canAnswer} />
           </div>
         </div>
 
@@ -521,10 +453,7 @@ export function InteractiveFunFacts() {
         </div>
 
         <div className="hidden sm:block order-3">
-          <GuessButton
-            onClick={() => handleEmojiClick(true)}
-            canAnswer={canAnswer}
-          />
+          <GuessButton onClick={() => handleEmojiClick(true)} canAnswer={canAnswer} />
         </div>
       </div>
 
@@ -541,16 +470,15 @@ export function InteractiveFunFacts() {
         {/* Responsive progression indicators */}
         <div className="flex gap-2 sm:gap-3 z-10">
           {questionsLocale.map((question, index) => {
-            const isGuessed = guessedFacts[question.id] !== undefined;
-            const isCorrect = isGuessed && guessedFacts[question.id];
+            const isGuessed = guessedFacts[question.id] !== undefined
+            const isCorrect = isGuessed && guessedFacts[question.id]
 
             return (
               <div
                 key={index}
                 className={cn(
                   "size-3 sm:size-4 rounded-full border-2 flex items-center justify-center",
-                  !allQuestionsAnswered &&
-                    "hover:scale-110 transition-transform duration-300 ease-in-out",
+                  !allQuestionsAnswered && "hover:scale-110 transition-transform duration-300 ease-in-out",
                   isGuessed
                     ? isCorrect
                       ? "bg-green-500 border-green-500"
@@ -560,13 +488,9 @@ export function InteractiveFunFacts() {
                       : "bg-b-base border-b-base-accent",
                 )}
               >
-                {isGuessed && (
-                  <span className="text-white text-[6px] sm:text-[8px]">
-                    {isCorrect ? "✓" : "✗"}
-                  </span>
-                )}
+                {isGuessed && <span className="text-white text-[6px] sm:text-[8px]">{isCorrect ? "✓" : "✗"}</span>}
               </div>
-            );
+            )
           })}
         </div>
       </div>
@@ -575,7 +499,7 @@ export function InteractiveFunFacts() {
         {/* Show all facts button */}
         <Button
           onClick={() => {
-            setShowAllFacts(true);
+            setShowAllFacts(true)
           }}
           asPointer
           whileTap
@@ -584,31 +508,16 @@ export function InteractiveFunFacts() {
         >
           {allQuestionsAnswered
             ? hasGuessedFalse
-              ? t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-false",
-                )
-              : t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true",
-                )
+              ? t("about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-false")
+              : t("about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true")
             : showAllFacts
-              ? t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-retry",
-                )
-              : t(
-                  "about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true",
-                )}
+              ? t("about.page.interactive-fun-facts-section.buttons.show-all.want-retry")
+              : t("about.page.interactive-fun-facts-section.buttons.show-all.want-response.has-true")}
         </Button>
 
         {allQuestionsAnswered && (
           <div className="text-center">
-            <Button
-              onClick={resetGame}
-              asPointer
-              variant="secondary"
-              whileTap
-              size="lg"
-              asFull
-            >
+            <Button onClick={resetGame} asPointer variant="secondary" whileTap size="lg" asFull>
               {t("about.page.interactive-fun-facts-section.buttons.retry")}
             </Button>
           </div>
@@ -623,5 +532,5 @@ export function InteractiveFunFacts() {
         onClose={closeAlert}
       />
     </SectionLayout>
-  );
+  )
 }

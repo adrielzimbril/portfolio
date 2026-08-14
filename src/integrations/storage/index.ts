@@ -1,1 +1,1 @@
-export * from "@/integrations/storage/provider";
+export * from "@/integrations/storage/provider"

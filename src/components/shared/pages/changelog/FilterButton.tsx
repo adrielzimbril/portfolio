@@ -1,22 +1,18 @@
-"use client";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { FilterOne } from "@aurthle/icons";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { FilterOne } from "@aurthle/icons"
+import { useTranslations } from "use-intl"
 
 interface FilterButtonProps {
-  onClick: () => void;
-  hasActiveFilters: boolean;
-  resultCount: number;
+  onClick: () => void
+  hasActiveFilters: boolean
+  resultCount: number
 }
 
-export function FilterButton({
-  onClick,
-  hasActiveFilters,
-  resultCount,
-}: FilterButtonProps) {
-  const t = useTranslations("changelog.sections.timeline.filter");
+export function FilterButton({ onClick, hasActiveFilters, resultCount }: FilterButtonProps) {
+  const t = useTranslations("changelog.sections.timeline.filter")
 
   return (
     <Button
@@ -36,5 +32,5 @@ export function FilterButton({
         </Badge>
       )}
     </Button>
-  );
+  )
 }

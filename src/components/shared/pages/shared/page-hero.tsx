@@ -1,6 +1,6 @@
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { ContentSection } from "@/components/shared/pages/shared/page-hero-content";
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder"
+import { ContentSection } from "@/components/shared/pages/shared/page-hero-content"
 
 export function PageHero({
   title,
@@ -17,20 +17,19 @@ export function PageHero({
   actionButton = false,
   onClick = () => {},
 }: {
-  title: string;
-  description: string | React.ReactNode;
-  badge?: string;
-  buttonLink?: string;
-  buttonText?: string;
-  buttonVariant?: "default" | "secondary";
-  imagePath?:
-    string | { emoji: string } | { mp4: string; webm: string; poster: string };
-  imgClassName?: string;
-  imageVariant?: "default" | "bordered" | "squircle";
-  isMobileShowed?: boolean;
-  imageContent?: React.ReactNode;
-  actionButton?: boolean;
-  onClick?: () => void;
+  title: string
+  description: string | React.ReactNode
+  badge?: string
+  buttonLink?: string
+  buttonText?: string
+  buttonVariant?: "default" | "secondary"
+  imagePath?: string | { emoji: string } | { mp4: string; webm: string; poster: string }
+  imgClassName?: string
+  imageVariant?: "default" | "bordered" | "squircle"
+  isMobileShowed?: boolean
+  imageContent?: React.ReactNode
+  actionButton?: boolean
+  onClick?: () => void
 }) {
   return (
     <SectionBase className="flex-row-3">
@@ -54,5 +53,5 @@ export function PageHero({
         onClick={onClick}
       />
     </SectionBase>
-  );
+  )
 }

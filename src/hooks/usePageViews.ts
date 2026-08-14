@@ -1,25 +1,17 @@
-"use client";
-import { useEffect, useMemo, useState } from "react";
-import { PageType } from "@/types";
-import { apiRoutes } from "@/data/api-routes";
+"use client"
+import { useEffect, useMemo, useState } from "react"
+import { PageType } from "@/types"
+import { apiRoutes } from "@/data/api-routes"
 
-export function usePageViews(
-  slug: string,
-  type?: PageType,
-  details?: Record<string, unknown>,
-  wantResponse?: boolean,
-) {
-  const [count, setCount] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const stringifiedDetails = details ? JSON.stringify(details) : null;
-  const memoizedDetails = useMemo(
-    () => JSON.parse(stringifiedDetails ?? "{}"),
-    [stringifiedDetails],
-  );
+export function usePageViews(slug: string, type?: PageType, details?: Record<string, unknown>, wantResponse?: boolean) {
+  const [count, setCount] = useState<number | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const stringifiedDetails = details ? JSON.stringify(details) : null
+  const memoizedDetails = useMemo(() => JSON.parse(stringifiedDetails ?? "{}"), [stringifiedDetails])
 
   useEffect(() => {
-    let cancelled = false;
+    let cancelled = false
 
     async function run() {
       try {
@@ -33,38 +25,34 @@ export function usePageViews(
             details: memoizedDetails,
             wantResponse,
           }),
-        });
-        const incJson = await incRes.json();
-        if (!incRes.ok)
-          throw new Error(incJson?.error || "Failed to increment");
-        if (!cancelled) setCount(incJson.count);
+        })
+        const incJson = await incRes.json()
+        if (!incRes.ok) throw new Error(incJson?.error || "Failed to increment")
+        if (!cancelled) setCount(incJson.count)
       } catch (e: unknown) {
         try {
           // Fallback: just read
           const res = await fetch(
             `${apiRoutes.views.link}?slug=${encodeURIComponent(slug)}&type=${encodeURIComponent(
               type ?? "page",
-            )}&details=${encodeURIComponent(
-              memoizedDetails ?? "",
-            )}&wantResponse=${wantResponse}`,
-          );
-          const json = await res.json();
-          if (!res.ok) throw new Error(json?.error || "Failed to fetch");
-          if (!cancelled) setCount(json.count ?? 0);
+            )}&details=${encodeURIComponent(memoizedDetails ?? "")}&wantResponse=${wantResponse}`,
+          )
+          const json = await res.json()
+          if (!res.ok) throw new Error(json?.error || "Failed to fetch")
+          if (!cancelled) setCount(json.count ?? 0)
         } catch (err) {
-          if (!cancelled)
-            setError((err as { message: string })?.message || "Unknown error");
+          if (!cancelled) setError((err as { message: string })?.message || "Unknown error")
         }
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) setLoading(false)
       }
     }
 
-    run();
+    run()
     return () => {
-      cancelled = true;
-    };
-  }, [slug, type, memoizedDetails, wantResponse]);
+      cancelled = true
+    }
+  }, [slug, type, memoizedDetails, wantResponse])
 
-  return { count, loading, error } as const;
+  return { count, loading, error } as const
 }

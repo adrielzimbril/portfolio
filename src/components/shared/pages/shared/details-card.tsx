@@ -1,17 +1,17 @@
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/utils/utils";
-import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
+import React from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { cn } from "@/utils/utils"
+import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
 
 export function DetailsCard({
   icon,
   title,
   description,
 }: {
-  icon: string | React.ReactNode;
-  title: string;
-  description: string;
+  icon: string | React.ReactNode
+  title: string
+  description: string
 }) {
   return (
     <Card className="bg-b-base squircle-4xl/100 md:squircle-6xl/100  border-0 overflow-hidden h-full md:max-w-xl">
@@ -22,10 +22,7 @@ export function DetailsCard({
           )}
         >
           <div className="flex flex-col items-start gap-4 w-full max-w-[90%] py-12 mx-auto">
-            <Badge
-              className="aspect-square p-4 rounded-full"
-              contentClassName="size-12"
-            >
+            <Badge className="aspect-square p-4 rounded-full" contentClassName="size-12">
               {typeof icon === "string" ? (
                 <Image
                   className="w-full h-full object-cover pointer-events-none"
@@ -42,12 +39,10 @@ export function DetailsCard({
             </Badge>
             <h3 className="text-3xl tracking-wide leading-[120%]">{title}</h3>
 
-            <p className="text-b-white-invert-thr whitespace-pre-line text-xl leading-[140%]">
-              {description}
-            </p>
+            <p className="text-b-white-invert-thr whitespace-pre-line text-xl leading-[140%]">{description}</p>
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

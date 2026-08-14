@@ -1,26 +1,26 @@
-"use client";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
+"use client"
+import React from "react"
+import { Badge } from "@/components/ui/badge"
 import {
   useNewsletterSubscribersCount,
   useProductTypeSubscribersCount,
   useProductSlugRequestsCount,
-} from "@/hooks/useSubscriberStats";
-import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons";
-import { ResourceType } from "@/types";
-import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats";
-import { cn } from "@/utils/utils";
-import { useTranslations } from "use-intl";
+} from "@/hooks/useSubscriberStats"
+import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons"
+import { ResourceType } from "@/types"
+import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats"
+import { cn } from "@/utils/utils"
+import { useTranslations } from "use-intl"
 
 function formatCount(n: number) {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `${Math.floor(n / 1_000)}K`;
-  return `${n}`;
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return `${Math.floor(n / 1_000)}K`
+  return `${n}`
 }
 
 export function NewsletterSubscribersBadge() {
-  const { count, loading } = useNewsletterSubscribersCount();
-  const t = useTranslations("newsletter.badges");
+  const { count, loading } = useNewsletterSubscribersCount()
+  const t = useTranslations("newsletter.badges")
   return (
     <Badge className="bg-violet-100" variant="colored">
       <span className="flex items-center gap-2">
@@ -28,73 +28,51 @@ export function NewsletterSubscribersBadge() {
         {loading ? "..." : `${formatCount(count ?? 0)} ${t("subscribers")}`}
       </span>
     </Badge>
-  );
+  )
 }
 
 export function ProductTypeSubscribersBadge({ type }: { type: ResourceType }) {
-  const { count, loading } = useProductTypeSubscribersCount(type);
-  const t = useTranslations("newsletter.badges");
+  const { count, loading } = useProductTypeSubscribersCount(type)
+  const t = useTranslations("newsletter.badges")
   return (
     <Badge className="bg-emerald-100" variant="colored">
       <span className="flex items-center gap-2">
         <Box size={16} className="text-emerald-500" variant="bulk" />
-        {loading
-          ? "..."
-          : `${formatCount(count ?? 0)} ${t("requests")} ${type}`}
+        {loading ? "..." : `${formatCount(count ?? 0)} ${t("requests")} ${type}`}
       </span>
     </Badge>
-  );
+  )
 }
 
-export function ProductSlugRequestsBadge({
-  slug,
-  type,
-}: {
-  slug: string;
-  type?: ResourceType;
-}): JSX.Element | null {
-  const t = useTranslations();
-  const { count, loading } = useProductSlugRequestsCount(slug);
+export function ProductSlugRequestsBadge({ slug, type }: { slug: string; type?: ResourceType }): JSX.Element | null {
+  const t = useTranslations()
+  const { count, loading } = useProductSlugRequestsCount(slug)
 
-  if (!type) return null;
+  if (!type) return null
 
   const productTypeMap: Record<ResourceType, string> = {
-    [ResourceType.COURSE]: t(
-      "common.page-sections.hub.base.resources-type.course.badge",
-    ),
-    [ResourceType.EBOOK]: t(
-      "common.page-sections.hub.base.resources-type.ebook.badge",
-    ),
-    [ResourceType.VIDEO]: t(
-      "common.page-sections.hub.base.resources-type.video.badge",
-    ),
-    [ResourceType.MASTERCLASS]: t(
-      "common.page-sections.hub.base.resources-type.masterclass.badge",
-    ),
-    [ResourceType.FIGMA_TEMPLATE]: t(
-      "common.page-sections.hub.base.resources-type.figma_template.badge",
-    ),
-    [ResourceType.CODE]: t(
-      "common.page-sections.hub.base.resources-type.code.badge",
-    ),
-  };
+    [ResourceType.COURSE]: t("common.page-sections.hub.base.resources-type.course.badge"),
+    [ResourceType.EBOOK]: t("common.page-sections.hub.base.resources-type.ebook.badge"),
+    [ResourceType.VIDEO]: t("common.page-sections.hub.base.resources-type.video.badge"),
+    [ResourceType.MASTERCLASS]: t("common.page-sections.hub.base.resources-type.masterclass.badge"),
+    [ResourceType.FIGMA_TEMPLATE]: t("common.page-sections.hub.base.resources-type.figma_template.badge"),
+    [ResourceType.CODE]: t("common.page-sections.hub.base.resources-type.code.badge"),
+  }
 
-  const productType = productTypeMap[type] ?? "";
+  const productType = productTypeMap[type] ?? ""
 
   return (
     <Badge className="bg-amber-100" variant="colored">
       <span className="flex items-center gap-1">
         <GiftBoxOne size={16} className="text-amber-600" variant="bulk" />
         {loading ? (
-          <span className="animate-pulse transition-all ease-in-out duration-200">
-            🤯
-          </span>
+          <span className="animate-pulse transition-all ease-in-out duration-200">🤯</span>
         ) : (
           `${formatCount(count ?? 0)} ${productType}`
         )}
       </span>
     </Badge>
-  );
+  )
 }
 
 export function ProductAvatarsStats({
@@ -103,12 +81,12 @@ export function ProductAvatarsStats({
   colorName,
   badgeClassName,
 }: {
-  slug: string;
-  type: ResourceType;
-  colorName?: string;
-  badgeClassName?: string;
+  slug: string
+  type: ResourceType
+  colorName?: string
+  badgeClassName?: string
 }) {
-  const { count } = useProductSlugRequestsCount(slug);
+  const { count } = useProductSlugRequestsCount(slug)
 
   return (
     <AvatarsStats
@@ -118,5 +96,5 @@ export function ProductAvatarsStats({
       colorName={cn(colorName ?? "bg-b-base")}
       badgeClassName={badgeClassName}
     />
-  );
+  )
 }

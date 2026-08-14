@@ -1,9 +1,9 @@
-"use client";
-import { ProgressProvider as AppProgressProvider } from "@bprogress/next/app";
-import { useIsDarkMode } from "@/hooks/useIsDarkMode";
+"use client"
+import { ProgressProvider as AppProgressProvider } from "@bprogress/next/app"
+import { useIsDarkMode } from "@/hooks/useIsDarkMode"
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
-  const isDarkMode = useIsDarkMode();
+  const isDarkMode = useIsDarkMode()
 
   return (
     <>
@@ -16,5 +16,5 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         {children}
       </AppProgressProvider>
     </>
-  );
+  )
 }

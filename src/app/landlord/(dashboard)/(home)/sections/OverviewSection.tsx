@@ -1,64 +1,40 @@
-"use client";
-import React, { useMemo } from "react";
-import useSWR from "swr";
-import { Clock, MessageSquareText, Send, Users } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import {
-  AdminCard,
-  EmptyState,
-  MetricCard,
-  StatusPill,
-} from "@/components/landlord/components/AdminPrimitives";
-import {
-  fetchMessages,
-  fetchParticipants,
-  formatDate,
-  participantsKey,
-} from "@/components/landlord/admin-utils";
-import type {
-  CommunityMessage,
-  Participant,
-} from "@/components/landlord/admin-types";
-import { useTranslations } from "next-intl";
+"use client"
+import React, { useMemo } from "react"
+import useSWR from "swr"
+import { Clock, MessageSquareText, Send, Users } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { landlordApiRoutes } from "@/data/landlordApiRoutes"
+import { AdminCard, EmptyState, MetricCard, StatusPill } from "@/components/landlord/components/AdminPrimitives"
+import { fetchMessages, fetchParticipants, formatDate, participantsKey } from "@/components/landlord/admin-utils"
+import type { CommunityMessage, Participant } from "@/components/landlord/admin-types"
+import { useTranslations } from "next-intl"
 
 export function OverviewSection() {
-  const t = useTranslations("admin.overview");
+  const t = useTranslations("admin.overview")
   const { data: participantsData, error: participantsError } = useSWR(
     participantsKey("all", 1, 1000),
     fetchParticipants,
-  );
-  const participants = (participantsData?.rows || []) as Participant[];
+  )
+  const participants = (participantsData?.rows || []) as Participant[]
 
-  const { data: messagesData, error: messagesError } = useSWR(
-    landlordApiRoutes.community.messages,
-    fetchMessages,
-  );
-  const messages = (messagesData?.rows || []) as CommunityMessage[];
+  const { data: messagesData, error: messagesError } = useSWR(landlordApiRoutes.community.messages, fetchMessages)
+  const messages = (messagesData?.rows || []) as CommunityMessage[]
 
   const stats = useMemo(() => {
-    const registrations = participants.filter(
-      (item) => item.type === "register",
-    );
-    const submissions = participants.filter(
-      (item) => item.type === "submission",
-    );
-    const today = new Date().toDateString();
+    const registrations = participants.filter((item) => item.type === "register")
+    const submissions = participants.filter((item) => item.type === "submission")
+    const today = new Date().toDateString()
     const todayActivity =
-      participants.filter(
-        (item) => new Date(item.created_at).toDateString() === today,
-      ).length +
-      messages.filter(
-        (item) => new Date(item.created_at).toDateString() === today,
-      ).length;
+      participants.filter((item) => new Date(item.created_at).toDateString() === today).length +
+      messages.filter((item) => new Date(item.created_at).toDateString() === today).length
 
     return {
       registrations: registrations.length,
       submissions: submissions.length,
       messages: messages.length,
       todayActivity,
-    };
-  }, [messages, participants]);
+    }
+  }, [messages, participants])
 
   const recentActivity = useMemo(() => {
     const participantRows = participants.slice(0, 5).map((participant) => ({
@@ -67,26 +43,24 @@ export function OverviewSection() {
       subtitle: `${participant.type === "submission" ? "Soumission" : "Inscription"} · ${participant.challenge_slug}`,
       date: participant.created_at,
       icon: participant.type === "submission" ? Send : Users,
-    }));
+    }))
     const messageRows = messages.slice(0, 5).map((message) => ({
       id: `message-${message.id}`,
       title: message.creator_name,
       subtitle: message.message?.fr || "",
       date: message.created_at,
       icon: MessageSquareText,
-    }));
+    }))
 
     return [...participantRows, ...messageRows]
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 6);
-  }, [messages, participants]);
+      .slice(0, 6)
+  }, [messages, participants])
 
   return (
     <div className="grid gap-5">
       <div className="mb-2">
-        <h2 className="text-2xl font-semibold tracking-[-0.02em] md:text-3xl">
-          Dashboard
-        </h2>
+        <h2 className="text-2xl font-semibold tracking-[-0.02em] md:text-3xl">Dashboard</h2>
         <p className="mt-1 text-sm text-black/45">{t("description")}</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -124,12 +98,8 @@ export function OverviewSection() {
         <AdminCard className="p-5">
           <div className="mb-5 flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold">
-                {t("recent_activity.title")}
-              </h3>
-              <p className="text-sm text-black/45">
-                {t("recent_activity.description")}
-              </p>
+              <h3 className="text-lg font-semibold">{t("recent_activity.title")}</h3>
+              <p className="text-sm text-black/45">{t("recent_activity.description")}</p>
             </div>
             <Badge className="bg-[#ffed90]" variant="colored">
               Live
@@ -138,7 +108,7 @@ export function OverviewSection() {
           {recentActivity.length ? (
             <div className="grid gap-2">
               {recentActivity.map((item) => {
-                const Icon = item.icon;
+                const Icon = item.icon
                 return (
                   <div
                     key={item.id}
@@ -148,63 +118,36 @@ export function OverviewSection() {
                       <Icon size={17} />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium">
-                        {item.title}
-                      </p>
-                      <p className="truncate text-xs text-black/45">
-                        {item.subtitle}
-                      </p>
+                      <p className="truncate text-sm font-medium">{item.title}</p>
+                      <p className="truncate text-xs text-black/45">{item.subtitle}</p>
                     </div>
-                    <p className="text-xs text-black/45">
-                      {formatDate(item.date)}
-                    </p>
+                    <p className="text-xs text-black/45">{formatDate(item.date)}</p>
                   </div>
-                );
+                )
               })}
             </div>
           ) : (
-            <EmptyState
-              icon={Clock}
-              title={t("empty_state.title")}
-              description={t("empty_state.description")}
-            />
+            <EmptyState icon={Clock} title={t("empty_state.title")} description={t("empty_state.description")} />
           )}
         </AdminCard>
 
         <AdminCard className="p-5">
           <h3 className="text-lg font-semibold">{t("panel_status.title")}</h3>
-          <p className="mt-1 text-sm text-black/45">
-            {t("panel_status.description")}
-          </p>
+          <p className="mt-1 text-sm text-black/45">{t("panel_status.description")}</p>
           <div className="mt-5 grid gap-3">
             {[
-              [
-                t("panel_status.quests_api"),
-                participantsError ? t("panel_status.check") : "OK",
-              ],
-              [
-                t("panel_status.community_api"),
-                messagesError ? t("panel_status.check") : "OK",
-              ],
+              [t("panel_status.quests_api"), participantsError ? t("panel_status.check") : "OK"],
+              [t("panel_status.community_api"), messagesError ? t("panel_status.check") : "OK"],
               [t("panel_status.session"), "Admin"],
             ].map(([label, state]) => (
-              <div
-                key={label}
-                className="flex items-center justify-between rounded-2xl bg-[#fbfaf6] px-4 py-3"
-              >
+              <div key={label} className="flex items-center justify-between rounded-2xl bg-[#fbfaf6] px-4 py-3">
                 <span className="text-sm">{label}</span>
-                <StatusPill
-                  tone={
-                    state === "OK" || state === "Admin" ? "success" : "danger"
-                  }
-                >
-                  {state}
-                </StatusPill>
+                <StatusPill tone={state === "OK" || state === "Admin" ? "success" : "danger"}>{state}</StatusPill>
               </div>
             ))}
           </div>
         </AdminCard>
       </div>
     </div>
-  );
+  )
 }

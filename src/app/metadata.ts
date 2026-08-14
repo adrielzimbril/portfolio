@@ -1,36 +1,25 @@
-import { Metadata } from "next";
-import { siteConfig } from "@/data/config";
-import {
-  getAbsolutePathUrl,
-  getBaseUrl,
-  getImageUrl,
-  getPathUrl,
-} from "@/utils";
-import { Locale } from "@/types";
-import { routes } from "@/data/routes";
+import { Metadata } from "next"
+import { siteConfig } from "@/data/config"
+import { getAbsolutePathUrl, getBaseUrl, getImageUrl, getPathUrl } from "@/utils"
+import { Locale } from "@/types"
+import { routes } from "@/data/routes"
 
 export interface InnerPageSeo {
-  title: string;
-  description: string;
-  keywords: string[];
+  title: string
+  description: string
+  keywords: string[]
   alternates: {
-    canonical: string;
-  };
+    canonical: string
+  }
 }
 
-const BASE_URL = getBaseUrl();
+const BASE_URL = getBaseUrl()
 
 const rssRoutes = Object.values(Locale).map((locale) => ({
-  [`application/rss+xml;lang=${locale}`]: getPathUrl(
-    `${routes.rss.link}/?locale=${locale}`,
-  ),
-  [`application/atom+xml;lang=${locale}`]: getPathUrl(
-    `${routes.rssAtom.link}/?locale=${locale}`,
-  ),
-  [`application/feed+json;lang=${locale}`]: getPathUrl(
-    `${routes.rssJson.link}/?locale=${locale}`,
-  ),
-}));
+  [`application/rss+xml;lang=${locale}`]: getPathUrl(`${routes.rss.link}/?locale=${locale}`),
+  [`application/atom+xml;lang=${locale}`]: getPathUrl(`${routes.rssAtom.link}/?locale=${locale}`),
+  [`application/feed+json;lang=${locale}`]: getPathUrl(`${routes.rssJson.link}/?locale=${locale}`),
+}))
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -117,4 +106,4 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-};
+}

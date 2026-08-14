@@ -1,15 +1,15 @@
-import { Badge } from "@/components/ui/badge";
-import { cn, pickRandomColor } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
+import { Badge } from "@/components/ui/badge"
+import { cn, pickRandomColor } from "@/utils"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types"
 
 interface TagsProps {
-  primaryTag?: string;
-  primaryTagColor?: DEFAULT_COLOR_CODE_NAME;
-  secondaryTag?: string;
-  secondaryTagColor?: DEFAULT_COLOR_CODE_NAME;
-  tags: string[];
-  isCentered?: boolean;
-  className?: string;
+  primaryTag?: string
+  primaryTagColor?: DEFAULT_COLOR_CODE_NAME
+  secondaryTag?: string
+  secondaryTagColor?: DEFAULT_COLOR_CODE_NAME
+  tags: string[]
+  isCentered?: boolean
+  className?: string
 }
 
 export function Tags({
@@ -30,25 +30,13 @@ export function Tags({
       )}
     >
       {primaryTag && (
-        <Badge
-          className={cn(
-            pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE),
-          )}
-          variant="colored"
-        >
+        <Badge className={cn(pickRandomColor(primaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE))} variant="colored">
           {primaryTag}
         </Badge>
       )}
 
       {secondaryTag && (
-        <Badge
-          className={cn(
-            pickRandomColor(
-              secondaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE,
-            ),
-          )}
-          variant="colored"
-        >
+        <Badge className={cn(pickRandomColor(secondaryTagColor ?? DEFAULT_COLOR_CODE_NAME.PURPLE))} variant="colored">
           {secondaryTag}
         </Badge>
       )}
@@ -57,5 +45,5 @@ export function Tags({
         <Badge key={index}>{tag}</Badge>
       ))}
     </div>
-  );
+  )
 }

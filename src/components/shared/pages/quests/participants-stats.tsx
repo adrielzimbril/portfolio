@@ -1,19 +1,19 @@
-"use client";
-import { useMemo } from "react";
-import BoringAvatar from "boring-avatars";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { AvatarGroup } from "@/components/aurthle/ui/avatar-group";
-import { pickRandomColorCode } from "@/utils";
-import { cn } from "@/utils/utils";
+"use client"
+import { useMemo } from "react"
+import BoringAvatar from "boring-avatars"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { AvatarGroup } from "@/components/aurthle/ui/avatar-group"
+import { pickRandomColorCode } from "@/utils"
+import { cn } from "@/utils/utils"
 
 type ParticipantsStatsProps = {
-  total: number;
-  registered: number;
-  submitted: number;
-  className?: string;
-  colorName?: string;
-  badgeClassName?: string;
-};
+  total: number
+  registered: number
+  submitted: number
+  className?: string
+  colorName?: string
+  badgeClassName?: string
+}
 
 export function ParticipantsStats({
   total,
@@ -23,8 +23,8 @@ export function ParticipantsStats({
   colorName,
   badgeClassName,
 }: ParticipantsStatsProps) {
-  const groupCount = Math.max(1, total);
-  const visibleCount = Math.max(1, Math.min(total, 5));
+  const groupCount = Math.max(1, total)
+  const visibleCount = Math.max(1, Math.min(total, 5))
 
   const colorSets = useMemo(
     () =>
@@ -32,16 +32,11 @@ export function ParticipantsStats({
         Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff"),
       ),
     [visibleCount],
-  );
+  )
 
   return (
     <div className={cn("flex flex-col items-start gap-1", className)}>
-      <div
-        className={cn(
-          "inline-flex items-center gap-1.5 px-1 py-0.5 squircle-7xl",
-          colorName ?? "bg-sh-white/99",
-        )}
-      >
+      <div className={cn("inline-flex items-center gap-1.5 px-1 py-0.5 squircle-7xl", colorName ?? "bg-sh-white/99")}>
         <div className="inline-flex items-start">
           <AvatarGroup numPeople={groupCount}>
             {Array.from({ length: visibleCount }).map((_, index) => (
@@ -71,5 +66,5 @@ export function ParticipantsStats({
         {registered} inscrits • {submitted} soumis
       </p> */}
     </div>
-  );
+  )
 }

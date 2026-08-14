@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import { cn, pickRandomColor } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle } from "@aurthle/icons";
+"use client"
+import React from "react"
+import { cn, pickRandomColor } from "@/utils"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types"
+import { Badge } from "@/components/ui/badge"
+import { CheckCircle } from "@aurthle/icons"
 
 export function ToolAvatar({
   name,
@@ -11,22 +11,22 @@ export function ToolAvatar({
   color,
   size = "md",
 }: {
-  name: string;
-  icon: React.ReactNode;
-  color?: DEFAULT_COLOR_CODE_NAME;
-  size?: "sm" | "md" | "lg";
+  name: string
+  icon: React.ReactNode
+  color?: DEFAULT_COLOR_CODE_NAME
+  size?: "sm" | "md" | "lg"
 }) {
   const sizeClasses = {
     sm: "size-16",
     md: "size-24",
     lg: "size-32",
-  };
+  }
 
   const iconSizeClasses = {
     sm: "size-6",
     md: "size-8",
     lg: "size-10",
-  };
+  }
 
   return (
     <div className="relative size-fit">
@@ -43,15 +43,12 @@ export function ToolAvatar({
       </div>
       <div className="absolute bottom-0 right-0">
         <Badge
-          className={cn(
-            pickRandomColor(color || DEFAULT_COLOR_CODE_NAME.VIOLET),
-            " p-1 rounded-full",
-          )}
+          className={cn(pickRandomColor(color || DEFAULT_COLOR_CODE_NAME.VIOLET), " p-1 rounded-full")}
           variant="secondary"
         >
           <CheckCircle className="text-primary-foreground" size={12} />
         </Badge>
       </div>
     </div>
-  );
+  )
 }

@@ -1,1 +1,1 @@
-export * from "@/integrations/backup/util/timestamp";
+export * from "@/integrations/backup/util/timestamp"

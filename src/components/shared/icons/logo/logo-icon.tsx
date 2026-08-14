@@ -1,5 +1,5 @@
-import { cn } from "@/utils/utils";
-import { IconProps } from "@/components/shared/icons/type";
+import { cn } from "@/utils/utils"
+import { IconProps } from "@/components/shared/icons/type"
 
 export const LogoIcon = ({ className }: IconProps) => (
   <svg
@@ -11,20 +11,10 @@ export const LogoIcon = ({ className }: IconProps) => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     className={cn("relative", className)}
   >
-    <rect
-      width="56"
-      height="56"
-      rx="16"
-      className="relative fill-b-white-invert-qr"
-    />
+    <rect width="56" height="56" rx="16" className="relative fill-b-white-invert-qr" />
     <path d="M0 0H56V56H0V0Z" fill="url(#pattern0_903_1046)" />
     <defs>
-      <pattern
-        id="pattern0_903_1046"
-        patternContentUnits="objectBoundingBox"
-        width="1"
-        height="1"
-      >
+      <pattern id="pattern0_903_1046" patternContentUnits="objectBoundingBox" width="1" height="1">
         <use xlinkHref="#image0_903_1046" transform="scale(0.00195312)" />
       </pattern>
       <image
@@ -36,4 +26,4 @@ export const LogoIcon = ({ className }: IconProps) => (
       />
     </defs>
   </svg>
-);
+)

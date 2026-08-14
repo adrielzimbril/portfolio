@@ -1,22 +1,22 @@
-import React from "react";
-import { getLocale, getTranslations } from "next-intl/server";
-import { Metadata } from "next";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { getBuildTimeStats } from "@/lib/stats/build-time-stats";
-import { getServerStats } from "@/lib/stats/server-stats";
-import { getGitHubStats } from "@/lib/stats/github-stats";
-import { getLighthouseStats } from "@/lib/stats/lighthouse-stats";
-import { getAllChangelog } from "@/integrations/content/lib/changelog";
-import { HeaderSection } from "@/app/(base)/stats/sections/HeaderSection";
-import { GeneralStatsSection } from "@/app/(base)/stats/sections/GeneralStatsSection";
-import { EngagementSection } from "@/app/(base)/stats/sections/EngagementSection";
-import { BlogStatsSection } from "@/app/(base)/stats/sections/BlogStatsSection";
-import { GitHubStatsSection } from "@/app/(base)/stats/sections/GitHubStatsSection";
-import { PerformanceSection } from "@/app/(base)/stats/sections/PerformanceSection";
-import { Skeleton } from "@/components/ui/skeleton";
+import React from "react"
+import { getLocale, getTranslations } from "next-intl/server"
+import { Metadata } from "next"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { getBuildTimeStats } from "@/lib/stats/build-time-stats"
+import { getServerStats } from "@/lib/stats/server-stats"
+import { getGitHubStats } from "@/lib/stats/github-stats"
+import { getLighthouseStats } from "@/lib/stats/lighthouse-stats"
+import { getAllChangelog } from "@/integrations/content/lib/changelog"
+import { HeaderSection } from "@/app/(base)/stats/sections/HeaderSection"
+import { GeneralStatsSection } from "@/app/(base)/stats/sections/GeneralStatsSection"
+import { EngagementSection } from "@/app/(base)/stats/sections/EngagementSection"
+import { BlogStatsSection } from "@/app/(base)/stats/sections/BlogStatsSection"
+import { GitHubStatsSection } from "@/app/(base)/stats/sections/GitHubStatsSection"
+import { PerformanceSection } from "@/app/(base)/stats/sections/PerformanceSection"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return {
     ...baseMetadata,
@@ -32,21 +32,20 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("stats.title"),
       description: t("stats.description"),
     },
-  };
+  }
 }
 
 export default async function StatsPage() {
-  const locale = await getLocale();
+  const locale = await getLocale()
 
   // Fetch data from different sources
-  const [buildTimeStats, serverStats, githubStats, lighthouseStats, changelog] =
-    await Promise.all([
-      getBuildTimeStats(),
-      getServerStats(locale),
-      getGitHubStats(),
-      getLighthouseStats(),
-      getAllChangelog(),
-    ]);
+  const [buildTimeStats, serverStats, githubStats, lighthouseStats, changelog] = await Promise.all([
+    getBuildTimeStats(),
+    getServerStats(locale),
+    getGitHubStats(),
+    getLighthouseStats(),
+    getAllChangelog(),
+  ])
 
   return (
     <>
@@ -54,10 +53,7 @@ export default async function StatsPage() {
         <HeaderSection />
       </Skeleton>
       <Skeleton name="stats-general" loading={false}>
-        <GeneralStatsSection
-          totalViews={serverStats.totalViews}
-          totalWords={buildTimeStats.totalWords}
-        />
+        <GeneralStatsSection totalViews={serverStats.totalViews} totalWords={buildTimeStats.totalWords} />
       </Skeleton>
       <Skeleton name="stats-engagement" loading={false}>
         <EngagementSection
@@ -89,11 +85,8 @@ export default async function StatsPage() {
         />
       </Skeleton>
       <Skeleton name="stats-performance" loading={false}>
-        <PerformanceSection
-          mobileScores={lighthouseStats.mobile}
-          desktopScores={lighthouseStats.desktop}
-        />
+        <PerformanceSection mobileScores={lighthouseStats.mobile} desktopScores={lighthouseStats.desktop} />
       </Skeleton>
     </>
-  );
+  )
 }

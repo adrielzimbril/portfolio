@@ -9,33 +9,33 @@
  * logger.info(date); // Output: Today
  */
 export function formatDateDiff(date: string): string {
-  const currentDate = new Date().getTime();
+  const currentDate = new Date().getTime()
   if (!date.includes("T")) {
-    date = `${date}T00:00:00`;
+    date = `${date}T00:00:00`
   }
-  const targetDate = new Date(date).getTime();
-  const timeDifference = Math.abs(currentDate - targetDate);
-  const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const targetDate = new Date(date).getTime()
+  const timeDifference = Math.abs(currentDate - targetDate)
+  const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
 
   const fullDate = new Date(date).toLocaleString("en-us", {
     month: "long",
     day: "numeric",
     year: "numeric",
-  });
+  })
 
   if (daysAgo < 1) {
-    return "Today";
+    return "Today"
   } else if (daysAgo < 7) {
-    return `${fullDate} (${daysAgo}d ago)`;
+    return `${fullDate} (${daysAgo}d ago)`
   } else if (daysAgo < 30) {
-    const weeksAgo = Math.floor(daysAgo / 7);
-    return `${fullDate} (${weeksAgo}w ago)`;
+    const weeksAgo = Math.floor(daysAgo / 7)
+    return `${fullDate} (${weeksAgo}w ago)`
   } else if (daysAgo < 365) {
-    const monthsAgo = Math.floor(daysAgo / 30);
-    return `${fullDate} (${monthsAgo}mo ago)`;
+    const monthsAgo = Math.floor(daysAgo / 30)
+    return `${fullDate} (${monthsAgo}mo ago)`
   } else {
-    const yearsAgo = Math.floor(daysAgo / 365);
-    return `${fullDate} (${yearsAgo}y ago)`;
+    const yearsAgo = Math.floor(daysAgo / 365)
+    return `${fullDate} (${yearsAgo}y ago)`
   }
 }
 
@@ -66,16 +66,14 @@ export function getDate({
   dateStyle = "medium",
   iso = false,
 }: {
-  date: string | Date;
-  lang?: Intl.LocalesArgument;
-  dateStyle?: Intl.DateTimeFormatOptions["dateStyle"];
-  iso?: boolean;
+  date: string | Date
+  lang?: Intl.LocalesArgument
+  dateStyle?: Intl.DateTimeFormatOptions["dateStyle"]
+  iso?: boolean
 }): string {
-  const d = new Date(date);
-  if (!d) return "Invalid date";
-  return iso
-    ? d.toISOString().split("T")[0] || "Invalid date"
-    : Intl.DateTimeFormat(lang, { dateStyle }).format(d);
+  const d = new Date(date)
+  if (!d) return "Invalid date"
+  return iso ? d.toISOString().split("T")[0] || "Invalid date" : Intl.DateTimeFormat(lang, { dateStyle }).format(d)
 }
 
 /**
@@ -88,11 +86,9 @@ export function getDate({
  * console.log(month); // Output: "august"
  */
 export const getThisMonth = () => {
-  const date = new Date();
-  return new Intl.DateTimeFormat("en", { month: "long" })
-    .format(date)
-    .toLowerCase();
-};
+  const date = new Date()
+  return new Intl.DateTimeFormat("en", { month: "long" }).format(date).toLowerCase()
+}
 
 /**
  * Calculate the difference between two dates with different output formats
@@ -122,25 +118,25 @@ export const getThisMonth = () => {
 export function getDateDifference(
   dateArray: string[],
   options?: {
-    format?: "auto" | "short" | "precise" | "detailed";
-    returnObject?: boolean;
+    format?: "auto" | "short" | "precise" | "detailed"
+    returnObject?: boolean
   },
 ):
   | string
   | {
-      formatted: string;
-      totalDays: number;
+      formatted: string
+      totalDays: number
       breakdown: {
-        years: number;
-        months: number;
-        weeks: number;
-        days: number;
-        hours: number;
-        minutes: number;
-        seconds: number;
-      };
+        years: number
+        months: number
+        weeks: number
+        days: number
+        hours: number
+        minutes: number
+        seconds: number
+      }
     } {
-  const { format = "auto", returnObject = false } = options || {};
+  const { format = "auto", returnObject = false } = options || {}
 
   if (dateArray.length < 2) {
     return returnObject
@@ -157,7 +153,7 @@ export function getDateDifference(
             seconds: 0,
           },
         }
-      : "Not enough dates";
+      : "Not enough dates"
   }
 
   if (!dateArray[0] || !dateArray[1]) {
@@ -175,112 +171,79 @@ export function getDateDifference(
             seconds: 0,
           },
         }
-      : "Invalid dates";
+      : "Invalid dates"
   }
 
-  const date1 = new Date(dateArray[0]);
-  const date2 = new Date(dateArray[1]);
+  const date1 = new Date(dateArray[0])
+  const date2 = new Date(dateArray[1])
 
   // Ensure that date2 > date1
-  const startDate = date1 < date2 ? date1 : date2;
-  const endDate = date1 < date2 ? date2 : date1;
+  const startDate = date1 < date2 ? date1 : date2
+  const endDate = date1 < date2 ? date2 : date1
 
   // Difference in milliseconds
-  const diffMs = endDate.getTime() - startDate.getTime();
+  const diffMs = endDate.getTime() - startDate.getTime()
 
   // Conversions
-  const seconds = Math.floor(diffMs / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const weeks = Math.floor(days / 7);
-  const months = Math.floor(days / 30.44); // Average
-  const years = Math.floor(days / 365.25); // With leap years
+  const seconds = Math.floor(diffMs / 1000)
+  const minutes = Math.floor(seconds / 60)
+  const hours = Math.floor(minutes / 60)
+  const days = Math.floor(hours / 24)
+  const weeks = Math.floor(days / 7)
+  const months = Math.floor(days / 30.44) // Average
+  const years = Math.floor(days / 365.25) // With leap years
 
   // Detailed object for returnObject
-  const breakdown = { years, months, weeks, days, hours, minutes, seconds };
+  const breakdown = { years, months, weeks, days, hours, minutes, seconds }
 
   // Formatting according to the requested type
-  let formatted: string;
+  let formatted: string
 
   switch (format) {
     case "short":
-      if (years >= 1) formatted = `${years}a`;
-      else if (months >= 1) formatted = `${months}m`;
-      else if (weeks >= 1) formatted = `${weeks}sem`;
-      else if (days >= 1) formatted = `${days}j`;
-      else if (hours >= 1) formatted = `${hours}h`;
-      else if (minutes >= 1) formatted = `${minutes}min`;
-      else formatted = `${seconds}s`;
-      break;
+      if (years >= 1) formatted = `${years}a`
+      else if (months >= 1) formatted = `${months}m`
+      else if (weeks >= 1) formatted = `${weeks}sem`
+      else if (days >= 1) formatted = `${days}j`
+      else if (hours >= 1) formatted = `${hours}h`
+      else if (minutes >= 1) formatted = `${minutes}min`
+      else formatted = `${seconds}s`
+      break
 
     case "precise":
-      const preciseYears = Math.floor(days / 365);
-      const preciseMonths = Math.floor((days % 365) / 30);
-      const preciseWeeks = Math.floor(((days % 365) % 30) / 7);
-      const preciseDays = ((days % 365) % 30) % 7;
+      const preciseYears = Math.floor(days / 365)
+      const preciseMonths = Math.floor((days % 365) / 30)
+      const preciseWeeks = Math.floor(((days % 365) % 30) / 7)
+      const preciseDays = ((days % 365) % 30) % 7
 
-      const parts = [];
-      if (preciseYears > 0)
-        parts.push(`${preciseYears} année${preciseYears > 1 ? "s" : ""}`);
-      if (preciseMonths > 0) parts.push(`${preciseMonths} mois`);
-      if (preciseWeeks > 0)
-        parts.push(`${preciseWeeks} semaine${preciseWeeks > 1 ? "s" : ""}`);
-      if (preciseDays > 0)
-        parts.push(`${preciseDays} jour${preciseDays > 1 ? "s" : ""}`);
+      const parts = []
+      if (preciseYears > 0) parts.push(`${preciseYears} année${preciseYears > 1 ? "s" : ""}`)
+      if (preciseMonths > 0) parts.push(`${preciseMonths} mois`)
+      if (preciseWeeks > 0) parts.push(`${preciseWeeks} semaine${preciseWeeks > 1 ? "s" : ""}`)
+      if (preciseDays > 0) parts.push(`${preciseDays} jour${preciseDays > 1 ? "s" : ""}`)
 
-      formatted = parts.length > 0 ? parts.join(", ") : "0 jour";
-      break;
+      formatted = parts.length > 0 ? parts.join(", ") : "0 jour"
+      break
 
     case "auto":
     default:
       // Automatic format - the most appropriate
       if (years >= 1) {
-        formatted =
-          years === 1
-            ? months >= 1
-              ? `${years + 1} années`
-              : "1 année"
-            : `${years} années`;
+        formatted = years === 1 ? (months >= 1 ? `${years + 1} années` : "1 année") : `${years} années`
       } else if (months >= 1) {
-        formatted =
-          months === 1
-            ? weeks >= 1
-              ? `${months + 1} mois`
-              : "1 mois"
-            : `${months} mois`;
+        formatted = months === 1 ? (weeks >= 1 ? `${months + 1} mois` : "1 mois") : `${months} mois`
       } else if (weeks >= 1) {
-        formatted =
-          weeks === 1
-            ? days >= 1
-              ? `${weeks + 1} semaines`
-              : "1 semaine"
-            : `${weeks} semaines`;
+        formatted = weeks === 1 ? (days >= 1 ? `${weeks + 1} semaines` : "1 semaine") : `${weeks} semaines`
       } else if (days >= 1) {
-        formatted =
-          days === 1
-            ? hours >= 1
-              ? `${days + 1} jours`
-              : "1 jour"
-            : `${days} jours`;
+        formatted = days === 1 ? (hours >= 1 ? `${days + 1} jours` : "1 jour") : `${days} jours`
       } else if (hours >= 1) {
-        formatted =
-          hours === 1
-            ? minutes >= 1
-              ? `${hours + 1} heures`
-              : "1 heure"
-            : `${hours} heures`;
+        formatted = hours === 1 ? (minutes >= 1 ? `${hours + 1} heures` : "1 heure") : `${hours} heures`
       } else if (minutes >= 1) {
-        formatted =
-          minutes === 1
-            ? seconds >= 1
-              ? `${minutes + 1} minutes`
-              : "1 minute"
-            : `${minutes} minutes`;
+        formatted = minutes === 1 ? (seconds >= 1 ? `${minutes + 1} minutes` : "1 minute") : `${minutes} minutes`
       } else {
-        formatted = seconds === 1 ? "1 seconde" : `${seconds} secondes`;
+        formatted = seconds === 1 ? "1 seconde" : `${seconds} secondes`
       }
-      break;
+      break
   }
 
   // Return according to the requested type
@@ -289,10 +252,10 @@ export function getDateDifference(
       formatted,
       totalDays: days,
       breakdown,
-    };
+    }
   }
 
-  return formatted;
+  return formatted
 }
 
 /**
@@ -306,9 +269,9 @@ export function getDateDifference(
  * formatCount(1000) // returns "1K"
  */
 export function formatCount(n: number) {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `${Math.floor(n / 1_000)}K`;
-  return `${n}`;
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return `${Math.floor(n / 1_000)}K`
+  return `${n}`
 }
 
 /**
@@ -322,30 +285,29 @@ export function formatCount(n: number) {
  * getHumanDate("2023-01-01") // returns "1 January 2023"
  */
 export function getHumanDate(dateString: string, withTime?: boolean): string {
-  const date = new Date(dateString);
+  const date = new Date(dateString)
 
   const formatted = date.toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",
     year: "numeric",
-  });
+  })
 
   const formattedDate = formatted.replace(
     /(\d{1,2}) (\w)(\w+)( \d{4})/,
-    (_, d, firstLetter, rest, year) =>
-      `${d} ${firstLetter.toUpperCase()}${rest}${year}`,
-  );
+    (_, d, firstLetter, rest, year) => `${d} ${firstLetter.toUpperCase()}${rest}${year}`,
+  )
 
   if (withTime) {
     const time = date.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
       timeZoneName: "short",
-    });
-    return `${formattedDate} • ${time}`;
+    })
+    return `${formattedDate} • ${time}`
   }
 
-  return formattedDate;
+  return formattedDate
 }
 
 /**
@@ -376,23 +338,18 @@ export function getHumanDate(dateString: string, withTime?: boolean): string {
  * getMachineDate("2026年4月25日 14:30"); // returns "2026-04-25T14:30:00[Europe/Paris]"
  * getMachineDate("2026-04-25T14:30:00Z"); // returns "2026-04-25T14:30:00[Europe/Paris]"
  */
-export function getMachineDate(
-  dateString: string,
-  withTimezone: boolean = false,
-): string {
+export function getMachineDate(dateString: string, withTimezone: boolean = false): string {
   // Try to parse directly (works for ISO, timestamps, etc)
-  let date = new Date(dateString);
+  let date = new Date(dateString)
 
   if (isNaN(date.getTime())) {
     // Pattern: "25 Avril 2026 à 14:30" or "April 25, 2026 at 2:30 PM" or "2026年4月25日 14:30"
-    const numberMatch = dateString.match(
-      /(\d{1,2})[^\d\w]*(\d{1,2}|\w+)[^\d]*(\d{4})[^\d]*(\d{1,2})?[^\d]*(\d{1,2})?/,
-    );
+    const numberMatch = dateString.match(/(\d{1,2})[^\d\w]*(\d{1,2}|\w+)[^\d]*(\d{4})[^\d]*(\d{1,2})?[^\d]*(\d{1,2})?/)
 
     if (numberMatch) {
-      const [, day, monthOrNum, year, hours = "0", minutes = "0"] = numberMatch;
+      const [, day, monthOrNum, year, hours = "0", minutes = "0"] = numberMatch
 
-      let month = Number(monthOrNum);
+      let month = Number(monthOrNum)
 
       // Si ce n'est pas un nombre, c'est le nom du mois
       if (isNaN(month)) {
@@ -447,28 +404,22 @@ export function getMachineDate(
           十月: 10,
           十一月: 11,
           十二月: 12,
-        };
-        month = monthNames[monthOrNum?.toLowerCase() || ""] || 1;
+        }
+        month = monthNames[monthOrNum?.toLowerCase() || ""] || 1
       }
 
-      date = new Date(
-        Number(year),
-        month - 1,
-        Number(day),
-        Number(hours),
-        Number(minutes),
-      );
+      date = new Date(Number(year), month - 1, Number(day), Number(hours), Number(minutes))
     }
   }
 
   if (isNaN(date.getTime())) {
-    throw new Error(`Invalid date format: ${dateString}`);
+    throw new Error(`Invalid date format: ${dateString}`)
   }
 
-  const isoDate = date.toISOString().replace("Z", "");
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const isoDate = date.toISOString().replace("Z", "")
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
-  return withTimezone ? `${isoDate}[${timezone}]` : isoDate;
+  return withTimezone ? `${isoDate}[${timezone}]` : isoDate
 }
 
 /**
@@ -483,11 +434,7 @@ export function getMachineDate(
  * getIsToday("2026-04-25") // returns true (if today is 2026-04-25)
  */
 export function getIsToday(dateString: string): boolean {
-  const d = new Date(getMachineDate(dateString));
-  const today = new Date();
-  return (
-    d.getDate() === today.getDate() &&
-    d.getMonth() === today.getMonth() &&
-    d.getFullYear() === today.getFullYear()
-  );
+  const d = new Date(getMachineDate(dateString))
+  const today = new Date()
+  return d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear()
 }

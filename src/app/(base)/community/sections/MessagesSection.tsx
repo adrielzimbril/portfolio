@@ -1,43 +1,43 @@
-"use client";
-import React, { useCallback, useState, useEffect } from "react";
-import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
-import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas";
-import { apiRoutes } from "@/data/api-routes";
-import { useWindowEvent } from "@/hooks/useWindowEvent";
+"use client"
+import React, { useCallback, useState, useEffect } from "react"
+import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard"
+import { InfiniteCanvas } from "@/components/shared/pages/community/InfiniteCanvas"
+import { apiRoutes } from "@/data/api-routes"
+import { useWindowEvent } from "@/hooks/useWindowEvent"
 
 const transformMessages = (msgs: any[]) =>
   msgs.map((msg: any) => ({
     ...msg,
     patternIndex: msg.pattern_index ?? Math.floor(Math.random() * 5), // Random pattern index 0-4
     rotation: msg.rotation ?? Math.floor(Math.random() * 20) - 10, // Random rotation -10 to 10 degrees
-  }));
+  }))
 
 export function MessagesSection() {
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<any[]>([])
 
   const fetchMessages = useCallback(async () => {
     try {
-      const response = await fetch(apiRoutes.community.messages.link);
+      const response = await fetch(apiRoutes.community.messages.link)
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json()
         if (data.messages && data.messages.length > 0) {
-          setMessages(transformMessages(data.messages));
+          setMessages(transformMessages(data.messages))
         }
       }
     } catch (error) {}
-  }, []);
+  }, [])
 
   useEffect(() => {
-    (async () => {
-      await fetchMessages();
-    })();
-  }, []);
+    ;(async () => {
+      await fetchMessages()
+    })()
+  }, [])
 
   useWindowEvent("community-message-added", () => {
-    fetchMessages();
-  });
+    fetchMessages()
+  })
 
-  const displayMessages = messages;
+  const displayMessages = messages
 
   return (
     <>
@@ -63,5 +63,5 @@ export function MessagesSection() {
         <InfiniteCanvas messages={displayMessages} />
       </div>
     </>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import React from "react";
-import { createTranslator } from "use-intl/core";
+import React from "react"
+import { createTranslator } from "use-intl/core"
 import {
   Body,
   Container,
@@ -14,38 +14,31 @@ import {
   Button,
   Tailwind,
   Font,
-} from "@react-email/components";
-import { defaultTranslations } from "@/integrations/mail/util/translations";
-import { defaultLocale } from "@/integrations/mail/util/translations";
-import type { BaseMailProps } from "@/integrations/mail/types/types";
+} from "@react-email/components"
+import { defaultTranslations } from "@/integrations/mail/util/translations"
+import { defaultLocale } from "@/integrations/mail/util/translations"
+import type { BaseMailProps } from "@/integrations/mail/types/types"
 
 export function FreeProductDeliveryEmail({
   locale,
   translations,
   ...props
 }: BaseMailProps & {
-  name?: string;
-  productTitle: string;
-  features?: string[];
-  coverImage?: string;
-  productUrl?: string;
-  customText?: string;
+  name?: string
+  productTitle: string
+  features?: string[]
+  coverImage?: string
+  productUrl?: string
+  customText?: string
 }) {
   const t = createTranslator({
     locale,
     messages: translations,
-  });
+  })
 
-  const {
-    name,
-    productTitle,
-    features = [],
-    coverImage,
-    productUrl,
-    customText,
-  } = props;
+  const { name, productTitle, features = [], coverImage, productUrl, customText } = props
 
-  const firstName: string = name?.split(" ")[0] ?? t("mail.common.defaultName");
+  const firstName: string = name?.split(" ")[0] ?? t("mail.common.defaultName")
 
   return (
     <Html>
@@ -72,17 +65,12 @@ export function FreeProductDeliveryEmail({
               <Text className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
                 {t("mail.freeProductDelivery.greeting", { firstName })} 👋
               </Text>
-              <Text className="text-[#666666] text-base m-0">
-                {t("mail.freeProductDelivery.intro")}
-              </Text>
+              <Text className="text-[#666666] text-base m-0">{t("mail.freeProductDelivery.intro")}</Text>
             </Section>
 
             {/* Product Section */}
             <Section className="p-5 bg-white">
-              <Heading
-                as="h1"
-                className="text-2xl font-medium leading-tight text-[#1a1a1a] text-center mb-5"
-              >
+              <Heading as="h1" className="text-2xl font-medium leading-tight text-[#1a1a1a] text-center mb-5">
                 {productTitle}
               </Heading>
 
@@ -95,25 +83,16 @@ export function FreeProductDeliveryEmail({
                 />
               )}
 
-              {customText && (
-                <Text className="text-[#333333] text-base leading-relaxed mb-6">
-                  {customText}
-                </Text>
-              )}
+              {customText && <Text className="text-[#333333] text-base leading-relaxed mb-6">{customText}</Text>}
 
               {features && features.length > 0 && (
                 <Section className="text-center my-6">
                   <Text className="text-[#333333] text-base leading-relaxed mb-3">
-                    <strong>
-                      {t("mail.freeProductDelivery.featuresTitle")}
-                    </strong>
+                    <strong>{t("mail.freeProductDelivery.featuresTitle")}</strong>
                   </Text>
                   <Section className="my-3">
                     {features.map((feature, index) => (
-                      <Text
-                        key={index}
-                        className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal"
-                      >
+                      <Text key={index} className="text-[#555555] text-sm leading-relaxed mb-1.5 font-normal">
                         → {feature}
                       </Text>
                     ))}
@@ -150,9 +129,7 @@ export function FreeProductDeliveryEmail({
             <Section className="p-10 bg-[#f5f5f4]">
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">
-                {t("mail.common.signature")}
-              </Text>
+              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">{t("mail.common.signature")}</Text>
 
               <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
                 {t("mail.common.contact")}
@@ -160,15 +137,13 @@ export function FreeProductDeliveryEmail({
 
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-              <Text className="text-xs text-[#999999] text-center mb-3">
-                {t("mail.common.copyright")}
-              </Text>
+              <Text className="text-xs text-[#999999] text-center mb-3">{t("mail.common.copyright")}</Text>
             </Section>
           </Container>
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }
 
 FreeProductDeliveryEmail.PreviewProps = {
@@ -180,6 +155,6 @@ FreeProductDeliveryEmail.PreviewProps = {
   coverImage: "",
   productUrl: "",
   customText: "",
-};
+}
 
-export default FreeProductDeliveryEmail;
+export default FreeProductDeliveryEmail

@@ -1,11 +1,11 @@
-import React from "react";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { OverviewSection } from "./sections/OverviewSection";
+import React from "react"
+import { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { OverviewSection } from "./sections/OverviewSection"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.pages.home");
+  const t = await getTranslations("admin.pages.home")
 
   return {
     ...baseMetadata,
@@ -26,9 +26,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("admin.title"),
       description: t("admin.description"),
     },
-  };
+  }
 }
 
 export default function AdminPage() {
-  return <OverviewSection />;
+  return <OverviewSection />
 }

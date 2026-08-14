@@ -1,41 +1,36 @@
-"use client";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { motion } from "motion/react";
-import { cn } from "@/utils/utils";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { getResourcesUrl, pickRandomColor } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import { ChartPresentationOne } from "@aurthle/icons";
-import { Link } from "@/components/ui/link";
+"use client"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import { motion } from "motion/react"
+import { cn } from "@/utils/utils"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { getResourcesUrl, pickRandomColor } from "@/utils"
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
+import { ChartPresentationOne } from "@aurthle/icons"
+import { Link } from "@/components/ui/link"
 
 export interface ThoughtsCategoriesData {
-  name: string;
-  count: number;
-  color?: string;
-  icon?: string;
+  name: string
+  count: number
+  color?: string
+  icon?: string
 }
 
 interface ThoughtsCategoriesCardProps {
-  data: ThoughtsCategoriesData[];
-  title: string;
-  description: string;
-  decorationEmoji: string;
+  data: ThoughtsCategoriesData[]
+  title: string
+  description: string
+  decorationEmoji: string
 }
 
-export function ThoughtsCategoriesCard({
-  data,
-  title,
-  description,
-  decorationEmoji,
-}: ThoughtsCategoriesCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const t = useTranslations();
+export function ThoughtsCategoriesCard({ data, title, description, decorationEmoji }: ThoughtsCategoriesCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
+  const t = useTranslations()
   const config = {
     maxItems: 2,
-  };
-  const displayData = data.slice(0, config.maxItems);
+  }
+  const displayData = data.slice(0, config.maxItems)
 
   return (
     <Card
@@ -62,11 +57,7 @@ export function ThoughtsCategoriesCard({
           </motion.div>
 
           <div className="relative w-full flex flex-col gap-2">
-            <div
-              className={cn(
-                "relative flex flex-row items-center gap-2 md:gap-4 mb-4",
-              )}
-            >
+            <div className={cn("relative flex flex-row items-center gap-2 md:gap-4 mb-4")}>
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
@@ -88,14 +79,9 @@ export function ThoughtsCategoriesCard({
             <div className="flex flex-1 flex-col justify-center space-y-1">
               {displayData.map((item, index) => {
                 return (
-                  <div
-                    key={`${item.name}-${index}`}
-                    className="flex items-center justify-between"
-                  >
+                  <div key={`${item.name}-${index}`} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="truncate text-xs font-medium text-muted-foreground">
-                        {item.name}
-                      </span>
+                      <span className="truncate text-xs font-medium text-muted-foreground">{item.name}</span>
                     </div>
                     <Badge
                       className={cn(
@@ -109,22 +95,15 @@ export function ThoughtsCategoriesCard({
                       {item.count.toLocaleString()}
                     </Badge>
                   </div>
-                );
+                )
               })}
             </div>
 
             {data.length > config.maxItems && (
               <div className="relative flex mt-2">
-                <Link
-                  href={getResourcesUrl(PageType.THOUGHT)}
-                  className="py-1.5"
-                  likeButton
-                  size="xs"
-                  variant="base"
-                >
+                <Link href={getResourcesUrl(PageType.THOUGHT)} className="py-1.5" likeButton size="xs" variant="base">
                   <span className="capitalize text-xs">
-                    +{data.length - config.maxItems}{" "}
-                    {t("common.button.see-more")}
+                    +{data.length - config.maxItems} {t("common.button.see-more")}
                   </span>
                 </Link>
               </div>
@@ -133,5 +112,5 @@ export function ThoughtsCategoriesCard({
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

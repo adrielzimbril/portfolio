@@ -1,26 +1,26 @@
 interface RadarBackgroundProps {
-  scores: number[];
+  scores: number[]
 }
 
 export function RadarBackground({ scores }: RadarBackgroundProps) {
-  const size = 220;
-  const center = size / 2;
-  const maxRadius = 90;
+  const size = 220
+  const center = size / 2
+  const maxRadius = 90
 
   // Convert scores to polygon points (4 quadrants)
   const getPolygonPoints = (scoreValues: number[]) => {
-    const angles: number[] = [-90, 0, 90, 180];
+    const angles: number[] = [-90, 0, 90, 180]
     return scoreValues
       .map((score, i: number) => {
         /* @ts-expect-error - angles[i] is guaranteed to be a number */
-        const angle = (angles[i] * Math.PI) / 180;
-        const radius = (score / 100) * maxRadius;
-        const x = center + radius * Math.cos(angle);
-        const y = center + radius * Math.sin(angle);
-        return `${x},${y}`;
+        const angle = (angles[i] * Math.PI) / 180
+        const radius = (score / 100) * maxRadius
+        const x = center + radius * Math.cos(angle)
+        const y = center + radius * Math.sin(angle)
+        return `${x},${y}`
       })
-      .join(" ");
-  };
+      .join(" ")
+  }
 
   return (
     <div className="pointer-events-none absolute -bottom-12 -right-12 text-green-600 dark:text-green-400">
@@ -37,16 +37,8 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
       >
         <defs>
           <radialGradient id="radarGradient" cx="50%" cy="50%" r="50%">
-            <stop
-              offset="0%"
-              stopColor="var(--radar-gradient-start)"
-              stopOpacity={0.4}
-            />
-            <stop
-              offset="100%"
-              stopColor="var(--radar-gradient-end)"
-              stopOpacity={0.1}
-            />
+            <stop offset="0%" stopColor="var(--radar-gradient-start)" stopOpacity={0.4} />
+            <stop offset="100%" stopColor="var(--radar-gradient-end)" stopOpacity={0.1} />
           </radialGradient>
         </defs>
 
@@ -100,24 +92,15 @@ export function RadarBackground({ scores }: RadarBackgroundProps) {
 
         {/* Score points */}
         {scores.map((score, i) => {
-          const angles = [-90, 0, 90, 180];
+          const angles = [-90, 0, 90, 180]
           /* @ts-expect-error - angles[i] is guaranteed to be a number */
-          const angle = (angles[i] * Math.PI) / 180;
-          const radius = (score / 100) * maxRadius;
-          const x = center + radius * Math.cos(angle);
-          const y = center + radius * Math.sin(angle);
-          return (
-            <circle
-              key={i}
-              cx={x}
-              cy={y}
-              r={3}
-              fill="currentColor"
-              opacity={0.7}
-            />
-          );
+          const angle = (angles[i] * Math.PI) / 180
+          const radius = (score / 100) * maxRadius
+          const x = center + radius * Math.cos(angle)
+          const y = center + radius * Math.sin(angle)
+          return <circle key={i} cx={x} cy={y} r={3} fill="currentColor" opacity={0.7} />
         })}
       </svg>
     </div>
-  );
+  )
 }

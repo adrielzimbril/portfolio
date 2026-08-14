@@ -1,31 +1,27 @@
-"use client";
-import React, { useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "use-intl";
-import { cn } from "@/utils/utils";
-import { ArrowLeftOne, ArrowRightOne } from "@aurthle/icons";
-import {
-  DialogHeader,
-  DialogSeparator,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Form } from "@/components/ui/form";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { apiRoutes } from "@/data/api-routes";
-import { toast } from "@/lib/toast";
-import { useLocale } from "next-intl";
-import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard";
-import { patterns } from "@/components/shared/pages/community/pattern";
-import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, Radio } from "@/components/ui/radio-group";
-import { Slider } from "@/components/ui/slider";
-import { Label } from "@/components/ui/label";
-import { Locale } from "@/types";
-import { dispatchWindowEvent } from "@/hooks/useWindowEvent";
+"use client"
+import React, { useState, useRef } from "react"
+import { Button } from "@/components/ui/button"
+import { useTranslations } from "use-intl"
+import { cn } from "@/utils/utils"
+import { ArrowLeftOne, ArrowRightOne } from "@aurthle/icons"
+import { DialogHeader, DialogSeparator, DialogTitle } from "@/components/ui/dialog"
+import { Form } from "@/components/ui/form"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
+import { apiRoutes } from "@/data/api-routes"
+import { toast } from "@/lib/toast"
+import { useLocale } from "next-intl"
+import { CommunityWallCard } from "@/components/shared/pages/community/CommunityWallCard"
+import { patterns } from "@/components/shared/pages/community/pattern"
+import { Textarea } from "@/components/ui/textarea"
+import { RadioGroup, Radio } from "@/components/ui/radio-group"
+import { Slider } from "@/components/ui/slider"
+import { Label } from "@/components/ui/label"
+import { Locale } from "@/types"
+import { dispatchWindowEvent } from "@/hooks/useWindowEvent"
 
 interface CommentFormProps {
-  user: any;
-  onSuccess?: () => void;
+  user: any
+  onSuccess?: () => void
 }
 
 const config = {
@@ -36,33 +32,31 @@ const config = {
     endAt: 10,
     step: 1,
   },
-};
+}
 
 export function CommentForm({ user, onSuccess }: CommentFormProps) {
-  const t = useTranslations();
-  const locale: Locale = useLocale() as Locale;
-  const [screen, setScreen] = useState<"input" | "preview">("input");
-  const [patternIndex, setPatternIndex] = useState(() =>
-    Math.floor(Math.random() * patterns.length),
-  );
-  const [rotation, setRotation] = useState(config.rotation.default);
-  const [comment, setComment] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const t = useTranslations()
+  const locale: Locale = useLocale() as Locale
+  const [screen, setScreen] = useState<"input" | "preview">("input")
+  const [patternIndex, setPatternIndex] = useState(() => Math.floor(Math.random() * patterns.length))
+  const [rotation, setRotation] = useState(config.rotation.default)
+  const [comment, setComment] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handlePrevPattern = () => {
-    setPatternIndex((prev) => (prev - 1 + patterns.length) % patterns.length);
-  };
+    setPatternIndex((prev) => (prev - 1 + patterns.length) % patterns.length)
+  }
 
   const handleNextPattern = () => {
-    setPatternIndex((prev) => (prev + 1) % patterns.length);
-  };
+    setPatternIndex((prev) => (prev + 1) % patterns.length)
+  }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!comment.trim()) {
-      toast.error(t("community.comment-form.validation.empty"));
-      return;
+      toast.error(t("community.comment-form.validation.empty"))
+      return
     }
 
     if (comment.length > config.maxCommentLength) {
@@ -70,11 +64,11 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         t("community.comment-form.validation.max", {
           max: config.maxCommentLength,
         }),
-      );
-      return;
+      )
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       const res = await fetch(apiRoutes.community.guestbook.link, {
@@ -88,47 +82,45 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
           pattern_index: patternIndex,
           rotation: rotation,
         }),
-      });
+      })
 
-      const data = await res.json().catch(() => ({}));
+      const data = await res.json().catch(() => ({}))
 
       if (!res.ok) {
-        toast.error(data?.error || t("community.comment-form.toast.error"));
-        throw new Error(data?.error || "Failed to submit comment");
+        toast.error(data?.error || t("community.comment-form.toast.error"))
+        throw new Error(data?.error || "Failed to submit comment")
       }
 
-      toast.success(t("community.comment-form.toast.success"));
-      setComment("");
-      setScreen("input");
-      setPatternIndex(Math.floor(Math.random() * patterns.length));
-      setRotation(config.rotation.default);
-      onSuccess?.();
+      toast.success(t("community.comment-form.toast.success"))
+      setComment("")
+      setScreen("input")
+      setPatternIndex(Math.floor(Math.random() * patterns.length))
+      setRotation(config.rotation.default)
+      onSuccess?.()
       // Dispatch custom event to refresh messages
-      dispatchWindowEvent("community-message-added");
+      dispatchWindowEvent("community-message-added")
     } catch (error) {
-      toast.error(t("community.comment-form.toast.error"));
-      throw error;
+      toast.error(t("community.comment-form.toast.error"))
+      throw error
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const handleNext = () => {
     if (comment.trim()) {
-      setScreen("preview");
+      setScreen("preview")
     }
-  };
+  }
 
   const handleBack = () => {
-    setScreen("input");
-  };
+    setScreen("input")
+  }
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle className="text-2xl font-bold text-start">
-          {t("community.comment-form.title")}
-        </DialogTitle>
+        <DialogTitle className="text-2xl font-bold text-start">{t("community.comment-form.title")}</DialogTitle>
       </DialogHeader>
 
       <DialogSeparator />
@@ -138,10 +130,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         <div className="hidden md:grid md:grid-cols-2 gap-6">
           {/* Left column: Controls */}
           <div className="size-full space-y-4">
-            <Form
-              onSubmit={onSubmit}
-              className="flex flex-col size-full space-y-4"
-            >
+            <Form onSubmit={onSubmit} className="flex flex-col size-full space-y-4">
               <Field>
                 <FieldLabel>{t("community.comment-form.label")}</FieldLabel>
                 <Textarea
@@ -155,17 +144,13 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   required
                   maxLength={config.maxCommentLength}
                 />
-                <FieldError>
-                  {t("community.comment-form.validation.empty")}
-                </FieldError>
+                <FieldError>{t("community.comment-form.validation.empty")}</FieldError>
               </Field>
 
               <div className="space-y-4">
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <label className="text-sm font-medium">
-                      {t("community.comment-form.controls.rotation")}
-                    </label>
+                    <label className="text-sm font-medium">{t("community.comment-form.controls.rotation")}</label>
                     <span className="text-sm">{rotation}°</span>
                   </div>
                   <Slider
@@ -174,17 +159,15 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                     max={config.rotation.endAt}
                     step={config.rotation.step}
                     onValueChange={(value) => {
-                      const newValue = Array.isArray(value) ? value[0] : value;
-                      setRotation(newValue as number);
+                      const newValue = Array.isArray(value) ? value[0] : value
+                      setRotation(newValue as number)
                     }}
                     className="w-full"
                   />
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Label className="text-sm font-medium">
-                    {t("community.comment-form.controls.pattern")}
-                  </Label>
+                  <Label className="text-sm font-medium">{t("community.comment-form.controls.pattern")}</Label>
                   <RadioGroup
                     value={patternIndex.toString()}
                     onValueChange={(value) => setPatternIndex(parseInt(value))}
@@ -195,10 +178,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         key={index}
                         value={index.toString()}
                         size="xl"
-                        aria-label={t(
-                          "community.comment-form.controls.patternAria",
-                          { index: index + 1 },
-                        )}
+                        aria-label={t("community.comment-form.controls.patternAria", { index: index + 1 })}
                       />
                     ))}
                   </RadioGroup>
@@ -206,13 +186,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
               </div>
 
               <div className="flex gap-2 mt-auto">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="flex-1"
-                  asIcon
-                  onClick={() => setComment("")}
-                >
+                <Button type="button" variant="outline" className="flex-1" asIcon onClick={() => setComment("")}>
                   {t("common.confirmation.cancel")}
                 </Button>
                 <Button
@@ -225,9 +199,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   disabled={!comment.trim() || isSubmitting}
                 >
                   <span className="flex items-center justify-center gap-1">
-                    {isSubmitting
-                      ? t("community.comment-form.submitting")
-                      : t("community.comment-form.submit")}
+                    {isSubmitting ? t("community.comment-form.submitting") : t("community.comment-form.submit")}
                   </span>
                 </Button>
               </div>
@@ -243,9 +215,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 size="icon"
                 asIcon
                 onClick={handlePrevPattern}
-                aria-label={t(
-                  "community.comment-form.controls.previousPattern",
-                )}
+                aria-label={t("community.comment-form.controls.previousPattern")}
               >
                 <ArrowLeftOne size={20} />
               </Button>
@@ -292,19 +262,11 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   required
                   maxLength={config.maxCommentLength}
                 />
-                <FieldError>
-                  {t("community.comment-form.validation.empty")}
-                </FieldError>
+                <FieldError>{t("community.comment-form.validation.empty")}</FieldError>
               </Field>
 
               <div className="flex gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="flex-1"
-                  asIcon
-                  onClick={() => setComment("")}
-                >
+                <Button type="button" variant="outline" className="flex-1" asIcon onClick={() => setComment("")}>
                   {t("common.confirmation.cancel")}
                 </Button>
                 <Button
@@ -341,9 +303,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   size="icon"
                   asIcon
                   onClick={handlePrevPattern}
-                  aria-label={t(
-                    "community.comment-form.controls.previousPattern",
-                  )}
+                  aria-label={t("community.comment-form.controls.previousPattern")}
                 >
                   <ArrowLeftOne size={20} />
                 </Button>
@@ -361,17 +321,15 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
 
               <div className="flex flex-col gap-4 w-full max-w-md">
                 <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium">
-                    {t("community.comment-form.controls.rotation")}
-                  </label>
+                  <label className="text-sm font-medium">{t("community.comment-form.controls.rotation")}</label>
                   <Slider
                     value={[rotation]}
                     min={config.rotation.startAt}
                     max={config.rotation.endAt}
                     step={config.rotation.step}
                     onValueChange={(value) => {
-                      const newValue = Array.isArray(value) ? value[0] : value;
-                      setRotation(newValue as number);
+                      const newValue = Array.isArray(value) ? value[0] : value
+                      setRotation(newValue as number)
                     }}
                     className="flex-1"
                   />
@@ -379,9 +337,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Label className="text-sm font-medium">
-                    {t("community.comment-form.controls.pattern")}
-                  </Label>
+                  <Label className="text-sm font-medium">{t("community.comment-form.controls.pattern")}</Label>
                   <RadioGroup
                     value={patternIndex.toString()}
                     onValueChange={(value) => setPatternIndex(parseInt(value))}
@@ -392,10 +348,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                         key={index}
                         value={index.toString()}
                         size="xl"
-                        aria-label={t(
-                          "community.comment-form.controls.patternAria",
-                          { index: index + 1 },
-                        )}
+                        aria-label={t("community.comment-form.controls.patternAria", { index: index + 1 })}
                       />
                     ))}
                   </RadioGroup>
@@ -403,12 +356,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
               </div>
 
               <Form onSubmit={onSubmit} className="flex gap-2 w-full max-w-md">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="flex-1"
-                  onClick={handleBack}
-                >
+                <Button type="button" variant="outline" className="flex-1" onClick={handleBack}>
                   {t("common.button.back")}
                 </Button>
                 <Button
@@ -421,9 +369,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
                   disabled={!comment.trim() || isSubmitting}
                 >
                   <span className="flex items-center justify-center gap-1">
-                    {isSubmitting
-                      ? t("community.comment-form.submitting")
-                      : t("community.comment-form.submit")}
+                    {isSubmitting ? t("community.comment-form.submitting") : t("community.comment-form.submit")}
                   </span>
                 </Button>
               </Form>
@@ -432,5 +378,5 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
         </div>
       </div>
     </>
-  );
+  )
 }

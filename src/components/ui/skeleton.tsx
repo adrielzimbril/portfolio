@@ -1,18 +1,18 @@
-import { cn } from "@/utils/utils";
-import type { SkeletonProps as BoneyardSkeletonProps } from "boneyard-js/react";
-import type React from "react";
+import { cn } from "@/utils/utils"
+import type { SkeletonProps as BoneyardSkeletonProps } from "boneyard-js/react"
+import type React from "react"
 
 type AutomatedSkeletonProps = {
-  name: string;
-  loading?: boolean;
-  children?: React.ReactNode;
-} & Omit<BoneyardSkeletonProps, "name" | "loading" | "children">;
+  name: string
+  loading?: boolean
+  children?: React.ReactNode
+} & Omit<BoneyardSkeletonProps, "name" | "loading" | "children">
 
 type ManualSkeletonProps = {
-  name?: undefined;
-  loading?: boolean;
-  children?: React.ReactNode;
-} & React.HTMLAttributes<HTMLDivElement>;
+  name?: undefined
+  loading?: boolean
+  children?: React.ReactNode
+} & React.HTMLAttributes<HTMLDivElement>
 
 /**
  * Skeleton component powered by boneyard-js for automated, pixel-perfect loader screens.
@@ -33,15 +33,13 @@ export function Skeleton({
   ...props
 }: AutomatedSkeletonProps | ManualSkeletonProps): React.ReactElement {
   if (name) {
-    const { snapshotConfig } = props as AutomatedSkeletonProps;
+    const { snapshotConfig } = props as AutomatedSkeletonProps
 
     return (
       <div
         className={className}
         data-boneyard={name}
-        data-boneyard-config={
-          snapshotConfig ? JSON.stringify(snapshotConfig) : undefined
-        }
+        data-boneyard-config={snapshotConfig ? JSON.stringify(snapshotConfig) : undefined}
         style={{ position: "relative" }}
       >
         <div
@@ -55,7 +53,7 @@ export function Skeleton({
           {loading ? null : children}
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -69,5 +67,5 @@ export function Skeleton({
       data-slot="skeleton"
       {...props}
     />
-  );
+  )
 }

@@ -1,22 +1,17 @@
-"use client";
-import React from "react";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { DetailsCard } from "@/components/shared/pages/shared/details-card";
-import { useLocale, useTranslations } from "use-intl";
-import { Locale } from "@/types";
-import {
-  WandIcon,
-  LongitudeIcon,
-  BalanceIcon,
-  BookIcon,
-} from "@/components/shared/icons/break-icons";
+"use client"
+import React from "react"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { DetailsCard } from "@/components/shared/pages/shared/details-card"
+import { useLocale, useTranslations } from "use-intl"
+import { Locale } from "@/types"
+import { WandIcon, LongitudeIcon, BalanceIcon, BookIcon } from "@/components/shared/icons/break-icons"
 
 interface PhilosophyCard {
-  title: string;
-  locale: Locale;
-  icon: React.ReactNode;
-  alt: string;
-  description: string;
+  title: string
+  locale: Locale
+  icon: React.ReactNode
+  alt: string
+  description: string
 }
 
 const data: PhilosophyCard[] = [
@@ -113,14 +108,13 @@ const data: PhilosophyCard[] = [
     locale: Locale.ZH_CN,
     icon: <BalanceIcon />,
     alt: "Balance default",
-    description:
-      "我相信快速迭代和有意图的决策。\n每一次测试都是指南针，每一次调整都让产品更接近最佳版本。",
+    description: "我相信快速迭代和有意图的决策。\n每一次测试都是指南针，每一次调整都让产品更接近最佳版本。",
   },
-];
+]
 
 export function PhilosophySection() {
-  const t = useTranslations();
-  const locale = useLocale();
+  const t = useTranslations()
+  const locale = useLocale()
 
   return (
     <SectionLayout
@@ -132,13 +126,8 @@ export function PhilosophySection() {
       {data
         .filter((item) => item.locale === locale)
         .map((item, index) => (
-          <DetailsCard
-            key={index}
-            icon={item.icon}
-            title={item.title}
-            description={item.description}
-          />
+          <DetailsCard key={index} icon={item.icon} title={item.title} description={item.description} />
         ))}
     </SectionLayout>
-  );
+  )
 }

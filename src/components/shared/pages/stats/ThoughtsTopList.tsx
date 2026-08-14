@@ -1,49 +1,38 @@
-"use client";
-import { motion } from "motion/react";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import type { ThoughtMetric } from "@/lib/stats/types";
-import { cn } from "@/utils/utils";
-import { truncateText } from "@/utils/format-text";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { getResourcesUrl, pickRandomColor } from "@/utils";
-import {
-  DEFAULT_COLOR_CODE_NAME,
-  PageType,
-  TopThoughtsListType,
-} from "@/types";
-import { Link } from "@/components/ui/link";
+"use client"
+import { motion } from "motion/react"
+import { useState } from "react"
+import { useTranslations } from "next-intl"
+import type { ThoughtMetric } from "@/lib/stats/types"
+import { cn } from "@/utils/utils"
+import { truncateText } from "@/utils/format-text"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { getResourcesUrl, pickRandomColor } from "@/utils"
+import { DEFAULT_COLOR_CODE_NAME, PageType, TopThoughtsListType } from "@/types"
+import { Link } from "@/components/ui/link"
 
 interface ThoughtsTopListProps {
-  title: string;
-  description: string;
-  type: TopThoughtsListType;
-  thoughts: ThoughtMetric[];
-  icon: React.ReactNode;
-  decoration: string;
-  delay?: number;
-  className?: string;
+  title: string
+  description: string
+  type: TopThoughtsListType
+  thoughts: ThoughtMetric[]
+  icon: React.ReactNode
+  decoration: string
+  delay?: number
+  className?: string
 }
 
-export function ThoughtsTopList({
-  title,
-  description,
-  type,
-  thoughts,
-  icon,
-  decoration,
-}: ThoughtsTopListProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const t = useTranslations();
+export function ThoughtsTopList({ title, description, type, thoughts, icon, decoration }: ThoughtsTopListProps) {
+  const [isHovered, setIsHovered] = useState(false)
+  const t = useTranslations()
   const config = {
     truncate: {
       type: "char" as const,
       maxLength: 40,
     },
     maxItems: 4,
-  };
-  const displayThoughts = thoughts.slice(0, config.maxItems);
+  }
+  const displayThoughts = thoughts.slice(0, config.maxItems)
 
   return (
     <Card
@@ -70,11 +59,7 @@ export function ThoughtsTopList({
           </motion.div>
 
           <div className="relative w-full flex flex-col gap-2">
-            <div
-              className={cn(
-                "relative flex flex-row items-center gap-2 md:gap-4 mb-4",
-              )}
-            >
+            <div className={cn("relative flex flex-row items-center gap-2 md:gap-4 mb-4")}>
               <Badge
                 className={cn(
                   "capitalize text-xs font-medium",
@@ -98,12 +83,7 @@ export function ThoughtsTopList({
                 return (
                   <div key={thought.slug} className="group/item">
                     <div className="flex items-center gap-3">
-                      <Badge
-                        className={cn("capitalize text-xs font-medium")}
-                        size="sm"
-                        variant="primary"
-                        circle
-                      >
+                      <Badge className={cn("capitalize text-xs font-medium")} size="sm" variant="primary" circle>
                         {index + 1}
                       </Badge>
                       <Link
@@ -122,8 +102,7 @@ export function ThoughtsTopList({
                               ? DEFAULT_COLOR_CODE_NAME.VIOLET
                               : DEFAULT_COLOR_CODE_NAME.ORANGE,
                           ),
-                          type === TopThoughtsListType.VIEWED &&
-                            "size-max text-primary-foreground",
+                          type === TopThoughtsListType.VIEWED && "size-max text-primary-foreground",
                         )}
                         variant="colored"
                         size="sm"
@@ -132,22 +111,15 @@ export function ThoughtsTopList({
                       </Badge>
                     </div>
                   </div>
-                );
+                )
               })}
             </div>
 
             {thoughts.length > config.maxItems && (
               <div className="relative flex mt-2">
-                <Link
-                  href={getResourcesUrl(PageType.THOUGHT)}
-                  className="py-1.5"
-                  likeButton
-                  size="xs"
-                  variant="base"
-                >
+                <Link href={getResourcesUrl(PageType.THOUGHT)} className="py-1.5" likeButton size="xs" variant="base">
                   <span className="capitalize text-xs">
-                    +{thoughts.length - config.maxItems}{" "}
-                    {t("common.button.see-more")}
+                    +{thoughts.length - config.maxItems} {t("common.button.see-more")}
                   </span>
                 </Link>
               </div>
@@ -156,5 +128,5 @@ export function ThoughtsTopList({
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

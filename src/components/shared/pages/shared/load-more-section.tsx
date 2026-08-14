@@ -1,20 +1,20 @@
-"use client";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Loader } from "@/components/shared/_layouts/loader";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import { Button } from "@/components/ui/button"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { Loader } from "@/components/shared/_layouts/loader"
+import { richTextComponent } from "@/integrations/content/utils/mdx-components"
+import { useTranslations } from "use-intl"
 
 interface LoadMoreUIProps {
-  children: React.ReactNode;
-  hasMore: boolean;
-  loading: boolean;
-  onLoadMore: () => void;
-  loadedItems: number;
-  totalItems: number;
-  showCounter?: boolean;
-  loadingFallback?: React.ReactNode;
+  children: React.ReactNode
+  hasMore: boolean
+  loading: boolean
+  onLoadMore: () => void
+  loadedItems: number
+  totalItems: number
+  showCounter?: boolean
+  loadingFallback?: React.ReactNode
 }
 
 export function LoadMoreSection({
@@ -27,7 +27,7 @@ export function LoadMoreSection({
   showCounter = false,
   loadingFallback,
 }: LoadMoreUIProps) {
-  const t = useTranslations();
+  const t = useTranslations()
   return (
     <SectionLayout className="p-0">
       {children}
@@ -37,8 +37,7 @@ export function LoadMoreSection({
           <Button onClick={onLoadMore} disabled={loading} whileTap asPointer>
             {loading ? (
               <span className="flex gap-2 items-center">
-                <Loader variant="pulse" />{" "}
-                {/* <span>{t("common.button.loading")} 🦄</span> */}
+                <Loader variant="pulse" /> {/* <span>{t("common.button.loading")} 🦄</span> */}
               </span>
             ) : (
               t("common.button.view-more")
@@ -48,9 +47,7 @@ export function LoadMoreSection({
           <>
             <div className="content-stretch flex flex-col text-center gap-2 text-b-white-invert-thr items-center justify-center relative shrink-0 max-w-md">
               <p>
-                <span className="text-foreground">
-                  {t("common.shared.loadMore.greeting")}
-                </span>
+                <span className="text-foreground">{t("common.shared.loadMore.greeting")}</span>
                 <br />
                 {t.rich("common.shared.loadMore.end.cta", {
                   ...richTextComponent,
@@ -70,5 +67,5 @@ export function LoadMoreSection({
         )}
       </div>
     </SectionLayout>
-  );
+  )
 }

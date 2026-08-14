@@ -1,27 +1,23 @@
-"use client";
-import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Link } from "@/components/ui/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import BoringAvatar from "boring-avatars";
-import { getExternalUrl, getImageUrl } from "@/utils/base-url";
-import { Tags } from "@/components/shared/pages/quests/tags";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
-import { cn, pickRandomColorCode } from "@/utils";
-import { useMemo } from "react";
-import { LinkDiagonalOne } from "@aurthle/icons";
-import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import type { Quest } from "@/integrations/content/lib/quests";
-import { useTranslations } from "use-intl";
-import { PreviewContent } from "@/components/shared/pages/shared/preview";
+"use client"
+import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Link } from "@/components/ui/link"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import BoringAvatar from "boring-avatars"
+import { getExternalUrl, getImageUrl } from "@/utils/base-url"
+import { Tags } from "@/components/shared/pages/quests/tags"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types/default"
+import { cn, pickRandomColorCode } from "@/utils"
+import { useMemo } from "react"
+import { LinkDiagonalOne } from "@aurthle/icons"
+import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section"
+import type { Quest } from "@/integrations/content/lib/quests"
+import { useTranslations } from "use-intl"
+import { PreviewContent } from "@/components/shared/pages/shared/preview"
 
-type Winner = NonNullable<Quest["winners"]>[number];
+type Winner = NonNullable<Quest["winners"]>[number]
 
 function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
   if (!tooltip) {
@@ -29,7 +25,7 @@ function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
       <Badge className="relative">
         <span className="text-xl">{label}</span>
       </Badge>
-    );
+    )
   }
 
   return (
@@ -41,20 +37,20 @@ function OverlayTag({ label, tooltip }: { label: string; tooltip?: string }) {
       </TooltipTrigger>
       <TooltipContent>{tooltip}</TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
 function WinnerCard({ participant }: { participant: Winner }) {
-  const t = useTranslations();
-  const workUrl = getExternalUrl(participant.work_url);
-  const profileUrl = getExternalUrl(participant.profile_url);
-  const WINNER_NUMBER = 3;
+  const t = useTranslations()
+  const workUrl = getExternalUrl(participant.work_url)
+  const profileUrl = getExternalUrl(participant.profile_url)
+  const WINNER_NUMBER = 3
 
   const colorSets: string[][] = useMemo(() => {
     return Array.from({ length: WINNER_NUMBER }).map(() =>
       Array.from({ length: 4 }).map(() => pickRandomColorCode() ?? "#ffffff"),
-    );
-  }, [WINNER_NUMBER]);
+    )
+  }, [WINNER_NUMBER])
 
   const rankBadge =
     participant.rank === 1
@@ -68,7 +64,7 @@ function WinnerCard({ participant }: { participant: Winner }) {
               label: t("quests.participants.rank.other", {
                 rank: participant.rank,
               }),
-            };
+            }
 
   return (
     <Card className="bg-b-base-second squircle-6xl/100  size-full border-0 overflow-hidden">
@@ -94,9 +90,7 @@ function WinnerCard({ participant }: { participant: Winner }) {
                   <PreviewContent
                     emoji={rankBadge.emoji ?? t("page-sections.preview.emoji")}
                     title={participant.name ?? t("page-sections.preview.title")}
-                    description={
-                      participant.role ?? t("page-sections.preview.description")
-                    }
+                    description={participant.role ?? t("page-sections.preview.description")}
                   />
                 )}
               </div>
@@ -104,30 +98,18 @@ function WinnerCard({ participant }: { participant: Winner }) {
             <div className="absolute top-2 right-2 flex flex-wrap gap-2 justify-end">
               <OverlayTag label={rankBadge.emoji} tooltip={rankBadge.label} />
               {participant.pixel_perfect && (
-                <OverlayTag
-                  label="🎖️"
-                  tooltip={t("quests.participants.badges.pixelPerfect")}
-                />
+                <OverlayTag label="🎖️" tooltip={t("quests.participants.badges.pixelPerfect")} />
               )}
               {participant.jury_favorite && (
-                <OverlayTag
-                  label="❤️"
-                  tooltip={t("quests.participants.badges.juryFavorite")}
-                />
+                <OverlayTag label="❤️" tooltip={t("quests.participants.badges.juryFavorite")} />
               )}
             </div>
           </div>
         </div>
 
-        {(participant.pixel_perfect ||
-          participant.original_idea ||
-          (participant.tags?.length ?? 0) > 0) && (
+        {(participant.pixel_perfect || participant.original_idea || (participant.tags?.length ?? 0) > 0) && (
           <Tags
-            primaryTag={
-              participant.original_idea
-                ? t("quests.participants.badges.originalIdea")
-                : undefined
-            }
+            primaryTag={participant.original_idea ? t("quests.participants.badges.originalIdea") : undefined}
             primaryTagColor={DEFAULT_COLOR_CODE_NAME.PURPLE}
             tags={participant.tags ?? []}
           />
@@ -135,20 +117,13 @@ function WinnerCard({ participant }: { participant: Winner }) {
 
         <div className="flex justify-between items-center gap-3 flex-wrap">
           <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href={profileUrl || workUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col"
-            >
+            <Link href={profileUrl || workUrl} target="_blank" rel="noopener noreferrer" className="flex flex-col">
               <Avatar className="size-11">
                 <AvatarImage src={getImageUrl(participant.avatar || "")} />
                 <AvatarFallback>
                   <BoringAvatar
                     name={participant.name}
-                    colors={
-                      colorSets[(participant.rank - 1) % WINNER_NUMBER] ?? []
-                    }
+                    colors={colorSets[(participant.rank - 1) % WINNER_NUMBER] ?? []}
                     variant="beam"
                   />
                 </AvatarFallback>
@@ -163,9 +138,7 @@ function WinnerCard({ participant }: { participant: Winner }) {
               >
                 {participant.name}
                 {participant.role && (
-                  <span className="inline-block text-sm font-normal text-b-white-invert-sec">
-                    {participant.role}
-                  </span>
+                  <span className="inline-block text-sm font-normal text-b-white-invert-sec">{participant.role}</span>
                 )}
               </Link>
             </div>
@@ -190,19 +163,15 @@ function WinnerCard({ participant }: { participant: Winner }) {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
 
-export function QuestParticipantsSection({
-  winners,
-}: {
-  winners: Quest["winners"];
-}) {
-  const t = useTranslations();
-  const participants = winners ?? [];
+export function QuestParticipantsSection({ winners }: { winners: Quest["winners"] }) {
+  const t = useTranslations()
+  const participants = winners ?? []
 
   if (participants.length === 0) {
-    return null;
+    return null
   }
 
   return (
@@ -211,11 +180,8 @@ export function QuestParticipantsSection({
         .slice()
         .sort((a, b) => a.rank - b.rank)
         .map((participant) => (
-          <WinnerCard
-            key={participant.id ?? `${participant.rank}-${participant.name}`}
-            participant={participant}
-          />
+          <WinnerCard key={participant.id ?? `${participant.rank}-${participant.name}`} participant={participant} />
         ))}
     </CardPreviewSection>
-  );
+  )
 }

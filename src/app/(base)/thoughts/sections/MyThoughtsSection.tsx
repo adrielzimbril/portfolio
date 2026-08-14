@@ -1,24 +1,21 @@
-"use client";
-import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
-import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useLoadMore } from "@/hooks/useLoadMore";
-import { Post } from "@/integrations/content/types";
-import { getDate } from "@/utils";
+"use client"
+import { ThoughtCard } from "@/components/shared/pages/thoughts/card"
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useLoadMore } from "@/hooks/useLoadMore"
+import { Post } from "@/integrations/content/types"
+import { getDate } from "@/utils"
 
 interface MyThoughtsSectionProps {
-  data: Post[];
+  data: Post[]
 }
 
-export function MyThoughtsSection({
-  data: initialPosts,
-}: MyThoughtsSectionProps) {
-  const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
-    useLoadMore({
-      dataSource: initialPosts,
-      initialCount: 4,
-      incrementCount: 4,
-    });
+export function MyThoughtsSection({ data: initialPosts }: MyThoughtsSectionProps) {
+  const { data, loadMore, loading, hasMore, loadedItems, totalItems } = useLoadMore({
+    dataSource: initialPosts,
+    initialCount: 4,
+    incrementCount: 4,
+  })
 
   return (
     <LoadMoreSection
@@ -28,9 +25,7 @@ export function MyThoughtsSection({
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={
-        <Skeleton name="thoughts-load-more" className="w-full h-40" />
-      }
+      loadingFallback={<Skeleton name="thoughts-load-more" className="w-full h-40" />}
     >
       {data.map((post, index) => (
         <ThoughtCard
@@ -45,5 +40,5 @@ export function MyThoughtsSection({
         />
       ))}
     </LoadMoreSection>
-  );
+  )
 }

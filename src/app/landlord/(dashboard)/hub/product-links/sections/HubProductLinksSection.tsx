@@ -1,91 +1,71 @@
-"use client";
-import React, { useMemo, useState } from "react";
-import useSWR from "swr";
-import { RefreshCw, Loader2, Save, Check, AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  AdminCard,
-  TablePager,
-  EmptyState,
-} from "@/components/landlord/components/AdminPrimitives";
-import {
-  dataTableKey,
-  fetchLandlordTable,
-} from "@/components/landlord/admin-utils";
-import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import { toast } from "@/lib/toast";
-import { useTranslations } from "next-intl";
+"use client"
+import React, { useMemo, useState } from "react"
+import useSWR from "swr"
+import { RefreshCw, Loader2, Save, Check, AlertCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { AdminCard, TablePager, EmptyState } from "@/components/landlord/components/AdminPrimitives"
+import { dataTableKey, fetchLandlordTable } from "@/components/landlord/admin-utils"
+import { landlordApiRoutes } from "@/data/landlordApiRoutes"
+import { toast } from "@/lib/toast"
+import { useTranslations } from "next-intl"
 
 interface ProductLinkRow {
-  id: number;
-  title: string;
-  slug: string;
-  private_url: string;
-  type: string;
-  published: boolean;
+  id: number
+  title: string
+  slug: string
+  private_url: string
+  type: string
+  published: boolean
 }
 
-const pageSize = 10;
+const pageSize = 10
 
 export function HubProductLinksSection() {
-  const t = useTranslations("admin.landlord.hub_product_links");
-  const [page, setPage] = useState(1);
+  const t = useTranslations("admin.landlord.hub_product_links")
+  const [page, setPage] = useState(1)
 
-  const swrKey = useMemo(
-    () => dataTableKey("hub-product-links", page, pageSize),
-    [page],
-  );
+  const swrKey = useMemo(() => dataTableKey("hub-product-links", page, pageSize), [page])
 
-  const {
-    data: tableData,
-    isLoading,
-    mutate,
-  } = useSWR(swrKey, fetchLandlordTable);
+  const { data: tableData, isLoading, mutate } = useSWR(swrKey, fetchLandlordTable)
 
-  const [updatingSlugs, setUpdatingSlugs] = useState<Set<string>>(new Set());
-  const [localUrls, setLocalUrls] = useState<Record<string, string>>({});
+  const [updatingSlugs, setUpdatingSlugs] = useState<Set<string>>(new Set())
+  const [localUrls, setLocalUrls] = useState<Record<string, string>>({})
 
-  const rows = useMemo(
-    () => (tableData?.rows as unknown as ProductLinkRow[]) || [],
-    [tableData],
-  );
+  const rows = useMemo(() => (tableData?.rows as unknown as ProductLinkRow[]) || [], [tableData])
 
   const handleUpdate = async (slug: string) => {
-    const private_url =
-      localUrls[slug] ?? rows.find((r) => r.slug === slug)?.private_url;
+    const private_url = localUrls[slug] ?? rows.find((r) => r.slug === slug)?.private_url
 
-    setUpdatingSlugs((prev) => new Set(prev).add(slug));
+    setUpdatingSlugs((prev) => new Set(prev).add(slug))
     try {
       const response = await fetch(landlordApiRoutes.hub.productLinks, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, private_url }),
-      });
+      })
 
-      if (!response.ok) throw new Error("Failed to update");
+      if (!response.ok) throw new Error("Failed to update")
 
-      toast.success(t("messages.link_updated", { slug }));
-      mutate();
+      toast.success(t("messages.link_updated", { slug }))
+      mutate()
     } catch (error) {
-      toast.error(t("messages.update_error", { slug }));
+      toast.error(t("messages.update_error", { slug }))
     } finally {
       setUpdatingSlugs((prev) => {
-        const next = new Set(prev);
-        next.delete(slug);
-        return next;
-      });
+        const next = new Set(prev)
+        next.delete(slug)
+        return next
+      })
     }
-  };
+  }
 
   return (
     <div className="grid gap-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            {t("title")}
-          </h2>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]">{t("title")}</h2>
           <p className="mt-1 text-sm text-black/45">{t("description")}</p>
         </div>
         <Button variant="outline" asIcon asPointer onClick={() => mutate()}>
@@ -108,51 +88,29 @@ export function HubProductLinksSection() {
                   <table className="w-full min-w-[800px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
                       <tr>
-                        <th className="px-5 py-4 font-medium">
-                          {t("fields.resource")}
-                        </th>
-                        <th className="px-5 py-4 font-medium">
-                          {t("fields.slug")}
-                        </th>
-                        <th className="px-5 py-4 font-medium">
-                          {t("fields.private_link")}
-                        </th>
-                        <th className="px-5 py-4 font-medium w-32 text-right">
-                          {t("fields.actions")}
-                        </th>
+                        <th className="px-5 py-4 font-medium">{t("fields.resource")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.slug")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.private_link")}</th>
+                        <th className="px-5 py-4 font-medium w-32 text-right">{t("fields.actions")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-black/6">
                       {rows.map((row) => {
-                        const isUpdating = updatingSlugs.has(row.slug);
-                        const currentValue =
-                          localUrls[row.slug] ?? row.private_url;
-                        const hasChanged =
-                          localUrls[row.slug] !== undefined &&
-                          localUrls[row.slug] !== row.private_url;
+                        const isUpdating = updatingSlugs.has(row.slug)
+                        const currentValue = localUrls[row.slug] ?? row.private_url
+                        const hasChanged = localUrls[row.slug] !== undefined && localUrls[row.slug] !== row.private_url
 
                         return (
-                          <tr
-                            key={row.slug}
-                            className="hover:bg-black/2 transition-colors group"
-                          >
+                          <tr key={row.slug} className="hover:bg-black/2 transition-colors group">
                             <td className="px-5 py-4">
-                              <div className="font-medium text-black/85">
-                                {row.title}
-                              </div>
+                              <div className="font-medium text-black/85">{row.title}</div>
                               <div className="text-xs text-black/40 capitalize">
-                                {t.has(
-                                  `common.page-sections.hub.base.resources-type.${row.type}.title`,
-                                )
-                                  ? t(
-                                      `common.page-sections.hub.base.resources-type.${row.type}.title`,
-                                    )
+                                {t.has(`common.page-sections.hub.base.resources-type.${row.type}.title`)
+                                  ? t(`common.page-sections.hub.base.resources-type.${row.type}.title`)
                                   : row.type}
                               </div>
                             </td>
-                            <td className="px-5 py-4 font-mono text-xs text-black/50">
-                              {row.slug}
-                            </td>
+                            <td className="px-5 py-4 font-mono text-xs text-black/50">{row.slug}</td>
                             <td className="px-5 py-4">
                               <div className="flex items-center gap-2">
                                 <Input
@@ -184,34 +142,22 @@ export function HubProductLinksSection() {
                                 ) : hasChanged ? (
                                   <Save size={14} />
                                 ) : (
-                                  <Check
-                                    size={14}
-                                    className="text-emerald-500"
-                                  />
+                                  <Check size={14} className="text-emerald-500" />
                                 )}
                                 <span>
-                                  {isUpdating
-                                    ? "..."
-                                    : hasChanged
-                                      ? t("actions.save")
-                                      : t("actions.up_to_date")}
+                                  {isUpdating ? "..." : hasChanged ? t("actions.save") : t("actions.up_to_date")}
                                 </span>
                               </Button>
                             </td>
                           </tr>
-                        );
+                        )
                       })}
                     </tbody>
                   </table>
                 </div>
               </ScrollArea>
               <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
-                <TablePager
-                  page={page}
-                  pageSize={pageSize}
-                  count={tableData?.count || 0}
-                  onPageChange={setPage}
-                />
+                <TablePager page={page} pageSize={pageSize} count={tableData?.count || 0} onPageChange={setPage} />
               </div>
             </>
           ) : (
@@ -226,5 +172,5 @@ export function HubProductLinksSection() {
         </div>
       </AdminCard>
     </div>
-  );
+  )
 }

@@ -1,17 +1,17 @@
-"use client";
-import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { Skeleton } from "@/components/ui/skeleton";
-import { TalksCard } from "@/components/shared/pages/talks/card";
-import { useLoadMore } from "@/hooks/useLoadMore";
-import type { Talk } from "@/integrations/content/lib/talks";
-import { getExternalUrl, getHumanDate } from "@/utils";
-import { useState } from "react";
-import { useTranslations } from "use-intl";
-import { AttendanceType } from "@/types";
+"use client"
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section"
+import { Skeleton } from "@/components/ui/skeleton"
+import { TalksCard } from "@/components/shared/pages/talks/card"
+import { useLoadMore } from "@/hooks/useLoadMore"
+import type { Talk } from "@/integrations/content/lib/talks"
+import { getExternalUrl, getHumanDate } from "@/utils"
+import { useState } from "react"
+import { useTranslations } from "use-intl"
+import { AttendanceType } from "@/types"
 
 export function MyTalksSection({ data }: { data: Talk[] }) {
-  const [currentTime] = useState(() => Date.now());
-  const t = useTranslations();
+  const [currentTime] = useState(() => Date.now())
+  const t = useTranslations()
 
   const {
     data: list,
@@ -24,7 +24,7 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
     dataSource: data,
     initialCount: 4,
     incrementCount: 4,
-  });
+  })
 
   return (
     <LoadMoreSection
@@ -33,17 +33,14 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={
-        <Skeleton name="talks-load-more" className="w-full h-40" />
-      }
+      loadingFallback={<Skeleton name="talks-load-more" className="w-full h-40" />}
     >
       {list.map((talk) => {
-        const eventDate = new Date(talk.event_date);
-        const eventTime = eventDate.getTime();
-        const isPastEvent =
-          Number.isFinite(eventTime) && currentTime >= eventTime;
-        const replayUrl = getExternalUrl(talk.replay_url);
-        const eventUrl = getExternalUrl(talk.event_url);
+        const eventDate = new Date(talk.event_date)
+        const eventTime = eventDate.getTime()
+        const isPastEvent = Number.isFinite(eventTime) && currentTime >= eventTime
+        const replayUrl = getExternalUrl(talk.replay_url)
+        const eventUrl = getExternalUrl(talk.event_url)
 
         const action = isPastEvent
           ? replayUrl
@@ -52,17 +49,12 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
           : {
               label: t("talks.card.actions.participate"),
               href: eventUrl || `/talks#${talk.slug}`,
-            };
+            }
 
-        const mode = talk.attendance_mode;
-        const modeLabel =
-          mode === AttendanceType.ONLINE
-            ? t("talks.badges.online")
-            : t("talks.badges.inPerson");
+        const mode = talk.attendance_mode
+        const modeLabel = mode === AttendanceType.ONLINE ? t("talks.badges.online") : t("talks.badges.inPerson")
 
-        const tags = [talk.role, modeLabel]
-          .filter(Boolean)
-          .map((name) => ({ name: name as string }));
+        const tags = [talk.role, modeLabel].filter(Boolean).map((name) => ({ name: name as string }))
 
         return (
           <TalksCard
@@ -76,8 +68,8 @@ export function MyTalksSection({ data }: { data: Talk[] }) {
             action={action}
             hideReactions
           />
-        );
+        )
       })}
     </LoadMoreSection>
-  );
+  )
 }

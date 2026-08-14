@@ -1,26 +1,20 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  SparklesTwo,
-  LightbulbTwoPower,
-  Bug,
-  Wrench,
-  Calendar,
-} from "@aurthle/icons";
-import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render";
-import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
-import { ChangelogItemType, DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import { cn } from "@/utils/utils";
-import { Changelog } from "@/integrations/content/types";
-import { pickRandomColor } from "@/utils";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { SparklesTwo, LightbulbTwoPower, Bug, Wrench, Calendar } from "@aurthle/icons"
+import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render"
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar"
+import { ChangelogItemType, DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
+import { cn } from "@/utils/utils"
+import { Changelog } from "@/integrations/content/types"
+import { pickRandomColor } from "@/utils"
+import { useTranslations } from "use-intl"
 
 interface TimelineEntryProps {
-  entry: Changelog;
-  isLatest: boolean;
+  entry: Changelog
+  isLatest: boolean
 }
 
 const typeIcons = {
@@ -28,26 +22,26 @@ const typeIcons = {
   feature: LightbulbTwoPower,
   fix: Bug,
   improvement: Wrench,
-};
+}
 
 export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
-  const t = useTranslations("changelog.sections.timeline.entry");
-  const Icon = typeIcons[entry.type as keyof typeof typeIcons];
+  const t = useTranslations("changelog.sections.timeline.entry")
+  const Icon = typeIcons[entry.type as keyof typeof typeIcons]
 
   const getColorForType = (type: ChangelogItemType) => {
     switch (type) {
       case ChangelogItemType.MILESTONE:
-        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_ORANGE);
+        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_ORANGE)
       case ChangelogItemType.FEATURE:
-        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_PURPLE);
+        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_PURPLE)
       case ChangelogItemType.FIX:
-        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_PINK);
+        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_PINK)
       case ChangelogItemType.IMPROVEMENT:
-        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_BLUE);
+        return pickRandomColor(DEFAULT_COLOR_CODE_NAME.PINKISH_BLUE)
       default:
-        return "";
+        return ""
     }
-  };
+  }
 
   return (
     <div className="relative flex items-start gap-6 group">
@@ -71,12 +65,7 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
       <Card className="bg-b-base squircle-6xl/100 flex-1 transition-all duration-300 overflow-hidden">
         {entry.cover && (
           <div className="relative h-72 w-full [corner-shape:] rounded-t-xl md:rounded-t-3xl overflow-hidden">
-            <Image
-              src={entry.cover}
-              alt={entry.version}
-              fill
-              className="object-cover"
-            />
+            <Image src={entry.cover} alt={entry.version} fill className="object-cover" />
             <div className="absolute inset-0 bg-linear-to-t from-b-base to-transparent" />
           </div>
         )}
@@ -106,33 +95,20 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
                 </time>
               </div>
               {isLatest && (
-                <Badge
-                  className={cn(
-                    pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE),
-                  )}
-                  variant="colored"
-                >
+                <Badge className={cn(pickRandomColor(DEFAULT_COLOR_CODE_NAME.ORANGE))} variant="colored">
                   {t("latest")}
                 </Badge>
               )}
             </div>
-            <Badge
-              className={cn(
-                "capitalize border-2 border-sh-white",
-                getColorForType(entry.type),
-              )}
-              variant="colored"
-            >
+            <Badge className={cn("capitalize border-2 border-sh-white", getColorForType(entry.type))} variant="colored">
               {t(`types.${entry.type}`)}
             </Badge>
           </div>
-          <h3 className="text-2xl font-bold mb-6 text-foreground">
-            {entry.version}
-          </h3>
+          <h3 className="text-2xl font-bold mb-6 text-foreground">{entry.version}</h3>
           <MarkdownContentRender content={entry.body} />
           <ReactionBar pageType={PageType.CHANGELOG} entityId={entry.version} />
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

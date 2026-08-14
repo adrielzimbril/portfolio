@@ -1,21 +1,20 @@
-"use client";
-import { ResourceCard } from "@/components/shared/pages/resources/card";
-import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useLoadMore } from "@/hooks/useLoadMore";
-import { Resource } from "@/integrations/content/types";
+"use client"
+import { ResourceCard } from "@/components/shared/pages/resources/card"
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useLoadMore } from "@/hooks/useLoadMore"
+import { Resource } from "@/integrations/content/types"
 
 interface MyHubSectionProps {
-  data: Resource[];
+  data: Resource[]
 }
 
 export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
-  const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
-    useLoadMore({
-      dataSource: initialResources,
-      initialCount: 4,
-      incrementCount: 4,
-    });
+  const { data, loadMore, loading, hasMore, loadedItems, totalItems } = useLoadMore({
+    dataSource: initialResources,
+    initialCount: 4,
+    incrementCount: 4,
+  })
 
   return (
     <LoadMoreSection
@@ -24,9 +23,7 @@ export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={
-        <Skeleton name="hub-load-more" className="w-full h-40" />
-      }
+      loadingFallback={<Skeleton name="hub-load-more" className="w-full h-40" />}
     >
       {data.map((item, index) => (
         <ResourceCard
@@ -44,5 +41,5 @@ export function MyHubSection({ data: initialResources }: MyHubSectionProps) {
         />
       ))}
     </LoadMoreSection>
-  );
+  )
 }

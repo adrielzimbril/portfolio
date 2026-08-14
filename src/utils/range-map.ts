@@ -15,20 +15,14 @@
  * @example
  * rangeMap({n: 5, fn: (i) => i * 3}); // returns [0, 3, 6, 9, 12]
  */
-export function rangeMap({
-  n,
-  fn,
-}: {
-  n: number;
-  fn?: (i: number) => any;
-}): any[] {
-  const arr = [];
+export function rangeMap({ n, fn }: { n: number; fn?: (i: number) => any }): any[] {
+  const arr = []
   while (n > arr.length) {
     if (fn) {
-      arr.push(fn(arr.length));
+      arr.push(fn(arr.length))
     } else {
-      arr.push(arr.length);
+      arr.push(arr.length)
     }
   }
-  return arr;
+  return arr
 }

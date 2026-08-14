@@ -1,25 +1,25 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import useSWR, { useSWRConfig } from "swr";
-import { cn } from "@/utils/utils";
-import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import { ReactionType, REACTION_EMOJIS } from "@/lib/stats/types";
-import { Badge } from "@/components/ui/badge";
-import { getCurrentUserId } from "@/lib/reactions/anonymous-user";
-import { apiRoutes } from "@/data/api-routes";
-import { pickRandomColor } from "@/utils";
-import { useUser } from "@/integrations/auth/provider/supabase";
-import { logger } from "@/utils/logger";
+"use client"
+import React, { useState, useEffect } from "react"
+import useSWR, { useSWRConfig } from "swr"
+import { cn } from "@/utils/utils"
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
+import { ReactionType, REACTION_EMOJIS } from "@/lib/stats/types"
+import { Badge } from "@/components/ui/badge"
+import { getCurrentUserId } from "@/lib/reactions/anonymous-user"
+import { apiRoutes } from "@/data/api-routes"
+import { pickRandomColor } from "@/utils"
+import { useUser } from "@/integrations/auth/provider/supabase"
+import { logger } from "@/utils/logger"
 
 interface ReactionButtonProps {
-  pageType: PageType;
-  entityId: string;
-  reactionType: ReactionType;
-  count?: number;
-  className?: string;
-  minimal?: boolean;
-  compact?: boolean;
-  isReacted?: boolean;
+  pageType: PageType
+  entityId: string
+  reactionType: ReactionType
+  count?: number
+  className?: string
+  minimal?: boolean
+  compact?: boolean
+  isReacted?: boolean
 }
 
 export function ReactionButton({
@@ -32,47 +32,44 @@ export function ReactionButton({
   compact = false,
   isReacted: isReactedProp = false,
 }: ReactionButtonProps) {
-  const { mutate: globalMutate } = useSWRConfig();
-  const { user, loading: userLoading } = useUser();
-  const [isLoading, setIsLoading] = useState(false);
-  const [localIsReacted, setLocalIsReacted] = useState(isReactedProp);
+  const { mutate: globalMutate } = useSWRConfig()
+  const { user, loading: userLoading } = useUser()
+  const [isLoading, setIsLoading] = useState(false)
+  const [localIsReacted, setLocalIsReacted] = useState(isReactedProp)
 
-  const emoji: string = REACTION_EMOJIS[reactionType];
+  const emoji: string = REACTION_EMOJIS[reactionType]
 
-  const currentUserId = getCurrentUserId(user);
+  const currentUserId = getCurrentUserId(user)
 
   useEffect(() => {
-    setLocalIsReacted(isReactedProp);
-  }, [isReactedProp]);
+    setLocalIsReacted(isReactedProp)
+  }, [isReactedProp])
 
-  const isReacted = localIsReacted;
+  const isReacted = localIsReacted
 
   const handleReaction = async () => {
-    if (!currentUserId || isLoading) return;
+    if (!currentUserId || isLoading) return
 
-    setIsLoading(true);
+    setIsLoading(true)
 
-    const countsKey = `reactions_${pageType}_${entityId}`;
-    const statusKey = `reaction_status_${pageType}_${entityId}`;
+    const countsKey = `reactions_${pageType}_${entityId}`
+    const statusKey = `reaction_status_${pageType}_${entityId}`
 
     // Optimistic Update
-    const nextIsReacted = !isReacted;
-    setLocalIsReacted(nextIsReacted);
+    const nextIsReacted = !isReacted
+    setLocalIsReacted(nextIsReacted)
 
     globalMutate(
       countsKey,
       (current: any) => {
-        if (!current) return current;
+        if (!current) return current
         return {
           ...current,
-          [reactionType]: Math.max(
-            0,
-            current[reactionType] + (nextIsReacted ? 1 : -1),
-          ),
-        };
+          [reactionType]: Math.max(0, current[reactionType] + (nextIsReacted ? 1 : -1)),
+        }
       },
       false,
-    );
+    )
 
     try {
       const res = await fetch(apiRoutes.reactions.main.link, {
@@ -84,30 +81,30 @@ export function ReactionButton({
           reactionType,
           anonymousId: currentUserId,
         }),
-      });
+      })
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to toggle reaction");
+        const error = await res.json()
+        throw new Error(error.error || "Failed to toggle reaction")
       }
 
-      const { action, counts, userStatus } = await res.json();
+      const { action, counts, userStatus } = await res.json()
 
       // Sync with API response
-      setLocalIsReacted(userStatus[reactionType]);
-      globalMutate(countsKey, counts);
-      globalMutate(statusKey, userStatus);
+      setLocalIsReacted(userStatus[reactionType])
+      globalMutate(countsKey, counts)
+      globalMutate(statusKey, userStatus)
     } catch (error) {
-      logger.error("Reaction error:", error);
+      logger.error("Reaction error:", error)
       // Rollback
-      setLocalIsReacted(isReacted);
-      globalMutate(countsKey);
+      setLocalIsReacted(isReacted)
+      globalMutate(countsKey)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
-  const reactionCount = count; // We use the prop directly as it's now managed by global useReactions SWR hook
+  const reactionCount = count // We use the prop directly as it's now managed by global useReactions SWR hook
 
   return (
     <>
@@ -149,9 +146,7 @@ export function ReactionButton({
               isReacted
                 ? "bg-[#8e8eff] text-primary-foreground! border-[#8e8eff]"
                 : "bg-[#8e8eff] text-primary-foreground! border-sh-white",
-              compact
-                ? "-bottom-1.5 text-[.5rem] px-1 py-0.5"
-                : "-bottom-2 text-[.8rem] px-2 py-1",
+              compact ? "-bottom-1.5 text-[.5rem] px-1 py-0.5" : "-bottom-2 text-[.8rem] px-2 py-1",
             )}
           >
             {reactionCount}
@@ -170,9 +165,7 @@ export function ReactionButton({
             : compact
               ? "gap-1 px-2 py-1 bg-sh-white border border-b-base-accent"
               : "gap-1.5 px-3 py-1.5 bg-sh-white border-2 border-b-base-accent",
-          isReacted &&
-            !minimal &&
-            "bg-background-background border-2 border-indigo-500",
+          isReacted && !minimal && "bg-background-background border-2 border-indigo-500",
           isReacted && minimal && "bg-sh-white border-2 border-indigo-500",
           className,
         )}
@@ -200,5 +193,5 @@ export function ReactionButton({
         )}
       </button>
     </>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-"use client";
-import React, { useState } from "react";
-import { usePathname } from "next/navigation";
+"use client"
+import React, { useState } from "react"
+import { usePathname } from "next/navigation"
 import {
   ChevronDown,
   Database,
@@ -13,18 +13,18 @@ import {
   Trophy,
   Users,
   X,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { landlordRoutes } from "@/data/landlordRoutes";
-import { cn } from "@/utils/utils";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useTranslations } from "next-intl";
-import { adminNavItems, adminNavGroups } from "./nav-items";
-import Image from "next/image";
-import { getImageUrl } from "@/utils";
-import { siteConfig } from "@/data/config";
-import { routes } from "@/data/routes";
-import { Link } from "@/components/ui/link";
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { landlordRoutes } from "@/data/landlordRoutes"
+import { cn } from "@/utils/utils"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { useTranslations } from "next-intl"
+import { adminNavItems, adminNavGroups } from "./nav-items"
+import Image from "next/image"
+import { getImageUrl } from "@/utils"
+import { siteConfig } from "@/data/config"
+import { routes } from "@/data/routes"
+import { Link } from "@/components/ui/link"
 
 export function Sidebar({
   sidebarOpen,
@@ -33,46 +33,46 @@ export function Sidebar({
   collapsed,
   setCollapsed,
 }: {
-  sidebarOpen: boolean;
-  setSidebarOpen: (open: boolean) => void;
-  onSignOut: () => void;
-  collapsed: boolean;
-  setCollapsed: (collapsed: boolean) => void;
+  sidebarOpen: boolean
+  setSidebarOpen: (open: boolean) => void
+  onSignOut: () => void
+  collapsed: boolean
+  setCollapsed: (collapsed: boolean) => void
 }) {
-  const t = useTranslations("admin.sidebar");
-  const pathname = usePathname();
-  const [questsOpen, setQuestsOpen] = useState(pathname.includes("/quests"));
-  const [hubOpen, setHubOpen] = useState(pathname.includes("/hub/"));
+  const t = useTranslations("admin.sidebar")
+  const pathname = usePathname()
+  const [questsOpen, setQuestsOpen] = useState(pathname.includes("/quests"))
+  const [hubOpen, setHubOpen] = useState(pathname.includes("/hub/"))
 
   const isActive = (key: string): boolean => {
     switch (key) {
       case "overview":
-        return pathname === landlordRoutes.landlord.link;
+        return pathname === landlordRoutes.landlord.link
       case "community":
-        return pathname.startsWith(landlordRoutes.community.link);
+        return pathname.startsWith(landlordRoutes.community.link)
       case "quests-registrations":
-        return pathname.startsWith(landlordRoutes.quests.registrations.link);
+        return pathname.startsWith(landlordRoutes.quests.registrations.link)
       case "quests-submissions":
-        return pathname.startsWith(landlordRoutes.quests.submissions.link);
+        return pathname.startsWith(landlordRoutes.quests.submissions.link)
       case "hub-requests":
-        return pathname.startsWith(landlordRoutes.hub.requests.link);
+        return pathname.startsWith(landlordRoutes.hub.requests.link)
       case "hub-product-links":
-        return pathname.startsWith(landlordRoutes.hub.productLinks.link);
+        return pathname.startsWith(landlordRoutes.hub.productLinks.link)
       case "newsletter":
-        return pathname.startsWith(landlordRoutes.tables.newsletter.link);
+        return pathname.startsWith(landlordRoutes.tables.newsletter.link)
       case "users":
-        return pathname.startsWith(landlordRoutes.tables.users.link);
+        return pathname.startsWith(landlordRoutes.tables.users.link)
       case "submissions":
-        return pathname.startsWith(landlordRoutes.tables.submissions.link);
+        return pathname.startsWith(landlordRoutes.tables.submissions.link)
       case "reactions":
-        return pathname.startsWith(landlordRoutes.tables.reactions.link);
+        return pathname.startsWith(landlordRoutes.tables.reactions.link)
       default:
-        return false;
+        return false
     }
-  };
+  }
 
-  const isQuestsGroupActive = pathname.includes("/quests");
-  const isHubGroupActive = pathname.includes("/hub/");
+  const isQuestsGroupActive = pathname.includes("/quests")
+  const isHubGroupActive = pathname.includes("/hub/")
 
   return (
     <aside
@@ -129,11 +129,7 @@ export function Sidebar({
       </div>
 
       {/* Scrollable nav area */}
-      <ScrollArea
-        className="flex-1 -mx-2 px-2"
-        scrollbarGutter
-        scrollbarThumbClassName="bg-white/20"
-      >
+      <ScrollArea className="flex-1 -mx-2 px-2" scrollbarGutter scrollbarThumbClassName="bg-white/20">
         <nav className="grid content-start gap-1 pb-4">
           {/* Dashboard */}
           <NavLink
@@ -232,7 +228,7 @@ export function Sidebar({
         </Button>
       </div>
     </aside>
-  );
+  )
 }
 
 function NavLink({
@@ -243,12 +239,12 @@ function NavLink({
   onClick,
   compact = false,
 }: {
-  href: string;
-  active: boolean;
-  icon: React.ElementType;
-  label: string;
-  onClick?: () => void;
-  compact?: boolean;
+  href: string
+  active: boolean
+  icon: React.ElementType
+  label: string
+  onClick?: () => void
+  compact?: boolean
 }) {
   return (
     <Link
@@ -257,9 +253,7 @@ function NavLink({
       className={cn(
         "flex items-center gap-3 rounded-xl text-left text-sm transition",
         compact ? "px-2 py-2" : "px-3 py-3",
-        active
-          ? "bg-white text-[#11191f]"
-          : "text-white/62 hover:bg-white/8 hover:text-white",
+        active ? "bg-white text-[#11191f]" : "text-white/62 hover:bg-white/8 hover:text-white",
       )}
     >
       <Icon size={compact ? 15 : 18} />
@@ -267,7 +261,7 @@ function NavLink({
         <span className="font-medium truncate">{label}</span>
       </span>
     </Link>
-  );
+  )
 }
 
 function NavGroup({
@@ -279,22 +273,22 @@ function NavGroup({
   isActiveCheck,
 }: {
   group: {
-    key: string;
-    label: string;
-    icon: React.ElementType;
+    key: string
+    label: string
+    icon: React.ElementType
     items: {
-      key: string;
-      label: string;
-      icon: React.ElementType;
-    }[];
-  };
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  isActive: boolean;
-  onNavClick: () => void;
-  isActiveCheck: (key: string) => boolean;
+      key: string
+      label: string
+      icon: React.ElementType
+    }[]
+  }
+  isOpen: boolean
+  setIsOpen: (open: boolean) => void
+  isActive: boolean
+  onNavClick: () => void
+  isActiveCheck: (key: string) => boolean
 }) {
-  const t = useTranslations("admin.sidebar");
+  const t = useTranslations("admin.sidebar")
 
   return (
     <div>
@@ -303,9 +297,7 @@ function NavGroup({
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "w-full flex items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition cursor-pointer",
-          isActive
-            ? "text-white"
-            : "text-white/62 hover:bg-white/8 hover:text-white",
+          isActive ? "text-white" : "text-white/62 hover:bg-white/8 hover:text-white",
         )}
       >
         <group.icon size={18} />
@@ -314,10 +306,7 @@ function NavGroup({
         </span>
         <ChevronDown
           size={15}
-          className={cn(
-            "shrink-0 text-white/40 transition-transform duration-200",
-            isOpen && "rotate-180",
-          )}
+          className={cn("shrink-0 text-white/40 transition-transform duration-200", isOpen && "rotate-180")}
         />
       </button>
       {isOpen && (
@@ -346,5 +335,5 @@ function NavGroup({
         </div>
       )}
     </div>
-  );
+  )
 }

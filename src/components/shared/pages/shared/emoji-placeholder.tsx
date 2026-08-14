@@ -1,9 +1,9 @@
-"use client";
-import { cn } from "@/utils/utils";
-import Image from "next/image";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { getImageUrl } from "@/utils/base-url";
-import { useTranslations } from "use-intl";
+"use client"
+import { cn } from "@/utils/utils"
+import Image from "next/image"
+import { useIsMobile } from "@/hooks/useIsMobile"
+import { getImageUrl } from "@/utils/base-url"
+import { useTranslations } from "use-intl"
 
 export function EmojiPlaceholder({
   src,
@@ -14,25 +14,23 @@ export function EmojiPlaceholder({
   imgContainerClassName,
   unOrdered = false,
 }: {
-  src:
-    string | { emoji: string } | { mp4: string; webm: string; poster: string };
-  variant?: "default" | "bordered" | "squircle";
-  isMobileShowed?: boolean;
-  className?: string;
-  imgClassName?: string;
-  imgContainerClassName?: string;
-  unOrdered?: boolean;
+  src: string | { emoji: string } | { mp4: string; webm: string; poster: string }
+  variant?: "default" | "bordered" | "squircle"
+  isMobileShowed?: boolean
+  className?: string
+  imgClassName?: string
+  imgContainerClassName?: string
+  unOrdered?: boolean
 }) {
-  const t = useTranslations();
-  const isMobile = useIsMobile();
+  const t = useTranslations()
+  const isMobile = useIsMobile()
 
   return (
     <div
       className={cn(
         "row-1 relative flex items-center justify-center size-full w-[stretch]! max-w-104 pointer-events-none",
         !unOrdered && "md:order-2",
-        (variant === "default" || variant === "bordered") &&
-          "size-fit md:size-[90%] aspect-square",
+        (variant === "default" || variant === "bordered") && "size-fit md:size-[90%] aspect-square",
         variant === "default" && "bg-b-white rounded-full",
         variant === "bordered" &&
           "size-fit rounded-full md:size-fit aspect-square p-16 border-8 md:border-12 border-b-base-accent",
@@ -45,8 +43,7 @@ export function EmojiPlaceholder({
       <div
         className={cn(
           "relative shrink-0 size-48 md:size-80 pointer-events-none",
-          (variant === "default" || variant === "bordered") &&
-            "size-72 md:size-96",
+          (variant === "default" || variant === "bordered") && "size-72 md:size-96",
           variant === "squircle" && "size-72 md:size-96",
           typeof src === "string" && "size-48 md:size-64",
           imgContainerClassName,
@@ -62,8 +59,7 @@ export function EmojiPlaceholder({
           <span
             className={cn(
               "relative size-full flex items-center justify-center text-9xl md:text-[10rem] object-cover pointer-events-none",
-              variant === "squircle" &&
-                "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
+              variant === "squircle" && "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName,
             )}
           >
@@ -73,8 +69,7 @@ export function EmojiPlaceholder({
           <video
             className={cn(
               "relative m-auto  bg-sh-white squircle-7xl size-full w-[stretch] object-cover pointer-events-none",
-              variant === "squircle" &&
-                "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
+              variant === "squircle" && "max-h-[92%] max-w-[92%] top-[4%] place-self-center overflow-hidden",
               imgClassName,
             )}
             autoPlay
@@ -105,12 +100,11 @@ export function EmojiPlaceholder({
             )}
             width={600}
             height={600}
-            alt=""
             loading="lazy"
             sizes="(max-width: 768px) 288px, 384px"
           />
         ) : null}
       </div>
     </div>
-  );
+  )
 }

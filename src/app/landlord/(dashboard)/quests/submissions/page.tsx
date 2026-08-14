@@ -1,11 +1,11 @@
-import React from "react";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { QuestSubmissionsSection } from "./sections/QuestSubmissionsSection";
+import React from "react"
+import { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { QuestSubmissionsSection } from "./sections/QuestSubmissionsSection"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("admin.pages.quests_submissions");
+  const t = await getTranslations("admin.pages.quests_submissions")
 
   return {
     ...baseMetadata,
@@ -15,9 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
       index: false,
       follow: false,
     },
-  };
+  }
 }
 
 export default function QuestSubmissionsPage() {
-  return <QuestSubmissionsSection />;
+  return <QuestSubmissionsSection />
 }

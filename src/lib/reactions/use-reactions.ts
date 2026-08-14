@@ -1,20 +1,18 @@
-"use client";
-import useSWR from "swr";
-import { PageType } from "@/types";
-import { ReactionType } from "@/lib/stats/types";
-import { apiRoutes } from "@/data/api-routes";
+"use client"
+import useSWR from "swr"
+import { PageType } from "@/types"
+import { ReactionType } from "@/lib/stats/types"
+import { apiRoutes } from "@/data/api-routes"
 
 export function useReactions(pageType: PageType, entityId: string) {
   const fetcher = async () => {
-    const res = await fetch(
-      `${apiRoutes.reactions.main.link}?pageType=${pageType}&entityId=${entityId}`,
-    );
+    const res = await fetch(`${apiRoutes.reactions.main.link}?pageType=${pageType}&entityId=${entityId}`)
     if (!res.ok) {
-      throw new Error("Failed to fetch reactions");
+      throw new Error("Failed to fetch reactions")
     }
-    const { counts } = await res.json();
-    return counts as Record<ReactionType, number>;
-  };
+    const { counts } = await res.json()
+    return counts as Record<ReactionType, number>
+  }
 
   const {
     data: reactions,
@@ -31,11 +29,11 @@ export function useReactions(pageType: PageType, entityId: string) {
     },
     revalidateOnFocus: false,
     refreshInterval: 60000,
-  });
+  })
 
   return {
     reactions: reactions!,
     loading: isLoading,
     mutate,
-  };
+  }
 }

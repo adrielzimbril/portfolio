@@ -1,25 +1,25 @@
-import { getTranslations } from "next-intl/server";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { ThoughtsTopList } from "@/components/shared/pages/stats/ThoughtsTopList";
-import { ReactionsSection } from "@/components/shared/pages/stats/ReactionsSection";
-import { ThoughtMostViewedCard } from "@/components/shared/pages/stats/ThoughtMostViewedCard";
-import { ThoughtsCategoriesCard } from "@/components/shared/pages/stats/ThoughtsCategoriesCard";
-import { ChangelogUpdatesCard } from "@/components/shared/pages/stats/ChangelogUpdatesCard";
-import { TrendUp, HeartOne } from "@aurthle/icons";
-import { TopThoughtsListType } from "@/types/enum";
-import type { Changelog } from "@/integrations/content/types/types";
+import { getTranslations } from "next-intl/server"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { ThoughtsTopList } from "@/components/shared/pages/stats/ThoughtsTopList"
+import { ReactionsSection } from "@/components/shared/pages/stats/ReactionsSection"
+import { ThoughtMostViewedCard } from "@/components/shared/pages/stats/ThoughtMostViewedCard"
+import { ThoughtsCategoriesCard } from "@/components/shared/pages/stats/ThoughtsCategoriesCard"
+import { ChangelogUpdatesCard } from "@/components/shared/pages/stats/ChangelogUpdatesCard"
+import { TrendUp, HeartOne } from "@aurthle/icons"
+import { TopThoughtsListType } from "@/types/enum"
+import type { Changelog } from "@/integrations/content/types/types"
 
 interface EngagementSectionProps {
   topViewedThoughts: Array<{
-    title: string;
-    slug: string;
-    coverImage?: string;
-    count: number;
-  }>;
-  topReactedThoughts: Array<{ title: string; slug: string; count: number }>;
-  reactions: Record<string, number>;
-  categories: Array<{ name: string; count: number }>;
-  changelog: Changelog[];
+    title: string
+    slug: string
+    coverImage?: string
+    count: number
+  }>
+  topReactedThoughts: Array<{ title: string; slug: string; count: number }>
+  reactions: Record<string, number>
+  categories: Array<{ name: string; count: number }>
+  changelog: Changelog[]
 }
 
 export async function EngagementSection({
@@ -29,14 +29,10 @@ export async function EngagementSection({
   categories,
   changelog,
 }: EngagementSectionProps) {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return (
-    <SectionLayout
-      badge={t("stats.sections.engagement.badge")}
-      isFlex
-      className="pb-0!"
-    >
+    <SectionLayout badge={t("stats.sections.engagement.badge")} isFlex className="pb-0!">
       <div className="w-full lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
         <ThoughtsTopList
           title={t("stats.cards.topViewed.title")}
@@ -74,12 +70,9 @@ export async function EngagementSection({
             description={t("stats.cards.categories.description")}
             decorationEmoji="📊"
           />
-          <ChangelogUpdatesCard
-            count={changelog.length}
-            changelog={changelog}
-          />
+          <ChangelogUpdatesCard count={changelog.length} changelog={changelog} />
         </div>
       </div>
     </SectionLayout>
-  );
+  )
 }

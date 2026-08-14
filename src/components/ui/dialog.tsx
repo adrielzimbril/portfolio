@@ -1,41 +1,28 @@
-"use client";
-import * as React from "react";
-import { cn } from "@/utils/utils";
-import { X } from "@aurthle/icons";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+"use client"
+import * as React from "react"
+import { cn } from "@/utils/utils"
+import { X } from "@aurthle/icons"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
-function Dialog({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return (
-    <DialogPrimitive.Root data-lenis-preventdata-slot="dialog" {...props} />
-  );
+function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
+  return <DialogPrimitive.Root data-lenis-preventdata-slot="dialog" {...props} />
 }
 
-function DialogTrigger({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
+function DialogTrigger({ ...props }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
+  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
-function DialogPortal({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
-  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />;
+function DialogPortal({ ...props }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
-function DialogClose({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
+function DialogClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.Close>) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
 }
 
-function DialogOverlay({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+function DialogOverlay({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
   return (
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
@@ -45,7 +32,7 @@ function DialogOverlay({
       )}
       {...props}
     />
-  );
+  )
 }
 
 function DialogContent({
@@ -57,10 +44,10 @@ function DialogContent({
   closeButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
-  variant?: "default" | "modern" | "glass";
-  scrollArea?: boolean;
-  closeButton?: boolean;
+  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full"
+  variant?: "default" | "modern" | "glass"
+  scrollArea?: boolean
+  closeButton?: boolean
 }) {
   const sizeClasses = {
     sm: "sm:max-w-sm",
@@ -69,15 +56,13 @@ function DialogContent({
     xl: "sm:max-w-2xl",
     "2xl": "sm:max-w-4xl",
     full: "sm:max-w-6xl",
-  };
+  }
 
   const variantClasses = {
     default: "bg-background squircle-2xl/80 md:squircle-5xl/80 border-0",
-    modern:
-      "bg-sh-white squircle-2xl/80 md:squircle-5xl/80 border-4 border-b-base-accent",
-    glass:
-      "bg-sh-white squircle-2xl/80 md:squircle-5xl/80 border-4 border-b-base-accent",
-  };
+    modern: "bg-sh-white squircle-2xl/80 md:squircle-5xl/80 border-4 border-b-base-accent",
+    glass: "bg-sh-white squircle-2xl/80 md:squircle-5xl/80 border-4 border-b-base-accent",
+  }
 
   return (
     <DialogPortal data-lenis-prevent>
@@ -96,9 +81,7 @@ function DialogContent({
         {...props}
       >
         {scrollArea ? (
-          <ScrollArea className="flex max-h-full flex-col overflow-hidden">
-            {children}
-          </ScrollArea>
+          <ScrollArea className="flex max-h-full flex-col overflow-hidden">{children}</ScrollArea>
         ) : (
           children
         )}
@@ -111,76 +94,53 @@ function DialogContent({
             asChild
           >
             <Button asPointer whileTap asIcon size="icon">
-              <X
-                size={16}
-                className="opacity-80 transition-opacity duration-200 group-hover:opacity-100"
-              />
+              <X size={16} className="opacity-80 transition-opacity duration-200 group-hover:opacity-100" />
               <span className="sr-only">Close</span>
             </Button>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>
     </DialogPortal>
-  );
+  )
 }
 
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="dialog-header"
-      className={cn("flex flex-col gap-2", className)}
-      {...props}
-    />
-  );
+  return <div data-slot="dialog-header" className={cn("flex flex-col gap-2", className)} {...props} />
 }
 
 function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-footer"
-      className={cn(
-        "flex flex-col gap-3 sm:flex-row sm:justify-end sm:gap-4",
-        className,
-      )}
+      className={cn("flex flex-col gap-3 sm:flex-row sm:justify-end sm:gap-4", className)}
       {...props}
     />
-  );
+  )
 }
 
-function DialogTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Title>) {
+function DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
-      className={cn(
-        "text-xl font-bold leading-[120%] text-white-invert-fr",
-        className,
-      )}
+      className={cn("text-xl font-bold leading-[120%] text-white-invert-fr", className)}
       {...props}
     />
-  );
+  )
 }
 
-function DialogDescription({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Description>) {
+function DialogDescription({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) {
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
       className={cn("text-base text-white-invert-fr", className)}
       {...props}
     />
-  );
+  )
 }
 
 // Additional components in the style of the reference
 function DialogSeparator({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div className={cn("h-px bg-b-base-accent w-full", className)} {...props} />
-  );
+  return <div className={cn("h-px bg-b-base-accent w-full", className)} {...props} />
 }
 
 function DialogCard({
@@ -188,27 +148,22 @@ function DialogCard({
   variant = "default",
   ...props
 }: React.ComponentProps<"div"> & {
-  variant?: "default" | "highlight" | "success" | "warning" | "info";
+  variant?: "default" | "highlight" | "success" | "warning" | "info"
 }) {
   const variantClasses = {
-    default:
-      "squircle-stone-50 dark:bg-b-base-second border-2 dark:border-b-base-accent",
+    default: "squircle-stone-50 dark:bg-b-base-second border-2 dark:border-b-base-accent",
     highlight: "squircle-blue-50 border-2 border-blue-200",
     success: "squircle-green-50 border-2 border-green-200",
     warning: "squircle-orange-50 border-2 border-orange-200",
     info: "squircle-indigo-50 border-2 border-indigo-200",
-  };
+  }
 
   return (
     <div
-      className={cn(
-        "squircle-xl/100 md:squircle-3xl/100  p-4 sm:p-6",
-        variantClasses[variant],
-        className,
-      )}
+      className={cn("squircle-xl/100 md:squircle-3xl/100  p-4 sm:p-6", variantClasses[variant], className)}
       {...props}
     />
-  );
+  )
 }
 
 function DialogBadge({
@@ -217,16 +172,15 @@ function DialogBadge({
   children,
   ...props
 }: React.ComponentProps<"div"> & {
-  variant?: "default" | "success" | "warning" | "info" | "colored";
+  variant?: "default" | "success" | "warning" | "info" | "colored"
 }) {
   const variantClasses = {
     default: "bg-b-base text-white-invert-fr",
     success: "squircle-green-100 text-green-800",
     warning: "bg-orange-100 text-orange-800",
     info: "bg-blue-100 text-blue-800",
-    colored:
-      "bg-b-base-accent border-2 border-b-base-accent text-white-invert-fr",
-  };
+    colored: "bg-b-base-accent border-2 border-b-base-accent text-white-invert-fr",
+  }
 
   return (
     <div
@@ -239,16 +193,13 @@ function DialogBadge({
     >
       {children}
     </div>
-  );
+  )
 }
 
 // Animated Dialog Components
-const AnimatedDialog = ({
-  children,
-  ...props
-}: React.ComponentProps<typeof Dialog>) => (
+const AnimatedDialog = ({ children, ...props }: React.ComponentProps<typeof Dialog>) => (
   <Dialog {...props}>{children}</Dialog>
-);
+)
 
 const AnimatedDialogContent = React.forwardRef<
   React.ElementRef<typeof DialogContent>,
@@ -257,8 +208,8 @@ const AnimatedDialogContent = React.forwardRef<
   <DialogContent ref={ref} {...props}>
     <div>{children}</div>
   </DialogContent>
-));
-AnimatedDialogContent.displayName = "AnimatedDialogContent";
+))
+AnimatedDialogContent.displayName = "AnimatedDialogContent"
 
 export {
   Dialog,
@@ -276,4 +227,4 @@ export {
   DialogBadge,
   AnimatedDialog,
   AnimatedDialogContent,
-};
+}

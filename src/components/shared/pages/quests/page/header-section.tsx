@@ -1,55 +1,51 @@
-"use client";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { Link } from "@/components/ui/link";
-import { cn, pickRandomColor } from "@/utils";
+"use client"
+import React from "react"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { Link } from "@/components/ui/link"
+import { cn, pickRandomColor } from "@/utils"
 import {
   HeaderPreviewCard,
   TextPreviewContent,
   PreviewContent,
-} from "@/components/shared/pages/shared/page/header-preview-card";
-import {
-  PreviewContentType,
-  DEFAULT_COLOR_CODE_NAME_TYPE,
-  PageType,
-} from "@/types";
-import { useTranslations } from "use-intl";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats";
-import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats";
+} from "@/components/shared/pages/shared/page/header-preview-card"
+import { PreviewContentType, DEFAULT_COLOR_CODE_NAME_TYPE, PageType } from "@/types"
+import { useTranslations } from "use-intl"
+import { useIsMobile } from "@/hooks/useIsMobile"
+import { useQuestParticipantsStats } from "@/hooks/useSubscriberStats"
+import { ParticipantsStats } from "@/components/shared/pages/quests/participants-stats"
 
 interface HeaderSectionProps {
   // Preview Content
-  previewContent?: PreviewContent;
+  previewContent?: PreviewContent
 
   // Main Title
-  mainTitle?: string;
+  mainTitle?: string
 
   // Main Slug
-  slug: string;
+  slug: string
 
   // Description
-  description?: string;
+  description?: string
 
   // Tags
   tags?: {
-    name: string;
-    color: string;
-  }[];
+    name: string
+    color: string
+  }[]
 
   // CTA Button
-  ctaButton?: string;
-  ctaButtonText: string;
+  ctaButton?: string
+  ctaButtonText: string
 
   // Page Type for reactions
-  pageType?: PageType.QUESTS;
+  pageType?: PageType.QUESTS
 
   // Optional CSS Classes
-  className?: string;
-  sectionClassName?: string;
-  cardClassName?: string;
+  className?: string
+  sectionClassName?: string
+  cardClassName?: string
 }
 
 export function HeaderSection({
@@ -63,25 +59,22 @@ export function HeaderSection({
   pageType,
   sectionClassName,
 }: HeaderSectionProps) {
-  const t = useTranslations();
-  const { stats } = useQuestParticipantsStats(slug);
+  const t = useTranslations()
+  const { stats } = useQuestParticipantsStats(slug)
 
   const basePreviewContent = {
     type: PreviewContentType.TEXT,
     emoji: t("common.page-sections.preview.emoji"),
     title: t("common.page-sections.preview.title"),
     subtitle: t("common.page-sections.preview.description"),
-  } as TextPreviewContent;
+  } as TextPreviewContent
 
-  const previewContent = initPreviewContent || basePreviewContent;
-  const isMobile = useIsMobile();
+  const previewContent = initPreviewContent || basePreviewContent
+  const isMobile = useIsMobile()
 
   return (
     <SectionBase
-      sectionClassName={cn(
-        "p-0 md:pb-0 mt-16 mb-10 md:mb-20",
-        sectionClassName,
-      )}
+      sectionClassName={cn("p-0 md:pb-0 mt-16 mb-10 md:mb-20", sectionClassName)}
       isWide
       cardClassName="w-full"
       cardContentClassName="px-4 md:px-12 py-6 md:py-12"
@@ -91,8 +84,7 @@ export function HeaderSection({
         <CardContent
           className={cn(
             "w-full bg-b-base squircle-3xl/100 md:squircle-5xl/100 overflow-hidden flex flex-col justify-center",
-            previewContent.type === PreviewContentType.TEXT ||
-              previewContent.type === PreviewContentType.CUSTOM
+            previewContent.type === PreviewContentType.TEXT || previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
               : "p-0",
           )}
@@ -101,9 +93,7 @@ export function HeaderSection({
         </CardContent>
       </Card>
 
-      <h1 className={cn("h2 w-full relative", !description && "font-normal")}>
-        {mainTitle}
-      </h1>
+      <h1 className={cn("h2 w-full relative", !description && "font-normal")}>{mainTitle}</h1>
 
       {description && <p className="text-b-white-invert-sec">{description}</p>}
 
@@ -120,9 +110,7 @@ export function HeaderSection({
             {tags.map((tag, index) => (
               <Badge
                 key={index}
-                className={pickRandomColor(
-                  tag.color as DEFAULT_COLOR_CODE_NAME_TYPE,
-                )}
+                className={pickRandomColor(tag.color as DEFAULT_COLOR_CODE_NAME_TYPE)}
                 variant="colored"
                 size="sm"
               >
@@ -147,5 +135,5 @@ export function HeaderSection({
         </div>
       )}
     </SectionBase>
-  );
+  )
 }

@@ -1,12 +1,12 @@
-"use client";
+"use client"
 export function AnalyticsScript() {
-  return null;
+  return null
 }
 
 export function useAnalytics() {
-  const trackEvent = () => {};
+  const trackEvent = () => {}
 
   return {
     trackEvent,
-  };
+  }
 }

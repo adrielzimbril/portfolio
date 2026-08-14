@@ -1,17 +1,17 @@
-"use client";
-import React from "react";
-import { PageHero } from "@/components/shared/pages/shared/page-hero";
-import { routes } from "@/data/routes";
-import { useTranslations, useLocale } from "use-intl";
-import { getImageUrl } from "@/utils/base-url";
-import { useIsDarkMode } from "@/hooks/useIsDarkMode";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { usePageViews } from "@/hooks/usePageViews";
-import { getPathUrl } from "@/utils/base-url";
+"use client"
+import React from "react"
+import { PageHero } from "@/components/shared/pages/shared/page-hero"
+import { routes } from "@/data/routes"
+import { useTranslations, useLocale } from "use-intl"
+import { getImageUrl } from "@/utils/base-url"
+import { useIsDarkMode } from "@/hooks/useIsDarkMode"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { usePageViews } from "@/hooks/usePageViews"
+import { getPathUrl } from "@/utils/base-url"
 
 export function HeaderSection() {
-  const t = useTranslations();
-  const locale = useLocale();
+  const t = useTranslations()
+  const locale = useLocale()
 
   usePageViews(
     routes.about.key,
@@ -21,9 +21,9 @@ export function HeaderSection() {
       path: getPathUrl(routes.about.link),
     },
     false,
-  );
+  )
 
-  const isDarkMode = useIsDarkMode();
+  const isDarkMode = useIsDarkMode()
 
   return (
     <>
@@ -40,27 +40,15 @@ export function HeaderSection() {
         isMobileShowed
         imageVariant="squircle"
         imagePath={{
-          mp4: getImageUrl(
-            isDarkMode
-              ? "/img/me/memoji/me-dark-out.mp4"
-              : "/img/me/memoji/me-out.mp4",
-          ),
-          webm: getImageUrl(
-            isDarkMode
-              ? "/img/me/memoji/me-dark-out.webm"
-              : "/img/me/memoji/me-out.webm",
-          ),
+          mp4: getImageUrl(isDarkMode ? "/img/me/memoji/me-dark-out.mp4" : "/img/me/memoji/me-out.mp4"),
+          webm: getImageUrl(isDarkMode ? "/img/me/memoji/me-dark-out.webm" : "/img/me/memoji/me-out.webm"),
           poster: getImageUrl("/img/me/memoji/me.png"),
         }}
       />
       <SectionBase isWide>
-        <h3 className="w-full relative h1">
-          {t("about.page.header-section.title-secondary")}
-        </h3>
-        <p className="relative whitespace-pre-line text-2xl">
-          {t("about.page.header-section.description-secondary")}
-        </p>
+        <h3 className="w-full relative h1">{t("about.page.header-section.title-secondary")}</h3>
+        <p className="relative whitespace-pre-line text-2xl">{t("about.page.header-section.description-secondary")}</p>
       </SectionBase>
     </>
-  );
+  )
 }

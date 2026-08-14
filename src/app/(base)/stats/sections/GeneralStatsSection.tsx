@@ -1,34 +1,25 @@
-import { getTranslations, getLocale } from "next-intl/server";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { StatCard } from "@/components/shared/pages/stats/StatCard";
-import { Eye, Coffee, Calendar } from "@aurthle/icons";
-import { ConfigValue } from "@/config";
+import { getTranslations, getLocale } from "next-intl/server"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { StatCard } from "@/components/shared/pages/stats/StatCard"
+import { Eye, Coffee, Calendar } from "@aurthle/icons"
+import { ConfigValue } from "@/config"
 
-const REVAMP_DATE = new Date(ConfigValue.NEXT_PUBLIC_REVAMP_DATE);
+const REVAMP_DATE = new Date(ConfigValue.NEXT_PUBLIC_REVAMP_DATE)
 
 interface GeneralStatsSectionProps {
-  totalViews: number;
-  totalWords: number;
+  totalViews: number
+  totalWords: number
 }
 
-export async function GeneralStatsSection({
-  totalViews,
-  totalWords,
-}: GeneralStatsSectionProps) {
-  const t = await getTranslations();
-  const locale = await getLocale();
+export async function GeneralStatsSection({ totalViews, totalWords }: GeneralStatsSectionProps) {
+  const t = await getTranslations()
+  const locale = await getLocale()
 
-  const coffeeCups = Math.floor(totalWords / 500);
-  const daysSinceRevamp = Math.floor(
-    (new Date().getTime() - REVAMP_DATE.getTime()) / (1000 * 60 * 60 * 24),
-  );
+  const coffeeCups = Math.floor(totalWords / 500)
+  const daysSinceRevamp = Math.floor((new Date().getTime() - REVAMP_DATE.getTime()) / (1000 * 60 * 60 * 24))
 
   return (
-    <SectionLayout
-      badge={t("stats.sections.general.badge")}
-      isFlex
-      className="py-0!"
-    >
+    <SectionLayout badge={t("stats.sections.general.badge")} isFlex className="py-0!">
       <div className="mt-6 md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard
           label={t("stats.cards.totalViews.label")}
@@ -61,5 +52,5 @@ export async function GeneralStatsSection({
         />
       </div>
     </SectionLayout>
-  );
+  )
 }

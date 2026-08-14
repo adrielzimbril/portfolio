@@ -1,18 +1,12 @@
-import React from "react";
+import React from "react"
 
 interface BookIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
+  size?: number | string
 }
 
 export const BookIcon = ({ size = 49, ...props }: BookIconProps) => {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 49 49"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width={size} height={size} viewBox="0 0 49 49" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M5.88892 36.6431H43.8889V38.6431C43.8889 40.8522 42.0981 42.6431 39.8889 42.6431H9.88892C7.67978 42.6431 5.88892 40.8522 5.88892 38.6431V36.6431Z"
         fill="url(#paint0_linear_622_1422)"
@@ -91,5 +85,5 @@ export const BookIcon = ({ size = 49, ...props }: BookIconProps) => {
         </linearGradient>
       </defs>
     </svg>
-  );
-};
+  )
+}

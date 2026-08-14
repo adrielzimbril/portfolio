@@ -1,15 +1,11 @@
-"use client";
-import { Dock, DockIcon } from "@/components/aurthle/ui/dock";
-import { ModeToggle } from "@/components/shared/_layouts/mode-toggle";
-import { Separator } from "@/components/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { siteConfig } from "@/data/config";
-import { Link } from "@/components/ui/link";
-import { cn } from "@/utils/utils";
+"use client"
+import { Dock, DockIcon } from "@/components/aurthle/ui/dock"
+import { ModeToggle } from "@/components/shared/_layouts/mode-toggle"
+import { Separator } from "@/components/ui/separator"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { siteConfig } from "@/data/config"
+import { Link } from "@/components/ui/link"
+import { cn } from "@/utils/utils"
 
 export function Dockbar({ asFade }: { asFade?: boolean }) {
   return (
@@ -30,13 +26,7 @@ export function Dockbar({ asFade }: { asFade?: boolean }) {
           <DockIcon key={item.href}>
             <Tooltip>
               <TooltipTrigger>
-                <Link
-                  href={item.href}
-                  likeButton
-                  asIcon
-                  variant="outline"
-                  size="iconSmall"
-                >
+                <Link href={item.href} likeButton asIcon variant="outline" size="iconSmall">
                   <item.icon variant="duotone" size="18" />
                 </Link>
               </TooltipTrigger>
@@ -53,13 +43,7 @@ export function Dockbar({ asFade }: { asFade?: boolean }) {
             <DockIcon key={name}>
               <Tooltip>
                 <TooltipTrigger>
-                  <Link
-                    href={social.url}
-                    likeButton
-                    asIcon
-                    variant="outline"
-                    size="iconSmall"
-                  >
+                  <Link href={social.url} likeButton asIcon variant="outline" size="iconSmall">
                     {social.icon && <social.icon size="18" />}
                   </Link>
                 </TooltipTrigger>
@@ -82,5 +66,5 @@ export function Dockbar({ asFade }: { asFade?: boolean }) {
         </DockIcon>
       </Dock>
     </div>
-  );
+  )
 }

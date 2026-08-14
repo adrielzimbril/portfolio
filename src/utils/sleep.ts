@@ -7,14 +7,14 @@
  * await sleep(1000); // 1000ms => 1 second
  */
 export const sleep = (ms: number | `${number}ms`): Promise<void> => {
-  let duration: number;
+  let duration: number
   if (typeof ms === "string") {
-    duration = Number.parseInt(ms, 10);
+    duration = Number.parseInt(ms, 10)
   } else {
-    duration = ms;
+    duration = ms
   }
-  return new Promise((resolve) => setTimeout(resolve, duration));
-};
+  return new Promise((resolve) => setTimeout(resolve, duration))
+}
 
 // Usage examples:
 // await sleep(1000);           // Sleep for 1000ms => 1 second

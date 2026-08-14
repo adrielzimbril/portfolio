@@ -1,5 +1,5 @@
-import { ToolItem } from "@/types";
-import { ToolboxToolCategory } from "@/types/enum";
+import { ToolItem } from "@/types"
+import { ToolboxToolCategory } from "@/types/enum"
 
 export const toolbox: ToolItem[] = [
   {
@@ -218,4 +218,4 @@ export const toolbox: ToolItem[] = [
     url: "https://music.apple.com",
     icon: "/img/tools/applemusic.svg",
   },
-];
+]

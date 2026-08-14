@@ -1,25 +1,20 @@
-import { getLocale, getTranslations } from "next-intl/server";
-import {
-  getQuestBySlug,
-  isSubmissionClosed,
-} from "@/integrations/content/lib/quests";
-import { IntentionForm } from "@/app/(base)/quests/[slug]/submit/sections/IntentionForm";
-import { HeaderSection } from "@/app/(base)/quests/[slug]/submit/sections/HeaderSection";
-import { getImageUrl, getResourcesUrl } from "@/utils/base-url";
-import { PageParams, PageType } from "@/types";
-import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { Metadata } from "next";
-import { localeRedirect } from "@/integrations/i18n/routing";
-import { routes } from "@/data/routes";
+import { getLocale, getTranslations } from "next-intl/server"
+import { getQuestBySlug, isSubmissionClosed } from "@/integrations/content/lib/quests"
+import { IntentionForm } from "@/app/(base)/quests/[slug]/submit/sections/IntentionForm"
+import { HeaderSection } from "@/app/(base)/quests/[slug]/submit/sections/HeaderSection"
+import { getImageUrl, getResourcesUrl } from "@/utils/base-url"
+import { PageParams, PageType } from "@/types"
+import { ChallengeClosedState } from "@/components/shared/pages/quests/challenge-closed-state"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { Metadata } from "next"
+import { localeRedirect } from "@/integrations/i18n/routing"
+import { routes } from "@/data/routes"
 
-export async function generateMetadata(props: {
-  params: Promise<PageParams>;
-}): Promise<Metadata> {
-  const { slug } = await props.params;
-  const t = await getTranslations();
-  const locale = await getLocale();
-  const quest = await getQuestBySlug(slug, { locale });
+export async function generateMetadata(props: { params: Promise<PageParams> }): Promise<Metadata> {
+  const { slug } = await props.params
+  const t = await getTranslations()
+  const locale = await getLocale()
+  const quest = await getQuestBySlug(slug, { locale })
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -38,23 +33,21 @@ export async function generateMetadata(props: {
       description: t("quests.submit.description"),
       images: [getImageUrl(quest?.cover ?? "opengraph-image.png")],
     },
-  };
-
-  return metadata;
-}
-export default async function QuestWorkSubmitPage(props: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await props.params;
-  const locale = await getLocale();
-  const t = await getTranslations();
-  const quest = await getQuestBySlug(slug, { locale });
-
-  if (!quest) {
-    return localeRedirect({ href: routes.quests.link, locale });
   }
 
-  const closed = isSubmissionClosed(quest.submission_deadline, quest.quest_end);
+  return metadata
+}
+export default async function QuestWorkSubmitPage(props: { params: Promise<{ slug: string }> }) {
+  const { slug } = await props.params
+  const locale = await getLocale()
+  const t = await getTranslations()
+  const quest = await getQuestBySlug(slug, { locale })
+
+  if (!quest) {
+    return localeRedirect({ href: routes.quests.link, locale })
+  }
+
+  const closed = isSubmissionClosed(quest.submission_deadline, quest.quest_end)
 
   return (
     <>
@@ -76,5 +69,5 @@ export default async function QuestWorkSubmitPage(props: {
         <IntentionForm quest={quest} isClosed={closed} />
       )}
     </>
-  );
+  )
 }

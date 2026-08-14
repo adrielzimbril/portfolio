@@ -1,51 +1,45 @@
-"use client";
-import React, { useCallback, useState } from "react";
-import { useLocale, useTranslations } from "use-intl";
-import { Form } from "@/components/ui/form";
-import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { apiRoutes } from "@/data/api-routes";
-import type { Quest } from "@/integrations/content/lib/quests";
-import { getHumanDate } from "@/utils";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal";
+"use client"
+import React, { useCallback, useState } from "react"
+import { useLocale, useTranslations } from "use-intl"
+import { Form } from "@/components/ui/form"
+import { Field, FieldError, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { apiRoutes } from "@/data/api-routes"
+import type { Quest } from "@/integrations/content/lib/quests"
+import { getHumanDate } from "@/utils"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal"
 
-export function IntentionForm({
-  quest,
-  isClosed,
-}: {
-  quest: Quest;
-  isClosed: boolean;
-}) {
-  const t = useTranslations();
-  const locale = useLocale();
+export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boolean }) {
+  const t = useTranslations()
+  const locale = useLocale()
   const [feedback, setFeedback] = useState<{
-    open: boolean;
-    status: "success" | "error";
-    title: string;
-    description: string;
+    open: boolean
+    status: "success" | "error"
+    title: string
+    description: string
   }>({
     open: false,
     status: "success",
     title: "",
     description: "",
-  });
+  })
   const closeFeedback = useCallback(() => {
-    setFeedback((prev) => ({ ...prev, open: false }));
-  }, []);
+    setFeedback((prev) => ({ ...prev, open: false }))
+  }, [])
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [workUrl, setWorkUrl] = useState("");
-  const [message, setMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [workUrl, setWorkUrl] = useState("")
+  const [message, setMessage] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (name.length < 2) {
       setFeedback({
@@ -53,8 +47,8 @@ export function IntentionForm({
         status: "error",
         title: t("quests.submit.form.feedback.error.title"),
         description: t("quests.submit.form.feedback.error.name_required"),
-      });
-      return;
+      })
+      return
     }
 
     if (!email || !email.includes("@")) {
@@ -63,8 +57,8 @@ export function IntentionForm({
         status: "error",
         title: t("quests.submit.form.feedback.error.title"),
         description: t("quests.submit.form.feedback.error.email_invalid"),
-      });
-      return;
+      })
+      return
     }
 
     if (!workUrl) {
@@ -73,43 +67,43 @@ export function IntentionForm({
         status: "error",
         title: t("quests.submit.form.feedback.error.title"),
         description: t("quests.submit.form.feedback.error.url_invalid"),
-      });
-      return;
+      })
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       const res = await fetch(apiRoutes.quests.submit(quest.slug).link, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, workUrl, message, locale }),
-      });
-      const data = await res.json().catch(() => ({}));
+      })
+      const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        throw new Error(data?.error || "SUBMIT_FAILED");
+        throw new Error(data?.error || "SUBMIT_FAILED")
       }
       setFeedback({
         open: true,
         status: "success",
         title: t("quests.submit.form.feedback.success.title"),
         description: t("quests.submit.form.feedback.success.description"),
-      });
-      setName("");
-      setEmail("");
-      setWorkUrl("");
-      setMessage("");
+      })
+      setName("")
+      setEmail("")
+      setWorkUrl("")
+      setMessage("")
     } catch {
       setFeedback({
         open: true,
         status: "error",
         title: t("quests.submit.form.feedback.error.title"),
         description: t("quests.submit.form.feedback.error.description"),
-      });
+      })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <>
@@ -139,15 +133,11 @@ export function IntentionForm({
                 </CardContent>
               </Card>
             ) : (
-              <Form
-                onSubmit={onSubmit}
-                className="space-y-6 w-full max-w-xl self-center place-self-center"
-              >
+              <Form onSubmit={onSubmit} className="space-y-6 w-full max-w-xl self-center place-self-center">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Field>
                     <FieldLabel>
-                      {t("quests.submit.form.fields.name.label")}{" "}
-                      <span className="text-red-500">*</span>
+                      {t("quests.submit.form.fields.name.label")} <span className="text-red-500">*</span>
                     </FieldLabel>
                     <Input
                       name="name"
@@ -163,8 +153,7 @@ export function IntentionForm({
                   </Field>
                   <Field>
                     <FieldLabel>
-                      {t("quests.submit.form.fields.email.label")}{" "}
-                      <span className="text-red-500">*</span>
+                      {t("quests.submit.form.fields.email.label")} <span className="text-red-500">*</span>
                     </FieldLabel>
                     <Input
                       name="email"
@@ -182,8 +171,7 @@ export function IntentionForm({
 
                 <Field>
                   <FieldLabel>
-                    {t("quests.submit.form.fields.link.label")}{" "}
-                    <span className="text-red-500">*</span>
+                    {t("quests.submit.form.fields.link.label")} <span className="text-red-500">*</span>
                   </FieldLabel>
                   <Input
                     name="workUrl"
@@ -194,15 +182,11 @@ export function IntentionForm({
                     placeholder={t("submit.page.fields.url.placeholder")}
                     required
                   />
-                  <FieldError>
-                    {t("quests.submit.form.feedback.error.url_invalid")}
-                  </FieldError>
+                  <FieldError>{t("quests.submit.form.feedback.error.url_invalid")}</FieldError>
                 </Field>
 
                 <Field>
-                  <FieldLabel>
-                    {t("quests.submit.form.fields.message.label")}
-                  </FieldLabel>
+                  <FieldLabel>{t("quests.submit.form.fields.message.label")}</FieldLabel>
                   <Textarea
                     name="message"
                     value={message}
@@ -210,24 +194,13 @@ export function IntentionForm({
                     rows={5}
                     variant="secondary"
                     className="rounded-xl"
-                    placeholder={t(
-                      "quests.submit.form.fields.message.placeholder",
-                    )}
+                    placeholder={t("quests.submit.form.fields.message.placeholder")}
                     maxLength={1500}
                   />
                 </Field>
 
-                <Button
-                  type="submit"
-                  whileTap
-                  asPointer
-                  asFull
-                  size="lg"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting
-                    ? t("quests.submit.form.actions.submitting")
-                    : t("quests.submit.form.actions.submit")}
+                <Button type="submit" whileTap asPointer asFull size="lg" disabled={isSubmitting}>
+                  {isSubmitting ? t("quests.submit.form.actions.submitting") : t("quests.submit.form.actions.submit")}
                 </Button>
               </Form>
             )}
@@ -242,5 +215,5 @@ export function IntentionForm({
         onClose={closeFeedback}
       />
     </>
-  );
+  )
 }

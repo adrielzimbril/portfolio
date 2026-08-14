@@ -1,38 +1,26 @@
-"use client";
-import { motion } from "motion/react";
-import Image from "next/image";
-import { useState } from "react";
-import {
-  cn,
-  formatCount,
-  getImageUrl,
-  getResourcesUrl,
-  pickRandomColor,
-} from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Eye, LinkDiagonalOne } from "@aurthle/icons";
-import { Link } from "@/components/ui/link";
-import { useTranslations } from "use-intl";
+"use client"
+import { motion } from "motion/react"
+import Image from "next/image"
+import { useState } from "react"
+import { cn, formatCount, getImageUrl, getResourcesUrl, pickRandomColor } from "@/utils"
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Eye, LinkDiagonalOne } from "@aurthle/icons"
+import { Link } from "@/components/ui/link"
+import { useTranslations } from "use-intl"
 
 interface ThoughtMostViewedCardProps {
-  title: string;
-  slug: string;
-  coverImage?: string;
-  views: number;
-  delay?: number;
+  title: string
+  slug: string
+  coverImage?: string
+  views: number
+  delay?: number
 }
 
-export function ThoughtMostViewedCard({
-  title,
-  slug,
-  coverImage,
-  views,
-  delay = 0,
-}: ThoughtMostViewedCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const t = useTranslations();
+export function ThoughtMostViewedCard({ title, slug, coverImage, views, delay = 0 }: ThoughtMostViewedCardProps) {
+  const [isHovered, setIsHovered] = useState(false)
+  const t = useTranslations()
 
   return (
     <Card
@@ -60,10 +48,7 @@ export function ThoughtMostViewedCard({
             📋
           </motion.div>
 
-          <Link
-            href={getResourcesUrl(PageType.THOUGHT, slug)}
-            className="block w-full"
-          >
+          <Link href={getResourcesUrl(PageType.THOUGHT, slug)} className="block w-full">
             <div className="relative h-[280px] shrink-0">
               <motion.div
                 animate={{
@@ -92,24 +77,15 @@ export function ThoughtMostViewedCard({
 
                 <div className="relative h-[100px] w-full shrink-0 overflow-hidden">
                   {coverImage ? (
-                    <Image
-                      src={getImageUrl(coverImage)}
-                      alt={title}
-                      fill
-                      className="object-cover object-top"
-                    />
+                    <Image src={getImageUrl(coverImage)} alt={title} fill className="object-cover object-top" />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center bg-b-base">
-                      <span className="text-sm">
-                        {t("stats.cards.mostViewed.noImage")}
-                      </span>
+                      <span className="text-sm">{t("stats.cards.mostViewed.noImage")}</span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-2">
-                    <p className="line-clamp-2 text-[8px] font-bold leading-tight text-white">
-                      {title}
-                    </p>
+                    <p className="line-clamp-2 text-[8px] font-bold leading-tight text-white">{title}</p>
                   </div>
                 </div>
 
@@ -151,9 +127,7 @@ export function ThoughtMostViewedCard({
                 href={getResourcesUrl(PageType.THOUGHT, slug)}
                 className="flex flex-col items-start justify-center gap-4"
               >
-                <h6 className="hidden h4 font-medium">
-                  {t("stats.cards.mostViewed.badge")}
-                </h6>
+                <h6 className="hidden h4 font-medium">{t("stats.cards.mostViewed.badge")}</h6>
                 <p className="w-full relative text-xl line-clamp-3 leading-[120%] font-medium text-b-white-invert-sec">
                   {title}
                 </p>
@@ -163,10 +137,7 @@ export function ThoughtMostViewedCard({
             <div className="flex w-full items-center justify-between gap-2">
               <div className="flex items-center justify-between gap-3">
                 <Badge
-                  className={cn(
-                    pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET),
-                    "size-max text-primary-foreground",
-                  )}
+                  className={cn(pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET), "size-max text-primary-foreground")}
                   contentClassName={cn("font-bold tabular-nums tracking-tight")}
                   variant="colored"
                   size="md"
@@ -178,13 +149,7 @@ export function ThoughtMostViewedCard({
                   </span>
                 </Badge>
               </div>
-              <Link
-                href={getResourcesUrl(PageType.HUB, slug)}
-                likeButton
-                whileTap
-                size="xs"
-                asIcon
-              >
+              <Link href={getResourcesUrl(PageType.HUB, slug)} likeButton whileTap size="xs" asIcon>
                 <span className="flex items-center gap-1">
                   {t("common.button.read")}
                   <LinkDiagonalOne size={16} />
@@ -195,5 +160,5 @@ export function ThoughtMostViewedCard({
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

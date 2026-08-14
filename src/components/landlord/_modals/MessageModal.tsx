@@ -1,8 +1,8 @@
-"use client";
-import React, { useState } from "react";
-import { useTranslations } from "next-intl";
-import { Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client"
+import React, { useState } from "react"
+import { useTranslations } from "next-intl"
+import { Loader2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -11,16 +11,16 @@ import {
   DialogHeader,
   DialogSeparator,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import { Locale } from "@/types/enum";
-import logger from "@/utils/logger";
-import type { CommunityMessage } from "@/components/landlord/admin-types";
-import { normalizeMessage } from "@/components/landlord/admin-utils";
-import { toast } from "@/lib/toast";
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { landlordApiRoutes } from "@/data/landlordApiRoutes"
+import { Locale } from "@/types/enum"
+import logger from "@/utils/logger"
+import type { CommunityMessage } from "@/components/landlord/admin-types"
+import { normalizeMessage } from "@/components/landlord/admin-utils"
+import { toast } from "@/lib/toast"
 
 export function MessageModal({
   open,
@@ -28,74 +28,65 @@ export function MessageModal({
   onOpenChange,
   onSaved,
 }: {
-  open: boolean;
-  message?: CommunityMessage | null;
-  onOpenChange: (open: boolean) => void;
-  onSaved: () => void;
+  open: boolean
+  message?: CommunityMessage | null
+  onOpenChange: (open: boolean) => void
+  onSaved: () => void
 }) {
-  const t = useTranslations("admin.landlord.community");
-  const tShared = useTranslations("admin.landlord.shared");
+  const t = useTranslations("admin.landlord.community")
+  const tShared = useTranslations("admin.landlord.shared")
   const [form, setForm] = useState({
     creator_name: "",
     creator_avatar_url: "",
     message: {} as Record<string, string>,
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   React.useEffect(() => {
-    if (!open) return;
+    if (!open) return
     setForm({
       creator_name: message?.creator_name || "",
       creator_avatar_url: message?.creator_avatar_url || "",
       message: message ? { ...normalizeMessage(message) } : {},
-    });
-  }, [open, message]);
+    })
+  }, [open, message])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
+    event.preventDefault()
+    setIsSubmitting(true)
     try {
-      const url = message
-        ? landlordApiRoutes.community.messageById(message.id)
-        : landlordApiRoutes.community.messages;
+      const url = message ? landlordApiRoutes.community.messageById(message.id) : landlordApiRoutes.community.messages
       const response = await fetch(url, {
         method: message ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      });
+      })
 
       if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data?.error || "Failed to save message");
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data?.error || "Failed to save message")
       }
 
-      toast.success(
-        message ? t("messages.success_updated") : t("messages.success_added"),
-      );
-      onSaved();
-      onOpenChange(false);
+      toast.success(message ? t("messages.success_updated") : t("messages.success_added"))
+      onSaved()
+      onOpenChange(false)
     } catch (error) {
-      logger.error("Failed to save message:", error);
-      toast.error(t("messages.error_save"));
+      logger.error("Failed to save message:", error)
+      toast.error(t("messages.error_save"))
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent size="xl" variant="modern" scrollArea>
         <DialogHeader>
-          <DialogTitle>
-            {message ? t("edit_title") : t("add_title")}
-          </DialogTitle>
+          <DialogTitle>{message ? t("edit_title") : t("add_title")}</DialogTitle>
           <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
         <DialogSeparator />
-        <form
-          onSubmit={handleSubmit}
-          className="grid gap-5 max-h-[calc(100vh-20rem)] overflow-y-auto pr-2"
-        >
+        <form onSubmit={handleSubmit} className="grid gap-5 max-h-[calc(100vh-20rem)] overflow-y-auto pr-2">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="creator-name">{t("fields.creatorName")}</Label>
@@ -168,5 +159,5 @@ export function MessageModal({
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

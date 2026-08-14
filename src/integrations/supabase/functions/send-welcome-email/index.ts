@@ -1,15 +1,15 @@
-import { logger } from "@/utils";
+import { logger } from "@/utils"
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
-};
+}
 
 interface EmailRequest {
-  nom: string;
-  numero: string;
-  email?: string;
+  nom: string
+  numero: string
+  email?: string
 }
 
 export async function POST(req: Request) {
@@ -18,14 +18,14 @@ export async function POST(req: Request) {
     return new Response(null, {
       status: 200,
       headers: corsHeaders,
-    });
+    })
   }
 
   try {
-    const { nom, numero, email }: EmailRequest = await req.json();
+    const { nom, numero, email }: EmailRequest = await req.json()
 
     // Simuler l'envoi d'email (remplacez par votre service d'email préféré)
-    logger.info("Envoi d'email de bienvenue à:", { nom, numero, email });
+    logger.info("Envoi d'email de bienvenue à:", { nom, numero, email })
 
     // Ici vous pouvez intégrer avec:
     // - SendGrid
@@ -65,10 +65,10 @@ export async function POST(req: Request) {
           </p>
         </div>
       `,
-    };
+    }
 
     // Log pour le développement
-    logger.info("Email préparé:", emailData);
+    logger.info("Email préparé:", emailData)
 
     // Retourner une réponse de succès
     return new Response(
@@ -84,9 +84,9 @@ export async function POST(req: Request) {
           "Content-Type": "application/json",
         },
       },
-    );
+    )
   } catch (error) {
-    logger.error("Erreur lors de l'envoi de l'email:", error);
+    logger.error("Erreur lors de l'envoi de l'email:", error)
 
     return new Response(
       JSON.stringify({
@@ -100,6 +100,6 @@ export async function POST(req: Request) {
           "Content-Type": "application/json",
         },
       },
-    );
+    )
   }
 }

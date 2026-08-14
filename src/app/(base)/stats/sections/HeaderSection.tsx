@@ -1,8 +1,8 @@
-import { getTranslations } from "next-intl/server";
-import { PageHero } from "@/components/shared/pages/shared/page-hero";
+import { getTranslations } from "next-intl/server"
+import { PageHero } from "@/components/shared/pages/shared/page-hero"
 
 export async function HeaderSection() {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return (
     <PageHero
@@ -11,5 +11,5 @@ export async function HeaderSection() {
       imagePath={{ emoji: "📊" }}
       isMobileShowed
     />
-  );
+  )
 }

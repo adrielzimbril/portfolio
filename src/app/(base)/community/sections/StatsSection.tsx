@@ -1,54 +1,54 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { ChatBubbleCircle, Users, TrendUp } from "@aurthle/icons";
-import { StatCard } from "@/components/shared/pages/community/StatCard";
-import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton";
-import { User } from "@supabase/supabase-js";
-import { apiRoutes } from "@/data/api-routes";
-import { useWindowEvent } from "@/hooks/useWindowEvent";
-import { useTranslations } from "use-intl";
+"use client"
+import React, { useEffect, useState } from "react"
+import { ChatBubbleCircle, Users, TrendUp } from "@aurthle/icons"
+import { StatCard } from "@/components/shared/pages/community/StatCard"
+import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton"
+import { User } from "@supabase/supabase-js"
+import { apiRoutes } from "@/data/api-routes"
+import { useWindowEvent } from "@/hooks/useWindowEvent"
+import { useTranslations } from "use-intl"
 
 interface Stats {
-  totalMessages: number;
-  uniqueMembers: number;
-  weekMessages: number;
+  totalMessages: number
+  uniqueMembers: number
+  weekMessages: number
 }
 
 interface StatsSectionProps {
-  user: User | null;
+  user: User | null
 }
 
 export function StatsSection({ user }: StatsSectionProps) {
-  const t = useTranslations();
+  const t = useTranslations()
   const [stats, setStats] = useState<Stats>({
     totalMessages: 0,
     uniqueMembers: 0,
     weekMessages: 0,
-  });
-  const [isLoading, setIsLoading] = useState(true);
+  })
+  const [isLoading, setIsLoading] = useState(true)
 
   const refreshStats = async () => {
     try {
-      const response = await fetch(apiRoutes.community.stats.link);
+      const response = await fetch(apiRoutes.community.stats.link)
       if (response.ok) {
-        const data = await response.json();
-        setStats(data);
+        const data = await response.json()
+        setStats(data)
       }
     } catch (error) {
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    (async () => {
-      await refreshStats();
-    })();
-  }, []);
+    ;(async () => {
+      await refreshStats()
+    })()
+  }, [])
 
   useWindowEvent("community-message-added", () => {
-    refreshStats();
-  });
+    refreshStats()
+  })
 
   return (
     <div className="relative px-6">
@@ -71,5 +71,5 @@ export function StatsSection({ user }: StatsSectionProps) {
       </div>
       <LeaveNoteButton user={user} />
     </div>
-  );
+  )
 }

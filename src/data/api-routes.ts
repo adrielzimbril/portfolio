@@ -1,4 +1,4 @@
-import { getApiUrl } from "@/utils/base-url";
+import { getApiUrl } from "@/utils/base-url"
 
 enum requestType {
   GET,
@@ -128,4 +128,4 @@ export const apiRoutes = {
       accept: [requestType.GET],
     },
   },
-};
+}

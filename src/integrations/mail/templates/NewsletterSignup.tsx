@@ -1,5 +1,5 @@
-import React from "react";
-import { createTranslator } from "use-intl/core";
+import React from "react"
+import { createTranslator } from "use-intl/core"
 import {
   Body,
   Container,
@@ -13,26 +13,19 @@ import {
   Hr,
   Tailwind,
   Font,
-} from "@react-email/components";
-import { getResourceAskUrl } from "@/utils";
-import {
-  defaultTranslations,
-  defaultLocale,
-} from "@/integrations/mail/util/translations";
-import type { BaseMailProps } from "@/integrations/mail/types/types";
+} from "@react-email/components"
+import { getResourceAskUrl } from "@/utils"
+import { defaultTranslations, defaultLocale } from "@/integrations/mail/util/translations"
+import type { BaseMailProps } from "@/integrations/mail/types/types"
 
-export function NewsletterSignup({
-  locale,
-  translations,
-  ...props
-}: BaseMailProps & { name?: string }) {
+export function NewsletterSignup({ locale, translations, ...props }: BaseMailProps & { name?: string }) {
   const t = createTranslator({
     locale,
     messages: translations,
-  });
+  })
 
-  const { name } = props;
-  const firstName: string = name?.split(" ")[0] ?? "";
+  const { name } = props
+  const firstName: string = name?.split(" ")[0] ?? ""
 
   return (
     <Html>
@@ -54,15 +47,10 @@ export function NewsletterSignup({
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             {/* Simple Header */}
             <Section className="px-10 pt-10 pb-5 bg-white text-center">
-              <Heading
-                as="h1"
-                className="text-3xl font-medium leading-tight text-[#1a1a1a] mb-2"
-              >
+              <Heading as="h1" className="text-3xl font-medium leading-tight text-[#1a1a1a] mb-2">
                 {t("mail.newsletterSignup.greeting", { firstName })} 👋
               </Heading>
-              <Text className="text-[#666666] text-base m-0">
-                {t("mail.newsletterSignup.tagline")}
-              </Text>
+              <Text className="text-[#666666] text-base m-0">{t("mail.newsletterSignup.tagline")}</Text>
             </Section>
 
             {/* Story Content */}
@@ -123,17 +111,13 @@ export function NewsletterSignup({
                 </Text>
 
                 <Link
-                  href={getResourceAskUrl(
-                    "the-mistake-that-stops-you-from-improving",
-                  )}
+                  href={getResourceAskUrl("the-mistake-that-stops-you-from-improving")}
                   className="bg-[#1a1a1a] text-white font-medium py-3 px-8 rounded-2xl text-base no-underline inline-block"
                 >
                   → {t("mail.newsletterSignup.cta.button")}
                 </Link>
 
-                <Text className="text-[#777777] text-sm mt-4 italic">
-                  {t("mail.newsletterSignup.cta.note")}
-                </Text>
+                <Text className="text-[#777777] text-sm mt-4 italic">{t("mail.newsletterSignup.cta.note")}</Text>
               </Section>
             </Section>
 
@@ -141,9 +125,7 @@ export function NewsletterSignup({
             <Section className="p-10 bg-[#f5f5f4]">
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">
-                {t("mail.common.signature")}
-              </Text>
+              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">{t("mail.common.signature")}</Text>
 
               <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
                 {t("mail.common.contact")}
@@ -151,21 +133,19 @@ export function NewsletterSignup({
 
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-              <Text className="text-xs text-[#999999] text-center mb-3">
-                {t("mail.common.copyright")}
-              </Text>
+              <Text className="text-xs text-[#999999] text-center mb-3">{t("mail.common.copyright")}</Text>
             </Section>
           </Container>
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }
 
 NewsletterSignup.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
   name: "",
-};
+}
 
-export default NewsletterSignup;
+export default NewsletterSignup

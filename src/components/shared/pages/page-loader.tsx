@@ -1,22 +1,22 @@
-"use client";
-import React from "react";
-import { cn } from "@/utils/utils";
-import { motion } from "motion/react";
-import { useRealisticLoading } from "@/components/shared/pages/useRealisticLoading";
-import { Loader } from "@/components/shared/_layouts/loader";
-import { LogoName } from "@/components/shared/icons/logo/logo-name";
-import { LogoIcon } from "@/components/shared/icons/logo/logo-icon";
-import { useIsMobile } from "@/hooks/useIsMobile";
+"use client"
+import React from "react"
+import { cn } from "@/utils/utils"
+import { motion } from "motion/react"
+import { useRealisticLoading } from "@/components/shared/pages/useRealisticLoading"
+import { Loader } from "@/components/shared/_layouts/loader"
+import { LogoName } from "@/components/shared/icons/logo/logo-name"
+import { LogoIcon } from "@/components/shared/icons/logo/logo-icon"
+import { useIsMobile } from "@/hooks/useIsMobile"
 
 interface GenericLoadingPageProps {
-  title: string;
-  subtitle: string;
-  emoji: string;
-  isPage?: boolean;
+  title: string
+  subtitle: string
+  emoji: string
+  isPage?: boolean
 }
 
 function LoadingProgressBar({ isPage }: { isPage: boolean }) {
-  const progress = useRealisticLoading();
+  const progress = useRealisticLoading()
 
   return (
     <>
@@ -33,7 +33,7 @@ function LoadingProgressBar({ isPage }: { isPage: boolean }) {
         )}
       </div>
     </>
-  );
+  )
 }
 
 function FloatingCard({
@@ -41,9 +41,9 @@ function FloatingCard({
   title,
   position,
 }: {
-  delay: number;
-  title: string;
-  position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+  delay: number
+  title: string
+  position?: "top-left" | "top-right" | "bottom-left" | "bottom-right"
 }) {
   return (
     <motion.div
@@ -51,10 +51,8 @@ function FloatingCard({
         "absolute bg-b-base backdrop-blur-[50px] backdrop-filter rounded-[24px] p-6",
         position === "top-left" && "top-32 left-2 md:top-32 md:left-32",
         position === "top-right" && "top-32 right-2 md:top-32 md:right-32",
-        position === "bottom-left" &&
-          "bottom-32 left-2 md:bottom-32 md:left-32",
-        position === "bottom-right" &&
-          "bottom-32 right-2 md:bottom-32 md:right-32",
+        position === "bottom-left" && "bottom-32 left-2 md:bottom-32 md:left-32",
+        position === "bottom-right" && "bottom-32 right-2 md:bottom-32 md:right-32",
       )}
       initial={{ opacity: 0, y: 20, scale: 0.8 }}
       animate={{
@@ -71,29 +69,19 @@ function FloatingCard({
     >
       <span className="text-base font-medium text-zinc-400">{title}</span>
     </motion.div>
-  );
+  )
 }
 
 const statsData = [
   { number: "18+", label: "Projects" },
   { number: "5+", label: "Years" },
   { number: "100%", label: "Enthusiast" },
-];
+]
 
-const floatingSkills = [
-  "SaaS 🦄",
-  "Design 🎨",
-  "Innovation 💡",
-  "Go To Market ✨",
-];
+const floatingSkills = ["SaaS 🦄", "Design 🎨", "Innovation 💡", "Go To Market ✨"]
 
-export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
-  title,
-  subtitle,
-  emoji,
-  isPage = true,
-}) => {
-  const isMobile = useIsMobile();
+export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({ title, subtitle, emoji, isPage = true }) => {
+  const isMobile = useIsMobile()
   return (
     <div className="flex flex-col mx-auto items-center justify-center relative bg-b-white size-full min-h-dvh">
       {/* Floating background elements */}
@@ -136,9 +124,7 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
               }}
             >
               <LogoIcon className={cn("shrink-0 size-14")} />
-              <LogoName
-                className={cn("h-5! qmd:h-6! w-48! qmd:w-60! shrink-0")}
-              />
+              <LogoName className={cn("h-5! qmd:h-6! w-48! qmd:w-60! shrink-0")} />
             </motion.div>
           </nav>
         </motion.header>
@@ -278,5 +264,5 @@ export const GenericLoadingPage: React.FC<GenericLoadingPageProps> = ({
         ))}
       </motion.div>
     </div>
-  );
-};
+  )
+}

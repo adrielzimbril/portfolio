@@ -1,29 +1,19 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/utils/utils";
-import { pickRandomColor } from "@/utils/pick-random-color";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types/default";
-import { Checked, LoveTime } from "@aurthle/icons";
+"use client"
+import React from "react"
+import Image from "next/image"
+import { Badge } from "@/components/ui/badge"
+import { cn } from "@/utils/utils"
+import { pickRandomColor } from "@/utils/pick-random-color"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types/default"
+import { Checked, LoveTime } from "@aurthle/icons"
 
-export function ConnectionAvatar({
-  image,
-  name,
-  met,
-}: {
-  image: string;
-  name: string;
-  met: string | null;
-}) {
+export function ConnectionAvatar({ image, name, met }: { image: string; name: string; met: string | null }) {
   return (
     <div className="relative size-fit">
       <div
         className={cn(
           "relative flex bg-background squircle-7xl border-4 size-36 overflow-hidden transition-all duration-300",
-          met
-            ? "border-[#8e8eff]"
-            : "border-b-base-accent group-hover:border-[#ffd3ad]",
+          met ? "border-[#8e8eff]" : "border-b-base-accent group-hover:border-[#ffd3ad]",
         )}
       >
         <Image
@@ -39,26 +29,18 @@ export function ConnectionAvatar({
       <div className="absolute top-0 right-0 ">
         <Badge
           className={cn(
-            pickRandomColor(
-              met
-                ? DEFAULT_COLOR_CODE_NAME.VIOLET
-                : DEFAULT_COLOR_CODE_NAME.ORANGE,
-            ),
+            pickRandomColor(met ? DEFAULT_COLOR_CODE_NAME.VIOLET : DEFAULT_COLOR_CODE_NAME.ORANGE),
             "p-1.5 rounded-full",
           )}
           variant="colored"
         >
           {met ? (
-            <Checked
-              className="text-primary-foreground"
-              size={24}
-              variant="outline"
-            />
+            <Checked className="text-primary-foreground" size={24} variant="outline" />
           ) : (
             <LoveTime size={24} variant="outline" />
           )}
         </Badge>
       </div>
     </div>
-  );
+  )
 }

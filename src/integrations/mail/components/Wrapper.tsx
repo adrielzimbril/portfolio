@@ -1,24 +1,12 @@
-import {
-  Container,
-  Font,
-  Head,
-  Html,
-  Section,
-  Tailwind,
-} from "@react-email/components";
-import React, { type PropsWithChildren } from "react";
-import { Logo } from "@/integrations/mail/components/Logo";
+import { Container, Font, Head, Html, Section, Tailwind } from "@react-email/components"
+import React, { type PropsWithChildren } from "react"
+import { Logo } from "@/integrations/mail/components/Logo"
 
 export default function Wrapper({ children }: PropsWithChildren) {
   return (
     <Html lang="fr">
       <Head>
-        <Font
-          fontFamily="Inter"
-          fallbackFontFamily="Arial"
-          fontWeight={400}
-          fontStyle="normal"
-        />
+        <Font fontFamily="Inter" fallbackFontFamily="Arial" fontWeight={400} fontStyle="normal" />
       </Head>
       <Tailwind
         config={{
@@ -53,5 +41,5 @@ export default function Wrapper({ children }: PropsWithChildren) {
         </Section>
       </Tailwind>
     </Html>
-  );
+  )
 }

@@ -1,36 +1,32 @@
-import logger from "@/utils/logger";
-import type { AddContactHandler } from "@/integrations/contact/types/types";
-import { Resend } from "resend";
-import { getResendConfig } from "@/config";
+import logger from "@/utils/logger"
+import type { AddContactHandler } from "@/integrations/contact/types/types"
+import { Resend } from "resend"
+import { getResendConfig } from "@/config"
 
-const { apiKey: CONTACT_PROVIDER_API_KEY, audienceId: CONTACT_AUDIENCE_ID } =
-  getResendConfig();
+const { apiKey: CONTACT_PROVIDER_API_KEY, audienceId: CONTACT_AUDIENCE_ID } = getResendConfig()
 
-const provider = new Resend(CONTACT_PROVIDER_API_KEY!);
+const provider = new Resend(CONTACT_PROVIDER_API_KEY!)
 
 export const add: AddContactHandler = async (params) => {
   if (!CONTACT_PROVIDER_API_KEY) {
-    throw new Error("Missing RESEND_API_KEY env var");
+    throw new Error("Missing RESEND_API_KEY env var")
   }
 
-  const listId: string[] = params.listIds as string[];
+  const listId: string[] = params.listIds as string[]
   listId?.forEach(async (id) => {
-    const audienceId = id ?? CONTACT_AUDIENCE_ID;
+    const audienceId = id ?? CONTACT_AUDIENCE_ID
 
-    const audience = await provider.audiences.get(audienceId);
+    const audience = await provider.audiences.get(audienceId)
 
     if (!audience.data) {
-      const err = audience.error;
-      logger.error(
-        "Resend provider requires an audienceId in input.metadata.audienceId; skipping",
-        {
-          id: audienceId,
-          name: err?.name,
-          message: err?.message,
-        },
-      );
+      const err = audience.error
+      logger.error("Resend provider requires an audienceId in input.metadata.audienceId; skipping", {
+        id: audienceId,
+        name: err?.name,
+        message: err?.message,
+      })
       // no-op success to keep flow resilient
-      return { ok: true } as const;
+      return { ok: true } as const
     }
 
     const response = await provider.contacts.create({
@@ -39,17 +35,17 @@ export const add: AddContactHandler = async (params) => {
       firstName: params.firstName,
       lastName: params.lastName,
       unsubscribed: false,
-    });
+    })
 
     if (!response.data) {
-      const err = response.error;
+      const err = response.error
       logger.error("Resend contacts error", {
         name: err?.name,
         message: err?.message,
-      });
-      throw new Error(err?.message || "Resend contacts error");
+      })
+      throw new Error(err?.message || "Resend contacts error")
     }
-  });
+  })
 
-  return { ok: true } as const;
-};
+  return { ok: true } as const
+}

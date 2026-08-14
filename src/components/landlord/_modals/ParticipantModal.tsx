@@ -1,8 +1,8 @@
-"use client";
-import React, { useState, useMemo } from "react";
-import { useTranslations } from "next-intl";
-import { Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client"
+import React, { useState, useMemo } from "react"
+import { useTranslations } from "next-intl"
+import { Loader2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -11,23 +11,17 @@ import {
   DialogHeader,
   DialogSeparator,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import { landlordApiRoutes } from "@/data/landlordApiRoutes";
-import { Locale } from "@/types/enum";
-import logger from "@/utils/logger";
-import type { QuestSummary } from "@/components/landlord/admin-types";
-import { toast } from "@/lib/toast";
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
+import { Textarea } from "@/components/ui/textarea"
+import { landlordApiRoutes } from "@/data/landlordApiRoutes"
+import { Locale } from "@/types/enum"
+import logger from "@/utils/logger"
+import type { QuestSummary } from "@/components/landlord/admin-types"
+import { toast } from "@/lib/toast"
 
 export function ParticipantModal({
   open,
@@ -38,17 +32,17 @@ export function ParticipantModal({
   type = "register",
   initialData,
 }: {
-  open: boolean;
-  quests: QuestSummary[];
-  selectedQuest: string;
-  onOpenChange: (open: boolean) => void;
-  onCreated: () => void;
-  type?: "register" | "submission";
-  initialData?: any;
+  open: boolean
+  quests: QuestSummary[]
+  selectedQuest: string
+  onOpenChange: (open: boolean) => void
+  onCreated: () => void
+  type?: "register" | "submission"
+  initialData?: any
 }) {
-  const t = useTranslations("admin.landlord.quests");
-  const tShared = useTranslations("admin.landlord.shared");
-  const isEditing = Boolean(initialData);
+  const t = useTranslations("admin.landlord.quests")
+  const tShared = useTranslations("admin.landlord.shared")
+  const isEditing = Boolean(initialData)
 
   const [form, setForm] = useState({
     challenge_slug: selectedQuest !== "all" ? selectedQuest : "",
@@ -60,15 +54,15 @@ export function ParticipantModal({
     language: Locale.EN,
     type: type,
     work_url: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const selectedQuestValue = useMemo(() => {
     if (selectedQuest !== "all") {
-      return selectedQuest;
+      return selectedQuest
     }
-    return "";
-  }, [selectedQuest]);
+    return ""
+  }, [selectedQuest])
 
   React.useEffect(() => {
     if (open) {
@@ -83,7 +77,7 @@ export function ParticipantModal({
           language: initialData.language || Locale.EN,
           type: type,
           work_url: initialData.work_url || "",
-        });
+        })
       } else {
         setForm({
           challenge_slug: selectedQuestValue,
@@ -95,58 +89,47 @@ export function ParticipantModal({
           language: Locale.EN,
           type,
           work_url: "",
-        });
+        })
       }
     }
-  }, [open, selectedQuestValue, type, initialData]);
+  }, [open, selectedQuestValue, type, initialData])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
     if (!form.challenge_slug) {
-      toast.error(t("messages.select_quest_first"));
-      return;
+      toast.error(t("messages.select_quest_first"))
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
     try {
       const baseUrl =
-        type === "submission"
-          ? landlordApiRoutes.quests.submissions
-          : landlordApiRoutes.quests.registrations;
+        type === "submission" ? landlordApiRoutes.quests.submissions : landlordApiRoutes.quests.registrations
 
-      const url = isEditing ? `${baseUrl}/${initialData.id}` : baseUrl;
-      const method = isEditing ? "PATCH" : "POST";
+      const url = isEditing ? `${baseUrl}/${initialData.id}` : baseUrl
+      const method = isEditing ? "PATCH" : "POST"
 
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
-      });
+      })
 
       if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data?.error || t("messages.error_process"));
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data?.error || t("messages.error_process"))
       }
 
-      toast.success(
-        isEditing
-          ? t("messages.success_modified")
-          : t("messages.success_added"),
-      );
-      onCreated();
-      onOpenChange(false);
+      toast.success(isEditing ? t("messages.success_modified") : t("messages.success_added"))
+      onCreated()
+      onOpenChange(false)
     } catch (error) {
-      logger.error(
-        `Failed to ${isEditing ? "edit" : "add"} participant:`,
-        error,
-      );
-      toast.error(
-        isEditing ? t("messages.error_process") : t("messages.error_process"),
-      );
+      logger.error(`Failed to ${isEditing ? "edit" : "add"} participant:`, error)
+      toast.error(isEditing ? t("messages.error_process") : t("messages.error_process"))
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -168,9 +151,7 @@ export function ParticipantModal({
             <Label htmlFor="quest">{t("fields.quest")}</Label>
             <Select
               value={form.challenge_slug}
-              onValueChange={(value) =>
-                setForm((current) => ({ ...current, challenge_slug: value }))
-              }
+              onValueChange={(value) => setForm((current) => ({ ...current, challenge_slug: value }))}
               disabled={isEditing}
             >
               <SelectTrigger id="quest">
@@ -221,15 +202,11 @@ export function ParticipantModal({
             <div className="flex items-center justify-between rounded-2xl border border-black/8 bg-black/2 p-4">
               <div>
                 <p className="text-sm font-medium">{t("fields.send_email")}</p>
-                <p className="text-xs text-black/45">
-                  {t("fields.send_email_hint")}
-                </p>
+                <p className="text-xs text-black/45">{t("fields.send_email_hint")}</p>
               </div>
               <Switch
                 checked={form.sendEmail}
-                onCheckedChange={(checked) =>
-                  setForm((current) => ({ ...current, sendEmail: checked }))
-                }
+                onCheckedChange={(checked) => setForm((current) => ({ ...current, sendEmail: checked }))}
               />
             </div>
           )}
@@ -249,9 +226,7 @@ export function ParticipantModal({
           </div>
           {type === "submission" && (
             <div className="space-y-2">
-              <Label htmlFor="participant-work-url">
-                {t("fields.work_url")}
-              </Label>
+              <Label htmlFor="participant-work-url">{t("fields.work_url")}</Label>
               <Input
                 id="participant-work-url"
                 value={form.work_url}
@@ -284,5 +259,5 @@ export function ParticipantModal({
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

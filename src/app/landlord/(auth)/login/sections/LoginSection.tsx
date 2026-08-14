@@ -1,27 +1,24 @@
-"use client";
-import React from "react";
-import { Github, Google } from "@aurthle/icons";
-import { Activity, LockKeyhole, Terminal } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { getPathUrl } from "@/utils";
-import {
-  signInWithGithub,
-  signInWithGoogle,
-} from "@/integrations/auth/provider/supabase";
-import { landlordRoutes } from "@/data/landlordRoutes";
-import { useTranslations } from "next-intl";
+"use client"
+import React from "react"
+import { Github, Google } from "@aurthle/icons"
+import { Activity, LockKeyhole, Terminal } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { getPathUrl } from "@/utils"
+import { signInWithGithub, signInWithGoogle } from "@/integrations/auth/provider/supabase"
+import { landlordRoutes } from "@/data/landlordRoutes"
+import { useTranslations } from "next-intl"
 
 function ProviderButton({
   provider,
   onClick,
   variant,
 }: {
-  provider: "github" | "google";
-  onClick: () => void;
-  variant: "default" | "secondary";
+  provider: "github" | "google"
+  onClick: () => void
+  variant: "default" | "secondary"
 }) {
-  const t = useTranslations("admin.login");
-  const Icon = provider === "github" ? Github : Google;
+  const t = useTranslations("admin.login")
+  const Icon = provider === "github" ? Github : Google
 
   return (
     <Button
@@ -37,38 +34,26 @@ function ProviderButton({
         {provider === "github" ? t("continue_github") : t("continue_google")}
       </span>
     </Button>
-  );
+  )
 }
 
 function LoginButtons() {
-  const handleSignIn = async (
-    signInFn: (callbackURL?: string) => Promise<void>,
-  ) => {
-    const callbackURL = getPathUrl(
-      landlordRoutes.landlord.link + window.location.search,
-    );
-    await signInFn(callbackURL);
-  };
+  const handleSignIn = async (signInFn: (callbackURL?: string) => Promise<void>) => {
+    const callbackURL = getPathUrl(landlordRoutes.landlord.link + window.location.search)
+    await signInFn(callbackURL)
+  }
 
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      <ProviderButton
-        provider="github"
-        variant="default"
-        onClick={() => handleSignIn(signInWithGithub)}
-      />
-      <ProviderButton
-        provider="google"
-        variant="secondary"
-        onClick={() => handleSignIn(signInWithGoogle)}
-      />
+      <ProviderButton provider="github" variant="default" onClick={() => handleSignIn(signInWithGithub)} />
+      <ProviderButton provider="google" variant="secondary" onClick={() => handleSignIn(signInWithGoogle)} />
     </div>
-  );
+  )
 }
 
 export function LoginSection({ reason }: { reason?: string }) {
-  const t = useTranslations("admin.login");
-  const isUnauthorized = reason === "unauthorized";
+  const t = useTranslations("admin.login")
+  const isUnauthorized = reason === "unauthorized"
 
   return (
     <div className="flex min-h-dvh items-center justify-center overflow-auto bg-[#f5f3ea] p-4 md:p-8">
@@ -79,9 +64,7 @@ export function LoginSection({ reason }: { reason?: string }) {
               <Terminal size={20} />
             </div>
             <div>
-              <p className="text-sm font-semibold tracking-tight">
-                Adriel Zimbril
-              </p>
+              <p className="text-sm font-semibold tracking-tight">Adriel Zimbril</p>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
                 [NODE_AUTHORIZATION_REQ] // FRAG-99
               </p>
@@ -104,16 +87,9 @@ export function LoginSection({ reason }: { reason?: string }) {
                     { label: "Entities", val: "48" },
                     { label: "Signals", val: "09" },
                   ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="rounded-xl bg-[#f5f3ea] p-3 transition-transform"
-                    >
-                      <p className="text-[9px] font-bold uppercase text-black/45">
-                        {item.label}
-                      </p>
-                      <p className="mt-1 text-xl font-semibold tabular-nums tracking-tighter">
-                        {item.val}
-                      </p>
+                    <div key={item.label} className="rounded-xl bg-[#f5f3ea] p-3 transition-transform">
+                      <p className="text-[9px] font-bold uppercase text-black/45">{item.label}</p>
+                      <p className="mt-1 text-xl font-semibold tabular-nums tracking-tighter">{item.val}</p>
                     </div>
                   ))}
                 </div>
@@ -123,12 +99,8 @@ export function LoginSection({ reason }: { reason?: string }) {
                   <Activity size={32} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-widest">
-                    ADMIN_OVERRIDE_CONSOLE
-                  </p>
-                  <p className="mt-1 text-[11px] leading-relaxed text-white/45">
-                    {t("kernel_pulse_description")}
-                  </p>
+                  <p className="text-sm font-semibold uppercase tracking-widest">ADMIN_OVERRIDE_CONSOLE</p>
+                  <p className="mt-1 text-[11px] leading-relaxed text-white/45">{t("kernel_pulse_description")}</p>
                 </div>
               </div>
             </div>
@@ -147,18 +119,12 @@ export function LoginSection({ reason }: { reason?: string }) {
                   <LockKeyhole size={20} />
                 </div>
                 <div className="lg:hidden">
-                  <p className="font-semibold text-[13px] uppercase tracking-wider">
-                    Adriel Zimbril
-                  </p>
+                  <p className="font-semibold text-[13px] uppercase tracking-wider">Adriel Zimbril</p>
                   <p className="text-xs text-black/50">Secure workspace</p>
                 </div>
               </div>
-              <h2 className="text-4xl font-semibold leading-tight tracking-[-0.04em] uppercase">
-                Accès_Racine
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-black/55">
-                {t("signature_detected_description")}
-              </p>
+              <h2 className="text-4xl font-semibold leading-tight tracking-[-0.04em] uppercase">Accès_Racine</h2>
+              <p className="mt-3 text-sm leading-6 text-black/55">{t("signature_detected_description")}</p>
             </div>
 
             {isUnauthorized && (
@@ -176,5 +142,5 @@ export function LoginSection({ reason }: { reason?: string }) {
         </main>
       </div>
     </div>
-  );
+  )
 }

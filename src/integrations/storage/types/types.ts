@@ -1,30 +1,30 @@
 export type CreateBucketHandler = (
   name: string,
   options?: {
-    public?: boolean;
+    public?: boolean
   },
-) => Promise<void>;
+) => Promise<void>
 
 export type GetSignedUploadUrlHandler = (
   path: string,
   options: {
-    bucket: string;
+    bucket: string
   },
-) => Promise<string>;
+) => Promise<string>
 
 export type GetSignedUrlHandler = (
   path: string,
   options: {
-    bucket: string;
-    expiresIn?: number;
+    bucket: string
+    expiresIn?: number
   },
-) => Promise<string>;
+) => Promise<string>
 
 export type UploadHandler = (
   file: File | Buffer | string,
   path: string,
   options: {
-    bucket: string;
-    contentType?: string;
+    bucket: string
+    contentType?: string
   },
-) => Promise<{ url: string; path: string }>;
+) => Promise<{ url: string; path: string }>

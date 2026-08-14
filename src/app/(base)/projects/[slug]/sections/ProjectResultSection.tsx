@@ -1,32 +1,29 @@
-"use client";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import Image from "next/image";
-import { cn } from "@/utils/utils";
-import { getImageUrl } from "@/utils/base-url";
-import { FormattedText } from "@/components/shared/formatted-text";
-import { useTranslations } from "use-intl";
-import { getEmojiHub } from "@aurthle/emoji-hub";
+"use client"
+import React from "react"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import Image from "next/image"
+import { cn } from "@/utils/utils"
+import { getImageUrl } from "@/utils/base-url"
+import { FormattedText } from "@/components/shared/formatted-text"
+import { useTranslations } from "use-intl"
+import { getEmojiHub } from "@aurthle/emoji-hub"
 
 export function ProjectResultSection({
   description,
   results,
 }: {
-  description: string;
-  results: { badge: string; icon: string; content: string }[];
+  description: string
+  results: { badge: string; icon: string; content: string }[]
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <>
       <SectionLayout
         title={t("projects.inner-page.project-result-section.title")}
-        description={
-          description ||
-          t("projects.inner-page.project-result-section.description")
-        }
+        description={description || t("projects.inner-page.project-result-section.description")}
         className="p-0"
         contentClassName="md:grid-cols-3"
       >
@@ -60,11 +57,7 @@ export function ProjectResultSection({
                 </div>
 
                 <div className="flex flex-col items-start gap-2 w-full">
-                  <FormattedText
-                    className="relative"
-                    key={index}
-                    inParagraph={false}
-                  >
+                  <FormattedText className="relative" key={index} inParagraph={false}>
                     {result.content}
                   </FormattedText>
                 </div>
@@ -74,5 +67,5 @@ export function ProjectResultSection({
         ))}
       </SectionLayout>
     </>
-  );
+  )
 }

@@ -1,35 +1,28 @@
-import { LocaleLink } from "@/integrations/i18n/routing";
-import { cn, getImageUrl, getThisPageUrl, slugifyHeadline } from "@/utils";
-import type { MDXComponents } from "mdx/types";
-import type { ImageProps } from "next/image";
-import Image from "next/image";
-import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { Link } from "@/components/ui/link";
-import { siteConfig } from "@/data/config";
-import { routes } from "@/data/routes";
+import { LocaleLink } from "@/integrations/i18n/routing"
+import { cn, getImageUrl, getThisPageUrl, slugifyHeadline } from "@/utils"
+import type { MDXComponents } from "mdx/types"
+import type { ImageProps } from "next/image"
+import Image from "next/image"
+import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { Link } from "@/components/ui/link"
+import { siteConfig } from "@/data/config"
+import { routes } from "@/data/routes"
 
 export const mdxComponents = {
   a: (props) => {
-    const { href, children, ...rest } = props;
-    const isInternalLink =
-      href && (href.startsWith("/") || href.startsWith("#"));
+    const { href, children, ...rest } = props
+    const isInternalLink = href && (href.startsWith("/") || href.startsWith("#"))
 
     return isInternalLink ? (
       <LocaleLink href={href} {...rest} className="underline">
         {children}
       </LocaleLink>
     ) : (
-      <a
-        target="_blank"
-        className="underline"
-        rel="noopener noreferrer"
-        href={href}
-        {...rest}
-      >
+      <a target="_blank" className="underline" rel="noopener noreferrer" href={href} {...rest}>
         {children}
       </a>
-    );
+    )
   },
   img: (props) =>
     props.src ? (
@@ -44,56 +37,32 @@ export const mdxComponents = {
       />
     ) : null,
   h1: ({ children, ...rest }) => (
-    <h1
-      id={slugifyHeadline(children as string)}
-      className="mb-6 font-bold h3 leading-[120%]"
-      {...rest}
-    >
+    <h1 id={slugifyHeadline(children as string)} className="mb-6 font-bold h3 leading-[120%]" {...rest}>
       {children}
     </h1>
   ),
   h2: ({ children, ...rest }) => (
-    <h2
-      id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold h4 leading-[120%]"
-      {...rest}
-    >
+    <h2 id={slugifyHeadline(children as string)} className="mb-4 font-bold h4 leading-[120%]" {...rest}>
       {children}
     </h2>
   ),
   h3: ({ children, ...rest }) => (
-    <h3
-      id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold h5 leading-[120%]"
-      {...rest}
-    >
+    <h3 id={slugifyHeadline(children as string)} className="mb-4 font-bold h5 leading-[120%]" {...rest}>
       {children}
     </h3>
   ),
   h4: ({ children, ...rest }) => (
-    <h4
-      id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold h6 leading-[120%]"
-      {...rest}
-    >
+    <h4 id={slugifyHeadline(children as string)} className="mb-4 font-bold h6 leading-[120%]" {...rest}>
       {children}
     </h4>
   ),
   h5: ({ children, ...rest }) => (
-    <h5
-      id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold text-base leading-[120%]"
-      {...rest}
-    >
+    <h5 id={slugifyHeadline(children as string)} className="mb-4 font-bold text-base leading-[120%]" {...rest}>
       {children}
     </h5>
   ),
   h6: ({ children, ...rest }) => (
-    <h6
-      id={slugifyHeadline(children as string)}
-      className="mb-4 font-bold text-sm leading-[120%]"
-      {...rest}
-    >
+    <h6 id={slugifyHeadline(children as string)} className="mb-4 font-bold text-sm leading-[120%]" {...rest}>
       {children}
     </h6>
   ),
@@ -104,10 +73,7 @@ export const mdxComponents = {
   ),
   span: ({ children, ...rest }) => <span {...rest}>{children}</span>,
   blockquote: ({ children, ...rest }) => (
-    <blockquote
-      {...rest}
-      className="mb-6 bg-b-base p-2 md:p-3 squircle-xl md:squircle-4xl"
-    >
+    <blockquote {...rest} className="mb-6 bg-b-base p-2 md:p-3 squircle-xl md:squircle-4xl">
       <div className="flex flex-col not-italic bg-sh-white p-2 md:p-4 squircle-xl md:squircle-3xl [&>p]:mb-2 [&>p:last-child]:mb-0">
         {children}
       </div>
@@ -130,10 +96,7 @@ export const mdxComponents = {
   ),
   table: ({ children, ...rest }) => (
     <div className="overflow-x-auto">
-      <table
-        className="mb-6 w-full rounded-xl border border-zinc-300"
-        {...rest}
-      >
+      <table className="mb-6 w-full rounded-xl border border-zinc-300" {...rest}>
         {children}
       </table>
     </div>
@@ -144,10 +107,7 @@ export const mdxComponents = {
     </thead>
   ),
   tbody: ({ children, ...rest }) => (
-    <tbody
-      className="divide-y divide-zinc-200 border border-zinc-300 rounded-b-2xl"
-      {...rest}
-    >
+    <tbody className="divide-y divide-zinc-200 border border-zinc-300 rounded-b-2xl" {...rest}>
       {children}
     </tbody>
   ),
@@ -161,73 +121,43 @@ export const mdxComponents = {
     </th>
   ),
   td: ({ children, ...rest }) => (
-    <td
-      className="px-4 py-2 text-b-white-invert-sec align-top h-min border-b border-l border-b-base-accent"
-      {...rest}
-    >
+    <td className="px-4 py-2 text-b-white-invert-sec align-top h-min border-b border-l border-b-base-accent" {...rest}>
       {children}
     </td>
   ),
   ChallengeRegisterLink: ({ children, ...rest }) => (
-    <Link
-      href={`${getThisPageUrl()}/register`}
-      className="underline ps-0"
-      {...rest}
-    >
+    <Link href={`${getThisPageUrl()}/register`} className="underline ps-0" {...rest}>
       {children}
     </Link>
   ),
   ChallengeSubmitLink: ({ children, ...rest }) => (
-    <Link
-      href={`${getThisPageUrl()}/submit`}
-      className=" underline ps-0"
-      {...rest}
-    >
+    <Link href={`${getThisPageUrl()}/submit`} className=" underline ps-0" {...rest}>
       {children}
     </Link>
   ),
-} satisfies MDXComponents;
+} satisfies MDXComponents
 
 export const mdxCustomComponents = {
   SectionLayout,
   PreviewValueCard,
   SmartSection,
   Highlight,
-} satisfies MDXComponents;
+} satisfies MDXComponents
 
-export function Highlight({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+export function Highlight({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <span
-      className={cn(
-        "p-1 py-0.5 bg-violet-200 text-b-white-unchanged rounded-md font-medium font-bold",
-        className,
-      )}
-    >
+    <span className={cn("p-1 py-0.5 bg-violet-200 text-b-white-unchanged rounded-md font-medium font-bold", className)}>
       {children}
     </span>
-  );
+  )
 }
 
 export const richTextComponent = {
   p: (chunks: React.ReactNode) => <p className="relative">{chunks}</p>,
-  strike: (chunks: React.ReactNode) => (
-    <span className="relative line-through">{chunks}</span>
-  ),
-  strong: (chunks: React.ReactNode) => (
-    <span className="relative font-bold">{chunks}</span>
-  ),
-  thin: (chunks: React.ReactNode) => (
-    <span className="relative font-light">{chunks}</span>
-  ),
-  markup: (chunks: React.ReactNode) => (
-    <span className="relative">{chunks}</span>
-  ),
+  strike: (chunks: React.ReactNode) => <span className="relative line-through">{chunks}</span>,
+  strong: (chunks: React.ReactNode) => <span className="relative font-bold">{chunks}</span>,
+  thin: (chunks: React.ReactNode) => <span className="relative font-light">{chunks}</span>,
+  markup: (chunks: React.ReactNode) => <span className="relative">{chunks}</span>,
   highlight: (chunks: React.ReactNode) => <Highlight>{chunks}</Highlight>,
   blog: (chunks: React.ReactNode) => (
     <Link
@@ -275,7 +205,7 @@ export const richTextComponent = {
     </Link>
   ),
   br: () => <br aria-hidden="true" />,
-};
+}
 
 /* Component that hides if title is empty */
 export function SmartSection({
@@ -283,16 +213,16 @@ export function SmartSection({
   description,
   children,
 }: {
-  title: string;
-  description: string;
-  children: React.ReactNode;
+  title: string
+  description: string
+  children: React.ReactNode
 }) {
   // Do not display if title is empty or undefined
-  if (!title?.trim()) return null;
+  if (!title?.trim()) return null
 
   return (
     <SectionLayout title={title} description={description}>
       {children}
     </SectionLayout>
-  );
+  )
 }

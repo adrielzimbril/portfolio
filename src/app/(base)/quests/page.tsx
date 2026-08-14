@@ -1,16 +1,16 @@
-import React from "react";
-import { HeaderSection } from "@/app/(base)/quests/sections/HeaderSection";
-import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
-import { metadata as baseMetadata } from "@/app/metadata";
-import logger from "@/utils/logger";
-import { getAllQuests } from "@/integrations/content/lib/quests";
-import { MyQuestsSection } from "@/app/(base)/quests/sections/MyQuestsSection";
-import { Skeleton } from "@/components/ui/skeleton";
+import React from "react"
+import { HeaderSection } from "@/app/(base)/quests/sections/HeaderSection"
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
+import { Metadata } from "next"
+import { getLocale, getTranslations } from "next-intl/server"
+import { metadata as baseMetadata } from "@/app/metadata"
+import logger from "@/utils/logger"
+import { getAllQuests } from "@/integrations/content/lib/quests"
+import { MyQuestsSection } from "@/app/(base)/quests/sections/MyQuestsSection"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -27,17 +27,17 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("quests.title"),
       description: t("quests.description"),
     },
-  };
+  }
 
-  return metadata;
+  return metadata
 }
 
 export default async function MyQuests() {
-  const locale = await getLocale();
+  const locale = await getLocale()
   const data = await getAllQuests({ locale }).catch((err) => {
-    logger.error(err);
-    return [];
-  });
+    logger.error(err)
+    return []
+  })
 
   return (
     <>
@@ -51,5 +51,5 @@ export default async function MyQuests() {
         <CallToAction isPage />
       </Skeleton>
     </>
-  );
+  )
 }

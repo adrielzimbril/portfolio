@@ -1,18 +1,12 @@
-import React from "react";
+import React from "react"
 
 interface ThreeDIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
+  size?: number | string
 }
 
 export const ThreeDIcon = ({ size = 49, ...props }: ThreeDIconProps) => {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 49 49"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <svg width={size} height={size} viewBox="0 0 49 49" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M24.8889 27.0118L7.38892 36.5118L11.613 20.5542C11.7937 19.8715 12.152 19.2488 12.6514 18.7494L24.8889 6.51184V27.0118Z"
         fill="url(#paint0_linear_622_955)"
@@ -76,5 +70,5 @@ export const ThreeDIcon = ({ size = 49, ...props }: ThreeDIconProps) => {
         </linearGradient>
       </defs>
     </svg>
-  );
-};
+  )
+}

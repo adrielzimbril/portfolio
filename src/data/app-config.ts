@@ -1,31 +1,31 @@
 export type Config = {
   i18n: {
-    enabled: boolean;
+    enabled: boolean
     locales: {
       [locale: string]: {
-        code: string;
-        label: string;
-        currency: string;
-        icon: string;
-        url: string;
-      };
-    };
-    defaultLocale: string;
-    defaultCurrency: string;
-    localeCookieName: string;
-  };
+        code: string
+        label: string
+        currency: string
+        icon: string
+        url: string
+      }
+    }
+    defaultLocale: string
+    defaultCurrency: string
+    localeCookieName: string
+  }
   mails: {
-    from: string;
-    replyTo: string;
-  };
+    from: string
+    replyTo: string
+  }
   contactForm: {
-    enabled: boolean;
-    to: string;
-    subject: string;
-  };
-};
+    enabled: boolean
+    to: string
+    subject: string
+  }
+}
 
-const BASE_URL = "https://www.adrielzimbril.com";
+const BASE_URL = "https://www.adrielzimbril.com"
 
 export const appConfig = {
   // Internationalization
@@ -78,4 +78,4 @@ export const appConfig = {
     // the subject of the email
     subject: "Contact form message",
   },
-} as const satisfies Config;
+} as const satisfies Config

@@ -1,21 +1,10 @@
-import { Feed } from "feed";
-import {
-  getAllPosts,
-  getAllProjects,
-  getAllQuests,
-  getAllResources,
-  getAllTalks,
-} from "@/integrations/content/lib";
-import { Locale, PageType } from "@/types";
-import {
-  getAbsolutePathUrl,
-  getImageUrl,
-  getPathUrl,
-  getResourcesUrl,
-} from "@/utils";
-import { siteConfig } from "@/data/config";
-import { routes } from "@/data/routes";
-import { getTranslations } from "next-intl/server";
+import { Feed } from "feed"
+import { getAllPosts, getAllProjects, getAllQuests, getAllResources, getAllTalks } from "@/integrations/content/lib"
+import { Locale, PageType } from "@/types"
+import { getAbsolutePathUrl, getImageUrl, getPathUrl, getResourcesUrl } from "@/utils"
+import { siteConfig } from "@/data/config"
+import { routes } from "@/data/routes"
+import { getTranslations } from "next-intl/server"
 
 /**
  * Normalize locale to be used in getTranslations
@@ -28,26 +17,26 @@ import { getTranslations } from "next-intl/server";
  * normalizeLocale("zh-cn") -> "zh-CN"
  */
 function normalizeLocale(locale: string): string {
-  const parts = locale.split("-");
+  const parts = locale.split("-")
   if (parts.length === 1) {
     // ex: "en"
-    return parts[0] || "";
+    return parts[0] || ""
   }
   // ex: "zh-cn" -> "zh-CN"
-  return `${parts[0]}-${parts[1]!.toUpperCase()}`;
+  return `${parts[0]}-${parts[1]!.toUpperCase()}`
 }
 
 export async function generateRssFeed({ locale }: { locale: Locale }) {
-  const localeForTranslation = normalizeLocale(locale);
+  const localeForTranslation = normalizeLocale(locale)
 
-  const t = await getTranslations({ locale: localeForTranslation });
+  const t = await getTranslations({ locale: localeForTranslation })
   const [posts, projects, resources, talks, quests] = await Promise.all([
     getAllPosts({ locale: localeForTranslation }),
     getAllProjects({ locale: localeForTranslation }),
     getAllResources({ locale: localeForTranslation }),
     getAllTalks({ locale: localeForTranslation }),
     getAllQuests({ locale: localeForTranslation }),
-  ]);
+  ])
 
   const feed = new Feed({
     title: siteConfig.details.name,
@@ -74,11 +63,11 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
       link: siteConfig.url,
       avatar: siteConfig.details.avatar,
     },
-  });
+  })
 
   // Add posts
   posts.forEach((post) => {
-    const url = getResourcesUrl(PageType.THOUGHT, post.slug);
+    const url = getResourcesUrl(PageType.THOUGHT, post.slug)
     feed.addItem({
       title: post.title,
       id: url,
@@ -101,19 +90,17 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
           domain: getPathUrl(routes.thoughts.link),
         },
       ],
-    });
-  });
+    })
+  })
 
   // Add projects
   projects.forEach((project) => {
-    const url = getResourcesUrl(PageType.PROJECT, project.slug);
+    const url = getResourcesUrl(PageType.PROJECT, project.slug)
     feed.addItem({
       title: project.title,
       id: url,
       link: url,
-      image: getImageUrl(
-        project.image_thumbnail || routes.openGraphResource.link,
-      ),
+      image: getImageUrl(project.image_thumbnail || routes.openGraphResource.link),
       description: project.excerpt || "",
       content: project.excerpt || "",
       date: new Date(project.updated_at || project.created_at),
@@ -131,12 +118,12 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
           domain: getPathUrl(routes.projects.link),
         },
       ],
-    });
-  });
+    })
+  })
 
   // Add resources
   resources.forEach((resource) => {
-    const url = getResourcesUrl(PageType.HUB, resource.slug);
+    const url = getResourcesUrl(PageType.HUB, resource.slug)
     feed.addItem({
       title: resource.title,
       id: url,
@@ -159,12 +146,12 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
           domain: getPathUrl(routes.hub.link),
         },
       ],
-    });
-  });
+    })
+  })
 
   // Add talks
   talks.forEach((talk) => {
-    const url = getResourcesUrl(PageType.TALKS);
+    const url = getResourcesUrl(PageType.TALKS)
     feed.addItem({
       title: talk.title,
       id: url,
@@ -187,12 +174,12 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
           domain: getPathUrl(routes.talks.link),
         },
       ],
-    });
-  });
+    })
+  })
 
   // Add quests
   quests.forEach((quest) => {
-    const url = getResourcesUrl(PageType.QUESTS, quest.slug);
+    const url = getResourcesUrl(PageType.QUESTS, quest.slug)
     feed.addItem({
       title: quest.title,
       id: url,
@@ -215,13 +202,13 @@ export async function generateRssFeed({ locale }: { locale: Locale }) {
           domain: getPathUrl(routes.quests.link),
         },
       ],
-    });
-  });
+    })
+  })
 
   // Generate the feed in both RSS 2.0 and Atom 1.0 formats
   return {
     rss2: feed.rss2(),
     atom: feed.atom1(),
     json: feed.json1(),
-  };
+  }
 }

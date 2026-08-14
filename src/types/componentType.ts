@@ -1,4 +1,4 @@
 export interface ResourceHeaderTag {
-  text: string;
-  bgColor: string;
+  text: string
+  bgColor: string
 }

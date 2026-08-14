@@ -1,32 +1,22 @@
-"use client";
-import React from "react";
-import { QuestCard } from "@/components/shared/pages/quests/card";
-import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import { Quest } from "@/integrations/content/types";
-import { useTranslations } from "use-intl";
-import { getResourcesUrl } from "@/utils/base-url";
-import { getHumanDate } from "@utils/format-date";
-import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types";
-import {
-  isRegistrationClosed,
-  isSubmissionClosed,
-} from "@/integrations/content/lib";
+"use client"
+import React from "react"
+import { QuestCard } from "@/components/shared/pages/quests/card"
+import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section"
+import { Quest } from "@/integrations/content/types"
+import { useTranslations } from "use-intl"
+import { getResourcesUrl } from "@/utils/base-url"
+import { getHumanDate } from "@utils/format-date"
+import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
+import { isRegistrationClosed, isSubmissionClosed } from "@/integrations/content/lib"
 
 export function MorePreviewSection({ data }: { data: Quest[] }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
-    <CardPreviewSection
-      title={t("quests.inner-page.more-preview-section.title")}
-    >
+    <CardPreviewSection title={t("quests.inner-page.more-preview-section.title")}>
       {data.map((quest) => {
-        const registrationClosed = isRegistrationClosed(
-          quest.registration_deadline,
-        );
-        const submissionClosed = isSubmissionClosed(
-          quest.submission_deadline,
-          quest.quest_end,
-        );
+        const registrationClosed = isRegistrationClosed(quest.registration_deadline)
+        const submissionClosed = isSubmissionClosed(quest.submission_deadline, quest.quest_end)
 
         return (
           <QuestCard
@@ -37,26 +27,16 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
             tags={[
               {
                 name: t(
-                  registrationClosed
-                    ? "quests.cards.tags.registration.closed"
-                    : "quests.cards.tags.registration.open",
+                  registrationClosed ? "quests.cards.tags.registration.closed" : "quests.cards.tags.registration.open",
                 ),
                 meta: {
-                  color: registrationClosed
-                    ? DEFAULT_COLOR_CODE_NAME.RED
-                    : DEFAULT_COLOR_CODE_NAME.PURPLE,
+                  color: registrationClosed ? DEFAULT_COLOR_CODE_NAME.RED : DEFAULT_COLOR_CODE_NAME.PURPLE,
                 },
               },
               {
-                name: t(
-                  submissionClosed
-                    ? "quests.cards.tags.submission.closed"
-                    : "quests.cards.tags.submission.open",
-                ),
+                name: t(submissionClosed ? "quests.cards.tags.submission.closed" : "quests.cards.tags.submission.open"),
                 meta: {
-                  color: submissionClosed
-                    ? DEFAULT_COLOR_CODE_NAME.ORANGE
-                    : DEFAULT_COLOR_CODE_NAME.BLUE,
+                  color: submissionClosed ? DEFAULT_COLOR_CODE_NAME.ORANGE : DEFAULT_COLOR_CODE_NAME.BLUE,
                 },
               },
             ]}
@@ -73,17 +53,13 @@ export function MorePreviewSection({ data }: { data: Quest[] }) {
               }),
             ]}
             action={{
-              label: t(
-                submissionClosed
-                  ? "quests.cards.actions.viewResults"
-                  : "quests.cards.actions.participate",
-              ),
+              label: t(submissionClosed ? "quests.cards.actions.viewResults" : "quests.cards.actions.participate"),
               href: getResourcesUrl(PageType.QUESTS, quest.slug),
             }}
             hideReactions
           />
-        );
+        )
       })}
     </CardPreviewSection>
-  );
+  )
 }

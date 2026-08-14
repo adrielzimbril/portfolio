@@ -1,22 +1,22 @@
-import { getImageUrl } from "@/utils/base-url";
-import { NextRequest } from "next/server";
-import { createClient } from "@/integrations/supabase/server";
-import { cookies } from "next/headers";
-import logger from "@/utils/logger";
-import { sendEmail } from "@/integrations/mail";
-import { addContact } from "@/integrations/contact";
-import { ContactProvider } from "@/integrations/contact/types/types";
-import { getResourcesUrl, validateSimpleClientToken } from "@/utils";
-import { getResourceById } from "@/integrations/content/lib";
-import { Locale, PageType, ResourceType } from "@/types";
-import { getResourceUserUrl } from "@/config/resources.config";
-import { getBrevoConfig } from "@/config";
+import { getImageUrl } from "@/utils/base-url"
+import { NextRequest } from "next/server"
+import { createClient } from "@/integrations/supabase/server"
+import { cookies } from "next/headers"
+import logger from "@/utils/logger"
+import { sendEmail } from "@/integrations/mail"
+import { addContact } from "@/integrations/contact"
+import { ContactProvider } from "@/integrations/contact/types/types"
+import { getResourcesUrl, validateSimpleClientToken } from "@/utils"
+import { getResourceById } from "@/integrations/content/lib"
+import { Locale, PageType, ResourceType } from "@/types"
+import { getResourceUserUrl } from "@/config/resources.config"
+import { getBrevoConfig } from "@/config"
 
 export async function POST(req: NextRequest) {
-  const cookieStore = await cookies();
-  const supabase = createClient(cookieStore);
+  const cookieStore = await cookies()
+  const supabase = createClient(cookieStore)
 
-  const body = await req.json().catch(() => ({}));
+  const body = await req.json().catch(() => ({}))
   const {
     email,
     name,
@@ -27,32 +27,28 @@ export async function POST(req: NextRequest) {
     updateExisting,
     locale,
   }: {
-    email: string;
-    name?: string;
-    phone?: string;
-    productId?: string;
-    productType?: ResourceType;
-    subscribedFromPage?: string;
-    updateExisting?: boolean;
-    locale?: Locale;
-  } = body;
+    email: string
+    name?: string
+    phone?: string
+    productId?: string
+    productType?: ResourceType
+    subscribedFromPage?: string
+    updateExisting?: boolean
+    locale?: Locale
+  } = body
 
   if (!email) {
     return new Response(JSON.stringify({ error: "Email is required" }), {
       status: 400,
-    });
+    })
   }
 
   // Link or create the user record first (users table)
-  let userId: string | undefined;
+  let userId: string | undefined
   // search user by email
-  const { data: existingUser, error: findError } = await supabase
-    .from("users")
-    .select("*")
-    .eq("email", email)
-    .limit(1);
-  const existingUserData = existingUser?.[0];
-  const alreadyExists = Boolean(existingUserData);
+  const { data: existingUser, error: findError } = await supabase.from("users").select("*").eq("email", email).limit(1)
+  const existingUserData = existingUser?.[0]
+  const alreadyExists = Boolean(existingUserData)
 
   if (!alreadyExists) {
     try {
@@ -60,14 +56,14 @@ export async function POST(req: NextRequest) {
         p_name: name ?? "",
         p_email: email ?? undefined,
         p_phone: phone ?? "",
-      });
+      })
       // Supabase returns a single row for this RPC
-      userId = userData!.id;
+      userId = userData!.id
     } catch (e) {
-      logger.warn("upsert_user RPC threw, continuing without user link", e);
+      logger.warn("upsert_user RPC threw, continuing without user link", e)
     }
   } else if (existingUserData) {
-    userId = existingUserData.id;
+    userId = existingUserData.id
   }
   // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
   // logger.info("Adding newsletter subscriber", { email, name, phone });
@@ -84,23 +80,17 @@ export async function POST(req: NextRequest) {
           url: req.url,
         }),
         updateexisting: alreadyExists,
-      });
+      })
     } catch (e) {
-      logger.error(
-        `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-        { error: e },
-      );
+      logger.error(`Failed to add newsletter subscriber for user ${userId} - ${email}`, { error: e })
     }
   } else {
     try {
       await supabase.from("newsletter_subscribers").update({
         updateexisting: alreadyExists,
-      });
+      })
     } catch (e) {
-      logger.error(
-        `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-        { error: e },
-      );
+      logger.error(`Failed to add newsletter subscriber for user ${userId} - ${email}`, { error: e })
     }
   }
 
@@ -112,23 +102,20 @@ export async function POST(req: NextRequest) {
         context: { name },
         templateId: "welcome",
         locale: locale,
-      });
+      })
     } catch (e) {
-      logger.warn(
-        `Welcome email send failed for user ${userId} - ${email}:`,
-        e,
-      );
+      logger.warn(`Welcome email send failed for user ${userId} - ${email}:`, e)
     }
   }
 
   if (productIdToken) {
-    const productId = validateSimpleClientToken(productIdToken).payload?.id;
-    const productData = await getResourceById(productId);
+    const productId = validateSimpleClientToken(productIdToken).payload?.id
+    const productData = await getResourceById(productId)
     if (productData) {
-      const { title, features, cover, slug, type } = productData;
-      const productUrl = getResourcesUrl(PageType.HUB, slug);
-      const productEndUrl = await getResourceUserUrl(slug, supabase);
-      const customText = undefined;
+      const { title, features, cover, slug, type } = productData
+      const productUrl = getResourcesUrl(PageType.HUB, slug)
+      const productEndUrl = await getResourceUserUrl(slug, supabase)
+      const customText = undefined
 
       if (userId) {
         try {
@@ -148,13 +135,13 @@ export async function POST(req: NextRequest) {
               referer: req.headers.get("referer"),
               url: req.url,
             }),
-          });
-          logger.info("[SUBSCRIBE] hub_product_requests", sup);
+          })
+          logger.info("[SUBSCRIBE] hub_product_requests", sup)
         } catch (e: unknown) {
           logger.error(
             `Failed: error caught to store hub_product_request for user ${userId} - ${email} via RPC:`,
             (e as Error)?.message || e,
-          );
+          )
         }
       }
 
@@ -173,20 +160,17 @@ export async function POST(req: NextRequest) {
             },
             templateId: "productDelivery",
             locale: locale,
-          });
+          })
         } catch (e: unknown) {
-          logger.warn(
-            `Product delivery email send failed for user ${userId} - ${email}:`,
-            (e as Error)?.message || e,
-          );
+          logger.warn(`Product delivery email send failed for user ${userId} - ${email}:`, (e as Error)?.message || e)
         }
       }
     }
   }
 
   // 2) Add to Brevo lists (general + product-specific)
-  const brevoConfig = getBrevoConfig();
-  const generalId = Number(brevoConfig.generalListId);
+  const brevoConfig = getBrevoConfig()
+  const generalId = Number(brevoConfig.generalListId)
 
   function getListIdByProduct(product?: ResourceType) {
     const map: Record<ResourceType, number | undefined> = {
@@ -196,15 +180,13 @@ export async function POST(req: NextRequest) {
       masterclass: Number(brevoConfig.masterclassListId),
       figma_template: Number(brevoConfig.figmaTemplateListId),
       code: Number(brevoConfig.codeListId),
-    };
-    return product ? map[product] : undefined;
+    }
+    return product ? map[product] : undefined
   }
 
-  const productTypeId = getListIdByProduct(productType);
+  const productTypeId = getListIdByProduct(productType)
 
-  const listIds = [generalId, productTypeId].filter(
-    (n): n is number => !!n && !Number.isNaN(n),
-  );
+  const listIds = [generalId, productTypeId].filter((n): n is number => !!n && !Number.isNaN(n))
 
   try {
     if (listIds.length > 0) {
@@ -214,18 +196,15 @@ export async function POST(req: NextRequest) {
         phone: phone ?? undefined,
         listIds,
         provider: ContactProvider.BREVO,
-      });
+      })
     }
   } catch (e: unknown) {
     // Do not fail the flow if Brevo fails
-    logger.warn(
-      `Brevo add contact error for user ${userId} - ${email}:`,
-      (e as Error)?.message || e,
-    );
+    logger.warn(`Brevo add contact error for user ${userId} - ${email}:`, (e as Error)?.message || e)
   }
 
   return new Response(JSON.stringify({ success: true }), {
     status: 200,
     headers: { "Content-Type": "application/json" },
-  });
+  })
 }

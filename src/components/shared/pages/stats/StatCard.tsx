@@ -1,24 +1,24 @@
-"use client";
-import { motion } from "motion/react";
-import { useEffect, useState } from "react";
-import { usePerformanceMode } from "@/hooks/usePerformanceMode";
-import { cn } from "@/utils/utils";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
-import { pickRandomColor } from "@/utils/pick-random-color";
+"use client"
+import { motion } from "motion/react"
+import { useEffect, useState } from "react"
+import { usePerformanceMode } from "@/hooks/usePerformanceMode"
+import { cn } from "@/utils/utils"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types"
+import { pickRandomColor } from "@/utils/pick-random-color"
 
 interface StatCardProps {
-  label: string;
-  value: number | string;
-  suffix?: string;
-  icon?: React.ReactNode;
-  decoration?: string;
-  decorationPattern?: string;
-  description?: string;
-  delay?: number;
-  className?: string;
-  decorations?: Array<{ x: string; y: string; rotate: number; delay: number }>;
+  label: string
+  value: number | string
+  suffix?: string
+  icon?: React.ReactNode
+  decoration?: string
+  decorationPattern?: string
+  description?: string
+  delay?: number
+  className?: string
+  decorations?: Array<{ x: string; y: string; rotate: number; delay: number }>
 }
 
 export function StatCard({
@@ -38,16 +38,13 @@ export function StatCard({
     { x: "15%", y: "70%", rotate: 12, delay: 0.3 },
   ],
 }: StatCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={cn(
-        " size-full bg-b-base squircle-6xl/100  border-0 overflow-hidden",
-        className,
-      )}
+      className={cn(" size-full bg-b-base squircle-6xl/100  border-0 overflow-hidden", className)}
     >
       <CardContent className="grid grid-cols-1 p-4 gap-4 h-full">
         <div
@@ -95,19 +92,13 @@ export function StatCard({
             </div>
           )}
           <div className="relative w-full flex flex-col gap-2">
-            <div
-              className={cn(
-                "relative flex flex-row items-center gap-2 md:gap-4",
-              )}
-            >
+            <div className={cn("relative flex flex-row items-center gap-2 md:gap-4")}>
               {icon && (
                 <Badge
                   className={cn(
                     "capitalize text-xs font-medium",
                     pickRandomColor(
-                      decorationPattern
-                        ? DEFAULT_COLOR_CODE_NAME.VIOLET
-                        : DEFAULT_COLOR_CODE_NAME.ORANGE,
+                      decorationPattern ? DEFAULT_COLOR_CODE_NAME.VIOLET : DEFAULT_COLOR_CODE_NAME.ORANGE,
                     ),
                     decorationPattern && "size-max text-primary-foreground",
                   )}
@@ -125,12 +116,10 @@ export function StatCard({
                 </p>
               </div>
             </div>
-            {description && (
-              <p className="text-xs text-muted-foreground">{description}</p>
-            )}
+            {description && <p className="text-xs text-muted-foreground">{description}</p>}
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

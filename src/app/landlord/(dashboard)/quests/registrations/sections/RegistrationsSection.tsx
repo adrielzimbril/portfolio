@@ -1,45 +1,25 @@
-"use client";
-import React, { useMemo, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
-import useSWR, { mutate } from "swr";
-import {
-  Filter,
-  Loader2,
-  Mail,
-  MoreHorizontal,
-  Plus,
-  RefreshCw,
-  Users,
-  Eye,
-  Edit,
-  Trash2,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client"
+import React, { useMemo, useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
+import useSWR, { mutate } from "swr"
+import { Filter, Loader2, Mail, MoreHorizontal, Plus, RefreshCw, Users, Eye, Edit, Trash2 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/dropdown-menu"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
   AdminCard,
   EmptyState,
   SearchBox,
   StatusPill,
   TablePager,
-} from "@/components/landlord/components/AdminPrimitives";
-import {
-  ParticipantModal,
-  DataDetailsModal,
-} from "@/components/landlord/_modals";
+} from "@/components/landlord/components/AdminPrimitives"
+import { ParticipantModal, DataDetailsModal } from "@/components/landlord/_modals"
 import {
   fetchParticipants,
   fetchQuests,
@@ -47,70 +27,55 @@ import {
   formatTime,
   registrationsKey,
   deleteParticipant,
-} from "@/components/landlord/admin-utils";
-import type { Participant } from "@/components/landlord/admin-types";
-import { toast } from "@/lib/toast";
-import { ScrollArea } from "@/components/ui/scroll-area";
+} from "@/components/landlord/admin-utils"
+import type { Participant } from "@/components/landlord/admin-types"
+import { toast } from "@/lib/toast"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export function RegistrationsSection() {
-  const locale = useLocale();
-  const t = useTranslations("admin.landlord.quests");
-  const tShared = useTranslations("admin.landlord.shared");
-  const [search, setSearch] = useState("");
-  const [selectedQuest, setSelectedQuest] = useState("all");
-  const [participantModalOpen, setParticipantModalOpen] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  const [selectedParticipant, setSelectedParticipant] = useState<any>(null);
-  const [page, setPage] = useState(1);
-  const pageSize = 10;
+  const locale = useLocale()
+  const t = useTranslations("admin.landlord.quests")
+  const tShared = useTranslations("admin.landlord.shared")
+  const [search, setSearch] = useState("")
+  const [selectedQuest, setSelectedQuest] = useState("all")
+  const [participantModalOpen, setParticipantModalOpen] = useState(false)
+  const [detailsOpen, setDetailsOpen] = useState(false)
+  const [selectedParticipant, setSelectedParticipant] = useState<any>(null)
+  const [page, setPage] = useState(1)
+  const pageSize = 10
 
-  const { data: quests = [] } = useSWR("landlord-quests", fetchQuests);
+  const { data: quests = [] } = useSWR("landlord-quests", fetchQuests)
 
   const { data: tableData, isLoading: loading } = useSWR(
     registrationsKey(selectedQuest, page, pageSize),
     fetchParticipants,
-  );
+  )
 
-  const participants = useMemo(
-    () => (tableData?.rows as unknown as Participant[]) || [],
-    [tableData],
-  );
+  const participants = useMemo(() => (tableData?.rows as unknown as Participant[]) || [], [tableData])
 
   const filteredParticipants = useMemo(() => {
-    const query = search.trim().toLowerCase();
-    if (!query) return participants;
+    const query = search.trim().toLowerCase()
+    if (!query) return participants
     return participants.filter((participant) =>
-      [
-        participant.name,
-        participant.email,
-        participant.challenge_slug,
-        participant.status,
-        participant.meta?.source,
-      ]
+      [participant.name, participant.email, participant.challenge_slug, participant.status, participant.meta?.source]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(query)),
-    );
-  }, [search, participants]);
+    )
+  }, [search, participants])
 
   return (
     <div className="grid gap-5">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-            {t("registrations.title")}
-          </h2>
-          <p className="mt-1 text-sm text-black/45">
-            {t("registrations.subtitle")}
-          </p>
+          <h2 className="text-2xl font-semibold tracking-[-0.02em]">{t("registrations.title")}</h2>
+          <p className="mt-1 text-sm text-black/45">{t("registrations.subtitle")}</p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
           <Button
             variant="outline"
             asIcon
             asPointer
-            onClick={() =>
-              mutate(registrationsKey(selectedQuest, page, pageSize))
-            }
+            onClick={() => mutate(registrationsKey(selectedQuest, page, pageSize))}
           >
             <RefreshCw size={16} />
             {t("actions.refresh")}
@@ -119,8 +84,8 @@ export function RegistrationsSection() {
             asIcon
             asPointer
             onClick={() => {
-              setSelectedParticipant(null);
-              setParticipantModalOpen(true);
+              setSelectedParticipant(null)
+              setParticipantModalOpen(true)
             }}
           >
             <Plus size={16} />
@@ -134,8 +99,8 @@ export function RegistrationsSection() {
           <SearchBox
             value={search}
             onChange={(v) => {
-              setSearch(v);
-              setPage(1);
+              setSearch(v)
+              setPage(1)
             }}
             placeholder={t("placeholders.search")}
           />
@@ -144,17 +109,15 @@ export function RegistrationsSection() {
             <Select
               value={selectedQuest}
               onValueChange={(v) => {
-                setSelectedQuest(v);
-                setPage(1);
+                setSelectedQuest(v)
+                setPage(1)
               }}
             >
               <SelectTrigger className="h-10 w-full min-w-56 bg-white text-sm md:w-72">
                 <SelectValue placeholder={t("placeholders.all_quests")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">
-                  {t("placeholders.all_quests")}
-                </SelectItem>
+                <SelectItem value="all">{t("placeholders.all_quests")}</SelectItem>
                 {quests.map((quest) => (
                   <SelectItem key={quest.slug} value={quest.slug}>
                     {quest.title}
@@ -180,80 +143,49 @@ export function RegistrationsSection() {
                   <table className="w-full min-w-[860px] border-collapse text-left text-sm">
                     <thead className="sticky top-0 z-10 bg-white border-b border-black/8 text-xs text-black/45 shadow-[0_1px_0_0_rgba(0,0,0,0.05)]">
                       <tr>
-                        <th className="px-5 py-4 font-medium">
-                          {t("fields.participant")}
-                        </th>
-                        <th className="px-5 py-4 font-medium">
-                          {t("fields.quest")}
-                        </th>
-                        <th className="px-5 py-4 font-medium">
-                          {t("fields.status")}
-                        </th>
-                        <th className="px-5 py-4 font-medium">
-                          {t("fields.date")}
-                        </th>
-                        <th className="px-5 py-4 text-right font-medium">
-                          {tShared("actions")}
-                        </th>
+                        <th className="px-5 py-4 font-medium">{t("fields.participant")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.quest")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.status")}</th>
+                        <th className="px-5 py-4 font-medium">{t("fields.date")}</th>
+                        <th className="px-5 py-4 text-right font-medium">{tShared("actions")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-black/6">
                       {filteredParticipants.map((participant) => (
-                        <tr
-                          key={participant.id}
-                          className="hover:bg-black/2 transition-colors"
-                        >
+                        <tr key={participant.id} className="hover:bg-black/2 transition-colors">
                           <td className="px-5 py-4">
                             <div className="flex items-center gap-3">
                               <div className="flex size-10 items-center justify-center rounded-full bg-[#ffed90] text-sm font-semibold">
-                                {participant.name?.charAt(0)?.toUpperCase() ||
-                                  "?"}
+                                {participant.name?.charAt(0)?.toUpperCase() || "?"}
                               </div>
                               <div className="min-w-0">
-                                <p className="truncate font-medium">
-                                  {participant.name}
-                                </p>
-                                <p className="truncate text-xs text-black/45">
-                                  {participant.email}
-                                </p>
+                                <p className="truncate font-medium">{participant.name}</p>
+                                <p className="truncate text-xs text-black/45">{participant.email}</p>
                               </div>
                             </div>
                           </td>
                           <td className="px-5 py-4">
-                            <span className="max-w-60 truncate text-black/70">
-                              {participant.challenge_slug}
-                            </span>
+                            <span className="max-w-60 truncate text-black/70">{participant.challenge_slug}</span>
                           </td>
                           <td className="px-5 py-4">
-                            <StatusPill tone="warning">
-                              {t("fields.participant")}
-                            </StatusPill>
+                            <StatusPill tone="warning">{t("fields.participant")}</StatusPill>
                           </td>
                           <td className="px-5 py-4 text-black/55">
-                            <div>
-                              {formatDate(participant.created_at, locale)}
-                            </div>
-                            <div className="text-xs text-black/35">
-                              {formatTime(participant.created_at, locale)}
-                            </div>
+                            <div>{formatDate(participant.created_at, locale)}</div>
+                            <div className="text-xs text-black/35">{formatTime(participant.created_at, locale)}</div>
                           </td>
                           <td className="px-5 py-4 text-right">
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
-                                <Button
-                                  variant="outline"
-                                  size="icon"
-                                  asPointer
-                                  aria-label={tShared("actions")}
-                                >
+                                <Button variant="outline" size="icon" asPointer aria-label={tShared("actions")}>
                                   <MoreHorizontal size={16} />
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem
                                   onClick={() => {
-                                    setSelectedParticipant(participant);
-                                    setDetailsOpen(true);
+                                    setSelectedParticipant(participant)
+                                    setDetailsOpen(true)
                                   }}
                                 >
                                   <Eye size={14} />
@@ -261,8 +193,8 @@ export function RegistrationsSection() {
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
                                   onClick={() => {
-                                    setSelectedParticipant(participant);
-                                    setParticipantModalOpen(true);
+                                    setSelectedParticipant(participant)
+                                    setParticipantModalOpen(true)
                                   }}
                                 >
                                   <Edit size={14} />
@@ -271,30 +203,13 @@ export function RegistrationsSection() {
                                 <DropdownMenuItem
                                   className="text-red-500 hover:text-white !focus:text-white"
                                   onClick={async () => {
-                                    if (
-                                      window.confirm(
-                                        t(
-                                          "actions.delete_registration_confirm",
-                                        ),
-                                      )
-                                    ) {
+                                    if (window.confirm(t("actions.delete_registration_confirm"))) {
                                       try {
-                                        await deleteParticipant(
-                                          "register",
-                                          participant.id,
-                                        );
-                                        toast.success(
-                                          t("messages.success_deleted"),
-                                        );
-                                        mutate(
-                                          registrationsKey(
-                                            selectedQuest,
-                                            page,
-                                            pageSize,
-                                          ),
-                                        );
+                                        await deleteParticipant("register", participant.id)
+                                        toast.success(t("messages.success_deleted"))
+                                        mutate(registrationsKey(selectedQuest, page, pageSize))
                                       } catch (e) {
-                                        toast.error(t("messages.error_delete"));
+                                        toast.error(t("messages.error_delete"))
                                       }
                                     }
                                   }}
@@ -307,11 +222,7 @@ export function RegistrationsSection() {
                                   onClick={() =>
                                     navigator.clipboard
                                       ?.writeText(participant.email)
-                                      .then(() =>
-                                        toast.success(
-                                          t("messages.email_copied"),
-                                        ),
-                                      )
+                                      .then(() => toast.success(t("messages.email_copied")))
                                   }
                                 >
                                   <Mail size={14} />
@@ -327,12 +238,7 @@ export function RegistrationsSection() {
                 </div>
               </ScrollArea>
               <div className="shrink-0 bg-white/50 backdrop-blur-sm px-1 py-1 border-t border-black/5">
-                <TablePager
-                  page={page}
-                  pageSize={pageSize}
-                  count={tableData?.count || 0}
-                  onPageChange={setPage}
-                />
+                <TablePager page={page} pageSize={pageSize} count={tableData?.count || 0} onPageChange={setPage} />
               </div>
             </>
           ) : (
@@ -353,9 +259,7 @@ export function RegistrationsSection() {
         selectedQuest={selectedQuest}
         onOpenChange={setParticipantModalOpen}
         initialData={selectedParticipant}
-        onCreated={() =>
-          mutate(registrationsKey(selectedQuest, page, pageSize))
-        }
+        onCreated={() => mutate(registrationsKey(selectedQuest, page, pageSize))}
       />
 
       <DataDetailsModal
@@ -365,5 +269,5 @@ export function RegistrationsSection() {
         title={tShared("participant_details")}
       />
     </div>
-  );
+  )
 }

@@ -1,22 +1,19 @@
-"use client";
-import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useLoadMore } from "@/hooks/useLoadMore";
-import { Project } from "@/integrations/content/types";
+"use client"
+import { ProjectCard } from "@/components/shared/pages/projects/card"
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useLoadMore } from "@/hooks/useLoadMore"
+import { Project } from "@/integrations/content/types"
 interface MyProjectsSectionProps {
-  data: Project[];
+  data: Project[]
 }
 
-export function MyProjectsSection({
-  data: initialProjects,
-}: MyProjectsSectionProps) {
-  const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
-    useLoadMore({
-      dataSource: initialProjects,
-      initialCount: 3,
-      incrementCount: 4,
-    });
+export function MyProjectsSection({ data: initialProjects }: MyProjectsSectionProps) {
+  const { data, loadMore, loading, hasMore, loadedItems, totalItems } = useLoadMore({
+    dataSource: initialProjects,
+    initialCount: 3,
+    incrementCount: 4,
+  })
 
   return (
     <LoadMoreSection
@@ -26,9 +23,7 @@ export function MyProjectsSection({
       onLoadMore={loadMore}
       loadedItems={loadedItems}
       totalItems={totalItems}
-      loadingFallback={
-        <Skeleton name="projects-load-more" className="w-full h-40" />
-      }
+      loadingFallback={<Skeleton name="projects-load-more" className="w-full h-40" />}
     >
       {data.map((project, index) => (
         <ProjectCard
@@ -44,5 +39,5 @@ export function MyProjectsSection({
         />
       ))}
     </LoadMoreSection>
-  );
+  )
 }

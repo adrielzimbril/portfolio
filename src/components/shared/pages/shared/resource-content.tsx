@@ -1,45 +1,42 @@
-"use client";
-import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Project, Post, Resource } from "@/integrations/content/types";
-import { PageType } from "@/types";
-import { getDate } from "@/utils";
-import { useCallback, useMemo, useState } from "react";
-import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { ResourceCard } from "@/components/shared/pages/resources/card";
-import { ThoughtCard } from "@/components/shared/pages/thoughts/card";
-import logger from "@/utils/logger";
+"use client"
+import { LoadMoreSection } from "@/components/shared/pages/shared/load-more-section"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Project, Post, Resource } from "@/integrations/content/types"
+import { PageType } from "@/types"
+import { getDate } from "@/utils"
+import { useCallback, useMemo, useState } from "react"
+import { ProjectCard } from "@/components/shared/pages/projects/card"
+import { ResourceCard } from "@/components/shared/pages/resources/card"
+import { ThoughtCard } from "@/components/shared/pages/thoughts/card"
+import logger from "@/utils/logger"
 
 interface ResourceSectionProps {
-  data: Project[] | Post[] | Resource[];
-  type: PageType;
+  data: Project[] | Post[] | Resource[]
+  type: PageType
 }
 
-export function ResourceSection({
-  data: initialResources,
-  type,
-}: ResourceSectionProps) {
+export function ResourceSection({ data: initialResources, type }: ResourceSectionProps) {
   // Memoize the projects to avoid re-creating the hook
-  const memoizedResources = useMemo(() => initialResources, [initialResources]);
-  const [loadedCount, setLoadedCount] = useState(3);
-  const [loading, setLoading] = useState(false);
+  const memoizedResources = useMemo(() => initialResources, [initialResources])
+  const [loadedCount, setLoadedCount] = useState(3)
+  const [loading, setLoading] = useState(false)
 
   const visibleResources = useMemo(() => {
-    return memoizedResources.slice(0, loadedCount);
-  }, [memoizedResources, loadedCount]);
+    return memoizedResources.slice(0, loadedCount)
+  }, [memoizedResources, loadedCount])
 
-  const hasMore = loadedCount < memoizedResources.length;
+  const hasMore = loadedCount < memoizedResources.length
 
   const loadMore = useCallback(async () => {
-    if (loading || !hasMore) return;
+    if (loading || !hasMore) return
 
-    setLoading(true);
+    setLoading(true)
     setTimeout(() => {
-      setLoadedCount((prev) => Math.min(prev + 4, memoizedResources.length));
-      setLoading(false);
-    }, 500);
-  }, [loading, hasMore, memoizedResources.length]);
-  logger.info("ResourceSection", { loadedCount, hasMore, loading });
+      setLoadedCount((prev) => Math.min(prev + 4, memoizedResources.length))
+      setLoading(false)
+    }, 500)
+  }, [loading, hasMore, memoizedResources.length])
+  logger.info("ResourceSection", { loadedCount, hasMore, loading })
 
   if (type === PageType.PROJECT) {
     // const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
@@ -53,9 +50,7 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={
-          <Skeleton name="projects-load-more" className="w-full h-40" />
-        }
+        loadingFallback={<Skeleton name="projects-load-more" className="w-full h-40" />}
       >
         {(visibleResources as unknown as Project[]).map((item, index) => (
           <ProjectCard
@@ -70,7 +65,7 @@ export function ResourceSection({
           />
         ))}
       </LoadMoreSection>
-    );
+    )
   } else if (type === PageType.THOUGHT) {
     // const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
     //   useLoadMore<Post>({
@@ -83,9 +78,7 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={
-          <Skeleton name="thoughts-load-more" className="w-full h-40" />
-        }
+        loadingFallback={<Skeleton name="thoughts-load-more" className="w-full h-40" />}
       >
         {(visibleResources as unknown as Post[]).map((item, index) => (
           <ThoughtCard
@@ -99,7 +92,7 @@ export function ResourceSection({
           />
         ))}
       </LoadMoreSection>
-    );
+    )
   } else if (type === PageType.HUB) {
     // const { data, loadMore, loading, hasMore, loadedItems, totalItems } =
     //   useLoadMore<Resource>({
@@ -112,9 +105,7 @@ export function ResourceSection({
         onLoadMore={loadMore}
         loadedItems={loadedCount}
         totalItems={memoizedResources.length}
-        loadingFallback={
-          <Skeleton name="hub-load-more" className="w-full h-40" />
-        }
+        loadingFallback={<Skeleton name="hub-load-more" className="w-full h-40" />}
       >
         {(visibleResources as unknown as Resource[]).map((item, index) => {
           return (
@@ -130,9 +121,9 @@ export function ResourceSection({
               avatars={item.studentsProfileImage}
               userCount={item.studentsNumber}
             />
-          );
+          )
         })}
       </LoadMoreSection>
-    );
+    )
   }
 }

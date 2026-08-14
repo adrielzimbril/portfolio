@@ -1,5 +1,5 @@
-import React from "react";
-import { createTranslator } from "use-intl/core";
+import React from "react"
+import { createTranslator } from "use-intl/core"
 import {
   Body,
   Container,
@@ -12,24 +12,20 @@ import {
   Text,
   Hr,
   Tailwind,
-} from "@react-email/components";
-import { defaultTranslations } from "@/integrations/mail/util/translations";
-import { defaultLocale } from "@/integrations/mail/util/translations";
-import type { BaseMailProps } from "@/integrations/mail/types/types";
+} from "@react-email/components"
+import { defaultTranslations } from "@/integrations/mail/util/translations"
+import { defaultLocale } from "@/integrations/mail/util/translations"
+import type { BaseMailProps } from "@/integrations/mail/types/types"
 
-export function WelcomeEmail({
-  locale,
-  translations,
-  ...props
-}: BaseMailProps & { name?: string }) {
+export function WelcomeEmail({ locale, translations, ...props }: BaseMailProps & { name?: string }) {
   const t = createTranslator({
     locale,
     messages: translations,
-  });
+  })
 
-  const { name } = props;
+  const { name } = props
 
-  const firstName: string = name?.split(" ")[0] ?? t("mail.common.defaultName");
+  const firstName: string = name?.split(" ")[0] ?? t("mail.common.defaultName")
 
   return (
     <Html>
@@ -51,22 +47,15 @@ export function WelcomeEmail({
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             {/* Simple Header */}
             <Section className="px-10 pt-10 pb-5 bg-white text-center">
-              <Heading
-                as="h1"
-                className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
-              >
+              <Heading as="h1" className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
                 {t("mail.welcome.greeting", { firstName })} 👋
               </Heading>
-              <Text className="text-[#666666] text-base m-0">
-                {t("mail.welcome.tagline")}
-              </Text>
+              <Text className="text-[#666666] text-base m-0">{t("mail.welcome.tagline")}</Text>
             </Section>
 
             {/* Welcome Content */}
             <Section className="px-10 pb-10 bg-white">
-              <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.welcome.content.intro")}
-              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">{t("mail.welcome.content.intro")}</Text>
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
                 {t("mail.welcome.content.nextSteps")}
@@ -75,9 +64,7 @@ export function WelcomeEmail({
               <Hr className="border-t border-[#e0e0e0] my-8" />
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                <strong>
-                  {t("mail.welcome.content.whatYouReceive.title")}
-                </strong>
+                <strong>{t("mail.welcome.content.whatYouReceive.title")}</strong>
               </Text>
 
               <Section className="my-6">
@@ -105,9 +92,7 @@ export function WelcomeEmail({
                 <strong>{t("mail.welcome.question.title")}</strong>
               </Text>
 
-              <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.welcome.question.text")}
-              </Text>
+              <Text className="text-[#333333] text-base leading-relaxed mb-5">{t("mail.welcome.question.text")}</Text>
 
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
                 {t("mail.welcome.question.encouragement")}
@@ -121,9 +106,7 @@ export function WelcomeEmail({
                   <strong>{t("mail.welcome.reminder.title")}</strong>
                 </Text>
 
-                <Text className="text-[#333333] text-base leading-relaxed mb-0">
-                  {t("mail.welcome.reminder.text")}
-                </Text>
+                <Text className="text-[#333333] text-base leading-relaxed mb-0">{t("mail.welcome.reminder.text")}</Text>
               </Section>
             </Section>
 
@@ -131,9 +114,7 @@ export function WelcomeEmail({
             <Section className="p-10 bg-[#f5f5f4]">
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">
-                {t("mail.common.signature")}
-              </Text>
+              <Text className="text-lg font-medium text-[#1a1a1a] mb-4 text-center">{t("mail.common.signature")}</Text>
 
               <Text className="text-sm leading-relaxed text-[#666666] mb-6 text-center">
                 {t("mail.common.contact")}
@@ -141,21 +122,19 @@ export function WelcomeEmail({
 
               <Hr className="border-t border-[#e0e0e0] mb-6" />
 
-              <Text className="text-xs text-[#999999] text-center mb-3">
-                {t("mail.common.copyright")}
-              </Text>
+              <Text className="text-xs text-[#999999] text-center mb-3">{t("mail.common.copyright")}</Text>
             </Section>
           </Container>
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }
 
 WelcomeEmail.PreviewProps = {
   locale: defaultLocale,
   translations: defaultTranslations,
   name: "",
-};
+}
 
-export default WelcomeEmail;
+export default WelcomeEmail

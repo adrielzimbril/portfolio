@@ -1,11 +1,11 @@
-import React from "react";
-import { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
-import { NewsletterForm } from "@/app/(base)/newsletter/sections/NewsletterForm";
-import { metadata as baseMetadata } from "@/app/metadata";
+import React from "react"
+import { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
+import { NewsletterForm } from "@/app/(base)/newsletter/sections/NewsletterForm"
+import { metadata as baseMetadata } from "@/app/metadata"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -22,11 +22,11 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("newsletter.title"),
       description: t("newsletter.description"),
     },
-  };
+  }
 
-  return metadata;
+  return metadata
 }
 
 export default function Newsletter() {
-  return <NewsletterForm />;
+  return <NewsletterForm />
 }

@@ -1,18 +1,16 @@
-import type { Post } from "@/integrations/content/types/types";
-import { allPosts } from "content-collections";
-import { SortOrder } from "@/types/enum";
+import type { Post } from "@/integrations/content/types/types"
+import { allPosts } from "content-collections"
+import { SortOrder } from "@/types/enum"
 
 type GetAllPostsOptions = {
-  published?: boolean;
-  locale?: string;
-  pageSlug?: string;
-  sort?: SortOrder;
-  limit?: number;
-};
+  published?: boolean
+  locale?: string
+  pageSlug?: string
+  sort?: SortOrder
+  limit?: number
+}
 
-export async function getAllPosts(
-  options: Partial<GetAllPostsOptions> = {},
-): Promise<Post[]> {
+export async function getAllPosts(options: Partial<GetAllPostsOptions> = {}): Promise<Post[]> {
   const { published, locale, pageSlug, sort, limit } = {
     published: true,
     locale: undefined,
@@ -20,45 +18,37 @@ export async function getAllPosts(
     sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
-  };
+  }
   return Promise.resolve(
     allPosts
-      .filter(
-        (post) =>
-          post.published === published && (!locale || post.locale === locale),
-      )
+      .filter((post) => post.published === published && (!locale || post.locale === locale))
       .sort((a, b) =>
-        sort === SortOrder.ASC
-          ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at),
+        sort === SortOrder.ASC ? a.created_at.localeCompare(b.created_at) : b.created_at.localeCompare(a.created_at),
       )
       .filter((post) => post.slug !== pageSlug)
       .slice(0, limit),
-  );
+  )
 }
 
 export async function getPostBySlug(
   slug: string,
   options?: {
-    locale?: string;
+    locale?: string
   },
 ): Promise<Post | null> {
-  const { locale } = options ?? {};
+  const { locale } = options ?? {}
 
   return Promise.resolve(
     allPosts.find(
-      (post: Post) =>
-        post.slug === slug &&
-        (!locale || post.locale === locale) &&
-        post.published === true,
+      (post: Post) => post.slug === slug && (!locale || post.locale === locale) && post.published === true,
     ) ?? null,
-  );
+  )
 }
 
 interface PostsResult {
-  currentPost: Post;
-  adjacentPosts: Post[];
-  totalFound: number;
+  currentPost: Post
+  adjacentPosts: Post[]
+  totalFound: number
 }
 
 /**
@@ -79,123 +69,103 @@ interface PostsResult {
 export async function getPostWithAdjacent(
   slug: string,
   options?: {
-    locale?: string;
+    locale?: string
   },
 ): Promise<PostsResult | null> {
-  const { locale } = options ?? {};
+  const { locale } = options ?? {}
   // Filter by locale if specified
-  const filteredPosts = allPosts.filter(
-    (post: Post) =>
-      post.published === true && (!locale || post.locale === locale),
-  );
+  const filteredPosts = allPosts.filter((post: Post) => post.published === true && (!locale || post.locale === locale))
 
   // Sort by date (most recent first)
   const sortedPosts = filteredPosts.sort(
-    (a, b) =>
-      new Date(b.created_at || "").getTime() -
-      new Date(a.created_at || "").getTime(),
-  );
+    (a, b) => new Date(b.created_at || "").getTime() - new Date(a.created_at || "").getTime(),
+  )
 
   // Find the current post
-  const currentIndex = sortedPosts.findIndex(
-    (post: Post) => post.slug === slug,
-  );
+  const currentIndex = sortedPosts.findIndex((post: Post) => post.slug === slug)
 
   if (currentIndex === -1) {
-    return null;
+    return null
   }
 
-  const currentPost = sortedPosts[currentIndex]!;
+  const currentPost = sortedPosts[currentIndex]!
 
   // Intelligent logic to always have 2 posts
-  const availableBefore = currentIndex;
-  const availableAfter = sortedPosts.length - currentIndex - 1;
-  const totalWanted = 2;
+  const availableBefore = currentIndex
+  const availableAfter = sortedPosts.length - currentIndex - 1
+  const totalWanted = 2
 
-  let beforeCount = 1; // Preference: 1 before, 1 after
-  let afterCount = 1;
+  let beforeCount = 1 // Preference: 1 before, 1 after
+  let afterCount = 1
 
   // Automatic adaptation
   if (availableBefore === 0) {
     // First post -> take 2 after
-    beforeCount = 0;
-    afterCount = Math.min(2, availableAfter);
+    beforeCount = 0
+    afterCount = Math.min(2, availableAfter)
   } else if (availableAfter === 0) {
     // Last post -> take 2 before
-    beforeCount = Math.min(2, availableBefore);
-    afterCount = 0;
+    beforeCount = Math.min(2, availableBefore)
+    afterCount = 0
   } else if (availableBefore < 1) {
     // Not enough before -> compensate with after
-    beforeCount = availableBefore;
-    afterCount = Math.min(totalWanted - beforeCount, availableAfter);
+    beforeCount = availableBefore
+    afterCount = Math.min(totalWanted - beforeCount, availableAfter)
   } else if (availableAfter < 1) {
     // Not enough after -> compensate with before
-    afterCount = availableAfter;
-    beforeCount = Math.min(totalWanted - afterCount, availableBefore);
+    afterCount = availableAfter
+    beforeCount = Math.min(totalWanted - afterCount, availableBefore)
   }
 
   // Retrieve the posts
-  const beforePosts =
-    beforeCount > 0
-      ? sortedPosts.slice(currentIndex - beforeCount, currentIndex)
-      : [];
+  const beforePosts = beforeCount > 0 ? sortedPosts.slice(currentIndex - beforeCount, currentIndex) : []
 
-  const afterPosts =
-    afterCount > 0
-      ? sortedPosts.slice(currentIndex + 1, currentIndex + 1 + afterCount)
-      : [];
+  const afterPosts = afterCount > 0 ? sortedPosts.slice(currentIndex + 1, currentIndex + 1 + afterCount) : []
 
   // Combine in chronological order
-  const adjacentPosts = [...beforePosts, ...afterPosts];
+  const adjacentPosts = [...beforePosts, ...afterPosts]
 
   return {
     currentPost,
     adjacentPosts,
     totalFound: adjacentPosts.length,
-  };
+  }
 }
 
 type GetAllPostSlugsOptions = {
-  published?: boolean;
-  locale?: string;
-  sort?: SortOrder;
-  limit?: number;
-};
+  published?: boolean
+  locale?: string
+  sort?: SortOrder
+  limit?: number
+}
 
-export async function getAllPostSlugs(
-  options: Partial<GetAllPostSlugsOptions> = {},
-): Promise<string[]> {
+export async function getAllPostSlugs(options: Partial<GetAllPostSlugsOptions> = {}): Promise<string[]> {
   const { published, locale, sort, limit } = {
     published: true,
     locale: undefined,
     sort: SortOrder.DESC,
     limit: Number.MAX_SAFE_INTEGER,
     ...options,
-  };
+  }
 
   return Promise.resolve(
     allPosts
-      .filter(
-        (post) =>
-          post.published === published && (!locale || post.locale === locale),
-      )
+      .filter((post) => post.published === published && (!locale || post.locale === locale))
       .sort((a, b) =>
-        sort === SortOrder.ASC
-          ? a.created_at.localeCompare(b.created_at)
-          : b.created_at.localeCompare(a.created_at),
+        sort === SortOrder.ASC ? a.created_at.localeCompare(b.created_at) : b.created_at.localeCompare(a.created_at),
       )
       .map((post) => post.slug)
       .slice(0, limit),
-  );
+  )
 }
 
 type FilterOptions = {
-  category?: string;
-  tag?: string;
-  search?: string;
-  published?: boolean;
-  locale?: string;
-};
+  category?: string
+  tag?: string
+  search?: string
+  published?: boolean
+  locale?: string
+}
 
 /**
  * Get filtered posts
@@ -216,37 +186,33 @@ export async function getFilteredPosts(
   const posts = await getAllPosts({
     published: options.published,
     locale: options.locale,
-  });
+  })
   return Promise.resolve(
     posts.filter((post) => {
       // Filter by category
-      if (
-        options.category &&
-        post.categories.find((cat) => cat.slug === options.category)
-      ) {
-        return false;
+      if (options.category && post.categories.find((cat) => cat.slug === options.category)) {
+        return false
       }
 
       // Filter by tag
       if (options.tag && !post.tags.find((tag) => tag.slug === options.tag)) {
-        return false;
+        return false
       }
 
       // Filter by search
       if (options.search) {
-        const searchLower = options.search.toLowerCase();
-        const titleMatch = post.title.toLowerCase().includes(searchLower);
-        const contentMatch =
-          post.excerpt?.toLowerCase().includes(searchLower) || false;
+        const searchLower = options.search.toLowerCase()
+        const titleMatch = post.title.toLowerCase().includes(searchLower)
+        const contentMatch = post.excerpt?.toLowerCase().includes(searchLower) || false
 
         if (!titleMatch && !contentMatch) {
-          return false;
+          return false
         }
       }
 
-      return true;
+      return true
     }),
-  );
+  )
 }
 
 /**
@@ -260,10 +226,8 @@ export async function getFilteredPosts(
  * ```
  */
 export async function getAllPostCategories(): Promise<string[]> {
-  const categories = allPosts.map((post) =>
-    post.categories.map((cat) => cat.slug),
-  );
-  return Promise.resolve([...new Set(categories.flat())]);
+  const categories = allPosts.map((post) => post.categories.map((cat) => cat.slug))
+  return Promise.resolve([...new Set(categories.flat())])
 }
 
 /**
@@ -278,6 +242,6 @@ export async function getAllPostCategories(): Promise<string[]> {
  * // Returns all unique tags from all posts
  */
 export async function getAllPostTags(): Promise<string[]> {
-  const allTags = allPosts.flatMap((post) => post.tags.map((tag) => tag.slug));
-  return Promise.resolve([...new Set(allTags)]);
+  const allTags = allPosts.flatMap((post) => post.tags.map((tag) => tag.slug))
+  return Promise.resolve([...new Set(allTags)])
 }

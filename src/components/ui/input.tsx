@@ -1,37 +1,31 @@
-"use client";
-import * as React from "react";
-import { cn } from "@/utils/utils";
-import { cva } from "class-variance-authority";
-import { VariantProps } from "class-variance-authority";
+"use client"
+import * as React from "react"
+import { cn } from "@/utils/utils"
+import { cva } from "class-variance-authority"
+import { VariantProps } from "class-variance-authority"
 
-export const inputVariants = cva(
-  "relative rounded-2xl border-2 overflow-hidden",
-  {
-    variants: {
-      variant: {
-        default: "bg-b-base-it border-b-base-accent",
-        secondary: "bg-b-white border-b-base-accent",
-        outline: "bg-transparent border-b-base-accent",
-      },
-      inputSize: {
-        default: "px-6 py-3",
-        sm: "px-3 py-2",
-        lg: "px-6 py-3 text-lg",
-      },
+export const inputVariants = cva("relative rounded-2xl border-2 overflow-hidden", {
+  variants: {
+    variant: {
+      default: "bg-b-base-it border-b-base-accent",
+      secondary: "bg-b-white border-b-base-accent",
+      outline: "bg-transparent border-b-base-accent",
     },
-    defaultVariants: {
-      variant: "default",
-      inputSize: "default",
+    inputSize: {
+      default: "px-6 py-3",
+      sm: "px-3 py-2",
+      lg: "px-6 py-3 text-lg",
     },
   },
-);
+  defaultVariants: {
+    variant: "default",
+    inputSize: "default",
+  },
+})
 
-export interface InputProps
-  extends
-    React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {
-  asFull?: boolean;
-  inputSize?: "default" | "sm" | "lg";
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
+  asFull?: boolean
+  inputSize?: "default" | "sm" | "lg"
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -56,9 +50,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
       </>
-    );
+    )
   },
-);
-Input.displayName = "Input";
+)
+Input.displayName = "Input"
 
-export { Input };
+export { Input }

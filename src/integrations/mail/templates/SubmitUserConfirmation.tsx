@@ -1,5 +1,5 @@
-import React from "react";
-import { createTranslator } from "use-intl/core";
+import React from "react"
+import { createTranslator } from "use-intl/core"
 import {
   Body,
   Container,
@@ -13,15 +13,12 @@ import {
   Hr,
   Tailwind,
   Link,
-} from "@react-email/components";
-import {
-  defaultTranslations,
-  defaultLocale,
-} from "@/integrations/mail/util/translations";
-import type { BaseMailProps } from "@/integrations/mail/types/types";
-import { richTextComponent } from "@/integrations/content/utils/mdx-components";
-import { siteConfig } from "@/data/config";
-import { Intention } from "@/types";
+} from "@react-email/components"
+import { defaultTranslations, defaultLocale } from "@/integrations/mail/util/translations"
+import type { BaseMailProps } from "@/integrations/mail/types/types"
+import { richTextComponent } from "@/integrations/content/utils/mdx-components"
+import { siteConfig } from "@/data/config"
+import { Intention } from "@/types"
 
 export function SubmitUserConfirmation({
   locale,
@@ -30,12 +27,12 @@ export function SubmitUserConfirmation({
   intention,
   url,
 }: BaseMailProps & {
-  name?: string;
-  intention: string;
-  url: string;
+  name?: string
+  intention: string
+  url: string
 }) {
-  const t = createTranslator({ locale, messages: translations });
-  const firstName: string = name?.split(" ")[0] ?? "";
+  const t = createTranslator({ locale, messages: translations })
+  const firstName: string = name?.split(" ")[0] ?? ""
 
   return (
     <Html>
@@ -56,10 +53,7 @@ export function SubmitUserConfirmation({
         <Body className="bg-[#fafaf9] my-8 font-sans">
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             <Section className="px-10 pt-10 pb-5 bg-white text-center">
-              <Heading
-                as="h1"
-                className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
-              >
+              <Heading as="h1" className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
                 {t("mail.submitUserConfirmation.subject")} ✨
               </Heading>
             </Section>
@@ -75,8 +69,7 @@ export function SubmitUserConfirmation({
                 })}
               </Text>
               <Text className="text-[#333333] text-base leading-relaxed mb-5">
-                {t("mail.submitUserConfirmation.content.link")} :{" "}
-                <Link href={url}>{url}</Link>
+                {t("mail.submitUserConfirmation.content.link")} : <Link href={url}>{url}</Link>
               </Text>
 
               <Hr className="border-t border-[#e0e0e0] my-8" />
@@ -93,16 +86,14 @@ export function SubmitUserConfirmation({
               </Text>
               <Text className="text-[#666666] text-sm leading-relaxed">
                 {t("mail.common.contact")} :{" "}
-                <Link href={`mailto:${siteConfig.links.contact.email}`}>
-                  {siteConfig.links.contact.email}
-                </Link>
+                <Link href={`mailto:${siteConfig.links.contact.email}`}>{siteConfig.links.contact.email}</Link>
               </Text>
             </Section>
           </Container>
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }
 
 SubmitUserConfirmation.PreviewProps = {
@@ -111,6 +102,6 @@ SubmitUserConfirmation.PreviewProps = {
   name: "Adriel",
   intention: Intention.UI_UX_REVIEW,
   url: "https://example.com",
-};
+}
 
-export default SubmitUserConfirmation;
+export default SubmitUserConfirmation

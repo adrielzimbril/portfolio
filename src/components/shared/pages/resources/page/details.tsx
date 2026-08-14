@@ -1,37 +1,22 @@
-import { cn } from "@/utils/utils";
-import { ResourceInnerStatementPreviewCardInfoProps } from "@/types";
+import { cn } from "@/utils/utils"
+import { ResourceInnerStatementPreviewCardInfoProps } from "@/types"
 
-export function CardPreview({
-  details,
-}: ResourceInnerStatementPreviewCardInfoProps) {
+export function CardPreview({ details }: ResourceInnerStatementPreviewCardInfoProps) {
   return (
-    <div
-      className={cn(
-        "flex flex-row items-center gap-6 px-6 py-6 squircle-4xl/100 bg-sh-white overflow-hidden",
-      )}
-    >
+    <div className={cn("flex flex-row items-center gap-6 px-6 py-6 squircle-4xl/100 bg-sh-white overflow-hidden")}>
       <PreviewIcon icon={details.icon} />
-      <PreviewContent
-        number={details.number}
-        description={details.description}
-      />
+      <PreviewContent number={details.number} description={details.description} />
     </div>
-  );
+  )
 }
 
-function PreviewContent({
-  number,
-  description,
-}: {
-  number: string;
-  description: string;
-}) {
+function PreviewContent({ number, description }: { number: string; description: string }) {
   return (
     <div className="flex flex-col items-start gap-2">
       <h4 className="h3 tracking-wide">{number}</h4>
       <p className="text-b-white-invert-thr leading-[120%]">{description}</p>
     </div>
-  );
+  )
 }
 
 function PreviewIcon({ icon }: { icon: string }) {
@@ -50,5 +35,5 @@ function PreviewIcon({ icon }: { icon: string }) {
         {icon}
       </span>
     </div>
-  );
+  )
 }

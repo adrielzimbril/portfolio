@@ -1,43 +1,43 @@
-"use client";
-import React from "react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { Calendar, Eye, HourglassFill } from "@aurthle/icons";
-import { cn } from "@/utils/utils";
-import { PreviewContentType } from "@/types";
+"use client"
+import React from "react"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { Calendar, Eye, HourglassFill } from "@aurthle/icons"
+import { cn } from "@/utils/utils"
+import { PreviewContentType } from "@/types"
 import {
   HeaderPreviewCard,
   PreviewContent,
   TextPreviewContent,
-} from "@/components/shared/pages/shared/page/header-preview-card";
-import { formatCount, getDate } from "@/utils";
-import { useTranslations } from "use-intl";
+} from "@/components/shared/pages/shared/page/header-preview-card"
+import { formatCount, getDate } from "@/utils"
+import { useTranslations } from "use-intl"
 
 interface HeaderSectionProps {
   // Preview Content
-  previewContent?: PreviewContent;
+  previewContent?: PreviewContent
 
   // Main Title
-  mainTitle?: string;
+  mainTitle?: string
 
   // Tags
-  tags?: { name: string }[];
+  tags?: { name: string }[]
 
   // Talk details : Date  + Min read + Views
   talkDetails?: {
-    date?: string;
-    readingTime?: string;
-    views?: number;
-  };
+    date?: string
+    readingTime?: string
+    views?: number
+  }
 
   // Optional custom node to display views (e.g., dynamic client badge)
-  viewsNode?: React.ReactNode;
+  viewsNode?: React.ReactNode
 
   // Optional CSS Classes
-  className?: string;
-  sectionClassName?: string;
-  cardClassName?: string;
+  className?: string
+  sectionClassName?: string
+  cardClassName?: string
 }
 
 export function HeaderSection({
@@ -46,16 +46,16 @@ export function HeaderSection({
   tags,
   talkDetails,
 }: HeaderSectionProps) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   const basePreviewContent = {
     type: PreviewContentType.TEXT,
     emoji: t("common.page-sections.preview.emoji"),
     title: t("common.page-sections.preview.title"),
     subtitle: t("common.page-sections.preview.description"),
-  } as TextPreviewContent;
+  } as TextPreviewContent
 
-  const previewContent = initPreviewContent || basePreviewContent;
+  const previewContent = initPreviewContent || basePreviewContent
 
   return (
     <SectionBase
@@ -69,8 +69,7 @@ export function HeaderSection({
         <CardContent
           className={cn(
             "w-full bg-b-base squircle-xl/100 md:squircle-3xl/100 overflow-hidden flex flex-col justify-center",
-            previewContent.type === PreviewContentType.TEXT ||
-              previewContent.type === PreviewContentType.CUSTOM
+            previewContent.type === PreviewContentType.TEXT || previewContent.type === PreviewContentType.CUSTOM
               ? "text-center md:px-12 py-16 md:py-20 min-h-[300px]"
               : "p-0",
           )}
@@ -84,11 +83,7 @@ export function HeaderSection({
       {talkDetails && Object.keys(talkDetails).length > 0 && (
         <div className="flex flex-wrap items-start gap-1.5 px-1 py-1 w-full overflow-hidden [&_svg]:size-auto">
           {talkDetails.date && (
-            <Badge
-              className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100"
-              variant="colored"
-              size="md"
-            >
+            <Badge className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100" variant="colored" size="md">
               <span className="flex items-center gap-2">
                 <Calendar className="size-4 text-indigo-400" variant="bulk" />
                 {getDate({ date: talkDetails.date })}
@@ -96,25 +91,14 @@ export function HeaderSection({
             </Badge>
           )}
 
-          <Badge
-            className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100"
-            variant="colored"
-            size="md"
-          >
+          <Badge className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100" variant="colored" size="md">
             <span className="flex items-center gap-2">
-              <HourglassFill
-                className="size-4 text-indigo-400"
-                variant="bulk"
-              />
+              <HourglassFill className="size-4 text-indigo-400" variant="bulk" />
               {talkDetails.readingTime} read
             </span>
           </Badge>
 
-          <Badge
-            className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100"
-            variant="colored"
-            size="md"
-          >
+          <Badge className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100" variant="colored" size="md">
             <span className="flex items-center gap-2">
               <Eye className="size-4 text-indigo-400" variant="bulk" />
               {formatCount(talkDetails.views ?? 0)} views
@@ -133,5 +117,5 @@ export function HeaderSection({
         </div>
       )}
     </SectionBase>
-  );
+  )
 }

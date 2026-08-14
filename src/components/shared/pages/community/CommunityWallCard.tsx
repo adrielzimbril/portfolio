@@ -1,25 +1,25 @@
-"use client";
+"use client"
 
-import React from "react";
-import { cn } from "@/utils/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
-import BoringAvatar from "boring-avatars";
-import { getImageUrl, pickRandomColorCode } from "@/utils";
-import { useMemo } from "react";
-import { patterns } from "@/components/shared/pages/community/pattern";
-import { useLocale } from "next-intl";
-import { Locale } from "@/types";
+import React from "react"
+import { cn } from "@/utils/utils"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Card, CardContent } from "@/components/ui/card"
+import BoringAvatar from "boring-avatars"
+import { getImageUrl, pickRandomColorCode } from "@/utils"
+import { useMemo } from "react"
+import { patterns } from "@/components/shared/pages/community/pattern"
+import { useLocale } from "next-intl"
+import { Locale } from "@/types"
 
 type CommunityWallCardProps = {
-  patternIndex: number;
-  message?: string | Record<Locale, string>;
-  rotation?: number;
-  author?: string;
-  profilePicture?: string;
-  className?: string;
-  language?: Locale;
-};
+  patternIndex: number
+  message?: string | Record<Locale, string>
+  rotation?: number
+  author?: string
+  profilePicture?: string
+  className?: string
+  language?: Locale
+}
 
 export function CommunityWallCard({
   patternIndex,
@@ -30,30 +30,26 @@ export function CommunityWallCard({
   className = "",
   language,
 }: CommunityWallCardProps) {
-  const pattern = patterns[patternIndex % patterns.length];
-  const locale: Locale = useLocale() as Locale;
+  const pattern = patterns[patternIndex % patterns.length]
+  const locale: Locale = useLocale() as Locale
 
   // Generate random colors for BoringAvatar
   const avatarColors = useMemo(() => {
-    return Array.from({ length: 8 }).map(
-      () => pickRandomColorCode() ?? "#ffffff",
-    );
-  }, []);
+    return Array.from({ length: 8 }).map(() => pickRandomColorCode() ?? "#ffffff")
+  }, [])
 
   // Extract message based on format (string or JSON)
   const displayMessage = useMemo(() => {
     if (typeof message === "string") {
-      return message;
+      return message
     }
     if (typeof message === "object" && message !== null) {
       // Use provided language, current locale, or fallback language
-      const lang = language || locale || Locale.EN;
-      return (
-        message[lang] || message[Locale.EN] || Object.values(message)[0] || ""
-      );
+      const lang = language || locale || Locale.EN
+      return message[lang] || message[Locale.EN] || Object.values(message)[0] || ""
     }
-    return "";
-  }, [message, language, locale]);
+    return ""
+  }, [message, language, locale])
 
   return (
     <Card
@@ -86,10 +82,7 @@ export function CommunityWallCard({
               <AvatarImage src={getImageUrl(profilePicture ?? "")} />
               <AvatarFallback className="relative pointer-events-none">
                 <BoringAvatar
-                  name={
-                    author ||
-                    (profilePicture?.slice(8)?.replace(".png", "") ?? "")
-                  }
+                  name={author || (profilePicture?.slice(8)?.replace(".png", "") ?? "")}
                   colors={avatarColors}
                   variant="beam"
                 />
@@ -100,5 +93,5 @@ export function CommunityWallCard({
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

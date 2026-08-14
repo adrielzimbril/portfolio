@@ -1,10 +1,10 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { CardPreview } from "@/components/shared/pages/shared/preview";
-import { CardInfo } from "@/components/shared/pages/projects/details";
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/utils/utils";
+import { Card, CardContent } from "@/components/ui/card"
+import { CardPreview } from "@/components/shared/pages/shared/preview"
+import { CardInfo } from "@/components/shared/pages/projects/details"
+import { Skeleton } from "@/components/ui/skeleton"
+import { cn } from "@/utils/utils"
 
-import { PageType } from "@/types/enum";
+import { PageType } from "@/types/enum"
 
 export function ProjectCard({
   title,
@@ -16,14 +16,14 @@ export function ProjectCard({
   isWide,
   hideReactions,
 }: {
-  title: string;
-  cover?: string;
-  description: string;
-  slug: string;
-  tags: { name: string }[];
-  categories: { name: string; color: string }[];
-  isWide: boolean;
-  hideReactions?: boolean;
+  title: string
+  cover?: string
+  description: string
+  slug: string
+  tags: { name: string }[]
+  categories: { name: string; color: string }[]
+  isWide: boolean
+  hideReactions?: boolean
 }) {
   return (
     <Card
@@ -61,7 +61,7 @@ export function ProjectCard({
         />
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export function ProjectCardSkeleton({ isWide = false }: { isWide?: boolean }) {
@@ -70,9 +70,9 @@ export function ProjectCardSkeleton({ isWide = false }: { isWide?: boolean }) {
       name={isWide ? "project-card-wide" : "project-card"}
       className={isWide ? "w-full h-64 md:col-span-2" : "w-full h-96"}
     />
-  );
+  )
 }
 
 export function InnerStatementCardSkeleton() {
-  return <Skeleton name="inner-statement-card" className="w-full h-32" />;
+  return <Skeleton name="inner-statement-card" className="w-full h-32" />
 }

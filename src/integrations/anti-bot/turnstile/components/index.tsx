@@ -1,1 +1,1 @@
-export * from "@/integrations/anti-bot/turnstile/components/TurnstileComponent";
+export * from "@/integrations/anti-bot/turnstile/components/TurnstileComponent"

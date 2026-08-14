@@ -1,14 +1,14 @@
-"use client";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import { Button } from "@/components/ui/button"
+import { useTranslations } from "use-intl"
 
 interface EmptyStateProps {
-  onClearFilters: () => void;
+  onClearFilters: () => void
 }
 
 export function EmptyState({ onClearFilters }: EmptyStateProps) {
-  const t = useTranslations("changelog.sections.timeline.emptyState");
+  const t = useTranslations("changelog.sections.timeline.emptyState")
 
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -17,5 +17,5 @@ export function EmptyState({ onClearFilters }: EmptyStateProps) {
         {t("clearFilters")}
       </Button>
     </div>
-  );
+  )
 }

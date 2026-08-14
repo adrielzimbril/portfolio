@@ -1,46 +1,28 @@
-"use client";
-import React from "react";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder";
-import { cn } from "@/utils/utils";
-import { FormattedText } from "@/components/shared/formatted-text";
-import { getImageUrl } from "@/utils/base-url";
-import { useTranslations } from "use-intl";
-import { getEmojiHub } from "@aurthle/emoji-hub";
+"use client"
+import React from "react"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { EmojiPlaceholder } from "@/components/shared/pages/shared/emoji-placeholder"
+import { cn } from "@/utils/utils"
+import { FormattedText } from "@/components/shared/formatted-text"
+import { getImageUrl } from "@/utils/base-url"
+import { useTranslations } from "use-intl"
+import { getEmojiHub } from "@aurthle/emoji-hub"
 
-function ContentSection({
-  description,
-  subDescription,
-}: {
-  description: string;
-  subDescription?: string;
-}) {
-  const t = useTranslations();
+function ContentSection({ description, subDescription }: { description: string; subDescription?: string }) {
+  const t = useTranslations()
 
   return (
     <div className="flex flex-col gap-4 items-start justify-start relative md:max-w-[55%]">
-      <h2 className="relative">
-        {t("projects.inner-page.goal-research-section.title")}
-      </h2>
-      <p className="relative text-lg md:text-2xl leading-[120%] md:mb-4">
-        {description}
-      </p>
+      <h2 className="relative">{t("projects.inner-page.goal-research-section.title")}</h2>
+      <p className="relative text-lg md:text-2xl leading-[120%] md:mb-4">{description}</p>
       {subDescription && (
-        <FormattedText className="relative text-base text-b-white-invert-thr">
-          {subDescription}
-        </FormattedText>
+        <FormattedText className="relative text-base text-b-white-invert-thr">{subDescription}</FormattedText>
       )}
     </div>
-  );
+  )
 }
 
-export function GoalResearchSection({
-  description,
-  subDescription,
-}: {
-  description: string;
-  subDescription?: string;
-}) {
+export function GoalResearchSection({ description, subDescription }: { description: string; subDescription?: string }) {
   return (
     <>
       <SectionBase
@@ -55,13 +37,10 @@ export function GoalResearchSection({
           //src={getImageUrl(getEmojiHub("🎯", "apple"))}
           src={{ emoji: "🎯" }}
           isMobileShowed
-          variant=""
+          variant="squircle"
         />
-        <ContentSection
-          description={description}
-          subDescription={subDescription}
-        />
+        <ContentSection description={description} subDescription={subDescription} />
       </SectionBase>
     </>
-  );
+  )
 }

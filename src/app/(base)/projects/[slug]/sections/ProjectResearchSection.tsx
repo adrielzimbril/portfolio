@@ -1,35 +1,32 @@
-"use client";
-import React from "react";
-import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { PortfolioProjectResearchScope } from "@/types/enum";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import { PreviewValueCard } from "@/components/shared/pages/shared/page/preview-value-card"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { PortfolioProjectResearchScope } from "@/types/enum"
+import { useTranslations } from "use-intl"
 
 export interface CardData {
   // title: PortfolioProjectResearchScope;
-  title: string;
-  emoji: string;
-  description: string;
-  methodology?: string;
+  title: string
+  emoji: string
+  description: string
+  methodology?: string
 }
 
 export function ProjectResearchSection({
   cards,
   cardSectionDescription,
 }: {
-  cards: CardData[];
-  cardSectionDescription?: string;
+  cards: CardData[]
+  cardSectionDescription?: string
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <>
       <SectionLayout
         title={t("projects.inner-page.project-research-section.title")}
-        description={
-          cardSectionDescription ||
-          t("projects.inner-page.project-research-section.description")
-        }
+        description={cardSectionDescription || t("projects.inner-page.project-research-section.description")}
       >
         {cards.map((card, index) => {
           return (
@@ -42,9 +39,9 @@ export function ProjectResearchSection({
                 description={card.methodology}
               />
             )
-          );
+          )
         })}
       </SectionLayout>
     </>
-  );
+  )
 }

@@ -17,18 +17,16 @@
 
 // Auto-validate environment variables on import (server-side only)
 if (typeof window === "undefined") {
-  import("./validate-environment-variables").then(
-    ({ validateEnvironmentVariables }) => {
-      validateEnvironmentVariables();
-    },
-  );
+  import("./validate-environment-variables").then(({ validateEnvironmentVariables }) => {
+    validateEnvironmentVariables()
+  })
 }
 
 // export configuration values
-export * from "@/config/config";
+export * from "@/config/config"
 
 // export utility functions
-export * from "@/config/utils";
+export * from "@/config/utils"
 
 // export validation functions
-export * from "@/config/validate-environment-variables";
+export * from "@/config/validate-environment-variables"

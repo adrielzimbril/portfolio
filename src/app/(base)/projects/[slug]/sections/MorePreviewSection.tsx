@@ -1,17 +1,15 @@
-"use client";
-import React from "react";
-import { ProjectCard } from "@/components/shared/pages/projects/card";
-import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section";
-import { Project } from "@/integrations/content/types";
-import { useTranslations } from "use-intl";
+"use client"
+import React from "react"
+import { ProjectCard } from "@/components/shared/pages/projects/card"
+import { CardPreviewSection } from "@/components/shared/pages/shared/card-preview-section"
+import { Project } from "@/integrations/content/types"
+import { useTranslations } from "use-intl"
 
 export function MorePreviewSection({ data }: { data: Project[] }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
-    <CardPreviewSection
-      title={t("projects.inner-page.more-preview-section.title")}
-    >
+    <CardPreviewSection title={t("projects.inner-page.more-preview-section.title")}>
       {data.map((project, index) => (
         <ProjectCard
           key={index}
@@ -26,5 +24,5 @@ export function MorePreviewSection({ data }: { data: Project[] }) {
         />
       ))}
     </CardPreviewSection>
-  );
+  )
 }

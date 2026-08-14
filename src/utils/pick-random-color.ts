@@ -3,7 +3,7 @@ import {
   DEFAULT_SQUIRCLE_COLOR,
   DEFAULT_COLOR_CODE_NAME,
   DEFAULT_COLOR_CODE_NAME_TYPE,
-} from "@/types/default";
+} from "@/types/default"
 
 /**
  *  Returns a color from the enum DEFAULT_COLOR_CODE
@@ -26,29 +26,27 @@ import {
  * const color = pickRandomColor("WHITE_GOLD");
  * logger.info(color); // Output: #f9f9f9
  */
-function pickRandomColorCode(
-  id?: DEFAULT_COLOR_CODE_NAME_TYPE | number,
-): DEFAULT_COLOR_CODE | undefined {
-  const colors = Object.values(DEFAULT_COLOR_CODE);
+function pickRandomColorCode(id?: DEFAULT_COLOR_CODE_NAME_TYPE | number): DEFAULT_COLOR_CODE | undefined {
+  const colors = Object.values(DEFAULT_COLOR_CODE)
 
   if (id !== undefined) {
     // If it's a number
     if (typeof id === "number" && !isNaN(id)) {
-      const num = Number(id);
+      const num = Number(id)
       if (num >= 0 && num < colors.length) {
-        return colors[num];
+        return colors[num]
       }
     }
 
     // If it's a valid color name
     if (typeof id === "string" && id in DEFAULT_COLOR_CODE) {
-      return DEFAULT_COLOR_CODE[id];
+      return DEFAULT_COLOR_CODE[id]
     }
   }
 
   // Completely random by default
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
+  const randomIndex = Math.floor(Math.random() * colors.length)
+  return colors[randomIndex]
 }
 
 /**
@@ -72,29 +70,27 @@ function pickRandomColorCode(
  * const color = pickRandomColor("WHITE_GOLD");
  * logger.info(color); // Output: bg-[#f9f9f9]
  */
-function pickRandomColor(
-  id?: DEFAULT_COLOR_CODE_NAME_TYPE | number,
-): DEFAULT_SQUIRCLE_COLOR | undefined {
-  const colors = Object.values(DEFAULT_SQUIRCLE_COLOR);
+function pickRandomColor(id?: DEFAULT_COLOR_CODE_NAME_TYPE | number): DEFAULT_SQUIRCLE_COLOR | undefined {
+  const colors = Object.values(DEFAULT_SQUIRCLE_COLOR)
 
   if (id !== undefined) {
     // If it's a number
     if (typeof id === "number" && !isNaN(id)) {
-      const num = Number(id);
+      const num = Number(id)
       if (num >= 0 && num < colors.length) {
-        return colors[num];
+        return colors[num]
       }
     }
 
     // If it's a valid color name
     if (typeof id === "string" && id in DEFAULT_SQUIRCLE_COLOR) {
-      return DEFAULT_SQUIRCLE_COLOR[id];
+      return DEFAULT_SQUIRCLE_COLOR[id]
     }
   }
 
   // Completely random by default
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
+  const randomIndex = Math.floor(Math.random() * colors.length)
+  return colors[randomIndex]
 }
 
 /**
@@ -107,9 +103,9 @@ function pickRandomColor(
  * logger.info(colorName); // Output: random color name (e.g. BLUE)
  */
 function pickRandomColorName(): DEFAULT_COLOR_CODE_NAME_TYPE {
-  const colors = Object.keys(DEFAULT_COLOR_CODE);
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex] as DEFAULT_COLOR_CODE_NAME_TYPE;
+  const colors = Object.keys(DEFAULT_COLOR_CODE)
+  const randomIndex = Math.floor(Math.random() * colors.length)
+  return colors[randomIndex] as DEFAULT_COLOR_CODE_NAME_TYPE
 }
 
 /**
@@ -123,7 +119,7 @@ function pickRandomColorName(): DEFAULT_COLOR_CODE_NAME_TYPE {
  * logger.info(colorIndex); // Output: 0
  */
 function getColorIndex(colorName: DEFAULT_COLOR_CODE_NAME_TYPE): number {
-  return Object.keys(DEFAULT_COLOR_CODE).indexOf(colorName);
+  return Object.keys(DEFAULT_COLOR_CODE).indexOf(colorName)
 }
 
 /**
@@ -151,10 +147,8 @@ function getColorIndex(colorName: DEFAULT_COLOR_CODE_NAME_TYPE): number {
 function isValidColorName(id: DEFAULT_COLOR_CODE_NAME_TYPE | number): boolean {
   return (
     Object.keys(DEFAULT_COLOR_CODE).includes(String(id)) ||
-    (!isNaN(Number(id)) &&
-      Number(id) >= 0 &&
-      Number(id) < Object.values(DEFAULT_COLOR_CODE).length)
-  );
+    (!isNaN(Number(id)) && Number(id) >= 0 && Number(id) < Object.values(DEFAULT_COLOR_CODE).length)
+  )
 }
 
 /**
@@ -167,14 +161,7 @@ function isValidColorName(id: DEFAULT_COLOR_CODE_NAME_TYPE | number): boolean {
  * logger.info(colorCount); // Output: number of available colors
  */
 function getColorCount(): number {
-  return Object.values(DEFAULT_COLOR_CODE).length;
+  return Object.values(DEFAULT_COLOR_CODE).length
 }
 
-export {
-  pickRandomColor,
-  pickRandomColorName,
-  pickRandomColorCode,
-  getColorIndex,
-  isValidColorName,
-  getColorCount,
-};
+export { pickRandomColor, pickRandomColorName, pickRandomColorCode, getColorIndex, isValidColorName, getColorCount }

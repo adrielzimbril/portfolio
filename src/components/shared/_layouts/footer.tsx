@@ -1,28 +1,25 @@
-import React from "react";
-import { getLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/components/ui/link";
-import {
-  getBestResourcesLink,
-  type ResourcePreview,
-} from "@/integrations/content/lib";
-import { cn, getResourcesUrl, getThisMonth } from "@/utils";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import { siteConfig } from "@/data/config";
-import { routes, type RouteType } from "@/data/routes";
-import { PageType } from "@/types";
-import { StatusBadge } from "@/components/ui/status-badge";
-import { LinkOne } from "@aurthle/icons";
-import { FooterLocaleSwitch } from "@/components/shared/_layouts/footer-locale-switch";
+import React from "react"
+import { getLocale, getTranslations } from "next-intl/server"
+import { Link } from "@/components/ui/link"
+import { getBestResourcesLink, type ResourcePreview } from "@/integrations/content/lib"
+import { cn, getResourcesUrl, getThisMonth } from "@/utils"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import { siteConfig } from "@/data/config"
+import { routes, type RouteType } from "@/data/routes"
+import { PageType } from "@/types"
+import { StatusBadge } from "@/components/ui/status-badge"
+import { LinkOne } from "@aurthle/icons"
+import { FooterLocaleSwitch } from "@/components/shared/_layouts/footer-locale-switch"
 
 export async function Footer() {
-  const t = await getTranslations();
-  const locale = await getLocale();
-  const menuRoutes = Object.values(routes);
-  const menuRoutesFiltered = menuRoutes.filter((item) => item.inFooter);
+  const t = await getTranslations()
+  const locale = await getLocale()
+  const menuRoutes = Object.values(routes)
+  const menuRoutesFiltered = menuRoutes.filter((item) => item.inFooter)
   const resources = await getBestResourcesLink({
     limit: 4,
     locale,
-  });
+  })
 
   return (
     <footer className="w-full">
@@ -41,21 +38,16 @@ export async function Footer() {
                   <StatusBadge
                     mode="inline"
                     status="available"
-                    primaryText={t(
-                      "common.shared.planning-badge.available.title",
-                    )}
+                    primaryText={t("common.shared.planning-badge.available.title")}
                     className="bg-sh-white text-b-white-invert"
                     variant="colored"
                     size="md"
                   >
                     <Link href={routes.contact.link}>
                       <span className="flex items-center gap-2">
-                        {t(
-                          "common.shared.planning-badge.available.description-simple",
-                          {
-                            date: t("common.shared.months." + getThisMonth()),
-                          },
-                        )}
+                        {t("common.shared.planning-badge.available.description-simple", {
+                          date: t("common.shared.months." + getThisMonth()),
+                        })}
                         <LinkOne variant="bulk" size={20} />
                       </span>
                     </Link>
@@ -70,21 +62,10 @@ export async function Footer() {
                 {Object.entries(siteConfig.links.contact.social)
                   .filter(([_, social]) => social.available)
                   .map(([name, social]) => (
-                    <Link
-                      key={name}
-                      href={social.url}
-                      likeButton
-                      whileTap
-                      size="xs"
-                      aria-label={name}
-                    >
+                    <Link key={name} href={social.url} likeButton whileTap size="xs" aria-label={name}>
                       <span className="flex items-center size-full justify-center m-auto">
-                        <span
-                          className={cn(social.key !== "email" && "capitalize")}
-                        >
-                          {social.key !== "email"
-                            ? t("common.base." + social.key)
-                            : social.name}
+                        <span className={cn(social.key !== "email" && "capitalize")}>
+                          {social.key !== "email" ? t("common.base." + social.key) : social.name}
                         </span>
                       </span>
                     </Link>
@@ -94,9 +75,7 @@ export async function Footer() {
 
             <div className="flex flex-col justify-self-end gap-6 w-full md:max-w-md rounded-2xl bg-b-bases bg-b-base p-4">
               <div className="flex flex-col gap-4 max-w-sms">
-                <h4 className="text-3xl">
-                  {t("common.page-sections.newsletter.footer.title")}
-                </h4>
+                <h4 className="text-3xl">{t("common.page-sections.newsletter.footer.title")}</h4>
                 <p className="text-base text-b-white-invert-thr">
                   {t("common.page-sections.newsletter.footer.description")}
                 </p>
@@ -118,12 +97,8 @@ export async function Footer() {
           {/* Only used for Google Search Console login verification */}
           <div className="hidden opacity-0">
             <div className="flex flex-col gap-4 max-w-sms">
-              <Link href={routes.privacy.link}>
-                {t("common.menu.privacy.desktop")}
-              </Link>
-              <Link href={routes.terms.link}>
-                {t("common.menu.terms.desktop")}
-              </Link>
+              <Link href={routes.privacy.link}>{t("common.menu.privacy.desktop")}</Link>
+              <Link href={routes.terms.link}>{t("common.menu.terms.desktop")}</Link>
             </div>
           </div>
 
@@ -145,7 +120,7 @@ export async function Footer() {
         </div>
       </SectionBase>
     </footer>
-  );
+  )
 }
 
 function FooterLinksContainer({ children }: { children: React.ReactNode }) {
@@ -155,20 +130,17 @@ function FooterLinksContainer({ children }: { children: React.ReactNode }) {
         {children}
       </div>
     </div>
-  );
+  )
 }
 
 async function FooterLinks({ links }: { links: RouteType[] }) {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return (
     <FooterLinksContainer>
       {links.map((link, index) => (
         <React.Fragment key={link.key}>
-          <Link
-            href={link.link}
-            className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4"
-          >
+          <Link href={link.link} className="text-base text-center md:text-left bg-b-white rounded-xl py-2 px-4">
             {t("common.menu." + link.key + ".desktop")}
           </Link>
           {index < links.length - 1 && (
@@ -180,15 +152,11 @@ async function FooterLinks({ links }: { links: RouteType[] }) {
         </React.Fragment>
       ))}
     </FooterLinksContainer>
-  );
+  )
 }
 
-async function FooterResources({
-  resources,
-}: {
-  resources: ResourcePreview[];
-}) {
-  const t = await getTranslations();
+async function FooterResources({ resources }: { resources: ResourcePreview[] }) {
+  const t = await getTranslations()
 
   return (
     <FooterLinksContainer>
@@ -209,5 +177,5 @@ async function FooterResources({
         </React.Fragment>
       ))}
     </FooterLinksContainer>
-  );
+  )
 }

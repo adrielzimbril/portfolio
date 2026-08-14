@@ -1,6 +1,6 @@
-"use client";
-import logger from "@/utils/logger";
-import { useEffect, useState } from "react";
+"use client"
+import logger from "@/utils/logger"
+import { useEffect, useState } from "react"
 
 /**
  * Returns a boolean indicating whether the current window width is less than the specified breakpoint.
@@ -13,17 +13,17 @@ import { useEffect, useState } from "react";
  * const isMobile = useIsMobile();
  */
 export const useIsMobile = (breakpoint = 768): boolean => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < breakpoint);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, [breakpoint]);
+    const checkMobile = () => setIsMobile(window.innerWidth < breakpoint)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [breakpoint])
 
-  return isMobile;
-};
+  return isMobile
+}
 
 /**
  * Returns a boolean indicating whether the current window is on iOS.
@@ -34,18 +34,15 @@ export const useIsMobile = (breakpoint = 768): boolean => {
  * const isIOS = useIsIOS(); // true if the current window is on iOS
  */
 export const useIsIOS = (): boolean => {
-  const [isIOS, setIsIOS] = useState(false);
+  const [isIOS, setIsIOS] = useState(false)
 
   useEffect(() => {
-    const checkIOS = () =>
-      setIsIOS(
-        /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
-      );
-    checkIOS();
-  }, []);
+    const checkIOS = () => setIsIOS(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
+    checkIOS()
+  }, [])
 
-  return isIOS;
-};
+  return isIOS
+}
 
 /**
  * Returns the major version of iOS.
@@ -56,27 +53,20 @@ export const useIsIOS = (): boolean => {
  * const iosVersion = getIOSMajorVersion(); // 17, 18, etc.
  */
 export const getIOSMajorVersion = (): number | null => {
-  if (
-    typeof navigator === "undefined" ||
-    typeof document === "undefined" ||
-    !navigator ||
-    !document
-  )
-    return null;
+  if (typeof navigator === "undefined" || typeof document === "undefined" || !navigator || !document) return null
 
   const isIOS =
-    /iP(hone|od|ad)/.test(navigator.platform) ||
-    (navigator.userAgent.includes("Mac") && "ontouchend" in document);
-  if (!isIOS || !navigator) return 20;
+    /iP(hone|od|ad)/.test(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  if (!isIOS || !navigator) return 20
 
-  const match = navigator.appVersion.match(/OS (\d+)_?\d*/);
+  const match = navigator.appVersion.match(/OS (\d+)_?\d*/)
 
   // logger.info("Your iOS version match", match);
 
-  if (!match) return 0;
+  if (!match) return 0
 
-  return parseInt(match[1] || "0", 10);
-};
+  return parseInt(match[1] || "0", 10)
+}
 
 /**
  * Compare iOS version.
@@ -92,27 +82,27 @@ export const useCompareIOSVersion = (
   version: number = 17,
   type: "equals" | "sup" | "sup-eq" | "inf" | "inf-eq" = "inf",
 ): boolean => {
-  const iosVersion = getIOSMajorVersion();
+  const iosVersion = getIOSMajorVersion()
 
-  if (iosVersion === null) return false;
+  if (iosVersion === null) return false
 
-  if (iosVersion < 17) logger.warn("Your iOS version Is Outdated", iosVersion);
+  if (iosVersion < 17) logger.warn("Your iOS version Is Outdated", iosVersion)
   // else logger.info("Your iOS version is supported", iosVersion);
 
-  if (iosVersion === 0) return false;
+  if (iosVersion === 0) return false
 
   switch (type) {
     case "equals":
-      return iosVersion === version;
+      return iosVersion === version
     case "sup":
-      return iosVersion > version;
+      return iosVersion > version
     case "sup-eq":
-      return iosVersion >= version;
+      return iosVersion >= version
     case "inf":
-      return iosVersion < version;
+      return iosVersion < version
     case "inf-eq":
-      return iosVersion <= version;
+      return iosVersion <= version
     default:
-      return false;
+      return false
   }
-};
+}

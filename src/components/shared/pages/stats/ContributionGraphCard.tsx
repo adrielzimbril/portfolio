@@ -1,21 +1,17 @@
-"use client";
-import { motion } from "motion/react";
-import type { ContributionData, ContributionDay } from "@/lib/stats/types";
-import { cn, pickRandomColor } from "@/utils";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Github } from "@aurthle/icons";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
+"use client"
+import { motion } from "motion/react"
+import type { ContributionData, ContributionDay } from "@/lib/stats/types"
+import { cn, pickRandomColor } from "@/utils"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { Github } from "@aurthle/icons"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types"
 
 interface ContributionGraphCardProps {
-  contributions: ContributionData;
-  delay?: number;
-  className?: string;
+  contributions: ContributionData
+  delay?: number
+  className?: string
 }
 
 const CONTRIBUTION_LEVEL_COLORS = {
@@ -24,7 +20,7 @@ const CONTRIBUTION_LEVEL_COLORS = {
   SECOND_QUARTILE: "bg-green-400",
   THIRD_QUARTILE: "bg-green-500",
   FOURTH_QUARTILE: "bg-green-600",
-} as const;
+} as const
 
 const levelColorsHover = {
   NONE: "group-hover/cell:bg-border/80",
@@ -32,53 +28,49 @@ const levelColorsHover = {
   SECOND_QUARTILE: "group-hover/cell:bg-green-500",
   THIRD_QUARTILE: "group-hover/cell:bg-green-600",
   FOURTH_QUARTILE: "group-hover/cell:bg-green-700",
-};
+}
 
 function formatDate(dateString: string): string {
-  const parts = dateString.split("-").map(Number);
-  const year = parts[0];
-  const month = parts[1];
-  const day = parts[2];
+  const parts = dateString.split("-").map(Number)
+  const year = parts[0]
+  const month = parts[1]
+  const day = parts[2]
   if (year === undefined || month === undefined || day === undefined) {
-    return dateString;
+    return dateString
   }
-  const date = new Date(year, month - 1, day);
+  const date = new Date(year, month - 1, day)
   return date.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
     day: "numeric",
     year: "numeric",
-  });
+  })
 }
 
-export function ContributionGraphCard({
-  contributions,
-  delay = 0,
-  className,
-}: ContributionGraphCardProps) {
+export function ContributionGraphCard({ contributions, delay = 0, className }: ContributionGraphCardProps) {
   const getMonthLabels = () => {
-    const months: { label: string; index: number }[] = [];
-    let currentMonth = -1;
+    const months: { label: string; index: number }[] = []
+    let currentMonth = -1
 
     contributions.weeks.forEach((week, weekIndex) => {
-      const firstDay = week.contributionDays[0];
+      const firstDay = week.contributionDays[0]
       if (firstDay) {
-        const date = new Date(firstDay.date);
-        const month = date.getMonth();
+        const date = new Date(firstDay.date)
+        const month = date.getMonth()
         if (month !== currentMonth) {
-          currentMonth = month;
+          currentMonth = month
           months.push({
             label: date.toLocaleDateString("en-US", { month: "short" }),
             index: weekIndex,
-          });
+          })
         }
       }
-    });
+    })
 
-    return months;
-  };
+    return months
+  }
 
-  const monthLabels = getMonthLabels();
+  const monthLabels = getMonthLabels()
 
   return (
     <Card
@@ -123,36 +115,22 @@ export function ContributionGraphCard({
           <div className="relative z-20 mt-2 flex-1">
             <div className="overflow-x-auto md:hidden">
               <div className="w-fit">
-                <div
-                  className="mb-1 flex text-[10px] text-muted-foreground"
-                  style={{ paddingLeft: "28px" }}
-                >
+                <div className="mb-1 flex text-[10px] text-muted-foreground" style={{ paddingLeft: "28px" }}>
                   <div className="flex" style={{ gap: "2px" }}>
                     {contributions.weeks.map((week, weekIndex) => {
-                      const showMonth = monthLabels.some(
-                        (m) => m.index === weekIndex,
-                      );
-                      const monthLabel = showMonth
-                        ? monthLabels.find((m) => m.index === weekIndex)?.label
-                        : "";
+                      const showMonth = monthLabels.some((m) => m.index === weekIndex)
+                      const monthLabel = showMonth ? monthLabels.find((m) => m.index === weekIndex)?.label : ""
                       return (
                         <div key={weekIndex} className="w-[10px] text-center">
-                          {monthLabel && (
-                            <span className="whitespace-nowrap">
-                              {monthLabel}
-                            </span>
-                          )}
+                          {monthLabel && <span className="whitespace-nowrap">{monthLabel}</span>}
                         </div>
-                      );
+                      )
                     })}
                   </div>
                 </div>
 
                 <div className="flex gap-[2px]">
-                  <div
-                    className="flex w-6 shrink-0 flex-col text-[9px] text-muted-foreground"
-                    style={{ gap: "2px" }}
-                  >
+                  <div className="flex w-6 shrink-0 flex-col text-[9px] text-muted-foreground" style={{ gap: "2px" }}>
                     <div className="h-[10px]" />
                     <div className="flex h-[10px] items-center">Mon</div>
                     <div className="h-[10px]" />
@@ -178,17 +156,11 @@ export function ContributionGraphCard({
                         {week.contributionDays.map((day, dayIndex) => (
                           <Tooltip key={dayIndex} variant="dark">
                             <TooltipTrigger>
-                              <div
-                                className={cn(
-                                  "group/cell relative aspect-square",
-                                )}
-                              >
+                              <div className={cn("group/cell relative aspect-square")}>
                                 <div
                                   className={cn(
                                     "h-[10px] w-[10px] aspect-square rounded-sm transition-colors duration-150",
-                                    CONTRIBUTION_LEVEL_COLORS[
-                                      day.contributionLevel
-                                    ],
+                                    CONTRIBUTION_LEVEL_COLORS[day.contributionLevel],
                                     levelColorsHover[day.contributionLevel],
                                   )}
                                 />
@@ -199,9 +171,7 @@ export function ContributionGraphCard({
                                 {day.contributionCount} contribution
                                 {day.contributionCount !== 1 ? "s" : ""}
                               </div>
-                              <div className="text-muted-foreground">
-                                {formatDate(day.date)}
-                              </div>
+                              <div className="text-muted-foreground">{formatDate(day.date)}</div>
                             </TooltipContent>
                           </Tooltip>
                         ))}
@@ -213,10 +183,7 @@ export function ContributionGraphCard({
             </div>
 
             <div className="hidden md:block">
-              <div
-                className="mb-1 flex text-[10px] text-muted-foreground"
-                style={{ paddingLeft: "28px" }}
-              >
+              <div className="mb-1 flex text-[10px] text-muted-foreground" style={{ paddingLeft: "28px" }}>
                 <div className="flex flex-1 justify-between">
                   {monthLabels.map((month, i) => (
                     <span key={i}>{month.label}</span>
@@ -256,17 +223,11 @@ export function ContributionGraphCard({
                       {week.contributionDays.map((day, dayIndex) => (
                         <Tooltip key={dayIndex}>
                           <TooltipTrigger>
-                            <div
-                              className={cn(
-                                "group/cell relative aspect-square",
-                              )}
-                            >
+                            <div className={cn("group/cell relative aspect-square")}>
                               <div
                                 className={cn(
                                   "h-full w-full aspect-square rounded-sm transition-colors duration-150 lg:rounded-md",
-                                  CONTRIBUTION_LEVEL_COLORS[
-                                    day.contributionLevel
-                                  ],
+                                  CONTRIBUTION_LEVEL_COLORS[day.contributionLevel],
                                   levelColorsHover[day.contributionLevel],
                                 )}
                               />
@@ -277,9 +238,7 @@ export function ContributionGraphCard({
                               {day.contributionCount} contribution
                               {day.contributionCount !== 1 ? "s" : ""}
                             </div>
-                            <div className="text-muted-foreground">
-                              {formatDate(day.date)}
-                            </div>
+                            <div className="text-muted-foreground">{formatDate(day.date)}</div>
                           </TooltipContent>
                         </Tooltip>
                       ))}
@@ -292,24 +251,15 @@ export function ContributionGraphCard({
 
           <div className="relative z-20 mt-3 flex items-center justify-center gap-1 text-[10px] text-muted-foreground md:justify-end">
             <span>Less</span>
-            {(
-              [
-                "NONE",
-                "FIRST_QUARTILE",
-                "SECOND_QUARTILE",
-                "THIRD_QUARTILE",
-                "FOURTH_QUARTILE",
-              ] as const
-            ).map((level) => (
-              <div
-                key={level}
-                className={`h-[10px] w-[10px] rounded-[2px] ${CONTRIBUTION_LEVEL_COLORS[level]}`}
-              />
-            ))}
+            {(["NONE", "FIRST_QUARTILE", "SECOND_QUARTILE", "THIRD_QUARTILE", "FOURTH_QUARTILE"] as const).map(
+              (level) => (
+                <div key={level} className={`h-[10px] w-[10px] rounded-[2px] ${CONTRIBUTION_LEVEL_COLORS[level]}`} />
+              ),
+            )}
             <span>More</span>
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

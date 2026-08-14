@@ -1,33 +1,31 @@
-import React from "react";
-import { HeaderSection } from "@/app/(base)/quests/[slug]/sections/HeaderSection";
-import { QuestDetailsSection } from "@/app/(base)/quests/[slug]/sections/QuestDetailsSection";
-import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar";
-import { PageType, PageParams } from "@/types";
-import { getLocale, getTranslations } from "next-intl/server";
-import { localeRedirect } from "@/integrations/i18n/routing";
-import { routes } from "@/data/routes";
-import { getImageUrl } from "@/utils/base-url";
-import { Metadata } from "next";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
-import { metadata as baseMetadata } from "@/app/metadata";
-import { Skeleton } from "@/components/ui/skeleton";
+import React from "react"
+import { HeaderSection } from "@/app/(base)/quests/[slug]/sections/HeaderSection"
+import { QuestDetailsSection } from "@/app/(base)/quests/[slug]/sections/QuestDetailsSection"
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
+import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar"
+import { PageType, PageParams } from "@/types"
+import { getLocale, getTranslations } from "next-intl/server"
+import { localeRedirect } from "@/integrations/i18n/routing"
+import { routes } from "@/data/routes"
+import { getImageUrl } from "@/utils/base-url"
+import { Metadata } from "next"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types"
+import { metadata as baseMetadata } from "@/app/metadata"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   getQuestWithAdjacent,
   getQuestBySlug,
   isRegistrationClosed,
   isSubmissionClosed,
   isResultsPublished,
-} from "@/integrations/content/lib/quests";
-import { QuestParticipantsSection } from "@/app/(base)/quests/[slug]/sections/QuestParticipantsSection";
-import { MorePreviewSection } from "@/app/(base)/quests/[slug]/sections/MorePreviewSection";
+} from "@/integrations/content/lib/quests"
+import { QuestParticipantsSection } from "@/app/(base)/quests/[slug]/sections/QuestParticipantsSection"
+import { MorePreviewSection } from "@/app/(base)/quests/[slug]/sections/MorePreviewSection"
 
-export async function generateMetadata(props: {
-  params: Promise<PageParams>;
-}): Promise<Metadata> {
-  const { slug } = await props.params;
-  const locale = await getLocale();
-  const quest = await getQuestBySlug(slug, { locale });
+export async function generateMetadata(props: { params: Promise<PageParams> }): Promise<Metadata> {
+  const { slug } = await props.params
+  const locale = await getLocale()
+  const quest = await getQuestBySlug(slug, { locale })
 
   const metadata: Metadata = {
     title: quest?.title,
@@ -44,19 +42,19 @@ export async function generateMetadata(props: {
       description: quest?.excerpt,
       images: [getImageUrl(quest?.cover ?? "opengraph-image.png")],
     },
-  };
+  }
 
-  return metadata;
+  return metadata
 }
 
 export default async function SubShop(props: { params: Promise<PageParams> }) {
-  const { slug } = await props.params;
-  const locale = await getLocale();
-  const t = await getTranslations();
-  const quest = await getQuestWithAdjacent(slug, { locale });
+  const { slug } = await props.params
+  const locale = await getLocale()
+  const t = await getTranslations()
+  const quest = await getQuestWithAdjacent(slug, { locale })
 
   if (!quest) {
-    return localeRedirect({ href: routes.quests.link, locale });
+    return localeRedirect({ href: routes.quests.link, locale })
   }
 
   const {
@@ -70,63 +68,47 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
     results_published,
     rewards,
     winners,
-  } = quest.currentQuest;
+  } = quest.currentQuest
 
-  const registrationClosed = isRegistrationClosed(registration_deadline);
-  const submissionClosed = isSubmissionClosed(submission_deadline, quest_end);
-  const resultsPublished = isResultsPublished(quest_end, results_published);
+  const registrationClosed = isRegistrationClosed(registration_deadline)
+  const submissionClosed = isSubmissionClosed(submission_deadline, quest_end)
+  const resultsPublished = isResultsPublished(quest_end, results_published)
 
   const tags: {
-    name: string;
+    name: string
     meta: {
-      [key: string]: any;
-    };
+      [key: string]: any
+    }
   }[] = [
     {
-      name: t(
-        registrationClosed
-          ? "quests.cards.tags.registration.closed"
-          : "quests.cards.tags.registration.open",
-      ),
+      name: t(registrationClosed ? "quests.cards.tags.registration.closed" : "quests.cards.tags.registration.open"),
       meta: {
-        color: registrationClosed
-          ? DEFAULT_COLOR_CODE_NAME.RED
-          : DEFAULT_COLOR_CODE_NAME.PURPLE,
+        color: registrationClosed ? DEFAULT_COLOR_CODE_NAME.RED : DEFAULT_COLOR_CODE_NAME.PURPLE,
       },
     },
     {
-      name: t(
-        submissionClosed
-          ? "quests.cards.tags.submission.closed"
-          : "quests.cards.tags.submission.open",
-      ),
+      name: t(submissionClosed ? "quests.cards.tags.submission.closed" : "quests.cards.tags.submission.open"),
       meta: {
-        color: submissionClosed
-          ? DEFAULT_COLOR_CODE_NAME.ORANGE
-          : DEFAULT_COLOR_CODE_NAME.BLUE,
+        color: submissionClosed ? DEFAULT_COLOR_CODE_NAME.ORANGE : DEFAULT_COLOR_CODE_NAME.BLUE,
       },
     },
     {
-      name: t(
-        resultsPublished
-          ? "quests.cards.tags.results.published"
-          : "quests.cards.tags.results.upcoming",
-      ),
+      name: t(resultsPublished ? "quests.cards.tags.results.published" : "quests.cards.tags.results.upcoming"),
       meta: {
         color: DEFAULT_COLOR_CODE_NAME.WHITE_GOLD,
       },
     },
-  ];
+  ]
 
   const dates: {
-    registration_end: string;
-    submission_end: string;
-    results: string;
+    registration_end: string
+    submission_end: string
+    results: string
   } = {
     registration_end: registration_deadline,
     submission_end: submission_deadline,
     results: quest_end,
-  };
+  }
 
   return (
     <>
@@ -144,13 +126,7 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         />
       </Skeleton>
       <Skeleton name="quest-detail-content" loading={false}>
-        <QuestDetailsSection
-          content={body || ""}
-          slug={slug}
-          dates={dates}
-          tags={tags}
-          rewards={rewards}
-        />
+        <QuestDetailsSection content={body || ""} slug={slug} dates={dates} tags={tags} rewards={rewards} />
         <ReactionBar pageType={PageType.QUESTS} entityId={slug} />
       </Skeleton>
       {isResultsPublished(quest_end, results_published) && (
@@ -164,5 +140,5 @@ export default async function SubShop(props: { params: Promise<PageParams> }) {
         </Skeleton>
       )}
     </>
-  );
+  )
 }

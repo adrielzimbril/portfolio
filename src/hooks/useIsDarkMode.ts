@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useTheme } from "next-themes";
+import { useEffect } from "react"
+import { useTheme } from "next-themes"
 
 /**
  * Use is dark mode.
@@ -7,11 +7,11 @@ import { useTheme } from "next-themes";
  * @returns {boolean} Whether the current theme is dark.
  */
 export function useIsDarkMode(): boolean {
-  const { resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme()
 
-  const isDarkMode = resolvedTheme !== "light";
+  const isDarkMode = resolvedTheme !== "light"
 
-  return isDarkMode;
+  return isDarkMode
 }
 
 /**
@@ -29,9 +29,9 @@ export function useIsDarkMode(): boolean {
  * useChangeTheme("system");
  */
 export function useChangeTheme(theme?: "dark" | "light" | "system"): void {
-  const { setTheme } = useTheme();
+  const { setTheme } = useTheme()
 
   useEffect(() => {
-    if (theme) setTheme(theme);
-  }, [theme]);
+    if (theme) setTheme(theme)
+  }, [theme])
 }

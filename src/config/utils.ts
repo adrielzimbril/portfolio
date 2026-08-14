@@ -4,7 +4,7 @@
  * Helper functions for environment variable operations and checks
  */
 
-import { ConfigValue } from "@/config";
+import { ConfigValue } from "@/config"
 
 // ============================================================================
 // ENVIRONMENT MODE CHECKS
@@ -14,28 +14,28 @@ import { ConfigValue } from "@/config";
  * Check if running in development mode
  */
 export function isDevelopment(): boolean {
-  return ConfigValue.NODE_ENV === "development";
+  return ConfigValue.NODE_ENV === "development"
 }
 
 /**
  * Check if running in production mode
  */
 export function isProduction(): boolean {
-  return ConfigValue.NODE_ENV === "production";
+  return ConfigValue.NODE_ENV === "production"
 }
 
 /**
  * Check if running in test mode
  */
 export function isTest(): boolean {
-  return ConfigValue.NODE_ENV === "test";
+  return ConfigValue.NODE_ENV === "test"
 }
 
 /**
  * Check if running in local mode
  */
 export function isLocal(): boolean {
-  return isDevelopment() || isTest();
+  return isDevelopment() || isTest()
 }
 
 // ============================================================================
@@ -121,31 +121,26 @@ export function getEnvVars(): Record<string, string | undefined> {
     NEXT_PRIVATE_POSTHOG_CODE: ConfigValue.NEXT_PRIVATE_POSTHOG_CODE,
     NEXT_PRIVATE_POSTHOG_KEY: ConfigValue.NEXT_PRIVATE_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_KEY: ConfigValue.NEXT_PUBLIC_POSTHOG_KEY,
-    NEXT_PRIVATE_POSTHOG_PERSONAL_KEY:
-      ConfigValue.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
+    NEXT_PRIVATE_POSTHOG_PERSONAL_KEY: ConfigValue.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: ConfigValue.NEXT_PUBLIC_POSTHOG_HOST,
     NEXT_PUBLIC_PLAUSIBLE_URL: ConfigValue.NEXT_PUBLIC_PLAUSIBLE_URL,
-    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID:
-      ConfigValue.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ConfigValue.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
 
     // Storage
     S3_ACCESS_KEY_ID: ConfigValue.S3_ACCESS_KEY_ID,
     S3_SECRET_ACCESS_KEY: ConfigValue.S3_SECRET_ACCESS_KEY,
     S3_ENDPOINT: ConfigValue.S3_ENDPOINT,
     S3_REGION: ConfigValue.S3_REGION,
-    NEXT_PUBLIC_AVATARS_BUCKET_NAME:
-      ConfigValue.NEXT_PUBLIC_AVATARS_BUCKET_NAME,
+    NEXT_PUBLIC_AVATARS_BUCKET_NAME: ConfigValue.NEXT_PUBLIC_AVATARS_BUCKET_NAME,
 
     // AI
     OPENAI_API_KEY: ConfigValue.OPENAI_API_KEY,
 
     // Bot Protection
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ConfigValue.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-    NEXT_PRIVATE_RECAPTCHA_SECRET_KEY:
-      ConfigValue.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
+    NEXT_PRIVATE_RECAPTCHA_SECRET_KEY: ConfigValue.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: ConfigValue.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-    NEXT_PRIVATE_TURNSTILE_SECRET_KEY:
-      ConfigValue.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
+    NEXT_PRIVATE_TURNSTILE_SECRET_KEY: ConfigValue.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
 
     // Performance
     PAGESPEED_API_KEY: ConfigValue.PAGESPEED_API_KEY,
@@ -153,7 +148,7 @@ export function getEnvVars(): Record<string, string | undefined> {
 
     // Legacy / Other
     NEXT_PUBLIC_REST_API_ENDPOINT: ConfigValue.NEXT_PUBLIC_REST_API_ENDPOINT,
-  };
+  }
 }
 
 /**
@@ -163,7 +158,7 @@ export function getEnvVars(): Record<string, string | undefined> {
  * @returns true if the environment variable is set and has a value
  */
 export function isEnvVarSet(name: string): boolean {
-  return !!process.env[name];
+  return !!process.env[name]
 }
 
 /**
@@ -174,7 +169,7 @@ export function isEnvVarSet(name: string): boolean {
  * @returns The environment variable value or the default value
  */
 export function getEnvVar(name: string, defaultValue?: string): string {
-  return process.env[name] || defaultValue || "";
+  return process.env[name] || defaultValue || ""
 }
 
 /**
@@ -185,15 +180,13 @@ export function getEnvVar(name: string, defaultValue?: string): string {
  * @throws Error if variable is not set in production
  */
 export function getEnvVarSafe(name: string): string {
-  const value = process.env[name];
+  const value = process.env[name]
 
   if (!value && isProduction()) {
-    throw new Error(
-      `Required environment variable "${name}" is not set in production`,
-    );
+    throw new Error(`Required environment variable "${name}" is not set in production`)
   }
 
-  return value || "";
+  return value || ""
 }
 
 /**
@@ -202,16 +195,16 @@ export function getEnvVarSafe(name: string): string {
  * @returns Record of public environment variables only
  */
 export function getPublicEnvVars(): Record<string, string | undefined> {
-  const envVars = getEnvVars();
-  const publicVars: Record<string, string | undefined> = {};
+  const envVars = getEnvVars()
+  const publicVars: Record<string, string | undefined> = {}
 
   Object.keys(envVars).forEach((key) => {
     if (key.startsWith("NEXT_PUBLIC_")) {
-      publicVars[key] = envVars[key];
+      publicVars[key] = envVars[key]
     }
-  });
+  })
 
-  return publicVars;
+  return publicVars
 }
 
 /**
@@ -220,16 +213,16 @@ export function getPublicEnvVars(): Record<string, string | undefined> {
  * @returns Record of private environment variables only
  */
 export function getPrivateEnvVars(): Record<string, string | undefined> {
-  const envVars = getEnvVars();
-  const privateVars: Record<string, string | undefined> = {};
+  const envVars = getEnvVars()
+  const privateVars: Record<string, string | undefined> = {}
 
   Object.keys(envVars).forEach((key) => {
     if (!key.startsWith("NEXT_PUBLIC_")) {
-      privateVars[key] = envVars[key];
+      privateVars[key] = envVars[key]
     }
-  });
+  })
 
-  return privateVars;
+  return privateVars
 }
 
 // ============================================================================
@@ -245,7 +238,7 @@ export function getSiteUrl() {
     domainUrl: ConfigValue.NEXT_PUBLIC_DOMAIN_SITE_URL,
     s3DomainUrl: ConfigValue.NEXT_PUBLIC_S3_DOMAIN_SITE_URL,
     vercelUrl: ConfigValue.NEXT_PUBLIC_VERCEL_URL,
-  };
+  }
 }
 
 /**
@@ -256,7 +249,7 @@ export function getSupabaseConfig() {
     url: ConfigValue.NEXT_PUBLIC_SUPABASE_URL,
     anonKey: ConfigValue.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     serviceRoleKey: ConfigValue.NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY,
-  };
+  }
 }
 
 /**
@@ -268,7 +261,7 @@ export function getGitHubConfig() {
     username: ConfigValue.NEXT_PUBLIC_GITHUB_USERNAME || "adrielzimbril",
     repo: ConfigValue.NEXT_PUBLIC_GITHUB_REPO || "portfolio-shiro",
     branch: ConfigValue.NEXT_PUBLIC_GITHUB_BRANCH || "main",
-  };
+  }
 }
 
 /**
@@ -281,7 +274,7 @@ export function getS3Config() {
     endpoint: ConfigValue.S3_ENDPOINT,
     region: ConfigValue.S3_REGION,
     bucketName: ConfigValue.NEXT_PUBLIC_AVATARS_BUCKET_NAME,
-  };
+  }
 }
 
 /**
@@ -293,7 +286,7 @@ export function getPosthogConfig() {
     key: ConfigValue.NEXT_PUBLIC_POSTHOG_KEY,
     personalKey: ConfigValue.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
     host: ConfigValue.NEXT_PUBLIC_POSTHOG_HOST,
-  };
+  }
 }
 
 /**
@@ -311,7 +304,7 @@ export function getBrevoConfig() {
     codeListId: ConfigValue.BREVO_CODE_LIST_ID,
     questsRegisterId: ConfigValue.BREVO_QUESTS_REGISTER_ID,
     questsSubmissionsId: ConfigValue.BREVO_QUESTS_SUBMISSIONS_ID,
-  };
+  }
 }
 
 /**
@@ -325,7 +318,7 @@ export function getResendConfig() {
     videoListId: ConfigValue.RESEND_VIDEO_LIST_ID,
     ebooksListId: ConfigValue.RESEND_EBOOKS_LIST_ID,
     audienceId: ConfigValue.RESEND_AUDIENCE_ID,
-  };
+  }
 }
 
 /**
@@ -335,5 +328,5 @@ export function getTurnstileConfig() {
   return {
     siteKey: ConfigValue.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
     secretKey: ConfigValue.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
-  };
+  }
 }

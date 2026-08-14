@@ -1,17 +1,14 @@
-import { useEffect } from "react";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useEffect } from "react"
+import { useLocalStorage } from "@/hooks/useLocalStorage"
 
 export const useFirstVisit = (): boolean => {
-  const [firstVisit, setFirstVisit] = useLocalStorage<boolean>(
-    "firstVisit",
-    false,
-  );
+  const [firstVisit, setFirstVisit] = useLocalStorage<boolean>("firstVisit", false)
 
   useEffect(() => {
     if (firstVisit === false) {
-      setFirstVisit(true);
+      setFirstVisit(true)
     }
-  }, [firstVisit, setFirstVisit]);
+  }, [firstVisit, setFirstVisit])
 
-  return firstVisit;
-};
+  return firstVisit
+}

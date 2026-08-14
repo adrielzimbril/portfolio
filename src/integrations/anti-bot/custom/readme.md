@@ -83,40 +83,36 @@ export const ContactForm = () => {
 
 ```typescript
 // pages/api/contact.ts
-import type { NextApiRequest, NextApiResponse } from "next";
-import { createProtectedSchema } from "../../hooks/useAntiBot";
-import { validateServerBotProtection } from "../../utils/serverAntiBot";
+import type { NextApiRequest, NextApiResponse } from "next"
+import { createProtectedSchema } from "../../hooks/useAntiBot"
+import { validateServerBotProtection } from "../../utils/serverAntiBot"
 
 const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   message: z.string().min(10),
-});
+})
 
-const protectedSchema = createProtectedSchema(contactSchema);
+const protectedSchema = createProtectedSchema(contactSchema)
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+    return res.status(405).json({ message: "Method not allowed" })
   }
 
   try {
-    const validatedData = protectedSchema.parse(req.body);
+    const validatedData = protectedSchema.parse(req.body)
 
-    const clientIp =
-      req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-    validateServerBotProtection(validatedData, clientIp as string);
+    const clientIp = req.headers["x-forwarded-for"] || req.connection.remoteAddress
+    validateServerBotProtection(validatedData, clientIp as string)
 
     // Process your form data here
-    console.log("Valid message:", validatedData);
+    console.log("Valid message:", validatedData)
 
-    res.status(200).json({ message: "Message sent successfully" });
+    res.status(200).json({ message: "Message sent successfully" })
   } catch (error) {
-    console.error("Form error:", error);
-    res.status(400).json({ message: "Invalid request" });
+    console.error("Form error:", error)
+    res.status(400).json({ message: "Invalid request" })
   }
 }
 ```
@@ -129,7 +125,7 @@ export default async function handler(
 const { botProtection, validateBotProtection } = useAntiBot({
   minTime: 3000, // 3 seconds minimum
   maxTime: 10 * 60 * 1000, // 10 minutes maximum
-});
+})
 ```
 
 ### Server Validation Options
@@ -139,7 +135,7 @@ validateServerBotProtection(data, clientIp, {
   minTime: 2000, // Server-side minimum time
   maxTime: 30 * 60 * 1000, // 30 minutes maximum
   checkIpRate: true, // Enable IP rate limiting
-});
+})
 ```
 
 ## How It Works
@@ -155,7 +151,7 @@ The hook throws specific errors you can catch:
 
 ```typescript
 try {
-  validateBotProtection(data);
+  validateBotProtection(data)
 } catch (error) {
   // "Bot detected via honeypot"
   // "Form submitted too quickly"

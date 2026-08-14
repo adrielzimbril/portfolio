@@ -1,1 +1,1 @@
-export * from "@/integrations/content/types/types";
+export * from "@/integrations/content/types/types"

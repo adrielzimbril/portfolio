@@ -1,15 +1,9 @@
-"use client";
-import { useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { CheckCircle, InfoCircle } from "@aurthle/icons";
+"use client"
+import { useEffect } from "react"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { CheckCircle, InfoCircle } from "@aurthle/icons"
 
-type Status = "success" | "error";
+type Status = "success" | "error"
 
 export function FormFeedbackModal({
   open,
@@ -19,18 +13,18 @@ export function FormFeedbackModal({
   onClose,
   autoHideMs = 3200,
 }: {
-  open: boolean;
-  status: Status;
-  title: string;
-  description: string;
-  onClose: () => void;
-  autoHideMs?: number;
+  open: boolean
+  status: Status
+  title: string
+  description: string
+  onClose: () => void
+  autoHideMs?: number
 }) {
   useEffect(() => {
-    if (!open) return;
-    const timer = setTimeout(onClose, autoHideMs);
-    return () => clearTimeout(timer);
-  }, [open, autoHideMs, onClose]);
+    if (!open) return
+    const timer = setTimeout(onClose, autoHideMs)
+    return () => clearTimeout(timer)
+  }, [open, autoHideMs, onClose])
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
@@ -44,11 +38,9 @@ export function FormFeedbackModal({
             )}
           </div>
           <DialogTitle className="text-center text-xl">{title}</DialogTitle>
-          <DialogDescription className="text-center text-b-white-invert-sec">
-            {description}
-          </DialogDescription>
+          <DialogDescription className="text-center text-b-white-invert-sec">{description}</DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

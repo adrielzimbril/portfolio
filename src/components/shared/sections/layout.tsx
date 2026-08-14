@@ -1,5 +1,5 @@
-import { SectionHeader } from "@/components/shared/sections/header";
-import { cn } from "@/utils/utils";
+import { SectionHeader } from "@/components/shared/sections/header"
+import { cn } from "@/utils/utils"
 
 export function SectionLayout({
   id,
@@ -14,23 +14,20 @@ export function SectionLayout({
   layoutStart,
   isPage,
 }: {
-  id?: string;
-  title?: string;
-  description?: string;
-  className?: string;
-  contentClassName?: string;
-  link?: string;
-  badge?: string;
-  children: React.ReactNode;
-  isFlex?: boolean;
-  layoutStart?: boolean;
-  isPage?: boolean;
+  id?: string
+  title?: string
+  description?: string
+  className?: string
+  contentClassName?: string
+  link?: string
+  badge?: string
+  children: React.ReactNode
+  isFlex?: boolean
+  layoutStart?: boolean
+  isPage?: boolean
 }) {
   return (
-    <section
-      className={cn("relative w-full py-14 md:py-[104px]", className)}
-      id={id}
-    >
+    <section className={cn("relative w-full py-14 md:py-[104px]", className)} id={id}>
       {(title || badge) && (
         <SectionHeader
           title={title}
@@ -44,13 +41,12 @@ export function SectionLayout({
       <div
         className={cn(
           "flex flex-col items-center justify-center justify-items-center self-center place-self-center w-full gap-6",
-          !isFlex &&
-            "md:grid grid-cols-1 md:grid-cols-2 md:max-w-[90%] place-items-center place-self-center",
+          !isFlex && "md:grid grid-cols-1 md:grid-cols-2 md:max-w-[90%] place-items-center place-self-center",
           contentClassName,
         )}
       >
         {children}
       </div>
     </section>
-  );
+  )
 }

@@ -1,18 +1,18 @@
-"use client";
-import React, { useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/utils/utils";
-import { SectionBase } from "@/components/shared/pages/shared/section-base";
-import Cal, { getCalApi } from "@calcom/embed-react";
-import { useTranslations, useLocale } from "use-intl";
-import { usePageViews } from "@/hooks/usePageViews";
-import { routes } from "@/data/routes";
-import { getPathUrl } from "@/utils/base-url";
+"use client"
+import React, { useEffect } from "react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/utils/utils"
+import { SectionBase } from "@/components/shared/pages/shared/section-base"
+import Cal, { getCalApi } from "@calcom/embed-react"
+import { useTranslations, useLocale } from "use-intl"
+import { usePageViews } from "@/hooks/usePageViews"
+import { routes } from "@/data/routes"
+import { getPathUrl } from "@/utils/base-url"
 
 export default function ContactForm({}) {
-  const t = useTranslations();
-  const locale = useLocale();
+  const t = useTranslations()
+  const locale = useLocale()
 
   usePageViews(
     routes.contact.key,
@@ -22,14 +22,14 @@ export default function ContactForm({}) {
       path: getPathUrl(routes.contact.link),
     },
     false,
-  );
+  )
 
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "hello-adrielzimbril" });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-    })();
-  }, []);
+    ;(async function () {
+      const cal = await getCalApi({ namespace: "hello-adrielzimbril" })
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
+    })()
+  }, [])
 
   return (
     <>
@@ -66,12 +66,7 @@ export default function ContactForm({}) {
             config={{ layout: "month_view" }}
           />
 
-          <div
-            className={cn(
-              "flex flex-col items-start gap-4 w-full md:max-w-[80%]",
-              "hidden",
-            )}
-          >
+          <div className={cn("flex flex-col items-start gap-4 w-full md:max-w-[80%]", "hidden")}>
             <Button
               asFull
               whileTap
@@ -81,13 +76,11 @@ export default function ContactForm({}) {
               data-cal-config='{"layout":"month_view"}'
               className={cn("hidden")}
             >
-              <span className="font-bold text-base">
-                {t("contact.page.form.submit")}
-              </span>
+              <span className="font-bold text-base">{t("contact.page.form.submit")}</span>
             </Button>
           </div>
         </div>
       </SectionBase>
     </>
-  );
+  )
 }

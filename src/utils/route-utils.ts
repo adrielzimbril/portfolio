@@ -10,7 +10,7 @@
  * getActivePathFromUrlParam(["/about", "contact"]) // returns "/about/contact"
  */
 export function getActivePathFromUrlParam(path: string | string[]) {
-  return Array.isArray(path) ? path.join("/") : path || "";
+  return Array.isArray(path) ? path.join("/") : path || ""
 }
 
 /**
@@ -26,10 +26,7 @@ export function getActivePathFromUrlParam(path: string | string[]) {
  * isActivePath("/about/contact") // returns true if the current path is "/about/contact"
  */
 export function isActivePath(path: string) {
-  return (
-    getActivePathFromUrlParam(path) ===
-    getActivePathFromUrlParam(window.location.pathname)
-  );
+  return getActivePathFromUrlParam(path) === getActivePathFromUrlParam(window.location.pathname)
 }
 
 /**
@@ -103,35 +100,31 @@ export function getActivePathInArray({
   asInclude = false,
   withSlash = false,
 }: {
-  path: string;
-  array: string[];
-  asInclude?: boolean;
-  withSlash?: boolean;
+  path: string
+  array: string[]
+  asInclude?: boolean
+  withSlash?: boolean
 }): string {
   // Clean the path: remove leading/trailing "/" and split into segments
-  const segments = path.split("/").filter(Boolean);
+  const segments = path.split("/").filter(Boolean)
 
   // Normalize the array: remove leading "/" from each item
-  const normalizedArray = array.map((item) => item.replace(/^\/+/, ""));
+  const normalizedArray = array.map((item) => item.replace(/^\/+/, ""))
 
   // If path is empty or root ("/"), return the first route
   if (segments.length === 0) {
-    return normalizedArray[0] || "";
+    return normalizedArray[0] || ""
   }
 
   // "Include" mode: return only the first matching segment
   if (asInclude) {
-    const firstMatch = segments.find((segment) =>
-      normalizedArray.includes(segment),
-    );
-    return firstMatch || "";
+    const firstMatch = segments.find((segment) => normalizedArray.includes(segment))
+    return firstMatch || ""
   }
 
   // Normal mode: return all matching segments joined by "/"
-  const matchedSegments = segments.filter((segment) =>
-    normalizedArray.includes(segment),
-  );
+  const matchedSegments = segments.filter((segment) => normalizedArray.includes(segment))
 
-  const result = matchedSegments.join("/");
-  return withSlash ? "/" + result : result;
+  const result = matchedSegments.join("/")
+  return withSlash ? "/" + result : result
 }

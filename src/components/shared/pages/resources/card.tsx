@@ -1,9 +1,9 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { CardPreview } from "@/components/shared/pages/shared/preview";
-import { CardInfo } from "@/components/shared/pages/resources/details";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent } from "@/components/ui/card"
+import { CardPreview } from "@/components/shared/pages/shared/preview"
+import { CardInfo } from "@/components/shared/pages/resources/details"
+import { Skeleton } from "@/components/ui/skeleton"
 
-import { PageType, ResourceType } from "@/types/enum";
+import { PageType, ResourceType } from "@/types/enum"
 
 export function ResourceCard({
   title,
@@ -17,16 +17,16 @@ export function ResourceCard({
   userCount,
   hideReactions,
 }: {
-  title: string;
-  cover?: string;
-  slug: string;
-  type: ResourceType;
-  tags: { name: string }[];
-  description: string;
-  features: string[];
-  avatars: string[];
-  userCount?: number;
-  hideReactions?: boolean;
+  title: string
+  cover?: string
+  slug: string
+  type: ResourceType
+  tags: { name: string }[]
+  description: string
+  features: string[]
+  avatars: string[]
+  userCount?: number
+  hideReactions?: boolean
 }) {
   return (
     <Card className="group relative bg-b-base-second squircle-6xl/100  size-full border-0">
@@ -56,9 +56,9 @@ export function ResourceCard({
         />
       </CardContent>
     </Card>
-  );
+  )
 }
 
 export function ResourceCardSkeleton() {
-  return <Skeleton name="resource-card" className="w-full h-80" />;
+  return <Skeleton name="resource-card" className="w-full h-80" />
 }

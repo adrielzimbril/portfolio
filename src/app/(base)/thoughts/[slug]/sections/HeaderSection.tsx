@@ -1,9 +1,9 @@
-"use client";
-import { HeaderSection as ThoughtHeaderSection } from "@/components/shared/pages/thoughts/page/header-section";
-import { PreviewContentType } from "@/types";
-import { usePageViews } from "@/hooks/usePageViews";
-import { PageType } from "@/types";
-import { getResourcesUrl } from "@/utils/base-url";
+"use client"
+import { HeaderSection as ThoughtHeaderSection } from "@/components/shared/pages/thoughts/page/header-section"
+import { PreviewContentType } from "@/types"
+import { usePageViews } from "@/hooks/usePageViews"
+import { PageType } from "@/types"
+import { getResourcesUrl } from "@/utils/base-url"
 
 export function HeaderSection({
   title,
@@ -14,13 +14,13 @@ export function HeaderSection({
   pageViewsData,
   pageType,
 }: {
-  date: string;
-  tags: { name: string }[];
-  cover: string;
-  title: string;
-  readingTime: string;
-  pageViewsData: { slug: string; locale: string };
-  pageType: PageType;
+  date: string
+  tags: { name: string }[]
+  cover: string
+  title: string
+  readingTime: string
+  pageViewsData: { slug: string; locale: string }
+  pageType: PageType
 }) {
   const { count } = usePageViews(
     pageViewsData.slug,
@@ -30,7 +30,7 @@ export function HeaderSection({
       path: getResourcesUrl(pageType, pageViewsData.slug),
     },
     true,
-  );
+  )
 
   return (
     <ThoughtHeaderSection
@@ -52,5 +52,5 @@ export function HeaderSection({
       }}
       slug={pageViewsData.slug}
     />
-  );
+  )
 }

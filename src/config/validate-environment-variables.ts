@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { logger } from "@/utils";
+import { z } from "zod"
+import { logger } from "@/utils"
 
 /**
  * Environment Variables Schema
@@ -114,9 +114,9 @@ const environmentVariablesSchema = z.object({
 
   // Legacy / Other
   NEXT_PUBLIC_REST_API_ENDPOINT: z.string().optional(),
-});
+})
 
-export type EnvVars = z.infer<typeof environmentVariablesSchema>;
+export type EnvVars = z.infer<typeof environmentVariablesSchema>
 
 /**
  * Validate environment variables using Zod
@@ -147,8 +147,7 @@ export function validateEnvironmentVariables(): EnvVars {
     AUTH_CALLBACK_URL_DEFAULT: process.env.AUTH_CALLBACK_URL_DEFAULT,
     AUTH_DEFAULT_REDIRECT: process.env.AUTH_DEFAULT_REDIRECT,
     NEXT_PRIVATE_ADMIN_EMAILS: process.env.NEXT_PRIVATE_ADMIN_EMAILS,
-    NEXT_PRIVATE_SESSION_TIMEOUT_HOURS:
-      process.env.NEXT_PRIVATE_SESSION_TIMEOUT_HOURS,
+    NEXT_PRIVATE_SESSION_TIMEOUT_HOURS: process.env.NEXT_PRIVATE_SESSION_TIMEOUT_HOURS,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     CONTACTS_PROVIDER: process.env.CONTACTS_PROVIDER,
@@ -182,42 +181,37 @@ export function validateEnvironmentVariables(): EnvVars {
     NEXT_PRIVATE_POSTHOG_CODE: process.env.NEXT_PRIVATE_POSTHOG_CODE,
     NEXT_PRIVATE_POSTHOG_KEY: process.env.NEXT_PRIVATE_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
-    NEXT_PRIVATE_POSTHOG_PERSONAL_KEY:
-      process.env.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
+    NEXT_PRIVATE_POSTHOG_PERSONAL_KEY: process.env.NEXT_PRIVATE_POSTHOG_PERSONAL_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     NEXT_PUBLIC_PLAUSIBLE_URL: process.env.NEXT_PUBLIC_PLAUSIBLE_URL,
-    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID:
-      process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
     S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
     S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
     S3_ENDPOINT: process.env.S3_ENDPOINT,
     S3_REGION: process.env.S3_REGION,
-    NEXT_PUBLIC_AVATARS_BUCKET_NAME:
-      process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME,
+    NEXT_PUBLIC_AVATARS_BUCKET_NAME: process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-    NEXT_PRIVATE_RECAPTCHA_SECRET_KEY:
-      process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
+    NEXT_PRIVATE_RECAPTCHA_SECRET_KEY: process.env.NEXT_PRIVATE_RECAPTCHA_SECRET_KEY,
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
-    NEXT_PRIVATE_TURNSTILE_SECRET_KEY:
-      process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
+    NEXT_PRIVATE_TURNSTILE_SECRET_KEY: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
     PAGESPEED_API_KEY: process.env.PAGESPEED_API_KEY,
     LIGHTHOUSE_CACHE_DAYS: process.env.LIGHTHOUSE_CACHE_DAYS,
     NEXT_PUBLIC_REST_API_ENDPOINT: process.env.NEXT_PUBLIC_REST_API_ENDPOINT,
-  };
+  }
 
-  const result = environmentVariablesSchema.safeParse(envVars);
+  const result = environmentVariablesSchema.safeParse(envVars)
 
   if (!result.success) {
     // Log errors for missing required variables
     result.error.issues.forEach((issue) => {
-      const varName = issue.path.join(".");
+      const varName = issue.path.join(".")
       if (issue.code === "invalid_type" || issue.code === "too_small") {
-        logger.env.error(varName, issue.message);
+        logger.env.error(varName, issue.message)
       } else {
-        logger.env.warn(varName, issue.message);
+        logger.env.warn(varName, issue.message)
       }
-    });
+    })
   }
 
   // Log warnings for missing optional variables in development
@@ -233,17 +227,15 @@ export function validateEnvironmentVariables(): EnvVars {
       "NEXT_PUBLIC_GOOGLE_ANALYTICS_ID",
       "S3_ACCESS_KEY_ID",
       "NEXT_PUBLIC_TURNSTILE_SITE_KEY",
-    ];
+    ]
 
     optionalVars.forEach((varName) => {
       if (!process.env[varName]) {
-        logger.env.missing(varName);
+        logger.env.missing(varName)
       }
-    });
+    })
   }
 
   // Return validated data with defaults applied
-  return result.success
-    ? result.data
-    : (environmentVariablesSchema.parse({}) as EnvVars);
+  return result.success ? result.data : (environmentVariablesSchema.parse({}) as EnvVars)
 }

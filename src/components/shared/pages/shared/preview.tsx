@@ -1,50 +1,26 @@
-"use client";
-import Image from "next/image";
-import {
-  cn,
-  getExternalUrl,
-  getImageUrl,
-  getResourcesUrl,
-  pickRandomColor,
-  pickRandomColorCode,
-} from "@/utils";
-import { PageType, ResourceType } from "@/types";
-import {
-  DeveloperFile,
-  Figma,
-  Notebook,
-  QueueTwo,
-  VideoFolder,
-  VideoLibrary,
-  VideoPlaylistOne,
-} from "@aurthle/icons";
-import { Link } from "@/components/ui/link";
-import { useTranslations } from "use-intl";
-import { Badge } from "@/components/ui/badge";
-import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types";
+"use client"
+import Image from "next/image"
+import { cn, getExternalUrl, getImageUrl, getResourcesUrl, pickRandomColor, pickRandomColorCode } from "@/utils"
+import { PageType, ResourceType } from "@/types"
+import { DeveloperFile, Figma, Notebook, QueueTwo, VideoFolder, VideoLibrary, VideoPlaylistOne } from "@aurthle/icons"
+import { Link } from "@/components/ui/link"
+import { useTranslations } from "use-intl"
+import { Badge } from "@/components/ui/badge"
+import { DEFAULT_COLOR_CODE_NAME_TYPE } from "@/types"
 
 interface PreviewProps {
-  title?: string;
-  cover?: string;
-  type: PageType;
-  slug?: string;
-  isCustomUrl?: boolean;
-  coverText?: { emoji: string; title: string; description: string };
-  isWide?: boolean;
-  resourceType?: ResourceType;
+  title?: string
+  cover?: string
+  type: PageType
+  slug?: string
+  isCustomUrl?: boolean
+  coverText?: { emoji: string; title: string; description: string }
+  isWide?: boolean
+  resourceType?: ResourceType
 }
 
-export function CardPreview({
-  title,
-  cover,
-  type,
-  slug,
-  isCustomUrl,
-  coverText,
-  isWide,
-  resourceType,
-}: PreviewProps) {
-  const t = useTranslations();
+export function CardPreview({ title, cover, type, slug, isCustomUrl, coverText, isWide, resourceType }: PreviewProps) {
+  const t = useTranslations()
   return (
     <div
       className={cn(
@@ -53,10 +29,7 @@ export function CardPreview({
         cover ? "p-2 h-48 md:h-80" : "p-4",
       )}
     >
-      <Link
-        href={isCustomUrl ? getExternalUrl(slug) : getResourcesUrl(type, slug!)}
-        className="flex size-full"
-      >
+      <Link href={isCustomUrl ? getExternalUrl(slug) : getResourcesUrl(type, slug!)} className="flex size-full">
         {cover ? (
           <div className="flex flex-col items-start gap-3 w-full mx-auto overflow-hidden squircle-xl md:squircle-3xl rounded-2xl">
             <Image
@@ -66,61 +39,39 @@ export function CardPreview({
               alt={title ?? ""}
               src={getImageUrl(cover!)}
               loading="lazy"
-              sizes={
-                isWide
-                  ? "(max-width: 768px) 100vw, 66vw"
-                  : "(max-width: 768px) 100vw, 33vw"
-              }
+              sizes={isWide ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
             />
           </div>
         ) : (
           <PreviewContent
             emoji={coverText?.emoji ?? t("page-sections.preview.emoji")}
             title={coverText?.title ?? t("page-sections.preview.title")}
-            description={
-              coverText?.description ?? t("page-sections.preview.description")
-            }
+            description={coverText?.description ?? t("page-sections.preview.description")}
           />
         )}
         {resourceType && <PreviewIcon resourceType={resourceType} />}
       </Link>
     </div>
-  );
+  )
 }
-export function PreviewContent({
-  emoji,
-  title,
-  description,
-}: {
-  emoji: string;
-  title: string;
-  description: string;
-}) {
+export function PreviewContent({ emoji, title, description }: { emoji: string; title: string; description: string }) {
   return (
     <div className="flex flex-col size-full h-48 md:h-72 max-w-[90%] mx-auto transition-all duration-800 ease hover:scale-105">
       <div className="flex flex-col items-start place-content-center gap-3 size-full pointer-events-none">
         <h4 className="text-3xl tracking-wide leading-[120%]">
           {emoji && (
             <>
-              <span
-                className={cn(
-                  "inline-block text-5xl px-2 py-4 rounded-full bg-[#f9f9f9]",
-                )}
-              >
-                {emoji}
-              </span>
+              <span className={cn("inline-block text-5xl px-2 py-4 rounded-full bg-[#f9f9f9]")}>{emoji}</span>
               <br />
             </>
           )}
           {title}
         </h4>
 
-        <p className="font-medium text-b-white-invert-thr text-xl line-clamp-3 leading-[120%]">
-          {description}
-        </p>
+        <p className="font-medium text-b-white-invert-thr text-xl line-clamp-3 leading-[120%]">{description}</p>
       </div>
     </div>
-  );
+  )
 }
 
 export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
@@ -142,5 +93,5 @@ export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
         <VideoLibrary size={24} variant="bulk" />
       )}
     </div>
-  );
+  )
 }

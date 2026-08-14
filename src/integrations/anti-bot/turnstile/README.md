@@ -15,7 +15,7 @@ npm install @thind9xdev/react-turnstile
 ## 🚀 Import into React
 
 ```tsx
-import { useTurnstile, TurnstileComponent } from "@thind9xdev/react-turnstile";
+import { useTurnstile, TurnstileComponent } from "@thind9xdev/react-turnstile"
 ```
 
 ## 📝 How to Use the Hook (useTurnstile)
@@ -23,19 +23,19 @@ import { useTurnstile, TurnstileComponent } from "@thind9xdev/react-turnstile";
 ### Basic Usage with Hook
 
 ```tsx
-import React from "react";
-import { useTurnstile } from "@thind9xdev/react-turnstile";
+import React from "react"
+import { useTurnstile } from "@thind9xdev/react-turnstile"
 
 const MyComponent = () => {
-  const siteKey = "YOUR_SITE_KEY"; // Replace with your actual site key
-  const { ref, token, error, isLoading } = useTurnstile(siteKey);
+  const siteKey = "YOUR_SITE_KEY" // Replace with your actual site key
+  const { ref, token, error, isLoading } = useTurnstile(siteKey)
 
   if (isLoading) {
-    return <div>Loading Turnstile...</div>;
+    return <div>Loading Turnstile...</div>
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error}</div>
   }
 
   // You can use the token to send requests to your API
@@ -44,20 +44,20 @@ const MyComponent = () => {
       <div ref={ref}></div>
       {token && <p>Turnstile token generated successfully!</p>}
     </div>
-  );
-};
+  )
+}
 
-export default MyComponent;
+export default MyComponent
 ```
 
 ### Advanced Usage with Hook
 
 ```tsx
-import React from "react";
-import { useTurnstile, TurnstileOptions } from "@thind9xdev/react-turnstile";
+import React from "react"
+import { useTurnstile, TurnstileOptions } from "@thind9xdev/react-turnstile"
 
 const AdvancedComponent = () => {
-  const siteKey = "YOUR_SITE_KEY";
+  const siteKey = "YOUR_SITE_KEY"
   const options: TurnstileOptions = {
     theme: "light",
     size: "normal",
@@ -65,39 +65,38 @@ const AdvancedComponent = () => {
     retry: "auto",
     "refresh-expired": "auto",
     appearance: "always",
-  };
+  }
 
-  const { ref, token, error, isLoading, reset, execute, getResponse } =
-    useTurnstile(siteKey, options);
+  const { ref, token, error, isLoading, reset, execute, getResponse } = useTurnstile(siteKey, options)
 
   const handleSubmit = async () => {
     try {
-      const currentToken = getResponse();
+      const currentToken = getResponse()
       if (currentToken) {
         // Send request to API with token
-        console.log("Current token:", currentToken);
+        console.log("Current token:", currentToken)
 
         // Example API call
         const response = await fetch("/api/verify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ token: currentToken }),
-        });
+        })
 
-        const result = await response.json();
-        console.log("Verification result:", result);
+        const result = await response.json()
+        console.log("Verification result:", result)
       } else {
         // Execute Turnstile if no token yet
-        execute();
+        execute()
       }
     } catch (err) {
-      console.error("Unable to get Turnstile token:", err);
+      console.error("Unable to get Turnstile token:", err)
     }
-  };
+  }
 
   const handleReset = () => {
-    reset(); // Reset widget to initial state
-  };
+    reset() // Reset widget to initial state
+  }
 
   return (
     <div>
@@ -111,10 +110,10 @@ const AdvancedComponent = () => {
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
       {token && <p style={{ color: "green" }}>Token is ready!</p>}
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedComponent;
+export default AdvancedComponent
 ```
 
 ## 🧩 How to Use the Component (TurnstileComponent)
@@ -122,30 +121,27 @@ export default AdvancedComponent;
 ### Basic Usage with Component
 
 ```tsx
-import React, { useRef } from "react";
-import {
-  TurnstileComponent,
-  TurnstileComponentRef,
-} from "@thind9xdev/react-turnstile";
+import React, { useRef } from "react"
+import { TurnstileComponent, TurnstileComponentRef } from "@thind9xdev/react-turnstile"
 
 const ComponentExample = () => {
-  const turnstileRef = useRef<TurnstileComponentRef>(null);
-  const siteKey = "YOUR_SITE_KEY";
+  const turnstileRef = useRef<TurnstileComponentRef>(null)
+  const siteKey = "YOUR_SITE_KEY"
 
   const handleSubmit = () => {
-    const token = turnstileRef.current?.getResponse();
+    const token = turnstileRef.current?.getResponse()
     if (token) {
-      console.log("Token from component:", token);
+      console.log("Token from component:", token)
       // Send token to your API
     } else {
-      console.log("No token yet, executing verification...");
-      turnstileRef.current?.execute();
+      console.log("No token yet, executing verification...")
+      turnstileRef.current?.execute()
     }
-  };
+  }
 
   const handleReset = () => {
-    turnstileRef.current?.reset();
-  };
+    turnstileRef.current?.reset()
+  }
 
   return (
     <div>
@@ -165,37 +161,34 @@ const ComponentExample = () => {
         <button onClick={handleReset}>Reset</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ComponentExample;
+export default ComponentExample
 ```
 
 ### Component Usage with Advanced Options
 
 ```tsx
-import React, { useRef, useState } from "react";
-import {
-  TurnstileComponent,
-  TurnstileComponentRef,
-} from "@thind9xdev/react-turnstile";
+import React, { useRef, useState } from "react"
+import { TurnstileComponent, TurnstileComponentRef } from "@thind9xdev/react-turnstile"
 
 const AdvancedComponentExample = () => {
-  const turnstileRef = useRef<TurnstileComponentRef>(null);
-  const [status, setStatus] = useState<string>("");
-  const siteKey = "YOUR_SITE_KEY";
+  const turnstileRef = useRef<TurnstileComponentRef>(null)
+  const [status, setStatus] = useState<string>("")
+  const siteKey = "YOUR_SITE_KEY"
 
   const handleSuccess = (token: string) => {
-    setStatus(`Verification successful! Token: ${token.substring(0, 20)}...`);
-  };
+    setStatus(`Verification successful! Token: ${token.substring(0, 20)}...`)
+  }
 
   const handleError = (error?: string) => {
-    setStatus(`Verification error: ${error || "Unknown"}`);
-  };
+    setStatus(`Verification error: ${error || "Unknown"}`)
+  }
 
   const handleLoad = () => {
-    setStatus("Turnstile loaded");
-  };
+    setStatus("Turnstile loaded")
+  }
 
   return (
     <div>
@@ -231,10 +224,10 @@ const AdvancedComponentExample = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default AdvancedComponentExample;
+export default AdvancedComponentExample
 ```
 
 ## 🔍 Invisible Mode
@@ -242,27 +235,27 @@ export default AdvancedComponentExample;
 ### Using Invisible Mode with Hook
 
 ```tsx
-import React, { useState } from "react";
-import { useTurnstile } from "@thind9xdev/react-turnstile";
+import React, { useState } from "react"
+import { useTurnstile } from "@thind9xdev/react-turnstile"
 
 const InvisibleTurnstile = () => {
-  const [email, setEmail] = useState("");
-  const siteKey = "YOUR_SITE_KEY";
+  const [email, setEmail] = useState("")
+  const siteKey = "YOUR_SITE_KEY"
 
   const { ref, token, error, isLoading, execute } = useTurnstile(siteKey, {
     appearance: "execute", // Invisible mode
     execution: "execute",
     theme: "light",
-  });
+  })
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!token) {
       // Execute Turnstile verification
-      console.log("Verifying...");
-      execute();
-      return;
+      console.log("Verifying...")
+      execute()
+      return
     }
 
     // Submit form with token
@@ -271,16 +264,16 @@ const InvisibleTurnstile = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, token }),
-      });
+      })
 
       if (response.ok) {
-        console.log("Form submitted successfully!");
-        setEmail("");
+        console.log("Form submitted successfully!")
+        setEmail("")
       }
     } catch (err) {
-      console.error("Form submission error:", err);
+      console.error("Form submission error:", err)
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -305,10 +298,10 @@ const InvisibleTurnstile = () => {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
     </form>
-  );
-};
+  )
+}
 
-export default InvisibleTurnstile;
+export default InvisibleTurnstile
 ```
 
 ## 📚 API Documentation
@@ -374,7 +367,7 @@ import {
   TurnstileOptions,
   TurnstileComponentProps,
   TurnstileComponentRef,
-} from "@thind9xdev/react-turnstile";
+} from "@thind9xdev/react-turnstile"
 ```
 
 ## 🎭 Appearance and Display Modes
@@ -426,60 +419,57 @@ For testing, you can use: `1x00000000000000000000AA`
 ### Verify Turnstile token with Node.js/Express:
 
 ```javascript
-const express = require("express");
-const axios = require("axios");
-const app = express();
+const express = require("express")
+const axios = require("axios")
+const app = express()
 
-app.use(express.json());
+app.use(express.json())
 
-const TURNSTILE_SECRET_KEY = "YOUR_SECRET_KEY"; // Replace with your actual secret key
+const TURNSTILE_SECRET_KEY = "YOUR_SECRET_KEY" // Replace with your actual secret key
 
 app.post("/verify-turnstile", async (req, res) => {
-  const { token, remoteip } = req.body;
+  const { token, remoteip } = req.body
 
   if (!token) {
     return res.status(400).json({
       success: false,
       message: "Missing token",
-    });
+    })
   }
 
   try {
-    const response = await axios.post(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        secret: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
-        response: token,
-        remoteip: remoteip, // optional
-      },
-    );
+    const response = await axios.post("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      secret: process.env.NEXT_PRIVATE_TURNSTILE_SECRET_KEY,
+      response: token,
+      remoteip: remoteip, // optional
+    })
 
-    const { success, error_codes } = response.data;
+    const { success, error_codes } = response.data
 
     if (success) {
       res.json({
         success: true,
         message: "Verification successful",
-      });
+      })
     } else {
       res.status(400).json({
         success: false,
         message: "Verification failed",
         error_codes,
-      });
+      })
     }
   } catch (error) {
-    console.error("Turnstile verification error:", error);
+    console.error("Turnstile verification error:", error)
     res.status(500).json({
       success: false,
       message: "Internal server error",
-    });
+    })
   }
-});
+})
 
 app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+  console.log("Server running on port 3000")
+})
 ```
 
 ### Verify Turnstile token with NestJS:
@@ -493,50 +483,42 @@ nest generate guard turnstile
 #### Add code for the guard:
 
 ```typescript
-import {
-  Injectable,
-  CanActivate,
-  ExecutionContext,
-  UnauthorizedException,
-} from "@nestjs/common";
-import { Request } from "express";
-import axios from "axios";
+import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from "@nestjs/common"
+import { Request } from "express"
+import axios from "axios"
 
 @Injectable()
 export class TurnstileGuard implements CanActivate {
-  private readonly secretKey = "YOUR_SECRET_KEY"; // Replace with your actual secret key
+  private readonly secretKey = "YOUR_SECRET_KEY" // Replace with your actual secret key
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request = context.switchToHttp().getRequest<Request>();
-    const turnstileToken = request.body.token;
+    const request = context.switchToHttp().getRequest<Request>()
+    const turnstileToken = request.body.token
 
     if (!turnstileToken) {
-      throw new UnauthorizedException("Missing Turnstile token");
+      throw new UnauthorizedException("Missing Turnstile token")
     }
 
     try {
-      const response = await axios.post(
-        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-        {
-          secret: this.secretKey,
-          response: turnstileToken,
-          remoteip: request.ip,
-        },
-      );
+      const response = await axios.post("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        secret: this.secretKey,
+        response: turnstileToken,
+        remoteip: request.ip,
+      })
 
-      const { success, error_codes } = response.data;
+      const { success, error_codes } = response.data
 
       if (!success) {
         throw new UnauthorizedException({
           message: "Invalid Turnstile token",
           error_codes,
-        });
+        })
       }
 
-      return true;
+      return true
     } catch (error) {
-      console.error("Turnstile verification error:", error);
-      throw new UnauthorizedException("Turnstile verification failed");
+      console.error("Turnstile verification error:", error)
+      throw new UnauthorizedException("Turnstile verification failed")
     }
   }
 }
@@ -545,8 +527,8 @@ export class TurnstileGuard implements CanActivate {
 #### Use the Guard in Controller:
 
 ```typescript
-import { Controller, Post, UseGuards, Body } from "@nestjs/common";
-import { TurnstileGuard } from "./turnstile.guard";
+import { Controller, Post, UseGuards, Body } from "@nestjs/common"
+import { TurnstileGuard } from "./turnstile.guard"
 
 @Controller("api")
 export class AppController {
@@ -554,7 +536,7 @@ export class AppController {
   @UseGuards(TurnstileGuard)
   submitForm(@Body() body: any) {
     // Handle form logic after Turnstile verification
-    return { message: "Form submitted successfully!" };
+    return { message: "Form submitted successfully!" }
   }
 }
 ```
@@ -627,21 +609,21 @@ Common error codes and their meanings:
 ### Error Handling Example:
 
 ```tsx
-import { useTurnstile } from "@thind9xdev/react-turnstile";
+import { useTurnstile } from "@thind9xdev/react-turnstile"
 
 const ErrorHandlingExample = () => {
-  const { ref, token, error, isLoading, reset } = useTurnstile("YOUR_SITE_KEY");
+  const { ref, token, error, isLoading, reset } = useTurnstile("YOUR_SITE_KEY")
 
   const getErrorMessage = (error: string) => {
     switch (error) {
       case "timeout-or-duplicate":
-        return "Token has been used or timed out. Please try again.";
+        return "Token has been used or timed out. Please try again."
       case "invalid-input-response":
-        return "Invalid response. Please refresh the page.";
+        return "Invalid response. Please refresh the page."
       default:
-        return `Verification error: ${error}`;
+        return `Verification error: ${error}`
     }
-  };
+  }
 
   return (
     <div>
@@ -654,8 +636,8 @@ const ErrorHandlingExample = () => {
       )}
       {token && <p style={{ color: "green" }}>✅ Verification successful!</p>}
     </div>
-  );
-};
+  )
+}
 ```
 
 ## 🌐 Browser Support

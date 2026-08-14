@@ -1,18 +1,13 @@
-import { getTranslations } from "next-intl/server";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { StatCard } from "@/components/shared/pages/stats/StatCard";
-import {
-  BookOne,
-  TextFolder,
-  Timelapse,
-  ChatBubbleCircle,
-} from "@aurthle/icons";
+import { getTranslations } from "next-intl/server"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { StatCard } from "@/components/shared/pages/stats/StatCard"
+import { BookOne, TextFolder, Timelapse, ChatBubbleCircle } from "@aurthle/icons"
 
 interface BlogStatsSectionProps {
-  totalPosts: number;
-  totalWords: number;
-  communityMessages: number;
-  totalReadingTime: number;
+  totalPosts: number
+  totalWords: number
+  communityMessages: number
+  totalReadingTime: number
 }
 
 export async function BlogStatsSection({
@@ -21,14 +16,10 @@ export async function BlogStatsSection({
   communityMessages,
   totalReadingTime,
 }: BlogStatsSectionProps) {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   return (
-    <SectionLayout
-      badge={t("stats.sections.blog.badge")}
-      isFlex
-      className="pb-0!"
-    >
+    <SectionLayout badge={t("stats.sections.blog.badge")} isFlex className="pb-0!">
       <div className="grid md:w-[90%] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           label={t("stats.cards.totalThoughts.label")}
@@ -60,5 +51,5 @@ export async function BlogStatsSection({
         />
       </div>
     </SectionLayout>
-  );
+  )
 }

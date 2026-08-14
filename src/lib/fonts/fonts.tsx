@@ -1,4 +1,4 @@
-import localFont from "next/font/local";
+import localFont from "next/font/local"
 
 export const SFProDisplay = localFont({
   src: [
@@ -30,7 +30,7 @@ export const SFProDisplay = localFont({
   preload: true,
   fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
   adjustFontFallback: "Arial",
-});
+})
 
 export const SFProText = localFont({
   src: [
@@ -62,4 +62,36 @@ export const SFProText = localFont({
   preload: false,
   fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
   adjustFontFallback: "Arial",
-});
+})
+
+export const OpenRunde = localFont({
+  src: [
+    {
+      path: "./fonts/open-runde/open-runde-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/open-runde/open-runde-medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/open-runde/open-runde-semibold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/open-runde/open-runde-bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-open-runde",
+  display: "swap",
+  weight: "400 700",
+  style: "normal",
+  preload: true,
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+  adjustFontFallback: "Arial",
+})

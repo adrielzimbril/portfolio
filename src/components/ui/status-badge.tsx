@@ -1,7 +1,7 @@
-import { type VariantProps, cva } from "class-variance-authority";
-import * as React from "react";
-import { cn } from "@/utils/utils";
-import { Badge, badgeVariants } from "@/components/ui/badge";
+import { type VariantProps, cva } from "class-variance-authority"
+import * as React from "react"
+import { cn } from "@/utils/utils"
+import { Badge, badgeVariants } from "@/components/ui/badge"
 
 const statusIndicatorVariants = cva("rounded-full", {
   variants: {
@@ -33,28 +33,17 @@ const statusIndicatorVariants = cva("rounded-full", {
     size: "default",
     animated: true,
   },
-});
+})
 
-export interface StatusBadgeProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {
-  status?:
-    | "online"
-    | "offline"
-    | "busy"
-    | "away"
-    | "available"
-    | "error"
-    | "warning"
-    | "info";
-  primaryText?: string;
-  showIndicator?: boolean;
-  animated?: boolean;
-  mode?: "stack" | "inline";
-  indicatorClassName?: string;
-  primaryTextClassName?: string;
-  secondaryTextClassName?: string;
+export interface StatusBadgeProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof badgeVariants> {
+  status?: "online" | "offline" | "busy" | "away" | "available" | "error" | "warning" | "info"
+  primaryText?: string
+  showIndicator?: boolean
+  animated?: boolean
+  mode?: "stack" | "inline"
+  indicatorClassName?: string
+  primaryTextClassName?: string
+  secondaryTextClassName?: string
 }
 
 function StatusBadge({
@@ -95,40 +84,20 @@ function StatusBadge({
         )}
       />
     </span>
-  );
+  )
 
   if (mode === "stack") {
     return (
-      <div
-        className={cn(
-          "flex items-center gap-2",
-          badgeVariants({ variant, size }),
-          className,
-        )}
-        {...props}
-      >
+      <div className={cn("flex items-center gap-2", badgeVariants({ variant, size }), className)} {...props}>
         {IndicatorComponent}
         <div className="flex flex-col items-start gap-0.5">
-          {primaryText && (
-            <span
-              className={cn("font-semibold leading-none", primaryTextClassName)}
-            >
-              {primaryText}
-            </span>
-          )}
+          {primaryText && <span className={cn("font-semibold leading-none", primaryTextClassName)}>{primaryText}</span>}
           {props.children && (
-            <span
-              className={cn(
-                "text-[0.7em] opacity-70 leading-none",
-                secondaryTextClassName,
-              )}
-            >
-              {props.children}
-            </span>
+            <span className={cn("text-[0.7em] opacity-70 leading-none", secondaryTextClassName)}>{props.children}</span>
           )}
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -145,24 +114,16 @@ function StatusBadge({
       <Badge size={size} circle={!primaryText}>
         <div className="flex items-center gap-2">
           {IndicatorComponent}
-          {primaryText && (
-            <span className={cn("font-semibold", primaryTextClassName)}>
-              {primaryText}
-            </span>
-          )}
+          {primaryText && <span className={cn("font-semibold", primaryTextClassName)}>{primaryText}</span>}
         </div>
       </Badge>
       {props.children && (
         <>
-          <span
-            className={cn("font-normal opacity-90", secondaryTextClassName)}
-          >
-            {props.children}
-          </span>
+          <span className={cn("font-normal opacity-90", secondaryTextClassName)}>{props.children}</span>
         </>
       )}
     </div>
-  );
+  )
 }
 
-export { StatusBadge, statusIndicatorVariants };
+export { StatusBadge, statusIndicatorVariants }

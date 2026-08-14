@@ -1,7 +1,7 @@
-"use client";
-import * as React from "react";
+"use client"
+import * as React from "react"
 
-import { cn } from "@/utils/utils";
+import { cn } from "@/utils/utils"
 import {
   Tooltip,
   TooltipContent,
@@ -9,41 +9,37 @@ import {
   TooltipTrigger,
   type TooltipProps,
   type TooltipContentProps,
-} from "@/components/ui/tooltip";
+} from "@/components/ui/tooltip"
 
 type AvatarProps = TooltipProps & {
-  children: React.ReactNode;
-  zIndex: number;
-};
+  children: React.ReactNode
+  zIndex: number
+}
 
 function AvatarContainer({ children, zIndex, ...props }: AvatarProps) {
   return (
     <Tooltip {...props}>
       <TooltipTrigger>
-        <div
-          data-slot="avatar-container"
-          className="relative"
-          style={{ zIndex }}
-        >
+        <div data-slot="avatar-container" className="relative" style={{ zIndex }}>
           {children}
         </div>
       </TooltipTrigger>
     </Tooltip>
-  );
+  )
 }
 
-type AvatarGroupTooltipProps = TooltipContentProps;
+type AvatarGroupTooltipProps = TooltipContentProps
 
 function AvatarGroupTooltip(props: AvatarGroupTooltipProps) {
-  return <TooltipContent {...props} />;
+  return <TooltipContent {...props} />
 }
 
 type AvatarGroupProps = Omit<React.ComponentProps<"div">, "translate"> & {
-  children: React.ReactElement[];
-  invertOverlap?: boolean;
-  numPeople?: number;
-  tooltipProps?: Omit<TooltipProps, "children">;
-};
+  children: React.ReactElement[]
+  invertOverlap?: boolean
+  numPeople?: number
+  tooltipProps?: Omit<TooltipProps, "children">
+}
 
 function AvatarGroup({
   ref,
@@ -65,9 +61,7 @@ function AvatarGroup({
         {children?.map((child, index) => (
           <AvatarContainer
             key={index}
-            zIndex={
-              invertOverlap ? React.Children.count(children) - index : index
-            }
+            zIndex={invertOverlap ? React.Children.count(children) - index : index}
             {...tooltipProps}
           >
             {child}
@@ -92,12 +86,7 @@ function AvatarGroup({
         )} */}
       </div>
     </TooltipProvider>
-  );
+  )
 }
 
-export {
-  AvatarGroup,
-  AvatarGroupTooltip,
-  type AvatarGroupProps,
-  type AvatarGroupTooltipProps,
-};
+export { AvatarGroup, AvatarGroupTooltip, type AvatarGroupProps, type AvatarGroupTooltipProps }

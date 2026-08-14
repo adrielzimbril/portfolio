@@ -1,80 +1,77 @@
-"use client";
-import React, { useState, useMemo } from "react";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import {
-  getAllChangelog,
-  getChangelogTypeCounts,
-} from "@/integrations/content/lib";
-import { Changelog } from "@/integrations/content/types";
-import { FilterModal } from "@/components/shared/pages/changelog/FilterModal";
-import { FilterButton } from "@/components/shared/pages/changelog/FilterButton";
-import { TimelineEntry } from "@/components/shared/pages/changelog/TimelineEntry";
-import { TimelineYearHeader } from "@/components/shared/pages/changelog/TimelineYearHeader";
-import { EmptyState } from "@/components/shared/pages/changelog/EmptyState";
-import { Button } from "@/components/ui/button";
-import { useTranslations } from "use-intl";
+"use client"
+import React, { useState, useMemo } from "react"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { getAllChangelog, getChangelogTypeCounts } from "@/integrations/content/lib"
+import { Changelog } from "@/integrations/content/types"
+import { FilterModal } from "@/components/shared/pages/changelog/FilterModal"
+import { FilterButton } from "@/components/shared/pages/changelog/FilterButton"
+import { TimelineEntry } from "@/components/shared/pages/changelog/TimelineEntry"
+import { TimelineYearHeader } from "@/components/shared/pages/changelog/TimelineYearHeader"
+import { EmptyState } from "@/components/shared/pages/changelog/EmptyState"
+import { Button } from "@/components/ui/button"
+import { useTranslations } from "use-intl"
 
 export function TimelineSection() {
-  const t = useTranslations();
-  const [selectedType, setSelectedType] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(3);
-  const [changelogData, setChangelogData] = React.useState<Changelog[]>([]);
+  const t = useTranslations()
+  const [selectedType, setSelectedType] = useState<string>("all")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(3)
+  const [changelogData, setChangelogData] = React.useState<Changelog[]>([])
   const [typeCounts, setTypeCounts] = React.useState<Record<string, number>>({
     all: 0,
     milestone: 0,
     feature: 0,
     fix: 0,
     improvement: 0,
-  });
+  })
 
   const handleTypeChange = (type: string) => {
-    setSelectedType(type);
-    setVisibleCount(3);
-  };
+    setSelectedType(type)
+    setVisibleCount(3)
+  }
 
   const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
-    setVisibleCount(3);
-  };
+    setSearchQuery(query)
+    setVisibleCount(3)
+  }
 
   React.useEffect(() => {
     const loadData = async () => {
-      const data: Changelog[] = await getAllChangelog();
-      setChangelogData(data);
-      const counts = await getChangelogTypeCounts();
-      setTypeCounts(counts);
-    };
-    loadData();
-  }, []);
+      const data: Changelog[] = await getAllChangelog()
+      setChangelogData(data)
+      const counts = await getChangelogTypeCounts()
+      setTypeCounts(counts)
+    }
+    loadData()
+  }, [])
 
   const filteredChangelog = useMemo(() => {
-    if (!changelogData.length) return [];
+    if (!changelogData.length) return []
 
     return changelogData.filter((entry) => {
       if (selectedType !== "all" && entry.type !== selectedType) {
-        return false;
+        return false
       }
       if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        const versionMatch = entry.version.toLowerCase().includes(query);
-        const bodyMatch = entry.body?.toLowerCase().includes(query) || false;
-        return versionMatch || bodyMatch;
+        const query = searchQuery.toLowerCase()
+        const versionMatch = entry.version.toLowerCase().includes(query)
+        const bodyMatch = entry.body?.toLowerCase().includes(query) || false
+        return versionMatch || bodyMatch
       }
-      return true;
-    });
-  }, [changelogData, selectedType, searchQuery]);
+      return true
+    })
+  }, [changelogData, selectedType, searchQuery])
 
   const clearFilters = () => {
-    setSelectedType("all");
-    setSearchQuery("");
-    setVisibleCount(3);
-  };
+    setSelectedType("all")
+    setSearchQuery("")
+    setVisibleCount(3)
+  }
 
-  const hasActiveFilters = selectedType !== "all" || searchQuery;
-  const visibleChangelog = filteredChangelog.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredChangelog.length;
+  const hasActiveFilters = selectedType !== "all" || searchQuery
+  const visibleChangelog = filteredChangelog.slice(0, visibleCount)
+  const hasMore = visibleCount < filteredChangelog.length
 
   return (
     <>
@@ -111,54 +108,36 @@ export function TimelineSection() {
               // Group by year
               const groupedByYear = visibleChangelog.reduce(
                 (acc, entry) => {
-                  const year = new Date(entry.date).getFullYear();
-                  if (!acc[year]) acc[year] = [];
-                  acc[year].push(entry);
-                  return acc;
+                  const year = new Date(entry.date).getFullYear()
+                  if (!acc[year]) acc[year] = []
+                  acc[year].push(entry)
+                  return acc
                 },
                 {} as Record<number, typeof visibleChangelog>,
-              );
+              )
 
               return Object.entries(groupedByYear)
                 .sort(([a], [b]) => Number(b) - Number(a))
                 .map(([year, entries]) => (
                   <div key={year} className="w-full">
-                    <TimelineYearHeader
-                      year={Number(year)}
-                      count={entries.length}
-                    />
+                    <TimelineYearHeader year={Number(year)} count={entries.length} />
 
                     {/* Timeline for this year */}
                     <div className="relative space-y-20 w-full">
                       {entries.map((entry, index) => {
                         const isLatest =
                           index === 0 &&
-                          year ===
-                            String(
-                              new Date(
-                                filteredChangelog[0]?.date || Date.now(),
-                              ).getFullYear(),
-                            );
+                          year === String(new Date(filteredChangelog[0]?.date || Date.now()).getFullYear())
 
-                        return (
-                          <TimelineEntry
-                            key={entry.version}
-                            entry={entry}
-                            isLatest={isLatest}
-                          />
-                        );
+                        return <TimelineEntry key={entry.version} entry={entry} isLatest={isLatest} />
                       })}
                     </div>
                   </div>
-                ));
+                ))
             })()}
             {hasMore && (
               <div className="flex justify-center">
-                <Button
-                  variant="outline"
-                  asPointer
-                  onClick={() => setVisibleCount((count) => count + 3)}
-                >
+                <Button variant="outline" asPointer onClick={() => setVisibleCount((count) => count + 3)}>
                   {t("changelog.load_more")}
                 </Button>
               </div>
@@ -167,5 +146,5 @@ export function TimelineSection() {
         )}
       </SectionLayout>
     </>
-  );
+  )
 }

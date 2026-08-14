@@ -1,20 +1,20 @@
-"use client";
-import Image from "next/image";
-import { cn } from "@/utils/utils";
-import { getImageUrl } from "@/utils/base-url";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useTranslations } from "use-intl";
-import { PreviewContent } from "@/components/shared/pages/shared/preview";
+"use client"
+import Image from "next/image"
+import { cn } from "@/utils/utils"
+import { getImageUrl } from "@/utils/base-url"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { useTranslations } from "use-intl"
+import { PreviewContent } from "@/components/shared/pages/shared/preview"
 
 interface PreviewProps {
-  title?: string;
-  cover?: string;
-  coverText?: { emoji: string; title: string; description: string };
-  isWide?: boolean;
+  title?: string
+  cover?: string
+  coverText?: { emoji: string; title: string; description: string }
+  isWide?: boolean
 }
 
 export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
-  const t = useTranslations();
+  const t = useTranslations()
   return (
     <div
       className={cn(
@@ -42,19 +42,11 @@ export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
                     alt={title ?? ""}
                     src={getImageUrl(cover)}
                     loading="lazy"
-                    sizes={
-                      isWide
-                        ? "(max-width: 768px) 100vw, 66vw"
-                        : "(max-width: 768px) 100vw, 33vw"
-                    }
+                    sizes={isWide ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
                   />
                 </button>
               </DialogTrigger>
-              <DialogContent
-                size="2xl"
-                className="max-w-6xl p-2 sm:p-3"
-                variant="glass"
-              >
+              <DialogContent size="2xl" className="max-w-6xl p-2 sm:p-3" variant="glass">
                 <div className="w-full h-full max-h-[85vh] overflow-hidden rounded-xl pointer-events-none">
                   <Image
                     width={1920}
@@ -73,12 +65,10 @@ export function CardPreview({ title, cover, coverText, isWide }: PreviewProps) {
           <PreviewContent
             emoji={coverText?.emoji ?? t("page-sections.preview.emoji")}
             title={coverText?.title ?? t("page-sections.preview.title")}
-            description={
-              coverText?.description ?? t("page-sections.preview.description")
-            }
+            description={coverText?.description ?? t("page-sections.preview.description")}
           />
         )}
       </div>
     </div>
-  );
+  )
 }

@@ -1,16 +1,16 @@
-import React from "react";
-import { HeaderSection } from "@/app/(base)/hub/sections/HeaderSection";
-import { CallToAction } from "@/components/shared/pages/shared/call-to-action";
-import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
-import { metadata as baseMetadata } from "@/app/metadata";
-import logger from "@/utils/logger";
-import { getAllResources } from "@/integrations/content/lib/resources";
-import { MyHubSection } from "@/app/(base)/hub/sections/MyHubSection";
-import { Skeleton } from "@/components/ui/skeleton";
+import React from "react"
+import { HeaderSection } from "@/app/(base)/hub/sections/HeaderSection"
+import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
+import { Metadata } from "next"
+import { getLocale, getTranslations } from "next-intl/server"
+import { metadata as baseMetadata } from "@/app/metadata"
+import logger from "@/utils/logger"
+import { getAllResources } from "@/integrations/content/lib/resources"
+import { MyHubSection } from "@/app/(base)/hub/sections/MyHubSection"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = await getTranslations()
 
   const metadata: Metadata = {
     ...baseMetadata,
@@ -27,17 +27,17 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("hub.title"),
       description: t("hub.description"),
     },
-  };
+  }
 
-  return metadata;
+  return metadata
 }
 
 export default async function MyHub() {
-  const locale = await getLocale();
+  const locale = await getLocale()
   const data = await getAllResources({ locale }).catch((err) => {
-    logger.error(err);
-    return [];
-  });
+    logger.error(err)
+    return []
+  })
 
   return (
     <>
@@ -52,5 +52,5 @@ export default async function MyHub() {
         <CallToAction isPage />
       </Skeleton>
     </>
-  );
+  )
 }

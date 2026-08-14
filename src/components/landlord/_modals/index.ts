@@ -1,3 +1,3 @@
-export * from "./ParticipantModal";
-export * from "./MessageModal";
-export * from "./DataDetailsModal";
+export * from "./ParticipantModal"
+export * from "./MessageModal"
+export * from "./DataDetailsModal"

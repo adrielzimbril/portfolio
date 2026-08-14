@@ -1,20 +1,20 @@
-import { NextRequest } from "next/server";
-import { createClient } from "@/integrations/supabase/server";
-import { cookies } from "next/headers";
-import { getImageUrl } from "@/utils/base-url";
-import { getBrevoConfig } from "@/config";
-import { sendEmail } from "@/integrations/mail";
-import { appConfig } from "@/data/app-config";
-import { Locale } from "@/types";
-import { addContact, ContactProvider } from "@/integrations/contact";
-import logger from "@/utils/logger";
+import { NextRequest } from "next/server"
+import { createClient } from "@/integrations/supabase/server"
+import { cookies } from "next/headers"
+import { getImageUrl } from "@/utils/base-url"
+import { getBrevoConfig } from "@/config"
+import { sendEmail } from "@/integrations/mail"
+import { appConfig } from "@/data/app-config"
+import { Locale } from "@/types"
+import { addContact, ContactProvider } from "@/integrations/contact"
+import logger from "@/utils/logger"
 
 export async function POST(req: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const cookieStore = await cookies()
+    const supabase = createClient(cookieStore)
 
-    const body = await req.json().catch(() => ({}));
+    const body = await req.json().catch(() => ({}))
     const {
       intention,
       name,
@@ -24,43 +24,36 @@ export async function POST(req: NextRequest) {
       target,
       locale,
     }: {
-      intention?: string;
-      name?: string;
-      email?: string;
-      url?: string;
-      description?: string;
-      target?: string;
-      locale?: Locale;
-    } = body || {};
+      intention?: string
+      name?: string
+      email?: string
+      url?: string
+      description?: string
+      target?: string
+      locale?: Locale
+    } = body || {}
 
     // Basic validation (server-side)
     if (!intention || !name || !email || !url) {
-      return new Response(
-        JSON.stringify({ error: "Missing required fields" }),
-        { status: 400 },
-      );
+      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 })
     }
 
     // Prepare meta from request
-    const ipHeader = req.headers.get("x-forwarded-for");
-    const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined;
-    const userAgent = req.headers.get("user-agent") || undefined;
+    const ipHeader = req.headers.get("x-forwarded-for")
+    const ip = ipHeader ? ipHeader.split(",")[0]?.trim() : undefined
+    const userAgent = req.headers.get("user-agent") || undefined
     const meta = {
       referer: req.headers.get("referer"),
       origin: req.headers.get("origin"),
       url: req.url,
-    } as const;
+    } as const
 
     // Link or create the user record first (users table)
-    let userId: string | undefined;
+    let userId: string | undefined
     // search user by email
-    const { data: existingUser } = await supabase
-      .from("users")
-      .select("*")
-      .eq("email", email)
-      .limit(1);
-    const existingUserData = existingUser?.[0];
-    const alreadyExists = Boolean(existingUserData);
+    const { data: existingUser } = await supabase.from("users").select("*").eq("email", email).limit(1)
+    const existingUserData = existingUser?.[0]
+    const alreadyExists = Boolean(existingUserData)
 
     if (!alreadyExists) {
       try {
@@ -68,14 +61,14 @@ export async function POST(req: NextRequest) {
           p_name: name ?? "",
           p_email: email ?? undefined,
           p_phone: "",
-        });
+        })
         // Supabase returns a single row for this RPC
-        userId = userData!.id;
+        userId = userData!.id
       } catch (e) {
-        logger.warn("upsert_user RPC threw, continuing without user link", e);
+        logger.warn("upsert_user RPC threw, continuing without user link", e)
       }
     } else if (existingUserData) {
-      userId = existingUserData.id;
+      userId = existingUserData.id
     }
     // Centralized DB logic: add or update via RPC (handles user linkage and dedupe)
     // logger.info("Adding newsletter subscriber", { email, name, phone });
@@ -92,28 +85,22 @@ export async function POST(req: NextRequest) {
             url: req.url,
           }),
           updateexisting: alreadyExists,
-        });
+        })
       } catch (e) {
-        logger.error(
-          `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-          { error: e },
-        );
+        logger.error(`Failed to add newsletter subscriber for user ${userId} - ${email}`, { error: e })
       }
     } else {
       try {
         await supabase.from("newsletter_subscribers").update({
           updateexisting: alreadyExists,
-        });
+        })
       } catch (e) {
-        logger.error(
-          `Failed to add newsletter subscriber for user ${userId} - ${email}`,
-          { error: e },
-        );
+        logger.error(`Failed to add newsletter subscriber for user ${userId} - ${email}`, { error: e })
       }
     }
 
-    const { generalListId } = getBrevoConfig();
-    const generalId = Number(generalListId);
+    const { generalListId } = getBrevoConfig()
+    const generalId = Number(generalListId)
 
     try {
       if (generalId) {
@@ -123,14 +110,11 @@ export async function POST(req: NextRequest) {
           phone: "",
           listIds: [generalId],
           provider: ContactProvider.BREVO,
-        });
+        })
       }
     } catch (e: unknown) {
       // Do not fail the flow if Brevo fails
-      logger.warn(
-        `Brevo add contact error for user ${userId} - ${email}:`,
-        (e as Error)?.message || e,
-      );
+      logger.warn(`Brevo add contact error for user ${userId} - ${email}:`, (e as Error)?.message || e)
     }
 
     // Store to Supabase
@@ -146,20 +130,17 @@ export async function POST(req: NextRequest) {
       user_agent: userAgent,
       status: "received",
       created_at: new Date().toISOString(),
-    });
+    })
 
     if (dbError) {
-      logger.error("submit_entries insert failed", dbError);
-      return new Response(
-        JSON.stringify({ error: "DB_ERROR", details: dbError.message }),
-        {
-          status: 500,
-        },
-      );
+      logger.error("submit_entries insert failed", dbError)
+      return new Response(JSON.stringify({ error: "DB_ERROR", details: dbError.message }), {
+        status: 500,
+      })
     }
 
     // Send admin notification
-    const adminTo = [{ email: appConfig.contactForm.to }];
+    const adminTo = [{ email: appConfig.contactForm.to }]
     await sendEmail({
       to: adminTo,
       templateId: "submitAdminNotification",
@@ -171,7 +152,7 @@ export async function POST(req: NextRequest) {
         description,
         target,
       },
-    });
+    })
 
     // Send user confirmation
     await sendEmail({
@@ -183,16 +164,16 @@ export async function POST(req: NextRequest) {
         intention,
         url,
       },
-    });
+    })
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
-    });
+    })
   } catch (e: unknown) {
-    logger.error("/api/submit failed", (e as Error)?.message || e);
+    logger.error("/api/submit failed", (e as Error)?.message || e)
     return new Response(JSON.stringify({ error: "UNKNOWN_ERROR" }), {
       status: 500,
-    });
+    })
   }
 }

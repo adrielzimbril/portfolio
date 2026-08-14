@@ -3,9 +3,9 @@ export const USFlag = ({
   height = "15",
   className,
 }: {
-  width?: string;
-  height?: string;
-  className?: string;
+  width?: string
+  height?: string
+  className?: string
 }) => {
   return (
     <svg
@@ -18,12 +18,7 @@ export const USFlag = ({
     >
       <g clipPath="url(#clip0_1414_4052)">
         <rect width="21" height="15" fill="white" />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M0 0H9V7H0V0Z"
-          fill="#1A47B8"
-        />
+        <path fillRule="evenodd" clipRule="evenodd" d="M0 0H9V7H0V0Z" fill="#1A47B8" />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -43,5 +38,5 @@ export const USFlag = ({
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}

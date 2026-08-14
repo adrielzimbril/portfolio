@@ -1,5 +1,5 @@
-import React from "react";
-import { createTranslator } from "use-intl/core";
+import React from "react"
+import { createTranslator } from "use-intl/core"
 import {
   Body,
   Container,
@@ -13,13 +13,10 @@ import {
   Hr,
   Tailwind,
   Link,
-} from "@react-email/components";
-import {
-  defaultTranslations,
-  defaultLocale,
-} from "@/integrations/mail/util/translations";
-import type { BaseMailProps } from "@/integrations/mail/types/types";
-import { Intention } from "@/types";
+} from "@react-email/components"
+import { defaultTranslations, defaultLocale } from "@/integrations/mail/util/translations"
+import type { BaseMailProps } from "@/integrations/mail/types/types"
+import { Intention } from "@/types"
 
 export function SubmitAdminNotification({
   locale,
@@ -31,14 +28,14 @@ export function SubmitAdminNotification({
   description,
   target,
 }: BaseMailProps & {
-  name: string;
-  email: string;
-  intention: string;
-  url: string;
-  description?: string;
-  target?: string;
+  name: string
+  email: string
+  intention: string
+  url: string
+  description?: string
+  target?: string
 }) {
-  const t = createTranslator({ locale, messages: translations });
+  const t = createTranslator({ locale, messages: translations })
 
   return (
     <Html>
@@ -59,10 +56,7 @@ export function SubmitAdminNotification({
         <Body className="bg-[#fafaf9] my-8 font-sans">
           <Container className="max-w-[600px] my-0 mx-auto bg-white border border-[#f0f0f0] rounded-xl">
             <Section className="px-10 pt-10 pb-5 bg-white text-center">
-              <Heading
-                as="h1"
-                className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2"
-              >
+              <Heading as="h1" className="text-2xl font-medium leading-tight text-[#1a1a1a] mb-2">
                 {t("mail.submitAdminNotification.subject")} 🧑🏻‍🔬
               </Heading>
             </Section>
@@ -88,9 +82,7 @@ export function SubmitAdminNotification({
               {description && (
                 <>
                   <Hr className="border-t border-[#e0e0e0] my-6" />
-                  <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">
-                    {description}
-                  </Text>
+                  <Text className="text-[#333333] text-base leading-relaxed whitespace-pre-wrap">{description}</Text>
                 </>
               )}
             </Section>
@@ -108,7 +100,7 @@ export function SubmitAdminNotification({
         </Body>
       </Tailwind>
     </Html>
-  );
+  )
 }
 
 SubmitAdminNotification.PreviewProps = {
@@ -120,6 +112,6 @@ SubmitAdminNotification.PreviewProps = {
   url: "https://example.com",
   description: "Un peu de contexte sur le projet…",
   target: "website",
-};
+}
 
-export default SubmitAdminNotification;
+export default SubmitAdminNotification

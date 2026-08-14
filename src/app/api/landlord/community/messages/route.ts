@@ -1,22 +1,19 @@
-import { NextResponse } from "next/server";
-import { createClient } from "@/integrations/supabase/server";
-import { cookies } from "next/headers";
-import { Locale } from "@/types";
-import { logger } from "@/utils";
+import { NextResponse } from "next/server"
+import { createClient } from "@/integrations/supabase/server"
+import { cookies } from "next/headers"
+import { Locale } from "@/types"
+import { logger } from "@/utils"
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const page = Math.max(Number(searchParams.get("page") || 1), 1);
-    const pageSize = Math.min(
-      Math.max(Number(searchParams.get("pageSize") || 10), 1),
-      50,
-    );
-    const from = (page - 1) * pageSize;
-    const to = from + pageSize - 1;
+    const { searchParams } = new URL(request.url)
+    const page = Math.max(Number(searchParams.get("page") || 1), 1)
+    const pageSize = Math.min(Math.max(Number(searchParams.get("pageSize") || 10), 1), 50)
+    const from = (page - 1) * pageSize
+    const to = from + pageSize - 1
 
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const cookieStore = await cookies()
+    const supabase = createClient(cookieStore)
 
     const {
       data: messages,
@@ -26,10 +23,10 @@ export async function GET(request: Request) {
       .from("community_wall")
       .select("*", { count: "exact" })
       .order("created_at", { ascending: false })
-      .range(from, to);
+      .range(from, to)
 
     if (error) {
-      return NextResponse.json({ messages: [], count: 0 }, { status: 200 });
+      return NextResponse.json({ messages: [], count: 0 }, { status: 200 })
     }
 
     return NextResponse.json({
@@ -38,19 +35,19 @@ export async function GET(request: Request) {
       count: count || 0,
       page,
       pageSize,
-    });
+    })
   } catch (error) {
-    return NextResponse.json({ messages: [] }, { status: 500 });
+    return NextResponse.json({ messages: [] }, { status: 500 })
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { creator_name, creator_avatar_url, message } = body;
+    const body = await request.json()
+    const { creator_name, creator_avatar_url, message } = body
 
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const cookieStore = await cookies()
+    const supabase = createClient(cookieStore)
 
     const { data, error } = await supabase
       .from("community_wall")
@@ -61,19 +58,16 @@ export async function POST(request: Request) {
         user_id: null,
       })
       .select()
-      .single();
+      .single()
 
     if (error) {
-      logger.error(error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      logger.error(error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    return NextResponse.json({ message: data });
+    return NextResponse.json({ message: data })
   } catch (error) {
-    logger.error(error);
-    return NextResponse.json(
-      { error: "Failed to add message" },
-      { status: 500 },
-    );
+    logger.error(error)
+    return NextResponse.json({ error: "Failed to add message" }, { status: 500 })
   }
 }

@@ -1,4 +1,4 @@
-import localFont from "next/font/local";
+import localFont from "next/font/local"
 
 export const SFProDisplay = localFont({
   src: [
@@ -117,7 +117,7 @@ export const SFProDisplay = localFont({
   preload: true,
   fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
   adjustFontFallback: "Arial",
-});
+})
 
 export const SFProText = localFont({
   src: [
@@ -200,4 +200,4 @@ export const SFProText = localFont({
   preload: false,
   fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
   adjustFontFallback: "Arial",
-});
+})

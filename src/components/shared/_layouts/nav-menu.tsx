@@ -1,25 +1,24 @@
-"use client";
-import { cn } from "@/utils/utils";
-import Link from "next/link";
-import { useTranslations } from "use-intl";
+"use client"
+import { cn } from "@/utils/utils"
+import Link from "next/link"
+import { useTranslations } from "use-intl"
 
 export function NavMenu({
   menuRoutes,
   activeTab,
   setActiveTab,
 }: {
-  menuRoutes: { key: string; link: string }[];
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  menuRoutes: { key: string; link: string }[]
+  activeTab: string
+  setActiveTab: (tab: string) => void
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
   return (
     <div className="w-fit hidden lg:block">
       <div className={cn("mx-auto flex w-full items-center justify-center")}>
         <div
           className={cn(
             "relative flex w-fit overflow-hidden items-center p-1",
-            //"rounded-2xl overflow-hidden border-2 border-solid border-secondary",
             "squircle-7xl bg-transparent border-2 border-b-base-accent",
           )}
         >
@@ -39,16 +38,14 @@ export function NavMenu({
                 <div
                   className={cn(
                     "absolute inset-0 bg-b-base-accent size-[95%] self-center place-self-center",
-                    "squircle-2xl/80 md:squircle-7xl/80 rounded-xl",
+                    "squircle-2xl/80 md:squircle-3xl/80",
                   )}
                 />
               )}
               <span
                 className={cn(
                   "relative block text-sm font-medium transition-colors duration-200 hover:text-b-white-invert tracking-tight",
-                  activeTab === item.key
-                    ? "text-b-white-invert"
-                    : "text-b-white-invert/60",
+                  activeTab === item.key ? "text-b-white-invert" : "text-b-white-invert/60",
                 )}
               >
                 {t("common.menu." + item.key + ".desktop")}
@@ -58,5 +55,5 @@ export function NavMenu({
         </div>
       </div>
     </div>
-  );
+  )
 }

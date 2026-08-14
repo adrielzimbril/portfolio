@@ -1,81 +1,51 @@
-"use client";
-import React from "react";
-import { SectionLayout } from "@/components/shared/sections/layout";
-import { routes } from "@/data/routes";
-import { useTranslations } from "use-intl";
-import { Link } from "@/components/ui/link";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { cn, pickRandomColor } from "@/utils";
-import { DEFAULT_COLOR_CODE_NAME } from "@/types";
+"use client"
+import React from "react"
+import { SectionLayout } from "@/components/shared/sections/layout"
+import { routes } from "@/data/routes"
+import { useTranslations } from "use-intl"
+import { Link } from "@/components/ui/link"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { cn, pickRandomColor } from "@/utils"
+import { DEFAULT_COLOR_CODE_NAME } from "@/types"
 
 export function RoutesSection() {
-  const t = useTranslations();
+  const t = useTranslations()
 
   const routeGroups = {
-    main: [
-      routes.home,
-      routes.about,
-      routes.hub,
-      routes.projects,
-      routes.talks,
-      routes.quests,
-      routes.thoughts,
-    ],
+    main: [routes.home, routes.about, routes.hub, routes.projects, routes.talks, routes.quests, routes.thoughts],
     contact: [routes.submit, routes.contact, routes.newsletter],
     community: [routes.community, routes.connections, routes.changelog],
     tools: [routes.toolbox, routes.stats],
     rss: [routes.rss, routes.rssAtom, routes.rssJson],
     legal: [routes.terms, routes.privacy],
-  };
+  }
 
   return (
-    <SectionLayout
-      className="pt-0!"
-      isFlex
-      description={t("routes.page.description")}
-    >
+    <SectionLayout className="pt-0!" isFlex description={t("routes.page.description")}>
       <div className="max-w-4xl mx-auto space-y-12">
         <div className="space-y-8">
-          <RouteGroup
-            title={t("routes.groups.main")}
-            routes={routeGroups.main}
-          />
-          <RouteGroup
-            title={t("routes.groups.community")}
-            routes={routeGroups.community}
-          />
-          <RouteGroup
-            title={t("routes.groups.contact")}
-            routes={routeGroups.contact}
-          />
-          <RouteGroup
-            title={t("routes.groups.tools")}
-            routes={routeGroups.tools}
-          />
+          <RouteGroup title={t("routes.groups.main")} routes={routeGroups.main} />
+          <RouteGroup title={t("routes.groups.community")} routes={routeGroups.community} />
+          <RouteGroup title={t("routes.groups.contact")} routes={routeGroups.contact} />
+          <RouteGroup title={t("routes.groups.tools")} routes={routeGroups.tools} />
           <RouteGroup title={t("routes.groups.rss")} routes={routeGroups.rss} />
-          <RouteGroup
-            title={t("routes.groups.legal")}
-            routes={routeGroups.legal}
-          />
+          <RouteGroup title={t("routes.groups.legal")} routes={routeGroups.legal} />
         </div>
       </div>
     </SectionLayout>
-  );
+  )
 }
 
 function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <div className="space-y-4">
       <h3 className="text-2xl font-bold text-b-white-foreground">{title}</h3>
       <div className="grid gap-4 md:grid-cols-2">
         {routes.map((route) => (
-          <Card
-            key={route.key}
-            className="group relative bg-b-base squircle-2xl/80  border-0"
-          >
+          <Card key={route.key} className="group relative bg-b-base squircle-2xl/80  border-0">
             <Link href={route.link} className="absolute inset-0 z-10" />
             <CardContent className="p-4 relative size-full z-0">
               <div
@@ -99,14 +69,12 @@ function RouteGroup({ title, routes }: { title: string; routes: any[] }) {
                     </Badge>
                   )}
                 </div>
-                <p className="text-sm text-b-white-invert-sec">
-                  {t(`${route.key}.description`)}
-                </p>
+                <p className="text-sm text-b-white-invert-sec">{t(`${route.key}.description`)}</p>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
     </div>
-  );
+  )
 }

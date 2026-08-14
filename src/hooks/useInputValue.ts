@@ -1,5 +1,5 @@
-"use client";
-import { type ChangeEvent, useState } from "react";
+"use client"
+import { type ChangeEvent, useState } from "react"
 
 /**
  * Returns an object containing the current value and an onChange handler for an input element.
@@ -12,14 +12,14 @@ import { type ChangeEvent, useState } from "react";
  * const { value, onChange } = useInputValue("initial value");
  */
 export function useInputValue(initialValue: string) {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(initialValue)
 
   function onChange(event: ChangeEvent<HTMLInputElement>) {
-    setValue(event.currentTarget.value);
+    setValue(event.currentTarget.value)
   }
 
   return {
     value,
     onChange,
-  };
+  }
 }

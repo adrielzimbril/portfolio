@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback } from "react"
 
 /**
  * Hook to scroll to an element by its ID.
@@ -14,12 +14,12 @@ import { useCallback } from "react";
  */
 export function useScrollTo() {
   const scrollToId = useCallback((id: string, offset: number = 0) => {
-    const el = document.getElementById(id);
+    const el = document.getElementById(id)
     if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      const y = el.getBoundingClientRect().top + window.scrollY - offset
+      window.scrollTo({ top: y, behavior: "smooth" })
     }
-  }, []);
+  }, [])
 
-  return scrollToId;
+  return scrollToId
 }

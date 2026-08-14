@@ -1,6 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
-import { supabaseKey } from "@/integrations/supabase/client";
-import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js"
+import { supabaseKey } from "@/integrations/supabase/client"
+import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
   try {
@@ -14,17 +14,11 @@ export async function POST(request: Request) {
     //   );
     // }
 
-    const supabase = createClient(
-      supabaseKey.url || "",
-      supabaseKey.anonKey || "",
-    );
+    const supabase = createClient(supabaseKey.url || "", supabaseKey.anonKey || "")
 
-    const { data, error } = await supabase.functions.invoke(
-      "check_tables_rls",
-      {
-        body: { name: "Functions" },
-      },
-    );
+    const { data, error } = await supabase.functions.invoke("check_tables_rls", {
+      body: { name: "Functions" },
+    })
 
     if (error) {
       return NextResponse.json(
@@ -38,7 +32,7 @@ export async function POST(request: Request) {
           timestamp: new Date().toISOString(),
         },
         { status: 500 },
-      );
+      )
     }
 
     return NextResponse.json({
@@ -46,7 +40,7 @@ export async function POST(request: Request) {
       data,
       dataCount: data?.length || 0,
       timestamp: new Date().toISOString(),
-    });
+    })
   } catch (error) {
     return NextResponse.json(
       {
@@ -55,6 +49,6 @@ export async function POST(request: Request) {
         timestamp: new Date().toISOString(),
       },
       { status: 500 },
-    );
+    )
   }
 }

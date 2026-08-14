@@ -1,70 +1,66 @@
-"use client";
-import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowUpOne } from "@aurthle/icons";
-import { useCompareIOSVersion } from "@/hooks/useIsMobile";
-import { cn } from "@/utils/utils";
+"use client"
+import { useState, useEffect, useRef } from "react"
+import { Button } from "@/components/ui/button"
+import { ArrowUpOne } from "@aurthle/icons"
+import { useCompareIOSVersion } from "@/hooks/useIsMobile"
+import { cn } from "@/utils/utils"
 
 export function ScrollToTop() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const isBadIOS = useCompareIOSVersion();
+  const [isVisible, setIsVisible] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const isBadIOS = useCompareIOSVersion()
 
-  const ticking = useRef(false);
-  const targetProgress = useRef(0);
-  const animationFrame = useRef<number | null>(null);
+  const ticking = useRef(false)
+  const targetProgress = useRef(0)
+  const animationFrame = useRef<number | null>(null)
 
   useEffect(() => {
-    if (isBadIOS) return; // Do nothing on mobile
+    if (isBadIOS) return // Do nothing on mobile
 
     const updateScroll = () => {
-      const scrollTop = window.pageYOffset;
-      const docHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      targetProgress.current = (scrollTop / docHeight) * 100;
-      setIsVisible(scrollTop > 300);
+      const scrollTop = window.pageYOffset
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
+      targetProgress.current = (scrollTop / docHeight) * 100
+      setIsVisible(scrollTop > 300)
 
       if (!ticking.current) {
-        ticking.current = true;
-        animateProgress();
+        ticking.current = true
+        animateProgress()
       }
-    };
+    }
 
     const animateProgress = () => {
       setScrollProgress((prev) => {
-        const diff = targetProgress.current - prev;
-        const step = diff * 0.2;
-        const next =
-          Math.abs(step) < 0.1 ? targetProgress.current : prev + step;
+        const diff = targetProgress.current - prev
+        const step = diff * 0.2
+        const next = Math.abs(step) < 0.1 ? targetProgress.current : prev + step
         if (next !== targetProgress.current) {
-          animationFrame.current = requestAnimationFrame(animateProgress);
+          animationFrame.current = requestAnimationFrame(animateProgress)
         } else {
-          ticking.current = false;
+          ticking.current = false
         }
-        return next;
-      });
-    };
+        return next
+      })
+    }
 
-    window.addEventListener("scroll", updateScroll, { passive: true });
+    window.addEventListener("scroll", updateScroll, { passive: true })
     return () => {
-      window.removeEventListener("scroll", updateScroll);
-      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
-    };
-  }, [isBadIOS]);
+      window.removeEventListener("scroll", updateScroll)
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current)
+    }
+  }, [isBadIOS])
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
-  const size = 48;
-  const strokeWidth = 4;
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset =
-    circumference - (scrollProgress / 100) * circumference;
+  const size = 48
+  const strokeWidth = 4
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const strokeDashoffset = circumference - (scrollProgress / 100) * circumference
 
-  if (!isVisible) return null;
+  if (!isVisible) return null
 
   return (
     <div className="fixed bottom-6 right-6 z-40">
@@ -111,5 +107,5 @@ export function ScrollToTop() {
         </div>
       </Button>
     </div>
-  );
+  )
 }

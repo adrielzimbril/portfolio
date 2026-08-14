@@ -1,18 +1,15 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import {
-  TurnstileProps,
-  TURNSTILE_CONSTANTS,
-} from "@/integrations/anti-bot/turnstile-second/types";
+import React, { useEffect, useRef, useCallback } from "react"
+import { TurnstileProps, TURNSTILE_CONSTANTS } from "@/integrations/anti-bot/turnstile-second/types"
 
 declare global {
   interface Window {
     turnstile: {
-      execute: (widgetId: string, options?: any) => void;
-      render: (container: string | HTMLElement, options: any) => string;
-      reset: (widgetId: string) => void;
-      remove: (widgetId: string) => void;
-    };
-    onloadTurnstileCallback?: () => void;
+      execute: (widgetId: string, options?: any) => void
+      render: (container: string | HTMLElement, options: any) => string
+      reset: (widgetId: string) => void
+      remove: (widgetId: string) => void
+    }
+    onloadTurnstileCallback?: () => void
   }
 }
 
@@ -45,60 +42,60 @@ export const Turnstile: React.FC<TurnstileProps> = ({
   sandbox = false,
   feedbackEnabled = TURNSTILE_CONSTANTS.DEFAULT_FEEDBACK_ENABLED,
 }) => {
-  const widgetRef = useRef<string>(undefined);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const widgetRef = useRef<string>(undefined)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const cleanup = useCallback(() => {
     if (widgetRef.current) {
-      window.turnstile?.remove(widgetRef.current);
-      widgetRef.current = undefined;
+      window.turnstile?.remove(widgetRef.current)
+      widgetRef.current = undefined
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    const scriptId = "cf-turnstile-script";
-    const existingScript = document.getElementById(scriptId);
+    const scriptId = "cf-turnstile-script"
+    const existingScript = document.getElementById(scriptId)
 
     if (!existingScript) {
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.src = `${TURNSTILE_CONSTANTS.SCRIPT_URL}?render=explicit&onload=onloadTurnstileCallback`;
-      script.async = true;
-      script.defer = true;
+      const script = document.createElement("script")
+      script.id = scriptId
+      script.src = `${TURNSTILE_CONSTANTS.SCRIPT_URL}?render=explicit&onload=onloadTurnstileCallback`
+      script.async = true
+      script.defer = true
 
       window.onloadTurnstileCallback = () => {
-        renderWidget();
-        onLoad?.();
-      };
+        renderWidget()
+        onLoad?.()
+      }
 
-      document.head.appendChild(script);
+      document.head.appendChild(script)
     } else if (window.turnstile) {
-      renderWidget();
-      onLoad?.();
+      renderWidget()
+      onLoad?.()
     }
 
-    return cleanup;
-  }, [siteKey, sandbox]);
+    return cleanup
+  }, [siteKey, sandbox])
 
   const sandboxDummyKey = () => {
     switch (sandbox) {
       case "pass":
-        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.PASS;
+        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.PASS
       case "block":
-        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.BLOCK;
+        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.BLOCK
       case "pass-invisible":
-        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.PASS_INVISIBLE;
+        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.PASS_INVISIBLE
       case "block-invisible":
-        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.BLOCK_INVISIBLE;
+        return TURNSTILE_CONSTANTS.SANDBOX_KEYS.BLOCK_INVISIBLE
     }
 
-    return TURNSTILE_CONSTANTS.SANDBOX_KEYS.PASS;
-  };
+    return TURNSTILE_CONSTANTS.SANDBOX_KEYS.PASS
+  }
 
   const renderWidget = () => {
-    if (!containerRef.current || !window.turnstile) return;
+    if (!containerRef.current || !window.turnstile) return
 
-    cleanup();
+    cleanup()
 
     widgetRef.current = window.turnstile.render(containerRef.current, {
       sitekey: sandbox ? sandboxDummyKey() : siteKey,
@@ -124,8 +121,8 @@ export const Turnstile: React.FC<TurnstileProps> = ({
       cdata: cData,
       language,
       "feedback-enabled": feedbackEnabled,
-    });
-  };
+    })
+  }
 
-  return <div ref={containerRef} id={id} className={className} />;
-};
+  return <div ref={containerRef} id={id} className={className} />
+}

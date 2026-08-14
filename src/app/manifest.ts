@@ -1,6 +1,6 @@
-import type { MetadataRoute } from "next";
-import { siteConfig } from "@/data/config";
-import { getBaseUrl, getPathUrl } from "@/utils/base-url";
+import type { MetadataRoute } from "next"
+import { siteConfig } from "@/data/config"
+import { getBaseUrl, getPathUrl } from "@/utils/base-url"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -33,5 +33,5 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/svg+xml",
       },
     ],
-  };
+  }
 }

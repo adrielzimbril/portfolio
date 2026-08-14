@@ -1,7 +1,7 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import { cn } from "@/utils/utils";
+"use client"
+import React from "react"
+import Image from "next/image"
+import { cn } from "@/utils/utils"
 
 export function ToolAvatar({ icon, name }: { icon: string; name: string }) {
   return (
@@ -22,5 +22,5 @@ export function ToolAvatar({ icon, name }: { icon: string; name: string }) {
         />
       </div>
     </div>
-  );
+  )
 }
