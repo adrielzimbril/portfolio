@@ -1,9 +1,10 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
+import { Sun, Moon, MoonSparkle, SolarEclipseTwo } from "@aurthle/icons"
 import { useTheme } from "next-themes"
 import { flushSync } from "react-dom"
 import { useRef } from "react"
+import { cn } from "@/utils"
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme()
@@ -49,8 +50,24 @@ export function ModeToggle() {
       className="size-8 cursor-pointer"
       onClick={changeTheme}
     >
-      <SunIcon className="size-4 dark:hidden" />
-      <MoonIcon className="hidden size-4 dark:block" />
+      <Sun
+        size={24}
+        variant="duotone"
+        className={cn(
+          "rotate-0 scale-100 transition-all",
+          theme === "dark" && "-rotate-90 scale-0",
+          theme === "system" && "-rotate-90 scale-0",
+        )}
+      />
+      <MoonSparkle
+        size={24}
+        variant="duotone"
+        className={cn(
+          "absolute rotate-90 scale-0 transition-all",
+          theme === "dark" && "rotate-0 scale-100",
+          theme === "system" && "-rotate-90 scale-0",
+        )}
+      />
     </Button>
   )
 }

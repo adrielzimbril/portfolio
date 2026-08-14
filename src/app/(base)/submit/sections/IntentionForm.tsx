@@ -41,7 +41,7 @@ const Select = ({
   return (
     <Field>
       <Label htmlFor={id}>{label}</Label>
-      <SelectComponent value={value} onValueChange={onChange}>
+      <SelectComponent value={value} onValueChange={(val) => onChange(val as string)}>
         <SelectTrigger id={id} variant="secondary" className="rounded-xl">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

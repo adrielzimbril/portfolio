@@ -1,4 +1,5 @@
-import { Slot } from "@radix-ui/react-slot"
+import { mergeProps } from "@base-ui/react/merge-props"
+import { useRender } from "@base-ui/react/use-render"
 import { type VariantProps, cva } from "class-variance-authority"
 import * as React from "react"
 import { cn } from "@/utils/utils"
@@ -38,7 +39,7 @@ const buttonVariants = cva(
 )
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  extends useRender.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   variant?:
     "default" | "base" | "secondary" | "destructive" | "outline" | "colored" | "ghost" | "icon" | "link" | "none"
   size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none"
@@ -56,6 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant,
       size,
       asChild = false,
+      render,
       asFull = false,
       asIcon = false,
       asPointer = false,
@@ -64,24 +66,31 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const Comp = asChild ? Slot : "button"
-    return (
-      <Comp
-        data-space-click={variant === "destructive" ? "deny" : "tap"}
-        data-space-hover="tick"
-        className={cn(
-          buttonVariants({ variant, size, className }),
-          asFull && "w-full flex text-center items-center justify-center",
-          asIcon && "[&_svg]:size-auto",
-          asPointer && "cursor-pointer",
-          whileTap && "hover:scale-105",
-        )}
-        ref={ref}
-        {...props}
-      />
-    )
+    // Handling asChild the Base UI way (using render)
+    const renderProp = asChild ? props.children as React.ReactElement : render;
+    
+    const defaultProps = {
+      className: cn(
+        buttonVariants({ variant, size, className }),
+        asFull && "w-full flex text-center items-center justify-center",
+        asIcon && "[&_svg]:size-auto",
+        asPointer && "cursor-pointer",
+        whileTap && "hover:scale-105",
+      ),
+      "data-space-click": variant === "destructive" ? "deny" : "tap",
+      "data-space-hover": "tick",
+      ref,
+      ...(!asChild && { children: props.children }),
+    };
+
+    return useRender({
+      defaultTagName: "button",
+      props: mergeProps<"button">(defaultProps, props),
+      render: renderProp,
+    });
   },
 )
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
+

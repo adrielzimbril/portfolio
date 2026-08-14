@@ -65,3 +65,5 @@ supabase/.temp/
 .next-dev-*.log
 
 migrate-squircle.js
+
+.agents/

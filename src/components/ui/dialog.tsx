@@ -2,7 +2,7 @@
 import * as React from "react"
 import { cn } from "@/utils/utils"
 import { X } from "@aurthle/icons"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { Dialog as DialogPrimitive } from "@base-ui/react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
@@ -22,9 +22,9 @@ function DialogClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.C
   return <DialogPrimitive.Close data-space-click="close" data-slot="dialog-close" {...props} />
 }
 
-function DialogOverlay({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+function DialogOverlay({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Backdrop>) {
   return (
-    <DialogPrimitive.Overlay
+    <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
       className={cn(
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/10 backdrop-blur-sm",
@@ -43,7 +43,7 @@ function DialogContent({
   scrollArea = false,
   closeButton = true,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+}: React.ComponentProps<typeof DialogPrimitive.Popup> & {
   size?: "sm" | "md" | "lg" | "xl" | "2xl" | "full"
   variant?: "default" | "modern" | "glass"
   scrollArea?: boolean
@@ -67,7 +67,7 @@ function DialogContent({
   return (
     <DialogPortal data-lenis-prevent>
       <DialogOverlay data-lenis-prevent />
-      <DialogPrimitive.Content
+      <DialogPrimitive.Popup
         data-lenis-prevent
         data-slot="dialog-content"
         className={cn(
@@ -99,7 +99,7 @@ function DialogContent({
             </Button>
           </DialogPrimitive.Close>
         )}
-      </DialogPrimitive.Content>
+      </DialogPrimitive.Popup>
     </DialogPortal>
   )
 }

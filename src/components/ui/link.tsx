@@ -34,7 +34,13 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         </span>
       </Button>
     ) : (
-      <NextLink className={cn("relative", className)} href={href!} ref={ref} {...props} data-space-hover="tick" />
+      <NextLink
+        className={cn("relative", className)}
+        href={href!}
+        ref={ref}
+        data-space-hover={props["data-space-hover"] || "tick"}
+        {...props}
+      />
     )
   },
 )

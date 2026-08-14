@@ -13,6 +13,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base"
 import { Card, CardContent } from "@/components/ui/card"
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal"
 import { loading, confirm, deny } from "@usespaceui/sounds"
+import { Badge } from "@/components/ui/badge"
 
 export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boolean }) {
   const t = useTranslations()
