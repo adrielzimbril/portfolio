@@ -30,7 +30,7 @@ export function EmojiPlaceholder({
       data-space-click="bloom"
       data-space-hover="droplet"
       className={cn(
-        "row-1 relative flex items-center justify-center size-full w-[stretch]! max-w-104 cursor-pointer transition-transform duration-300 hover:scale-105",
+        "row-1 relative flex items-center justify-center size-full w-[stretch]! cursor-pointer transition-transform duration-300 hover:scale-105",
         !unOrdered && "md:order-2",
         (variant === "default" || variant === "bordered") && "size-fit md:size-[90%] aspect-square",
         variant === "default" && "bg-b-white rounded-full",

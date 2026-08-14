@@ -46,7 +46,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
 
     const run = async () => {
       initSquircle()
-      await sleep(50)
+      await sleep(10)
 
       if (!cancelled) {
         setIsLoaded(true)
