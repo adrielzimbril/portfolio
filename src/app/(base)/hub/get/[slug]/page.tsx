@@ -8,6 +8,7 @@ import { GetResource } from "@/components/shared/pages/resources/get-resource"
 import { Metadata } from "next"
 import { getImageUrl } from "@/utils/base-url"
 import { metadata as baseMetadata } from "@/app/metadata"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(props: { params: Promise<PageParams> }): Promise<Metadata> {
   const params = await props.params
@@ -52,15 +53,17 @@ export default async function SubShopGet(props: { params: Promise<PageParams> })
 
   return (
     <>
-      <GetResource
-        id={id}
-        title={title}
-        slug={slug}
-        tags={tags}
-        excerpt={excerpt}
-        type={type}
-        created_at={created_at}
-      />
+      <Skeleton name="resource-get-content" loading={false}>
+        <GetResource
+          id={id}
+          title={title}
+          slug={slug}
+          tags={tags}
+          excerpt={excerpt}
+          type={type}
+          created_at={created_at}
+        />
+      </Skeleton>
     </>
   )
 }

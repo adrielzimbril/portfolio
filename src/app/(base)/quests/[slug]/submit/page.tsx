@@ -9,6 +9,7 @@ import { metadata as baseMetadata } from "@/app/metadata"
 import { Metadata } from "next"
 import { localeRedirect } from "@/integrations/i18n/routing"
 import { routes } from "@/data/routes"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(props: { params: Promise<PageParams> }): Promise<Metadata> {
   const { slug } = await props.params
@@ -51,22 +52,28 @@ export default async function QuestWorkSubmitPage(props: { params: Promise<{ slu
 
   return (
     <>
-      <HeaderSection
-        title={quest.title}
-        actionButton={true}
-        buttonLink={getResourcesUrl(PageType.QUESTS, slug)}
-        buttonText={t("quests.submit.closed.actionLabel")}
-      />
-      {closed ? (
-        <ChallengeClosedState
-          badge={t("quests.submit.closed.badge")}
-          title={t("quests.submit.closed.title")}
-          description={t("quests.submit.closed.description")}
-          href={getResourcesUrl(PageType.QUESTS, slug)}
-          actionLabel={t("quests.submit.closed.actionLabel")}
+      <Skeleton name="quest-submit-header" loading={false}>
+        <HeaderSection
+          title={quest.title}
+          actionButton={true}
+          buttonLink={getResourcesUrl(PageType.QUESTS, slug)}
+          buttonText={t("quests.submit.closed.actionLabel")}
         />
+      </Skeleton>
+      {closed ? (
+        <Skeleton name="quest-submit-closed" loading={false}>
+          <ChallengeClosedState
+            badge={t("quests.submit.closed.badge")}
+            title={t("quests.submit.closed.title")}
+            description={t("quests.submit.closed.description")}
+            href={getResourcesUrl(PageType.QUESTS, slug)}
+            actionLabel={t("quests.submit.closed.actionLabel")}
+          />
+        </Skeleton>
       ) : (
-        <IntentionForm quest={quest} isClosed={closed} />
+        <Skeleton name="quest-submit-form" loading={false}>
+          <IntentionForm quest={quest} isClosed={closed} />
+        </Skeleton>
       )}
     </>
   )

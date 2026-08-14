@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 import { HeaderSection } from "@/app/(base)/routes/sections/HeaderSection"
 import { RoutesSection } from "@/app/(base)/routes/sections/RoutesSection"
 import { metadata as baseMetadata } from "@/app/metadata"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -30,8 +31,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Routes() {
   return (
     <>
-      <HeaderSection />
-      <RoutesSection />
+      <Skeleton name="routes-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="routes-list" loading={false}>
+        <RoutesSection />
+      </Skeleton>
     </>
   )
 }

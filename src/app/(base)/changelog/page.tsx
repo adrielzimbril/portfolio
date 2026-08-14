@@ -5,6 +5,7 @@ import { metadata as baseMetadata } from "@/app/metadata"
 import { HeaderSection } from "@/app/(base)/changelog/sections/HeaderSection"
 import { TimelineSection } from "@/app/(base)/changelog/sections/TimelineSection"
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -29,9 +30,15 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ChangelogPage() {
   return (
     <>
-      <HeaderSection />
-      <TimelineSection />
-      <CallToAction isPage />
+      <Skeleton name="changelog-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="changelog-timeline" loading={false}>
+        <TimelineSection />
+      </Skeleton>
+      <Skeleton name="changelog-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   )
 }

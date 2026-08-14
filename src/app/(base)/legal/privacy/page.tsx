@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 import { HeaderSection } from "@/app/(base)/legal/privacy/sections/HeaderSection"
 import { PageContent } from "@/app/(base)/legal/privacy/sections/PageContent"
 import { metadata as baseMetadata } from "@/app/metadata"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -30,8 +31,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Privacy() {
   return (
     <>
-      <HeaderSection />
-      <PageContent />
+      <Skeleton name="privacy-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="privacy-content" loading={false}>
+        <PageContent />
+      </Skeleton>
     </>
   )
 }

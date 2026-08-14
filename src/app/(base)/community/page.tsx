@@ -9,6 +9,7 @@ import { MessagesSection } from "@/app/(base)/community/sections/MessagesSection
 import { createClient } from "@/integrations/supabase/server"
 import { cookies } from "next/headers"
 import logger from "@/utils/logger"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -47,24 +48,30 @@ export default async function CommunityPage() {
 
   return (
     <>
-      <PageHero
-        title={t("community.page.title")}
-        description={t("community.page.description")}
-        imagePath={{ emoji: "🎨" }}
-        isMobileShowed
-      />
+      <Skeleton name="community-hero" loading={false}>
+        <PageHero
+          title={t("community.page.title")}
+          description={t("community.page.description")}
+          imagePath={{ emoji: "🎨" }}
+          isMobileShowed
+        />
+      </Skeleton>
 
-      <SectionLayout className="p-0!" isFlex>
-        <StatsSection user={user} />
-      </SectionLayout>
+      <Skeleton name="community-stats" loading={false}>
+        <SectionLayout className="p-0!" isFlex>
+          <StatsSection user={user} />
+        </SectionLayout>
+      </Skeleton>
 
-      <SectionLayout isFlex>
-        {/* <LeaveNoteButton user={user} /> */}
-        <div className="flex justify-center size-full">
-          {/* <FormSection user={user} /> */}
-          <MessagesSection />
-        </div>
-      </SectionLayout>
+      <Skeleton name="community-messages" loading={false}>
+        <SectionLayout isFlex>
+          {/* <LeaveNoteButton user={user} /> */}
+          <div className="flex justify-center size-full">
+            {/* <FormSection user={user} /> */}
+            <MessagesSection />
+          </div>
+        </SectionLayout>
+      </Skeleton>
     </>
   )
 }

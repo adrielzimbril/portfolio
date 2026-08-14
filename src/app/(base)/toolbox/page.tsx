@@ -6,6 +6,7 @@ import { HeaderSection } from "@/app/(base)/toolbox/sections/HeaderSection"
 import { SetupSection } from "@/app/(base)/toolbox/sections/SetupSection"
 import { ToolsSection } from "@/app/(base)/toolbox/sections/ToolsSection"
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -31,10 +32,18 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ToolsPage() {
   return (
     <>
-      <HeaderSection />
-      <ToolsSection />
-      <SetupSection />
-      <CallToAction isPage />
+      <Skeleton name="toolbox-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="toolbox-tools" loading={false}>
+        <ToolsSection />
+      </Skeleton>
+      <Skeleton name="toolbox-setup" loading={false}>
+        <SetupSection />
+      </Skeleton>
+      <Skeleton name="toolbox-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   )
 }

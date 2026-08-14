@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server"
 import { HeaderSection } from "@/app/(base)/legal/terms/sections/HeaderSection"
 import { PageContent } from "@/app/(base)/legal/terms/sections/PageContent"
 import { metadata as baseMetadata } from "@/app/metadata"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -30,8 +31,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Terms() {
   return (
     <>
-      <HeaderSection />
-      <PageContent />
+      <Skeleton name="terms-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="terms-content" loading={false}>
+        <PageContent />
+      </Skeleton>
     </>
   )
 }

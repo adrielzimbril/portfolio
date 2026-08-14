@@ -9,6 +9,7 @@ import { metadata as baseMetadata } from "@/app/metadata"
 import { Metadata } from "next"
 import { localeRedirect } from "@/integrations/i18n/routing"
 import { routes } from "@/data/routes"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(props: { params: Promise<PageParams> }): Promise<Metadata> {
   const { slug } = await props.params
@@ -57,22 +58,28 @@ export default async function QuestRegisterPage(props: {
 
   return (
     <>
-      <HeaderSection
-        title={quest.title}
-        actionButton={true}
-        buttonLink={getResourcesUrl(PageType.QUESTS, slug)}
-        buttonText={t("quests.register.closed.actionLabel")}
-      />
-      {closed ? (
-        <ChallengeClosedState
-          badge={t("quests.register.closed.badge")}
-          title={t("quests.register.closed.title")}
-          description={t("quests.register.closed.description")}
-          href={getResourcesUrl(PageType.QUESTS, slug)}
-          actionLabel={t("quests.register.closed.actionLabel")}
+      <Skeleton name="quest-register-header" loading={false}>
+        <HeaderSection
+          title={quest.title}
+          actionButton={true}
+          buttonLink={getResourcesUrl(PageType.QUESTS, slug)}
+          buttonText={t("quests.register.closed.actionLabel")}
         />
+      </Skeleton>
+      {closed ? (
+        <Skeleton name="quest-register-closed" loading={false}>
+          <ChallengeClosedState
+            badge={t("quests.register.closed.badge")}
+            title={t("quests.register.closed.title")}
+            description={t("quests.register.closed.description")}
+            href={getResourcesUrl(PageType.QUESTS, slug)}
+            actionLabel={t("quests.register.closed.actionLabel")}
+          />
+        </Skeleton>
       ) : (
-        <IntentionForm questSlug={slug} />
+        <Skeleton name="quest-register-form" loading={false}>
+          <IntentionForm questSlug={slug} />
+        </Skeleton>
       )}
     </>
   )

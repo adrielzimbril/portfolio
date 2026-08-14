@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 import { NewsletterForm } from "@/app/(base)/newsletter/sections/NewsletterForm"
 import { metadata as baseMetadata } from "@/app/metadata"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -28,5 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Newsletter() {
-  return <NewsletterForm />
+  return (
+    <Skeleton name="newsletter-form" loading={false}>
+      <NewsletterForm />
+    </Skeleton>
+  )
 }

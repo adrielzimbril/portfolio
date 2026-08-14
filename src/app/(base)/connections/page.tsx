@@ -5,6 +5,7 @@ import { metadata as baseMetadata } from "@/app/metadata"
 import { HeaderSection } from "@/app/(base)/connections/sections/HeaderSection"
 import { PeopleSection } from "@/app/(base)/connections/sections/PeopleSection"
 import { CallToAction } from "@/components/shared/pages/shared/call-to-action"
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations()
@@ -30,9 +31,15 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function ConnectionsPage() {
   return (
     <>
-      <HeaderSection />
-      <PeopleSection />
-      <CallToAction isPage />
+      <Skeleton name="connections-header" loading={false}>
+        <HeaderSection />
+      </Skeleton>
+      <Skeleton name="connections-people" loading={false}>
+        <PeopleSection />
+      </Skeleton>
+      <Skeleton name="connections-cta" loading={false}>
+        <CallToAction isPage />
+      </Skeleton>
     </>
   )
 }
