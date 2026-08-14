@@ -122,7 +122,7 @@ export function QuestSubmissionsSection() {
             <Select
               value={selectedQuest}
               onValueChange={(v) => {
-                setSelectedQuest(v)
+                setSelectedQuest(v as string)
                 setPage(1)
               }}
             >

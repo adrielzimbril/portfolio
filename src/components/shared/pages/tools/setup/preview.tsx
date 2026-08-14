@@ -55,8 +55,9 @@ export function CardPreview({ title, cover, coverText, isWide, purchaseUrl }: Pr
             </Link>
           ) : (
             <Dialog>
-              <DialogTrigger asChild>
-                <button type="button" className="w-full text-left" aria-label={`View ${title}`}>
+              <DialogTrigger
+                render={<button type="button" className="w-full text-left" aria-label={`View ${title}`} />}
+              >
                   <Image
                     width={1200}
                     height={630}
@@ -66,7 +67,6 @@ export function CardPreview({ title, cover, coverText, isWide, purchaseUrl }: Pr
                     loading="lazy"
                     sizes={isWide ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
                   />
-                </button>
               </DialogTrigger>
               <DialogContent size="2xl" className="max-w-6xl p-2 sm:p-3" variant="glass">
                 <div className="w-full h-full max-h-[85vh] overflow-hidden rounded-xl pointer-events-none">

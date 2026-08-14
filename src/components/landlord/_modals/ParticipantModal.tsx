@@ -156,7 +156,7 @@ export function ParticipantModal({
             <Label htmlFor="quest">{t("fields.quest")}</Label>
             <Select
               value={form.challenge_slug}
-              onValueChange={(value) => setForm((current) => ({ ...current, challenge_slug: value }))}
+              onValueChange={(value) => setForm((current) => ({ ...current, challenge_slug: value as string }))}
               disabled={isEditing}
             >
               <SelectTrigger id="quest">

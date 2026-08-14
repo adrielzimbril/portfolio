@@ -20,24 +20,26 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
   return (
     <div className="flex justify-center mt-8">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button
-            variant="default"
-            asIcon
-            asPointer
-            className={cn(" squircle-2xl/80", "flex items-center gap-3 px-6 py-4")}
-          >
-            <div className="relative">
-              <StatusBadge status={user ? "online" : "busy"} showIndicator animated size="sm" />
-            </div>
-            <span className="flex items-center gap-2">
-              {/* <ChatBubbleCircle size={24} variant="bulk" /> */}
-              {/* {user
-                ? t("community.leave-note.online")
-                : t("community.leave-note.button")} */}
-              {t("community.leave-note.button")}
-            </span>
-          </Button>
+        <DialogTrigger
+          render={
+            <Button
+              variant="default"
+              asIcon
+              asPointer
+              className={cn(" squircle-2xl/80", "flex items-center gap-3 px-6 py-4")}
+            />
+          }
+        >
+          <div className="relative">
+            <StatusBadge status={user ? "online" : "busy"} showIndicator animated size="sm" />
+          </div>
+          <span className="flex items-center gap-2">
+            {/* <ChatBubbleCircle size={24} variant="bulk" /> */}
+            {/* {user
+              ? t("community.leave-note.online")
+              : t("community.leave-note.button")} */}
+            {t("community.leave-note.button")}
+          </span>
         </DialogTrigger>
         <DialogContent size={user ? "2xl" : "md"}>
           {user ? <CommentForm user={user} onSuccess={() => setOpen(false)} /> : <LoginModal />}

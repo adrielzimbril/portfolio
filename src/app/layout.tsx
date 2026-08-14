@@ -15,7 +15,7 @@ import { OpenRunde } from "@/lib/fonts/fonts"
 import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie"
 import { ProgressProvider } from "@/components/aurthle/providers/progress-provider"
 import { SoundProvider } from "@/components/aurthle/providers/sound-provider"
-import { BoneyardRegistry } from "@/components/shared/boneyard-registry"
+import "@/bones/registry"
 
 import { notFound } from "next/navigation"
 import logger from "@/utils/logger"
@@ -65,7 +65,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         data-space-copy="copy"
         data-space-paste="paste"
       >
-        <BoneyardRegistry />
+        {/* <BoneyardRegistry /> */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem enableColorScheme disableTransitionOnChange>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <LayoutProvider>

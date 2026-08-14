@@ -24,7 +24,7 @@ function DropdownMenuContent({
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Popup> & { sideOffset?: number; align?: "start" | "center" | "end" }) {
   return (
     <DropdownMenuPrimitive.Portal>
-      <DropdownMenuPrimitive.Positioner sideOffset={sideOffset} alignment={align}>
+      <DropdownMenuPrimitive.Positioner sideOffset={sideOffset} align={align}>
         <DropdownMenuPrimitive.Popup
           data-slot="dropdown-menu-content"
           className={cn(
@@ -199,7 +199,7 @@ function DropdownMenuSubContent({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Popup> & { sideOffset?: number; align?: "start" | "center" | "end" }) {
   return (
-    <DropdownMenuPrimitive.Positioner sideOffset={sideOffset} alignment={align}>
+    <DropdownMenuPrimitive.Positioner sideOffset={sideOffset} align={align}>
       <DropdownMenuPrimitive.Popup
         data-slot="dropdown-menu-sub-content"
         className={cn(

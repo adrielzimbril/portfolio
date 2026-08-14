@@ -25,20 +25,20 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
         asFull={asFull}
         asIcon={asIcon}
         className={cn(className)}
-        asChild={true}
+        render={
+          <span className="relative">
+            <NextLink className={cn("relative size-full", linkClassName)} href={href!} ref={ref} {...props} />
+          </span>
+        }
         whileTap={whileTap}
         asPointer
-      >
-        <span className="relative">
-          <NextLink className={cn("relative size-full", linkClassName)} href={href!} ref={ref} {...props} />
-        </span>
-      </Button>
+      />
     ) : (
       <NextLink
         className={cn("relative", className)}
         href={href!}
         ref={ref}
-        data-space-hover={props["data-space-hover"] || "tick"}
+        data-space-hover={(props as any)["data-space-hover"] || "tick"}
         {...props}
       />
     )

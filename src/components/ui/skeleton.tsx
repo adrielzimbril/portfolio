@@ -30,7 +30,7 @@ export function Skeleton({
   const isCurrentlyLoading = loading ?? !isLoaded
 
   if (name) {
-    const { snapshotConfig, fixture, ...rest } = props as AutomatedSkeletonProps
+    const { snapshotConfig, fixture, ...rest } = props as any
 
     return (
       <BoneyardSkeleton

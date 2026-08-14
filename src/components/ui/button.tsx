@@ -43,7 +43,6 @@ export interface ButtonProps
   variant?:
     "default" | "base" | "secondary" | "destructive" | "outline" | "colored" | "ghost" | "icon" | "link" | "none"
   size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none"
-  asChild?: boolean
   asFull?: boolean
   asIcon?: boolean
   asPointer?: boolean
@@ -56,7 +55,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant,
       size,
-      asChild = false,
       render,
       asFull = false,
       asIcon = false,
@@ -66,9 +64,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    // Handling asChild the Base UI way (using render)
-    const renderProp = asChild ? props.children as React.ReactElement : render;
-    
     const defaultProps = {
       className: cn(
         buttonVariants({ variant, size, className }),
@@ -80,13 +75,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "data-space-click": variant === "destructive" ? "deny" : "tap",
       "data-space-hover": "tick",
       ref,
-      ...(!asChild && { children: props.children }),
+      children: props.children,
     };
 
     return useRender({
       defaultTagName: "button",
       props: mergeProps<"button">(defaultProps, props),
-      render: renderProp,
+      render,
     });
   },
 )
