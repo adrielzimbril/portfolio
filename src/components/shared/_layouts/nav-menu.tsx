@@ -26,6 +26,8 @@ export function NavMenu({
             <Link
               key={item.key}
               href={item.link}
+              data-space-click="tap"
+              data-space-hover="tick"
               onClick={() => setActiveTab(item.key)}
               className={cn(
                 "relative transition-all duration-200",

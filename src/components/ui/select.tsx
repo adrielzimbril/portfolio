@@ -27,6 +27,7 @@ export interface SelectTriggerProps
 function SelectTrigger({ className, variant, inputSize, children, ...props }: SelectTriggerProps) {
   return (
     <SelectPrimitive.Trigger
+      data-space-click="open"
       data-slot="select-trigger"
       className={cn(
         "border-b-base-accent text-inherit focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-0 flex h-12 w-full items-center justify-between gap-2 rounded-xl border bg-transparent px-3 py-2 text-lg shadow-none transition-none outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&>span]:line-clamp-1",
@@ -88,6 +89,8 @@ function SelectLabel({ className, ...props }: React.ComponentProps<typeof Select
 function SelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
   return (
     <SelectPrimitive.Item
+      data-space-click="confirm"
+      data-space-hover="tick"
       data-slot="select-item"
       className={cn(
         "text-b-white-unchanged data-[state=checked]:bg-indigo-100 focus:bg-indigo-200 focus:text-b-white-unchanged relative flex cursor-default items-center gap-2 rounded-lg py-2 px-4 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",

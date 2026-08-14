@@ -18,7 +18,7 @@ function DropdownMenuPortal({ ...props }: React.ComponentProps<typeof DropdownMe
 }
 
 function DropdownMenuTrigger({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Trigger>) {
-  return <DropdownMenuPrimitive.Trigger data-slot="dropdown-menu-trigger" {...props} />
+  return <DropdownMenuPrimitive.Trigger data-space-click="open" data-slot="dropdown-menu-trigger" {...props} />
 }
 
 function DropdownMenuContent({
@@ -96,6 +96,8 @@ function DropdownMenuItem({
 }) {
   return (
     <DropdownMenuPrimitive.Item
+      data-space-click={variant === "destructive" ? "deny" : "confirm"}
+      data-space-hover="tick"
       data-slot="dropdown-menu-item"
       data-inset={inset}
       data-variant={variant}

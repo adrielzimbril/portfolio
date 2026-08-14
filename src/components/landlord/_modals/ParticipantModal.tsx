@@ -22,6 +22,7 @@ import { Locale } from "@/types/enum"
 import logger from "@/utils/logger"
 import type { QuestSummary } from "@/components/landlord/admin-types"
 import { toast } from "@/lib/toast"
+import { loading, confirm, deny } from "@usespaceui/sounds"
 
 export function ParticipantModal({
   open,
@@ -97,10 +98,12 @@ export function ParticipantModal({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!form.challenge_slug) {
+      deny()
       toast.error(t("messages.select_quest_first"))
       return
     }
 
+    loading()
     setIsSubmitting(true)
     try {
       const baseUrl =
@@ -120,10 +123,12 @@ export function ParticipantModal({
         throw new Error(data?.error || t("messages.error_process"))
       }
 
+      confirm()
       toast.success(isEditing ? t("messages.success_modified") : t("messages.success_added"))
       onCreated()
       onOpenChange(false)
     } catch (error) {
+      deny()
       logger.error(`Failed to ${isEditing ? "edit" : "add"} participant:`, error)
       toast.error(isEditing ? t("messages.error_process") : t("messages.error_process"))
     } finally {

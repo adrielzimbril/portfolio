@@ -79,7 +79,9 @@ export function Navbar() {
               }}
               variant="none"
               size="none"
-              className="flex items-center gap-1 md:gap-2"
+              data-space-click="bloom"
+              data-space-hover="droplet"
+              className="flex items-center gap-1 md:gap-2 cursor-pointer"
             >
               <Image
                 className="size-10! lg:size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
@@ -121,6 +123,7 @@ export function Navbar() {
                 size="icon"
                 asIcon
                 asPointer
+                data-space-click={isDrawerOpen ? "close" : "open"}
                 //variant="secondary"
                 onClick={toggleDrawer}
               >
@@ -143,7 +146,9 @@ export function Navbar() {
                 <div className="flex items-center justify-between">
                   <Link
                     href={routes.home.link}
-                    className="flex items-center gap-3"
+                    data-space-click="bloom"
+                    data-space-hover="droplet"
+                    className="flex items-center gap-3 cursor-pointer"
                     onClick={async () => {
                       setActiveTab(routes.home.key)
                       sleep(2000).then(() => {
@@ -172,6 +177,7 @@ export function Navbar() {
                     whileTap
                     asIcon
                     size="icon"
+                    data-space-click="close"
                   >
                     <X size={20} className="size-5" />
                   </Button>

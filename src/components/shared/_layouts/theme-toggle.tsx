@@ -56,6 +56,7 @@ export function ThemeToggle() {
       size="icon"
       asIcon
       asPointer
+      data-space-click="sparkle"
       ref={buttonRef}
       onClick={changeTheme}
       aria-label={theme}

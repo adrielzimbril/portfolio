@@ -16,6 +16,7 @@ import { usePageViews } from "@/hooks/usePageViews"
 import { getPathUrl, sleep } from "@/utils"
 import { useTurnstile } from "@/integrations/anti-bot/turnstile"
 import { getTurnstileConfig } from "@/config"
+import { open, deny } from "@usespaceui/sounds"
 
 export function NewsletterForm() {
   const t = useTranslations()
@@ -82,8 +83,10 @@ export function NewsletterForm() {
             <Button
               onClick={() => {
                 if (isEmailValid && token) {
+                  open()
                   setIsModalOpen(true)
                 } else {
+                  deny()
                   execute()
                   toast.error(t("zod.errors.customized.email.invalid"))
                 }

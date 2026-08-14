@@ -18,6 +18,7 @@ import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import { Locale } from "@/types"
 import { dispatchWindowEvent } from "@/hooks/useWindowEvent"
+import { loading, confirm, deny } from "@usespaceui/sounds"
 
 interface CommentFormProps {
   user: any
@@ -55,11 +56,13 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
     e.preventDefault()
 
     if (!comment.trim()) {
+      deny()
       toast.error(t("community.comment-form.validation.empty"))
       return
     }
 
     if (comment.length > config.maxCommentLength) {
+      deny()
       toast.error(
         t("community.comment-form.validation.max", {
           max: config.maxCommentLength,
@@ -68,6 +71,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       return
     }
 
+    loading()
     setIsSubmitting(true)
 
     try {
@@ -87,10 +91,12 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       const data = await res.json().catch(() => ({}))
 
       if (!res.ok) {
+        deny()
         toast.error(data?.error || t("community.comment-form.toast.error"))
         throw new Error(data?.error || "Failed to submit comment")
       }
 
+      confirm()
       toast.success(t("community.comment-form.toast.success"))
       setComment("")
       setScreen("input")
@@ -100,6 +106,7 @@ export function CommentForm({ user, onSuccess }: CommentFormProps) {
       // Dispatch custom event to refresh messages
       dispatchWindowEvent("community-message-added")
     } catch (error) {
+      deny()
       toast.error(t("community.comment-form.toast.error"))
       throw error
     } finally {

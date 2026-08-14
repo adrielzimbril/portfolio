@@ -14,6 +14,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { OpenRunde } from "@/lib/fonts/fonts"
 import { getUserLocale } from "@/integrations/i18n/lib/locale-cookie"
 import { ProgressProvider } from "@/components/aurthle/providers/progress-provider"
+import { SoundProvider } from "@/components/aurthle/providers/sound-provider"
 import { BoneyardRegistry } from "@/components/shared/boneyard-registry"
 
 import { notFound } from "next/navigation"
@@ -58,21 +59,28 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`antialiased ${OpenRunde.variable}`}>
+      <body
+        className={`antialiased ${OpenRunde.variable}`}
+        data-space-contextmenu="open"
+        data-space-copy="copy"
+        data-space-paste="paste"
+      >
         <BoneyardRegistry />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem enableColorScheme disableTransitionOnChange>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <LayoutProvider>
               <ProgressProvider>
-                <TooltipProvider openDelay={0} closeDelay={0}>
-                  <SyncProvider>
-                    <ToastProvider>
-                      <AnchoredToastProvider>
-                        <main>{children}</main>
-                      </AnchoredToastProvider>
-                    </ToastProvider>
-                  </SyncProvider>
-                </TooltipProvider>
+                <SoundProvider>
+                  <TooltipProvider openDelay={0} closeDelay={0}>
+                    <SyncProvider>
+                      <ToastProvider>
+                        <AnchoredToastProvider>
+                          <main>{children}</main>
+                        </AnchoredToastProvider>
+                      </ToastProvider>
+                    </SyncProvider>
+                  </TooltipProvider>
+                </SoundProvider>
               </ProgressProvider>
             </LayoutProvider>
           </NextIntlClientProvider>

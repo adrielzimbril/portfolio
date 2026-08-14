@@ -22,6 +22,7 @@ import { apiRoutes } from "@/data/api-routes"
 import { Label } from "@/components/ui/label"
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal"
 import { Intention } from "@/types"
+import { loading, confirm, deny } from "@usespaceui/sounds"
 
 const Select = ({
   label,
@@ -89,6 +90,7 @@ export function IntentionForm() {
     e.preventDefault()
 
     if (name.length < 4) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -99,6 +101,7 @@ export function IntentionForm() {
     }
 
     if (!email || !email.includes("@")) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -109,6 +112,7 @@ export function IntentionForm() {
     }
 
     if (!url) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -118,6 +122,7 @@ export function IntentionForm() {
       return
     }
 
+    loading()
     setIsSubmitting(true)
 
     try {
@@ -138,6 +143,7 @@ export function IntentionForm() {
       if (!res.ok) {
         throw new Error(data?.error || "Failed to submit")
       }
+      confirm()
       setFeedback({
         open: true,
         status: "success",
@@ -151,6 +157,7 @@ export function IntentionForm() {
       setTarget("")
       setIntention(Intention.UI_UX_REVIEW)
     } catch (error) {
+      deny()
       setFeedback({
         open: true,
         status: "error",

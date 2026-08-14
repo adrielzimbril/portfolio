@@ -53,6 +53,7 @@ function UserAvatars({ avatars, userCount }: { avatars?: string[]; userCount?: n
                 <AvatarFallback className={cn("relative pointer-events-none")}>
                   <SpaceAvatar
                     name={avatars?.[index]?.slice(8)?.replace(".png", "") || randomWord()}
+                    variant="all"
                     colors={colorSets[index] ?? []}
                     size={24}
                     circle

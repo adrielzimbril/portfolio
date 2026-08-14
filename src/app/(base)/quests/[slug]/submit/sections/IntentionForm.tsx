@@ -11,8 +11,8 @@ import type { Quest } from "@/integrations/content/lib/quests"
 import { getHumanDate } from "@/utils"
 import { SectionBase } from "@/components/shared/pages/shared/section-base"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal"
+import { loading, confirm, deny } from "@usespaceui/sounds"
 
 export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boolean }) {
   const t = useTranslations()
@@ -42,6 +42,7 @@ export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boo
     e.preventDefault()
 
     if (name.length < 2) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -52,6 +53,7 @@ export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boo
     }
 
     if (!email || !email.includes("@")) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -62,6 +64,7 @@ export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boo
     }
 
     if (!workUrl) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -71,6 +74,7 @@ export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boo
       return
     }
 
+    loading()
     setIsSubmitting(true)
 
     try {
@@ -83,6 +87,7 @@ export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boo
       if (!res.ok) {
         throw new Error(data?.error || "SUBMIT_FAILED")
       }
+      confirm()
       setFeedback({
         open: true,
         status: "success",
@@ -94,6 +99,7 @@ export function IntentionForm({ quest, isClosed }: { quest: Quest; isClosed: boo
       setWorkUrl("")
       setMessage("")
     } catch {
+      deny()
       setFeedback({
         open: true,
         status: "error",

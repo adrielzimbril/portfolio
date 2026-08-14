@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 import React, { useCallback, useState } from "react"
 import { useLocale, useTranslations } from "use-intl"
 import { Form } from "@/components/ui/form"
@@ -11,6 +11,7 @@ import { SectionBase } from "@/components/shared/pages/shared/section-base"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { FormFeedbackModal } from "@/components/shared/forms/FormFeedbackModal"
+import { loading, confirm, deny } from "@usespaceui/sounds"
 
 export function IntentionForm({ questSlug }: { questSlug: string }) {
   const t = useTranslations()
@@ -40,6 +41,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
     e.preventDefault()
 
     if (name.length < 2) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -50,6 +52,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
     }
 
     if (!email || !email.includes("@")) {
+      deny()
       setFeedback({
         open: true,
         status: "error",
@@ -59,6 +62,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
       return
     }
 
+    loading()
     setIsSubmitting(true)
 
     try {
@@ -73,6 +77,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
         throw new Error(data?.error || "REGISTER_FAILED")
       }
 
+      confirm()
       setFeedback({
         open: true,
         status: "success",
@@ -83,6 +88,7 @@ export function IntentionForm({ questSlug }: { questSlug: string }) {
       setEmail("")
       setMessage("")
     } catch {
+      deny()
       setFeedback({
         open: true,
         status: "error",

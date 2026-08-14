@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { landlordApiRoutes } from "@/data/landlordApiRoutes"
 import { Locale } from "@/types/enum"
 import logger from "@/utils/logger"
+import { loading, confirm, deny } from "@usespaceui/sounds"
 import type { CommunityMessage } from "@/components/landlord/admin-types"
 import { normalizeMessage } from "@/components/landlord/admin-utils"
 import { toast } from "@/lib/toast"
@@ -53,6 +54,7 @@ export function MessageModal({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    loading()
     setIsSubmitting(true)
     try {
       const url = message ? landlordApiRoutes.community.messageById(message.id) : landlordApiRoutes.community.messages
@@ -67,10 +69,12 @@ export function MessageModal({
         throw new Error(data?.error || "Failed to save message")
       }
 
+      confirm()
       toast.success(message ? t("messages.success_updated") : t("messages.success_added"))
       onSaved()
       onOpenChange(false)
     } catch (error) {
+      deny()
       logger.error("Failed to save message:", error)
       toast.error(t("messages.error_save"))
     } finally {

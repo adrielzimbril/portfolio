@@ -45,6 +45,7 @@ export function ModeToggle() {
       ref={buttonRef}
       type="button"
       size="icon"
+      data-space-click="sparkle"
       className="size-8 cursor-pointer"
       onClick={changeTheme}
     >

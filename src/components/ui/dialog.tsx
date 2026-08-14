@@ -11,7 +11,7 @@ function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>)
 }
 
 function DialogTrigger({ ...props }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
+  return <DialogPrimitive.Trigger data-space-click="open" data-slot="dialog-trigger" {...props} />
 }
 
 function DialogPortal({ ...props }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
@@ -19,7 +19,7 @@ function DialogPortal({ ...props }: React.ComponentProps<typeof DialogPrimitive.
 }
 
 function DialogClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
+  return <DialogPrimitive.Close data-space-click="close" data-slot="dialog-close" {...props} />
 }
 
 function DialogOverlay({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
@@ -93,7 +93,7 @@ function DialogContent({
             )}
             asChild
           >
-            <Button asPointer whileTap asIcon size="icon">
+            <Button asPointer whileTap asIcon size="icon" data-space-click="close">
               <X size={16} className="opacity-80 transition-opacity duration-200 group-hover:opacity-100" />
               <span className="sr-only">Close</span>
             </Button>

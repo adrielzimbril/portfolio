@@ -20,6 +20,7 @@ import { apiRoutes } from "@/data/api-routes"
 import { redirect } from "next/navigation"
 import { getPathUrl, sleep } from "@/utils"
 import { routes } from "@/data/routes"
+import { loading, confirm, deny } from "@usespaceui/sounds"
 
 interface SubscriptionModalProps {
   isOpen: boolean
@@ -205,20 +206,24 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
     e.preventDefault()
 
     if (!email) {
+      deny()
       toast.error(t("zod.errors.customized.email.update-required"))
       return
     }
 
     if (name.length < 4) {
+      deny()
       toast.error(t("zod.errors.customized.name.required"))
       return
     }
 
     if (phone.length < 10) {
+      deny()
       toast.error(t("zod.errors.customized.phone.required"))
       return
     }
 
+    loading()
     setIsSubmitting(true)
 
     try {
@@ -233,6 +238,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         updateLayer: true,
       })
 
+      confirm()
       setIsSuccess(true)
       if (confettiConfig.afterName) {
         animateConfetti()
@@ -257,6 +263,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         })
       }, 2000)
     } catch (error) {
+      deny()
       logger.error(t("logger.newsletter.subscribe.failed"), error)
       toast.error(t("logger.form.submit-update-failed"))
     } finally {

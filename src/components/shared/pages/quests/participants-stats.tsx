@@ -44,6 +44,7 @@ export function ParticipantsStats({
                 <AvatarFallback className="relative pointer-events-none">
                   <SpaceAvatar
                     name={`quest-participant-${index + 1}`}
+                    variant="all"
                     colors={colorSets[index] ?? []}
                     size={24}
                     circle

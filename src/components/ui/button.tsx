@@ -67,6 +67,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
+        data-space-click={variant === "destructive" ? "deny" : "tap"}
+        data-space-hover="tick"
         className={cn(
           buttonVariants({ variant, size, className }),
           asFull && "w-full flex text-center items-center justify-center",
