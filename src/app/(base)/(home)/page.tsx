@@ -45,10 +45,10 @@ export default function Home() {
       <Skeleton name="home-header">
         <HeaderSection />
       </Skeleton>
-      {showed.talks && (
-        <Suspense fallback={<Skeleton name="home-talks" className="w-full h-80" />}>
-          <Skeleton name="home-talks">
-            <TalksSection />
+      {showed.resources && (
+        <Suspense fallback={<Skeleton name="home-resources" className="w-full h-80" />}>
+          <Skeleton name="home-resources">
+            <ResourcesSection />
           </Skeleton>
         </Suspense>
       )}
@@ -59,10 +59,10 @@ export default function Home() {
           </Skeleton>
         </Suspense>
       )}
-      {showed.resources && (
-        <Suspense fallback={<Skeleton name="home-resources" className="w-full h-80" />}>
-          <Skeleton name="home-resources">
-            <ResourcesSection />
+      {showed.talks && (
+        <Suspense fallback={<Skeleton name="home-talks" className="w-full h-80" />}>
+          <Skeleton name="home-talks">
+            <TalksSection />
           </Skeleton>
         </Suspense>
       )}

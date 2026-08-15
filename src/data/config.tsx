@@ -182,10 +182,10 @@ export const siteConfig = {
   home: {
     sections: {
       showed: {
-        talks: false,
-        quests: false,
         resources: true,
-        projects: true,
+        quests: true,
+        talks: true,
+        projects: false,
         testimonials: true,
         thoughts: false,
       },
