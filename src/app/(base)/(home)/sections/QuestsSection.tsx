@@ -66,6 +66,7 @@ export async function QuestsSection() {
               label: t(submissionClosed ? "quests.cards.actions.viewResults" : "quests.cards.actions.participate"),
               href: getResourcesUrl(PageType.QUESTS, quest.slug),
             }}
+            hideReactions
           />
         )
       })}

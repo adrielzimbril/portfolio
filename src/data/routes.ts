@@ -73,7 +73,7 @@ export const routes: { [K in RouteKeys]: RouteType } = {
   projects: {
     key: "projects",
     link: "/projects",
-    inHeader: true,
+    inHeader: false,
     inFooter: false,
     inSitemap: true,
   },
