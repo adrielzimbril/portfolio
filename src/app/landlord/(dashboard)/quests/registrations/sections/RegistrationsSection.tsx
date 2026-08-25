@@ -59,7 +59,7 @@ export function RegistrationsSection() {
 
   const { data: tableData, isLoading: loading } = useSWR(
     registrationsKey(selectedQuest, page, pageSize),
-    () => fetchParticipants(selectedQuest, page, pageSize, "register"),
+    fetchParticipants,
   )
 
   const participants = useMemo(() => (tableData?.rows || []) as Participant[], [tableData])

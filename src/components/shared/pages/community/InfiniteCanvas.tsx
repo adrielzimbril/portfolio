@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { pickRandomColor } from "@/utils/pick-random-color"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types/default"
 import { useTranslations } from "use-intl"
-import { CursorIcon as MoveObjectOne } from "@solar-icons/react/bold-duotone"
+import { AlignVerticalCenterIcon, GpsIcon, CursorIcon as MoveObjectOne } from "@solar-icons/react/bold-duotone"
 import { cn } from "@/utils/utils"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -275,7 +275,7 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
               title="Recenter canvas"
               circle
             >
-              <MoveObjectOne size={24} />
+              <GpsIcon size={24} />
             </Badge>
           </div>
           {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}

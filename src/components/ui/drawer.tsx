@@ -11,6 +11,7 @@ import { createContext, useContext } from "react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/utils"
+import { IconChevronRight, IconX } from "@tabler/icons-react"
 
 type DrawerPosition = "right" | "left" | "top" | "bottom"
 
@@ -196,7 +197,7 @@ export function DrawerPopup({
               className="absolute inset-e-2 top-2 [&_svg]:size-auto"
               render={<Button size="icon" variant="ghost" />}
             >
-              <XIcon />
+              <IconX />
             </DrawerPrimitive.Close>
           )}
           {showBar && <DrawerBar />}
@@ -453,7 +454,7 @@ export function DrawerMenuTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ms-auto -me-0.5 opacity-80" />
+      <IconChevronRight className="ms-auto -me-0.5 opacity-80" />
     </DrawerTrigger>
   )
 }

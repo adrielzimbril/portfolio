@@ -3,14 +3,14 @@ import React, { useMemo, useState } from "react"
 import useSWR, { mutate } from "swr"
 import { useLocale, useTranslations } from "next-intl"
 import {
-  IconLoader2 as Loader2,
-  IconMessage2 as MessageSquareText,
-  IconDots as MoreHorizontal,
-  IconPencil as Pencil,
-  IconPlus as Plus,
-  IconRefresh as RefreshCw,
-  IconTrash as Trash2,
-  IconEye as Eye,
+  IconLoader2,
+  IconMessage2,
+  IconDots,
+  IconPencil,
+  IconPlus,
+  IconRefresh,
+  IconTrash,
+  IconEye,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -59,9 +59,9 @@ export function CommunitySection() {
     if (!query) return messages
     return messages.filter((message) => {
       const normalized = normalizeMessage(message)
-      return [message.creator_name, ...Object.values(normalized)]
-        .filter(Boolean)
-        .some((value) => String(value).toLowerCase().includes(query))
+      const matchesName = message.creator_name?.toLowerCase().includes(query)
+      const matchesMessage = Object.values(normalized).some((val) => val?.toLowerCase().includes(query))
+      return matchesName || matchesMessage
     })
   }, [search, messages])
 
@@ -83,8 +83,12 @@ export function CommunitySection() {
     if (!messageToDelete) return
     setIsDeleting(true)
     try {
-      const response = await fetch(landlordApiRoutes.community.messageById(messageToDelete.id), { method: "DELETE" })
-      if (!response.ok) throw new Error("Failed to delete message")
+      const response = await fetch(landlordApiRoutes.community.messageById(messageToDelete.id), {
+        method: "DELETE",
+      })
+
+      if (!response.ok) throw new Error("Failed to delete")
+
       toast.success(t("messages.success_deleted"))
       setMessageToDelete(null)
       mutate(messagesKey(page, pageSize))
@@ -105,11 +109,11 @@ export function CommunitySection() {
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
           <Button variant="outline" asIcon asPointer onClick={() => mutate(messagesKey(page, pageSize))}>
-            <RefreshCw size={16} />
+            <IconRefresh size={16} />
             {tShared("refresh")}
           </Button>
           <Button asIcon asPointer onClick={onOpenCreate}>
-            <Plus size={16} />
+            <IconPlus size={16} />
             {tShared("add")}
           </Button>
         </div>
@@ -130,7 +134,7 @@ export function CommunitySection() {
         <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-380px)] overflow-hidden">
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
-              <Loader2 size={18} className="animate-spin" />
+              <IconLoader2 size={18} className="animate-spin" />
               {tShared("loading_data")}
             </div>
           ) : filteredMessages.length > 0 ? (
@@ -200,7 +204,7 @@ export function CommunitySection() {
                             <td className="px-5 py-4 text-right">
                               <DropdownMenu>
                                 <DropdownMenuTrigger render={<Button variant="outline" size="icon" asPointer aria-label={tShared("actions")} />}>
-                                  <MoreHorizontal size={16} />
+                                  <IconDots size={16} />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end" className="w-44">
                                   <DropdownMenuItem
@@ -209,17 +213,17 @@ export function CommunitySection() {
                                       setDetailsOpen(true)
                                     }}
                                   >
-                                    <Eye size={14} />
+                                    <IconEye size={14} />
                                     {t("actions.view_details")}
                                   </DropdownMenuItem>
                                   <DropdownMenuSeparator />
                                   <DropdownMenuItem onClick={() => onOpenEdit(message)}>
-                                    <Pencil size={14} />
+                                    <IconPencil size={14} />
                                     {tShared("edit")}
                                   </DropdownMenuItem>
                                   <DropdownMenuSeparator />
                                   <DropdownMenuItem variant="destructive" onClick={() => onAskDelete(message)}>
-                                    <Trash2 size={14} />
+                                    <IconTrash size={14} />
                                     {tShared("delete")}
                                   </DropdownMenuItem>
                                 </DropdownMenuContent>
@@ -239,7 +243,7 @@ export function CommunitySection() {
           ) : (
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
-                icon={MessageSquareText}
+                icon={IconMessage2}
                 title={t("messages.empty_messages")}
                 description={t("messages.empty_messages_desc")}
               />

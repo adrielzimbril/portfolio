@@ -3,18 +3,18 @@ import React, { useMemo, useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import useSWR, { mutate } from "swr"
 import {
-  IconExternalLink as ExternalLink,
-  IconFileText as FileText,
-  IconFilter as Filter,
-  IconLoader2 as Loader2,
-  IconMail as Mail,
-  IconDots as MoreHorizontal,
-  IconPlus as Plus,
-  IconRefresh as RefreshCw,
-  IconSend as Send,
-  IconEye as Eye,
-  IconEdit as Edit,
-  IconTrash as Trash2,
+  IconExternalLink,
+  IconFileText,
+  IconFilter,
+  IconLoader2,
+  IconMail,
+  IconDots,
+  IconPlus,
+  IconRefresh,
+  IconSend,
+  IconEye,
+  IconEdit,
+  IconTrash,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -64,11 +64,11 @@ export function QuestSubmissionsSection() {
     fetchParticipants,
   )
 
-  const participants = useMemo(() => (tableData?.rows as unknown as Participant[]) || [], [tableData])
+  const participants = useMemo(() => (tableData?.rows || []) as Participant[], [tableData])
 
   const filteredParticipants = useMemo(() => {
-    const query = search.trim().toLowerCase()
-    if (!query) return participants
+    if (!search.trim()) return participants
+    const query = search.toLowerCase()
     return participants.filter((participant) =>
       [participant.name, participant.email, participant.challenge_slug, participant.status, participant.meta?.source]
         .filter(Boolean)
@@ -90,7 +90,7 @@ export function QuestSubmissionsSection() {
             asPointer
             onClick={() => mutate(submissionsKey(selectedQuest, page, pageSize))}
           >
-            <RefreshCw size={16} />
+            <IconRefresh size={16} />
             {t("actions.refresh")}
           </Button>
           <Button
@@ -101,7 +101,7 @@ export function QuestSubmissionsSection() {
               setParticipantModalOpen(true)
             }}
           >
-            <Plus size={16} />
+            <IconPlus size={16} />
             {t("actions.add")}
           </Button>
         </div>
@@ -118,7 +118,7 @@ export function QuestSubmissionsSection() {
             placeholder={t("placeholders.search")}
           />
           <div className="flex items-center gap-2">
-            <Filter size={16} className="text-black/35" />
+            <IconFilter size={16} className="text-black/35" />
             <Select
               value={selectedQuest}
               onValueChange={(v) => {
@@ -146,7 +146,7 @@ export function QuestSubmissionsSection() {
         <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-380px)] overflow-hidden">
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
-              <Loader2 size={18} className="animate-spin" />
+              <IconLoader2 size={18} className="animate-spin" />
               {t("messages.loading_submissions")}
             </div>
           ) : filteredParticipants.length > 0 ? (
@@ -190,7 +190,7 @@ export function QuestSubmissionsSection() {
                           <td className="px-5 py-4 text-right">
                             <DropdownMenu>
                               <DropdownMenuTrigger render={<Button variant="outline" size="icon" asPointer aria-label={tShared("actions")} />}>
-                                <MoreHorizontal size={16} />
+                                <IconDots size={16} />
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem
@@ -199,18 +199,18 @@ export function QuestSubmissionsSection() {
                                     setDetailsOpen(true)
                                   }}
                                 >
-                                  <Eye size={14} />
+                                  <IconEye size={14} />
                                   {t("actions.view_details")}
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 {participant.work_url ? (
                                   <DropdownMenuItem render={<a href={participant.work_url} target="_blank" rel="noopener noreferrer" />}>
-                                    <ExternalLink size={14} />
+                                    <IconExternalLink size={14} />
                                     {t("actions.view_work")}
                                   </DropdownMenuItem>
                                 ) : (
                                   <DropdownMenuItem disabled>
-                                    <FileText size={14} />
+                                    <IconFileText size={14} />
                                     {t("fields.no_work")}
                                   </DropdownMenuItem>
                                 )}
@@ -222,7 +222,7 @@ export function QuestSubmissionsSection() {
                                       .then(() => toast.success(t("messages.email_copied")))
                                   }
                                 >
-                                  <Mail size={14} />
+                                  <IconMail size={14} />
                                   {t("actions.copy_email")}
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
@@ -232,7 +232,7 @@ export function QuestSubmissionsSection() {
                                     setParticipantModalOpen(true)
                                   }}
                                 >
-                                  <Edit size={14} />
+                                  <IconEdit size={14} />
                                   {tShared("edit")}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
@@ -246,7 +246,7 @@ export function QuestSubmissionsSection() {
                                     }
                                   }}
                                 >
-                                  <Trash2 size={14} />
+                                  <IconTrash size={14} />
                                   {tShared("delete")}
                                 </DropdownMenuItem>
                               </DropdownMenuContent>
@@ -265,7 +265,7 @@ export function QuestSubmissionsSection() {
           ) : (
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
-                icon={Send}
+                icon={IconSend}
                 title={t("messages.empty_submissions")}
                 description={t("messages.empty_submissions")}
               />

@@ -25,12 +25,12 @@ export function LeaveNoteButton({ user }: LeaveNoteButtonProps) {
               variant="default"
               asIcon
               asPointer
-              className={cn(" squircle-2xl/80", "flex items-center gap-3 px-6 py-4")}
+              className={cn("squircle-2xl/80", "flex items-center gap-3 px-6 py-4")}
             />
           }
         >
           <div className="relative">
-            <StatusBadge status={user ? "online" : "busy"} showIndicator animated size="sm" />
+            <StatusBadge status={user ? "online" : "busy"} showIndicator animated size="sm" className="bg-inherit" />
           </div>
           <span className="flex items-center gap-2">
             {/* <ChatBubbleCircle size={24} variant="bulk" /> */}

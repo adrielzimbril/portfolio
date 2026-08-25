@@ -37,7 +37,7 @@ export async function EngagementSection({
         <ThoughtsTopList
           title={t("stats.cards.topViewed.title")}
           description={t("stats.cards.topViewed.description")}
-          type={TopThoughtsListType.REACTED}
+          type={TopThoughtsListType.VIEWED}
           thoughts={topViewedThoughts}
           icon={<TrendUp size={32} />}
           decoration="📈"
