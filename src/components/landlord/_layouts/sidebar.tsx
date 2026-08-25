@@ -2,18 +2,18 @@
 import React, { useState } from "react"
 import { usePathname } from "next/navigation"
 import {
-  ChevronDown,
-  Database,
-  Home,
-  LayoutDashboard,
-  LogOut,
-  MessageSquareText,
-  PanelLeftClose,
-  ShieldCheck,
-  Trophy,
-  Users,
-  X,
-} from "lucide-react"
+  IconChevronDown as ChevronDown,
+  IconDatabase as Database,
+  IconHome as Home,
+  IconLayoutDashboard as LayoutDashboard,
+  IconLogout as LogOut,
+  IconMessage2 as MessageSquareText,
+  IconLayoutSidebarLeftCollapse as PanelLeftClose,
+  IconShieldCheck as ShieldCheck,
+  IconTrophy as Trophy,
+  IconUsers as Users,
+  IconX as X,
+} from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { landlordRoutes } from "@/data/landlordRoutes"
 import { cn } from "@/utils/utils"

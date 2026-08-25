@@ -1,7 +1,12 @@
 "use client"
 import React from "react"
 import { usePathname } from "next/navigation"
-import { PanelLeft, RefreshCw, UserRound, PanelLeftClose } from "lucide-react"
+import {
+  IconLayoutSidebarLeftExpand as PanelLeft,
+  IconRefresh as RefreshCw,
+  IconUser as UserRound,
+  IconLayoutSidebarLeftCollapse as PanelLeftClose,
+} from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import type { AdminUser } from "@/components/landlord/admin-types"
 import { adminNavItems } from "./nav-items"

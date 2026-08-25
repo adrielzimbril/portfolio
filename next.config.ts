@@ -68,8 +68,6 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
-  cacheComponents: true,
-  partialPrefetching: true,
   reactStrictMode: false,
   reactCompiler: true,
   typescript: {
@@ -78,9 +76,8 @@ const nextConfig: NextConfig = {
   experimental: {
     useTypeScriptCli: true,
     turbopackRustReactCompiler: true,
-    useOffline: true,
     mdxRs: true,
-    optimizePackageImports: ["@solar-icons/react", "lucide-react", "@base-ui/react"],
+    optimizePackageImports: ["@solar-icons/react", "@tabler/icons-react", "@base-ui/react"],
   },
   serverExternalPackages: ["@vercel/og"],
 }

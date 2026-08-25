@@ -1,4 +1,10 @@
-import { Database, LayoutDashboard, MessageSquareText, Trophy, Users } from "lucide-react"
+import {
+  IconDatabase as Database,
+  IconLayoutDashboard as LayoutDashboard,
+  IconMessage2 as MessageSquareText,
+  IconTrophy as Trophy,
+  IconUsers as Users,
+} from "@tabler/icons-react"
 import type { NavItem } from "@/components/landlord/admin-types"
 
 export const adminNavItems: NavItem[] = [

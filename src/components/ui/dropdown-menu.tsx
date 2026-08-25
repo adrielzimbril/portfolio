@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react"
-import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react"
+import { IconCheck, IconChevronRight, IconCircleFilled } from "@tabler/icons-react"
 import { Menu as DropdownMenuPrimitive } from "@base-ui/react"
 import { cn } from "@/utils/utils"
 
@@ -53,13 +53,11 @@ function DropdownMenuItem({
 }) {
   return (
     <DropdownMenuPrimitive.Item
-      data-space-click={variant === "destructive" ? "deny" : "confirm"}
-      data-space-hover="tick"
       data-slot="dropdown-menu-item"
       data-inset={inset}
       data-variant={variant}
       className={cn(
-        "focus:bg-accent focus:text-accent-foreground cursor-pointer data-[variant=destructive]:text-destructive-foreground data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/40 data-[variant=destructive]:focus:text-destructive-foreground data-[variant=destructive]:*:[svg]:text-destructive-foreground! relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-inset:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/40 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-xl px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
       )}
       {...props}
@@ -85,7 +83,7 @@ function DropdownMenuCheckboxItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.CheckboxItemIndicator>
-          <CheckIcon size={16} className="ml-auto" />
+          <IconCheck size={16} className="ml-auto" />
         </DropdownMenuPrimitive.CheckboxItemIndicator>
       </span>
       {children}
@@ -116,7 +114,7 @@ function DropdownMenuRadioItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center [&_svg]:size-auto [&_svg]:shrink-0">
         <DropdownMenuPrimitive.RadioItemIndicator>
-          {asCircle && <CircleIcon size={8} className="size-2 fill-current" />}
+          {asCircle && <IconCircleFilled size={8} className="size-2 fill-current" />}
         </DropdownMenuPrimitive.RadioItemIndicator>
       </span>
       {children}
@@ -187,7 +185,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon size={16} className="text-muted-foreground/80 ml-auto" />
+      <IconChevronRight size={16} className="text-muted-foreground/80 ml-auto" />
     </DropdownMenuPrimitive.SubmenuTrigger>
   )
 }

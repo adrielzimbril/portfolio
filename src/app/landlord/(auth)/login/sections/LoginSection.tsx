@@ -2,7 +2,11 @@
 import React from "react"
 import { Link } from "@/components/ui/link"
 import { Github, Google } from "@/components/shared/icons/social-icons"
-import { Activity, LockKeyhole, Terminal } from "lucide-react"
+import {
+  IconActivity as Activity,
+  IconLock as LockKeyhole,
+  IconTerminal2 as Terminal,
+} from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { getPathUrl } from "@/utils"
 import { signInWithGithub, signInWithGoogle } from "@/integrations/auth/provider/supabase"

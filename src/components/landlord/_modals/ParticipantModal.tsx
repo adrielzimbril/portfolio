@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useMemo } from "react"
 import { useTranslations } from "next-intl"
-import { Loader2 } from "lucide-react"
+import { IconLoader2 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,

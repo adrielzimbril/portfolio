@@ -3,7 +3,11 @@
 import React, { useState, useEffect } from "react"
 import { Turnstile } from "@/integrations/anti-bot/turnstile-second"
 import { ConfigValue } from "@/config"
-import { Loader2, ShieldCheck, ShieldAlert } from "lucide-react"
+import {
+  IconLoader2 as Loader2,
+  IconShieldCheck as ShieldCheck,
+  IconShieldX as ShieldAlert,
+} from "@tabler/icons-react"
 import { cn } from "@/utils"
 import { isLocal } from "@/config/utils"
 import { logger } from "@/utils/logger"

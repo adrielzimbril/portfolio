@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { useTranslations } from "next-intl"
-import { Loader2, Search } from "lucide-react"
+import { IconLoader2 as Loader2, IconSearch as Search } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"

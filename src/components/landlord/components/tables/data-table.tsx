@@ -1,7 +1,12 @@
 "use client"
 import React, { useState } from "react"
 import useSWR from "swr"
-import { FileText, Loader2, RefreshCw, Eye } from "lucide-react"
+import {
+  IconFileText as FileText,
+  IconLoader2 as Loader2,
+  IconRefresh as RefreshCw,
+  IconEye as Eye,
+} from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { AdminCard, EmptyState, TablePager } from "@/components/landlord/components/AdminPrimitives"

@@ -1,7 +1,12 @@
 "use client"
 import React, { useMemo } from "react"
 import useSWR from "swr"
-import { Clock, MessageSquareText, Send, Users } from "lucide-react"
+import {
+  IconClock as Clock,
+  IconMessage2 as MessageSquareText,
+  IconSend as Send,
+  IconUsers as Users,
+} from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { landlordApiRoutes } from "@/data/landlordApiRoutes"
 import { AdminCard, EmptyState, MetricCard, StatusPill } from "@/components/landlord/components/AdminPrimitives"

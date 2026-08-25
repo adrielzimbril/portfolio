@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react"
 import { useTranslations } from "next-intl"
-import { Loader2 } from "lucide-react"
+import { IconLoader2 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -156,7 +156,7 @@ export function MessageModal({
               {tShared("cancel")}
             </Button>
             <Button type="submit" disabled={isSubmitting} asIcon asPointer>
-              {isSubmitting && <Loader2 size={16} className="animate-spin" />}
+              {isSubmitting && <IconLoader2 size={16} className="animate-spin" />}
               {message ? tShared("save") : t("actions.add")}
             </Button>
           </DialogFooter>

@@ -1,7 +1,13 @@
 "use client"
 import React, { useMemo, useState } from "react"
 import useSWR from "swr"
-import { RefreshCw, Loader2, Save, Check, AlertCircle } from "lucide-react"
+import {
+  IconRefresh as RefreshCw,
+  IconLoader2 as Loader2,
+  IconDeviceFloppy as Save,
+  IconCheck as Check,
+  IconAlertCircle as AlertCircle,
+} from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"

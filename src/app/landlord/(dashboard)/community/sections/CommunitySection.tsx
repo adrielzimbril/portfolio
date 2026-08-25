@@ -2,7 +2,16 @@
 import React, { useMemo, useState } from "react"
 import useSWR, { mutate } from "swr"
 import { useLocale, useTranslations } from "next-intl"
-import { Loader2, MessageSquareText, MoreHorizontal, Pencil, Plus, RefreshCw, Trash2, Eye } from "lucide-react"
+import {
+  IconLoader2 as Loader2,
+  IconMessage2 as MessageSquareText,
+  IconDots as MoreHorizontal,
+  IconPencil as Pencil,
+  IconPlus as Plus,
+  IconRefresh as RefreshCw,
+  IconTrash as Trash2,
+  IconEye as Eye,
+} from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,

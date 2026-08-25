@@ -3,8 +3,6 @@ import { generateRssFeed } from "@/lib/rss"
 import { Locale } from "@/types"
 import logger from "@/utils/logger"
 
-export const dynamic = "force-dynamic"
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)

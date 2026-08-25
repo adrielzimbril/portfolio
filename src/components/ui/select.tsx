@@ -2,7 +2,7 @@
 import * as React from "react"
 import { cn } from "@/utils/utils"
 import { Select as SelectPrimitive } from "@base-ui/react"
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
+import { IconCheck, IconChevronDown, IconChevronUp } from "@tabler/icons-react"
 import { VariantProps } from "class-variance-authority"
 import { inputVariants } from "@/components/ui/input"
 
@@ -38,7 +38,7 @@ function SelectTrigger({ className, variant, inputSize, children, ...props }: Se
     >
       {children}
       <SelectPrimitive.Icon
-        render={<ChevronDownIcon size={16} className="text-muted-foreground/80 in-aria-invalid:text-destructive/80 shrink-0" />}
+        render={<IconChevronDown size={16} className="text-muted-foreground/80 in-aria-invalid:text-destructive/80 shrink-0" />}
       />
     </SelectPrimitive.Trigger>
   )
@@ -56,18 +56,19 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            "border-input bg-popover dark:bg-b-base-second text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-[min(24rem,var(--radix-select-content-available-height))] min-w-32 overflow-hidden rounded-xl border [&_[role=group]]:py-1",
-            "gap-1",
+            "bg-popover text-popover-foreground data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=open]:animate-in data-[state=closed]:animate-out relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md",
             position === "popper" &&
-              "w-full min-w-[var(--radix-select-trigger-width)] data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+              "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
             className,
           )}
           {...props}
         >
           <SelectScrollUpButton />
-          <div className={cn("p-1 px-2", position === "popper" && "h-[var(--radix-select-trigger-height)]")}>
+          <SelectPrimitive.Viewport
+            className={cn("p-1", position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]")}
+          >
             {children}
-          </div>
+          </SelectPrimitive.Viewport>
           <SelectScrollDownButton />
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
@@ -101,7 +102,7 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
       <span className="pointer-events-none absolute end-4 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <CheckIcon size={20} />
+          <IconCheck size={20} />
         </SelectPrimitive.ItemIndicator>
       </span>
     </SelectPrimitive.Item>
@@ -125,7 +126,7 @@ function SelectScrollUpButton({ className, ...props }: React.ComponentProps<type
       className={cn("text-muted-foreground/80 flex cursor-default items-center justify-center py-1", className)}
       {...props}
     >
-      <ChevronUpIcon size={16} />
+      <IconChevronUp size={16} />
     </SelectPrimitive.ScrollUpArrow>
   )
 }
@@ -140,7 +141,7 @@ function SelectScrollDownButton({
       className={cn("text-muted-foreground/80 flex cursor-default items-center justify-center py-1", className)}
       {...props}
     >
-      <ChevronDownIcon size={16} />
+      <IconChevronDown size={16} />
     </SelectPrimitive.ScrollDownArrow>
   )
 }

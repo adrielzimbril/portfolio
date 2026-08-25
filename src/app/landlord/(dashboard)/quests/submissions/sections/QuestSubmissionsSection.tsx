@@ -3,19 +3,19 @@ import React, { useMemo, useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import useSWR, { mutate } from "swr"
 import {
-  ExternalLink,
-  FileText,
-  Filter,
-  Loader2,
-  Mail,
-  MoreHorizontal,
-  Plus,
-  RefreshCw,
-  Send,
-  Eye,
-  Edit,
-  Trash2,
-} from "lucide-react"
+  IconExternalLink as ExternalLink,
+  IconFileText as FileText,
+  IconFilter as Filter,
+  IconLoader2 as Loader2,
+  IconMail as Mail,
+  IconDots as MoreHorizontal,
+  IconPlus as Plus,
+  IconRefresh as RefreshCw,
+  IconSend as Send,
+  IconEye as Eye,
+  IconEdit as Edit,
+  IconTrash as Trash2,
+} from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
