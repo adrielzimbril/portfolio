@@ -2,7 +2,15 @@
 import Image from "next/image"
 import { cn, getExternalUrl, getImageUrl, getResourcesUrl, pickRandomColor, pickRandomColorCode } from "@/utils"
 import { PageType, ResourceType } from "@/types"
-import { DeveloperFile, Figma, Notebook, QueueTwo, VideoFolder, VideoLibrary, VideoPlaylistOne } from "@aurthle/icons"
+import {
+  CodeFileIcon as DeveloperFile,
+  NotebookIcon as Notebook,
+  PlaylistIcon as QueueTwo,
+  VideoLibraryIcon as VideoFolder,
+  VideoLibraryIcon,
+  VideoFrameIcon as VideoPlaylistOne,
+} from "@solar-icons/react/bold-duotone"
+import { Figma } from "@/components/shared/icons/social-icons"
 import { Link } from "@/components/ui/link"
 import { useTranslations } from "use-intl"
 import { Badge } from "@/components/ui/badge"
@@ -78,19 +86,19 @@ export function PreviewIcon({ resourceType }: { resourceType: ResourceType }) {
   return (
     <div className="inline-flex items-center justify-center gap-3 p-2.5 absolute top-2 right-2 bg-b-base [&_svg,svg_*]:fill-b-white-invert [&_svg,_svg_*]:color-b-white-invert rounded-full pointer-events-none overflow-hidden">
       {resourceType === ResourceType.COURSE ? (
-        <VideoFolder size={24} variant="bulk" />
+        <VideoFolder size={24} />
       ) : resourceType === ResourceType.EBOOK ? (
-        <Notebook size={24} variant="bulk" />
+        <Notebook size={24} />
       ) : resourceType === ResourceType.VIDEO ? (
-        <VideoPlaylistOne size={24} variant="bulk" />
+        <VideoPlaylistOne size={24} />
       ) : resourceType === ResourceType.MASTERCLASS ? (
-        <QueueTwo size={24} variant="bulk" />
+        <QueueTwo size={24} />
       ) : resourceType === ResourceType.FIGMA_TEMPLATE ? (
-        <Figma size={24} variant="bulk" />
+        <Figma size={24} />
       ) : resourceType === ResourceType.CODE ? (
-        <DeveloperFile size={24} variant="bulk" />
+        <DeveloperFile size={24} />
       ) : (
-        <VideoLibrary size={24} variant="bulk" />
+        <VideoLibraryIcon size={24} />
       )}
     </div>
   )

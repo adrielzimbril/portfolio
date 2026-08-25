@@ -5,9 +5,9 @@ import { motion } from "motion/react"
 import { cn } from "@/utils/utils"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { PresentationGraphIcon as ChartPresentationOne } from "@solar-icons/react/bold-duotone"
 import { getResourcesUrl, pickRandomColor } from "@/utils"
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
-import { ChartPresentationOne } from "@aurthle/icons"
 import { Link } from "@/components/ui/link"
 
 export interface ThoughtsCategoriesData {

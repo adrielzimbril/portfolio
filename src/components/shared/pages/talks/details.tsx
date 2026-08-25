@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { Link } from "@/components/ui/link"
-import { LinkDiagonalOne } from "@aurthle/icons"
+import { LinkRoundAngleIcon as LinkDiagonalOne } from "@solar-icons/react/linear"
 import { Tags } from "@/components/shared/pages/resources/tags"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { AvatarGroup } from "@/components/aurthle/ui/avatar-group"

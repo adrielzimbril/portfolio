@@ -1,6 +1,6 @@
 "use client"
 import * as React from "react"
-import { Sun, Moon, MoonSparkle, SolarEclipseTwo } from "@aurthle/icons"
+import { Sun2Icon as Sun, MoonStarsIcon as MoonSparkle, SunFogIcon as SolarEclipseTwo } from "@solar-icons/react/bold-duotone"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { flushSync } from "react-dom"
@@ -64,7 +64,6 @@ export function ThemeToggle() {
     >
       <Sun
         size={24}
-        variant="duotone"
         className={cn(
           "rotate-0 scale-100 transition-all",
           theme === "dark" && "-rotate-90 scale-0",
@@ -73,7 +72,6 @@ export function ThemeToggle() {
       />
       <MoonSparkle
         size={24}
-        variant="duotone"
         className={cn(
           "absolute rotate-90 scale-0 transition-all",
           theme === "dark" && "rotate-0 scale-100",
@@ -82,7 +80,6 @@ export function ThemeToggle() {
       />
       <SolarEclipseTwo
         size={24}
-        variant="duotone"
         className={cn("absolute rotate-180 scale-0 transition-all", theme === "system" && "rotate-0 scale-100")}
       />
       <span className="sr-only">Toggle theme</span>

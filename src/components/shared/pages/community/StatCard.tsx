@@ -1,10 +1,11 @@
 "use client"
 import React from "react"
 import { cn } from "@/utils/utils"
-import { IconComponentsProps } from "@aurthle/icons"
 import { Badge } from "@/components/ui/badge"
 import { pickRandomColor } from "@/utils/pick-random-color"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types/default"
+
+export type IconComponent = React.ComponentType<{ size?: number; className?: string; variant?: string }>
 
 export function StatCard({
   icon: Icon,
@@ -28,7 +29,6 @@ export function StatCard({
             <Icon
               size={42}
               className={cn("transition-all duration-300 group-hover:scale-110", "text-[#8e8eff]")}
-              variant="bulk"
             />
           </div>
         </div>

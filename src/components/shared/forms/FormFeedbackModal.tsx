@@ -1,7 +1,7 @@
 "use client"
 import { useEffect } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { CheckCircle, InfoCircle } from "@aurthle/icons"
+import { CheckCircleIcon as CheckCircle, InfoCircleIcon as InfoCircle } from "@solar-icons/react/bold-duotone"
 
 type Status = "success" | "error"
 

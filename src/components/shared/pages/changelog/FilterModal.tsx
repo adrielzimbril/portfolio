@@ -4,7 +4,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogTitle, DialogHeader, DialogFooter, DialogSeparator } from "@/components/ui/dialog"
-import { SparklesTwo, LightbulbTwoPower, Bug, Wrench } from "@aurthle/icons"
+import {
+  StarsIcon as SparklesTwo,
+  LightbulbBoltIcon as LightbulbTwoPower,
+  BugIcon as Bug,
+  TuningIcon as Wrench,
+} from "@solar-icons/react/bold-duotone"
 import { ChangelogItemType, DEFAULT_COLOR_CODE_NAME } from "@/types"
 import { cn } from "@/utils/utils"
 import { pickRandomColor } from "@/utils"
@@ -74,7 +79,7 @@ export function FilterModal({
                     size="xs"
                     circle
                   >
-                    <Icon size={16} variant="bulk" />
+                    <Icon size={16} />
                   </Badge>
                 )}
                 {t(`types.${type}`)}

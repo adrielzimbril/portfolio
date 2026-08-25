@@ -1,5 +1,12 @@
 import { cn } from "@/utils/utils"
-import { ShieldCheckedTwo, AlertTriangle, XCircle, Checked, Star, InfoCircle } from "@aurthle/icons"
+import {
+  ShieldCheckIcon as ShieldCheckedTwo,
+  DangerTriangleIcon as AlertTriangle,
+  CloseCircleIcon as XCircle,
+  CheckCircleIcon as Checked,
+  StarIcon as Star,
+  InfoCircleIcon as InfoCircle,
+} from "@solar-icons/react/bold-duotone"
 import { getScoreColor } from "@/lib/stats/lighthouse-utils"
 
 interface ScoreBarProps {
@@ -8,16 +15,17 @@ interface ScoreBarProps {
   delay?: number
 }
 
+const getCategoryIcon = (label: string) => {
+  const normalized = label.toLowerCase()
+  if (normalized.includes("performance")) return <Star size={14} />
+  if (normalized.includes("accessibility")) return <InfoCircle size={14} />
+  if (normalized.includes("best") || normalized.includes("pratiques")) return <ShieldCheckedTwo size={14} />
+  if (normalized.includes("seo")) return <Checked size={14} />
+  return <Star size={14} />
+}
+
 export function ScoreBar({ score, label, delay = 0 }: ScoreBarProps) {
   const colors = getScoreColor(score)
-  const ScoreIcon = (() => {
-    if (score === 100) return Star
-    if (score >= 90) return ShieldCheckedTwo
-    if (score >= 70) return Checked
-    if (score >= 50) return InfoCircle
-    if (score >= 25) return AlertTriangle
-    return XCircle
-  })()
 
   return (
     <div className="flex flex-col gap-2">

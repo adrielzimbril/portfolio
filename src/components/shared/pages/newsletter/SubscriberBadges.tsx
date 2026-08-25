@@ -6,7 +6,7 @@ import {
   useProductTypeSubscribersCount,
   useProductSlugRequestsCount,
 } from "@/hooks/useSubscriberStats"
-import { Box, GiftBoxOne, UsersGroup } from "@aurthle/icons"
+import { BoxIcon as Box, GiftIcon as GiftBoxOne, UsersGroupRoundedIcon as UsersGroup } from "@solar-icons/react/bold-duotone"
 import { ResourceType } from "@/types"
 import { AvatarsStats } from "@/components/shared/pages/resources/avatar-stats"
 import { cn } from "@/utils/utils"
@@ -24,7 +24,7 @@ export function NewsletterSubscribersBadge() {
   return (
     <Badge className="bg-violet-100" variant="colored">
       <span className="flex items-center gap-2">
-        <UsersGroup size={16} className="text-indigo-400" variant="bulk" />
+        <UsersGroup size={16} className="text-indigo-400" />
         {loading ? "..." : `${formatCount(count ?? 0)} ${t("subscribers")}`}
       </span>
     </Badge>
@@ -37,7 +37,7 @@ export function ProductTypeSubscribersBadge({ type }: { type: ResourceType }) {
   return (
     <Badge className="bg-emerald-100" variant="colored">
       <span className="flex items-center gap-2">
-        <Box size={16} className="text-emerald-500" variant="bulk" />
+        <Box size={16} className="text-emerald-500" />
         {loading ? "..." : `${formatCount(count ?? 0)} ${t("requests")} ${type}`}
       </span>
     </Badge>
@@ -64,7 +64,7 @@ export function ProductSlugRequestsBadge({ slug, type }: { slug: string; type?: 
   return (
     <Badge className="bg-amber-100" variant="colored">
       <span className="flex items-center gap-1">
-        <GiftBoxOne size={16} className="text-amber-600" variant="bulk" />
+        <GiftBoxOne size={16} className="text-amber-600" />
         {loading ? (
           <span className="animate-pulse transition-all ease-in-out duration-200">🤯</span>
         ) : (

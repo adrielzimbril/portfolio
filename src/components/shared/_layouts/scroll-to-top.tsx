@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowUpOne } from "@aurthle/icons"
+import { ArrowUpIcon as ArrowUpOne } from "@solar-icons/react/linear"
 import { useCompareIOSVersion } from "@/hooks/useIsMobile"
 import { cn } from "@/utils/utils"
 

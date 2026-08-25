@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/utils/utils"
 import { pickRandomColor } from "@/utils/pick-random-color"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types/default"
-import { Checked, LoveTime } from "@aurthle/icons"
+import { CheckCircleIcon as Checked, HeartIcon as LoveTime } from "@solar-icons/react/linear"
 
 export function ConnectionAvatar({ image, name, met }: { image: string; name: string; met: string | null }) {
   return (
@@ -35,9 +35,9 @@ export function ConnectionAvatar({ image, name, met }: { image: string; name: st
           variant="colored"
         >
           {met ? (
-            <Checked className="text-primary-foreground" size={24} variant="outline" />
+            <Checked className="text-primary-foreground" size={24} />
           ) : (
-            <LoveTime size={24} variant="outline" />
+            <LoveTime size={24} />
           )}
         </Badge>
       </div>

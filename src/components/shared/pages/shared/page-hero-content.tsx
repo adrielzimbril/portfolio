@@ -1,5 +1,5 @@
 import { Link } from "@/components/ui/link"
-import { ArrowRightOne, ArrowDownOne } from "@aurthle/icons"
+import { ArrowRightIcon as ArrowRightOne, ArrowDownIcon as ArrowDownOne } from "@solar-icons/react/linear"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 

@@ -1,5 +1,5 @@
 "use client"
-import { Display, Mobile } from "@aurthle/icons"
+import { DisplayIcon as Display, SmartphoneIcon as Mobile } from "@solar-icons/react/bold-duotone"
 import { useTranslations } from "next-intl"
 import type { LighthouseScores } from "@/lib/stats/types"
 import { cn } from "@/utils/utils"
@@ -60,7 +60,7 @@ export function LighthouseScoreCard({ scores, strategy, delay = 0, className }: 
                 size="lg"
                 circle
               >
-                <DeviceIcon variant="bulk" />
+                <DeviceIcon />
               </Badge>
               <Badge className="capitalize" variant="inverted" size="md">
                 <div className="flex items-center gap-3">

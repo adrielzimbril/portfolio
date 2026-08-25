@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react"
 import { cn } from "@/utils/utils"
-import { X } from "@aurthle/icons"
+import { CloseIcon as X } from "@solar-icons/react/linear"
 import { Dialog as DialogPrimitive } from "@base-ui/react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"

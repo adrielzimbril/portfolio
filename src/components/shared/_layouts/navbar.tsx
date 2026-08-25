@@ -3,7 +3,8 @@ import { NavMenu } from "@/components/shared/_layouts/nav-menu"
 import { ThemeToggle } from "@/components/shared/_layouts/theme-toggle"
 import { siteConfig } from "@/data/config"
 import { cn } from "@/utils/utils"
-import { Menu, X, Github } from "@aurthle/icons"
+import { HamburgerMenuIcon as Menu, CloseIcon as X } from "@solar-icons/react/linear"
+import { Github } from "@/components/shared/icons/social-icons"
 import { useScroll, type Variants } from "motion/react"
 import { useEffect, useState } from "react"
 import { routes } from "@/data/routes"
@@ -116,7 +117,7 @@ export function Navbar() {
                 target="_blank"
                 href={siteConfig.links.contact.social.githubRepo.url}
               >
-                <Github size={24} className="size-5" variant="duotone" />
+                <Github size={24} className="size-5" />
               </Link>
               <Button
                 className="lg:hidden md:size-auto md:p-2 aspect-square"

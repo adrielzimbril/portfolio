@@ -1,6 +1,6 @@
 "use client"
 import { Link } from "@/components/ui/link"
-import { LinkDiagonalOne } from "@aurthle/icons"
+import { LinkRoundAngleIcon as LinkDiagonalOne } from "@solar-icons/react/linear"
 import { Tags } from "@/components/shared/pages/quests/tags"
 import { PageType } from "@/types"
 import { getResourcesUrl } from "@/utils/base-url"

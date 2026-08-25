@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState, useRef } from "react"
-import { CheckCircle } from "@aurthle/icons"
+import { CheckCircleIcon as CheckCircle } from "@solar-icons/react/bold-duotone"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Form } from "@/components/ui/form"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"

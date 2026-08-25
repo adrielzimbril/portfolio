@@ -1,9 +1,10 @@
 "use client"
 import { useState } from "react"
-import { Star, Github, Git } from "@aurthle/icons"
 import { motion } from "motion/react"
 import { cn } from "@/utils/utils"
 import { Card, CardContent } from "@/components/ui/card"
+import { StarIcon as Star, CodeCircleIcon as Git } from "@solar-icons/react/bold-duotone"
+import { Github } from "@/components/shared/icons/social-icons"
 import { Badge } from "@/components/ui/badge"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types"
 import { pickRandomColor } from "@/utils"
@@ -207,7 +208,7 @@ export function GitHubStatsCard({ type, label, value, period }: GitHubStatsCardP
               size="lg"
               circle
             >
-              <Icon size={32} variant="bulk" />
+              <Icon size={32} />
             </Badge>
             <div className="flex flex-col items-start gap-2">
               <h6 className="tracking-wide whitespace-pre-line">{label}</h6>

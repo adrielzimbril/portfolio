@@ -5,7 +5,6 @@ import { StatusBadge } from "@/components/ui/status-badge"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { cn } from "@/utils/utils"
 import { useTranslations } from "use-intl"
-import { ChatBubbleCircle } from "@aurthle/icons"
 import { LoginModal } from "@/components/shared/pages/community/LoginModal"
 import { CommentForm } from "@/components/shared/pages/community/CommentForm"
 

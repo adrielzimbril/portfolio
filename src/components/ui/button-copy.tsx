@@ -2,7 +2,7 @@
 import * as React from "react"
 import { type VariantProps } from "class-variance-authority"
 import { AnimatePresence, motion } from "motion/react"
-import { CheckCircle, Copy } from "@aurthle/icons"
+import { CheckCircleIcon as CheckCircle, CopyIcon as Copy } from "@solar-icons/react/linear"
 import {
   Button as ButtonPrimitive,
   type ButtonProps as ButtonPrimitiveProps,

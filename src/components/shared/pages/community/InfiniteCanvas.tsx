@@ -5,7 +5,8 @@ import { CommunityWallCard } from "@/components/shared/pages/community/Community
 import { Badge } from "@/components/ui/badge"
 import { pickRandomColor } from "@/utils/pick-random-color"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types/default"
-import { MoveObjectOne } from "@aurthle/icons"
+import { useTranslations } from "use-intl"
+import { CursorIcon as MoveObjectOne } from "@solar-icons/react/bold-duotone"
 import { cn } from "@/utils/utils"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -274,9 +275,13 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
               title="Recenter canvas"
               circle
             >
-              <MoveObjectOne size={24} variant="bulk" />
+              <MoveObjectOne size={24} />
             </Badge>
           </div>
+          <Badge className="capitalize text-xs font-semibold" variant="default" size="sm">
+            <MoveObjectOne size={16} />
+            {t("community.infinite-canvas.drag")}
+          </Badge>
           {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}
           {children && children}
         </CardContent>

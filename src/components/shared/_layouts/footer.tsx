@@ -8,7 +8,7 @@ import { siteConfig } from "@/data/config"
 import { routes, type RouteType } from "@/data/routes"
 import { PageType } from "@/types"
 import { StatusBadge } from "@/components/ui/status-badge"
-import { LinkOne } from "@aurthle/icons"
+import { LinkRoundIcon as LinkOne } from "@solar-icons/react/bold-duotone"
 import { FooterLocaleSwitch } from "@/components/shared/_layouts/footer-locale-switch"
 
 export async function Footer() {
@@ -48,7 +48,7 @@ export async function Footer() {
                         {t("common.shared.planning-badge.available.description-simple", {
                           date: t("common.shared.months." + getThisMonth()),
                         })}
-                        <LinkOne variant="bulk" size={20} />
+                        <LinkOne size={20} />
                       </span>
                     </Link>
                   </StatusBadge>

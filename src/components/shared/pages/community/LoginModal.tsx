@@ -1,6 +1,6 @@
 "use client"
 import React from "react"
-import { Github, Google } from "@aurthle/icons"
+import { Github, Google } from "@/components/shared/icons/social-icons"
 import { useTranslations } from "use-intl"
 import { cn } from "@/utils/utils"
 import { DialogHeader, DialogTitle, DialogSeparator } from "@/components/ui/dialog"
@@ -32,7 +32,7 @@ export function LoginModal() {
             className={cn(" squircle-2xl/80 w-full")}
           >
             <span className="flex items-center justify-center gap-2">
-              <Github size={16} variant="bulk" />
+              <Github size={16} />
               {t("community.login-modal.github")}
             </span>
           </Button>
@@ -45,7 +45,7 @@ export function LoginModal() {
             className={cn(" squircle-2xl/80 w-full")}
           >
             <span className="flex items-center justify-center gap-2">
-              <Google size={16} variant="bulk" />
+              <Google size={16} />
               {t("community.login-modal.google")}
             </span>
           </Button>

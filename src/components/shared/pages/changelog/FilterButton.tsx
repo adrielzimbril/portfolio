@@ -2,7 +2,7 @@
 import React from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { FilterOne } from "@aurthle/icons"
+import { FilterIcon as FilterOne } from "@solar-icons/react/bold-duotone"
 import { useTranslations } from "use-intl"
 
 interface FilterButtonProps {
@@ -24,7 +24,7 @@ export function FilterButton({ onClick, hasActiveFilters, resultCount }: FilterB
       whileTap
       className="gap-2"
     >
-      <FilterOne size={20} variant="bulk" />
+      <FilterOne size={20} />
       {t("button")}
       {hasActiveFilters && (
         <Badge variant="white" size="xs" circle className="ml-1 h-auto!">

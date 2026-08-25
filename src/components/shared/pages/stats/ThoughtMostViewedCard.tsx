@@ -6,7 +6,8 @@ import { cn, formatCount, getImageUrl, getResourcesUrl, pickRandomColor } from "
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Eye, LinkDiagonalOne } from "@aurthle/icons"
+import { EyeIcon as Eye } from "@solar-icons/react/bold-duotone"
+import { LinkRoundAngleIcon as LinkDiagonalOne } from "@solar-icons/react/linear"
 import { Link } from "@/components/ui/link"
 import { useTranslations } from "use-intl"
 
@@ -143,7 +144,7 @@ export function ThoughtMostViewedCard({ title, slug, coverImage, views, delay = 
                   size="md"
                 >
                   <span className="flex items-center gap-1">
-                    <Eye size={16} variant="bulk" />
+                    <Eye size={16} />
                     {/* {views} */}
                     {formatCount(views)} {t("common.stats.views")}
                   </span>

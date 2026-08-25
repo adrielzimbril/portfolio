@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { cn } from "@/utils/utils"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { Sparkles, Star, Bug, Wrench } from "@aurthle/icons"
+import { StarsIcon as Sparkles, StarIcon as Star, BugIcon as Bug, TuningIcon as Wrench } from "@solar-icons/react/bold-duotone"
 import { DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
 import { pickRandomColor } from "@/utils/pick-random-color"
 import { getResourcesUrl } from "@/utils"
@@ -108,7 +108,6 @@ export function ChangelogUpdatesCard({ count, changelog }: ChangelogUpdatesCardP
                             <Icon
                               className={cn(typeColors[item.type as keyof typeof typeColors])}
                               size={12}
-                              variant="bulk"
                             />
                           </Badge>
                         ) : null
@@ -146,7 +145,7 @@ export function ChangelogUpdatesCard({ count, changelog }: ChangelogUpdatesCardP
                 variant="colored"
                 circle
               >
-                <Sparkles size={32} variant="bulk" />
+                <Sparkles size={32} />
               </Badge>
               <div className="flex flex-col items-start gap-1">
                 <h6 className="tracking-wide">Changelog</h6>

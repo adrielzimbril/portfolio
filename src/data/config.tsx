@@ -1,9 +1,7 @@
 import { routes } from "@/data/routes"
 import { getBaseUrl, getImageUrl } from "@/utils"
+import { UserIcon as User, Home2Icon as House, LetterIcon as Mail } from "@solar-icons/react/bold-duotone"
 import {
-  User,
-  House,
-  Mail,
   Linkedin,
   Instagram,
   Github,
@@ -13,7 +11,7 @@ import {
   Youtube,
   Figma,
   Tiktok,
-} from "@aurthle/icons"
+} from "@/components/shared/icons/social-icons"
 
 const BASE_URL = getBaseUrl()
 

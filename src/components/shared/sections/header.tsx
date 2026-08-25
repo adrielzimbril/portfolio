@@ -2,7 +2,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Link } from "@/components/ui/link"
 import { cn } from "@/utils/utils"
-import { ArrowRightOne } from "@aurthle/icons"
+import { ArrowRightIcon as ArrowRightOne } from "@solar-icons/react/linear"
 import { useTranslations } from "use-intl"
 
 export function SectionHeader({

@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/utils/utils"
 import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react"
 import { cva } from "class-variance-authority"
-import { ArrowDownOne } from "@aurthle/icons"
+import { ArrowDownIcon as ArrowDownOne } from "@solar-icons/react/linear"
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,

@@ -3,7 +3,13 @@ import React from "react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { SparklesTwo, LightbulbTwoPower, Bug, Wrench, Calendar } from "@aurthle/icons"
+import {
+  StarsIcon as SparklesTwo,
+  LightbulbBoltIcon as LightbulbTwoPower,
+  BugIcon as Bug,
+  TuningIcon as Wrench,
+  CalendarIcon as Calendar,
+} from "@solar-icons/react/bold-duotone"
 import { MarkdownContentRender } from "@/components/shared/pages/shared/markdown-content-render"
 import { ReactionBar } from "@/components/shared/pages/shared/reactions/ReactionBar"
 import { ChangelogItemType, DEFAULT_COLOR_CODE_NAME, PageType } from "@/types"
@@ -57,7 +63,7 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
           variant="colored"
           circle
         >
-          {Icon && <Icon size={24} variant="bulk" />}
+          {Icon && <Icon size={24} />}
         </Badge>
       </div>
 
@@ -83,7 +89,7 @@ export function TimelineEntry({ entry, isLatest }: TimelineEntryProps) {
                   size="xs"
                   circle
                 >
-                  <Calendar size={16} variant="bulk" />
+                  <Calendar size={14} />
                 </Badge>
 
                 <time className="text-sm font-medium text-muted-foreground">

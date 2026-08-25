@@ -3,7 +3,7 @@ import React from "react"
 import { cn, pickRandomColor } from "@/utils"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types"
 import { Badge } from "@/components/ui/badge"
-import { CheckCircle } from "@aurthle/icons"
+import { CheckCircleIcon as CheckCircle } from "@solar-icons/react/linear"
 
 export function ToolAvatar({
   name,
