@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
-import { Github, Google } from "@aurthle/icons"
+import { Link } from "@/components/ui/link"
+import { Github, Google } from "@/components/shared/icons/social-icons"
 import { Activity, LockKeyhole, Terminal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getPathUrl } from "@/utils"
@@ -30,7 +31,7 @@ function ProviderButton({
       className="h-12 w-full justify-center rounded-none text-sm"
     >
       <span className="flex items-center justify-center gap-2">
-        <Icon size={18} variant="bulk" />
+        <Icon size={18} />
         {provider === "github" ? t("continue_github") : t("continue_google")}
       </span>
     </Button>

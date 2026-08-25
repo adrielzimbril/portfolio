@@ -3,7 +3,11 @@ import React from "react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { SectionBase } from "@/components/shared/pages/shared/section-base"
-import { Calendar, Eye, HourglassFill } from "@aurthle/icons"
+import {
+  CalendarIcon as Calendar,
+  HourglassIcon as HourglassFill,
+  EyeIcon as Eye,
+} from "@solar-icons/react/bold-duotone"
 import { cn } from "@/utils/utils"
 import { PreviewContentType } from "@/types"
 import {
@@ -85,7 +89,7 @@ export function HeaderSection({
           {talkDetails.date && (
             <Badge className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100" variant="colored" size="md">
               <span className="flex items-center gap-2">
-                <Calendar className="size-4 text-indigo-400" variant="bulk" />
+                <Calendar size={16} className="text-indigo-400" />
                 {getDate({ date: talkDetails.date })}
               </span>
             </Badge>
@@ -93,15 +97,15 @@ export function HeaderSection({
 
           <Badge className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100" variant="colored" size="md">
             <span className="flex items-center gap-2">
-              <HourglassFill className="size-4 text-indigo-400" variant="bulk" />
-              {talkDetails.readingTime} read
+              <HourglassFill size={16} className="text-indigo-400" />
+              {talkDetails.readingTime}
             </span>
           </Badge>
 
           <Badge className="bg-violet-100 squircle-3xl/100 md:squircle-5xl/100" variant="colored" size="md">
             <span className="flex items-center gap-2">
-              <Eye className="size-4 text-indigo-400" variant="bulk" />
-              {formatCount(talkDetails.views ?? 0)} views
+              <Eye size={16} className="text-indigo-400" />
+              {formatCount(talkDetails.views ?? 0)} {t("common.stats.views")}
             </span>
           </Badge>
         </div>

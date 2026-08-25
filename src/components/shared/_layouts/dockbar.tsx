@@ -27,7 +27,7 @@ export function Dockbar({ asFade }: { asFade?: boolean }) {
             <Tooltip>
               <TooltipTrigger>
                 <Link href={item.href} likeButton asIcon variant="outline" size="iconSmall">
-                  <item.icon variant="duotone" size="18" />
+                  <item.icon size="18" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent>

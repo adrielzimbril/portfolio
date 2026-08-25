@@ -1,6 +1,10 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import { ChatBubbleCircle, Users, TrendUp } from "@aurthle/icons"
+import {
+  ChatRoundDotsIcon as ChatBubbleCircle,
+  UserIcon as Users,
+  GraphUpIcon as TrendUp,
+} from "@solar-icons/react/bold-duotone"
 import { StatCard } from "@/components/shared/pages/community/StatCard"
 import { LeaveNoteButton } from "@/components/shared/pages/community/LeaveNoteButton"
 import { User } from "@supabase/supabase-js"

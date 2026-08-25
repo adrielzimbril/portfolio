@@ -278,10 +278,6 @@ export function InfiniteCanvas({ messages, children }: InfiniteCanvasProps) {
               <MoveObjectOne size={24} />
             </Badge>
           </div>
-          <Badge className="capitalize text-xs font-semibold" variant="default" size="sm">
-            <MoveObjectOne size={16} />
-            {t("community.infinite-canvas.drag")}
-          </Badge>
           {/* Children (e.g., modal) - rendered outside canvas for fixed positioning */}
           {children && children}
         </CardContent>

@@ -5,7 +5,7 @@ import { ReactionsSection } from "@/components/shared/pages/stats/ReactionsSecti
 import { ThoughtMostViewedCard } from "@/components/shared/pages/stats/ThoughtMostViewedCard"
 import { ThoughtsCategoriesCard } from "@/components/shared/pages/stats/ThoughtsCategoriesCard"
 import { ChangelogUpdatesCard } from "@/components/shared/pages/stats/ChangelogUpdatesCard"
-import { TrendUp, HeartOne } from "@aurthle/icons"
+import { GraphUpIcon as TrendUp, HeartIcon as HeartOne } from "@solar-icons/react/bold-duotone"
 import { TopThoughtsListType } from "@/types/enum"
 import type { Changelog } from "@/integrations/content/types/types"
 
@@ -39,7 +39,7 @@ export async function EngagementSection({
           description={t("stats.cards.topViewed.description")}
           type={TopThoughtsListType.REACTED}
           thoughts={topViewedThoughts}
-          icon={<TrendUp size={32} variant="bulk" />}
+          icon={<TrendUp size={32} />}
           decoration="📈"
         />
         <ThoughtsTopList
@@ -47,7 +47,7 @@ export async function EngagementSection({
           description={t("stats.cards.topReacted.description")}
           type={TopThoughtsListType.REACTED}
           thoughts={topReactedThoughts}
-          icon={<HeartOne size={32} variant="bulk" />}
+          icon={<HeartOne size={32} />}
           decoration="❤️"
         />
       </div>

@@ -5,7 +5,7 @@ import { Link } from "@/components/ui/link"
 import { SectionBase } from "@/components/shared/pages/shared/section-base"
 import { useTranslations, useLocale } from "use-intl"
 import { StatusBadge } from "@/components/ui/status-badge"
-import { LinkOne } from "@aurthle/icons"
+import { LinkRoundIcon as LinkOne } from "@solar-icons/react/bold-duotone"
 import { getDate, getPathUrl, getThisMonth } from "@/utils"
 import { usePageViews } from "@/hooks/usePageViews"
 
@@ -31,7 +31,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary" | "quaternary" 
                 limit: 1,
                 date: t("common.shared.months." + getThisMonth()),
               })}
-              <LinkOne variant="bulk" size={20} />
+              <LinkOne size={20} />
             </span>
           </Link>
         </StatusBadge>
@@ -55,7 +55,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary" | "quaternary" 
                   dateStyle: "medium",
                 }),
               })}
-              <LinkOne variant="bulk" size={18} />
+              <LinkOne size={18} />
             </span>
           </Link>
         </StatusBadge>
@@ -82,7 +82,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary" | "quaternary" 
                   dateStyle: "medium",
                 }),
               })}
-              <LinkOne variant="bulk" size={18} />
+              <LinkOne size={18} />
             </span>
           </Link>
         </StatusBadge>
@@ -99,7 +99,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary" | "quaternary" 
           <Link href={routes.contact.link}>
             <span className="flex items-center gap-2">
               {t("common.shared.planning-badge.available.description-simple")} 👋🏻
-              <LinkOne variant="bulk" size={20} />
+              <LinkOne size={20} />
             </span>
           </Link>
         </StatusBadge>
@@ -116,7 +116,7 @@ const PlanningBadge = (type: "simple" | "secondary" | "tertiary" | "quaternary" 
           <Link href={routes.contact.link}>
             <span className="flex items-center gap-2">
               {t("common.shared.planning-badge.available.description-simple")} 👋🏻
-              <LinkOne variant="bulk" size={20} />
+              <LinkOne size={20} />
             </span>
           </Link>
         </StatusBadge>

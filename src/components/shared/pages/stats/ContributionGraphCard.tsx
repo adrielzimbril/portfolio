@@ -5,7 +5,7 @@ import { cn, pickRandomColor } from "@/utils"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { Github } from "@aurthle/icons"
+import { Github } from "@/components/shared/icons/social-icons"
 import { DEFAULT_COLOR_CODE_NAME } from "@/types"
 
 interface ContributionGraphCardProps {
@@ -97,11 +97,11 @@ export function ContributionGraphCard({ contributions, delay = 0, className }: C
                 variant="colored"
                 circle
               >
-                <Github size={20} variant="bulk" />
+                <Github size={32} />
               </Badge>
-              <div>
-                <h6 className="font-medium text-foreground">Contributions</h6>
-                <p className="text-sm text-muted-foreground">This year</p>
+              <div className="flex flex-col items-start gap-1">
+                <h6 className="tracking-wide">{t("stats.contribution-graph.title")}</h6>
+                <p className="text-xs text-muted-foreground">{t("stats.contribution-graph.subtitle")}</p>
               </div>
             </div>
             <div className="text-right">

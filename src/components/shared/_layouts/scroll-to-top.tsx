@@ -67,10 +67,11 @@ export function ScrollToTop() {
       <Button
         onClick={scrollToTop}
         className={cn(
-          "relative p-3 transition-all duration-200 group hover:scale-105 active:scale-95 cursor-pointer",
+          "relative p-3 transition-all duration-200 group hover:scale-105 active:scale-95 cursor-pointer rounded-full [&_svg]:size-[48]",
           isBadIOS ? "bg-b-base-accent" : "rounded-full",
         )}
         variant={isBadIOS ? "colored" : "outline"}
+        squircle={false}
         asIcon
         style={{ width: size, height: size }}
       >

@@ -5,7 +5,7 @@ import * as React from "react"
 import { cn } from "@/utils/utils"
 
 const buttonVariants = cva(
-  "inline-flex squircle-7xl/100 hover:squircle-3xl/100 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -38,8 +38,7 @@ const buttonVariants = cva(
   },
 )
 
-export interface ButtonProps
-  extends useRender.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
+export interface ButtonProps extends useRender.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   variant?:
     "default" | "base" | "secondary" | "destructive" | "outline" | "colored" | "ghost" | "icon" | "link" | "none"
   size?: "default" | "xs" | "sm" | "lg" | "iconSmall" | "icon" | "nav" | "none"
@@ -47,6 +46,7 @@ export interface ButtonProps
   asIcon?: boolean
   asPointer?: boolean
   whileTap?: boolean
+  squircle?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -60,6 +60,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asIcon = false,
       asPointer = false,
       whileTap = false,
+      squircle = true,
       ...props
     },
     ref,
@@ -67,6 +68,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const defaultProps = {
       className: cn(
         buttonVariants({ variant, size, className }),
+        squircle && "squircle-7xl/100 hover:squircle-3xl/100",
         asFull && "w-full flex text-center items-center justify-center",
         asIcon && "[&_svg]:size-auto",
         asPointer && "cursor-pointer",
@@ -76,16 +78,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "data-space-hover": "tick",
       ref,
       children: props.children,
-    };
+    }
 
     return useRender({
       defaultTagName: "button",
       props: mergeProps<"button">(defaultProps, props),
       render,
-    });
+    })
   },
 )
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
-

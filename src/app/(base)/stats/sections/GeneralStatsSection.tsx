@@ -1,7 +1,7 @@
 import { getTranslations, getLocale } from "next-intl/server"
 import { SectionLayout } from "@/components/shared/sections/layout"
 import { StatCard } from "@/components/shared/pages/stats/StatCard"
-import { Eye, Coffee, Calendar } from "@aurthle/icons"
+import { EyeIcon as Eye, CupHotIcon as Coffee, CalendarIcon as Calendar } from "@solar-icons/react/bold-duotone"
 import { ConfigValue } from "@/config"
 
 const REVAMP_DATE = new Date(ConfigValue.NEXT_PUBLIC_REVAMP_DATE)
@@ -24,7 +24,7 @@ export async function GeneralStatsSection({ totalViews, totalWords }: GeneralSta
         <StatCard
           label={t("stats.cards.totalViews.label")}
           value={totalViews}
-          icon={<Eye size={32} variant="bulk" />}
+          icon={<Eye size={32} />}
           decoration="👁️"
           description={t("stats.cards.totalViews.description")}
         />
@@ -32,7 +32,7 @@ export async function GeneralStatsSection({ totalViews, totalWords }: GeneralSta
           label={t("stats.cards.coffee.label")}
           value={coffeeCups}
           suffix={t("stats.cards.coffee.suffix")}
-          icon={<Coffee size={32} variant="bulk" />}
+          icon={<Coffee size={32} />}
           decoration="☕"
           description={t("stats.cards.coffee.description")}
         />
@@ -40,7 +40,7 @@ export async function GeneralStatsSection({ totalViews, totalWords }: GeneralSta
           label={t("stats.cards.siteAge.label")}
           value={daysSinceRevamp}
           suffix={t("stats.cards.siteAge.suffix")}
-          icon={<Calendar size={32} variant="bulk" />}
+          icon={<Calendar size={32} />}
           decoration="📅"
           description={t("stats.cards.siteAge.description", {
             date: REVAMP_DATE.toLocaleDateString(locale, {

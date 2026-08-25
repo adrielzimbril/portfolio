@@ -1,5 +1,6 @@
 "use client"
-import { Linkedin, LinkOne } from "@aurthle/icons"
+import { Linkedin } from "@/components/shared/icons/social-icons"
+import { LinkRoundIcon as LinkOne } from "@solar-icons/react/bold-duotone"
 import { useState, useEffect, useMemo } from "react"
 import { Avatar as SpaceAvatar } from "@usespaceui/avatars/react"
 import { cn, pickRandomColorCode } from "@/utils"
@@ -67,12 +68,12 @@ export function TestimonialsSection() {
                     <>
                       {currentTestimonial?.linkedinUrl ? (
                         <>
-                          <Linkedin size={18} variant="bulk" />
+                          <Linkedin size={18} />
                           <span className="hidden md:block leading-0">{t("common.base.linkedin")}</span>
                         </>
                       ) : (
                         <>
-                          <LinkOne size={18} variant="bulk" />
+                          <LinkOne size={18} />
                           <span className="hidden md:block leading-0">{t("common.base.website")}</span>
                         </>
                       )}
