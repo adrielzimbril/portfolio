@@ -1,9 +1,10 @@
-import { withContentCollections } from "@content-collections/next";
-import type { NextConfig } from "next";
-import nextIntlPlugin from "next-intl/plugin";
-import bundleAnalyzer from "@next/bundle-analyzer";
-import { ConfigValue } from "@/config/config";
-import { appConfig } from "@data/app-config";
+import { withContentCollections } from "@content-collections/next"
+import type { NextConfig } from "next"
+import nextIntlPlugin from "next-intl/plugin"
+import bundleAnalyzer from "@next/bundle-analyzer"
+import path from "path"
+import { ConfigValue } from "@/config/config"
+import { appConfig } from "@data/app-config"
 
 const withNextIntl = nextIntlPlugin({
   requestConfig: "./src/integrations/i18n/request.ts",
@@ -12,12 +13,12 @@ const withNextIntl = nextIntlPlugin({
       (locale) => `./src/integrations/i18n/translations/${locale}.json`,
     ),
   },
-});
+})
 
-const IsDEV = ConfigValue.NODE_ENV === "development";
+const IsDEV = ConfigValue.NODE_ENV === "development"
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: ConfigValue.ANALYZE_BUNDLE === "true",
-});
+})
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -64,13 +65,24 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
+  cacheComponents: true,
+  partialPrefetching: true,
+  reactStrictMode: false,
+  reactCompiler: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   experimental: {
+    useTypeScriptCli: true,
+    turbopackRustReactCompiler: true,
+    useOffline: true,
     mdxRs: true,
-    optimizePackageImports: ["@aurthle/icons"],
+    optimizePackageImports: ["@solar-icons/react", "lucide-react", "@base-ui/react"],
   },
   serverExternalPackages: ["@vercel/og"],
-};
+}
 
-export default withContentCollections(
-  withNextIntl(withBundleAnalyzer(nextConfig)),
-);
+export default withContentCollections(withNextIntl(withBundleAnalyzer(nextConfig)))

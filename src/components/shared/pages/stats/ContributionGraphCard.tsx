@@ -99,9 +99,9 @@ export function ContributionGraphCard({ contributions, delay = 0, className }: C
               >
                 <Github size={32} />
               </Badge>
-              <div className="flex flex-col items-start gap-1">
-                <h6 className="tracking-wide">{t("stats.contribution-graph.title")}</h6>
-                <p className="text-xs text-muted-foreground">{t("stats.contribution-graph.subtitle")}</p>
+              <div>
+                <h6 className="font-medium text-foreground">Contributions</h6>
+                <p className="text-sm text-muted-foreground">This year</p>
               </div>
             </div>
             <div className="text-right">

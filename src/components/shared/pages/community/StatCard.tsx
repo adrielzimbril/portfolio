@@ -12,7 +12,7 @@ export function StatCard({
   label,
   value,
 }: {
-  icon: React.ComponentType<IconComponentsProps>
+  icon: IconComponent
   label: string
   value: string
 }) {

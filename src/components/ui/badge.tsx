@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/utils/utils"
 
 const badgeVariants = cva(
-  "squircle-2xl/80 md:squircle-3xl/80 lex h-auto md:h-[stretch] items-center border-none px-3 py-1.5 font-semibold transition-colors",
+  "squircle-2xl/80 md:squircle-3xl/80 flex h-auto md:h-[stretch] items-center border-none px-3 py-1.5 font-semibold transition-colors",
   {
     variants: {
       variant: {

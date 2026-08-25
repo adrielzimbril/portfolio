@@ -68,7 +68,7 @@ export function ThoughtsCategoriesCard({ data, title, description, decorationEmo
                 variant="colored"
                 circle
               >
-                <ChartPresentationOne size={32} variant="bulk" />
+                <ChartPresentationOne size={32} />
               </Badge>
               <div className="flex flex-col items-start gap-2">
                 <h6 className="tracking-wide">{title}</h6>
