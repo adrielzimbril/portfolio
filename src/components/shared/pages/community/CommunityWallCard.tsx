@@ -83,6 +83,7 @@ export function CommunityWallCard({
               <AvatarFallback className="relative pointer-events-none">
                 <SpaceAvatar
                   name={author || (profilePicture?.slice(8)?.replace(".png", "") ?? "")}
+                  variant="all"
                   size={32}
                   circle
                 />

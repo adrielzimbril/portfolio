@@ -44,6 +44,7 @@
     "@react-email/components": "^0.5.7",
     "@react-email/render": "^1.4.0",
     "@sindresorhus/slugify": "^2.2.1",
+    "@solar-icons/react": "^2.1.0",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.98.0",
     "@trigger.dev/sdk": "4.0.4",

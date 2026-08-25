@@ -121,11 +121,7 @@ function WinnerCard({ participant }: { participant: Winner }) {
               <Avatar className="size-11">
                 <AvatarImage src={getImageUrl(participant.avatar || "")} />
                 <AvatarFallback>
-                  <SpaceAvatar
-                    name={participant.name}
-                    size={44}
-                    circle
-                  />
+                  <SpaceAvatar name={participant.name} variant="all" size={44} circle />
                 </AvatarFallback>
               </Avatar>
             </Link>

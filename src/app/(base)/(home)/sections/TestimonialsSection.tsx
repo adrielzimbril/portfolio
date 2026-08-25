@@ -89,6 +89,7 @@ export function TestimonialsSection() {
                     <div className="size-10 md:size-12 rounded-full flex items-center justify-center">
                       <SpaceAvatar
                         name={currentTestimonial?.avatar ?? currentTestimonial.name}
+                        variant="all"
                         size={48}
                         circle
                         className="size-10 md:size-12"

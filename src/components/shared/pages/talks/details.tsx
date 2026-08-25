@@ -100,7 +100,13 @@ function ParticipantsStats({ count }: { count: number }) {
           {Array.from({ length: visibleCount }).map((_, index) => (
             <Avatar key={index} className="w-6 h-6">
               <AvatarFallback className="relative pointer-events-none">
-                <SpaceAvatar name={`participant-${index + 1}`} colors={colorSets[index] ?? []} size={24} circle />
+                <SpaceAvatar
+                  name={`participant-${index + 1}`}
+                  variant="all"
+                  colors={colorSets[index] ?? []}
+                  size={24}
+                  circle
+                />
               </AvatarFallback>
             </Avatar>
           ))}

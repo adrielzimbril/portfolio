@@ -158,7 +158,7 @@ export function Navbar() {
                   >
                     <Image
                       className="size-12! rounded-2xl overflow-hidden object-cover pointer-events-none"
-                      src={getImageUrl("icon-three.png")}
+                      src={getImageUrl("icon-five.png")}
                       alt={siteConfig.description}
                       width={256}
                       height={256}
