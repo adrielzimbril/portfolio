@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import logger from "@/utils/logger"
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -8,8 +7,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   try {
     const body = await request.json()
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     const { data, error } = await supabase.from("challenge_registrations").update(body).eq("id", id).select().single()
 
@@ -28,8 +26,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   try {
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     const { error } = await supabase.from("challenge_registrations").delete().eq("id", id)
 

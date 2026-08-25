@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
-import { createClient } from "@/integrations/supabase/server"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { getAllResources } from "@/integrations/content/lib"
 import { hubProductLinksRepository } from "@/integrations/supabase/repository/hubProductLinks"
 import { logger } from "@/utils"
@@ -24,8 +23,7 @@ export async function GET(request: Request) {
     })
 
     // 2. Get private urls from DB
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
     const repo = hubProductLinksRepository(supabase)
     const dbLinks = await repo.getAll()
     const dbMap = new Map(dbLinks.map((l) => [l.slug, l.private_url]))
@@ -63,8 +61,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Slug is required" }, { status: 400 })
     }
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
     const repo = hubProductLinksRepository(supabase)
 
     const updated = await repo.upsert(slug, private_url || "")

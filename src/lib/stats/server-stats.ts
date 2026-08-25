@@ -1,13 +1,12 @@
 import { ServerStats, ThoughtMetric, ReactionType } from "@/lib/stats/types"
 import { PageType } from "@/types"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { getAllPosts } from "@/integrations/content/lib/posts"
 
 // Function to retrieve statistics from the server (Supabase)
+// Uses admin client (service role) to bypass RLS — page_counters has no RLS policies for anon
 export async function getServerStats(locale?: string): Promise<ServerStats> {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createAdminClient()
 
   // Fetch all posts to get titles and cover images
   const allPosts = await getAllPosts({ locale })

@@ -139,7 +139,7 @@ export function ThoughtMostViewedCard({ title, slug, coverImage, views, delay = 
               <div className="flex items-center justify-between gap-3">
                 <Badge
                   className={cn(pickRandomColor(DEFAULT_COLOR_CODE_NAME.VIOLET), "size-max text-primary-foreground")}
-                  contentClassName={cn("font-bold tabular-nums tracking-tight")}
+                  contentClassName={cn("font-medium tabular-nums tracking-tight")}
                   variant="colored"
                   size="md"
                 >

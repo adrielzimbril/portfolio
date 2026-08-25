@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient, createAdminClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import logger from "@/utils/logger"
 import { ConfigValue } from "@/config"
 
@@ -12,8 +11,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 
     logger.info("PATCH message request:", { id, body })
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     // Check authentication
     const {
@@ -31,8 +29,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
       isAdmin,
     })
 
-    // Use admin client if user is admin, otherwise use regular client
-    const client = isAdmin ? createAdminClient() : supabase
+    // Use admin client for landlord operations
+    const client = supabase
 
     // Fetch existing message to check user_id
     const { data: existingMessage, error: fetchError } = await client
@@ -74,8 +72,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
   try {
     const { id } = await params
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     const { error } = await supabase.from("community_wall").delete().eq("id", id)
 

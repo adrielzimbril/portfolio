@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { Locale } from "@/types"
 import { logger } from "@/utils"
 
@@ -12,8 +11,7 @@ export async function GET(request: Request) {
     const from = (page - 1) * pageSize
     const to = from + pageSize - 1
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     const {
       data: messages,
@@ -46,8 +44,7 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { creator_name, creator_avatar_url, message } = body
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     const { data, error } = await supabase
       .from("community_wall")

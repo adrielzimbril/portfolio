@@ -4,8 +4,7 @@ import { appConfig } from "@/data/app-config"
 import { getQuestBySlug } from "@/integrations/content/lib"
 import { addContact, ContactProvider } from "@/integrations/contact"
 import { sendEmail } from "@/integrations/mail"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { Locale, PageType } from "@/types"
 import logger from "@/utils/logger"
 import { getResourcesUrl } from "@/utils/base-url"
@@ -20,8 +19,7 @@ const registerSchema = z.object({
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
     const db = supabase as any
     const { slug } = await params
     const quest = await getQuestBySlug(slug)

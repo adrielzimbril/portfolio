@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
-import { createClient } from "@/integrations/supabase/server"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { logger } from "@/utils"
 
 const TABLE = "newsletter_subscribers_with_user"
@@ -14,8 +13,7 @@ export async function GET(request: Request) {
     const from = (page - 1) * pageSize
     const to = from + pageSize - 1
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
     const fromRelation = supabase.from.bind(supabase) as (relation: string) => any
 
     const { data, error, count } = await fromRelation(TABLE)

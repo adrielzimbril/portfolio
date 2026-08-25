@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { getImageUrl } from "@/utils/base-url"
 import { getBrevoConfig } from "@/config"
 import { sendEmail } from "@/integrations/mail"
@@ -11,8 +10,7 @@ import logger from "@/utils/logger"
 
 export async function POST(req: NextRequest) {
   try {
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     const body = await req.json().catch(() => ({}))
     const {

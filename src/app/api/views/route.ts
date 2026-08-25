@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { getIpInfo } from "@/hooks/useIpInfo"
 import logger from "@/utils/logger"
 
@@ -15,8 +14,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Page not found" }, { status: 400 })
   }
 
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createAdminClient()
 
   try {
     const { data: analyticsData, error: rpcError } = await supabase.rpc("get_page_analytics", {
@@ -45,8 +43,7 @@ export async function POST(req: NextRequest) {
 
   const blockedIp: string[] = ["::1", "127.0.0.1"]
   const ipInfo = blockedIp.includes(ip) ? null : await getIpInfo(ip)
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createAdminClient()
 
   try {
     const body = await req.json().catch(() => ({}))

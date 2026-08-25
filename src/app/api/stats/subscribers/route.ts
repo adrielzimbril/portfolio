@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 
 // Supported:
 // GET /api/stats/subscribers?scope=newsletter -> { count }
@@ -8,8 +7,7 @@ import { cookies } from "next/headers"
 // GET /api/stats/subscribers?scope=productTitle&title=My%20Product -> { count }
 // GET /api/stats/subscribers?scope=summary -> { newsletter, byType: { course, ebook, video }, totalRequests }
 export async function GET(req: NextRequest) {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = createAdminClient()
 
   const { searchParams } = new URL(req.url)
   const scope = searchParams.get("scope") || "newsletter"

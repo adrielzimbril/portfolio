@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/integrations/supabase/server"
-import { cookies } from "next/headers"
+import { createAdminClient } from "@/integrations/supabase/server"
 import { sendEmail } from "@/integrations/mail"
 import { appConfig } from "@/data/app-config"
 import { getQuestBySlug } from "@/integrations/content/lib"
@@ -19,8 +18,7 @@ export async function GET(request: Request) {
     const from = (page - 1) * pageSize
     const to = from + pageSize - 1
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
 
     let query = supabase
       .from("challenge_submissions")
@@ -60,8 +58,7 @@ export async function POST(request: Request) {
       locale = Locale.EN,
     } = body
 
-    const cookieStore = await cookies()
-    const supabase = createClient(cookieStore)
+    const supabase = createAdminClient()
     const db = supabase as any
 
     const quest = await getQuestBySlug(challenge_slug)
