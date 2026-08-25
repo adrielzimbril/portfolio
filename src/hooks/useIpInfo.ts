@@ -224,7 +224,7 @@ export async function getIpInfo<T = IpInfoResponse>(
 
   try {
     // Build the URL
-    const baseUrl = "https://api.oricodes.com/ip"
+    const baseUrl = "https://api.spaceui.one/ip"
     const url = ip ? `${baseUrl}/${ip}` : baseUrl
 
     // Retry logic
