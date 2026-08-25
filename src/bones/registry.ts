@@ -3,160 +3,160 @@
 import { registerBones } from 'boneyard-js'
 import { configureBoneyard } from 'boneyard-js/react'
 
-import _projects_listing from './projects-listing.bones.json'
+import _about_header from './about-header.bones.json'
+import _about_craft from './about-craft.bones.json'
+import _about_facts from './about-facts.bones.json'
+import _about_philosophy from './about-philosophy.bones.json'
+import _about_cta from './about-cta.bones.json'
 import _projects_header from './projects-header.bones.json'
+import _projects_listing from './projects-listing.bones.json'
 import _projects_cta from './projects-cta.bones.json'
+import _project_detail_goal from './project-detail-goal.bones.json'
+import _project_detail_statement from './project-detail-statement.bones.json'
+import _project_detail_preview from './project-detail-preview.bones.json'
 import _project_detail_header from './project-detail-header.bones.json'
 import _project_detail_content from './project-detail-content.bones.json'
 import _project_detail_research from './project-detail-research.bones.json'
-import _project_detail_statement from './project-detail-statement.bones.json'
-import _project_detail_preview from './project-detail-preview.bones.json'
+import _project_detail_points from './project-detail-points.bones.json'
 import _project_detail_result from './project-detail-result.bones.json'
 import _project_detail_more from './project-detail-more.bones.json'
-import _project_detail_goal from './project-detail-goal.bones.json'
-import _project_detail_points from './project-detail-points.bones.json'
 import _project_detail_cta from './project-detail-cta.bones.json'
-import _thoughts_listing from './thoughts-listing.bones.json'
 import _thoughts_header from './thoughts-header.bones.json'
+import _thoughts_listing from './thoughts-listing.bones.json'
 import _thoughts_cta from './thoughts-cta.bones.json'
 import _talks_header from './talks-header.bones.json'
 import _talks_listing from './talks-listing.bones.json'
 import _talks_cta from './talks-cta.bones.json'
-import _quest_register_closed from './quest-register-closed.bones.json'
+import _quests_header from './quests-header.bones.json'
+import _quests_listing from './quests-listing.bones.json'
+import _quests_cta from './quests-cta.bones.json'
+import _quest_detail_header from './quest-detail-header.bones.json'
+import _quest_detail_content from './quest-detail-content.bones.json'
+import _quest_detail_participants from './quest-detail-participants.bones.json'
 import _quest_register_header from './quest-register-header.bones.json'
-import _quest_submit_closed from './quest-submit-closed.bones.json'
+import _quest_register_closed from './quest-register-closed.bones.json'
 import _quest_submit_header from './quest-submit-header.bones.json'
+import _quest_submit_closed from './quest-submit-closed.bones.json'
 import _hub_header from './hub-header.bones.json'
 import _hub_listing from './hub-listing.bones.json'
 import _hub_cta from './hub-cta.bones.json'
-import _resource_detail_content from './resource-detail-content.bones.json'
 import _resource_detail_header from './resource-detail-header.bones.json'
+import _resource_detail_content from './resource-detail-content.bones.json'
 import _resource_detail_more from './resource-detail-more.bones.json'
 import _resource_detail_cta from './resource-detail-cta.bones.json'
 import _resource_get_content from './resource-get-content.bones.json'
-import _stats_performance from './stats-performance.bones.json'
 import _stats_hero from './stats-hero.bones.json'
 import _stats_general from './stats-general.bones.json'
 import _stats_engagement from './stats-engagement.bones.json'
 import _stats_blog from './stats-blog.bones.json'
 import _stats_github from './stats-github.bones.json'
+import _stats_performance from './stats-performance.bones.json'
+import _toolbox_header from './toolbox-header.bones.json'
 import _toolbox_tools from './toolbox-tools.bones.json'
 import _toolbox_setup from './toolbox-setup.bones.json'
-import _toolbox_header from './toolbox-header.bones.json'
 import _toolbox_cta from './toolbox-cta.bones.json'
-import _connections_people from './connections-people.bones.json'
 import _connections_header from './connections-header.bones.json'
+import _connections_people from './connections-people.bones.json'
 import _connections_cta from './connections-cta.bones.json'
 import _community_hero from './community-hero.bones.json'
 import _community_stats from './community-stats.bones.json'
 import _community_messages from './community-messages.bones.json'
-import _changelog_timeline from './changelog-timeline.bones.json'
 import _changelog_header from './changelog-header.bones.json'
+import _changelog_timeline from './changelog-timeline.bones.json'
 import _changelog_cta from './changelog-cta.bones.json'
-import _routes_list from './routes-list.bones.json'
 import _routes_header from './routes-header.bones.json'
+import _routes_list from './routes-list.bones.json'
 import _form_contact from './form-contact.bones.json'
 import _newsletter_form from './newsletter-form.bones.json'
-import _form_default from './form-default.bones.json'
 import _submit_header from './submit-header.bones.json'
-import _about_craft from './about-craft.bones.json'
-import _about_cta from './about-cta.bones.json'
-import _about_facts from './about-facts.bones.json'
-import _about_header from './about-header.bones.json'
-import _about_philosophy from './about-philosophy.bones.json'
+import _form_default from './form-default.bones.json'
+import _privacy_content from './privacy-content.bones.json'
+import _privacy_header from './privacy-header.bones.json'
+import _terms_content from './terms-content.bones.json'
+import _terms_header from './terms-header.bones.json'
 import _home_cta from './home-cta.bones.json'
 import _home_header from './home-header.bones.json'
 import _home_projects from './home-projects.bones.json'
 import _home_resources from './home-resources.bones.json'
 import _home_testimonials from './home-testimonials.bones.json'
-import _privacy_content from './privacy-content.bones.json'
-import _privacy_header from './privacy-header.bones.json'
-import _quest_detail_content from './quest-detail-content.bones.json'
-import _quest_detail_header from './quest-detail-header.bones.json'
-import _quest_detail_participants from './quest-detail-participants.bones.json'
-import _quests_cta from './quests-cta.bones.json'
-import _quests_header from './quests-header.bones.json'
-import _quests_listing from './quests-listing.bones.json'
-import _terms_content from './terms-content.bones.json'
-import _terms_header from './terms-header.bones.json'
 
 configureBoneyard({"color":"#e5e5e5","darkColor":"#2a2a2a","animate":"shimmer","shimmerColor":"#ebebeb","darkShimmerColor":"#333333","speed":"2s","shimmerAngle":110,"stagger":80,"transition":300})
 
 registerBones({
-  "projects-listing": _projects_listing,
+  "about-header": _about_header,
+  "about-craft": _about_craft,
+  "about-facts": _about_facts,
+  "about-philosophy": _about_philosophy,
+  "about-cta": _about_cta,
   "projects-header": _projects_header,
+  "projects-listing": _projects_listing,
   "projects-cta": _projects_cta,
+  "project-detail-goal": _project_detail_goal,
+  "project-detail-statement": _project_detail_statement,
+  "project-detail-preview": _project_detail_preview,
   "project-detail-header": _project_detail_header,
   "project-detail-content": _project_detail_content,
   "project-detail-research": _project_detail_research,
-  "project-detail-statement": _project_detail_statement,
-  "project-detail-preview": _project_detail_preview,
+  "project-detail-points": _project_detail_points,
   "project-detail-result": _project_detail_result,
   "project-detail-more": _project_detail_more,
-  "project-detail-goal": _project_detail_goal,
-  "project-detail-points": _project_detail_points,
   "project-detail-cta": _project_detail_cta,
-  "thoughts-listing": _thoughts_listing,
   "thoughts-header": _thoughts_header,
+  "thoughts-listing": _thoughts_listing,
   "thoughts-cta": _thoughts_cta,
   "talks-header": _talks_header,
   "talks-listing": _talks_listing,
   "talks-cta": _talks_cta,
-  "quest-register-closed": _quest_register_closed,
+  "quests-header": _quests_header,
+  "quests-listing": _quests_listing,
+  "quests-cta": _quests_cta,
+  "quest-detail-header": _quest_detail_header,
+  "quest-detail-content": _quest_detail_content,
+  "quest-detail-participants": _quest_detail_participants,
   "quest-register-header": _quest_register_header,
-  "quest-submit-closed": _quest_submit_closed,
+  "quest-register-closed": _quest_register_closed,
   "quest-submit-header": _quest_submit_header,
+  "quest-submit-closed": _quest_submit_closed,
   "hub-header": _hub_header,
   "hub-listing": _hub_listing,
   "hub-cta": _hub_cta,
-  "resource-detail-content": _resource_detail_content,
   "resource-detail-header": _resource_detail_header,
+  "resource-detail-content": _resource_detail_content,
   "resource-detail-more": _resource_detail_more,
   "resource-detail-cta": _resource_detail_cta,
   "resource-get-content": _resource_get_content,
-  "stats-performance": _stats_performance,
   "stats-hero": _stats_hero,
   "stats-general": _stats_general,
   "stats-engagement": _stats_engagement,
   "stats-blog": _stats_blog,
   "stats-github": _stats_github,
+  "stats-performance": _stats_performance,
+  "toolbox-header": _toolbox_header,
   "toolbox-tools": _toolbox_tools,
   "toolbox-setup": _toolbox_setup,
-  "toolbox-header": _toolbox_header,
   "toolbox-cta": _toolbox_cta,
-  "connections-people": _connections_people,
   "connections-header": _connections_header,
+  "connections-people": _connections_people,
   "connections-cta": _connections_cta,
   "community-hero": _community_hero,
   "community-stats": _community_stats,
   "community-messages": _community_messages,
-  "changelog-timeline": _changelog_timeline,
   "changelog-header": _changelog_header,
+  "changelog-timeline": _changelog_timeline,
   "changelog-cta": _changelog_cta,
-  "routes-list": _routes_list,
   "routes-header": _routes_header,
+  "routes-list": _routes_list,
   "form-contact": _form_contact,
   "newsletter-form": _newsletter_form,
-  "form-default": _form_default,
   "submit-header": _submit_header,
-  "about-craft": _about_craft,
-  "about-cta": _about_cta,
-  "about-facts": _about_facts,
-  "about-header": _about_header,
-  "about-philosophy": _about_philosophy,
+  "form-default": _form_default,
+  "privacy-content": _privacy_content,
+  "privacy-header": _privacy_header,
+  "terms-content": _terms_content,
+  "terms-header": _terms_header,
   "home-cta": _home_cta,
   "home-header": _home_header,
   "home-projects": _home_projects,
   "home-resources": _home_resources,
   "home-testimonials": _home_testimonials,
-  "privacy-content": _privacy_content,
-  "privacy-header": _privacy_header,
-  "quest-detail-content": _quest_detail_content,
-  "quest-detail-header": _quest_detail_header,
-  "quest-detail-participants": _quest_detail_participants,
-  "quests-cta": _quests_cta,
-  "quests-header": _quests_header,
-  "quests-listing": _quests_listing,
-  "terms-content": _terms_content,
-  "terms-header": _terms_header,
 })
