@@ -9,7 +9,7 @@ import { LinkRoundIcon as LinkOne } from "@solar-icons/react/bold-duotone"
 import { getDate, getPathUrl, getThisMonth } from "@/utils"
 import { usePageViews } from "@/hooks/usePageViews"
 
-const PlanningBadge = (type: "simple" | "secondary" | "tertiary" | "quaternary" | "quinary"): React.ReactNode => {
+function PlanningBadge({ type }: { type: "simple" | "secondary" | "tertiary" | "quaternary" | "quinary" }) {
   const t = useTranslations()
   const locale = useLocale()
   const now = new Date()
@@ -140,7 +140,7 @@ export function HeaderSection() {
 
   return (
     <SectionBase sectionClassName="p-0 mt-16" isWide>
-      {PlanningBadge("quinary")}
+      <PlanningBadge type="quinary" />
       <h1 className="w-full relative">{t("home.page.header-section.title")}</h1>
       <p className="relative text-2xl">{t("home.page.header-section.description")}</p>
       <div className="grid w-full md:flex md:w-auto items-start gap-3">
