@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react"
 import { Turnstile } from "@/integrations/anti-bot/turnstile-second"
 import { ConfigValue } from "@/config"
 import {
-  IconLoader2 as Loader2,
-  IconShieldCheck as ShieldCheck,
-  IconShieldX as ShieldAlert,
+  IconLoader2,
+  IconShieldCheck,
+  IconShieldX,
 } from "@tabler/icons-react"
 import { cn } from "@/utils"
 import { isLocal } from "@/config/utils"
@@ -23,44 +23,54 @@ export function BotProtector({ children }: BotProtectorProps) {
 
   const sessionVerified = !isLocalMode && sessionStorage.getItem("shiro_bot_verified") === "true"
 
-  const [isVerified, setIsVerified] = useState<boolean>(isLocalMode || sessionVerified)
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(!isLocalMode && !sessionVerified)
+  const [verified, setVerified] = useState<boolean>(isLocalMode || sessionVerified)
+  const [error, setError] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const handleVerify = (token: string) => {
-    if (token) {
-      setIsVerified(true)
+  const handleVerify = async (token: string) => {
+    setIsLoading(true)
+    try {
+      const response = await fetch("/api/auth/verify-turnstile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        sessionStorage.setItem("shiro_bot_verified", "true")
+        setVerified(true)
+      } else {
+        setError(true)
+      }
+    } catch (err) {
+      logger.error("[BotProtector] Verification error:", err)
+      setError(true)
+    } finally {
       setIsLoading(false)
-      sessionStorage.setItem("shiro_bot_verified", "true")
     }
   }
 
-  const handleError = (err: any) => {
-    logger.error("[BotProtector] Turnstile error:", err)
-    setError(t("verification_failed"))
-    setIsLoading(false)
+  const handleError = () => {
+    setError(true)
   }
 
-  if (isVerified) {
+  if (verified) {
     return <>{children}</>
   }
 
   return (
-    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-[#f5f3ea]/80 backdrop-blur-md">
-      <div className="w-full max-w-sm rounded-[32px] border border-black/10 bg-white p-8 shadow-[0_24px_80px_rgba(17,25,31,0.14)] text-center">
-        <div className="mb-6 flex justify-center">
-          <div
-            className={cn(
-              "flex size-16 items-center justify-center rounded-2xl",
-              error ? "bg-red-50 text-red-500" : "bg-[#11191f] text-white",
-            )}
-          >
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#f4f3ef] p-4">
+      <div className="w-full max-w-md rounded-2xl border border-black/8 bg-white p-8 text-center shadow-xl">
+        <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-2xl bg-black/5">
+          <div className="text-black/70">
             {error ? (
-              <ShieldAlert size={32} />
+              <IconShieldX size={32} className="text-red-500" />
             ) : isLoading ? (
-              <Loader2 size={32} className="animate-spin" />
+              <IconLoader2 size={32} className="animate-spin" />
             ) : (
-              <ShieldCheck size={32} />
+              <IconShieldCheck size={32} />
             )}
           </div>
         </div>

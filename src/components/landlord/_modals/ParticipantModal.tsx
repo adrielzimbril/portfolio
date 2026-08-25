@@ -257,7 +257,7 @@ export function ParticipantModal({
               {tShared("cancel")}
             </Button>
             <Button type="submit" disabled={isSubmitting} asIcon asPointer>
-              {isSubmitting && <Loader2 size={16} className="animate-spin" />}
+              {isSubmitting && <IconLoader2 size={16} className="animate-spin" />}
               {isEditing ? tShared("save") : t("actions.add")}
             </Button>
           </DialogFooter>

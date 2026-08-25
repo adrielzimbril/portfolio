@@ -2,11 +2,11 @@
 import React, { useMemo, useState } from "react"
 import useSWR from "swr"
 import {
-  IconRefresh as RefreshCw,
-  IconLoader2 as Loader2,
-  IconDeviceFloppy as Save,
-  IconCheck as Check,
-  IconAlertCircle as AlertCircle,
+  IconRefresh,
+  IconLoader2,
+  IconDeviceFloppy,
+  IconCheck,
+  IconAlertCircle,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -75,7 +75,7 @@ export function HubProductLinksSection() {
           <p className="mt-1 text-sm text-black/45">{t("description")}</p>
         </div>
         <Button variant="outline" asIcon asPointer onClick={() => mutate()}>
-          <RefreshCw size={16} />
+          <IconRefresh size={16} />
           {t("actions.refresh")}
         </Button>
       </div>
@@ -84,7 +84,7 @@ export function HubProductLinksSection() {
         <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-270px)] overflow-hidden">
           {isLoading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
-              <Loader2 size={18} className="animate-spin" />
+              <IconLoader2 size={18} className="animate-spin" />
               {t("messages.loading")}
             </div>
           ) : rows.length > 0 ? (
@@ -144,11 +144,11 @@ export function HubProductLinksSection() {
                                 className="ml-auto"
                               >
                                 {isUpdating ? (
-                                  <Loader2 size={14} className="animate-spin" />
+                                  <IconLoader2 size={14} className="animate-spin" />
                                 ) : hasChanged ? (
-                                  <Save size={14} />
+                                  <IconDeviceFloppy size={14} />
                                 ) : (
-                                  <Check size={14} className="text-emerald-500" />
+                                  <IconCheck size={14} className="text-emerald-500" />
                                 )}
                                 <span>
                                   {isUpdating ? "..." : hasChanged ? t("actions.save") : t("actions.up_to_date")}
@@ -169,7 +169,7 @@ export function HubProductLinksSection() {
           ) : (
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
-                icon={AlertCircle}
+                icon={IconAlertCircle}
                 title={t("messages.no_resources")}
                 description={t("messages.no_resources_desc")}
               />

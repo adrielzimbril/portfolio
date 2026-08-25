@@ -2,17 +2,17 @@
 import React, { useState } from "react"
 import { usePathname } from "next/navigation"
 import {
-  IconChevronDown as ChevronDown,
-  IconDatabase as Database,
-  IconHome as Home,
-  IconLayoutDashboard as LayoutDashboard,
-  IconLogout as LogOut,
-  IconMessage2 as MessageSquareText,
-  IconLayoutSidebarLeftCollapse as PanelLeftClose,
-  IconShieldCheck as ShieldCheck,
-  IconTrophy as Trophy,
-  IconUsers as Users,
-  IconX as X,
+  IconChevronDown,
+  IconDatabase,
+  IconHome,
+  IconLayoutDashboard,
+  IconLogout,
+  IconMessage2,
+  IconLayoutSidebarLeftCollapse,
+  IconShieldCheck,
+  IconTrophy,
+  IconUsers,
+  IconX,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { landlordRoutes } from "@/data/landlordRoutes"
@@ -41,8 +41,8 @@ export function Sidebar({
 }) {
   const t = useTranslations("admin.sidebar")
   const pathname = usePathname()
-  const [questsOpen, setQuestsOpen] = useState(pathname.includes("/quests"))
-  const [hubOpen, setHubOpen] = useState(pathname.includes("/hub/"))
+  const [questsOpen, setQuestsOpen] = useState(true)
+  const [hubOpen, setHubOpen] = useState(true)
 
   const isActive = (key: string): boolean => {
     switch (key) {
@@ -114,7 +114,7 @@ export function Sidebar({
           onClick={() => setSidebarOpen(false)}
           aria-label={t("close_nav")}
         >
-          <X size={18} />
+          <IconX size={18} />
         </Button>
         <Button
           variant="none"
@@ -124,7 +124,7 @@ export function Sidebar({
           onClick={() => setCollapsed(!collapsed)}
           aria-label={collapsed ? t("expand") : t("collapse")}
         >
-          <PanelLeftClose size={18} className={collapsed ? "rotate-180" : ""} />
+          <IconLayoutSidebarLeftCollapse size={18} className={collapsed ? "rotate-180" : ""} />
         </Button>
       </div>
 
@@ -135,7 +135,7 @@ export function Sidebar({
           <NavLink
             href={landlordRoutes.landlord.link}
             active={isActive("overview")}
-            icon={LayoutDashboard}
+            icon={IconLayoutDashboard}
             label={t("items.dashboard.label")}
             onClick={() => setSidebarOpen(false)}
           />
@@ -164,7 +164,7 @@ export function Sidebar({
           <NavLink
             href={landlordRoutes.community.link}
             active={isActive("community")}
-            icon={MessageSquareText}
+            icon={IconMessage2}
             label={t("items.community.label")}
             onClick={() => setSidebarOpen(false)}
           />
@@ -178,28 +178,28 @@ export function Sidebar({
               <NavLink
                 href={landlordRoutes.tables.newsletter.link}
                 active={isActive("newsletter")}
-                icon={Database}
+                icon={IconDatabase}
                 label={t("items.newsletter.label")}
                 onClick={() => setSidebarOpen(false)}
               />
               <NavLink
                 href={landlordRoutes.tables.users.link}
                 active={isActive("users")}
-                icon={Users}
+                icon={IconUsers}
                 label={t("items.users.label")}
                 onClick={() => setSidebarOpen(false)}
               />
               <NavLink
                 href={landlordRoutes.tables.submissions.link}
                 active={isActive("submissions")}
-                icon={Database}
+                icon={IconDatabase}
                 label={t("items.submissions.label")}
                 onClick={() => setSidebarOpen(false)}
               />
               <NavLink
                 href={landlordRoutes.tables.reactions.link}
                 active={isActive("reactions")}
-                icon={Database}
+                icon={IconDatabase}
                 label={t("items.reactions.label")}
                 onClick={() => setSidebarOpen(false)}
               />
@@ -214,7 +214,7 @@ export function Sidebar({
           href="/"
           className="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm text-white/55 hover:bg-white/8 hover:text-white transition"
         >
-          <Home size={17} />
+          <IconHome size={17} />
           {t("back_to_site")}
         </Link>
         <Button
@@ -223,7 +223,7 @@ export function Sidebar({
           onClick={onSignOut}
           className="flex items-center justify-start gap-3 rounded-2xl px-3 py-2.5 text-sm text-white/55 hover:bg-white/8 hover:text-white cursor-pointer transition"
         >
-          <LogOut size={17} />
+          <IconLogout size={17} />
           {t("sign_out")}
         </Button>
       </div>
@@ -304,7 +304,7 @@ function NavGroup({
         <span className="flex flex-col flex-1 min-w-0">
           <span className="font-medium">{group.label}</span>
         </span>
-        <ChevronDown
+        <IconChevronDown
           size={15}
           className={cn("shrink-0 text-white/40 transition-transform duration-200", isOpen && "rotate-180")}
         />

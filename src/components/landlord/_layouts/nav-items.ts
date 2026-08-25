@@ -1,9 +1,9 @@
 import {
-  IconDatabase as Database,
-  IconLayoutDashboard as LayoutDashboard,
-  IconMessage2 as MessageSquareText,
-  IconTrophy as Trophy,
-  IconUsers as Users,
+  IconDatabase,
+  IconLayoutDashboard,
+  IconMessage2,
+  IconTrophy,
+  IconUsers,
 } from "@tabler/icons-react"
 import type { NavItem } from "@/components/landlord/admin-types"
 
@@ -11,52 +11,52 @@ export const adminNavItems: NavItem[] = [
   {
     key: "overview",
     label: "Dashboard",
-    icon: LayoutDashboard,
+    icon: IconLayoutDashboard,
   },
   {
     key: "quests-registrations",
     label: "Inscriptions",
-    icon: Users,
+    icon: IconUsers,
   },
   {
     key: "quests-submissions",
     label: "Soumissions",
-    icon: Trophy,
+    icon: IconTrophy,
   },
   {
     key: "community",
     label: "Community",
-    icon: MessageSquareText,
+    icon: IconMessage2,
   },
   {
     key: "newsletter",
     label: "Newsletter",
-    icon: Database,
+    icon: IconDatabase,
   },
   {
     key: "users",
     label: "Users",
-    icon: Users,
+    icon: IconUsers,
   },
   {
     key: "submissions",
     label: "Submissions",
-    icon: Database,
+    icon: IconDatabase,
   },
   {
     key: "hub-requests",
     label: "Hub Requests",
-    icon: Database,
+    icon: IconDatabase,
   },
   {
     key: "hub-product-links",
     label: "Product Links",
-    icon: Database,
+    icon: IconDatabase,
   },
   {
     key: "reactions",
     label: "Reactions",
-    icon: Database,
+    icon: IconDatabase,
   },
 ]
 
@@ -71,34 +71,34 @@ export const adminNavGroups: NavGroup[] = [
   {
     key: "quests",
     label: "Quest",
-    icon: Trophy,
+    icon: IconTrophy,
     items: [
       {
         key: "quests-registrations",
         label: "Inscriptions",
-        icon: Users,
+        icon: IconUsers,
       },
       {
         key: "quests-submissions",
         label: "Soumissions",
-        icon: Trophy,
+        icon: IconTrophy,
       },
     ],
   },
   {
     key: "hub",
     label: "Hub",
-    icon: Database,
+    icon: IconDatabase,
     items: [
       {
         key: "hub-requests",
         label: "Requests",
-        icon: MessageSquareText,
+        icon: IconMessage2,
       },
       {
         key: "hub-product-links",
         label: "Product Links",
-        icon: Database,
+        icon: IconDatabase,
       },
     ],
   },

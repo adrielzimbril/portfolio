@@ -3,9 +3,9 @@ import React from "react"
 import { Link } from "@/components/ui/link"
 import { Github, Google } from "@/components/shared/icons/social-icons"
 import {
-  IconActivity as Activity,
-  IconLock as LockKeyhole,
-  IconTerminal2 as Terminal,
+  IconActivity,
+  IconLock,
+  IconTerminal2,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { getPathUrl } from "@/utils"
@@ -66,7 +66,7 @@ export function LoginSection({ reason }: { reason?: string }) {
         <aside className="relative hidden min-h-[680px] flex-col justify-between overflow-hidden bg-[#11191f] p-10 text-white lg:flex">
           <div className="relative z-10 flex items-center gap-3">
             <div className="flex size-11 items-center justify-center rounded-2xl bg-white text-[#11191f]">
-              <Terminal size={20} />
+              <IconTerminal2 size={20} />
             </div>
             <div>
               <p className="text-sm font-semibold tracking-tight">Adriel Zimbril</p>
@@ -101,7 +101,7 @@ export function LoginSection({ reason }: { reason?: string }) {
               </div>
               <div className="flex items-center gap-4 rounded-2xl bg-white/10 p-4 transition-colors">
                 <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-white/40">
-                  <Activity size={32} />
+                  <IconActivity size={32} />
                 </div>
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-widest">ADMIN_OVERRIDE_CONSOLE</p>
@@ -121,7 +121,7 @@ export function LoginSection({ reason }: { reason?: string }) {
             <div className="mb-8">
               <div className="mb-10 flex items-center gap-3">
                 <div className="flex size-12 items-center justify-center rounded-2xl bg-[#11191f] text-white">
-                  <LockKeyhole size={20} />
+                  <IconLock size={20} />
                 </div>
                 <div className="lg:hidden">
                   <p className="font-semibold text-[13px] uppercase tracking-wider">Adriel Zimbril</p>

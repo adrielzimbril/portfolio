@@ -2,10 +2,10 @@
 import React, { useMemo } from "react"
 import useSWR from "swr"
 import {
-  IconClock as Clock,
-  IconMessage2 as MessageSquareText,
-  IconSend as Send,
-  IconUsers as Users,
+  IconClock,
+  IconMessage2,
+  IconSend,
+  IconUsers,
 } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { landlordApiRoutes } from "@/data/landlordApiRoutes"
@@ -47,14 +47,14 @@ export function OverviewSection() {
       title: participant.name,
       subtitle: `${participant.type === "submission" ? "Soumission" : "Inscription"} · ${participant.challenge_slug}`,
       date: participant.created_at,
-      icon: participant.type === "submission" ? Send : Users,
+      icon: participant.type === "submission" ? IconSend : IconUsers,
     }))
     const messageRows = messages.slice(0, 5).map((message) => ({
       id: `message-${message.id}`,
       title: message.creator_name,
       subtitle: message.message?.fr || "",
       date: message.created_at,
-      icon: MessageSquareText,
+      icon: IconMessage2,
     }))
 
     return [...participantRows, ...messageRows]
@@ -73,28 +73,28 @@ export function OverviewSection() {
           label={t("metrics.registrations.label")}
           value={stats.registrations}
           detail={t("metrics.registrations.detail")}
-          icon={Users}
+          icon={IconUsers}
           tone="dark"
         />
         <MetricCard
           label={t("metrics.submissions.label")}
           value={stats.submissions}
           detail={t("metrics.submissions.detail")}
-          icon={Send}
+          icon={IconSend}
           tone="yellow"
         />
         <MetricCard
           label={t("metrics.messages.label")}
           value={stats.messages}
           detail={t("metrics.messages.detail")}
-          icon={MessageSquareText}
+          icon={IconMessage2}
           tone="green"
         />
         <MetricCard
           label={t("metrics.today.label")}
           value={stats.todayActivity}
           detail={t("metrics.today.detail")}
-          icon={Clock}
+          icon={IconClock}
           tone="white"
         />
       </div>
@@ -132,7 +132,7 @@ export function OverviewSection() {
               })}
             </div>
           ) : (
-            <EmptyState icon={Clock} title={t("empty_state.title")} description={t("empty_state.description")} />
+            <EmptyState icon={IconClock} title={t("empty_state.title")} description={t("empty_state.description")} />
           )}
         </AdminCard>
 

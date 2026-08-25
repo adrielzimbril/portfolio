@@ -3,16 +3,16 @@ import React, { useMemo, useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
 import useSWR, { mutate } from "swr"
 import {
-  IconFilter as Filter,
-  IconLoader2 as Loader2,
-  IconMail as Mail,
-  IconDots as MoreHorizontal,
-  IconPlus as Plus,
-  IconRefresh as RefreshCw,
-  IconUsers as Users,
-  IconEye as Eye,
-  IconEdit as Edit,
-  IconTrash as Trash2,
+  IconFilter,
+  IconLoader2,
+  IconMail,
+  IconDots,
+  IconPlus,
+  IconRefresh,
+  IconUsers,
+  IconEye,
+  IconEdit,
+  IconTrash,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -59,14 +59,14 @@ export function RegistrationsSection() {
 
   const { data: tableData, isLoading: loading } = useSWR(
     registrationsKey(selectedQuest, page, pageSize),
-    fetchParticipants,
+    () => fetchParticipants(selectedQuest, page, pageSize, "register"),
   )
 
-  const participants = useMemo(() => (tableData?.rows as unknown as Participant[]) || [], [tableData])
+  const participants = useMemo(() => (tableData?.rows || []) as Participant[], [tableData])
 
   const filteredParticipants = useMemo(() => {
-    const query = search.trim().toLowerCase()
-    if (!query) return participants
+    if (!search.trim()) return participants
+    const query = search.toLowerCase()
     return participants.filter((participant) =>
       [participant.name, participant.email, participant.challenge_slug, participant.status, participant.meta?.source]
         .filter(Boolean)
@@ -88,7 +88,7 @@ export function RegistrationsSection() {
             asPointer
             onClick={() => mutate(registrationsKey(selectedQuest, page, pageSize))}
           >
-            <RefreshCw size={16} />
+            <IconRefresh size={16} />
             {t("actions.refresh")}
           </Button>
           <Button
@@ -99,7 +99,7 @@ export function RegistrationsSection() {
               setParticipantModalOpen(true)
             }}
           >
-            <Plus size={16} />
+            <IconPlus size={16} />
             {t("actions.add")}
           </Button>
         </div>
@@ -116,7 +116,7 @@ export function RegistrationsSection() {
             placeholder={t("placeholders.search")}
           />
           <div className="flex items-center gap-2">
-            <Filter size={16} className="text-black/35" />
+            <IconFilter size={16} className="text-black/35" />
             <Select
               value={selectedQuest}
               onValueChange={(v) => {
@@ -144,7 +144,7 @@ export function RegistrationsSection() {
         <div className="flex flex-col h-[600px] xl:h-[calc(100dvh-380px)] overflow-hidden">
           {loading ? (
             <div className="flex flex-1 items-center justify-center gap-2 text-sm text-black/50">
-              <Loader2 size={18} className="animate-spin" />
+              <IconLoader2 size={18} className="animate-spin" />
               {t("messages.loading_participants")}
             </div>
           ) : filteredParticipants.length > 0 ? (
@@ -188,7 +188,7 @@ export function RegistrationsSection() {
                           <td className="px-5 py-4 text-right">
                             <DropdownMenu>
                               <DropdownMenuTrigger render={<Button variant="outline" size="icon" asPointer aria-label={tShared("actions")} />}>
-                                <MoreHorizontal size={16} />
+                                <IconDots size={16} />
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem
@@ -197,7 +197,7 @@ export function RegistrationsSection() {
                                     setDetailsOpen(true)
                                   }}
                                 >
-                                  <Eye size={14} />
+                                  <IconEye size={14} />
                                   {t("actions.view_details")}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
@@ -206,7 +206,7 @@ export function RegistrationsSection() {
                                     setParticipantModalOpen(true)
                                   }}
                                 >
-                                  <Edit size={14} />
+                                  <IconEdit size={14} />
                                   {tShared("edit")}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
@@ -223,7 +223,7 @@ export function RegistrationsSection() {
                                     }
                                   }}
                                 >
-                                  <Trash2 size={14} />
+                                  <IconTrash size={14} />
                                   {t("actions.delete")}
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
@@ -234,7 +234,7 @@ export function RegistrationsSection() {
                                       .then(() => toast.success(t("messages.email_copied")))
                                   }
                                 >
-                                  <Mail size={14} />
+                                  <IconMail size={14} />
                                   {t("actions.copy_email")}
                                 </DropdownMenuItem>
                               </DropdownMenuContent>
@@ -253,7 +253,7 @@ export function RegistrationsSection() {
           ) : (
             <div className="flex flex-1 items-center justify-center p-6">
               <EmptyState
-                icon={Users}
+                icon={IconUsers}
                 title={t("messages.empty_participants")}
                 description={t("messages.empty_participants")}
               />

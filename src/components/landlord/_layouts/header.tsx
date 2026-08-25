@@ -2,10 +2,10 @@
 import React from "react"
 import { usePathname } from "next/navigation"
 import {
-  IconLayoutSidebarLeftExpand as PanelLeft,
-  IconRefresh as RefreshCw,
-  IconUser as UserRound,
-  IconLayoutSidebarLeftCollapse as PanelLeftClose,
+  IconLayoutSidebarLeftExpand,
+  IconRefresh,
+  IconUser,
+  IconLayoutSidebarLeftCollapse,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import type { AdminUser } from "@/components/landlord/admin-types"
@@ -52,7 +52,7 @@ export function Header({
         onClick={() => setSidebarOpen(true)}
         aria-label={t("open_nav")}
       >
-        <PanelLeft size={18} />
+        <IconLayoutSidebarLeftExpand size={18} />
       </Button>
       <div className="min-w-0 flex-1 ml-2">
         <p className="text-xs text-black/45 font-medium uppercase tracking-wider">{t("subtitle")}</p>
@@ -66,7 +66,7 @@ export function Header({
         aria-label={t("refresh")}
         className="hidden md:flex"
       >
-        <RefreshCw size={17} />
+        <IconRefresh size={17} />
       </Button>
       <Button
         variant="outline"
@@ -76,7 +76,7 @@ export function Header({
         aria-label={sidebarCollapsed ? t("expand_sidebar") : t("collapse_sidebar")}
         className="hidden md:flex"
       >
-        {sidebarCollapsed ? <PanelLeft size={17} /> : <PanelLeftClose size={17} />}
+        {sidebarCollapsed ? <IconLayoutSidebarLeftExpand size={17} /> : <IconLayoutSidebarLeftCollapse size={17} />}
       </Button>
       <FooterLocaleSwitch />
       <div className="hidden items-center gap-3 rounded-2xl bg-[#f7f6f1] px-4 py-2.5 md:flex ml-2">
@@ -88,7 +88,7 @@ export function Header({
           />
         ) : (
           <div className="flex size-9 items-center justify-center rounded-full bg-[#ffed90] shadow-sm">
-            <UserRound size={17} />
+            <IconUser size={17} />
           </div>
         )}
         <div className="max-w-44">

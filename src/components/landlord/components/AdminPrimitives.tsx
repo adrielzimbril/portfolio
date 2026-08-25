@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { useTranslations } from "next-intl"
-import { IconLoader2 as Loader2, IconSearch as Search } from "@tabler/icons-react"
+import { IconLoader2, IconSearch } from "@tabler/icons-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -78,7 +78,7 @@ export function SearchBox({
 }) {
   return (
     <div className="relative w-full min-w-0 md:max-w-xs">
-      <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-black/35" />
+      <IconSearch size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-black/35" />
       <Input
         value={value}
         onChange={(event) => onChange(event.target.value)}
@@ -120,7 +120,7 @@ export function ConfirmDialog({
             {tShared("cancel")}
           </Button>
           <Button type="button" variant="destructive" asIcon asPointer onClick={onConfirm} disabled={loading}>
-            {loading && <Loader2 size={16} className="animate-spin" />}
+            {loading && <IconLoader2 size={16} className="animate-spin" />}
             {confirmLabel}
           </Button>
         </DialogFooter>

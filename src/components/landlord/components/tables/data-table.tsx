@@ -2,10 +2,10 @@
 import React, { useState } from "react"
 import useSWR from "swr"
 import {
-  IconFileText as FileText,
-  IconLoader2 as Loader2,
-  IconRefresh as RefreshCw,
-  IconEye as Eye,
+  IconFileText,
+  IconLoader2,
+  IconRefresh,
+  IconEye,
 } from "@tabler/icons-react"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -36,7 +36,7 @@ function DataRows({
   if (!rows.length) {
     return (
       <div className="p-6">
-        <EmptyState icon={FileText} title={t("no_data")} description={t("no_data_description")} />
+        <EmptyState icon={IconFileText} title={t("no_data")} description={t("no_data_description")} />
       </div>
     )
   }
@@ -77,7 +77,7 @@ function DataRows({
                       onClick={() => onViewDetails(row as Record<string, any>)}
                       className="size-8 opacity-0 group-hover:opacity-100 transition-opacity"
                     >
-                      <Eye size={14} />
+                      <IconEye size={14} />
                     </Button>
                   </td>
                 </tr>
@@ -112,7 +112,7 @@ export function DataTable({ tableKey, label, detail }: { tableKey: DataTableKey;
           <p className="mt-1 text-sm text-black/45">{detail}</p>
         </div>
         <Button variant="outline" asIcon asPointer onClick={() => mutate()}>
-          <RefreshCw size={16} />
+          <IconRefresh size={16} />
           {t("refresh")}
         </Button>
       </div>
@@ -120,7 +120,7 @@ export function DataTable({ tableKey, label, detail }: { tableKey: DataTableKey;
       <AdminCard className="overflow-hidden">
         {loading ? (
           <div className="flex min-h-72 items-center justify-center gap-2 text-sm text-black/50">
-            <Loader2 size={18} className="animate-spin" />
+            <IconLoader2 size={18} className="animate-spin" />
             {t("loading_data")}
           </div>
         ) : (
