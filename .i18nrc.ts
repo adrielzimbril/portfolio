@@ -1,7 +1,7 @@
 import { defineConfig } from "@lobehub/i18n-cli";
 
 const config = {
-  modelName: "gpt-5.6-luna" as any, // OpenAI's recommended replacement: `gpt-5-nano` → `gpt-5.6-luna`
+  modelName: "gpt-6-luna" as any, // OpenAI's recommended replacement: `gpt-5-nano` → `gpt-5.6-luna`
   mode: "default", // "default" for i18n translations files or "content" for md/mdx files
   isMdx: false, // Set to true if you are using MDX files (I currently use mdx files for content, and md for tags, and categories and others)
 };
